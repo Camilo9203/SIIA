@@ -1,0 +1,56 @@
+
+ci_db_pdo_driver::db_connectG
+=/var/www/html/siia/system/database/drivers/pdo/pdo_driver.php ("3*„
+3I
+=/var/www/html/siia/system/database/drivers/pdo/pdo_driver.phpˆ ˆ(Px
+v
+I
+=/var/www/html/siia/system/database/drivers/pdo/pdo_driver.phpˆ ˆ(
+%2"__id**
+ci_db_pdo_driver"
+dsn}
+{
+I
+=/var/www/html/siia/system/database/drivers/pdo/pdo_driver.phpˆ ˆ(-
+%3"__id*"* 
+ci_db_pdo_driver"
+
+username}
+{
+I
+=/var/www/html/siia/system/database/drivers/pdo/pdo_driver.phpˆ/ ˆ(>
+%4"__id*"* 
+ci_db_pdo_driver"
+
+password|
+z
+I
+=/var/www/html/siia/system/database/drivers/pdo/pdo_driver.phpˆ@ ˆ(N
+%5"__id*!*
+ci_db_pdo_driver"	
+optionsXV
+I
+=/var/www/html/siia/system/database/drivers/pdo/pdo_driver.phpˆ
+ ˆ(O
+%1"pdoŽ
+‹
+I
+=/var/www/html/siia/system/database/drivers/pdo/pdo_driver.phpˆ
+ ˆ(O
+%6"pdo::__construct*
+
+%1*
+
+%2*
+
+%3*
+
+%4*
+
+%5"S
+I
+=/var/www/html/siia/system/database/drivers/pdo/pdo_driver.phpˆ ˆ(P
+
+%1:
+$persistentB
+ci_db_pdo_driver

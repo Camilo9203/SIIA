@@ -1,0 +1,20 @@
+
+ ci_db_mysql_driver::_trans_beginM
+A/var/www/html/siia/system/database/drivers/mysql/mysql_driver.php§ §( "1*Þ
+1M
+A/var/www/html/siia/system/database/drivers/mysql/mysql_driver.php© ©(*–“
+M
+A/var/www/html/siia/system/database/drivers/mysql/mysql_driver.php© ©()
+%1*
+ci_db_mysql_driver*
+'SET AUTOCOMMIT=0'2simple_query—”
+M
+A/var/www/html/siia/system/database/drivers/mysql/mysql_driver.phpª	 ª(1
+%2*
+ci_db_mysql_driver*
+'START TRANSACTION'2simple_query"W
+M
+A/var/www/html/siia/system/database/drivers/mysql/mysql_driver.phpª ª(2
+
+%2B
+ci_db_mysql_driver

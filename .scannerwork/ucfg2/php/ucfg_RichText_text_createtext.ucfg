@@ -1,0 +1,33 @@
+
+phpexcel_richtext::createtextH
+>/var/www/html/siia/application/libraries/PHPExcel/RichText.phpR R("1*¿
+1H
+>/var/www/html/siia/application/libraries/PHPExcel/RichText.phpT T(=wu
+H
+>/var/www/html/siia/application/libraries/PHPExcel/RichText.phpT T(<
+
+$objText"phpexcel_richtext_textelement™
+–
+H
+>/var/www/html/siia/application/libraries/PHPExcel/RichText.phpT T(<
+%1"*phpexcel_richtext_textelement::__construct*
+
+
+$objText*
+
+
+$pText€~
+H
+>/var/www/html/siia/application/libraries/PHPExcel/RichText.phpU U( 
+%2*
+phpexcel_richtext*
+
+
+$objText2addtext"X
+H
+>/var/www/html/siia/application/libraries/PHPExcel/RichText.phpV V(
+
+
+$objText:
+$pTextB
+phpexcel_richtext

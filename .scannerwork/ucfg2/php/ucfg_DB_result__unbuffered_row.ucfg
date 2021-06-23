@@ -1,0 +1,39 @@
+
+ci_db_result::unbuffered_row<
+0/var/www/html/siia/system/database/DB_result.php ("2"4"5*ñ
+2<
+0/var/www/html/siia/system/database/DB_result.php” ”( fd
+<
+0/var/www/html/siia/system/database/DB_result.php”
+ ”(
+%1*
+ci_db_result2_fetch_assoc"F
+<
+0/var/www/html/siia/system/database/DB_result.php” ”( 
+
+%1*ò
+4<
+0/var/www/html/siia/system/database/DB_result.php˜ ˜(!ge
+<
+0/var/www/html/siia/system/database/DB_result.php˜
+ ˜( 
+%2*
+ci_db_result2_fetch_object"F
+<
+0/var/www/html/siia/system/database/DB_result.php˜ ˜(!
+
+%2*ý
+5<
+0/var/www/html/siia/system/database/DB_result.php› ›(%rp
+<
+0/var/www/html/siia/system/database/DB_result.php›	 ›($
+%3*
+ci_db_result*	
+
+$type2_fetch_object"F
+<
+0/var/www/html/siia/system/database/DB_result.php› ›(%
+
+%3:
+$typeB
+ci_db_result

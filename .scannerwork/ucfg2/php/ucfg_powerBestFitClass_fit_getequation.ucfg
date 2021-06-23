@@ -1,0 +1,49 @@
+
+$phpexcel_power_best_fit::getequation^
+T/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/powerBestFitClass.phpG G("1*∞
+1^
+T/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/powerBestFitClass.phpI I(&ôñ
+^
+T/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/powerBestFitClass.phpI I(%
+%1*
+phpexcel_power_best_fit*
+
+$dp2getslopez
+x
+^
+T/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/powerBestFitClass.phpI I(%
+$slope"__id*
+
+%1ùö
+^
+T/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/powerBestFitClass.phpJ J(-
+%2*
+phpexcel_power_best_fit*
+
+$dp2getintersect~
+|
+^
+T/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/powerBestFitClass.phpJ J(-
+
+$intersect"__id*
+
+%2®
+•
+^
+T/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/powerBestFitClass.phpL L(5
+%3"__concat*
+
+'Y = '*
+
+
+$intersect*	
+' * X^'*
+
+
+$slope"h
+^
+T/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/powerBestFitClass.phpL L(6
+
+%3:
+$dpB
+phpexcel_power_best_fit

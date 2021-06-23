@@ -1,0 +1,39 @@
+
+*phpexcel_calculation_function::__constructT
+J/var/www/html/siia/application/libraries/PHPExcel/Calculation/Function.phpH H("4"6*À
+4T
+J/var/www/html/siia/application/libraries/PHPExcel/Calculation/Function.phpL L(-û
+õ
+T
+J/var/www/html/siia/application/libraries/PHPExcel/Calculation/Function.phpL L(,-
+phpexcel_calculation_function"
+
+category"__id*
+
+
+$pCategory†
+ù
+T
+J/var/www/html/siia/application/libraries/PHPExcel/Calculation/Function.phpM M(-.
+phpexcel_calculation_function"
+	excelName"__id*
+
+$pExcelName¶
+£
+T
+J/var/www/html/siia/application/libraries/PHPExcel/Calculation/Function.phpN N(01
+phpexcel_calculation_function"
+phpExcelName"__id*
+
+$pPHPExcelName*
+6*Ä
+6
+Function.php"k
+T
+J/var/www/html/siia/application/libraries/PHPExcel/Calculation/Function.phpR R(
+implicit return:
+
+$pCategory:
+$pExcelName:
+$pPHPExcelNameB!
+phpexcel_calculation_function

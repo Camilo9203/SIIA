@@ -1,0 +1,21 @@
+
+ci_db_pdo_driver::_trans_beginI
+=/var/www/html/siia/system/database/drivers/pdo/pdo_driver.phpÂ Â( "1*
+1I
+=/var/www/html/siia/system/database/drivers/pdo/pdo_driver.phpÄ Ä(,|
+z
+I
+=/var/www/html/siia/system/database/drivers/pdo/pdo_driver.phpÄ	 Ä(
+%1"__id*!*
+ci_db_pdo_driver"	
+conn_idmk
+I
+=/var/www/html/siia/system/database/drivers/pdo/pdo_driver.phpÄ	 Ä(+
+%2*
+
+%12begintransaction"S
+I
+=/var/www/html/siia/system/database/drivers/pdo/pdo_driver.phpÄ Ä(,
+
+%2B
+ci_db_pdo_driver

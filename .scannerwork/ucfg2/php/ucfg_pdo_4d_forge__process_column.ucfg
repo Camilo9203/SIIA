@@ -1,0 +1,100 @@
+
+#ci_db_pdo_4d_forge::_process_columnV
+J/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_4d_forge.phpÑ Ñ(#"1*¥
+1V
+J/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_4d_forge.phpÜ ä(á
+Ñ
+V
+J/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_4d_forge.phpÜ	 Ü(
+%1"__id**
+ci_db_pdo_4d_forge"
+dbÖ
+Ç
+V
+J/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_4d_forge.phpÜ' Ü(5
+%2"
+__arrayGet*
+
+
+$field*
+
+'name'ÖÇ
+V
+J/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_4d_forge.phpÜ	 Ü(6
+%3*
+
+%1*
+
+%22escape_identifiersÖ
+Ç
+V
+J/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_4d_forge.phpá á(
+%4"
+__arrayGet*
+
+
+$field*
+
+'type'á
+Ñ
+V
+J/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_4d_forge.phpá á('
+%5"
+__arrayGet*
+
+
+$field*
+
+'length'Ö
+Ç
+V
+J/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_4d_forge.phpà à(
+%6"
+__arrayGet*
+
+
+$field*
+
+'null'á
+Ñ
+V
+J/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_4d_forge.phpâ â(
+%7"
+__arrayGet*
+
+
+$field*
+
+'unique'è
+å
+V
+J/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_4d_forge.phpä ä(
+%8"
+__arrayGet*
+
+
+$field*
+'auto_increment'§
+°
+V
+J/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_4d_forge.phpÜ	 ä(
+%9"__concat*
+
+%3*
+' '*
+
+%4*
+
+%5*
+
+%6*
+
+%7*
+
+%8"`
+V
+J/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_4d_forge.phpÜ ä(
+
+%9:
+$fieldB
+ci_db_pdo_4d_forge

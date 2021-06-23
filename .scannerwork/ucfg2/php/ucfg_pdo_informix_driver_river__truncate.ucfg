@@ -1,0 +1,19 @@
+
+$ci_db_pdo_informix_driver::_truncate]
+Q/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_informix_driver.phpê ê("1*Ë
+1]
+Q/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_informix_driver.phpí í('ö
+ó
+]
+Q/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_informix_driver.phpí	 í(&
+%1"__concat*
+'TRUNCATE TABLE ONLY '*
+
+
+$table"g
+]
+Q/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_informix_driver.phpí í('
+
+%1:
+$tableB
+ci_db_pdo_informix_driver

@@ -1,0 +1,140 @@
+
+perfil::estadoorganizaciones?
+5/var/www/html/siia/application/controllers/Perfil.phpY Y(%"1*ï
+1?
+5/var/www/html/siia/application/controllers/Perfil.phpZ Z(7h
+f
+?
+5/var/www/html/siia/application/controllers/Perfil.phpZ Z(
+%1"__id**
+perfil"	
+sessionmk
+?
+5/var/www/html/siia/application/controllers/Perfil.phpZ Z(6
+%2*
+
+%1*
+'usuario_id'2userdata`
+^
+?
+5/var/www/html/siia/application/controllers/Perfil.phpZ Z(6
+$usuario_id"__id*
+
+%2c
+a
+?
+5/var/www/html/siia/application/controllers/Perfil.php[ [(!
+%3"__id**
+perfil"
+dbpn
+?
+5/var/www/html/siia/application/controllers/Perfil.php[ [(<
+%4*
+
+%3*
+"id_organizacion"2selectmk
+?
+5/var/www/html/siia/application/controllers/Perfil.php[ [(T
+%5*
+
+%4*
+"organizaciones"2from…‚
+?
+5/var/www/html/siia/application/controllers/Perfil.php[ [(
+%6*
+
+%5*
+"usuarios_id_usuario"*
+
+$usuario_id2whereWU
+@
+5/var/www/html/siia/application/controllers/Perfil.php[ [(†
+%7*
+
+%62getWU
+@
+5/var/www/html/siia/application/controllers/Perfil.php[ [(
+%8*
+
+%72rowi
+g
+@
+5/var/www/html/siia/application/controllers/Perfil.php[ [(
+$datos_organizacion"__id*
+
+%8}
+{
+?
+5/var/www/html/siia/application/controllers/Perfil.php\ \(:
+%9"__id*,**
+
+$datos_organizacion"
+id_organizacione
+c
+?
+5/var/www/html/siia/application/controllers/Perfil.php\ \(:
+$id_organizacion"__id*
+
+%9d
+b
+?
+5/var/www/html/siia/application/controllers/Perfil.php^ ^(
+%10"__id**
+perfil"
+dbig
+?
+5/var/www/html/siia/application/controllers/Perfil.php^ ^('
+%11*
+
+%10*
+
+"nombre"2selectus
+?
+5/var/www/html/siia/application/controllers/Perfil.php^ ^(E
+%12*
+
+%11*
+"estadoOrganizaciones"2from˜•
+@
+5/var/www/html/siia/application/controllers/Perfil.php^ ^(€
+%13*
+
+%12*$"
+ "organizaciones_id_organizacion"*
+
+$id_organizacion2whereYW
+@
+5/var/www/html/siia/application/controllers/Perfil.php^ ^(‡
+%14*
+
+%132getYW
+@
+5/var/www/html/siia/application/controllers/Perfil.php^ ^(Ž
+%15*
+
+%142row^
+\
+@
+5/var/www/html/siia/application/controllers/Perfil.php^ ^(Ž	
+$estado"__id*
+
+%15i
+g
+?
+5/var/www/html/siia/application/controllers/Perfil.php_ _("
+%16"__id**
+	
+$estado"
+nombrec
+a
+?
+5/var/www/html/siia/application/controllers/Perfil.php_ _("
+$nombreEstado"__id*
+
+%16"T
+?
+5/var/www/html/siia/application/controllers/Perfil.php` `(
+
+$nombreEstadoB
+
+perfil

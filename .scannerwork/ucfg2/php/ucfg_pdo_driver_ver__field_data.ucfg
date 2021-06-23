@@ -1,0 +1,25 @@
+
+ci_db_pdo_driver::_field_dataI
+=/var/www/html/siia/system/database/drivers/pdo/pdo_driver.phpï ï("1*µ
+1I
+=/var/www/html/siia/system/database/drivers/pdo/pdo_driver.phpó ó(Cãà
+I
+=/var/www/html/siia/system/database/drivers/pdo/pdo_driver.phpó  ó(B
+%1*
+ci_db_pdo_driver*
+
+
+$table2protect_identifiersÅ
+
+I
+=/var/www/html/siia/system/database/drivers/pdo/pdo_driver.phpó	 ó(B
+%2"__concat*
+'SELECT TOP 1 * FROM '*
+
+%1"S
+I
+=/var/www/html/siia/system/database/drivers/pdo/pdo_driver.phpó ó(C
+
+%2:
+$tableB
+ci_db_pdo_driver

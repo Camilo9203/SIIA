@@ -1,0 +1,35 @@
+
+&ci_db_pdo_informix_forge::_alter_tableZ
+P/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_informix_forge.phpV V( "2"3*Ë
+2Z
+P/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_informix_forge.phpZ Z(Å
+
+Z
+P/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_informix_forge.phpZ Z(
+$alter_type"__id*
+
+'MODIFY'*
+3*ì
+3Z
+P/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_informix_forge.php] ](;À
+»
+Z
+P/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_informix_forge.php]	 ](:
+%1"ci_db_pdo_forge::_alter_table*
+ci_db_pdo_informix_forge*
+
+$alter_type*
+
+
+$table*
+
+
+$field"d
+Z
+P/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_informix_forge.php] ](;
+
+%1:
+$alter_type:
+$table:
+$fieldB
+ci_db_pdo_informix_forge

@@ -1,0 +1,22 @@
+
+ci_db_query_builder::select_maxC
+7/var/www/html/siia/system/database/DB_query_builder.phpø ø("1*∑
+1C
+7/var/www/html/siia/system/database/DB_query_builder.php¡ ¡(9ùö
+C
+7/var/www/html/siia/system/database/DB_query_builder.php¡	 ¡(8
+%1*
+ci_db_query_builder*
+	
+$select*
+
+
+$alias*	
+'MAX'2_max_min_avg_sum"M
+C
+7/var/www/html/siia/system/database/DB_query_builder.php¡ ¡(9
+
+%1:	
+$select:
+$aliasB
+ci_db_query_builder

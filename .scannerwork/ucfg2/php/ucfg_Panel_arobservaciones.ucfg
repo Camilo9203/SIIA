@@ -1,0 +1,246 @@
+
+panel::cargarobservaciones@
+4/var/www/html/siia/application/controllers/Panel.php• •($"1*¡"
+1@
+4/var/www/html/siia/application/controllers/Panel.php– –(7h
+f
+@
+4/var/www/html/siia/application/controllers/Panel.php– –(
+%1"__id**
+panel"	
+sessionnl
+@
+4/var/www/html/siia/application/controllers/Panel.php– –(6
+%2*
+
+%1*
+'usuario_id'2userdataa
+_
+@
+4/var/www/html/siia/application/controllers/Panel.php– –(6
+$usuario_id"__id*
+
+%2c
+a
+@
+4/var/www/html/siia/application/controllers/Panel.php— —(!
+%3"__id**
+panel"
+dbqo
+@
+4/var/www/html/siia/application/controllers/Panel.php— —(<
+%4*
+
+%3*
+"id_organizacion"2selectnl
+@
+4/var/www/html/siia/application/controllers/Panel.php— —(T
+%5*
+
+%4*
+"organizaciones"2from†ƒ
+@
+4/var/www/html/siia/application/controllers/Panel.php— —(
+%6*
+
+%5*
+"usuarios_id_usuario"*
+
+$usuario_id2whereXV
+A
+4/var/www/html/siia/application/controllers/Panel.php— —(†
+%7*
+
+%62getXV
+A
+4/var/www/html/siia/application/controllers/Panel.php— —(
+%8*
+
+%72rowj
+h
+A
+4/var/www/html/siia/application/controllers/Panel.php— —(
+$datos_organizacion"__id*
+
+%8~
+|
+@
+4/var/www/html/siia/application/controllers/Panel.php˜ ˜(:
+%9"__id*,**
+
+$datos_organizacion"
+id_organizacionf
+d
+@
+4/var/www/html/siia/application/controllers/Panel.php˜ ˜(:
+$id_organizacion"__id*
+
+%9d
+b
+@
+4/var/www/html/siia/application/controllers/Panel.phpš š(
+%10"__id**
+panel"
+dbtr
+@
+4/var/www/html/siia/application/controllers/Panel.phpš š(5
+%11*
+
+%10*
+"numeroRevisiones"2selectmk
+@
+4/var/www/html/siia/application/controllers/Panel.phpš š(J
+%12*
+
+%11*
+"solicitudes"2from™–
+A
+4/var/www/html/siia/application/controllers/Panel.phpš š(…
+%13*
+
+%12*$"
+ "organizaciones_id_organizacion"*
+
+$id_organizacion2whereZX
+A
+4/var/www/html/siia/application/controllers/Panel.phpš š(Œ
+%14*
+
+%132getZX
+A
+4/var/www/html/siia/application/controllers/Panel.phpš š(“
+%15*
+
+%142rowq
+o
+A
+4/var/www/html/siia/application/controllers/Panel.phpš š(¥
+%16"__id**
+
+%15"
+numeroRevisionesc
+a
+A
+4/var/www/html/siia/application/controllers/Panel.phpš š(¥
+$numero_rev"__id*
+
+%16d
+b
+@
+4/var/www/html/siia/application/controllers/Panel.phpœ œ(
+%17"__id**
+panel"
+dbom
+@
+4/var/www/html/siia/application/controllers/Panel.phpœ œ(2
+%18*
+
+%17*
+"idSolicitud"2selectom
+@
+4/var/www/html/siia/application/controllers/Panel.phpœ œ(I
+%19*
+
+%18*
+"tipoSolicitud"2from™–
+A
+4/var/www/html/siia/application/controllers/Panel.phpœ œ(„
+%20*
+
+%19*$"
+ "organizaciones_id_organizacion"*
+
+$id_organizacion2whereZX
+A
+4/var/www/html/siia/application/controllers/Panel.phpœ œ(‹
+%21*
+
+%202getZX
+A
+4/var/www/html/siia/application/controllers/Panel.phpœ œ(’
+%22*
+
+%212rowl
+j
+A
+4/var/www/html/siia/application/controllers/Panel.phpœ œ(Ÿ
+%23"__id**
+
+%22"
+idSolicitude
+c
+A
+4/var/www/html/siia/application/controllers/Panel.phpœ œ(Ÿ
+$id_solicitud"__id*
+
+%23d
+b
+@
+4/var/www/html/siia/application/controllers/Panel.phpž ž(
+%24"__id**
+panel"
+dbec
+@
+4/var/www/html/siia/application/controllers/Panel.phpž ž()
+%25*
+
+%24*
+"*"2selectom
+@
+4/var/www/html/siia/application/controllers/Panel.phpž ž(@
+%26*
+
+%25*
+"observaciones"2fromƒ€
+@
+4/var/www/html/siia/application/controllers/Panel.phpž ž(f
+%27*
+
+%26*
+"numeroRevision"*
+
+$numero_rev2whereƒ€
+A
+4/var/www/html/siia/application/controllers/Panel.phpž ž(‹
+%28*
+
+%27*
+"idSolicitud"*
+
+$id_solicitud2where™–
+A
+4/var/www/html/siia/application/controllers/Panel.phpž ž(Æ
+%29*
+
+%28*$"
+ "organizaciones_id_organizacion"*
+
+$id_organizacion2where{y
+A
+4/var/www/html/siia/application/controllers/Panel.phpž ž(ã
+%30*
+
+%29*
+"valueForm"*	
+"asc"2order_byZX
+A
+4/var/www/html/siia/application/controllers/Panel.phpž ž(ê
+%31*
+
+%302get][
+A
+4/var/www/html/siia/application/controllers/Panel.phpž ž(ô
+%32*
+
+%312resultf
+d
+A
+4/var/www/html/siia/application/controllers/Panel.phpž ž(ô
+$observaciones"__id*
+
+%32"V
+@
+4/var/www/html/siia/application/controllers/Panel.phpŸ Ÿ(
+
+$observacionesB	
+panel

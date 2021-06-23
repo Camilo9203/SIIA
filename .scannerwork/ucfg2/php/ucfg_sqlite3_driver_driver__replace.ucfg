@@ -1,0 +1,32 @@
+
+ci_db_sqlite3_driver::_replaceQ
+E/var/www/html/siia/system/database/drivers/sqlite3/sqlite3_driver.php» »("1*â
+1Q
+E/var/www/html/siia/system/database/drivers/sqlite3/sqlite3_driver.php½ ½(?«
+¨
+Q
+E/var/www/html/siia/system/database/drivers/sqlite3/sqlite3_driver.php½ ½(>
+%1"ci_db::_replace*
+ci_db_sqlite3_driver*
+
+
+$table*	
+
+$keys*
+	
+$values
+}
+Q
+E/var/www/html/siia/system/database/drivers/sqlite3/sqlite3_driver.php½	 ½(>
+%2"__concat*
+'INSERT OR '*
+
+%1"[
+Q
+E/var/www/html/siia/system/database/drivers/sqlite3/sqlite3_driver.php½ ½(?
+
+%2:
+$table:
+$keys:	
+$valuesB
+ci_db_sqlite3_driver

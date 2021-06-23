@@ -1,0 +1,100 @@
+
+)ci_db_pdo_firebird_forge::_process_column\
+P/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_firebird_forge.php∂ ∂(#"1*ı
+1\
+P/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_firebird_forge.php∏ º(ì
+ê
+\
+P/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_firebird_forge.php∏	 ∏(
+%1"__id*$*"
+ci_db_pdo_firebird_forge"
+dbã
+à
+\
+P/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_firebird_forge.php∏' ∏(5
+%2"
+__arrayGet*
+
+
+$field*
+
+'name'ãà
+\
+P/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_firebird_forge.php∏	 ∏(6
+%3*
+
+%1*
+
+%22escape_identifiersã
+à
+\
+P/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_firebird_forge.phpπ π(
+%4"
+__arrayGet*
+
+
+$field*
+
+'type'ç
+ä
+\
+P/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_firebird_forge.phpπ π('
+%5"
+__arrayGet*
+
+
+$field*
+
+'length'ã
+à
+\
+P/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_firebird_forge.php∫ ∫(
+%6"
+__arrayGet*
+
+
+$field*
+
+'null'ç
+ä
+\
+P/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_firebird_forge.phpª ª(
+%7"
+__arrayGet*
+
+
+$field*
+
+'unique'é
+ã
+\
+P/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_firebird_forge.phpº º(
+%8"
+__arrayGet*
+
+
+$field*
+	'default'™
+ß
+\
+P/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_firebird_forge.php∏	 º(
+%9"__concat*
+
+%3*
+' '*
+
+%4*
+
+%5*
+
+%6*
+
+%7*
+
+%8"f
+\
+P/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_firebird_forge.php∏ º(
+
+%9:
+$fieldB
+ci_db_pdo_firebird_forge

@@ -1,0 +1,66 @@
+
+admin::cargar_actividadusuario@
+4/var/www/html/siia/application/controllers/Admin.php‚ ‚(("1*œ
+1A
+4/var/www/html/siia/application/controllers/Admin.php„ „(õc
+a
+@
+4/var/www/html/siia/application/controllers/Admin.php„ „(
+%1"__id**
+admin"
+dbca
+@
+4/var/www/html/siia/application/controllers/Admin.php„ „(+
+%2*
+
+%1*
+'*'2selectki
+@
+4/var/www/html/siia/application/controllers/Admin.php„ „(@
+%3*
+
+%2*
+'session_log'2fromtr
+@
+4/var/www/html/siia/application/controllers/Admin.php„ „(Z
+%4*
+
+%3*
+'usuario_id'*
+
+$id2where~|
+@
+4/var/www/html/siia/application/controllers/Admin.php„ „(~
+%5*
+
+%4*
+"id_session_log"*
+
+"desc"2order_by`^
+A
+4/var/www/html/siia/application/controllers/Admin.php„ „(â
+%6*
+
+%5*2F2limitXV
+A
+4/var/www/html/siia/application/controllers/Admin.php„ „(ê
+%7*
+
+%62get[Y
+A
+4/var/www/html/siia/application/controllers/Admin.php„ „(ö
+%8*
+
+%72resultg
+e
+A
+4/var/www/html/siia/application/controllers/Admin.php„ „(ö
+$datos_actividad"__id*
+
+%8"X
+@
+4/var/www/html/siia/application/controllers/Admin.php‰ ‰(
+
+$datos_actividad:
+$idB	
+admin

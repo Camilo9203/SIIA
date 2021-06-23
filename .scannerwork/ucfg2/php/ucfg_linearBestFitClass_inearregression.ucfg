@@ -1,0 +1,30 @@
+
+*phpexcel_linear_best_fit::linearregression_
+U/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/linearBestFitClass.phpT T(%"1*•
+2
+linearBestFitClass.php"v
+_
+U/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/linearBestFitClass.phpW W(
+implicit return*¬
+1_
+U/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/linearBestFitClass.phpV V(:À½
+_
+U/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/linearBestFitClass.phpV V(9
+%1*
+phpexcel_linear_best_fit*
+
+
+$yValues*
+
+
+$xValues*
+
+
+$const2leastsquarefit*
+2:
+
+$yValues:
+
+$xValues:
+$constB
+phpexcel_linear_best_fit

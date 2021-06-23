@@ -1,0 +1,189 @@
+
+5phpexcel_writer_excel2007_worksheet::writepagemargins\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.php‹ ‹(%"1*â
+2
+Worksheet.php"s
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.phpÁ Á(
+implicit return*ú
+1\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.phpﬂ ﬂ(0òï
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.phpﬂ ﬂ(/
+%1*
+
+
+$objWriter*
+'pageMargins'2startelementÑÅ
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.php‡P ‡(i
+%2*
+	
+$pSheet2getpagemarginswu
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.php‡P ‡(t
+%3*
+
+%22getleft±
+Æ
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.php‡+ ‡(u
+%4"$phpexcel_shared_string::formatnumber*"
+phpexcel_shared_string*
+
+%3õò
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.php‡ ‡(v
+%5*
+
+
+$objWriter*
+
+'left'*
+
+%42writeattributeÑÅ
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.php·Q ·(j
+%6*
+	
+$pSheet2getpagemarginsxv
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.php·Q ·(v
+%7*
+
+%62getright±
+Æ
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.php·, ·(w
+%8"$phpexcel_shared_string::formatnumber*"
+phpexcel_shared_string*
+
+%7úô
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.php· ·(x
+%9*
+
+
+$objWriter*	
+'right'*
+
+%82writeattributeÖÇ
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.php‚O ‚(h
+%10*
+	
+$pSheet2getpagemarginsxv
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.php‚O ‚(r
+%11*
+
+%102gettop≥
+∞
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.php‚* ‚(s
+%12"$phpexcel_shared_string::formatnumber*"
+phpexcel_shared_string*
+
+%11úô
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.php‚ ‚(t
+%13*
+
+
+$objWriter*	
+'top'*
+
+%122writeattributeÖÇ
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.php„R „(k
+%14*
+	
+$pSheet2getpagemargins{y
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.php„R „(x
+%15*
+
+%142	getbottom≥
+∞
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.php„- „(y
+%16"$phpexcel_shared_string::formatnumber*"
+phpexcel_shared_string*
+
+%15üú
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.php„ „(z
+%17*
+
+
+$objWriter*
+
+'bottom'*
+
+%162writeattributeÖÇ
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.php‰R ‰(k
+%18*
+	
+$pSheet2getpagemargins{y
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.php‰R ‰(x
+%19*
+
+%182	getheader≥
+∞
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.php‰- ‰(y
+%20"$phpexcel_shared_string::formatnumber*"
+phpexcel_shared_string*
+
+%19üú
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.php‰ ‰(z
+%21*
+
+
+$objWriter*
+
+'header'*
+
+%202writeattributeÖÇ
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.phpÂR Â(k
+%22*
+	
+$pSheet2getpagemargins{y
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.phpÂR Â(x
+%23*
+
+%222	getfooter≥
+∞
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.phpÂ- Â(y
+%24"$phpexcel_shared_string::formatnumber*"
+phpexcel_shared_string*
+
+%23üú
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.phpÂ Â(z
+%25*
+
+
+$objWriter*
+
+'footer'*
+
+%242writeattributeÑÅ
+\
+P/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Worksheet.phpÊ Ê( 
+%26*
+
+
+$objWriter2
+endelement*
+2:
+
+$objWriter:	
+$pSheetB'%
+#phpexcel_writer_excel2007_worksheet

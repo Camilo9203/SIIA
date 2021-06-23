@@ -1,0 +1,72 @@
+
+(ci_db_query_builder::get_compiled_selectC
+7/var/www/html/siia/system/database/DB_query_builder.php¯
+ ¯
+($"2"3*Í
+2C
+7/var/www/html/siia/system/database/DB_query_builder.php³
+ ³
+(!ƒ€
+C
+7/var/www/html/siia/system/database/DB_query_builder.php³
+ ³
+( 
+%1*
+ci_db_query_builder*
+
+
+$table2_track_aliasesxv
+C
+7/var/www/html/siia/system/database/DB_query_builder.php´
+ ´
+(
+%2*
+ci_db_query_builder*
+
+
+$table2from*
+3*«
+3C
+7/var/www/html/siia/system/database/DB_query_builder.php·
+ ·
+(%wu
+C
+7/var/www/html/siia/system/database/DB_query_builder.php·
+ ·
+($
+%3*
+ci_db_query_builder2_compile_select`
+^
+C
+7/var/www/html/siia/system/database/DB_query_builder.php·
+ ·
+($	
+$select"__id*
+
+%3*
+4
+5*Ä
+4C
+7/var/www/html/siia/system/database/DB_query_builder.php»
+ »
+(us
+C
+7/var/www/html/siia/system/database/DB_query_builder.php»
+ »
+(
+%4*
+ci_db_query_builder2_reset_select*
+5*œ
+5C
+7/var/www/html/siia/system/database/DB_query_builder.php¾
+ ¾
+("R
+C
+7/var/www/html/siia/system/database/DB_query_builder.php¾
+ ¾
+(
+	
+$select:
+$table:
+$resetB
+ci_db_query_builder

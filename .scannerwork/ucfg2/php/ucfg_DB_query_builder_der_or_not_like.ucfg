@@ -1,0 +1,30 @@
+
+ ci_db_query_builder::or_not_likeC
+7/var/www/html/siia/system/database/DB_query_builder.php’ ’("1*Î
+1C
+7/var/www/html/siia/system/database/DB_query_builder.php” ”(D´±
+C
+7/var/www/html/siia/system/database/DB_query_builder.php”	 ”(C
+%1*
+ci_db_query_builder*
+
+
+$field*
+
+
+$match*	
+'OR '*	
+
+$side*	
+'NOT'*
+	
+$escape2_like"M
+C
+7/var/www/html/siia/system/database/DB_query_builder.php” ”(D
+
+%1:
+$field:
+$match:
+$side:	
+$escapeB
+ci_db_query_builder

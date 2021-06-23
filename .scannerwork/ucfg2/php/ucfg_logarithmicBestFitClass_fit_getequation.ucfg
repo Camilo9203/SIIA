@@ -1,0 +1,50 @@
+
+*phpexcel_logarithmic_best_fit::getequationd
+Z/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/logarithmicBestFitClass.phpD D("1*ø
+1d
+Z/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/logarithmicBestFitClass.phpF F(&¥¢
+d
+Z/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/logarithmicBestFitClass.phpF F(%
+%1*!
+phpexcel_logarithmic_best_fit*
+
+$dp2getslope€
+~
+d
+Z/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/logarithmicBestFitClass.phpF F(%
+$slope"__id*
+
+%1©¦
+d
+Z/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/logarithmicBestFitClass.phpG G(-
+%2*!
+phpexcel_logarithmic_best_fit*
+
+$dp2getintersect…
+‚
+d
+Z/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/logarithmicBestFitClass.phpG G(-
+
+$intersect"__id*
+
+%2½
+º
+d
+Z/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/logarithmicBestFitClass.phpI I(9
+%3"__concat*
+
+'Y = '*
+
+
+$intersect*	
+' + '*
+
+
+$slope*
+' * log(X)'"n
+d
+Z/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/logarithmicBestFitClass.phpI I(:
+
+%3:
+$dpB!
+phpexcel_logarithmic_best_fit

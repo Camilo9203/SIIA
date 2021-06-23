@@ -1,0 +1,60 @@
+
+admin::cargar_informacionmodal@
+4/var/www/html/siia/application/controllers/Admin.php« «(("1*Ù
+1@
+4/var/www/html/siia/application/controllers/Admin.php¬ ¬(}c
+a
+@
+4/var/www/html/siia/application/controllers/Admin.php¬ ¬(
+%1"__id**
+admin"
+dbge
+@
+4/var/www/html/siia/application/controllers/Admin.php¬ ¬(0
+%2*
+
+%1*	
+"valor"2selecthf
+@
+4/var/www/html/siia/application/controllers/Admin.php¬ ¬(B
+%3*
+
+%2*
+
+"opciones"2from}
+@
+4/var/www/html/siia/application/controllers/Admin.php¬ ¬(g
+%4*
+
+%3*
+
+"nombre"*
+"informacionModal"2whereWU
+@
+4/var/www/html/siia/application/controllers/Admin.php¬ ¬(n
+%5*
+
+%42getWU
+@
+4/var/www/html/siia/application/controllers/Admin.php¬ ¬(u
+%6*
+
+%52rowc
+a
+@
+4/var/www/html/siia/application/controllers/Admin.php¬ ¬(|
+%7"__id**
+
+%6"
+valorg
+e
+@
+4/var/www/html/siia/application/controllers/Admin.php¬ ¬(|
+$informacionModal"__id*
+
+%7"Y
+@
+4/var/www/html/siia/application/controllers/Admin.php­ ­(
+
+$informacionModalB	
+admin

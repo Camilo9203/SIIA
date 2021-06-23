@@ -1,0 +1,70 @@
+
+panel::cargardatosorganizacion@
+4/var/www/html/siia/application/controllers/Panel.php° °(("1*¿	
+1@
+4/var/www/html/siia/application/controllers/Panel.php± ±(7h
+f
+@
+4/var/www/html/siia/application/controllers/Panel.php± ±(
+%1"__id**
+panel"	
+sessionnl
+@
+4/var/www/html/siia/application/controllers/Panel.php± ±(6
+%2*
+
+%1*
+'usuario_id'2userdataa
+_
+@
+4/var/www/html/siia/application/controllers/Panel.php± ±(6
+$usuario_id"__id*
+
+%2c
+a
+@
+4/var/www/html/siia/application/controllers/Panel.php³ ³(!
+%3"__id**
+panel"
+dbca
+@
+4/var/www/html/siia/application/controllers/Panel.php³ ³(.
+%4*
+
+%3*
+"*"2selectnl
+@
+4/var/www/html/siia/application/controllers/Panel.php³ ³(F
+%5*
+
+%4*
+"organizaciones"2from†ƒ
+@
+4/var/www/html/siia/application/controllers/Panel.php³ ³(q
+%6*
+
+%5*
+"usuarios_id_usuario"*
+
+$usuario_id2whereWU
+@
+4/var/www/html/siia/application/controllers/Panel.php³ ³(x
+%7*
+
+%62getWU
+@
+4/var/www/html/siia/application/controllers/Panel.php³ ³(
+%8*
+
+%72rowi
+g
+@
+4/var/www/html/siia/application/controllers/Panel.php³ ³(
+$datos_organizacion"__id*
+
+%8"[
+@
+4/var/www/html/siia/application/controllers/Panel.php´ ´(
+
+$datos_organizacionB	
+panel

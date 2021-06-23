@@ -1,0 +1,616 @@
+
+"phpexcel_style_color::indexedcolorM
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpß ß('"1*=
+2M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ Ÿ(_]
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%4"$Array
+
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%5"
+__arraySet*
+
+%4*2*
+
+'FF000000'
+
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%6"
+__arraySet*
+
+%4*2*
+
+'FFFFFFFF'
+
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%7"
+__arraySet*
+
+%4*2*
+
+'FFFF0000'
+
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%8"
+__arraySet*
+
+%4*2*
+
+'FF00FF00'
+
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%9"
+__arraySet*
+
+%4*2*
+
+'FF0000FF'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%10"
+__arraySet*
+
+%4*2*
+
+'FFFFFF00'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%11"
+__arraySet*
+
+%4*2*
+
+'FFFF00FF'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%12"
+__arraySet*
+
+%4*2*
+
+'FF00FFFF'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%13"
+__arraySet*
+
+%4*2	*
+
+'FF800000'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%14"
+__arraySet*
+
+%4*2
+*
+
+'FF008000'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%15"
+__arraySet*
+
+%4*2*
+
+'FF000080'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%16"
+__arraySet*
+
+%4*2*
+
+'FF808000'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%17"
+__arraySet*
+
+%4*2*
+
+'FF800080'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%18"
+__arraySet*
+
+%4*2*
+
+'FF008080'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%19"
+__arraySet*
+
+%4*2*
+
+'FFC0C0C0'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%20"
+__arraySet*
+
+%4*2*
+
+'FF808080'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%21"
+__arraySet*
+
+%4*2*
+
+'FF9999FF'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%22"
+__arraySet*
+
+%4*2*
+
+'FF993366'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%23"
+__arraySet*
+
+%4*2*
+
+'FFFFFFCC'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%24"
+__arraySet*
+
+%4*2*
+
+'FFCCFFFF'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%25"
+__arraySet*
+
+%4*2*
+
+'FF660066'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%26"
+__arraySet*
+
+%4*2*
+
+'FFFF8080'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%27"
+__arraySet*
+
+%4*2*
+
+'FF0066CC'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%28"
+__arraySet*
+
+%4*2*
+
+'FFCCCCFF'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%29"
+__arraySet*
+
+%4*2*
+
+'FF000080'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%30"
+__arraySet*
+
+%4*2*
+
+'FFFF00FF'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%31"
+__arraySet*
+
+%4*2*
+
+'FFFFFF00'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%32"
+__arraySet*
+
+%4*2*
+
+'FF00FFFF'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%33"
+__arraySet*
+
+%4*2*
+
+'FF800080'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%34"
+__arraySet*
+
+%4*2*
+
+'FF800000'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%35"
+__arraySet*
+
+%4*2*
+
+'FF008080'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%36"
+__arraySet*
+
+%4*2 *
+
+'FF0000FF'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%37"
+__arraySet*
+
+%4*2!*
+
+'FF00CCFF'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%38"
+__arraySet*
+
+%4*2"*
+
+'FFCCFFFF'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%39"
+__arraySet*
+
+%4*2#*
+
+'FFCCFFCC'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%40"
+__arraySet*
+
+%4*2$*
+
+'FFFFFF99'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%41"
+__arraySet*
+
+%4*2%*
+
+'FF99CCFF'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%42"
+__arraySet*
+
+%4*2&*
+
+'FFFF99CC'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%43"
+__arraySet*
+
+%4*2'*
+
+'FFCC99FF'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%44"
+__arraySet*
+
+%4*2(*
+
+'FFFFCC99'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%45"
+__arraySet*
+
+%4*2)*
+
+'FF3366FF'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%46"
+__arraySet*
+
+%4*2**
+
+'FF33CCCC'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%47"
+__arraySet*
+
+%4*2+*
+
+'FF99CC00'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%48"
+__arraySet*
+
+%4*2,*
+
+'FFFFCC00'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%49"
+__arraySet*
+
+%4*2-*
+
+'FFFF9900'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%50"
+__arraySet*
+
+%4*2.*
+
+'FFFF6600'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%51"
+__arraySet*
+
+%4*2/*
+
+'FF666699'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%52"
+__arraySet*
+
+%4*20*
+
+'FF969696'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%53"
+__arraySet*
+
+%4*21*
+
+'FF003366'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%54"
+__arraySet*
+
+%4*22*
+
+'FF339966'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%55"
+__arraySet*
+
+%4*23*
+
+'FF003300'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%56"
+__arraySet*
+
+%4*24*
+
+'FF333300'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%57"
+__arraySet*
+
+%4*25*
+
+'FF993300'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%58"
+__arraySet*
+
+%4*26*
+
+'FF993366'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%59"
+__arraySet*
+
+%4*27*
+
+'FF333399'ƒ
+€
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ# Ÿ(
+%60"
+__arraySet*
+
+%4*28*
+
+'FF333333'Œ
+‰
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpæ Ÿ(*
+phpexcel_style_color"
+$indexedColors"__id*
+
+%4*
+3*õ
+3M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.php¢ ¢(;
+Š
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.php¢& ¢(:
+%61"__id*,**
+phpexcel_style_color"
+$indexedColors…
+‚
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.php¢ ¢(;
+%62"array_key_exists* *
+	
+$pIndex*
+
+%61*	
+4
+6
+7*¨
+4M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.php£ £(Knl
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.php£ £(J
+%63"phpexcel_style_color‰
+†
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.php£ £(J
+%64"!phpexcel_style_color::__construct*
+
+%63* "X
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.php£ £(K
+
+%63*¨
+6M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.php§ §(?nl
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.php§ §(>
+%65"phpexcel_style_color‰
+†
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.php§ §(>
+%66"!phpexcel_style_color::__construct*
+
+%65* "X
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.php§ §(?
+
+%65*¨
+7M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.php© ©(;nl
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.php© ©(:
+%67"phpexcel_style_color‰
+†
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.php© ©(:
+%68"!phpexcel_style_color::__construct*
+
+%67* "X
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.php© ©(;
+
+%67*µ
+1M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpâ â("p
+n
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpâ â(!
+%1"intval* *
+	
+$pIndexj
+h
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpâ â(!	
+$pIndex"__id*
+
+%1Œ
+‰
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpå å((
+%2"__id*,**
+phpexcel_style_color"
+$indexedColorsl
+j
+M
+A/var/www/html/siia/application/libraries/PHPExcel/Style/Color.phpå å()
+%3"is_null* *
+
+%2*
+2
+3:	
+$pIndex:
+$backgroundB
+phpexcel_style_color

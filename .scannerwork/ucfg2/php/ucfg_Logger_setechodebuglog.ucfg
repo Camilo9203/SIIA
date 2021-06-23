@@ -1,0 +1,21 @@
+
++phpexcel_calcengine_logger::setechodebuglogQ
+G/var/www/html/siia/application/libraries/PHPExcel/CalcEngine/Logger.phpb b(#"1*{
+2
+
+Logger.php"h
+Q
+G/var/www/html/siia/application/libraries/PHPExcel/CalcEngine/Logger.phpe e(
+implicit return*÷
+1Q
+G/var/www/html/siia/application/libraries/PHPExcel/CalcEngine/Logger.phpd d(&™
+–
+Q
+G/var/www/html/siia/application/libraries/PHPExcel/CalcEngine/Logger.phpd d(%.
+phpexcel_calcengine_logger"
+echoDebugLog"__id*
+	
+$pValue*
+2:	
+$pValueB
+phpexcel_calcengine_logger

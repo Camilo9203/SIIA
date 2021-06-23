@@ -1,0 +1,134 @@
+
+)phpexcel_style_border::getsharedcomponentL
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.phpp p(&"1*ê
+14L
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.php (FÑ
+Å
+L
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.php ($
+%8"__id*%*#
+phpexcel_style_border"
+parentrp
+L
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.php (:
+%9*
+
+%82getsharedcomponenthf
+L
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.php (E
+%10*
+
+%92getleft"W
+L
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.php (F
+
+%10*ü
+16N
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.phpÅ Å(Gá
+Ñ
+N
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.phpÅ Å($
+%11"__id*%*#
+phpexcel_style_border"
+parentvt
+N
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.phpÅ Å(:
+%12*
+
+%112getsharedcomponentlj
+N
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.phpÅ Å(F
+%13*
+
+%122getright"Y
+N
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.phpÅ Å(G
+
+%13*ù
+18N
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.phpÉ É(Eá
+Ñ
+N
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.phpÉ É($
+%14"__id*%*#
+phpexcel_style_border"
+parentvt
+N
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.phpÉ É(:
+%15*
+
+%142getsharedcomponentjh
+N
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.phpÉ É(D
+%16*
+
+%152gettop"Y
+N
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.phpÉ É(E
+
+%16*y
+19
+
+Border.php"e
+N
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.phpÖ Ö(
+implicit return*ê
+10L
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.php{ {(HÑ
+Å
+L
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.php{ {($
+%2"__id*%*#
+phpexcel_style_border"
+parentrp
+L
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.php{ {(:
+%3*
+
+%22getsharedcomponentig
+L
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.php{ {(G
+%4*
+
+%32	getbottom"V
+L
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.php{ {(H
+
+%4*í
+12L
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.php} }(JÑ
+Å
+L
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.php} }($
+%5"__id*%*#
+phpexcel_style_border"
+parentrp
+L
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.php} }(:
+%6*
+
+%52getsharedcomponentki
+L
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.php} }(I
+%7*
+
+%62getdiagonal"V
+L
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.php} }(J
+
+%7*˛
+1L
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.phpr r(*ê
+ç
+L
+B/var/www/html/siia/application/libraries/PHPExcel/Style/Border.phpr r()
+%1"__id*1*/
+phpexcel_style_border"
+parentPropertyName*
+14
+16
+18
+19
+10
+12B
+phpexcel_style_border

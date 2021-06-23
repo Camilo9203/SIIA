@@ -1,0 +1,139 @@
+
+perfil::numerosolicitudesA
+5/var/www/html/siia/application/controllers/Perfil.phpƒ ƒ(""1*¾
+1A
+5/var/www/html/siia/application/controllers/Perfil.php„ „(7j
+h
+A
+5/var/www/html/siia/application/controllers/Perfil.php„ „(
+%1"__id**
+perfil"	
+sessionom
+A
+5/var/www/html/siia/application/controllers/Perfil.php„ „(6
+%2*
+
+%1*
+'usuario_id'2userdatab
+`
+A
+5/var/www/html/siia/application/controllers/Perfil.php„ „(6
+$usuario_id"__id*
+
+%2e
+c
+A
+5/var/www/html/siia/application/controllers/Perfil.php… …(!
+%3"__id**
+perfil"
+dbrp
+A
+5/var/www/html/siia/application/controllers/Perfil.php… …(<
+%4*
+
+%3*
+"id_organizacion"2selectom
+A
+5/var/www/html/siia/application/controllers/Perfil.php… …(T
+%5*
+
+%4*
+"organizaciones"2from‡„
+A
+5/var/www/html/siia/application/controllers/Perfil.php… …(
+%6*
+
+%5*
+"usuarios_id_usuario"*
+
+$usuario_id2whereYW
+B
+5/var/www/html/siia/application/controllers/Perfil.php… …(†
+%7*
+
+%62getYW
+B
+5/var/www/html/siia/application/controllers/Perfil.php… …(
+%8*
+
+%72rowk
+i
+B
+5/var/www/html/siia/application/controllers/Perfil.php… …(
+$datos_organizacion"__id*
+
+%8
+}
+A
+5/var/www/html/siia/application/controllers/Perfil.php† †(:
+%9"__id*,**
+
+$datos_organizacion"
+id_organizaciong
+e
+A
+5/var/www/html/siia/application/controllers/Perfil.php† †(:
+$id_organizacion"__id*
+
+%9f
+d
+A
+5/var/www/html/siia/application/controllers/Perfil.phpˆ ˆ(
+%10"__id**
+perfil"
+dbvt
+A
+5/var/www/html/siia/application/controllers/Perfil.phpˆ ˆ(7
+%11*
+
+%10*
+"numeroSolicitudes"2selectnl
+A
+5/var/www/html/siia/application/controllers/Perfil.phpˆ ˆ(L
+%12*
+
+%11*
+"solicitudes"2fromš—
+B
+5/var/www/html/siia/application/controllers/Perfil.phpˆ ˆ(‡
+%13*
+
+%12*$"
+ "organizaciones_id_organizacion"*
+
+$id_organizacion2where[Y
+B
+5/var/www/html/siia/application/controllers/Perfil.phpˆ ˆ(Ž
+%14*
+
+%132get[Y
+B
+5/var/www/html/siia/application/controllers/Perfil.phpˆ ˆ(•
+%15*
+
+%142rowe
+c
+B
+5/var/www/html/siia/application/controllers/Perfil.phpˆ ˆ(•
+$solicitudes"__id*
+
+%15{
+y
+A
+5/var/www/html/siia/application/controllers/Perfil.php‰ ‰(7
+%16"__id*'*%
+
+$solicitudes"
+numeroSolicitudesj
+h
+A
+5/var/www/html/siia/application/controllers/Perfil.php‰ ‰(7
+$numeroSolicitudes"__id*
+
+%16"[
+A
+5/var/www/html/siia/application/controllers/Perfil.phpŠ Š(
+
+$numeroSolicitudesB
+
+perfil

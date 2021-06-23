@@ -1,0 +1,44 @@
+
+admin::cargardepartamentos@
+4/var/www/html/siia/application/controllers/Admin.phpÁ Á($"1*ñ
+1@
+4/var/www/html/siia/application/controllers/Admin.phpÂ Â(Rc
+a
+@
+4/var/www/html/siia/application/controllers/Admin.phpÂ Â(
+%1"__id**
+admin"
+dbca
+@
+4/var/www/html/siia/application/controllers/Admin.phpÂ Â()
+%2*
+
+%1*
+"*"2selectmk
+@
+4/var/www/html/siia/application/controllers/Admin.phpÂ Â(@
+%3*
+
+%2*
+"departamentos"2fromWU
+@
+4/var/www/html/siia/application/controllers/Admin.phpÂ Â(G
+%4*
+
+%32getZX
+@
+4/var/www/html/siia/application/controllers/Admin.phpÂ Â(Q
+%5*
+
+%42resultd
+b
+@
+4/var/www/html/siia/application/controllers/Admin.phpÂ Â(Q
+$departamentos"__id*
+
+%5"V
+@
+4/var/www/html/siia/application/controllers/Admin.phpÃ Ã(
+
+$departamentosB	
+admin

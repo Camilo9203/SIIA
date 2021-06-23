@@ -1,0 +1,64 @@
+
+"phpexcel_chart::gettopleftpositionG
+;/var/www/html/siia/application/libraries/PHPExcel/Chart.phpÄ Ä(&"1*ô
+1G
+;/var/www/html/siia/application/libraries/PHPExcel/Chart.phpÆ Ê(
+YW
+G
+;/var/www/html/siia/application/libraries/PHPExcel/Chart.phpÆ Ê(	
+%1"$Array
+}
+G
+;/var/www/html/siia/application/libraries/PHPExcel/Chart.phpÇ Ç(.
+%2"__id*&*$
+phpexcel_chart"
+topLeftCellRefy
+w
+G
+;/var/www/html/siia/application/libraries/PHPExcel/Chart.phpÆ Ê(	
+%3"
+__arraySet*
+
+%1*
+
+'cell'*
+
+%2
+}
+G
+;/var/www/html/siia/application/libraries/PHPExcel/Chart.phpÈ È(.
+%4"__id*&*$
+phpexcel_chart"
+topLeftXOffset|
+z
+G
+;/var/www/html/siia/application/libraries/PHPExcel/Chart.phpÆ Ê(	
+%5"
+__arraySet*
+
+%1*
+	'xOffset'*
+
+%4
+}
+G
+;/var/www/html/siia/application/libraries/PHPExcel/Chart.phpÉ É(.
+%6"__id*&*$
+phpexcel_chart"
+topLeftYOffset|
+z
+G
+;/var/www/html/siia/application/libraries/PHPExcel/Chart.phpÆ Ê(	
+%7"
+__arraySet*
+
+%1*
+	'yOffset'*
+
+%6"Q
+G
+;/var/www/html/siia/application/libraries/PHPExcel/Chart.phpÆ Ê(
+
+
+%1B
+phpexcel_chart

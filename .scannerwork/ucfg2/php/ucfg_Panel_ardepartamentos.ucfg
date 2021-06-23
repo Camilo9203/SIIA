@@ -1,0 +1,44 @@
+
+panel::cargardepartamentos@
+4/var/www/html/siia/application/controllers/Panel.phpŸ Ÿ($"1*ñ
+1@
+4/var/www/html/siia/application/controllers/Panel.php   (Rc
+a
+@
+4/var/www/html/siia/application/controllers/Panel.php   (
+%1"__id**
+panel"
+dbca
+@
+4/var/www/html/siia/application/controllers/Panel.php   ()
+%2*
+
+%1*
+"*"2selectmk
+@
+4/var/www/html/siia/application/controllers/Panel.php   (@
+%3*
+
+%2*
+"departamentos"2fromWU
+@
+4/var/www/html/siia/application/controllers/Panel.php   (G
+%4*
+
+%32getZX
+@
+4/var/www/html/siia/application/controllers/Panel.php   (Q
+%5*
+
+%42resultd
+b
+@
+4/var/www/html/siia/application/controllers/Panel.php   (Q
+$departamentos"__id*
+
+%5"V
+@
+4/var/www/html/siia/application/controllers/Panel.php¡ ¡(
+
+$departamentosB	
+panel

@@ -1,0 +1,23 @@
+
+ci_db_postgre_utility::_backupP
+F/var/www/html/siia/system/database/drivers/postgre/postgre_utility.phpI I("1*Ë
+1P
+F/var/www/html/siia/system/database/drivers/postgre/postgre_utility.phpL L(<„
+
+P
+F/var/www/html/siia/system/database/drivers/postgre/postgre_utility.phpL	 L(
+%1"__id*!*
+ci_db_postgre_utility"
+db
+P
+F/var/www/html/siia/system/database/drivers/postgre/postgre_utility.phpL	 L(;
+%2*
+
+%1*
+'db_unsupported_feature'2display_error"Z
+P
+F/var/www/html/siia/system/database/drivers/postgre/postgre_utility.phpL L(<
+
+%2:	
+$paramsB
+ci_db_postgre_utility

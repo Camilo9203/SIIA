@@ -1,0 +1,65 @@
+
+ci_db_mssql_driver::_deleteM
+A/var/www/html/siia/system/database/drivers/mssql/mssql_driver.php¦ ¦("1*›
+2N
+A/var/www/html/siia/system/database/drivers/mssql/mssql_driver.phpª ª(†„
+
+M
+A/var/www/html/siia/system/database/drivers/mssql/mssql_driver.phpª+ ª(:
+%2"__id*$*"
+ci_db_mssql_driver"
+
+qb_limitŠ
+M
+A/var/www/html/siia/system/database/drivers/mssql/mssql_driver.phpªM ª(k
+%3*
+ci_db_mssql_driver*
+
+'qb_where'2_compile_whÔ
+Ñ
+N
+A/var/www/html/siia/system/database/drivers/mssql/mssql_driver.phpª
+ ª(…
+%4"__concat*$"
+ 'WITH ci_delete AS (SELECT TOP '*
+
+%2*
+
+' * FROM '*
+
+
+$table*
+
+%3*
+') DELETE FROM ci_delete'"X
+N
+A/var/www/html/siia/system/database/drivers/mssql/mssql_driver.phpª ª(†
+
+%4*º
+3M
+A/var/www/html/siia/system/database/drivers/mssql/mssql_driver.php­ ­(!Œ
+‰
+M
+A/var/www/html/siia/system/database/drivers/mssql/mssql_driver.php­	 ­( 
+%5"ci_db::_delete*
+ci_db_mssql_driver*
+
+
+$table"W
+M
+A/var/www/html/siia/system/database/drivers/mssql/mssql_driver.php­ ­(!
+
+%5*á
+1M
+A/var/www/html/siia/system/database/drivers/mssql/mssql_driver.php¨ ¨(„
+
+M
+A/var/www/html/siia/system/database/drivers/mssql/mssql_driver.php¨ ¨(
+%1"__id*$*"
+ci_db_mssql_driver"
+
+qb_limit*
+2
+3:
+$tableB
+ci_db_mssql_driver

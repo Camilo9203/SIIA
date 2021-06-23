@@ -1,0 +1,34 @@
+
+0phpexcel_worksheet::insertnewcolumnbeforebyindexK
+?/var/www/html/siia/application/libraries/PHPExcel/Worksheet.phpû û(0"2"4*æ
+2K
+?/var/www/html/siia/application/libraries/PHPExcel/Worksheet.phpş ş(k
+š
+K
+?/var/www/html/siia/application/libraries/PHPExcel/Worksheet.phpş0 ş(^
+%1"$phpexcel_cell::stringfromcolumnindex*"
+phpexcel_cell*
+
+
+$pBeforeœ™
+K
+?/var/www/html/siia/application/libraries/PHPExcel/Worksheet.phpş ş(j
+%2*
+phpexcel_worksheet*
+
+%1*
+
+	$pNumCols2insertnewcolumnbefore"U
+K
+?/var/www/html/siia/application/libraries/PHPExcel/Worksheet.phpş ş(k
+
+%2*x
+4
+Worksheet.php"b
+K
+?/var/www/html/siia/application/libraries/PHPExcel/Worksheet.php‚ ‚(
+implicit return:
+
+$pBefore:
+	$pNumColsB
+phpexcel_worksheet

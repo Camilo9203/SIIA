@@ -1,0 +1,19 @@
+
+!ci_db_pdo_mysql_driver::_truncateZ
+N/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_mysql_driver.phpÝ Ý("1*Ô
+1Z
+N/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_mysql_driver.phpß ß(Œ
+‰
+Z
+N/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_mysql_driver.phpß	 ß(
+%1"__concat*
+'TRUNCATE '*
+
+
+$table"d
+Z
+N/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_mysql_driver.phpß ß(
+
+%1:
+$tableB
+ci_db_pdo_mysql_driver

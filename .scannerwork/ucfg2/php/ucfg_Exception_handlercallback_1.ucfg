@@ -1,0 +1,47 @@
+
+/phpexcel_writer_exception::errorhandlercallbackP
+F/var/www/html/siia/application/libraries/PHPExcel/Writer/Exception.php' '(/"1*}
+2
+Exception.php"g
+P
+F/var/www/html/siia/application/libraries/PHPExcel/Writer/Exception.php- -(
+implicit return*»
+1P
+F/var/www/html/siia/application/libraries/PHPExcel/Writer/Exception.php) )(&`^
+P
+F/var/www/html/siia/application/libraries/PHPExcel/Writer/Exception.php) )(%
+$e"selfŽ
+‹
+P
+F/var/www/html/siia/application/libraries/PHPExcel/Writer/Exception.php) )(%
+%1"self::__construct*
+
+$e*
+	
+$string*	
+
+$codeu
+s
+P
+F/var/www/html/siia/application/libraries/PHPExcel/Writer/Exception.php* *(
+
+$e"
+line"__id*	
+
+$lineu
+s
+P
+F/var/www/html/siia/application/libraries/PHPExcel/Writer/Exception.php+ +(
+
+$e"
+file"__id*	
+
+$file*
+2:
+$code:	
+$string:
+$file:
+$line:
+
+$contextB
+phpexcel_writer_exception

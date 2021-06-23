@@ -1,0 +1,11 @@
+
+*ci_db_pdo_odbc_forge::_attr_auto_incrementV
+L/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_odbc_forge.phpA A(("1*ˆ
+1
+pdo_odbc_forge.php"m
+V
+L/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_odbc_forge.phpD D(
+implicit return:
+$attributes:
+$fieldB
+ci_db_pdo_odbc_forge

@@ -1,0 +1,47 @@
+
+.phpexcel_chart_exception::errorhandlercallbackO
+E/var/www/html/siia/application/libraries/PHPExcel/Chart/Exception.php' '(/"1*|
+2
+Exception.php"f
+O
+E/var/www/html/siia/application/libraries/PHPExcel/Chart/Exception.php- -(
+implicit return*∂
+1O
+E/var/www/html/siia/application/libraries/PHPExcel/Chart/Exception.php) )(&_]
+O
+E/var/www/html/siia/application/libraries/PHPExcel/Chart/Exception.php) )(%
+$e"selfç
+ä
+O
+E/var/www/html/siia/application/libraries/PHPExcel/Chart/Exception.php) )(%
+%1"self::__construct*
+
+$e*
+	
+$string*	
+
+$codet
+r
+O
+E/var/www/html/siia/application/libraries/PHPExcel/Chart/Exception.php* *(
+
+$e"
+line"__id*	
+
+$linet
+r
+O
+E/var/www/html/siia/application/libraries/PHPExcel/Chart/Exception.php+ +(
+
+$e"
+file"__id*	
+
+$file*
+2:
+$code:	
+$string:
+$file:
+$line:
+
+$contextB
+phpexcel_chart_exception

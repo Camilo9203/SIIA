@@ -1,0 +1,47 @@
+
+(phpexcel_exception::errorhandlercallbackI
+?/var/www/html/siia/application/libraries/PHPExcel/Exception.php/ /(/"1*v
+2
+Exception.php"`
+I
+?/var/www/html/siia/application/libraries/PHPExcel/Exception.php5 5(
+implicit return*˜
+1I
+?/var/www/html/siia/application/libraries/PHPExcel/Exception.php1 1(&YW
+I
+?/var/www/html/siia/application/libraries/PHPExcel/Exception.php1 1(%
+$e"self‡
+„
+I
+?/var/www/html/siia/application/libraries/PHPExcel/Exception.php1 1(%
+%1"self::__construct*
+
+$e*
+	
+$string*	
+
+$coden
+l
+I
+?/var/www/html/siia/application/libraries/PHPExcel/Exception.php2 2(
+
+$e"
+line"__id*	
+
+$linen
+l
+I
+?/var/www/html/siia/application/libraries/PHPExcel/Exception.php3 3(
+
+$e"
+file"__id*	
+
+$file*
+2:
+$code:	
+$string:
+$file:
+$line:
+
+$contextB
+phpexcel_exception

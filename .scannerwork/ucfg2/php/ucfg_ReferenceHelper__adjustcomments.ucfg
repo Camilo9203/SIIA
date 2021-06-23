@@ -1,0 +1,108 @@
+
+(phpexcel_referencehelper::adjustcommentsQ
+E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpÈ È(%"1*º
+3Q
+E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpÏ Ï(kÖ
+Ó
+Q
+E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpÏ Ï(k
+%3"self::celladdressindeleterange*"
+self*
+
+$key*
+
+
+$beforeRow*
+
+	$pNumRows*
+
+$beforeColumnIndex*
+
+	$pNumCols*	
+3
+4
+5*¹
+4Q
+E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpÑ Ñ(aÅÂ
+Q
+E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpÑ  Ñ(`
+%4*
+phpexcel_referencehelper*
+
+$key*
+
+
+$pBefore*
+
+	$pNumCols*
+
+	$pNumRows2updatecellreferencet
+r
+Q
+E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpÑ Ñ(`
+$newReference"__id*
+
+%4š
+—
+Q
+E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpÒ Ò(,
+%5"
+__arraySet*
+
+$aNewComments*
+
+$newReference*
+
+
+$value*
+3
+5*ç
+5Q
+E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpÖ Ö(,‰†
+Q
+E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpÖ Ö(+
+%6*
+	
+$pSheet*
+
+$aNewComments2setcomments*
+6*„
+6
+ReferenceHelper.php"h
+Q
+E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.php× ×(
+implicit return*£
+1Q
+E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpÊ Ê(,us
+Q
+E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpÊ Ê(+
+%1*
+	
+$pSheet2getcommentsq
+o
+Q
+E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpÊ Ê(+
+
+$aComments"__id*
+
+%1ca
+Q
+E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpË Ë(
+%2"$Arrayt
+r
+Q
+E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpË Ë(
+$aNewComments"__id*
+
+%2*
+3
+5:	
+$pSheet:
+
+$pBefore:
+$beforeColumnIndex:
+	$pNumCols:
+
+$beforeRow:
+	$pNumRowsB
+phpexcel_referencehelper

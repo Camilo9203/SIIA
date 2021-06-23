@@ -1,0 +1,81 @@
+
+pop3::catchwarningO
+C/var/www/html/siia/application/third_party/phpmailer/class.pop3.phpç ç(#"1*}
+2
+class.pop3.php"f
+O
+C/var/www/html/siia/application/third_party/phpmailer/class.pop3.phpñ ñ(
+implicit return*ü
+1O
+C/var/www/html/siia/application/third_party/phpmailer/class.pop3.phpè ï(a_
+O
+C/var/www/html/siia/application/third_party/phpmailer/class.pop3.phpè ï(	
+%1"$Array∑
+¥
+O
+C/var/www/html/siia/application/third_party/phpmailer/class.pop3.phpè ï(	
+%2"
+__arraySet*
+
+%1*	
+'error'*:8
+6"Connecting to the POP3 server raised a PHP warning: "á
+Ñ
+O
+C/var/www/html/siia/application/third_party/phpmailer/class.pop3.phpè ï(	
+%3"
+__arraySet*
+
+%1*	
+'errno'*
+
+
+$errnoâ
+Ü
+O
+C/var/www/html/siia/application/third_party/phpmailer/class.pop3.phpè ï(	
+%4"
+__arraySet*
+
+%1*
+
+'errstr'*
+	
+$errstrã
+à
+O
+C/var/www/html/siia/application/third_party/phpmailer/class.pop3.phpè ï(	
+%5"
+__arraySet*
+
+%1*
+	'errfile'*
+
+
+$errfileã
+à
+O
+C/var/www/html/siia/application/third_party/phpmailer/class.pop3.phpè ï(	
+%6"
+__arraySet*
+
+%1*
+	'errline'*
+
+
+$errlineus
+O
+C/var/www/html/siia/application/third_party/phpmailer/class.pop3.phpè ï(
+
+%7*
+pop3*
+
+%12seterror*
+2:
+$errno:	
+$errstr:
+
+$errfile:
+
+$errlineB
+pop3

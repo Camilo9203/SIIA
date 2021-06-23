@@ -1,0 +1,125 @@
+
+.panel::cargardatos_formulario_programas_avalar@
+4/var/www/html/siia/application/controllers/Panel.phpè è(8"1*∏
+1@
+4/var/www/html/siia/application/controllers/Panel.phpê ê(7h
+f
+@
+4/var/www/html/siia/application/controllers/Panel.phpê ê(
+%1"__id**
+panel"	
+sessionnl
+@
+4/var/www/html/siia/application/controllers/Panel.phpê ê(6
+%2*
+
+%1*
+'usuario_id'2userdataa
+_
+@
+4/var/www/html/siia/application/controllers/Panel.phpê ê(6
+$usuario_id"__id*
+
+%2c
+a
+@
+4/var/www/html/siia/application/controllers/Panel.phpë ë(!
+%3"__id**
+panel"
+dbqo
+@
+4/var/www/html/siia/application/controllers/Panel.phpë ë(<
+%4*
+
+%3*
+"id_organizacion"2selectnl
+@
+4/var/www/html/siia/application/controllers/Panel.phpë ë(T
+%5*
+
+%4*
+"organizaciones"2fromÜÉ
+@
+4/var/www/html/siia/application/controllers/Panel.phpë ë(
+%6*
+
+%5*
+"usuarios_id_usuario"*
+
+$usuario_id2whereXV
+A
+4/var/www/html/siia/application/controllers/Panel.phpë ë(Ü
+%7*
+
+%62getXV
+A
+4/var/www/html/siia/application/controllers/Panel.phpë ë(ç
+%8*
+
+%72rowj
+h
+A
+4/var/www/html/siia/application/controllers/Panel.phpë ë(ç
+$datos_organizacion"__id*
+
+%8~
+|
+@
+4/var/www/html/siia/application/controllers/Panel.phpí í(:
+%9"__id*,**
+
+$datos_organizacion"
+id_organizacionf
+d
+@
+4/var/www/html/siia/application/controllers/Panel.phpí í(:
+$id_organizacion"__id*
+
+%9d
+b
+@
+4/var/www/html/siia/application/controllers/Panel.phpì ì(
+%10"__id**
+panel"
+dbec
+@
+4/var/www/html/siia/application/controllers/Panel.phpì ì(,
+%11*
+
+%10*
+"*"2selectqo
+@
+4/var/www/html/siia/application/controllers/Panel.phpì ì(E
+%12*
+
+%11*
+"programasAvalar"2fromôñ
+A
+4/var/www/html/siia/application/controllers/Panel.phpì ì(Ä
+%13*
+
+%12*$"
+ "organizaciones_id_organizacion"*
+
+$id_organizacion2whereZX
+A
+4/var/www/html/siia/application/controllers/Panel.phpì ì(á
+%14*
+
+%132get][
+A
+4/var/www/html/siia/application/controllers/Panel.phpì ì(ë
+%15*
+
+%142resulti
+g
+A
+4/var/www/html/siia/application/controllers/Panel.phpì ì(ë
+$datos_formulario"__id*
+
+%15"Y
+@
+4/var/www/html/siia/application/controllers/Panel.phpî î(
+
+$datos_formularioB	
+panel

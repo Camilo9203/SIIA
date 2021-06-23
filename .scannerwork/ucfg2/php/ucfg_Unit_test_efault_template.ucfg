@@ -1,0 +1,43 @@
+
+ci_unit_test::_default_template=
+1/var/www/html/siia/system/libraries/Unit_test.phpÞ Þ(%"1*j
+2
+Unit_test.php"T
+=
+1/var/www/html/siia/system/libraries/Unit_test.phpä ä(
+implicit return*²
+1>
+1/var/www/html/siia/system/libraries/Unit_test.phpà à(œé
+æ
+>
+1/var/www/html/siia/system/libraries/Unit_test.phpà à(›
+%1"__concat*
+"\n"*xv
+t'<table style="width:100%; font-size:small; margin:10px 0; border-collapse:collapse; border:1px solid #CCC;">{rows}'*
+"\n</table>"o
+m
+>
+1/var/www/html/siia/system/libraries/Unit_test.phpà à(›
+ci_unit_test"
+	_template"__id*
+
+%1•
+’
+=
+1/var/www/html/siia/system/libraries/Unit_test.phpâ ã(T
+%2"__concat*
+"\n\t<tr>\n\t\t"*MK
+I'<th style="text-align: left; border-bottom:1px solid #CCC;">{item}</th>'*
+
+"\n\t\t"*=;
+9'<td style="border-bottom:1px solid #CCC;">{result}</td>'*
+"\n\t</tr>"s
+q
+=
+1/var/www/html/siia/system/libraries/Unit_test.phpâ ã(T"
+ci_unit_test"
+_template_rows"__id*
+
+%2*
+2B
+ci_unit_test

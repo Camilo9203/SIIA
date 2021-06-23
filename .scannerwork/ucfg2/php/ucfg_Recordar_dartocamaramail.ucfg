@@ -1,0 +1,532 @@
+
+recordar::recordartocamaramailC
+7/var/www/html/siia/application/controllers/Recordar.phpê ê(%"1*p
+13
+Recordar.php"Z
+C
+7/var/www/html/siia/application/controllers/Recordar.php¥ ¥(
+implicit return*ó#
+3C
+7/var/www/html/siia/application/controllers/Recordar.phpû û(Fé
+ã
+C
+7/var/www/html/siia/application/controllers/Recordar.phpû û(E
+%16"__id*7*5
+
+$organizacionDB" 
+organizaciones_id_organizacionj
+h
+C
+7/var/www/html/siia/application/controllers/Recordar.phpû û(E
+$id_organizacion"__id*
+
+%16j
+h
+C
+7/var/www/html/siia/application/controllers/Recordar.phpü ü(#
+%17"__id**
+
+recordar"
+db£†
+C
+7/var/www/html/siia/application/controllers/Recordar.phpü ü(j
+%18*
+
+%17*A?
+="nombreOrganizacion, numNIT, camaraComercio, id_organizacion"2selecttr
+D
+7/var/www/html/siia/application/controllers/Recordar.phpü ü(Ç
+%19*
+
+%18*
+"organizaciones"2fromçä
+D
+7/var/www/html/siia/application/controllers/Recordar.phpü ü(Æ
+%20*
+
+%19*
+"id_organizacion"*
+
+$id_organizacion2where][
+D
+7/var/www/html/siia/application/controllers/Recordar.phpü ü(µ
+%21*
+
+%202get][
+D
+7/var/www/html/siia/application/controllers/Recordar.phpü ü(º
+%22*
+
+%212rowo
+m
+D
+7/var/www/html/siia/application/controllers/Recordar.phpü ü(º
+$data_organizaciones"__id*
+
+%22Ñ
+Å
+C
+7/var/www/html/siia/application/controllers/Recordar.php† †(2
+%23"__id*-*+
+
+$data_organizaciones"
+id_organizaciona
+_
+C
+7/var/www/html/siia/application/controllers/Recordar.php† †(2	
+$id_org"__id*
+
+%23É
+Ä
+C
+7/var/www/html/siia/application/controllers/Recordar.php° °(9
+%24"__id*,**
+
+$data_organizaciones"
+camaraComercioi
+g
+C
+7/var/www/html/siia/application/controllers/Recordar.php° °(9
+$camaraComercio"__id*
+
+%24j
+h
+C
+7/var/www/html/siia/application/controllers/Recordar.php¢ ¢((
+%25"__id**
+
+recordar"
+dbhf
+C
+7/var/www/html/siia/application/controllers/Recordar.php¢ ¢(5
+%26*
+
+%25*
+"*"2selectwu
+C
+7/var/www/html/siia/application/controllers/Recordar.php¢ ¢(Q
+%27*
+
+%26*
+"informacionGeneral"2fromìê
+D
+7/var/www/html/siia/application/controllers/Recordar.php¢ ¢(É
+%28*
+
+%27*$"
+ "organizaciones_id_organizacion"*
+	
+$id_org2where][
+D
+7/var/www/html/siia/application/controllers/Recordar.php¢ ¢(ä
+%29*
+
+%282get][
+D
+7/var/www/html/siia/application/controllers/Recordar.php¢ ¢(ë
+%30*
+
+%292rows
+q
+D
+7/var/www/html/siia/application/controllers/Recordar.php¢ ¢(ë
+$data_organizaciones_inf"__id*
+
+%30j
+h
+C
+7/var/www/html/siia/application/controllers/Recordar.php£ £("
+%31"__id**
+
+recordar"
+dbhf
+C
+7/var/www/html/siia/application/controllers/Recordar.php£ £(/
+%32*
+
+%31*
+"*"2selectwu
+C
+7/var/www/html/siia/application/controllers/Recordar.php£ £(K
+%33*
+
+%32*
+"documentacionLegal"2fromíè
+C
+7/var/www/html/siia/application/controllers/Recordar.php£ £(|
+%34*
+
+%33*$"
+ "organizaciones_id_organizacion"*
+	
+$id_org2where][
+D
+7/var/www/html/siia/application/controllers/Recordar.php£ £(É
+%35*
+
+%342get][
+D
+7/var/www/html/siia/application/controllers/Recordar.php£ £(ä
+%36*
+
+%352rown
+l
+D
+7/var/www/html/siia/application/controllers/Recordar.php£ £(ä
+$documentacionLegal"__id*
+
+%36j
+h
+C
+7/var/www/html/siia/application/controllers/Recordar.php§ §((
+%37"__id**
+
+recordar"
+dbhf
+C
+7/var/www/html/siia/application/controllers/Recordar.php§ §(5
+%38*
+
+%37*
+"*"2selectyw
+C
+7/var/www/html/siia/application/controllers/Recordar.php§ §(S
+%39*
+
+%38*
+"estadoOrganizaciones"2fromìê
+D
+7/var/www/html/siia/application/controllers/Recordar.php§ §(Ö
+%40*
+
+%39*$"
+ "organizaciones_id_organizacion"*
+	
+$id_org2where][
+D
+7/var/www/html/siia/application/controllers/Recordar.php§ §(å
+%41*
+
+%402get][
+D
+7/var/www/html/siia/application/controllers/Recordar.php§ §(ì
+%42*
+
+%412rows
+q
+D
+7/var/www/html/siia/application/controllers/Recordar.php§ §(ì
+$data_organizaciones_est"__id*
+
+%42~
+|
+C
+7/var/www/html/siia/application/controllers/Recordar.php• •(:
+%43"__id*(*&
+
+$data_organizaciones_est"
+nombrem
+k
+C
+7/var/www/html/siia/application/controllers/Recordar.php• •(:
+$estadoOrganizacion"__id*
+
+%43Ö
+Ç
+C
+7/var/www/html/siia/application/controllers/Recordar.php¶ ¶(6
+%44"__id*.*,
+
+$documentacionLegal"
+registroEducativoc
+a
+C
+7/var/www/html/siia/application/controllers/Recordar.php¶ ¶(6
+	$registro"__id*
+
+%44*
+3
+8
+11
+12*ﬂ
+8D
+7/var/www/html/siia/application/controllers/Recordar.php© ©(Üá
+Ñ
+C
+7/var/www/html/siia/application/controllers/Recordar.php© ©(C
+%45"__id*0*.
+
+$data_organizaciones"
+nombreOrganizacionz
+x
+C
+7/var/www/html/siia/application/controllers/Recordar.php©Y ©(u
+%46"__id*$*"
+
+$data_organizaciones"
+numNIT´
+®
+D
+7/var/www/html/siia/application/controllers/Recordar.php© ©(Ö
+%47"__concat*
+
+"Nombre: "*
+
+%45*
+" con NIT: <strong>"*
+
+%46*
+"</strong><br>"o
+m
+D
+7/var/www/html/siia/application/controllers/Recordar.php© ©(Ö
+%48"__concat*
+	
+$texto1*
+
+%47b
+`
+D
+7/var/www/html/siia/application/controllers/Recordar.php© ©(Ö	
+$texto1"__id*
+
+%48*
+3
+11
+12*⁄
+11D
+7/var/www/html/siia/application/controllers/Recordar.php≠ ≠(Öá
+Ñ
+C
+7/var/www/html/siia/application/controllers/Recordar.php≠ ≠(B
+%49"__id*0*.
+
+$data_organizaciones"
+nombreOrganizacionz
+x
+C
+7/var/www/html/siia/application/controllers/Recordar.php≠X ≠(t
+%50"__id*$*"
+
+$data_organizaciones"
+numNIT´
+®
+D
+7/var/www/html/siia/application/controllers/Recordar.php≠ ≠(Ñ
+%51"__concat*
+
+"Nombre: "*
+
+%49*
+" con NIT: <strong>"*
+
+%50*
+"</strong><br>"n
+l
+D
+7/var/www/html/siia/application/controllers/Recordar.php≠ ≠(Ñ
+%52"__concat*
+
+
+$texto*
+
+%51a
+_
+D
+7/var/www/html/siia/application/controllers/Recordar.php≠ ≠(Ñ
+$texto"__id*
+
+%52*
+3
+12*ó
+12C
+7/var/www/html/siia/application/controllers/Recordar.php± ±(O…
+∆
+C
+7/var/www/html/siia/application/controllers/Recordar.php± ±(N
+%53"__concat*
+	
+$inicio*
+""*
+
+$orgFinalizadas*
+""*
+	
+$texto1*
+
+"<br>"*
+
+$orgTotales*
+""*
+
+
+$textoa
+_
+C
+7/var/www/html/siia/application/controllers/Recordar.php± ±(N	
+$correo"__id*
+
+%53ñì
+C
+7/var/www/html/siia/application/controllers/Recordar.php≥ ≥(8
+%54*
+
+recordar*
+	
+$correo*
+
+$correoCamara2envio_mail_camara_admin*
+13*¡
+1C
+7/var/www/html/siia/application/controllers/Recordar.phpë ë(`
+^
+C
+7/var/www/html/siia/application/controllers/Recordar.phpë ë(	
+$correo"__id*
+""i
+g
+C
+7/var/www/html/siia/application/controllers/Recordar.phpí í(
+%1"__id**
+
+recordar"
+dbfd
+C
+7/var/www/html/siia/application/controllers/Recordar.phpí í()
+%2*
+
+%1*
+"*"2selectrp
+C
+7/var/www/html/siia/application/controllers/Recordar.phpí í(B
+%3*
+
+%2*
+"administradores"2fromom
+C
+7/var/www/html/siia/application/controllers/Recordar.phpí í(U
+%4*
+
+%3*	
+"nivel"*22whereZX
+C
+7/var/www/html/siia/application/controllers/Recordar.phpí í(\
+%5*
+
+%42getZX
+C
+7/var/www/html/siia/application/controllers/Recordar.phpí í(c
+%6*
+
+%52rowg
+e
+C
+7/var/www/html/siia/application/controllers/Recordar.phpí í(c
+$usuarioCamara"__id*
+
+%6á
+Ñ
+C
+7/var/www/html/siia/application/controllers/Recordar.phpì ì(5
+%7"__id*1*/
+
+$usuarioCamara"
+primerNombreAdministrador`
+^
+C
+7/var/www/html/siia/application/controllers/Recordar.phpì ì(5	
+$nombre"__id*
+
+%7â
+Ü
+C
+7/var/www/html/siia/application/controllers/Recordar.phpî î(9
+%8"__id*3*1
+
+$usuarioCamara"
+primerApellidoAdministradorb
+`
+C
+7/var/www/html/siia/application/controllers/Recordar.phpî î(9
+	$apellido"__id*
+
+%8à
+Ö
+C
+7/var/www/html/siia/application/controllers/Recordar.phpï ï(<
+%9"__id*2*0
+
+$usuarioCamara"
+direccionCorreoElectronicof
+d
+C
+7/var/www/html/siia/application/controllers/Recordar.phpï ï(<
+$correoCamara"__id*
+
+%9ˆ
+Û
+D
+7/var/www/html/siia/application/controllers/Recordar.phpó ó(ç
+%10"__concat*
+"Buen d√≠a "*
+	
+$nombre*
+" "*
+
+	$apellido*ca
+_", <br>Las siguientes organizaciones estan pendientes por subir la camara de comercio:<br><br>"b
+`
+D
+7/var/www/html/siia/application/controllers/Recordar.phpó ó(ç	
+$inicio"__id*
+
+%10°
+û
+C
+7/var/www/html/siia/application/controllers/Recordar.phpò ò(M
+$orgTotales"__id*B@
+>"Organizaciones inscritas en la aplicaci√≥n (todas): <br><br>"ƒ
+¡
+C
+7/var/www/html/siia/application/controllers/Recordar.phpô ô(q
+$orgFinalizadas"__id*a_
+]"Organizaciones que finalizaron o en observaciones <strong>(prioritarias)</strong>: <br><br>"j
+h
+C
+7/var/www/html/siia/application/controllers/Recordar.phpõ õ(!
+%11"__id**
+
+recordar"
+dbÜÉ
+C
+7/var/www/html/siia/application/controllers/Recordar.phpõ õ(K
+%12*
+
+%11*$"
+ "organizaciones_id_organizacion"2selectyw
+C
+7/var/www/html/siia/application/controllers/Recordar.phpõ õ(i
+%13*
+
+%12*
+"estadoOrganizaciones"2from\Z
+C
+7/var/www/html/siia/application/controllers/Recordar.phpõ õ(p
+%14*
+
+%132get_]
+C
+7/var/www/html/siia/application/controllers/Recordar.phpõ õ(z
+%15*
+
+%142resultm
+k
+C
+7/var/www/html/siia/application/controllers/Recordar.phpõ õ(z
+$dataOrganizaciones"__id*
+
+%15*
+3
+12B
+
+recordar

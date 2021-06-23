@@ -1,0 +1,54 @@
+
+$reportes::cargar_docenteshabilitadosC
+7/var/www/html/siia/application/controllers/Reportes.phpå å(+"1*ï
+1C
+7/var/www/html/siia/application/controllers/Reportes.phpæ æ(\i
+g
+C
+7/var/www/html/siia/application/controllers/Reportes.phpæ æ(
+%1"__id**
+
+reportes"
+dbfd
+C
+7/var/www/html/siia/application/controllers/Reportes.phpæ æ($
+%2*
+
+%1*
+"*"2selectki
+C
+7/var/www/html/siia/application/controllers/Reportes.phpæ æ(6
+%3*
+
+%2*
+
+"docentes"2frompn
+C
+7/var/www/html/siia/application/controllers/Reportes.phpæ æ(J
+%4*
+
+%3*
+
+"valido"*22whereZX
+C
+7/var/www/html/siia/application/controllers/Reportes.phpæ æ(Q
+%5*
+
+%42get][
+C
+7/var/www/html/siia/application/controllers/Reportes.phpæ æ([
+%6*
+
+%52resultb
+`
+C
+7/var/www/html/siia/application/controllers/Reportes.phpæ æ([
+	$docentes"__id*
+
+%6"T
+C
+7/var/www/html/siia/application/controllers/Reportes.phpç ç(
+
+	$docentesB
+
+reportes

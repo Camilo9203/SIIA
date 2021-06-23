@@ -1,0 +1,41 @@
+
+ci_db_result::__construct:
+0/var/www/html/siia/system/database/DB_result.phpu u("1*g
+2
+DB_result.php"Q
+:
+0/var/www/html/siia/system/database/DB_result.phpy y(
+implicit return*ø
+1:
+0/var/www/html/siia/system/database/DB_result.phpw w(+k
+i
+:
+0/var/www/html/siia/system/database/DB_result.phpw w(*
+%1"__id**
+
+$driver_object"	
+conn_idi
+g
+:
+0/var/www/html/siia/system/database/DB_result.phpw w(*
+ci_db_result"	
+conn_id"__id*
+
+%1m
+k
+:
+0/var/www/html/siia/system/database/DB_result.phpx x(.
+%2"__id*!*
+
+$driver_object"
+	result_idk
+i
+:
+0/var/www/html/siia/system/database/DB_result.phpx x(.
+ci_db_result"
+	result_id"__id*
+
+%2*
+2:
+$driver_objectB
+ci_db_result

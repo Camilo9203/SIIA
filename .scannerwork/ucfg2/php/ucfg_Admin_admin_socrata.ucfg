@@ -1,0 +1,1151 @@
+
+admin::socrata>
+4/var/www/html/siia/application/controllers/Admin.php ("1*“X
+13>
+4/var/www/html/siia/application/controllers/Admin.php2 2(>‰
+†
+>
+4/var/www/html/siia/application/controllers/Admin.php2 2(=
+%52"__id*7*5
+
+$organizaciones_acreditadas"
+nombreOrganizacion\
+Z
+>
+4/var/www/html/siia/application/controllers/Admin.php2 2(=	
+$nombre"__id*
+
+%52|
+z
+>
+4/var/www/html/siia/application/controllers/Admin.php3 3(.
+%53"__id*+*)
+
+$organizaciones_acreditadas"
+numNITY
+W
+>
+4/var/www/html/siia/application/controllers/Admin.php3 3(.
+$nit"__id*
+
+%53{
+y
+>
+4/var/www/html/siia/application/controllers/Admin.php4 4(/
+%54"__id***(
+
+$organizaciones_acreditadas"
+sigla[
+Y
+>
+4/var/www/html/siia/application/controllers/Admin.php4 4(/
+$sigla"__id*
+
+%54x
+v
+>
+4/var/www/html/siia/application/controllers/Admin.php5 5(-
+%55"__id*'*%
+
+$org_estado_acreditadas"
+nombre\
+Z
+>
+4/var/www/html/siia/application/controllers/Admin.php5 5(-	
+$estado"__id*
+
+%55w
+u
+>
+4/var/www/html/siia/application/controllers/Admin.php6 6(+
+%56"__id*&*$
+
+$org_estado_acreditadas"
+fecha[
+Y
+>
+4/var/www/html/siia/application/controllers/Admin.php6 6(+
+$fecha"__id*
+
+%56
+}
+>
+4/var/www/html/siia/application/controllers/Admin.php7 7(2
+%57"__id*.*,
+
+$organizaciones_data"
+tipoOrganizacionZ
+X
+>
+4/var/www/html/siia/application/controllers/Admin.php7 7(2
+$tipo"__id*
+
+%57…
+‚
+>
+4/var/www/html/siia/application/controllers/Admin.php8 8(9
+%58"__id*3*1
+
+$organizaciones_data"
+direccionOrganizacion\
+Z
+>
+4/var/www/html/siia/application/controllers/Admin.php8 8(9	
+$direcc"__id*
+
+%58ˆ
+…
+>
+4/var/www/html/siia/application/controllers/Admin.php9 9(9
+%59"__id*6*4
+
+$organizaciones_data"
+nomDepartamentoUbicacionY
+W
+>
+4/var/www/html/siia/application/controllers/Admin.php9 9(9
+$dep"__id*
+
+%59„
+
+>
+4/var/www/html/siia/application/controllers/Admin.php: :(5
+%60"__id*2*0
+
+$organizaciones_data"
+nomMunicipioNacionalY
+W
+>
+4/var/www/html/siia/application/controllers/Admin.php: :(5
+$mun"__id*
+
+%60r
+p
+>
+4/var/www/html/siia/application/controllers/Admin.php; ;($
+%61"__id*!*
+
+$organizaciones_data"
+faxY
+W
+>
+4/var/www/html/siia/application/controllers/Admin.php; ;($
+$tel"__id*
+
+%61x
+v
+>
+4/var/www/html/siia/application/controllers/Admin.php< <(*
+%62"__id*'*%
+
+$organizaciones_data"
+	extensionY
+W
+>
+4/var/www/html/siia/application/controllers/Admin.php< <(*
+$ext"__id*
+
+%62Z
+X
+>
+4/var/www/html/siia/application/controllers/Admin.php= =(
+$url"__id*
+
+$url…
+‚
+>
+4/var/www/html/siia/application/controllers/Admin.php> >(6
+%63"__id*3*1
+
+$organizaciones_data"
+actuacionOrganizacionY
+W
+>
+4/var/www/html/siia/application/controllers/Admin.php> >(6
+$act"__id*
+
+%63|
+z
+>
+4/var/www/html/siia/application/controllers/Admin.php? ?(0
+%64"__id*+*)
+
+$organizaciones_data"
+tipoEducacion[
+Y
+>
+4/var/www/html/siia/application/controllers/Admin.php? ?(0
+$tipoE"__id*
+
+%64‹
+ˆ
+>
+4/var/www/html/siia/application/controllers/Admin.php@ @(>
+%65"__id*9*7
+
+$organizaciones_acreditadas"
+primerNombreRepLegal[
+Y
+>
+4/var/www/html/siia/application/controllers/Admin.php@ @(>
+$pnomb"__id*
+
+%65Œ
+‰
+>
+4/var/www/html/siia/application/controllers/Admin.phpA A(?
+%66"__id*:*8
+
+$organizaciones_acreditadas"
+segundoNombreRepLegal[
+Y
+>
+4/var/www/html/siia/application/controllers/Admin.phpA A(?
+$snomb"__id*
+
+%66
+Š
+>
+4/var/www/html/siia/application/controllers/Admin.phpB B(A
+%67"__id*;*9
+
+$organizaciones_acreditadas"
+primerApellidoRepLegal\
+Z
+>
+4/var/www/html/siia/application/controllers/Admin.phpB B(A	
+$papell"__id*
+
+%67Ž
+‹
+>
+4/var/www/html/siia/application/controllers/Admin.phpC C(B
+%68"__id*<*:
+
+$organizaciones_acreditadas"
+segundoApellidoRepLegal\
+Z
+>
+4/var/www/html/siia/application/controllers/Admin.phpC C(B	
+$sapell"__id*
+
+%68Š
+‡
+>
+4/var/www/html/siia/application/controllers/Admin.phpD D(;
+%69"__id*8*6
+
+$organizaciones_data"
+numCedulaCiudadaniaPersonaY
+W
+>
+4/var/www/html/siia/application/controllers/Admin.phpD D(;
+$ced"__id*
+
+%69
+š
+>
+4/var/www/html/siia/application/controllers/Admin.phpE E(Q
+%70"__id*K*I
+
+$organizaciones_acreditadas"(
+&direccionCorreoElectronicoOrganizacion\
+Z
+>
+4/var/www/html/siia/application/controllers/Admin.phpE E(Q	
+$dircor"__id*
+
+%70™
+–
+>
+4/var/www/html/siia/application/controllers/Admin.phpF F(M
+%71"__id*G*E
+
+$organizaciones_acreditadas"$
+"direccionCorreoElectronicoRepLegal\
+Z
+>
+4/var/www/html/siia/application/controllers/Admin.phpF F(M	
+$dircre"__id*
+
+%71x
+v
+>
+4/var/www/html/siia/application/controllers/Admin.phpG G(+
+%72"__id*'*%
+
+$resoluciones"
+numeroResolucionZ
+X
+>
+4/var/www/html/siia/application/controllers/Admin.phpG G(+
+$nres"__id*
+
+%72~
+|
+>
+4/var/www/html/siia/application/controllers/Admin.phpH H(1
+%73"__id*-*+
+
+$resoluciones"
+fechaResolucionInicialZ
+X
+>
+4/var/www/html/siia/application/controllers/Admin.phpH H(1
+$fres"__id*
+
+%73w
+u
+>
+4/var/www/html/siia/application/controllers/Admin.phpI I()
+%74"__id*&*$
+
+$resoluciones"
+aÃ±osResolucionZ
+X
+>
+4/var/www/html/siia/application/controllers/Admin.phpI I()
+$ares"__id*
+
+%74Š
+‡
+>
+4/var/www/html/siia/application/controllers/Admin.phpJ J(?
+%75"__id*8*6
+
+$org_estado_acreditadas"
+tipoSolicitudAcreditado]
+[
+>
+4/var/www/html/siia/application/controllers/Admin.phpJ J(?
+
+$tiposol"__id*
+
+%75Œ
+‰
+>
+4/var/www/html/siia/application/controllers/Admin.phpK K(B
+%76"__id*:*8
+
+$org_estado_acreditadas"
+motivoSolicitudAcreditado^
+\
+>
+4/var/www/html/siia/application/controllers/Admin.phpK K(B
+	$motivsol"__id*
+
+%76
+Œ
+>
+4/var/www/html/siia/application/controllers/Admin.phpL L(F
+%77"__id*=*;
+
+$org_estado_acreditadas"
+modalidadSolicitudAcreditado_
+]
+>
+4/var/www/html/siia/application/controllers/Admin.phpL L(F
+
+$modalisol"__id*
+
+%77QO
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%78"$Arrayˆ
+…
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%79"
+__arraySet*
+
+%78*
+'nombre_de_la_entidad'*
+	
+$nombrez
+x
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%80"
+__arraySet*
+
+%78*
+'n_mero_nit'*
+
+$nit†
+ƒ
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%81"
+__arraySet*
+
+%78*
+'sigla_de_la_entidad'*
+
+
+$sigla
+Œ
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%82"
+__arraySet*
+
+%78*!
+'estado_actual_de_la_entidad'*
+	
+$estado‰
+†
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%83"
+__arraySet*
+
+%78*
+'fecha_cambio_de_estado'*
+
+
+$fecha€
+~
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%84"
+__arraySet*
+
+%78*
+'tipo_de_entidad'*	
+
+$tipo‹
+ˆ
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%85"
+__arraySet*
+
+%78*
+'direcci_n_de_la_entidad'*
+	
+$direcc‹
+ˆ
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%86"
+__arraySet*
+
+%78* 
+'departamento_de_la_entidad'*
+
+$depˆ
+…
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%87"
+__arraySet*
+
+%78*
+'municipio_de_la_entidad'*
+
+$mun‡
+„
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%88"
+__arraySet*
+
+%78*
+'tel_fono_de_la_entidad'*
+
+$tely
+w
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%89"
+__arraySet*
+
+%78*
+'extensi_n'*
+
+$ext
+
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%90"
+__arraySet*
+
+%78*
+'url_de_la_entidad'*
+
+$urlˆ
+…
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%91"
+__arraySet*
+
+%78*
+'actuaci_n_de_la_entidad'*
+
+$act’
+
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%92"
+__arraySet*
+
+%78*%#
+!'tipo_de_educaci_n_de_la_entidad'*
+
+
+$tipoE”
+‘
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%93"
+__arraySet*
+
+%78*'%
+#'primer_nombre_representante_legal'*
+
+
+$pnomb•
+’
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%94"
+__arraySet*
+
+%78*(&
+$'segundo_nombre_representante_legal'*
+
+
+$snomb—
+”
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%95"
+__arraySet*
+
+%78*)'
+%'primer_apellido_representante_legal'*
+	
+$papell˜
+•
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%96"
+__arraySet*
+
+%78**(
+&'segundo_apellido_representante_legal'*
+	
+$sapell’
+
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%97"
+__arraySet*
+
+%78*'%
+#'n_mero_c_dula_representante_legal'*
+
+$cedŽ
+‹
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%98"
+__arraySet*
+
+%78* 
+'correo_electr_nico_entidad'*
+	
+$dircorš
+—
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%99"
+__arraySet*
+
+%78*,*
+('correo_electr_nico_representante_legal'*
+	
+$dircreŠ
+‡
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%100"
+__arraySet*
+
+%78*
+'n_mero_de_la_resoluci_n'*	
+
+$nres“
+
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%101"
+__arraySet*
+
+%78*&$
+"'fecha_de_inicio_de_la_resoluci_n'*	
+
+$fresˆ
+…
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%102"
+__arraySet*
+
+%78*
+'a_os_de_la_resoluci_n'*	
+
+$ares®
+«
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%103"
+__arraySet*
+
+%78*
+'tipo_de_solicitud'*31
+/'En proceso de actualizaciÃ³n de base de datos'³
+°
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%104"
+__arraySet*
+
+%78*
+'motivo_de_la_solicitud'*31
+/'En proceso de actualizaciÃ³n de base de datos'¶
+³
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+%105"
+__arraySet*
+
+%78*
+'modalidad_de_la_solicitud'*31
+/'En proceso de actualizaciÃ³n de base de datos'b
+`
+>
+4/var/www/html/siia/application/controllers/Admin.phpN j(
+$data_as_json"__id*
+
+%78n
+l
+>
+4/var/www/html/siia/application/controllers/Admin.phpl l(.
+%106"json_encode* *
+
+$data_as_jsonc
+a
+>
+4/var/www/html/siia/application/controllers/Admin.phpl l(.
+$data_as_json"__id*
+
+%106us
+>
+4/var/www/html/siia/application/controllers/Admin.phpn n(@
+%107*
+
+
+$socrata* *
+
+$data_as_json2post_
+]
+>
+4/var/www/html/siia/application/controllers/Admin.phpn n(@
+	$response"__id*
+
+%107i
+g
+>
+4/var/www/html/siia/application/controllers/Admin.phpo o(
+%108"__id**
+admin"
+
+logs_siah
+f
+>
+4/var/www/html/siia/application/controllers/Admin.phpo2 o(@
+%109"__id**
+admin"	
+sessiontr
+>
+4/var/www/html/siia/application/controllers/Admin.phpo2 o(\
+%110*
+
+%109*
+'nombre_usuario'2userdata³
+°
+?
+4/var/www/html/siia/application/controllers/Admin.phpo! o(“
+%111"__concat*
+'Administrador:'*
+
+%110*;9
+7' actualizÃ³ los datos en la pagina de Datos Abiertos.'lj
+?
+4/var/www/html/siia/application/controllers/Admin.phpo o(”
+%112*
+
+%108*
+
+%1112session_log*
+3
+14*–
+14>
+4/var/www/html/siia/application/controllers/Admin.phps s(j
+h
+>
+4/var/www/html/siia/application/controllers/Admin.phps s(
+%113"json_encode* *
+
+	$response^
+\
+>
+4/var/www/html/siia/application/controllers/Admin.phps s(
+%114"echo* *
+
+%113*
+15*Ô	
+3>
+4/var/www/html/siia/application/controllers/Admin.php (%p
+n
+>
+4/var/www/html/siia/application/controllers/Admin.php ($
+%15"__id**
+
+$organizacionDB"
+numNIT\
+Z
+>
+4/var/www/html/siia/application/controllers/Admin.php ($	
+$numNIT"__id*
+
+%15b
+`
+>
+4/var/www/html/siia/application/controllers/Admin.php ($
+%16"__id**
+admin"
+dbca
+>
+4/var/www/html/siia/application/controllers/Admin.php (1
+%17*
+
+%16*
+"*"2selectnl
+>
+4/var/www/html/siia/application/controllers/Admin.php (I
+%18*
+
+%17*
+"organizaciones"2fromtr
+>
+4/var/www/html/siia/application/controllers/Admin.php (c
+%19*
+
+%18*
+
+"numNIT"*
+	
+$numNIT2whereWU
+>
+4/var/www/html/siia/application/controllers/Admin.php (j
+%20*
+
+%192getWU
+>
+4/var/www/html/siia/application/controllers/Admin.php (q
+%21*
+
+%202rowj
+h
+>
+4/var/www/html/siia/application/controllers/Admin.php (q
+$datas_organizaciones"__id*
+
+%21
+}
+>
+4/var/www/html/siia/application/controllers/Admin.php (<
+%22"__id*.*,
+
+$datas_organizaciones"
+id_organizacione
+c
+>
+4/var/www/html/siia/application/controllers/Admin.php (<
+$id_organizacion"__id*
+
+%22*
+
+3
+14
+5*h
+15
+	Admin.php"U
+>
+4/var/www/html/siia/application/controllers/Admin.phpt t(
+implicit return*’
+5?
+4/var/www/html/siia/application/controllers/Admin.php (œb
+`
+>
+4/var/www/html/siia/application/controllers/Admin.php ('
+%23"__id**
+admin"
+dbca
+>
+4/var/www/html/siia/application/controllers/Admin.php (4
+%24*
+
+%23*
+"*"2selecttr
+>
+4/var/www/html/siia/application/controllers/Admin.php (R
+%25*
+
+%24*
+"estadoOrganizaciones"2from—”
+?
+4/var/www/html/siia/application/controllers/Admin.php (
+%26*
+
+%25*$"
+ "organizaciones_id_organizacion"*
+
+$id_organizacion2whereXV
+?
+4/var/www/html/siia/application/controllers/Admin.php (”
+%27*
+
+%262getXV
+?
+4/var/www/html/siia/application/controllers/Admin.php (›
+%28*
+
+%272rowm
+k
+?
+4/var/www/html/siia/application/controllers/Admin.php (›
+$org_estado_acreditadas"__id*
+
+%28b
+`
+>
+4/var/www/html/siia/application/controllers/Admin.php "  (+
+%29"__id**
+admin"
+dbca
+>
+4/var/www/html/siia/application/controllers/Admin.php "  (8
+%30*
+
+%29*
+"*"2selectnl
+>
+4/var/www/html/siia/application/controllers/Admin.php "  (P
+%31*
+
+%30*
+"organizaciones"2from‡„
+>
+4/var/www/html/siia/application/controllers/Admin.php "  (|
+%32*
+
+%31*
+"id_organizacion"*
+
+$id_organizacion2whereXV
+?
+4/var/www/html/siia/application/controllers/Admin.php "  (ƒ
+%33*
+
+%322getXV
+?
+4/var/www/html/siia/application/controllers/Admin.php "  (Š
+%34*
+
+%332rowq
+o
+?
+4/var/www/html/siia/application/controllers/Admin.php   (Š
+$organizaciones_acreditadas"__id*
+
+%34b
+`
+>
+4/var/www/html/siia/application/controllers/Admin.php! !($
+%35"__id**
+admin"
+dbca
+>
+4/var/www/html/siia/application/controllers/Admin.php! !(1
+%36*
+
+%35*
+"*"2selectrp
+>
+4/var/www/html/siia/application/controllers/Admin.php! !(M
+%37*
+
+%36*
+"informacionGeneral"2from—”
+?
+4/var/www/html/siia/application/controllers/Admin.php! !(ˆ
+%38*
+
+%37*$"
+ "organizaciones_id_organizacion"*
+
+$id_organizacion2whereXV
+?
+4/var/www/html/siia/application/controllers/Admin.php! !(
+%39*
+
+%382getXV
+?
+4/var/www/html/siia/application/controllers/Admin.php! !(–
+%40*
+
+%392rowj
+h
+?
+4/var/www/html/siia/application/controllers/Admin.php! !(–
+$organizaciones_data"__id*
+
+%40b
+`
+>
+4/var/www/html/siia/application/controllers/Admin.php" "(
+%41"__id**
+admin"
+dbca
+>
+4/var/www/html/siia/application/controllers/Admin.php" "(*
+%42*
+
+%41*
+"*"2selectlj
+>
+4/var/www/html/siia/application/controllers/Admin.php" "(@
+%43*
+
+%42*
+"resoluciones"2from–“
+>
+4/var/www/html/siia/application/controllers/Admin.php" "({
+%44*
+
+%43*$"
+ "organizaciones_id_organizacion"*
+
+$id_organizacion2whereXV
+?
+4/var/www/html/siia/application/controllers/Admin.php" "(‚
+%45*
+
+%442getXV
+?
+4/var/www/html/siia/application/controllers/Admin.php" "(‰
+%46*
+
+%452rowc
+a
+?
+4/var/www/html/siia/application/controllers/Admin.php" "(‰
+$resoluciones"__id*
+
+%46~
+|
+>
+4/var/www/html/siia/application/controllers/Admin.php$ $(,
+%47"__id*-*+
+
+$organizaciones_data"
+urlOrganizacion*
+6
+7*Ë
+6>
+4/var/www/html/siia/application/controllers/Admin.php$8 $(c~
+|
+>
+4/var/www/html/siia/application/controllers/Admin.php$8 $(]
+%48"__id*-*+
+
+$organizaciones_data"
+urlOrganizacion*
+7
+8*¯
+7>
+4/var/www/html/siia/application/controllers/Admin.php% %(`
+^
+>
+4/var/www/html/siia/application/controllers/Admin.php% %(
+$url"__id*
+
+"No Tiene"*
+10
+11*¨
+8>
+4/var/www/html/siia/application/controllers/Admin.php' '(2~
+|
+>
+4/var/www/html/siia/application/controllers/Admin.php' '(1
+%49"__id*-*+
+
+$organizaciones_data"
+urlOrganizacionY
+W
+>
+4/var/www/html/siia/application/controllers/Admin.php' '(1
+$url"__id*
+
+%49*
+10
+11*¼
+10>
+4/var/www/html/siia/application/controllers/Admin.php+ +('p
+n
+>
+4/var/www/html/siia/application/controllers/Admin.php+ +(&
+$url"__id*
+"www.orgsolidarias.gov.co"*
+11*É
+11>
+4/var/www/html/siia/application/controllers/Admin.php. .(+y
+w
+>
+4/var/www/html/siia/application/controllers/Admin.php.	 .(+
+%50"
+preg_match* *
+'#^http(s)?://#'*
+
+$url*
+13
+12*“
+12>
+4/var/www/html/siia/application/controllers/Admin.php/ /( l
+j
+>
+4/var/www/html/siia/application/controllers/Admin.php/ /(
+%51"__concat*
+	'http://'*
+
+$urlY
+W
+>
+4/var/www/html/siia/application/controllers/Admin.php/ /(
+$url"__id*
+
+%51*
+13*¥
+1>
+4/var/www/html/siia/application/controllers/Admin.php (!PN
+>
+4/var/www/html/siia/application/controllers/Admin.php ( 
+%1"$Arrayh
+f
+>
+4/var/www/html/siia/application/controllers/Admin.php ( 
+$data_organizaciones"__id*
+
+%1ZX
+>
+4/var/www/html/siia/application/controllers/Admin.php (_
+
+$socrata"
+ci_socrata
+}
+>
+4/var/www/html/siia/application/controllers/Admin.php (_
+%2"ci_socrata::__construct*
+
+
+$socrata* * * * a
+_
+>
+4/var/www/html/siia/application/controllers/Admin.php (!
+%3"__id**
+admin"
+dba_
+>
+4/var/www/html/siia/application/controllers/Admin.php (.
+%4*
+
+%3*
+"*"2selectrp
+>
+4/var/www/html/siia/application/controllers/Admin.php (L
+%5*
+
+%4*
+"estadoOrganizaciones"2fromwu
+>
+4/var/www/html/siia/application/controllers/Admin.php (k
+%6*
+
+%5*
+
+"nombre"*
+"Acreditado"2where„
+?
+4/var/www/html/siia/application/controllers/Admin.php (•
+%7*
+
+%6*
+"estadoAnterior"*
+"Acreditado"2or_whereVT
+?
+4/var/www/html/siia/application/controllers/Admin.php (œ
+%8*
+
+%72getYW
+?
+4/var/www/html/siia/application/controllers/Admin.php (¦
+%9*
+
+%82resulth
+f
+?
+4/var/www/html/siia/application/controllers/Admin.php (¦
+$estado_acreditadas"__id*
+
+%9b
+`
+>
+4/var/www/html/siia/application/controllers/Admin.php ("
+%10"__id**
+admin"
+dbzx
+>
+4/var/www/html/siia/application/controllers/Admin.php (H
+%11*
+
+%10*
+"distinct(numNIT), numNIT"2selectge
+>
+4/var/www/html/siia/application/controllers/Admin.php (Y
+%12*
+
+%11*
+	"nits_db"2fromWU
+>
+4/var/www/html/siia/application/controllers/Admin.php (`
+%13*
+
+%122getZX
+>
+4/var/www/html/siia/application/controllers/Admin.php (j
+%14*
+
+%132resulti
+g
+>
+4/var/www/html/siia/application/controllers/Admin.php (j
+$organizacionesNITDB"__id*
+
+%14*
+3
+14B	
+admin

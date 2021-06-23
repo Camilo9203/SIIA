@@ -1,0 +1,53 @@
+
+"panel::cargardatosarchivosdocentes@
+4/var/www/html/siia/application/controllers/Panel.phpÛ Û(,"1*ò
+1@
+4/var/www/html/siia/application/controllers/Panel.phpÜ Ü(wc
+a
+@
+4/var/www/html/siia/application/controllers/Panel.phpÜ Ü(
+%1"__id**
+panel"
+dbca
+@
+4/var/www/html/siia/application/controllers/Panel.phpÜ Ü()
+%2*
+
+%1*
+"*"2selectom
+@
+4/var/www/html/siia/application/controllers/Panel.phpÜ Ü(B
+%3*
+
+%2*
+"archivosDocente"2from}{
+@
+4/var/www/html/siia/application/controllers/Panel.phpÜ Ü(e
+%4*
+
+%3*
+'docentes_id_docente'*
+
+$id2whereWU
+@
+4/var/www/html/siia/application/controllers/Panel.phpÜ Ü(l
+%5*
+
+%42getZX
+@
+4/var/www/html/siia/application/controllers/Panel.phpÜ Ü(v
+%6*
+
+%52resultd
+b
+@
+4/var/www/html/siia/application/controllers/Panel.phpÜ Ü(v
+$data_archivos"__id*
+
+%6"V
+@
+4/var/www/html/siia/application/controllers/Panel.phpÝ Ý(
+
+$data_archivos:
+$idB	
+panel

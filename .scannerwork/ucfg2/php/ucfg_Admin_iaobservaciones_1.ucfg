@@ -1,0 +1,44 @@
+
+!admin::cargarbateriaobservaciones@
+4/var/www/html/siia/application/controllers/Admin.phpç ç(+"1*†
+1@
+4/var/www/html/siia/application/controllers/Admin.phpè è(`c
+a
+@
+4/var/www/html/siia/application/controllers/Admin.phpè è(#
+%1"__id**
+admin"
+dbca
+@
+4/var/www/html/siia/application/controllers/Admin.phpè è(0
+%2*
+
+%1*
+"*"2selecttr
+@
+4/var/www/html/siia/application/controllers/Admin.phpè è(N
+%3*
+
+%2*
+"bateriaObservaciones"2fromWU
+@
+4/var/www/html/siia/application/controllers/Admin.phpè è(U
+%4*
+
+%32getZX
+@
+4/var/www/html/siia/application/controllers/Admin.phpè è(_
+%5*
+
+%42resultk
+i
+@
+4/var/www/html/siia/application/controllers/Admin.phpè è(_
+$bateriaObservaciones"__id*
+
+%5"]
+@
+4/var/www/html/siia/application/controllers/Admin.phpé é(
+
+$bateriaObservacionesB	
+admin
