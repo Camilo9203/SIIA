@@ -9060,16 +9060,15 @@ $(document).ready(function () {
 			$("#motivo1").attr("checked", true);
 		}
 	});
-	//TODO: Modalidad Solicitud. 
+	//TODO: Modalidad Solicitud.
 	$("input:radio[name=modalidad_solicitud]").change(function () {
 		$valor = $(this).val();
-		if ($valor == "Virtual" || $valor == "Virtual y Presencial"){
+		if ($valor == "Virtual" || $valor == "Virtual y Presencial") {
 			$("#ayudaModalidad").modal("toggle");
-		} else if ($valor == "Actualizar Facilitadores")  {
+		} else if ($valor == "Actualizar Facilitadores") {
 			$("#ayudaFacilitadores").modal("toggle");
 		} else {
 			$("#ayudaModalidad").modal("hide");
-
 		}
 	});
 
@@ -9492,29 +9491,43 @@ $(document).ready(function () {
 			material: material,
 			bibliografia: bibliografia,
 			duracion: duracion,
-			programa_basico_eticaValoresPrincipios: programa_basico_eticaValoresPrincipios,
+			programa_basico_eticaValoresPrincipios:
+				programa_basico_eticaValoresPrincipios,
 			programa_basico_solidaridad: programa_basico_solidaridad,
 			programa_basico_economia: programa_basico_economia,
 			programa_basico_economiaSolidaria: programa_basico_economiaSolidaria,
-			programa_basico_asosiatividadEmprendimiento: programa_basico_asosiatividadEmprendimiento,
-			programa_basico_organizacionSolidaria: programa_basico_organizacionSolidaria,
+			programa_basico_asosiatividadEmprendimiento:
+				programa_basico_asosiatividadEmprendimiento,
+			programa_basico_organizacionSolidaria:
+				programa_basico_organizacionSolidaria,
 			programa_basico_trabajoEquipo: programa_basico_trabajoEquipo,
 			programa_basico_educacionSolidaria: programa_basico_educacionSolidaria,
-			programa_basico_responsabilidadSocial: programa_basico_responsabilidadSocial,
+			programa_basico_responsabilidadSocial:
+				programa_basico_responsabilidadSocial,
 			programa_basico_medioAmbiente: programa_basico_medioAmbiente,
-			programa_basico_contextoEconomicoSocial: programa_basico_contextoEconomicoSocial,
-			programa_basico_necesidadesSerHumano: programa_basico_necesidadesSerHumano,
+			programa_basico_contextoEconomicoSocial:
+				programa_basico_contextoEconomicoSocial,
+			programa_basico_necesidadesSerHumano:
+				programa_basico_necesidadesSerHumano,
 			programa_basico_porqueFomentar: programa_basico_porqueFomentar,
-			programa_basico_principiosValoresFines: programa_basico_principiosValoresFines,
+			programa_basico_principiosValoresFines:
+				programa_basico_principiosValoresFines,
 			programa_basico_marcoNormativo: programa_basico_marcoNormativo,
-			programa_basico_tiposOrganizacionesEconomiaSolidaria: programa_basico_tiposOrganizacionesEconomiaSolidaria,
-			programa_basico_antecedentesHistoricos: programa_basico_antecedentesHistoricos,
-			programa_basico_caracteristicasEconomicas: programa_basico_caracteristicasEconomicas,
+			programa_basico_tiposOrganizacionesEconomiaSolidaria:
+				programa_basico_tiposOrganizacionesEconomiaSolidaria,
+			programa_basico_antecedentesHistoricos:
+				programa_basico_antecedentesHistoricos,
+			programa_basico_caracteristicasEconomicas:
+				programa_basico_caracteristicasEconomicas,
 			programa_basico_estructuraInterna: programa_basico_estructuraInterna,
-			programa_basico_marcoJuridicoAplicable: programa_basico_marcoJuridicoAplicable,
-			programa_basico_fundamentosAdministrativos: programa_basico_fundamentosAdministrativos,
-			programa_basico_orientacionElaboracionEstatutos: programa_basico_orientacionElaboracionEstatutos,
-			programa_basico_unidadAdministrativa: programa_basico_unidadAdministrativa,
+			programa_basico_marcoJuridicoAplicable:
+				programa_basico_marcoJuridicoAplicable,
+			programa_basico_fundamentosAdministrativos:
+				programa_basico_fundamentosAdministrativos,
+			programa_basico_orientacionElaboracionEstatutos:
+				programa_basico_orientacionElaboracionEstatutos,
+			programa_basico_unidadAdministrativa:
+				programa_basico_unidadAdministrativa,
 			programa_basico_superintendencia: programa_basico_superintendencia,
 			programa_basico_fondoGarantias: programa_basico_fondoGarantias,
 			programa_basico_consejoNacional: programa_basico_consejoNacional,
@@ -11697,7 +11710,8 @@ $(document).ready(function () {
 			informe_municipio_asistente: $informe_municipio_asistente,
 			informe_fax_asistente: $informe_fax_asistente,
 			informe_direccion_asistente: $informe_direccion_asistente,
-			informe_direccionCorreoElectronico_asistente: $informe_direccionCorreoElectronico_asistente,
+			informe_direccionCorreoElectronico_asistente:
+				$informe_direccionCorreoElectronico_asistente,
 			cabeza_radio: $cabeza_radio,
 			informe_discapacidad_asistente: $informe_discapacidad_asistente,
 			indigenas_chekbox: $indigenas_chekbox,
@@ -11876,7 +11890,8 @@ $(document).ready(function () {
 			informe_municipio_asistente: $informe_municipio_asistente,
 			informe_fax_asistente: $informe_fax_asistente,
 			informe_direccion_asistente: $informe_direccion_asistente,
-			informe_direccionCorreoElectronico_asistente: $informe_direccionCorreoElectronico_asistente,
+			informe_direccionCorreoElectronico_asistente:
+				$informe_direccionCorreoElectronico_asistente,
 			cabeza_radio: $cabeza_radio,
 			informe_discapacidad_asistente: $informe_discapacidad_asistente,
 			indigenas_chekbox: $indigenas_chekbox,
@@ -16428,7 +16443,7 @@ $(document).ready(function () {
 			width: "toggle",
 		});
 	});
-//TODO: Menu formularios
+	//TODO: Menu formularios
 	$(".contenedor--menu3").hide();
 	$(".icono3").click(function () {
 		$(".contenedor--menu3").animate({
@@ -18233,18 +18248,7 @@ function init_echarts() {
 					name: "sales",
 					type: "bar",
 					data: [
-						2.0,
-						4.9,
-						7.0,
-						23.2,
-						25.6,
-						76.7,
-						135.6,
-						162.2,
-						32.6,
-						20.0,
-						6.4,
-						3.3,
+						2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3,
 					],
 					markPoint: {
 						data: [
@@ -18271,18 +18275,7 @@ function init_echarts() {
 					name: "purchases",
 					type: "bar",
 					data: [
-						2.6,
-						5.9,
-						9.0,
-						26.4,
-						28.7,
-						70.7,
-						175.6,
-						182.2,
-						48.7,
-						18.8,
-						6.0,
-						2.3,
+						2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3,
 					],
 					markPoint: {
 						data: [
