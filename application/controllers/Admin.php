@@ -29,7 +29,7 @@ class Admin extends CI_Controller
 		$passwor2 = generate_hash($password);
 		echo json_encode($passwor2);
 	}
-
+	// Socrata
 	public function socrata()
 	{
 		$data_organizaciones = array();
@@ -132,7 +132,7 @@ class Admin extends CI_Controller
 		}
 		echo json_encode($response);
 	}
-
+	// Clean Socrata
 	public function clean_socrata()
 	{
 		$socrata = new CI_Socrata(APP_URL_DATOS, APP_DATOS_TOKEN, APP_DATOS_USER, APP_DATOS_PASSWORD);
@@ -171,7 +171,7 @@ class Admin extends CI_Controller
 		$response = $socrata->put(APP_DATOS_VIEWIUD, $data_as_json);
 		echo json_encode($response);
 	}
-
+	// Get Socrata
 	public function get_socrata()
 	{
 		$socrata = new CI_Socrata(APP_URL_DATOS, APP_DATOS_TOKEN, APP_DATOS_USER, APP_DATOS_PASSWORD);
@@ -181,7 +181,7 @@ class Admin extends CI_Controller
 		$response = $socrata->get(APP_DATOS_VIEWIUD, $params);
 		echo json_encode($response);
 	}
-
+	// Socrata Panel
 	public function socrataPanel()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -208,7 +208,7 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
+	// Panel Admin 
 	public function panel_admin()
 	{
 		date_default_timezone_set("America/Bogota");
