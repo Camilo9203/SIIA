@@ -235,10 +235,11 @@ $(document).ready(function () {
 	} else {
 		/** No hay nada que hacer aqui. **/
 	}
-
+//TODO:Permisos panel admin 
 	if (funcion == "panelAdmin") {
 		// 0 tot - 1 ev - 2 rep - 3 cam - 4 hist - 5 seg - 6 asignar
 		$nivel = $("#data_logg").attr("nvl");
+		console.log($("#data_logg").attr("nvl"));
 		if ($nivel == 0) {
 			/** No hay nada que hacer aqui. **/
 		} else if ($nivel == 1) {
@@ -1010,6 +1011,10 @@ $(document).ready(function () {
 	$("#admin_reportes").click(function () {
 		redirect(baseURL + "panelAdmin/reportes");
 	});
+	// Estadisticas
+	$("#admin_estadisticas").click(function () {
+		redirect(baseURL + "panelAdmin/estadisticas");
+	});
 	//Atras en reportes
 	$("#admin_volver_reportes").click(function () {
 		redirect(baseURL + "panelAdmin");
@@ -1024,6 +1029,7 @@ $(document).ready(function () {
 	$("#admin_panel_org_inscritas_volver").click(function () {
 		redirect(baseURL + "panelAdmin/organizaciones");
 	});
+
 	$("#admin_enproceso_volver").click(function () {
 		redirect(baseURL + "panelAdmin/organizaciones");
 	});
@@ -8184,7 +8190,7 @@ $(document).ready(function () {
 		$("#reenvio_pre").slideUp();
 
 		var organizacion = $("#organizacion").val();
-		var nit = $("#nit").val();
+		var nit = $("#nit").val() . $("#nit_digito").val();
 		var sigla = $("#sigla").val();
 		var nombre = $("#nombre").val();
 		var nombre_s = $("#nombre_s").val();
@@ -16738,6 +16744,7 @@ function sleep(milliseconds) {
 /**
 	Validaciones para los formularios.
 **/
+
 function validaciones() {
 	/**
 		Forms validations TODO.
@@ -16752,7 +16759,11 @@ function validaciones() {
 			nit: {
 				required: true,
 				minlength: 3,
+				maxlength: 10,
 				//regex: "^[^.][0-9]+-[0-9]{1}?$",
+			},
+			nit_digito: {
+				required: true,
 			},
 			sigla: {
 				required: true,
@@ -16816,7 +16827,11 @@ function validaciones() {
 			nit: {
 				required: "Por favor, escriba el NIT de la organización.",
 				minlength: "El nit debe tener mínimo 3 caracteres.",
+				maxlength: "El nit debe tener maximo 10 caracteres.",
 				//regex: "Por favor, escriba un NIT válido, sin puntos y con (-)."
+			},
+			nit_digito: {
+				required: "Por favor, escriba el digito de verificación.",
 			},
 			sigla: {
 				required: "Por favor, escriba la Sigla de la organización.",
@@ -17404,6 +17419,7 @@ function tablas() {
 		"tabla_super_admins",
 		"tabla_verdocentes",
 		"tabla_docentes",
+		"tabla_docentes_no_aprobado",
 		"tabla_visitas",
 		"tabla_plan",
 	];

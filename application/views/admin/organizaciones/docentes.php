@@ -1,8 +1,41 @@
 <div class="col-md-12">
+	<!-- Tabla facilitadores -->
 	<div id="organizaciones_docentes">
-	<hr/>
-	<h4>Facilitadores:</h4>
-	<br/>
+		<hr />
+		<h4>Facilitadores pendientes por ser aprobados:</h4>
+		<br />
+		<table id="tabla_docentes_no_aprobado" width="100%" border=0 class="table table-striped table-bordered tabla_form">
+			<thead>
+				<tr>
+					<td class="col-md-2">Nombre</td>
+					<td class="col-md-2">Cédula</td>
+					<td class="col-md-2">Profesión</td>
+					<td class="col-md-2">Horas</td>
+					<td class="col-md-2">Organización</td>
+					<td class="col-md-2">Acción</td>
+				</tr>
+			</thead>
+			<tbody id="tbody">
+				<?php
+				for ($i = 0; $i < count($docentes); $i++) {
+					echo "<tr>";
+					echo "<td>" . $docentes[$i]->primerNombreDocente . "</td>";
+					echo "<td>" . $docentes[$i]->numCedulaCiudadaniaDocente . "</td>";
+					echo "<td>" . $docentes[$i]->profesion . "</td>";
+					echo "<td>" . $docentes[$i]->horaCapacitacion . "</td>";
+					echo "<td>" . '' . "</td>";
+					echo "<td><button class='btn btn-siia btn-sm' id='verModalAsignarDocente' data-docente='" . $docentes[$i]->numCedulaCiudadaniaDocente . "' data-nombre'" . $docentes[$i]->primerNombreDocente . "' data-toggle='modal' data-target='#asignarDocente'>Asignar <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
+					echo "</tr>";
+				}
+				?>
+			</tbody>
+		</table>
+	</div><br />
+	<!-- Tabla facilitadores -->
+	<div id="organizaciones_docentes">
+		<hr />
+		<h4>Facilitadores:</h4>
+		<br />
 		<table id="tabla_enProceso_organizacion" width="100%" border=0 class="table table-striped table-bordered tabla_form">
 			<thead>
 				<tr>
@@ -15,38 +48,39 @@
 				</tr>
 			</thead>
 			<tbody id="tbody">
-			<?php
-				for ($i=0; $i < count($organizaciones); $i++) {
+				<?php
+				for ($i = 0; $i < count($organizaciones); $i++) {
 					echo "<tr>";
-					echo "<td>".$organizaciones[$i] ->nombreOrganizacion."</td>";
-					echo "<td>".$organizaciones[$i] ->numNIT."</td>";
-					echo "<td>".$organizaciones[$i] ->primerNombreRepLegal." ".$organizaciones[$i] ->segundoNombreRepLegal." ".$organizaciones[$i] ->primerApellidoRepLegal." ".$organizaciones[$i] ->segundoApellidoRepLegal."</td>";
-					echo "<td>".$organizaciones[$i] ->direccionCorreoElectronicoOrganizacion."</td>";
-					echo "<td>".$organizaciones[$i] ->direccionCorreoElectronicoRepLegal."</td>";
-					echo "<td><button class='btn btn-siia btn-sm ver_organizacion_docentes' data-organizacion='".$organizaciones[$i] ->id_organizacion."'>Ver facilitador <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
+					echo "<td>" . $organizaciones[$i]->nombreOrganizacion . "</td>";
+					echo "<td>" . $organizaciones[$i]->numNIT . "</td>";
+					echo "<td>" . $organizaciones[$i]->primerNombreRepLegal . " " . $organizaciones[$i]->segundoNombreRepLegal . " " . $organizaciones[$i]->primerApellidoRepLegal . " " . $organizaciones[$i]->segundoApellidoRepLegal . "</td>";
+					echo "<td>" . $organizaciones[$i]->direccionCorreoElectronicoOrganizacion . "</td>";
+					echo "<td>" . $organizaciones[$i]->direccionCorreoElectronicoRepLegal . "</td>";
+					echo "<td><button class='btn btn-siia btn-sm ver_organizacion_docentes' data-organizacion='" . $organizaciones[$i]->id_organizacion . "'>Ver facilitador <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
 					echo "</tr>";
 				}
-			?>
+				?>
 			</tbody>
 		</table>
 		<button class="btn btn-danger btn-sm pull-left admin_volver_org"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 	</div>
+	<!-- Iframe Docentes -->
 	<div id="docentes_organizaciones">
-	<hr/>
-	<table id="tabla_historial_obs" width="100%" border=0 class="table table-striped table-bordered tabla_form">
-		<thead>
-			<tr>
-				<td>Nombre</td>
-				<td>Cédula</td>
-				<td>Profesión</td>
-				<td>Horas</td>
-				<td>Aprobado</td>
-				<td>Acción</td>
-			</tr>
-		</thead>
-		<tbody id="tbody_orgDocentes">
-		</tbody>
-	</table>
+		<hr />
+		<table id="tabla_historial_obs" width="100%" border=0 class="table table-striped table-bordered tabla_form">
+			<thead>
+				<tr>
+					<td>Nombre</td>
+					<td>Cédula</td>
+					<td>Profesión</td>
+					<td>Horas</td>
+					<td>Aprobado</td>
+					<td>Acción</td>
+				</tr>
+			</thead>
+			<tbody id="tbody_orgDocentes">
+			</tbody>
+		</table>
 		<!--<div class="col-md-12 text-center" id="informacion_organizacion">
 			<h4>Información de la Organización:</h4>
 			<div class="form-group">
@@ -82,51 +116,51 @@
 			<h4>Docente #<label id="id_docente"></label>:</h4>
 			<div class="col-md-6">
 				<div class="form-group">
-				    <label for="">Primer Nombre:</label>
+					<label for="">Primer Nombre:</label>
 					<p id="primer_nombre_docente"></p>
 				</div>
 				<div class="form-group">
-				    <label for="">Segundo Nombre:</label>
+					<label for="">Segundo Nombre:</label>
 					<p id="segundo_nombre_docente"></p>
 				</div>
 				<div class="form-group">
-				    <label for="">Primer Apellido:</label>
+					<label for="">Primer Apellido:</label>
 					<p id="primer_apellido_docente"></p>
 				</div>
 				<div class="form-group">
-				    <label for="">Segundo Apellido:</label>
+					<label for="">Segundo Apellido:</label>
 					<p id="segundo_apellido_docente"></p>
 				</div>
 				<div class="form-group">
-				    <label for="">Número de Cédula:</label>
+					<label for="">Número de Cédula:</label>
 					<p id="numero_cedula_docente"></p>
 				</div>
 				<button class="btn btn-danger btn-sm pull-left" id="volver_docentes_organizaciones"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 			</div>
 			<div class="col-md-6">
 				<div class="form-group">
-				    <label for="">Profesión:</label>
+					<label for="">Profesión:</label>
 					<p id="profesion_docente"></p>
 				</div>
 				<div class="form-group">
-				    <label for="">Horas de Capacitación:</label>
+					<label for="">Horas de Capacitación:</label>
 					<p id="horas_cap_docente"></p>
 				</div>
 				<div class="form-group">
-				    <label for="">¿Aprobado?:</label>
+					<label for="">¿Aprobado?:</label>
 					<p class="text-center" id="valido_docente"></p>
 				</div>
 				<div class="form-group">
-				    <label for="">Observación actual:</label>
+					<label for="">Observación actual:</label>
 					<p id="obs_val_docente"></p>
 				</div>
 				<div class="form-group">
-				    <label for="">Observación anterior:</label>
+					<label for="">Observación anterior:</label>
 					<p id="obs_valAnt_docente"></p>
 				</div>
 			</div>
 			<div class="clearfix"></div>
-			<hr/>
+			<hr />
 			<div class="col-md-12">
 				<label>Documentos:</label>
 				<table id="tabla_archivos_formulario" width="100%" border=0 class="table table-striped table-bordered tabla_form">
@@ -144,7 +178,7 @@
 				<!--<div id="documentos_docente"></div>-->
 			</div>
 			<div class="clearfix"></div>
-			<hr/>
+			<hr />
 			<div class="col-md-2">
 				<label>¿El docente es aprobado?</label>
 				<div class="radio">
@@ -154,15 +188,59 @@
 			</div>
 			<div class="col-md-10">
 				<label>Observaciones si el docente no es aprobado:</label>
-				<textarea id="docente_val_obs" class="form-control"></textarea><br/>
+				<textarea id="docente_val_obs" class="form-control"></textarea><br />
 				<button class="docente_ btn btn-siia btn-sm guardarValidoDocente" data-id="" disabled="true">Guardar y enviar notificación <i class="fa fa-check" aria-hidden="true"></i></button>
 			</div>
 			<div class="clearfix"></div>
-			<hr/>
+			<hr />
 			<!--<div>
 				<button class="pull-left btn btn-danger btn-sm" id="anteriorDocente"><i class="fa fa-chevron-left" aria-hidden="true"></i> Anterior docente</button>
 				<button class="pull-right btn btn-danger btn-sm" id="siguienteDocente">Siguiente docente <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
 			</div>-->
+		</div>
+	</div>
+</div>
+<!-- Modol Asignar Evaluador a Docente //TODO:Terminar asignación de docentes-->
+<div class="modal fade" id="asignarDocente" tabindex="-1" role="dialog" aria-labelledby="ariaAsignar">
+	<div class="modal-dialog modal-md" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title" id="ariaAsignar">Asignar evaluador a una organización</h3>
+				<small>Pueden que existan usuario con diferente rol y tenga que comunicarse con soporte para que el super administrador pueda cambiar este rol.</small>
+			</div>
+			<div class="modal-body">
+				<p>Seleccione de la siguiente lista los usuarios que tienen el rol de evaluadores para que pueda asignarlo a una organización y que pueda verificar la solicitud.</p>
+				<hr />
+				<select name="evaluadorAsignar" id="evaluadorAsignar" class="selectpicker form-control show-tick" required="">
+					<?php
+					foreach ($administradores as $administrador) {
+						if ($administrador->nivel == 1) {
+					?>
+							<option id="<?php echo $administrador->id_administrador; ?>" value="<?php echo $administrador->usuario; ?>"><?php echo $administrador->primerNombreAdministrador . " " . $administrador->primerApellidoAdministrador; ?></option>
+					<?php
+						}
+					}
+					?>
+				</select>
+				<div class="clearfix"></div>
+				<hr />
+				<p>Cedula del docente:</p><label id="idDocente"></label>
+				<p>Nombre del docenete:</p><label id="nombreDocente"></label>
+				<!-- <p>Número NIT:</p><label id="nitAsigOrg"></label> -->
+				<hr />
+				<p>Luego haber seleccionado al usuario, puede dar clic en asignar para que se haga lo siguiente:</p>
+				<ul>
+					<li>Se le enviara un correo a la persona con la información de la organización.</li>
+					<li>Solamente esa persona podrá acceder a ver la solicitud de la organización.</li>
+				</ul>
+				<div class="clearfix"></div>
+				<hr />
+				<button type="button" class="btn btn-sm btn-success btn-block" id="asignarOrganizacionEvaluador">Asignar... <i class="fa fa-check" aria-hidden="true"></i></button>
+				<div class="clearfix"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-sm btn-danger pull-left" data-dismiss="modal">Cerrar <i class="fa fa-times" aria-hidden="true"></i></button>
+			</div>
 		</div>
 	</div>
 </div>

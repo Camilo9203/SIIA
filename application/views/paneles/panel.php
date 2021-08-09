@@ -52,15 +52,15 @@
 			</div>
 		</div>
 	</div>
-	//TODO: Informe de actividades 
+	<!-- Informate de actividades //TODO: Antes comentado -->
 	<div class="col-md-3">
 		<div class="panel panel-siia ver_informe_actividades">
-		  <div class="panel-heading">
-		    <h3 class="panel-title">Informes <i class="fa fa-flag" aria-hidden="true"></i></h3>
-		  </div>
-		  <div class="panel-body">
-		   	<button class="btn btn-default btn-block ver_informe_actividades" id="ver_informe_actividades">Informe de actividades </button>
-		  </div>
+			<div class="panel-heading">
+				<h3 class="panel-title">Informes <i class="fa fa-flag" aria-hidden="true"></i></h3>
+			</div>
+			<div class="panel-body">
+				<button class="btn btn-default btn-block ver_informe_actividades" id="ver_informe_actividades">Informe de actividades </button>
+			</div>
 		</div>
 	</div>
 	<!-- <div class="col-md-3">
@@ -109,7 +109,7 @@
 			<label><input type="radio" name="tipo_solicitud" id="tipo1" class="" value="Acreditación Primera vez" checked>Acreditación primera vez.</label>
 		</div>
 	</div>
-	
+
 	<div id="div_solicitud">
 		<div class="form-group">
 			<div class="radio">
@@ -197,8 +197,7 @@
 		</div>
 	</div>
 </div>
-<!-- Ayuda Facilitadores Modal -->
-//TODO: Modal para actualización de facilitadores.
+<!-- Ayuda Facilitadores Modal //TODO: Modal para actualización de facilitadores. -->
 <div class="modal fade in" id="ayudaFacilitadores" tabindex="-1" role="dialog" aria-labelledby="ayudaFacilitadores">
 	<div class="modal-dialog modal-xs" role="document">
 		<div class="modal-content">
@@ -208,7 +207,7 @@
 			<div class="modal-body">
 				<p>Desea ir directamente al modulo para la actualización de facilitadores</p>
 			</div>
-			<div class="modal-footer"> 
+			<div class="modal-footer">
 				<button type="button" id="noModVirt" class="btn btn-danger btn-sm pull-left">No, quizá mas adelante <i class="fa fa-times" aria-hidden="true"></i></button>
 				<button type="button" id="ver_docentes" class="btn btn-siia btn-sm pull-right" data-dismiss="modal">Si, ir a actualizar facilitadores <i class="fa fa-check" aria-hidden="true"></i></button>
 			</div>

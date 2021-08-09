@@ -100,20 +100,20 @@
 		<!-- End Google Tag Manager (noscript) -->
 		<section class="top-nav">
 			<div class="container">
-				<div class="row">
-					<!--<div class="col-md-12">
-                    <h3 id="titulo_sistema"></h3>
-                </div>-->
+				<!-- <div class="row">
 					<div class="col-md-12">
-						<a href="https://www.gov.co/home/" target="_blank"><img src="https://www.uaeos.gov.co/sites/default/files/archivos/govco.png" class="img-responsive" style="width: 1903px;margin-bottom: 2%;"></a>
-					</div>
-					<div class="col-md-6">
-						<a href="http://www.uaeos.gov.co/"><img alt="Uaeos" id="imagen_header" class="pull-left img-responsive" src="https://acreditacion.uaeos.gov.co/siia/assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png"></a>
-					</div>
-					<div class="col-md-6">
-						<a href="<?php echo base_url(); ?>"><img alt="SIIA" id="imagen_header_sia" class="pull-right img-responsive" src="https://acreditacion.uaeos.gov.co/siia/assets/img/siia_logo.png"></a>
-					</div>
+                    <h3 id="titulo_sistema"></h3>
+                </div> -->
+				<div class="col-md-12">
+					<a href="https://www.gov.co/home/" target="_blank"><img src="https://www.uaeos.gov.co/sites/default/files/archivos/govco.png" class="img-responsive" style="width: 1903px;margin-bottom: 2%;"></a>
 				</div>
+				<div class="col-md-6">
+					<a href="http://www.uaeos.gov.co/"><img alt="Uaeos" id="imagen_header" class="pull-left img-responsive" src="https://acreditacion.uaeos.gov.co/siia/assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png"></a>
+				</div>
+				<div class="col-md-6">
+					<a href="<?php echo base_url(); ?>"><img alt="SIIA" id="imagen_header_sia" class="pull-right img-responsive" src="https://acreditacion.uaeos.gov.co/siia/assets/img/siia_logo.png"></a>
+				</div>
+			</div>
 			</div>
 		</section>
 		<div id="tPg" titulo="<?php echo $title; ?>"></div>
@@ -121,7 +121,6 @@
 		if (!$logged_in && $tipo_usuario == "none") {
 			echo "<div class='hidden' id='data_logg' data-log='$logged_in'></div>";
 		?>
-
 			<nav class="navbar navbar-dark">
 				<div class="container">
 					<!-- Brand and toggle get grouped for better mobile display -->
@@ -147,7 +146,6 @@
 					</div><!-- /.navbar-collapse -->
 				</div><!-- /.container-fluid -->
 			</nav>
-
 	</header>
 <?php
 		}

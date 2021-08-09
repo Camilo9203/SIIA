@@ -4,13 +4,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Admin extends CI_Controller
 {
 	//ALTER TABLE administradores AUTO_INCREMENT=99999999;
-
 	function __construct()
 	{
 		parent::__construct();
 		verify_session_admin();
 	}
-
+	// Encripción para recuperación de contraseña
 	public function mcdec()
 	{
 		$password = "";
@@ -29,6 +28,7 @@ class Admin extends CI_Controller
 		$passwor2 = generate_hash($password);
 		echo json_encode($passwor2);
 	}
+
 	// Socrata
 	public function socrata()
 	{
@@ -235,7 +235,7 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
+	// Contacto
 	public function contacto()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -263,7 +263,7 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
+	// Historico
 	public function historico()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -291,7 +291,7 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
+	// Seguimiento
 	public function seguimiento()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -322,7 +322,7 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
+	// Camara de comercio
 	public function camara()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -350,7 +350,7 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
+	// Resoluciones
 	public function resoluciones()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -456,6 +456,9 @@ class Admin extends CI_Controller
 		$data['fecha'] = $fecha;
 		$data['departamentos'] = $this->cargarDepartamentos();
 		$data['organizaciones'] = $this->cargar_organizacionesconDocentes();
+		$data['docentes'] = $this->cargar_docentesDeshabilitados();
+		$data['administradores'] = $this->cargar_administradores();
+
 
 		$this->load->view('include/header', $data);
 		$this->load->view('admin/organizaciones/docentes', $data);
@@ -1234,6 +1237,7 @@ class Admin extends CI_Controller
 		}
 
 		return $organizaciones;
+		// echo json_encode($organizaciones);
 	}
 
 	public function cargar_organizacionesFinalizadasObs()
@@ -1398,11 +1402,16 @@ class Admin extends CI_Controller
 
 		return $organizaciones;
 	}
-
+	// TODO:Cargar docentes 
+	public function cargar_docentesDeshabilitados()
+	{
+		$docentes = $this->db->select("*")->from("docentes")->where("valido", 0)->get()->result();
+		return $docentes;
+	}
+	// Cargar docentes 
 	public function cargar_organizacionesconDocentes()
 	{
 		$data_organizacionesBD = $this->db->select("DISTINCT(docentes.organizaciones_id_organizacion), organizaciones.*", null, false)->from("organizaciones, docentes")->where("docentes.organizaciones_id_organizacion = organizaciones.id_organizacion")->get()->result();
-
 		return $data_organizacionesBD;
 	}
 
@@ -2819,7 +2828,7 @@ class Admin extends CI_Controller
 			echo json_encode(array('msg' => "Se guardo la observación."));
 		}
 	}
-
+	// Actualizar Opciones
 	public function actualizarOpciones()
 	{
 		$titulo = $this->input->post('titulo');
@@ -2834,7 +2843,7 @@ class Admin extends CI_Controller
 		}
 	}
 
-	public function guardarArchivoObsPlataforma() //TODO: Funcion plataforma
+	public function guardarArchivoObsPlataforma() //TODO: Guardar Archivos
 	{
 		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
 		$tipoArchivo = $this->input->post('tipoArchivo');

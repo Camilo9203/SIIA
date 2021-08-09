@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -51,10 +51,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 
-if($this->config->item('mantenimiento') == TRUE) {
-    $route['default_controller'] = "Home/mantenimiento";
-    $route['(:any)'] = "Home/mantenimiento";
-}else{
+if ($this->config->item('mantenimiento') == TRUE) {
+	$route['default_controller'] = "Home/mantenimiento";
+	$route['(:any)'] = "Home/mantenimiento";
+} else {
 	$route['default_controller'] = 'Home';
 }
 
@@ -114,6 +114,10 @@ $route['panelAdmin/organizaciones/resoluciones'] = 'Admin/resoluciones';
 $route['panelAdmin/organizaciones/estadoOrganizaciones'] = 'Admin/estadoOrg';
 $route['panelAdmin/seguimiento'] = 'Admin/seguimiento';
 $route['evaluacion'] = 'Admin/evaluacion';
+//Estadisticas
+$route['panelAdmin/estadisticas'] = 'Estadisticas/panel_estadisticas';
+// $route['panelAdmin/reportes'] = 'Admin/panel_reportes';
+
 // Super
 $route['super/?'] = 'Super';
 $route['super/panel'] = 'Super/panel';
