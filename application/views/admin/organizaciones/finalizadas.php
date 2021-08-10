@@ -54,6 +54,7 @@
 	</div>
 </div>
 <div class="clearfix"></div>
+<!-- Registro de observaciones por formulario -->
 <div class="container" id="admin_panel_ver_finalizada">
 	<div class="panel-group" id="datos_org_final">
 		<hr />
@@ -537,11 +538,11 @@
 </div>
 
 
+
 <!-- Botón Menu de formulario -->
 <div class="icono--div4">
 	<a class="btn btn-siia btn-sm icono3 desOptSiia" role="button" title="Menu Formulario" data-toggle="tooltip" data-placement="right">Menu Formulario <i class="fa fa-bars" aria-hidden="true"></i></a>
 </div>
-
 <!-- Menu de formularios -->
 <div class="contenedor--menu3">
 	<div class="icono--div3">
@@ -566,9 +567,7 @@
 		</div>
 	</div>
 </div>
-
-
-
+<!-- Modal ver historial de observaciones -->
 <div class="modal fade" id="verHistObs" tabindex="-1" role="dialog" aria-labelledby="verhistobs">
 	<div class="modal-dialog modal-xl" role="document">
 		<div class="modal-content">
@@ -621,7 +620,7 @@
 		</div>
 	</div>
 </div>
-
+<!-- Modal terminar proceso de observaciones -->
 <div class="modal fade" id="terminarProcObs" tabindex="-1" role="dialog" aria-labelledby="termprocobs">
 	<div class="modal-dialog modal-md" role="document">
 		<div class="modal-content">

@@ -83,7 +83,7 @@
 		</div>
 	</div>
 	<!-- Estadisticas -->
-	<div class="col-md-3 datos_abiertos">
+	<div class="col-md-3 estadisticas">
 		<div class="panel panel-siia">
 			<div class="panel-heading">
 				<h3 class="panel-title">Estadisticas SIIA <i class="fa fa-arrow-up" aria-hidden="true"></i></h3>
