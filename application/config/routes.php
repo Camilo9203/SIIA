@@ -114,8 +114,10 @@ $route['panelAdmin/organizaciones/resoluciones'] = 'Admin/resoluciones';
 $route['panelAdmin/organizaciones/estadoOrganizaciones'] = 'Admin/estadoOrg';
 $route['panelAdmin/seguimiento'] = 'Admin/seguimiento';
 $route['evaluacion'] = 'Admin/evaluacion';
-//Estadisticas
+//Estadisticas //TODO:Rutas nuevas para estadisticas
 $route['panelAdmin/estadisticas'] = 'Estadisticas/panel_estadisticas';
+$route['panelAdmin/estadisticas/tramite'] = 'Estadisticas/estadisticas_tramite';
+$route['panelAdmin/estadisticas/acreditacion'] = 'Estadisticas/estadisticas_acreditacion';
 // $route['panelAdmin/reportes'] = 'Admin/panel_reportes';
 
 // Super

@@ -235,7 +235,7 @@ $(document).ready(function () {
 	} else {
 		/** No hay nada que hacer aqui. **/
 	}
-//TODO:Permisos panel admin 
+	//TODO:Permisos panel admin
 	if (funcion == "panelAdmin") {
 		// 0 tot - 1 ev - 2 rep - 3 cam - 4 hist - 5 seg - 6 asignar
 		$nivel = $("#data_logg").attr("nvl");
@@ -8190,7 +8190,7 @@ $(document).ready(function () {
 		$("#reenvio_pre").slideUp();
 
 		var organizacion = $("#organizacion").val();
-		var nit = $("#nit").val() . $("#nit_digito").val();
+		var nit = $("#nit").val() + "-" + $("#nit_digito").val();
 		var sigla = $("#sigla").val();
 		var nombre = $("#nombre").val();
 		var nombre_s = $("#nombre_s").val();

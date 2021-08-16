@@ -2,9 +2,11 @@
 <div id="" class="col-md-5 center-block">
 	<div class="clearfix"></div>
 	<hr />
+	<!-- Tramite -->
 	<div class="form-group">
-		<button class="btn btn-default form-control" id="reporte_org_acreditadas">Estadísticas del Tramite</button>
+		<button class="btn btn-default form-control" id="estadisticas_tramite">Estadísticas del Tramite</button>
 	</div>
+	<!-- Acreditación -->
 	<div class="form-group">
 		<button class="btn btn-default form-control" id="reporte_org_historico">Estadísticas de la Acreditación</button>
 	</div>

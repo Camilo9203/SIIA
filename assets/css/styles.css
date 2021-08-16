@@ -392,6 +392,7 @@ table.table #tbodyArchivosDocen a {
 	border-color: white;
 	color: white;
 }
+/* TODO: Creación de estilo para botón estadisticas */
 .btn-estadisticas {
 	background-color: #187206 !important;
 	border-color: white;

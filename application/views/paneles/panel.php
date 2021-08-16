@@ -63,6 +63,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- Informate de actividades //TODO: Antes no comentado -->
 	<!-- <div class="col-md-3">
 		<div class="panel panel-siia">
 			<div class="panel-heading">
@@ -94,22 +95,19 @@
 		</div>
 	</div>
 </div>
-<!-- Fin Panel Princiapal -->
-<!-- ---------------------- -->
-<!-- ---------------------- -->
-<!-- ---------------------- -->
-<!-- Seleccionar tipo de solicitud -->
+<!-- Formulario tipo de solicitud //TODO: Formulario tipo de solicitud -->
 <div id="tipoSolicitud" class="col-md-5 center-block">
 	<?php echo form_open('', array('id' => 'formulario_crear_solicitud')); ?>
 	<div class="clearfix"></div>
 	<hr />
+	<!-- Tipo d solicitud -->
+	<label for="tipo_solicitud">Tipo de solicitud:<span class="spanRojo">*</span></label><br>
 	<div class="form-group">
-		<label for="tipo_solicitud">Tipo de solicitud:<span class="spanRojo">*</span></label><br>
 		<div class="radio">
 			<label><input type="radio" name="tipo_solicitud" id="tipo1" class="" value="Acreditación Primera vez" checked>Acreditación primera vez.</label>
 		</div>
 	</div>
-
+	<!-- Solo si la entidad esta o estuvo acreditada //TODO: Solo si la entidad ya fue acreditada-->
 	<div id="div_solicitud">
 		<div class="form-group">
 			<div class="radio">
@@ -123,17 +121,22 @@
 		</div>
 	</div>
 	<hr />
+	<!-- Tipo d solicitud -FIN -->
+	<!-- Motivo de la solicitud -->
 	<label for="motivo_solicitud">Motivo de la solicitud:<span class="spanRojo">*</span></label><br>
+	<!-- Acreditación curso basico ES -->
 	<div class="form-group">
 		<div class="radio">
 			<label><input type="radio" name="motivo_solicitud" id="motivo1" class="motivo_sol" value="Acreditación Curso Basico de Economia Solidaria" checked>Acreditación curso basico de economia solidaria.</label>
 		</div>
 	</div>
+	<!-- Acreditación aval de trabajo asociado -->
 	<div class="form-group">
 		<div class="radio">
 			<label><input type="radio" name="motivo_solicitud" id="motivo2" class="motivo_sol" value="Acreditación, Aval de Trabajo Asociado">Acreditación, aval de trabajo asociado.</label>
 		</div>
 	</div>
+	<!-- Acretitación para otros programas //TODO: Otros programas comentado-->
 	<!-- <div class="form-group">
 		<div class="radio">
 			<label><input type="radio" name="motivo_solicitud" id="motivo3" class="motivo_sol" value="Acreditación, Aval a otros Programas">Acreditación, aval a otros programas.</label>
@@ -144,40 +147,43 @@
 			<label><input type="radio" name="motivo_solicitud" id="motivo4" class="motivo_sol" value="Acreditación, Aval de Trabajo Asociado, Aval a otros Programas">Acreditación, aval de trabajo asociado, aval a otros programas. <small>(Todas)</small></label>
 		</div>
 	</div> -->
+	<!-- Solo si la entidad esta o estuvo acreditada //TODO: Solo si la entidad ya fue acreditada-->
 	<div class="form-group" id="div_motivo_actualizar">
 		<div class="radio">
 			<label><input type="radio" name="motivo_solicitud" id="motivo5" class="motivo_sol" value="Actualizar Datos">Actualizar datos</label>
 		</div>
 	</div>
 	<hr />
+	<!-- Motivo de la solicitud -FIN-->
+	<!-- Modalidad de la solicitud -->
 	<label for="modalidad_solicitud">Modalidad:<span class="spanRojo">*</span></label><br>
-	<!--<i data-toggle="modal" data-target="#ayudaModalidad" class="fa fa-question-circle pull-right" aria-hidden="true"></i>-->
+	<!-- Ayuda para modalidad virtual -->
+	<i data-toggle="modal" data-target="#ayudaModalidad" class="fa fa-question-circle pull-right" aria-hidden="true"></i>
+	<!-- Presencial -->
 	<div class="form-group">
 		<div class="radio">
 			<label><input type="radio" name="modalidad_solicitud" id="modalidad2" class="" value="Presencial" checked>Presencial</label>
 		</div>
 	</div>
+	<!-- Virtual -->
 	<div class="form-group">
 		<div class="radio">
 			<label><input type="radio" name="modalidad_solicitud" id="modalidad1" class="" value="Virtual">Virtual</label>
 		</div>
 	</div>
+	<!-- Ambas -->
 	<div class="form-group">
 		<div class="radio">
 			<label><input type="radio" name="modalidad_solicitud" id="modalidad3" class="" value="Virtual y Presencial">Virtual y presencial <small>(Ambos)</small></label>
 		</div>
 	</div>
-	<div class="form-group">
-		<div class="radio">
-			<label><input type="radio" name="modalidad_solicitud" id="modalidad4" class="" value="Actualizar Facilitadores">Actualizar facilitadores</label>
-		</div>
-	</div>
 	<hr />
+	<!-- Modalidad de la solicitud -FIN -->
 	</form>
 	<button class="btn btn-siia btn-sm pull-right" name="" id="guardar_formulario_tipoSolicitud" id="guardar_formulario_tipoSolicitud">Crear solicitud <i class="fa fa-check" aria-hidden="true"></i></button>
 	<button class="btn btn-danger btn-sm volver_al_panel"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 </div>
-<!-- Ayuda Modalidad Modal -->
+<!-- Modal Ayuda Modalidad Virtual  -->
 <div class="modal fade in" id="ayudaModalidad" tabindex="-1" role="dialog" aria-labelledby="ayudaModalidad">
 	<div class="modal-dialog modal-xs" role="document">
 		<div class="modal-content">
@@ -197,27 +203,7 @@
 		</div>
 	</div>
 </div>
-<!-- Ayuda Facilitadores Modal //TODO: Modal para actualización de facilitadores. -->
-<div class="modal fade in" id="ayudaFacilitadores" tabindex="-1" role="dialog" aria-labelledby="ayudaFacilitadores">
-	<div class="modal-dialog modal-xs" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title" id="guardarOBSSIs">¿Desea Actualizar Facilitadores.?</h4>
-			</div>
-			<div class="modal-body">
-				<p>Desea ir directamente al modulo para la actualización de facilitadores</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" id="noModVirt" class="btn btn-danger btn-sm pull-left">No, quizá mas adelante <i class="fa fa-times" aria-hidden="true"></i></button>
-				<button type="button" id="ver_docentes" class="btn btn-siia btn-sm pull-right" data-dismiss="modal">Si, ir a actualizar facilitadores <i class="fa fa-check" aria-hidden="true"></i></button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Fin de Seleccionar Tipo de Solicitud -->
-<!-- ---------------------- -->
-<!-- ---------------------- -->
-<!-- ---------------------- -->
+<!-- Formularios //TODO: Formularios usuario -->
 <div class="col-md-9 formularios" role="main">
 	<!-- Inicio del Panel Inicial -->
 	<div id="estado_solicitud">
@@ -1628,3 +1614,4 @@
 			</div>
 		</div>
 	</div>
+</div>

@@ -23,7 +23,8 @@ Apache - Ubuntu >= 16.04 LTS
 # apt-get install apache2
 ```
 
-MySQL 
+MySQL
+
 ```
 # apt-get install mysql-server
 ```
@@ -33,7 +34,7 @@ PHP >= 7.0 - Ubuntu >= 16.04 LTS
 ```
 Ejemplo versiones = php7.x-dev
 
-# apt-get install php7.0 
+# apt-get install php7.0
 # apt-get install php-mysql php-curl php-gd php-pear php-imagick php-imap php-mcrypt php-memcache php-pspell php-recode php-snmp php-tidy php-xmlrpc php-xsl php-dev -y
 # apt-get install php libapache2-mod-php
 # php --version
@@ -61,7 +62,7 @@ Una serie de ejemplos paso a paso que indican que debe ejecutar un entorno de de
 Activar MultiViews en Apache
 
 ```
-# nano /etc/apache2/sites-available/000-default.conf 
+# nano /etc/apache2/sites-available/000-default.conf
 
 <Directory /var/www/html/>
         Options Indexes FollowSymLinks MultiViews
@@ -106,7 +107,6 @@ CodeIgniter requiere hacer (si existe omitir el paso)
 
 Ejecutar bash para los folder de uploads
 
-
 ```
 # cd /var/www/html/siia/
 # sh FOLDERS_SIIA.sh
@@ -126,6 +126,7 @@ Crear base de datos limpia en MySQL
 ```
 
 Cambiar el archivo de configuracion de CodeIgniter
+
 ```
 # cd /var/www/html/siia/application/config
 # nano config.php
@@ -195,7 +196,7 @@ CodeIgniter requiere hacer
 Cambiar la carpeta root de apache a siia
 
 ```
-# nano /etc/apache2/sites-available/000-default.conf 
+# nano /etc/apache2/sites-available/000-default.conf
 
 DocumentRoot /var/www/html/siia
 
@@ -217,6 +218,7 @@ Cambiar el .htaccess comentando la RewriteBase /siia/
 ```
 
 Cambiar el archivo de configuracion de CodeIgniter
+
 ```
 # cd /var/www/html/siia/application/config
 # nano config.php
@@ -232,9 +234,9 @@ Abrimos el explorador y entramos a la ip del servidor al proyecto por ejemplo: h
 
 ## Creado con
 
-* [CodeIgniter](https://codeigniter.com/) - Framework
-* [Apache](https://httpd.apache.org/) - Dependencia
-* [PHP](http://php.net/) - Dependencia
+- [CodeIgniter](https://codeigniter.com/) - Framework
+- [Apache](https://httpd.apache.org/) - Dependencia
+- [PHP](http://php.net/) - Dependencia
 
 ## Versiones
 
@@ -242,8 +244,9 @@ Se usa [SemVer](http://semver.org/) para versiones.
 
 ## Autores
 
-* **Sergio Daniel Martínez Porras** - *Trabajo Inicial* - [M4RS](https://bitbucket.org/M4RS/)
+- **Sergio Daniel Martínez Porras** - _Trabajo Inicial_ - [M4RS](https://bitbucket.org/M4RS/)
+- **Camilo Ríos Hernandez** - _Desarrollo de modulos nuevos y ajustes en el codigo anterior_
 
 ## Licencia
 
-Este proyecto esta bajo los derechos de autor del desarrollador y de la Unidad Administrativa Especial de Organizaciones Solidarias
+Este proyecto esta bajo los derechos de autor del desarrollador y de la Unidad Administrativa Especial de Organizaciones Solidarias - UAEOS

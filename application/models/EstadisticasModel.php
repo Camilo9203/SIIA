@@ -11,9 +11,12 @@ class EstadisticasModel extends CI_Model
 	{
 		if ($id === FALSE) {
 
-			// Traer tabla completa$query = $this->db->get('solicitudes');
-			// Consulta para traer solicitudes y ogranizaciones de la solicitud
-			$query = $this->db->select("*")->from("solicitudes")->join('organizaciones', 'organizaciones.id_organizacion = solicitudes.organizaciones_id_organizacion')->get();
+			// Consulta para traer solicitudes, tipo de solitud y ogranizacion de la solicitud
+			$query = $this->db->select("QUARTER(fecha)")->from("solicitudes")->join('organizaciones', 'organizaciones.id_organizacion = solicitudes.organizaciones_id_organizacion')->get_where('solicitudes', array('fecha' => "solicitudes"));
+			// Variables para consultas del tramite
+			// $años  = 
+
+
 			// 	$data_organizaciones = $this->db->select("*")->from("organizaciones, estadoOrganizaciones, solicitudes")->where("organizaciones.id_organizacion", $id_org)->where("estadoOrganizaciones.organizaciones_id_organizacion", $id_org)->where("solicitudes.organizaciones_id_organizacion", $id_org)->get()->row();
 			// Retornar resultas en forma de array
 			return $query->result_array();
@@ -37,7 +40,6 @@ class EstadisticasModel extends CI_Model
 	public function get_tipoSolicitud($id = FALSE)
 	{
 		if ($id === FALSE) {
-
 			// Traer tabla completa$query = $this->db->get('solicitudes');
 			// Consulta para traer solicitudes y ogranizaciones de la solicitud
 			$query = $this->db->select("*")->from("tipoSolicitud")->join('solicitudes', 'tipoSolicitud.organizaciones_id_organizacion = solicitudes.organizaciones_id_organizacion')->get();
