@@ -24,7 +24,7 @@
 	<link href="<?php echo base_url('assets/img/favicon64.png') ?>" type="image/png" sizes="64x64" rel="icon" />
 	<link href="<?php echo base_url('assets/img/favicon128.png') ?>" type="image/png" sizes="128x128" rel="shortcut icon" />
 	<link href="https://fonts.googleapis.com/css?family=Dosis&display=swap" rel="stylesheet">
-	<!-- Graficas //TODO:Graficas para las estadisticas -->
+	<!-- Graficas //TODO: Charts Graficas para las estadisticas -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.js" integrity="sha512-XcsV/45eM/syxTudkE8AoKK1OfxTrlFpOltc9NmHXh3HF+0ZA917G9iG6Fm7B6AzP+UeEzV8pLwnbRNPxdUpfA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 	<meta name="theme-color" content="#09476E" />
@@ -120,7 +120,7 @@
 			</div>
 		</section>
 		<div id="tPg" titulo="<?php echo $title; ?>"></div>
-		<!-- Navbar Usuario no registrado //TODO:Navbar de usuario no registrado -->
+		<!-- Navbar Usuario no registrado //TODO: Navbar de usuario no registrado -->
 		<?php
 		if (!$logged_in && $tipo_usuario == "none") {
 			echo "<div class='hidden' id='data_logg' data-log='$logged_in'></div>";
@@ -205,7 +205,7 @@
 							</nav>
 						</div>
 					</div>
-					<!-- Menu formulario acreditación //TODO:Menu Formulario para acreditación-->
+					<!-- Menu formulario acreditación //TODO: Menu Formulario para acreditación-->
 					<?php if ($tipo_usuario == "user") { ?>
 						<div class="col-md-3 side_main_menu">
 							<div class="left_col scroll-view">
@@ -276,7 +276,7 @@
 					<div class="icono--div2">
 						<a class="btn btn-siia btn-sm icono2 desOptSiia" role="button" title="Registro telefonico" data-toggle="tooltip" data-placement="right">Registro telefonico <i class="fa fa-phone" aria-hidden="true"></i></a>
 					</div>
-					<!-- Registro de llamadas //TODO:Registro de llamas para dividir de este archivo -->
+					<!-- Registro de llamadas //TODO: Registro de llamas para dividir de este archivo -->
 					<div class="contenedor--menu2">
 						<h3>Registro telefónico: <a class="icono2 desOptSiia pull-right" role="button" title="Registro telefonico"><i class="fa fa-times" aria-hidden="true"></i></a></h3>
 						<br>

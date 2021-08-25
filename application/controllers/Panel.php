@@ -1940,7 +1940,7 @@ class Panel extends CI_Controller
 		}
 		return $datos;
 	}
-
+	// TODO: Actualizar docentes
 	public function actualizarDocente()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -2086,7 +2086,7 @@ class Panel extends CI_Controller
 		}
 	}
 
-	// Finalizar proceso
+	//TODO: Finalizar proceso
 	public function finalizarProceso()
 	{
 		$formularios = $this->verificarFormularios();

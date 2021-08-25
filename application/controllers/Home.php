@@ -1,30 +1,33 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Home extends CI_Controller
+{
 
-	function __construct(){
+	function __construct()
+	{
 		parent::__construct();
-		setlocale(LC_ALL , 'es_CO.UTF-8');
+		setlocale(LC_ALL, 'es_CO.UTF-8');
 	}
 
 	/**
 		Funcion Index para cargar las vistas necesarias.
-	**/
+	 **/
 	public function index()
 	{
-		$data['title'] = 'Home';//'Home';
+		$data['title'] = 'Home'; //'Home';
 		$data['logged_in'] = false;
 		$data['tipo_usuario'] = "none";
 		$data['nombre_usuario'] = "none";
-		
+
 		$this->load->view('include/header', $data);
 		$this->load->view('home');
 		$this->load->view('include/footer');
 		$this->logs_sia->logs('PLACE_USER');
 	}
 
-	public function cargarOpcionesSistema(){
+	public function cargarOpcionesSistema()
+	{
 		$opciones = $this->db->select("*")->from("opciones")->get()->result();
 		echo json_encode($opciones);
 	}
@@ -35,7 +38,7 @@ class Home extends CI_Controller {
 		$data['logged_in'] = false;
 		$data['tipo_usuario'] = "none";
 		$data['nombre_usuario'] = "none";
-		
+
 		$this->load->view('404_r');
 		$this->logs_sia->logs('PLACE_USER');
 	}
@@ -53,58 +56,62 @@ class Home extends CI_Controller {
 		$data['logged_in'] = false;
 		$data['tipo_usuario'] = "none";
 		$data['nombre_usuario'] = "none";
-		
+
 		$this->load->view('mantenimiento');
 		$this->logs_sia->logs('PLACE_USER');
 	}
 
-	public function mapa(){
+	public function mapa()
+	{
 		$data['title'] = 'Mapa Gestión';
 		$data['logged_in'] = false;
 		$data['tipo_usuario'] = "none";
 		$data['nombre_usuario'] = "none";
-		
+
 		$this->load->view('include/header', $data);
 		$this->load->view('mapagestion/mapa');
 		$this->load->view('include/footer');
 		$this->logs_sia->logs('PLACE_USER');
 	}
 
-	public function estadoSolicitud(){
+	public function estadoSolicitud()
+	{
 		$data['title'] = 'Estado de la organización - solicitud';
 		$data['logged_in'] = false;
 		$data['tipo_usuario'] = "none";
 		$data['nombre_usuario'] = "none";
-		
+
 		$this->load->view('include/header', $data);
 		$this->load->view('estadoSolicitud');
 		$this->load->view('include/footer');
 		$this->logs_sia->logs('PLACE_USER');
 	}
 
-	public function facilitadores(){
+	public function facilitadores()
+	{
 		$data['title'] = 'Facilitadores válidos';
 		$data['logged_in'] = false;
 		$data['tipo_usuario'] = "none";
 		$data['nombre_usuario'] = "none";
-		
+
 		$this->load->view('include/header', $data);
 		$this->load->view('facilitadores');
 		$this->load->view('include/footer');
 		$this->logs_sia->logs('PLACE_USER');
 	}
 
-	public function consultarEstado(){
+	public function consultarEstado()
+	{
 		$idoNit = $this->input->post('idoNit');
 
 		$tipoSolicitud = $this->db->select("*")->from("tipoSolicitud")->where("idSolicitud", $idoNit)->get()->row();
-		if($tipoSolicitud == ""){
+		if ($tipoSolicitud == "") {
 			$organizaciones = $this->db->select("*")->from("organizaciones")->where("numNIT", $idoNit)->get()->row();
-			
+
 			$idOrganizacion = $organizaciones->id_organizacion;
 
 			$tipoSolicitud = $this->db->select("*")->from("tipoSolicitud")->where("organizaciones_id_organizacion", $idOrganizacion)->get()->row();
-		}else{
+		} else {
 			$idOrganizacion = $tipoSolicitud->organizaciones_id_organizacion;
 		}
 		$estado = $this->db->select("fechaFinalizado, nombre, organizaciones_id_organizacion")->from("estadoOrganizaciones")->where("organizaciones_id_organizacion", $idOrganizacion)->get()->row();
@@ -112,27 +119,29 @@ class Home extends CI_Controller {
 		echo json_encode(array("estado" => $estado, "tipoSolicitud" => $tipoSolicitud));
 	}
 
-	public function consultarFacilitadores(){
+	public function consultarFacilitadores()
+	{
 		$numeroNIT = $this->input->post('numeroNIT');
 
 		$organizaciones = $this->db->select("*")->from("organizaciones")->where("numNIT", $numeroNIT)->get()->row();
 		$id_organizacion = $organizaciones->id_organizacion;
 
-		if($organizaciones != ""){
+		if ($organizaciones != "") {
 			$facilitadores = $this->db->select("*")->from("docentes")->where("organizaciones_id_organizacion", $id_organizacion)->where("valido", 1)->get()->result();
 		}
 
 		echo json_encode(array("facilitadores" => $facilitadores));
 	}
 
-	public function verificarUsuario(){
-		$nombre = $this->input->post('nombre');
+	public function verificarUsuario()
+	{
+		// Comprobar que el nombre de usuario y el nit no se encuentre en la base de datos. 
+		$nitOrganizacion = $this->db->select("numNIT")->from("organizaciones")->where("numNIT", $this->input->post('nit'))->get()->row()->numeroNIT;
+		$nombreUsuario = $this->db->select("usuario")->from("usuarios")->where("usuario", $this->input->post('nombre'))->get()->row()->usuario;
 
-		$dataUsuario = $this->db->select("usuario")->from("usuarios")->where("usuario", $nombre)->get()->row()->usuario;
-
-		if($dataUsuario != NULL || $dataUsuario != ""){
+		if ($nombreUsuario != NULL || $nombreUsuario != "" || $nitOrganizacion != "") {
 			echo json_encode(array("existe" => 1));
-		}else{
+		} else {
 			echo json_encode(array("existe" => 0));
 		}
 	}

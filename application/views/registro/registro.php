@@ -9,9 +9,12 @@
 		</div>
 		<div class="form-group">
 			<label for="nit">NIT de la organización (sin puntos + digito de verificación): <span class="spanRojo">*</span></label>
-			<input type="number" class="form-control" form="formulario_registro" name="nit" id="nit" placeholder="Número NIT de la organización... 899999050" required="" maxlength="10" minlength="3" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
-			<!-- Digito de verificación //TODO: Pendiente por terminar -->
-			<input type="number" class="form-control" form="formulario_registro" name="nit_digito" id="nit_digito" placeholder="0" required="" maxlength="1" minlength="1" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+			<div class="input-group">
+				<input type="number" class="form-control" form="formulario_registro" name="nit" id="nit" placeholder="Numero de NIT" required="" maxlength="10" minlength="3" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+				<!-- Digito de verificación //TODO: Pendiente por terminar -->
+				<span class="input-group-addon">-</span>
+				<input type="number" class="form-control" form="formulario_registro" name="nit_digito" id="nit_digito" placeholder=" Dígito de verificación" required="" maxlength="1" minlength="1" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+			</div>
 		</div>
 		<div class="form-group">
 			<label for="sigla">Sigla de la organización: <span class="spanRojo">*</span></label>
@@ -34,16 +37,12 @@
 			<input type="text" class="form-control" form="formulario_registro" name="segundo_apellido_rep_regal" id="apellido_s" placeholder="Segundo apellido del representante...">
 		</div>
 		<div class="form-group">
-			<label for="correo_electronico">Correo electrónico de organización (Notificaciones): <span class="spanRojo">*</span></label>
-			<input type="email" class="form-control" form="formulario_registro" name="correo_electronico" id="correo_electronico" placeholder="Correo electrónico de la organización..." required="">
-		</div>
-		<div class="form-group">
 			<label for="correo_electronico_rep_legal">Correo electrónico del representante legal: <span class="spanRojo">*</span></label>
 			<input type="email" class="form-control" form="formulario_registro" name="correo_electronico_rep_legal" id="correo_electronico_rep_legal" placeholder="Correo electrónico del representante legal..." required="">
 		</div>
 	</div>
 	<div class="col-md-6" id="left_registro">
-		<h3>Nombre y apellido de quien registra esta información:</h3><small class="pull-right"><span class="spanRojo">*</span> Requerido</small>
+		<h3>Información de quien se encargara del tramite:</h3><small class="pull-right"><span class="spanRojo">*</span> Requerido</small>
 		<div class="form-group">
 			<label for="primer_nombre_persona">Primer nombre: <span class="spanRojo">*</span></label>
 			<input type="text" class="form-control" form="formulario_registro" name="primer_nombre_persona" id="nombre_p" placeholder="Primer nombre..." required="">
@@ -52,9 +51,13 @@
 			<label for="primer_apellido_persona">Primer apellido: <span class="spanRojo">*</span></label>
 			<input type="text" class="form-control" form="formulario_registro" name="primer_apellido_persona" id="apellido_p" placeholder="Primer apellido..." required="">
 		</div>
-		<h3>Datos de la cuenta de usuario:</h3><small class="pull-right"><span class="spanRojo">*</span> Requerido</small>
 		<div class="form-group">
-			<label for="nombre_usuario">Nombre de usuario: <span class="spanRojo">*</span></label>
+			<label for="correo_electronico">Correo electrónico de organización (Notificaciones): <span class="spanRojo">*</span></label>
+			<input type="email" class="form-control" form="formulario_registro" name="correo_electronico" id="correo_electronico" placeholder="Correo electrónico de la organización..." required="">
+		</div>
+		<!-- <h3>Datos de la cuenta de usuario:</h3><small class="pull-right"><span class="spanRojo">*</span> Requerido</small> -->
+		<div class="form-group">
+			<label for="nombre_usuario">Nombre de usuario (Incio de sesión): <span class="spanRojo">*</span></label>
 			<input type="text" class="form-control" form="formulario_registro" name="nombre_usuario" id="nombre_usuario" placeholder="Nombre de usuario..." required="">
 		</div>
 		<div class="form-group">
@@ -273,6 +276,108 @@
 			<div class="modal-body">
 				<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
 				<button type="button" class="btn btn-siia btn-sm pull-right" id="acepto_politica">Sí, acepto. <i class="fa fa-check"></i></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal Ayuda en Registro - INICIO -->
+<div class="modal fade" id="ayuda_registro" tabindex="-1" role="dialog" aria-labelledby="ayudaRegistro">
+	<div class="modal-dialog modal-xl" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="ayudaRegistro">¿La información ingresada es correcta?</h4>
+				<small>Por favor, verifique los correos electrónicos en este momento, se le notificara cualquier comunicación del sistema por este medio y se enviara un link de activación de la cuenta en el SIIA. ***</small>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div id="informacion_pre">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Organización:</label>
+								<p id="modalConfOrg"></p>
+							</div>
+							<div class="form-group">
+								<label>NIT de la organización:</label>
+								<p id="modalConfNit"></p>
+							</div>
+							<div class="form-group">
+								<label>Sigla de la organización:</label>
+								<p id="modalConfSigla"></p>
+							</div>
+							<div class="form-group">
+								<label>Primer nombre del representante legal:</label>
+								<p id="modalConfPNRL"></p>
+							</div>
+							<div class="form-group">
+								<label>Segundo nombre del representante legal:</label>
+								<p id="modalConfSNRL"></p>
+							</div>
+							<div class="form-group">
+								<label>Primer apellido del representante legal:</label>
+								<p id="modalConfPARL"></p>
+							</div>
+							<div class="form-group">
+								<label>Segundo apellido del representante legal:</label>
+								<p id="modalConfSARL"></p>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Correo electrónico de organización:(Notificaciones)</label>
+								<p id="modalConfCOrg"></p>
+							</div>
+							<div class="form-group">
+								<label>Correo electrónico del representante legal:</label>
+								<p id="modalConfCRep"></p>
+							</div>
+							<div class="form-group">
+								<label>Primer nombre:</label>
+								<p id="modalConfPn"></p>
+							</div>
+							<div class="form-group">
+								<label>Primer apellido:</label>
+								<p id="modalConfPa"></p>
+							</div>
+							<div class="form-group">
+								<label>Nombre de usuario:</label>
+								<p id="modalConfNU"></p>
+							</div>
+							<div class="form-group">
+								<label>Contraseña:</label>
+								<p>Su contraseña.</p>
+							</div>
+							<div class="form-check">
+								<input type="checkbox" class="form-check-input" id="aceptoComActo">
+								<label class="form-check-label" for="aceptoComActo"><span class="underlined"><a>Acepto que se envíen comunicaciones y actos administrativos vía correo electrónico <span class="spanRojo">*</span></a></span></label>
+							</div>
+						</div>
+					</div>
+					<div id="reenvio_pre">
+						<div class="container">
+							<div class="jumbotron">
+								<p>Si el correo no le llega en los próximos 5 minutos, y no está en la bandeja de spam, por favor, escriba otro correo electrónico (Gmail.com, Outlook.com, Yahoo.com, Hotmail.com), y de click en "Volver a enviar el correo". Si el problema persiste, contactese con <a href="mailto:atencionalciudadano@uaeos.gov.co">atencionalciudadano@uaeos.gov.co</a></p>
+								<div class="clearfix"></div>
+								<hr />
+								<div class="form-group">
+									<label for="correo_electronico_rese">Correo electrónico de organización:*</label>
+									<input type="email" class="form-control" name="correo_electronico_rese" id="correo_electronico_rese" placeholder="Correo electrónico organización">
+								</div>
+							</div>
+							<!--<div class="jumbotron">
+				<small>Estamos teniendo inconvenientes con nuestro sistema de correos y lo estaremos solucionando lo mas pronto posible.</small>
+				<p>El registro se ha creado satisfactoriamente, ahora puede ingresar al sistema con su usuario y contraseña dando click <a href="<?php echo base_url("/login"); ?>">aquí</a>.</p>
+			</div>-->
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" name="registro" disabled="disabled" id="guardar_registro" class="btn btn-success btn-sm submit" value="Registrarme">Sí, Registrarme. <i class="fa fa-check"></i></button>
+				<button type="button" id="reenvio" class="btn btn-info btn-sm submit" value="Volver a enviar">Volver a enviar el correo. <i class="fa fa-paper-plane"></i></button>
+				<!--<button type="button" id="cerr_reen" class="btn btn-danger pull-left" data-dismiss="modal">Cerrar. <i class="fa fa-times"></i></button>-->
+				<button type="button" id="cerr_mod" class="btn btn-danger btn-sm pull-left" data-dismiss="modal">No, voy a verificar. <i class="fa fa-times" aria-hidden="true"></i></button>
 			</div>
 		</div>
 	</div>

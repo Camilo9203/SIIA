@@ -235,7 +235,7 @@ $(document).ready(function () {
 	} else {
 		/** No hay nada que hacer aqui. **/
 	}
-	//TODO:Permisos panel admin
+	//TODO: Permisos panel admin
 	if (funcion == "panelAdmin") {
 		// 0 tot - 1 ev - 2 rep - 3 cam - 4 hist - 5 seg - 6 asignar
 		$nivel = $("#data_logg").attr("nvl");
@@ -8184,7 +8184,7 @@ $(document).ready(function () {
 		}
 	});
 
-	// Guardar registro
+	// TODO: Guardar formulario de registro
 	$("#confirmaRegistro").click(function () {
 		$("#informacion_pre").slideDown();
 		$("#reenvio_pre").slideUp();
@@ -8208,6 +8208,7 @@ $(document).ready(function () {
 
 		datas = {
 			nombre: nombre_usuario,
+			nit: nit,
 		};
 
 		if ($("#formulario_registro").valid()) {
@@ -8241,7 +8242,7 @@ $(document).ready(function () {
 											"Verifique su información y correos electronicos.",
 											"success"
 										);
-										$("#modalConfOrg").html(organizacion);
+										$("#modalConfOrg").html($("#organizacion").val());
 										$("#modalConfNit").html(nit);
 										$("#modalConfSigla").html(sigla);
 										$("#modalConfPNRL").html(nombre);
@@ -8284,11 +8285,11 @@ $(document).ready(function () {
 			$("#ayuda_registro").modal("toggle");
 		}
 	});
-
+	// TODO: Guardar registro validado.
 	$("#guardar_registro").click(function () {
 		if ($("#formulario_registro").valid()) {
 			var organizacion = $("#organizacion").val();
-			var nit = $("#nit").val();
+			var nit = $("#nit").val() + "-" + $("#nit_digito").val();
 			var sigla = $("#sigla").val();
 			var nombre = $("#nombre").val();
 			var nombre_s = $("#nombre_s").val();
@@ -13713,7 +13714,7 @@ $(document).ready(function () {
 		$("#tbody_hist_obs").empty();
 		$("#tbody_hist_obs").html("");
 	});
-
+	// TODO: Actualizar docente
 	$("#actualizar_docente").click(function () {
 		$id_docente = $("#nombre_doc").attr("data-id");
 		$primer_nombre_doc = $("#primer_nombre_doc").val();
@@ -14932,7 +14933,7 @@ $(document).ready(function () {
 	$(".actualizar_solicitud").click(function () {
 		window.open(baseURL + "panel#actualizarSolicitud", "_blank");
 	});
-
+	//TODO: Leer Notificaciones
 	$(".notificaciones").click(function () {
 		$.ajax({
 			url: baseURL + "notificaciones/leerNotificaciones",
@@ -16536,7 +16537,7 @@ function clearJSON(response) {
 	$res = response.replace('"', "").replace('"', "");
 	return $res;
 }
-
+//TODO: Cargar notificaciones
 function notificaciones(baseURL) {
 	//Notificaciones
 	$data_logg = $("#data_logg").attr("data-log");
@@ -16742,7 +16743,7 @@ function sleep(milliseconds) {
 }
 
 /**
-	Validaciones para los formularios.
+	TODO: Validaciones para los formularios.
 **/
 
 function validaciones() {
@@ -17401,7 +17402,7 @@ function paging(tabla) {
 }
 
 /**
-	Tablas a iniciarlizar con Data Table, si se van añadir mas tablas a inicializar escribir el id sin el # en el array "tablas".
+	TODO: Tablas a iniciarlizar con Data Table, si se van añadir mas tablas a inicializar escribir el id sin el # en el array "tablas".
 **/
 function tablas() {
 	if (typeof $.fn.DataTable === "undefined") {
@@ -17778,7 +17779,7 @@ function cargarArchivosDocente($id) {
 		},
 	});
 }
-
+// TODO: Verificacion de formularios
 function verificarFormularios() {
 	$("#formulariosFaltantes").empty();
 	$.ajax({
@@ -18030,6 +18031,7 @@ function dragDivFormById(div) {
 	Termina funciones del archivo.
 **/
 
+//TODO: Echarts
 function init_echarts() {
 	/**
 	81 14 0 = 510E00

@@ -14,8 +14,7 @@ class Estadisticas extends CI_Controller
 	{
 		$data = array(
 
-			'solicitudes' => $this->EstadisticasModel->get_solicitudes(),
-			'tipo_Solicitud' => $this->EstadisticasModel->get_tipoSolicitud(),
+			'solicitudes' => $this->EstadisticasModel->solicitudesOrganizacion(),
 
 		);
 		// Json datos estadisticos

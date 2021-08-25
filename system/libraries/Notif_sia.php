@@ -9,7 +9,7 @@ class CI_Notif_sia {
     }
 
     /**
-        Crear notificaciones para el usuario
+        TODO: Crear notificaciones para el usuario
     **/ 
     public function notification($type, $quienRecibe, $org){
         $nombre_usuario = $this->CI->session->userdata('nombre_usuario');
@@ -76,4 +76,3 @@ class CI_Notif_sia {
         $this->CI->db->insert('notificaciones', $notif);    
     }
 }
-?>

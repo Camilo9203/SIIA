@@ -10,19 +10,19 @@ class Admin extends CI_Controller
 		verify_session_admin();
 	}
 	// Encripción para recuperación de contraseña
-	public function mcdec()
+	private function mcdec()
 	{
 		$password = "";
 		$passwor2 = mc_decrypt($password, KEY_RDEL);
 		echo json_encode($passwor2);
 	}
-	public function mcenc()
+	private function mcenc()
 	{
 		$password = "asdQWE123@";
 		$passwor2 = mc_encrypt($password, KEY_RDEL);
 		echo json_encode($passwor2);
 	}
-	public function enchash()
+	private function enchash()
 	{
 		$password = "@1nv3st0rC";
 		$passwor2 = generate_hash($password);
@@ -1537,7 +1537,7 @@ class Admin extends CI_Controller
 		$this->notif_sia->notification('Docente', $nombre_usuario, "");
 		//$this->envio_mail("docentes", $id_organizacion, 2, "");
 	}
-
+	// TODO: Asignar evaluador a organizacion a evaluar
 	public function asignarOrganizacion()
 	{
 		$id_organizacion = $this->input->post('id_organizacion');

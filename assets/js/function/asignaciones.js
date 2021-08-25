@@ -5,7 +5,7 @@ $(document).on("click", "#verModalAsignarDocente", function () {
 	$("#idDocente").html($id_docente);
 	$("#nombreDocente").html($nombreDocente);
 });
-// TODO:Pendiente por enlazar
+// TODO: Pendiente por enlazar
 $("#asignarOrganizacionEvaluador").click(function () {
 	$id_organizacion = $("#idDocente").html();
 	$evaluadorAsignar = $("#evaluadorAsignar").val();
