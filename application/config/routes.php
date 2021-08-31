@@ -107,7 +107,10 @@ $route['panelAdmin/reportes/historico'] = 'Reportes/entidadesHistorico';
 $route['panelAdmin/reportes/asistentes'] = 'Reportes/verAsistentes';
 $route['panelAdmin/reportes/docentesHabilitados'] = 'Reportes/docentesHabilitados';
 $route['panelAdmin/reportes/registroTelefonico'] = 'Reportes/registroTelefonico';
+// TODO: Rutas nuevas para actualización de facilitadores
 $route['panelAdmin/organizaciones/docentes'] = 'Admin/docentes';
+$route['panelAdmin/organizaciones/docentes/asignar'] = 'Admin/asignarDocentes';
+$route['panelAdmin/organizaciones/docentes/evaluar'] = 'Admin/evaluarDocentes';
 $route['panelAdmin/organizaciones/solodocentes'] = 'Admin/solodocentes';
 $route['panelAdmin/organizaciones/camaraComercio'] = 'Admin/camara';
 $route['panelAdmin/organizaciones/resoluciones'] = 'Admin/resoluciones';

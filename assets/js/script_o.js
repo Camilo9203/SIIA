@@ -188,7 +188,7 @@ $(document).ready(function () {
 			}
 		}
 	});
-
+	// TODO: Permisos de visualización panel usuario
 	if (funcion == "panel") {
 		$.ajax({
 			url: baseURL + "panel/cargarEstadoSolicitud",
@@ -8134,7 +8134,7 @@ $(document).ready(function () {
 	});
 
 	/**
-		Click en Recordar Contraseña
+		TODO: Click en Recordar Contraseña
 	**/
 	$("#recordar_contrasena").click(function () {
 		if ($("#formulario_recordar").valid()) {
@@ -8184,7 +8184,7 @@ $(document).ready(function () {
 		}
 	});
 
-	// TODO: Guardar formulario de registro
+	// TODO: Confirmar formulario de registro
 	$("#confirmaRegistro").click(function () {
 		$("#informacion_pre").slideDown();
 		$("#reenvio_pre").slideUp();
@@ -8410,7 +8410,7 @@ $(document).ready(function () {
 			}
 		}
 	});
-
+	// Aceptar
 	$("#aceptoComActo").change(function () {
 		if ($("#aceptoComActo").is(":checked")) {
 			$("#guardar_registro").removeAttr("disabled");
@@ -10363,7 +10363,7 @@ $(document).ready(function () {
 			},
 		});
 	});
-
+	// TODO: Modal Asignar Evaluador Organizacion
 	$(document).on("click", "#verModalAsignar", function () {
 		$id_organizacion = $(this).attr("data-organizacion");
 		$nombreOrganizacion = $(this).attr("data-nombre");
@@ -10374,6 +10374,7 @@ $(document).ready(function () {
 		$("#nitAsigOrg").html($numNIT);
 	});
 
+	// TODO: Asignar evaluador a organización
 	$("#asignarOrganizacionEvaluador").click(function () {
 		$id_organizacion = $("#idAsigOrg").html();
 		$evaluadorAsignar = $("#evaluadorAsignar").val();
@@ -10404,7 +10405,50 @@ $(document).ready(function () {
 			},
 		});
 	});
+	// TODO: Modal Asignar Evaluador Docente
+	$(document).on("click", "#verModalAsignarDocente", function () {
+		$idDocente = $(this).attr("data-id");
+		$cedulaDocente = $(this).attr("data-docente");
+		$nombreDocente = $(this).attr("data-nombre");
+		$apellidoDocente = $(this).attr("data-apellido");
 
+		$nombre = $nombreDocente + " " + $apellidoDocente;
+
+		$("#idDocente").html($idDocente);
+		$("#cedulaDocente").html($cedulaDocente);
+		$("#nombreDocente").html($nombre);
+	});
+	// TODO: Asignar evaluador a docente
+	$("#asignarDocenteEvaluador").click(function () {
+		$id_docente = $("#idDocente").html();
+		$evaluadorAsignar = $("#evaluadorAsignar").val();
+
+		data = {
+			id_docente: $id_docente,
+			evaluadorAsignar: $evaluadorAsignar,
+		};
+
+		$.ajax({
+			url: baseURL + "admin/asignarDocenteEvaluador",
+			type: "post",
+			dataType: "JSON",
+			data: data,
+			beforeSend: function () {
+				notificacion("Espere, asignando...", "success");
+				$("#asignarDocenteEvaluador").attr("disabled", true);
+			},
+			success: function (response) {
+				notificacion(response.msg, "success");
+				setInterval(function () {
+					redirect(baseURL + response.url);
+				}, 3500);
+				$("#asignarDocente").toggle();
+			},
+			error: function (ev) {
+				//Do nothing
+			},
+		});
+	});
 	$("#admin_actualizar_nombre_aplicacion").click(function () {
 		var $titulo = $("#admin_nombre_aplicacion").val();
 		var data = {
@@ -13821,7 +13865,7 @@ $(document).ready(function () {
 			},
 		});
 	});
-
+	// TODO: Validar docente
 	$(".guardarValidoDocente").click(function () {
 		$(".guardarObsArchivoDoc").each(function () {
 			$(this).click();
@@ -17420,7 +17464,8 @@ function tablas() {
 		"tabla_super_admins",
 		"tabla_verdocentes",
 		"tabla_docentes",
-		"tabla_docentes_no_aprobado",
+		"tabla_docentes_no_asignados",
+		"tabla_docentes_asignados",
 		"tabla_visitas",
 		"tabla_plan",
 	];

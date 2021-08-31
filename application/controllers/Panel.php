@@ -1152,7 +1152,6 @@ class Panel extends CI_Controller
 			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "18", 'estado' => "1"));
 		}
 	}
-
 	// Formulario 1
 	public function guardar_formulario_informacion_general_entidad()
 	{
@@ -1243,7 +1242,6 @@ class Panel extends CI_Controller
 			}
 		}
 	}
-
 	// Formulario 2
 	public function guardar_formulario_documentacion_legal()
 	{
@@ -1318,7 +1316,6 @@ class Panel extends CI_Controller
 		}
 		//}
 	}
-
 	// Formulario 3
 	public function guardar_formulario_registro_educativo()
 	{
@@ -1374,7 +1371,6 @@ class Panel extends CI_Controller
 		}
 		//}
 	}
-
 	// Formulario 4
 	public function guardar_formulario_antecedentes_academicos()
 	{
@@ -1440,7 +1436,6 @@ class Panel extends CI_Controller
 		}
 		//}
 	}
-
 	// Formulario 5
 	public function guardar_formulario_jornadas_actualizacion()
 	{
@@ -1476,7 +1471,6 @@ class Panel extends CI_Controller
 			echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no son correctos."));
 		}
 	}
-
 	// Formulario 6
 	public function guardar_formulario_datos_basicos_programas()
 	{
@@ -1575,7 +1569,6 @@ class Panel extends CI_Controller
 			echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no son correctos."));
 		}
 	}
-
 	// Formulario 7
 	public function guardar_formulario_programas_aval()
 	{
@@ -1636,7 +1629,7 @@ class Panel extends CI_Controller
 			echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no son correctos."));
 		}
 	}
-
+	// Formulario 8
 	public function guardar_formulario_programas_avalar()
 	{
 		$nombre = $this->input->post("nombre");
@@ -1683,7 +1676,6 @@ class Panel extends CI_Controller
 			echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no son correctos."));
 		}
 	}
-
 	// Formulario 9
 	public function guardar_formulario_docentes()
 	{
@@ -1730,7 +1722,7 @@ class Panel extends CI_Controller
 			echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no son correctos."));
 		}
 	}
-
+	// Formulario 10
 	public function guardar_formulario_aplicacion()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -1753,7 +1745,6 @@ class Panel extends CI_Controller
 	}
 
 	// Informe de actividades
-
 	public function guardar_cursoInformeActividades()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -1943,11 +1934,11 @@ class Panel extends CI_Controller
 	// TODO: Actualizar docentes
 	public function actualizarDocente()
 	{
+		// Variables para la actualizacion de la tabla docentes. 
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
 		$id_organizacion = $datos_organizacion->id_organizacion;
 		$nombreOrganizacion = $datos_organizacion->nombreOrganizacion;
-
 		$id_docente = $this->input->post("id_docente");
 		$primer_nombre_doc = $this->input->post("primer_nombre_doc");
 		$segundo_nombre_doc = $this->input->post("segundo_nombre_doc");
@@ -1956,9 +1947,14 @@ class Panel extends CI_Controller
 		$numero_cedula_doc = $this->input->post("numero_cedula_doc");
 		$profesion_doc = $this->input->post("profesion_doc");
 		$horas_doc = $this->input->post("horas_doc");
-
+		// TODO: Variables nuevas para asignación de docente según su estado. 
 		$informacionDocente = $this->db->select("*")->from("docentes")->where("id_docente", $id_docente)->get()->row();
-
+		// Asignar "No" a valor de asignación y evitar que se reemplace el valor ya asignado
+		$asignado = $informacionDocente->asignado;
+		if ($asignado == NULL && $informacionDocente->valido == "0") {
+			$asignado = "No";
+		}
+		// Datos para la actualización de docentes en Array
 		$data_update = array(
 			'primerNombreDocente' => $primer_nombre_doc,
 			'segundoNombreDocente' => $segundo_nombre_doc,
@@ -1969,6 +1965,7 @@ class Panel extends CI_Controller
 			'horaCapacitacion' => $horas_doc,
 			'observacion' => "Facilitador actualizado.",
 			'observacionAnterior' => $informacionDocente->observacion,
+			'asignado' => $asignado,
 		);
 
 		$where = array('organizaciones_id_organizacion' => $id_organizacion, 'id_docente' => $id_docente);
@@ -1977,7 +1974,15 @@ class Panel extends CI_Controller
 			echo json_encode(array("msg" => "Docente $primer_apellido_doc $primer_apellido_doc Actualizado."));
 			//$this->envio_mailcontacto("docentes", 2);
 			$this->logs_sia->session_log('Docentes Actualizados');
-			$this->notif_sia->notification('Docentes', 'admin', $nombreOrganizacion);
+			// Se enviera notificación en caso de no estar aprobado el docente, adicional correo electronico en caso de no estar asignado a evaluador
+			if ($informacionDocente->valido == "0") {
+				// Solo envia notificación si no esta aprobado
+				$this->notif_sia->notification('Docentes', 'admin', $nombreOrganizacion);
+				// Solo envia correo si no esta asignado
+				if ($asignado != NULL || $asignado == "No") {
+					$this->envilo_mailadmin("actualizacion", "2", $numero_cedula_doc);
+				}
+			}
 		}
 	}
 
@@ -2033,9 +2038,7 @@ class Panel extends CI_Controller
 	public function eliminarDocente()
 	{
 		$id_docente = $this->input->post("id_docente");
-
 		$archivos = $this->db->select("*")->from("archivosDocente")->where("docentes_id_docente", $id_docente)->get()->result();
-
 		foreach ($archivos as $archivo) {
 			$nombre = $archivo->nombre;
 			$tipo = $archivo->tipo;
@@ -3172,8 +3175,8 @@ class Panel extends CI_Controller
 			echo json_encode(array("msg" => "Asistente actualizado, verifique la información."));
 		}
 	}
-
-	function envio_mailcontacto($type, $prioridad)
+	// TODO: Enviar Correos a contacto de la solicitud
+	function envio_mailcontacto($tipo, $prioridad)
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
 		$to_correo = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
@@ -3183,7 +3186,7 @@ class Panel extends CI_Controller
 		$datosSolicitudes = $this->db->select("*")->from("solicitudes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
 		$fechaSolicitud = $datosSolicitudes->fecha;
 
-		switch ($type) {
+		switch ($tipo) {
 			case 'finaliza':
 				$asunto = "Finaliza el diligenciamiento de la solicitud";
 				$mensaje = "Organización " . $to_correo->nombreOrganizacion . ": Organizaciones Solidarias le informa que su solicitud de acreditación ha sido enviada por el SIIA para ser evaluada. En este momento no puede visualizarla en el aplicativo hasta que se realice la verificación de requisitos. De ser necesario, le será devuelta con las observaciones pertinentes, dentro de los siguientes diez (10) días hábiles. 
@@ -3213,26 +3216,11 @@ class Panel extends CI_Controller
 		4 => '4 (Low)',
 		5 => '5 (Lowest)'
 		 **/
-		switch ($prioridad) {
-			case 1:
-				$num_prioridad = 1;
-				break;
-			case 2:
-				$num_prioridad = 2;
-				break;
-			case 3:
-				$num_prioridad = 3;
-				break;
-			default:
-				$num_prioridad = 3;
-				break;
-		}
-
 		$this->email->from(CORREO_SIA, "Acreditaciones");
 		$this->email->to($to_correo->direccionCorreoElectronicoOrganizacion);
 		$this->email->cc(CORREO_SIA);
 		$this->email->subject('SIIA - : ' . $asunto);
-		$this->email->set_priority($num_prioridad);
+		$this->email->set_priority($prioridad);
 
 		$data_msg['mensaje'] = $mensaje;
 
@@ -3246,7 +3234,55 @@ class Panel extends CI_Controller
 			echo json_encode(array('url' => "login", 'msg' => "Lo sentimos, hubo un error y no se envio el correo."));
 		}
 	}
-
+	// TODO: Enviar Correos a Administrador
+	function envilo_mailadmin($type, $prioridad, $docente)
+	{
+		$usuario_id = $this->session->userdata('usuario_id');
+		$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
+		// $id_organizacion = $organizacion->id_organizacion;
+		$docente = $this->db->select("*")->from("docentes")->where("numCedulaCiudadaniaDocente", $docente)->get()->row();
+		// Cuerpo del mensaje según sea el caso.
+		switch ($type) {
+				// Actualización de facilitadores
+			case 'actualizacion':
+				$asunto = "Actualizacion Docente";
+				$mensaje = "La organización <strong>" . $organizacion->nombreOrganizacion . "</strong>: Realizo una solicitud para actualización del facilitador <strong>" . $docente->primerNombreDocente . " " . $docente->primerApellidoDocente . "</strong>, por favor ingrese al sistema para asignar dicha solicitud, gracias. 
+					<br/><br/>
+					<label>Datos de recepción:</label> <br/>
+					Fecha de recepcion de solicitud: <strong>" . date("Y-m-d h:m:s") . "</strong>. <br/>";
+				break;
+			default:
+				$asunto = "";
+				$mensaje = "";
+				break;
+		}
+		/**
+		 * Datos para envio de Email al administrador
+		 * Prioridad
+		1 => '1 (Highest)',
+		2 => '2 (High)',
+		3 => '3 (Normal)',
+		4 => '4 (Low)',
+		5 => '5 (Lowest)'
+		 **/
+		$this->email->from(CORREO_SIA, "Acreditaciones");
+		$this->email->to(CORREO_SIA);
+		$this->email->cc(CORREO_SIA);
+		$this->email->subject('SIIA: ' . $asunto);
+		$this->email->set_priority($prioridad);
+		// Crear arrya con el mesaje
+		$data_msg['mensaje'] = $mensaje;
+		// Vista del mensaje
+		$email_view = $this->load->view('email/contacto', $data_msg, true);
+		// Envio del correo con la vista
+		$this->email->message($email_view);
+		// Comprobación de que se enviara el correo
+		if ($this->email->send()) {
+			// Do nothing.
+		} else {
+			echo json_encode(array('url' => "login", 'msg' => "Lo sentimos, hubo un error y no se envio el correo."));
+		}
+	}
 	public function cargar_informacionModal()
 	{
 		$informacionModal = $this->db->select("valor")->from("opciones")->where("nombre", "informacionModal")->get()->row()->valor;

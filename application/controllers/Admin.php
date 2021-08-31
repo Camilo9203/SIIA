@@ -8,6 +8,7 @@ class Admin extends CI_Controller
 	{
 		parent::__construct();
 		verify_session_admin();
+		$this->load->model('DocentesModel');
 	}
 	// Encripción para recuperación de contraseña
 	private function mcdec()
@@ -434,7 +435,7 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
+	// Vista docentes
 	public function docentes()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -456,7 +457,6 @@ class Admin extends CI_Controller
 		$data['fecha'] = $fecha;
 		$data['departamentos'] = $this->cargarDepartamentos();
 		$data['organizaciones'] = $this->cargar_organizacionesconDocentes();
-		$data['docentes'] = $this->cargar_docentesDeshabilitados();
 		$data['administradores'] = $this->cargar_administradores();
 
 
@@ -465,7 +465,65 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
+	// TODO: Codigo nuevo para la asignación de solicitudes de actulizacion de docentes.
+	public function asignarDocentes()
+	{
+		date_default_timezone_set("America/Bogota");
+		$logged = $this->session->userdata('logged_in');
+		$nombre_usuario = $this->session->userdata('nombre_usuario');
+		$usuario_id = $this->session->userdata('usuario_id');
+		$tipo_usuario = $this->session->userdata('type_user');
+		$nivel = $this->session->userdata('nivel');
+		$hora = date("H:i", time());
+		$fecha = date('Y/m/d');
 
+		$data['title'] = 'Panel Principal / Administrador / Facilitadores / Asignar';
+		$data['logged_in'] = $logged;
+		$data['nombre_usuario'] = $nombre_usuario;
+		$data['usuario_id'] = $usuario_id;
+		$data['tipo_usuario'] = $tipo_usuario;
+		$data['nivel'] = $nivel;
+		$data['hora'] = $hora;
+		$data['fecha'] = $fecha;
+		$data['departamentos'] = $this->cargarDepartamentos();
+		$data['docentes'] = $this->DocentesModel->docentesSinAsignar();
+		$data['administradores'] = $this->cargar_administradores();
+
+		$this->load->view('include/header', $data);
+		$this->load->view('admin/organizaciones/docentes/asignarDocentes', $data);
+		$this->load->view('include/footer', $data);
+		$this->logs_sia->logs('PLACE_USER');
+	}
+	// TODO: Codigo nuevo para la asignación de solicitudes de actulizacion de docentes.
+	public function evaluarDocentes()
+	{
+		date_default_timezone_set("America/Bogota");
+		$logged = $this->session->userdata('logged_in');
+		$nombre_usuario = $this->session->userdata('nombre_usuario');
+		$usuario_id = $this->session->userdata('usuario_id');
+		$tipo_usuario = $this->session->userdata('type_user');
+		$nivel = $this->session->userdata('nivel');
+		$hora = date("H:i", time());
+		$fecha = date('Y/m/d');
+
+		$data['title'] = 'Panel Principal / Administrador / Facilitadores / Evaluar';
+		$data['logged_in'] = $logged;
+		$data['nombre_usuario'] = $nombre_usuario;
+		$data['usuario_id'] = $usuario_id;
+		$data['tipo_usuario'] = $tipo_usuario;
+		$data['nivel'] = $nivel;
+		$data['hora'] = $hora;
+		$data['fecha'] = $fecha;
+		$data['departamentos'] = $this->cargarDepartamentos();
+		$data['docentes'] = $this->DocentesModel->docentesSinAsignar();
+		$data['administradores'] = $this->cargar_administradores();
+
+
+		$this->load->view('include/header', $data);
+		$this->load->view('admin/organizaciones/docentes/evaluarDocentes', $data);
+		$this->load->view('include/footer', $data);
+		$this->logs_sia->logs('PLACE_USER');
+	}
 	public function solodocentes()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -1405,7 +1463,9 @@ class Admin extends CI_Controller
 	// TODO:Cargar docentes 
 	public function cargar_docentesDeshabilitados()
 	{
-		$docentes = $this->db->select("*")->from("docentes")->where("valido", 0)->get()->result();
+		// $docentes = $this->db->select("*")->from("docentes")->where("valido", 0)->where("asignado !=", "")->get()->result();
+		$docentes = $this->db->select("*")->from("organizaciones")->join("docentes", "docentes.organizaciones_id_organizacion = organizaciones.id_organizacion")->where("docentes.valido", 0)->where("docentes.asignado", "No")->get()->result();
+		// echo json_encode($docentes);
 		return $docentes;
 	}
 	// Cargar docentes 
@@ -1508,7 +1568,8 @@ class Admin extends CI_Controller
 			$data_update = array(
 				'id_docente' => $id_docente,
 				'valido' => $valido,
-				'observacion' => $docente_val_obs
+				'observacion' => $docente_val_obs,
+				'asignado' => '',
 			);
 		} else {
 			$informacionDocente = $this->db->select("*")->from("docentes")->where("id_docente", $id_docente)->get()->row();
@@ -1518,6 +1579,7 @@ class Admin extends CI_Controller
 				'valido' => $valido,
 				'observacion' => $docente_val_obs,
 				'observacionAnterior' => $informacionDocente->observacion,
+				'asignado' => $informacionDocente->asignado,
 			);
 		}
 
@@ -1546,7 +1608,7 @@ class Admin extends CI_Controller
 		$organizacion = $this->db->select("*")->from("organizaciones")->where("id_organizacion", $id_organizacion)->get()->row();
 		$evaluador = $this->db->select("*")->from("administradores")->where("usuario", $evaluadorAsignar)->get()->row();
 		$nombreOrganizacion = $organizacion->nombreOrganizacion;
-		$nombreEvaluador = $evaluador->primerNombreAdministrador . " " . $primerApellidoAdministrador;
+		$nombreEvaluador = $evaluador->primerNombreAdministrador . " " .  $evaluador->primerApellidoAdministrador;
 		$correoEvaluador = $evaluador->direccionCorreoElectronico;
 
 		$data_asignar = array(
@@ -1557,7 +1619,30 @@ class Admin extends CI_Controller
 		if ($this->db->update('organizaciones', $data_asignar)) {
 			$this->logs_sia->session_log('Se asigno ' . $nombreOrganizacion . ' a ' . $nombreEvaluador . ' en la fecha ' . date("Y/m/d H:m:s") . '.');
 			echo json_encode(array('url' => "panelAdmin/organizaciones/asignar", 'msg' => 'Se asigno ' . $nombreOrganizacion . ' a ' . $nombreEvaluador . ' en la fecha ' . date("Y/m/d H:m:s") . '.'));
-			$this->envio_mail_admin("asignar", $correoEvaluador, 2);
+			$this->envio_mail_admin("asignar", $correoEvaluador, 2, $organizacion);
+		}
+	}
+	// TODO: Asignar evaluador a docente a evaluar
+	public function asignarDocenteEvaluador()
+	{
+		$id_docente = $this->input->post('id_docente');
+		$evaluadorAsignar = $this->input->post('evaluadorAsignar');
+
+		$docente = $this->db->select("*")->from("docentes")->where("id_docente", $id_docente)->get()->row();
+		$evaluador = $this->db->select("*")->from("administradores")->where("usuario", $evaluadorAsignar)->get()->row();
+		$nombreDocente = $docente->primerNombreDocente . " " . $docente->primerApellidoDocente;
+		$nombreEvaluador = $evaluador->primerNombreAdministrador . " " .  $evaluador->primerApellidoAdministrador;
+		$correoEvaluador = $evaluador->direccionCorreoElectronico;
+
+		$data_asignar = array(
+			'asignado' => $evaluadorAsignar
+		);
+
+		$this->db->where('id_docente', $id_docente);
+		if ($this->db->update('docentes', $data_asignar)) {
+			$this->logs_sia->session_log('Se asigno ' . $nombreDocente . ' a ' . $nombreEvaluador . ' en la fecha ' . date("Y/m/d H:m:s") . '.');
+			echo json_encode(array('url' => "panelAdmin/organizaciones/docentes/asignar", 'msg' => 'Se asigno ' . $nombreDocente . ' a ' . $nombreEvaluador . ' en la fecha ' . date("Y/m/d H:m:s") . '.'));
+			$this->envio_mail_admin("asignarDocente", $correoEvaluador, 2, $docente);
 		}
 	}
 
@@ -3089,15 +3174,19 @@ class Admin extends CI_Controller
 			echo json_encode(array('url' => "login", 'msg' => "Lo sentimos, hubo un error y no se envio el correo."));
 		}
 	}
-
-	function envio_mail_admin($type, $correoAdmin, $prioridad)
+	// TODO: Enviar Email a Administradores
+	function envio_mail_admin($tipo, $correoAdmin, $prioridad, $docente)
 	{
 		$fromSIA = "Unidad Administrativa Especial de Organizaciones Solidarias UAEOS - Aplicación SIIA.";
 
-		switch ($type) {
+		switch ($tipo) {
 			case 'asignar':
-				$asunto = "Asignar";
+				$asunto = "Asignación de organización";
 				$mensaje = "Se le ha asignado una organización para que pueda ver la solicitud y la información, este correo es informativo y debe ingresar a la aplicación SIIA, en organizaciones y luego en evaluación para poder ver la solicitud.";
+				break;
+			case 'asignarDocente':
+				$asunto = "Asignación de docente";
+				$mensaje = "Se le ha asignado el docente <strong>" . $docente->primerNombreDocente . " " . $docente->primerApellidoDocente . "</strong> para que pueda ver la solicitud y la información, este correo es informativo y debe ingresar a la aplicación SIIA, en facilitadores y luego en evaluación para poder ver la solicitud.";
 				break;
 			default:
 				$asunto = "";
@@ -3111,25 +3200,11 @@ class Admin extends CI_Controller
 		4 => '4 (Low)',
 		5 => '5 (Lowest)'
 		 **/
-		switch ($prioridad) {
-			case 1:
-				$num_prioridad = 1;
-				break;
-			case 2:
-				$num_prioridad = 2;
-				break;
-			case 3:
-				$num_prioridad = 3;
-				break;
-			default:
-				$num_prioridad = 3;
-				break;
-		}
-
 		$this->email->from(CORREO_SIA, "Acreditaciones");
-		$this->email->to($correoAdmin);
-		$this->email->subject('SIIA - : ' . $asunto);
-		$this->email->set_priority($num_prioridad);
+		$this->email->to(CORREO_SIA); // Pruebas
+		// $this->email->to($correoAdmin);
+		$this->email->subject('SIIA: ' . $asunto);
+		$this->email->set_priority($prioridad);
 
 		$data_msg['mensaje'] = $mensaje;
 

@@ -3,7 +3,7 @@
 <script>
 	var ctx = document.getElementById('myChart');
 	var myChart = new Chart(ctx, {
-		type: 'bar',
+		type: 'pie',
 		data: {
 			labels: ['2018', '2019', '2020', '2021'],
 			datasets: [{

@@ -136,10 +136,10 @@ class Home extends CI_Controller
 	public function verificarUsuario()
 	{
 		// Comprobar que el nombre de usuario y el nit no se encuentre en la base de datos. 
-		$nitOrganizacion = $this->db->select("numNIT")->from("organizaciones")->where("numNIT", $this->input->post('nit'))->get()->row()->numeroNIT;
+		// $nitOrganizacion = $this->db->select("numNIT")->from("organizaciones")->where("numNIT", $this->input->post('nit'))->get()->row()->numeroNIT;
 		$nombreUsuario = $this->db->select("usuario")->from("usuarios")->where("usuario", $this->input->post('nombre'))->get()->row()->usuario;
 
-		if ($nombreUsuario != NULL || $nombreUsuario != "" || $nitOrganizacion != "") {
+		if ($nombreUsuario != NULL || $nombreUsuario != "") {
 			echo json_encode(array("existe" => 1));
 		} else {
 			echo json_encode(array("existe" => 0));

@@ -7,9 +7,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
 	<title>SIIA - Información</title>
-
+	<!-- Estilos -->
 	<style type="text/css">
 		/* CLIENT-SPECIFIC STYLES */
 		body,
@@ -105,12 +104,12 @@
 <body style="margin:0; padding:0; background-color:#F2F2F2;">
 
 	<span style="display: block; width: 720px !important; max-width: 720px; height: 1px" class="mobileOff"></span>
-
+	<!-- Mensaje centrado -->
 	<center>
 		<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#F2F2F2">
 			<tr>
 				<td align="center" valign="top">
-
+					<!-- Imagen -->
 					<table width="720" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#FFFFFF">
 						<tr>
 							<td height="10" style="font-size:10px; line-height:10px;">&nbsp;</td>
@@ -121,7 +120,7 @@
 								<table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
 									<tr>
 										<td align="center" valign="top">
-											<img src="http://acreditacion.uaeos.gov.co/siia/assets/img/siiaheadercorreo.png" width="720" height="157" style="margin:0; padding:0; border:none; display:block;" border="0" class="imgClass" alt="" />
+											<img src="https://acreditacion.uaeos.gov.co/siia/assets/img/siiaheadercorreo.png" width="720" height="157" style="margin:0; padding:0; border:none; display:block;" border="0" class="imgClass" alt="" />
 										</td>
 									</tr>
 								</table>
@@ -132,7 +131,7 @@
 							<td height="10" style="font-size:10px; line-height:10px;">&nbsp;</td>
 						</tr>
 					</table>
-
+					<!-- Titulo y mensaje -->
 					<table width="720" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#FFFFFF">
 						<tr>
 							<td height="10" style="height:4px; line-height: 4px; background-color: #0071b9;">&nbsp;</td>
@@ -157,7 +156,7 @@
 							<td height="30" style="font-size:10px; line-height:30px;">&nbsp;</td>
 						</tr>
 					</table>
-
+					<!-- Footer -->
 					<table width="720" cellpadding="0" cellspacing="0" border="0" class="wrapper" bgcolor="#e2e2e2">
 						<tr>
 							<td height="10" style="font-size:10px; line-height:10px;">&nbsp;</td>
@@ -190,7 +189,6 @@
 							<td height="10" style="font-size:10px; line-height:10px;">&nbsp;</td>
 						</tr>
 					</table>
-
 				</td>
 			</tr>
 		</table>
