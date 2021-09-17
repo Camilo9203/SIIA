@@ -42,7 +42,7 @@
 		</div>
 	</div>
 	<div class="col-md-6" id="left_registro">
-		<h3>Información de quien se encargara del tramite:</h3><small class="pull-right"><span class="spanRojo">*</span> Requerido</small>
+		<h3>Información de la persona encargada del tramite:</h3><small class="pull-right"><span class="spanRojo">*</span> Requerido</small>
 		<div class="form-group">
 			<label for="primer_nombre_persona">Primer nombre: <span class="spanRojo">*</span></label>
 			<input type="text" class="form-control" form="formulario_registro" name="primer_nombre_persona" id="nombre_p" placeholder="Primer nombre..." required="">

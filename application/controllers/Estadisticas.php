@@ -14,7 +14,10 @@ class Estadisticas extends CI_Controller
 	{
 		$data = array(
 
-			'solicitudes' => $this->EstadisticasModel->solicitudesOrganizacion(),
+			'acreditadas' => $this->EstadisticasModel->organizacionesAcreditadas(),
+			'cursoBasico' => $this->EstadisticasModel->organizacionesBasico(),
+			'avaladas' => $this->EstadisticasModel->organizacionesAvaladas(),
+			'modalidadVirtual' => $this->EstadisticasModel->organizacionesVirtual(),
 
 		);
 		// Json datos estadisticos
@@ -45,7 +48,7 @@ class Estadisticas extends CI_Controller
 		$data['nivel'] = $nivel;
 		$data['hora'] = $hora;
 		$data['fecha'] = $fecha;
-		$data['departamentos'] = $this->cargarDepartamentos();
+		$data['organizaciones'] = $this->index();
 
 		$this->load->view('include/header', $data);
 		$this->load->view('admin/estadisticas/estadisticas', $data);
@@ -72,18 +75,10 @@ class Estadisticas extends CI_Controller
 		$data['nivel'] = $nivel;
 		$data['hora'] = $hora;
 		$data['fecha'] = $fecha;
-		$data['departamentos'] = $this->cargarDepartamentos();
 
 		$this->load->view('include/header', $data);
 		$this->load->view('admin/estadisticas/tramite', $data);
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
-	}
-
-	// Opciones del sistema
-	public function cargarDepartamentos()
-	{
-		$departamentos = $this->db->select("*")->from("departamentos")->get()->result();
-		return $departamentos;
 	}
 }

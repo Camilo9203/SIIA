@@ -1325,7 +1325,7 @@ class Admin extends CI_Controller
 
 		return $organizaciones;
 	}
-
+	// TODO: Organizaciones acreditadas
 	public function cargar_organizacionesAcreditadas()
 	{
 		$organizaciones = array();
@@ -1460,7 +1460,7 @@ class Admin extends CI_Controller
 
 		return $organizaciones;
 	}
-	// TODO:Cargar docentes 
+	// TODO: Cargar docentes 
 	public function cargar_docentesDeshabilitados()
 	{
 		// $docentes = $this->db->select("*")->from("docentes")->where("valido", 0)->where("asignado !=", "")->get()->result();
