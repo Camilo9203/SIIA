@@ -35,7 +35,7 @@
 				?>
 			</tbody>
 		</table>
-		<button class="btn btn-danger btn-sm pull-left admin_volver_org"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
+		<button class="btn btn-danger btn-sm pull-left admin_volver_docentes"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 	</div>
 	<!-- Iframe Docentes -->
 	<div id="docentes_organizaciones">

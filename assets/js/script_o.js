@@ -246,6 +246,8 @@ $(document).ready(function () {
 			$("#adjCamara").remove();
 			$(".cambiar_img_hd").remove();
 			$("#asigOrg").remove();
+			// Docentes
+			$("#asigDocentes").remove();
 		} else if ($nivel == 2) {
 			$(".admin_informeActividades").remove();
 			$(".admin_historico").remove();
@@ -263,6 +265,8 @@ $(document).ready(function () {
 			$("#guardarObservacionesModal").remove();
 			$("#verModTermObs").remove();
 			$("#asigOrg").remove();
+			// Docentes
+			$("#asigDocentes").remove();
 		} else if ($nivel == 3) {
 			//Principal
 			$(".admin_informeActividades").remove();
@@ -281,6 +285,8 @@ $(document).ready(function () {
 			$(".admin_organizaciones_inscritas").remove();
 			$(".cambiar_img_hd").remove();
 			$("#asigOrg").remove();
+			// Docentes
+			$("#asigDocentes").remove();
 		} else if ($nivel == 4) {
 			//Principal
 			$(".admin_informeActividades").remove();
@@ -299,6 +305,8 @@ $(document).ready(function () {
 			$("#guardarObservacionesModal").remove();
 			$("#verModTermObs").remove();
 			$("#asigOrg").remove();
+			// Docentes
+			$("#asigDocentes").remove();
 		} else if ($nivel == 5) {
 			//Principal
 			$(".admin_informeActividades").remove();
@@ -316,6 +324,8 @@ $(document).ready(function () {
 			$(".admin_camaracomercio").remove();
 			$(".cambiar_img_hd").remove();
 			$("#asigOrg").remove();
+			// Docentes
+			$("#asigDocentes").remove();
 		} else if ($nivel == 6) {
 			/** No hay nada que hacer aqui. **/
 		} else {
@@ -1011,6 +1021,19 @@ $(document).ready(function () {
 	$("#admin_reportes").click(function () {
 		redirect(baseURL + "panelAdmin/reportes");
 	});
+	// TODO: Menu panel docentes
+		$("#admin_docentes_panel").click(function () {
+			redirect(baseURL + "panelAdmin/organizaciones/docentes/panel");
+		});
+		$("#admin_docentes_asignar").click(function () {
+			redirect(baseURL + "panelAdmin/organizaciones/docentes/asignar");
+		});
+		$("#admin_docentes_evaluar").click(function () {
+			redirect(baseURL + "panelAdmin/organizaciones/docentes/evaluar");
+		});
+		$(".admin_volver_docentes").click(function () {
+			redirect(baseURL + "panelAdmin/organizaciones/docentes/panel");
+		});
 	// Estadisticas
 	$("#admin_estadisticas").click(function () {
 		redirect(baseURL + "panelAdmin/estadisticas");
@@ -9240,6 +9263,13 @@ $(document).ready(function () {
 			var fechaResolucion = $("#fechaResolucion").val();
 			var departamentoResolucion = $("#departamentos3").val();
 			var municipioResolucion = $("#municipios3").val();
+		} else if ($("input:radio[name=camaraComercio]:checked").val() == "Si") {
+			var registroEducativo = "No Tiene";
+			var entidadRegistro = "Camara de Comercio";
+			var numeroResolucion = "N/A";
+			var fechaResolucion = "1900-01-01 00:00:00";
+			var departamentoResolucion = "N/A";
+			var municipioResolucion = "N/A";
 		} else {
 			var registroEducativo = "No Tiene";
 			var entidadRegistro = "No Tiene";
@@ -10884,14 +10914,6 @@ $(document).ready(function () {
 		}
 	});
 
-	$(".certificadoExistencia").click(function () {
-		if ($("#certificadoExistencia").prop("checked")) {
-			$("#div_certificado_existencia").show();
-		} else {
-			$("#div_certificado_existencia").hide();
-		}
-	});
-
 	$(".motivo_sol").click(function () {
 		console.log($(this).attr("id"));
 		$id_motivo = $(this).attr("id");
@@ -10902,6 +10924,48 @@ $(document).ready(function () {
 		}
 	});
 
+	// TODO: Acciones formulario 2: Documentacion Legal
+	// Camara de comercio
+	$(".camaraComercio").click(function () {
+		if ($("input:radio[name=camaraComercio]:checked").val() == "Si") {
+			$("#div_camara_comercio").show();
+			$("#reg_doc_cond").show();
+			$("#reg_doc_cond>a").removeAttr("style");
+			$("#reg_doc_cond>a").html(
+				'<span id="3" class="step_no">3</span> Camara de Comercio Entidad <i class="fa fa-newspaper-o" aria-hidden="true"></i>'
+			);
+			$("input:radio[name=registroEducativo]").attr("disabled", true);
+			$("#div_registro_educativo").hide();
+			$("input:radio[name=certificadoExistencia]").attr("disabled", true);
+			$("#div_certificado_existencia").hide();
+		} else {
+			$("input:radio[name=registroEducativo]").attr("disabled", false);
+			$("input:radio[name=certificadoExistencia]").attr("disabled", false);
+			$("#div_camara_comercio").hide();
+			$("#reg_doc_cond").hide();
+		}
+	});
+	// Certifcado de existencia
+	$(".certificadoExistencia").click(function () {
+		if ($("input:radio[name=certificadoExistencia]:checked").val() == "Si") {
+			$("#div_certificado_existencia").show();
+			$("#reg_doc_cond").show();
+			$("#reg_doc_cond>a").removeAttr("style");
+			$("#reg_doc_cond>a").html(
+				'<span id="3" class="step_no">3</span> Certificado Existencia <i class="fa fa-newspaper-o" aria-hidden="true"></i>'
+			);
+			$("input:radio[name=registroEducativo]").attr("disabled", true);
+			$("#div_registro_educativo").hide();
+			$("input:radio[name=camaraComercio]").attr("disabled", true);
+			$("#div_camara_comercio").hide();
+		} else {
+			$("input:radio[name=registroEducativo]").attr("disabled", false);
+			$("input:radio[name=camaraComercio]").attr("disabled", false);
+			$("#div_certificado_existencia").hide();
+			$("#reg_doc_cond").hide();
+		}
+	});
+	// Registro Educativo
 	$(".registroEducativo").click(function () {
 		if ($("input:radio[name=registroEducativo]:checked").val() == "Si") {
 			$("#div_registro_educativo").show();
@@ -10910,7 +10974,13 @@ $(document).ready(function () {
 			$("#reg_doc_cond>a").html(
 				'<span id="3" class="step_no">3</span> Registros Educativos de Programas <i class="fa fa-newspaper-o" aria-hidden="true"></i>'
 			); //('<small>(Finalizado)</small> <i class="fa fa-check" aria-hidden="true"></i>');
+			$("input:radio[name=camaraComercio]").attr("disabled", true);
+			$("#div_camara_comercio").hide();
+			$("input:radio[name=certificadoExistencia]").attr("disabled", true);
+			$("#div_certificado_existencia").hide();
 		} else {
+			$("input:radio[name=camaraComercio]").attr("disabled", false);
+			$("input:radio[name=certificadoExistencia]").attr("disabled", false);
 			$("#div_registro_educativo").hide();
 			$("#reg_doc_cond").hide();
 		}
@@ -13768,6 +13838,7 @@ $(document).ready(function () {
 		$numero_cedula_doc = $("#numero_cedula_doc").val();
 		$profesion_doc = $("#profesion_doc").val();
 		$horas_doc = $("#horas_doc").val();
+		$solicitud = $(".actualizar_docente").val();
 
 		data = {
 			id_docente: $id_docente,
@@ -13778,6 +13849,7 @@ $(document).ready(function () {
 			numero_cedula_doc: $numero_cedula_doc,
 			profesion_doc: $profesion_doc,
 			horas_doc: $horas_doc,
+			solicitud: $solicitud,
 		};
 
 		$.ajax({

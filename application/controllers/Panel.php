@@ -1934,19 +1934,15 @@ class Panel extends CI_Controller
 	// TODO: Actualizar docentes
 	public function actualizarDocente()
 	{
-		// Variables para la actualizacion de la tabla docentes. 
+		// Traer datos organanzación, se captura usuario id y se trae organización que pertenece al id del usuario. 
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
+		// ID organización & Nombre de la organización
 		$id_organizacion = $datos_organizacion->id_organizacion;
 		$nombreOrganizacion = $datos_organizacion->nombreOrganizacion;
+		// ID docente desde post y solci
 		$id_docente = $this->input->post("id_docente");
-		$primer_nombre_doc = $this->input->post("primer_nombre_doc");
-		$segundo_nombre_doc = $this->input->post("segundo_nombre_doc");
-		$primer_apellido_doc = $this->input->post("primer_apellido_doc");
-		$segundo_apellido_doc = $this->input->post("segundo_apellido_doc");
-		$numero_cedula_doc = $this->input->post("numero_cedula_doc");
-		$profesion_doc = $this->input->post("profesion_doc");
-		$horas_doc = $this->input->post("horas_doc");
+		$solicitud = $this->input->post("solicitud");
 		// TODO: Variables nuevas para asignación de docente según su estado. 
 		$informacionDocente = $this->db->select("*")->from("docentes")->where("id_docente", $id_docente)->get()->row();
 		// Asignar "No" a valor de asignación y evitar que se reemplace el valor ya asignado
@@ -1956,13 +1952,13 @@ class Panel extends CI_Controller
 		}
 		// Datos para la actualización de docentes en Array
 		$data_update = array(
-			'primerNombreDocente' => $primer_nombre_doc,
-			'segundoNombreDocente' => $segundo_nombre_doc,
-			'primerApellidoDocente' => $primer_apellido_doc,
-			'segundoApellidoDocente' => $segundo_apellido_doc,
-			'numCedulaCiudadaniaDocente' => $numero_cedula_doc,
-			'profesion' => $profesion_doc,
-			'horaCapacitacion' => $horas_doc,
+			'primerNombreDocente' => $this->input->post("primer_nombre_doc"),
+			'segundoNombreDocente' => $this->input->post("segundo_nombre_doc"),
+			'primerApellidoDocente' => $this->input->post("primer_nombre_doc"),
+			'segundoApellidoDocente' => $this->input->post("segundo_apellido_doc"),
+			'numCedulaCiudadaniaDocente' => $this->input->post("numero_cedula_doc"),
+			'profesion' => $this->input->post("profesion_doc"),
+			'horaCapacitacion' => $this->input->post("horas_doc"),
 			'observacion' => "Facilitador actualizado.",
 			'observacionAnterior' => $informacionDocente->observacion,
 			'asignado' => $asignado,
@@ -1972,15 +1968,18 @@ class Panel extends CI_Controller
 		$this->db->where($where);
 		if ($this->db->update('docentes', $data_update)) {
 			echo json_encode(array("msg" => "Docente $primer_apellido_doc $primer_apellido_doc Actualizado."));
-			//$this->envio_mailcontacto("docentes", 2);
+			// Solo actualizacion como log
 			$this->logs_sia->session_log('Docentes Actualizados');
-			// Se enviera notificación en caso de no estar aprobado el docente, adicional correo electronico en caso de no estar asignado a evaluador
-			if ($informacionDocente->valido == "0") {
-				// Solo envia notificación si no esta aprobado
-				$this->notif_sia->notification('Docentes', 'admin', $nombreOrganizacion);
-				// Solo envia correo si no esta asignado
-				if ($asignado != NULL || $asignado == "No") {
-					$this->envilo_mailadmin("actualizacion", "2", $numero_cedula_doc);
+			// Si se marca actualizar con envio de solicitud
+			if ($solicitud == "Si") {
+				// Se enviera notificación en caso de no estar aprobado el docente, adicional correo electronico en caso de no estar asignado a evaluador
+				if ($informacionDocente->valido == "0") {
+					// Solo envia notificación si no esta aprobado
+					$this->notif_sia->notification('Docentes', 'admin', $nombreOrganizacion);
+					// Solo envia correo si no esta asignado
+					if ($asignado != NULL || $asignado == "No") {
+						$this->envilo_mailadmin("actualizacion", "2", $numero_cedula_doc);
+					}
 				}
 			}
 		}

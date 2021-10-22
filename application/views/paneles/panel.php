@@ -137,7 +137,7 @@
 		</div>
 	</div>
 	<!-- Acretitación para otros programas //TODO: Otros programas comentado-->
-	<!-- <div class="form-group">
+	<div class="form-group">
 		<div class="radio">
 			<label><input type="radio" name="motivo_solicitud" id="motivo3" class="motivo_sol" value="Acreditación, Aval a otros Programas">Acreditación, aval a otros programas.</label>
 		</div>
@@ -146,7 +146,7 @@
 		<div class="radio">
 			<label><input type="radio" name="motivo_solicitud" id="motivo4" class="motivo_sol" value="Acreditación, Aval de Trabajo Asociado, Aval a otros Programas">Acreditación, aval de trabajo asociado, aval a otros programas. <small>(Todas)</small></label>
 		</div>
-	</div> -->
+	</div>
 	<!-- Solo si la entidad esta o estuvo acreditada //TODO: Solo si la entidad ya fue acreditada-->
 	<div class="form-group" id="div_motivo_actualizar">
 		<div class="radio">
@@ -529,34 +529,72 @@
 	<!-- Formulario de documentacion legal 2 - INICIO -->
 	<div id="documentacion_legal" data-form="2" class=" formulario_panel">
 		<h3>2. Documentación Legal <i class="fa fa-book" aria-hidden="true"></i></h3>
-		<p>En caso que el Certificado de Existencia y Representación Legal sea emitido por Cámara de Comercio, la Unidad Administrativa realizará la verificación de este requisito por medio de consulta directa a la base de datos del Registro Único Empresarial Y Social RUES. Por tal motivo no es necesario anexar el certificado. Es responsabilidad de la entidad mantener renovado el registro mercantil en el certificado. Los Campos marcados con (*) son obligatorios.</p>
+		<p>Los Campos marcados con (*) son obligatorios.</p>
 		<small>Si no tiene el registro educativo, seleccione la opción "No", y de click en guardar.</small>
-		<!--<div class="col-md-12">
-			<hr/>
+		<!-- Camara de comercio -->
+		<div class="col-md-12">
+			<hr />
 			<?php echo form_open('', array('id' => 'formulario_documentacion_legal')); ?>
-				<label>2.1 Certificado de Existencia y Representación Legal.</label>
-				<div class="checkbox">
-					<label for="certificadoExistencia">La entidad presenta Certificado de Existencia y Representación Legal:</label>
+			<label>2.1. Certificado de Camara de Comercio.</label>
+			<div class="checkbox">
+				<label for="camaraComercio">La entidad cuenta con Certificado de Camara de Comercio:</label>
+				<?php foreach ($data_documentacion_legal as $documentacion) : ?>
+					<?php if ($documentacion->entidadRegistro == "Camara de Comercio") : ?>
+						<label><input type="radio" class="camaraComercio" name="camaraComercio" id="camaraComercio" value="Si" checked> Si</label>
+						<label><input type="radio" class="camaraComercio" name="camaraComercio" id="camaraComercio" value="No"> No</label>
+					<?php elseif ($documentacion->entidadRegistro != "Camara de Comercio") : ?>
+						<label><input type="radio" class="camaraComercio" name="camaraComercio" id="camaraComercio" value="Si" disabled> Si</label>
+						<label><input type="radio" class="camaraComercio" name="camaraComercio" id="camaraComercio" value="No" checked disabled> No</label>
+					<?php endif ?>
+				<?php endforeach ?>
+				<?php if ($data_documentacion_legal == NULL) : ?>
+					<label><input type="radio" class="camaraComercio" name="camaraComercio" id="camaraComercio" value="Si"> Si</label>
+					<label><input type="radio" class="camaraComercio" name="camaraComercio" id="camaraComercio" value="No" checked> No</label>
+				<?php endif ?>
+			</div>
+			<div id="div_camara_comercio" hidden>
+				<p>En caso que el Certificado de Existencia y Representación Legal sea emitido por Cámara de Comercio, la Unidad Administrativa realizará la verificación de este requisito por medio de consulta directa a la base de datos del Registro Único Empresarial Y Social RUES. Por tal motivo no es necesario anexar el certificado. Es responsabilidad de la entidad mantener renovado el registro mercantil en el certificado. Los Campos marcados con (*) son obligatorios.</p>
+			</div>
+		</div>
+		<!-- Certificado de existencia y representación legal -->
+		<div class="col-md-12">
+			<hr />
+			<?php echo form_open('', array('id' => 'formulario_documentacion_legal')); ?>
+			<label>2.1. Certificado de Existencia y Representación Legal.</label>
+			<div class="checkbox">
+				<label for="certificadoExistencia">La entidad presenta Certificado de Existencia y Representación Legal:</label>
+
+				<?php foreach ($data_documentacion_legal as $documentacion) : ?>
+					<?php if ($documentacion->registroEducativo == "certificadoExistencia") : ?>
+						<label><input type="radio" class="certificadoExistencia" name="certificadoExistencia" id="certificadoExistencia" value="Si" checked> Si</label>
+						<label><input type="radio" class="certificadoExistencia" name="certificadoExistencia" id="" value="No"> No</label>
+					<?php elseif ($documentacion->registroEducativo != "certificadoExistencia") : ?>
+						<label><input type="radio" class="certificadoExistencia" name="certificadoExistencia" id="certificadoExistencia" value="Si" disabled> Si</label>
+						<label><input type="radio" class="certificadoExistencia" name="certificadoExistencia" id="" value="No" checked disabled> No</label>
+					<?php endif ?>
+				<?php endforeach ?>
+				<?php if ($data_documentacion_legal == NULL) : ?>
 					<label><input type="radio" class="certificadoExistencia" name="certificadoExistencia" id="certificadoExistencia" value="Si"> Si</label>
 					<label><input type="radio" class="certificadoExistencia" name="certificadoExistencia" id="" value="No" checked> No</label>
+				<?php endif ?>
+			</div>
+			<div id="div_certificado_existencia">
+				<div class="form-group">
+					<label for="numeroExistencia">Número del Documento de Existencia y Representación Legal:<span class="spanRojo">*</span></label>
+					<input type="text" class="form-control" name="numeroExistencia" id="numeroExistencia" placeholder="Número del Documento de Existencia y Representación Legal" value="<?php echo $data_documentacion_legal->numeroExistencia; ?>">
 				</div>
-				<div id="div_certificado_existencia">
-					<div class="form-group">
-						<label for="numeroExistencia">Número del Documento de Existencia y Representación Legal:<span class="spanRojo">*</span></label>
-						<input type="text" class="form-control" name="numeroExistencia" id="numeroExistencia" placeholder="Número del Documento de Existencia y Representación Legal" value="<?php echo $data_documentacion_legal->numeroExistencia; ?>">
-					</div>
-					<div class="form-group">
-						<label for="fechaExpedicion">Fecha de Expedición:<span class="spanRojo">*</span></label>
-						<input type="date" class="form-control" name="fechaExpedicion" id="fechaExpedicion" value="<?php echo $data_documentacion_legal->fechaExpedicion; ?>">
-					</div>
-					<div class="form-group">
-						<label for="objetoSocial">Objeto social según certificado Cámara de Comercio:<span class="spanRojo">*</span></label>
-						<textarea name="objetoSocial" class=" form-control" id="objetoSocial" placeholder="Objeto social según certificado Cámara de Comercio" maxlength="300"><?php echo $data_documentacion_legal->objetoSocial; ?></textarea>
-					</div>
-					<div class="form-group">
-						<label for="departamentos">Departamento:<span class="spanRojo">*</span></label>
-						<br>
-						<select name="departamentos" data-id-dep="2" id="departamentos2" class="selectpicker form-control show-tick departamentos" required="">
+				<div class="form-group">
+					<label for="fechaExpedicion">Fecha de Expedición:<span class="spanRojo">*</span></label>
+					<input type="date" class="form-control" name="fechaExpedicion" id="fechaExpedicion" value="<?php echo $data_documentacion_legal->fechaExpedicion; ?>">
+				</div>
+				<div class="form-group">
+					<label for="objetoSocial">Objeto social según certificado Cámara de Comercio:<span class="spanRojo">*</span></label>
+					<textarea name="objetoSocial" class=" form-control" id="objetoSocial" placeholder="Objeto social según certificado Cámara de Comercio" maxlength="300"><?php echo $data_documentacion_legal->objetoSocial; ?></textarea>
+				</div>
+				<div class="form-group">
+					<label for="departamentos">Departamento:<span class="spanRojo">*</span></label>
+					<br>
+					<select name="departamentos" data-id-dep="2" id="departamentos2" class="selectpicker form-control show-tick departamentos" required="">
 						<?php
 						foreach ($departamentos as $departamento) {
 						?>
@@ -564,13 +602,13 @@
 						<?php
 						}
 						?>
-						</select>
-					</div>
-					<div class="form-group">
-						<div id="div_municipios2">
-							<label for="municipios2">Municipio:<span class="spanRojo">*</span></label>
-							<br>
-							<select name="municipios2" id="municipios2" class="selectpicker form-control show-tick municipios" required="">
+					</select>
+				</div>
+				<div class="form-group">
+					<div id="div_municipios2">
+						<label for="municipios2">Municipio:<span class="spanRojo">*</span></label>
+						<br>
+						<select name="municipios2" id="municipios2" class="selectpicker form-control show-tick municipios" required="">
 							<?php
 							foreach ($municipios as $municipio) {
 							?>
@@ -578,31 +616,31 @@
 							<?php
 							}
 							?>
-							</select>
-						</div>
+						</select>
 					</div>
-			    </div>
-			</div>-->
+				</div>
+			</div>
+		</div>
+		<!-- Registro educativo -->
 		<div class="col-md-12">
 			<hr />
-			<label>2.2 Registro Educativo.</label>
-			<small>- Estos datos aplican solamente a Entidades Educativas (Opcional)*.</small>
+			<label>2.2. Registro Educativo.</label>
+			<small> Estos datos aplican solamente a Entidades Educativas (Opcional)*.</small>
 			<div class="checkbox">
 				<label for="registroEducativo">La entidad presenta Certificado de Existencia y Representación Legal:</label>
-				<?php foreach ($data_documentacion_legal as $documentacion) { ?>
-					<?php if ($documentacion->registroEducativo == "Si Tiene") { ?>
+				<?php foreach ($data_documentacion_legal as $documentacion) : ?>
+					<?php if ($documentacion->registroEducativo == "Si Tiene") : ?>
 						<label><input type="radio" class="registroEducativo" name="registroEducativo" id="registroEducativo" value="Si" checked>Si</label>
 						<label><input type="radio" class="registroEducativo" name="registroEducativo" id="" value="No">No</label>
-					<?php } else { ?>
-						<label><input type="radio" class="registroEducativo" name="registroEducativo" id="registroEducativo" value="Si">Si</label>
-						<label><input type="radio" class="registroEducativo" name="registroEducativo" id="" value="No" checked>No</label>
-					<?php }
-				}
-				if ($data_documentacion_legal == NUll) { ?>
-					<label><input type="radio" class="registroEducativo" name="registroEducativo" id="registroEducativo" value="Si">Si</label>
-					<label><input type="radio" class="registroEducativo" name="registroEducativo" id="" value="No" checked>No</label>
-				<?php } ?>
-
+					<?php elseif ($documentacion->registroEducativo != "Si Tiene") : ?>
+						<label><input type="radio" class="registroEducativo" name="registroEducativo" id="registroEducativo" value="Si" disabled>Si</label>
+						<label><input type="radio" class="registroEducativo" name="registroEducativo" id="registroEducativo" value="No" checked disabled>No</label>
+					<?php endif ?>
+				<?php endforeach ?>
+				<?php if ($data_documentacion_legal == NULL) : ?>
+					<label><input type="radio" class="registroEducativo" name="registroEducativo" id="registroEducativo" value="Si"> Si</label>
+					<label><input type="radio" class="registroEducativo" name="registroEducativo" id="registroEducativo" value="No" checked> No</label>
+				<?php endif ?>
 			</div>
 			<div id="div_registro_educativo">
 				<div class="form-group">
@@ -650,86 +688,95 @@
 						</select>
 					</div>
 				</div>
+				<hr />
 			</div>
 		</div>
 		</form>
 		<button name="guardar_formulario_documentacion_legal" id="guardar_formulario_documentacion_legal" class="btn btn-siia btn-sm pull-right">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
 		<div class="clearfix"></div>
-		<div class="">
-			<hr />
-			<div class="col-md-12">
-				<?php echo form_open_multipart('', array('id' => 'formulario_registro_educativo')); ?>
-				<label>Registro Educativo (PDF):<span class="spanRojo">*</span></label>
-				<br />
-				<div class="col-md-4">
-					<input type="file" required accept="application/pdf" class="form-control" data-val="registroEdu" name="registroEdu" id="registroEdu">
-				</div>
-				<div class="col-md-3">
-					<input type="button" class="btn btn-siia btn-sm archivos_form_registro fa-fa center-block" data-name="registroEdu" name="registro" id="registro" value="Guardar archivo(s) &#xf0c7">
-				</div>
-				</form>
-			</div>
-			<div class="clearfix"></div>
+		<!-- Tabla de documentación -->
+		<?php if (count($data_documentacion_legal) > 0) : ?>
 			<div class="">
-				<hr />
-				<label>Documentación:</label>
-				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-				<table id="" width="100%" border=0 class="table table-striped table-bordered">
-					<thead>
-						<tr>
-							<!--<td>Certificado existencia</td>
+				<div class="clearfix"></div>
+				<!-- Tabla de documentacion -->
+				<div class="">
+					<hr />
+					<label>Documentación:</label>
+					<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+					<table id="" width="100%" border=0 class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<!--<td>Certificado existencia</td>
 								<td>Número existencia</td>
 								<td>Fecha expedición</td>
 								<td>Departamento certificado</td>
 								<td>Municipio certificado</td>
 								<td>Objeto aocial</td>-->
-							<td>Registro Educativo</td>
-							<td>Entidad registro</td>
-							<td>Número resolución</td>
-							<td>Fecha resolución</td>
-							<td>Departamento resolución</td>
-							<td>Municipio resolución</td>
-							<td>Acción</td>
-						</tr>
-					</thead>
-					<tbody id="tbody">
-						<?php
-						foreach ($data_documentacion_legal as $documentacion) {
-							/**echo "<td>".$documentacion->certificadoExistencia."</td>";
+								<td>Registro Educativo</td>
+								<td>Entidad registro</td>
+								<td>Número resolución</td>
+								<td>Fecha resolución</td>
+								<td>Departamento resolución</td>
+								<td>Municipio resolución</td>
+								<td>Acción</td>
+							</tr>
+						</thead>
+						<tbody id="tbody">
+							<?php
+							foreach ($data_documentacion_legal as $documentacion) {
+								/**echo "<td>".$documentacion->certificadoExistencia."</td>";
 								echo "<td>".$documentacion->numeroExistencia."</td>";
 								echo "<td>".$documentacion->fechaExpedicion."</td>";
 								echo "<td>".$documentacion->departamentoCertificado."</td>";
 								echo "<td>".$documentacion->municipioCertificado."</td>";
 								echo "<td>".$documentacion->objetoSocial."</td>";**/
-							echo "<tr><td>" . $documentacion->registroEducativo . "</td>";
-							echo "<td>" . $documentacion->entidadRegistro . "</td>";
-							echo "<td>" . $documentacion->numeroResolucion . "</td>";
-							echo "<td>" . $documentacion->fechaResolucion . "</td>";
-							echo "<td>" . $documentacion->departamentoResolucion . "</td>";
-							echo "<td>" . $documentacion->municipioResolucion . "</td>";
-							echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDocumentacionLegal' data-id-documentacion=" . $documentacion->id_documentacionLegal . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
-						}
-						?>
-					</tbody>
-				</table>
+								echo "<tr><td>" . $documentacion->registroEducativo . "</td>";
+								echo "<td>" . $documentacion->entidadRegistro . "</td>";
+								echo "<td>" . $documentacion->numeroResolucion . "</td>";
+								echo "<td>" . $documentacion->fechaResolucion . "</td>";
+								echo "<td>" . $documentacion->departamentoResolucion . "</td>";
+								echo "<td>" . $documentacion->municipioResolucion . "</td>";
+								echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDocumentacionLegal' data-id-documentacion=" . $documentacion->id_documentacionLegal . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+							}
+							?>
+						</tbody>
+					</table>
+				</div>
+				<!-- Tabla de archivos -->
+				<?php foreach ($data_documentacion_legal as $documentacion) : ?>
+					<?php if ($documentacion->entidadRegistro != "Camara de Comercio") : ?>
+						<hr />
+						<div class="form-group">
+							<?php echo form_open_multipart('', array('id' => 'formulario_registro_educativo')); ?>
+							<label>Registro Educativo (PDF):<span class="spanRojo"> *</span></label>
+							<br />
+							<div class="col-md-4">
+								<input type="file" required accept="application/pdf" class="form-control" data-val="registroEdu" name="registroEdu" id="registroEdu">
+							</div>
+							<div class="col-md-3">
+								<input type="button" class="btn btn-siia btn-sm archivos_form_registro fa-fa center-block" data-name="registroEdu" name="registro" id="registro" value="Guardar archivo(s) &#xf0c7">
+							</div>
+							</form></br></br>
+						</div>
+						<div class="">
+							<label>Archivos:</label>
+							<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>
+							<table id="tabla_archivos_formulario" width="100%" border=0 class="table table-striped table-bordered tabla_form">
+								<thead>
+									<tr>
+										<td class="col-md-4">Nombre</td>
+										<td class="col-md-4">Tipo</td>
+										<td class="col-md-4">Acción</td>
+									</tr>
+								</thead>
+								<tbody id="tbody">
+								</tbody>
+							</table>
+						</div>
+					<?php endif ?>
+				<?php endforeach ?>
 			</div>
-			<div class="">
-				<hr />
-				<label>Archivos:</label>
-				<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>
-				<table id="tabla_archivos_formulario" width="100%" border=0 class="table table-striped table-bordered tabla_form">
-					<thead>
-						<tr>
-							<td class="col-md-4">Nombre</td>
-							<td class="col-md-4">Tipo</td>
-							<td class="col-md-4">Acción</td>
-						</tr>
-					</thead>
-					<tbody id="tbody">
-					</tbody>
-				</table>
-			</div>
-		</div>
+		<?php endif ?>
 	</div>
 	<!-- Formulario de documentacion legal 2 - FIN -->
 	<!-- Formulario de registro de programas 3 - INICIO -->

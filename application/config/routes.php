@@ -107,21 +107,21 @@ $route['panelAdmin/reportes/historico'] = 'Reportes/entidadesHistorico';
 $route['panelAdmin/reportes/asistentes'] = 'Reportes/verAsistentes';
 $route['panelAdmin/reportes/docentesHabilitados'] = 'Reportes/docentesHabilitados';
 $route['panelAdmin/reportes/registroTelefonico'] = 'Reportes/registroTelefonico';
-// TODO: Rutas nuevas para actualización de facilitadores
-$route['panelAdmin/organizaciones/docentes'] = 'Admin/docentes';
-$route['panelAdmin/organizaciones/docentes/asignar'] = 'Admin/asignarDocentes';
-$route['panelAdmin/organizaciones/docentes/evaluar'] = 'Admin/evaluarDocentes';
 $route['panelAdmin/organizaciones/solodocentes'] = 'Admin/solodocentes';
 $route['panelAdmin/organizaciones/camaraComercio'] = 'Admin/camara';
 $route['panelAdmin/organizaciones/resoluciones'] = 'Admin/resoluciones';
 $route['panelAdmin/organizaciones/estadoOrganizaciones'] = 'Admin/estadoOrg';
 $route['panelAdmin/seguimiento'] = 'Admin/seguimiento';
 $route['evaluacion'] = 'Admin/evaluacion';
+// TODO: Rutas nuevas para actualización de facilitadores
+$route['panelAdmin/organizaciones/docentes'] = 'Admin/docentes';
+$route['panelAdmin/organizaciones/docentes/panel'] = 'Docentes/panelDocentes';
+$route['panelAdmin/organizaciones/docentes/asignar'] = 'Docentes/asignarDocentes';
+$route['panelAdmin/organizaciones/docentes/evaluar'] = 'Docentes/evaluarDocentes';
 //Estadisticas //TODO:Rutas nuevas para estadisticas
 $route['panelAdmin/estadisticas'] = 'Estadisticas/panel_estadisticas';
 $route['panelAdmin/estadisticas/tramite'] = 'Estadisticas/estadisticas_tramite';
 $route['panelAdmin/estadisticas/acreditacion'] = 'Estadisticas/estadisticas_acreditacion';
-// $route['panelAdmin/reportes'] = 'Admin/panel_reportes';
 
 // Super
 $route['super/?'] = 'Super';

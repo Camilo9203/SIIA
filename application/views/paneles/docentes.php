@@ -243,7 +243,8 @@
     </div>
     <div class="modal-footer">
     	<button type="button" class="btn btn-warning btn-sm pull-left" data-toggle='modal' data-target='#eliminarDocente'>Eliminar facilitador <i class="fa fa-trash-o" aria-hidden="true"></i></button>
-    	<button type="button" class="btn btn-siia btn-sm" id="actualizar_docente">Actualizar datos del facilitador <i class="fa fa-refresh" aria-hidden="true"></i></button>
+    	<button type="button" class="btn btn-success btn-sm" id="actualizar_docente" value="Si">Enviar Actualizacion Como Solicitud <i class="fa fa-refresh" aria-hidden="true"></i></button>
+    	<button type="button" class="btn btn-siia btn-sm" id="actualizar_docente" value="No">Solo Actualizar datos del facilitador <i class="fa fa-refresh" aria-hidden="true"></i></button>
     	<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cerrar <i class="fa fa-times" aria-hidden="true"></i></button>
     </div>
   </div>

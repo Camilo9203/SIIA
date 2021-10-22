@@ -71,7 +71,7 @@
 		    <h3 class="panel-title">Ver Facilitadores <i class="fa fa-graduation-cap" aria-hidden="true"></i></h3>
 		  </div>
 		  <div class="panel-body">
-			<button class="btn btn-default form-control" id="admin_verorganizaciones_docentes">Facilitadores</button>
+			<button class="btn btn-default form-control" id="admin_docentes_panel">Facilitadores</button>
 		  </div>
 		</div>
 	</div>

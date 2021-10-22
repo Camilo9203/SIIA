@@ -90,7 +90,11 @@
 				?>
 			</tbody>
 		</table>
+		
 	</div><br />
+	<div class="clearfix"></div>
+	<hr/>
+	<button class="btn btn-danger btn-sm pull-left admin_volver_docentes"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 </div>
 <!-- Modol Asignar Evaluador a Docente //TODO:Terminar asignación de docentes-->
 <div class="modal fade" id="asignarDocente" tabindex="-1" role="dialog" aria-labelledby="ariaAsignar">

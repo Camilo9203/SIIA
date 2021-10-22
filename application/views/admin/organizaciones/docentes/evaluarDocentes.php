@@ -59,9 +59,7 @@
 				}
 				?>
 			</tbody>
-		</table>
-		<button class="btn btn-danger btn-sm pull-left" id="admin_ver_org_volver"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
-	</div>
+		</table></div>
 	<!-- Iframe Docentes -->
 	<div id="docentes_organizaciones">
 		<hr />
@@ -102,7 +100,6 @@
 					<label for="">Número de Cédula:</label>
 					<p id="numero_cedula_docente"></p>
 				</div>
-				<button class="btn btn-danger btn-sm pull-left" id="volver_docentes_organizaciones"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 			</div>
 			<div class="col-md-6">
 				<div class="form-group">
@@ -166,4 +163,8 @@
 			</div>-->
 		</div>
 	</div>
+	<!-- Boton volver -->
+	<div class="clearfix"></div>
+	<hr/>
+	<button class="btn btn-danger btn-sm pull-left admin_volver_docentes"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>	
 </div>

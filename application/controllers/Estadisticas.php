@@ -6,7 +6,7 @@ class Estadisticas extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		verify_session_admin();
+		// verify_session_admin();
 		$this->load->model('EstadisticasModel');
 	}
 	// Traer datos estadisticos
@@ -21,7 +21,7 @@ class Estadisticas extends CI_Controller
 
 		);
 		// Json datos estadisticos
-		echo json_encode($data);
+		echo json_encode($data, JSON_UNESCAPED_UNICODE);
 	}
 
 	// public function view($id = NULL)
