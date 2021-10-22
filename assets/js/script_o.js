@@ -1022,18 +1022,18 @@ $(document).ready(function () {
 		redirect(baseURL + "panelAdmin/reportes");
 	});
 	// TODO: Menu panel docentes
-		$("#admin_docentes_panel").click(function () {
-			redirect(baseURL + "panelAdmin/organizaciones/docentes/panel");
-		});
-		$("#admin_docentes_asignar").click(function () {
-			redirect(baseURL + "panelAdmin/organizaciones/docentes/asignar");
-		});
-		$("#admin_docentes_evaluar").click(function () {
-			redirect(baseURL + "panelAdmin/organizaciones/docentes/evaluar");
-		});
-		$(".admin_volver_docentes").click(function () {
-			redirect(baseURL + "panelAdmin/organizaciones/docentes/panel");
-		});
+	$("#admin_docentes_panel").click(function () {
+		redirect(baseURL + "panelAdmin/organizaciones/docentes/panel");
+	});
+	$("#admin_docentes_asignar").click(function () {
+		redirect(baseURL + "panelAdmin/organizaciones/docentes/asignar");
+	});
+	$("#admin_docentes_evaluar").click(function () {
+		redirect(baseURL + "panelAdmin/organizaciones/docentes/evaluar");
+	});
+	$(".admin_volver_docentes").click(function () {
+		redirect(baseURL + "panelAdmin/organizaciones/docentes/panel");
+	});
 	// Estadisticas
 	$("#admin_estadisticas").click(function () {
 		redirect(baseURL + "panelAdmin/estadisticas");
@@ -3317,7 +3317,7 @@ $(document).ready(function () {
 				$("#plataforma").append(
 					'<div class="col-md-12" id="archivos_plataforma">'
 				);
-				//TODO: Error formulario 10//
+				//TODO: Error formulario 10
 				$("#plataforma>#archivos_plataforma").append("<p>Archivos:</p>");
 				for ($a = 0; $a < data_orgFinalizada["0"].archivos.length; $a++) {
 					if (data_orgFinalizada["0"].archivos[$a].id_formulario == "10") {
@@ -3327,7 +3327,6 @@ $(document).ready(function () {
 						) {
 							$carpeta = baseURL + "uploads/instructivosPlataforma/";
 						}
-
 						$("#plataforma>#archivos_plataforma").append(
 							"<li class='listaArchivos'><a href='" +
 								$carpeta +
@@ -5661,7 +5660,7 @@ $(document).ready(function () {
 						$("#docentes").append("</div>");
 					}
 				}
-				/** Formulario 10 **/
+				/** TODO: Formulario 10 **/
 				for (var i = 0; i < response.plataforma.length; i++) {
 					$cols = 12 / parseFloat(response.plataforma.length);
 					$("#plataforma").append(
@@ -5881,6 +5880,13 @@ $(document).ready(function () {
 								"instructivoPlataforma"
 							) {
 								$carpeta = baseURL + "uploads/instructivosPlataforma/";
+							}
+
+							if (
+								data_orgFinalizada["0"].archivos[$a].tipo ==
+								"observacionesPlataformaVirtual"
+							) {
+								$carpeta = baseURL + "uploads/observacionesPlataforma/";
 							}
 
 							$("#plataforma>#archivos_plataforma").append(
