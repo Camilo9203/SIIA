@@ -258,11 +258,22 @@ class Admin extends CI_Controller
 		$data['fecha'] = $fecha;
 		$data['departamentos'] = $this->cargarDepartamentos();
 		$data['usuarios'] = $this->verUsuarios();
+		$data['emails'] = $this->db->select("*")->from("organizaciones")->get()->result();
 
 		$this->load->view('include/header', $data);
 		$this->load->view('admin/contacto/contacto', $data);
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
+	}
+	public function cargarCorreos()
+	{
+		$data = $this->db->select("direccionCorreoElectronicoOrganizacion, direccionCorreoElectronicoRepLegal")->from("organizaciones")->get()->result();
+		echo json_encode($data, JSON_UNESCAPED_UNICODE);
+	}
+	public function cargarCorreosAcreditadas()
+	{
+		$data = $this->db->select("direccionCorreoElectronicoOrganizacion, direccionCorreoElectronicoRepLegal")->from("organizaciones")->join('nits_db', 'nits_db.numNIT = organizaciones.numNIT')->get()->result();
+		echo json_encode($data, JSON_UNESCAPED_UNICODE);
 	}
 	// Historico
 	public function historico()

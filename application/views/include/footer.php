@@ -511,6 +511,7 @@
 	<script src="<?php echo base_url('assets/js/initck.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/vis.min.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/script_o.js?v=1.0.8.61219') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/contacto.js?v=1.0.8.61') . time() ?>" type="text/javascript"></script>
 	<!--<script src="<?php echo base_url('assets/js/script_o.min.js') ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/script.js') ?>" type="text/javascript"></script>-->
 	<script type="text/javascript">

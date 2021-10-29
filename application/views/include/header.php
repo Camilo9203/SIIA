@@ -15,8 +15,8 @@
 	<meta name="distribution" content="web" />
 	<META NAME="ROBOTS" CONTENT="INDEX, FOLLOW" />
 	<!-- Styles -->
-	<link href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css" />
 	<link href="<?php echo base_url('assets/css/font-awesome.min.css') ?>" rel="stylesheet" type="text/css" />
+	<link href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css" />
 	<!-- Custom CSS -->
 	<link href="<?php echo base_url('assets/css/styles.css?v=1.0.8.1919') ?>" rel="stylesheet" type="text/css" />
 	<link href="<?php echo base_url('assets/img/favicon16.png') ?>" type="image/png" sizes="16x16" rel="icon" />

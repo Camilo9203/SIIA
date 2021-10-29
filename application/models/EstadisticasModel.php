@@ -59,14 +59,14 @@ class EstadisticasModel extends CI_Model
 
 
 // get_where('solicitudes', array('fecha' => "solicitudes"));
-		// Variables para consultas del tramite
-		// $años  = ->join('solicitudes', 'solicitudes.organizaciones_id_organizacion = organizaciones.id_organizacion')->join('tipoSolicitud', 'tipoSolicitud.organizaciones_id_organizacion', 'organizaciones.id_organizacion')
-		// $data_organizaciones = $this->db->select("*")->from("organizaciones, estadoOrganizaciones, solicitudes")->where("organizaciones.id_organizacion", $id_org)->where("estadoOrganizaciones.organizaciones_id_organizacion", $id_org)->where("solicitudes.organizaciones_id_organizacion", $id_org)->get()->row();
-		// Retornar resultas en forma de array
-		// foreach ($id_organizaciones as $id_organizacion) {
-		// 	$id_org = $id_organizacion->organizaciones_id_organizacion;
-		// 	array_push($organizaciones, $data_organizaciones);
-		// }
-		// return $organizaciones;
-		// echo json_encode($organizaciones);
-		// var_dump($data);
+	// Variables para consultas del tramite
+	// $años  = ->join('solicitudes', 'solicitudes.organizaciones_id_organizacion = organizaciones.id_organizacion')->join('tipoSolicitud', 'tipoSolicitud.organizaciones_id_organizacion', 'organizaciones.id_organizacion')
+	// $data_organizaciones = $this->db->select("*")->from("organizaciones, estadoOrganizaciones, solicitudes")->where("organizaciones.id_organizacion", $id_org)->where("estadoOrganizaciones.organizaciones_id_organizacion", $id_org)->where("solicitudes.organizaciones_id_organizacion", $id_org)->get()->row();
+	// Retornar resultas en forma de array
+	// foreach ($id_organizaciones as $id_organizacion) {
+	// 	$id_org = $id_organizacion->organizaciones_id_organizacion;
+	// 	array_push($organizaciones, $data_organizaciones);
+	// }
+	// return $organizaciones;
+	// echo json_encode($organizaciones);
+	// var_dump($data);

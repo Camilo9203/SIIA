@@ -118,11 +118,10 @@ $route['panelAdmin/organizaciones/docentes'] = 'Admin/docentes';
 $route['panelAdmin/organizaciones/docentes/panel'] = 'Docentes/panelDocentes';
 $route['panelAdmin/organizaciones/docentes/asignar'] = 'Docentes/asignarDocentes';
 $route['panelAdmin/organizaciones/docentes/evaluar'] = 'Docentes/evaluarDocentes';
-//Estadisticas //TODO:Rutas nuevas para estadisticas
-$route['panelAdmin/estadisticas'] = 'Estadisticas/panel_estadisticas';
-$route['panelAdmin/estadisticas/tramite'] = 'Estadisticas/estadisticas_tramite';
-$route['panelAdmin/estadisticas/acreditacion'] = 'Estadisticas/estadisticas_acreditacion';
-
+//Estadisticas 
+//TODO:Rutas nuevas para estadisticas
+$route['panelAdmin/estadisticas'] = 'Estadisticas/panel';
+$route['panelAdmin/estadisticas/acreditacion'] = 'Estadisticas/acreditacion';
 // Super
 $route['super/?'] = 'Super';
 $route['super/panel'] = 'Super/panel';
@@ -134,6 +133,7 @@ $route['actualizacion'] = 'Update/update_info_user';
 $route['recordar'] = 'Recordar';
 //Panel usuario
 //$route['panel/contacto'] = 'Contacto';
+$route['panel/contacto'] = 'Contacto';
 $route['panel/contacto/ayuda'] = 'Contacto/ayuda';
 $route['Certificado'] = 'Certificaciones/crearCertificacion';
 $route['panel/estadoSolicitud'] = 'Panel/estadoSolicitud';

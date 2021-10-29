@@ -1034,10 +1034,35 @@ $(document).ready(function () {
 	$(".admin_volver_docentes").click(function () {
 		redirect(baseURL + "panelAdmin/organizaciones/docentes/panel");
 	});
-	// Estadisticas
+	// TODO: Estadisticas
 	$("#admin_estadisticas").click(function () {
 		redirect(baseURL + "panelAdmin/estadisticas");
 	});
+	$("#estadisticas_tramite").click(function () {
+		redirect(baseURL + "panelAdmin/estadisticas/tramite");
+	});
+	$("#estadisticas_acreditacion").click(function () {
+		redirect(baseURL + "panelAdmin/estadisticas/acreditacion");
+	});
+	$("#estadisticas_tramite").click(function () {
+		redirect(baseURL + "panelAdmin/estadisticas/tramite");
+	});
+	$("#estadisticas_personas").click(function () {
+		redirect(baseURL + "panelAdmin/estadisticas/personas");
+	});
+	$("#estadisticas_historico").click(function () {
+		redirect(baseURL + "panelAdmin/estadisticas/historico");
+	});
+	$("#estadisticas_seguimiento").click(function () {
+		redirect(baseURL + "panelAdmin/estadisticas/seguimiento");
+	});
+	$("#estadisticas_facilitadores").click(function () {
+		redirect(baseURL + "panelAdmin/estadisticas/facilitadores");
+	});
+	$("#volver_estadisticas").click(function () {
+		redirect(baseURL + "panelAdmin/estadisticas");
+	});
+
 	//Atras en reportes
 	$("#admin_volver_reportes").click(function () {
 		redirect(baseURL + "panelAdmin");
@@ -10237,128 +10262,7 @@ $(document).ready(function () {
 		});
 	});
 
-	$("#enviar_correo_contacto_admin").click(function () {
-		$correo_electronico = $("#contacto_correo_electronico_admin").val();
-		$nombre = $("#contacto_nombre_admin").val();
-		$prioridad = $("#contacto_prioridad_admin").val();
-		$asunto = $("#contacto_asunto_admin").val();
-		$mensaje = CKEDITOR.instances.contacto_mensaje_admin.getData(); //$("#contacto_mensaje_admin").val();
-
-		data = {
-			correo_electronico: $correo_electronico,
-			prioridad: $prioridad,
-			asunto: $asunto,
-			mensaje: $mensaje,
-		};
-
-		if ($("#contacto_copia_admin").is(":visible")) {
-			data.correo_electronico_rep = $(
-				"#contacto_correo_electronico_rep_admin"
-			).val();
-		} else {
-			data.correo_electronico_rep = "";
-		}
-
-		if ($("#comunicado").is(":visible")) {
-			data.todos = "";
-		} else {
-			if ($("#contaco_enviar_copia_admin_todos").prop("checked")) {
-				data.todos = 1;
-			} else if ($("#contaco_enviar_copia_admin_todos_acre").prop("checked")) {
-				data.todos = 2;
-			} else {
-				data.todos = 1;
-			}
-		}
-
-		$.ajax({
-			url: baseURL + "admin/enviomail_contacto",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			beforeSend: function () {
-				notificacion("Espere, enviando...", "success");
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
-
-	$("#enviar_correo_contacto").click(function () {
-		$correo_electronico = $("#contacto_correo_electronico").val();
-		$nombre = $("#contacto_nombre").val();
-		$prioridad = $("#contacto_prioridad").val();
-		$asunto = $("#contacto_asunto").val();
-		$mensaje = $("#contacto_mensaje").val();
-		data = {
-			correo_electronico: $correo_electronico,
-			nombre: $nombre,
-			prioridad: $prioridad,
-			asunto: $asunto,
-			mensaje: $mensaje,
-		};
-		if ($("#contacto_copia").is(":visible")) {
-			data.correo_electronico_rep = $("#contacto_correo_electronico_rep").val();
-		} else {
-			data.correo_electronico_rep = "";
-		}
-
-		$.ajax({
-			url: baseURL + "contacto/enviomail_contacto",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			beforeSend: function () {
-				notificacion("Espere, enviando...", "success");
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
-
-	$("#contaco_enviar_copia").click(function () {
-		if ($("#contaco_enviar_copia").prop("checked")) {
-			$("#contacto_copia").show();
-		} else {
-			$("#contacto_copia").hide();
-		}
-	});
-
-	$("#contaco_enviar_copia_admin").click(function () {
-		if ($("#contaco_enviar_copia_admin").prop("checked")) {
-			$("#contacto_copia_admin").show();
-		} else {
-			$("#contacto_copia_admin").hide();
-		}
-	});
-
-	$("#contaco_enviar_copia_admin_todos").click(function () {
-		if ($("#contaco_enviar_copia_admin_todos").prop("checked")) {
-			$("#comunicado").hide();
-			$("#contacto_asunto_admin").val("Comunicado SIIA: ");
-		} else {
-			$("#comunicado").show();
-			$("#contacto_asunto_admin").val("");
-		}
-	});
-
-	$("#contaco_enviar_copia_admin_todos_acre").click(function () {
-		if ($("#contaco_enviar_copia_admin_todos_acre").prop("checked")) {
-			$("#comunicado").hide();
-			$("#contacto_asunto_admin").val("Entidades acreditadas en el SIIA: ");
-		} else {
-			$("#comunicado").show();
-			$("#contacto_asunto_admin").val("");
-		}
-	});
+	
 
 	$("#finalizar_si").click(function () {
 		$(this).attr("disabled", true);

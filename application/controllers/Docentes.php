@@ -42,7 +42,7 @@ class Docentes extends CI_Controller
 			'nivel' => $this->session->userdata('nivel'),
 			'hora' => date("H:i", time()),
 			'fecha' => date('Y/m/d'),
-			'administradores' => $this->AdminModel->cargarAdministradores(),
+			// 'administradores' => $this->AdminModel->cargarAdministradores(),
 
 		);
 		$this->load->view('include/header', $data);
