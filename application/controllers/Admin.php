@@ -2722,51 +2722,19 @@ class Admin extends CI_Controller
 	function enviomail_contacto()
 	{
 		$correo_electronico = CORREO_SIA;
-		$correo_electronico_rep = $this->input->post('correo_electronico_rep');
-		$todos = $this->input->post('todos');
-		$nombre = $this->input->post('nombre');
+		$to = $this->input->post('correo_electronico');
+		$bcc = $this->input->post('masivo');
+		$cc = $this->input->post('correo_electronico_rep');
 		$prioridad = $this->input->post('prioridad');
 		$asunto = $this->input->post('asunto');
 		$mensaje = $this->input->post('mensaje');
-		$to = $this->input->post('correo_electronico');
+		// $todos = $this->input->post('todos');
+		// $nombre = $this->input->post('nombre');
 
-		if ($correo_electronico_rep != null || $correo_electronico_rep != "") {
-			$cc = $correo_electronico_rep;
-		} else {
-			$cc = "";
-		}
-
-		if ($todos == 1 && $todos != null || $todos != "") {
-			$organizaciones = $this->db->select("*")->from("organizaciones")->get()->result();
-			$correos = "";
-
-			foreach ($organizaciones as $organizacion) {
-				$correoOrganizacion = $organizacion->direccionCorreoElectronicoOrganizacion;
-				$correoRepLegal = $organizacion->direccionCorreoElectronicoRepLegal;
-
-				$correos .= $correoOrganizacion . "," . $correoRepLegal . ",";
-			}
-
+		if ($correo_electronico != null || $correo_electronico != "") {
 			$to = $correo_electronico;
-			$cc = $correos;
-		} else if ($todos == 2 && $todos != null || $todos != "") {
-			$organizacionesNITDB = $this->db->select(("distinct(numNIT), numNIT"))->from("nits_db")->get()->result();
-			$correos = "";
-
-			foreach ($organizacionesNITDB as $organizacionbd) {
-				$nit = $organizacionbd->numNIT;
-				$organizaciones = $this->db->select("*")->from("organizaciones")->where("numeroNIT", $nit)->get()->row();
-
-				$correoOrganizacion = $organizaciones->direccionCorreoElectronicoOrganizacion;
-				$correoRepLegal = $organizaciones->direccionCorreoElectronicoRepLegal;
-
-				$correos .= $correoOrganizacion . "," . $correoRepLegal . ",";
-			}
-
-			$to = $correo_electronico;
-			$cc = $correos;
 		} else {
-			$cc = "";
+			$to = "";
 		}
 		/**
 		1 => '1 (Highest)',
@@ -2791,7 +2759,8 @@ class Admin extends CI_Controller
 		}
 		$this->email->from($correo_electronico, "Acreditaciones");
 		$this->email->to($to);
-		$this->email->bcc($cc);
+		$this->email->cc($cc);
+		$this->email->bcc($bcc);
 		$this->email->subject('SIIA - Asunto: ' . $asunto);
 		$this->email->set_priority($num_prioridad);
 

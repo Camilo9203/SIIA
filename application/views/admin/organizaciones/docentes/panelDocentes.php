@@ -39,7 +39,7 @@
 		</div>
 	</div>
 	<div class="clearfix"></div>
-	<hr/>
+	<hr />
 	<button class="btn btn-danger btn-sm pull-left" id="admin_organizaciones"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 
 </div>

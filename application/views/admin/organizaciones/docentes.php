@@ -5,7 +5,6 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h4>Facilitadores:</h4>
-				<button class='btn btn-siia ver_organizacion_docentes' data-organizacion='" . $organizaciones[$i]->id_organizacion . "'>Ver facilitador <i class='fa fa-eye' aria-hidden='true'></i></button>
 			</div>
 		</div>
 		<br />

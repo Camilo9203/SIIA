@@ -21,34 +21,48 @@ $.ajax({
 
 $("#enviar_correo_contacto_admin").click(function () {
 	if ($("#contacto_enviar_copia_admin_todos").prop("checked")) {
-	}
-
-	data = {
-		correo_electronico: $("#contacto_correo_electronico_admin").val(),
-		prioridad: $("#contacto_prioridad_admin").val(),
-		asunto: $("#contacto_asunto_admin").val(),
-		mensaje: CKEDITOR.instances.contacto_mensaje_admin.getData(),
-	};
-
-	if ($("#contacto_copia_admin").is(":visible")) {
-		data.correo_electronico_rep = $(
-			"#contacto_correo_electronico_rep_admin"
-		).val();
+		data = {
+			masivo: correosTodos,
+			prioridad: $("#contacto_prioridad_admin").val(),
+			asunto: $("#contacto_asunto_admin").val(),
+			mensaje: CKEDITOR.instances.contacto_mensaje_admin.getData(),
+		};
+		console.log(data.correo_electronico);
+	} else if ($("#contacto_enviar_copia_admin_todos_acre").prop("checked")) {
+		data = {
+			masivo: correosAcreditadas,
+			prioridad: $("#contacto_prioridad_admin").val(),
+			asunto: $("#contacto_asunto_admin").val(),
+			mensaje: CKEDITOR.instances.contacto_mensaje_admin.getData(),
+		};
 	} else {
-		data.correo_electronico_rep = "";
-	}
-
-	if ($("#comunicado").is(":visible")) {
-		data.todos = "";
-	} else {
-		if ($("#contacto_enviar_copia_admin_todos").prop("checked")) {
-			data.todos = 1;
-		} else if ($("#contacto_enviar_copia_admin_todos_acre").prop("checked")) {
-			data.todos = 2;
+		data = {
+			correo_electronico: $("#contacto_correo_electronico_admin").val(),
+			prioridad: $("#contacto_prioridad_admin").val(),
+			asunto: $("#contacto_asunto_admin").val(),
+			mensaje: CKEDITOR.instances.contacto_mensaje_admin.getData(),
+		};
+		if ($("#contacto_copia_admin").is(":visible")) {
+			data.correo_electronico_rep = $(
+				"#contacto_correo_electronico_rep_admin"
+			).val();
+			console.log(data.correo_electronico_rep);
 		} else {
-			data.todos = 1;
+			data.correo_electronico_rep = "";
 		}
 	}
+
+	// if ($("#comunicado").is(":visible")) {
+	// 	data.todos = "";
+	// } else {
+	// 	if ($("#contacto_enviar_copia_admin_todos").prop("checked")) {
+	// 		data.todos = 1;
+	// 	} else if ($("#contacto_enviar_copia_admin_todos_acre").prop("checked")) {
+	// 		data.todos = 2;
+	// 	} else {
+	// 		data.todos = 1;
+	// 	}
+	// }
 
 	$.ajax({
 		url: baseURL + "admin/enviomail_contacto",
@@ -185,7 +199,6 @@ $("#contacto_enviar_copia_admin_todos_acre").click(function () {
 $("#contacto_correo_electronico_admin").change(function () {
 	$("#contacto_enviar_copia_admin").prop("checked", false);
 	$("#contacto_copia_admin").hide();
-
 	if (
 		$("#contacto_correo_electronico_admin").val() == "Seleccione una opción"
 	) {
@@ -220,7 +233,7 @@ $("#contacto_enviar_copia_admin").click(function () {
 		$("#contacto_correo_electronico_rep_admin").prop("disabled", true);
 		// Pruebas
 		console.log(correos);
-		console.log($correoRepLegal);
+		console.log($("#contacto_correo_electronico_rep_admin").val());
 	} else {
 		$("#contacto_copia_admin").hide();
 	}

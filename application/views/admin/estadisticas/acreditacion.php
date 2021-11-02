@@ -42,9 +42,6 @@
 	</div> -->
 	<div class="col-sm-10">
 		<div class="row" style="text-align: justify;">
-			<div class="col-sm-12">
-				<p>Procedimiento administrativo mediante el cual la UAEOS - Unidad Administrativa Especial de Organizaciones Solidarias, autoriza a las organizaciones que cumplen los requisitos establecidos, para impartir el curso de economía solidaria y expedir los certificados válidos para cumplir con el requisito previo al registro de las organizaciones de economía solidaria ante los entes. Numeral 3 del artículo 2 de la resolución 110 de 2016.</p>
-			</div>
 			<div class="filtrosAcreditacion row">
 				<div class="form-group col-lg-2">
 					<label>Tipo de información</label>
