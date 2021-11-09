@@ -35,7 +35,7 @@ PHP >= 7.0 - Ubuntu >= 16.04 LTS
 Ejemplo versiones = php7.x-dev
 
 # apt-get install php7.0
-# apt-get install php-mysql php-curl php-gd php-pear php-imagick php-imap php-mcrypt php-memcache php-pspell php-recode php-snmp php-tidy php-xmlrpc php-xsl php-dev -y
+# apt-get install php7.4-mysql php-curl php7.4-gd php7.4-imagick php7.4-imap php7.4-mcrypt php7.4-memcache php7.4-pspell php7.4-snmp php7.4-tidy php7.4-xmlrpc php7.4-xsl php7.4-dev -y
 # apt-get install php libapache2-mod-php
 # php --version
 ```
