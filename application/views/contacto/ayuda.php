@@ -50,13 +50,13 @@
 			</div>
 			<div class="panel">
 				<div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question8" data-id="question">
-					<h4 class="panel-title">Normatividad del trámite de la Acreditacion</h4>
+					<h4 class="panel-title">Normatividad del trámite de la Acreditación</h4>
 				</div>
 
 			</div>
 			<div class="panel">
 				<div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question9" data-id="question">
-					<h4 class="panel-title">Consejos pedagógicos</h4>
+					<h4 class="panel-title">Mesas regionales de educación solidaria</h4>
 				</div>
 
 			</div>
@@ -108,16 +108,18 @@
 		</div>
 		<div id="question8" class="panel-collapse collapse" style="height: 0px;">
 			<div class="panel-body">
-				<p>Circular 2 Acreditación 2010
-					Resolución 221 de 2007
-					Resolución 426 de 2008
-					Circular 1 Acreditación 2008</p>
+				<p> Resolución 221 de 2007 <br>
+					Resolución 110 de 2016 <br>
+					Resolución 332 de 2017 <br>
+					Circular 1 Acreditación 2008 <br>
+					Circular 001 Acreditación 2020 <br>
+					Guía para entidades acreditadas <br>
+				</p>
 			</div>
 		</div>
 		<div id="question9" class="panel-collapse collapse" style="height: 0px;">
 			<div class="panel-body">
-				<p>Documento para la Articulación de Los Consejos Pedagógicos
-					Circular 06 de 11 de Septiembre de 2009</p>
+				<p>La Unidad Administrativa Especial de Organizaciones Solidarias, promoverá la realización de Mesas Regionales de Educación Solidaria, como escenarios de participación y articulación para el diseño de planes, programas y proyectos educativos para el sector solidario. Podrán participar en las Mesas Regionales de Educación Solidaria: los comités de educación de las organizaciones solidarias, los organismos de integración de las organizaciones solidarias, instituciones auxiliares de la economía solidaria, las entidades acreditadas para impartir educación solidaria, los colegios cooperativos, las instituciones de educación superior que tengan programas de economía solidaria y representantes de las entidades públicas y del sector educativo. Parágrafo. Las Mesas de Educación Solidaria serán convocadas por la Unidad Administrativa Especial de Organizaciones Solidarias, cuando se considere necesario.9</p>
 			</div>
 		</div>
 	</div>

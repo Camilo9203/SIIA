@@ -133,20 +133,21 @@
 	<!-- Acreditación aval de trabajo asociado -->
 	<div class="form-group">
 		<div class="radio">
-			<label><input type="radio" name="motivo_solicitud" id="motivo2" class="motivo_sol" value="Acreditación, Aval de Trabajo Asociado">Acreditación, aval de trabajo asociado.</label>
+			<label><input type="radio" name="motivo_solicitud" id="motivo2" class="motivo_sol" value="Acreditación, Aval de Trabajo Asociado">Acreditación curso basico de economia solidaria y aval de trabajo asociado.</label>
 		</div>
 	</div>
 	<!-- Acretitación para otros programas //TODO: Otros programas comentado-->
 	<div class="form-group">
 		<div class="radio">
-			<label><input type="radio" name="motivo_solicitud" id="motivo3" class="motivo_sol" value="Acreditación, Aval a otros Programas">Acreditación, aval a otros programas.</label>
+			<label><input type="radio" name="motivo_solicitud" id="motivo3" class="motivo_sol" value="Acreditación, Aval a otros Programas">Acreditacion en aval de trabajo asociado.</label>
 		</div>
 	</div>
-	<div class="form-group">
+	<!-- //TODO: Otros programas -->
+	<!-- <div class="form-group">
 		<div class="radio">
-			<label><input type="radio" name="motivo_solicitud" id="motivo4" class="motivo_sol" value="Acreditación, Aval de Trabajo Asociado, Aval a otros Programas">Acreditación, aval de trabajo asociado, aval a otros programas. <small>(Todas)</small></label>
+			<label><input type="radio" name="motivo_solicitud" id="motivo4" class="motivo_sol" value="Acreditación, Aval de Trabajo Asociado, Aval a otros Programas">Acreditación otros programas. <small>(Todas)</small></label>
 		</div>
-	</div>
+	</div -->
 	<!-- Solo si la entidad esta o estuvo acreditada //TODO: Solo si la entidad ya fue acreditada-->
 	<div class="form-group" id="div_motivo_actualizar">
 		<div class="radio">
@@ -560,7 +561,7 @@
 		<div class="col-md-12">
 			<hr />
 			<?php echo form_open('', array('id' => 'formulario_documentacion_legal')); ?>
-			<label>2.1. Certificado de Existencia y Representación Legal.</label>
+			<label>2.2. Certificado de Existencia y Representación Legal.</label>
 			<div class="checkbox">
 				<label for="certificadoExistencia">La entidad presenta Certificado de Existencia y Representación Legal:</label>
 
@@ -587,10 +588,11 @@
 					<label for="fechaExpedicion">Fecha de Expedición:<span class="spanRojo">*</span></label>
 					<input type="date" class="form-control" name="fechaExpedicion" id="fechaExpedicion" value="<?php echo $data_documentacion_legal->fechaExpedicion; ?>">
 				</div>
-				<div class="form-group">
+				<!-- //TODO: Quitar de base de datos -->
+				<!-- <div class="form-group">
 					<label for="objetoSocial">Objeto social según certificado Cámara de Comercio:<span class="spanRojo">*</span></label>
 					<textarea name="objetoSocial" class=" form-control" id="objetoSocial" placeholder="Objeto social según certificado Cámara de Comercio" maxlength="300"><?php echo $data_documentacion_legal->objetoSocial; ?></textarea>
-				</div>
+				</div>-->
 				<div class="form-group">
 					<label for="departamentos">Departamento:<span class="spanRojo">*</span></label>
 					<br>
@@ -624,10 +626,10 @@
 		<!-- Registro educativo -->
 		<div class="col-md-12">
 			<hr />
-			<label>2.2. Registro Educativo.</label>
+			<label>2.3. Registro Educativo.</label>
 			<small> Estos datos aplican solamente a Entidades Educativas (Opcional)*.</small>
 			<div class="checkbox">
-				<label for="registroEducativo">La entidad presenta Certificado de Existencia y Representación Legal:</label>
+				<label for="registroEducativo">La entidad presenta registro educativo:</label>
 				<?php foreach ($data_documentacion_legal as $documentacion) : ?>
 					<?php if ($documentacion->registroEducativo == "Si Tiene") : ?>
 						<label><input type="radio" class="registroEducativo" name="registroEducativo" id="registroEducativo" value="Si" checked>Si</label>
@@ -862,7 +864,7 @@
 			<h3>4. Antecedentes Académicos <i class="fa fa-id-card" aria-hidden="true"></i></h3>
 			<p>Se debe hacer un análisis de los niveles de formación, las necesidades y los avances de los procesos adelantados en materia pedagógica. También se deben determinar las áreas en donde se requiera afianzar y profundizar conocimientos. Los Campos marcados con (*) son obligatorios</p>
 			<div class="form-group">
-				<label for="descripcionProceso">Descripción cualitativa de los procesos de formación que ha realizado:<span class="spanRojo">*</span></label>
+				<label for="descripcionProceso">Describa de manera cualitativa los procesos de formación que ha realizado:<span class="spanRojo">*</span></label>
 				<textarea class="form-control" name="descripcionProceso" id="descripcionProceso" placeholder="Descripción cualitativa de los procesos de formación que ha realizado..."></textarea>
 			</div>
 			<div class="form-group">
@@ -878,7 +880,7 @@
 				<textarea class="form-control" name="metodologiaAcademicos" id="metodologiaAcademicos" placeholder="Metodología..."></textarea>
 			</div>
 			<div class="form-group">
-				<label for="materialDidacticoAcademicos">Material didáctico y ayudas Educativas incorporadas:<span class="spanRojo">*</span></label>
+				<label for="materialDidacticoAcademicos">Describa el material didáctico y las ayudas educativas utilizadas:<span class="spanRojo">*</span></label>
 				<textarea class="form-control" name="materialDidacticoAcademicos" id="materialDidacticoAcademicos" placeholder="Material didáctico y ayudas Educativas incorporadas..."></textarea>
 			</div>
 			<div class="form-group">
@@ -887,7 +889,7 @@
 			</div>
 			<div class="form-group">
 				<label for="duracionCursoAcademicos">Duración del curso:<span class="spanRojo">*</span> (Horas)</label>
-				<input type="number" class="form-control" name="duracionCursoAcademicos" id="duracionCursoAcademicos" placeholder="13">
+				<input type="number" class="form-control" name="duracionCursoAcademicos" id="duracionCursoAcademicos" placeholder="">
 			</div>
 			</form>
 			<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_antecedentes_academicos" id="guardar_formulario_antecedentes_academicos">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
@@ -933,9 +935,9 @@
 			<h3>5. Jornadas de actualización <i class="fa fa-handshake-o" aria-hidden="true"></i></h3>
 			<p>Registre los datos de la última jornada de actualización, organizada por Organizaciones Solidarias, a la que asistió. Si selecciona "No", de click en guardar y adjunte la carta de compromiso.</p>
 			<div class="form-group">
-				<label for="">5.1 Ha participado en jornadas de actualización organizadas por Organizaciones Solidarias?</label>
+				<label for="">5.1 Ha participado en jornadas de actualización organizadas por la UAEOS?</label>
 				<div class="checkbox">
-					<label for="jornaSelect">La entidad presenta Certificado de Existencia y Representación Legal:</label>
+					<label for="jornaSelect">La entidad participo en la jornada de actualización pedagógica:</label>
 					<label><input type="radio" class="jornaSelect" name="jornaSelect" id="jornaSelect" value="Si">Si</label>
 					<label><input type="radio" class="jornaSelect" name="jornaSelect" id="" value="No" checked>No</label>
 				</div>
@@ -955,7 +957,7 @@
 			<hr />
 			<div class="form-group">
 				<label>Documento de la Jornada de Actualización o carta de compromiso </label>
-				<p>En caso de no haber participado ingrese una carta de compromiso por el contrario adjunte el documento de la jornada. (PDF)</p>
+				<p>En caso de haber participado en la jornada de actualización adjunte el certificado. En caso de no haber participado adjunte una carta de compromiso de participación en la jornada de actualización. (PDF)</p>
 				<br />
 				<?php echo form_open_multipart('', array('id' => 'formulario_jornada_actualizacion')); ?>
 				<label>Archivo (PDF):<span class="spanRojo">*</span></label>
