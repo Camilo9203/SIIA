@@ -1,3 +1,6 @@
+var url = unescape(window.location.href);
+var activate = url.split("/");
+var baseURL = activate[0] + "//" + activate[2] + "/" + activate[3] + "/";
 var entidades;
 var html = "";
 var resultado;
@@ -433,7 +436,7 @@ function onlyUnique(value, index, self) {
 function cargarDepartamentos(departamentos) {
 	for (i = 0; i < departamentos.length; i++) {
 		$(".departamentoAcreditacion").append(
-			"<option>" + departamentos[i] + "</option>"
+			"<option value=''>" + departamentos[i] + "</option>"
 		);
 	}
 }
