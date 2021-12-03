@@ -7,7 +7,7 @@ var resultado;
 var departamentos = [];
 var municipios = [];
 var tipoOrg = [];
-var domainName = window.location.origin + "/beneficiados/public/";
+// var domainName = window.location.origin + "/beneficiados/public/";
 
 $.ajax({
 	url: baseURL + "Estadisticas",
@@ -69,7 +69,7 @@ $("#tipoInformacion").change(function () {
 			arrayDepartamentos[d] +
 				": " +
 				repetidosDpto[dept] +
-				" <i class='far fa-eye verDept' data-name='" +
+				" <i class='fa fa-eye verDept' data-name='" +
 				arrayDepartamentos[d] +
 				"'></i></br>"
 		);
@@ -81,19 +81,19 @@ $("#tipoInformacion").change(function () {
 			arraytipoOrg[d] +
 				": " +
 				repetidosTipo[tipoOrg] +
-				" <i class='far fa-eye verTipo' data-name='" +
+				" <i class='fa fa-eye verTipo' data-name='" +
 				arraytipoOrg[d] +
 				"'></i></br>"
 		);
 	}
 
 	$(".totalOrgAcreditacion").html(
-		resultado.length + " <i class='far fa-eye verOrg'></i>"
+		resultado.length + " <i class='fa fa-eye verOrg'></i>"
 	);
 });
 
 //filtro por departamento
-$(".departamentoAcreditacion").change(function () {
+$(".selectDepartamentoAcreditacion").change(function () {
 	html = "";
 	tipoOrg = [];
 	departamentos = [];
@@ -159,7 +159,7 @@ $(".departamentoAcreditacion").change(function () {
 });
 
 //filtro por Municipio
-$(".municipioAcreditacion").change(function () {
+$(".selectMunicipioAcreditacion").change(function () {
 	$(".fichaUno").removeClass("col-lg-6");
 	$(".fichaUno").addClass("col-lg-12");
 	$(".fichaDos").hide();
@@ -407,7 +407,7 @@ $(document).on("click", ".verTipo", function () {
 //reinicio de filtros
 $(".reinciarFiltro").click(function () {
 	$("#tipoInformacion").val("");
-	$(".departamentoAcreditacion").html(
+	$(".selectDepartamentoAcreditacion").html(
 		"<option value=''>Seleccione una opción</option>"
 	);
 	$(".municipioAcreditacion").html(
@@ -435,7 +435,7 @@ function onlyUnique(value, index, self) {
 //cargar departamentos existentes
 function cargarDepartamentos(departamentos) {
 	for (i = 0; i < departamentos.length; i++) {
-		$(".departamentoAcreditacion").append(
+		$(".selectDepartamentoAcreditacion").append(
 			"<option value=''>" + departamentos[i] + "</option>"
 		);
 	}
@@ -444,7 +444,7 @@ function cargarDepartamentos(departamentos) {
 //cargar municipios existentes
 function cargarMunicipios(municipios) {
 	for (i = 0; i < municipios.length; i++) {
-		$(".municipioAcreditacion").append(
+		$(".selectMunicipioAcreditacion").append(
 			"<option>" + municipios[i] + "</option>"
 		);
 	}

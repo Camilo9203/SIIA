@@ -11,7 +11,7 @@
 			<div class="filtrosAcreditacion row">
 				<div class="form-group col-lg-3">
 					<label>Tipo de información</label>
-					<select name="tipoInformacion" class="selectpicker form-control show-tick" id="tipoInformacion">
+					<select name="tipoInformacion" class="form-control show-tick" id="tipoInformacion">
 						<option value="">Seleccione una opción</option>
 						<option value="acreditadas">Acreditadas</option>
 						<option value="cursoBasico">Curso Basico</option>
@@ -21,55 +21,55 @@
 				</div>
 				<div class="form-group col-lg-3">
 					<label>Departamento</label>
-					<select name="departamentoAcreditacion" class="selectpicker form-control show-tick departamentoAcreditacion">
+					<select name="selectDepartamentoAcreditacion" class="form-control show-tick selectDepartamentoAcreditacion">
 						<option value="">Seleccione una opción</option>
 					</select>
 				</div>
 				<div class="form-group col-lg-3">
 					<label>Municipio</label>
-					<select name="municipioAcreditacion" class="selectpicker form-control show-tick municipioAcreditacion">
+					<select name="municipioAcreditacion" class="form-control show-tick selectMunicipioAcreditacion">
 						<option value="">Seleccione una opción</option>
 					</select>
 				</div>
 				<div class="form-group col-lg-3">
 					<label>Tipo Organización</label>
-					<select name="tipoOrgAcreditacion" class="selectpicker form-control show-tick tipoOrgAcreditacion">
+					<select name="tipoOrgAcreditacion" class="form-control show-tick tipoOrgAcreditacion">
 						<option value="">Seleccione una opción</option>
 					</select>
 				</div>
 			</div>
 		</div>
-		<!-- <div class="col-lg-2">
+		<div class="col-lg-2">
 			<button class="btn btn-siia reinciarFiltro" style="margin-top:30px;">Reiniciar Filtros</button>
-		</div> -->
+		</div>
 		<div class="col-lg-12">
 			<div class="row">
 				<section class="col-sm-12">
 					<!-- Custom tabs (Charts with tabs)-->
 					<div class="card">
-						<div class="card-header" style="background: #3266cc;color: white;">
+						<div class="card-header">
 							<h3 class="card-title">
-								<a class="verOrganizaciones">Datos</a>
+								<a class="verOrganizaciones" style="color: #d6e0f5 !important;">Datos</a>
 							</h3>
 						</div><!-- /.card-header -->
 						<div class="bodyChart row card-body">
 							<section class="fichaUno col-lg-6">
 								<div class="card">
-									<div class="card-header" style="background: #d6e0f5;"><strong>Total Organizaciones</strong></div>
+									<div class="card-header" style="background: #d6e0f5 !important;"><strong>Total Organizaciones</strong></div>
 									<div class="card-body">
 										<p class="textoStats totalOrgAcreditacion"></p>
 									</div>
 								</div>
 
 								<div class="card cardFichaTipoOrg">
-									<div class="card-header" style="background: #d6e0f5;"><strong>Tipo de Organización</strong></div>
+									<div class="card-header" style="background: #d6e0f5 !important;"><strong>Tipo de Organización</strong></div>
 									<div class="card-body orgTipo"></div>
 								</div>
 							</section>
 
-							<section class="col-lg-6 fichaDos" style="">
+							<section class="col-lg-6 fichaDos">
 								<div class="card">
-									<div class="card-header" style="background: #d6e0f5;"><strong>Organizaciones por Ubicación</strong></div>
+									<div class="card-header" style="background: #d6e0f5 !important;"><strong>Organizaciones por Ubicación</strong></div>
 									<div class="card-body orgDpto"></div>
 								</div>
 							</section>
@@ -100,7 +100,7 @@
 						</table>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 					</div>
 				</div>
 			</div>
@@ -109,14 +109,8 @@
 
 
 	</div>
-
-
 </div>
-
-
-
 <!-- <canvas id="myChart" width="40" height="40"></canvas>
-
 <script>
 	var ctx = document.getElementById('myChart');
 	var myChart = new Chart(ctx, {

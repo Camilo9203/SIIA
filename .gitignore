@@ -2,6 +2,7 @@
 
 application/cache/*
 application/config/config.php
+application/config/database.php
 !application/cache/index.html
 !application/cache/.htaccess
 
@@ -31,4 +32,4 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.sublime-project
 node_modules
 siia-18-05-2021.sql:Zone.Identifier
-!application/config/database.php
+application/config/database.php

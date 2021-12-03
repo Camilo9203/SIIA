@@ -1401,3 +1401,21 @@ FIN CUSTOM
 .contenedor-columna {
 	display: table-cell;
 }
+
+/* TODO: Estilos nuevos */
+.card {
+	border-radius: 5%;
+	margin: 15px 15px;
+}
+.card-header {
+	display: flex;
+	background-color: #07385d;
+	justify-content: center;
+	align-items: center;
+	border-radius: 5px;
+}
+.card-body {
+	border-radius: 5px;
+	padding: 20px 20px;
+	text-align: center;
+}
