@@ -93,7 +93,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- Modal Ayuda en Registro - INICIO -->
+	<!-- TODO: Modal Ayuda en Registro - INICIO -->
 	<div class="modal fade" id="ayuda_registro" tabindex="-1" role="dialog" aria-labelledby="ayudaRegistro">
 		<div class="modal-dialog modal-xl" role="document">
 			<div class="modal-content">
@@ -178,9 +178,9 @@
 									</div>
 								</div>
 								<!--<div class="jumbotron">
-				<small>Estamos teniendo inconvenientes con nuestro sistema de correos y lo estaremos solucionando lo mas pronto posible.</small>
-				<p>El registro se ha creado satisfactoriamente, ahora puede ingresar al sistema con su usuario y contraseña dando click <a href="<?php echo base_url("/login"); ?>">aquí</a>.</p>
-			</div>-->
+									<small>Estamos teniendo inconvenientes con nuestro sistema de correos y lo estaremos solucionando lo mas pronto posible.</small>
+									<p>El registro se ha creado satisfactoriamente, ahora puede ingresar al sistema con su usuario y contraseña dando click <a href="<?php echo base_url("/login"); ?>">aquí</a>.</p>
+								</div>-->
 							</div>
 						</div>
 					</div>

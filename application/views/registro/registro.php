@@ -5,7 +5,7 @@
 		<h3>Información básica de la organización:</h3><small class="pull-right"><span class="spanRojo">*</span> Requerido</small>
 		<div class="form-group">
 			<label for="organizacion">Nombre de la organizacion: <span class="spanRojo">*</span></label>
-			<input type="text" class="form-control" form="formulario_registro" name="organizacion" id="organizacion" placeholder="Nombre de la organización..." required="" autofocus>
+			<input type="text" class="form-control" form="formulario_registro" name="organizacion" id="organizacion" placeholder="Nombre de la organización..." required="" autofocus value="<?php echo  set_value('organizacion');  ?>">
 		</div>
 		<div class="form-group">
 			<label for="nit">NIT de la organización (sin puntos + digito de verificación): <span class="spanRojo">*</span></label>
@@ -92,8 +92,6 @@
 		</div>
 	</div>
 	</form>
-	<div class="col-md-6">
-	</div>
 </div>
 <!-- Modal Politica de Privacidad -->
 <div class="modal fade" id="politica_ventana" tabindex="-1" role="dialog" aria-labelledby="politica">

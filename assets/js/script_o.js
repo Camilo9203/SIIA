@@ -8343,7 +8343,8 @@ $(document).ready(function () {
 	$("#guardar_registro").click(function () {
 		if ($("#formulario_registro").valid()) {
 			var organizacion = $("#organizacion").val();
-			var nit = $("#nit").val() + "-" + $("#nit_digito").val();
+			var nit = $("#nit").val();
+			var nit_digito = $("#nit_digito").val();
 			var sigla = $("#sigla").val();
 			var nombre = $("#nombre").val();
 			var nombre_s = $("#nombre_s").val();
@@ -8377,6 +8378,7 @@ $(document).ready(function () {
 							var data = {
 								organizacion: organizacion,
 								nit: nit,
+								nit_digito: nit_digito,
 								sigla: sigla,
 								nombre: nombre,
 								nombre_s: nombre_s,
@@ -8389,6 +8391,7 @@ $(document).ready(function () {
 								nombre_usuario: nombre_usuario,
 								password: pass,
 							};
+							console.log(data);
 							$.ajax({
 								url: baseURL + "home/verificarUsuario",
 								type: "post",
@@ -10261,8 +10264,6 @@ $(document).ready(function () {
 			},
 		});
 	});
-
-	
 
 	$("#finalizar_si").click(function () {
 		$(this).attr("disabled", true);

@@ -1,15 +1,17 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Registro extends CI_Controller {
+class Registro extends CI_Controller
+{
 
-	function __construct(){
+	function __construct()
+	{
 		parent::__construct();
 	}
 
 	/**
 		Funcion Index para cargar las vistas necesarias.
-	**/
+	 **/
 	public function index()
 	{
 		$data['title'] = 'Registro';
@@ -24,32 +26,31 @@ class Registro extends CI_Controller {
 	/**
 		Funcion para Registrar la informacion del formulario registro que el usuario ingreso.
 		Los parametros se traen del ajax.
-	**/
+	 **/
 	public function registrar_info()
 	{
-		$this->form_validation->set_rules('organizacion','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('nit','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('sigla','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('nombre','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('nombre_s','','trim|xss_clean');
-    	$this->form_validation->set_rules('apellido','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('apellido_s','','trim|xss_clean');
-    	$this->form_validation->set_rules('correo_electronico','','trim|required|min_length[3]|valid_email|xss_clean');
-    	$this->form_validation->set_rules('correo_electronico_rep_legal','','trim|required|min_length[3]|valid_email|xss_clean');
-    	$this->form_validation->set_rules('nombre_p','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('apellido_p','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('nombre_usuario','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('password','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('organizacion', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('nit', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('nit_digito', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('sigla', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('nombre', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('nombre_s', '', 'trim|xss_clean');
+		$this->form_validation->set_rules('apellido', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('apellido_p', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('apellido_s', '', 'trim|xss_clean');
+		$this->form_validation->set_rules('correo_electronico', '', 'trim|required|min_length[3]|valid_email|xss_clean');
+		$this->form_validation->set_rules('correo_electronico_rep_legal', '', 'trim|required|min_length[3]|valid_email|xss_clean');
+		$this->form_validation->set_rules('nombre_p', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('nombre_usuario', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('password', '', 'trim|required|min_length[3]|xss_clean');
 
-    	if ($this->form_validation->run("formulario_registro") == FALSE)
-		{
-			echo json_encode(array('url'=>"registro", 'msg'=>"Verifique los datos, no son válidos."));
-		}
-		else
-		{
+		if ($this->form_validation->run("formulario_registro") == FALSE) {
+			echo json_encode(array('url' => "registro", 'msg' => "Verifique los datos, no son válidos."));
+			// var_dump(validation_errors());
+		} else {
 			$fromSIA = "Unidad Administrativa Especial de Organizaciones Solidarias UAEOS - Aplicación SIIA.";
 			$organizacion = $this->input->post('organizacion');
-			$nit = $this->input->post('nit');
+			$nit = $this->input->post('nit') + "-" + $this->input->post('nit_digito');
 			$sigla = $this->input->post('sigla');
 			$nombre = $this->input->post('nombre');
 			$nombre_s = $this->input->post('nombre_s');
@@ -74,20 +75,20 @@ class Registro extends CI_Controller {
 			$data_usuarioBD = $this->db->select('*')->from('usuarios')->where('usuario', $nombre_usuario)->get()->row();
 			$datos_registro = $this->db->select('numNIT')->from('organizaciones')->where('numNIT', $nit)->get()->row();
 
-			if($data_user == "NULL" || $data_user == NULL || $data_user == null){
+			if ($data_user == "NULL" || $data_user == NULL || $data_user == null) {
 				$data_exist = false;
-			}else{
+			} else {
 				$data_exist = true;
 			}
 
-			if($datos_registro == "NULL" || $datos_registro == NULL || $datos_registro == null){
+			if ($datos_registro == "NULL" || $datos_registro == NULL || $datos_registro == null) {
 				$organizacion_exist = false;
-			}else{
+			} else {
 				$organizacion_exist = true;
 			}
-			
-			if($data_exist == false){
-				if($organizacion_exist == false){
+
+			if ($data_exist == false) {
+				if ($organizacion_exist == false) {
 
 					$data_token = array(
 						'token' => $token,
@@ -97,7 +98,7 @@ class Registro extends CI_Controller {
 
 					$this->db->insert('token', $data_token);
 					$datos_token = $this->db->select('id_token')->from('token')->where('usuario_token', $nombre_usuario)->get()->row();
-					$id_token = $datos_token ->id_token;
+					$id_token = $datos_token->id_token;
 					$this->logs_sia->logQueries();
 
 					$data_usuario = array(
@@ -112,7 +113,7 @@ class Registro extends CI_Controller {
 					$this->logs_sia->logQueries();
 
 					$data_user = $this->db->select('id_usuario')->from('usuarios')->where('usuario', $nombre_usuario)->get()->row();
-					$id_usuario = $data_user ->id_usuario;
+					$id_usuario = $data_user->id_usuario;
 					$this->logs_sia->logQueries();
 
 					$data_registro = array(
@@ -132,7 +133,7 @@ class Registro extends CI_Controller {
 					$this->db->insert('organizaciones', $data_registro);
 
 					$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $id_usuario)->get()->row();
-					$id_organizacion = $datos_organizacion ->id_organizacion;
+					$id_organizacion = $datos_organizacion->id_organizacion;
 
 					$data_solicitud = array(
 						'numeroSolicitudes' => 0,
@@ -147,7 +148,7 @@ class Registro extends CI_Controller {
 					foreach ($nits_db as $nits) {
 						$nt_db = $nits->numNIT;
 
-						if($nit == $nt_db){
+						if ($nit == $nt_db) {
 							$fechaFinalizacion = $nits->fechaFinalizacion;
 
 							$data_resolucion = array(
@@ -164,7 +165,7 @@ class Registro extends CI_Controller {
 								'organizaciones_id_organizacion' => $id_organizacion
 							);
 							break;
-						}else{
+						} else {
 							$data_estadoOrganizacion = array(
 								'nombre' => "Inscrito",
 								'fecha' =>  date('Y/m/d H:i:s'),
@@ -179,8 +180,7 @@ class Registro extends CI_Controller {
 					$this->logs_sia->logs('REGISTER_TYPE');
 					$this->logs_sia->logs('URL_TYPE');
 					$this->logs_sia->logQueries();
-
-				}else{
+				} else {
 					//echo json_encode(array('url'=>"", 'msg'=>"El numero NIT de la organización ya esta registrado, de igual forma se envio correo electrónico."));
 					$tokenID = $data_usuarioBD->token_id_token;
 					$usuarioID = $data_usuarioBD->id_usuario;
@@ -200,7 +200,7 @@ class Registro extends CI_Controller {
 					$this->enviomail_activar(CORREO_SIA, "$fromSIA", "$correo_electronico", "$correo_electronico_rep_legal", $token, "$nombre", "$apellido", "$organizacion", "$nit", "$nombre_usuario");
 					$this->logs_sia->logs('URL_TYPE');
 				}
-			}else{
+			} else {
 				//echo json_encode(array('url'=>"", 'msg'=>"El nombre de usuario ya esta registrado, de igual forma se envio correo electrónico, por favor elija otro."));
 				$tokenID = $data_usuarioBD->token_id_token;
 				$usuarioID = $data_usuarioBD->id_usuario;
@@ -234,8 +234,9 @@ class Registro extends CI_Controller {
 		@param organizacion = Nombre de la organizacion.
 		@param nit = Nit de la organizacion.
 		@param nombre_usuario = Nombre de usuario del usuario.
-	**/
-	function enviomail_activar($from, $from_name, $to, $cc, $token, $nombre, $apellido, $organizacion, $nit, $nombre_usuario){
+	 **/
+	function enviomail_activar($from, $from_name, $to, $cc, $token, $nombre, $apellido, $organizacion, $nit, $nombre_usuario)
+	{
 		$this->email->from($from, "Acreditaciones");
 		$this->email->to($to);
 		$this->email->cc($cc);
@@ -253,26 +254,26 @@ class Registro extends CI_Controller {
 
 		$this->email->message($email_view);
 
-		if($this->email->send()){
+		if ($this->email->send()) {
 			$usuarios = $this->db->select("*")->from("usuarios")->where("usuario", $nombre_usuario)->get()->row();
 			$id_us = $usuarios->id_usuario;
 			$token = $this->db->select("*")->from("token")->where("usuario_token", $nombre_usuario)->get()->row();
 			$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $id_us)->get()->row();
-			echo json_encode(array('url'=>"login", 'msg'=>"Se envio un correo a: ".$to.", por favor verifiquelo para activar su cuenta.", "usuario" => $usuarios, "token" => $token, "organizacion" => $organizacion));
-		}else{
+			echo json_encode(array('url' => "login", 'msg' => "Se envio un correo a: " . $to . ", por favor verifiquelo para activar su cuenta.", "usuario" => $usuarios, "token" => $token, "organizacion" => $organizacion));
+		} else {
 			//SET FOREIGN_KEY_CHECKS=0; -- to disable them
 			$id_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("nombreOrganizacion", $organizacion)->get()->row()->id_organizacion;
 			$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-			if($this->db->delete('estadoOrganizaciones')){
+			if ($this->db->delete('estadoOrganizaciones')) {
 				$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-				if($this->db->delete('solicitudes')){
+				if ($this->db->delete('solicitudes')) {
 					$this->db->where('id_organizacion', $id_organizacion);
-					if($this->db->delete('organizaciones')){
+					if ($this->db->delete('organizaciones')) {
 						$this->db->where('usuario', $nombre_usuario);
-						if($this->db->delete('usuarios')){
+						if ($this->db->delete('usuarios')) {
 							$this->db->where('token', $token);
-							if($this->db->delete('token')){
-								echo json_encode(array('url'=>"login", 'msg'=>"Lo sentimos, hubo un error y no se envio el correo, intente de nuevo.", "status" => 0));
+							if ($this->db->delete('token')) {
+								echo json_encode(array('url' => "login", 'msg' => "Lo sentimos, hubo un error y no se envio el correo, intente de nuevo.", "status" => 0));
 							}
 						}
 					}
@@ -281,7 +282,8 @@ class Registro extends CI_Controller {
 		}
 	}
 
-	public function reenvio(){
+	public function reenvio()
+	{
 		$fromSIA = "Unidad Administrativa Especial de Organizaciones Solidarias UAEOS - Aplicación SIIA.";
 		$organizacion = $this->input->post('organizacion');
 		$nit = $this->input->post('nit');
