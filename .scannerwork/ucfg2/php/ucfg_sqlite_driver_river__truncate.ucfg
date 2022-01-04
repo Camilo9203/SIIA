@@ -1,19 +1,0 @@
-
-ci_db_sqlite_driver::_truncateO
-C/var/www/html/siia/system/database/drivers/sqlite/sqlite_driver.phpπ π("1*∂
-1O
-C/var/www/html/siia/system/database/drivers/sqlite/sqlite_driver.phpª ª(Ñ
-Å
-O
-C/var/www/html/siia/system/database/drivers/sqlite/sqlite_driver.phpª	 ª(
-%1"__concat*
-'DELETE FROM '*
-
-
-$table"Y
-O
-C/var/www/html/siia/system/database/drivers/sqlite/sqlite_driver.phpª ª(
-
-%1:
-$tableB
-ci_db_sqlite_driver

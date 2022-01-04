@@ -19,13 +19,14 @@ class Admin extends CI_Controller
 	}
 	private function mcenc()
 	{
-		$password = "asdQWE123@";
+		$password = "Asodamas2021#";
 		$passwor2 = mc_encrypt($password, KEY_RDEL);
 		echo json_encode($passwor2);
 	}
+
 	private function enchash()
 	{
-		$password = "@1nv3st0rC";
+		$password = "Asodamas2021#";
 		$passwor2 = generate_hash($password);
 		echo json_encode($passwor2);
 	}

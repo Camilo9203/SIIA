@@ -1,27 +1,0 @@
-
-smtp::sendandmailO
-C/var/www/html/siia/application/third_party/phpmailer/class.smtp.php¬ ¬("1*¾
-1O
-C/var/www/html/siia/application/third_party/phpmailer/class.smtp.php® ®(B~
-|
-O
-C/var/www/html/siia/application/third_party/phpmailer/class.smtp.php®* ®(;
-%1"__concat*
-
-SAML FROM:*	
-
-$fromŒ‰
-O
-C/var/www/html/siia/application/third_party/phpmailer/class.smtp.php® ®(A
-%2*
-smtp*
-
-'SAML'*
-
-%1*2ú2sendcommand"Y
-O
-C/var/www/html/siia/application/third_party/phpmailer/class.smtp.php® ®(B
-
-%2:
-$fromB
-smtp

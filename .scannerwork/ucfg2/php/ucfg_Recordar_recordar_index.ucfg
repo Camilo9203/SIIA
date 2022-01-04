@@ -1,39 +1,0 @@
-
-recordar::indexA
-7/var/www/html/siia/application/controllers/Recordar.php ("1*m
-2
-Recordar.php"X
-A
-7/var/www/html/siia/application/controllers/Recordar.php (
-implicit return*•
-1A
-7/var/www/html/siia/application/controllers/Recordar.php (*i
-g
-A
-7/var/www/html/siia/application/controllers/Recordar.php (
-%1"__id**
-
-recordar"
-loadsq
-A
-7/var/www/html/siia/application/controllers/Recordar.php ()
-%2*
-
-%1*
-'include/header_src'2viewi
-g
-A
-7/var/www/html/siia/application/controllers/Recordar.php (
-%3"__id**
-
-recordar"
-load}{
-A
-7/var/www/html/siia/application/controllers/Recordar.php (3
-%4*
-
-%3*" 
-'recordar/recordar_contrasena'2view*
-2B
-
-recordar

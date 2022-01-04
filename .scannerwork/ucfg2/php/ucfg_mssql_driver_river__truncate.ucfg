@@ -1,19 +1,0 @@
-
-ci_db_mssql_driver::_truncateM
-A/var/www/html/siia/system/database/drivers/mssql/mssql_driver.php— —("1*³
-1M
-A/var/www/html/siia/system/database/drivers/mssql/mssql_driver.php™ ™("…
-‚
-M
-A/var/www/html/siia/system/database/drivers/mssql/mssql_driver.php™	 ™(!
-%1"__concat*
-'TRUNCATE TABLE '*
-
-
-$table"W
-M
-A/var/www/html/siia/system/database/drivers/mssql/mssql_driver.php™ ™("
-
-%1:
-$tableB
-ci_db_mssql_driver

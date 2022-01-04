@@ -1,49 +1,0 @@
-
-ci_migration::_update_version=
-1/var/www/html/siia/system/libraries/Migration.phpÉ É(#"1*j
-2
-Migration.php"T
-=
-1/var/www/html/siia/system/libraries/Migration.phpÎ Î(
-implicit return*Ý
-1=
-1/var/www/html/siia/system/libraries/Migration.phpË Í(g
-e
-=
-1/var/www/html/siia/system/libraries/Migration.phpË Ë(
-%1"__id**
-ci_migration"
-dbu
-s
-=
-1/var/www/html/siia/system/libraries/Migration.phpË Ë(+
-%2"__id*&*$
-ci_migration"
-_migration_tableOM
-=
-1/var/www/html/siia/system/libraries/Migration.phpË- Í(
-%3"$Arrayz
-x
-=
-1/var/www/html/siia/system/libraries/Migration.phpË- Í(
-%4"
-__arraySet*
-
-%3*
-	'version'*
-
-
-$migrationge
-=
-1/var/www/html/siia/system/libraries/Migration.phpË Í(
-%5*
-
-%1*
-
-%2*
-
-%32update*
-2:
-
-$migrationB
-ci_migration

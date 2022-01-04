@@ -1,23 +1,0 @@
-
-ci_db_sqlite3_utility::_backupP
-F/var/www/html/siia/system/database/drivers/sqlite3/sqlite3_utility.php7 7("1*Ë
-1P
-F/var/www/html/siia/system/database/drivers/sqlite3/sqlite3_utility.php: :(<„
-
-P
-F/var/www/html/siia/system/database/drivers/sqlite3/sqlite3_utility.php:	 :(
-%1"__id*!*
-ci_db_sqlite3_utility"
-db
-P
-F/var/www/html/siia/system/database/drivers/sqlite3/sqlite3_utility.php:	 :(;
-%2*
-
-%1*
-'db_unsupported_feature'2display_error"Z
-P
-F/var/www/html/siia/system/database/drivers/sqlite3/sqlite3_utility.php: :(<
-
-%2:	
-$paramsB
-ci_db_sqlite3_utility

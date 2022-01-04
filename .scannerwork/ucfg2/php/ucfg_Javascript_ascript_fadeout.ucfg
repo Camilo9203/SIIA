@@ -1,33 +1,0 @@
-
-ci_javascript::fadeout>
-2/var/www/html/siia/system/libraries/Javascript.phpÎ Î("1*ÿ
-1>
-2/var/www/html/siia/system/libraries/Javascript.phpÐ Ð(:i
-g
->
-2/var/www/html/siia/system/libraries/Javascript.phpÐ	 Ð(
-%1"__id**
-ci_javascript"
-js„
->
-2/var/www/html/siia/system/libraries/Javascript.phpÐ	 Ð(9
-%2*
-
-%1*
-
-
-$element*
-
-
-$speed*
-
-	$callback2_fadeout"H
->
-2/var/www/html/siia/system/libraries/Javascript.phpÐ Ð(:
-
-%2:
-
-$element:
-$speed:
-	$callbackB
-ci_javascript

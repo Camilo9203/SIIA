@@ -1,19 +1,0 @@
-
-ci_db_sqlsrv_driver::_truncateO
-C/var/www/html/siia/system/database/drivers/sqlsrv/sqlsrv_driver.php¨ ¨("1*¹
-1O
-C/var/www/html/siia/system/database/drivers/sqlsrv/sqlsrv_driver.phpª ª("‡
-„
-O
-C/var/www/html/siia/system/database/drivers/sqlsrv/sqlsrv_driver.phpª	 ª(!
-%1"__concat*
-'TRUNCATE TABLE '*
-
-
-$table"Y
-O
-C/var/www/html/siia/system/database/drivers/sqlsrv/sqlsrv_driver.phpª ª("
-
-%1:
-$tableB
-ci_db_sqlsrv_driver

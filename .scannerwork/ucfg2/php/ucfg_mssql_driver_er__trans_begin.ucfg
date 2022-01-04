@@ -1,15 +1,0 @@
-
- ci_db_mssql_driver::_trans_beginM
-A/var/www/html/siia/system/database/drivers/mssql/mssql_driver.phpº º( "1*æ
-1M
-A/var/www/html/siia/system/database/drivers/mssql/mssql_driver.phpæ æ(+êç
-M
-A/var/www/html/siia/system/database/drivers/mssql/mssql_driver.phpæ	 æ(*
-%1*
-ci_db_mssql_driver*
-'BEGIN TRAN'2simple_query"W
-M
-A/var/www/html/siia/system/database/drivers/mssql/mssql_driver.phpæ æ(+
-
-%1B
-ci_db_mssql_driver

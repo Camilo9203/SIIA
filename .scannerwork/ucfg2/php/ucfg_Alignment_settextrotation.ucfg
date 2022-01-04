@@ -1,86 +1,0 @@
-
-)phpexcel_style_alignment::settextrotationQ
-E/var/www/html/siia/application/libraries/PHPExcel/Style/Alignment.phpù ù(#"7"12*Û
-7Q
-E/var/www/html/siia/application/libraries/PHPExcel/Style/Alignment.php¶ ¶(#í
-è
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/Style/Alignment.php¶ ¶(#
-%1"__id*.*,
-phpexcel_style_alignment"
-isSupervisor*
-8
-9*Ù
-8Q
-E/var/www/html/siia/application/libraries/PHPExcel/Style/Alignment.phpß ß(Qca
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/Style/Alignment.phpß3 ß(O
-%2"$Arrayç
-ä
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/Style/Alignment.phpß3 ß(O
-%3"
-__arraySet*
-
-%2*
-
-'rotation'*
-	
-$pValueëé
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/Style/Alignment.phpß ß(P
-%4*
-phpexcel_style_alignment*
-
-%22getstylearrayr
-p
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/Style/Alignment.phpß ß(P
-$styleArray"__id*
-
-%4äá
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/Style/Alignment.php® ®('
-%5*
-phpexcel_style_alignment2getactivesheetåâ
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/Style/Alignment.php®2 ®(K
-%6*
-phpexcel_style_alignment2getselectedcellsus
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/Style/Alignment.php® ®(L
-%7*
-
-%5*
-
-%62getstyleÖÇ
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/Style/Alignment.php® ®(i
-%8*
-
-%7*
-
-$styleArray2applyfromarray*
-11*ˆ
-9Q
-E/var/www/html/siia/application/libraries/PHPExcel/Style/Alignment.php™ ™(.ó
-î
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/Style/Alignment.php™ ™(-,
-phpexcel_style_alignment"
-textRotation"__id*
-	
-$pValue*
-11* 
-11Q
-E/var/www/html/siia/application/libraries/PHPExcel/Style/Alignment.php∞ ∞("q
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/Style/Alignment.php∞ ∞(
-phpexcel_style_alignment*
-12
-Alignment.php"h
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/Style/Alignment.php± ±(
-implicit return:	
-$pValueB
-phpexcel_style_alignment

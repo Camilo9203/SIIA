@@ -1,38 +1,0 @@
-
-"phpexcel_chart_legend::__constructL
-B/var/www/html/siia/application/libraries/PHPExcel/Chart/Legend.phpN N("1*v
-2
-
-Legend.php"c
-L
-B/var/www/html/siia/application/libraries/PHPExcel/Chart/Legend.phpS S(
-implicit return*‚
-1L
-B/var/www/html/siia/application/libraries/PHPExcel/Chart/Legend.phpP P(&Ž‹
-L
-B/var/www/html/siia/application/libraries/PHPExcel/Chart/Legend.phpP P(%
-%1*
-phpexcel_chart_legend*
-
-	$position2setposition‰
-†
-L
-B/var/www/html/siia/application/libraries/PHPExcel/Chart/Legend.phpQ Q(#
-phpexcel_chart_legend"
-layout"__id*
-	
-$layoutŒ‰
-L
-B/var/www/html/siia/application/libraries/PHPExcel/Chart/Legend.phpR R(#
-%2*
-phpexcel_chart_legend*
-
-
-$overlay2
-setoverlay*
-2:
-	$position:	
-$layout:
-
-$overlayB
-phpexcel_chart_legend

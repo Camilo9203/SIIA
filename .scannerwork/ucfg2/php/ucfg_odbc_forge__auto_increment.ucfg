@@ -1,11 +1,0 @@
-
-&ci_db_odbc_forge::_attr_auto_incrementH
->/var/www/html/siia/system/database/drivers/odbc/odbc_forge.phpQ Q(("1*v
-1
-odbc_forge.php"_
-H
->/var/www/html/siia/system/database/drivers/odbc/odbc_forge.phpT T(
-implicit return:
-$attributes:
-$fieldB
-ci_db_odbc_forge

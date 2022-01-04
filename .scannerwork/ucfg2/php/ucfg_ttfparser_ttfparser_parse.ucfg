@@ -1,58 +1,0 @@
-
-ttfparser::parseP
-F/var/www/html/siia/application/third_party/fpdf/makefont/ttfparser.php0
- 0("1*}
-2
-ttfparser.php"g
-P
-F/var/www/html/siia/application/third_party/fpdf/makefont/ttfparser.php= =(
-implicit return*ô
-
-1P
-F/var/www/html/siia/application/third_party/fpdf/makefont/ttfparser.php2 2({y
-P
-F/var/www/html/siia/application/third_party/fpdf/makefont/ttfparser.php2 2(
-%1*
-	ttfparser2parseoffsettabletr
-P
-F/var/www/html/siia/application/third_party/fpdf/makefont/ttfparser.php3 3(
-%2*
-	ttfparser2	parseheadtr
-P
-F/var/www/html/siia/application/third_party/fpdf/makefont/ttfparser.php4 4(
-%3*
-	ttfparser2	parsehheatr
-P
-F/var/www/html/siia/application/third_party/fpdf/makefont/ttfparser.php5 5(
-%4*
-	ttfparser2	parsemaxptr
-P
-F/var/www/html/siia/application/third_party/fpdf/makefont/ttfparser.php6 6(
-%5*
-	ttfparser2	parsehmtxtr
-P
-F/var/www/html/siia/application/third_party/fpdf/makefont/ttfparser.php7 7(
-%6*
-	ttfparser2	parselocatr
-P
-F/var/www/html/siia/application/third_party/fpdf/makefont/ttfparser.php8 8(
-%7*
-	ttfparser2	parseglyftr
-P
-F/var/www/html/siia/application/third_party/fpdf/makefont/ttfparser.php9 9(
-%8*
-	ttfparser2	parsecmaptr
-P
-F/var/www/html/siia/application/third_party/fpdf/makefont/ttfparser.php: :(
-%9*
-	ttfparser2	parsenametr
-P
-F/var/www/html/siia/application/third_party/fpdf/makefont/ttfparser.php; ;(
-%10*
-	ttfparser2parseos2us
-P
-F/var/www/html/siia/application/third_party/fpdf/makefont/ttfparser.php< <(
-%11*
-	ttfparser2	parsepost*
-2B
-	ttfparser

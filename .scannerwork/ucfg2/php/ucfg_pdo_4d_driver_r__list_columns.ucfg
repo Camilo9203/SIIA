@@ -1,50 +1,0 @@
-
-"ci_db_pdo_4d_driver::_list_columnsW
-K/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_4d_driver.phpÇ Ç(!"1*á
-1W
-K/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_4d_driver.phpÑ Ö(R¢ü
-W
-K/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_4d_driver.phpÑ Ñ(;
-%1*
-ci_db_pdo_4d_driver*
-'COLUMN_NAME'2escape_identifiers§°
-W
-K/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_4d_driver.phpÑE Ñ(o
-%2*
-ci_db_pdo_4d_driver*
-'_USER_COLUMNS'2escape_identifiers°û
-W
-K/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_4d_driver.phpÖ Ö(5
-%3*
-ci_db_pdo_4d_driver*
-'TABLE_NAME'2escape_identifiersèå
-W
-K/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_4d_driver.phpÖ< Ö(Q
-%4*
-ci_db_pdo_4d_driver*
-
-
-$table2escape√
-¿
-W
-K/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_4d_driver.phpÑ	 Ö(Q
-%5"__concat*
-	'SELECT '*
-
-%1*
-
-' FROM '*
-
-%2*
-	' WHERE '*
-
-%3*	
-' = '*
-
-%4"a
-W
-K/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_4d_driver.phpÑ Ö(R
-
-%5:
-$tableB
-ci_db_pdo_4d_driver

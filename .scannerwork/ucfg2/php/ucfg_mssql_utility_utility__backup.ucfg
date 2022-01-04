@@ -1,23 +1,0 @@
-
-ci_db_mssql_utility::_backupL
-B/var/www/html/siia/system/database/drivers/mssql/mssql_utility.phpG G("1*·
-1L
-B/var/www/html/siia/system/database/drivers/mssql/mssql_utility.phpJ J(<}
-{
-L
-B/var/www/html/siia/system/database/drivers/mssql/mssql_utility.phpJ	 J(
-%1"__id**
-ci_db_mssql_utility"
-dbŒ‰
-L
-B/var/www/html/siia/system/database/drivers/mssql/mssql_utility.phpJ	 J(;
-%2*
-
-%1*
-'db_unsupported_feature'2display_error"V
-L
-B/var/www/html/siia/system/database/drivers/mssql/mssql_utility.phpJ J(<
-
-%2:	
-$paramsB
-ci_db_mssql_utility

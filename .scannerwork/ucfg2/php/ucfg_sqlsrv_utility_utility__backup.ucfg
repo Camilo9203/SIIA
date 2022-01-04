@@ -1,23 +1,0 @@
-
-ci_db_sqlsrv_utility::_backupN
-D/var/www/html/siia/system/database/drivers/sqlsrv/sqlsrv_utility.phpG G("1*Á
-1N
-D/var/www/html/siia/system/database/drivers/sqlsrv/sqlsrv_utility.phpJ J(<€
-~
-N
-D/var/www/html/siia/system/database/drivers/sqlsrv/sqlsrv_utility.phpJ	 J(
-%1"__id* *
-ci_db_sqlsrv_utility"
-dbŽ‹
-N
-D/var/www/html/siia/system/database/drivers/sqlsrv/sqlsrv_utility.phpJ	 J(;
-%2*
-
-%1*
-'db_unsupported_feature'2display_error"X
-N
-D/var/www/html/siia/system/database/drivers/sqlsrv/sqlsrv_utility.phpJ J(<
-
-%2:	
-$paramsB
-ci_db_sqlsrv_utility

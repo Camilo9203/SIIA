@@ -1,23 +1,0 @@
-
-ci_db_cubrid_utility::_backupN
-D/var/www/html/siia/system/database/drivers/cubrid/cubrid_utility.phpH H("1*Á
-1N
-D/var/www/html/siia/system/database/drivers/cubrid/cubrid_utility.phpM M(<€
-~
-N
-D/var/www/html/siia/system/database/drivers/cubrid/cubrid_utility.phpM	 M(
-%1"__id* *
-ci_db_cubrid_utility"
-dbŽ‹
-N
-D/var/www/html/siia/system/database/drivers/cubrid/cubrid_utility.phpM	 M(;
-%2*
-
-%1*
-'db_unsupported_feature'2display_error"X
-N
-D/var/www/html/siia/system/database/drivers/cubrid/cubrid_utility.phpM M(<
-
-%2:	
-$paramsB
-ci_db_cubrid_utility

@@ -1,27 +1,0 @@
-
-ci_db_query_builder::or_whereC
-7/var/www/html/siia/system/database/DB_query_builder.phpø ø("1*Ä
-1C
-7/var/www/html/siia/system/database/DB_query_builder.phpú ú(>ª§
-C
-7/var/www/html/siia/system/database/DB_query_builder.phpú	 ú(=
-%1*
-ci_db_query_builder*
-
-'qb_where'*
-
-$key*
-
-
-$value*	
-'OR '*
-	
-$escape2_wh"M
-C
-7/var/www/html/siia/system/database/DB_query_builder.phpú ú(>
-
-%1:
-$key:
-$value:	
-$escapeB
-ci_db_query_builder

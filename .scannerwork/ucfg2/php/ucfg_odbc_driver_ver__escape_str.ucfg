@@ -1,25 +1,0 @@
-
-ci_db_odbc_driver::_escape_strK
-?/var/www/html/siia/system/database/drivers/odbc/odbc_driver.php½ ½("1*z
-2
-odbc_driver.php"b
-K
-?/var/www/html/siia/system/database/drivers/odbc/odbc_driver.phpÀ À(
-implicit return*ß
-1K
-?/var/www/html/siia/system/database/drivers/odbc/odbc_driver.php¿ ¿(5z
-x
-K
-?/var/www/html/siia/system/database/drivers/odbc/odbc_driver.php¿ ¿(
-%1"__id**
-ci_db_odbc_driver"
-db‹ˆ
-K
-?/var/www/html/siia/system/database/drivers/odbc/odbc_driver.php¿ ¿(4
-%2*
-
-%1*
-'db_unsupported_feature'2display_error*
-2:
-$strB
-ci_db_odbc_driver

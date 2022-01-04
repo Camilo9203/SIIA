@@ -1,38 +1,0 @@
-
-ci_db_cache::__construct9
-//var/www/html/siia/system/database/DB_cache.phpJ J("1*e
-2
-DB_cache.php"P
-9
-//var/www/html/siia/system/database/DB_cache.phpR R(
-implicit return*Ç
-19
-//var/www/html/siia/system/database/DB_cache.phpM M(b
-`
-9
-//var/www/html/siia/system/database/DB_cache.phpO O(
-%1"__id**
-ci_db_cache"
-CI[
-Y
-9
-//var/www/html/siia/system/database/DB_cache.phpO O(
-%2"__id**
-
-%1"
-load_]
-9
-//var/www/html/siia/system/database/DB_cache.phpO O(!
-%3*
-
-%2*
-
-'file'2helper`^
-9
-//var/www/html/siia/system/database/DB_cache.phpQ Q(
-%4*
-ci_db_cache2
-check_path*
-2:
-$dbB
-ci_db_cache

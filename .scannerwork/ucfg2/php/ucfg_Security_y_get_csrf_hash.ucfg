@@ -1,17 +1,0 @@
-
-ci_security::get_csrf_hash7
-+/var/www/html/siia/system/core/Security.php² ²("1*é
-17
-+/var/www/html/siia/system/core/Security.php´ ´(h
-f
-7
-+/var/www/html/siia/system/core/Security.php´	 ´(
-%1"__id**
-ci_security"
-
-_csrf_hash"A
-7
-+/var/www/html/siia/system/core/Security.php´ ´(
-
-%1B
-ci_security

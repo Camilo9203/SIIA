@@ -1,98 +1,0 @@
-
-)phpexcel_writer_opendocument::__constructS
-I/var/www/html/siia/application/libraries/PHPExcel/Writer/OpenDocument.php1 1("1*É
-4
-OpenDocument.php"j
-S
-I/var/www/html/siia/application/libraries/PHPExcel/Writer/OpenDocument.phpB B(
-implicit return*≥
-1S
-I/var/www/html/siia/application/libraries/PHPExcel/Writer/OpenDocument.php3 3('ùö
-S
-I/var/www/html/siia/application/libraries/PHPExcel/Writer/OpenDocument.php3 3(&
-%1* 
-phpexcel_writer_opendocument*
-
-
-$pPHPExcel2setphpexcelec
-S
-I/var/www/html/siia/application/libraries/PHPExcel/Writer/OpenDocument.php5 =(	
-%2"$Array≠
-™
-S
-I/var/www/html/siia/application/libraries/PHPExcel/Writer/OpenDocument.php5 =(	
-%3"
-__arraySet*
-
-%2*
-	'content'**(
-&'PHPExcel_Writer_OpenDocument_Content'ß
-§
-S
-I/var/www/html/siia/application/libraries/PHPExcel/Writer/OpenDocument.php5 =(	
-%4"
-__arraySet*
-
-%2*
-
-'meta'*'%
-#'PHPExcel_Writer_OpenDocument_Meta'Æ
-´
-S
-I/var/www/html/siia/application/libraries/PHPExcel/Writer/OpenDocument.php5 =(	
-%5"
-__arraySet*
-
-%2*
-
-'meta_inf'**(
-&'PHPExcel_Writer_OpenDocument_MetaInf'Ø
-¨
-S
-I/var/www/html/siia/application/libraries/PHPExcel/Writer/OpenDocument.php5 =(	
-%6"
-__arraySet*
-
-%2*
-
-'mimetype'*+)
-''PHPExcel_Writer_OpenDocument_Mimetype'Ø
-¨
-S
-I/var/www/html/siia/application/libraries/PHPExcel/Writer/OpenDocument.php5 =(	
-%7"
-__arraySet*
-
-%2*
-
-'settings'*+)
-''PHPExcel_Writer_OpenDocument_Settings'´
-®
-S
-I/var/www/html/siia/application/libraries/PHPExcel/Writer/OpenDocument.php5 =(	
-%8"
-__arraySet*
-
-%2*
-
-'styles'*)'
-%'PHPExcel_Writer_OpenDocument_Styles'≥
-∞
-S
-I/var/www/html/siia/application/libraries/PHPExcel/Writer/OpenDocument.php5 =(	
-%9"
-__arraySet*
-
-%2*
-'thumbnails'*-+
-)'PHPExcel_Writer_OpenDocument_Thumbnails'z
-x
-S
-I/var/www/html/siia/application/libraries/PHPExcel/Writer/OpenDocument.php5 =(	
-$writerPartsArray"__id*
-
-%2*
-4:
-
-$pPHPExcelB 
-phpexcel_writer_opendocument

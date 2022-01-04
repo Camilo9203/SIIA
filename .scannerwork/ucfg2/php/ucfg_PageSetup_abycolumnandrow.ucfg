@@ -1,60 +1,0 @@
-
-8phpexcel_worksheet_pagesetup::setprintareabycolumnandrowU
-I/var/www/html/siia/application/libraries/PHPExcel/Worksheet/PageSetup.php÷ ÷(."1*à
-1U
-I/var/www/html/siia/application/libraries/PHPExcel/Worksheet/PageSetup.phpù ı(
-§
-¤
-U
-I/var/www/html/siia/application/libraries/PHPExcel/Worksheet/PageSetup.phpú ú(:
-%1"$phpexcel_cell::stringfromcolumnindex*"
-phpexcel_cell*
-
-
-$column1§
-¤
-U
-I/var/www/html/siia/application/libraries/PHPExcel/Worksheet/PageSetup.phpúK ú(y
-%2"$phpexcel_cell::stringfromcolumnindex*"
-phpexcel_cell*
-
-
-$column2š
-—
-V
-I/var/www/html/siia/application/libraries/PHPExcel/Worksheet/PageSetup.phpú ú(
-%3"__concat*
-
-%1*	
-
-$row1*
-':'*
-
-%2*	
-
-$row2±®
-U
-I/var/www/html/siia/application/libraries/PHPExcel/Worksheet/PageSetup.phpù ı(	
-%4* 
-phpexcel_worksheet_pagesetup*
-
-%3*
-
-
-$index*
-	
-$method2setprintarea"_
-U
-I/var/www/html/siia/application/libraries/PHPExcel/Worksheet/PageSetup.phpù ı(
-
-
-%4:
-
-$column1:
-$row1:
-
-$column2:
-$row2:
-$index:	
-$methodB 
-phpexcel_worksheet_pagesetup

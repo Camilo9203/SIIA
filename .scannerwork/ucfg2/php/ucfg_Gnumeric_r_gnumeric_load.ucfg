@@ -1,30 +1,0 @@
-
-phpexcel_reader_gnumeric::loadQ
-E/var/www/html/siia/application/libraries/PHPExcel/Reader/Gnumeric.phpÄ Ä("1*Ý
-1Q
-E/var/www/html/siia/application/libraries/PHPExcel/Reader/Gnumeric.phpÇ Ç(&om
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/Reader/Gnumeric.phpÇ Ç(%
-$objPHPExcel"phpexcel…
-‚
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/Reader/Gnumeric.phpÇ Ç(%
-%1"phpexcel::__construct*
-
-$objPHPExcel®«
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/Reader/Gnumeric.phpÊ Ê(@
-%2*
-phpexcel_reader_gnumeric*
-
-
-$pFilename*
-
-$objPHPExcel2loadintoexisting"[
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/Reader/Gnumeric.phpÊ Ê(A
-
-%2:
-
-$pFilenameB
-phpexcel_reader_gnumeric

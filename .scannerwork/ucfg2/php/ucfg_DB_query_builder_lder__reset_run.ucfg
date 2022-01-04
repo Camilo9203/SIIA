@@ -1,10 +1,0 @@
-
-ci_db_query_builder::_reset_runC
-7/var/www/html/siia/system/database/DB_query_builder.php¶ ¶("3*w
-3
-DB_query_builder.php"Z
-C
-7/var/www/html/siia/system/database/DB_query_builder.php¼ ¼(
-implicit return:
-$qb_reset_itemsB
-ci_db_query_builder

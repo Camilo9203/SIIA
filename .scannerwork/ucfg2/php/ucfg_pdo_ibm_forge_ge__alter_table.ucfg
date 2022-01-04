@@ -1,35 +1,0 @@
-
-!ci_db_pdo_ibm_forge::_alter_tableU
-K/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_ibm_forge.phpT T( "2"3*Ý
-2U
-K/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_ibm_forge.phpX X(|
-z
-U
-K/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_ibm_forge.phpX X(
-$alter_type"__id*
-
-'MODIFY'*
-3*ÿ
-3U
-K/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_ibm_forge.php[ [(;Á
-¾
-U
-K/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_ibm_forge.php[	 [(:
-%1"ci_db_pdo_forge::_alter_table*
-ci_db_pdo_ibm_forge*
-
-$alter_type*
-
-
-$table*
-
-
-$field"_
-U
-K/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_ibm_forge.php[ [(;
-
-%1:
-$alter_type:
-$table:
-$fieldB
-ci_db_pdo_ibm_forge

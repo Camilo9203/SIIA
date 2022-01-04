@@ -1,25 +1,0 @@
-
-ci_input::user_agent4
-(/var/www/html/siia/system/core/Input.phpÈ È("1*‘
-14
-(/var/www/html/siia/system/core/Input.phpÊ Ê(K•’
-4
-(/var/www/html/siia/system/core/Input.phpÊ	 Ê(J
-%1*
-
-ci_input*
-
-
-$_SERVER*
-'HTTP_USER_AGENT'*
-
-
-$xss_clean2_fetch_from_array">
-4
-(/var/www/html/siia/system/core/Input.phpÊ Ê(K
-
-%1:
-
-$xss_cleanB
-
-ci_input

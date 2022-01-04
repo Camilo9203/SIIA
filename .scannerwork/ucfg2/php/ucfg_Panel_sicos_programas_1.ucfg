@@ -1,1294 +1,0 @@
-
-1panel::guardar_formulario_datos_basicos_programas@
-4/var/www/html/siia/application/controllers/Panel.phpë ë(;"1*≤>
-2@
-4/var/www/html/siia/application/controllers/Panel.php∂ ∂(8i
-g
-@
-4/var/www/html/siia/application/controllers/Panel.php∂ ∂(
-%69"__id**
-panel"	
-sessionpn
-@
-4/var/www/html/siia/application/controllers/Panel.php∂ ∂(7
-%70*
-
-%69*
-'usuario_id'2userdatab
-`
-@
-4/var/www/html/siia/application/controllers/Panel.php∂ ∂(7
-$usuario_id"__id*
-
-%70d
-b
-@
-4/var/www/html/siia/application/controllers/Panel.php∑ ∑("
-%71"__id**
-panel"
-dbsq
-@
-4/var/www/html/siia/application/controllers/Panel.php∑ ∑(=
-%72*
-
-%71*
-"id_organizacion"2selectpn
-@
-4/var/www/html/siia/application/controllers/Panel.php∑ ∑(U
-%73*
-
-%72*
-"organizaciones"2fromâÜ
-A
-4/var/www/html/siia/application/controllers/Panel.php∑ ∑(Ä
-%74*
-
-%73*
-"usuarios_id_usuario"*
-
-$usuario_id2whereZX
-A
-4/var/www/html/siia/application/controllers/Panel.php∑ ∑(á
-%75*
-
-%742getZX
-A
-4/var/www/html/siia/application/controllers/Panel.php∑ ∑(é
-%76*
-
-%752rowk
-i
-A
-4/var/www/html/siia/application/controllers/Panel.php∑ ∑(é
-$datos_organizacion"__id*
-
-%76
-}
-@
-4/var/www/html/siia/application/controllers/Panel.php∏ ∏(;
-%77"__id*,**
-
-$datos_organizacion"
-id_organizaciong
-e
-@
-4/var/www/html/siia/application/controllers/Panel.php∏ ∏(;
-$id_organizacion"__id*
-
-%77d
-b
-@
-4/var/www/html/siia/application/controllers/Panel.php∫" ∫(+
-%78"__id**
-panel"
-dbec
-@
-4/var/www/html/siia/application/controllers/Panel.php∫" ∫(8
-%79*
-
-%78*
-"*"2selectwu
-@
-4/var/www/html/siia/application/controllers/Panel.php∫" ∫(W
-%80*
-
-%79*
-"datosBasicosProgramas"2fromôñ
-A
-4/var/www/html/siia/application/controllers/Panel.php∫" ∫(í
-%81*
-
-%80*$"
- "organizaciones_id_organizacion"*
-
-$id_organizacion2whereZX
-A
-4/var/www/html/siia/application/controllers/Panel.php∫" ∫(ô
-%82*
-
-%812getZX
-A
-4/var/www/html/siia/application/controllers/Panel.php∫" ∫(†
-%83*
-
-%822rowt
-r
-A
-4/var/www/html/siia/application/controllers/Panel.php∫ ∫(†
-$datos_datosBasicosProgramas"__id*
-
-%83SQ
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%84"$ArrayÅ
-
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%85"
-__arraySet*
-
-%84*
-'objetivos'*
-
-
-$objetivosÜ
-É
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%86"
-__arraySet*
-
-%84*
-'metodologia'*
-
-$metodologiaâ
-Ü
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%87"
-__arraySet*
-
-%84*
-'materialDidactico'*
-
-	$materialà
-Ö
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%88"
-__arraySet*
-
-%84*
-'bibliografia'*
-
-$bibliografiaÖ
-Ç
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%89"
-__arraySet*
-
-%84*
-'duracionCurso'*
-
-	$duracion¨
-©
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%90"
-__arraySet*
-
-%84*
-'eticaValoresPrincipios'*+
-)
-'$programa_basico_eticaValoresPrincipiosñ
-ì
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%91"
-__arraySet*
-
-%84*
-'solidaridad'* 
-
-$programa_basico_solidaridadê
-ç
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%92"
-__arraySet*
-
-%84*
-
-'economia'*
-
-$programa_basico_economia¢
-ü
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%93"
-__arraySet*
-
-%84*
-'economiaSolidaria'*&
-$
-"$programa_basico_economiaSolidaria∂
-≥
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%94"
-__arraySet*
-
-%84*!
-'asosiatividadEmprendimiento'*0
-.
-,$programa_basico_asosiatividadEmprendimiento™
-ß
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%95"
-__arraySet*
-
-%84*
-'organizacionSolidaria'**
-(
-&$programa_basico_organizacionSolidariaö
-ó
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%96"
-__arraySet*
-
-%84*
-'trabajoEquipo'*"
- 
-$programa_basico_trabajoEquipo§
-°
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%97"
-__arraySet*
-
-%84*
-'educacionSolidaria'*'
-%
-#$programa_basico_educacionSolidaria™
-ß
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%98"
-__arraySet*
-
-%84*
-'responsabilidadSocial'**
-(
-&$programa_basico_responsabilidadSocialö
-ó
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%99"
-__arraySet*
-
-%84*
-'medioAmbiente'*"
- 
-$programa_basico_medioAmbienteØ
-¨
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%100"
-__arraySet*
-
-%84*
-'contextoEconomicoSocial'*,
-*
-($programa_basico_contextoEconomicoSocial©
-¶
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%101"
-__arraySet*
-
-%84*
-'necesidadesSerHumano'*)
-'
-%$programa_basico_necesidadesSerHumanoù
-ö
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%102"
-__arraySet*
-
-%84*
-'porqueFomentar'*#
-!
-$programa_basico_porqueFomentar≠
-™
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%103"
-__arraySet*
-
-%84*
-'principiosValoresFines'*+
-)
-'$programa_basico_principiosValoresFinesù
-ö
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%104"
-__arraySet*
-
-%84*
-'marcoNormativo'*#
-!
-$programa_basico_marcoNormativo…
-∆
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%105"
-__arraySet*
-
-%84**(
-&'tiposOrganizacionesEconomiaSolidaria'*9
-7
-5$programa_basico_tiposOrganizacionesEconomiaSolidaria≠
-™
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%106"
-__arraySet*
-
-%84*
-'antecedentesHistoricos'*+
-)
-'$programa_basico_antecedentesHistoricos≥
-∞
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%107"
-__arraySet*
-
-%84*
-'caracteristicasEconomicas'*.
-,
-*$programa_basico_caracteristicasEconomicas£
-†
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%108"
-__arraySet*
-
-%84*
-'estructuraInterna'*&
-$
-"$programa_basico_estructuraInterna≠
-™
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%109"
-__arraySet*
-
-%84*
-'marcoJuridicoAplicable'*+
-)
-'$programa_basico_marcoJuridicoAplicableµ
-≤
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%110"
-__arraySet*
-
-%84* 
-'fundamentosAdministrativos'*/
--
-+$programa_basico_fundamentosAdministrativosø
-º
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%111"
-__arraySet*
-
-%84*%#
-!'orientacionElaboracionEstatutos'*4
-2
-0$programa_basico_orientacionElaboracionEstatutos©
-¶
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%112"
-__arraySet*
-
-%84*
-'unidadAdministrativa'*)
-'
-%$programa_basico_unidadAdministrativa°
-û
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%113"
-__arraySet*
-
-%84*
-'superintendencia'*%
-#
-!$programa_basico_superintendenciaù
-ö
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%114"
-__arraySet*
-
-%84*
-'fondoGarantias'*#
-!
-$programa_basico_fondoGarantiasü
-ú
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%115"
-__arraySet*
-
-%84*
-'consejoNacional'*$
-"
- $programa_basico_consejoNacionalõ
-ò
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%116"
-__arraySet*
-
-%84*
-'fondoNacional'*"
- 
-$programa_basico_fondoNacionalü
-ú
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%117"
-__arraySet*
-
-%84*
-'mesasRegionales'*$
-"
- $programa_basico_mesasRegionalesû
-õ
-@
-4/var/www/html/siia/application/controllers/Panel.phpº  ﬂ(
-%118"
-__arraySet*
-
-%84*$"
- 'organizaciones_id_organizacion'*
-
-$id_organizacionr
-p
-@
-4/var/www/html/siia/application/controllers/Panel.phpº ﬂ(
-$data_datosBasicosProgramas"__id*
-
-%84*
-3
-4*‰
-3@
-4/var/www/html/siia/application/controllers/Panel.php‚ ‚(Ie
-c
-@
-4/var/www/html/siia/application/controllers/Panel.php‚ ‚(
-%119"__id**
-panel"
-dböó
-@
-4/var/www/html/siia/application/controllers/Panel.php‚ ‚(H
-%120*
-
-%119*$"
- 'organizaciones_id_organizacion'*
-
-$id_organizacion2wheree
-c
-@
-4/var/www/html/siia/application/controllers/Panel.php„ „(
-%121"__id**
-panel"
-dbùö
-@
-4/var/www/html/siia/application/controllers/Panel.php„ „(K
-%122*
-
-%121*
-'datosBasicosProgramas'*
-
-$data_datosBasicosProgramas2updateTR
-@
-4/var/www/html/siia/application/controllers/Panel.php‰ ‰(T
-%123"$Arrayz
-x
-@
-4/var/www/html/siia/application/controllers/Panel.php‰ ‰(T
-%124"
-__arraySet*
-
-%123*	
-'url'*	
-"panel"ñ
-ì
-@
-4/var/www/html/siia/application/controllers/Panel.php‰ ‰(T
-%125"
-__arraySet*
-
-%123*	
-'msg'*&$
-""Se actualizo programas b√°sicos."g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.php‰	 ‰(U
-%126"json_encode* *
-
-%123`
-^
-@
-4/var/www/html/siia/application/controllers/Panel.php‰ ‰(U
-%127"echo* *
-
-%126k
-i
-@
-4/var/www/html/siia/application/controllers/Panel.phpÂ Â(
-%128"__id**
-panel"
-
-logs_siaòï
-@
-4/var/www/html/siia/application/controllers/Panel.phpÂ Â(N
-%129*
-
-%128*20
-.'Formulario Actualizaci√≥n programas b√°sicos'2session_logk
-i
-@
-4/var/www/html/siia/application/controllers/Panel.phpÊ Ê(
-%130"__id**
-panel"
-
-logs_siab`
-@
-4/var/www/html/siia/application/controllers/Panel.phpÊ Ê(!
-%131*
-
-%1302
-logqueries*
-6*Ã
-
-4@
-4/var/www/html/siia/application/controllers/Panel.phpË Ë(Oe
-c
-@
-4/var/www/html/siia/application/controllers/Panel.phpË Ë(
-%132"__id**
-panel"
-dbùö
-@
-4/var/www/html/siia/application/controllers/Panel.phpË Ë(N
-%133*
-
-%132*
-'datosBasicosProgramas'*
-
-$data_datosBasicosProgramas2insertTR
-@
-4/var/www/html/siia/application/controllers/Panel.phpÈ È(T
-%134"$Arrayz
-x
-@
-4/var/www/html/siia/application/controllers/Panel.phpÈ È(T
-%135"
-__arraySet*
-
-%134*	
-'url'*	
-"panel"í
-è
-@
-4/var/www/html/siia/application/controllers/Panel.phpÈ È(T
-%136"
-__arraySet*
-
-%134*	
-'msg'*" 
-"Se guardo Programas Basicos."g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.phpÈ È(U
-%137"json_encode* *
-
-%134`
-^
-@
-4/var/www/html/siia/application/controllers/Panel.phpÈ È(U
-%138"echo* *
-
-%137k
-i
-@
-4/var/www/html/siia/application/controllers/Panel.phpÍ Í(
-%139"__id**
-panel"
-
-logs_siaàÖ
-@
-4/var/www/html/siia/application/controllers/Panel.phpÍ Í(@
-%140*
-
-%139*" 
-'Formulario Programas Basicos'2session_logk
-i
-@
-4/var/www/html/siia/application/controllers/Panel.phpÎ Î(
-%141"__id**
-panel"
-
-logs_siab`
-@
-4/var/www/html/siia/application/controllers/Panel.phpÎ Î(!
-%142*
-
-%1412
-logqueries*
-6*ê
-5@
-4/var/www/html/siia/application/controllers/Panel.phpÓ Ó(fTR
-@
-4/var/www/html/siia/application/controllers/Panel.phpÓ Ó(d
-%143"$Arrayz
-x
-@
-4/var/www/html/siia/application/controllers/Panel.phpÓ Ó(d
-%144"
-__arraySet*
-
-%143*	
-'url'*	
-"panel"¶
-£
-@
-4/var/www/html/siia/application/controllers/Panel.phpÓ Ó(d
-%145"
-__arraySet*
-
-%143*	
-'msg'*64
-2"Verifique los datos ingresado, no son correctos."g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.phpÓ Ó(e
-%146"json_encode* *
-
-%143`
-^
-@
-4/var/www/html/siia/application/controllers/Panel.phpÓ Ó(e
-%147"echo* *
-
-%146*
-6*i
-6
-	Panel.php"W
-@
-4/var/www/html/siia/application/controllers/Panel.php (
-implicit return*À^
-1@
-4/var/www/html/siia/application/controllers/Panel.phpí í(/f
-d
-@
-4/var/www/html/siia/application/controllers/Panel.phpí í(
-%1"__id**
-panel"
-inputig
-@
-4/var/www/html/siia/application/controllers/Panel.phpí í(.
-%2*
-
-%1*
-'objetivos'2post`
-^
-@
-4/var/www/html/siia/application/controllers/Panel.phpí í(.
-
-$objetivos"__id*
-
-%2f
-d
-@
-4/var/www/html/siia/application/controllers/Panel.phpì ì(
-%3"__id**
-panel"
-inputki
-@
-4/var/www/html/siia/application/controllers/Panel.phpì ì(2
-%4*
-
-%3*
-'metodologia'2postb
-`
-@
-4/var/www/html/siia/application/controllers/Panel.phpì ì(2
-$metodologia"__id*
-
-%4f
-d
-@
-4/var/www/html/siia/application/controllers/Panel.phpî î(
-%5"__id**
-panel"
-inputhf
-@
-4/var/www/html/siia/application/controllers/Panel.phpî î(,
-%6*
-
-%5*
-
-'material'2post_
-]
-@
-4/var/www/html/siia/application/controllers/Panel.phpî î(,
-	$material"__id*
-
-%6f
-d
-@
-4/var/www/html/siia/application/controllers/Panel.phpï ï(
-%7"__id**
-panel"
-inputlj
-@
-4/var/www/html/siia/application/controllers/Panel.phpï ï(4
-%8*
-
-%7*
-'bibliografia'2postc
-a
-@
-4/var/www/html/siia/application/controllers/Panel.phpï ï(4
-$bibliografia"__id*
-
-%8f
-d
-@
-4/var/www/html/siia/application/controllers/Panel.phpñ ñ(
-%9"__id**
-panel"
-inputig
-@
-4/var/www/html/siia/application/controllers/Panel.phpñ ñ(,
-%10*
-
-%9*
-
-'duracion'2post`
-^
-@
-4/var/www/html/siia/application/controllers/Panel.phpñ ñ(,
-	$duracion"__id*
-
-%10g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.phpò, ò(8
-%11"__id**
-panel"
-inputâÜ
-@
-4/var/www/html/siia/application/controllers/Panel.phpò, ò(h
-%12*
-
-%11*,*
-('programa_basico_eticaValoresPrincipios'2post~
-|
-@
-4/var/www/html/siia/application/controllers/Panel.phpò ò(h)
-'$programa_basico_eticaValoresPrincipios"__id*
-
-%12g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.phpô! ô(-
-%13"__id**
-panel"
-input}{
-@
-4/var/www/html/siia/application/controllers/Panel.phpô! ô(R
-%14*
-
-%13*!
-'programa_basico_solidaridad'2posts
-q
-@
-4/var/www/html/siia/application/controllers/Panel.phpô ô(R
-$programa_basico_solidaridad"__id*
-
-%14g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.phpö ö(*
-%15"__id**
-panel"
-inputzx
-@
-4/var/www/html/siia/application/controllers/Panel.phpö ö(L
-%16*
-
-%15*
-'programa_basico_economia'2postp
-n
-@
-4/var/www/html/siia/application/controllers/Panel.phpö ö(L
-$programa_basico_economia"__id*
-
-%16g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.phpõ' õ(3
-%17"__id**
-panel"
-inputÑÅ
-@
-4/var/www/html/siia/application/controllers/Panel.phpõ' õ(^
-%18*
-
-%17*'%
-#'programa_basico_economiaSolidaria'2posty
-w
-@
-4/var/www/html/siia/application/controllers/Panel.phpõ õ(^$
-"$programa_basico_economiaSolidaria"__id*
-
-%18g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.phpú1 ú(=
-%19"__id**
-panel"
-inputéã
-@
-4/var/www/html/siia/application/controllers/Panel.phpú1 ú(r
-%20*
-
-%19*1/
--'programa_basico_asosiatividadEmprendimiento'2postÑ
-Å
-@
-4/var/www/html/siia/application/controllers/Panel.phpú ú(r.
-,$programa_basico_asosiatividadEmprendimiento"__id*
-
-%20g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.phpù+ ù(7
-%21"__id**
-panel"
-inputàÖ
-@
-4/var/www/html/siia/application/controllers/Panel.phpù+ ù(f
-%22*
-
-%21*+)
-''programa_basico_organizacionSolidaria'2post}
-{
-@
-4/var/www/html/siia/application/controllers/Panel.phpù ù(f(
-&$programa_basico_organizacionSolidaria"__id*
-
-%22g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.phpû# û(/
-%23"__id**
-panel"
-input}
-@
-4/var/www/html/siia/application/controllers/Panel.phpû# û(V
-%24*
-
-%23*#!
-'programa_basico_trabajoEquipo'2postu
-s
-@
-4/var/www/html/siia/application/controllers/Panel.phpû û(V 
-$programa_basico_trabajoEquipo"__id*
-
-%24g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.phpü( ü(4
-%25"__id**
-panel"
-inputÖÇ
-@
-4/var/www/html/siia/application/controllers/Panel.phpü( ü(`
-%26*
-
-%25*(&
-$'programa_basico_educacionSolidaria'2postz
-x
-@
-4/var/www/html/siia/application/controllers/Panel.phpü ü(`%
-#$programa_basico_educacionSolidaria"__id*
-
-%26g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.php†+ †(7
-%27"__id**
-panel"
-inputàÖ
-@
-4/var/www/html/siia/application/controllers/Panel.php†+ †(f
-%28*
-
-%27*+)
-''programa_basico_responsabilidadSocial'2post}
-{
-@
-4/var/www/html/siia/application/controllers/Panel.php† †(f(
-&$programa_basico_responsabilidadSocial"__id*
-
-%28g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.php°# °(/
-%29"__id**
-panel"
-input}
-@
-4/var/www/html/siia/application/controllers/Panel.php°# °(V
-%30*
-
-%29*#!
-'programa_basico_medioAmbiente'2postu
-s
-@
-4/var/www/html/siia/application/controllers/Panel.php° °(V 
-$programa_basico_medioAmbiente"__id*
-
-%30g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.php¢- ¢(9
-%31"__id**
-panel"
-inputäá
-@
-4/var/www/html/siia/application/controllers/Panel.php¢- ¢(j
-%32*
-
-%31*-+
-)'programa_basico_contextoEconomicoSocial'2post
-}
-@
-4/var/www/html/siia/application/controllers/Panel.php¢ ¢(j*
-($programa_basico_contextoEconomicoSocial"__id*
-
-%32g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.php£* £(6
-%33"__id**
-panel"
-inputáÑ
-@
-4/var/www/html/siia/application/controllers/Panel.php£* £(d
-%34*
-
-%33**(
-&'programa_basico_necesidadesSerHumano'2post|
-z
-@
-4/var/www/html/siia/application/controllers/Panel.php£ £(d'
-%$programa_basico_necesidadesSerHumano"__id*
-
-%34g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.php§$ §(0
-%35"__id**
-panel"
-inputÄ~
-@
-4/var/www/html/siia/application/controllers/Panel.php§$ §(X
-%36*
-
-%35*$"
- 'programa_basico_porqueFomentar'2postv
-t
-@
-4/var/www/html/siia/application/controllers/Panel.php§ §(X!
-$programa_basico_porqueFomentar"__id*
-
-%36g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.php•, •(8
-%37"__id**
-panel"
-inputâÜ
-@
-4/var/www/html/siia/application/controllers/Panel.php•, •(h
-%38*
-
-%37*,*
-('programa_basico_principiosValoresFines'2post~
-|
-@
-4/var/www/html/siia/application/controllers/Panel.php• •(h)
-'$programa_basico_principiosValoresFines"__id*
-
-%38g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.php¶$ ¶(0
-%39"__id**
-panel"
-inputÄ~
-@
-4/var/www/html/siia/application/controllers/Panel.php¶$ ¶(X
-%40*
-
-%39*$"
- 'programa_basico_marcoNormativo'2postv
-t
-@
-4/var/www/html/siia/application/controllers/Panel.php¶ ¶(X!
-$programa_basico_marcoNormativo"__id*
-
-%40g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.phpß: ß(F
-%41"__id**
-panel"
-inputòï
-A
-4/var/www/html/siia/application/controllers/Panel.phpß: ß(Ñ
-%42*
-
-%41*:8
-6'programa_basico_tiposOrganizacionesEconomiaSolidaria'2posté
-ã
-A
-4/var/www/html/siia/application/controllers/Panel.phpß ß(Ñ7
-5$programa_basico_tiposOrganizacionesEconomiaSolidaria"__id*
-
-%42g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.php®, ®(8
-%43"__id**
-panel"
-inputâÜ
-@
-4/var/www/html/siia/application/controllers/Panel.php®, ®(h
-%44*
-
-%43*,*
-('programa_basico_antecedentesHistoricos'2post~
-|
-@
-4/var/www/html/siia/application/controllers/Panel.php® ®(h)
-'$programa_basico_antecedentesHistoricos"__id*
-
-%44g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.php©/ ©(;
-%45"__id**
-panel"
-inputåâ
-@
-4/var/www/html/siia/application/controllers/Panel.php©/ ©(n
-%46*
-
-%45*/-
-+'programa_basico_caracteristicasEconomicas'2postÅ
-
-@
-4/var/www/html/siia/application/controllers/Panel.php© ©(n,
-*$programa_basico_caracteristicasEconomicas"__id*
-
-%46g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.php™' ™(3
-%47"__id**
-panel"
-inputÑÅ
-@
-4/var/www/html/siia/application/controllers/Panel.php™' ™(^
-%48*
-
-%47*'%
-#'programa_basico_estructuraInterna'2posty
-w
-@
-4/var/www/html/siia/application/controllers/Panel.php™ ™(^$
-"$programa_basico_estructuraInterna"__id*
-
-%48g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.php´, ´(8
-%49"__id**
-panel"
-inputâÜ
-@
-4/var/www/html/siia/application/controllers/Panel.php´, ´(h
-%50*
-
-%49*,*
-('programa_basico_marcoJuridicoAplicable'2post~
-|
-@
-4/var/www/html/siia/application/controllers/Panel.php´ ´(h)
-'$programa_basico_marcoJuridicoAplicable"__id*
-
-%50g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.php¨0 ¨(<
-%51"__id**
-panel"
-inputçä
-@
-4/var/www/html/siia/application/controllers/Panel.php¨0 ¨(p
-%52*
-
-%51*0.
-,'programa_basico_fundamentosAdministrativos'2postÉ
-Ä
-@
-4/var/www/html/siia/application/controllers/Panel.php¨ ¨(p-
-+$programa_basico_fundamentosAdministrativos"__id*
-
-%52g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.php≠5 ≠(A
-%53"__id**
-panel"
-inputíè
-@
-4/var/www/html/siia/application/controllers/Panel.php≠5 ≠(z
-%54*
-
-%53*53
-1'programa_basico_orientacionElaboracionEstatutos'2postà
-Ö
-@
-4/var/www/html/siia/application/controllers/Panel.php≠ ≠(z2
-0$programa_basico_orientacionElaboracionEstatutos"__id*
-
-%54g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.phpÆ* Æ(6
-%55"__id**
-panel"
-inputáÑ
-@
-4/var/www/html/siia/application/controllers/Panel.phpÆ* Æ(d
-%56*
-
-%55**(
-&'programa_basico_unidadAdministrativa'2post|
-z
-@
-4/var/www/html/siia/application/controllers/Panel.phpÆ Æ(d'
-%$programa_basico_unidadAdministrativa"__id*
-
-%56g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.phpØ& Ø(2
-%57"__id**
-panel"
-inputÉÄ
-@
-4/var/www/html/siia/application/controllers/Panel.phpØ& Ø(\
-%58*
-
-%57*&$
-"'programa_basico_superintendencia'2postx
-v
-@
-4/var/www/html/siia/application/controllers/Panel.phpØ Ø(\#
-!$programa_basico_superintendencia"__id*
-
-%58g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.php∞$ ∞(0
-%59"__id**
-panel"
-inputÄ~
-@
-4/var/www/html/siia/application/controllers/Panel.php∞$ ∞(X
-%60*
-
-%59*$"
- 'programa_basico_fondoGarantias'2postv
-t
-@
-4/var/www/html/siia/application/controllers/Panel.php∞ ∞(X!
-$programa_basico_fondoGarantias"__id*
-
-%60g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.php±% ±(1
-%61"__id**
-panel"
-inputÅ
-@
-4/var/www/html/siia/application/controllers/Panel.php±% ±(Z
-%62*
-
-%61*%#
-!'programa_basico_consejoNacional'2postw
-u
-@
-4/var/www/html/siia/application/controllers/Panel.php± ±(Z"
- $programa_basico_consejoNacional"__id*
-
-%62g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.php≤# ≤(/
-%63"__id**
-panel"
-input}
-@
-4/var/www/html/siia/application/controllers/Panel.php≤# ≤(V
-%64*
-
-%63*#!
-'programa_basico_fondoNacional'2postu
-s
-@
-4/var/www/html/siia/application/controllers/Panel.php≤ ≤(V 
-$programa_basico_fondoNacional"__id*
-
-%64g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.php≥% ≥(1
-%65"__id**
-panel"
-inputÅ
-@
-4/var/www/html/siia/application/controllers/Panel.php≥% ≥(Z
-%66*
-
-%65*%#
-!'programa_basico_mesasRegionales'2postw
-u
-@
-4/var/www/html/siia/application/controllers/Panel.php≥ ≥(Z"
- $programa_basico_mesasRegionales"__id*
-
-%66g
-e
-@
-4/var/www/html/siia/application/controllers/Panel.phpµ µ(
-%67"__id**
-panel"
-inputZX
-@
-4/var/www/html/siia/application/controllers/Panel.phpµ µ(
-%68*
-
-%672post*
-2
-5B	
-panel

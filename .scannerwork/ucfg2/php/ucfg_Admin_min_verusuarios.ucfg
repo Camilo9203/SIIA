@@ -1,51 +1,0 @@
-
-admin::verusuarios@
-4/var/www/html/siia/application/controllers/Admin.phpÝ Ý("1*Ô
-1@
-4/var/www/html/siia/application/controllers/Admin.phpÞ Þ(_c
-a
-@
-4/var/www/html/siia/application/controllers/Admin.phpÞ Þ(
-%1"__id**
-admin"
-dbca
-@
-4/var/www/html/siia/application/controllers/Admin.phpÞ Þ($
-%2*
-
-%1*
-"*"2selecthf
-@
-4/var/www/html/siia/application/controllers/Admin.phpÞ Þ(6
-%3*
-
-%2*
-
-"usuarios"2frompn
-@
-4/var/www/html/siia/application/controllers/Admin.phpÞ Þ(M
-%4*
-
-%3*
-"logged_in"*22whereWU
-@
-4/var/www/html/siia/application/controllers/Admin.phpÞ Þ(T
-%5*
-
-%42getZX
-@
-4/var/www/html/siia/application/controllers/Admin.phpÞ Þ(^
-%6*
-
-%52result_
-]
-@
-4/var/www/html/siia/application/controllers/Admin.phpÞ Þ(^
-	$usuarios"__id*
-
-%6"Q
-@
-4/var/www/html/siia/application/controllers/Admin.phpß ß(
-
-	$usuariosB	
-admin

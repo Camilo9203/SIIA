@@ -1,32 +1,0 @@
-
-!ci_db_pdo_sqlite_driver::_replace[
-O/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_sqlite_driver.phpÄ Ä("1*š
-1[
-O/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_sqlite_driver.phpÆ Æ(?Ã
-À
-[
-O/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_sqlite_driver.phpÆ Æ(>
-%1"ci_db_pdo_driver::_replace*
-ci_db_pdo_sqlite_driver*
-
-
-$table*	
-
-$keys*
-	
-$valuesŠ
-‡
-[
-O/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_sqlite_driver.phpÆ	 Æ(>
-%2"__concat*
-'INSERT OR '*
-
-%1"e
-[
-O/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_sqlite_driver.phpÆ Æ(?
-
-%2:
-$table:
-$keys:	
-$valuesB
-ci_db_pdo_sqlite_driver

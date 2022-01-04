@@ -1,23 +1,0 @@
-
-ci_db_mysqli_result::num_fieldsM
-C/var/www/html/siia/system/database/drivers/mysqli/mysqli_result.phpH H("1*¬
-1M
-C/var/www/html/siia/system/database/drivers/mysqli/mysqli_result.phpJ J('†
-ƒ
-M
-C/var/www/html/siia/system/database/drivers/mysqli/mysqli_result.phpJ	 J(
-%1"__id*&*$
-ci_db_mysqli_result"
-	result_idv
-t
-M
-C/var/www/html/siia/system/database/drivers/mysqli/mysqli_result.phpJ	 J(&
-%2"__id**
-
-%1"
-field_count"W
-M
-C/var/www/html/siia/system/database/drivers/mysqli/mysqli_result.phpJ J('
-
-%2B
-ci_db_mysqli_result

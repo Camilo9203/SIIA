@@ -1,72 +1,0 @@
-
-admin::cargar_visitas@
-4/var/www/html/siia/application/controllers/Admin.phpÒ Ò("1*´	
-1@
-4/var/www/html/siia/application/controllers/Admin.phpÚ Ú(?h
-f
-@
-4/var/www/html/siia/application/controllers/Admin.phpÚ Ú("
-%1"__id**
-admin"	
-sessionrp
-@
-4/var/www/html/siia/application/controllers/Admin.phpÚ Ú(>
-%2*
-
-%1*
-'nombre_usuario'2userdatae
-c
-@
-4/var/www/html/siia/application/controllers/Admin.phpÚ Ú(>
-$nombre_usuario"__id*
-
-%2c
-a
-@
-4/var/www/html/siia/application/controllers/Admin.phpÛ Û(
-%3"__id**
-admin"
-dbca
-@
-4/var/www/html/siia/application/controllers/Admin.phpÛ Û(#
-%4*
-
-%3*
-"*"2selectge
-@
-4/var/www/html/siia/application/controllers/Admin.phpÛ Û(4
-%5*
-
-%4*
-	"visitas"2fromÑÅ
-@
-4/var/www/html/siia/application/controllers/Admin.phpÛ Û(]
-%6*
-
-%5*
-"usuarioVisita"*
-
-$nombre_usuario2whereWU
-@
-4/var/www/html/siia/application/controllers/Admin.phpÛ Û(d
-%7*
-
-%62getZX
-@
-4/var/www/html/siia/application/controllers/Admin.phpÛ Û(n
-%8*
-
-%72result^
-\
-@
-4/var/www/html/siia/application/controllers/Admin.phpÛ Û(n
-
-$visitas"__id*
-
-%8"P
-@
-4/var/www/html/siia/application/controllers/Admin.phpÙ Ù(
-
-
-$visitasB	
-admin

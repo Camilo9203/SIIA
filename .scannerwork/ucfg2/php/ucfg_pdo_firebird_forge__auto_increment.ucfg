@@ -1,11 +1,0 @@
-
-.ci_db_pdo_firebird_forge::_attr_auto_increment\
-P/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_firebird_forge.phpè è(("1*’
-1
-pdo_firebird_forge.php"s
-\
-P/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_firebird_forge.phpë ë(
-implicit return:
-$attributes:
-$fieldB
-ci_db_pdo_firebird_forge

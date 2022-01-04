@@ -1,21 +1,0 @@
-
-ci_xmlrpc::method:
-./var/www/html/siia/system/libraries/Xmlrpc.php‘ ‘("1*d
-2
-
-Xmlrpc.php"Q
-:
-./var/www/html/siia/system/libraries/Xmlrpc.php” ”(
-implicit return*²
-1:
-./var/www/html/siia/system/libraries/Xmlrpc.php“ “(l
-j
-:
-./var/www/html/siia/system/libraries/Xmlrpc.php“ “(
-	ci_xmlrpc"
-method"__id*
-
-	$function*
-2:
-	$functionB
-	ci_xmlrpc

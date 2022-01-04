@@ -1,74 +1,0 @@
-
-update::index?
-5/var/www/html/siia/application/controllers/Update.php ("1*i
-2
-
-Update.php"V
-?
-5/var/www/html/siia/application/controllers/Update.php   (
-implicit return*≤
-1?
-5/var/www/html/siia/application/controllers/Update.php (#Ñ
-Å
-?
-5/var/www/html/siia/application/controllers/Update.php (
-%1"
-__arraySet*	
-
-$data*	
-'title'*
-'Actualizaci√≥n'e
-c
-?
-5/var/www/html/siia/application/controllers/Update.php (
-%2"__id**
-update"
-loadxv
-?
-5/var/www/html/siia/application/controllers/Update.php (,
-%3*
-
-%2*
-'include/header'*	
-
-$data2viewe
-c
-?
-5/var/www/html/siia/application/controllers/Update.php (
-%4"__id**
-update"
-loadlj
-?
-5/var/www/html/siia/application/controllers/Update.php ($
-%5*
-
-%4*
-'actualizacion'2viewe
-c
-?
-5/var/www/html/siia/application/controllers/Update.php (
-%6"__id**
-update"
-loadmk
-?
-5/var/www/html/siia/application/controllers/Update.php (%
-%7*
-
-%6*
-'include/footer'2viewi
-g
-?
-5/var/www/html/siia/application/controllers/Update.php (
-%8"__id**
-update"
-
-logs_siaig
-?
-5/var/www/html/siia/application/controllers/Update.php (%
-%9*
-
-%8*
-'PLACE_USER'2logs*
-2B
-
-update

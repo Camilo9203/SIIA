@@ -1,40 +1,0 @@
-
-ci_jquery::_removeclassE
-9/var/www/html/siia/system/libraries/Javascript/Jquery.phpÀ À( "1* 
-1E
-9/var/www/html/siia/system/libraries/Javascript/Jquery.phpÂ Â(,{y
-E
-9/var/www/html/siia/system/libraries/Javascript/Jquery.phpÂ Â(+
-%1*
-	ci_jquery*
-
-
-$element2_prep_elementc
-a
-E
-9/var/www/html/siia/system/libraries/Javascript/Jquery.phpÂ Â(+
-
-$element"__id*
-
-%1 
-
-E
-9/var/www/html/siia/system/libraries/Javascript/Jquery.phpÃ	 Ã(5
-%2"__concat*
-'$('*
-
-
-$element*
-').removeClass("'*
-
-
-$class*	
-'");'"O
-E
-9/var/www/html/siia/system/libraries/Javascript/Jquery.phpÃ Ã(6
-
-%2:
-
-$element:
-$classB
-	ci_jquery

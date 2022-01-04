@@ -1,49 +1,0 @@
-
-home::ejemplocorreos=
-3/var/www/html/siia/application/controllers/Home.php+ +("1*e
-2
-
-Home.php"T
-=
-3/var/www/html/siia/application/controllers/Home.php0 0(
-implicit return*Í
-1=
-3/var/www/html/siia/application/controllers/Home.php- -(&a
-_
-=
-3/var/www/html/siia/application/controllers/Home.php- -(
-%1"__id**
-home"
-loadki
-=
-3/var/www/html/siia/application/controllers/Home.php- -(%
-%2*
-
-%1*
-'email/contacto'2viewa
-_
-=
-3/var/www/html/siia/application/controllers/Home.php. .(
-%3"__id**
-home"
-loadvt
-=
-3/var/www/html/siia/application/controllers/Home.php. .(0
-%4*
-
-%3*
-'email/recordar_contrasena'2viewa
-_
-=
-3/var/www/html/siia/application/controllers/Home.php/ /(
-%5"__id**
-home"
-loadvt
-=
-3/var/www/html/siia/application/controllers/Home.php/ /(0
-%6*
-
-%5*
-'email/verificacion_cuenta'2view*
-2B
-home

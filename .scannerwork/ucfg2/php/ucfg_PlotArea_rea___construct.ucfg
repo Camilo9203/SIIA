@@ -1,29 +1,0 @@
-
-$phpexcel_chart_plotarea::__constructN
-D/var/www/html/siia/application/libraries/PHPExcel/Chart/PlotArea.php/ /("1*z
-2
-PlotArea.php"e
-N
-D/var/www/html/siia/application/libraries/PHPExcel/Chart/PlotArea.php3 3(
-implicit return*Ä
-1N
-D/var/www/html/siia/application/libraries/PHPExcel/Chart/PlotArea.php1 1( ç
-ä
-N
-D/var/www/html/siia/application/libraries/PHPExcel/Chart/PlotArea.php1 1(%
-phpexcel_chart_plotarea"
-layout"__id*
-	
-$layoutï
-í
-N
-D/var/www/html/siia/application/libraries/PHPExcel/Chart/PlotArea.php2 2(')
-phpexcel_chart_plotarea"
-
-plotSeries"__id*
-
-$plotSeries*
-2:	
-$layout:
-$plotSeriesB
-phpexcel_chart_plotarea

@@ -1,90 +1,0 @@
-
-#phpexcel_calculation::listfunctionsM
-A/var/www/html/siia/application/libraries/PHPExcel/Calculation.php˚! ˚!(!"1*Ì
-2M
-A/var/www/html/siia/application/libraries/PHPExcel/Calculation.phpˇ! ˇ!()ê
-ç
-M
-A/var/www/html/siia/application/libraries/PHPExcel/Calculation.phpˇ! ˇ!()
-%2"__id*0*.
-phpexcel_calculation"
-$PHPExcelFunctions*
-3
-5*‰
-3M
-A/var/www/html/siia/application/libraries/PHPExcel/Calculation.phpÄ" Ä"(Tá
-Ñ
-M
-A/var/www/html/siia/application/libraries/PHPExcel/Calculation.phpÄ" Ä"()
-%3"
-__arrayGet*
-
-	$function*
-'functionCall'*
-2
-4*•
-4M
-A/var/www/html/siia/application/libraries/PHPExcel/Calculation.phpÅ" Ö"(É
-Ä
-M
-A/var/www/html/siia/application/libraries/PHPExcel/Calculation.phpÇ" Ç"()
-%5"
-__arrayGet*
-
-	$function*
-
-'category'á
-Ñ
-M
-A/var/www/html/siia/application/libraries/PHPExcel/Calculation.phpÑ" Ñ"(-
-%6"
-__arrayGet*
-
-	$function*
-'functionCall'vt
-M
-A/var/www/html/siia/application/libraries/PHPExcel/Calculation.phpÅ". Ö"(
-%4"phpexcel_calculation_functionØ
-¨
-M
-A/var/www/html/siia/application/libraries/PHPExcel/Calculation.phpÅ". Ö"(
-%7"*phpexcel_calculation_function::__construct*
-
-%4*
-
-%5*
-
-$functionName*
-
-%6ë
-é
-M
-A/var/www/html/siia/application/libraries/PHPExcel/Calculation.phpÅ" Å"(+
-%8"
-__arraySet*
-
-$returnValue*
-
-$functionName*
-
-%4*
-2*µ
-5M
-A/var/www/html/siia/application/libraries/PHPExcel/Calculation.phpâ" â"("a
-M
-A/var/www/html/siia/application/libraries/PHPExcel/Calculation.phpâ" â"(
-
-$returnValue*©
-1M
-A/var/www/html/siia/application/libraries/PHPExcel/Calculation.php˝! ˝!(_]
-M
-A/var/www/html/siia/application/libraries/PHPExcel/Calculation.php˝! ˝!(
-%1"$Arrayo
-m
-M
-A/var/www/html/siia/application/libraries/PHPExcel/Calculation.php˝! ˝!(
-$returnValue"__id*
-
-%1*
-2B
-phpexcel_calculation

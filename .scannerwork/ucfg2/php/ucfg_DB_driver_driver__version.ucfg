@@ -1,9 +1,0 @@
-
-ci_db_driver::_version<
-0/var/www/html/siia/system/database/DB_driver.phpË Ë("1* 
-1<
-0/var/www/html/siia/system/database/DB_driver.phpÍ Í(#"]
-<
-0/var/www/html/siia/system/database/DB_driver.phpÍ Í(#
-'SELECT VERSION() AS ver'B
-ci_db_driver

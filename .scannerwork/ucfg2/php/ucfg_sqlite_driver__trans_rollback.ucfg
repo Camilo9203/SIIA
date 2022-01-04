@@ -1,16 +1,0 @@
-
-$ci_db_sqlite_driver::_trans_rollbackO
-C/var/www/html/siia/system/database/drivers/sqlite/sqlite_driver.php— —(#"1*Ã
-1O
-C/var/www/html/siia/system/database/drivers/sqlite/sqlite_driver.php™ ™()‘Ž
-O
-C/var/www/html/siia/system/database/drivers/sqlite/sqlite_driver.php™	 ™((
-%1*
-ci_db_sqlite_driver*
-
-'ROLLBACK'2simple_query"Y
-O
-C/var/www/html/siia/system/database/drivers/sqlite/sqlite_driver.php™ ™()
-
-%1B
-ci_db_sqlite_driver

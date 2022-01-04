@@ -1,41 +1,0 @@
-
-%phpexcel_reader_gnumeric::__constructO
-E/var/www/html/siia/application/libraries/PHPExcel/Reader/Gnumeric.php: :("1*{
-2
-Gnumeric.php"f
-O
-E/var/www/html/siia/application/libraries/PHPExcel/Reader/Gnumeric.php> >(
-implicit return*µ
-1O
-E/var/www/html/siia/application/libraries/PHPExcel/Reader/Gnumeric.php< <(H|z
-O
-E/var/www/html/siia/application/libraries/PHPExcel/Reader/Gnumeric.php<  <(G
-%1"!phpexcel_reader_defaultreadfilter’
-
-O
-E/var/www/html/siia/application/libraries/PHPExcel/Reader/Gnumeric.php<  <(G
-%2".phpexcel_reader_defaultreadfilter::__construct*
-
-%1Ž
-‹
-O
-E/var/www/html/siia/application/libraries/PHPExcel/Reader/Gnumeric.php< <(G*
-phpexcel_reader_gnumeric"
-
-readFilter"__id*
-
-%1Ÿ
-œ
-O
-E/var/www/html/siia/application/libraries/PHPExcel/Reader/Gnumeric.php=! =(H
-%3"%phpexcel_referencehelper::getinstance*"
-phpexcel_referencehelper“
-
-O
-E/var/www/html/siia/application/libraries/PHPExcel/Reader/Gnumeric.php= =(H/
-phpexcel_reader_gnumeric"
-referenceHelper"__id*
-
-%3*
-2B
-phpexcel_reader_gnumeric

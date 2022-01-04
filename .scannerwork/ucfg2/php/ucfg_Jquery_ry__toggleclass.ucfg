@@ -1,40 +1,0 @@
-
-ci_jquery::_toggleclassE
-9/var/www/html/siia/system/libraries/Javascript/Jquery.php¨ ¨( "1*†
-1E
-9/var/www/html/siia/system/libraries/Javascript/Jquery.phpÆ Æ(,{y
-E
-9/var/www/html/siia/system/libraries/Javascript/Jquery.phpÆ Æ(+
-%1*
-	ci_jquery*
-
-
-$element2_prep_elementc
-a
-E
-9/var/www/html/siia/system/libraries/Javascript/Jquery.phpÆ Æ(+
-
-$element"__id*
-
-%1†
-ù
-E
-9/var/www/html/siia/system/libraries/Javascript/Jquery.phpØ	 Ø(5
-%2"__concat*
-'$('*
-
-
-$element*
-').toggleClass("'*
-
-
-$class*	
-'");'"O
-E
-9/var/www/html/siia/system/libraries/Javascript/Jquery.phpØ Ø(6
-
-%2:
-
-$element:
-$classB
-	ci_jquery

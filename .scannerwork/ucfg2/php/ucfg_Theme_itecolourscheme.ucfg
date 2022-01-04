@@ -1,69 +1,0 @@
-
-2phpexcel_writer_excel2007_theme::writecolourschemeX
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Theme.phpŸ Ÿ(&"1*±
-2X
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Theme.php‹ ‹(7à
-Ö
-X
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Theme.php‹% ‹(5
-%2"__concat*
-'a:'*
-
-$colourNameâÜ
-X
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Theme.php‹ ‹(6
-%3*
-
-
-$objWriter*
-
-%22startelementíè
-X
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Theme.phpﬁ ﬁ(5
-%4*
-
-
-$objWriter*
-'a:srgbClr'2startelement†ù
-X
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Theme.phpﬂ ﬂ(C
-%5*
-
-
-$objWriter*	
-'val'*
-
-$colourValue2writeattribute~|
-X
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Theme.php‡ ‡((
-%6*
-
-
-$objWriter2
-endelement~|
-X
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Theme.php‚ ‚($
-%7*
-
-
-$objWriter2
-endelement*
-1*Å
-3
-	Theme.php"o
-X
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Theme.php‰ ‰(
-implicit return*â
-1X
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Theme.php€ €($°
-û
-X
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Theme.php€ €($
-%1"__id*6*4!
-phpexcel_writer_excel2007_theme"
-$colourScheme*
-2
-3:
-
-$objWriterB#!
-phpexcel_writer_excel2007_theme

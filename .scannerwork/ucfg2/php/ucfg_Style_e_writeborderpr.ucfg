@@ -1,93 +1,0 @@
-
-.phpexcel_writer_excel2007_style::writeborderprX
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Style.phpé é(""1*¨
-
-2X
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Style.phpí í(-çä
-X
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Style.phpí í(,
-%2*
-
-
-$objWriter*
-
-
-$pName2startelementÄ~
-X
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Style.phpì0 ì(J
-%3*
-
-
-$pBorder2getborderstyleòï
-X
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Style.phpì ì(K
-%4*
-
-
-$objWriter*	
-'style'*
-
-%32writeattributeéã
-X
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Style.phpñ ñ(-
-%5*
-
-
-$objWriter*	
-'color'2startelementzx
-X
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Style.phpó. ó(B
-%6*
-
-
-$pBorder2getcolorsq
-X
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Style.phpó. ó(M
-%7*
-
-%62getargbñì
-X
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Style.phpó ó(N
-%8*
-
-
-$objWriter*	
-'rgb'*
-
-%72writeattribute~|
-X
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Style.phpò ò($
-%9*
-
-
-$objWriter2
-endelement}
-X
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Style.phpö ö($
-%10*
-
-
-$objWriter2
-endelement*
-3*Å
-3
-	Style.php"o
-X
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Style.phpú ú(
-implicit return*Ë
-1X
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Style.phpë ë(LÄ~
-X
-L/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/Style.phpë ë(&
-%1*
-
-
-$pBorder2getborderstyle*
-2
-3:
-
-$objWriter:
-$pName:
-
-$pBorderB#!
-phpexcel_writer_excel2007_style

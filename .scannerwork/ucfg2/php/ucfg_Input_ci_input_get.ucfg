@@ -1,27 +1,0 @@
-
-ci_input::get4
-(/var/www/html/siia/system/core/Input.phpð ð("1*ƒ
-14
-(/var/www/html/siia/system/core/Input.phpò ò(=‡„
-4
-(/var/www/html/siia/system/core/Input.phpò	 ò(<
-%1*
-
-ci_input*	
-
-$_GET*
-
-
-$index*
-
-
-$xss_clean2_fetch_from_array">
-4
-(/var/www/html/siia/system/core/Input.phpò ò(=
-
-%1:
-$index:
-
-$xss_cleanB
-
-ci_input

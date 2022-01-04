@@ -1,21 +1,0 @@
-
-!ci_db_mysqli_result::_fetch_assocO
-C/var/www/html/siia/system/database/drivers/mysqli/mysqli_result.php¦ ¦( "1*ª
-1O
-C/var/www/html/siia/system/database/drivers/mysqli/mysqli_result.php¨ ¨()ˆ
-…
-O
-C/var/www/html/siia/system/database/drivers/mysqli/mysqli_result.php¨	 ¨(
-%1"__id*&*$
-ci_db_mysqli_result"
-	result_idnl
-O
-C/var/www/html/siia/system/database/drivers/mysqli/mysqli_result.php¨	 ¨((
-%2*
-
-%12fetch_assoc"Y
-O
-C/var/www/html/siia/system/database/drivers/mysqli/mysqli_result.php¨ ¨()
-
-%2B
-ci_db_mysqli_result

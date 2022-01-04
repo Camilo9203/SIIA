@@ -1,18 +1,0 @@
-
-ci_session_memcached_driver::gc\
-P/var/www/html/siia/system/libraries/Session/drivers/Session_memcached_driver.phpŸ Ÿ("1*è
-1\
-P/var/www/html/siia/system/libraries/Session/drivers/Session_memcached_driver.php¢ ¢(œ
-™
-\
-P/var/www/html/siia/system/libraries/Session/drivers/Session_memcached_driver.php¢	 ¢(
-%1"__id*-*+
-ci_session_memcached_driver"
-
-_success"f
-\
-P/var/www/html/siia/system/libraries/Session/drivers/Session_memcached_driver.php¢ ¢(
-
-%1:
-$maxlifetimeB
-ci_session_memcached_driver

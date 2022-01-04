@@ -1,27 +1,0 @@
-
-ci_session::__setC
-7/var/www/html/siia/system/libraries/Session/Session.php° °("1*n
-2
-Session.php"Z
-C
-7/var/www/html/siia/system/libraries/Session/Session.php³ ³(
-implicit return*Í
-1C
-7/var/www/html/siia/system/libraries/Session/Session.php² ²(~
-|
-C
-7/var/www/html/siia/system/libraries/Session/Session.php² ²(
-%1"
-__arraySet*
-
-	$_SESSION*
-
-$key*
-
-
-$value*
-2:
-$key:
-$valueB
-
-ci_session

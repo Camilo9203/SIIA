@@ -1,50 +1,0 @@
-
-?phpexcel_writer_excel2007_contenttypes::writedefaultcontenttype_
-S/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/ContentTypes.phpœ œ(,"3"5*Ì
-3_
-S/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/ContentTypes.php” ”(0óî
-_
-S/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/ContentTypes.php” ”(/
-%1*
-
-
-$objWriter*
-	'Default'2startelement´®
-_
-S/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/ContentTypes.php‘ ‘(?
-%2*
-
-
-$objWriter*
-'Extension'*
-
-
-$pPartname2writeattribute∞≠
-_
-S/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/ContentTypes.php’ ’(D
-%3*
-
-
-$objWriter*
-'ContentType'*
-
-$pContentType2writeattributeÜÉ
-_
-S/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/ContentTypes.php÷ ÷($
-%4*
-
-
-$objWriter2
-endelement*
-5*è
-5
-ContentTypes.php"v
-_
-S/var/www/html/siia/application/libraries/PHPExcel/Writer/Excel2007/ContentTypes.php⁄ ⁄(
-implicit return:
-
-$objWriter:
-
-$pPartname:
-$pContentTypeB*(
-&phpexcel_writer_excel2007_contenttypes

@@ -1,25 +1,0 @@
-
-(ci_db_pdo_firebird_driver::_list_columns]
-Q/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_firebird_driver.phpŒ Œ(!"1*½
-1]
-Q/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_firebird_driver.phpŽ Ž(q›˜
-]
-Q/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_firebird_driver.phpŽ[ Ž(p
-%1*
-ci_db_pdo_firebird_driver*
-
-
-$table2escapeÑ
-Î
-]
-Q/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_firebird_driver.phpŽ	 Ž(p
-%2"__concat*US
-Q'SELECT "RDB$FIELD_NAME" FROM "RDB$RELATION_FIELDS" WHERE "RDB$RELATION_NAME" = '*
-
-%1"g
-]
-Q/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_firebird_driver.phpŽ Ž(q
-
-%2:
-$tableB
-ci_db_pdo_firebird_driver

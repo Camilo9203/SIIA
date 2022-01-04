@@ -1,60 +1,0 @@
-
-ci_loader::view5
-)/var/www/html/siia/system/core/Loader.phpÁ Á("1*Ï
-16
-)/var/www/html/siia/system/core/Loader.phpÈ È(ÅGE
-5
-)/var/www/html/siia/system/core/Loader.phpÈ È(
-%1"$Arrayn
-l
-5
-)/var/www/html/siia/system/core/Loader.phpÈ È(
-%2"
-__arraySet*
-
-%1*
-
-'_ci_view'*	
-
-$viewpn
-5
-)/var/www/html/siia/system/core/Loader.phpÈB È(e
-%3*
-	ci_loader*	
-
-$vars2_ci_prepare_view_varsk
-i
-5
-)/var/www/html/siia/system/core/Loader.phpÈ È(
-%4"
-__arraySet*
-
-%1*
-
-'_ci_vars'*
-
-%3r
-p
-5
-)/var/www/html/siia/system/core/Loader.phpÈ È(
-%5"
-__arraySet*
-
-%1*
-'_ci_return'*
-	
-$returna_
-6
-)/var/www/html/siia/system/core/Loader.phpÈ	 È(Ä
-%6*
-	ci_loader*
-
-%12_ci_load"@
-6
-)/var/www/html/siia/system/core/Loader.phpÈ È(Å
-
-%6:
-$view:
-$vars:	
-$returnB
-	ci_loader

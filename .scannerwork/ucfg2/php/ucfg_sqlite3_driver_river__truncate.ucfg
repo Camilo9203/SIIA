@@ -1,19 +1,0 @@
-
-ci_db_sqlite3_driver::_truncateQ
-E/var/www/html/siia/system/database/drivers/sqlite3/sqlite3_driver.phpÍ Í("1*¼
-1Q
-E/var/www/html/siia/system/database/drivers/sqlite3/sqlite3_driver.phpÏ Ï(†
-ƒ
-Q
-E/var/www/html/siia/system/database/drivers/sqlite3/sqlite3_driver.phpÏ	 Ï(
-%1"__concat*
-'DELETE FROM '*
-
-
-$table"[
-Q
-E/var/www/html/siia/system/database/drivers/sqlite3/sqlite3_driver.phpÏ Ï(
-
-%1:
-$tableB
-ci_db_sqlite3_driver

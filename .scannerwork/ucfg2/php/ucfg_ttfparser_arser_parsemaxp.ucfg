@@ -1,35 +1,0 @@
-
-ttfparser::parsemaxpP
-F/var/www/html/siia/application/third_party/fpdf/makefont/ttfparser.phpl
- l("1*}
-2
-ttfparser.php"g
-P
-F/var/www/html/siia/application/third_party/fpdf/makefont/ttfparser.phpq q(
-implicit return*Å
-1P
-F/var/www/html/siia/application/third_party/fpdf/makefont/ttfparser.phpn n({y
-P
-F/var/www/html/siia/application/third_party/fpdf/makefont/ttfparser.phpn n(
-%1*
-	ttfparser*
-
-'maxp'2seekus
-P
-F/var/www/html/siia/application/third_party/fpdf/makefont/ttfparser.phpo o(
-%2*
-	ttfparser*22skipus
-P
-F/var/www/html/siia/application/third_party/fpdf/makefont/ttfparser.phpp p((
-%3*
-	ttfparser2
-readushort~
-|
-P
-F/var/www/html/siia/application/third_party/fpdf/makefont/ttfparser.phpp p((
-	ttfparser"
-	numGlyphs"__id*
-
-%3*
-2B
-	ttfparser

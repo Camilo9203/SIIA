@@ -1,85 +1,0 @@
-
-*phpexcel_referencehelper::adjustmergecellsQ
-E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpì ì('"1*¬
-3Q
-E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpò ò(]≈¬
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpò ò(\
-%3*
-phpexcel_referencehelper*
-
-$key*
-
-
-$pBefore*
-
-	$pNumCols*
-
-	$pNumRows2updatecellreferencet
-r
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpò ò(\
-$newReference"__id*
-
-%3£
-†
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpô ô(*
-%4"
-__arraySet*
-
-$aNewMergeCells*
-
-$newReference*
-
-$newReference*
-3
-4*Î
-4Q
-E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpõ õ(0çä
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpõ õ(/
-%5*
-	
-$pSheet*
-
-$aNewMergeCells2setmergecells*
-5*Ñ
-5
-ReferenceHelper.php"h
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpú ú(
-implicit return*©
-1Q
-E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpï ï(0wu
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpï ï(/
-%1*
-	
-$pSheet2getmergecellss
-q
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpï ï(/
-$aMergeCells"__id*
-
-%1ca
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpñ ñ(!
-%2"$Arrayv
-t
-Q
-E/var/www/html/siia/application/libraries/PHPExcel/ReferenceHelper.phpñ ñ(!
-$aNewMergeCells"__id*
-
-%2*
-3
-4:	
-$pSheet:
-
-$pBefore:
-$beforeColumnIndex:
-	$pNumCols:
-
-$beforeRow:
-	$pNumRowsB
-phpexcel_referencehelper

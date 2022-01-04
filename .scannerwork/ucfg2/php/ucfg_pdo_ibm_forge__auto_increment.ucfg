@@ -1,11 +1,0 @@
-
-)ci_db_pdo_ibm_forge::_attr_auto_incrementW
-K/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_ibm_forge.php• •(("1*ˆ
-1
-pdo_ibm_forge.php"n
-W
-K/var/www/html/siia/system/database/drivers/pdo/subdrivers/pdo_ibm_forge.php˜ ˜(
-implicit return:
-$attributes:
-$fieldB
-ci_db_pdo_ibm_forge

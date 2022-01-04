@@ -1,50 +1,0 @@
-
-*phpexcel_exponential_best_fit::getequationd
-Z/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/exponentialBestFitClass.phpD D("1*ñ
-1d
-Z/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/exponentialBestFitClass.phpF F(&¥¢
-d
-Z/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/exponentialBestFitClass.phpF F(%
-%1*!
-phpexcel_exponential_best_fit*
-
-$dp2getslope€
-~
-d
-Z/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/exponentialBestFitClass.phpF F(%
-$slope"__id*
-
-%1©¦
-d
-Z/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/exponentialBestFitClass.phpG G(-
-%2*!
-phpexcel_exponential_best_fit*
-
-$dp2getintersect…
-‚
-d
-Z/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/exponentialBestFitClass.phpG G(-
-
-$intersect"__id*
-
-%2¶
-³
-d
-Z/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/exponentialBestFitClass.phpI I(:
-%3"__concat*
-
-'Y = '*
-
-
-$intersect*	
-' * '*
-
-
-$slope*
-'^X'"n
-d
-Z/var/www/html/siia/application/libraries/PHPExcel/Shared/trend/exponentialBestFitClass.phpI I(;
-
-%3:
-$dpB!
-phpexcel_exponential_best_fit
