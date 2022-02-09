@@ -88,14 +88,14 @@ p {
 <div class="row-fluid">
 <!-- page content -->
 <div class="col-md-12">
-    <a href="https://www.orgsolidarias.gov.co/"><img alt="Logo Orgsolidarias" id="logo_mantenimiento" class="img-responsive center-block" src=""></a>
-    <a href="https://acreditacion.orgsolidarias.gov.co/"><img alt="Logo SIIA" id="logo_mantenimiento_sia" class="img-responsive center-block" src=""></a>
+    <a href="https://www.uaeos.gov.co/"><img alt="Logo Orgsolidarias" id="logo_mantenimiento" class="img-responsive center-block" src=""></a>
+    <a href="https://acreditacion.uaeos.gov.co/"><img alt="Logo SIIA" id="logo_mantenimiento_sia" class="img-responsive center-block" src=""></a>
 </div>
 <hr/>
 <div class="col-md-12">
   	<div class="col-middle">
     <div class="text-center text-center">
-      <h2>SIIA en Mantenimiento.</h2>
+      <h1>SIIA en Mantenimiento.</h1>
       <h3>Se informa que el día de hoy <?php echo $fecha; ?>, se realizara un mantenimiento en la plataforma, debido a esto se presentara intermitencia en el servicio, se pondra en funcionamiento lo mas pronto posible.</h3>
       <h4>Agradecemos su compresión, todo con el fin de poder brindarles un mejor servicio.</h4>
       <h5>Causas: Resolver problemas de correos electronicos.</h5>

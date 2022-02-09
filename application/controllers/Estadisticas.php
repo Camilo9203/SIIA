@@ -12,14 +12,15 @@ class Estadisticas extends CI_Controller
 	public function index()
 	{
 		$data = array(
-
+			
 			'acreditadas' => $this->EstadisticasModel->organizacionesAcreditadas(),
 			'cursoBasico' => $this->EstadisticasModel->organizacionesBasico(),
 			'avaladas' => $this->EstadisticasModel->organizacionesAvaladas(),
 			'modalidadVirtual' => $this->EstadisticasModel->organizacionesVirtual(),
-
+			
 		);
 		// Json datos estadisticos
+		$this->output->set_header('Content-Type: application/json; charset=utf-8');
 		echo json_encode($data, JSON_UNESCAPED_UNICODE);
 	}
 	// Variables de Session

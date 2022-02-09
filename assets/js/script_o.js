@@ -1,8 +1,7 @@
 /* PLEASE DO NOT COPY AND PASTE THIS CODE. */
-/* Por favor no copiar y pegar este código.*/
 /**
-	@Autor Sergio Daniel Martinez Porras
-	@Date 4/12/2019
+	@Autor Camilo Rios
+	@Date 2021
 **/
 $(document).ready(function () {
 	initJS();
@@ -8272,7 +8271,7 @@ $(document).ready(function () {
 				dataType: "JSON",
 				data: datas,
 				success: function (response) {
-					if (response.existe == 1) {
+					if (response.existe === 1) {
 						notificacion(
 							"El nombre usuario ya existe... Puede usar números...",
 							"success"
@@ -8289,8 +8288,8 @@ $(document).ready(function () {
 							pass.length > 0 &&
 							pass2.length > 0
 						) {
-							if (pass == pass2) {
-								if (check == true) {
+							if (pass === pass2) {
+								if (check === true) {
 									if (response_captcha != 0) {
 										notificacion(
 											"Verifique su información y correos electronicos.",
@@ -8343,8 +8342,7 @@ $(document).ready(function () {
 	$("#guardar_registro").click(function () {
 		if ($("#formulario_registro").valid()) {
 			var organizacion = $("#organizacion").val();
-			var nit = $("#nit").val();
-			var nit_digito = $("#nit_digito").val();
+			var nit = $("#nit").val() + "-" + $("#nit_digito").val();
 			var sigla = $("#sigla").val();
 			var nombre = $("#nombre").val();
 			var nombre_s = $("#nombre_s").val();
@@ -8361,6 +8359,7 @@ $(document).ready(function () {
 			var pass2 = $("#re_password").val();
 			var check = $("#acepto_cond").prop("checked");
 			var response_captcha = grecaptcha.getResponse();
+			console.log(response_captcha);
 
 			if (
 				organizacion.length > 0 &&
@@ -8378,7 +8377,6 @@ $(document).ready(function () {
 							var data = {
 								organizacion: organizacion,
 								nit: nit,
-								nit_digito: nit_digito,
 								sigla: sigla,
 								nombre: nombre,
 								nombre_s: nombre_s,
@@ -16776,8 +16774,8 @@ function sleep(milliseconds) {
 function validaciones() {
 	/**
 		Forms validations TODO.
+	 	Formulario Registro
 	**/
-	// Formulario Registro
 	$("form[id='formulario_registro']").validate({
 		rules: {
 			organizacion: {
