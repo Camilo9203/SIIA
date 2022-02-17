@@ -7,6 +7,10 @@
 	<div class="form-group">
 		<button class="btn btn-default form-control" id="reporte_org_historico">Reporte Organizaciones Historico</button>
 	</div>
+	<!-- //TODO: Reporte Informe de actividades -->
+	<div class="form-group">
+		<button class="btn btn-default form-control" id="reporte_org_historico">Reporte Informe Actividades Pedagogicas</button>
+	</div>
 	<div class="form-group">
 		<button class="btn btn-default form-control" id="reportes_ver_asistentes">Todos los Asistentes</button>
 	</div>

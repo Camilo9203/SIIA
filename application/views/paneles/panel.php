@@ -708,12 +708,12 @@
 					<table id="" width="100%" border=0 class="table table-striped table-bordered">
 						<thead>
 							<tr>
-								<!--<td>Certificado existencia</td>
+								<td>Certificado existencia</td>
 								<td>Número existencia</td>
 								<td>Fecha expedición</td>
 								<td>Departamento certificado</td>
 								<td>Municipio certificado</td>
-								<td>Objeto aocial</td>-->
+								<td>Objeto aocial</td>
 								<td>Registro Educativo</td>
 								<td>Entidad registro</td>
 								<td>Número resolución</td>
@@ -726,13 +726,13 @@
 						<tbody id="tbody">
 							<?php
 							foreach ($data_documentacion_legal as $documentacion) {
-								/**echo "<td>".$documentacion->certificadoExistencia."</td>";
-								echo "<td>".$documentacion->numeroExistencia."</td>";
-								echo "<td>".$documentacion->fechaExpedicion."</td>";
-								echo "<td>".$documentacion->departamentoCertificado."</td>";
-								echo "<td>".$documentacion->municipioCertificado."</td>";
-								echo "<td>".$documentacion->objetoSocial."</td>";**/
-								echo "<tr><td>" . $documentacion->registroEducativo . "</td>";
+								echo "<tr><td>" . $documentacion->certificadoExistencia . "</td>";
+								echo "<td>" . $documentacion->numeroExistencia . "</td>";
+								echo "<td>" . $documentacion->fechaExpedicion . "</td>";
+								echo "<td>" . $documentacion->departamentoCertificado . "</td>";
+								echo "<td>" . $documentacion->municipioCertificado . "</td>";
+								echo "<td>" . $documentacion->objetoSocial . "</td>";
+								echo "<td>" . $documentacion->registroEducativo . "</td>";
 								echo "<td>" . $documentacion->entidadRegistro . "</td>";
 								echo "<td>" . $documentacion->numeroResolucion . "</td>";
 								echo "<td>" . $documentacion->fechaResolucion . "</td>";

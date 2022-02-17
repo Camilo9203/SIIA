@@ -10,7 +10,7 @@
 		<li>Si comete un error despues de haber creado el curso debe hacer click en el boton Restaurar y volver a comenzar.</li>
 		<li>Si da click en Enviar/Ver para el certificado se le enviará un correo electrónico al asistente (Si el asistente no tiene correo, por favor ingresar el correo electrónico de la organización para que luego le haga entrega del mismo).</li>
 		<li>Para ingresar los asistentes de forma automatica en excel debe diligenciar el siguiente <a target="_blank" href="<?php echo base_url("assets/manuales/AsistentesCursosOrganizacion.xlsx"); ?>">FORMATO <i class="fa fa-file-excel-o" aria-hidden="true"></i></a> en excel, o si ya lo diligencio, seleccione el archivo y de click en subir asistentes.</li>
-		<li>Recuerde diligenciar y verificar toda la información suministrada antes de finilazar.</li>
+		<li>Recuerde diligenciar y verificar toda la información suministrada antes de finalizar.</li>
 	</h4>
 </div>
 <div class="container" id="div_llenar_curso">
@@ -23,7 +23,7 @@
 			<input type="text" class="form-control" name="informe_nombre_curso" id="informe_nombre_curso" placeholder="Nombre del curso">
 		</div>
 		<div class="form-group">
-			<label for="informe_tipo_curso">Tipo de Curso:</label><br>
+			<label for="informe_tipo_curso">Modalidad del curso:</label><br>
 			<select name="informe_tipo_curso" id="informe_tipo_curso" class="selectpicker form-control show-tick" required="">
 				<?php
 				foreach ($tiposCursos as $tiposCurso) {
@@ -49,6 +49,7 @@
 					<option id="0" value="No" selected>No, sin unión...</option>
 				</optgroup>
 				<optgroup label="Organizaciones">
+					<!-- //TODO: Cambiar por organizaciones acreditadas -->
 					<?php
 					foreach ($organizaciones as $organizacion) {
 					?>
@@ -148,7 +149,7 @@
 			<tr>
 				<td>Docente</td>
 				<td>Nombre Curso</td>
-				<td>Tipo Curso</td>
+				<td>Modalidad</td>
 				<td>Intencionalidad Curso</td>
 				<td>Duracion Curso</td>
 				<td>Asistentes</td>

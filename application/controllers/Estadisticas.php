@@ -53,7 +53,7 @@ class Estadisticas extends CI_Controller
 	public function acreditacion()
 	{
 		$data = $this->datosSession();
-		$data['title'] = 'Panel Principal / Administrador / Estadisticas / Tramite';
+		$data['title'] = 'Panel Principal / Administrador / Estadisticas / Acreditacion';
 		$this->load->view('include/header', $data);
 		$this->load->view('admin/estadisticas/acreditacion', $data);
 		$this->load->view('include/footer', $data);
