@@ -77,3 +77,8 @@ footer .footer-enlaces a {
 	text-decoration: underline;
 }
 /* Footer End*/
+
+.swal2-styled.swal2-confirm {
+	background-color: #004884 !important;
+	color: #fff;
+}

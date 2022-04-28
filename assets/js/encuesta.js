@@ -23,13 +23,56 @@ $("#enviarEcuesta").click(function () {
 		dataType: "JSON",
 		data: data,
 		beforeSend: function () {
-			notificacion("Un momento. Enviando...", "success");
+			/* notificacion("Un momento. Enviando...", "success"); */
+			const Toast = Swal.mixin({
+				toast: true,
+				position: 'top-end',
+				showConfirmButton: false,
+				timer: 3000,
+				timerProgressBar: true,
+				didOpen: (toast) => {
+					toast.addEventListener('mouseenter', Swal.stopTimer)
+					toast.addEventListener('mouseleave', Swal.resumeTimer)
+				}
+			})
+			Toast.fire({
+				icon: 'success',
+				title: 'Un momento. Enviando...'
+			})
 		},
 		success: function (response) {
-			notificacion(response.msg, "success");
+			/* notificacion(response.msg, "success"); */
+			if(response.estado === 1) {
+				Swal.fire({
+					title: 'Encuesta enviada!',
+					text: response.msg,
+					icon: 'success',
+					confirmButtonText: 'Finalizar',
+				});
+			} else if (response.estado === 2){
+				Swal.fire({
+					title: 'Encuesta enviada!',
+					text: response.msg,
+					icon: 'warning',
+					confirmButtonText: 'Finalizar',
+				});
+			} else {
+				Swal.fire({
+					title: 'Encuesta no enviada!',
+					text: response.msg,
+					icon: 'error',
+					confirmButtonText: 'Finalizar',
+				});
+			}
+
 		},
-		error: function (){
-			//Do nothing
+		error: function (response){
+			Swal.fire({
+				title: 'Encuesta no enviada!',
+				text: response.msg,
+				icon: 'error',
+				confirmButtonText: 'Finalizar',
+			});
 		},
 	});
 });
