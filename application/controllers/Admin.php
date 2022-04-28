@@ -11,20 +11,20 @@ class Admin extends CI_Controller
 		$this->load->model('DocentesModel');
 	}
 	// Encripción para recuperación de contraseña
-	private function mcdec()
+	public function mcdec()
 	{
 		$password = "";
 		$passwor2 = mc_decrypt($password, KEY_RDEL);
 		echo json_encode($passwor2);
 	}
-	private function mcenc()
+	public function mcenc()
 	{
 		$password = "Asodamas2021#";
 		$passwor2 = mc_encrypt($password, KEY_RDEL);
 		echo json_encode($passwor2);
 	}
 
-	private function enchash()
+	public function enchash()
 	{
 		$password = "Asodamas2021#";
 		$passwor2 = generate_hash($password);

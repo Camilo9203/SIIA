@@ -51,24 +51,11 @@ $("#enviar_correo_contacto_admin").click(function () {
 			data.correo_electronico_rep = "";
 		}
 	}
-
-	// if ($("#comunicado").is(":visible")) {
-	// 	data.todos = "";
-	// } else {
-	// 	if ($("#contacto_enviar_copia_admin_todos").prop("checked")) {
-	// 		data.todos = 1;
-	// 	} else if ($("#contacto_enviar_copia_admin_todos_acre").prop("checked")) {
-	// 		data.todos = 2;
-	// 	} else {
-	// 		data.todos = 1;
-	// 	}
-	// }
-
 	$.ajax({
 		url: baseURL + "admin/enviomail_contacto",
 		type: "POST",
 		dataType: "JSON",
-		data: data,
+	data: data,
 		beforeSend: function () {
 			notificacion("Espere, enviando...", "success");
 		},
@@ -80,7 +67,7 @@ $("#enviar_correo_contacto_admin").click(function () {
 		},
 	});
 });
-// TODO: Formulario de contacto administrador
+// Formulario de contacto administrador
 $("#enviar_correo_contacto").click(function () {
 	$correo_electronico = $("#contacto_correo_electronico").val();
 	$nombre = $("#contacto_nombre").val();
@@ -116,7 +103,7 @@ $("#enviar_correo_contacto").click(function () {
 		},
 	});
 });
-
+// TODO: Por comentar
 $("#contaco_enviar_copia").click(function () {
 	if ($("#contaco_enviar_copia").prop("checked")) {
 		$("#contacto_copia").show();
@@ -124,7 +111,6 @@ $("#contaco_enviar_copia").click(function () {
 		$("#contacto_copia").hide();
 	}
 });
-
 // Cheked Correo a todas las entidades.
 $("#contacto_enviar_copia_admin_todos").click(function () {
 	// Si esta check

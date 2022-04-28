@@ -7150,21 +7150,7 @@ function clearInputs(id){
 	@param msg = Mensaje a mostrar.
 	@param type = "warning","info","success","error",
 **/
-function notificacion($msg, $type){
-    notif({
-		type: $type,
-		msg: $msg,
-		position: "right",
-		width: 200,
-		height: 60,
-		autohide: false,
-		multiline: true,
-		fade: true,
-		bgcolor: "#0e3b5e",
-		color: "#fff",
-		opacity: 0.9,
-	});
-}
+
 
 /**
 	Boton para volver al inicio.

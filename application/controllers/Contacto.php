@@ -27,24 +27,19 @@ class Contacto extends CI_Controller
 
 	public function index()
 	{
-		$logged = $this->session->userdata('logged_in');
-		$nombre_usuario = $this->session->userdata('nombre_usuario');
 		$usuario_id = $this->session->userdata('usuario_id');
-		$tipo_usuario = $this->session->userdata('type_user');
-		$hora = date("H:i", time());
-		$fecha = date('Y/m/d');
-
-		$data['title'] = 'Contacto';
-		$data['logged_in'] = $logged;
-		$data['tipo_usuario'] = $tipo_usuario;
-		$data['usuario_id'] = $usuario_id;
-		$data['hora'] = $hora;
-		$data['fecha'] = $fecha;
-
+		$data = array(
+			'title' => 'Contacto',
+			'logged_in' => $this->session->userdata('logged_in'),
+			'nombre_usuario' => $this->session->userdata('nombre_usuario'),
+			'tipo_usuario' => $this->session->userdata('type_user'),
+			'usuario_id' => $usuario_id,
+			'hora' =>  date("H:i", time()),
+			'fecha' => date('Y/m/d'),
+		);
 		$datos_registro = $this->db->select('*')->from('organizaciones')->where('usuarios_id_usuario', $usuario_id)->get()->row();
 		$datos_usuario = $this->db->select('usuario')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
 		$data['nombre_usuario'] = $datos_usuario->usuario;
-
 		$data_registro = array(
 			'nombreOrganizacion' => $datos_registro->nombreOrganizacion,
 			'numNIT' => $datos_registro->numNIT,

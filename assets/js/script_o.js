@@ -704,7 +704,7 @@ $(document).ready(function () {
 	notificaciones(baseURL);
 
 	/**
-		Eventos Clicks TODO
+		TODO: Eventos Clicks
 	**/
 
 	//Evento consultar estadoSolicitud

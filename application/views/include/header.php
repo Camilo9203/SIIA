@@ -17,6 +17,8 @@
 	<!-- Styles -->
 	<link href="<?php echo base_url('assets/css/font-awesome.min.css') ?>" rel="stylesheet" type="text/css" />
 	<link href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css" />
+
+
 	<!-- Custom CSS -->
 	<link href="<?php echo base_url('assets/css/styles.css?v=1.0.8.1919') ?>" rel="stylesheet" type="text/css" />
 	<link href="<?php echo base_url('assets/img/favicon16.png') ?>" type="image/png" sizes="16x16" rel="icon" />
@@ -121,10 +123,7 @@
 		</section>
 		<div id="tPg" titulo="<?php echo $title; ?>"></div>
 		<!-- Navbar Usuario no registrado //TODO: Navbar de usuario no registrado -->
-		<?php
-		if (!$logged_in && $tipo_usuario == "none") {
-			echo "<div class='hidden' id='data_logg' data-log='$logged_in'></div>";
-		?>
+		<?php if (!$logged_in && $tipo_usuario == "none") { echo "<div class='hidden' id='data_logg' data-log='$logged_in'></div>";?>
 			<nav class="navbar navbar-dark">
 				<div class="container">
 					<!-- Brand and toggle get grouped for better mobile display -->

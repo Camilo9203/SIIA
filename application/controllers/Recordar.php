@@ -82,6 +82,18 @@ class Recordar extends CI_Controller {
 		$this->email->message($email_view);
 
 		if($this->email->send()){
+			$data = array(
+				'fecha' => date('Y/m/d'),
+				'de' => $from,
+				'para' => $to,
+				'asunto' => 'SIIA - Recordar Contraseña.',
+				'cuerpo' => $data_msg,
+				'estado' => 'enviado',
+				'tipo' => 'Alerta Automatica',
+				'error' => 'Ninguno'
+			);
+//			die(var_dump($data));
+			$this->db->insert('correosRegistro', $data);
 			echo json_encode(array('url'=>"", 'msg'=>"Se envio un correo, por favor verifiquelo."));
 		}else{
 			echo json_encode(array('url'=>"login", 'msg'=>"Lo sentimos, hubo un error y no se envio el correo."));

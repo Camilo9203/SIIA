@@ -1,4 +1,5 @@
 <div class="container">
+	<!--	Información de la organización	-->
 	<div class="col-md-4">
 		<h3>Información de la organización.</h3>
 		<hr/>
@@ -18,6 +19,7 @@
 		<div class="clearfix"></div>
 		<hr/>
 	</div>
+	<!--	Formulario	-->
 	<div class="col-md-8">
 		<h4>Seleccione la prioridad del mensaje, escriba el asunto del mensaje y por ultimo escriba el mensaje.</h4>
 		<hr/>

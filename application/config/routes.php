@@ -60,6 +60,7 @@ if ($this->config->item('mantenimiento') == TRUE) {
 
 // HOME
 $route['estado'] = 'Home/estadoSolicitud';
+$route['encuesta'] = 'Encuesta/index';
 $route['facilitadores'] = 'Home/facilitadores';
 
 //TODAS las rutas para usuarios
@@ -119,7 +120,7 @@ $route['panelAdmin/organizaciones/docentes/panel'] = 'Docentes/panelDocentes';
 $route['panelAdmin/organizaciones/docentes/asignar'] = 'Docentes/asignarDocentes';
 $route['panelAdmin/organizaciones/docentes/evaluar'] = 'Docentes/evaluarDocentes';
 //Estadisticas 
-//TODO:Rutas nuevas para estadisticas
+//TODO: Rutas nuevas para estadisticas
 $route['panelAdmin/estadisticas'] = 'Estadisticas/panel';
 $route['panelAdmin/estadisticas/acreditacion'] = 'Estadisticas/acreditacion';
 // Super

@@ -1,1 +1,79 @@
 /* Your custom styles */
+.navbar-govco {
+	align-items: flex-start;
+}
+.navbar-header {
+	padding: 40px;
+}
+nav li
+.navbar-nav .nav-item.active, .navbar-nav .nav-item:hover, .navbar-nav .nav-item:focus {
+	background: #0a2031 !important;
+}
+.navbar-nav .nav-item.active a, .navbar-nav .nav-item:hover a, .navbar-nav .nav-item:focus a {
+	color: #ffffff !important;
+}
+/* Link Activo*/
+.navbar-nav .nav-item.active, .navbar-nav .nav-item:hover, .navbar-nav .nav-item:focus {
+	background: #0259a3 !important;
+}
+.navbar-nav a:hover, .navbar-nav a:focus {
+	background: #0259a3 !important;
+}
+/* Link Activo Fin*/
+/* Botón ir arriba*/
+.backtoTop .btn-svg-up-hover {
+	font-size: 2rem !important;
+	line-height: 2rem !important;
+}
+.backtoTop .btn-up-hover {
+	padding: 0.5rem;
+}
+/* Botón ir arriba Fin*/
+/* Footer */
+footer {
+	background: #36c;
+	color: #fff;
+}
+footer h3 {
+	color: #fff;
+	font-size: 20px;
+	font-weight: 500;
+	margin-bottom: 1em;
+}
+footer ul  {
+	margin: 0;
+	padding: 0;
+}
+footer li  {
+	color: #fff;
+	font-size: 14px;
+	font-family: Work Sans,sans-serif;
+	list-style: none;
+}
+footer li a {
+	color: #fff;
+	font-size: 14px;
+	font-family: Work Sans,sans-serif;
+	list-style: none;
+	font-weight: bold;
+}
+footer .icon a {
+	color: #fff;
+	text-decoration: underline;
+	font-size: 15px;
+	display: block;
+}
+footer .contac span {
+	position: relative;
+	top: 1px;
+	margin-right: 10px;
+}
+footer .footer-enlaces {
+	margin-top: 15px;
+}
+footer .footer-enlaces a {
+	color: #fff;
+	font-size: 14px;
+	text-decoration: underline;
+}
+/* Footer End*/

@@ -90,6 +90,7 @@ define('APP_DATOS_USER', 'uaeostics@gmail.com'); // Usuario de la aplicacion en 
 define('APP_DATOS_PASSWORD', 'Lr563serv*'); // Contraseña de la aplicacion en datos abiertos
 define('APP_DATOS_VIEWIUD', '2tsa-2de2'); // https://www.datos.gov.co/resource/43dx-dcjb.json https://www.datos.gov.co/resource/9qtj-epz2.json
 define('CORREO_SIA', 'acreditaciones@uaeos.gov.co'); // Correo electronico del sia para el contacto
+define('CORREO_PRUEBAS', 'camilo.rios@uaeos.gov.co'); // Correo electronico del siia para el pruebas
 define('CORREO_ATENCION', 'acreditaciones@uaeos.gov.co'); // Correo electronico de ATENCION AL CIUDADANO PRIORIDAD BAJA
 define('CORREO_COORDINADOR', 'acreditaciones@uaeos.gov.co'); // Correo electronico de COORDINADOR DE EDUCACION PRIORIDAD MEDIA
 define('CORREO_AREA', 'acreditaciones@uaeos.gov.co'); // Correo electronico de COORDINADOR DE AREA PRIORIDAD ALTA
