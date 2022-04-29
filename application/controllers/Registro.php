@@ -10,13 +10,15 @@ class Registro extends CI_Controller
 	}
 
 	/**
-		Funcion Index para cargar las vistas necesarias.
+		Función form de registro.
 	 **/
 	public function index()
 	{
-		$data['title'] = 'Registro';
-		$data['logged_in'] = false;
-		$data['tipo_usuario'] = "none";
+		$data = array(
+			'title' => 'Registro',
+			'loggen_in' => false,
+			'tipo_usuario' => "none"
+		);
 		$this->load->view('include/header', $data);
 		$this->load->view('registro/registro');
 		$this->load->view('include/footer');
@@ -24,8 +26,8 @@ class Registro extends CI_Controller
 	}
 
 	/**
-		Funcion para Registrar la informacion del formulario registro que el usuario ingreso.
-		Los parametros se traen del ajax.
+	Función para validar formulario de registro, almacenar datos de organización, usuario y token.
+	 * Se envía email de activación de cuenta.
 	 **/
 	public function registrar_info()
 	{
@@ -40,188 +42,60 @@ class Registro extends CI_Controller
 		$this->form_validation->set_rules('correo_electronico', '', 'trim|required|min_length[3]|valid_email|xss_clean');
 		$this->form_validation->set_rules('correo_electronico_rep_legal', '', 'trim|required|min_length[3]|valid_email|xss_clean');
 		$this->form_validation->set_rules('nombre_p', '', 'trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('nombre_usuario', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('nombre_usuario', '', 'trim|required|min_length[3]|xss_clean|is_unique[usuarios.usuario]');
 		$this->form_validation->set_rules('password', '', 'trim|required|min_length[3]|xss_clean');
 
 		if ($this->form_validation->run("formulario_registro") == FALSE) {
 			$error = validation_errors();
 			echo json_encode(array('url' => "registro", 'msg' => $error));
 		} else {
-			$fromSIA = "Unidad Administrativa Especial de Organizaciones Solidarias UAEOS - Aplicación SIIA.";
-			$organizacion = $this->input->post('organizacion');
-			$nit = $this->input->post('nit') + "-" + $this->input->post('nit_digito');
-			$sigla = $this->input->post('sigla');
-			$nombre = $this->input->post('nombre');
-			$nombre_s = $this->input->post('nombre_s');
-			$apellido = $this->input->post('apellido');
-			$apellido_s = $this->input->post('apellido_s');
-			$correo_electronico = $this->input->post('correo_electronico');
-			$correo_electronico_rep_legal = $this->input->post('correo_electronico_rep_legal');
-			$nombre_p = $this->input->post('nombre_p');
-			$apellido_p = $this->input->post('apellido_p');
-			$nombre_usuario = $this->input->post('nombre_usuario');
-			$password = $this->input->post('password');
-			$password_rdel = mc_encrypt($password, KEY_RDEL);
-			$password_hash = generate_hash($password);
-
-			$token = generate_token();
-
-			$data_exist = false;
-			$name_user_exist = false;
-			$organizacion_exist = false;
-
-			$data_user = $this->db->select('usuario')->from('usuarios')->where('usuario', $nombre_usuario)->get()->row();
-			$data_usuarioBD = $this->db->select('*')->from('usuarios')->where('usuario', $nombre_usuario)->get()->row();
-			$datos_registro = $this->db->select('numNIT')->from('organizaciones')->where('numNIT', $nit)->get()->row();
-
-			if ($data_user == "NULL" || $data_user == NULL || $data_user == null) {
-				$data_exist = false;
-			} else {
-				$data_exist = true;
-			}
-
-			if ($datos_registro == "NULL" || $datos_registro == NULL || $datos_registro == null) {
-				$organizacion_exist = false;
-			} else {
-				$organizacion_exist = true;
-			}
-
-			if ($data_exist == false) {
-				if ($organizacion_exist == false) {
-
-					$data_token = array(
-						'token' => $token,
-						'verificado' => 0,
-						'usuario_token' => $nombre_usuario
-					);
-
-					$this->db->insert('token', $data_token);
-					$datos_token = $this->db->select('id_token')->from('token')->where('usuario_token', $nombre_usuario)->get()->row();
-					$id_token = $datos_token->id_token;
+			$data_registro_user = array(
+				'usuario' => $this->input->post('nombre_usuario'),
+				'contrasena' => generate_hash($this->input->post('password')),
+				'contrasena_rdel' => mc_encrypt($this->input->post('password'), KEY_RDEL),
+				'logged_in' => 0,
+			);
+			if ($this->db->insert('usuarios', $data_registro_user)){
+				$this->logs_sia->logQueries();
+				$id_usuario = $this->db->select('id_usuario')->from('usuarios')->where('usuario', $data_registro_user['usuario'])->get()->row();
+				$data_token = array(
+					'token' => generate_token(),
+					'verificado' => 0,
+					'usuario_token' => $data_registro_user['usuario']
+				);
+				$id_token = $this->db->select('id_token')->from('token')->where('usuario_token', $data_registro_user['usuario'])->get()->row();
+				$this->db->set('token_id_token', $id_token);
+				$this->db->insert('usuarios');
+				if ($this->db->insert('token', $data_token)) {
 					$this->logs_sia->logQueries();
-
-					$data_usuario = array(
-						'usuario' => $nombre_usuario,
-						'contrasena' => $password_hash,
-						'contrasena_rdel' => $password_rdel,
-						'logged_in' => 0,
-						'token_id_token' => $id_token
-					);
-
-					$this->db->insert('usuarios', $data_usuario);
-					$this->logs_sia->logQueries();
-
-					$data_user = $this->db->select('id_usuario')->from('usuarios')->where('usuario', $nombre_usuario)->get()->row();
-					$id_usuario = $data_user->id_usuario;
-					$this->logs_sia->logQueries();
-
-					$data_registro = array(
-						'nombreOrganizacion' => $organizacion,
-						'numNIT' => $nit,
-						'sigla' => $sigla,
-						'primerNombreRepLegal' => $nombre,
-						'segundoNombreRepLegal' => $nombre_s,
-						'primerApellidoRepLegal' => $apellido,
-						'segundoApellidoRepLegal' => $apellido_s,
-						'direccionCorreoElectronicoOrganizacion' => $correo_electronico,
-						'direccionCorreoElectronicoRepLegal' => $correo_electronico_rep_legal,
-						'primerNombrePersona' => $nombre_p,
-						'primerApellidoPersona' => $apellido_p,
+					$data_registro_org = array(
+						'nombreOrganizacion' => $this->input->post('organizacion'),
+						'numNIT' => $this->input->post('nit'),
+						'sigla' => $this->input->post('sigla'),
+						'primerNombreRepLegal' => $this->input->post('nombre'),
+						'segundoNombreRepLegal' => $this->input->post('nombre_s'),
+						'primerApellidoRepLegal' => $this->input->post('apellido'),
+						'segundoApellidoRepLegal' => $this->input->post('apellido'),
+						'direccionCorreoElectronicoOrganizacion' => $this->input->post('correo_electronico'),
+						'direccionCorreoElectronicoRepLegal' => $this->input->post('correo_electronico_rep_legal'),
+						'estado' => "Inscrito",
 						'usuarios_id_usuario' => $id_usuario
 					);
-					$this->db->insert('organizaciones', $data_registro);
-
-					$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $id_usuario)->get()->row();
-					$id_organizacion = $datos_organizacion->id_organizacion;
-
-					$data_solicitud = array(
-						'numeroSolicitudes' => 0,
-						'fecha' =>  date('Y/m/d H:i:s'),
-						'organizaciones_id_organizacion' => $id_organizacion
-					);
-
-					$this->db->insert('solicitudes', $data_solicitud);
-
-					$nits_db = $this->db->select("*")->from("nits_db")->get()->result();
-
-					foreach ($nits_db as $nits) {
-						$nt_db = $nits->numNIT;
-
-						if ($nit == $nt_db) {
-							$fechaFinalizacion = $nits->fechaFinalizacion;
-
-							$data_resolucion = array(
-								'fechaResolucionFinal' => $fechaFinalizacion,
-								'organizaciones_id_organizacion' => $id_organizacion
-							);
-
-							$this->db->insert('resoluciones', $data_resolucion);
-
-							$data_estadoOrganizacion = array(
-								'nombre' => "Acreditado",
-								'fecha' =>  date('Y/m/d H:i:s'),
-								'estadoAnterior' => "Finalizado",
-								'organizaciones_id_organizacion' => $id_organizacion
-							);
-							break;
-						} else {
-							$data_estadoOrganizacion = array(
-								'nombre' => "Inscrito",
-								'fecha' =>  date('Y/m/d H:i:s'),
-								'estadoAnterior' => "Inscrito",
-								'organizaciones_id_organizacion' => $id_organizacion
-							);
+					if ($this->db->insert('organizaciones', $data_registro_org)) {
+						$this->logs_sia->logQueries();
+						$datos_token = $this->db->select('id_token')->from('token')->where('usuario_token', $data_registro_user['usuario'])->get()->row();
+						$fromSIA = "Unidad Administrativa Especial de Organizaciones Solidarias UAEOS - Aplicación SIIA.";
+						$this->enviomail_activar(CORREO_SIA, $fromSIA, $data_registro_org['direccionCorreoElectronicoOrganizacion'], $data_registro_org['direccionCorreoElectronicoRepLegal'], $datos_token->token, $data_registro_org['primerNombreRepLegal'], $data_registro_org['primerApellidoRepLegal'], $data_registro_org['nombreOrganizacion'], $data_registro_org['numNIT'], $data_registro_user['usuario']);
+						$this->logs_sia->logs('REGISTER_TYPE');
+						$this->logs_sia->logs('URL_TYPE');
+						$this->logs_sia->logQueries();
 						}
 					}
-
-					$this->db->insert('estadoOrganizaciones', $data_estadoOrganizacion);
-					$this->enviomail_activar(CORREO_SIA, "$fromSIA", "$correo_electronico", "$correo_electronico_rep_legal", "$token", "$nombre", "$apellido", "$organizacion", "$nit", "$nombre_usuario");
-					$this->logs_sia->logs('REGISTER_TYPE');
-					$this->logs_sia->logs('URL_TYPE');
-					$this->logs_sia->logQueries();
-				} else {
-					//echo json_encode(array('url'=>"", 'msg'=>"El numero NIT de la organización ya esta registrado, de igual forma se envio correo electrónico."));
-					$tokenID = $data_usuarioBD->token_id_token;
-					$usuarioID = $data_usuarioBD->id_usuario;
-
-					$tokenBD = $this->db->select("*")->from("token")->where("id_token", $tokenID)->get()->row();
-					$token = $tokenBD->token;
-
-					$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuarioID)->get()->row();
-					$correo_electronico = $organizacion->direccionCorreoElectronicoOrganizacion;
-					$correo_electronico_rep_legal = $organizacion->direccionCorreoElectronicoRepLegal;
-					$nombre = $organizacion->primerNombreRepLegal;
-					$apellido = $organizacion->primerApellidoRepLegal;
-					$organizacion = $organizacion->nombreOrganizacion;
-					$nit = $organizacion->numNIT;
-					$nombre_usuario = $data_usuarioBD->usuario;
-
-					$this->enviomail_activar(CORREO_SIA, "$fromSIA", "$correo_electronico", "$correo_electronico_rep_legal", $token, "$nombre", "$apellido", "$organizacion", "$nit", "$nombre_usuario");
-					$this->logs_sia->logs('URL_TYPE');
 				}
-			} else {
-				//echo json_encode(array('url'=>"", 'msg'=>"El nombre de usuario ya esta registrado, de igual forma se envio correo electrónico, por favor elija otro."));
-				$tokenID = $data_usuarioBD->token_id_token;
-				$usuarioID = $data_usuarioBD->id_usuario;
-
-				$tokenBD = $this->db->select("*")->from("token")->where("id_token", $tokenID)->get()->row();
-				$token = $tokenBD->token;
-
-				$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuarioID)->get()->row();
-				$correo_electronico = $organizacion->direccionCorreoElectronicoOrganizacion;
-				$correo_electronico_rep_legal = $organizacion->direccionCorreoElectronicoRepLegal;
-				$nombre = $organizacion->primerNombreRepLegal;
-				$apellido = $organizacion->primerApellidoRepLegal;
-				$organizacion = $organizacion->nombreOrganizacion;
-				$nit = $organizacion->numNIT;
-				$nombre_usuario = $data_usuarioBD->usuario;
-
-				$this->enviomail_activar(CORREO_SIA, "$fromSIA", "$correo_electronico", "$correo_electronico_rep_legal", $token, "$nombre", "$apellido", "$organizacion", "$nit", "$nombre_usuario");
-				$this->logs_sia->logs('URL_TYPE');
 			}
 		}
-	}
 
+	}
 	/**
 		Funcion para enviar un correo electronico.
 		@param from = De quien lo envia.
