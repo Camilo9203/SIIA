@@ -1,4 +1,5 @@
 <div id="registro" class="center-block col-md-7">
+	<?php echo validation_errors('formulario_registro'); ?>
 	<?php echo form_open('', array('id' => 'formulario_registro')); ?>
 	<!--<button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#ayuda_registro">?</button>-->
 	<div class="col-md-6">

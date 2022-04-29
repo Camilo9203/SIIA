@@ -1,27 +1,3 @@
-<!--<nav class="navbar">-->
-		<!-- Brand and toggle get grouped for better mobile display -->
-<!--	<div class="navbar-header">-->
-<!--		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">-->
-<!--			<span class="sr-only">Toggle navigation</span>-->
-<!--			<span class="icon-bar"></span>-->
-<!--			<span class="icon-bar"></span>-->
-<!--			<span class="icon-bar"></span>-->
-<!--		</button>-->
-<!--	</div>-->
-	<!-- Collect the nav links, forms, and other content for toggling -->
-<!--	<div class="" id="bs-example-navbar-collapse-1">-->
-<!--		<ul class="nav navbar-nav">-->
-<!--			<li><a class="active" href="--><?php //echo base_url('home'); ?><!--">Home <i class="fa fa-home" aria-hidden="true"></i></a></li>-->
-<!--			<li><a href="--><?php //echo base_url('estado'); ?><!--">Estado de la solicitud <i class="fa fa-eye" aria-hidden="true"></i></a></li>-->
-<!--			<li><a href="--><?php //echo base_url('facilitadores'); ?><!--">Facilitadores válidos <i class="fa fa-users" aria-hidden="true"></i></a></li>-->
-<!--		</ul>-->
-<!--		<ul class="nav navbar-nav navbar-right">-->
-<!--			<li><a href="--><?php //echo base_url('login'); ?><!--">Iniciar sesión <i class="fa fa-sign-in" aria-hidden="true"></i></a></li>-->
-<!--			<li><a href="--><?php //echo base_url('registro'); ?><!--">Registrarme <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>-->
-<!--		</ul>-->
-<!--	</div>-->
-<!--</nav>-->
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3 ">
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarGuest" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>

@@ -24,13 +24,14 @@ class Super extends CI_Controller {
 
 	public function index()
 	{
-		$data['title'] = 'SUP';
-		$data['tipo_usuario'] = "none";
-		$data['logged_in'] = FALSE;
-
-		$this->load->view('include/header', $data);
-		$this->load->view('admin/super/super');
-		$this->load->view('include/footer');
+		$data = array(
+			'title' => 'SUP',
+			'tipo_usuario' => "none",
+			'logged_in' => FALSE
+		);
+		$this->load->view('include/header/main', $data);
+		$this->load->view('super/index');
+		$this->load->view('include/footer/main');
 		$this->logs_sia->logs('PLACE_USER');
 	}
 
@@ -85,9 +86,9 @@ class Super extends CI_Controller {
 			$data['logged_in'] = $this->session->userdata('logged_in');
 			$data['administradores'] = $this->cargarAdministradores();
 			
-			$this->load->view('include/header', $data);
-			$this->load->view('admin/super/super', $data);
-			$this->load->view('include/footer');
+			$this->load->view('include/header/main', $data);
+			$this->load->view('super/panel', $data);
+			$this->load->view('include/footer/main');
 			$this->logs_sia->logs('PLACE_USER');
 		}else{
 		}
