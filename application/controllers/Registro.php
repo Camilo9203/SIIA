@@ -42,22 +42,28 @@ class Registro extends CI_Controller
 		$this->form_validation->set_rules('correo_electronico', '', 'trim|required|min_length[3]|valid_email|xss_clean');
 		$this->form_validation->set_rules('correo_electronico_rep_legal', '', 'trim|required|min_length[3]|valid_email|xss_clean');
 		$this->form_validation->set_rules('nombre_p', '', 'trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('nombre_usuario', '', 'trim|required|min_length[3]|xss_clean|is_unique[usuarios.usuario]');
+		$this->form_validation->set_rules('nombre_usuario', '', 'trim|required|min_length[3]|xss_clean');
 		$this->form_validation->set_rules('password', '', 'trim|required|min_length[3]|xss_clean');
 
 		if ($this->form_validation->run("formulario_registro") == FALSE) {
 			$error = validation_errors();
 			echo json_encode(array('url' => "registro", 'msg' => $error));
-		} else {
+		}
+		else {
+			/** TODO: Arreglar error al generar contraseña */
 			$data_registro_user = array(
 				'usuario' => $this->input->post('nombre_usuario'),
-				'contrasena' => generate_hash($this->input->post('password')),
-				'contrasena_rdel' => mc_encrypt($this->input->post('password'), KEY_RDEL),
+				'contrasena' => $this->input->post('password'),
+				'contrasena_rdel'=> $this->input->post('password'),
+				//'contrasena' => generate_hash($this->input->post('password')),
+				//'contrasena_rdel' => mc_encrypt($this->input->post('password'), KEY_RDEL),
 				'logged_in' => 0,
 			);
 			if ($this->db->insert('usuarios', $data_registro_user)){
+				echo json_encode(array('url' => "registro", 'msg' => "Se ha registrado usuario"));
 				$this->logs_sia->logQueries();
 				$id_usuario = $this->db->select('id_usuario')->from('usuarios')->where('usuario', $data_registro_user['usuario'])->get()->row();
+				echo $id_usuario;
 				$data_token = array(
 					'token' => generate_token(),
 					'verificado' => 0,
@@ -89,12 +95,10 @@ class Registro extends CI_Controller
 						$this->logs_sia->logs('REGISTER_TYPE');
 						$this->logs_sia->logs('URL_TYPE');
 						$this->logs_sia->logQueries();
-						}
 					}
 				}
 			}
 		}
-
 	}
 	/**
 		Funcion para enviar un correo electronico.
