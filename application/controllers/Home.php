@@ -138,26 +138,4 @@ class Home extends CI_Controller
 		echo json_encode(array("facilitadores" => $facilitadores));
 	}
 
-	public function verificarUsuario()
-	{
-		// Comprobar que el nombre de usuario y el nit no se encuentre en la base de datos. 
-		// $nitOrganizacion = $this->db->select("numNIT")->from("organizaciones")->where("numNIT", $this->input->post('nit'))->get()->row()->numeroNIT;
-		$nombreUsuario = $this->db->select("usuario")->from("usuarios")->where("usuario", $this->input->post('nombre'))->get()->row()->usuario;
-
-		if ($nombreUsuario != NULL || $nombreUsuario != "") {
-			echo json_encode(array("existe" => 1));
-		} else {
-			echo json_encode(array("existe" => 0));
-		}
-	}
-	public function verificarNIT()
-	{
-		// Comprobar que el nombre de usuario y el nit no se encuentre en la base de datos.
-		$nit = $this->db->select("numNIT")->from("organizaciones")->where("numNIT", $this->input->post('nit'))->get()->row()->numNIT;
-		if ($nit != NULL || $nit != "") {
-			echo json_encode(array("existe" => 1));
-		} else {
-			echo json_encode(array("existe" => 0));
-		}
-	}
 }

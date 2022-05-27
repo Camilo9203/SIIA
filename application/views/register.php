@@ -8,40 +8,39 @@
 			<hr/>
 			<div class="form-group">
 				<label for="organizacion">Nombre de la organización: <span class="spanRojo">*</span></label>
-				<input type="text" class="form-control" form="formulario_registro" name="organizacion" id="organizacion" placeholder="Nombre de la organización..." required="" autofocus value="<?php echo  set_value('organizacion');  ?>">
+				<input type="text" class="form-control input-govco" form="formulario_registro" name="organizacion" id="organizacion" placeholder="Nombre de la organización..." required="" autofocus value="<?php echo  set_value('organizacion');  ?>">
 			</div>
 			<div class="form-group">
 				<label for="nit">NIT de la organización (sin puntos + digito de verificación): <span class="spanRojo">*</span></label>
 				<div class="input-group">
 					<input type="number" class="form-control" form="formulario_registro" name="nit" id="nit" placeholder="Numero de NIT" required="" maxlength="10" minlength="3" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
-					<!-- Digito de verificación //TODO: Pendiente por terminar -->
 					<span class="input-group-addon">-</span>
-					<input type="number" class="form-control" form="formulario_registro" name="nit_digito" id="nit_digito" placeholder=" Dígito de verificación" required="" maxlength="1" minlength="1" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+					<input type="number" class="form-control input-govco" form="formulario_registro" name="nit_digito" id="nit_digito" placeholder=" Dígito de verificación" required="" maxlength="1" minlength="1" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="sigla">Sigla de la organización: <span class="spanRojo">*</span></label>
-				<input type="text" class="form-control" form="formulario_registro" name="sigla" id="sigla" placeholder="Sigla de la organización..." required="">
+				<input type="text" class="form-control input-govco" form="formulario_registro" name="sigla" id="sigla" placeholder="Sigla de la organización..." required="">
 			</div>
 			<div class="form-group">
 				<label for="primer_nombre_rep_legal">Primer nombre del representante legal: <span class="spanRojo">*</span></label>
-				<input type="text" class="form-control" form="formulario_registro" name="primer_nombre_rep_legal" id="nombre" placeholder="Primer nombre del representante..." required="">
+				<input type="text" class="form-control input-govco" form="formulario_registro" name="primer_nombre_rep_legal" id="nombre" placeholder="Primer nombre del representante..." required="">
 			</div>
 			<div class="form-group">
 				<label for="segundo_nombre_rep_legal">Segundo nombre del representante legal:</label>
-				<input type="text" class="form-control" form="formulario_registro" name="segundo_nombre_rep_legal" id="nombre_s" placeholder="Segundo nombre del representante...">
+				<input type="text" class="form-control input-govco" form="formulario_registro" name="segundo_nombre_rep_legal" id="nombre_s" placeholder="Segundo nombre del representante...">
 			</div>
 			<div class="form-group">
 				<label for="primer_apellido_rep_regal">Primer apellido del representante legal: <span class="spanRojo">*</span></label>
-				<input type="text" class="form-control" form="formulario_registro" name="primer_apellido_rep_regal" id="apellido" placeholder="Primer apellido del representante..." required="">
+				<input type="text" class="form-control input-govco" form="formulario_registro" name="primer_apellido_rep_regal" id="apellido" placeholder="Primer apellido del representante..." required="">
 			</div>
 			<div class="form-group">
 				<label for="segundo_apellido_rep_regal">Segundo apellido del representante legal:</label>
-				<input type="text" class="form-control" form="formulario_registro" name="segundo_apellido_rep_regal" id="apellido_s" placeholder="Segundo apellido del representante...">
+				<input type="text" class="form-control input-govco" form="formulario_registro" name="segundo_apellido_rep_regal" id="apellido_s" placeholder="Segundo apellido del representante...">
 			</div>
 			<div class="form-group">
 				<label for="correo_electronico_rep_legal">Correo electrónico del representante legal: <span class="spanRojo">*</span></label>
-				<input type="email" class="form-control" form="formulario_registro" name="correo_electronico_rep_legal" id="correo_electronico_rep_legal" placeholder="Correo electrónico del representante legal..." required="">
+				<input type="email" class="form-control input-govco" form="formulario_registro" name="correo_electronico_rep_legal" id="correo_electronico_rep_legal" placeholder="Correo electrónico del representante legal..." required="">
 			</div>
 		</div>
 		<div class="col-md-6 p-4">
@@ -49,15 +48,15 @@
 			<hr/>
 			<div class="form-group">
 				<label for="primer_nombre_persona">Primer nombre: <span class="spanRojo">*</span></label>
-				<input type="text" class="form-control" form="formulario_registro" name="primer_nombre_persona" id="nombre_p" placeholder="Primer nombre..." required="">
+				<input type="text" class="form-control input-govco" form="formulario_registro" name="primer_nombre_persona" id="nombre_p" placeholder="Primer nombre..." required="">
 			</div>
 			<div class="form-group">
 				<label for="primer_apellido_persona">Primer apellido: <span class="spanRojo">*</span></label>
-				<input type="text" class="form-control" form="formulario_registro" name="primer_apellido_persona" id="apellido_p" placeholder="Primer apellido..." required="">
+				<input type="text" class="form-control input-govco" form="formulario_registro" name="primer_apellido_persona" id="apellido_p" placeholder="Primer apellido..." required="">
 			</div>
 			<div class="form-group">
 				<label for="correo_electronico">Correo electrónico de organización (Notificaciones): <span class="spanRojo">*</span></label>
-				<input type="email" class="form-control" form="formulario_registro" name="correo_electronico" id="correo_electronico" placeholder="Correo electrónico de la organización..." required="">
+				<input type="email" class="form-control input-govco" form="formulario_registro" name="correo_electronico" id="correo_electronico" placeholder="Correo electrónico de la organización..." required="">
 			</div>
 			<!-- <h3>Datos de la cuenta de usuario:</h3><small class="pull-right"><span class="spanRojo">*</span> Requerido</small> -->
 			<div class="form-group">
@@ -67,30 +66,30 @@
 			<div class="form-group">
 				<label for="password">Contraseña: <span class="spanRojo">*</span></label>
 				<div class="pw-cont">
-					<input type="password" class="form-control" form="formulario_registro" name="password" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required="" autocomplete="off">
+					<input type="password" class="form-control input-govco" form="formulario_registro" name="password" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required="" autocomplete="off">
 					<span id="show-pass1"><i class="fa fa-eye" aria-hidden="true"></i></span>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="re_password">Vuelve a escribir la contraseña: <span class="spanRojo">*</span></label>
 				<div class="pw-cont">
-					<input type="password" class="form-control" form="formulario_registro" name="re_password" id="re_password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required="" autocomplete="off">
+					<input type="password" class="form-control input-govco" form="formulario_registro" name="re_password" id="re_password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required="" autocomplete="off">
 					<span id="show-pass2"><i class="fa fa-eye" aria-hidden="true"></i></span>
 				</div>
 			</div>
 			<hr/>
 			<div class="form-group">
+				<small class="pull-right">
+					<i>
+						<span class="spanRojo">*</span>Clic en el texto para ver política
+					</i>
+				</small>
 				<label class="underlined">
 					<input type="checkbox" id="acepto_cond" form="formulario_registro" name="acepto_cond" value="* Acepto condiciones y restricciones en SIIA." disabled required>
 					<label for="acepto_cond">&nbsp;
 						<a data-toggle="modal" data-target="#politica_ventana" data-backdrop="static" data-keyboard="false"><span class="spanRojo">*</span> Política de tratamiento de la información.</a>
 					</label>
 				</label>
-				<small class="pull-right">
-					<i>
-						<span class="spanRojo">*</span>Clic en el texto para ver política
-					</i>
-				</small>
 			</div>
 			<div class="form-group">
 				<form>
@@ -98,8 +97,8 @@
 				</form>
 			</div>
 			<div class="form-group">
-				<button type="button" id="confirmaRegistro" class="btn btn btn-round btn-high text-capitalize btn-sm pull-right" data-toggle="modal" data-target="#ayuda_registro">Registrarme <i class="fa fa-check"></i></button>
-				<button type="button" class="btn btn-danger btn-sm submit ingresar" value="Iniciar Sesion">Iniciar Sesión <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+				<button type="button" id="guardar_registro" class="btn btn btn-round btn-high text-capitalize btn-sm pull-right">Registrarme <i class="fa fa-check"></i></button>
+				<button type="button" class="btn btn-danger btn-sm submit ingresar" value="Iniciar Sesión">Iniciar Sesión <i class="fa fa-sign-in" aria-hidden="true"></i></button>
 			</div>
 			<img src="<?php echo base_url(); ?>assets/img/loading.gif" id="loading" class="img-responsive col-md-2">
 			<div class="form-group">

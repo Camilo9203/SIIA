@@ -47,9 +47,9 @@ class Panel extends CI_Controller
 //		$data["camara"] = $this->cargarCamaraComercio();
 //		$data['informacionModal'] = $this->cargar_informacionModal();
 
-		$this->load->view('include/header', $data);
-		$this->load->view('paneles/panel', $data);
-		$this->load->view('include/footer', $data);
+		$this->load->view('include/header/main', $data);
+		$this->load->view('usuario/panel', $data);
+		$this->load->view('include/footer/main', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
 

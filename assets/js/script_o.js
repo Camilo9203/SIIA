@@ -8085,56 +8085,7 @@ $(document).ready(function () {
 	});
 	// Click admin FIN
 
-	/**
-		Click en inicio de Sesion.
-	**/
-	$("#inicio_sesion").click(function () {
-		if ($("#formulario_login").valid()) {
-			var usuario = $("#usuario").val();
-			var password = $("#password").val();
-			var response_captcha = grecaptcha.getResponse();
 
-			if (usuario.length > 0 && password.length > 0) {
-				var data = {
-					usuario: usuario,
-					password: password,
-				};
-				$.ajax({
-					url: baseURL + "sesion/login",
-					type: "post",
-					dataType: "JSON",
-					data: data,
-					beforeSend: function () {
-						$("#loading").show();
-						$(this).attr("disabled", true);
-					},
-					success: function (response) {
-						if (response.url == "login") {
-							mensaje(response.msg, "alert-warning");
-							clearInputs("formulario_login");
-						}
-						if (response.url == "panel") {
-							redirect(response.url);
-						}
-						$("#loading").toggle();
-						grecaptcha.reset();
-					},
-					error: function (ev) {
-						//Do nothing
-					},
-
-					// 	if(response_captcha != 0){
-					// 	    });
-					// 	}else{
-					// 		mensaje(texto_validacaptcha, alert_danger);
-					// 	}
-					// }else{
-					// 	mensaje("Escriba el usuario y la contraseña.", alert_danger);
-					// }
-				});
-			}
-		}
-	});
 
 	/**
 		Click en inicio de Sesion Administrador.
@@ -16515,187 +16466,7 @@ function sleep(milliseconds) {
 **/
 
 function validaciones() {
-	/**
-		Forms validations TODO.
-	 	Formulario Registro
-	**/
-	$("form[id='formulario_registro']").validate({
-		rules: {
-			organizacion: {
-				required: true,
-				minlength: 3,
-			},
-			nit: {
-				required: true,
-				minlength: 3,
-				maxlength: 10,
-				//regex: "^[^.][0-9]+-[0-9]{1}?$",
-			},
-			nit_digito: {
-				required: true,
-			},
-			sigla: {
-				required: true,
-				minlength: 3,
-			},
-			primer_nombre_rep_legal: {
-				required: true,
-				minlength: 3,
-			},
-			primer_apellido_rep_regal: {
-				required: true,
-				minlength: 3,
-			},
-			correo_electronico: {
-				required: true,
-				minlength: 3,
-				email: true,
-			},
-			correo_electronico_rep_legal: {
-				required: true,
-				minlength: 3,
-				email: true,
-			},
-			primer_nombre_persona: {
-				required: true,
-				minlength: 3,
-			},
-			primer_apellido_persona: {
-				required: true,
-				minlength: 3,
-			},
-			nombre_usuario: {
-				required: true,
-				minlength: 3,
-				maxlength: 10,
-			},
-			password: {
-				required: true,
-				minlength: 8,
-				maxlength: 10,
-				regex:
-					"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,10}$",
-			},
-			re_password: {
-				required: true,
-				minlength: 8,
-				maxlength: 10,
-				regex:
-					"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,10}$",
-			},
-			aceptocond: {
-				required: true,
-			},
-		},
-		messages: {
-			organizacion: {
-				required: "Por favor, escriba el nombre de la organización.",
-				minlength:
-					"El nombre de la organización debe tener mínimo 3 caracteres.",
-			},
-			nit: {
-				required: "Por favor, escriba el NIT de la organización.",
-				minlength: "El nit debe tener mínimo 3 caracteres.",
-				maxlength: "El nit debe tener maximo 10 caracteres.",
-				//regex: "Por favor, escriba un NIT válido, sin puntos y con (-)."
-			},
-			nit_digito: {
-				required: "Por favor, escriba el digito de verificación.",
-			},
-			sigla: {
-				required: "Por favor, escriba la Sigla de la organización.",
-				minlength:
-					"La Sigla de la organización debe tener mínimo 3 caracteres.",
-			},
-			primer_nombre_rep_legal: {
-				required:
-					"Por favor, escriba el Primer Nombre del Representante Legal.",
-				minlength:
-					"El Primer Nombre del Representante Legal debe tener mínimo 3 caracteres.",
-			},
-			primer_apellido_rep_regal: {
-				required:
-					"Por favor, escriba el Primer Apellido del Representante Legal.",
-				minlength:
-					"El Primer Apellido del Representante Legal debe tener mínimo 3 caracteres.",
-			},
-			correo_electronico: {
-				required:
-					"Por favor, escriba un Correo Electrónico de la organizacion válido.",
-				minlength: "El Correo Electrónico debe tener mínimo 3 caracteres.",
-				email: "Por favor, escriba un Correo Electrónico valido.",
-			},
-			correo_electronico_rep_legal: {
-				required:
-					"Por favor, escriba un Correo Electrónico del representante legal válido.",
-				minlength: "El Correo Electrónico debe tener mínimo 3 caracteres.",
-				email: "Por favor, escriba un Correo Electrónico valido.",
-			},
-			primer_nombre_persona: {
-				required: "Por favor, escriba su Primer Nombre.",
-				minlength: "El Primer Nombre debe tener mínimo 3 caracteres.",
-			},
-			primer_apellido_persona: {
-				required: "Por favor, escriba su Primer Apellido.",
-				minlength: "El Primer Apellido debe tener mínimo 3 caracteres.",
-			},
-			nombre_usuario: {
-				required: "Por favor, escriba el Nombre de Usuario.",
-				minlength: "El Nombre de Usuario debe tener mínimo 3 caracteres.",
-				maxlength: "El Nombre de Usuario debe tener máximo 10 caracteres.",
-			},
-			password: {
-				required: "Por favor, escriba la Contraseña.",
-				minlength: "La Contraseña debe tener mínimo 8 caracteres.",
-				maxlength: "La Contraseña debe tener máximo 10 caracteres.",
-				regex:
-					"Debe tener mínimo 8 y máximo 10 caracteres, al menos una mayúscula, una minúscula, un número, y un cáracter especial (#?!@$%^&*-).",
-			},
-			re_password: {
-				required: "Por favor, vuela a escribir la Contraseña.",
-				minlength: "La Contraseña debe tener mínimo 8 caracteres.",
-				maxlength: "La Contraseña debe tener máximo 10 caracteres.",
-				regex:
-					"Debe tener mínimo 8 y máximo 10 caracteres, al menos una mayúscula, una minúscula, un número, y un cáracter especial (#?!@$%^&*-).",
-			},
-			aceptocond: {
-				required:
-					"Para continuar tiene que aceptar las condiciones y restricciones de SIA.",
-			},
-		},
-	});
-
-	// Formulario Login.
-	$("form[id='formulario_login']").validate({
-		rules: {
-			usuario: {
-				required: true,
-				minlength: 3,
-				//maxlength: 10,
-			},
-			password: {
-				required: true,
-				minlength: 8,
-				maxlength: 10,
-				regex:
-					"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,10}$",
-			},
-		},
-		messages: {
-			usuario: {
-				required: "Por favor, escriba el Nombre de Usuario.",
-				minlength: "El Nombre de Usuario debe tener mínimo 3 caracteres.",
-				//maxlength: "El Nombre de Usuario debe tener máximo 10 caracteres."
-			},
-			password: {
-				required: "Por favor, escriba la contraseña.",
-				minlength: "La Contraseña debe tener mínimo 8 caracteres.",
-				maxlength: "La Contraseña debe tener máximo 10 caracteres.",
-				regex:
-					"Debe tener mínimo 8 y máximo 10 caracteres, al menos una mayúscula, una minúscula, un número, y un cáracter especial (#?!@$%^&*-).",
-			},
-		},
-	});
+	// Formulario Crear Solicitud
 	$("form[id='formulario_crear_solicitud']").validate({
 		rules: {
 			tipo_solicitud: {
@@ -16720,7 +16491,6 @@ function validaciones() {
 			},
 		},
 	});
-
 	// Formulario Login Administradores.
 	$("form[id='formulario_login_admin']").validate({
 		rules: {
@@ -16744,7 +16514,6 @@ function validaciones() {
 			},
 		},
 	});
-
 	// Formulario Recordar Contraseña.
 	$("form[id='formulario_recordar']").validate({
 		rules: {
@@ -16777,7 +16546,6 @@ function validaciones() {
 			},
 		},
 	});
-
 	// Formulario Actualizar.
 	$("form[id='formulario_actualizar']").validate({
 		rules: {
@@ -16871,7 +16639,6 @@ function validaciones() {
 			},
 		},
 	});
-
 	// Formulario Actualizar Contraseña.
 	$("form[id='formulario_actualizar_contrasena']").validate({
 		rules: {
@@ -16921,7 +16688,6 @@ function validaciones() {
 			},
 		},
 	});
-
 	// Formulario Actualizar Nombre de usuario.
 	$("form[id='formulario_actualizar_usuario']").validate({
 		rules: {
@@ -16937,7 +16703,6 @@ function validaciones() {
 			},
 		},
 	});
-
 	// Formulario Actualizar Nombre de usuario.
 	$("form[id='formulario_actualizar_imagen']").validate({
 		rules: {
@@ -16962,7 +16727,7 @@ function validaciones() {
 			},
 		},
 	});
-
+	// Formulario Actualizar Información General.
 	$("form[id='formulario_informacion_general_entidad']").validate({
 		rules: {
 			tipo_organizacion: {

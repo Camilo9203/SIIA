@@ -83,6 +83,13 @@ footer .footer-enlaces a {
 	color: #fff;
 }
 
+
+label.error {
+	color: #e62e31;
+	font-size: 13px;
+}
+
+
 .se-pre-con {
 	position: fixed;
 	left: 0px;

@@ -15,17 +15,17 @@
 	<meta name="distribution" content="web" />
 	<meta name="ROBOTS" content="INDEX, FOLLOW" />
 	<!-- Styles -->
-	<link href="https://cdn.www.gov.co/assets/css/styles.css" rel="stylesheet">
-	<link href="<?php echo base_url('assets/css/font-awesome.min.css') ?>" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!--	<link href="https://cdn.www.gov.co/assets/css/styles.css" rel="stylesheet">-->
+<!--	<link href="--><?php //echo base_url('assets/css/font-awesome.min.css') ?><!--" rel="stylesheet" type="text/css" />-->
+<!--	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
 	<!--	<link href="--><?php //echo base_url('assets/css/bootstrap.min.css') ?><!--" rel="stylesheet" type="text/css" />-->
 	<!-- Custom CSS -->
-	<link href="<?php echo base_url('assets/css/style.css?v=1.0.8.1919') ?>" rel="stylesheet" type="text/css" />
+<!--	<link href="--><?php //echo base_url('assets/css/style.css?v=1.0.8.1919') ?><!--" rel="stylesheet" type="text/css" />-->
 	<!-- Favicon -->
-	<link href="<?php echo base_url('assets/img/favicon16.png') ?>" type="image/png" sizes="16x16" rel="icon" />
-	<link href="<?php echo base_url('assets/img/favicon32.png') ?>" type="image/png" sizes="32x32" rel="icon" />
-	<link href="<?php echo base_url('assets/img/favicon64.png') ?>" type="image/png" sizes="64x64" rel="icon" />
-	<link href="<?php echo base_url('assets/img/favicon128.png') ?>" type="image/png" sizes="128x128" rel="shortcut icon" />
+	<link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon16.png') ?>" type="image/png" sizes="16x16" />
+	<link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon32.png') ?>" type="image/png" sizes="32x32" />
+	<link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon64.png') ?>" type="image/png" sizes="64x64" />
+	<link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon128.png') ?>" type="image/png" sizes="128x128" />
 	<link href="https://fonts.googleapis.com/css?family=Dosis&display=swap" rel="stylesheet">
 	<!-- Graficas //TODO: Charts Graficas para las estadisticas -->
 	<!--	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.js" integrity="sha512-XcsV/45eM/syxTudkE8AoKK1OfxTrlFpOltc9NmHXh3HF+0ZA917G9iG6Fm7B6AzP+UeEzV8pLwnbRNPxdUpfA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
@@ -33,6 +33,12 @@
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="white-translucent" />
 	<meta name="google-site-verification" content="DloHloB2_mQ9o7BPTd9xXEYHUeXrnWQqKGGKeuGrkLk" />
+	<!-- Dashboard	-->
+	<link rel="stylesheet" href="<?php echo base_url('assets/js/dashboard/vendors/feather/feather.css') ?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/js/dashboard/vendors/ti-icons/css/themify-icons.css') ?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/js/dashboard/vendors/css/vendor.bundle.base.css') ?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/css/dashboard/css/vertical-layout-light/style.css') ?>">
+<!--	<link rel="shortcut icon" href="--><?php //echo base_url('assets/js/dashboard/images/favicon.png') ?><!--" />-->
 	<!-- Google -->
 	<script src="https://www.google.com/recaptcha/api.js"></script>
 	<!-- Google Tag Manager -->
@@ -111,30 +117,4 @@
 </head>
 
 <body class="nav-md">
-<!--	<div class="se-pre-con"></div>-->
-	<!-- Cabecera y Navbar -->
-	<header>
-		<nav class="navbar navbar-govco">
-			<a class="navbar-brand" href="https://www.gov.co/home/">
-				<img src="https://cdn.www.gov.co/assets/images/logo.png" width="auto" height="20" alt="Logo Gov.co">
-			</a>
-		</nav>
-		<div class="navbar-header col-xs-12">
-			<div class="navbar-uaeos">
-				<a href="https://www.uaeos.gov.co/" target="_blank" title="Ir a UAEOS">
-					<img id="imagen_header" src="https://acreditacion.uaeos.gov.co/siia/assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png" width="auto" height="75">
-				<a href="<?php echo base_url(); ?>" title="Ir a SIIA">
-					<img id="imagen_header_sia" alt="Brand" src="https://acreditacion.uaeos.gov.co/siia/assets/img/siia_logo.png" width="auto" height="75" class="pull-right">
-				</a>
-			</div>
-		</div>
 
-
-		<!-- Navbar Usuario no registrado //TODO: Navbar de usuario no registrado -->
-		<?php if (!$logged_in && $tipo_usuario == "none") {
-			echo "<div class='hidden' id='data_logg' data-log='$logged_in'></div>";
-			$this->load->view('include/navbar/guest', $data);
-			?>
-
-		<?php } ?>
-	</header>

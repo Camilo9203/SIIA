@@ -3,6 +3,7 @@ var url = unescape(window.location.href);
 var activate = url.split("/");
 var baseURL = activate[0] + "//" + activate[2] + "/" + activate[3] + "/";
 var encuestas;
+ValidarFormRegistro();
 /** Notificación Toast SweetAlert */
 const Toast = Swal.mixin({
 	toast: true,
@@ -29,7 +30,7 @@ $("#nombre_usuario").change(function () {
 		nombre: $("#nombre_usuario").val(),
 	};
 	$.ajax({
-		url: baseURL + "home/verificarUsuario",
+		url: baseURL + "registro/verificarUsuario",
 		type: "post",
 		dataType: "JSON",
 		data: usuario,
@@ -60,7 +61,7 @@ $("#nit_digito").change(function () {
 		nit: nit,
 	};
 	$.ajax({
-		url: baseURL + "home/verificarNIT",
+		url: baseURL + "registro/verificarNIT",
 		type: "post",
 		dataType: "JSON",
 		data: organizacion,
@@ -118,7 +119,7 @@ $("#confirmaRegistro").click(function () {
 
 	if ($("#formulario_registro").valid()) {
 		$.ajax({
-			url: baseURL + "home/verificarUsuario",
+			url: baseURL + "registro/verificarUsuario",
 			type: "post",
 			dataType: "JSON",
 			data: datas,
@@ -191,6 +192,161 @@ $("#confirmaRegistro").click(function () {
 	}
 });
 // TODO: Guardar registro validado.
+
+
+/**
+	 Validar Formulario Registro
+ **/
+function ValidarFormRegistro () {
+	$("form[id='formulario_registro']").validate({
+		rules: {
+			organizacion: {
+				required: true,
+				minlength: 3,
+			},
+			nit: {
+				required: true,
+				minlength: 3,
+				maxlength: 10,
+				//regex: "^[^.][0-9]+-[0-9]{1}?$",
+			},
+			nit_digito: {
+				required: true,
+			},
+			sigla: {
+				required: true,
+				minlength: 3,
+			},
+			primer_nombre_rep_legal: {
+				required: true,
+				minlength: 3,
+			},
+			primer_apellido_rep_regal: {
+				required: true,
+				minlength: 3,
+			},
+			correo_electronico: {
+				required: true,
+				minlength: 3,
+				email: true,
+			},
+			correo_electronico_rep_legal: {
+				required: true,
+				minlength: 3,
+				email: true,
+			},
+			primer_nombre_persona: {
+				required: true,
+				minlength: 3,
+			},
+			primer_apellido_persona: {
+				required: true,
+				minlength: 3,
+			},
+			nombre_usuario: {
+				required: true,
+				minlength: 3,
+				maxlength: 10,
+			},
+			password: {
+				required: true,
+				minlength: 8,
+				maxlength: 10,
+				regex:
+					"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,10}$",
+			},
+			re_password: {
+				required: true,
+				minlength: 8,
+				maxlength: 10,
+				regex:
+					"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,10}$",
+			},
+			aceptocond: {
+				required: true,
+			},
+		},
+		messages: {
+			organizacion: {
+				required: "Por favor, escriba el nombre de la organización.",
+				minlength:
+					"El nombre de la organización debe tener mínimo 3 caracteres.",
+			},
+			nit: {
+				required: "Por favor, escriba el NIT de la organización.",
+				minlength: "El nit debe tener mínimo 3 caracteres.",
+				maxlength: "El nit debe tener maximo 10 caracteres.",
+				//regex: "Por favor, escriba un NIT válido, sin puntos y con (-)."
+			},
+			nit_digito: {
+				required: "Por favor, escriba el digito de verificación.",
+			},
+			sigla: {
+				required: "Por favor, escriba la Sigla de la organización.",
+				minlength:
+					"La Sigla de la organización debe tener mínimo 3 caracteres.",
+			},
+			primer_nombre_rep_legal: {
+				required:
+					"Por favor, escriba el Primer Nombre del Representante Legal.",
+				minlength:
+					"El Primer Nombre del Representante Legal debe tener mínimo 3 caracteres.",
+			},
+			primer_apellido_rep_regal: {
+				required:
+					"Por favor, escriba el Primer Apellido del Representante Legal.",
+				minlength:
+					"El Primer Apellido del Representante Legal debe tener mínimo 3 caracteres.",
+			},
+			correo_electronico: {
+				required:
+					"Por favor, escriba un Correo Electrónico de la organizacion válido.",
+				minlength: "El Correo Electrónico debe tener mínimo 3 caracteres.",
+				email: "Por favor, escriba un Correo Electrónico valido.",
+			},
+			correo_electronico_rep_legal: {
+				required:
+					"Por favor, escriba un Correo Electrónico del representante legal válido.",
+				minlength: "El Correo Electrónico debe tener mínimo 3 caracteres.",
+				email: "Por favor, escriba un Correo Electrónico valido.",
+			},
+			primer_nombre_persona: {
+				required: "Por favor, escriba su Primer Nombre.",
+				minlength: "El Primer Nombre debe tener mínimo 3 caracteres.",
+			},
+			primer_apellido_persona: {
+				required: "Por favor, escriba su Primer Apellido.",
+				minlength: "El Primer Apellido debe tener mínimo 3 caracteres.",
+			},
+			nombre_usuario: {
+				required: "Por favor, escriba el Nombre de Usuario.",
+				minlength: "El Nombre de Usuario debe tener mínimo 3 caracteres.",
+				maxlength: "El Nombre de Usuario debe tener máximo 10 caracteres.",
+			},
+			password: {
+				required: "Por favor, escriba la Contraseña.",
+				minlength: "La Contraseña debe tener mínimo 8 caracteres.",
+				maxlength: "La Contraseña debe tener máximo 10 caracteres.",
+				regex:
+					"Debe tener mínimo 8 y máximo 10 caracteres, al menos una mayúscula, una minúscula, un número, y un cáracter especial (#?!@$%^&*-).",
+			},
+			re_password: {
+				required: "Por favor, vuela a escribir la Contraseña.",
+				minlength: "La Contraseña debe tener mínimo 8 caracteres.",
+				maxlength: "La Contraseña debe tener máximo 10 caracteres.",
+				regex:
+					"Debe tener mínimo 8 y máximo 10 caracteres, al menos una mayúscula, una minúscula, un número, y un cáracter especial (#?!@$%^&*-).",
+			},
+			aceptocond: {
+				required:
+					"Para continuar tiene que aceptar las condiciones y restricciones de SIA.",
+			},
+		},
+	});
+}
+/**
+	 Guardar Registro
+ **/
 $("#guardar_registro").click(function () {
 	if ($("#formulario_registro").valid()) {
 		var organizacion = $("#organizacion").val();
@@ -201,9 +357,7 @@ $("#guardar_registro").click(function () {
 		var apellido = $("#apellido").val();
 		var apellido_s = $("#apellido_s").val();
 		var correo_electronico = $("#correo_electronico").val();
-		var correo_electronico_rep_legal = $(
-			"#correo_electronico_rep_legal"
-		).val();
+		var correo_electronico_rep_legal = $("#correo_electronico_rep_legal").val();
 		var nombre_p = $("#nombre_p").val();
 		var apellido_p = $("#apellido_p").val();
 		var nombre_usuario = $("#nombre_usuario").val();
