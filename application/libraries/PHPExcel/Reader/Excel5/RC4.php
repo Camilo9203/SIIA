@@ -56,7 +56,7 @@ class PHPExcel_Reader_Excel5_RC4
     }
 
     /**
-     * Symmetric decryption/encryption function
+     * Symmetric decryption/encryption funciones
      *
      * @param string $data Data to encrypt/decrypt
      *

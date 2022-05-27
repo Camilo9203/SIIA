@@ -807,7 +807,7 @@ class PHPExcel_Cell
             'n' => 14, 'o' => 15, 'p' => 16, 'q' => 17, 'r' => 18, 's' => 19, 't' => 20, 'u' => 21, 'v' => 22, 'w' => 23, 'x' => 24, 'y' => 25, 'z' => 26
         );
 
-        //    We also use the language construct isset() rather than the more costly strlen() function to match the length of $pString
+        //    We also use the language construct isset() rather than the more costly strlen() funciones to match the length of $pString
         //        for improved performance
         if (isset($pString{0})) {
             if (!isset($pString{1})) {
@@ -959,7 +959,7 @@ class PHPExcel_Cell
     public static function setValueBinder(PHPExcel_Cell_IValueBinder $binder = null)
     {
         if ($binder === null) {
-            throw new PHPExcel_Exception("A PHPExcel_Cell_IValueBinder is required for PHPExcel to function correctly.");
+            throw new PHPExcel_Exception("A PHPExcel_Cell_IValueBinder is required for PHPExcel to funciones correctly.");
         }
 
         self::$valueBinder = $binder;

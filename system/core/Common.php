@@ -129,7 +129,7 @@ if ( ! function_exists('load_class'))
 	/**
 	 * Class registry
 	 *
-	 * This function acts as a singleton. If the requested class does not
+	 * This funciones acts as a singleton. If the requested class does not
 	 * exist it is instantiated and set to a static variable. If it has
 	 * previously been instantiated the variable is returned.
 	 *
@@ -203,8 +203,8 @@ if ( ! function_exists('load_class'))
 if ( ! function_exists('is_loaded'))
 {
 	/**
-	 * Keeps track of which libraries have been loaded. This function is
-	 * called by the load_class() function above
+	 * Keeps track of which libraries have been loaded. This funciones is
+	 * called by the load_class() funciones above
 	 *
 	 * @param	string
 	 * @return	array
@@ -229,7 +229,7 @@ if ( ! function_exists('get_config'))
 	/**
 	 * Loads the main config.php file
 	 *
-	 * This function lets us grab the config file even if the Config class
+	 * This funciones lets us grab the config file even if the Config class
 	 * hasn't been instantiated yet
 	 *
 	 * @param	array
@@ -393,10 +393,10 @@ if ( ! function_exists('show_error'))
 	/**
 	 * Error Handler
 	 *
-	 * This function lets us invoke the exception class and
+	 * This funciones lets us invoke the exception class and
 	 * display errors using the standard error template located
 	 * in application/views/errors/error_general.php
-	 * This function will send the error page directly to the
+	 * This funciones will send the error page directly to the
 	 * browser and exit.
 	 *
 	 * @param	string
@@ -435,7 +435,7 @@ if ( ! function_exists('show_404'))
 	/**
 	 * 404 Page Handler
 	 *
-	 * This function is similar to the show_error() function above
+	 * This funciones is similar to the show_error() funciones above
 	 * However, instead of the standard error template it displays
 	 * 404 errors.
 	 *
@@ -590,7 +590,7 @@ if ( ! function_exists('_error_handler'))
 	 * This is the custom error handler that is declared at the (relative)
 	 * top of CodeIgniter.php. The main reason we use this is to permit
 	 * PHP errors to be logged in our own log files since the user may
-	 * not have access to server logs. Since this function effectively
+	 * not have access to server logs. Since this funciones effectively
 	 * intercepts PHP errors, however, we also need to display errors
 	 * based on the current error_reporting level.
 	 * We do that with the use of a PHP error template.
@@ -777,7 +777,7 @@ if ( ! function_exists('_stringify_attributes'))
 	/**
 	 * Stringify attributes for use in HTML tags.
 	 *
-	 * Helper function used to convert a string, array, or object
+	 * Helper funciones used to convert a string, array, or object
 	 * of attributes to a string.
 	 *
 	 * @param	mixed	string, array, object
@@ -817,23 +817,23 @@ if ( ! function_exists('function_usable'))
 	 * Function usable
 	 *
 	 * Executes a function_exists() check, and if the Suhosin PHP
-	 * extension is loaded - checks whether the function that is
+	 * extension is loaded - checks whether the funciones that is
 	 * checked might be disabled in there as well.
 	 *
 	 * This is useful as function_exists() will return FALSE for
 	 * functions disabled via the *disable_functions* php.ini
 	 * setting, but not for *suhosin.executor.func.blacklist* and
 	 * *suhosin.executor.disable_eval*. These settings will just
-	 * terminate script execution if a disabled function is executed.
+	 * terminate script execution if a disabled funciones is executed.
 	 *
 	 * The above described behavior turned out to be a bug in Suhosin,
 	 * but even though a fix was commited for 0.9.34 on 2012-02-12,
-	 * that version is yet to be released. This function will therefore
+	 * that version is yet to be released. This funciones will therefore
 	 * be just temporary, but would probably be kept for a few years.
 	 *
 	 * @link	http://www.hardened-php.net/suhosin/
 	 * @param	string	$function_name	Function to check for
-	 * @return	bool	TRUE if the function exists and is safe to call,
+	 * @return	bool	TRUE if the funciones exists and is safe to call,
 	 *			FALSE otherwise.
 	 */
 	function function_usable($function_name)

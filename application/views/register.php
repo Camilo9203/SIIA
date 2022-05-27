@@ -1,108 +1,126 @@
-<div id="registro" class="center-block col-md-7">
-	<?php echo validation_errors('formulario_registro'); ?>
-	<?php echo form_open('', array('id' => 'formulario_registro')); ?>
-	<!--<button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#ayuda_registro">?</button>-->
-	<div class="col-md-6">
-		<h3>Información básica de la organización:</h3><small class="pull-right"><span class="spanRojo">*</span> Requerido</small>
-		<div class="form-group">
-			<label for="organizacion">Nombre de la organizacion: <span class="spanRojo">*</span></label>
-			<input type="text" class="form-control" form="formulario_registro" name="organizacion" id="organizacion" placeholder="Nombre de la organización..." required="" autofocus value="<?php echo  set_value('organizacion');  ?>">
-		</div>
-		<div class="form-group">
-			<label for="nit">NIT de la organización (sin puntos + digito de verificación): <span class="spanRojo">*</span></label>
-			<div class="input-group">
-				<input type="number" class="form-control" form="formulario_registro" name="nit" id="nit" placeholder="Numero de NIT" required="" maxlength="10" minlength="3" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
-				<!-- Digito de verificación //TODO: Pendiente por terminar -->
-				<span class="input-group-addon">-</span>
-				<input type="number" class="form-control" form="formulario_registro" name="nit_digito" id="nit_digito" placeholder=" Dígito de verificación" required="" maxlength="1" minlength="1" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+<?php echo validation_errors('formulario_registro'); ?>
+<?php echo form_open('', array('id' => 'formulario_registro')); ?>
+<!--<button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#ayuda_registro">?</button>-->
+<div class="container-fluid">
+	<div class="row justify-content-md-center p-4 m-4">
+		<div class="col-md-6 p-4">
+			<h3>Información básica de la organización a acreditar:</h3><small class="pull-right"><span class="spanRojo">*</span> Requerido</small>
+			<hr/>
+			<div class="form-group">
+				<label for="organizacion">Nombre de la organización: <span class="spanRojo">*</span></label>
+				<input type="text" class="form-control" form="formulario_registro" name="organizacion" id="organizacion" placeholder="Nombre de la organización..." required="" autofocus value="<?php echo  set_value('organizacion');  ?>">
+			</div>
+			<div class="form-group">
+				<label for="nit">NIT de la organización (sin puntos + digito de verificación): <span class="spanRojo">*</span></label>
+				<div class="input-group">
+					<input type="number" class="form-control" form="formulario_registro" name="nit" id="nit" placeholder="Numero de NIT" required="" maxlength="10" minlength="3" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+					<!-- Digito de verificación //TODO: Pendiente por terminar -->
+					<span class="input-group-addon">-</span>
+					<input type="number" class="form-control" form="formulario_registro" name="nit_digito" id="nit_digito" placeholder=" Dígito de verificación" required="" maxlength="1" minlength="1" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="sigla">Sigla de la organización: <span class="spanRojo">*</span></label>
+				<input type="text" class="form-control" form="formulario_registro" name="sigla" id="sigla" placeholder="Sigla de la organización..." required="">
+			</div>
+			<div class="form-group">
+				<label for="primer_nombre_rep_legal">Primer nombre del representante legal: <span class="spanRojo">*</span></label>
+				<input type="text" class="form-control" form="formulario_registro" name="primer_nombre_rep_legal" id="nombre" placeholder="Primer nombre del representante..." required="">
+			</div>
+			<div class="form-group">
+				<label for="segundo_nombre_rep_legal">Segundo nombre del representante legal:</label>
+				<input type="text" class="form-control" form="formulario_registro" name="segundo_nombre_rep_legal" id="nombre_s" placeholder="Segundo nombre del representante...">
+			</div>
+			<div class="form-group">
+				<label for="primer_apellido_rep_regal">Primer apellido del representante legal: <span class="spanRojo">*</span></label>
+				<input type="text" class="form-control" form="formulario_registro" name="primer_apellido_rep_regal" id="apellido" placeholder="Primer apellido del representante..." required="">
+			</div>
+			<div class="form-group">
+				<label for="segundo_apellido_rep_regal">Segundo apellido del representante legal:</label>
+				<input type="text" class="form-control" form="formulario_registro" name="segundo_apellido_rep_regal" id="apellido_s" placeholder="Segundo apellido del representante...">
+			</div>
+			<div class="form-group">
+				<label for="correo_electronico_rep_legal">Correo electrónico del representante legal: <span class="spanRojo">*</span></label>
+				<input type="email" class="form-control" form="formulario_registro" name="correo_electronico_rep_legal" id="correo_electronico_rep_legal" placeholder="Correo electrónico del representante legal..." required="">
 			</div>
 		</div>
-		<div class="form-group">
-			<label for="sigla">Sigla de la organización: <span class="spanRojo">*</span></label>
-			<input type="text" class="form-control" form="formulario_registro" name="sigla" id="sigla" placeholder="Sigla de la organización..." required="">
+		<div class="col-md-6 p-4">
+			<h3>Información de la persona encargada del trámite:</h3><small class="pull-right"><span class="spanRojo">*</span> Requerido</small>
+			<hr/>
+			<div class="form-group">
+				<label for="primer_nombre_persona">Primer nombre: <span class="spanRojo">*</span></label>
+				<input type="text" class="form-control" form="formulario_registro" name="primer_nombre_persona" id="nombre_p" placeholder="Primer nombre..." required="">
+			</div>
+			<div class="form-group">
+				<label for="primer_apellido_persona">Primer apellido: <span class="spanRojo">*</span></label>
+				<input type="text" class="form-control" form="formulario_registro" name="primer_apellido_persona" id="apellido_p" placeholder="Primer apellido..." required="">
+			</div>
+			<div class="form-group">
+				<label for="correo_electronico">Correo electrónico de organización (Notificaciones): <span class="spanRojo">*</span></label>
+				<input type="email" class="form-control" form="formulario_registro" name="correo_electronico" id="correo_electronico" placeholder="Correo electrónico de la organización..." required="">
+			</div>
+			<!-- <h3>Datos de la cuenta de usuario:</h3><small class="pull-right"><span class="spanRojo">*</span> Requerido</small> -->
+			<div class="form-group">
+				<label for="nombre_usuario">Nombre de usuario (Incio de sesión): <span class="spanRojo">*</span></label>
+				<input type="text" class="form-control" form="formulario_registro" name="nombre_usuario" id="nombre_usuario" placeholder="Nombre de usuario..." required="">
+			</div>
+			<div class="form-group">
+				<label for="password">Contraseña: <span class="spanRojo">*</span></label>
+				<div class="pw-cont">
+					<input type="password" class="form-control" form="formulario_registro" name="password" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required="" autocomplete="off">
+					<span id="show-pass1"><i class="fa fa-eye" aria-hidden="true"></i></span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="re_password">Vuelve a escribir la contraseña: <span class="spanRojo">*</span></label>
+				<div class="pw-cont">
+					<input type="password" class="form-control" form="formulario_registro" name="re_password" id="re_password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required="" autocomplete="off">
+					<span id="show-pass2"><i class="fa fa-eye" aria-hidden="true"></i></span>
+				</div>
+			</div>
+			<hr/>
+			<div class="form-group">
+				<label class="underlined">
+					<input type="checkbox" id="acepto_cond" form="formulario_registro" name="acepto_cond" value="* Acepto condiciones y restricciones en SIIA." disabled required>
+					<label for="acepto_cond">&nbsp;
+						<a data-toggle="modal" data-target="#politica_ventana" data-backdrop="static" data-keyboard="false"><span class="spanRojo">*</span> Política de tratamiento de la información.</a>
+					</label>
+				</label>
+				<small class="pull-right">
+					<i>
+						<span class="spanRojo">*</span>Clic en el texto para ver política
+					</i>
+				</small>
+			</div>
+			<div class="form-group">
+				<form>
+					<div class="g-recaptcha" id="g-recaptcha" data-sitekey="6LfCESEUAAAAAOemaQmmGTGJeiKvLmPkY7as9zPj"></div>
+				</form>
+			</div>
+			<div class="form-group">
+				<button type="button" id="confirmaRegistro" class="btn btn btn-round btn-high text-capitalize btn-sm pull-right" data-toggle="modal" data-target="#ayuda_registro">Registrarme <i class="fa fa-check"></i></button>
+				<button type="button" class="btn btn-danger btn-sm submit ingresar" value="Iniciar Sesion">Iniciar Sesión <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+			</div>
+			<img src="<?php echo base_url(); ?>assets/img/loading.gif" id="loading" class="img-responsive col-md-2">
+			<div class="form-group">
+				<div id="mensaje" class="col-md-12 alert" role="alert"></div>
+			</div>
 		</div>
-		<div class="form-group">
-			<label for="primer_nombre_rep_legal">Primer nombre del representante legal: <span class="spanRojo">*</span></label>
-			<input type="text" class="form-control" form="formulario_registro" name="primer_nombre_rep_legal" id="nombre" placeholder="Primer nombre del representante..." required="">
-		</div>
-		<div class="form-group">
-			<label for="segundo_nombre_rep_legal">Segundo nombre del representante legal:</label>
-			<input type="text" class="form-control" form="formulario_registro" name="segundo_nombre_rep_legal" id="nombre_s" placeholder="Segundo nombre del representante...">
-		</div>
-		<div class="form-group">
-			<label for="primer_apellido_rep_regal">Primer apellido del representante legal: <span class="spanRojo">*</span></label>
-			<input type="text" class="form-control" form="formulario_registro" name="primer_apellido_rep_regal" id="apellido" placeholder="Primer apellido del representante..." required="">
-		</div>
-		<div class="form-group">
-			<label for="segundo_apellido_rep_regal">Segundo apellido del representante legal:</label>
-			<input type="text" class="form-control" form="formulario_registro" name="segundo_apellido_rep_regal" id="apellido_s" placeholder="Segundo apellido del representante...">
-		</div>
-		<div class="form-group">
-			<label for="correo_electronico_rep_legal">Correo electrónico del representante legal: <span class="spanRojo">*</span></label>
-			<input type="email" class="form-control" form="formulario_registro" name="correo_electronico_rep_legal" id="correo_electronico_rep_legal" placeholder="Correo electrónico del representante legal..." required="">
-		</div>
+		</form>
 	</div>
-	<div class="col-md-6" id="left_registro">
-		<h3>Información de la persona encargada del tramite:</h3><small class="pull-right"><span class="spanRojo">*</span> Requerido</small>
-		<div class="form-group">
-			<label for="primer_nombre_persona">Primer nombre: <span class="spanRojo">*</span></label>
-			<input type="text" class="form-control" form="formulario_registro" name="primer_nombre_persona" id="nombre_p" placeholder="Primer nombre..." required="">
-		</div>
-		<div class="form-group">
-			<label for="primer_apellido_persona">Primer apellido: <span class="spanRojo">*</span></label>
-			<input type="text" class="form-control" form="formulario_registro" name="primer_apellido_persona" id="apellido_p" placeholder="Primer apellido..." required="">
-		</div>
-		<div class="form-group">
-			<label for="correo_electronico">Correo electrónico de organización (Notificaciones): <span class="spanRojo">*</span></label>
-			<input type="email" class="form-control" form="formulario_registro" name="correo_electronico" id="correo_electronico" placeholder="Correo electrónico de la organización..." required="">
-		</div>
-		<!-- <h3>Datos de la cuenta de usuario:</h3><small class="pull-right"><span class="spanRojo">*</span> Requerido</small> -->
-		<div class="form-group">
-			<label for="nombre_usuario">Nombre de usuario (Incio de sesión): <span class="spanRojo">*</span></label>
-			<input type="text" class="form-control" form="formulario_registro" name="nombre_usuario" id="nombre_usuario" placeholder="Nombre de usuario..." required="">
-		</div>
-		<div class="form-group">
-			<label for="password">Contraseña: <span class="spanRojo">*</span></label>
-			<div class="pw-cont">
-				<input type="password" class="form-control" form="formulario_registro" name="password" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required="" autocomplete="off">
-				<span id="show-pass1"><i class="fa fa-eye" aria-hidden="true"></i></span>
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="re_password">Vuelve a escribir la contraseña: <span class="spanRojo">*</span></label>
-			<div class="pw-cont">
-				<input type="password" class="form-control" form="formulario_registro" name="re_password" id="re_password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required="" autocomplete="off">
-				<span id="show-pass2"><i class="fa fa-eye" aria-hidden="true"></i></span>
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="underlined"><input type="checkbox" id="acepto_cond" form="formulario_registro" name="aceptocond" value="* Acepto condiciones y restricciones en SIA." disabled required><label for="aceptocond">&nbsp;</label> <a data-toggle="modal" data-target="#politica_ventana" data-backdrop="static" data-keyboard="false"><span class="spanRojo">*</span> Política de tratamiento de la información.</a></label> <small class="pull-right"><i><span class="spanRojo">*</span> Clic en el texto para ver política</i></small>
-		</div>
-		<div class="form-group">
-			<form>
-				<div class="g-recaptcha" id="g-recaptcha" data-sitekey="6LfCESEUAAAAAOemaQmmGTGJeiKvLmPkY7as9zPj"></div>
-			</form>
-		</div>
-		<div class="form-group">
-			<button type="button" id="confirmaRegistro" class="btn btn-siia btn-sm pull-right" data-toggle="modal" data-target="#ayuda_registro">Registrarme <i class="fa fa-check"></i></button>
-			<button type="button" class="btn btn-danger btn-sm submit ingresar" value="Iniciar Sesion">Iniciar Sesión <i class="fa fa-sign-in" aria-hidden="true"></i></button>
-		</div>
-		<img src="<?php echo base_url(); ?>assets/img/loading.gif" id="loading" class="img-responsive col-md-2">
-		<div class="form-group">
-			<div id="mensaje" class="col-md-12 alert" role="alert"></div>
-		</div>
-	</div>
-	</form>
 </div>
-<!-- Modal Politica de Privacidad -->
-<div class="modal fade" id="politica_ventana" tabindex="-1" role="dialog" aria-labelledby="politica">
-	<div class="modal-dialog modal-lg" role="document">
+
+<!-- Modal Política de Privacidad -->
+<div class="modal fade govco-modal-large show" id="politica_ventana" tabindex="-1" role="dialog" aria-labelledby="politica">
+	<div class="modal-dialog alert-govco modal-lg modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<div class="row">
-					<div id="header_politicas" class="col-md-12">
+					<div id="header_politicas" class="col-md-12 text-center">
 						<img alt="logo" id="imagen_header_politicas" class="img-responsive">
-						<h2>POLÍTICA DE PROTECCIÓN DE DATOS PERSONALES DE LA UNIDAD ADMINISTRATIVA ESPECIAL DE ORGANIZACIONES SOLIDARIAS</h2>
+						<hr />
+						<h5>POLÍTICA DE PROTECCIÓN DE DATOS PERSONALES DE LA UNIDAD ADMINISTRATIVA ESPECIAL DE ORGANIZACIONES SOLIDARIAS</h5>
+						<hr />
 					</div>
 					<div class="clearfix"></div>
 					<hr />
@@ -200,7 +218,7 @@
 						<hr />
 						<div class="panel-body c_pol">
 							<div class="t_pol">
-								<label>IV. DECLARACION</label>
+								<label>IV. DECLARACIÓN</label>
 							</div>
 							<p>
 								La Entidad reconoce la titularidad que de los datos personales ostentan las personas y en consecuencia ellas de manera exclusiva pueden decidir sobre los mismos. Por lo tanto, La Entidad utilizará los datos personales para el cumplimiento de las finalidades autorizadas expresamente por el titular o por las normas vigentes. En el tratamiento y protección de datos personales, La Entidad tendrá los siguientes deberes, sin perjuicio de otros previstos en las disposiciones que regulen o lleguen a regular esta materia:
@@ -231,7 +249,7 @@
 						<hr />
 						<div class="panel-body c_pol">
 							<div class="t_pol">
-								<label>V. RESPONSABLE DE IMPLEMENTACION</label>
+								<label>V. RESPONSABLE DE IMPLEMENTACIÓN</label>
 							</div>
 							<p>Responsable de las bases de datos: Es La Unidad Administrativa Especial de Organizaciones Solidarias a través del área responsable de la información Dirección de Investigaciones y Planeación – Grupo de Planeación y Estadística. El rol del responsable consiste en tomar las decisiones sobre las bases de datos y/o el tratamiento de los datos. Define la finalidad y la forma en que se recolectan, almacenan y administran los datos. Asimismo, está obligado a solicitar y conservar la autorización en la que conste el consentimiento expreso del titular de la información.</p>
 						</div>
@@ -274,7 +292,109 @@
 			</div>
 			<div class="modal-body">
 				<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
-				<button type="button" class="btn btn-siia btn-sm pull-right" id="acepto_politica">Sí, acepto. <i class="fa fa-check"></i></button>
+				<button type="button" class="btn btn btn-round btn-high text-capitalize btn-sm pull-right" id="acepto_politica">Sí, acepto. <i class="fa fa-check"></i></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- TODO: Modal Ayuda en Registro - INICIO -->
+<div class="modal fade govco-modal-large" id="ayuda_registro" tabindex="-1" role="dialog" aria-labelledby="ayudaRegistro">
+	<div class="modal-dialog modal-xl" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="ayudaRegistro">¿La información ingresada es correcta?</h4>
+				<small>Por favor, verifique los correos electrónicos en este momento, se le notificara cualquier comunicación del sistema por este medio y se enviara un link de activación de la cuenta en el SIIA. ***</small>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div id="informacion_pre">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Organización:</label>
+								<p id="modalConfOrg"></p>
+							</div>
+							<div class="form-group">
+								<label>NIT de la organización:</label>
+								<p id="modalConfNit"></p>
+							</div>
+							<div class="form-group">
+								<label>Sigla de la organización:</label>
+								<p id="modalConfSigla"></p>
+							</div>
+							<div class="form-group">
+								<label>Primer nombre del representante legal:</label>
+								<p id="modalConfPNRL"></p>
+							</div>
+							<div class="form-group">
+								<label>Segundo nombre del representante legal:</label>
+								<p id="modalConfSNRL"></p>
+							</div>
+							<div class="form-group">
+								<label>Primer apellido del representante legal:</label>
+								<p id="modalConfPARL"></p>
+							</div>
+							<div class="form-group">
+								<label>Segundo apellido del representante legal:</label>
+								<p id="modalConfSARL"></p>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Correo electrónico de organización:(Notificaciones)</label>
+								<p id="modalConfCOrg"></p>
+							</div>
+							<div class="form-group">
+								<label>Correo electrónico del representante legal:</label>
+								<p id="modalConfCRep"></p>
+							</div>
+							<div class="form-group">
+								<label>Primer nombre:</label>
+								<p id="modalConfPn"></p>
+							</div>
+							<div class="form-group">
+								<label>Primer apellido:</label>
+								<p id="modalConfPa"></p>
+							</div>
+							<div class="form-group">
+								<label>Nombre de usuario:</label>
+								<p id="modalConfNU"></p>
+							</div>
+							<div class="form-group">
+								<label>Contraseña:</label>
+								<p>Su contraseña.</p>
+							</div>
+							<div class="form-check">
+								<input type="checkbox" class="form-check-input" id="aceptoComActo">
+								<label class="form-check-label" for="aceptoComActo"><span class="underlined"><a>Acepto que se envíen comunicaciones y actos administrativos vía correo electrónico <span class="spanRojo">*</span></a></span></label>
+							</div>
+						</div>
+					</div>
+					<div id="reenvio_pre">
+						<div class="container">
+							<div class="jumbotron">
+								<p>Si el correo no le llega en los próximos 5 minutos, y no está en la bandeja de spam, por favor, escriba otro correo electrónico (Gmail.com, Outlook.com, Yahoo.com, Hotmail.com), y de click en "Volver a enviar el correo". Si el problema persiste, contactese con <a href="mailto:atencionalciudadano@uaeos.gov.co">atencionalciudadano@uaeos.gov.co</a></p>
+								<div class="clearfix"></div>
+								<hr />
+								<div class="form-group">
+									<label for="correo_electronico_rese">Correo electrónico de organización:*</label>
+									<input type="email" class="form-control" name="correo_electronico_rese" id="correo_electronico_rese" placeholder="Correo electrónico organización">
+								</div>
+							</div>
+							<!--<div class="jumbotron">
+									<small>Estamos teniendo inconvenientes con nuestro sistema de correos y lo estaremos solucionando lo mas pronto posible.</small>
+									<p>El registro se ha creado satisfactoriamente, ahora puede ingresar al sistema con su usuario y contraseña dando click <a href="<?php echo base_url("/login"); ?>">aquí</a>.</p>
+								</div>-->
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" name="registro" disabled="disabled" id="guardar_registro" class="btn btn-success btn-sm submit" value="Registrarme">Sí, Registrarme. <i class="fa fa-check"></i></button>
+				<button type="button" id="reenvio" class="btn btn-info btn-sm submit" value="Volver a enviar">Volver a enviar el correo. <i class="fa fa-paper-plane"></i></button>
+				<!--<button type="button" id="cerr_reen" class="btn btn-danger pull-left" data-dismiss="modal">Cerrar. <i class="fa fa-times"></i></button>-->
+				<button type="button" id="cerr_mod" class="btn btn-danger btn-sm pull-left" data-dismiss="modal">No, voy a verificar. <i class="fa fa-times" aria-hidden="true"></i></button>
 			</div>
 		</div>
 	</div>

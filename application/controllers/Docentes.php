@@ -25,7 +25,7 @@ class Docentes extends CI_Controller
 		// echo json_encode($data, JSON_UNESCAPED_UNICODE);
 	}
 
-	// public function view($id = NULL)
+	// public funciones view($id = NULL)
 	// {
 	// 	$data['estadisticasmodel'] = $this->EstadisticasModel->get_solicitudes($id);
 	// }

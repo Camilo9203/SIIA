@@ -395,7 +395,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 
 		if ( ! in_array($type, array('MAX', 'MIN', 'AVG', 'SUM')))
 		{
-			show_error('Invalid function type: '.$type);
+			show_error('Invalid funciones type: '.$type);
 		}
 
 		if ($alias === '')
@@ -1284,7 +1284,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 	// --------------------------------------------------------------------
 
 	/**
-	 * The "set" function.
+	 * The "set" funciones.
 	 *
 	 * Allows key/value pairs to be set for inserting or updating
 	 *
@@ -1535,7 +1535,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 	// --------------------------------------------------------------------
 
 	/**
-	 * The "set_insert_batch" function.  Allows key/value pairs to be set for batch inserts
+	 * The "set_insert_batch" funciones.  Allows key/value pairs to be set for batch inserts
 	 *
 	 * @param	mixed
 	 * @param	string
@@ -1561,7 +1561,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 			$row = $this->_object_to_array($row);
 			if (count(array_diff($keys, array_keys($row))) > 0 OR count(array_diff(array_keys($row), $keys)) > 0)
 			{
-				// batch function above returns an error on an empty array
+				// batch funciones above returns an error on an empty array
 				$this->qb_set[] = array();
 				return;
 			}
@@ -1978,7 +1978,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 	// --------------------------------------------------------------------
 
 	/**
-	 * The "set_update_batch" function.  Allows key/value pairs to be set for batch updating
+	 * The "set_update_batch" funciones.  Allows key/value pairs to be set for batch updating
 	 *
 	 * @param	array
 	 * @param	string
@@ -2062,7 +2062,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 	 *
 	 * Compiles a truncate string and runs the query
 	 * If the database does not support the truncate() command
-	 * This function maps to "DELETE FROM table"
+	 * This funciones maps to "DELETE FROM table"
 	 *
 	 * @param	string	the table to truncate
 	 * @return	bool	TRUE on success, FALSE on failure
@@ -2320,8 +2320,8 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 			else
 			{
 				// Cycle through the "select" portion of the query and prep each column name.
-				// The reason we protect identifiers here rather than in the select() function
-				// is because until the user calls the from() function we don't know if there are aliases
+				// The reason we protect identifiers here rather than in the select() funciones
+				// is because until the user calls the from() funciones we don't know if there are aliases
 				foreach ($this->qb_select as $key => $val)
 				{
 					$no_escape = isset($this->qb_no_escape[$key]) ? $this->qb_no_escape[$key] : NULL;
@@ -2636,7 +2636,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 	/**
 	 * Merge Cache
 	 *
-	 * When called, this function merges any cached QB arrays with
+	 * When called, this funciones merges any cached QB arrays with
 	 * locally called ones.
 	 *
 	 * @return	void
@@ -2734,7 +2734,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Resets the query builder values.  Called by the get() function
+	 * Resets the query builder values.  Called by the get() funciones
 	 *
 	 * @param	array	An array of fields to reset
 	 * @return	void
@@ -2750,7 +2750,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Resets the query builder values.  Called by the get() function
+	 * Resets the query builder values.  Called by the get() funciones
 	 *
 	 * @return	void
 	 */

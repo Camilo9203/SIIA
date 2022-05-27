@@ -33,7 +33,7 @@
 	<script src="<?php echo base_url('assets/js/jquery.validate.js') ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/script_o.js?v=19919') ?>" type="text/javascript"></script>
 	<!-- //TODO:Pendiente por enlazar -->
-	<script src="<?php echo base_url('assets/js/function/asignaciones.js') ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/funciones/asignaciones.js') ?>" type="text/javascript"></script>
 	<!-- Google -->
 	<script src="https://www.google.com/recaptcha/api.js"></script>
 </head>

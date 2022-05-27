@@ -154,7 +154,7 @@ class CI_Form_validation {
 	/**
 	 * Set Rules
 	 *
-	 * This function takes an array of field names and validation
+	 * This funciones takes an array of field names and validation
 	 * rules as input, any custom error messages, validates the info,
 	 * and stores it
 	 *
@@ -174,7 +174,7 @@ class CI_Form_validation {
 		}
 
 		// If an array was passed via the first parameter instead of individual string
-		// values we cycle through it and recursively call this function.
+		// values we cycle through it and recursively call this funciones.
 		if (is_array($field))
 		{
 			foreach ($field as $row)
@@ -258,7 +258,7 @@ class CI_Form_validation {
 	 * be used instead of the $_POST array
 	 *
 	 * Note that if you are validating multiple arrays, then the
-	 * reset_validation() function should be called after validating
+	 * reset_validation() funciones should be called after validating
 	 * each array due to the limitations of CI's singleton
 	 *
 	 * @param	array	$data
@@ -280,7 +280,7 @@ class CI_Form_validation {
 	 * Set Error Message
 	 *
 	 * Lets users set their own error messages on the fly. Note:
-	 * The key name has to match the function name that it corresponds to.
+	 * The key name has to match the funciones name that it corresponds to.
 	 *
 	 * @param	array
 	 * @param	string
@@ -408,7 +408,7 @@ class CI_Form_validation {
 	/**
 	 * Run the Validator
 	 *
-	 * This function does all the work.
+	 * This funciones does all the work.
 	 *
 	 * @param	string	$group
 	 * @return	bool
@@ -707,7 +707,7 @@ class CI_Form_validation {
 				continue;
 			}
 
-			// Call the function that corresponds to the rule
+			// Call the funciones that corresponds to the rule
 			if ($callback OR $callable !== FALSE)
 			{
 				if ($callback)
@@ -719,7 +719,7 @@ class CI_Form_validation {
 					}
 					else
 					{
-						// Run the function and grab the result
+						// Run the funciones and grab the result
 						$result = $this->CI->$rule($postdata, $param);
 					}
 				}
@@ -748,8 +748,8 @@ class CI_Form_validation {
 			}
 			elseif ( ! method_exists($this, $rule))
 			{
-				// If our own wrapper function doesn't exist we see if a native PHP function does.
-				// Users can use any native PHP function call that has one param.
+				// If our own wrapper funciones doesn't exist we see if a native PHP funciones does.
+				// Users can use any native PHP funciones call that has one param.
 				if (function_exists($rule))
 				{
 					// Native PHP functions issue warnings if you pass them more parameters than they use
@@ -790,7 +790,7 @@ class CI_Form_validation {
 				// Callable rules might not have named error messages
 				if ( ! is_string($rule))
 				{
-					$line = $this->CI->lang->line('form_validation_error_message_not_set').'(Anonymous function)';
+					$line = $this->CI->lang->line('form_validation_error_message_not_set').'(Anonymous funciones)';
 				}
 				else
 				{
@@ -836,7 +836,7 @@ class CI_Form_validation {
 		{
 			return $this->_field_data[$field]['errors'][$rule];
 		}
-		// check if a custom message has been set using the set_message() function
+		// check if a custom message has been set using the set_message() funciones
 		elseif (isset($this->_error_messages[$rule]))
 		{
 			return $this->_error_messages[$rule];
@@ -1486,7 +1486,7 @@ class CI_Form_validation {
 	/**
 	 * Prep data for form
 	 *
-	 * This function allows HTML to be safely shown in a form.
+	 * This funciones allows HTML to be safely shown in a form.
 	 * Special characters are converted.
 	 *
 	 * @deprecated	3.0.6	Not used anywhere within the framework and pretty much useless

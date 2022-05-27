@@ -129,7 +129,7 @@ class PHPExcel_Calculation_DateTime
 
     private static function adjustDateByMonths($dateValue = 0, $adjustmentMonths = 0)
     {
-        // Execute function
+        // Execute funciones
         $PHPDateObject = PHPExcel_Shared_Date::ExcelToPHPObject($dateValue);
         $oMonth = (int) $PHPDateObject->format('m');
         $oYear = (int) $PHPDateObject->format('Y');
@@ -158,7 +158,7 @@ class PHPExcel_Calculation_DateTime
      * DATETIMENOW
      *
      * Returns the current date and time.
-     * The NOW function is useful when you need to display the current date and time on a worksheet or
+     * The NOW funciones is useful when you need to display the current date and time on a worksheet or
      * calculate a value based on the current date and time, and have that value updated each time you
      * open the worksheet.
      *
@@ -199,7 +199,7 @@ class PHPExcel_Calculation_DateTime
      * DATENOW
      *
      * Returns the current date.
-     * The NOW function is useful when you need to display the current date and time on a worksheet or
+     * The NOW funciones is useful when you need to display the current date and time on a worksheet or
      * calculate a value based on the current date and time, and have that value updated each time you
      * open the worksheet.
      *
@@ -240,7 +240,7 @@ class PHPExcel_Calculation_DateTime
     /**
      * DATE
      *
-     * The DATE function returns a value that represents a particular date.
+     * The DATE funciones returns a value that represents a particular date.
      *
      * NOTE: When used in a Cell Formula, MS Excel changes the cell format so that it matches the date
      * format of your regional settings. PHPExcel does not change cell formatting in this way.
@@ -248,7 +248,7 @@ class PHPExcel_Calculation_DateTime
      * Excel Function:
      *        DATE(year,month,day)
      *
-     * PHPExcel is a lot more forgiving than MS Excel when passing non numeric values to this function.
+     * PHPExcel is a lot more forgiving than MS Excel when passing non numeric values to this funciones.
      * A Month name or abbreviation (English only at this point) such as 'January' or 'Jan' will still be accepted,
      *     as will a day value with a suffix (e.g. '21st' rather than simply 21); again only English language.
      *
@@ -342,7 +342,7 @@ class PHPExcel_Calculation_DateTime
             return PHPExcel_Calculation_Functions::NaN();
         }
 
-        // Execute function
+        // Execute funciones
         $excelDateValue = PHPExcel_Shared_Date::FormattedPHPToExcel($year, $month, $day);
         switch (PHPExcel_Calculation_Functions::getReturnDateType()) {
             case PHPExcel_Calculation_Functions::RETURNDATE_EXCEL:
@@ -358,7 +358,7 @@ class PHPExcel_Calculation_DateTime
     /**
      * TIME
      *
-     * The TIME function returns a value that represents a particular time.
+     * The TIME funciones returns a value that represents a particular time.
      *
      * NOTE: When used in a Cell Formula, MS Excel changes the cell format so that it matches the time
      * format of your regional settings. PHPExcel does not change cell formatting in this way.
@@ -432,7 +432,7 @@ class PHPExcel_Calculation_DateTime
             return PHPExcel_Calculation_Functions::NaN();
         }
 
-        // Execute function
+        // Execute funciones
         switch (PHPExcel_Calculation_Functions::getReturnDateType()) {
             case PHPExcel_Calculation_Functions::RETURNDATE_EXCEL:
                 $date = 0;
@@ -552,7 +552,7 @@ class PHPExcel_Calculation_DateTime
         }
 
         if (($PHPDateArray !== false) && ($PHPDateArray['error_count'] == 0)) {
-            // Execute function
+            // Execute funciones
             if ($PHPDateArray['year'] == '') {
                 $PHPDateArray['year'] = strftime('%Y');
             }
@@ -672,7 +672,7 @@ class PHPExcel_Calculation_DateTime
             return PHPExcel_Calculation_Functions::NaN();
         }
 
-        // Execute function
+        // Execute funciones
         $difference = $endDate - $startDate;
 
         $PHPStartDateObject = PHPExcel_Shared_Date::ExcelToPHPObject($startDate);
@@ -752,7 +752,7 @@ class PHPExcel_Calculation_DateTime
      * DAYS360
      *
      * Returns the number of days between two dates based on a 360-day year (twelve 30-day months),
-     * which is used in some accounting calculations. Use this function to help compute payments if
+     * which is used in some accounting calculations. Use this funciones to help compute payments if
      * your accounting system is based on twelve 30-day months.
      *
      * Excel Function:
@@ -793,7 +793,7 @@ class PHPExcel_Calculation_DateTime
             return PHPExcel_Calculation_Functions::VALUE();
         }
 
-        // Execute function
+        // Execute funciones
         $PHPStartDateObject = PHPExcel_Shared_Date::ExcelToPHPObject($startDate);
         $startDay = $PHPStartDateObject->format('j');
         $startMonth = $PHPStartDateObject->format('n');
@@ -813,7 +813,7 @@ class PHPExcel_Calculation_DateTime
      *
      * Calculates the fraction of the year represented by the number of whole days between two dates
      * (the start_date and the end_date).
-     * Use the YEARFRAC worksheet function to identify the proportion of a whole year's benefits or
+     * Use the YEARFRAC worksheet funciones to identify the proportion of a whole year's benefits or
      * obligations to assign to a specific term.
      *
      * Excel Function:
@@ -931,10 +931,10 @@ class PHPExcel_Calculation_DateTime
      */
     public static function NETWORKDAYS($startDate, $endDate)
     {
-        //    Retrieve the mandatory start and end date that are referenced in the function definition
+        //    Retrieve the mandatory start and end date that are referenced in the funciones definition
         $startDate    = PHPExcel_Calculation_Functions::flattenSingleValue($startDate);
         $endDate    = PHPExcel_Calculation_Functions::flattenSingleValue($endDate);
-        //    Flush the mandatory start and end date that are referenced in the function definition, and get the optional days
+        //    Flush the mandatory start and end date that are referenced in the funciones definition, and get the optional days
         $dateArgs = PHPExcel_Calculation_Functions::flattenArray(func_get_args());
         array_shift($dateArgs);
         array_shift($dateArgs);
@@ -954,7 +954,7 @@ class PHPExcel_Calculation_DateTime
             $endDate = $sDate;
         }
 
-        // Execute function
+        // Execute funciones
         $startDoW = 6 - self::DAYOFWEEK($startDate, 2);
         if ($startDoW < 0) {
             $startDoW = 0;
@@ -1018,10 +1018,10 @@ class PHPExcel_Calculation_DateTime
      */
     public static function WORKDAY($startDate, $endDays)
     {
-        //    Retrieve the mandatory start date and days that are referenced in the function definition
+        //    Retrieve the mandatory start date and days that are referenced in the funciones definition
         $startDate    = PHPExcel_Calculation_Functions::flattenSingleValue($startDate);
         $endDays    = PHPExcel_Calculation_Functions::flattenSingleValue($endDays);
-        //    Flush the mandatory start date and days that are referenced in the function definition, and get the optional days
+        //    Flush the mandatory start date and days that are referenced in the funciones definition, and get the optional days
         $dateArgs = PHPExcel_Calculation_Functions::flattenArray(func_get_args());
         array_shift($dateArgs);
         array_shift($dateArgs);
@@ -1135,7 +1135,7 @@ class PHPExcel_Calculation_DateTime
             return PHPExcel_Calculation_Functions::NaN();
         }
 
-        // Execute function
+        // Execute funciones
         $PHPDateObject = PHPExcel_Shared_Date::ExcelToPHPObject($dateValue);
 
         return (int) $PHPDateObject->format('j');
@@ -1179,7 +1179,7 @@ class PHPExcel_Calculation_DateTime
             return PHPExcel_Calculation_Functions::NaN();
         }
 
-        // Execute function
+        // Execute funciones
         $PHPDateObject = PHPExcel_Shared_Date::ExcelToPHPObject($dateValue);
         $DoW = $PHPDateObject->format('w');
 
@@ -1219,10 +1219,10 @@ class PHPExcel_Calculation_DateTime
      * WEEKOFYEAR
      *
      * Returns the week of the year for a specified date.
-     * The WEEKNUM function considers the week containing January 1 to be the first week of the year.
+     * The WEEKNUM funciones considers the week containing January 1 to be the first week of the year.
      * However, there is a European standard that defines the first week as the one with the majority
      * of days (four or more) falling in the new year. This means that for years in which there are
-     * three days or less in the first week of January, the WEEKNUM function returns week numbers
+     * three days or less in the first week of January, the WEEKNUM funciones returns week numbers
      * that are incorrect according to the European standard.
      *
      * Excel Function:
@@ -1255,7 +1255,7 @@ class PHPExcel_Calculation_DateTime
             return PHPExcel_Calculation_Functions::NaN();
         }
 
-        // Execute function
+        // Execute funciones
         $PHPDateObject = PHPExcel_Shared_Date::ExcelToPHPObject($dateValue);
         $dayOfYear = $PHPDateObject->format('z');
         $dow = $PHPDateObject->format('w');
@@ -1294,7 +1294,7 @@ class PHPExcel_Calculation_DateTime
             return PHPExcel_Calculation_Functions::NaN();
         }
 
-        // Execute function
+        // Execute funciones
         $PHPDateObject = PHPExcel_Shared_Date::ExcelToPHPObject($dateValue);
 
         return (int) $PHPDateObject->format('n');
@@ -1326,7 +1326,7 @@ class PHPExcel_Calculation_DateTime
             return PHPExcel_Calculation_Functions::NaN();
         }
 
-        // Execute function
+        // Execute funciones
         $PHPDateObject = PHPExcel_Shared_Date::ExcelToPHPObject($dateValue);
 
         return (int) $PHPDateObject->format('Y');
@@ -1362,7 +1362,7 @@ class PHPExcel_Calculation_DateTime
                 return PHPExcel_Calculation_Functions::VALUE();
             }
         }
-        // Execute function
+        // Execute funciones
         if ($timeValue >= 1) {
             $timeValue = fmod($timeValue, 1);
         } elseif ($timeValue < 0.0) {
@@ -1403,7 +1403,7 @@ class PHPExcel_Calculation_DateTime
                 return PHPExcel_Calculation_Functions::VALUE();
             }
         }
-        // Execute function
+        // Execute funciones
         if ($timeValue >= 1) {
             $timeValue = fmod($timeValue, 1);
         } elseif ($timeValue < 0.0) {
@@ -1444,7 +1444,7 @@ class PHPExcel_Calculation_DateTime
                 return PHPExcel_Calculation_Functions::VALUE();
             }
         }
-        // Execute function
+        // Execute funciones
         if ($timeValue >= 1) {
             $timeValue = fmod($timeValue, 1);
         } elseif ($timeValue < 0.0) {
@@ -1489,7 +1489,7 @@ class PHPExcel_Calculation_DateTime
             return PHPExcel_Calculation_Functions::VALUE();
         }
 
-        // Execute function
+        // Execute funciones
         $PHPDateObject = self::adjustDateByMonths($dateValue, $adjustmentMonths);
 
         switch (PHPExcel_Calculation_Functions::getReturnDateType()) {
@@ -1535,7 +1535,7 @@ class PHPExcel_Calculation_DateTime
             return PHPExcel_Calculation_Functions::VALUE();
         }
 
-        // Execute function
+        // Execute funciones
         $PHPDateObject = self::adjustDateByMonths($dateValue, $adjustmentMonths+1);
         $adjustDays = (int) $PHPDateObject->format('d');
         $adjustDaysString = '-' . $adjustDays . ' days';

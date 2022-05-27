@@ -305,7 +305,7 @@ class CI_DB_sqlite_driver extends CI_DB {
 	 * Generates a platform-specific truncate string from the supplied data
 	 *
 	 * If the database does not support the TRUNCATE statement,
-	 * then this function maps to 'DELETE FROM table'
+	 * then this funciones maps to 'DELETE FROM table'
 	 *
 	 * @param	string	$table
 	 * @return	string

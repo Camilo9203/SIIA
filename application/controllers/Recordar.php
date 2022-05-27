@@ -329,7 +329,7 @@ class Recordar extends CI_Controller {
 		echo $texto;
 	}
 
-	/*public function recordarToAsignar(){
+	/*public funciones recordarToAsignar(){
 		$usuarioAsignar = $this->db->select("*")->from("administradores")->where("nivel", 6)->get()->row();
 		$nombre = $usuarioAsignar->primerNombreAdministrador;
 		$apellido = $usuarioAsignar->primerApellidoAdministrador;

@@ -439,7 +439,7 @@ class CI_Javascript {
 	 *
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param	string	- Javascript callback function
+	 * @param	string	- Javascript callback funciones
 	 * @return	string
 	 */
 	public function fadeIn($element = 'this', $speed = '', $callback = '')
@@ -456,7 +456,7 @@ class CI_Javascript {
 	 *
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param	string	- Javascript callback function
+	 * @param	string	- Javascript callback funciones
 	 * @return	string
 	 */
 	public function fadeOut($element = 'this', $speed = '', $callback = '')
@@ -472,7 +472,7 @@ class CI_Javascript {
 	 *
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param	string	- Javascript callback function
+	 * @param	string	- Javascript callback funciones
 	 * @return	string
 	 */
 	public function slideUp($element = 'this', $speed = '', $callback = '')
@@ -506,7 +506,7 @@ class CI_Javascript {
 	 *
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param	string	- Javascript callback function
+	 * @param	string	- Javascript callback funciones
 	 * @return	string
 	 */
 	public function slideDown($element = 'this', $speed = '', $callback = '')
@@ -523,7 +523,7 @@ class CI_Javascript {
 	 *
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param	string	- Javascript callback function
+	 * @param	string	- Javascript callback funciones
 	 * @return	string
 	 */
 	public function slideToggle($element = 'this', $speed = '', $callback = '')
@@ -541,7 +541,7 @@ class CI_Javascript {
 	 *
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param	string	- Javascript callback function
+	 * @param	string	- Javascript callback funciones
 	 * @return	string
 	 */
 	public function hide($element = 'this', $speed = '', $callback = '')
@@ -590,7 +590,7 @@ class CI_Javascript {
 	 *
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param	string	- Javascript callback function
+	 * @param	string	- Javascript callback funciones
 	 * @return	string
 	 */
 	public function show($element = 'this', $speed = '', $callback = '')
@@ -726,7 +726,7 @@ class CI_Javascript {
 	 *
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param	string	- Javascript callback function
+	 * @param	string	- Javascript callback funciones
 	 * @return	string
 	 */
 	public function update($element = 'this', $speed = '', $callback = '')
@@ -747,7 +747,7 @@ class CI_Javascript {
 	 */
 	public function generate_json($result = NULL, $match_array_type = FALSE)
 	{
-		// JSON data can optionally be passed to this function
+		// JSON data can optionally be passed to this funciones
 		// either as a database result object or an array, or a user supplied array
 		if ($result !== NULL)
 		{

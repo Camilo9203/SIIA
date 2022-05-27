@@ -248,7 +248,7 @@ if ( ! function_exists('form_password'))
 	/**
 	 * Password Field
 	 *
-	 * Identical to the input function but adds the "password" type
+	 * Identical to the input funciones but adds the "password" type
 	 *
 	 * @param	mixed
 	 * @param	string
@@ -270,7 +270,7 @@ if ( ! function_exists('form_upload'))
 	/**
 	 * Upload Field
 	 *
-	 * Identical to the input function but adds the "file" type
+	 * Identical to the input funciones but adds the "file" type
 	 *
 	 * @param	mixed
 	 * @param	string
@@ -913,7 +913,7 @@ if ( ! function_exists('validation_errors'))
 	 * Validation Error String
 	 *
 	 * Returns all the errors associated with a form submission. This is a helper
-	 * function for the form validation class.
+	 * funciones for the form validation class.
 	 *
 	 * @param	string
 	 * @param	string
@@ -937,7 +937,7 @@ if ( ! function_exists('_parse_form_attributes'))
 	/**
 	 * Parse the form attributes
 	 *
-	 * Helper function used by some of the form helpers
+	 * Helper funciones used by some of the form helpers
 	 *
 	 * @param	array	$attributes	List of attributes
 	 * @param	array	$default	Default values
@@ -989,7 +989,7 @@ if ( ! function_exists('_attributes_to_string'))
 	/**
 	 * Attributes To String
 	 *
-	 * Helper function used by some of the form helpers
+	 * Helper funciones used by some of the form helpers
 	 *
 	 * @param	mixed
 	 * @return	string

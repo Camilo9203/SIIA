@@ -432,7 +432,7 @@ class PHPExcel_Shared_OLE
     }
 
     /**
-    * Utility function to transform ASCII text to Unicode
+    * Utility funciones to transform ASCII text to Unicode
     *
     * @access public
     * @static
@@ -449,7 +449,7 @@ class PHPExcel_Shared_OLE
     }
 
     /**
-    * Utility function
+    * Utility funciones
     * Returns a string for the OLE container with the date given
     *
     * @access public

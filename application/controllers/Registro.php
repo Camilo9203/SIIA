@@ -17,11 +17,12 @@ class Registro extends CI_Controller
 		$data = array(
 			'title' => 'Registro',
 			'loggen_in' => false,
-			'tipo_usuario' => "none"
+			'tipo_usuario' => "none",
+			'activeLink' => "register"
 		);
-		$this->load->view('include/header', $data);
-		$this->load->view('registro/registro');
-		$this->load->view('include/footer');
+		$this->load->view('include/header_new', $data);
+		$this->load->view('register');
+		$this->load->view('include/footer_new');
 		$this->logs_sia->logs('PLACE_USER');
 	}
 
@@ -31,6 +32,7 @@ class Registro extends CI_Controller
 	 **/
 	public function registrar_info()
 	{
+		/** Reglas de validación formulario */
 		$this->form_validation->set_rules('organizacion', '', 'trim|required|min_length[3]|xss_clean');
 		$this->form_validation->set_rules('nit', '', 'trim|required|min_length[3]|xss_clean');
 		$this->form_validation->set_rules('sigla', '', 'trim|required|min_length[3]|xss_clean');
@@ -44,36 +46,50 @@ class Registro extends CI_Controller
 		$this->form_validation->set_rules('nombre_p', '', 'trim|required|min_length[3]|xss_clean');
 		$this->form_validation->set_rules('nombre_usuario', '', 'trim|required|min_length[3]|xss_clean');
 		$this->form_validation->set_rules('password', '', 'trim|required|min_length[3]|xss_clean');
-
+		/** Correr validación de formulario */
 		if ($this->form_validation->run("formulario_registro") == FALSE) {
+			// Capturar error si la validación falsa
 			$error = validation_errors();
+			// Imprimir error de validación
 			echo json_encode(array('url' => "registro", 'msg' => $error));
 		}
 		else {
-			/** TODO: Arreglar error al generar contraseña */
+			/** Capturar Data Tabla Usuario */
 			$data_registro_user = array(
 				'usuario' => $this->input->post('nombre_usuario'),
 				'contrasena' => $this->input->post('password'),
 				'contrasena_rdel'=> $this->input->post('password'),
-				//'contrasena' => generate_hash($this->input->post('password')),
-				//'contrasena_rdel' => mc_encrypt($this->input->post('password'), KEY_RDEL),
+				'contrasena' => generate_hash($this->input->post('password')),
+				'contrasena_rdel' => mc_encrypt($this->input->post('password'), KEY_RDEL),
 				'logged_in' => 0,
 			);
+			/** Guardar data de usuario y comprobar que se hubiese guardado */
 			if ($this->db->insert('usuarios', $data_registro_user)){
-				echo json_encode(array('url' => "registro", 'msg' => "Se ha registrado usuario"));
 				$this->logs_sia->logQueries();
-				$id_usuario = $this->db->select('id_usuario')->from('usuarios')->where('usuario', $data_registro_user['usuario'])->get()->row();
-				echo $id_usuario;
+				//Capturar data del usuario registrado
+				$usuario = $this->db->select('id_usuario')->from('usuarios')->where('usuario', $data_registro_user['usuario'])->get()->row();
+				/** @var $data_token  Capturar Data Tabla Token */
 				$data_token = array(
 					'token' => generate_token(),
 					'verificado' => 0,
 					'usuario_token' => $data_registro_user['usuario']
 				);
-				$id_token = $this->db->select('id_token')->from('token')->where('usuario_token', $data_registro_user['usuario'])->get()->row();
-				$this->db->set('token_id_token', $id_token);
-				$this->db->insert('usuarios');
-				if ($this->db->insert('token', $data_token)) {
+				/** Guardar datos en tabla token */
+				$this->db->insert('token', $data_token);
+				//Capturar data de token registrado
+				$token = $this->db->select('id_token')->from('token')->where('usuario_token', $data_token['usuario_token'])->get()->row();
+				//Crear variable de token
+				$update_usuario = array(
+					'token_id_token' => $token->id_token
+				);
+				//Actualizar tabla usuarios para asociar token al usuario registrado.
+				$this->db->where('id_usuario', $usuario->id_usuario);
+				//Comprobar actualización de datos
+				if ($this->db->update('usuarios', $update_usuario)) {
 					$this->logs_sia->logQueries();
+					/** @var  $data_registro_org
+					 	Capturar datos de la organización
+					 */
 					$data_registro_org = array(
 						'nombreOrganizacion' => $this->input->post('organizacion'),
 						'numNIT' => $this->input->post('nit'),
@@ -85,31 +101,42 @@ class Registro extends CI_Controller
 						'direccionCorreoElectronicoOrganizacion' => $this->input->post('correo_electronico'),
 						'direccionCorreoElectronicoRepLegal' => $this->input->post('correo_electronico_rep_legal'),
 						'estado' => "Inscrito",
-						'usuarios_id_usuario' => $id_usuario
+						'usuarios_id_usuario' => $usuario->id_usuario,
 					);
+					//Guardar datos en la tabla de usuarios y comprobar.
 					if ($this->db->insert('organizaciones', $data_registro_org)) {
 						$this->logs_sia->logQueries();
-						$datos_token = $this->db->select('id_token')->from('token')->where('usuario_token', $data_registro_user['usuario'])->get()->row();
+						$token = $this->db->select('token')->from('token')->where('usuario_token', $data_registro_user['usuario'])->get()->row();
 						$fromSIA = "Unidad Administrativa Especial de Organizaciones Solidarias UAEOS - Aplicación SIIA.";
-						$this->enviomail_activar(CORREO_SIA, $fromSIA, $data_registro_org['direccionCorreoElectronicoOrganizacion'], $data_registro_org['direccionCorreoElectronicoRepLegal'], $datos_token->token, $data_registro_org['primerNombreRepLegal'], $data_registro_org['primerApellidoRepLegal'], $data_registro_org['nombreOrganizacion'], $data_registro_org['numNIT'], $data_registro_user['usuario']);
+						$this->enviomail_activar(CORREO_SIA, $fromSIA, $data_registro_org['direccionCorreoElectronicoOrganizacion'], $data_registro_org['direccionCorreoElectronicoRepLegal'], $token->token, $data_registro_org['primerNombreRepLegal'], $data_registro_org['primerApellidoRepLegal'], $data_registro_org['nombreOrganizacion'], $data_registro_org['numNIT'], $data_registro_user['usuario']);
 						$this->logs_sia->logs('REGISTER_TYPE');
 						$this->logs_sia->logs('URL_TYPE');
 						$this->logs_sia->logQueries();
+						echo json_encode(array('url' => "registro", 'msg' => "Se ha registrado usuario correctamente"));
+					}
+					else {
+						echo json_encode(array('url' => "registro", 'msg' => "No se logro crear organización"));
 					}
 				}
+				else {
+					echo json_encode(array('url' => "registro", 'msg' => "No se logro crear token"));
+				}
+			}
+			else {
+				echo json_encode(array('url' => "registro", 'msg' => "No se logro crear usuario"));
 			}
 		}
 	}
 	/**
-		Funcion para enviar un correo electronico.
-		@param from = De quien lo envia.
-		@param from_name = Para quien se envia.
-		@param to = A que correo se envia.
+		Función para enviar un correo electrónico.
+		@param from = De quien lo envía.
+		@param from_name = Para quien se envía.
+		@param to = A que correo se envía.
 		@param token = Token para validar la cuenta.
 		@param nombre = Primer nombre del representante legal.
 		@param apellido = Primer apellido del representante legal.
-		@param organizacion = Nombre de la organizacion.
-		@param nit = Nit de la organizacion.
+		@param organizacion = Nombre de la organización.
+		@param nit = Nit de la organización.
 		@param nombre_usuario = Nombre de usuario del usuario.
 	 **/
 	function enviomail_activar($from, $from_name, $to, $cc, $token, $nombre, $apellido, $organizacion, $nit, $nombre_usuario)

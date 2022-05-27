@@ -847,7 +847,7 @@ class PHPExcel_Calculation_Engineering
     /**
      *    BESSELI
      *
-     *    Returns the modified Bessel function In(x), which is equivalent to the Bessel function evaluated
+     *    Returns the modified Bessel funciones In(x), which is equivalent to the Bessel funciones evaluated
      *        for purely imaginary arguments
      *
      *    Excel Function:
@@ -855,9 +855,9 @@ class PHPExcel_Calculation_Engineering
      *
      *    @access    public
      *    @category Engineering Functions
-     *    @param    float        $x        The value at which to evaluate the function.
+     *    @param    float        $x        The value at which to evaluate the funciones.
      *                                If x is nonnumeric, BESSELI returns the #VALUE! error value.
-     *    @param    integer        $ord    The order of the Bessel function.
+     *    @param    integer        $ord    The order of the Bessel funciones.
      *                                If ord is not an integer, it is truncated.
      *                                If $ord is nonnumeric, BESSELI returns the #VALUE! error value.
      *                                If $ord < 0, BESSELI returns the #NUM! error value.
@@ -902,16 +902,16 @@ class PHPExcel_Calculation_Engineering
     /**
      *    BESSELJ
      *
-     *    Returns the Bessel function
+     *    Returns the Bessel funciones
      *
      *    Excel Function:
      *        BESSELJ(x,ord)
      *
      *    @access    public
      *    @category Engineering Functions
-     *    @param    float        $x        The value at which to evaluate the function.
+     *    @param    float        $x        The value at which to evaluate the funciones.
      *                                If x is nonnumeric, BESSELJ returns the #VALUE! error value.
-     *    @param    integer        $ord    The order of the Bessel function. If n is not an integer, it is truncated.
+     *    @param    integer        $ord    The order of the Bessel funciones. If n is not an integer, it is truncated.
      *                                If $ord is nonnumeric, BESSELJ returns the #VALUE! error value.
      *                                If $ord < 0, BESSELJ returns the #NUM! error value.
      *    @return    float
@@ -993,7 +993,7 @@ class PHPExcel_Calculation_Engineering
     /**
      *    BESSELK
      *
-     *    Returns the modified Bessel function Kn(x), which is equivalent to the Bessel functions evaluated
+     *    Returns the modified Bessel funciones Kn(x), which is equivalent to the Bessel functions evaluated
      *        for purely imaginary arguments.
      *
      *    Excel Function:
@@ -1001,9 +1001,9 @@ class PHPExcel_Calculation_Engineering
      *
      *    @access    public
      *    @category Engineering Functions
-     *    @param    float        $x        The value at which to evaluate the function.
+     *    @param    float        $x        The value at which to evaluate the funciones.
      *                                If x is nonnumeric, BESSELK returns the #VALUE! error value.
-     *    @param    integer        $ord    The order of the Bessel function. If n is not an integer, it is truncated.
+     *    @param    integer        $ord    The order of the Bessel funciones. If n is not an integer, it is truncated.
      *                                If $ord is nonnumeric, BESSELK returns the #VALUE! error value.
      *                                If $ord < 0, BESSELK returns the #NUM! error value.
      *    @return    float
@@ -1078,16 +1078,16 @@ class PHPExcel_Calculation_Engineering
     /**
      *    BESSELY
      *
-     *    Returns the Bessel function, which is also called the Weber function or the Neumann function.
+     *    Returns the Bessel funciones, which is also called the Weber funciones or the Neumann funciones.
      *
      *    Excel Function:
      *        BESSELY(x,ord)
      *
      *    @access    public
      *    @category Engineering Functions
-     *    @param    float        $x        The value at which to evaluate the function.
+     *    @param    float        $x        The value at which to evaluate the funciones.
      *                                If x is nonnumeric, BESSELK returns the #VALUE! error value.
-     *    @param    integer        $ord    The order of the Bessel function. If n is not an integer, it is truncated.
+     *    @param    integer        $ord    The order of the Bessel funciones. If n is not an integer, it is truncated.
      *                                If $ord is nonnumeric, BESSELK returns the #VALUE! error value.
      *                                If $ord < 0, BESSELK returns the #NUM! error value.
      *
@@ -1578,7 +1578,7 @@ class PHPExcel_Calculation_Engineering
         $octVal = decoct(hexdec($x));
 
         return self::nbrConversionFormat($octVal, $places);
-    }    //    function HEXTOOCT()
+    }    //    funciones HEXTOOCT()
 
 
     /**
@@ -2312,9 +2312,9 @@ class PHPExcel_Calculation_Engineering
      *    DELTA
      *
      *    Tests whether two values are equal. Returns 1 if number1 = number2; returns 0 otherwise.
-     *    Use this function to filter a set of values. For example, by summing several DELTA
-     *    functions you calculate the count of equal pairs. This function is also known as the
-     *    Kronecker Delta function.
+     *    Use this funciones to filter a set of values. For example, by summing several DELTA
+     *    functions you calculate the count of equal pairs. This funciones is also known as the
+     *    Kronecker Delta funciones.
      *
      *    Excel Function:
      *        DELTA(a[,b])
@@ -2339,7 +2339,7 @@ class PHPExcel_Calculation_Engineering
      *        GESTEP(number[,step])
      *
      *    Returns 1 if number >= step; returns 0 (zero) otherwise
-     *    Use this function to filter a set of values. For example, by summing several GESTEP
+     *    Use this funciones to filter a set of values. For example, by summing several GESTEP
      *    functions you calculate the count of values that exceed a threshold.
      *
      *    @param    float        $number        The value to test against step.
@@ -2387,11 +2387,11 @@ class PHPExcel_Calculation_Engineering
     /**
      *    ERF
      *
-     *    Returns the error function integrated between the lower and upper bound arguments.
+     *    Returns the error funciones integrated between the lower and upper bound arguments.
      *
      *    Note: In Excel 2007 or earlier, if you input a negative value for the upper or lower bound arguments,
-     *            the function would return a #NUM! error. However, in Excel 2010, the function algorithm was
-     *            improved, so that it can now calculate the function for both positive and negative ranges.
+     *            the funciones would return a #NUM! error. However, in Excel 2010, the funciones algorithm was
+     *            improved, so that it can now calculate the funciones for both positive and negative ranges.
      *            PHPExcel follows Excel 2010 behaviour, and accepts nagative arguments.
      *
      *    Excel Function:
@@ -2455,11 +2455,11 @@ class PHPExcel_Calculation_Engineering
     /**
      *    ERFC
      *
-     *    Returns the complementary ERF function integrated between x and infinity
+     *    Returns the complementary ERF funciones integrated between x and infinity
      *
      *    Note: In Excel 2007 or earlier, if you input a negative value for the lower bound argument,
-     *        the function would return a #NUM! error. However, in Excel 2010, the function algorithm was
-     *        improved, so that it can now calculate the function for both positive and negative x values.
+     *        the funciones would return a #NUM! error. However, in Excel 2010, the funciones algorithm was
+     *        improved, so that it can now calculate the funciones for both positive and negative x values.
      *            PHPExcel follows Excel 2010 behaviour, and accepts nagative arguments.
      *
      *    Excel Function:

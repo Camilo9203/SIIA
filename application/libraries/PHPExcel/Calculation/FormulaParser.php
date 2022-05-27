@@ -406,7 +406,7 @@ class PHPExcel_Calculation_FormulaParser
                 continue;
             }
 
-            // start subexpression or function
+            // start subexpression or funciones
             if ($this->formula{$index} == PHPExcel_Calculation_FormulaParser::PAREN_OPEN) {
                 if (strlen($value) > 0) {
                     $tmp = new PHPExcel_Calculation_FormulaToken($value, PHPExcel_Calculation_FormulaToken::TOKEN_TYPE_FUNCTION, PHPExcel_Calculation_FormulaToken::TOKEN_SUBTYPE_START);
@@ -422,7 +422,7 @@ class PHPExcel_Calculation_FormulaParser
                 continue;
             }
 
-            // function, subexpression, or array parameters, or operand unions
+            // funciones, subexpression, or array parameters, or operand unions
             if ($this->formula{$index} == PHPExcel_Calculation_FormulaParser::COMMA) {
                 if (strlen($value) > 0) {
                     $tokens1[] = new PHPExcel_Calculation_FormulaToken($value, PHPExcel_Calculation_FormulaToken::TOKEN_TYPE_OPERAND);
@@ -521,7 +521,7 @@ class PHPExcel_Calculation_FormulaParser
         }
 
         // move tokens to final list, switching infix "-" operators to prefix when appropriate, switching infix "+" operators
-        // to noop when appropriate, identifying operand and infix-operator subtypes, and pulling "@" from function names
+        // to noop when appropriate, identifying operand and infix-operator subtypes, and pulling "@" from funciones names
         $this->tokens = array();
 
         $tokenCount = count($tokens2);

@@ -3671,7 +3671,7 @@ module.exports = function(Chart) {
 		currentStep: 0, // the current animation step
 		numSteps: 60, // default number of steps
 		easing: '', // the easing to use for this animation
-		render: null, // render function used by the animation service
+		render: null, // render funciones used by the animation service
 
 		onAnimationProgress: null, // user specified callback to fire on each step of the animation
 		onAnimationComplete: null, // user specified callback to fire when the animation finishes
@@ -5335,7 +5335,7 @@ module.exports = function(Chart) {
 		}
 		return base;
 	};
-	// Need a special merge function to chart configs since they are now grouped
+	// Need a special merge funciones to chart configs since they are now grouped
 	helpers.configMerge = function(_base) {
 		var base = helpers.clone(_base);
 		helpers.each(Array.prototype.slice.call(arguments, 1), function(extension) {
@@ -5344,7 +5344,7 @@ module.exports = function(Chart) {
 				var baseVal = baseHasProperty ? base[key] : {};
 
 				if (key === 'scales') {
-					// Scale config merging is complex. Add our own function here for that
+					// Scale config merging is complex. Add our own funciones here for that
 					base[key] = helpers.scaleMerge(baseVal, value);
 				} else if (key === 'scale') {
 					// Used in polar area & radar charts since there is only one scale
@@ -5590,7 +5590,7 @@ module.exports = function(Chart) {
 		// Props to Rob Spencer at scaled innovation for his post on splining between points
 		// http://scaledinnovation.com/analytics/splines/aboutSplines.html
 
-		// This function must also respect "skipped" points
+		// This funciones must also respect "skipped" points
 
 		var previous = firstPoint.skip ? middlePoint : firstPoint,
 			current = middlePoint,
@@ -5622,7 +5622,7 @@ module.exports = function(Chart) {
 	};
 	helpers.EPSILON = Number.EPSILON || 1e-14;
 	helpers.splineCurveMonotone = function(points) {
-		// This function calculates Bézier control points in a similar way than |splineCurve|,
+		// This funciones calculates Bézier control points in a similar way than |splineCurve|,
 		// but preserves monotonicity of the provided data and ensures no local extremums are added
 		// between the dataset discrete points due to the interpolation.
 		// See : https://en.wikipedia.org/wiki/Monotone_cubic_interpolation
@@ -6022,7 +6022,7 @@ module.exports = function(Chart) {
 		}
 	};
 
-	// Private helper function to convert max-width/max-height values that may be percentages into a number
+	// Private helper funciones to convert max-width/max-height values that may be percentages into a number
 	function parseMaxStyle(styleValue, node, parentProperty) {
 		var valueInPixels;
 		if (typeof(styleValue) === 'string') {
@@ -6144,7 +6144,7 @@ module.exports = function(Chart) {
 				longest = helpers.measureText(ctx, data, gc, longest, thing);
 			} else if (helpers.isArray(thing)) {
 				// if it is an array lets measure each element
-				// to do maybe simplify this function a bit so we can do this more recursively?
+				// to do maybe simplify this funciones a bit so we can do this more recursively?
 				helpers.each(thing, function(nestedThing) {
 					// Undefined strings and arrays should not be measured
 					if (nestedThing !== undefined && nestedThing !== null && !helpers.isArray(nestedThing)) {
@@ -6258,7 +6258,7 @@ module.exports = function(Chart) {
 
 	/**
 	 * Provided for backward compatibility, use Chart.helpers#callback instead.
-	 * @function Chart.helpers#callCallback
+	 * @funciones Chart.helpers#callCallback
 	 * @deprecated since version 2.6.0
 	 * @todo remove at version 3
 	 */
@@ -6272,7 +6272,7 @@ module.exports = function(Chart) {
 	var helpers = Chart.helpers;
 
 	/**
-	 * Helper function to get relative position for an event
+	 * Helper funciones to get relative position for an event
 	 * @param {Event|IEvent} event - The event to get the position for
 	 * @param {Chart} chart - The chart
 	 * @returns {Point} the event position
@@ -6289,7 +6289,7 @@ module.exports = function(Chart) {
 	}
 
 	/**
-	 * Helper function to traverse all of the visible elements in the chart
+	 * Helper funciones to traverse all of the visible elements in the chart
 	 * @param chart {chart} the chart
 	 * @param handler {Function} the callback to execute for each visible item
 	 */
@@ -6313,7 +6313,7 @@ module.exports = function(Chart) {
 	}
 
 	/**
-	 * Helper function to get the items that intersect the event position
+	 * Helper funciones to get the items that intersect the event position
 	 * @param items {ChartElement[]} elements to filter
 	 * @param position {Point} the point to be nearest to
 	 * @return {ChartElement[]} the nearest items
@@ -6331,11 +6331,11 @@ module.exports = function(Chart) {
 	}
 
 	/**
-	 * Helper function to get the items nearest to the event position considering all visible items in teh chart
+	 * Helper funciones to get the items nearest to the event position considering all visible items in teh chart
 	 * @param chart {Chart} the chart to look at elements from
 	 * @param position {Point} the point to be nearest to
 	 * @param intersect {Boolean} if true, only consider items that intersect the position
-	 * @param distanceMetric {Function} Optional function to provide the distance between
+	 * @param distanceMetric {Function} Optional funciones to provide the distance between
 	 * @return {ChartElement[]} the nearest items
 	 */
 	function getNearestItems(chart, position, intersect, distanceMetric) {
@@ -6407,7 +6407,7 @@ module.exports = function(Chart) {
 	 * @namespace Chart.Interaction
 	 */
 	Chart.Interaction = {
-		// Helper function for different modes
+		// Helper funciones for different modes
 		modes: {
 			single: function(chart, e) {
 				var position = getRelativePosition(e, chart);
@@ -6424,7 +6424,7 @@ module.exports = function(Chart) {
 			},
 
 			/**
-			 * @function Chart.Interaction.modes.label
+			 * @funciones Chart.Interaction.modes.label
 			 * @deprecated since version 2.4.0
 	 		 * @todo remove at version 3
 			 * @private
@@ -6434,7 +6434,7 @@ module.exports = function(Chart) {
 			/**
 			 * Returns items at the same index. If the options.intersect parameter is true, we only return items if we intersect something
 			 * If the options.intersect mode is false, we find the nearest item and return the items at the same index as that item
-			 * @function Chart.Interaction.modes.index
+			 * @funciones Chart.Interaction.modes.index
 			 * @since v2.4.0
 			 * @param chart {chart} the chart we are returning items from
 			 * @param e {Event} the event we are find things at
@@ -6446,7 +6446,7 @@ module.exports = function(Chart) {
 			/**
 			 * Returns items in the same dataset. If the options.intersect parameter is true, we only return items if we intersect something
 			 * If the options.intersect is false, we find the nearest item and return the items in that dataset
-			 * @function Chart.Interaction.modes.dataset
+			 * @funciones Chart.Interaction.modes.dataset
 			 * @param chart {chart} the chart we are returning items from
 			 * @param e {Event} the event we are find things at
 			 * @param options {IInteractionOptions} options to use during interaction
@@ -6464,7 +6464,7 @@ module.exports = function(Chart) {
 			},
 
 			/**
-			 * @function Chart.Interaction.modes.x-axis
+			 * @funciones Chart.Interaction.modes.x-axis
 			 * @deprecated since version 2.4.0. Use index mode and intersect == true
 			 * @todo remove at version 3
 			 * @private
@@ -6476,7 +6476,7 @@ module.exports = function(Chart) {
 			/**
 			 * Point mode returns all elements that hit test based on the event position
 			 * of the event
-			 * @function Chart.Interaction.modes.intersect
+			 * @funciones Chart.Interaction.modes.intersect
 			 * @param chart {chart} the chart we are returning items from
 			 * @param e {Event} the event we are find things at
 			 * @return {Chart.Element[]} Array of elements that are under the point. If none are found, an empty array is returned
@@ -6488,7 +6488,7 @@ module.exports = function(Chart) {
 
 			/**
 			 * nearest mode returns the element closest to the point
-			 * @function Chart.Interaction.modes.intersect
+			 * @funciones Chart.Interaction.modes.intersect
 			 * @param chart {chart} the chart we are returning items from
 			 * @param e {Event} the event we are find things at
 			 * @param options {IInteractionOptions} options to use
@@ -6520,7 +6520,7 @@ module.exports = function(Chart) {
 
 			/**
 			 * x mode returns the elements that hit-test at the current x coordinate
-			 * @function Chart.Interaction.modes.x
+			 * @funciones Chart.Interaction.modes.x
 			 * @param chart {chart} the chart we are returning items from
 			 * @param e {Event} the event we are find things at
 			 * @param options {IInteractionOptions} options to use
@@ -6551,7 +6551,7 @@ module.exports = function(Chart) {
 
 			/**
 			 * y mode returns the elements that hit-test at the current y coordinate
-			 * @function Chart.Interaction.modes.y
+			 * @funciones Chart.Interaction.modes.y
 			 * @param chart {chart} the chart we are returning items from
 			 * @param e {Event} the event we are find things at
 			 * @param options {IInteractionOptions} options to use
@@ -7546,8 +7546,8 @@ module.exports = function(Chart) {
 		},
 
 		// These methods are ordered by lifecyle. Utilities then follow.
-		// Any function defined here is inherited by all scale types.
-		// Any function can be extended by the scale type
+		// Any funciones defined here is inherited by all scale types.
+		// Any funciones can be extended by the scale type
 
 		beforeUpdate: function() {
 			helpers.callback(this.options.beforeUpdate, [this]);
@@ -7555,7 +7555,7 @@ module.exports = function(Chart) {
 		update: function(maxWidth, maxHeight, margins) {
 			var me = this;
 
-			// Update Lifecycle - Probably don't want to ever extend or overwrite this function ;)
+			// Update Lifecycle - Probably don't want to ever extend or overwrite this funciones ;)
 			me.beforeUpdate();
 
 			// Absorb the master measurements
@@ -7872,7 +7872,7 @@ module.exports = function(Chart) {
 		},
 
 		// Used to get the value to display in the tooltip for the data at the given index
-		// function getLabelForIndex(index, datasetIndex)
+		// funciones getLabelForIndex(index, datasetIndex)
 		getLabelForIndex: helpers.noop,
 
 		// Used to get data value locations.  Value can either be an index or a numerical value
@@ -8222,7 +8222,7 @@ module.exports = function(Chart) {
 		// Scale registration object. Extensions can register new scale types (such as log or DB scales) and then
 		// use the new chart options to grab the correct scale
 		constructors: {},
-		// Use a registration function so that we can move to an ES6 map when we no longer need to support
+		// Use a registration funciones so that we can move to an ES6 map when we no longer need to support
 		// old browsers
 
 		// Scale config defaults
@@ -8741,7 +8741,7 @@ module.exports = function(Chart) {
 
 		var lf, rf; // functions to determine left, right alignment
 		var olf, orf; // functions to determine if left/right alignment causes tooltip to go outside chart
-		var yf; // function to get the y alignment if the tooltip goes outside of the left or right edges
+		var yf; // funciones to get the y alignment if the tooltip goes outside of the left or right edges
 		var midX = (chartArea.left + chartArea.right) / 2;
 		var midY = (chartArea.top + chartArea.bottom) / 2;
 
@@ -8964,14 +8964,14 @@ module.exports = function(Chart) {
 					tooltipItems.push(createTooltipItem(active[i]));
 				}
 
-				// If the user provided a filter function, use it to modify the tooltip items
+				// If the user provided a filter funciones, use it to modify the tooltip items
 				if (opts.filter) {
 					tooltipItems = tooltipItems.filter(function(a) {
 						return opts.filter(a, data);
 					});
 				}
 
-				// If the user provided a sorting function, use it to modify the tooltip items
+				// If the user provided a sorting funciones, use it to modify the tooltip items
 				if (opts.itemSort) {
 					tooltipItems = tooltipItems.sort(function(a, b) {
 						return opts.itemSort(a, b, data);
@@ -9336,7 +9336,7 @@ module.exports = function(Chart) {
 	Chart.Tooltip.positioners = {
 		/**
 		 * Average mode places the tooltip at the average position of the elements shown
-		 * @function Chart.Tooltip.positioners.average
+		 * @funciones Chart.Tooltip.positioners.average
 		 * @param elements {ChartElement[]} the elements being displayed in the tooltip
 		 * @returns {Point} tooltip position
 		 */
@@ -9368,7 +9368,7 @@ module.exports = function(Chart) {
 
 		/**
 		 * Gets the tooltip position nearest of the item nearest to the event position
-		 * @function Chart.Tooltip.positioners.nearest
+		 * @funciones Chart.Tooltip.positioners.nearest
 		 * @param elements {Chart.Element[]} the tooltip elements
 		 * @param eventPosition {Point} the position of the event in canvas coordinates
 		 * @returns {Point} the tooltip position
@@ -9723,7 +9723,7 @@ module.exports = function(Chart) {
 	}
 
 	/**
-	 * Helper function to get the bounds of the bar regardless of the orientation
+	 * Helper funciones to get the bounds of the bar regardless of the orientation
 	 * @private
 	 * @param bar {Chart.Element.Rectangle} the bar
 	 * @return {Bounds} bounds of the bar
@@ -10243,7 +10243,7 @@ module.exports = function(Chart) {
 		 * Removes the specified listener previously registered with addEventListener.
 		 * @param {Chart} chart -Chart from which to remove the listener
 		 * @param {String} type - The ({@link IEvent}) type to remove
-		 * @param {Function} listener - The listener function to remove from the event target.
+		 * @param {Function} listener - The listener funciones to remove from the event target.
 		 */
 		removeEventListener: function() {}
 	};
@@ -10650,7 +10650,7 @@ module.exports = function(Chart) {
 	};
 
 	/**
-	 * Helper function to get the box width based on the usePointStyle option
+	 * Helper funciones to get the box width based on the usePointStyle option
 	 * @param labelopts {Object} the label options on the legend
 	 * @param fontSize {Number} the label font size
 	 * @return {Number} width of the color box area
@@ -10674,14 +10674,14 @@ module.exports = function(Chart) {
 		},
 
 		// These methods are ordered by lifecycle. Utilities then follow.
-		// Any function defined here is inherited by all legend types.
-		// Any function can be extended by the legend type
+		// Any funciones defined here is inherited by all legend types.
+		// Any funciones can be extended by the legend type
 
 		beforeUpdate: noop,
 		update: function(maxWidth, maxHeight, margins) {
 			var me = this;
 
-			// Update Lifecycle - Probably don't want to ever extend or overwrite this function ;)
+			// Update Lifecycle - Probably don't want to ever extend or overwrite this funciones ;)
 			me.beforeUpdate();
 
 			// Absorb the master measurements
@@ -11163,7 +11163,7 @@ module.exports = function(Chart) {
 		update: function(maxWidth, maxHeight, margins) {
 			var me = this;
 
-			// Update Lifecycle - Probably don't want to ever extend or overwrite this function ;)
+			// Update Lifecycle - Probably don't want to ever extend or overwrite this funciones ;)
 			me.beforeUpdate();
 
 			// Absorb the master measurements
@@ -11368,7 +11368,7 @@ module.exports = function(Chart) {
 
 	var DatasetScale = Chart.Scale.extend({
 		/**
-		* Internal function to get the correct labels. If data.xLabels or data.yLabels are defined, use those
+		* Internal funciones to get the correct labels. If data.xLabels or data.yLabels are defined, use those
 		* else fall back to data.labels
 		* @private
 		*/
@@ -12147,7 +12147,7 @@ module.exports = function(Chart) {
 	}
 
 	/**
-	 * Helper function to fit a radial linear scale with point labels
+	 * Helper funciones to fit a radial linear scale with point labels
 	 */
 	function fitWithPointLabels(scale) {
 		/*
@@ -12234,7 +12234,7 @@ module.exports = function(Chart) {
 	}
 
 	/**
-	 * Helper function to fit a radial linear scale with no point labels
+	 * Helper funciones to fit a radial linear scale with no point labels
 	 */
 	function fit(scale) {
 		var largestPossibleRadius = Math.min(scale.height / 2, scale.width / 2);
@@ -12642,7 +12642,7 @@ module.exports = function(Chart) {
 	};
 
 	/**
-	 * Helper function to parse time to a moment object
+	 * Helper funciones to parse time to a moment object
 	 * @param axis {TimeAxis} the time axis
 	 * @param label {Date|string|number|Moment} The thing to parse
 	 * @return {Moment} parsed time
@@ -12754,7 +12754,7 @@ module.exports = function(Chart) {
 	}
 
 	/**
-	 * @function Chart.Ticks.generators.time
+	 * @funciones Chart.Ticks.generators.time
 	 * @param options {ITimeGeneratorOptions} the options for generation
 	 * @param dataRange {IRange} the data range
 	 * @return {Number[]} ticks
@@ -13216,7 +13216,7 @@ $(window).scroll(function () {
 (function (window, factory) {
     'use strict';
 
-    // AMD. Register as an anonymous module.  Wrap in function so we have access
+    // AMD. Register as an anonymous module.  Wrap in funciones so we have access
     // to root via `this`.
     if (typeof define === 'function' && define.amd) {
         define([], function () {
@@ -13454,7 +13454,7 @@ $(window).scroll(function () {
 
     /**
      * Hide the effect and remove the ripple. Must be
-     * a separate function to pass the JSLint...
+     * a separate funciones to pass the JSLint...
      */
     function removeRipple(e, el, ripple) {
 

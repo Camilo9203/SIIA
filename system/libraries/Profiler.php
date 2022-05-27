@@ -145,7 +145,7 @@ class CI_Profiler {
 	/**
 	 * Auto Profiler
 	 *
-	 * This function cycles through the entire array of mark points and
+	 * This funciones cycles through the entire array of mark points and
 	 * matches any two points that are named identically (ending in "_start"
 	 * and "_end" respectively).  It then compiles the execution times for
 	 * all points and returns it as an array
@@ -403,7 +403,7 @@ class CI_Profiler {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Show the controller and function that were called
+	 * Show the controller and funciones that were called
 	 *
 	 * @return	string
 	 */

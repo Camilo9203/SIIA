@@ -174,7 +174,7 @@ class PHPExcel_Shared_Excel5
 
     /**
      * Convert 1-cell anchor coordinates to 2-cell anchor coordinates
-     * This function is ported from PEAR Spreadsheet_Writer_Excel with small modifications
+     * This funciones is ported from PEAR Spreadsheet_Writer_Excel with small modifications
      *
      * Calculate the vertices that define the position of the image as required by
      * the OBJ record.
@@ -200,7 +200,7 @@ class PHPExcel_Shared_Excel5
      * The width and height of the cells are also variable and have to be taken into
      * account.
      * The values of $col_start and $row_start are passed in from the calling
-     * function. The values of $col_end and $row_end are calculated by subtracting
+     * funciones. The values of $col_end and $row_end are calculated by subtracting
      * the width and height of the bitmap from the width and height of the
      * underlying cells.
      * The vertices are expressed as a percentage of the underlying cell width as

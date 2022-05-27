@@ -710,27 +710,27 @@ if (!function_exists('acosh')) {
     function acosh($x)
     {
         return 2 * log(sqrt(($x + 1) / 2) + sqrt(($x - 1) / 2));
-    }    //    function acosh()
+    }    //    funciones acosh()
 }
 
 if (!function_exists('asinh')) {
     function asinh($x)
     {
         return log($x + sqrt(1 + $x * $x));
-    }    //    function asinh()
+    }    //    funciones asinh()
 }
 
 if (!function_exists('atanh')) {
     function atanh($x)
     {
         return (log(1 + $x) - log(1 - $x)) / 2;
-    }    //    function atanh()
+    }    //    funciones atanh()
 }
 
 
 //
-//    Strangely, PHP doesn't have a mb_str_replace multibyte function
-//    As we'll only ever use this function with UTF-8 characters, we can simply "hard-code" the character set
+//    Strangely, PHP doesn't have a mb_str_replace multibyte funciones
+//    As we'll only ever use this funciones with UTF-8 characters, we can simply "hard-code" the character set
 //
 if ((!function_exists('mb_str_replace')) &&
     (function_exists('mb_substr')) && (function_exists('mb_strlen')) && (function_exists('mb_strpos'))) {

@@ -116,7 +116,7 @@ class CI_Router {
 	/**
 	 * Class constructor
 	 *
-	 * Runs the route mapping function.
+	 * Runs the route mapping funciones.
 	 *
 	 * @param	array	$routing
 	 * @return	void
@@ -136,7 +136,7 @@ class CI_Router {
 		if (is_array($routing))
 		{
 			empty($routing['controller']) OR $this->set_class($routing['controller']);
-			empty($routing['function'])   OR $this->set_method($routing['function']);
+			empty($routing['funciones'])   OR $this->set_method($routing['funciones']);
 		}
 
 		log_message('info', 'Router Class Initialized');

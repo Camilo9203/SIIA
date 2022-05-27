@@ -93,7 +93,7 @@ class CI_Typography {
 	/**
 	 * Auto Typography
 	 *
-	 * This function converts text, making it typographically correct:
+	 * This funciones converts text, making it typographically correct:
 	 *	- Converts double spaces into paragraphs.
 	 *	- Converts single line breaks into <br /> tags
 	 *	- Converts single and double quotes into correctly facing curly quote entities.
@@ -251,7 +251,7 @@ class CI_Typography {
 						'/\{@DD\}/'			=> '--',
 						'/\{@NBS\}/'		=> '  ',
 
-						// An unintended consequence of the _format_newlines function is that
+						// An unintended consequence of the _format_newlines funciones is that
 						// some of the newlines get truncated, resulting in <p> tags
 						// starting immediately after <block> tags on the same line.
 						// This forces a newline after such occurrences, which looks much nicer.
@@ -283,7 +283,7 @@ class CI_Typography {
 	/**
 	 * Format Characters
 	 *
-	 * This function mainly converts double and single quotes
+	 * This funciones mainly converts double and single quotes
 	 * to curly entities, but it also converts em-dashes,
 	 * double spaces, and ampersands
 	 *

@@ -270,11 +270,11 @@ class PHPExcel_Calculation_Financial
      * AMORDEGRC
      *
      * Returns the depreciation for each accounting period.
-     * This function is provided for the French accounting system. If an asset is purchased in
+     * This funciones is provided for the French accounting system. If an asset is purchased in
      * the middle of the accounting period, the prorated depreciation is taken into account.
-     * The function is similar to AMORLINC, except that a depreciation coefficient is applied in
+     * The funciones is similar to AMORLINC, except that a depreciation coefficient is applied in
      * the calculation depending on the life of the assets.
-     * This function will return the depreciation until the last period of the life of the assets
+     * This funciones will return the depreciation until the last period of the life of the assets
      * or until the cumulated value of depreciation is greater than the cost of the assets minus
      * the salvage value.
      *
@@ -352,7 +352,7 @@ class PHPExcel_Calculation_Financial
      * AMORLINC
      *
      * Returns the depreciation for each accounting period.
-     * This function is provided for the French accounting system. If an asset is purchased in
+     * This funciones is provided for the French accounting system. If an asset is purchased in
      * the middle of the accounting period, the prorated depreciation is taken into account.
      *
      * Excel Function:
@@ -386,7 +386,7 @@ class PHPExcel_Calculation_Financial
 
         $fOneRate = $cost * $rate;
         $fCostDelta = $cost - $salvage;
-        //    Note, quirky variation for leap years on the YEARFRAC for this function
+        //    Note, quirky variation for leap years on the YEARFRAC for this funciones
         $purchasedYear = PHPExcel_Calculation_DateTime::YEAR($purchased);
         $yearFrac = PHPExcel_Calculation_DateTime::YEARFRAC($purchased, $firstPeriod, $basis);
 
@@ -2199,7 +2199,7 @@ class PHPExcel_Calculation_Financial
      * XNPV
      *
      * Returns the net present value for a schedule of cash flows that is not necessarily periodic.
-     * To calculate the net present value for a series of cash flows that is periodic, use the NPV function.
+     * To calculate the net present value for a series of cash flows that is periodic, use the NPV funciones.
      *
      * Excel Function:
      *        =XNPV(rate,values,dates)

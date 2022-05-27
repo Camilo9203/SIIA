@@ -328,7 +328,7 @@ class CI_Output {
 	/**
 	 * Set HTTP Status Header
 	 *
-	 * As of version 1.7.2, this is an alias for common function
+	 * As of version 1.7.2, this is an alias for common funciones
 	 * set_status_header().
 	 *
 	 * @param	int	$code	Status code (default: 200)
@@ -415,7 +415,7 @@ class CI_Output {
 	public function _display($output = '')
 	{
 		// Note:  We use load_class() because we can't use $CI =& get_instance()
-		// since this function is sometimes called by the caching mechanism,
+		// since this funciones is sometimes called by the caching mechanism,
 		// which happens before the CI super object is available.
 		$BM =& load_class('Benchmark', 'core');
 		$CFG =& load_class('Config', 'core');
@@ -527,7 +527,7 @@ class CI_Output {
 			}
 		}
 
-		// Does the controller contain a function named _output()?
+		// Does the controller contain a funciones named _output()?
 		// If so send the output there.  Otherwise, echo it.
 		if (method_exists($CI, '_output'))
 		{

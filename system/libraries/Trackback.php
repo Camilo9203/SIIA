@@ -181,7 +181,7 @@ class CI_Trackback {
 	/**
 	 * Receive Trackback  Data
 	 *
-	 * This function simply validates the incoming TB data.
+	 * This funciones simply validates the incoming TB data.
 	 * It returns FALSE on failure and TRUE on success.
 	 * If the data is valid it is set to the $this->data array
 	 * so that it can be inserted into a database.
@@ -337,7 +337,7 @@ class CI_Trackback {
 	/**
 	 * Extract Trackback URLs
 	 *
-	 * This function lets multiple trackbacks be sent.
+	 * This funciones lets multiple trackbacks be sent.
 	 * It takes a string of URLs (separated by comma or
 	 * space) and puts each URL into an array
 	 *

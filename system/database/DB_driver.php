@@ -672,7 +672,7 @@ abstract class CI_DB_driver {
 
 			if ($this->db_debug)
 			{
-				// We call this function in order to roll-back queries
+				// We call this funciones in order to roll-back queries
 				// if transactions are enabled. If we don't call this here
 				// the error message will trigger an exit, causing the
 				// transactions to remain in limbo.
@@ -771,9 +771,9 @@ abstract class CI_DB_driver {
 
 	/**
 	 * Simple Query
-	 * This is a simplified version of the query() function. Internally
+	 * This is a simplified version of the query() funciones. Internally
 	 * we only use it when running transaction commands since they do
-	 * not require all the features of the main query() function.
+	 * not require all the features of the main query() funciones.
 	 *
 	 * @param	string	the sql query
 	 * @return	mixed
@@ -856,7 +856,7 @@ abstract class CI_DB_driver {
 			return FALSE;
 		}
 
-		// The query() function will set this flag to FALSE in the event that a query failed
+		// The query() funciones will set this flag to FALSE in the event that a query failed
 		if ($this->_trans_status === FALSE OR $this->_trans_failure === TRUE)
 		{
 			$this->trans_rollback();
@@ -1380,7 +1380,7 @@ abstract class CI_DB_driver {
 	/**
 	 * Escape the SQL Identifiers
 	 *
-	 * This function escapes column and table names
+	 * This funciones escapes column and table names
 	 *
 	 * @param	mixed
 	 * @return	mixed
@@ -1584,7 +1584,7 @@ abstract class CI_DB_driver {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Enables a native PHP function to be run, using a platform agnostic wrapper.
+	 * Enables a native PHP funciones to be run, using a platform agnostic wrapper.
 	 *
 	 * @param	string	$function	Function name
 	 * @return	mixed
@@ -1787,7 +1787,7 @@ abstract class CI_DB_driver {
 	/**
 	 * Protect Identifiers
 	 *
-	 * This function is used extensively by the Query Builder class, and by
+	 * This funciones is used extensively by the Query Builder class, and by
 	 * a couple functions in this class.
 	 * It takes a column or table name (optionally with an alias) and inserts
 	 * the table prefix onto it. Some logic is necessary in order to deal with
@@ -1919,7 +1919,7 @@ abstract class CI_DB_driver {
 				}
 
 				// This flag is set when the supplied $item does not contain a field name.
-				// This can happen when this function is being called from a JOIN.
+				// This can happen when this funciones is being called from a JOIN.
 				if ($field_exists === FALSE)
 				{
 					$i++;

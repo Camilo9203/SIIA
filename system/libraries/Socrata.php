@@ -60,7 +60,7 @@ class CI_Socrata {
     }
     return $handle;
   }
-  // Convenience function for GET calls
+  // Convenience funciones for GET calls
   public function get($path, $params = array()) {
     $handle = $this->create_curl_handle($path, $params);
     $response = curl_exec($handle);
@@ -72,7 +72,7 @@ class CI_Socrata {
     }
     return json_decode($response, true);
   }
-  // Convenience function for Posts
+  // Convenience funciones for Posts
   public function post($path, $json_filter) {
     $handle = $this->create_curl_handle($path, array());
     // Set up our handle for POSTs
@@ -90,7 +90,7 @@ class CI_Socrata {
     }
     return json_decode($response, true);
   }
-  // Convenience function for Puts
+  // Convenience funciones for Puts
   public function put($path, $json_filter) {
     $handle = $this->create_curl_handle($path, array());
     // Build up the headers we'll need to pass

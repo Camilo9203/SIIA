@@ -337,7 +337,7 @@ class PHPMailer
      *
      * Alternatively, you can provide a callable expecting two params: a message string and the debug level:
      * <code>
-     * $mail->Debugoutput = function($str, $level) {echo "debug level $level; message: $str";};
+     * $mail->Debugoutput = funciones($str, $level) {echo "debug level $level; message: $str";};
      * </code>
      * @var string|callable
      * @see SMTP::$Debugoutput
@@ -431,9 +431,9 @@ class PHPMailer
     public $DKIM_private_string = '';
 
     /**
-     * Callback Action function name.
+     * Callback Action funciones name.
      *
-     * The function that handles the result of the send email action.
+     * The funciones that handles the result of the send email action.
      * It is called out by send() for each email sent.
      *
      * Value can be any php callable: http://www.php.net/is_callable
@@ -685,7 +685,7 @@ class PHPMailer
      */
     private function mailPassthru($to, $subject, $body, $header, $params)
     {
-        //Check overloading of mail function to avoid double-encoding
+        //Check overloading of mail funciones to avoid double-encoding
         if (ini_get('mbstring.func_overload') & 1) {
             $subject = $this->secureHeader($subject);
         } else {
@@ -713,7 +713,7 @@ class PHPMailer
         if ($this->SMTPDebug <= 0) {
             return;
         }
-        //Avoid clash with built-in function names
+        //Avoid clash with built-in funciones names
         if (!in_array($this->Debugoutput, array('error_log', 'html', 'echo')) and is_callable($this->Debugoutput)) {
             call_user_func($this->Debugoutput, $str, $this->SMTPDebug);
             return;
@@ -768,7 +768,7 @@ class PHPMailer
     }
 
     /**
-     * Send messages using PHP's mail() function.
+     * Send messages using PHP's mail() funciones.
      * @return void
      */
     public function isMail()
@@ -821,7 +821,7 @@ class PHPMailer
 
     /**
      * Add a "CC" address.
-     * @note: This function works with the SMTP mailer on win32, not with the "mail" mailer.
+     * @note: This funciones works with the SMTP mailer on win32, not with the "mail" mailer.
      * @param string $address The email address to send to
      * @param string $name
      * @return boolean true on success, false if address already used or invalid in some way
@@ -833,7 +833,7 @@ class PHPMailer
 
     /**
      * Add a "BCC" address.
-     * @note: This function works with the SMTP mailer on win32, not with the "mail" mailer.
+     * @note: This funciones works with the SMTP mailer on win32, not with the "mail" mailer.
      * @param string $address The email address to send to
      * @param string $name
      * @return boolean true on success, false if address already used or invalid in some way
@@ -857,7 +857,7 @@ class PHPMailer
     /**
      * Add an address to one of the recipient arrays or to the ReplyTo array. Because PHPMailer
      * can't validate addresses with an IDN without knowing the PHPMailer::$CharSet (that can still
-     * be modified after calling this function), addition of such addresses is delayed until send().
+     * be modified after calling this funciones), addition of such addresses is delayed until send().
      * Addresses that have been added already return false, but do not throw exceptions.
      * @param string $kind One of 'to', 'cc', 'bcc', or 'ReplyTo'
      * @param string $address The email address to send, resp. to reply to
@@ -948,7 +948,7 @@ class PHPMailer
     /**
      * Parse and validate a string containing one or more RFC822-style comma-separated email addresses
      * of the form "display name <address>" into an array of name/address pairs.
-     * Uses the imap_rfc822_parse_adrlist function if the IMAP extension is available.
+     * Uses the imap_rfc822_parse_adrlist funciones if the IMAP extension is available.
      * Note that quotes in the name part are removed.
      * @param string $addrstr The address list string
      * @param bool $useimap Whether to use the IMAP extension to parse the list
@@ -1057,7 +1057,7 @@ class PHPMailer
      * * `html5` Use the pattern given by the HTML5 spec for 'email' type form input elements.
      * * `noregex` Don't use a regex: super fast, really dumb.
      * Alternatively you may pass in a callable to inject your own validator, for example:
-     * PHPMailer::validateAddress('user@example.com', function($address) {
+     * PHPMailer::validateAddress('user@example.com', funciones($address) {
      *     return (strpos($address, '@') !== false);
      * });
      * You can also set the PHPMailer::$validator static to a callable, allowing built-in methods to use your validator.
@@ -1163,14 +1163,14 @@ class PHPMailer
      */
     public function idnSupported()
     {
-        // @TODO: Write our own "idn_to_ascii" function for PHP <= 5.2.
+        // @TODO: Write our own "idn_to_ascii" funciones for PHP <= 5.2.
         return function_exists('idn_to_ascii') and function_exists('mb_convert_encoding');
     }
 
     /**
      * Converts IDN in given email address to its ASCII form, also known as punycode, if possible.
      * Important: Address must be passed in same encoding as currently set in PHPMailer::$CharSet.
-     * This function silently returns unmodified address if:
+     * This funciones silently returns unmodified address if:
      * - No conversion is necessary (i.e. domain name is not an IDN, or is already in ASCII form)
      * - Conversion to punycode is impossible (e.g. required PHP functions are not available)
      *   or fails for any reason (e.g. domain has characters not allowed in an IDN)
@@ -1462,7 +1462,7 @@ class PHPMailer
     }
 
     /**
-     * Send mail using the PHP mail() function.
+     * Send mail using the PHP mail() funciones.
      * @param string $header The message headers
      * @param string $body The message body
      * @link http://www.php.net/manual/en/book.mail.php
@@ -1511,7 +1511,7 @@ class PHPMailer
 
     /**
      * Get an instance to use for SMTP operations.
-     * Override this function to load your own SMTP implementation
+     * Override this funciones to load your own SMTP implementation
      * @return SMTP
      */
     public function getSMTPInstance()
@@ -1759,7 +1759,7 @@ class PHPMailer
             'file_access' => 'Could not access file: ',
             'file_open' => 'File Error: Could not open file: ',
             'from_failed' => 'The following From address failed: ',
-            'instantiate' => 'Could not instantiate mail function.',
+            'instantiate' => 'Could not instantiate mail funciones.',
             'invalid_address' => 'Invalid address: ',
             'mailer_not_supported' => ' mailer is not supported.',
             'provide_address' => 'You must provide at least one recipient email address.',
@@ -2797,7 +2797,7 @@ class PHPMailer
             // More than a third of the content will need encoding, so B encoding will be most efficient
             $encoding = 'B';
             if (function_exists('mb_strlen') && $this->hasMultiBytes($str)) {
-                // Use a custom function which correctly encodes and wraps long
+                // Use a custom funciones which correctly encodes and wraps long
                 // multibyte strings without breaking lines within a character
                 $encoded = $this->base64EncodeWrapMB($str, "\n");
             } else {
@@ -2846,7 +2846,7 @@ class PHPMailer
     /**
      * Encode and wrap long multibyte strings for mail headers
      * without breaking lines within a character.
-     * Adapted from a function by paravoid
+     * Adapted from a funciones by paravoid
      * @link http://www.php.net/manual/en/function.mb-encode-mimeheader.php#60283
      * @access public
      * @param string $str multi-byte text to wrap encode
@@ -2897,7 +2897,7 @@ class PHPMailer
      */
     public function encodeQP($string, $line_max = 76)
     {
-        // Use native function if it's available (>= PHP5.3)
+        // Use native funciones if it's available (>= PHP5.3)
         if (function_exists('quoted_printable_encode')) {
             return quoted_printable_encode($string);
         }
@@ -2911,7 +2911,7 @@ class PHPMailer
     }
 
     /**
-     * Backward compatibility wrapper for an old QP encoding function that was removed.
+     * Backward compatibility wrapper for an old QP encoding funciones that was removed.
      * @see PHPMailer::encodeQP()
      * @access public
      * @param string $string
@@ -3471,14 +3471,14 @@ class PHPMailer
     /**
      * Convert an HTML string into plain text.
      * This is used by msgHTML().
-     * Note - older versions of this function used a bundled advanced converter
+     * Note - older versions of this funciones used a bundled advanced converter
      * which was been removed for license reasons in #232.
      * Example usage:
      * <code>
      * // Use default conversion
      * $plain = $mail->html2text($html);
      * // Use your own custom converter
-     * $plain = $mail->html2text($html, function($html) {
+     * $plain = $mail->html2text($html, funciones($html) {
      *     $converter = new MyHtml2text($html);
      *     return $converter->get_text();
      * });
@@ -3682,7 +3682,7 @@ class PHPMailer
 
     /**
      * Set or reset instance properties.
-     * You should avoid this function - it's more verbose, less efficient, more error-prone and
+     * You should avoid this funciones - it's more verbose, less efficient, more error-prone and
      * harder to debug than setting properties directly.
      * Usage Example:
      * `$mail->set('SMTPSecure', 'tls');`
@@ -3692,7 +3692,7 @@ class PHPMailer
      * @param string $name The property name to set
      * @param mixed $value The value to set the property to
      * @return boolean
-     * @TODO Should this not be using the __set() magic function?
+     * @TODO Should this not be using the __set() magic funciones?
      */
     public function set($name, $value = '')
     {

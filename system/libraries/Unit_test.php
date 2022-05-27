@@ -384,7 +384,7 @@ class CI_Unit_test {
 }
 
 /**
- * Helper function to test boolean TRUE
+ * Helper funciones to test boolean TRUE
  *
  * @param	mixed	$test
  * @return	bool
@@ -395,7 +395,7 @@ function is_true($test)
 }
 
 /**
- * Helper function to test boolean FALSE
+ * Helper funciones to test boolean FALSE
  *
  * @param	mixed	$test
  * @return	bool

@@ -341,7 +341,7 @@ class CI_Zip {
 	/**
 	 * Read a directory and add it to the zip.
 	 *
-	 * This function recursively reads a folder and everything it contains (including
+	 * This funciones recursively reads a folder and everything it contains (including
 	 * sub-folders) and creates a zip based on it. Whatever directory structure
 	 * is in the original file path will be recreated in the zip file.
 	 *

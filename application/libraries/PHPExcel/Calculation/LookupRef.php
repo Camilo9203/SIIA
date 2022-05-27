@@ -101,8 +101,8 @@ class PHPExcel_Calculation_LookupRef
      *
      * Returns the column number of the given cell reference
      * If the cell reference is a range of cells, COLUMN returns the column numbers of each column in the reference as a horizontal array.
-     * If cell reference is omitted, and the function is being called through the calculation engine, then it is assumed to be the
-     *        reference of the cell in which the COLUMN function appears; otherwise this function returns 0.
+     * If cell reference is omitted, and the funciones is being called through the calculation engine, then it is assumed to be the
+     *        reference of the cell in which the COLUMN funciones appears; otherwise this funciones returns 0.
      *
      * Excel Function:
      *        =COLUMN([cellAddress])
@@ -178,8 +178,8 @@ class PHPExcel_Calculation_LookupRef
      *
      * Returns the row number of the given cell reference
      * If the cell reference is a range of cells, ROW returns the row numbers of each row in the reference as a vertical array.
-     * If cell reference is omitted, and the function is being called through the calculation engine, then it is assumed to be the
-     *        reference of the cell in which the ROW function appears; otherwise this function returns 0.
+     * If cell reference is omitted, and the funciones is being called through the calculation engine, then it is assumed to be the
+     *        reference of the cell in which the ROW funciones appears; otherwise this funciones returns 0.
      *
      * Excel Function:
      *        =ROW([cellAddress])
@@ -490,7 +490,7 @@ class PHPExcel_Calculation_LookupRef
     /**
      * MATCH
      *
-     * The MATCH function searches for a specified item in a range of cells
+     * The MATCH funciones searches for a specified item in a range of cells
      *
      * Excel Function:
      *        =MATCH(lookup_value, lookup_array, [match_type])
@@ -649,7 +649,7 @@ class PHPExcel_Calculation_LookupRef
      * @param    array    $matrixData    A matrix of values
      * @return    array
      *
-     * Unlike the Excel TRANSPOSE function, which will only work on a single row or column, this function will transpose a full matrix.
+     * Unlike the Excel TRANSPOSE funciones, which will only work on a single row or column, this funciones will transpose a full matrix.
      */
     public static function TRANSPOSE($matrixData)
     {
@@ -684,7 +684,7 @@ class PHPExcel_Calculation_LookupRef
 
     /**
      * VLOOKUP
-     * The VLOOKUP function searches for value in the left-most column of lookup_array and returns the value in the same row based on the index_number.
+     * The VLOOKUP funciones searches for value in the left-most column of lookup_array and returns the value in the same row based on the index_number.
      * @param    lookup_value    The value that you want to match in lookup_array
      * @param    lookup_array    The range of cells being searched
      * @param    index_number    The column number in table_array from which the matching value must be returned. The first column is 1.
@@ -747,7 +747,7 @@ class PHPExcel_Calculation_LookupRef
 
     /**
      * HLOOKUP
-     * The HLOOKUP function searches for value in the top-most row of lookup_array and returns the value in the same column based on the index_number.
+     * The HLOOKUP funciones searches for value in the top-most row of lookup_array and returns the value in the same column based on the index_number.
      * @param    lookup_value    The value that you want to match in lookup_array
      * @param    lookup_array    The range of cells being searched
      * @param    index_number    The row number in table_array from which the matching value must be returned. The first row is 1.
@@ -811,7 +811,7 @@ class PHPExcel_Calculation_LookupRef
 
     /**
      * LOOKUP
-     * The LOOKUP function searches for value either from a one-row or one-column range or from an array.
+     * The LOOKUP funciones searches for value either from a one-row or one-column range or from an array.
      * @param    lookup_value    The value that you want to match in lookup_array
      * @param    lookup_vector    The range of cells being searched
      * @param    result_vector    The column from which the matching value must be returned

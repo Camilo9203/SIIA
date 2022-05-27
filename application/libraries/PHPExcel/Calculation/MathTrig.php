@@ -71,15 +71,15 @@ class PHPExcel_Calculation_MathTrig
     /**
      * ATAN2
      *
-     * This function calculates the arc tangent of the two variables x and y. It is similar to
+     * This funciones calculates the arc tangent of the two variables x and y. It is similar to
      *        calculating the arc tangent of y ÷ x, except that the signs of both arguments are used
      *        to determine the quadrant of the result.
      * The arctangent is the angle from the x-axis to a line containing the origin (0, 0) and a
      *        point with coordinates (xCoordinate, yCoordinate). The angle is given in radians between
      *        -pi and pi, excluding -pi.
      *
-     * Note that the Excel ATAN2() function accepts its arguments in the reverse order to the standard
-     *        PHP atan2() function, so we need to reverse them here before calling the PHP atan() function.
+     * Note that the Excel ATAN2() funciones accepts its arguments in the reverse order to the standard
+     *        PHP atan2() funciones, so we need to reverse them here before calling the PHP atan() funciones.
      *
      * Excel Function:
      *        ATAN2(xCoordinate,yCoordinate)
@@ -189,7 +189,7 @@ class PHPExcel_Calculation_MathTrig
      * EVEN
      *
      * Returns number rounded up to the nearest even integer.
-     * You can use this function for processing items that come in twos. For example,
+     * You can use this funciones for processing items that come in twos. For example,
      *        a packing crate accepts rows of one or two items. The crate is full when
      *        the number of items, rounded up to the nearest two, matches the crate's
      *        capacity.
@@ -873,7 +873,7 @@ class PHPExcel_Calculation_MathTrig
     /**
      * QUOTIENT
      *
-     * QUOTIENT function returns the integer portion of a division. Numerator is the divided number
+     * QUOTIENT funciones returns the integer portion of a division. Numerator is the divided number
      *        and denominator is the divisor.
      *
      * Excel Function:
@@ -1107,7 +1107,7 @@ class PHPExcel_Calculation_MathTrig
      *
      * Returns a subtotal in a list or database.
      *
-     * @param    int        the number 1 to 11 that specifies which function to
+     * @param    int        the number 1 to 11 that specifies which funciones to
      *                    use in calculating subtotals within a list.
      * @param    array of mixed        Data Series
      * @return    float

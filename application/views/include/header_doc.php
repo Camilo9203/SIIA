@@ -65,7 +65,7 @@
 	<script src="<?php echo base_url('assets/js/initck.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/script_o.js?v=1.0.9.47192') ?>" type="text/javascript"></script>
 	<!-- //TODO:Pendiente por enlazar -->
-	<script src="<?php echo base_url('assets/js/function/asignaciones.js') ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/funciones/asignaciones.js') ?>" type="text/javascript"></script>
 	<!--<script src="<?php echo base_url('assets/js/script_o.min.js') ?>" type="text/javascript"></script>
     <script src="<?php echo base_url('assets/js/script.js') ?>" type="text/javascript"></script>-->
 	<script type="text/javascript">

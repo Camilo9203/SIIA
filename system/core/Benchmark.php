@@ -61,7 +61,7 @@ class CI_Benchmark {
 	/**
 	 * Set a benchmark marker
 	 *
-	 * Multiple calls to this function can be made so that several
+	 * Multiple calls to this funciones can be made so that several
 	 * execution points can be timed.
 	 *
 	 * @param	string	$name	Marker name
@@ -79,7 +79,7 @@ class CI_Benchmark {
 	 *
 	 * Calculates the time difference between two marked points.
 	 *
-	 * If the first parameter is empty this function instead returns the
+	 * If the first parameter is empty this funciones instead returns the
 	 * {elapsed_time} pseudo-variable. This permits the full system
 	 * execution time to be shown in a template. The output class will
 	 * swap the real value for this variable.

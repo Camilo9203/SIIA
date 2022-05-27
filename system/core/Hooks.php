@@ -137,7 +137,7 @@ class CI_Hooks {
 			return FALSE;
 		}
 
-		if (is_array($this->hooks[$which]) && ! isset($this->hooks[$which]['function']))
+		if (is_array($this->hooks[$which]) && ! isset($this->hooks[$which]['funciones']))
 		{
 			foreach ($this->hooks[$which] as $val)
 			{
@@ -205,9 +205,9 @@ class CI_Hooks {
 			return FALSE;
 		}
 
-		// Determine and class and/or function names
+		// Determine and class and/or funciones names
 		$class		= empty($data['class']) ? FALSE : $data['class'];
-		$function	= empty($data['function']) ? FALSE : $data['function'];
+		$function	= empty($data['funciones']) ? FALSE : $data['funciones'];
 		$params		= isset($data['params']) ? $data['params'] : '';
 
 		if (empty($function))
@@ -218,7 +218,7 @@ class CI_Hooks {
 		// Set the _in_progress flag
 		$this->_in_progress = TRUE;
 
-		// Call the requested class and/or function
+		// Call the requested class and/or funciones
 		if ($class !== FALSE)
 		{
 			// The object is stored?

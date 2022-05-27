@@ -573,7 +573,7 @@ class PHPExcel_Style_NumberFormat extends PHPExcel_Style_Supervisor implements P
      *
      * @param mixed    $value        Value to format
      * @param string    $format        Format code
-     * @param array        $callBack    Callback function for additional formatting of string
+     * @param array        $callBack    Callback funciones for additional formatting of string
      * @return string    Formatted string
      */
     public static function toFormattedString($value = '0', $format = PHPExcel_Style_NumberFormat::FORMAT_GENERAL, $callBack = null)
@@ -740,7 +740,7 @@ class PHPExcel_Style_NumberFormat extends PHPExcel_Style_Supervisor implements P
         // Escape any escaped slashes to a single slash
         $format = preg_replace("/\\\\/u", '\\', $format);
 
-        // Additional formatting provided by callback function
+        // Additional formatting provided by callback funciones
         if ($callBack !== null) {
             list($writerInstance, $function) = $callBack;
             $value = $writerInstance->$function($value, $formatColor);

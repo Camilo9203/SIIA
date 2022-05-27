@@ -83,7 +83,7 @@ class PHPExcel_Calculation_Statistical
 
 
     /**
-     * Beta function.
+     * Beta funciones.
      *
      * @author Jaco van Kooten
      *
@@ -102,7 +102,7 @@ class PHPExcel_Calculation_Statistical
 
 
     /**
-     * Incomplete beta function
+     * Incomplete beta funciones
      *
      * @author Jaco van Kooten
      * @author Paul Meagher
@@ -131,13 +131,13 @@ class PHPExcel_Calculation_Statistical
     }
 
 
-    // Function cache for logBeta function
+    // Function cache for logBeta funciones
     private static $logBetaCacheP      = 0.0;
     private static $logBetaCacheQ      = 0.0;
     private static $logBetaCacheResult = 0.0;
 
     /**
-     * The natural logarithm of the beta function.
+     * The natural logarithm of the beta funciones.
      *
      * @param p require p>0
      * @param q require q>0
@@ -160,7 +160,7 @@ class PHPExcel_Calculation_Statistical
 
 
     /**
-     * Evaluates of continued fraction part of incomplete beta function.
+     * Evaluates of continued fraction part of incomplete beta funciones.
      * Based on an idea from Numerical Recipes (W.H. Press et al, 1992).
      * @author Jaco van Kooten
      */
@@ -212,14 +212,14 @@ class PHPExcel_Calculation_Statistical
 
 
     /**
-     * logGamma function
+     * logGamma funciones
      *
      * @version 1.1
      * @author Jaco van Kooten
      *
      * Original author was Jaco van Kooten. Ported to PHP by Paul Meagher.
      *
-     * The natural logarithm of the gamma function. <br />
+     * The natural logarithm of the gamma funciones. <br />
      * Based on public domain NETLIB (Fortran) code by W. J. Cody and L. Stoltz <br />
      * Applied Mathematics Division <br />
      * Argonne National Laboratory <br />
@@ -237,7 +237,7 @@ class PHPExcel_Calculation_Statistical
      * From the original documentation:
      * </p>
      * <p>
-     * This routine calculates the LOG(GAMMA) function for a positive real argument X.
+     * This routine calculates the LOG(GAMMA) funciones for a positive real argument X.
      * Computation is based on an algorithm outlined in references 1 and 2.
      * The program uses rational functions that theoretically approximate LOG(GAMMA)
      * to at least 18 significant decimal digits. The approximation for X > 12 is from
@@ -433,7 +433,7 @@ class PHPExcel_Calculation_Statistical
 
 
     //
-    //    Private implementation of the incomplete Gamma function
+    //    Private implementation of the incomplete Gamma funciones
     //
     private static function incompleteGamma($a, $x)
     {
@@ -451,7 +451,7 @@ class PHPExcel_Calculation_Statistical
 
 
     //
-    //    Private implementation of the Gamma function
+    //    Private implementation of the Gamma funciones
     //
     private static function gamma($data)
     {
@@ -497,7 +497,7 @@ class PHPExcel_Calculation_Statistical
         //    I have not checked the accuracy of this implementation. Be aware that PHP
         //    will truncate the coeficcients to 14 digits.
 
-        //    You have permission to use and distribute this function freely for
+        //    You have permission to use and distribute this funciones freely for
         //    whatever purpose you want, but please show common courtesy and give credit
         //    where credit is due.
 
@@ -604,7 +604,7 @@ class PHPExcel_Calculation_Statistical
             }
         }
         return $z;
-    }    //    function inverseNcdf2()
+    }    //    funciones inverseNcdf2()
 
 
     private static function inverseNcdf3($p)
@@ -1002,7 +1002,7 @@ class PHPExcel_Calculation_Statistical
      * @param    boolean        $cumulative
      * @return    float
      *
-     * @todo    Cumulative distribution function
+     * @todo    Cumulative distribution funciones
      *
      */
     public static function BINOMDIST($value, $trials, $probability, $cumulative)
@@ -1039,7 +1039,7 @@ class PHPExcel_Calculation_Statistical
      *
      * Returns the one-tailed probability of the chi-squared distribution.
      *
-     * @param    float        $value            Value for the function
+     * @param    float        $value            Value for the funciones
      * @param    float        $degrees        degrees of freedom
      * @return    float
      */
@@ -1069,7 +1069,7 @@ class PHPExcel_Calculation_Statistical
      *
      * Returns the one-tailed probability of the chi-squared distribution.
      *
-     * @param    float        $probability    Probability for the function
+     * @param    float        $probability    Probability for the funciones
      * @param    float        $degrees        degrees of freedom
      * @return    float
      */
@@ -1355,7 +1355,7 @@ class PHPExcel_Calculation_Statistical
      * @todo    Warning. This implementation differs from the algorithm detailed on the MS
      *            web site in that $CumPGuessMinus1 = $CumPGuess - 1 rather than $CumPGuess - $PGuess
      *            This eliminates a potential endless loop error, but may have an adverse affect on the
-     *            accuracy of the function (although all my tests have so far returned correct results).
+     *            accuracy of the funciones (although all my tests have so far returned correct results).
      *
      */
     public static function CRITBINOM($trials, $probability, $alpha)
@@ -1521,7 +1521,7 @@ class PHPExcel_Calculation_Statistical
      *        such as how long an automated bank teller takes to deliver cash. For example, you can
      *        use EXPONDIST to determine the probability that the process takes at most 1 minute.
      *
-     * @param    float        $value            Value of the function
+     * @param    float        $value            Value of the funciones
      * @param    float        $lambda            The parameter value
      * @param    boolean        $cumulative
      * @return    float
@@ -1551,8 +1551,8 @@ class PHPExcel_Calculation_Statistical
     /**
      * FISHER
      *
-     * Returns the Fisher transformation at x. This transformation produces a function that
-     *        is normally distributed rather than skewed. Use this function to perform hypothesis
+     * Returns the Fisher transformation at x. This transformation produces a funciones that
+     *        is normally distributed rather than skewed. Use this funciones to perform hypothesis
      *        testing on the correlation coefficient.
      *
      * @param    float        $value
@@ -1724,7 +1724,7 @@ class PHPExcel_Calculation_Statistical
     /**
      * GAMMALN
      *
-     * Returns the natural logarithm of the gamma function.
+     * Returns the natural logarithm of the gamma funciones.
      *
      * @param    float        $value
      * @return    float
@@ -1964,7 +1964,7 @@ class PHPExcel_Calculation_Statistical
     /**
      * LARGE
      *
-     * Returns the nth largest value in a data set. You can use this function to
+     * Returns the nth largest value in a data set. You can use this funciones to
      *        select a value based on its relative standing.
      *
      * Excel Function:
@@ -2541,7 +2541,7 @@ class PHPExcel_Calculation_Statistical
      *
      * Returns the negative binomial distribution. NEGBINOMDIST returns the probability that
      *        there will be number_f failures before the number_s-th success, when the constant
-     *        probability of a success is probability_s. This function is similar to the binomial
+     *        probability of a success is probability_s. This funciones is similar to the binomial
      *        distribution, except that the number of successes is fixed, and the number of trials is
      *        variable. Like the binomial, trials are assumed to be independent.
      *
@@ -2578,7 +2578,7 @@ class PHPExcel_Calculation_Statistical
      * NORMDIST
      *
      * Returns the normal distribution for the specified mean and standard deviation. This
-     * function has a very wide range of applications in statistics, including hypothesis
+     * funciones has a very wide range of applications in statistics, including hypothesis
      * testing.
      *
      * @param    float        $value
@@ -2643,8 +2643,8 @@ class PHPExcel_Calculation_Statistical
     /**
      * NORMSDIST
      *
-     * Returns the standard normal cumulative distribution function. The distribution has
-     * a mean of 0 (zero) and a standard deviation of one. Use this function in place of a
+     * Returns the standard normal cumulative distribution funciones. The distribution has
+     * a mean of 0 (zero) and a standard deviation of one. Use this funciones in place of a
      * table of standard normal curve areas.
      *
      * @param    float        $value
@@ -2776,7 +2776,7 @@ class PHPExcel_Calculation_Statistical
      * Returns the number of permutations for a given number of objects that can be
      *        selected from number objects. A permutation is any set or subset of objects or
      *        events where internal order is significant. Permutations are different from
-     *        combinations, for which the internal order is not significant. Use this function
+     *        combinations, for which the internal order is not significant. Use this funciones
      *        for lottery-style probability calculations.
      *
      * @param    int        $numObjs    Number of different objects
@@ -3002,7 +3002,7 @@ class PHPExcel_Calculation_Statistical
     /**
      * SMALL
      *
-     * Returns the nth smallest value in a data set. You can use this function to
+     * Returns the nth smallest value in a data set. You can use this funciones to
      *        select a value based on its relative standing.
      *
      * Excel Function:
@@ -3297,7 +3297,7 @@ class PHPExcel_Calculation_Statistical
      *
      * Returns the probability of Student's T distribution.
      *
-     * @param    float        $value            Value for the function
+     * @param    float        $value            Value for the funciones
      * @param    float        $degrees        degrees of freedom
      * @param    float        $tails            number of tails (1 or 2)
      * @return    float
@@ -3314,7 +3314,7 @@ class PHPExcel_Calculation_Statistical
             }
             //    tdist, which finds the probability that corresponds to a given value
             //    of t with k degrees of freedom. This algorithm is translated from a
-            //    pascal function on p81 of "Statistical Computing in Pascal" by D
+            //    pascal funciones on p81 of "Statistical Computing in Pascal" by D
             //    Cooke, A H Craven & G M Clark (1985: Edward Arnold (Pubs.) Ltd:
             //    London). The above Pascal algorithm is itself a translation of the
             //    fortran algoritm "AS 3" by B E Cooper of the Atlas Computer
@@ -3361,7 +3361,7 @@ class PHPExcel_Calculation_Statistical
      *
      * Returns the one-tailed probability of the chi-squared distribution.
      *
-     * @param    float        $probability    Probability for the function
+     * @param    float        $probability    Probability for the funciones
      * @param    float        $degrees        degrees of freedom
      * @return    float
      */

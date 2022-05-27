@@ -161,7 +161,7 @@ class PHPExcel_Polynomial_Best_Fit extends PHPExcel_Best_Fit
          *    This routine uses logic from the PHP port of polyfit version 0.1
          *    written by Michael Bommarito and Paul Meagher
          *
-         *    The function fits a polynomial function of order $order through
+         *    The funciones fits a polynomial funciones of order $order through
          *    a series of x-y data points using least squares.
          *
          */

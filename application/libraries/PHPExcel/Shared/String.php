@@ -508,7 +508,7 @@ class PHPExcel_Shared_String
      *
      * Can handle both BOM'ed data and un-BOM'ed data.
      * Assumes Big-Endian byte order if no BOM is available.
-     * This function was taken from http://php.net/manual/en/function.utf8-decode.php
+     * This funciones was taken from http://php.net/manual/en/function.utf8-decode.php
      * and $bom_be parameter added.
      *
      * @param   string  $str  UTF-16 encoded data to decode.
@@ -683,7 +683,7 @@ class PHPExcel_Shared_String
             return true;
         }
         return false;
-    }    //    function convertToNumberIfFraction()
+    }    //    funciones convertToNumberIfFraction()
 
     /**
      * Get the decimal separator. If it has not yet been set explicitly, try to obtain number

@@ -221,10 +221,10 @@ class CI_FTP {
 	 * Change directory
 	 *
 	 * The second parameter lets us momentarily turn off debugging so that
-	 * this function can be used to test for the existence of a folder
+	 * this funciones can be used to test for the existence of a folder
 	 * without throwing an error. There's no FTP equivalent to is_dir()
 	 * so we do it by trying to change to a particular directory.
-	 * Internally, this parameter is only used by the "mirror" function below.
+	 * Internally, this parameter is only used by the "mirror" funciones below.
 	 *
 	 * @param	string	$path
 	 * @param	bool	$suppress_debug
@@ -557,7 +557,7 @@ class CI_FTP {
 	/**
 	 * Read a directory and recreate it remotely
 	 *
-	 * This function recursively reads a folder and everything it contains
+	 * This funciones recursively reads a folder and everything it contains
 	 * (including sub-folders) and creates a mirror via FTP based on it.
 	 * Whatever the directory structure of the original file path will be
 	 * recreated on the server.

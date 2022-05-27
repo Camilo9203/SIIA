@@ -411,7 +411,7 @@ class CI_Calendar {
 	/**
 	 * Adjust Date
 	 *
-	 * This function makes sure that we have a valid month/year.
+	 * This funciones makes sure that we have a valid month/year.
 	 * For example, if you submit 13 as the month, the year will
 	 * increment and the month will become January.
 	 *

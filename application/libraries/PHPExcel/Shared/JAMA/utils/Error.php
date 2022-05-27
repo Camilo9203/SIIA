@@ -22,7 +22,7 @@ Feel free to correct anything that looks amiss to you.
 */
 
 define('POLYMORPHIC_ARGUMENT_EXCEPTION', -1);
-$error['EN'][POLYMORPHIC_ARGUMENT_EXCEPTION] = "Invalid argument pattern for polymorphic function.";
+$error['EN'][POLYMORPHIC_ARGUMENT_EXCEPTION] = "Invalid argument pattern for polymorphic funciones.";
 $error['FR'][POLYMORPHIC_ARGUMENT_EXCEPTION] = "Modèle inadmissible d'argument pour la fonction polymorphe.".
 $error['DE'][POLYMORPHIC_ARGUMENT_EXCEPTION] = "Unzulässiges Argumentmuster für polymorphe Funktion.";
 

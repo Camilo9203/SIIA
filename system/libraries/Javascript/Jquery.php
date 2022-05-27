@@ -238,7 +238,7 @@ class CI_Jquery extends CI_Javascript {
 	 */
 	protected function _hover($element = 'this', $over = '', $out = '')
 	{
-		$event = "\n\t$(".$this->_prep_element($element).").hover(\n\t\tfunction()\n\t\t{\n\t\t\t{$over}\n\t\t}, \n\t\tfunction()\n\t\t{\n\t\t\t{$out}\n\t\t});\n";
+		$event = "\n\t$(".$this->_prep_element($element).").hover(\n\t\tfunciones()\n\t\t{\n\t\t\t{$over}\n\t\t}, \n\t\tfunciones()\n\t\t{\n\t\t\t{$out}\n\t\t});\n";
 
 		$this->jquery_code_for_compile[] = $event;
 
@@ -496,7 +496,7 @@ class CI_Jquery extends CI_Javascript {
 	 *
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param	string	- Javascript callback function
+	 * @param	string	- Javascript callback funciones
 	 * @return	string
 	 */
 	protected function _fadeIn($element = 'this', $speed = '', $callback = '')
@@ -506,7 +506,7 @@ class CI_Jquery extends CI_Javascript {
 
 		if ($callback !== '')
 		{
-			$callback = ", function(){\n{$callback}\n}";
+			$callback = ", funciones(){\n{$callback}\n}";
 		}
 
 		return "$({$element}).fadeIn({$speed}{$callback});";
@@ -521,7 +521,7 @@ class CI_Jquery extends CI_Javascript {
 	 *
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param	string	- Javascript callback function
+	 * @param	string	- Javascript callback funciones
 	 * @return	string
 	 */
 	protected function _fadeOut($element = 'this', $speed = '', $callback = '')
@@ -531,7 +531,7 @@ class CI_Jquery extends CI_Javascript {
 
 		if ($callback !== '')
 		{
-			$callback = ", function(){\n{$callback}\n}";
+			$callback = ", funciones(){\n{$callback}\n}";
 		}
 
 		return '$('.$element.').fadeOut('.$speed.$callback.');';
@@ -546,7 +546,7 @@ class CI_Jquery extends CI_Javascript {
 	 *
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param	string	- Javascript callback function
+	 * @param	string	- Javascript callback funciones
 	 * @return	string
 	 */
 	protected function _hide($element = 'this', $speed = '', $callback = '')
@@ -556,7 +556,7 @@ class CI_Jquery extends CI_Javascript {
 
 		if ($callback !== '')
 		{
-			$callback = ", function(){\n{$callback}\n}";
+			$callback = ", funciones(){\n{$callback}\n}";
 		}
 
 		return "$({$element}).hide({$speed}{$callback});";
@@ -588,7 +588,7 @@ class CI_Jquery extends CI_Javascript {
 	 *
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param	string	- Javascript callback function
+	 * @param	string	- Javascript callback funciones
 	 * @return	string
 	 */
 	protected function _slideUp($element = 'this', $speed = '', $callback = '')
@@ -598,7 +598,7 @@ class CI_Jquery extends CI_Javascript {
 
 		if ($callback !== '')
 		{
-			$callback = ", function(){\n{$callback}\n}";
+			$callback = ", funciones(){\n{$callback}\n}";
 		}
 
 		return '$('.$element.').slideUp('.$speed.$callback.');';
@@ -613,7 +613,7 @@ class CI_Jquery extends CI_Javascript {
 	 *
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param	string	- Javascript callback function
+	 * @param	string	- Javascript callback funciones
 	 * @return	string
 	 */
 	protected function _slideDown($element = 'this', $speed = '', $callback = '')
@@ -623,7 +623,7 @@ class CI_Jquery extends CI_Javascript {
 
 		if ($callback !== '')
 		{
-			$callback = ", function(){\n{$callback}\n}";
+			$callback = ", funciones(){\n{$callback}\n}";
 		}
 
 		return '$('.$element.').slideDown('.$speed.$callback.');';
@@ -638,7 +638,7 @@ class CI_Jquery extends CI_Javascript {
 	 *
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param	string	- Javascript callback function
+	 * @param	string	- Javascript callback funciones
 	 * @return	string
 	 */
 	protected function _slideToggle($element = 'this', $speed = '', $callback = '')
@@ -648,7 +648,7 @@ class CI_Jquery extends CI_Javascript {
 
 		if ($callback !== '')
 		{
-			$callback = ", function(){\n{$callback}\n}";
+			$callback = ", funciones(){\n{$callback}\n}";
 		}
 
 		return '$('.$element.').slideToggle('.$speed.$callback.');';
@@ -696,7 +696,7 @@ class CI_Jquery extends CI_Javascript {
 	 *
 	 * @param	string	- element
 	 * @param	string	- One of 'slow', 'normal', 'fast', or time in milliseconds
-	 * @param	string	- Javascript callback function
+	 * @param	string	- Javascript callback funciones
 	 * @return	string
 	 */
 	protected function _show($element = 'this', $speed = '', $callback = '')
@@ -706,7 +706,7 @@ class CI_Jquery extends CI_Javascript {
 
 		if ($callback !== '')
 		{
-			$callback = ", function(){\n{$callback}\n}";
+			$callback = ", funciones(){\n{$callback}\n}";
 		}
 
 		return '$('.$element.').show('.$speed.$callback.');';
@@ -936,7 +936,7 @@ class CI_Jquery extends CI_Javascript {
 			$js = implode("\n\t\t", $js);
 		}
 
-		$event = "\n\t$(".$this->_prep_element($element).').'.$event."(function(){\n\t\t{$js}\n\t});\n";
+		$event = "\n\t$(".$this->_prep_element($element).').'.$event."(funciones(){\n\t\t{$js}\n\t});\n";
 		$this->jquery_code_for_compile[] = $event;
 		return $event;
 	}
@@ -947,7 +947,7 @@ class CI_Jquery extends CI_Javascript {
 	 * Compile
 	 *
 	 * As events are specified, they are stored in an array
-	 * This function compiles them all for output on a page
+	 * This funciones compiles them all for output on a page
 	 *
 	 * @param	string	$view_var
 	 * @param	bool	$script_tags
@@ -966,7 +966,7 @@ class CI_Jquery extends CI_Javascript {
 		}
 
 		// Inline references
-		$script = '$(document).ready(function() {'."\n"
+		$script = '$(document).ready(funciones() {'."\n"
 			.implode('', $this->jquery_code_for_compile)
 			.'});';
 

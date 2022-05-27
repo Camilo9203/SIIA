@@ -345,14 +345,14 @@ class CI_Image_lib {
 	public $file_permissions = 0644;
 
 	/**
-	 * Name of function to create image
+	 * Name of funciones to create image
 	 *
 	 * @var string
 	 */
 	public $create_fnc		= 'imagecreatetruecolor';
 
 	/**
-	 * Name of function to copy image
+	 * Name of funciones to copy image
 	 *
 	 * @var string
 	 */
@@ -657,8 +657,8 @@ class CI_Image_lib {
 	/**
 	 * Image Resize
 	 *
-	 * This is a wrapper function that chooses the proper
-	 * resize function based on the protocol specified
+	 * This is a wrapper funciones that chooses the proper
+	 * resize funciones based on the protocol specified
 	 *
 	 * @return	bool
 	 */
@@ -673,8 +673,8 @@ class CI_Image_lib {
 	/**
 	 * Image Crop
 	 *
-	 * This is a wrapper function that chooses the proper
-	 * cropping function based on the protocol specified
+	 * This is a wrapper funciones that chooses the proper
+	 * cropping funciones based on the protocol specified
 	 *
 	 * @return	bool
 	 */
@@ -689,8 +689,8 @@ class CI_Image_lib {
 	/**
 	 * Image Rotate
 	 *
-	 * This is a wrapper function that chooses the proper
-	 * rotation function based on the protocol specified
+	 * This is a wrapper funciones that chooses the proper
+	 * rotation funciones based on the protocol specified
 	 *
 	 * @return	bool
 	 */
@@ -717,7 +717,7 @@ class CI_Image_lib {
 			$this->height	= $this->orig_height;
 		}
 
-		// Choose resizing function
+		// Choose resizing funciones
 		if ($this->image_library === 'imagemagick' OR $this->image_library === 'netpbm')
 		{
 			$protocol = 'image_process_'.$this->image_library;
@@ -734,7 +734,7 @@ class CI_Image_lib {
 	/**
 	 * Image Process Using GD/GD2
 	 *
-	 * This function will resize or crop
+	 * This funciones will resize or crop
 	 *
 	 * @param	string
 	 * @return	bool
@@ -835,7 +835,7 @@ class CI_Image_lib {
 	/**
 	 * Image Process Using ImageMagick
 	 *
-	 * This function will resize, crop or rotate
+	 * This funciones will resize, crop or rotate
 	 *
 	 * @param	string
 	 * @return	bool
@@ -905,7 +905,7 @@ class CI_Image_lib {
 	/**
 	 * Image Process Using NetPBM
 	 *
-	 * This function will resize, crop or rotate
+	 * This funciones will resize, crop or rotate
 	 *
 	 * @param	string
 	 * @return	bool
@@ -1037,7 +1037,7 @@ class CI_Image_lib {
 	/**
 	 * Create Mirror Image using GD
 	 *
-	 * This function will flip horizontal or vertical
+	 * This funciones will flip horizontal or vertical
 	 *
 	 * @return	bool
 	 */
@@ -1115,7 +1115,7 @@ class CI_Image_lib {
 	/**
 	 * Image Watermark
 	 *
-	 * This is a wrapper function that chooses the type
+	 * This is a wrapper funciones that chooses the type
 	 * of watermarking based on the specified preference.
 	 *
 	 * @return	bool
@@ -1565,7 +1565,7 @@ class CI_Image_lib {
 	 * can end up warping the image due to an incorrect
 	 * ratio between the full-sized image and the thumb.
 	 *
-	 * This function lets us re-proportion the width/height
+	 * This funciones lets us re-proportion the width/height
 	 * if users choose to maintain the aspect ratio when resizing.
 	 *
 	 * @return	void
@@ -1616,7 +1616,7 @@ class CI_Image_lib {
 	/**
 	 * Get image properties
 	 *
-	 * A helper function that gets info about the file
+	 * A helper funciones that gets info about the file
 	 *
 	 * @param	string
 	 * @param	bool
@@ -1673,7 +1673,7 @@ class CI_Image_lib {
 	/**
 	 * Size calculator
 	 *
-	 * This function takes a known width x height and
+	 * This funciones takes a known width x height and
 	 * recalculates it to a new size. Only one
 	 * new variable needs to be known
 	 *
@@ -1726,8 +1726,8 @@ class CI_Image_lib {
 	/**
 	 * Explode source_image
 	 *
-	 * This is a helper function that extracts the extension
-	 * from the source_image.  This function lets us deal with
+	 * This is a helper funciones that extracts the extension
+	 * from the source_image.  This funciones lets us deal with
 	 * source_images with multiple periods, like: my.cool.jpg
 	 * It returns an associative array with two elements:
 	 * $array['ext']  = '.jpg';

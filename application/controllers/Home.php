@@ -15,14 +15,15 @@ class Home extends CI_Controller
 	 **/
 	public function index()
 	{
-		$data['title'] = 'Home'; //'Home';
-		$data['logged_in'] = false;
-		$data['tipo_usuario'] = "none";
-		$data['nombre_usuario'] = "none";
-
-		$this->load->view('include/header', $data);
+		$data = array(
+			'title' => 'Home',
+			'loggen_in' => false,
+			'tipo_usuario' => "none",
+			'activeLink' => "home"
+		);
+		$this->load->view('include/header_new', $data);
 		$this->load->view('home');
-		$this->load->view('include/footer');
+		$this->load->view('include/footer_new');
 		$this->logs_sia->logs('PLACE_USER');
 	}
 
@@ -76,27 +77,31 @@ class Home extends CI_Controller
 
 	public function estadoSolicitud()
 	{
-		$data['title'] = 'Estado de la organización - solicitud';
-		$data['logged_in'] = false;
-		$data['tipo_usuario'] = "none";
-		$data['nombre_usuario'] = "none";
+		$data = array(
+			'title' => 'Estado de la organización - solicitud',
+			'loggen_in' => false,
+			'tipo_usuario' => "none",
+			'activeLink' => "estado"
+		);
 
-		$this->load->view('include/header', $data);
+		$this->load->view('include/header_new', $data);
 		$this->load->view('estadoSolicitud');
-		$this->load->view('include/footer');
+		$this->load->view('include/footer_new');
 		$this->logs_sia->logs('PLACE_USER');
 	}
 
 	public function facilitadores()
 	{
-		$data['title'] = 'Facilitadores válidos';
-		$data['logged_in'] = false;
-		$data['tipo_usuario'] = "none";
-		$data['nombre_usuario'] = "none";
+		$data = array(
+			'title' => 'Facilitadores válidos',
+			'loggen_in' => false,
+			'tipo_usuario' => "none",
+			'activeLink' => "facilitadores"
+		);
 
-		$this->load->view('include/header', $data);
+		$this->load->view('include/header_new', $data);
 		$this->load->view('facilitadores');
-		$this->load->view('include/footer');
+		$this->load->view('include/footer_new');
 		$this->logs_sia->logs('PLACE_USER');
 	}
 
@@ -140,6 +145,16 @@ class Home extends CI_Controller
 		$nombreUsuario = $this->db->select("usuario")->from("usuarios")->where("usuario", $this->input->post('nombre'))->get()->row()->usuario;
 
 		if ($nombreUsuario != NULL || $nombreUsuario != "") {
+			echo json_encode(array("existe" => 1));
+		} else {
+			echo json_encode(array("existe" => 0));
+		}
+	}
+	public function verificarNIT()
+	{
+		// Comprobar que el nombre de usuario y el nit no se encuentre en la base de datos.
+		$nit = $this->db->select("numNIT")->from("organizaciones")->where("numNIT", $this->input->post('nit'))->get()->row()->numNIT;
+		if ($nit != NULL || $nit != "") {
 			echo json_encode(array("existe" => 1));
 		} else {
 			echo json_encode(array("existe" => 0));

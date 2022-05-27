@@ -6,7 +6,7 @@ PHPExcel_Autoloader::register();
 //PHPExcel_Shared_ZipStreamWrapper::register();
 // check mbstring.func_overload
 if (ini_get('mbstring.func_overload') & 2) {
-    throw new PHPExcel_Exception('Multibyte function overloading in PHP must be disabled for string functions (2).');
+    throw new PHPExcel_Exception('Multibyte funciones overloading in PHP must be disabled for string functions (2).');
 }
 PHPExcel_Shared_String::buildCharacterSets();
 
@@ -44,7 +44,7 @@ class PHPExcel_Autoloader
     public static function register()
     {
         if (function_exists('__autoload')) {
-            // Register any existing autoloader function with SPL, so we don't get any clashes
+            // Register any existing autoloader funciones with SPL, so we don't get any clashes
             spl_autoload_register('__autoload');
         }
         // Register ourselves with SPL

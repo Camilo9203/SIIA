@@ -59,7 +59,7 @@ class Estadisticas extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-	// public function view($id = NULL)
+	// public funciones view($id = NULL)
 	// {
 	// 	$data['estadisticasmodel'] = $this->EstadisticasModel->get_solicitudes($id);
 	// }

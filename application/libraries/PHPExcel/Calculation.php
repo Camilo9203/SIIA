@@ -59,7 +59,7 @@ class PHPExcel_Calculation
     const CALCULATION_REGEXP_STRING        = '"(?:[^"]|"")*"';
     //    Opening bracket
     const CALCULATION_REGEXP_OPENBRACE    = '\(';
-    //    Function (allow for the old @ symbol that could be used to prefix a function, but we'll ignore it)
+    //    Function (allow for the old @ symbol that could be used to prefix a funciones, but we'll ignore it)
     const CALCULATION_REGEXP_FUNCTION    = '@?([A-Z][A-Z0-9\.]*)[\s]*\(';
     //    Cell reference (cell or range of cells, with or without a sheet reference)
     const CALCULATION_REGEXP_CELLREF    = CALCULATION_REGEXP_CELLREF;
@@ -236,7 +236,7 @@ class PHPExcel_Calculation
     );
 
     /**
-     * Locale-specific argument separator for function arguments
+     * Locale-specific argument separator for funciones arguments
      *
      * @var string
      *
@@ -2324,16 +2324,16 @@ class PHPExcel_Calculation
             self::$localeBoolean = array('TRUE' => 'TRUE', 'FALSE' => 'FALSE', 'NULL' => 'NULL');
             //    Default is English, if user isn't requesting english, then read the necessary data from the locale files
             if ($locale != 'en_us') {
-                //    Search for a file with a list of function names for locale
+                //    Search for a file with a list of funciones names for locale
                 $functionNamesFile = PHPEXCEL_ROOT . 'PHPExcel'.DIRECTORY_SEPARATOR.'locale'.DIRECTORY_SEPARATOR.str_replace('_', DIRECTORY_SEPARATOR, $locale).DIRECTORY_SEPARATOR.'functions';
                 if (!file_exists($functionNamesFile)) {
-                    //    If there isn't a locale specific function file, look for a language specific function file
+                    //    If there isn't a locale specific funciones file, look for a language specific funciones file
                     $functionNamesFile = PHPEXCEL_ROOT . 'PHPExcel'.DIRECTORY_SEPARATOR.'locale'.DIRECTORY_SEPARATOR.$language.DIRECTORY_SEPARATOR.'functions';
                     if (!file_exists($functionNamesFile)) {
                         return false;
                     }
                 }
-                //    Retrieve the list of locale or language specific function names
+                //    Retrieve the list of locale or language specific funciones names
                 $localeFunctions = file($functionNamesFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
                 foreach ($localeFunctions as $localeFunction) {
                     list($localeFunction) = explode('##', $localeFunction);    //    Strip out comments
@@ -2408,7 +2408,7 @@ class PHPExcel_Calculation
 
     private static function translateFormula($from, $to, $formula, $fromSeparator, $toSeparator)
     {
-        //    Convert any Excel function names to the required language
+        //    Convert any Excel funciones names to the required language
         if (self::$localeLanguage !== 'en_us') {
             $inBraces = false;
             //    If there is the possibility of braces within a quoted string, then we don't treat those as matrix indicators
@@ -2825,7 +2825,7 @@ class PHPExcel_Calculation
     private static function checkMatrixOperands(&$operand1, &$operand2, $resize = 1)
     {
         //    Examine each of the two operands, and turn them into an array if they aren't one already
-        //    Note that this function should only be called if one or both of the operand is already an array
+        //    Note that this funciones should only be called if one or both of the operand is already an array
         if (!is_array($operand1)) {
             list($matrixRows, $matrixColumns) = self::getMatrixDimensions($operand2);
             $operand1 = array_fill(0, $matrixRows, array_fill(0, $matrixColumns, $operand1));
@@ -3047,7 +3047,7 @@ class PHPExcel_Calculation
         static $matrixReplaceFrom = array('{', ';', '}');
         static $matrixReplaceTo = array('MKMATRIX(MKMATRIX(', '),MKMATRIX(', '))');
 
-        //    Convert any Excel matrix references to the MKMATRIX() function
+        //    Convert any Excel matrix references to the MKMATRIX() funciones
         if (strpos($formula, '{') !== false) {
             //    If there is the possibility of braces within a quoted string, then we don't treat those as matrix indicators
             if (strpos($formula, '"') !== false) {
@@ -3158,7 +3158,7 @@ class PHPExcel_Calculation
         $expectingOperator = false;                    //    We use this test in syntax-checking the expression to determine when a
                                                     //        - is a negation or + is a positive operator rather than an operation
         $expectingOperand = false;                    //    We use this test in syntax-checking the expression to determine whether an operand
-                                                    //        should be null in a function call
+                                                    //        should be null in a funciones call
         //    The guts of the lexical parser
         //    Loop through the formula extracting each operator and operand in turn
         while (true) {
@@ -3170,7 +3170,7 @@ class PHPExcel_Calculation
 //echo 'Initial character of expression block is comparison operator '.$opCharacter.PHP_EOL;
             }
 
-            //    Find out if we're currently at the beginning of a number, variable, cell reference, function, parenthesis or operand
+            //    Find out if we're currently at the beginning of a number, variable, cell reference, funciones, parenthesis or operand
             $isOperandOrFunction = preg_match($regexpMatchString, substr($formula, $index), $match);
 //echo '$isOperandOrFunction is '.(($isOperandOrFunction) ? 'True' : 'False').PHP_EOL;
 //var_dump($match);
@@ -3212,8 +3212,8 @@ class PHPExcel_Calculation
                     }
                 }
                 $d = $stack->last(2);
-                if (preg_match('/^'.self::CALCULATION_REGEXP_FUNCTION.'$/i', $d['value'], $matches)) {    //    Did this parenthesis just close a function?
-                    $functionName = $matches[1];                                        //    Get the function name
+                if (preg_match('/^'.self::CALCULATION_REGEXP_FUNCTION.'$/i', $d['value'], $matches)) {    //    Did this parenthesis just close a funciones?
+                    $functionName = $matches[1];                                        //    Get the funciones name
 //echo 'Closed Function is '.$functionName, PHP_EOL;
                     $d = $stack->pop();
                     $argumentCount = $d['value'];        //    See how many arguments there were (argument count is the next value stored on the stack)
@@ -3225,17 +3225,17 @@ class PHPExcel_Calculation
 //    echo 'With '.$argumentCount.' arguments', PHP_EOL;
 //}
                     $output[] = $d;                        //    Dump the argument count on the output
-                    $output[] = $stack->pop();            //    Pop the function and push onto the output
+                    $output[] = $stack->pop();            //    Pop the funciones and push onto the output
                     if (isset(self::$controlFunctions[$functionName])) {
-//echo 'Built-in function '.$functionName, PHP_EOL;
+//echo 'Built-in funciones '.$functionName, PHP_EOL;
                         $expectedArgumentCount = self::$controlFunctions[$functionName]['argumentCount'];
                         $functionCall = self::$controlFunctions[$functionName]['functionCall'];
                     } elseif (isset(self::$PHPExcelFunctions[$functionName])) {
-//echo 'PHPExcel function '.$functionName, PHP_EOL;
+//echo 'PHPExcel funciones '.$functionName, PHP_EOL;
                         $expectedArgumentCount = self::$PHPExcelFunctions[$functionName]['argumentCount'];
                         $functionCall = self::$PHPExcelFunctions[$functionName]['functionCall'];
-                    } else {    // did we somehow push a non-function on the stack? this should never happen
-                        return $this->raiseFormulaError("Formula Error: Internal error, non-function on stack");
+                    } else {    // did we somehow push a non-funciones on the stack? this should never happen
+                        return $this->raiseFormulaError("Formula Error: Internal error, non-funciones on stack");
                     }
                     //    Check the argument count
                     $argumentCountError = false;
@@ -3279,12 +3279,12 @@ class PHPExcel_Calculation
                         }
                     }
                     if ($argumentCountError) {
-                        return $this->raiseFormulaError("Formula Error: Wrong number of arguments for $functionName() function: $argumentCount given, ".$expectedArgumentCountString." expected");
+                        return $this->raiseFormulaError("Formula Error: Wrong number of arguments for $functionName() funciones: $argumentCount given, ".$expectedArgumentCountString." expected");
                     }
                 }
                 ++$index;
 
-            } elseif ($opCharacter == ',') {            //    Is this the separator for function arguments?
+            } elseif ($opCharacter == ',') {            //    Is this the separator for funciones arguments?
 //echo 'Element is a Function argument separator', PHP_EOL;
                 while (($o2 = $stack->pop()) && $o2['value'] != '(') {        //    Pop off the stack back to the last (
                     if ($o2 === null) {
@@ -3298,7 +3298,7 @@ class PHPExcel_Calculation
                 if (($expectingOperand) || (!$expectingOperator)) {
                     $output[] = array('type' => 'NULL Value', 'value' => self::$excelConstants['NULL'], 'reference' => null);
                 }
-                // make sure there was a function
+                // make sure there was a funciones
                 $d = $stack->last(2);
                 if (!preg_match('/^'.self::CALCULATION_REGEXP_FUNCTION.'$/i', $d['value'], $matches)) {
                     return $this->raiseFormulaError("Formula Error: Unexpected ,");
@@ -3315,7 +3315,7 @@ class PHPExcel_Calculation
                 $stack->push('Brace', '(');
                 ++$index;
 
-            } elseif ($isOperandOrFunction && !$expectingOperator) {    // do we now have a function/variable/number?
+            } elseif ($isOperandOrFunction && !$expectingOperator) {    // do we now have a funciones/variable/number?
                 $expectingOperator = true;
                 $expectingOperand = false;
                 $val = $match[1];
@@ -3325,7 +3325,7 @@ class PHPExcel_Calculation
                 if (preg_match('/^'.self::CALCULATION_REGEXP_FUNCTION.'$/i', $val, $matches)) {
                     $val = preg_replace('/\s/u', '', $val);
 //                    echo 'Element '.$val.' is a Function<br />';
-                    if (isset(self::$PHPExcelFunctions[strtoupper($matches[1])]) || isset(self::$controlFunctions[strtoupper($matches[1])])) {    // it's a function
+                    if (isset(self::$PHPExcelFunctions[strtoupper($matches[1])]) || isset(self::$controlFunctions[strtoupper($matches[1])])) {    // it's a funciones
                         $stack->push('Function', strtoupper($val));
                         $ax = preg_match('/^\s*(\s*\))/ui', substr($formula, $index+$length), $amatch);
                         if ($ax) {
@@ -3778,16 +3778,16 @@ class PHPExcel_Calculation
                 }
                 $stack->push('Value', $cellValue, $cellRef);
 
-            // if the token is a function, pop arguments off the stack, hand them to the function, and push the result back on
+            // if the token is a funciones, pop arguments off the stack, hand them to the funciones, and push the result back on
             } elseif (preg_match('/^'.self::CALCULATION_REGEXP_FUNCTION.'$/i', $token, $matches)) {
-//                echo 'Token is a function<br />';
+//                echo 'Token is a funciones<br />';
                 $functionName = $matches[1];
                 $argCount = $stack->pop();
                 $argCount = $argCount['value'];
                 if ($functionName != 'MKMATRIX') {
                     $this->_debugLog->writeDebugLog('Evaluating Function ', self::localeFunc($functionName), '() with ', (($argCount == 0) ? 'no' : $argCount), ' argument', (($argCount == 1) ? '' : 's'));
                 }
-                if ((isset(self::$PHPExcelFunctions[$functionName])) || (isset(self::$controlFunctions[$functionName]))) {    // function
+                if ((isset(self::$PHPExcelFunctions[$functionName])) || (isset(self::$controlFunctions[$functionName]))) {    // funciones
                     if (isset(self::$PHPExcelFunctions[$functionName])) {
                         $functionCall = self::$PHPExcelFunctions[$functionName]['functionCall'];
                         $passByReference = isset(self::$PHPExcelFunctions[$functionName]['passByReference']);
@@ -3797,7 +3797,7 @@ class PHPExcel_Calculation
                         $passByReference = isset(self::$controlFunctions[$functionName]['passByReference']);
                         $passCellReference = isset(self::$controlFunctions[$functionName]['passCellReference']);
                     }
-                    // get the arguments for this function
+                    // get the arguments for this funciones
 //                    echo 'Function '.$functionName.' expects '.$argCount.' arguments<br />';
                     $args = $argArrayVals = array();
                     for ($i = 0; $i < $argCount; ++$i) {
@@ -3850,19 +3850,19 @@ class PHPExcel_Calculation
 //                                foreach($args as $arg) {
 //                                    $this->_debugLog->writeDebugLog('Evaluating ', self::localeFunc($functionName), '( ', $this->showValue($arg), ' )');
 //                                    $r = call_user_func_array($functionCall, $arg);
-//                                    $this->_debugLog->writeDebugLog('Evaluation Result for ', self::localeFunc($functionName), '() function call is ', $this->showTypeDetails($r));
+//                                    $this->_debugLog->writeDebugLog('Evaluation Result for ', self::localeFunc($functionName), '() funciones call is ', $this->showTypeDetails($r));
 //                                    $result[$row][] = $r;
 //                                }
 //                                ++$row;
 //                            } else {
 //                                $this->_debugLog->writeDebugLog('Evaluating ', self::localeFunc($functionName), '( ', $this->showValue($args), ' )');
 //                                $r = call_user_func_array($functionCall, $args);
-//                                $this->_debugLog->writeDebugLog('Evaluation Result for ', self::localeFunc($functionName), '() function call is ', $this->showTypeDetails($r));
+//                                $this->_debugLog->writeDebugLog('Evaluation Result for ', self::localeFunc($functionName), '() funciones call is ', $this->showTypeDetails($r));
 //                                $result[] = $r;
 //                            }
 //                        }
 //                    } else {
-                    //    Process the argument with the appropriate function call
+                    //    Process the argument with the appropriate funciones call
                     if ($passCellReference) {
                         $args[] = $pCell;
                     }
@@ -3876,7 +3876,7 @@ class PHPExcel_Calculation
                         $result = call_user_func_array($functionCall, $args);
                     }
                     if ($functionName != 'MKMATRIX') {
-                        $this->_debugLog->writeDebugLog('Evaluation Result for ', self::localeFunc($functionName), '() function call is ', $this->showTypeDetails($result));
+                        $this->_debugLog->writeDebugLog('Evaluation Result for ', self::localeFunc($functionName), '() funciones call is ', $this->showTypeDetails($result));
                     }
                     $stack->push('Value', self::wrapResult($result));
                 }
@@ -4323,7 +4323,7 @@ class PHPExcel_Calculation
 
 
     /**
-     * Is a specific function implemented?
+     * Is a specific funciones implemented?
      *
      * @param    string    $pFunction    Function Name
      * @return    boolean
@@ -4340,7 +4340,7 @@ class PHPExcel_Calculation
 
 
     /**
-     * Get a list of all implemented functions as an array of function objects
+     * Get a list of all implemented functions as an array of funciones objects
      *
      * @return    array of PHPExcel_Calculation_Function
      */
@@ -4363,7 +4363,7 @@ class PHPExcel_Calculation
 
 
     /**
-     * Get a list of all Excel function names
+     * Get a list of all Excel funciones names
      *
      * @return    array
      */
@@ -4373,7 +4373,7 @@ class PHPExcel_Calculation
     }
 
     /**
-     * Get a list of implemented Excel function names
+     * Get a list of implemented Excel funciones names
      *
      * @return    array
      */

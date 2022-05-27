@@ -85,7 +85,7 @@ class PHPExcel_Calculation_Logical
      *
      *        Boolean arguments are treated as True or False as appropriate
      *        Integer or floating point arguments are treated as True, except for 0 or 0.0 which are False
-     *        If any argument value is a string, or a Null, the function returns a #VALUE! error, unless the string holds
+     *        If any argument value is a string, or a Null, the funciones returns a #VALUE! error, unless the string holds
      *            the value TRUE or FALSE, in which case it is evaluated as the corresponding boolean value
      *
      * @access    public
@@ -141,7 +141,7 @@ class PHPExcel_Calculation_Logical
      *
      *        Boolean arguments are treated as True or False as appropriate
      *        Integer or floating point arguments are treated as True, except for 0 or 0.0 which are False
-     *        If any argument value is a string, or a Null, the function returns a #VALUE! error, unless the string holds
+     *        If any argument value is a string, or a Null, the funciones returns a #VALUE! error, unless the string holds
      *            the value TRUE or FALSE, in which case it is evaluated as the corresponding boolean value
      *
      * @access    public
@@ -196,7 +196,7 @@ class PHPExcel_Calculation_Logical
      *
      *        Boolean arguments are treated as True or False as appropriate
      *        Integer or floating point arguments are treated as True, except for 0 or 0.0 which are False
-     *        If any argument value is a string, or a Null, the function returns a #VALUE! error, unless the string holds
+     *        If any argument value is a string, or a Null, the funciones returns a #VALUE! error, unless the string holds
      *            the value TRUE or FALSE, in which case it is evaluated as the corresponding boolean value
      *
      * @access    public
@@ -235,13 +235,13 @@ class PHPExcel_Calculation_Logical
      *            This argument can use any comparison calculation operator.
      *        ReturnIfTrue is the value that is returned if condition evaluates to TRUE.
      *            For example, if this argument is the text string "Within budget" and the condition argument evaluates to TRUE,
-     *            then the IF function returns the text "Within budget"
+     *            then the IF funciones returns the text "Within budget"
      *            If condition is TRUE and ReturnIfTrue is blank, this argument returns 0 (zero). To display the word TRUE, use
      *            the logical value TRUE for this argument.
      *            ReturnIfTrue can be another formula.
      *        ReturnIfFalse is the value that is returned if condition evaluates to FALSE.
      *            For example, if this argument is the text string "Over budget" and the condition argument evaluates to FALSE,
-     *            then the IF function returns the text "Over budget".
+     *            then the IF funciones returns the text "Over budget".
      *            If condition is FALSE and ReturnIfFalse is omitted, then the logical value FALSE is returned.
      *            If condition is FALSE and ReturnIfFalse is blank, then the value 0 (zero) is returned.
      *            ReturnIfFalse can be another formula.

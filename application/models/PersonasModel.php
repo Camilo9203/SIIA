@@ -20,7 +20,7 @@ class PersonasModel extends CI_Model
 		return $query->row_array();
 	}
 	// // Traer entidades curso basico
-	// public function organizacionesBasico($id = FALSE)
+	// public funciones organizacionesBasico($id = FALSE)
 	// {
 	// 	if ($id === FALSE) {
 	// 		// Consulta para traer organizaciones curso basico
@@ -32,7 +32,7 @@ class PersonasModel extends CI_Model
 	// 	return $query->row_array();
 	// }
 	// // Traer entidades avaladas
-	// public function organizacionesAvaladas($id = FALSE)
+	// public funciones organizacionesAvaladas($id = FALSE)
 	// {
 	// 	if ($id === FALSE) {
 	// 		// Consulta para traer organizaciones avaladas
@@ -44,7 +44,7 @@ class PersonasModel extends CI_Model
 	// 	return $query->row_array();
 	// }
 	// // Traer entidades con modalidad virtual
-	// public function organizacionesVirtual($id = FALSE)
+	// public funciones organizacionesVirtual($id = FALSE)
 	// {
 	// 	if ($id === FALSE) {
 	// 		// Consulta para traer organizaciones acreditadas con modalidad virtual

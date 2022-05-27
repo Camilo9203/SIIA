@@ -161,7 +161,7 @@ class CI_Log {
 	/**
 	 * Write Log File
 	 *
-	 * Generally this function will be called using the global log_message() function
+	 * Generally this funciones will be called using the global log_message() funciones
 	 *
 	 * @param	string	$level 	The error level: 'error', 'debug' or 'info'
 	 * @param	string	$msg 	The error message

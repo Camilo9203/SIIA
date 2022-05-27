@@ -26,7 +26,7 @@ if (!defined('PHPEXCEL_ROOT')) {
  */
 class PHPExcel_Shared_JAMA_Matrix
 {
-    const POLYMORPHIC_ARGUMENT_EXCEPTION = "Invalid argument pattern for polymorphic function.";
+    const POLYMORPHIC_ARGUMENT_EXCEPTION = "Invalid argument pattern for polymorphic funciones.";
     const ARGUMENT_TYPE_EXCEPTION        = "Invalid argument type.";
     const ARGUMENT_BOUNDS_EXCEPTION      = "Invalid argument range.";
     const MATRIX_DIMENSION_EXCEPTION     = "Matrix dimensions are not equal.";
@@ -326,7 +326,7 @@ class PHPExcel_Shared_JAMA_Matrix
         } else {
             throw new PHPExcel_Calculation_Exception(self::ARGUMENT_TYPE_EXCEPTION);
         }
-    }    //    function checkMatrixDimensions()
+    }    //    funciones checkMatrixDimensions()
 
     /**
      *    set
@@ -341,7 +341,7 @@ class PHPExcel_Shared_JAMA_Matrix
     {
         // Optimized set version just has this
         $this->A[$i][$j] = $c;
-    }    //    function set()
+    }    //    funciones set()
 
     /**
      *    identity
@@ -431,7 +431,7 @@ class PHPExcel_Shared_JAMA_Matrix
             }
         }
         return $R;
-    }    //    function transpose()
+    }    //    funciones transpose()
 
     /**
      *    trace

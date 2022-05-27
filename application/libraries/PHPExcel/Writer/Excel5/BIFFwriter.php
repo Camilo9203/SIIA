@@ -123,7 +123,7 @@ class PHPExcel_Writer_Excel5_BIFFwriter
     }
 
     /**
-     * General storage function
+     * General storage funciones
      *
      * @param string $data binary data to append
      * @access private
@@ -138,7 +138,7 @@ class PHPExcel_Writer_Excel5_BIFFwriter
     }
 
     /**
-     * General storage function like append, but returns string instead of modifying $this->_data
+     * General storage funciones like append, but returns string instead of modifying $this->_data
      *
      * @param string $data binary data to write
      * @return string
@@ -211,7 +211,7 @@ class PHPExcel_Writer_Excel5_BIFFwriter
      * Excel 97 the limit is 8228 bytes. Records that are longer than these limits
      * must be split up into CONTINUE blocks.
      *
-     * This function takes a long BIFF record and inserts CONTINUE records as
+     * This funciones takes a long BIFF record and inserts CONTINUE records as
      * necessary.
      *
      * @param  string  $data The original binary data to be written

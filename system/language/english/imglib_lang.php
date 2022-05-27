@@ -40,7 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['imglib_source_image_required'] = 'You must specify a source image in your preferences.';
 $lang['imglib_gd_required'] = 'The GD image library is required for this feature.';
 $lang['imglib_gd_required_for_props'] = 'Your server must support the GD image library in order to determine the image properties.';
-$lang['imglib_unsupported_imagecreate'] = 'Your server does not support the GD function required to process this type of image.';
+$lang['imglib_unsupported_imagecreate'] = 'Your server does not support the GD funciones required to process this type of image.';
 $lang['imglib_gif_not_supported'] = 'GIF images are often not supported due to licensing restrictions. You may have to use JPG or PNG images instead.';
 $lang['imglib_jpg_not_supported'] = 'JPG images are not supported.';
 $lang['imglib_png_not_supported'] = 'PNG images are not supported.';

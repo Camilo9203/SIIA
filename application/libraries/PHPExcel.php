@@ -270,7 +270,7 @@ class PHPExcel
         }
     }
     /**
-    * return the extension of a filename. Internal use for a array_map callback (php<5.3 don't like lambda function)
+    * return the extension of a filename. Internal use for a array_map callback (php<5.3 don't like lambda funciones)
     *
     */
     private function getExtensionOnly($ThePath)
@@ -423,7 +423,7 @@ class PHPExcel
     public function getCalculationEngine()
     {
         return $this->calculationEngine;
-    }    //    function getCellCacheController()
+    }    //    funciones getCellCacheController()
 
     /**
      * Get properties

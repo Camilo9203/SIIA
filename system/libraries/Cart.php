@@ -276,7 +276,7 @@ class CI_Cart {
 	/**
 	 * Update the cart
 	 *
-	 * This function permits the quantity of a given item to be changed.
+	 * This funciones permits the quantity of a given item to be changed.
 	 * Typically it is called from the "view cart" page if a user makes
 	 * changes to the quantity before checkout. That array must contain the
 	 * product ID and quantity for each item.
@@ -333,7 +333,7 @@ class CI_Cart {
 	/**
 	 * Update the cart
 	 *
-	 * This function permits changing item properties.
+	 * This funciones permits changing item properties.
 	 * Typically it is called from the "view cart" page if a user makes
 	 * changes to the quantity before checkout. That array must contain the
 	 * rowid and quantity for each item.
@@ -508,7 +508,7 @@ class CI_Cart {
 	/**
 	 * Has options
 	 *
-	 * Returns TRUE if the rowid passed to this function correlates to an item
+	 * Returns TRUE if the rowid passed to this funciones correlates to an item
 	 * that has options associated with it.
 	 *
 	 * @param	string	$row_id = ''

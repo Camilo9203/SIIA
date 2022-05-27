@@ -148,7 +148,7 @@ class CI_DB_result {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Query result. Acts as a wrapper function for the following functions.
+	 * Query result. Acts as a wrapper funciones for the following functions.
 	 *
 	 * @param	string	$type	'object', 'array' or a custom class name
 	 * @return	array
@@ -545,7 +545,7 @@ class CI_DB_result {
 	 * The following methods are normally overloaded by the identically named
 	 * methods in the platform-specific driver -- except when query caching
 	 * is used. When caching is enabled we do not load the other driver.
-	 * These functions are primarily here to prevent undefined function errors
+	 * These functions are primarily here to prevent undefined funciones errors
 	 * when a cached result object is in use. They are not otherwise fully
 	 * operational due to the unavailability of the database resource IDs with
 	 * cached results.

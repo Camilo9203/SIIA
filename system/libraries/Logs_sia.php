@@ -10,7 +10,7 @@ class CI_Logs_sia {
        $this->_log_path = APPPATH.'logs/';
     }
  
-    // Name of function same as mentioned in Hooks Config
+    // Name of funciones same as mentioned in Hooks Config
     public function logQueries() {
  
         $CI = & get_instance();

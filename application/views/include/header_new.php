@@ -109,7 +109,6 @@
 	<!-- Title -->
 	<title>Sistema Integrado de Información de Acreditación | <?php echo $title; ?></title>
 </head>
-
 <body class="nav-md">
 <!--	<div class="se-pre-con"></div>-->
 	<!-- Cabecera y Navbar -->
@@ -128,13 +127,10 @@
 				</a>
 			</div>
 		</div>
-
-
 		<!-- Navbar Usuario no registrado //TODO: Navbar de usuario no registrado -->
 		<?php if (!$logged_in && $tipo_usuario == "none") {
 			echo "<div class='hidden' id='data_logg' data-log='$logged_in'></div>";
-			$this->load->view('include/navbar/guest', $data);
+			$this->load->view('include/navbar/guest', $activeLink);
 			?>
-
 		<?php } ?>
 	</header>

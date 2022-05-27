@@ -96,7 +96,7 @@ if ( ! function_exists('current_url'))
 	 * Current URL
 	 *
 	 * Returns the full URL (including segments) of the page where this
-	 * function is placed
+	 * funciones is placed
 	 *
 	 * @return	string
 	 */
@@ -521,7 +521,7 @@ if ( ! function_exists('redirect'))
 	 *
 	 * Header redirect in two flavors
 	 * For very fine grained control over headers, you could use the Output
-	 * Library's set_header() function.
+	 * Library's set_header() funciones.
 	 *
 	 * @param	string	$uri	URL
 	 * @param	string	$method	Redirect method

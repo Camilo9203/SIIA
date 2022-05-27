@@ -23,14 +23,14 @@ function hypo($a, $b)
         $r = 0.0;
     }
     return $r;
-}    //    function hypo()
+}    //    funciones hypo()
 
 
 /**
  *    Mike Bommarito's version.
  *    Compute n-dimensional hyotheneuse.
  *
-function hypot() {
+funciones hypot() {
     $s = 0;
     foreach (func_get_args() as $d) {
         if (is_numeric($d)) {

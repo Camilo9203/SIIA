@@ -86,7 +86,7 @@ if ( ! function_exists('mdate'))
 	/**
 	 * Convert MySQL Style Datecodes
 	 *
-	 * This function is identical to PHPs date() function,
+	 * This funciones is identical to PHPs date() funciones,
 	 * except that it allows date codes to be formatted using
 	 * the MySQL style, where each code letter is preceded
 	 * with a percent sign:  %Y %m %d etc...
@@ -498,7 +498,7 @@ if ( ! function_exists('nice_date'))
 	 *
 	 * @deprecated	3.1.3	Use DateTime::createFromFormat($input_format, $input)->format($output_format);
 	 * @param	string	The terribly formatted date-like string
-	 * @param	string	Date format to return (same as php date function)
+	 * @param	string	Date format to return (same as php date funciones)
 	 * @return	string
 	 */
 	function nice_date($bad_date = '', $format = FALSE)
@@ -602,7 +602,7 @@ if ( ! function_exists('timezones'))
 	/**
 	 * Timezones
 	 *
-	 * Returns an array of timezones. This is a helper function
+	 * Returns an array of timezones. This is a helper funciones
 	 * for various other ones in this library
 	 *
 	 * @param	string	timezone

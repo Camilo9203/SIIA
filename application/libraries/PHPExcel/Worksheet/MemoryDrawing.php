@@ -47,7 +47,7 @@ class PHPExcel_Worksheet_MemoryDrawing extends PHPExcel_Worksheet_BaseDrawing im
     private $imageResource;
 
     /**
-     * Rendering function
+     * Rendering funciones
      *
      * @var string
      */
@@ -111,7 +111,7 @@ class PHPExcel_Worksheet_MemoryDrawing extends PHPExcel_Worksheet_BaseDrawing im
     }
 
     /**
-     * Get rendering function
+     * Get rendering funciones
      *
      * @return string
      */
@@ -121,7 +121,7 @@ class PHPExcel_Worksheet_MemoryDrawing extends PHPExcel_Worksheet_BaseDrawing im
     }
 
     /**
-     * Set rendering function
+     * Set rendering funciones
      *
      * @param string $value
      * @return PHPExcel_Worksheet_MemoryDrawing

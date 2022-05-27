@@ -155,7 +155,7 @@ class CI_Encrypt {
 	 * too gets converted using XOR. The whole thing is then run
 	 * through mcrypt using the randomized key. The end result
 	 * is a double-encrypted message string that is randomized
-	 * with each call to this function, even if the supplied
+	 * with each call to this funciones, even if the supplied
 	 * message and key are the same.
 	 *
 	 * @param	string	the string to encode

@@ -120,7 +120,7 @@ class SMTP
      *
      * Alternatively, you can provide a callable expecting two params: a message string and the debug level:
      * <code>
-     * $smtp->Debugoutput = function($str, $level) {echo "debug level $level; message: $str";};
+     * $smtp->Debugoutput = funciones($str, $level) {echo "debug level $level; message: $str";};
      * </code>
      * @var string|callable
      */
@@ -137,7 +137,7 @@ class SMTP
     /**
      * The timeout value for connection, in seconds.
      * Default of 5 minutes (300sec) is from RFC2821 section 4.5.3.2
-     * This needs to be quite high to function correctly with hosts using greetdelay as an anti-spam measure.
+     * This needs to be quite high to funciones correctly with hosts using greetdelay as an anti-spam measure.
      * @link http://tools.ietf.org/html/rfc2821#section-4.5.3.2
      * @var integer
      */
@@ -215,7 +215,7 @@ class SMTP
         if ($level > $this->do_debug) {
             return;
         }
-        //Avoid clash with built-in function names
+        //Avoid clash with built-in funciones names
         if (!in_array($this->Debugoutput, array('error_log', 'html', 'echo')) and is_callable($this->Debugoutput)) {
             call_user_func($this->Debugoutput, $str, $level);
             return;
@@ -325,7 +325,7 @@ class SMTP
         }
         $this->edebug('Connection: opened', self::DEBUG_CONNECTION);
         // SMTP server can take longer to respond, give longer timeout for first read
-        // Windows does not have support for this timeout function
+        // Windows does not have support for this timeout funciones
         if (substr(PHP_OS, 0, 3) != 'WIN') {
             $max = ini_get('max_execution_time');
             // Don't bother if unlimited
@@ -547,7 +547,7 @@ class SMTP
     /**
      * Calculate an MD5 HMAC hash.
      * Works like hash_hmac('md5', $data, $key)
-     * in case that function is not available
+     * in case that funciones is not available
      * @param string $data The data to hash
      * @param string $key The key to hash with
      * @access protected
@@ -605,7 +605,7 @@ class SMTP
 
     /**
      * Close the socket and clean up the state of the class.
-     * Don't use this function without first trying to use QUIT.
+     * Don't use this funciones without first trying to use QUIT.
      * @see quit()
      * @access public
      * @return void

@@ -318,7 +318,7 @@ if ( ! function_exists('highlight_code'))
 	 */
 	function highlight_code($str)
 	{
-		/* The highlight string function encodes and highlights
+		/* The highlight string funciones encodes and highlights
 		 * brackets so we need them to start raw.
 		 *
 		 * Also replace any existing PHP tags to temporary markers
@@ -331,7 +331,7 @@ if ( ! function_exists('highlight_code'))
 			$str
 		);
 
-		// The highlight_string function requires that the text be surrounded
+		// The highlight_string funciones requires that the text be surrounded
 		// by PHP tags, which we will remove later
 		$str = highlight_string('<?php '.$str.' ?>', TRUE);
 
@@ -465,7 +465,7 @@ if ( ! function_exists('word_wrap'))
 			}
 		}
 
-		// Use PHP's native function to do the initial wordwrap.
+		// Use PHP's native funciones to do the initial wordwrap.
 		// We set the cut flag to FALSE so that any individual words that are
 		// too long get left alone. In the next step we'll deal with them.
 		$str = wordwrap($str, $charlim, "\n", FALSE);
@@ -528,7 +528,7 @@ if ( ! function_exists('ellipsize'))
 	/**
 	 * Ellipsize String
 	 *
-	 * This function will strip tags from a string, split it at its max_length and ellipsize
+	 * This funciones will strip tags from a string, split it at its max_length and ellipsize
 	 *
 	 * @param	string	string to ellipsize
 	 * @param	int	max length of string

@@ -31,21 +31,21 @@ class Panel extends CI_Controller
 		$data['tipo_usuario'] = $tipo_usuario;
 		$data['hora'] = $hora;
 		$data['fecha'] = $fecha;
-		$data['estado'] = $this->estadoOrganizaciones();
-		$data['departamentos'] = $this->cargarDepartamentos();
-
-		$data['data_organizacion'] = $this->cargarDatosOrganizacion();
-		$data['data_informacion_general'] = $this->cargarDatos_formulario_informacion_general_entidad();
-		$data['data_documentacion_legal'] = $this->cargarDatos_formulario_documentacion_legal();
-		$data['data_registro_educativo'] = $this->cargarDatos_formulario_registro_educativo();
-		$data['data_antecedentes_academicos'] = $this->cargarDatos_formulario_antecedentes_academicos();
-		$data['data_jornadas_actualizacion'] = $this->cargarDatos_formulario_jornadas_actualizacion();
-		$data['data_basicos_programas'] = $this->cargarDatos_formulario_basicos_programas();
-		$data['data_aval_economia'] = $this->cargarDatos_formulario_aval_economia();
-		$data['data_programas_avalar'] = $this->cargarDatos_formulario_programas_avalar();
-		$data['data_plataforma'] = $this->cargarDatos_formulario_datos_plataforma();
-		$data["camara"] = $this->cargarCamaraComercio();
-		$data['informacionModal'] = $this->cargar_informacionModal();
+//		$data['estado'] = $this->estadoOrganizaciones();
+//		$data['departamentos'] = $this->cargarDepartamentos();
+//
+//		$data['data_organizacion'] = $this->cargarDatosOrganizacion();
+//		$data['data_informacion_general'] = $this->cargarDatos_formulario_informacion_general_entidad();
+//		$data['data_documentacion_legal'] = $this->cargarDatos_formulario_documentacion_legal();
+//		$data['data_registro_educativo'] = $this->cargarDatos_formulario_registro_educativo();
+//		$data['data_antecedentes_academicos'] = $this->cargarDatos_formulario_antecedentes_academicos();
+//		$data['data_jornadas_actualizacion'] = $this->cargarDatos_formulario_jornadas_actualizacion();
+//		$data['data_basicos_programas'] = $this->cargarDatos_formulario_basicos_programas();
+//		$data['data_aval_economia'] = $this->cargarDatos_formulario_aval_economia();
+//		$data['data_programas_avalar'] = $this->cargarDatos_formulario_programas_avalar();
+//		$data['data_plataforma'] = $this->cargarDatos_formulario_datos_plataforma();
+//		$data["camara"] = $this->cargarCamaraComercio();
+//		$data['informacionModal'] = $this->cargar_informacionModal();
 
 		$this->load->view('include/header', $data);
 		$this->load->view('paneles/panel', $data);

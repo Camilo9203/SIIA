@@ -534,7 +534,7 @@ class CI_Upload {
 
 		/*
 		 * Validate the file name
-		 * This function appends an number onto the end of
+		 * This funciones appends an number onto the end of
 		 * the file if one with the same name already exists.
 		 * If it returns false there was a problem.
 		 */
@@ -576,7 +576,7 @@ class CI_Upload {
 		 * Set the finalized image dimensions
 		 * This sets the image width/height (assuming the
 		 * file was an image). We use this information
-		 * in the "data" function.
+		 * in the "data" funciones.
 		 */
 		$this->set_image_properties($this->upload_path.$this->file_name);
 
@@ -641,7 +641,7 @@ class CI_Upload {
 	/**
 	 * Set the file name
 	 *
-	 * This function takes a filename/path as input and looks for the
+	 * This funciones takes a filename/path as input and looks for the
 	 * existence of a file with the same name. If found, it will append a
 	 * number to the end of the filename to avoid overwriting a pre-existing file.
 	 *
@@ -1066,7 +1066,7 @@ class CI_Upload {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Runs the file through the XSS clean function
+	 * Runs the file through the XSS clean funciones
 	 *
 	 * This prevents people from embedding malicious code in their files.
 	 * I'm not sure that it won't negatively affect certain files in unexpected ways,
@@ -1235,7 +1235,7 @@ class CI_Upload {
 				finfo_close($finfo);
 
 				/* According to the comments section of the PHP manual page,
-				 * it is possible that this function returns an empty string
+				 * it is possible that this funciones returns an empty string
 				 * for some files (e.g. if they don't exist in the magic MIME database)
 				 */
 				if (is_string($mime) && preg_match($regexp, $mime, $matches))

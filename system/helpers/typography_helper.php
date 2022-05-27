@@ -91,7 +91,7 @@ if ( ! function_exists('entity_decode'))
 	/**
 	 * HTML Entities Decode
 	 *
-	 * This function is a replacement for html_entity_decode()
+	 * This funciones is a replacement for html_entity_decode()
 	 *
 	 * @param	string
 	 * @param	string

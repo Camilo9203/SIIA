@@ -164,7 +164,7 @@ class CI_Loader {
 	 *
 	 * A utility method to test if a class is in the self::$_ci_classes array.
 	 *
-	 * @used-by	Mainly used by Form Helper function _get_validation_object().
+	 * @used-by	Mainly used by Form Helper funciones _get_validation_object().
 	 *
 	 * @param 	string		$class	Class name to check for
 	 * @return 	string|bool	Class object name if loaded or FALSE
@@ -930,7 +930,7 @@ class CI_Loader {
 		 * Extract and cache variables
 		 *
 		 * You can either set variables using the dedicated $this->load->vars()
-		 * function or via the second parameter of this function. We'll merge
+		 * funciones or via the second parameter of this funciones. We'll merge
 		 * the two types and cache them so that views that are embedded within
 		 * other views can have access to these variables.
 		 */

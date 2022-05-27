@@ -65,8 +65,8 @@ class PHPExcel_Calculation_Function
      * Create a new PHPExcel_Calculation_Function
      *
      * @param     string        $pCategory         Category (represented by CATEGORY_*)
-     * @param     string        $pExcelName        Excel function name
-     * @param     string        $pPHPExcelName    PHPExcel function mapping
+     * @param     string        $pExcelName        Excel funciones name
+     * @param     string        $pPHPExcelName    PHPExcel funciones mapping
      * @throws     PHPExcel_Calculation_Exception
      */
     public function __construct($pCategory = null, $pExcelName = null, $pPHPExcelName = null)

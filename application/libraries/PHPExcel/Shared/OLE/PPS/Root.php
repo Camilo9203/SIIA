@@ -151,7 +151,7 @@ class PHPExcel_Shared_OLE_PPS_Root extends PHPExcel_Shared_OLE_PPS
     }
 
     /**
-    * Helper function for caculating a magic value for block sizes
+    * Helper funciones for caculating a magic value for block sizes
     *
     * @access public
     * @param integer $i2 The argument

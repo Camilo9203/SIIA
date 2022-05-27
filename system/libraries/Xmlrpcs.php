@@ -61,7 +61,7 @@ if ( ! class_exists('CI_Xmlrpc', FALSE))
 class CI_Xmlrpcs extends CI_Xmlrpc {
 
 	/**
-	 * Array of methods mapped to function names and signatures
+	 * Array of methods mapped to funciones names and signatures
 	 *
 	 * @var array
 	 */
@@ -149,19 +149,19 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 	{
 		$this->methods = array(
 					'system.listMethods'	 => array(
-										'function' => 'this.listMethods',
+										'funciones' => 'this.listMethods',
 										'signature' => array(array($this->xmlrpcArray, $this->xmlrpcString), array($this->xmlrpcArray)),
 										'docstring' => 'Returns an array of available methods on this server'),
 					'system.methodHelp'	 => array(
-										'function' => 'this.methodHelp',
+										'funciones' => 'this.methodHelp',
 										'signature' => array(array($this->xmlrpcString, $this->xmlrpcString)),
 										'docstring' => 'Returns a documentation string for the specified method'),
 					'system.methodSignature' => array(
-										'function' => 'this.methodSignature',
+										'funciones' => 'this.methodSignature',
 										'signature' => array(array($this->xmlrpcArray, $this->xmlrpcString)),
 										'docstring' => 'Returns an array describing the return type and required parameters of a method'),
 					'system.multicall'	 => array(
-										'function' => 'this.multicall',
+										'funciones' => 'this.multicall',
 										'signature' => array(array($this->xmlrpcArray, $this->xmlrpcArray)),
 										'docstring' => 'Combine multiple RPC calls in one request. See http://www.xmlrpc.com/discuss/msgReader$1208 for details')
 				);
@@ -190,7 +190,7 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 	 * Add Method to Class
 	 *
 	 * @param	string	method name
-	 * @param	string	function
+	 * @param	string	funciones
 	 * @param	string	signature
 	 * @param	string	docstring
 	 * @return	void
@@ -198,7 +198,7 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 	public function add_to_map($methodname, $function, $sig, $doc)
 	{
 		$this->methods[$methodname] = array(
-			'function'	=> $function,
+			'funciones'	=> $function,
 			'signature'	=> $sig,
 			'docstring'	=> $doc
 		);
@@ -329,7 +329,7 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 		// Valid Method
 		//-------------------------------------
 
-		if ( ! isset($this->methods[$methName]['function']))
+		if ( ! isset($this->methods[$methName]['funciones']))
 		{
 			return new XML_RPC_Response(0, $this->xmlrpcerr['unknown_method'], $this->xmlrpcstr['unknown_method']);
 		}
@@ -338,7 +338,7 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 		// Check for Method (and Object)
 		//-------------------------------------
 
-		$method_parts = explode('.', $this->methods[$methName]['function']);
+		$method_parts = explode('.', $this->methods[$methName]['funciones']);
 		$objectCall   = ! empty($method_parts[1]);
 
 		if ($system_call === TRUE)
@@ -349,7 +349,7 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 			}
 		}
 		elseif (($objectCall && ! is_callable(array($method_parts[0], $method_parts[1])))
-			OR ( ! $objectCall && ! is_callable($this->methods[$methName]['function']))
+			OR ( ! $objectCall && ! is_callable($this->methods[$methName]['funciones']))
 		)
 		{
 			return new XML_RPC_Response(0, $this->xmlrpcerr['unknown_method'], $this->xmlrpcstr['unknown_method']);
@@ -409,7 +409,7 @@ class CI_Xmlrpcs extends CI_Xmlrpc {
 		}
 		else
 		{
-			return call_user_func($this->methods[$methName]['function'], $m);
+			return call_user_func($this->methods[$methName]['funciones'], $m);
 		}
 	}
 

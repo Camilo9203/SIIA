@@ -91,7 +91,7 @@ class PHPExcel_Shared_JAMA_QRDecomposition
         } else {
             throw new PHPExcel_Calculation_Exception(PHPExcel_Shared_JAMA_Matrix::ARGUMENT_TYPE_EXCEPTION);
         }
-    }    //    function __construct()
+    }    //    funciones __construct()
 
 
     /**
@@ -107,7 +107,7 @@ class PHPExcel_Shared_JAMA_QRDecomposition
             }
         }
         return true;
-    }    //    function isFullRank()
+    }    //    funciones isFullRank()
 
     /**
      *    Return the Householder vectors
@@ -126,7 +126,7 @@ class PHPExcel_Shared_JAMA_QRDecomposition
             }
         }
         return new PHPExcel_Shared_JAMA_Matrix($H);
-    }    //    function getH()
+    }    //    funciones getH()
 
     /**
      *    Return the upper triangular factor
@@ -147,7 +147,7 @@ class PHPExcel_Shared_JAMA_QRDecomposition
             }
         }
         return new PHPExcel_Shared_JAMA_Matrix($R);
-    }    //    function getR()
+    }    //    funciones getR()
 
     /**
      *    Generate and return the (economy-sized) orthogonal factor
@@ -184,7 +184,7 @@ class PHPExcel_Shared_JAMA_QRDecomposition
         }
         */
         return new PHPExcel_Shared_JAMA_Matrix($Q);
-    }    //    function getQ()
+    }    //    funciones getQ()
 
     /**
      *    Least squares solution of A*X = B

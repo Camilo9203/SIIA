@@ -43,7 +43,7 @@ class PHPExcel_CachedObjectStorage_Igbinary extends PHPExcel_CachedObjectStorage
             $this->currentCellIsDirty = false;
         }
         $this->currentObjectID = $this->currentObject = null;
-    }    //    function _storeData()
+    }    //    funciones _storeData()
 
 
     /**
@@ -65,7 +65,7 @@ class PHPExcel_CachedObjectStorage_Igbinary extends PHPExcel_CachedObjectStorage
         $this->currentCellIsDirty = true;
 
         return $cell;
-    }    //    function addCacheData()
+    }    //    funciones addCacheData()
 
 
     /**
@@ -96,7 +96,7 @@ class PHPExcel_CachedObjectStorage_Igbinary extends PHPExcel_CachedObjectStorage
 
         //    Return requested entry
         return $this->currentObject;
-    }    //    function getCacheData()
+    }    //    funciones getCacheData()
 
 
     /**
@@ -129,7 +129,7 @@ class PHPExcel_CachedObjectStorage_Igbinary extends PHPExcel_CachedObjectStorage
 
         //    detach ourself from the worksheet, so that it can then delete this object successfully
         $this->parent = null;
-    }    //    function unsetWorksheetCells()
+    }    //    funciones unsetWorksheetCells()
 
 
     /**

@@ -11,28 +11,30 @@ class Sesion extends CI_Controller {
 		Funcion Index para cargar las vistas necesarias.
 	**/
 	public function index(){
-		$data['title'] = 'Iniciar Sesión';
-		$data['logged_in'] = false;
-		$data['tipo_usuario'] = "none";
-		$this->load->view('include/header', $data);
-		$this->load->view('login/login');
-		$this->load->view('include/footer');
+		$data = array (
+			'title' => 'Iniciar Sesión',
+			'loggen_in' => false,
+			'tipo_usuario' => "none",
+			'activeLink' => "login"
+		);
+		$this->load->view('include/header_new', $data);
+		$this->load->view('login');
+		$this->load->view('include/footer_new');
 		$this->logs_sia->logs('PLACE_USER');
 	}
 
 	/**
-		Funcion para hacer Login a SIA y redireccionar a Panel.
-		Los parametros se traen del ajax.
+		Función para hacer Login a SIA y redireccionar a Panel.
+		Los parámetros se traen del ajax.
 	**/
 	public function login()
 	{
 		$this->form_validation->set_rules('usuario','Username','trim|required|min_length[3]|xss_clean');
     	$this->form_validation->set_rules('password','Password','trim|required|min_length[3]|xss_clean');
-
-
 		if ($this->form_validation->run("formulario_login") == FALSE)
 		{
-			echo json_encode(array('url'=>"login", 'msg'=>"Verifique los datos ingresados."));
+			$error = validation_errors();
+			echo json_encode(array('url'=>"login", 'msg'=>$error));
 		}
 		else
 		{
@@ -123,27 +125,22 @@ class Sesion extends CI_Controller {
 	{
 		$nombre_usuario = $this->session->userdata('nombre_usuario');
 		$usuario_id = $this->session->userdata('usuario_id');
-
 		$this->logs_sia->session_log('Logout');
-
 		$data_update = array(
 					'logged_in' => "0"
 		);
-
 		$this->db->where('id_usuario', $usuario_id);
 		$this->db->update('usuarios', $data_update);
-
 		$this->logs_sia->logs('LOGOUT_TYPE');
 		$this->logs_sia->logQueries();
 		$this->logs_sia->logs('URL_TYPE');
-
 		delete_cookie('SIIASession');
 		$this->session->sess_destroy();
 		echo json_encode(array('url'=>base_url()."login", 'msg'=>"Sesión terminada."));
 	}
 
-		/**
-		Funcion Index para cargar las vistas necesarias.
+	/**
+		Función Index para cargar las vistas necesarias.
 	**/
 	public function login_admin()
 	{

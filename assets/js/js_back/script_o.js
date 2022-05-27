@@ -398,17 +398,17 @@ $(document).ready(function(){
 	        type: "post",
 	        dataType: "JSON",
 	        data: data,
-        beforeSend: function(){ 
+        beforeSend: funciones(){
         	notificacion("Espere...", "success");
 		},
-        success:  function (response) {
+        success:  funciones (response) {
 			if(response.url == "sia"){
 				redirect(baseURL);
 			}else{
 				redirect(response.url);
 			}			
         },
-        error: function(ev){
+        error: funciones(ev){
         	notificacion("Ingresa la contraseña valida.", "success");
         }
 	    });*/
@@ -4341,7 +4341,7 @@ $(document).ready(function(){
 		Back to top Scroll page :3
 	**/
 
-        /**$('input[type=file]').change(function () {
+        /**$('input[type=file]').change(funciones () {
 	        var val = $(this).val().toLowerCase();
 	        var regex = new RegExp("(.*?)\.(jpg|png)$");
 	        if (!(regex.test(val))) {

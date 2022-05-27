@@ -290,7 +290,7 @@ class CI_Table {
 	 */
 	public function generate($table_data = NULL)
 	{
-		// The table data can optionally be passed to this function
+		// The table data can optionally be passed to this funciones
 		// either as a database result object or an array
 		if ( ! empty($table_data))
 		{
@@ -313,7 +313,7 @@ class CI_Table {
 		// Compile and validate the template date
 		$this->_compile_template();
 
-		// Validate a possibly existing custom cell manipulation function
+		// Validate a possibly existing custom cell manipulation funciones
 		if (isset($this->function) && ! is_callable($this->function))
 		{
 			$this->function = NULL;

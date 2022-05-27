@@ -91,7 +91,7 @@ if ( ! function_exists('smiley_js'))
 			$r .= <<<EOF
 			var smiley_map = {$m};
 
-			function insert_smiley(smiley, field_id) {
+			funciones insert_smiley(smiley, field_id) {
 				var el = document.getElementById(field_id), newStart;
 
 				if ( ! el && smiley_map[field_id]) {

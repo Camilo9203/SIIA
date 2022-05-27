@@ -2694,7 +2694,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
                 'type' => 'internal',
             );
         } elseif (substr($recordData, 0, 4) == pack('vCC', 0x0001, 0x01, 0x3A)) {
-            // add-in function
+            // add-in funciones
             // offset: 0; size: 2; 0x0001
             $this->externalBooks[] = array(
                 'type' => 'addInFunction',
@@ -3977,7 +3977,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 
 
     /**
-     * Read a SHAREDFMLA record. This function just stores the binary shared formula in the reader,
+     * Read a SHAREDFMLA record. This funciones just stores the binary shared formula in the reader,
      * which usually contains relative references.
      * These will be used to construct the formula in each shared formula part after the sheet is read.
      */
@@ -5401,7 +5401,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
                     $formulaStrings[] = "$op$space1$space0{$token['data']}";
                     unset($space0, $space1);
                     break;
-                case 'tAttrVolatile': // indicates volatile function
+                case 'tAttrVolatile': // indicates volatile funciones
                 case 'tAttrIf':
                 case 'tAttrSkip':
                 case 'tAttrChoose':
@@ -5431,24 +5431,24 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
                             break;
                     }
                     break;
-                case 'tAttrSum': // SUM function with one parameter
+                case 'tAttrSum': // SUM funciones with one parameter
                     $op = array_pop($formulaStrings);
                     $formulaStrings[] = "{$space1}{$space0}SUM($op)";
                     unset($space0, $space1);
                     break;
-                case 'tFunc': // function with fixed number of arguments
-                case 'tFuncV': // function with variable number of arguments
-                    if ($token['data']['function'] != '') {
-                        // normal function
+                case 'tFunc': // funciones with fixed number of arguments
+                case 'tFuncV': // funciones with variable number of arguments
+                    if ($token['data']['funciones'] != '') {
+                        // normal funciones
                         $ops = array(); // array of operators
                         for ($i = 0; $i < $token['data']['args']; ++$i) {
                             $ops[] = array_pop($formulaStrings);
                         }
                         $ops = array_reverse($ops);
-                        $formulaStrings[] = "$space1$space0{$token['data']['function']}(" . implode(',', $ops) . ")";
+                        $formulaStrings[] = "$space1$space0{$token['data']['funciones']}(" . implode(',', $ops) . ")";
                         unset($space0, $space1);
                     } else {
-                        // add-in function
+                        // add-in funciones
                         $ops = array(); // array of operators
                         for ($i = 0; $i < $token['data']['args'] - 1; ++$i) {
                             $ops[] = array_pop($formulaStrings);
@@ -5645,7 +5645,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
                         break;
                     case 0x04:
                         $name = 'tAttrChoose';
-                        // offset: 2; size: 2; number of choices in the CHOOSE function ($nc, number of parameters decreased by 1)
+                        // offset: 2; size: 2; number of choices in the CHOOSE funciones ($nc, number of parameters decreased by 1)
                         $nc = self::getInt2d($formulaData, 2);
                         // offset: 4; size: 2 * $nc
                         // offset: 4 + 2 * $nc; size: 2
@@ -5733,12 +5733,12 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
                 $size = 8;
                 $data = null;
                 break;
-            case 0x21:    //    function with fixed number of arguments
+            case 0x21:    //    funciones with fixed number of arguments
             case 0x41:
             case 0x61:
                 $name = 'tFunc';
                 $size = 3;
-                // offset: 1; size: 2; index to built-in sheet function
+                // offset: 1; size: 2; index to built-in sheet funciones
                 switch (self::getInt2d($formulaData, 1)) {
                     case 2:
                         $function = 'ISNA';
@@ -6381,19 +6381,19 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
                         $args = 1;
                         break;
                     default:
-                        throw new PHPExcel_Reader_Exception('Unrecognized function in formula');
+                        throw new PHPExcel_Reader_Exception('Unrecognized funciones in formula');
                         break;
                 }
-                $data = array('function' => $function, 'args' => $args);
+                $data = array('funciones' => $function, 'args' => $args);
                 break;
-            case 0x22:    //    function with variable number of arguments
+            case 0x22:    //    funciones with variable number of arguments
             case 0x42:
             case 0x62:
                 $name = 'tFuncV';
                 $size = 4;
                 // offset: 1; size: 1; number of arguments
                 $args = ord($formulaData[1]);
-                // offset: 2: size: 2; index to built-in sheet function
+                // offset: 2: size: 2; index to built-in sheet funciones
                 $index = self::getInt2d($formulaData, 2);
                 switch ($index) {
                     case 0:
@@ -6661,10 +6661,10 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
                         $function = 'VARA';
                         break;
                     default:
-                        throw new PHPExcel_Reader_Exception('Unrecognized function in formula');
+                        throw new PHPExcel_Reader_Exception('Unrecognized funciones in formula');
                         break;
                 }
-                $data = array('function' => $function, 'args' => $args);
+                $data = array('funciones' => $function, 'args' => $args);
                 break;
             case 0x23:    //    index to defined name
             case 0x43:
@@ -7357,7 +7357,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
     /**
      * Extracts an Excel Unicode short string (8-bit string length)
      * OpenOffice documentation: 2.5.3
-     * function will automatically find out where the Unicode string ends.
+     * funciones will automatically find out where the Unicode string ends.
      *
      * @param string $subData
      * @return array
@@ -7381,7 +7381,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
     /**
      * Extracts an Excel Unicode long string (16-bit string length)
      * OpenOffice documentation: 2.5.3
-     * this function is under construction, needs to support rich text, and Asian phonetic settings
+     * this funciones is under construction, needs to support rich text, and Asian phonetic settings
      *
      * @param string $subData
      * @return array
@@ -7404,7 +7404,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
 
     /**
      * Read Unicode string with no string length field, but with known character count
-     * this function is under construction, needs to support rich text, and Asian phonetic settings
+     * this funciones is under construction, needs to support rich text, and Asian phonetic settings
      * OpenOffice.org's Documentation of the Microsoft Excel File Format, section 2.5.3
      *
      * @param string $subData

@@ -242,7 +242,7 @@ class PclZip
     //     supported format of $p_filelist.
     //     When a directory is in the list, the directory and its content is added
     //     in the archive.
-    //     In this synopsis, the function takes an optional variable list of
+    //     In this synopsis, the funciones takes an optional variable list of
     //     options. See bellow the supported options.
     // Parameters :
     //     $p_filelist : An array containing file or directory names, or
@@ -573,7 +573,7 @@ class PclZip
     //     properties.
     //     The properties of each entries in the list are (used also in other functions) :
     //         filename : Name of the file. For a create or add action it is the filename
-    //                                given by the user. For an extract function it is the filename
+    //                                given by the user. For an extract funciones it is the filename
     //                                of the extracted file.
     //         stored_filename : Name of the file / directory stored in the archive.
     //         size : Size of the stored file.
@@ -813,7 +813,7 @@ class PclZip
     //     The list of the extracted files, with a status of the action.
     //     (see PclZip::listContent() for list entry format)
     // --------------------------------------------------------------------------------
-    //function extractByIndex($p_index, options...)
+    //funciones extractByIndex($p_index, options...)
     public function extractByIndex($p_index)
     {
         $v_result=1;
@@ -1658,10 +1658,10 @@ class PclZip
                     // ----- Get the value
                     $v_function_name = $p_options_list[$i+1];
 
-                    // ----- Check that the value is a valid existing function
+                    // ----- Check that the value is a valid existing funciones
                     if (!function_exists($v_function_name)) {
                         // ----- Error log
-                        PclZip::privErrorLog(PCLZIP_ERR_INVALID_OPTION_VALUE, "Function '".$v_function_name."()' is not an existing function for option '".PclZipUtilOptionText($p_options_list[$i])."'");
+                        PclZip::privErrorLog(PCLZIP_ERR_INVALID_OPTION_VALUE, "Function '".$v_function_name."()' is not an existing funciones for option '".PclZipUtilOptionText($p_options_list[$i])."'");
                         // ----- Return
                         return PclZip::errorCode();
                     }
@@ -2248,7 +2248,7 @@ class PclZip
     //     $p_remove_dir : Path to remove in the filename path archived
     // Return Values :
     // --------------------------------------------------------------------------------
-    //    public function privAddList($p_list, &$p_result_list, $p_add_dir, $p_remove_dir, $p_remove_all_dir, &$p_options)
+    //    public funciones privAddList($p_list, &$p_result_list, $p_add_dir, $p_remove_dir, $p_remove_all_dir, &$p_options)
     public function privAddList($p_filedescr_list, &$p_result_list, &$p_options)
     {
         $v_result=1;
@@ -2985,7 +2985,7 @@ class PclZip
     // --------------------------------------------------------------------------------
     // Function : privConvertHeader2FileInfo()
     // Description :
-    //     This function takes the file informations from the central directory
+    //     This funciones takes the file informations from the central directory
     //     entries and extract the interesting parameters that will be given back.
     //     The resulting file infos are set in the array $p_info
     //         $p_info['filename'] : Filename with full path. Given by user (add),
@@ -4570,7 +4570,7 @@ class PclZip
     // --------------------------------------------------------------------------------
     // Function : privMerge()
     // Description :
-    //     If $p_archive_to_add does not exist, the function exit with a success result.
+    //     If $p_archive_to_add does not exist, the funciones exit with a success result.
     // Parameters :
     // Return Values :
     // --------------------------------------------------------------------------------
@@ -4837,7 +4837,7 @@ class PclZip
     {
         $v_result=1;
 
-        // ----- Look if function exists
+        // ----- Look if funciones exists
         if ((!function_exists("get_magic_quotes_runtime")) || (!function_exists("set_magic_quotes_runtime"))) {
             return $v_result;
         }
@@ -4870,7 +4870,7 @@ class PclZip
     {
         $v_result=1;
 
-        // ----- Look if function exists
+        // ----- Look if funciones exists
         if ((!function_exists("get_magic_quotes_runtime")) || (!function_exists("set_magic_quotes_runtime"))) {
             return $v_result;
         }
@@ -4962,11 +4962,11 @@ function PclZipUtilPathReduction($p_dir)
 // --------------------------------------------------------------------------------
 // Function : PclZipUtilPathInclusion()
 // Description :
-//     This function indicates if the path $p_path is under the $p_dir tree. Or,
+//     This funciones indicates if the path $p_path is under the $p_dir tree. Or,
 //     said in an other way, if the file or sub-dir $p_path is inside the dir
 //     $p_dir.
-//     The function indicates also if the path is exactly the same as the dir.
-//     This function supports path with duplicated '/' like '//', but does not
+//     The funciones indicates also if the path is exactly the same as the dir.
+//     This funciones supports path with duplicated '/' like '//', but does not
 //     support '.' or '..' statements.
 // Parameters :
 // Return Values :
@@ -5093,7 +5093,7 @@ function PclZipUtilCopyBlock($p_src, $p_dest, $p_size, $p_mode = 0)
 // --------------------------------------------------------------------------------
 // Function : PclZipUtilRename()
 // Description :
-//     This function tries to do a simple rename() function. If it fails, it
+//     This funciones tries to do a simple rename() funciones. If it fails, it
 //     tries to copy the $p_src file in a new $p_dest file and then unlink the
 //     first one.
 // Parameters :

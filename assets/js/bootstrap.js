@@ -1470,7 +1470,7 @@ var Dropdown = function ($$$1) {
     boundary: 'scrollParent'
   };
   var DefaultType = {
-    offset: '(number|string|function)',
+    offset: '(number|string|funciones)',
     flip: 'boolean',
     boundary: '(string|element)'
     /**
@@ -2460,12 +2460,12 @@ var Tooltip = function ($$$1) {
   var DefaultType = {
     animation: 'boolean',
     template: 'string',
-    title: '(string|element|function)',
+    title: '(string|element|funciones)',
     trigger: 'string',
     delay: '(number|object)',
     html: 'boolean',
     selector: '(string|boolean)',
-    placement: '(string|function)',
+    placement: '(string|funciones)',
     offset: '(number|string)',
     container: '(string|element|boolean)',
     fallbackPlacement: '(string|array)',
@@ -3128,7 +3128,7 @@ var Popover = function ($$$1) {
     template: '<div class="popover" role="tooltip">' + '<div class="arrow"></div>' + '<h3 class="popover-header"></h3>' + '<div class="popover-body"></div></div>'
   });
   var DefaultType = _extends({}, Tooltip.DefaultType, {
-    content: '(string|element|function)'
+    content: '(string|element|funciones)'
   });
   var ClassName = {
     FADE: 'fade',

@@ -956,7 +956,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
 
     /**
      * This is the more general form of writeUrl(). It allows a hyperlink to be
-     * written to a range of cells. This function also decides the type of hyperlink
+     * written to a range of cells. This funciones also decides the type of hyperlink
      * to be written. These are either, Web (http, ftp, mailto), Internal
      * (Sheet1!A1) or external ('c:\temp\foo.xls#Sheet1!A1').
      *
@@ -2362,7 +2362,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
      * The width and height of the cells are also variable and have to be taken into
      * account.
      * The values of $col_start and $row_start are passed in from the calling
-     * function. The values of $col_end and $row_end are calculated by subtracting
+     * funciones. The values of $col_end and $row_end are calculated by subtracting
      * the width and height of the bitmap from the width and height of the
      * underlying cells.
      * The vertices are expressed as a percentage of the underlying cell width as
