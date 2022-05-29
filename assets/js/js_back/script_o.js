@@ -6973,14 +6973,14 @@ $(document).ready(function(){
    	$(".verPage").click(function(){
    		$page = $(this).attr("target");
    		if(funcion == "home"){
-			$(".pages").hide();
+			$(".paginas").hide();
 	   		$("#"+$page).show();
    		}else if(activate[3] == "sia" && funcion == ""){
-	   		$(".pages").hide();
+	   		$(".paginas").hide();
 	   		$("#"+$page).show();
    		}else{
    			redirect("home#"+$page);
-   			$(".pages").hide();
+   			$(".paginas").hide();
    			$("#"+$page).show();
    		}
    	});

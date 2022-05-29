@@ -218,7 +218,7 @@ class PHPExcel_Worksheet_PageSetup
 
     /**
       * Fit To Height
-      * Number of vertical pages to fit on
+      * Number of vertical paginas to fit on
       *
       * @var int?
       */
@@ -226,7 +226,7 @@ class PHPExcel_Worksheet_PageSetup
 
     /**
       * Fit To Width
-      * Number of horizontal pages to fit on
+      * Number of horizontal paginas to fit on
       *
       * @var int?
       */

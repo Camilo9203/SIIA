@@ -299,7 +299,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
     private $frozen;
 
     /**
-     * Fit printout to number of pages? (in sheet currently being read). See SHEETPR record.
+     * Fit printout to number of paginas? (in sheet currently being read). See SHEETPR record.
      *
      * @var boolean
      */
@@ -3096,7 +3096,7 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
         $isSummaryRight = (0x0080 & self::getInt2d($recordData, 0)) >> 7;
         $this->phpSheet->setShowSummaryRight($isSummaryRight);
 
-        // bit: 8; mask: 0x100; 0 = scale printout in percent, 1 = fit printout to number of pages
+        // bit: 8; mask: 0x100; 0 = scale printout in percent, 1 = fit printout to number of paginas
         // this corresponds to radio button setting in page setup dialog in Excel
         $this->isFitToPages = (bool) ((0x0100 & self::getInt2d($recordData, 0)) >> 8);
     }
@@ -3343,10 +3343,10 @@ class PHPExcel_Reader_Excel5 extends PHPExcel_Reader_Abstract implements PHPExce
             // offset: 2; size: 2; scaling factor
             $scale = self::getInt2d($recordData, 2);
 
-            // offset: 6; size: 2; fit worksheet width to this number of pages, 0 = use as many as needed
+            // offset: 6; size: 2; fit worksheet width to this number of paginas, 0 = use as many as needed
             $fitToWidth = self::getInt2d($recordData, 6);
 
-            // offset: 8; size: 2; fit worksheet height to this number of pages, 0 = use as many as needed
+            // offset: 8; size: 2; fit worksheet height to this number of paginas, 0 = use as many as needed
             $fitToHeight = self::getInt2d($recordData, 8);
 
             // offset: 10; size: 2; option flags

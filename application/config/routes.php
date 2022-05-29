@@ -142,6 +142,10 @@ $route['panel/estadoSolicitud'] = 'Panel/estadoSolicitud';
 $route['panel/informeActividades'] = 'Panel/informeActividades';
 $route['panel/docentes'] = 'Panel/docentes';
 $route['panel/planMejora'] = 'Panel/planMejora';
+$route['panel/solicitudes'] = 'Panel/solicitudes';
+$route['panel/formularios'] = 'Panel/formularios';
+$route['panel/facilitadores'] = 'Panel/facilitadores';
+$route['panel/estadisticas'] = 'Panel/estadisticas';
 //Perfil Usuario
 $route['panel/perfil'] = 'Perfil';
 //Mapa Gestion

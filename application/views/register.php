@@ -100,7 +100,7 @@
 				<button type="button" id="guardar_registro" class="btn btn btn-round btn-high text-capitalize btn-sm pull-right">Registrarme <i class="fa fa-check"></i></button>
 				<button type="button" class="btn btn-danger btn-sm submit ingresar" value="Iniciar Sesión">Iniciar Sesión <i class="fa fa-sign-in" aria-hidden="true"></i></button>
 			</div>
-			<img src="<?php echo base_url(); ?>assets/img/loading.gif" id="loading" class="img-responsive col-md-2">
+<!--			<img src="--><?php //echo base_url(); ?><!--assets/img/loading.gif" id="loading" class="img-responsive col-md-2">-->
 			<div class="form-group">
 				<div id="mensaje" class="col-md-12 alert" role="alert"></div>
 			</div>
@@ -110,8 +110,8 @@
 </div>
 
 <!-- Modal Política de Privacidad -->
-<div class="modal fade govco-modal-large show" id="politica_ventana" tabindex="-1" role="dialog" aria-labelledby="politica">
-	<div class="modal-dialog alert-govco modal-lg modal-dialog-centered" role="document">
+<div class="modal fade" id="politica_ventana" tabindex="-1" role="dialog" aria-labelledby="politica">
+	<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<div class="row">

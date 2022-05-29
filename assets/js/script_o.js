@@ -8756,30 +8756,6 @@ $(document).ready(function () {
 		});
 	});
 	/**
-		Click en Salir de Sesion.
-	**/
-	$("#salir").click(function () {
-		$(this).attr("disabled", true);
-		$.ajax({
-			url: baseURL + "sesion/logout",
-			type: "post",
-			dataType: "JSON",
-			beforeSend: function () {
-				notificacion("Espere...", "success");
-			},
-			success: function (response) {
-				notificacion("La sesión ha terminado.", "success");
-				setInterval(function () {
-					redirect(baseURL + "login");
-				}, 2000);
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
-
-	/**
 		Click en Salir de Sesion Administrador.
 	**/
 	$("#salir_admin").click(function () {
@@ -16036,14 +16012,14 @@ $(document).ready(function () {
 	$(".verPage").click(function () {
 		$page = $(this).attr("target");
 		if (funcion == "home") {
-			$(".pages").hide();
+			$(".paginas").hide();
 			$("#" + $page).show();
 		} else if (activate[3] == "sia" && funcion == "") {
-			$(".pages").hide();
+			$(".paginas").hide();
 			$("#" + $page).show();
 		} else {
 			redirect("home#" + $page);
-			$(".pages").hide();
+			$(".paginas").hide();
 			$("#" + $page).show();
 		}
 	});

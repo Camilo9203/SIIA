@@ -3,6 +3,18 @@ var url = unescape(window.location.href);
 var activate = url.split("/");
 var baseURL = activate[0] + "//" + activate[2] + "/" + activate[3] + "/";
 ValidarFormLogin();
+/** Notificación Toast SweetAlert */
+const ToastLogin = Swal.mixin({
+	toast: true,
+	position: 'top-end',
+	showConfirmButton: false,
+	timer: 4000,
+	timerProgressBar: true,
+	didOpen: (toast) => {
+		toast.addEventListener('mouseenter', Swal.stopTimer)
+		toast.addEventListener('mouseleave', Swal.resumeTimer)
+	}
+})
 /**
 	 Validar Formulario Registro
  **/
@@ -43,12 +55,10 @@ function ValidarFormLogin () {
 		Click en inicio de Sesion.
  **/
 $("#inicio_sesion").click(function () {
-	alert('entra en función');
 	if ($("#formulario_login").valid()) {
 		var usuario = $("#usuario").val();
 		var password = $("#password").val();
 		var response_captcha = grecaptcha.getResponse();
-		alert(password);
 		if (usuario.length > 0 && password.length > 0) {
 			var data = {
 				usuario: usuario,
@@ -60,15 +70,27 @@ $("#inicio_sesion").click(function () {
 				dataType: "JSON",
 				data: data,
 				beforeSend: function () {
-					$("#loading").show();
 					$(this).attr("disabled", true);
+					ToastLogin.fire({
+						icon: 'info',
+						title: 'Iniciando Sesión.'
+					})
 				},
 				success: function (response) {
 					if (response.url == "login") {
-						mensaje(response.msg, "alert-warning");
+						Swal.fire({
+							title: 'No se logro Iniciar!',
+							text: response.msg,
+							icon: 'warning',
+							confirmButtonText: 'Finalizar',
+						});
 						clearInputs("formulario_login");
 					}
 					if (response.url == "panel") {
+						ToastLogin.fire({
+							icon: 'success',
+							title: 'Sesión Iniciada.'
+						})
 						redirect(response.url);
 					}
 					$("#loading").toggle();
@@ -92,4 +114,35 @@ $("#inicio_sesion").click(function () {
 	else {
 		alert('arregla el formulario');
 	}
+});
+
+
+/**
+		Click en Salir de Sesión.
+ **/
+$("#salir").click(function () {
+	$(this).attr("disabled", true);
+	$.ajax({
+		url: baseURL + "sesion/logout",
+		type: "post",
+		dataType: "JSON",
+		beforeSend: function () {
+			ToastLogin.fire({
+				icon: 'error',
+				title: 'Cerrando Sesión.'
+			})
+		},
+		success: function (response) {
+			ToastLogin.fire({
+				icon: 'success',
+				title: 'La sesión ha terminado.'
+			})
+			setInterval(function () {
+				redirect(baseURL + "login");
+			}, 2000);
+		},
+		error: function (ev) {
+			//Do nothing
+		},
+	});
 });

@@ -20,9 +20,9 @@ class Registro extends CI_Controller
 			'tipo_usuario' => "none",
 			'activeLink' => "register"
 		);
-		$this->load->view('include/header_new', $data);
+		$this->load->view('include/header/main', $data);
 		$this->load->view('register');
-		$this->load->view('include/footer_new');
+		$this->load->view('include/header/main');
 		$this->logs_sia->logs('PLACE_USER');
 	}
 

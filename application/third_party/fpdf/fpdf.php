@@ -15,7 +15,7 @@ protected $page;               // current page number
 protected $n;                  // current object number
 protected $offsets;            // array of object offsets
 protected $buffer;             // buffer holding in-memory PDF
-protected $pages;              // array containing pages
+protected $pages;              // array containing paginas
 protected $state;              // current document state
 protected $compress;           // compression flag
 protected $k;                  // scale factor (number of points in user unit)
@@ -55,13 +55,13 @@ protected $ColorFlag;          // indicates whether fill and text colors are dif
 protected $WithAlpha;          // indicates whether alpha channel is used
 protected $ws;                 // word spacing
 protected $images;             // array of used images
-protected $PageLinks;          // array of links in pages
+protected $PageLinks;          // array of links in paginas
 protected $links;              // array of internal links
 protected $AutoPageBreak;      // automatic page breaking
 protected $PageBreakTrigger;   // threshold used to trigger page breaks
 protected $InHeader;           // flag set when processing header
 protected $InFooter;           // flag set when processing footer
-protected $AliasNbPages;       // alias for total number of pages
+protected $AliasNbPages;       // alias for total number of paginas
 protected $ZoomMode;           // zoom display mode
 protected $LayoutMode;         // layout display mode
 protected $metadata;           // document properties
@@ -262,7 +262,7 @@ function SetCreator($creator, $isUTF8=false)
 
 function AliasNbPages($alias='{nb}')
 {
-	// Define an alias for total number of pages
+	// Define an alias for total number of paginas
 	$this->AliasNbPages = $alias;
 }
 

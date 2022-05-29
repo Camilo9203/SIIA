@@ -268,7 +268,7 @@ class CI_Pagination {
 	protected $query_string_segment = 'per_page';
 
 	/**
-	 * Display pages flag
+	 * Display paginas flag
 	 *
 	 * @var	bool
 	 */
@@ -405,7 +405,7 @@ class CI_Pagination {
 			return '';
 		}
 
-		// Calculate the total number of pages
+		// Calculate the total number of paginas
 		$num_pages = (int) ceil($this->total_rows / $this->per_page);
 
 		// Is there only one page? Hm... nothing more to do here then.
@@ -592,7 +592,7 @@ class CI_Pagination {
 
 		}
 
-		// Render the pages
+		// Render the paginas
 		if ($this->display_pages !== FALSE)
 		{
 			// Write the digit links

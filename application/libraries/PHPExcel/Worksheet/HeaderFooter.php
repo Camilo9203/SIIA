@@ -47,7 +47,7 @@
  * two or more occurrences of this section marker exist, the contents from all markers are concatenated, in the
  * order of appearance, and placed into the left section.
  * &P - code for "current page #"
- * &N - code for "total pages"
+ * &N - code for "total paginas"
  * &font size - code for "text font size", where font size is a font size in points.
  * &K - code for "text font color"
  * RGB Color is specified as RRGGBB

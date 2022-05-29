@@ -252,15 +252,15 @@ function ValidarFormRegistro () {
 				required: true,
 				minlength: 8,
 				maxlength: 10,
-				regex:
-					"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,10}$",
+				// regex:
+				// 	"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,10}$",
 			},
 			re_password: {
 				required: true,
 				minlength: 8,
 				maxlength: 10,
-				regex:
-					"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,10}$",
+				// regex:
+				// 	"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,10}$",
 			},
 			aceptocond: {
 				required: true,

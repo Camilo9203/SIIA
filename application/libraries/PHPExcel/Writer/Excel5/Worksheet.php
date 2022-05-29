@@ -1781,8 +1781,8 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
             $this->phpSheet->getPageSetup()->getScale() : 100;   // Print scaling factor
 
         $iPageStart   = 0x01;                 // Starting page number
-        $iFitWidth    = (int) $this->phpSheet->getPageSetup()->getFitToWidth();    // Fit to number of pages wide
-        $iFitHeight    = (int) $this->phpSheet->getPageSetup()->getFitToHeight();    // Fit to number of pages high
+        $iFitWidth    = (int) $this->phpSheet->getPageSetup()->getFitToWidth();    // Fit to number of paginas wide
+        $iFitHeight    = (int) $this->phpSheet->getPageSetup()->getFitToHeight();    // Fit to number of paginas high
         $grbit        = 0x00;                 // Option flags
         $iRes         = 0x0258;               // Print resolution
         $iVRes        = 0x0258;               // Vertical print resolution
