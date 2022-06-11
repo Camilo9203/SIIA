@@ -17,9 +17,9 @@ class Encuesta extends CI_Controller
 			'tipo_usuario' => "none",
 			'nombre_usuario' => "none",
 		);
-		$this->load->view('include/header_new', $data);
+		$this->load->view('include/header/guest', $data);
 		$this->load->view('encuesta/index');
-		$this->load->view('include/footer_new');
+		$this->load->view('include/footer/guest');
 		$this->logs_sia->logs('PLACE_USER');
 	}
 	//Cargar todas las encuestas registradas
@@ -56,7 +56,7 @@ class Encuesta extends CI_Controller
 			if ($this->email->send()) {
 				//Capturar datos para guardar en base de datos registro del correo enviado.
 				$correo_registro = array(
-					'fecha' => date('Y/m/d'),
+					'fecha' => date('Y/m/d H:i:s'),
 					'de' => CORREO_SIA,
 					'para' => CORREO_PRUEBAS,
 					'asunto' => "Encuesta enviada",
@@ -74,7 +74,7 @@ class Encuesta extends CI_Controller
 			} else {
 				//Capturar datos para guardar en base de datos registro del correo no enviado.
 				$correo_registro = array(
-					'fecha' => date('Y/m/d'),
+					'fecha' => date('Y/m/d H:i:s'),
 					'de' => CORREO_SIA,
 					'para' => CORREO_PRUEBAS,
 					'asunto' => "Encuesta no enviada",

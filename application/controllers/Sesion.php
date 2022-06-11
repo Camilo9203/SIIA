@@ -17,9 +17,9 @@ class Sesion extends CI_Controller {
 			'tipo_usuario' => "none",
 			'activeLink' => "login"
 		);
-		$this->load->view('include/header_new', $data);
+		$this->load->view('include/header/guest', $data);
 		$this->load->view('login');
-		$this->load->view('include/footer_new');
+		$this->load->view('include/footer/guest');
 		$this->logs_sia->logs('PLACE_USER');
 	}
 
@@ -83,7 +83,7 @@ class Sesion extends CI_Controller {
 								echo json_encode(array('url'=>"panel", 'msg'=>""));
 								$this->logs_sia->session_log('Login');
 								$data_update = array(
-											'logged_in' => "1"
+									'logged_in' => "1"
 								);
 
 								$this->db->where('id_usuario', $usuario_id);

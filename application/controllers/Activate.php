@@ -24,13 +24,13 @@ class Activate extends CI_Controller {
 
 	public function index()
 	{
-		$data['title'] = 'Activacion de Cuenta';
+		$data['title'] = 'Activación de Cuenta';
 		$data['logged_in'] = false;
 		$data['tipo_usuario'] = "none";
 		
-		$this->load->view('include/header', $data);
+		$this->load->view('include/header/guest', $data);
 		$this->load->view('activate/activate');
-		$this->load->view('include/footer');
+		$this->load->view('include/footer/guest');
 		$this->logs_sia->logs('PLACE_USER');
 	}
 

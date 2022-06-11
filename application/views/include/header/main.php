@@ -38,6 +38,7 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/css/dashboard/css/vertical-layout-light/style.css') ?>">
 	<!-- Plugin css for this page -->
 	<link rel="stylesheet" href="<?php echo base_url('assets/js/dashboard/vendors/select2/select2.min.css') ?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/js/dashboard/vendors/mdi/css/materialdesignicons.min.css') ?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/js/dashboard/vendors/select2-bootstrap-theme/select2-bootstrap.min.css') ?>">
 	<!-- End plugin css for this page -->
 
@@ -122,9 +123,18 @@
 <div class="container-scroller">
 	<!-- Navbar Usuario no registrado //TODO: Navbar de usuario no registrado -->
 	<?php
-	echo "<div class='hidden' id='data_logg' data-log='$logged_in'></div>";
-	$this->load->view('usuario/parciales/_navbar', $data_organizacion);
-	?>
+		echo "<div class='hidden' id='data_logg' data-log='$logged_in'></div>";
+		if ($logged_in && $tipo_usuario == "user") {
+			$this->load->view('usuario/parciales/_navbar', $data_organizacion);
+
+		}
+		elseif ($logged_in && $tipo_usuario == "admin") {
+			$this->load->view('usuario/parciales/_navbar', $data_organizacion);
+		}
+		elseif (!$logged_in && $tipo_usuario == "none") {
+			$this->load->view('include/navbar/guest', $activeLink);
+		}
+		?>
 
 	<!-- partial ajustes visuales-->
 	<div class="container-fluid page-body-wrapper">
@@ -300,4 +310,9 @@
 		</div>
 		<!-- partial sidebar -->
 		<!-- partial:../../partials/_sidebar.html -->
-		<?php $this->load->view('usuario/parciales/_sidebar', $activeLink); ?>
+		<?php
+			if ($logged_in && $tipo_usuario == "user") {
+				$this->load->view('usuario/parciales/_sidebar', $activeLink);
+			}
+			?>
+

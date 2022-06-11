@@ -16,18 +16,46 @@ const Toast = Swal.mixin({
 		toast.addEventListener('mouseleave', Swal.resumeTimer)
 	}
 })
+/** Opciones del sistema */
 $.ajax({
-	url: baseURL + "Encuesta/cargar",
-	type: "GET",
+	url: baseURL + "home/cargarOpcionesSistema",
+	type: "post",
+	dataType: "JSON",
 	success: function (response) {
-		encuestas = JSON.parse(response);
+		for (var i = 0; i < response.length; i++) {
+			if (response[i].nombre == "titulo") {
+				$("#titulo_sistema").html(response[i].valor);
+			}
+			if (response[i].nombre == "logo") {
+				$("#imagen_header_politicas").attr(
+					"src",
+					baseURL + response[i].valor
+				);
+				$("#imagen_header").attr("src", baseURL + response[i].valor);
+				$("#logo_mantenimiento").attr("src", baseURL + response[i].valor);
+			}
+			if (response[i].nombre == "logo_app") {
+				$("#imagen_header_sia").attr("src", baseURL + response[i].valor);
+				$("#logo_mantenimiento_sia").attr("src", baseURL + response[i].valor);
+			}
+			if (
+				response[i].nombre == "modal" &&
+				response[i].valor == 1 &&
+				funcion == "panel" &&
+				funcion_ == undefined
+			) {
+				$("#panelPrincipal").modal("show");
+			}
+		}
+	},
+	error: function (ev) {
+		//Do nothing
 	},
 });
-
-/** Verificación de usuario registrado*/
+/** Verificación de usuario registrado */
 $("#nombre_usuario").change(function () {
 	usuario = {
-		nombre: $("#nombre_usuario").val(),
+		nombre_usuario: $("#nombre_usuario").val(),
 	};
 	$.ajax({
 		url: baseURL + "registro/verificarUsuario",
@@ -53,12 +81,10 @@ $("#nombre_usuario").change(function () {
 		},
 	});
 });
-
-/** Verificación de nit registrado*/
+/** Verificación de nit registrado */
 $("#nit_digito").change(function () {
-	nit = $("#nit").val() + "-" + $("#nit_digito").val();
 	organizacion = {
-		nit: nit,
+		nit: $("#nit").val() + "-" + $("#nit_digito").val(),
 	};
 	$.ajax({
 		url: baseURL + "registro/verificarNIT",
@@ -84,116 +110,134 @@ $("#nit_digito").change(function () {
 		},
 	});
 });
-
-/** Verificación de nit registrado*/
+/** Aceptar política */
 $("#acepto_politica").click(function () {
 	$("#acepto_cond").prop("checked", true);
 	$("#politica_ventana").modal("toggle");
 });
-
+/** Declinar política */
+$("#declino_politica").click(function () {
+	$("#acepto_cond").prop("checked", false);
+	$("#politica_ventana").modal("toggle");
+});
+/** Aceptar formulario de registro */
+$("#aceptoComActo").change(function () {
+	if ($("#aceptoComActo").is(":checked")) {
+		$("#guardar_registro").removeAttr("disabled");
+		$("#guardar_registro").attr("disabled", false);
+	} else {
+		$("#guardar_registro").attr("disabled", true);
+	}
+});
+/** Confirmar registro formulario de registro */
 $("#confirmaRegistro").click(function () {
 	$("#informacion_pre").slideDown();
 	$("#reenvio_pre").slideUp();
-
-	var organizacion = $("#organizacion").val();
-	var nit = $("#nit").val() + "-" + $("#nit_digito").val();
-	var sigla = $("#sigla").val();
-	var nombre = $("#nombre").val();
-	var nombre_s = $("#nombre_s").val();
-	var apellido = $("#apellido").val();
-	var apellido_s = $("#apellido_s").val();
-	var correo_electronico = $("#correo_electronico").val();
-	var correo_electronico_rep_legal = $("#correo_electronico_rep_legal").val();
-	var nombre_p = $("#nombre_p").val();
-	var apellido_p = $("#apellido_p").val();
-	var nombre_usuario = $("#nombre_usuario").val();
-	var pass = $("#password").val();
-	var pass2 = $("#re_password").val();
-	var check = $("#acepto_cond").prop("checked");
-	var response_captcha = grecaptcha.getResponse();
-
-	datas = {
-		nombre: nombre_usuario,
-		nit: nit,
+	/** Variables para otras comprobaciones */
+	let pass = $("#password").val();
+	let pass2 = $("#re_password").val();
+	let check = $("#acepto_cond").prop("checked");
+	let response_captcha = grecaptcha.getResponse();
+	/** Data ajax para verificar NIT y Usuario */
+	let data = {
+		nombre_usuario: $("#nombre_usuario").val(),
+		nit:	$("#nit").val() + "-" + $("#nit_digito").val(),
 	};
-
+	/** Validar formulario registro */
 	if ($("#formulario_registro").valid()) {
-		$.ajax({
-			url: baseURL + "registro/verificarUsuario",
+		/** Petición ajax para comprobar NIT */
+		$.ajax ({
+			url: baseURL + "registro/verificarNIT",
 			type: "post",
 			dataType: "JSON",
-			data: datas,
-			success: function (response) {
-				if (response.existe === 1) {
-					notificacion(
-						"El nombre usuario ya existe... Puede usar números...",
-						"success"
-					);
-					$("#ayuda_registro").modal("toggle");
+			data: data,
+			success: function (response){
+				if (response.existe == 1) {
+					Toast.fire({
+						/** Alerta cuando NIT ya existe */
+						icon: 'warning',
+						title: 'El NIT ya existe.'
+					});
 				} else {
-					if (
-						organizacion.length > 0 &&
-						nit.length > 0 &&
-						nombre.length > 0 &&
-						apellido.length > 0 &&
-						correo_electronico.length > 0 &&
-						nombre_usuario.length > 0 &&
-						pass.length > 0 &&
-						pass2.length > 0
-					) {
-						if (pass === pass2) {
-							if (check === true) {
-								if (response_captcha != 0) {
-									notificacion(
-										"Verifique su información y correos electronicos.",
-										"success"
-									);
-									$("#modalConfOrg").html($("#organizacion").val());
-									$("#modalConfNit").html(nit);
-									$("#modalConfSigla").html(sigla);
-									$("#modalConfPNRL").html(nombre);
-									$("#modalConfSNRL").html(nombre_s);
-									$("#modalConfPARL").html(apellido);
-									$("#modalConfSARL").html(apellido_s);
-									$("#modalConfCOrg").html(correo_electronico);
-									$("#modalConfCRep").html(correo_electronico_rep_legal);
-									$("#modalConfPn").html(nombre_p);
-									$("#modalConfPa").html(apellido_p);
-									$("#modalConfNU").html(nombre_usuario);
-								} else {
-									$("#ayuda_registro").modal("toggle");
-									mensaje(texto_validacaptcha, alert_danger);
-								}
+					/** Petición ajax para comprobar usuario */
+					$.ajax({
+						url: baseURL + "registro/verificarUsuario",
+						type: "post",
+						dataType: "JSON",
+						data: data,
+						success: function (response) {
+							/** Comprobar si usuario ya */
+							if (response.existe == 1) {
+								/** Alerta cuando usuario ya existe */
+								Toast.fire({
+									icon: 'warning',
+									title: 'El nombre usuario ya existe. Puede usar números.'
+								});
 							} else {
-								mensaje(
-									"¿Aceptas condiciones y restricciones?",
-									alert_danger
-								);
+								if (pass === pass2) {
+									if (check === true) {
+										if (response_captcha != 0) {
+											/** Alerta de verificación datos*/
+											Toast.fire({
+												icon: 'success',
+												title: 'Verifique su información y correos electrónicos'
+											});
+											/** Muestra modal con los datos para ser confirmados */
+											$("#ayuda_registro").modal("show");
+											$("#modalConfOrg").html($("#organizacion").val());
+											$("#modalConfNit").html($("#nit").val() + "-" + $("#nit_digito").val());
+											$("#modalConfSigla").html($("#sigla").val());
+											$("#modalConfPNRL").html($("#nombre").val());
+											$("#modalConfSNRL").html($("#nombre_s").val());
+											$("#modalConfPARL").html($("#apellido").val());
+											$("#modalConfSARL").html($("#apellido_s").val());
+											$("#modalConfCOrg").html($("#correo_electronico").val());
+											$("#modalConfCRep").html($("#correo_electronico_rep_legal").val());
+											$("#modalConfPn").html($("#nombre_p").val());
+											$("#modalConfPa").html($("#apellido_p").val());
+											$("#modalConfNU").html($("#nombre_usuario").val());
+										} else {
+											/** Alerta de captcha no validado */
+											Toast.fire({
+												icon: 'warning',
+												title: 'Por favor valida el captcha.'
+											});
+										}
+									} else {
+										/** Alerta de políticas no aceptadas */
+										Toast.fire({
+											icon: 'warning',
+											title: 'Debes leer y aceptar las políticas'
+										});
+									}
+								} else {
+									/** Alerta de contraseñas diferentes */
+									Toast.fire({
+										icon: 'warning',
+										title: 'Las contraseñas no coinciden.'
+									});
+								}
 							}
-						} else {
-							$("#ayuda_registro").modal("toggle");
-							mensaje(
-								"La contraseña no coincide, verifiquela...",
-								alert_warning
-							);
-						}
-					} else {
-						$("#ayuda_registro").modal("toggle");
-						mensaje("Por favor, llene los datos requeridos.", alert_danger);
-					}
+						},
+						error: function (ev) {
+							//Do nothing
+						},
+					});
 				}
 			},
-			error: function (ev) {
+			error: function (ev){
 				//Do nothing
-			},
+			}
 		});
+
 	} else {
-		$("#ayuda_registro").modal("toggle");
+		/** Alerta de llenar campos requeridos */
+		Toast.fire({
+			icon: 'warning',
+			title: 'Por favor, llene los datos requeridos.'
+		});
 	}
 });
-// TODO: Guardar registro validado.
-
-
 /**
 	 Validar Formulario Registro
  **/
@@ -348,65 +392,57 @@ function ValidarFormRegistro () {
 	 Guardar Registro
  **/
 $("#guardar_registro").click(function () {
+	/** Validar formulario registro */
 	if ($("#formulario_registro").valid()) {
-		var organizacion = $("#organizacion").val();
-		var nit = $("#nit").val() + "-" + $("#nit_digito").val();
-		var sigla = $("#sigla").val();
-		var nombre = $("#nombre").val();
-		var nombre_s = $("#nombre_s").val();
-		var apellido = $("#apellido").val();
-		var apellido_s = $("#apellido_s").val();
-		var correo_electronico = $("#correo_electronico").val();
-		var correo_electronico_rep_legal = $("#correo_electronico_rep_legal").val();
-		var nombre_p = $("#nombre_p").val();
-		var apellido_p = $("#apellido_p").val();
-		var nombre_usuario = $("#nombre_usuario").val();
-		var pass = $("#password").val();
-		var pass2 = $("#re_password").val();
-		var check = $("#acepto_cond").prop("checked");
-		var response_captcha = grecaptcha.getResponse();
-		console.log(response_captcha);
-
-		if (
-			organizacion.length > 0 &&
-			nit.length > 0 &&
-			nombre.length > 0 &&
-			apellido.length > 0 &&
-			correo_electronico.length > 0 &&
-			nombre_usuario.length > 0 &&
-			pass.length > 0 &&
-			pass2.length > 0
-		) {
-			if (pass == pass2) {
-				if (check == true) {
-					if (response_captcha != 0) {
-						var data = {
-							organizacion: organizacion,
-							nit: nit,
-							sigla: sigla,
-							nombre: nombre,
-							nombre_s: nombre_s,
-							apellido: apellido,
-							apellido_s: apellido_s,
-							correo_electronico: correo_electronico,
-							correo_electronico_rep_legal: correo_electronico_rep_legal,
-							nombre_p: nombre_p,
-							apellido_p: apellido_p,
-							nombre_usuario: nombre_usuario,
-							password: pass,
-						};
-						console.log(data);
+		/** Variable grecaptcha */
+		let response_captcha = grecaptcha.getResponse();
+		/** Comprobar captcha */
+		if (response_captcha != 0) {
+			/** Data para registrar cuenta */
+			let data = {
+				organizacion: $("#organizacion").val(),
+				nit: $("#nit").val() + "-" + $("#nit_digito").val(),
+				sigla: $("#sigla").val(),
+				nombre: $("#nombre").val(),
+				nombre_s: $("#nombre_s").val(),
+				apellido: $("#apellido").val(),
+				apellido_s: $("#apellido_s").val(),
+				correo_electronico: $("#correo_electronico").val(),
+				correo_electronico_rep_legal: $("#correo_electronico_rep_legal").val(),
+				nombre_p: $("#nombre_p").val(),
+				apellido_p: $("#apellido_p").val(),
+				nombre_usuario: $("#nombre_usuario").val(),
+				password: $("#password").val(),
+			};
+			console.log(data);
+			/** Verificar si NIT ya existe */
+			$.ajax({
+				url: baseURL + "registro/verificarNIT",
+				type: "post",
+				dataType: "JSON",
+				data: data,
+				success: function (response) {
+					if (response.existe == 1) {
+						/** Alerta si NIT ya existe*/
+						Toast.fire({
+							icon: 'error',
+							title: 'El NIT ya existe.'
+						});
+					} else {
+						/** Verificar si usuario ya existe */
 						$.ajax({
-							url: baseURL + "home/verificarUsuario",
+							url: baseURL + "registro/verificarUsuario",
 							type: "post",
 							dataType: "JSON",
 							data: data,
 							success: function (response) {
 								if (response.existe == 1) {
-									notificacion(
-										"El nombre usuario ya existe... Puede usar números...",
-										"success"
-									);
+									/** Alerta si usuario ya existe*/
+									Toast.fire({
+										icon: 'error',
+										title: 'El nombre usuario ya existe. Puede usar números.'
+									});
+								/** Ejecución de registro de información*/
 								} else {
 									$.ajax({
 										url: baseURL + "registro/registrar_info",
@@ -414,36 +450,41 @@ $("#guardar_registro").click(function () {
 										dataType: "JSON",
 										data: data,
 										beforeSend: function () {
-											$("#loading").show();
-											$(this).attr("disabled", true);
-											//notificacion("Enviando correo electrónico, espere...");
-											notificacion("Registrando información, espere...");
-											$(this).attr("disabled", true);
+											$("#guardar_registro").attr("disabled", true);
+											Toast.fire({
+												icon: 'info',
+												title: 'Registrando información, espere...'
+											});
 										},
 										success: function (response) {
+											/** Modal Estático */
 											$("#ayuda_registro").attr("data-backdrop", "static");
 											$("#ayuda_registro").attr("data-keyboard", "false");
-											$("#correo_electronico_rese").attr(
-												"data-org",
-												JSON.stringify(response).replace(/'/g, "\\'")
-											);
-											mensaje(response.msg, "alert-success");
-											$("#loading").toggle();
-											if (response.status == 0) {
-												notificacion(
-													"El correo electrónico no fue enviado, intente de nuevo."
-												);
-												$("#cerr_mod").click();
-											} else {
+											// $("#correo_electronico_rese").attr(
+											// 	"data-org",
+											// 	JSON.stringify(response).replace(/'/g, "\\'")
+											// );
+											/** Comprobar estado de envío y creación de cuenta */
+											if (response.status == 1) {
+												/** Reset Captcha */
 												grecaptcha.reset();
-												//clearInputs('formulario_registro');
-												notificacion("El correo electrónico enviado.");
-												//$('#ayuda_registro').modal('toggle');
-												$("#informacion_pre").slideUp();
-												$("#reenvio_pre").slideDown();
+												Toast.fire({
+													icon: 'success',
+													title: response.msg,
+												});
+												/** Esconder confirmación y mostrar reenvío de email */
+												$("#informacion_previa").slideUp();
+												$("#reenvio_email").slideDown();
 												$("#reenvio").show();
 												$("#guardar_registro").hide();
-												$(this).attr("disabled", true);
+											} else {
+												/** Alerta si el correo no se envío */
+												Toast.fire({
+													icon: 'error',
+													title: 'El correo electrónico no fue enviado, intente de nuevo.'
+												});
+												/** Cerrar Modal */
+												$("#cerr_mod").click();
 											}
 										},
 										error: function (ev) {
@@ -456,18 +497,17 @@ $("#guardar_registro").click(function () {
 								//Do nothing
 							},
 						});
-					} else {
-						mensaje(texto_validacaptcha, alert_danger);
-						$("#ayuda_registro").modal("toggle");
 					}
-				} else {
-					mensaje("¿Aceptas condiciones y restricciones?", alert_danger);
-				}
-			} else {
-				mensaje("La contraseña no coincide, verifiquela...", alert_warning);
-			}
+				},
+			});
+
 		} else {
-			mensaje("Por favor, llene los datos requeridos...", alert_danger);
+			/** Alerta si no se valida la captcha */
+			Toast.fire({
+				icon: 'warning',
+				title: 'Por favor valida el captcha.'
+			});
 		}
+
 	}
 });

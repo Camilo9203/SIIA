@@ -8187,17 +8187,7 @@ $(document).ready(function () {
 			}
 		}
 	});
-	// TODO: Confirmar formulario de registro
 
-	// Aceptar
-	$("#aceptoComActo").change(function () {
-		if ($("#aceptoComActo").is(":checked")) {
-			$("#guardar_registro").removeAttr("disabled");
-			$("#guardar_registro").attr("disabled", false);
-		} else {
-			$("#guardar_registro").attr("disabled", true);
-		}
-	});
 
 
 

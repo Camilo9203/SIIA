@@ -14,10 +14,10 @@ nav li
 }
 /* Link Activo*/
 .navbar-nav .nav-item.active, .navbar-nav .nav-item:hover, .navbar-nav .nav-item:focus {
-	background: #0259a3 !important;
+	background: #3365ca !important;
 }
 .navbar-nav a:hover, .navbar-nav a:focus {
-	background: #0259a3 !important;
+	background: #6597fe !important;
 }
 /* Link Activo Fin*/
 /* Botón ir arriba*/
@@ -31,7 +31,7 @@ nav li
 /* Botón ir arriba Fin*/
 /* Footer */
 footer {
-	background: #36c;
+	background: #004784FF;
 	color: #fff;
 }
 footer h3 {

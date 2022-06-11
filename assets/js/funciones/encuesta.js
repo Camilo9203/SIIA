@@ -9,7 +9,17 @@ $.ajax({
 		encuestas = JSON.parse(response);
 	},
 });
-
+const ToastEncuesta = Swal.mixin({
+	toast: true,
+	position: 'top-end',
+	showConfirmButton: false,
+	timer: 3000,
+	timerProgressBar: true,
+	didOpen: (toast) => {
+		toast.addEventListener('mouseenter', Swal.stopTimer)
+		toast.addEventListener('mouseleave', Swal.resumeTimer)
+	}
+})
 $("#enviarEcuesta").click(function () {
 	var data = {
 		calificacion_general: $(".calificacion_general").val(),
@@ -23,25 +33,12 @@ $("#enviarEcuesta").click(function () {
 		dataType: "JSON",
 		data: data,
 		beforeSend: function () {
-			/* notificacion("Un momento. Enviando...", "success"); */
-			const Toast = Swal.mixin({
-				toast: true,
-				position: 'top-end',
-				showConfirmButton: false,
-				timer: 3000,
-				timerProgressBar: true,
-				didOpen: (toast) => {
-					toast.addEventListener('mouseenter', Swal.stopTimer)
-					toast.addEventListener('mouseleave', Swal.resumeTimer)
-				}
-			})
-			Toast.fire({
+			ToastEncuesta.fire({
 				icon: 'success',
 				title: 'Un momento. Enviando...'
-			})
+			});
 		},
 		success: function (response) {
-			/* notificacion(response.msg, "success"); */
 			if(response.estado === 1) {
 				Swal.fire({
 					title: 'Encuesta enviada!',

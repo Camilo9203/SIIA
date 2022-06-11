@@ -10,7 +10,6 @@ class Admin extends CI_Controller
 		verify_session_admin();
 		$this->load->model('DocentesModel');
 	}
-	// Encripción para recuperación de contraseña
 	public function mcdec()
 	{
 		$password = "";

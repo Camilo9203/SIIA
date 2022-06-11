@@ -1,7 +1,7 @@
 <div class="center-block" role="main">
 	<div class="container">
 		<div class="card p-4 mb-4">
-			<br><h4>Encuesta de Satisfacción:</h4>
+			<br><h3>Encuesta de Satisfacción:</h3>
 			<hr/>
 			<p>En este espacio puede decirnos que le ha parecido el proceso de acreditación y en que podemos mejorar en el Sistema Integrado de Información de Acreditación.</p>
 			<p>Debe diligenciar los campos requeridos y dar clic en enviar. Gracias!.</p><br>
@@ -11,7 +11,7 @@
 					<label>
 						<p>1. ¿Cómo califica en general el trámite de acreditación? </p>
 					</label><br>
-					<div class="form-group select-govco">
+					<div class="form-group">
 						<select id ="selector-normal" class="form-control calificacion_general" title="Por ejemplo: Excelente"> <!--selectpicker-->
 							<option selected>Elija una opción</option>
 							<option value="Excelente">Excelente</option>
@@ -25,7 +25,7 @@
 					<label>
 						<p>2. Si su entidad tuvo contacto con el responsable de la evaluación, ¿Cómo califica su atención?</p>
 					</label><br>
-					<div class="form-group select-govco">
+					<div class="form-group">
 						<select id ="selector-normal" class="form-control calificacion_evaluador" title="Por ejemplo: Excelente"> <!--selectpicker-->
 							<option selected>Elija una opción</option>
 							<option value="Excelente">Excelente</option>
@@ -42,7 +42,7 @@
 				<div class="form-group">
 				<!--	Botón de enviar	-->
 				<div class="p-2">
-					<button class="btn btn-round btn-high text-capitalize" id="enviarEcuesta">Enviar Encuesta <span class="govco-icon govco-icon-right-arrow-n small" ></span></button>
+					<button class="btn btn-round btn-primary text-capitalize" id="enviarEcuesta">Enviar Encuesta <span class="govco-icon govco-icon-right-arrow-n small" ></span></button>
 				</div>
 			</form>
 			<hr/>

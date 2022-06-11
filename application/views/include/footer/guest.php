@@ -11,7 +11,7 @@
 				<div class="modal-body">
 					<img style="margin: 0 auto;" src="<?php echo base_url("assets/img/siia_logo.png"); ?>" class="img-responsive" alt="Banner">
 					<hr />
-					<?php echo $informacionModal; ?>
+
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger" id="cerrarModalpanelPrincipal" data-dismiss="modal">Cerrar <i class="fa fa-times" aria-hidden="true"></i></button>
@@ -283,16 +283,16 @@
 </div>
 <!-- Modal - FIN -->
 <!-- //TODO: Botón de ir arriba -->
-<div class="backtoTop" id="back-to-top">
-	<div class="div-star-up" style="">
-		<button class="btn-up-hover back-to-top-button" aria-label="Volver a arriba" type="button" data-original-title="" title="">
-			<a class="a-start-up">
-              <span class="govco-icon govco-icon-shortu-arrow-n btn-svg-up-hover small"></span>
-				<span class="label-button-star-up">Volver a arriba</span>
-			</a>
-		</button>
-	</div>
-</div>
+<!--<div class="backtoTop" id="back-to-top">-->
+<!--	<div class="div-star-up" style="">-->
+<!--		<button class="btn-up-hover back-to-top-button" aria-label="Volver a arriba" type="button" data-original-title="" title="">-->
+<!--			<a class="a-start-up">-->
+<!--              <span class="govco-icon govco-icon-shortu-arrow-n btn-svg-up-hover small"></span>-->
+<!--				<span class="label-button-star-up">Volver a arriba</span>-->
+<!--			</a>-->
+<!--		</button>-->
+<!--	</div>-->
+<!--</div>-->
 <!-- Footer Content -->
 <!-- Footer -->
 <footer class="navbar-govco">
@@ -412,63 +412,88 @@
 	</div>
 </footer>
 <div class="hidden" id="scripts-sia">
-	<link href="https://cdn.www.gov.co/v2/assets/js/utils.js" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<link href="<?php echo base_url('assets/css/notifIt.css') ?>" rel="stylesheet" type="text/css" />
-	<link href="<?php echo base_url('assets/css/dataTables.bootstrap.css') ?>" rel="stylesheet" type="text/css" />
-	<link href="<?php echo base_url('assets/css/bootstrap-select.min.css') ?>" rel="stylesheet" type="text/css" />
-	<link href="<?php echo base_url('assets/css/animate.min.css') ?>" rel="stylesheet" type="text/css" />
-	<link href="<?php echo base_url('assets/css/bootstrap-dropdownhover.min.css') ?>" rel="stylesheet" type="text/css" />
-	<!-- <link href="--><?php //echo base_url('assets/css/mdb.min.css') ?><!--" rel="stylesheet" type="text/css" />-->
-	<link href="<?php echo base_url('assets/css/vis.min.css') ?>" rel="stylesheet" type="text/css" />
-	<!-- Scripts -->
-	<script src="<?php echo base_url('assets/js/modernizr.js') ?>"></script>
+	<!--	JQuery-->
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+	<!-- plugins:js -->
+	<script src="<?php echo base_url('assets/js/dashboard/vendors/js/vendor.bundle.base.js') ?>"></script>
+	<!-- endinject -->
+	<!-- Plugin js for this page -->
+	<script src="<?php echo base_url('assets/js/dashboard/vendors/chart.js/Chart.min.js') ?>"></script>
+	<script src="<?php echo base_url('assets/js/dashboard/vendors/typeahead.js/typeahead.bundle.min.js') ?>"></script>
+	<script src="<?php echo base_url('assets/js/dashboard/vendors/select2/select2.min.js') ?>"></script>
+	<!-- End plugin js for this page -->
+	<!-- inject:js -->
+	<script src="<?php echo base_url('assets/js/dashboard/js/off-canvas.js') ?>"></script>
+	<script src="<?php echo base_url('assets/js/dashboard/js/hoverable-collapse.js') ?>"></script>
+	<script src="<?php echo base_url('assets/js/dashboard/js/template.js') ?>"></script>
+	<script src="<?php echo base_url('assets/js/dashboard/js/settings.js') ?>"></script>
+	<script src="<?php echo base_url('assets/js/dashboard/js/todolist.js') ?>"></script>
+	<!-- endinject -->
+	<!-- Custom js for this page-->
+	<script src="<?php echo base_url('assets/js/dashboard/js/file-upload.js') ?>"></script>
+	<script src="<?php echo base_url('assets/js/dashboard/js/typeahead.js') ?>"></script>
+	<script src="<?php echo base_url('assets/js/dashboard/js/select2.js') ?>"></script>
+	<!-- End custom js for this page-->
+	<!-- Custom js for this page-->
+	<script src="<?php echo base_url('assets/js/dashboard/js/chart.js') ?>"></script>
+	<!-- End custom js for this page-->
+	<!--	Alertas	-->
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!--	Notificaciones	-->
 	<script src="<?php echo base_url('assets/js/notifIt.js') ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>" type="text/javascript"></script>
+	<!--	Validaciones de formularios	-->
 	<script src="<?php echo base_url('assets/js/jquery.validate.js') ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/bootstrap-select.min.js') ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/langs/selector-i18n/defaults-es_ES.js') ?>" type="text/javascript"></script>
-	<!-- Data Tables -->
-	<script src="<?php echo base_url('assets/js/popper.min.js') ?>" type="text/javascript"></script>
-	<!-- <script src="<?php echo base_url('assets/js/jquery.dataTables.min.js') ?>" type="text/javascript"></script> -->
-	<script src="<?php echo base_url('assets/js/jquery.dataTables.nuevo.min.js') ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/dataTables.buttons.min.js') ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/dataTables.bootstrap.js') ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/buttons.html5.min.js') ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/buttons.print.min.js') ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/buttons.flash.min.js') ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/buttons.colVis.min.js') ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/jszip.min.js') ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/pdfmake.min.js') ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/vfs_fonts.js') ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/buttons.bootstrap.min.js') ?>" type="text/javascript"></script>
-	<!-- Fin Data Tables -->
-	<script src="<?php echo base_url('assets/js/sidebar-menu.js') ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/paging.js') ?>"></script>
-	<script src="<?php echo base_url('assets/js/bootstrap-dropdownhover.min.js') ?>"></script>
-	<script src="<?php echo base_url('assets/js/echarts.min.js') ?>"></script>
-	<script src="<?php echo base_url('assets/js/map/js/world.js') ?>"></script>
-	<!--<script src="<?php echo base_url('assets/js/mdbs.min.js') ?>"></script>-->
-	<script src="<?php echo base_url('assets/js/ckeditor.js') ?>"></script>
-	<script src="<?php echo base_url('assets/js/initck.js') ?>"></script>
-	<script src="<?php echo base_url('assets/js/vis.min.js') ?>"></script>
+	<!--	Script Propios	-->
 	<script src="<?php echo base_url('assets/js/script_o.js?v=1.0.8.61219') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/funciones/registro.js?v=1.0.0.1') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/funciones/login.js?v=1.0.7.61342') . time() ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/funciones/contacto.js?v=1.0.8.61') . time() ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/funciones/estadisticas.js?v=1.0.8.62') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/funciones/encuesta.js?v=1.0.8.62') . time() ?>" type="text/javascript"></script>
 	<script type="text/javascript">
 		$(window).on('load', function() {
 			$(".se-pre-con").fadeOut("slow");
 		});
 	</script>
-	<!--Add the following script at the bottom of the web page (immediately before the </body> tag)-->
-	<!--<script type="text/javascript" async="async" defer="defer" data-cfasync="false" src="https://mylivechat.com/chatinline.aspx?hccid=49054954"></script>-->
+	<!--	<link href="https://cdn.www.gov.co/v2/assets/js/utils.js" rel="stylesheet">-->
+	<!--	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
+	<!--	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>-->
+	<!--	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
+	<!--	<link href="--><?php //echo base_url('assets/css/notifIt.css') ?><!--" rel="stylesheet" type="text/css" />-->
+	<!--	<link href="--><?php //echo base_url('assets/css/dataTables.bootstrap.css') ?><!--" rel="stylesheet" type="text/css" />-->
+	<!--	<link href="--><?php //echo base_url('assets/css/bootstrap-select.min.css') ?><!--" rel="stylesheet" type="text/css" />-->
+	<!--	<link href="--><?php //echo base_url('assets/css/animate.min.css') ?><!--" rel="stylesheet" type="text/css" />-->
+	<!--	<link href="--><?php //echo base_url('assets/css/bootstrap-dropdownhover.min.css') ?><!--" rel="stylesheet" type="text/css" />-->
+	<!-- <link href="--><?php //echo base_url('assets/css/mdb.min.css') ?><!--" rel="stylesheet" type="text/css" />-->
+	<!--	<link href="--><?php //echo base_url('assets/css/vis.min.css') ?><!--" rel="stylesheet" type="text/css" />-->
+	<!-- Scripts -->
+	<!--	<script src="--><?php //echo base_url('assets/js/modernizr.js') ?><!--"></script>-->
+
+	<!--	<script src="--><?php //echo base_url('assets/js/bootstrap.min.js') ?><!--" type="text/javascript"></script>-->
+	<!--	<script src="--><?php //echo base_url('assets/js/bootstrap-select.min.js') ?><!--" type="text/javascript"></script>-->
+	<!--	<script src="--><?php //echo base_url('assets/langs/selector-i18n/defaults-es_ES.js') ?><!--" type="text/javascript"></script>-->
+	<!-- Data Tables -->
+	<!--	<script src="--><?php //echo base_url('assets/js/popper.min.js') ?><!--" type="text/javascript"></script>-->
+	<!-- 	<script src="<?php echo base_url('assets/js/jquery.dataTables.min.js') ?>" type="text/javascript"></script> -->
+	<!--	<script src="--><?php //echo base_url('assets/js/jquery.dataTables.nuevo.min.js') ?><!--" type="text/javascript"></script>-->
+	<!--	<script src="--><?php //echo base_url('assets/js/dataTables.buttons.min.js') ?><!--" type="text/javascript"></script>-->
+	<!--	<script src="--><?php //echo base_url('assets/js/dataTables.bootstrap.js') ?><!--" type="text/javascript"></script>-->
+	<!--	<script src="--><?php //echo base_url('assets/js/buttons.html5.min.js') ?><!--" type="text/javascript"></script>-->
+	<!--	<script src="--><?php //echo base_url('assets/js/buttons.print.min.js') ?><!--" type="text/javascript"></script>-->
+	<!--	<script src="--><?php //echo base_url('assets/js/buttons.flash.min.js') ?><!--" type="text/javascript"></script>-->
+	<!--	<script src="--><?php //echo base_url('assets/js/buttons.colVis.min.js') ?><!--" type="text/javascript"></script>-->
+	<!--	<script src="--><?php //echo base_url('assets/js/jszip.min.js') ?><!--" type="text/javascript"></script>-->
+	<!--	<script src="--><?php //echo base_url('assets/js/pdfmake.min.js') ?><!--" type="text/javascript"></script>-->
+	<!--	<script src="--><?php //echo base_url('assets/js/vfs_fonts.js') ?><!--" type="text/javascript"></script>-->
+	<!--	<script src="--><?php //echo base_url('assets/js/buttons.bootstrap.min.js') ?><!--" type="text/javascript"></script>-->
+	<!-- Fin Data Tables -->
+	<!--	<script src="--><?php //echo base_url('assets/js/sidebar-menu.js') ?><!--" type="text/javascript"></script>-->
+	<!--	<script src="--><?php //echo base_url('assets/js/paging.js') ?><!--"></script>-->
+	<!--	<script src="--><?php //echo base_url('assets/js/bootstrap-dropdownhover.min.js') ?><!--"></script>-->
+	<!--	<script src="--><?php //echo base_url('assets/js/echarts.min.js') ?><!--"></script>-->
+	<!--	<script src="--><?php //echo base_url('assets/js/map/js/world.js') ?><!--"></script>-->
+	<!--	<script src="--><?php //echo base_url('assets/js/mdbs.min.js') ?><!--"></script>-->
+	<!--	<script src="--><?php //echo base_url('assets/js/ckeditor.js') ?><!--"></script>-->
+	<!--	<script src="--><?php //echo base_url('assets/js/initck.js') ?><!--"></script>-->
+	<!--	<script src="--><?php //echo base_url('assets/js/vis.min.js') ?><!--"></script>-->
 </div>
 </body>
 </html>

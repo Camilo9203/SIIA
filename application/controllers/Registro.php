@@ -20,9 +20,9 @@ class Registro extends CI_Controller
 			'tipo_usuario' => "none",
 			'activeLink' => "register"
 		);
-		$this->load->view('include/header/main', $data);
+		$this->load->view('include/header/guest', $data);
 		$this->load->view('register');
-		$this->load->view('include/header/main');
+		$this->load->view('include/footer/guest');
 		$this->logs_sia->logs('PLACE_USER');
 	}
 
@@ -33,10 +33,8 @@ class Registro extends CI_Controller
 
 	public function verificarUsuario()
 	{
-		// Comprobar que el nombre de usuario y el nit no se encuentre en la base de datos.
-		// $nitOrganizacion = $this->db->select("numNIT")->from("organizaciones")->where("numNIT", $this->input->post('nit'))->get()->row()->numeroNIT;
-		$nombreUsuario = $this->db->select("usuario")->from("usuarios")->where("usuario", $this->input->post('nombre'))->get()->row()->usuario;
-
+		// Comprobar que el nombre de usuario no se encuentre en la base de datos.
+		$nombreUsuario = $this->db->select("usuario")->from("usuarios")->where("usuario", $this->input->post('nombre_usuario'))->get()->row()->usuario;
 		if ($nombreUsuario != NULL || $nombreUsuario != "") {
 			echo json_encode(array("existe" => 1));
 		} else {
@@ -45,7 +43,7 @@ class Registro extends CI_Controller
 	}
 	public function verificarNIT()
 	{
-		// Comprobar que el nombre de usuario y el nit no se encuentre en la base de datos.
+		// Comprobar que el nit no se encuentre en la base de datos.
 		$nit = $this->db->select("numNIT")->from("organizaciones")->where("numNIT", $this->input->post('nit'))->get()->row()->numNIT;
 		if ($nit != NULL || $nit != "") {
 			echo json_encode(array("existe" => 1));
@@ -78,77 +76,94 @@ class Registro extends CI_Controller
 			echo json_encode(array('url' => "registro", 'msg' => $error));
 		}
 		else {
-			/** Capturar Data Tabla Usuario */
-			$data_registro_user = array(
-				'usuario' => $this->input->post('nombre_usuario'),
-				'contrasena' => $this->input->post('password'),
-				'contrasena_rdel'=> $this->input->post('password'),
-				'contrasena' => generate_hash($this->input->post('password')),
-				'contrasena_rdel' => mc_encrypt($this->input->post('password'), KEY_RDEL),
-				'logged_in' => 0,
-			);
-			/** Guardar data de usuario y comprobar que se hubiese guardado */
-			if ($this->db->insert('usuarios', $data_registro_user)){
-				$this->logs_sia->logQueries();
-				//Capturar data del usuario registrado
-				$usuario = $this->db->select('id_usuario')->from('usuarios')->where('usuario', $data_registro_user['usuario'])->get()->row();
-				/** @var $data_token  Capturar Data Tabla Token */
-				$data_token = array(
-					'token' => generate_token(),
-					'verificado' => 0,
-					'usuario_token' => $data_registro_user['usuario']
+			/**	@var $nombreUsuario Capturar nombre de usuario */
+			$nombreUsuario = $this->db->select("usuario")->from("usuarios")->where("usuario", $this->input->post('nombre_usuario'))->get()->row()->usuario;
+			/**	@var $nit Capturar NIT de Organización */
+			$nit = $this->db->select("numNIT")->from("organizaciones")->where("numNIT", $this->input->post('nit'))->get()->row()->numNIT;
+			/** Comprobar que usuario existe */
+			if ($nombreUsuario != NULL || $nombreUsuario != "") {
+				echo json_encode(array('url' => "registro", "msg" => "Usuario existente, intente de nuevo"));
+			}
+			/** Comprobar que NIT existe */
+			elseif ($nit != NULL || $nit != "") {
+				echo json_encode(array('url' => "registro", "msg" => "NIT existente, intente de nuevo"));
+			}
+			/** Acción si no existe ni usuario ni nit */
+			else {
+				/** Capturar Data Tabla Usuario */
+				$data_registro_user = array(
+					'usuario' => $this->input->post('nombre_usuario'),
+					'contrasena' => $this->input->post('password'),
+					'contrasena_rdel'=> $this->input->post('password'),
+					'contrasena' => generate_hash($this->input->post('password')),
+					'contrasena_rdel' => mc_encrypt($this->input->post('password'), KEY_RDEL),
+					'logged_in' => 0,
+					'created_at' => date('Y/m/d H:i:s'),
 				);
-				/** Guardar datos en tabla token */
-				$this->db->insert('token', $data_token);
-				//Capturar data de token registrado
-				$token = $this->db->select('id_token')->from('token')->where('usuario_token', $data_token['usuario_token'])->get()->row();
-				//Crear variable de token
-				$update_usuario = array(
-					'token_id_token' => $token->id_token
-				);
-				//Actualizar tabla usuarios para asociar token al usuario registrado.
-				$this->db->where('id_usuario', $usuario->id_usuario);
-				//Comprobar actualización de datos
-				if ($this->db->update('usuarios', $update_usuario)) {
+				/** Guardar data de usuario y comprobar que se hubiese guardado */
+				if ($this->db->insert('usuarios', $data_registro_user)){
 					$this->logs_sia->logQueries();
-					/** @var  $data_registro_org
-					 	Capturar datos de la organización
-					 */
-					$data_registro_org = array(
-						'nombreOrganizacion' => $this->input->post('organizacion'),
-						'numNIT' => $this->input->post('nit'),
-						'sigla' => $this->input->post('sigla'),
-						'primerNombreRepLegal' => $this->input->post('nombre'),
-						'segundoNombreRepLegal' => $this->input->post('nombre_s'),
-						'primerApellidoRepLegal' => $this->input->post('apellido'),
-						'segundoApellidoRepLegal' => $this->input->post('apellido'),
-						'direccionCorreoElectronicoOrganizacion' => $this->input->post('correo_electronico'),
-						'direccionCorreoElectronicoRepLegal' => $this->input->post('correo_electronico_rep_legal'),
-						'estado' => "Inscrito",
-						'usuarios_id_usuario' => $usuario->id_usuario,
+					/**  Capturar id del usuario registrado */
+					$usuario = $this->db->select('id_usuario')->from('usuarios')->where('usuario', $data_registro_user['usuario'])->get()->row();
+					/** @var $data_token  Capturar Data Tabla Token */
+					$data_token = array(
+						'token' => generate_token(),
+						'verificado' => 0,
+						'usuario_token' => $data_registro_user['usuario'],
+						'created_at' => date('Y/m/d H:i:s'),
 					);
-					//Guardar datos en la tabla de usuarios y comprobar.
-					if ($this->db->insert('organizaciones', $data_registro_org)) {
+					/** Guardar datos en tabla token */
+					$this->db->insert('token', $data_token);
+					//Capturar data de token registrado
+					$token = $this->db->select('id_token')->from('token')->where('usuario_token', $data_token['usuario_token'])->get()->row();
+					//Crear variable de token
+					$update_usuario['token_id_token'] = $token->id_token;
+					// Buscar registro de usuario
+					$this->db->where('id_usuario', $usuario->id_usuario);
+					/**  Actualizar y comprobar usuario con token registrado. */
+					if ($this->db->update('usuarios', $update_usuario)) {
 						$this->logs_sia->logQueries();
-						$token = $this->db->select('token')->from('token')->where('usuario_token', $data_registro_user['usuario'])->get()->row();
-						$fromSIA = "Unidad Administrativa Especial de Organizaciones Solidarias UAEOS - Aplicación SIIA.";
-						$this->enviomail_activar(CORREO_SIA, $fromSIA, $data_registro_org['direccionCorreoElectronicoOrganizacion'], $data_registro_org['direccionCorreoElectronicoRepLegal'], $token->token, $data_registro_org['primerNombreRepLegal'], $data_registro_org['primerApellidoRepLegal'], $data_registro_org['nombreOrganizacion'], $data_registro_org['numNIT'], $data_registro_user['usuario']);
-						$this->logs_sia->logs('REGISTER_TYPE');
-						$this->logs_sia->logs('URL_TYPE');
-						$this->logs_sia->logQueries();
-						echo json_encode(array('url' => "registro", 'msg' => "Se ha registrado usuario correctamente"));
+						/** @var  $data_registro_org
+							Capturar datos de la organización
+						 */
+						$data_registro_org = array(
+							'nombreOrganizacion' => $this->input->post('organizacion'),
+							'numNIT' => $this->input->post('nit'),
+							'sigla' => $this->input->post('sigla'),
+							'primerNombreRepLegal' => $this->input->post('nombre'),
+							'segundoNombreRepLegal' => $this->input->post('nombre_s'),
+							'primerApellidoRepLegal' => $this->input->post('apellido'),
+							'segundoApellidoRepLegal' => $this->input->post('apellido'),
+							'direccionCorreoElectronicoOrganizacion' => $this->input->post('correo_electronico'),
+							'direccionCorreoElectronicoRepLegal' => $this->input->post('correo_electronico_rep_legal'),
+							'estado' => "Inscrito",
+							'usuarios_id_usuario' => $usuario->id_usuario,
+							'created_at' => date('Y/m/d H:i:s'),
+						);
+						//Guardar datos en la tabla de usuarios y comprobar.
+						if ($this->db->insert('organizaciones', $data_registro_org)) {
+							$this->logs_sia->logQueries();
+							$token = $this->db->select('token')->from('token')->where('usuario_token', $data_registro_user['usuario'])->get()->row();
+							$fromSIA = "Unidad Administrativa Especial de Organizaciones Solidarias UAEOS - Aplicación SIIA.";
+							$this->enviomail_activar(CORREO_SIA, $fromSIA, $data_registro_org['direccionCorreoElectronicoOrganizacion'], $data_registro_org['direccionCorreoElectronicoRepLegal'], $token->token, $data_registro_org['primerNombreRepLegal'], $data_registro_org['primerApellidoRepLegal'], $data_registro_org['nombreOrganizacion'], $data_registro_org['numNIT'], $data_registro_user['usuario']);
+							$this->logs_sia->logs('REGISTER_TYPE');
+							$this->logs_sia->logs('URL_TYPE');
+							$this->logs_sia->logQueries();
+							//echo json_encode(array('url' => "registro", 'msg' => "Se ha registrado usuario correctamente, verifica correo de notificaciones" . $data_registro_org['direccionCorreoElectronicoOrganizacion'], 'status' => 1));
+						}
+						else {
+							echo json_encode(array('url' => "registro", 'msg' => "No se logro crear organización"));
+						}
 					}
 					else {
-						echo json_encode(array('url' => "registro", 'msg' => "No se logro crear organización"));
+						echo json_encode(array('url' => "registro", 'msg' => "No se logro crear token"));
 					}
 				}
 				else {
-					echo json_encode(array('url' => "registro", 'msg' => "No se logro crear token"));
+					echo json_encode(array('url' => "registro", 'msg' => "No se logro crear usuario"));
 				}
 			}
-			else {
-				echo json_encode(array('url' => "registro", 'msg' => "No se logro crear usuario"));
-			}
+
 		}
 	}
 	/**
@@ -169,43 +184,58 @@ class Registro extends CI_Controller
 		$this->email->to($to);
 		$this->email->cc($cc);
 		$this->email->subject('SIIA - Activación de Cuenta.');
-
-		$data_msg['organizacion'] = $organizacion;
-		$data_msg['nit'] = $nit;
-		$data_msg['to'] = $to;
-		$data_msg['nombre_rep_legal'] = $nombre;
-		$data_msg['apellido_rep_legal'] = $apellido;
-		$data_msg['nombre_usuario'] = $nombre_usuario;
-		$data_msg['token'] = $token;
-
+		/** Capturar data mensaje */
+		$data_msg = array(
+			'organización' => $organizacion,
+			'nit' => $nit,
+			'to' => $to,
+			'nombre_rep_legal' => $nombre,
+			'apellido_rep_legal' => $apellido,
+			'nombre_usuario' => $nombre_usuario,
+			'token' => $token
+		);
+		/** Variable de mensaje, con vista y mensaje */
 		$email_view = $this->load->view('email/verificacion_cuenta', $data_msg, true);
-
+		/** Enviar vista al mensaje */
 		$this->email->message($email_view);
-
+		/** Comprobar si se envía mensaje */
 		if ($this->email->send()) {
-			$usuarios = $this->db->select("*")->from("usuarios")->where("usuario", $nombre_usuario)->get()->row();
-			$id_us = $usuarios->id_usuario;
-			$token = $this->db->select("*")->from("token")->where("usuario_token", $nombre_usuario)->get()->row();
-			$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $id_us)->get()->row();
-			echo json_encode(array('url' => "login", 'msg' => "Se envio un correo a: " . $to . ", por favor verifiquelo para activar su cuenta.", "usuario" => $usuarios, "token" => $token, "organizacion" => $organizacion));
+			//Capturar datos para guardar en base de datos registro del correo enviado.
+			$correo_registro = array(
+				'fecha' => date('Y/m/d H:i:s'),
+				'de' => CORREO_SIA,
+				'para' => $to,
+				'cc' => $cc,
+				'asunto' => "Nuevo usuario registrado - Correo de activación enviado",
+				'cuerpo' => json_encode($data_msg),
+				'estado' => "1",
+				'tipo' => "Notificación externa",
+				'error' => $this->email->print_debugger()
+			);
+			//Comprobar que se guardó o no el registro en la tabla correosRegistro
+			if($this->db->insert('correosRegistro', $correo_registro)){
+				echo json_encode(array('url' => "registro", 'msg' => "Se envío un correo a: " . $to . ", por favor verifíquelo para activar su cuenta.", "status" => 1));
+			}
+			else {
+				echo json_encode(array('msg' => "Se envío el correo de activación pero no se guardo registro en base de datos", "status" => 1));
+			}
+
 		} else {
-			//SET FOREIGN_KEY_CHECKS=0; -- to disable them
-			$id_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("nombreOrganizacion", $organizacion)->get()->row()->id_organizacion;
-			$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-			if ($this->db->delete('estadoOrganizaciones')) {
-				$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-				if ($this->db->delete('solicitudes')) {
-					$this->db->where('id_organizacion', $id_organizacion);
-					if ($this->db->delete('organizaciones')) {
-						$this->db->where('usuario', $nombre_usuario);
-						if ($this->db->delete('usuarios')) {
-							$this->db->where('token', $token);
-							if ($this->db->delete('token')) {
-								echo json_encode(array('url' => "login", 'msg' => "Lo sentimos, hubo un error y no se envio el correo, intente de nuevo.", "status" => 0));
-							}
-						}
-					}
-				}
+			//Capturar datos para guardar en base de datos registro del correo no enviado.
+			$correo_registro = array(
+				'fecha' => date('Y/m/d H:i:s'),
+				'de' => CORREO_SIA,
+				'para' => $to,
+				'cc' => $cc,
+				'asunto' => "Correo de activación no enviado",
+				'cuerpo' => json_encode($data_msg),
+				'estado' => "0",
+				'tipo' => "Notificación interna",
+				'error' => $this->email->print_debugger()
+			);
+			//Comprobar que se guardó o no el registro en la tabla correosRegistro
+			if($this->db->insert('correosRegistro', $correo_registro)){
+				echo json_encode(array('msg' => "Se han guardado tus datos registrados, pero no se logro enviar correo de activación, sin embargo se registro error en base de datos para verificación por parte del administrador"));
 			}
 		}
 	}
@@ -222,7 +252,6 @@ class Registro extends CI_Controller
 		$apellido_p = $this->input->post('apellido_p');
 		$nombre_usuario = $this->input->post('usuario');
 		$token = $this->input->post('tk');
-
 		$this->enviomail_activar(CORREO_SIA, "$fromSIA", "$correo_electronico", "$correo_electronico_rep_legal", "$token", "$nombre", "$apellido", "$organizacion", "$nit", "$nombre_usuario");
 	}
 }

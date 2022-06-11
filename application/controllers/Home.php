@@ -21,9 +21,9 @@ class Home extends CI_Controller
 			'tipo_usuario' => "none",
 			'activeLink' => "home"
 		);
-		$this->load->view('include/header_new', $data);
+		$this->load->view('include/header/guest', $data);
 		$this->load->view('home');
-		$this->load->view('include/footer_new');
+		$this->load->view('include/footer/guest');
 		$this->logs_sia->logs('PLACE_USER');
 	}
 
@@ -84,9 +84,9 @@ class Home extends CI_Controller
 			'activeLink' => "estado"
 		);
 
-		$this->load->view('include/header_new', $data);
+		$this->load->view('include/header/guest', $data);
 		$this->load->view('estadoSolicitud');
-		$this->load->view('include/footer_new');
+		$this->load->view('include/footer/guest');
 		$this->logs_sia->logs('PLACE_USER');
 	}
 
@@ -99,9 +99,9 @@ class Home extends CI_Controller
 			'activeLink' => "facilitadores"
 		);
 
-		$this->load->view('include/header_new', $data);
+		$this->load->view('include/header/guest', $data);
 		$this->load->view('facilitadores');
-		$this->load->view('include/footer_new');
+		$this->load->view('include/footer/guest');
 		$this->logs_sia->logs('PLACE_USER');
 	}
 
