@@ -820,7 +820,7 @@ $(document).ready(function () {
 		}
 	});
 
-	// Eventos del menu
+	//TODO: Eventos del menu
 	$("#sidebar-menu>.menu_section>#wizard_verticle>.side-menu>li>a").click(
 		function () {
 			$(".formulario_panel").hide();
@@ -9145,17 +9145,10 @@ $(document).ready(function () {
 	$("#guardar_formulario_tipoSolicitud").click(function () {
 		if ($("#formulario_crear_solicitud").valid()) {
 			$(this).attr("disabled", true);
-			var tipo_solicitud = $("input:radio[name=tipo_solicitud]:checked").val();
-			var motivo_solicitud = $(
-				"input:radio[name=motivo_solicitud]:checked"
-			).val();
-			var modalidad_solicitud = $(
-				"input:radio[name=modalidad_solicitud]:checked"
-			).val();
 			data = {
-				tipo_solicitud: tipo_solicitud,
-				motivo_solicitud: motivo_solicitud,
-				modalidad_solicitud: modalidad_solicitud,
+				tipo_solicitud: $("input:radio[name=tipo_solicitud]:checked").val(),
+				motivo_solicitud: $("input:radio[name=motivo_solicitud]:checked").val(),
+				modalidad_solicitud: $("input:radio[name=modalidad_solicitud]:checked").val(),
 			};
 
 			$.ajax({
@@ -9173,10 +9166,7 @@ $(document).ready(function () {
 					$(".side_main_menu").show();
 					$(".hide-sidevar").show();
 					verificarFormularios();
-					if (
-						response.est == "En Proceso de Renovación" ||
-						response.est == "En Proceso de Actualización"
-					) {
+					if (response.est == "En Proceso de Renovación" || response.est == "En Proceso de Actualización") {
 						window.location.hash = "enProcesoActualizacion";
 					} else if (
 						response.est == "En Proceso" ||
@@ -17832,6 +17822,7 @@ function verificarFormularios() {
 			$("#motivoSolicitudesBB").html(response.motivo);
 			$("#modalidadSolicitudesBB").html(response.modalidad);
 			$("#estadoAnteriorBB").html(response.estadoAnterior);
+			console.log(response.formularios);
 			for (var i = 0; i < response.formularios.length; i++) {
 				var step_sel = response.formularios[i].split(".");
 				if (i != step_sel[0]) {

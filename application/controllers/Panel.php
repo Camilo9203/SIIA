@@ -894,7 +894,9 @@ class Panel extends CI_Controller
 			if (($modalidadSolicitud == "Virtual" || $modalidadSolicitud == "Virtual y Presencial") && $aplicacion == NULL) {
 				array_push($formularios, "10. Falta el formulario de Ingreso a la Plataforma Virtual.");
 			}
-		} else if ($motivoSolicitud == "Acreditación, Aval de Trabajo Asociado") {
+		}
+		// Acreditación, Aval de Trabajo Asociado
+		else if ($motivoSolicitud == "Acreditación, Aval de Trabajo Asociado") {
 			if ($informacionGeneral == NULL || $certificacionesForm == NULL || $lugar == NULL || $carta == NULL) {
 				array_push($formularios, "1. Falta el formulario de Informacion General.");
 			}
@@ -922,7 +924,9 @@ class Panel extends CI_Controller
 			if (($modalidadSolicitud == "Virtual" || $modalidadSolicitud == "Virtual y Presencial") && $aplicacion == NULL) {
 				array_push($formularios, "10. Falta el formulario de Ingreso a la Plataforma Virtual.");
 			}
-		} else if ($motivoSolicitud == "Acreditación, Aval a otros Programas") {
+		}
+		// Acreditación Curso Medio de Economía Solidaria
+		else if ($motivoSolicitud == "Acreditación Curso Medio de Economía Solidaria") {
 			if ($informacionGeneral == NULL || $certificacionesForm == NULL || $lugar == NULL || $carta == NULL) {
 				array_push($formularios, "1. Falta el formulario de Informacion General.");
 			}
@@ -941,16 +945,15 @@ class Panel extends CI_Controller
 			if ($datosBasicosProgramas == NULL || $datosBasicosProg == NULL || $materialProgBasicos == NULL) {
 				array_push($formularios, "6. Falta el formulario de Datos Basicos Programas.");
 			}
-			if ($programasAvalar == NULL || $formatosEval == NULL || $materialProgEval == NULL) {
-				array_push($formularios, "8. Falta el formulario de Programas Avalar.");
-			}
 			if ($docentes == NULL || $numeroDocentes < 3) {
 				array_push($formularios, "9. Faltan facilitadores y/o archivos, deben ser tres (3) con sus respectivos documentos.");
 			}
 			if (($modalidadSolicitud == "Virtual" || $modalidadSolicitud == "Virtual y Presencial") && $aplicacion == NULL) {
 				array_push($formularios, "10. Falta el formulario de Ingreso a la Plataforma Virtual.");
 			}
-		} else if ($motivoSolicitud == "Acreditación, Aval de Trabajo Asociado, Aval a otros Programas") {
+		}
+		// Acreditación Curso Avanzado de Economía Solidaria
+		else if ($motivoSolicitud == "Acreditación Curso Avanzado de Economía Solidaria") {
 			if ($informacionGeneral == NULL || $certificacionesForm == NULL || $lugar == NULL || $carta == NULL) {
 				array_push($formularios, "1. Falta el formulario de Informacion General.");
 			}
@@ -969,11 +972,32 @@ class Panel extends CI_Controller
 			if ($datosBasicosProgramas == NULL || $datosBasicosProg == NULL || $materialProgBasicos == NULL) {
 				array_push($formularios, "6. Falta el formulario de Datos Basicos Programas.");
 			}
-			if ($programasAvalEconomia == NULL || $datosAvalEcon == NULL || $materialAvalEcon == NULL) {
-				array_push($formularios, "7. Falta el formulario de Programas Aval Economia.");
+			if ($docentes == NULL || $numeroDocentes < 3) {
+				array_push($formularios, "9. Faltan facilitadores y/o archivos, deben ser tres (3) con sus respectivos documentos.");
 			}
-			if ($programasAvalar == NULL || $formatosEval == NULL || $materialProgEval == NULL) {
-				array_push($formularios, "8. Falta el formulario de Programas Avalar.");
+			if (($modalidadSolicitud == "Virtual" || $modalidadSolicitud == "Virtual y Presencial") && $aplicacion == NULL) {
+				array_push($formularios, "10. Falta el formulario de Ingreso a la Plataforma Virtual.");
+			}
+		}
+		//
+		else if ($motivoSolicitud == "Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria") {
+			if ($informacionGeneral == NULL || $certificacionesForm == NULL || $lugar == NULL || $carta == NULL) {
+				array_push($formularios, "1. Falta el formulario de Informacion General.");
+			}
+			if ($documentacionLegal == NULL) {
+				array_push($formularios, "2. Falta el formulario de Documentacion Legal.");
+			}
+			if ($registroEducativoProgramas == NULL && $documentacionLegal != NULL && $registroE != "No Tiene") {
+				array_push($formularios, "3. Falta el formulario de Registro Educativo Programas.");
+			}
+			if ($antecedentesAcademicos == NULL) {
+				array_push($formularios, "4. Falta el formulario de Antecedentes Academicos.");
+			}
+			if ($jornadasActualizacion == NULL || $jornada == NULL) {
+				array_push($formularios, "5. Falta el formulario de Jornadas Actualización.");
+			}
+			if ($datosBasicosProgramas == NULL || $datosBasicosProg == NULL || $materialProgBasicos == NULL) {
+				array_push($formularios, "6. Falta el formulario de Datos Basicos Programas.");
 			}
 			if ($docentes == NULL || $numeroDocentes < 3) {
 				array_push($formularios, "9. Faltan facilitadores y/o archivos, deben ser tres (3) con sus respectivos documentos.");
@@ -981,7 +1005,9 @@ class Panel extends CI_Controller
 			if (($modalidadSolicitud == "Virtual" || $modalidadSolicitud == "Virtual y Presencial") && $aplicacion == NULL) {
 				array_push($formularios, "10. Falta el formulario de Ingreso a la Plataforma Virtual.");
 			}
-		} else if ($motivoSolicitud == "Actualizar Datos") {
+		}
+		// Actualizar Datos
+		else if ($motivoSolicitud == "Actualizar Datos") {
 			if ($informacionGeneral == NULL) {
 				array_push($formularios, "Llene los formularios que requieran actualizacion." && $aplicacion == NULL);
 			}

@@ -136,12 +136,30 @@
 			<label><input type="radio" name="motivo_solicitud" id="motivo2" class="motivo_sol" value="Acreditación, Aval de Trabajo Asociado">Acreditación curso básico de economía solidaria y aval de trabajo asociado.</label>
 		</div>
 	</div>
-	<!-- Acreditación para otros programas //TODO: Otros programas comentado-->
+	<!-- Acreditación curso medio ES -->
 	<div class="form-group">
 		<div class="radio">
-			<label><input type="radio" name="motivo_solicitud" id="motivo3" class="motivo_sol" value="Acreditación, Aval a otros Programas">Acreditacion en aval de trabajo asociado.</label>
+			<label><input type="radio" name="motivo_solicitud" id="motivo3" class="motivo_sol" value="Acreditación Curso Medio de Economía Solidaria" checked>Acreditación curso medio de economía solidaria.</label>
 		</div>
 	</div>
+	<!-- Acreditación curso avanzado ES -->
+	<div class="form-group">
+		<div class="radio">
+			<label><input type="radio" name="motivo_solicitud" id="motivo4" class="motivo_sol" value="Acreditación Curso Avanzado de Economía Solidaria" checked>Acreditación curso avanzado de economía solidaria.</label>
+		</div>
+	</div>
+	<!-- Acreditación curso de educación económica y financiera para la economía solidaria -->
+	<div class="form-group">
+		<div class="radio">
+			<label><input type="radio" name="motivo_solicitud" id="motivo5" class="motivo_sol" value="Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria" checked>Acreditación curso de educación económica y financiera para la economía solidaria</label>
+		</div>
+	</div>
+	<!-- Acreditación para otros programas //TODO: Otros programas comentado-->
+<!--	<div class="form-group">-->
+<!--		<div class="radio">-->
+<!--			<label><input type="radio" name="motivo_solicitud" id="motivo3" class="motivo_sol" value="Acreditación, Aval a otros Programas">Acreditacion en aval de trabajo asociado.</label>-->
+<!--		</div>-->
+<!--	</div>-->
 	<!-- //TODO: Otros programas -->
 	<!-- <div class="form-group">
 		<div class="radio">
@@ -181,7 +199,7 @@
 	<hr />
 	<!-- Modalidad de la solicitud -FIN -->
 	</form>
-	<button class="btn btn-siia btn-sm pull-right" name="" id="guardar_formulario_tipoSolicitud" id="guardar_formulario_tipoSolicitud">Crear solicitud <i class="fa fa-check" aria-hidden="true"></i></button>
+	<button class="btn btn-siia btn-sm pull-right" name="" id="guardar_formulario_tipoSolicitud">Crear solicitud <i class="fa fa-check" aria-hidden="true"></i></button>
 	<button class="btn btn-danger btn-sm volver_al_panel"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 </div>
 <!-- Modal Ayuda Modalidad Virtual  -->
