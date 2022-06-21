@@ -118,7 +118,7 @@ class Registro extends CI_Controller
 					$token = $this->db->select('id_token')->from('token')->where('usuario_token', $data_token['usuario_token'])->get()->row();
 					//Crear variable de token
 					$update_usuario['token_id_token'] = $token->id_token;
-					// Buscar registro de usuario
+					//Buscar registro de usuario
 					$this->db->where('id_usuario', $usuario->id_usuario);
 					/**  Actualizar y comprobar usuario con token registrado. */
 					if ($this->db->update('usuarios', $update_usuario)) {
@@ -248,6 +248,7 @@ class Registro extends CI_Controller
 		$nombre = $this->input->post('primerNombre');
 		$apellido = $this->input->post('primerApellido');
 		$correo_electronico = $this->input->post('to');
+		$correo_electronico_rep_legal = $this->input->post('to');
 		$nombre_p = $this->input->post('nombre_p');
 		$apellido_p = $this->input->post('apellido_p');
 		$nombre_usuario = $this->input->post('usuario');

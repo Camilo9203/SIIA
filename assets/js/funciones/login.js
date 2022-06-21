@@ -116,6 +116,53 @@ $("#inicio_sesion").click(function () {
 	}
 });
 
+/**
+		Clic en Recordar Contraseña
+ **/
+$("#recordar_contrasena").click(function () {
+	if ($("#formulario_recordar").valid()) {
+		let nit = $("#numeroNIT").val() + "-" + $("#digitoVerificacion").val();
+		$.ajax({
+			url: baseURL + "registro/verificarNIT",
+			type: "post",
+			dataType: "JSON",
+			data: nit,
+			success: function (response) {
+				if (response.existe == 1) {
+					$.ajax({
+						url: baseURL + "recordar/recordar",
+						type: "post",
+						dataType: "JSON",
+						data: nit,
+						beforeSend: function () {
+							$("#loading").show();
+							$(this).attr("disabled", true);
+						},
+						success: function (response) {
+							mensaje(response.msg, "alert-success");
+							$("#loading").toggle();
+							clearInputs("formulario_recordar");
+							grecaptcha.reset();
+						},
+						error: function (ev) {
+							//Do nothing
+						},
+					});
+				} else {
+					/** Alerta si NIT ya existe*/
+					Toast.fire({
+						icon: 'error',
+						title: 'El NIT no existe.'
+					});
+
+				}
+			}
+		});
+
+	}
+});
+
+
 
 /**
 		Click en Salir de Sesión.

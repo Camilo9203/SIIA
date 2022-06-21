@@ -7,12 +7,12 @@ class Admin extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		verify_session_admin();
+//		verify_session_admin();
 		$this->load->model('DocentesModel');
 	}
 	public function mcdec()
 	{
-		$password = "";
+		$password = "KSR8ztt//8Fj7FfSaDjLphyJKJq/X2LdFL4GoJnNgO2OQWaeJZvIHTAf9T+fFFbwHtwImhK9LMs4tOW7VnKZfRkR7t8cT4ebcoIANjtwRszS+DzZxD14J9CL+9sbV4Fj|SSSBKczEmOxdrUuN2qtZOWh/wPzJljlsXkR2hK4jcko=";
 		$passwor2 = mc_decrypt($password, KEY_RDEL);
 		echo json_encode($passwor2);
 	}

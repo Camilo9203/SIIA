@@ -8137,56 +8137,7 @@ $(document).ready(function () {
 		}
 	});
 
-	/**
-		TODO: Click en Recordar Contraseña
-	**/
-	$("#recordar_contrasena").click(function () {
-		if ($("#formulario_recordar").valid()) {
-			var usuario = $("#nombre_usuario_rec").val();
-			var correo_electronico = $("#correo_electronico_rec").val();
-			var check = $("#acepto_cond_rec").prop("checked");
-			var response_captcha = grecaptcha.getResponse();
 
-			if (usuario.length > 0 && correo_electronico.length > 0) {
-				if (check == true) {
-					if (response_captcha != 0) {
-						var data = {
-							usuario: usuario,
-							correo_electronico: correo_electronico,
-						};
-						$.ajax({
-							url: baseURL + "recordar/recordar",
-							type: "post",
-							dataType: "JSON",
-							data: data,
-							beforeSend: function () {
-								$("#loading").show();
-								$(this).attr("disabled", true);
-							},
-							success: function (response) {
-								mensaje(response.msg, "alert-success");
-								$("#loading").toggle();
-								clearInputs("formulario_recordar");
-								grecaptcha.reset();
-							},
-							error: function (ev) {
-								//Do nothing
-							},
-						});
-					} else {
-						mensaje(texto_validacaptcha, alert_danger);
-					}
-				} else {
-					mensaje(
-						"Aceptas que eres el usuario del correo electronico?",
-						alert_warning
-					);
-				}
-			} else {
-				mensaje("No hay valores.", alert_danger);
-			}
-		}
-	});
 
 
 

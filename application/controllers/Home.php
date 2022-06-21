@@ -17,8 +17,6 @@ class Home extends CI_Controller
 	{
 		$data = array(
 			'title' => 'Home',
-			'loggen_in' => false,
-			'tipo_usuario' => "none",
 			'activeLink' => "home"
 		);
 		$this->load->view('include/header/guest', $data);
@@ -36,10 +34,6 @@ class Home extends CI_Controller
 	public function construccion()
 	{
 		$data['title'] = 'En contrucción';
-		$data['logged_in'] = false;
-		$data['tipo_usuario'] = "none";
-		$data['nombre_usuario'] = "none";
-
 		$this->load->view('404_r');
 		$this->logs_sia->logs('PLACE_USER');
 	}

@@ -137,9 +137,5 @@
 			</div>
 		</div>
 		<!-- Navbar Usuario no registrado //TODO: Navbar de usuario no registrado -->
-		<?php if (!$logged_in && $tipo_usuario == "none") {
-			echo "<div class='hidden' id='data_logg' data-log='$logged_in'></div>";
-			$this->load->view('include/navbar/guest', $activeLink);
-			?>
-		<?php } ?>
+		<?php $this->load->view('include/navbar/guest', $activeLink); ?>
 	</header>

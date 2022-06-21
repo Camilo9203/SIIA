@@ -22,41 +22,35 @@ class Recordar extends CI_Controller {
 	**/
 	public function recordar()
 	{
-		$this->form_validation->set_rules('usuario','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('correo_electronico','','trim|required|min_length[3]|valid_email|xss_clean');
+		$organizacion = $this->db->select('*')->from('organizaciones')->where('numNIT', $this->input->post('nit'))->get()->row();
 
-    	if ($this->form_validation->run("formulario_registro") == FALSE)
-		{
-			echo json_encode(array('url'=>"login", 'msg'=>"Verifique los datos, no son validos."));
+		die(var_dump($organizacion->direccionCorreoElectronicoOrganizacion));
+
+		$fromSIA = "Unidad Administrativa Especial de Organizaciones Solidarias UAEOS - Aplicacion SIIA.";
+		$usuario = $this->input->post('usuario');
+		$correo_electronico =  $this->input->post('correo_electronico');
+
+		$datos_usuario = $this->db->select('*')->from('usuarios')->where('usuario', $usuario)->get()->row();
+		$datos_registro = $this->db->select('*')->from('organizaciones')->where('direccionCorreoElectronicoOrganizacion', $correo_electronico)->get()->row();
+		$this->logs_sia->logQueries();
+
+		if($datos_usuario == "NULL" || $datos_usuario == NULL || $datos_usuario == null && $datos_registro == "NULL" || $datos_registro == NULL || $datos_registro == null){
+			$user_exist = false;
+		}else{
+			$user_exist = true;
 		}
-		else
-		{
-			$fromSIA = "Unidad Administrativa Especial de Organizaciones Solidarias UAEOS - Aplicacion SIIA.";
-			$usuario = $this->input->post('usuario');
-			$correo_electronico =  $this->input->post('correo_electronico');
 
-			$datos_usuario = $this->db->select('*')->from('usuarios')->where('usuario', $usuario)->get()->row();
-			$datos_registro = $this->db->select('*')->from('organizaciones')->where('direccionCorreoElectronicoOrganizacion', $correo_electronico)->get()->row();
-			$this->logs_sia->logQueries();
-
-			if($datos_usuario == "NULL" || $datos_usuario == NULL || $datos_usuario == null && $datos_registro == "NULL" || $datos_registro == NULL || $datos_registro == null){
-				$user_exist = false;
-			}else{
-				$user_exist = true;
-			}
-
-			if($user_exist == true){
-				$contrasena_rdel = $datos_usuario ->contrasena_rdel;
-				$correo_electronico = $datos_registro ->direccionCorreoElectronicoOrganizacion;
-				$nombre_usuario = $datos_usuario ->usuario;
-				$password = mc_decrypt($contrasena_rdel, KEY_RDEL);
-				$this->enviomail_recodar(CORREO_SIA, "$fromSIA", "$correo_electronico", "$password", "$nombre_usuario");
-				$this->logs_sia->logs('REMEMBER_PASSWORD');
-				$this->logs_sia->logs('URL_TYPE');
-			}else{
-				echo json_encode(array('url'=>"login", 'msg'=>"No existe el usuario."));
-				$this->logs_sia->logs('URL_TYPE');
-			}
+		if($user_exist == true){
+			$contrasena_rdel = $datos_usuario ->contrasena_rdel;
+			$correo_electronico = $datos_registro ->direccionCorreoElectronicoOrganizacion;
+			$nombre_usuario = $datos_usuario ->usuario;
+			$password = mc_decrypt($contrasena_rdel, KEY_RDEL);
+			$this->enviomail_recodar(CORREO_SIA, "$fromSIA", "$correo_electronico", "$password", "$nombre_usuario");
+			$this->logs_sia->logs('REMEMBER_PASSWORD');
+			$this->logs_sia->logs('URL_TYPE');
+		}else{
+			echo json_encode(array('url'=>"login", 'msg'=>"No existe el usuario."));
+			$this->logs_sia->logs('URL_TYPE');
 		}
 	}
 

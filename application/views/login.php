@@ -56,15 +56,42 @@
 	<div class="modal-dialog modal-md" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="recordarContrasena">Recordar la contraseña.</h4>
+				<h4 class="modal-title" id="recordarContrasena">Recordar Contraseña.</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
 			<div class="modal-body">
-				<div class="row">
-					<div class="embed-responsive embed-responsive-16by9">
-						<iframe title="Recordar" src="<?php echo base_url(); ?>recordar" class="embed-responsive-item"></iframe>
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<p class="text-justify">Por favor ingresa tu numero de NIT con el digito de verificación luego presiona el botón recordar y te enviaremos un correo con tu contraseña y usuario</p>
+							<br>
+							<?php echo form_open('', array('id' => 'formulario_recordar')); ?>
+								<div class="form-group">
+									<label for="nit">NIT de la organización: <span class="spanRojo">*</span></label>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text">#</span>
+										</div>
+										<input type="number" class="form-control" form="formulario_recordar" name="numeroNIT" id="numeroNIT" placeholder="Numero de NIT" required maxlength="10" minlength="3" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+										<div class="input-group-prepend">
+											<span class="input-group-text">V</span>
+										</div>
+										<input type="number" class="form-control" form="formulario_recordar" name="digitoVerificacion" id="digitoVerificacion" placeholder="Dígito" required maxlength="1" minlength="1" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" size="2">
+									</div>
+								</div>
+								<div class="form-group">
+									<button name="recordar_contrasena" id="recordar_contrasena" class="btn btn-primary"><i class="mdi mdi-account" aria-hidden="true"></i> Recordar</button>
+								</div>
+						</div>
 					</div>
 				</div>
+<!--				<div class="row">-->
+<!--					<div class="embed-responsive embed-responsive-16by9">-->
+<!--						<iframe title="Recordar" src="--><?php //echo base_url(); ?><!--recordar" class="embed-responsive-item"></iframe>-->
+<!--					</div>-->
+<!--				</div>-->
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cerrar <i class="fa fa-times" aria-hidden="true"></i></button>
@@ -73,7 +100,6 @@
 	</div>
 </div>
 <!-- Modal Recordar - FIN -->
-
 
 <!-- Anterior Login-->
 

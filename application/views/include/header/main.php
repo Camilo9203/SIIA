@@ -126,7 +126,6 @@
 		echo "<div class='hidden' id='data_logg' data-log='$logged_in'></div>";
 		if ($logged_in && $tipo_usuario == "user") {
 			$this->load->view('usuario/parciales/_navbar', $data_organizacion);
-
 		}
 		elseif ($logged_in && $tipo_usuario == "admin") {
 			$this->load->view('usuario/parciales/_navbar', $data_organizacion);
