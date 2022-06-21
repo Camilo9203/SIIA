@@ -111,7 +111,7 @@
 	<div id="div_solicitud">
 		<div class="form-group">
 			<div class="radio">
-				<label><input type="radio" name="tipo_solicitud" id="tipo2" class="" value="Renovacion de Acreditación">Renovación de acreditación.</label>
+				<label><input type="radio" name="tipo_solicitud" id="tipo2" class="" value="Renovación de Acreditación">Renovación de acreditación.</label>
 			</div>
 		</div>
 		<div class="form-group">
@@ -124,19 +124,19 @@
 	<!-- Tipo d solicitud -FIN -->
 	<!-- Motivo de la solicitud -->
 	<label for="motivo_solicitud">Motivo de la solicitud:<span class="spanRojo">*</span></label><br>
-	<!-- Acreditación curso basico ES -->
+	<!-- Acreditación curso básico ES -->
 	<div class="form-group">
 		<div class="radio">
-			<label><input type="radio" name="motivo_solicitud" id="motivo1" class="motivo_sol" value="Acreditación Curso Basico de Economia Solidaria" checked>Acreditación curso basico de economia solidaria.</label>
+			<label><input type="radio" name="motivo_solicitud" id="motivo1" class="motivo_sol" value="Acreditación Curso Básico de Economía Solidaria" checked>Acreditación curso básico de economía solidaria.</label>
 		</div>
 	</div>
 	<!-- Acreditación aval de trabajo asociado -->
 	<div class="form-group">
 		<div class="radio">
-			<label><input type="radio" name="motivo_solicitud" id="motivo2" class="motivo_sol" value="Acreditación, Aval de Trabajo Asociado">Acreditación curso basico de economia solidaria y aval de trabajo asociado.</label>
+			<label><input type="radio" name="motivo_solicitud" id="motivo2" class="motivo_sol" value="Acreditación, Aval de Trabajo Asociado">Acreditación curso básico de economía solidaria y aval de trabajo asociado.</label>
 		</div>
 	</div>
-	<!-- Acretitación para otros programas //TODO: Otros programas comentado-->
+	<!-- Acreditación para otros programas //TODO: Otros programas comentado-->
 	<div class="form-group">
 		<div class="radio">
 			<label><input type="radio" name="motivo_solicitud" id="motivo3" class="motivo_sol" value="Acreditación, Aval a otros Programas">Acreditacion en aval de trabajo asociado.</label>
