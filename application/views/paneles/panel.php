@@ -124,48 +124,27 @@
 	<!-- Tipo d solicitud -FIN -->
 	<!-- Motivo de la solicitud -->
 	<label for="motivo_solicitud">Motivo de la solicitud:<span class="spanRojo">*</span></label><br>
-	<!-- Acreditación curso básico ES -->
-	<div class="form-group">
-		<div class="radio">
-			<label><input type="radio" name="motivo_solicitud" id="motivo1" class="motivo_sol" value="Acreditación Curso Básico de Economía Solidaria" checked>Acreditación curso básico de economía solidaria.</label>
-		</div>
+	<!-- CheckBox Motivos de la solicitud -->
+	<div class="form-check radio">
+		<input class="form-check-input" type="checkbox" value="1" id="cursoBasico" name="motivos[]" checked>
+		<label class="form-check-label" for="cursoBasico">Acreditación Curso Básico de Economía Solidaria</label>
 	</div>
-	<!-- Acreditación aval de trabajo asociado -->
-	<div class="form-group">
-		<div class="radio">
-			<label><input type="radio" name="motivo_solicitud" id="motivo2" class="motivo_sol" value="Acreditación, Aval de Trabajo Asociado">Acreditación curso básico de economía solidaria y aval de trabajo asociado.</label>
-		</div>
+	<div class="form-check radio">
+		<input class="form-check-input" type="checkbox" value="2" id="avalTrabajo" name="motivos[]">
+		<label class="form-check-label" for="avalTrabajo">Aval de Trabajo Asociado</label>
 	</div>
-	<!-- Acreditación curso medio ES -->
-	<div class="form-group">
-		<div class="radio">
-			<label><input type="radio" name="motivo_solicitud" id="motivo3" class="motivo_sol" value="Acreditación Curso Medio de Economía Solidaria" checked>Acreditación curso medio de economía solidaria.</label>
-		</div>
+	<div class="form-check radio">
+		<input class="form-check-input" type="checkbox" value="3" id="cursoMedio" name="motivos[]">
+		<label class="form-check-label" for="cursoMedio">Acreditación Curso Medio de Economía Solidaria</label>
 	</div>
-	<!-- Acreditación curso avanzado ES -->
-	<div class="form-group">
-		<div class="radio">
-			<label><input type="radio" name="motivo_solicitud" id="motivo4" class="motivo_sol" value="Acreditación Curso Avanzado de Economía Solidaria" checked>Acreditación curso avanzado de economía solidaria.</label>
-		</div>
+	<div class="form-check radio">
+		<input class="form-check-input" type="checkbox" value="4" id="cursoAvanzado" name="motivos[]">
+		<label class="form-check-label" for="cursoAvanzado">Acreditación Curso Avanzado de Economía Solidaria</label>
 	</div>
-	<!-- Acreditación curso de educación económica y financiera para la economía solidaria -->
-	<div class="form-group">
-		<div class="radio">
-			<label><input type="radio" name="motivo_solicitud" id="motivo5" class="motivo_sol" value="Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria" checked>Acreditación curso de educación económica y financiera para la economía solidaria</label>
-		</div>
+	<div class="form-check radio">
+		<input class="form-check-input" type="checkbox" value="5" id="finacieraEconomia" name="motivos[]">
+		<label class="form-check-label" for="finacieraEconomia">Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria</label>
 	</div>
-	<!-- Acreditación para otros programas //TODO: Otros programas comentado-->
-<!--	<div class="form-group">-->
-<!--		<div class="radio">-->
-<!--			<label><input type="radio" name="motivo_solicitud" id="motivo3" class="motivo_sol" value="Acreditación, Aval a otros Programas">Acreditacion en aval de trabajo asociado.</label>-->
-<!--		</div>-->
-<!--	</div>-->
-	<!-- //TODO: Otros programas -->
-	<!-- <div class="form-group">
-		<div class="radio">
-			<label><input type="radio" name="motivo_solicitud" id="motivo4" class="motivo_sol" value="Acreditación, Aval de Trabajo Asociado, Aval a otros Programas">Acreditación otros programas. <small>(Todas)</small></label>
-		</div>
-	</div -->
 	<!-- Solo si la entidad esta o estuvo acreditada //TODO: Solo si la entidad ya fue acreditada-->
 	<div class="form-group" id="div_motivo_actualizar">
 		<div class="radio">
@@ -178,22 +157,52 @@
 	<label for="modalidad_solicitud">Modalidad:<span class="spanRojo">*</span></label><br>
 	<!-- Ayuda para modalidad virtual -->
 	<i data-toggle="modal" data-target="#ayudaModalidad" class="fa fa-question-circle pull-right" aria-hidden="true"></i>
+	<div class="form-check radio">
+		<input class="form-check-input" type="checkbox" value="1" id="presencial" name="modalidades[]" checked>
+		<label class="form-check-label" for="presencial">Presencial</label>
+	</div>
+	<div class="form-check radio">
+		<input class="form-check-input" type="checkbox" value="2" id="virtual" name="modalidades[]">
+		<label class="form-check-label" for="virtual">Virtual</label>
+	</div>
+	<div class="form-check radio">
+		<input class="form-check-input" type="checkbox" value="3" id="enLinea" name="modalidades[]">
+		<label class="form-check-label" for="enLinea">En Linea</label>
+	</div>
 	<!-- Presencial -->
 	<div class="form-group">
 		<div class="radio">
-			<label><input type="radio" name="modalidad_solicitud" id="modalidad2" class="" value="Presencial" checked>Presencial</label>
+			<label><input type="radio" name="modalidad_solicitud" id="modalidad1" class="" value="Presencial" checked>Presencial</label>
 		</div>
 	</div>
 	<!-- Virtual -->
 	<div class="form-group">
 		<div class="radio">
-			<label><input type="radio" name="modalidad_solicitud" id="modalidad1" class="" value="Virtual">Virtual</label>
+			<label><input type="radio" name="modalidad_solicitud" id="modalidad2" class="" value="Virtual">Virtual</label>
+		</div>
+	</div>
+	<!-- En linea -->
+	<div class="form-group">
+		<div class="radio">
+			<label><input type="radio" name="modalidad_solicitud" id="modalidad3" class="" value="Virtual">En linea</label>
 		</div>
 	</div>
 	<!-- Ambas -->
 	<div class="form-group">
 		<div class="radio">
-			<label><input type="radio" name="modalidad_solicitud" id="modalidad3" class="" value="Virtual y Presencial">Virtual y presencial <small>(Ambos)</small></label>
+			<label><input type="radio" name="modalidad_solicitud" id="modalidad4" class="" value="Virtual y Presencial">Virtual y presencial <small>(Ambos)</small></label>
+		</div>
+	</div>
+	<!-- Presencial y en linea -->
+	<div class="form-group">
+		<div class="radio">
+			<label><input type="radio" name="modalidad_solicitud" id="modalidad5" class="" value="Virtual y Presencial">Presencial y en linea <small>(Ambos)</small></label>
+		</div>
+	</div>
+	<!-- Virtual y en linea -->
+	<div class="form-group">
+		<div class="radio">
+			<label><input type="radio" name="modalidad_solicitud" id="modalidad6" class="" value="Virtual y Presencial">Virtual y en linea<small>(Ambos)</small></label>
 		</div>
 	</div>
 	<hr />
@@ -879,7 +888,7 @@
 	<div id="antecedentes_academicos" data-form="4" class=" formulario_panel">
 		<div class="">
 			<?php echo form_open('', array('id' => 'formulario_antecedentes_academicos')); ?>
-			<h3>4. Antecedentes Académicos <i class="fa fa-id-card" aria-hidden="true"></i></h3>
+			<h3>3. Antecedentes Académicos <i class="fa fa-id-card" aria-hidden="true"></i></h3>
 			<p>Se debe hacer un análisis de los niveles de formación, las necesidades y los avances de los procesos adelantados en materia pedagógica. También se deben determinar las áreas en donde se requiera afianzar y profundizar conocimientos. Los Campos marcados con (*) son obligatorios</p>
 			<div class="form-group">
 				<label for="descripcionProceso">Describa de manera cualitativa los procesos de formación que ha realizado:<span class="spanRojo">*</span></label>
@@ -946,11 +955,11 @@
 		</div>
 	</div>
 	<!-- Formulario de antecedentes academicos 4 - FIN -->
-	<!-- Formulario de jornadas de actualizacion 5 - INICIO -->
+	<!-- Formulario de jornadas de actualización 5 - INICIO -->
 	<div id="jornadas_de_actualizacion" data-form="5" class=" formulario_panel">
 		<div class="">
 			<?php echo form_open('', array('id' => 'formulario_jornadas_actualizacion')); ?>
-			<h3>5. Jornadas de actualización <i class="fa fa-handshake-o" aria-hidden="true"></i></h3>
+			<h3>4. Jornadas de actualización <i class="fa fa-handshake-o" aria-hidden="true"></i></h3>
 			<p>Registre los datos de la última jornada de actualización, organizada por Organizaciones Solidarias, a la que asistió. Si selecciona "No", de click en guardar y adjunte la carta de compromiso.</p>
 			<div class="form-group">
 				<label for="">5.1 Ha participado en jornadas de actualización organizadas por la UAEOS?</label>
@@ -1033,232 +1042,65 @@
 		</div>
 	</div>
 	<!-- Formulario de jornadas de actualizacion 5 - FIN -->
-	<!-- Formulario de programa basico de economia solidaria 6 - INICIO -->
+	<!-- Formulario de programa básico de economía solidaria 6 - INICIO -->
 	<div id="programa_basico_de_economia_solidaria" data-form="6" class=" formulario_panel">
-		<?php echo form_open('', array('id' => 'formulario_programa_basico')); ?>
-		<h3>6. Programa básico de economía solidaria <i class="fa fa-server" aria-hidden="true"></i></h3>
-		<p>Los campos marcados con (<span class="spanRojo">*</span>) son <strong>obligatorios</strong>.</p>
-		<p>Recuerde presionar el botón <strong>guardar datos</strong> siempre que actualice o agregue información, se encontrara en la última página del formulario actual.</p>
-		<div id="divAtrasProgBasiES">
-			<label>6.1 Datos Básicos del Programa</label>
-			<div class="form-group">
-				<label for="programa_basico_objetivos">Objetivos:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_objetivos" id="programa_basico_objetivos" placeholder="Objetivos..."><?php echo $data_basicos_programas->objetivos; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_metodologia">Metodología a Utilizar:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_metodologia" id="programa_basico_metodologia" placeholder="Metodología a Utilizar..."><?php echo $data_basicos_programas->metodologia; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_material">Material Didáctico y Ayudas Educativas Incorporadas:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_material" id="programa_basico_material" placeholder="Material Didáctico y Ayudas Educativas Incorporadas..."><?php echo $data_basicos_programas->materialDidactico; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_bibliografia">Bibliografia:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_bibliografia" id="programa_basico_bibliografia" placeholder="Bibliografia..."><?php echo $data_basicos_programas->bibliografia; ?></textarea>
-			</div>
-			<!--<a>Ir al centro de documentacion de Organizaciones Solidarias.</a>-->
-			<div class="form-group">
-				<label for="programa_basico_duracion">Duracion del curso:<span class="spanRojo">*</span></label>
-				<input type="number" class="form-control" name="programa_basico_duracion" id="programa_basico_duracion" placeholder="32" value="<?php echo $data_basicos_programas->duracionCurso; ?>">
-			</div>
-			<input type="button" id="siguienteProgBasiES1" class="btn btn-warning btn-sm pull-right fa-fa" value='Siguiente página &#xf061'>
-		</div>
-		<div id="divSiguienteProgBasiES1">
-			<label>6.2 Socialización de conceptos funtamentales</label>
-			<div class="form-group">
-				<label for="programa_basico_eticaValoresPrincipios">Etica, valores y principios:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_eticaValoresPrincipios" id="programa_basico_eticaValoresPrincipios" placeholder="Etica, valores y principios..."><?php echo $data_basicos_programas->eticaValoresPrincipios; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_solidaridad">Solidaridad:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_solidaridad" id="programa_basico_solidaridad" placeholder="Solidaridad..."><?php echo $data_basicos_programas->solidaridad; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_economia">Economía:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_economia" id="programa_basico_economia" placeholder="Economía..."><?php echo $data_basicos_programas->economia; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_economiaSolidaria">Economía Solidaria:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_economiaSolidaria" id="programa_basico_economiaSolidaria" placeholder="Economía Solidaria..."><?php echo $data_basicos_programas->economiaSolidaria; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_asosiatividadEmprendimiento">Asociatividad y Emprendimiento Solidario:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_asosiatividadEmprendimiento" id="programa_basico_asosiatividadEmprendimiento" placeholder="Asociatividad y Emprendimiento Solidario..."><?php echo $data_basicos_programas->asosiatividadEmprendimiento; ?></textarea>
-			</div>
-			<div class="form-group hidden">
-				<label for="">Emprendimiento Solidario:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="" id="" placeholder="Emprendimiento Solidario..."></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_organizacionSolidaria">Organización Solidaria:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_organizacionSolidaria" id="programa_basico_organizacionSolidaria" placeholder="Organización Solidaria..."><?php echo $data_basicos_programas->organizacionSolidaria; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_trabajoEquipo">Trabajo en Equipo:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_trabajoEquipo" id="programa_basico_trabajoEquipo" placeholder="Trabajo en Equipo..."><?php echo $data_basicos_programas->trabajoEquipo; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_educacionSolidaria">Educación Solidaria:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_educacionSolidaria" id="programa_basico_educacionSolidaria" placeholder="Educación Solidaria..."><?php echo $data_basicos_programas->educacionSolidaria; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_responsabilidadSocial">Responsabilidad Social:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_responsabilidadSocial" id="programa_basico_responsabilidadSocial" placeholder="Responsabilidad Social..."><?php echo $data_basicos_programas->responsabilidadSocial; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_medioAmbiente">Medio Ambiente:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_medioAmbiente" id="programa_basico_medioAmbiente" placeholder="Medio Ambiente..."><?php echo $data_basicos_programas->medioAmbiente; ?></textarea>
-			</div>
-			<input type="button" id="atrasProgProgBasiES" class="btn btn-warning btn-sm pull-left fa-fa" value='&#xf060 Página atrás'>
-			<input type="button" id="siguienteProgBasiES2" class="btn btn-warning btn-sm pull-right fa-fa" value='Siguiente página &#xf061'>
-		</div>
-		<div id="divSiguienteProgBasiES2">
-			<label>6.3 Contexto socioeconómico para el desarrollo</label>
-			<div class="form-group">
-				<label for="programa_basico_contextoEconomicoSocial">El contexto económico, social, cultural y ambiental que vivimos:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_contextoEconomicoSocial" id="programa_basico_contextoEconomicoSocial" placeholder="El contexto económico, social, cultural y ambiental que vivimos..."><?php echo $data_basicos_programas->contextoEconomicoSocial; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_necesidadesSerHumano">Necesidades del ser humano y sus soluciones:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_necesidadesSerHumano" id="programa_basico_necesidadesSerHumano" placeholder="Necesidades del ser humano y sus soluciones..."><?php echo $data_basicos_programas->necesidadesSerHumano; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_porqueFomentar">¿Por qué y para qué fomentar una organización solidaria?:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_porqueFomentar" id="programa_basico_porqueFomentar" placeholder="¿Por qué y para qué fomentar una organización solidaria?..."><?php echo $data_basicos_programas->porqueFomentar; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_principiosValoresFines">Principios, valores y fines de la economía solidaria:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_principiosValoresFines" id="programa_basico_principiosValoresFines" placeholder="Principios, valores y fines de la economía solidaria..."><?php echo $data_basicos_programas->principiosValoresFines; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_marcoNormativo">Marco normativo general de la economía solidaria en Colombia:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_marcoNormativo" id="programa_basico_marcoNormativo" placeholder="Marco normativo general de la economía solidaria en Colombia..."><?php echo $data_basicos_programas->marcoNormativo; ?></textarea>
-			</div>
-			<input type="button" id="atrasProgProgBasiES1" class="btn btn-warning btn-sm pull-left fa-fa" value='&#xf060 Página atrás'>
-			<input type="button" id="siguienteProgBasiES3" class="btn btn-warning btn-sm pull-right fa-fa" value='Siguiente página &#xf061'>
-		</div>
-		<div id="divSiguienteProgBasiES3">
-			<label>6.4 Tipos de organizaciones solidarias</label>
-			<div class="form-group">
-				<label for="programa_basico_tiposOrganizacionesEconomiaSolidaria">Tipos de organizaciones de economía solidaria y solidaria de desarrollo:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_tiposOrganizacionesEconomiaSolidaria" id="programa_basico_tiposOrganizacionesEconomiaSolidaria" placeholder="Tipos de organizaciones de economía solidaria y solidaria de desarrollo..."><?php echo $data_basicos_programas->tiposOrganizacionesEconomiaSolidaria; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_antecedentesHistoricos">Antecedentes históricos de la organización solidaria objeto del curso:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_antecedentesHistoricos" id="programa_basico_antecedentesHistoricos" placeholder="Antecedentes históricos de la organización solidaria objeto del curso..."><?php echo $data_basicos_programas->antecedentesHistoricos; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_caracteristicasEconomicas">Características económicas, sociales y culturales de la organización solidaria:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_caracteristicasEconomicas" id="programa_basico_caracteristicasEconomicas" placeholder="Características económicas, sociales y culturales de la organización solidaria..."><?php echo $data_basicos_programas->caracteristicasEconomicas; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_estructuraInterna">Estructura interna organizativa básica (dirección, control y comités de apoyo):<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_estructuraInterna" id="programa_basico_estructuraInterna" placeholder="Estructura interna organizativa básica (dirección, control y comités de apoyo)..."><?php echo $data_basicos_programas->estructuraInterna; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_marcoJuridicoAplicable">Marco jurídico aplicable al tipo de organización:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_marcoJuridicoAplicable" id="programa_basico_marcoJuridicoAplicable" placeholder="Marco jurídico aplicable al tipo de organización..."><?php echo $data_basicos_programas->marcoJuridicoAplicable; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_fundamentosAdministrativos">Fundamentos administrativos de la organización:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_fundamentosAdministrativos" id="programa_basico_fundamentosAdministrativos" placeholder="Fundamentos administrativos de la organización..."><?php echo $data_basicos_programas->fundamentosAdministrativos; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_orientacionElaboracionEstatutos">Orientación para la elaboración de estatutos, reglamentos y legalización de la organización:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_orientacionElaboracionEstatutos" id="programa_basico_orientacionElaboracionEstatutos" placeholder="Orientación para la elaboración de estatutos, reglamentos y legalización de la organización..."><?php echo $data_basicos_programas->orientacionElaboracionEstatutos; ?></textarea>
-			</div>
-			<input type="button" id="atrasProgProgBasiES2" class="btn btn-warning btn-sm pull-left fa-fa" value='&#xf060 Página atrás'>
-			<input type="button" id="siguienteProgBasiES4" class="btn btn-warning btn-sm pull-right fa-fa" value='Siguiente página &#xf061'>
-		</div>
-		<div id="divSiguienteProgBasiES4">
-			<label>6.5 Entes de control y apoyo al sector solidario</label>
-			<div class="form-group">
-				<label for="programa_basico_unidadAdministrativa">Unidad Administrativa Especial de Organizaciones Solidarias:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_unidadAdministrativa" id="programa_basico_unidadAdministrativa" placeholder="Unidad Administrativa Especial de Organizaciones Solidarias..."><?php echo $data_basicos_programas->unidadAdministrativa; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_superintendencia">Superintendencia de la Economía Solidaria:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_superintendencia" id="programa_basico_superintendencia" placeholder="Superintendencia de la Economía Solidaria..."><?php echo $data_basicos_programas->superintendencia; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_fondoGarantias">Fondo de Garantías Cooperativas - FOGACOOP:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_fondoGarantias" id="programa_basico_fondoGarantias" placeholder="Fondo de Garantías Cooperativas - FOGACOOP..."><?php echo $data_basicos_programas->fondoGarantias; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_consejoNacional">Consejo Nacional de la Economía Solidaria - CONES:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_consejoNacional" id="programa_basico_consejoNacional" placeholder="Consejo Nacional de la Economía Solidaria - CONES..."><?php echo $data_basicos_programas->consejoNacional; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_fondoNacional">Fondo Nacional de la Economía Solidaria - FONES:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_fondoNacional" id="programa_basico_fondoNacional" placeholder="Fondo Nacional de la Economía Solidaria - FONES..."><?php echo $data_basicos_programas->fondoNacional; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programa_basico_mesasRegionales">Mesas Regionales de Educación Solidaria:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programa_basico_mesasRegionales" id="programa_basico_mesasRegionales" placeholder="Mesas Regionales de Educación Solidaria..."><?php echo $data_basicos_programas->mesasRegionales; ?></textarea>
-			</div>
-			<input type="button" id="atrasProgProgBasiES3" class="btn btn-warning btn-sm pull-left fa-fa" value='&#xf060 Página atrás'>
-		</div>
-		</form>
-		<div class="clearfix"></div>
+		<?php // echo form_open('', array('id' => 'formulario_programa_basico')); ?>
+		<h3>5. Programas de educación en economía solidaria <i class="fa fa-server" aria-hidden="true"></i></h3>
+		<p>Por favor lea atentamente los temas a desarrollar en cada curso y <strong>acepte </strong>desarrollarlos, creando las metodologías y materiales adecuados para el proceso de enseñanza y aprendizaje.</p>
+		<p>Recuerde que al <strong>aceptar</strong> se registrara un compromiso y este quedara en nuestra base de datos.</p>
+		<p>Pulsa en el <strong>enlace</strong> del curso para ver sus temas a desarrollar y acepté en la parte inferior del cuadro emergente para poder continuar.</p>
 		<hr />
-		<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_programa_basico" id="guardar_formulario_programa_basico">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
-		<div class="clearfix"></div>
-		<hr />
-		<div class="form-group">
-			<?php echo form_open_multipart('', array('id' => 'formulario_material_programas_basicos')); ?>
-			<label>Archivos de Material Didactico (PDF):</label>
-			<br />
-			<div class="col-md-4">
-				<input type="file" required accept="application/pdf" class="form-control" data-val="materialDidacticoProgBasicos" name="materialDidacticoProgBasicos" id="materialDidacticoProgBasicos">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="form-group" id="curso_basico_es" style="display: none;" >
+						<label class="underlined">
+							<input type="checkbox" id="programa" form="formulario_programas" name="curso_basico_es" value="* Acreditación Curso Básico de Economía Solidaria" disabled required>
+							<label for="modalCursoBasico">&nbsp;</label>
+							<a data-toggle="modal" data-target="#modalCursoBasico" data-backdrop="static" data-keyboard="false">
+								<span class="spanRojo">*</span> Acreditación Curso Básico de Economía Solidaria
+							</a>
+						</label>
+					</div>
+					<div class="form-group" id="curso_basico_aval" style="display: none;" >
+						<label class="underlined">
+							<input type="checkbox" id="curso_basico_aval" form="formulario_programas" name="curso_basico_aval" value="* Acreditación, Aval de Trabajo Asociado" disabled required>
+							<label for="modalAval">&nbsp;</label>
+							<a data-toggle="modal" data-target="#modalAval" data-backdrop="static" data-keyboard="false">
+								<span class="spanRojo">*</span> Acreditación, Aval de Trabajo Asociado
+							</a>
+						</label>
+					</div>
+					<div class="form-group" id="curso_medio_es" style="display: none;" >
+						<label class="underlined">
+							<input type="checkbox" id="curso_basico_aval" form="formulario_programas" name="curso_basico" value="* Acreditación Curso Medio de Economía Solidaria" disabled required>
+							<label for="modalCursoMedio">&nbsp;</label>
+							<a data-toggle="modal" data-target="#modalCursoMedio" data-backdrop="static" data-keyboard="false">
+								<span class="spanRojo">*</span> Acreditación Curso Medio de Economía Solidaria
+							</a>
+						</label>
+					</div>
+					<div class="form-group" id="curso_avanzado_es" style="display: none;" >
+						<label class="underlined">
+							<input type="checkbox" id="curso_avanzado_es" form="formulario_programas" name="curso_avanzado_es" value="* Acreditación Curso Avanzado de Economía Solidaria" disabled required>
+							<label for="modalCursoAvanzado">&nbsp;</label>
+							<a data-toggle="modal" data-target="#modalCursoAvanzado" data-backdrop="static" data-keyboard="false">
+								<span class="spanRojo">*</span> Acreditación Curso Avanzado de Economía Solidaria
+							</a>
+						</label>
+					</div>
+					<div class="form-group" id="curso_economia_financiera" style="display: none;" >
+						<label class="underlined">
+							<input type="checkbox" id="curso_economia_financiera" form="formulario_programas" name="curso_economia_financiera" value="* Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria" disabled required>
+							<label for="modalCursoFinanciera">&nbsp;</label>
+							<a data-toggle="modal" data-target="#modalCursoFinanciera" data-backdrop="static" data-keyboard="false" data-programa="Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria">
+								<span class="spanRojo">*</span> Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria
+							</a>
+					</div>
+					<input type="text" name="id_organizacion" id="id_organizacion" value="<?php echo $data_organizacion->id_organizacion;?>" style="display: none">
+				</div>
 			</div>
-			<div class="col-md-3">
-				<input type="button" class="btn btn-siia btn-sm archivos_form_basico_economia fa-fa center-block" data-name="materialDidacticoProgBasicos" name="materialDicProgBasic" id="materialDicProgBasic" value="Guardar archivo(s) &#xf0c7">
-			</div>
-			</form>
 		</div>
-		<!--<div class="clearfix"></div>
-		<hr/>
-		<label>Programas:</label>
-		<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-		<!--<table id="" width="100%" border=0 class="table table-striped table-bordered">
-			<thead>
-				<tr>
-					<td>Objetivos</td>
-					<td>Metodología</td>
-					<td>Material didactico</td>
-					<td>Bibliografía</td>
-					<td>Duración curso</td>
-					<td>Acción</td>
-				</tr>
-			</thead>
-			<tbody id="tbody">
-				foreach ($data_basicos_programas as $programasBasicos) {
-					echo "<tr><td>".$programasBasicos->objetivos."</td>";
-					echo "<td>".$programasBasicos->metodologia."</td>";
-					echo "<td>".$programasBasicos->materialDidactico."</td>";
-					echo "<td>".$programasBasicos->bibliografia."</td>";
-					echo "<td>".$programasBasicos->duracionCurso."</td>";
-					echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarProgramasBasicos' data-id-programasBasicos=".$programasBasicos->id_datosBasicosProgramas.">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
-					}
-				?>
-			</tbody>
-		</table>-->
-		<div class="clearfix"></div>
-		<hr />
-		<label>Archivos:</label>
-		<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>
-		<table id="tabla_archivos_formulario" width="100%" border=0 class="table table-striped table-bordered tabla_form">
-			<thead>
-				<tr>
-					<td class="col-md-4">Nombre</td>
-					<td class="col-md-4">Tipo</td>
-					<td class="col-md-4">Acción</td>
-				</tr>
-			</thead>
-			<tbody id="tbody">
-			</tbody>
-		</table>
 	</div>
 	<!-- Formulario de programa basico de economia solidaria 6 - FIN -->
 	<!-- Formulario de aval de economia 7 - Inicio -->
@@ -1518,7 +1360,7 @@
 	<!-- Formulario de programas 8 - FIN -->
 	<!-- Formulario de docentes 9 - INICIO -->
 	<div id="docentes" data-form="9" class=" formulario_panel">
-		<h3>9. Facilitadores <i class="fa fa-users" aria-hidden="true"></i></h3>
+		<h3>6. Facilitadores <i class="fa fa-users" aria-hidden="true"></i></h3>
 		<div class="container">
 			<div class="jumbotron">
 				<h3>Facilitadores</h3>
@@ -1577,7 +1419,7 @@
 	<!-- Formulario de docentes 9 - FIN -->
 	<!-- Formulario Datos Plataforma 10 - INICIO -->
 	<div id="datos_plataforma" data-form="10" class=" formulario_panel">
-		<h3>10. Datos Plataforma Virtual <i class="fa fa-globe" aria-hidden="true"></i></h3>
+		<h3>7. Datos modalidad virtual<i class="fa fa-globe" aria-hidden="true"></i></h3>
 		<p>Ingrese los datos de ingreso con un instructivo para poder navegar dentro del curso.</p>
 		<div class="form-group">
 			<label for="datos_plataforma_url">URL:<span class="spanRojo">*</span></label>
@@ -1650,6 +1492,81 @@
 		<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_plataforma" id="guardar_formulario_plataforma">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
 	</div>
 	<!-- Formulario Datos Plataforma 10 - FIN -->
+	<!-- Formulario Datos Plataforma 9 - INICIO -->
+	<div id="datos_en_linea" data-form="11" class=" formulario_panel">
+		<h3>8. Datos modalidad en linea<i class="fa fa-globe" aria-hidden="true"></i></h3>
+		<p>Ingrese los datos de ingreso con un instructivo para poder navegar dentro del curso.</p>
+		<div class="form-group">
+			<label for="datos_plataforma_url">URL:<span class="spanRojo">*</span></label>
+			<input type="text" class="form-control" name="datos_plataforma_url" id="datos_plataforma_url" placeholder="https://www.orgsolidarias.gov.co/">
+		</div>
+		<div class="form-group">
+			<label for="datos_plataforma_usuario">Usuario:<span class="spanRojo">*</span></label>
+			<input type="text" class="form-control" name="datos_plataforma_usuario" id="datos_plataforma_usuario" placeholder="usuario.aplicacion">
+		</div>
+		<div class="form-group">
+			<label for="datos_plataforma_contrasena">Contraseña:<span class="spanRojo">*</span></label>
+			<input type="text" class="form-control" name="datos_plataforma_contrasena" id="datos_plataforma_contrasena" placeholder="contraseña123@">
+		</div>
+		<div class="clearfix"></div>
+		<hr />
+		<div class="">
+			<?php echo form_open_multipart('', array('id' => 'formulario_material_programas_basicos')); ?>
+			<label>Instructivo (PDF):<span class="spanRojo">*</span></label>
+			<br />
+			<div class="col-md-4">
+				<input type="file" required accept="application/pdf" class="form-control" data-val="instructivoPlataforma" name="instructivoPlataforma" id="instructivoPlataforma">
+			</div>
+			<div class="col-md-3">
+				<input type="button" class="btn btn-siia btn-sm archivos_form_instructivoPlataforma fa-fa center-block" data-name="instructivoPlataforma" name="materialDicAvalEco" id="materialDicAvalEco" value="Guardar archivo(s) &#xf0c7">
+			</div>
+			</form>
+		</div>
+		<div class="clearfix"></div>
+		<div class="">
+			<hr />
+			<label>Plataforma:</label>
+			<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+			<table id="" width="100%" border=0 class="table table-striped table-bordered">
+				<thead>
+				<tr>
+					<td>URL aplicación</td>
+					<td>Usuario aplicación</td>
+					<td>Contraseña aplicación</td>
+					<td>Acción</td>
+				</tr>
+				</thead>
+				<tbody id="tbody">
+				<?php
+				foreach ($data_plataforma as $datosPlataforma) {
+					echo "<tr><td>" . $datosPlataforma->urlAplicacion . "</td>";
+					echo "<td>" . $datosPlataforma->usuarioAplicacion . "</td>";
+					echo "<td>" . $datosPlataforma->contrasenaAplicacion . "</td>";
+					echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosPlataforma' data-id-datosPlataforma=" . $datosPlataforma->id_datosAplicacion . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+				}
+				?>
+				</tbody>
+			</table>
+		</div>
+		<div class="">
+			<hr />
+			<label>Archivos:</label>
+			<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>
+			<table id="tabla_archivos_formulario" width="100%" border=0 class="table table-striped table-bordered tabla_form">
+				<thead>
+				<tr>
+					<td class="col-md-4">Nombre</td>
+					<td class="col-md-4">Tipo</td>
+					<td class="col-md-4">Acción</td>
+				</tr>
+				</thead>
+				<tbody id="tbody">
+				</tbody>
+			</table>
+		</div>
+		<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_plataforma" id="guardar_formulario_plataforma">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
+	</div>
+	<!-- Formulario Datos Plataforma 9 - FIN -->
 	<!-- Fin de Formularios -->
 	<!-- Continuar para finalizar Acreditacion - INICIO -->
 	<div id="finalizar_proceso" data-form="0" class="col-md-9 formulario_panel">
@@ -1677,6 +1594,123 @@
 				<div class="modal-footer">
 					<button class="btn btn-danger btn-sm pull-left" data-dismiss="modal">No, voy a verificar <i class="fa fa-times" aria-hidden="true"></i></button>
 					<button class="btn btn-siia btn-sm pull-right" id="finalizar_si">Si, estoy completamente seguro de terminar y enviar la solicitud <i class="fa fa-check-square-o" aria-hidden="true"></i></button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal Cursos -->
+	<div class="modal fade" id="modalCursoBasico" tabindex="-1" role="dialog" aria-labelledby="modalCursoBasico">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="row">
+						<div id="header_politicas" class="col-md-12">
+							<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="https://acreditacion.uaeos.gov.co/siia/assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
+						</div>
+						<div class="clearfix"></div>
+						<hr />
+						<!-- Tablas de cursos -->
+						<div class="col-md-12">
+							Texto Curso Básico
+						</div>
+					</div>
+				</div>
+				<div class="modal-body">
+					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
+					<button type="button" class="btn btn-siia btn-sm pull-right" id="acepto_programa" data-programa="Acreditación Curso Básico de Economía Solidaria">Sí, acepto. <i class="fa fa-check"></i></button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modalAval" tabindex="-1" role="dialog" aria-labelledby="modalAval">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="row">
+						<div id="header_politicas" class="col-md-12">
+							<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="https://acreditacion.uaeos.gov.co/siia/assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
+						</div>
+						<div class="clearfix"></div>
+						<hr />
+						<!-- Tablas de cursos -->
+						<div class="col-md-12">
+							Texto Acreditación, Aval
+						</div>
+					</div>
+				</div>
+				<div class="modal-body">
+					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
+					<button type="button" class="btn btn-siia btn-sm pull-right" id="acepto_programa" data-programa="Acreditación, Aval de Trabajo Asociado">Sí, acepto. <i class="fa fa-check"></i></button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modalCursoMedio" tabindex="-1" role="dialog" aria-labelledby="modalCursoMedio">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="row">
+						<div id="header_politicas" class="col-md-12">
+							<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="https://acreditacion.uaeos.gov.co/siia/assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
+						</div>
+						<div class="clearfix"></div>
+						<hr />
+						<!-- Tablas de cursos -->
+						<div class="col-md-12">
+							Texto Curso Medio
+						</div>
+					</div>
+				</div>
+				<div class="modal-body">
+					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
+					<button type="button" class="btn btn-siia btn-sm pull-right" id="acepto_programa" data-programa="Acreditación Curso Medio de Economía Solidaria">Sí, acepto. <i class="fa fa-check"></i></button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modalCursoAvanzado" tabindex="-1" role="dialog" aria-labelledby="modalCursoAvanzado">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="row">
+						<div id="header_politicas" class="col-md-12">
+							<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="http://localhost/siia/assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
+						</div>
+						<div class="clearfix"></div>
+						<hr />
+						<!-- Tablas de cursos -->
+						<div class="col-md-12">
+							Texto Curso Avanzado
+						</div>
+					</div>
+				</div>
+				<div class="modal-body">
+					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
+					<button type="button" class="btn btn-siia btn-sm pull-right" id="acepto_programa" data-programa="Acreditación Curso Avanzado de Economía Solidaria">Sí, acepto. <i class="fa fa-check"></i></button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modalCursoFinanciera" tabindex="-1" role="dialog" aria-labelledby="modalCursoFinanciera">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="row">
+						<div id="header_politicas" class="col-md-12">
+							<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="https://acreditacion.uaeos.gov.co/siia/assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
+
+						</div>
+						<div class="clearfix"></div>
+						<hr />
+						<!-- Tablas de cursos -->
+						<div class="col-md-12">
+							Texto Curso Financiera
+						</div>
+					</div>
+				</div>
+				<div class="modal-body">
+					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
+					<button type="button" class="btn btn-siia btn-sm pull-right" id="acepto_programa" data-programa="Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria">Sí, acepto. <i class="fa fa-check"></i></button>
 				</div>
 			</div>
 		</div>

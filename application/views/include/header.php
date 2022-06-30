@@ -219,14 +219,15 @@
 												<li class="step-no"><a data-form="1" data-form-name="informacion_general"><span id="1" class="step_no menu-sel">1</span> Información General de la Entidad <i class="fa fa-home" aria-hidden="true"></i></a></li>
 												<li class="step-no"><a data-form="2" data-form-name="documentacion_legal"><span id="2" class="step_no menu-sel">2</span> Documentación Legal <i class="fa fa-book" aria-hidden="true"></i></a></li>
 <!--												<li class="step-no" id="reg_doc_cond"><a data-form="3" data-form-name="registros_educativos"><span id="3" class="step_no menu-sel">3</span> Registros Educativos de Programas <i class="fa fa-newspaper-o" aria-hidden="true"></i></a></li>-->
-												<li class="step-no"><a data-form="4" data-form-name="antecedentes_academicos"><span id="4" class="step_no menu-sel">3</span> Antecedentes Académicos <i class="fa fa-id-card" aria-hidden="true"></i></a></li>
-												<li class="step-no"><a data-form="5" data-form-name="jornadas_actualizacion"><span id="5" class="step_no menu-sel">4</span> Jornadas de Actualización <i class="fa fa-handshake-o" aria-hidden="true"></i></a></li>
-												<li class="step-no"><a data-form="6" data-form-name="programa_economia"><span id="6" class="step_no menu-sel">5</span> Programas de Educación en Economía Solidaria <i class="fa fa-server" aria-hidden="true"></i></a></li>
+												<li class="step-no"><a data-form="4" data-form-name="antecedentes_academicos"><span id="3" class="step_no menu-sel">3</span> Antecedentes Académicos <i class="fa fa-id-card" aria-hidden="true"></i></a></li>
+												<li class="step-no"><a data-form="5" data-form-name="jornadas_actualizacion"><span id="4" class="step_no menu-sel">4</span> Jornadas de Actualización <i class="fa fa-handshake-o" aria-hidden="true"></i></a></li>
+												<li class="step-no"><a data-form="6" data-form-name="programa_economia"><span id="5" class="step_no menu-sel">5</span> Programas de Educación en Economía Solidaria <i class="fa fa-server" aria-hidden="true"></i></a></li>
 <!--												<li class="step-no"><a data-form="7" data-form-name="programa_economia" style="text-align: left;"><span id="7" class="step_no menu-sel">7</span> <small>Prog. de Economía Solidaria con Énfasis en Trabajo Asociado <i class="fa fa-sitemap" aria-hidden="true"></i></a></small></li>-->
 												<!-- //TODO: Formulario 8, antes comentado -->
 <!--												<li class="step-no"><a data-form="8" data-form-name="aval_personas"><span id="8" class="step_no menu-sel">8</span> Aval de Programas <i class="fa fa-signal" aria-hidden="true"></i></a></li>-->
-												<li class="step-no"><a data-form="9" data-form-name="equipo_docente"><span id="9" class="step_no menu-sel">6</span> Equipo de Facilitadores <i class="fa fa-users" aria-hidden="true"></i></a></li>
-												<li class="step-no"><a data-form="10" data-form-name="plataforma"><span id="10" class="step_no menu-sel">7</span> Datos Plataforma <i class="fa fa-globe" aria-hidden="true"></i></a></li>
+												<li class="step-no"><a data-form="9" data-form-name="equipo_docente"><span id="6" class="step_no menu-sel">6</span> Equipo de Facilitadores <i class="fa fa-users" aria-hidden="true"></i></a></li>
+												<li class="step-no"><a data-form="10" data-form-name="plataforma"><span id="7" class="step_no menu-sel">7</span> Datos modalidad virtual <i class="fa fa-globe" aria-hidden="true"></i></a></li>
+												<li class="step-no"><a data-form="11" data-form-name="en_linea"><span id="7" class="step_no menu-sel">8</span> Datos modalidad en linea<i class="fa fa-globe" aria-hidden="true"></i></a></li>
 												<li id="act_datos_sol_org" class="step-no"><a data-form="0" data-form-name="finalizar_proceso"><span class="step_no"><i class="fa fa-check" aria-hidden="true"></i></span> Finalizar Proceso <i class="fa fa-check" aria-hidden="true"></i></a></li>
 											</ul>
 										</div>

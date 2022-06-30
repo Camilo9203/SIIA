@@ -829,16 +829,11 @@ $(document).ready(function () {
 			$("#tipoSolicitud").hide();
 			$(".archivos").toggle();
 			var $id_form = $(this).attr("data-form");
-			var $step = $(
-				"#sidebar-menu>.menu_section>#wizard_verticle>.side-menu>li>a>span#" +
-					$id_form
-			);
+			var $step = $("#sidebar-menu>.menu_section>#wizard_verticle>.side-menu>li>a>span#" + $id_form);
 			$step.addClass("menu-sel");
 			$step.removeClass("keyStep");
 			$("#idDataForm").remove();
-			$("body").append(
-				"<div id='idDataForm' class='hidden' data-form='" + $id_form + "'>"
-			);
+			$("body").append("<div id='idDataForm' class='hidden' data-form='" + $id_form + "'>");
 			switch ($id_form) {
 				case "1":
 					$("#informacion_general_entidad").show();
@@ -859,9 +854,7 @@ $(document).ready(function () {
 					$("#programa_basico_de_economia_solidaria").show();
 					break;
 				case "7":
-					$(
-						"#programas_aval_de_economia_solidaria_con_enfasis_en_trabajo_asociado"
-					).show();
+					$("#programas_aval_de_economia_solidaria_con_enfasis_en_trabajo_asociado").show();
 					break;
 				case "8":
 					$("#programas").show();
@@ -872,11 +865,14 @@ $(document).ready(function () {
 				case "10":
 					$("#datos_plataforma").show();
 					break;
+				case "11":
+					$("#datos_en_linea").show();
+					break;
 				case "0":
 					$("#finalizar_proceso").show();
 					break;
 				default:
-					notificacion("Selecciona otra opcion.");
+					notificacion("Selecciona otra opción.");
 			}
 			cargarArchivos();
 		}
@@ -893,9 +889,7 @@ $(document).ready(function () {
 				$("#antecedentes_academicos").hide();
 				$("#jornadas_de_actualizacion").hide();
 				$("#programa_basico_de_economia_solidaria").hide();
-				$(
-					"#programas_aval_de_economia_solidaria_con_enfasis_en_trabajo_asociado"
-				).hide();
+				$("#programas_aval_de_economia_solidaria_con_enfasis_en_trabajo_asociado").hide();
 				$("#programas").hide();
 				$("#docentes").hide();
 				$("#datos_plataforma").hide();
@@ -1787,7 +1781,6 @@ $(document).ready(function () {
 					$("#documentacion>#ll").append("</div>");
 				}
 			}
-
 			/** Formulario 3 **/
 			if ($jsonInformacion.registroEducativoProgramas.length > 0) {
 				for (
@@ -9136,53 +9129,11 @@ $(document).ready(function () {
 
 	$("#noModVirt").click(function () {
 		$valor = $("input:radio[name=modalidad_solicitud]").val();
-
 		$("#modalidad2").prop("checked", true);
 		$("#ayudaModalidad").modal("hide");
 	});
 
-	//TODO: Guardar formulario tipo de solicitud
-	$("#guardar_formulario_tipoSolicitud").click(function () {
-		if ($("#formulario_crear_solicitud").valid()) {
-			$(this).attr("disabled", true);
-			data = {
-				tipo_solicitud: $("input:radio[name=tipo_solicitud]:checked").val(),
-				motivo_solicitud: $("input:radio[name=motivo_solicitud]:checked").val(),
-				modalidad_solicitud: $("input:radio[name=modalidad_solicitud]:checked").val(),
-			};
 
-			$.ajax({
-				url: baseURL + "panel/guardar_tipoSolicitud",
-				type: "post",
-				dataType: "JSON",
-				data: data,
-				beforeSend: function () {
-					notificacion("Espere...", "success");
-				},
-				success: function (response) {
-					notificacion(response.msg, "success");
-					$("#tipoSolicitud").hide();
-					$("#estado_solicitud").show();
-					$(".side_main_menu").show();
-					$(".hide-sidevar").show();
-					verificarFormularios();
-					if (response.est == "En Proceso de Renovación" || response.est == "En Proceso de Actualización") {
-						window.location.hash = "enProcesoActualizacion";
-					} else if (
-						response.est == "En Proceso" ||
-						response.est == "Negada" ||
-						response.est == "Revocada" ||
-						response.est == "Acreditado"
-					) {
-						window.location.hash = "enProceso";
-					}
-				},
-				error: function (ev) {
-					//Do nothing
-				},
-			});
-		}
-	});
 
 	$("#guardar_formulario_informacion_general_entidad").click(function () {
 		if ($("#formulario_informacion_general_entidad").valid()) {
@@ -10275,23 +10226,6 @@ $(document).ready(function () {
 		});
 	});
 
-	$("#eliminarSolicitud").click(function () {
-		$(this).attr("disabled", true);
-		$.ajax({
-			url: baseURL + "panel/eliminarSolicitud",
-			type: "post",
-			dataType: "JSON",
-			success: function (response) {
-				notificacion(response.msg, "success");
-				setInterval(function () {
-					redirect(baseURL + "panel");
-				}, 2000);
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
 	// TODO: Modal Asignar Evaluador Organizacion
 	$(document).on("click", "#verModalAsignar", function () {
 		$id_organizacion = $(this).attr("data-organizacion");
@@ -15374,68 +15308,7 @@ $(document).ready(function () {
 		$("#guardar_formulario_programas_aval").show();
 	});
 
-	//Formulario para el fomulario 6
-	$("#siguienteProgBasiES1").click(function () {
-		console.log("Ver div1");
-		$("#divAtrasProgBasiES").slideUp();
-		$("#divSiguienteProgBasiES1").slideDown();
-		$("#atrasProgProgBasiES").show();
-		$(this).attr("id", "siguienteProgBasiES2");
-	});
 
-	$("#atrasProgProgBasiES").click(function () {
-		console.log("Ver atras 1");
-		$(this).hide();
-		$("#divSiguienteProgBasiES1").slideUp();
-		$("#divAtrasProgBasiES").slideDown();
-	});
-
-	$("#siguienteProgBasiES2").click(function () {
-		console.log("Ver div2");
-		$("#divSiguienteProgBasiES1").slideUp();
-		$("#divSiguienteProgBasiES2").slideDown();
-		$("#atrasProgProgBasiES").attr("id", "atrasProgProgBasiES1");
-		$(this).attr("id", "siguienteProgBasiES3");
-	});
-
-	$("#atrasProgProgBasiES1").click(function () {
-		console.log("Ver atras 1");
-		$("#divSiguienteProgBasiES2").slideUp();
-		$("#divSiguienteProgBasiES1").slideDown();
-		$(this).attr("id", "atrasProgProgBasiES");
-		$("#siguienteProgBasiES3").attr("id", "siguienteProgBasiES2");
-	});
-
-	$("#siguienteProgBasiES3").click(function () {
-		console.log("Ver div3");
-		$("#divSiguienteProgBasiES2").slideUp();
-		$("#divSiguienteProgBasiES3").slideDown();
-		$("#atrasProgProgBasiES1").attr("id", "atrasProgProgBasiES2");
-		$(this).attr("id", "siguienteProgBasiES4");
-	});
-
-	$("#atrasProgProgBasiES2").click(function () {
-		$("#divSiguienteProgBasiES3").slideUp();
-		$("#divSiguienteProgBasiES2").slideDown();
-		$(this).attr("id", "atrasProgProgBasiES1");
-		$("#siguienteProgBasiES4").attr("id", "siguienteProgBasiES3");
-	});
-
-	$("#siguienteProgBasiES4").click(function () {
-		console.log("Ver div4");
-		$("#divSiguienteProgBasiES3").slideUp();
-		$("#divSiguienteProgBasiES4").slideDown();
-		$("#atrasProgProgBasiES2").attr("id", "atrasProgProgBasiES3");
-		//$("#guardar_formulario_programa_basico").show();
-	});
-
-	$("#atrasProgProgBasiES3").click(function () {
-		$("#divSiguienteProgBasiES4").slideUp();
-		$("#divSiguienteProgBasiES3").slideDown();
-		$(this).attr("id", "atrasProgProgBasiES2");
-		//$("#guardar_formulario_programa_basico").hide();
-		$("#siguienteProgBasiES4").show();
-	});
 
 	$("input:radio[name=jornaSelect]").change(function () {
 		if ($("input:radio[name=jornaSelect]:checked").val() == "Si") {
@@ -15456,7 +15329,7 @@ $(document).ready(function () {
 	//Politica
 	$("#acepto_politica").click(function () {
 		$("#acepto_cond").prop("checked", true);
-		$("#politica_ventana").modal("toggle");
+		$("#aceptar_programa").modal("toggle");
 	});
 
 	$("#verInfGenMenuAdmin").click(function () {
@@ -17795,7 +17668,7 @@ function cargarArchivosDocente($id) {
 		},
 	});
 }
-// TODO: Verificacion de formularios
+// TODO: Verificación de formularios
 function verificarFormularios() {
 	$("#formulariosFaltantes").empty();
 	$.ajax({
@@ -17806,16 +17679,11 @@ function verificarFormularios() {
 			console.log(response);
 			notificacion(response.msg, "success");
 			$("#estadoOrgBD").html(response.estado);
-			if (
-				response.estado == "En Proceso de Actualización" ||
-				response.motivo == "Actualizar Datos"
-			) {
+			if (response.estado == "En Proceso de Actualización" || response.motivo == "Actualizar Datos") {
 				$("#act_datos_sol_org").remove();
 				$("#at_txt_act_datos").remove();
 				//$("#el_sol").show();
-				$("#estado_solicitud").append(
-					'<h3 id="at_txt_act_datos"><span>ATENCIÓN: Cuando termine de actualizar los datos elimine la solicitud dando click en "Cambiar el tipo de solicitud actual" para volver a su estado anterior de "Acreditado".<span></h3>'
-				);
+				$("#estado_solicitud").append('<h3 id="at_txt_act_datos"><span>ATENCIÓN: Cuando termine de actualizar los datos elimine la solicitud dando clic en "Cambiar el tipo de solicitud actual" para volver a su estado anterior de "Acreditado".<span></h3>');
 			}
 			$("#numeroSolicitudesBD").html(response.numero);
 			$("#tipoSolicitudesBB").html(response.tipo);
@@ -17829,23 +17697,13 @@ function verificarFormularios() {
 					$("span#" + step_sel[0] + ".step_no").removeClass("menu-sel");
 					$("span#" + step_sel[0] + ".step_no").addClass("NOmenu-sel");
 				}
-				$("#formulariosFaltantes").append(
-					"<p>" + response.formularios[i] + "</p>"
-				);
+				$("#formulariosFaltantes").append("<p>" + response.formularios[i] + "</p>");
 			}
-			$("li.step-no>a>span.step_no.menu-sel")
-				.parent()
-				.css("background", "#008000");
+			$("li.step-no>a>span.step_no.menu-sel").parent().css("background", "#008000");
 			$("li.step-no>a>span.step_no.menu-sel").parent().css("color", "white");
-			$("li.step-no>a>span.step_no.menu-sel")
-				.parent()
-				.css("border-radius", "10px");
-			$("li.step-no>a>span.step_no.menu-sel")
-				.parent()
-				.css("programasAvalar-materialDidacticong", "4px");
-			$("li.step-no>a>span.step_no.menu-sel")
-				.parent()
-				.css("text-decoration", "underline white");
+			$("li.step-no>a>span.step_no.menu-sel").parent().css("border-radius", "10px");
+			$("li.step-no>a>span.step_no.menu-sel").parent().css("programasAvalar-materialDidacticong", "4px");
+			$("li.step-no>a>span.step_no.menu-sel").parent().css("text-decoration", "underline white");
 
 			if (!$("li.step-no>a").children("span.completo").length > 0) {
 				$("li.step-no>a>span.step_no.menu-sel")
@@ -17862,6 +17720,48 @@ function verificarFormularios() {
 			}
 			//$("li.step-no>a>span.step_no.menu-sel").remove();
 			//$("li.step-no>a>span.step_no.menu-sel").css("background-color", "#07385d !important");
+			//Formulario 6
+			for (let i = 0; i < response.motivos.length; i++) {
+				let motivos = response.motivos[i];
+				console.log(motivos);
+				switch (motivos) {
+					case "1":
+						$("#curso_basico_es").show();
+						break;
+					case "2":
+						$("#curso_basico_aval").show();
+						break;
+					case "3":
+						$("#curso_medio_es").show();
+						break;
+					case "4":
+						$("#curso_avanzado_es").show();
+						break;
+					case "5":
+						$("#curso_economia_financiera").show();
+						break;
+					default:
+
+				}
+
+			}
+
+			console.log(response.motivos);
+			if (response.motivo == "Acreditación Curso Básico de Economía Solidaria") {
+				$("#curso_basico_es").show();
+			}
+			if (response.motivo == "Acreditación, Aval de Trabajo Asociado") {
+				$("#curso_basico_aval").show();
+			}
+			if (response.motivo == "Acreditación Curso Medio de Economía Solidaria") {
+				$("#curso_medio_es").show();
+			}
+			if (response.motivo == "Acreditación Curso Avanzado de Economía Solidaria") {
+				$("#curso_avanzado_es").show();
+			}
+			if (response.motivo == "Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria") {
+				$("#curso_economia_financiera").show();
+			}
 		},
 		error: function (ev) {
 			//Do nothing
@@ -17890,9 +17790,7 @@ function submenu() {
 	$(".contenedor--menu").hide();
 
 	$(".icono").click(function () {
-		$(".contenedor--menu").animate({
-			width: "toggle",
-		});
+		$(".contenedor--menu").animate({width: "toggle",});
 	});
 
 	//$( ".submenu" ).before(innerHTML = "\u25bc");

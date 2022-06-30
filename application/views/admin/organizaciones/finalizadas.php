@@ -290,162 +290,7 @@
 		</div>
 		<div class="col-md-12" id="datosBasicosProgramas">
 			<h3>6. Datos Basicos de Programas</h3>
-			<div id="divAtrasProgBasiES">
-				<label>6.1 Datos Básicos del Programa</label>
-				<div class="form-group">
-					<p>Objetivos: </p><label class="tipoLeer" id='objetivosBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Objetivos" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Metodología a Utilizar: </p><label class="tipoLeer" id='metodologiaBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Metodología a Utilizar" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Material Didáctico y Ayudas Educativas Incorporadas: </p><label class="tipoLeer" id='materialBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Material Didáctico y Ayudas Educativas Incorporadas" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Bibliografia: </p><label class="tipoLeer" id='bibliografiaBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Bibliografia" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Duracion del curso: </p><label class="tipoLeer" id='duracionBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Duracion del curso" id="" rows="3"></textarea>
-				</div>
-				<input type="button" id="siguienteProgBasiES1" class="btn btn-siia btn-sm guardarObservaciones pull-right fa-fa" value='Siguiente página &#xf061'>
-			</div>
-			<div id="divSiguienteProgBasiES1">
-				<label>6.2 Socialización de conceptos funtamentales</label>
-				<div class="form-group">
-					<p>Etica, valores y principios: </p><label class="tipoLeer" id='eticaValoresBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Etica, valores y principios" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Solidaridad: </p><label class="tipoLeer" id='solidaridadBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Solidaridad" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Economía: </p><label class="tipoLeer" id='economiaBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Economía" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Economía Solidaria: </p><label class="tipoLeer" id='economiaSolidariaBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Economía Solidaria" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Asociatividad y Emprendimiento Solidario: </p><label class="tipoLeer" id='asosiatividadBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Asociatividad y Emprendimiento Solidario" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Organización Solidaria: </p><label class="tipoLeer" id='organizacionSolidariaBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Organización Solidaria" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Trabajo en Equipo: </p><label class="tipoLeer" id='trabajoEquipoBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Trabajo en Equipo" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Educacíon Solidaria: </p><label class="tipoLeer" id='educacionSolidariaBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Educacíon Solidaria" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Responsabilidad Social: </p><label class="tipoLeer" id='responsabilidadSocialBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Responsabilidad Social" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Medio Ambiente: </p><label class="tipoLeer" id='medioAmbienteBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Medio Ambiente" id="" rows="3"></textarea>
-				</div>
-				<input type="button" id="atrasProgProgBasiES" class="btn btn-siia btn-sm guardarObservaciones pull-left fa-fa" value='&#xf060 Atrás página'>
-				<input type="button" id="siguienteProgBasiES2" class="btn btn-siia btn-sm guardarObservaciones pull-right fa-fa" value='Siguiente página &#xf061'>
-			</div>
-			<div id="divSiguienteProgBasiES2">
-				<label>6.3 Contexto socioeconómico para el desarrollo</label>
-				<div class="form-group">
-					<p>El contexto económico, social, cultural y ambiental que vivimos: </p><label class="tipoLeer" id='contextoEconomicoBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="El contexto económico, social, cultural y ambiental que vivimos" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Necesidades del ser humano y sus soluciones: </p><label class="tipoLeer" id='necesidadesBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Necesidades del ser humano y sus soluciones" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>¿Por qué y para qué fomentar una organización solidaria?: </p><label class="tipoLeer" id='porqueParaqueBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="¿Por qué y para qué fomentar una organización solidaria?" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Principios, valores y fines de la economía solidaria: </p><label class="tipoLeer" id='principiosValoresBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Principios, valores y fines de la economía solidaria" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Marco normativo general de la economía solidaria en Colombia: </p><label class="tipoLeer" id='marcoNormativoBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Marco normativo general de la economía solidaria en Colombia" id="" rows="3"></textarea>
-				</div>
-				<input type="button" id="atrasProgProgBasiES1" class="btn btn-siia btn-sm guardarObservaciones pull-left fa-fa" value='&#xf060 Atrás página'>
-				<input type="button" id="siguienteProgBasiES3" class="btn btn-siia btn-sm guardarObservaciones pull-right fa-fa" value='Siguiente página &#xf061'>
-			</div>
-			<div id="divSiguienteProgBasiES3">
-				<label>6.4 Tipos de organizaciones solidarias</label>
-				<div class="form-group">
-					<p>Tipos de organizaciones de economía solidaria y solidaria de desarrollo: </p><label class="tipoLeer" id='tiposOrganizacionesBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Tipos de organizaciones de economía solidaria y solidaria de desarrollo" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Antecedentes históricos de la organización solidaria objeto del curso: </p><label class="tipoLeer" id='antecedentesHistoricosBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Antecedentes históricos de la organización solidaria objeto del curso" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Características económicas, sociales y culturales de la organización solidaria: </p><label class="tipoLeer" id='caracteristicasEconomicasBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Características económicas, sociales y culturales de la organización solidaria" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Estructura interna organizativa básica (dirección, control y comités de apoyo): </p><label class="tipoLeer" id='estructuraInternaBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Estructura interna organizativa básica (dirección, control y comités de apoyo)" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Marco jurídico aplicable al tipo de organización: </p><label class="tipoLeer" id='marcoJuridicoBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Marco jurídico aplicable al tipo de organización" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Fundamentos administrativos de la organización: </p><label class="tipoLeer" id='fundamentosAdministrativosBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Fundamentos administrativos de la organización" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Orientación para la elaboración de estatutos, reglamentos y legalización de la organización: </p><label class="tipoLeer" id='estatutosReglamentosBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Orientación para la elaboración de estatutos, reglamentos y legalización de la organización" id="" rows="3"></textarea>
-				</div>
-				<input type="button" id="atrasProgProgBasiES2" class="btn btn-siia btn-sm guardarObservaciones pull-left fa-fa" value='&#xf060 Atrás página'>
-				<input type="button" id="siguienteProgBasiES4" class="btn btn-siia btn-sm guardarObservaciones pull-right fa-fa" value='Siguiente página &#xf061'>
-			</div>
-			<div id="divSiguienteProgBasiES4">
-				<label>6.5 Entes de control y apoyo al sector solidario</label>
-				<div class="form-group">
-					<p>Unidad Administrativa Especial de Organizaciones Solidarias: </p><label class="tipoLeer" id='uaeosBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Unidad Administrativa Especial de Organizaciones Solidarias" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Superintendencia de la Economía Solidaria: </p><label class="tipoLeer" id='superintendenciaBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Superintendencia de la Economía Solidaria" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Fondo de Garantías Cooperativas - FOGACOOP: </p><label class="tipoLeer" id='fondoGarantiasBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Fondo de Garantías Cooperativas - FOGACOOP" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Consejo Nacional de la Economía Solidaria - CONES: </p><label class="tipoLeer" id='consejoBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Consejo Nacional de la Economía Solidaria - CONES" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Fondo Nacional de la Economía Solidaria - FONES: </p><label class="tipoLeer" id='fondoNacionalBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Fondo Nacional de la Economía Solidaria - FONES" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Mesas Regionales de Educación Solidaria: </p><label class="tipoLeer" id='mesasRegionalesBasicosProgramas'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="datosBasicosProgramas" data-title="Mesas Regionales de Educación Solidaria" id="" rows="3"></textarea>
-				</div>
-				<input type="button" id="atrasProgProgBasiES3" class="btn btn-siia btn-sm guardarObservaciones pull-left fa-fa" value='&#xf060 Atrás página'>
-			</div>
-			<div class="clearfix"></div>
+
 			<hr />
 		</div>
 		<div class="col-md-12" id="programasAvalEconomia">
@@ -533,6 +378,11 @@
 		</div>
 		<div class="col-md-12" id="plataforma">
 			<h3>10. Plataforma</h3>
+		</div>
+		<div class="col-md-12" id="enLinea">
+			<h3>11. En linea</h3>
+
+			<hr />
 		</div>
 	</div>
 </div>
