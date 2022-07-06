@@ -1,0 +1,125 @@
+let url = unescape(window.location.href);
+let activate = url.split("/");
+let baseURL = activate[0] + "//" + activate[2] + "/" + activate[3] + "/";
+let html = "";
+/** Acciones Menú Observaciones */
+$("#verInfGenMenuAdmin").click(function () {
+	$("#informacion").show();
+	$("#documentacion").hide();
+	$("#registroEducativoProgramas").hide();
+	$("#antecedentesAcademicos").hide();
+	$("#jornadasActualizacion").hide();
+	$("#datosBasicosProgramas").hide();
+	$("#programasAvalEconomia").hide();
+	$("#programasAvalar").hide();
+	$("#docentes").hide();
+	$("#plataforma").hide();
+});
+$("#verDocLegalMenuAdmin").click(function () {
+	$("#informacion").hide();
+	$("#documentacion").show();
+	$("#registroEducativoProgramas").hide();
+	$("#antecedentesAcademicos").hide();
+	$("#jornadasActualizacion").hide();
+	$("#datosBasicosProgramas").hide();
+	$("#programasAvalEconomia").hide();
+	$("#programasAvalar").hide();
+	$("#docentes").hide();
+	$("#plataforma").hide();
+});
+$("#verRegAcaMenuAdmin").click(function () {
+	$("#informacion").hide();
+	$("#documentacion").hide();
+	$("#registroEducativoProgramas").show();
+	$("#antecedentesAcademicos").hide();
+	$("#jornadasActualizacion").hide();
+	$("#datosBasicosProgramas").hide();
+	$("#programasAvalEconomia").hide();
+	$("#programasAvalar").hide();
+	$("#docentes").hide();
+	$("#plataforma").hide();
+});
+$("#verAntAcaMenuAdmin").click(function () {
+	$("#informacion").hide();
+	$("#documentacion").hide();
+	$("#registroEducativoProgramas").hide();
+	$("#antecedentesAcademicos").show();
+	$("#jornadasActualizacion").hide();
+	$("#datosBasicosProgramas").hide();
+	$("#programasAvalEconomia").hide();
+	$("#programasAvalar").hide();
+	$("#docentes").hide();
+	$("#plataforma").hide();
+});
+$("#verJorActMenuAdmin").click(function () {
+	$("#informacion").hide();
+	$("#documentacion").hide();
+	$("#registroEducativoProgramas").hide();
+	$("#antecedentesAcademicos").hide();
+	$("#jornadasActualizacion").show();
+	$("#datosBasicosProgramas").hide();
+	$("#programasAvalEconomia").hide();
+	$("#programasAvalar").hide();
+	$("#docentes").hide();
+	$("#plataforma").hide();
+});
+$("#verProgBasMenuAdmin").click(function () {
+	$("#informacion").hide();
+	$("#documentacion").hide();
+	$("#registroEducativoProgramas").hide();
+	$("#antecedentesAcademicos").hide();
+	$("#jornadasActualizacion").hide();
+	$("#datosBasicosProgramas").show();
+	$("#programasAvalEconomia").hide();
+	$("#programasAvalar").hide();
+	$("#docentes").hide();
+	$("#plataforma").hide();
+});
+$("#verProgAvaMenuAdmin").click(function () {
+	$("#informacion").hide();
+	$("#documentacion").hide();
+	$("#registroEducativoProgramas").hide();
+	$("#antecedentesAcademicos").hide();
+	$("#jornadasActualizacion").hide();
+	$("#datosBasicosProgramas").hide();
+	$("#programasAvalEconomia").show();
+	$("#programasAvalar").hide();
+	$("#docentes").hide();
+	$("#plataforma").hide();
+});
+$("#verProgsMenuAdmin").click(function () {
+	$("#informacion").hide();
+	$("#documentacion").hide();
+	$("#registroEducativoProgramas").hide();
+	$("#antecedentesAcademicos").hide();
+	$("#jornadasActualizacion").hide();
+	$("#datosBasicosProgramas").hide();
+	$("#programasAvalEconomia").hide();
+	$("#programasAvalar").show();
+	$("#docentes").hide();
+	$("#plataforma").hide();
+});
+$("#verFaciliMenuAdmin").click(function () {
+	$("#informacion").hide();
+	$("#documentacion").hide();
+	$("#registroEducativoProgramas").hide();
+	$("#antecedentesAcademicos").hide();
+	$("#jornadasActualizacion").hide();
+	$("#datosBasicosProgramas").hide();
+	$("#programasAvalEconomia").hide();
+	$("#programasAvalar").hide();
+	$("#docentes").show();
+	$("#plataforma").hide();
+});
+$("#verDatPlatMenuAdmin").click(function () {
+	$("#informacion").hide();
+	$("#documentacion").hide();
+	$("#registroEducativoProgramas").hide();
+	$("#antecedentesAcademicos").hide();
+	$("#jornadasActualizacion").hide();
+	$("#datosBasicosProgramas").hide();
+	$("#programasAvalEconomia").hide();
+	$("#programasAvalar").hide();
+	$("#docentes").hide();
+	$("#plataforma").show();
+});

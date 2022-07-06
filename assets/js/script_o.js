@@ -1515,151 +1515,43 @@ $(document).ready(function () {
 			}
 			/** Formulario 1 **/
 			for (var i = 0; i < $jsonInformacion.informacionGeneral.length; i++) {
-				$("#actuacionOrganizacion").html(
-					$jsonInformacion.informacionGeneral[i].actuacionOrganizacion
-				);
-				$("#direccionOrganizacion").html(
-					$jsonInformacion.informacionGeneral[i].direccionOrganizacion
-				);
+				$("#actuacionOrganizacion").html($jsonInformacion.informacionGeneral[i].actuacionOrganizacion);
+				$("#direccionOrganizacion").html($jsonInformacion.informacionGeneral[i].direccionOrganizacion);
 				$("#extension").html($jsonInformacion.informacionGeneral[i].extension);
 				$("#fax").html($jsonInformacion.informacionGeneral[i].fax);
 				$("#fines").html($jsonInformacion.informacionGeneral[i].fines);
 				$("#mision").html($jsonInformacion.informacionGeneral[i].mision);
-				$("#nomDepartamentoUbicacion").html(
-					$jsonInformacion.informacionGeneral[i].nomDepartamentoUbicacion
-				);
-				$("#nomMunicipioNacional").html(
-					$jsonInformacion.informacionGeneral[i].nomMunicipioNacional
-				);
-				$("#numCedulaCiudadaniaPersona").html(
-					$jsonInformacion.informacionGeneral[i].numCedulaCiudadaniaPersona
-				);
-				$("#objetoSocialEstatutos").html(
-					$jsonInformacion.informacionGeneral[i].objetoSocialEstatutos
-				);
+				$("#nomDepartamentoUbicacion").html($jsonInformacion.informacionGeneral[i].nomDepartamentoUbicacion);
+				$("#nomMunicipioNacional").html($jsonInformacion.informacionGeneral[i].nomMunicipioNacional);
+				$("#numCedulaCiudadaniaPersona").html($jsonInformacion.informacionGeneral[i].numCedulaCiudadaniaPersona);
+				$("#objetoSocialEstatutos").html($jsonInformacion.informacionGeneral[i].objetoSocialEstatutos);
 				$("#otros").html($jsonInformacion.informacionGeneral[i].otros);
-				$("#portafolio").html(
-					$jsonInformacion.informacionGeneral[i].portafolio
-				);
-				$("#presentacionInstitucional").html(
-					$jsonInformacion.informacionGeneral[i].presentacionInstitucional
-				);
-				$("#principios").html(
-					$jsonInformacion.informacionGeneral[i].principios
-				);
-				$("#tipoEducacion").html(
-					$jsonInformacion.informacionGeneral[i].tipoEducacion
-				);
-				$("#tipoOrganizacion").html(
-					$jsonInformacion.informacionGeneral[i].tipoOrganizacion
-				);
-				$("#urlOrganizacion").html(
-					$jsonInformacion.informacionGeneral[i].urlOrganizacion
-				);
+				$("#portafolio").html($jsonInformacion.informacionGeneral[i].portafolio);
+				$("#presentacionInstitucional").html($jsonInformacion.informacionGeneral[i].presentacionInstitucional);
+				$("#principios").html($jsonInformacion.informacionGeneral[i].principios);
+				$("#tipoEducacion").html($jsonInformacion.informacionGeneral[i].tipoEducacion);
+				$("#tipoOrganizacion").html($jsonInformacion.informacionGeneral[i].tipoOrganizacion);
+				$("#urlOrganizacion").html($jsonInformacion.informacionGeneral[i].urlOrganizacion);
 				$("#vision").html($jsonInformacion.informacionGeneral[i].vision);
 				//___
-				$("#actuacionOrganizacion")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						$jsonInformacion.informacionGeneral[i].actuacionOrganizacion
-					);
-				$("#direccionOrganizacion")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						$jsonInformacion.informacionGeneral[i].direccionOrganizacion
-					);
-				$("#extension")
-					.parent()
-					.next()
-					.attr("data-text", $jsonInformacion.informacionGeneral[i].extension);
-				$("#fax")
-					.parent()
-					.next()
-					.attr("data-text", $jsonInformacion.informacionGeneral[i].fax);
-				$("#fines")
-					.parent()
-					.next()
-					.attr("data-text", $jsonInformacion.informacionGeneral[i].fines);
-				$("#mision")
-					.parent()
-					.next()
-					.attr("data-text", $jsonInformacion.informacionGeneral[i].mision);
-				$("#nomDepartamentoUbicacion")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						$jsonInformacion.informacionGeneral[i].nomDepartamentoUbicacion
-					);
-				$("#nomMunicipioNacional")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						$jsonInformacion.informacionGeneral[i].nomMunicipioNacional
-					);
-				$("#numCedulaCiudadaniaPersona")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						$jsonInformacion.informacionGeneral[i].numCedulaCiudadaniaPersona
-					);
-				$("#objetoSocialEstatutos")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						$jsonInformacion.informacionGeneral[i].objetoSocialEstatutos
-					);
-				$("#otros")
-					.parent()
-					.next()
-					.attr("data-text", $jsonInformacion.informacionGeneral[i].otros);
-				$("#portafolio")
-					.parent()
-					.next()
-					.attr("data-text", $jsonInformacion.informacionGeneral[i].portafolio);
-				$("#presentacionInstitucional")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						$jsonInformacion.informacionGeneral[i].presentacionInstitucional
-					);
-				$("#principios")
-					.parent()
-					.next()
-					.attr("data-text", $jsonInformacion.informacionGeneral[i].principios);
-				$("#tipoEducacion")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						$jsonInformacion.informacionGeneral[i].tipoEducacion
-					);
-				$("#tipoOrganizacion")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						$jsonInformacion.informacionGeneral[i].tipoOrganizacion
-					);
-				$("#urlOrganizacion")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						$jsonInformacion.informacionGeneral[i].urlOrganizacion
-					);
-				$("#vision")
-					.parent()
-					.next()
-					.attr("data-text", $jsonInformacion.informacionGeneral[i].vision);
+				$("#actuacionOrganizacion").parent().next().attr("data-text", $jsonInformacion.informacionGeneral[i].actuacionOrganizacion);
+				$("#direccionOrganizacion").parent().next().attr("data-text", $jsonInformacion.informacionGeneral[i].direccionOrganizacion);
+				$("#extension").parent().next().attr("data-text", $jsonInformacion.informacionGeneral[i].extension);
+				$("#fax").parent().next().attr("data-text", $jsonInformacion.informacionGeneral[i].fax);
+				$("#fines").parent().next().attr("data-text", $jsonInformacion.informacionGeneral[i].fines);
+				$("#mision").parent().next().attr("data-text", $jsonInformacion.informacionGeneral[i].mision);
+				$("#nomDepartamentoUbicacion").parent().next().attr("data-text", $jsonInformacion.informacionGeneral[i].nomDepartamentoUbicacion);
+				$("#nomMunicipioNacional").parent().next().attr("data-text", $jsonInformacion.informacionGeneral[i].nomMunicipioNacional);
+				$("#numCedulaCiudadaniaPersona").parent().next().attr("data-text", $jsonInformacion.informacionGeneral[i].numCedulaCiudadaniaPersona);
+				$("#objetoSocialEstatutos").parent().next().attr("data-text", $jsonInformacion.informacionGeneral[i].objetoSocialEstatutos);
+				$("#otros").parent().next().attr("data-text", $jsonInformacion.informacionGeneral[i].otros);
+				$("#portafolio").parent().next().attr("data-text", $jsonInformacion.informacionGeneral[i].portafolio);
+				$("#presentacionInstitucional").parent().next().attr("data-text", $jsonInformacion.informacionGeneral[i].presentacionInstitucional);
+				$("#principios").parent().next().attr("data-text", $jsonInformacion.informacionGeneral[i].principios);
+				$("#tipoEducacion").parent().next().attr("data-text", $jsonInformacion.informacionGeneral[i].tipoEducacion);
+				$("#tipoOrganizacion").parent().next().attr("data-text", $jsonInformacion.informacionGeneral[i].tipoOrganizacion);
+				$("#urlOrganizacion").parent().next().attr("data-text", $jsonInformacion.informacionGeneral[i].urlOrganizacion);
+				$("#vision").parent().next().attr("data-text", $jsonInformacion.informacionGeneral[i].vision);
 				for ($a = 0; $a < data_orgFinalizada["0"].archivos.length; $a++) {
 					if (data_orgFinalizada["0"].archivos[$a].id_formulario == "1") {
 						if (data_orgFinalizada["0"].archivos[$a].tipo == "carta") {
@@ -1673,8 +1565,7 @@ $(document).ready(function () {
 						}
 
 						$("#archivos_informacionGeneral").append(
-							"<li class='listaArchivos'><a href='" +
-								$carpeta +
+							"<li class='listaArchivos'><a href='" + $carpeta +
 								data_orgFinalizada["0"].archivos[$a].nombre +
 								"' target='_blank'>" +
 								data_orgFinalizada["0"].archivos[$a].nombre +
@@ -1685,27 +1576,13 @@ $(document).ready(function () {
 			}
 			/** Formulario 2 **/
 			for (var i = 0; i < $jsonInformacion.documentacionLegal.length; i++) {
-				if (
-					$jsonInformacion.documentacionLegal[i].registroEducativo != "No Tiene"
-				) {
-					$("#departamentoResolucion").html(
-						$jsonInformacion.documentacionLegal[i].departamentoResolucion
-					);
-					$("#entidadRegistro").html(
-						$jsonInformacion.documentacionLegal[i].entidadRegistro
-					);
-					$("#fechaResolucion").html(
-						$jsonInformacion.documentacionLegal[i].fechaResolucion
-					);
-					$("#municipioResolucion").html(
-						$jsonInformacion.documentacionLegal[i].municipioResolucion
-					);
-					$("#numeroResolucion").html(
-						$jsonInformacion.documentacionLegal[i].numeroResolucion
-					);
-					$("#registroEducativo").html(
-						$jsonInformacion.documentacionLegal[i].registroEducativo
-					);
+				if ($jsonInformacion.documentacionLegal[i].registroEducativo != "No Tiene") {
+					$("#departamentoResolucion").html($jsonInformacion.documentacionLegal[i].departamentoResolucion);
+					$("#entidadRegistro").html($jsonInformacion.documentacionLegal[i].entidadRegistro);
+					$("#fechaResolucion").html($jsonInformacion.documentacionLegal[i].fechaResolucion);
+					$("#municipioResolucion").html($jsonInformacion.documentacionLegal[i].municipioResolucion);
+					$("#numeroResolucion").html($jsonInformacion.documentacionLegal[i].numeroResolucion);
+					$("#registroEducativo").html($jsonInformacion.documentacionLegal[i].registroEducativo);
 
 					//__
 					$("#departamentoResolucion")
@@ -2734,7 +2611,6 @@ $(document).ready(function () {
 				$("#datosBasicosProgramas>#archivos_datosBasicosProgramas").append('<hr/>');
 				$("#datosBasicosProgramas").append('</div>');*/
 			}
-
 			/** Formulario 7 **/
 			for (var i = 0; i < $jsonInformacion.programasAvalEconomia.length; i++) {
 				$("#objetivosProgramasAvalEconomia").html(
@@ -4599,406 +4475,29 @@ $(document).ready(function () {
 					}
 				}
 				/** Formulario 6 **/
-				for (var i = 0; i < response.datosBasicosProgramas.length; i++) {
-					$("#objetivosBasicosProgramas").html(
-						response.datosBasicosProgramas[i].objetivos
-					);
-					$("#metodologiaBasicosProgramas").html(
-						response.datosBasicosProgramas[i].metodologia
-					);
-					$("#materialBasicosProgramas").html(
-						response.datosBasicosProgramas[i].materialDidactico
-					);
-					$("#bibliografiaBasicosProgramas").html(
-						response.datosBasicosProgramas[i].bibliografia
-					);
-					$("#duracionBasicosProgramas").html(
-						response.datosBasicosProgramas[i].duracionCurso
-					);
-					$("#eticaValoresBasicosProgramas").html(
-						response.datosBasicosProgramas[i].eticaValoresPrincipios
-					);
-					$("#solidaridadBasicosProgramas").html(
-						response.datosBasicosProgramas[i].solidaridad
-					);
-					$("#economiaBasicosProgramas").html(
-						response.datosBasicosProgramas[i].economia
-					);
-					$("#economiaSolidariaBasicosProgramas").html(
-						response.datosBasicosProgramas[i].economiaSolidaria
-					);
-					$("#asosiatividadBasicosProgramas").html(
-						response.datosBasicosProgramas[i].asosiatividadEmprendimiento
-					);
-					$("#organizacionSolidariaBasicosProgramas").html(
-						response.datosBasicosProgramas[i].organizacionSolidaria
-					);
-					$("#trabajoEquipoBasicosProgramas").html(
-						response.datosBasicosProgramas[i].trabajoEquipo
-					);
-					$("#educacionSolidariaBasicosProgramas").html(
-						response.datosBasicosProgramas[i].educacionSolidaria
-					);
-					$("#responsabilidadSocialBasicosProgramas").html(
-						response.datosBasicosProgramas[i].responsabilidadSocial
-					);
-					$("#medioAmbienteBasicosProgramas").html(
-						response.datosBasicosProgramas[i].medioAmbiente
-					);
-					$("#contextoEconomicoBasicosProgramas").html(
-						response.datosBasicosProgramas[i].contextoEconomicoSocial
-					);
-					$("#necesidadesBasicosProgramas").html(
-						response.datosBasicosProgramas[i].necesidadesSerHumano
-					);
-					$("#porqueParaqueBasicosProgramas").html(
-						response.datosBasicosProgramas[i].porqueFomentar
-					);
-					$("#principiosValoresBasicosProgramas").html(
-						response.datosBasicosProgramas[i].principiosValoresFines
-					);
-					$("#marcoNormativoBasicosProgramas").html(
-						response.datosBasicosProgramas[i].marcoNormativo
-					);
-					$("#tiposOrganizacionesBasicosProgramas").html(
-						response.datosBasicosProgramas[i]
-							.tiposOrganizacionesEconomiaSolidaria
-					);
-					$("#antecedentesHistoricosBasicosProgramas").html(
-						response.datosBasicosProgramas[i].antecedentesHistoricos
-					);
-					$("#caracteristicasEconomicasBasicosProgramas").html(
-						response.datosBasicosProgramas[i].caracteristicasEconomicas
-					);
-					$("#estructuraInternaBasicosProgramas").html(
-						response.datosBasicosProgramas[i].estructuraInterna
-					);
-					$("#marcoJuridicoBasicosProgramas").html(
-						response.datosBasicosProgramas[i].marcoJuridicoAplicable
-					);
-					$("#fundamentosAdministrativosBasicosProgramas").html(
-						response.datosBasicosProgramas[i].fundamentosAdministrativos
-					);
-					$("#estatutosReglamentosBasicosProgramas").html(
-						response.datosBasicosProgramas[i].orientacionElaboracionEstatutos
-					);
-					$("#uaeosBasicosProgramas").html(
-						response.datosBasicosProgramas[i].unidadAdministrativa
-					);
-					$("#superintendenciaBasicosProgramas").html(
-						response.datosBasicosProgramas[i].superintendencia
-					);
-					$("#fondoGarantiasBasicosProgramas").html(
-						response.datosBasicosProgramas[i].fondoGarantias
-					);
-					$("#consejoBasicosProgramas").html(
-						response.datosBasicosProgramas[i].consejoNacional
-					);
-					$("#fondoNacionalBasicosProgramas").html(
-						response.datosBasicosProgramas[i].fondoNacional
-					);
-					$("#mesasRegionalesBasicosProgramas").html(
-						response.datosBasicosProgramas[i].mesasRegionales
-					);
-					//___
-					$("#objetivosBasicosProgramas")
-						.parent()
-						.next()
-						.attr("data-text", response.datosBasicosProgramas[i].objetivos);
-					$("#metodologiaBasicosProgramas")
-						.parent()
-						.next()
-						.attr("data-text", response.datosBasicosProgramas[i].metodologia);
-					$("#materialBasicosProgramas")
-						.parent()
-						.next()
-						.attr(
-							"data-text",
-							response.datosBasicosProgramas[i].materialDidactico
-						);
-					$("#bibliografiaBasicosProgramas")
-						.parent()
-						.next()
-						.attr("data-text", response.datosBasicosProgramas[i].bibliografia);
-					$("#duracionBasicosProgramas")
-						.parent()
-						.next()
-						.attr("data-text", response.datosBasicosProgramas[i].duracionCurso);
-					$("#eticaValoresBasicosProgramas")
-						.parent()
-						.next()
-						.attr(
-							"data-text",
-							response.datosBasicosProgramas[i].eticaValoresPrincipios
-						);
-					$("#solidaridadBasicosProgramas")
-						.parent()
-						.next()
-						.attr("data-text", response.datosBasicosProgramas[i].solidaridad);
-					$("#economiaBasicosProgramas")
-						.parent()
-						.next()
-						.attr("data-text", response.datosBasicosProgramas[i].economia);
-					$("#economiaSolidariaBasicosProgramas")
-						.parent()
-						.next()
-						.attr(
-							"data-text",
-							response.datosBasicosProgramas[i].economiaSolidaria
-						);
-					$("#asosiatividadBasicosProgramas")
-						.parent()
-						.next()
-						.attr(
-							"data-text",
-							response.datosBasicosProgramas[i].asosiatividadEmprendimiento
-						);
-					$("#organizacionSolidariaBasicosProgramas")
-						.parent()
-						.next()
-						.attr(
-							"data-text",
-							response.datosBasicosProgramas[i].organizacionSolidaria
-						);
-					$("#trabajoEquipoBasicosProgramas")
-						.parent()
-						.next()
-						.attr("data-text", response.datosBasicosProgramas[i].trabajoEquipo);
-					$("#educacionSolidariaBasicosProgramas")
-						.parent()
-						.next()
-						.attr(
-							"data-text",
-							response.datosBasicosProgramas[i].educacionSolidaria
-						);
-					$("#responsabilidadSocialBasicosProgramas")
-						.parent()
-						.next()
-						.attr(
-							"data-text",
-							response.datosBasicosProgramas[i].responsabilidadSocial
-						);
-					$("#medioAmbienteBasicosProgramas")
-						.parent()
-						.next()
-						.attr("data-text", response.datosBasicosProgramas[i].medioAmbiente);
-					$("#contextoEconomicoBasicosProgramas")
-						.parent()
-						.next()
-						.attr(
-							"data-text",
-							response.datosBasicosProgramas[i].contextoEconomicoSocial
-						);
-					$("#necesidadesBasicosProgramas")
-						.parent()
-						.next()
-						.attr(
-							"data-text",
-							response.datosBasicosProgramas[i].necesidadesSerHumano
-						);
-					$("#porqueParaqueBasicosProgramas")
-						.parent()
-						.next()
-						.attr(
-							"data-text",
-							response.datosBasicosProgramas[i].porqueFomentar
-						);
-					$("#principiosValoresBasicosProgramas")
-						.parent()
-						.next()
-						.attr(
-							"data-text",
-							response.datosBasicosProgramas[i].principiosValoresFines
-						);
-					$("#marcoNormativoBasicosProgramas")
-						.parent()
-						.next()
-						.attr(
-							"data-text",
-							response.datosBasicosProgramas[i].marcoNormativo
-						);
-					$("#tiposOrganizacionesBasicosProgramas")
-						.parent()
-						.next()
-						.attr(
-							"data-text",
-							response.datosBasicosProgramas[i]
-								.tiposOrganizacionesEconomiaSolidaria
-						);
-					$("#antecedentesHistoricosBasicosProgramas")
-						.parent()
-						.next()
-						.attr(
-							"data-text",
-							response.datosBasicosProgramas[i].antecedentesHistoricos
-						);
-					$("#caracteristicasEconomicasBasicosProgramas")
-						.parent()
-						.next()
-						.attr(
-							"data-text",
-							response.datosBasicosProgramas[i].caracteristicasEconomicas
-						);
-					$("#estructuraInternaBasicosProgramas")
-						.parent()
-						.next()
-						.attr(
-							"data-text",
-							response.datosBasicosProgramas[i].estructuraInterna
-						);
-					$("#marcoJuridicoBasicosProgramas")
-						.parent()
-						.next()
-						.attr(
-							"data-text",
-							response.datosBasicosProgramas[i].marcoJuridicoAplicable
-						);
-					$("#fundamentosAdministrativosBasicosProgramas")
-						.parent()
-						.next()
-						.attr(
-							"data-text",
-							response.datosBasicosProgramas[i].fundamentosAdministrativos
-						);
-					$("#estatutosReglamentosBasicosProgramas")
-						.parent()
-						.next()
-						.attr(
-							"data-text",
-							response.datosBasicosProgramas[i].orientacionElaboracionEstatutos
-						);
-					$("#uaeosBasicosProgramas")
-						.parent()
-						.next()
-						.attr(
-							"data-text",
-							response.datosBasicosProgramas[i].unidadAdministrativa
-						);
-					$("#superintendenciaBasicosProgramas")
-						.parent()
-						.next()
-						.attr(
-							"data-text",
-							response.datosBasicosProgramas[i].superintendencia
-						);
-					$("#fondoGarantiasBasicosProgramas")
-						.parent()
-						.next()
-						.attr(
-							"data-text",
-							response.datosBasicosProgramas[i].fondoGarantias
-						);
-					$("#consejoBasicosProgramas")
-						.parent()
-						.next()
-						.attr(
-							"data-text",
-							response.datosBasicosProgramas[i].consejoNacional
-						);
-					$("#fondoNacionalBasicosProgramas")
-						.parent()
-						.next()
-						.attr("data-text", response.datosBasicosProgramas[i].fondoNacional);
-					$("#mesasRegionalesBasicosProgramas")
-						.parent()
-						.next()
-						.attr(
-							"data-text",
-							response.datosBasicosProgramas[i].mesasRegionales
-						);
-
-					$("#datosBasicosProgramas").append(
-						'<div class="col-md-12" id="archivos_datosBasicosProgramas">'
-					);
-					$("#datosBasicosProgramas>#archivos_datosBasicosProgramas").append(
-						"<p>Archivos:</p>"
-					);
-					for ($a = 0; $a < data_orgFinalizada["0"].archivos.length; $a++) {
-						if (data_orgFinalizada["0"].archivos[$a].id_formulario == "6") {
-							if (
-								data_orgFinalizada["0"].archivos[$a].tipo ==
-								"materialDidacticoProgBasicos"
-							) {
-								$carpeta = baseURL + "uploads/materialDidacticoProgBasicos/";
-							}
-
-							$(
-								"#datosBasicosProgramas>#archivos_datosBasicosProgramas"
-							).append(
-								"<li class='listaArchivos'><a href='" +
-									$carpeta +
-									data_orgFinalizada["0"].archivos[$a].nombre +
-									"' target='_blank'>" +
-									data_orgFinalizada["0"].archivos[$a].nombre +
-									"</a></li>"
-							);
+				for (var i = 0; i < response.datosProgramas.length; i++) {
+					console.log(response.datosProgramas[0]['nombrePrograma']);
+					for (let i = 0; i < response.datosProgramas.length; i++) {
+						let programa = response.datosProgramas[i]['nombrePrograma'];
+						switch (programa) {
+							case "Acreditación Curso Básico de Economía Solidaria":
+								$("#curso_basico_es").show();
+								break;
+							case "Acreditación, Aval de Trabajo Asociado":
+								$("#curso_basico_aval").show();
+								break;
+							case "Acreditación Curso Medio de Economía Solidaria":
+								$("#curso_medio_es").show();
+								break;
+							case "Acreditación Curso Avanzado de Economía Solidaria":
+								$("#curso_avanzado_es").show();
+								break;
+							case "Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria":
+								$("#curso_economia_financiera").show();
+								break;
+							default:
 						}
 					}
-					$("#archivos_datosBasicosProgramas").append(
-						'<div class="form-group" id="datosBasicosProgramas-observacionesGeneral' +
-							i +
-							'">'
-					);
-					$("#archivos_datosBasicosProgramas>div").append(
-						"<p>Observaciones de archivos:</p>"
-					);
-					$("#archivos_datosBasicosProgramas>div").append(
-						"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Observaciones en general' data-text='Observaciones de archivos datos basicos programas' data-type='datosBasicosProgramas' id='obs-inf-gen-datbaprog" +
-							i +
-							"' rows='3'></textarea>"
-					);
-					$("#archivos_datosBasicosProgramas").append("</div>");
-					$("#datosBasicosProgramas").append("</div>");
-					$("#datosBasicosProgramas>#archivos_datosBasicosProgramas").append(
-						'<div class="clearfix"></div>'
-					);
-					$("#datosBasicosProgramas>#archivos_datosBasicosProgramas").append(
-						"<hr/>"
-					);
-
-					/*$cols = 12/(parseFloat(response.datosBasicosProgramas.length));
-					$("#datosBasicosProgramas").append('<div class="col-md-'+$cols+'" id="col'+i+'">');
-	
-					$("#datosBasicosProgramas>#col"+i+"").append('<div class="form-group" id="datosBasicosProgramas-bibliografia'+$cols+i+'">');
-						$("#datosBasicosProgramas>#col"+i+">#datosBasicosProgramas-bibliografia"+$cols+i+"").append("<p>Bibliografía:</p><label class='tipoLeer'>"+response.datosBasicosProgramas[i].bibliografia+"</label>");
-						$("#datosBasicosProgramas>#col"+i+">#datosBasicosProgramas-bibliografia"+$cols+i+"").append("<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Bibliografía' data-text='"+response.datosBasicosProgramas[i].bibliografia+"' data-type='datosBasicosProgramas' id='obs-pnombre-docente"+i+"' rows='3'></textarea>");
-					$("#datosBasicosProgramas>#col"+i+">#datosBasicosProgramas-bibliografia"+$cols+i+"").append('</div>');
-	
-					$("#datosBasicosProgramas>#col"+i+"").append('<div class="form-group" id="datosBasicosProgramas-duracionCurso'+$cols+i+'">');
-						$("#datosBasicosProgramas>#col"+i+">#datosBasicosProgramas-duracionCurso"+$cols+i+"").append("<p>Duracion del curso:</p><label class='tipoLeer'>"+response.datosBasicosProgramas[i].duracionCurso+"</label>");
-						$("#datosBasicosProgramas>#col"+i+">#datosBasicosProgramas-duracionCurso"+$cols+i+"").append("<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Duracion del curso' data-text='"+response.datosBasicosProgramas[i].duracionCurso+"' data-type='datosBasicosProgramas' id='obs-pnombre-docente"+i+"' rows='3'></textarea>");
-					$("#datosBasicosProgramas>#col"+i+">#datosBasicosProgramas-duracionCurso"+$cols+i+"").append('</div>');
-	
-					$("#datosBasicosProgramas>#col"+i+"").append('<div class="form-group" id="datosBasicosProgramas-materialDidactico'+$cols+i+'">');
-						$("#datosBasicosProgramas>#col"+i+">#datosBasicosProgramas-materialDidactico"+$cols+i+"").append("<p>Material didactico:</p><label class='tipoLeer'>"+response.datosBasicosProgramas[i].materialDidactico+"</label>");
-						$("#datosBasicosProgramas>#col"+i+">#datosBasicosProgramas-materialDidactico"+$cols+i+"").append("<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Material didactico' data-text='"+response.datosBasicosProgramas[i].materialDidactico+"' data-type='datosBasicosProgramas' id='obs-pnombre-docente"+i+"' rows='3'></textarea>");
-					$("#datosBasicosProgramas>#col"+i+">#datosBasicosProgramas-materialDidactico"+$cols+i+"").append('</div>');
-	
-					$("#datosBasicosProgramas>#col"+i+"").append('<div class="form-group" id="datosBasicosProgramas-metodologia'+$cols+i+'">');
-						$("#datosBasicosProgramas>#col"+i+">#datosBasicosProgramas-metodologia"+$cols+i+"").append("<p>Metodología:</p><label class='tipoLeer'>"+response.datosBasicosProgramas[i].metodologia+"</label>");
-						$("#datosBasicosProgramas>#col"+i+">#datosBasicosProgramas-metodologia"+$cols+i+"").append("<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Metodología' data-text='"+response.datosBasicosProgramas[i].metodologia+"' data-type='datosBasicosProgramas' id='obs-papellido-docente"+i+"' rows='3'></textarea>");
-					$("#datosBasicosProgramas>#col"+i+">#datosBasicosProgramas-metodologia"+$cols+i+"").append('</div>');
-	
-					$("#datosBasicosProgramas>#col"+i+"").append('<div class="form-group" id="datosBasicosProgramas-objetivos'+$cols+i+'">');
-						$("#datosBasicosProgramas>#col"+i+">#datosBasicosProgramas-objetivos"+$cols+i+"").append("<p>Objetivos:</p><label class='tipoLeer'>"+response.datosBasicosProgramas[i].objetivos+"</label>");
-						$("#datosBasicosProgramas>#col"+i+">#datosBasicosProgramas-objetivos"+$cols+i+"").append("<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Objetivos' data-text='"+response.datosBasicosProgramas[i].objetivos+"' data-type='datosBasicosProgramas' id='obs-sapellido-docente"+i+"' rows='3'></textarea>");
-					$("#datosBasicosProgramas>#col"+i+">#datosBasicosProgramas-objetivos"+$cols+i+"").append('</div>');
-	
-					$("#datosBasicosProgramas").append('</div>');
-					$("#datosBasicosProgramas").append('<div class="col-md-12" id="archivos_datosBasicosProgramas">');
-					$("#datosBasicosProgramas>#archivos_datosBasicosProgramas").append("<p>Archivos:</p>");
-					for($a = 0; $a < data_orgFinalizada['0'].archivos.length; $a++){
-						if(data_orgFinalizada['0'].archivos[$a].id_formulario == "6"){
-							if(data_orgFinalizada['0'].archivos[$a].tipo == "materialDidacticoProgBasicos"){
-								$carpeta = baseURL+"uploads/materialDidacticoProgBasicos/";
-							}
-	
-							$("#datosBasicosProgramas>#archivos_datosBasicosProgramas").append("<li class='listaArchivos'><a href='"+$carpeta+data_orgFinalizada['0'].archivos[$a].nombre+"' target='_blank'>"+data_orgFinalizada['0'].archivos[$a].nombre+"</a></li>");
-						}
-					}
-					$("#datosBasicosProgramas>#archivos_datosBasicosProgramas").append('<div class="clearfix"></div>');
-					$("#datosBasicosProgramas>#archivos_datosBasicosProgramas").append('<hr/>');
-					$("#datosBasicosProgramas").append('</div>');*/
 				}
 
 				/** Formulario 7 **/
@@ -7147,7 +6646,6 @@ $(document).ready(function () {
 			};
 			$observaciones_adm.push(data);
 		}
-
 		for ($j = 0; $j < $observaciones_adm.length; $j++) {
 			if ($observaciones_adm[$j].valor == "") {
 				$("#guardarOBSSI").modal("hide");
@@ -9115,25 +8613,6 @@ $(document).ready(function () {
 			$("#motivo1").attr("checked", true);
 		}
 	});
-	//TODO: Modalidad Solicitud.
-	$("input:radio[name=modalidad_solicitud]").change(function () {
-		$valor = $(this).val();
-		if ($valor == "Virtual" || $valor == "Virtual y Presencial") {
-			$("#ayudaModalidad").modal("toggle");
-		} else if ($valor == "Actualizar Facilitadores") {
-			$("#ayudaFacilitadores").modal("toggle");
-		} else {
-			$("#ayudaModalidad").modal("hide");
-		}
-	});
-
-	$("#noModVirt").click(function () {
-		$valor = $("input:radio[name=modalidad_solicitud]").val();
-		$("#modalidad2").prop("checked", true);
-		$("#ayudaModalidad").modal("hide");
-	});
-
-
 
 	$("#guardar_formulario_informacion_general_entidad").click(function () {
 		if ($("#formulario_informacion_general_entidad").valid()) {
@@ -9207,126 +8686,6 @@ $(document).ready(function () {
 				},
 			});
 		}
-	});
-
-	$("#guardar_formulario_documentacion_legal").click(function () {
-		$(this).attr("disabled", true);
-		//if($("#formulario_documentacion_legal").valid()){
-
-		/**if($('input:radio[name=certificadoExistencia]:checked').val() == "Si"){
-				var certificadoExistencia = "Si Tiene";
-				var numeroExistencia = $("#numeroExistencia").val();
-				var fechaExpedicion = $("#fechaExpedicion").val();
-				var departamentoCertificado = $("#departamentos2").val();
-				var municipioCertificado = $("#municipios2").val();
-				var objetoSocial = $("#objetoSocial").val();
-			}else{
-				var certificadoExistencia = "No Tiene";
-				var numeroExistencia = "No Tiene";
-				var fechaExpedicion = "1900-01-01 00:00:00";
-				var departamentoCertificado = "No Tiene";
-				var municipioCertificado = "No Tiene";
-				var objetoSocial = "No Tiene";
-			}**/
-
-		if ($("input:radio[name=registroEducativo]:checked").val() == "Si") {
-			var registroEducativo = "Si Tiene";
-			var entidadRegistro = $("#entidadRegistro").val();
-			var numeroResolucion = $("#numeroResolucion").val();
-			var fechaResolucion = $("#fechaResolucion").val();
-			var departamentoResolucion = $("#departamentos3").val();
-			var municipioResolucion = $("#municipios3").val();
-		} else if ($("input:radio[name=camaraComercio]:checked").val() == "Si") {
-			var registroEducativo = "No Tiene";
-			var entidadRegistro = "Camara de Comercio";
-			var numeroResolucion = "N/A";
-			var fechaResolucion = "1900-01-01 00:00:00";
-			var departamentoResolucion = "N/A";
-			var municipioResolucion = "N/A";
-		} else {
-			var registroEducativo = "No Tiene";
-			var entidadRegistro = "No Tiene";
-			var numeroResolucion = "No Tiene";
-			var fechaResolucion = "1900-01-01 00:00:00";
-			var departamentoResolucion = "No Tiene";
-			var municipioResolucion = "No Tiene";
-		}
-
-		data = {
-			/*'certificadoExistencia': certificadoExistencia,
-				'numeroExistencia': numeroExistencia,
-				'fechaExpedicion': fechaExpedicion,
-				'departamentoCertificado': departamentoCertificado,
-				'municipioCertificado': municipioCertificado,
-				'objetoSocial': objetoSocial,*/
-			registroEducativo: registroEducativo,
-			entidadRegistro: entidadRegistro,
-			numeroResolucion: numeroResolucion,
-			fechaResolucion: fechaResolucion,
-			departamentoResolucion: departamentoResolucion,
-			municipioResolucion: municipioResolucion,
-		};
-
-		$.ajax({
-			url: baseURL + "panel/guardar_formulario_documentacion_legal",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			beforeSend: function () {
-				notificacion("Espere...", "success");
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-				setInterval(function () {
-					reload();
-				}, 2000);
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-		//}
-	});
-
-	$("#guardar_formulario_registro_educativo").click(function () {
-		//if($("#formulario_documentacion_legal").valid()){
-		$(this).attr("disabled", true);
-		var tipoEducacion = $("#tipoEducacion").val();
-		var fechaResolucionProgramas = $("#fechaResolucionProgramas").val();
-		var numeroResolucionProgramas = $("#numeroResolucionProgramas").val();
-		var nombrePrograma = $("#nombrePrograma").val();
-		var objetoResolucionProgramas = $("#objetoResolucionProgramas").val();
-		var entidadResolucion = $("#entidadResolucion").val();
-
-		data = {
-			tipoEducacion: tipoEducacion,
-			fechaResolucionProgramas: fechaResolucionProgramas,
-			numeroResolucionProgramas: numeroResolucionProgramas,
-			nombrePrograma: nombrePrograma,
-			objetoResolucionProgramas: objetoResolucionProgramas,
-			entidadResolucion: entidadResolucion,
-		};
-
-		$.ajax({
-			url: baseURL + "panel/guardar_formulario_registro_educativo",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			beforeSend: function () {
-				notificacion("Espere...", "success");
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-				//clearInputs("formulario_registro_educativo_de_programas");
-				setInterval(function () {
-					reload();
-				}, 2000);
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-		//}
 	});
 
 	$("#guardar_formulario_antecedentes_academicos").click(function () {
@@ -9809,39 +9168,11 @@ $(document).ready(function () {
 		});
 	});
 
-	$(".archivos_form_registro").on("click", function () {
-		$data_name = $(".archivos_form_registro").attr("data-name");
-		var file_data = $("#" + $data_name).prop("files")[0];
-		var form_data = new FormData();
-		form_data.append("file", file_data);
-		form_data.append("tipoArchivo", $("#" + $data_name).attr("data-val"));
-		form_data.append("append_name", $data_name);
-		$.ajax({
-			url: baseURL + "panel/guardarArchivoRegistro",
-			dataType: "text",
-			cache: false,
-			contentType: false,
-			processData: false,
-			data: form_data,
-			type: "post",
-			dataType: "JSON",
-			beforeSubmit: function () {
-				$("#loading").show();
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-				cargarArchivos();
-			},
-			error: function (ev) {
-				notificacion("Verifique los datos del formulario.", "success");
-			},
-		});
-	});
 
 	$(".archivos_form_jornada").on("click", function () {
 		$data_name = $(".archivos_form_jornada").attr("data-name");
-		var file_data = $("#" + $data_name).prop("files")[0];
-		var form_data = new FormData();
+		let file_data = $("#" + $data_name).prop("files")[0];
+		let form_data = new FormData();
 		form_data.append("file", file_data);
 		form_data.append("tipoArchivo", $("#" + $data_name).attr("data-val"));
 		form_data.append("append_name", $data_name);
@@ -10757,67 +10088,7 @@ $(document).ready(function () {
 		}
 	});
 
-	// TODO: Acciones formulario 2: Documentacion Legal
-	// Camara de comercio
-	$(".camaraComercio").click(function () {
-		if ($("input:radio[name=camaraComercio]:checked").val() == "Si") {
-			$("#div_camara_comercio").show();
-			$("#reg_doc_cond").show();
-			$("#reg_doc_cond>a").removeAttr("style");
-			$("#reg_doc_cond>a").html(
-				'<span id="3" class="step_no">3</span> Camara de Comercio Entidad <i class="fa fa-newspaper-o" aria-hidden="true"></i>'
-			);
-			$("input:radio[name=registroEducativo]").attr("disabled", true);
-			$("#div_registro_educativo").hide();
-			$("input:radio[name=certificadoExistencia]").attr("disabled", true);
-			$("#div_certificado_existencia").hide();
-		} else {
-			$("input:radio[name=registroEducativo]").attr("disabled", false);
-			$("input:radio[name=certificadoExistencia]").attr("disabled", false);
-			$("#div_camara_comercio").hide();
-			$("#reg_doc_cond").hide();
-		}
-	});
-	// Certifcado de existencia
-	$(".certificadoExistencia").click(function () {
-		if ($("input:radio[name=certificadoExistencia]:checked").val() == "Si") {
-			$("#div_certificado_existencia").show();
-			$("#reg_doc_cond").show();
-			$("#reg_doc_cond>a").removeAttr("style");
-			$("#reg_doc_cond>a").html(
-				'<span id="3" class="step_no">3</span> Certificado Existencia <i class="fa fa-newspaper-o" aria-hidden="true"></i>'
-			);
-			$("input:radio[name=registroEducativo]").attr("disabled", true);
-			$("#div_registro_educativo").hide();
-			$("input:radio[name=camaraComercio]").attr("disabled", true);
-			$("#div_camara_comercio").hide();
-		} else {
-			$("input:radio[name=registroEducativo]").attr("disabled", false);
-			$("input:radio[name=camaraComercio]").attr("disabled", false);
-			$("#div_certificado_existencia").hide();
-			$("#reg_doc_cond").hide();
-		}
-	});
-	// Registro Educativo
-	$(".registroEducativo").click(function () {
-		if ($("input:radio[name=registroEducativo]:checked").val() == "Si") {
-			$("#div_registro_educativo").show();
-			$("#reg_doc_cond").show();
-			$("#reg_doc_cond>a").removeAttr("style");
-			$("#reg_doc_cond>a").html(
-				'<span id="3" class="step_no">3</span> Registros Educativos de Programas <i class="fa fa-newspaper-o" aria-hidden="true"></i>'
-			); //('<small>(Finalizado)</small> <i class="fa fa-check" aria-hidden="true"></i>');
-			$("input:radio[name=camaraComercio]").attr("disabled", true);
-			$("#div_camara_comercio").hide();
-			$("input:radio[name=certificadoExistencia]").attr("disabled", true);
-			$("#div_certificado_existencia").hide();
-		} else {
-			$("input:radio[name=camaraComercio]").attr("disabled", false);
-			$("input:radio[name=certificadoExistencia]").attr("disabled", false);
-			$("#div_registro_educativo").hide();
-			$("#reg_doc_cond").hide();
-		}
-	});
+
 
 	$(".dataReload").click(function () {
 		cargarArchivos();
@@ -15332,135 +14603,6 @@ $(document).ready(function () {
 		$("#aceptar_programa").modal("toggle");
 	});
 
-	$("#verInfGenMenuAdmin").click(function () {
-		$("#informacion").show();
-		$("#documentacion").hide();
-		$("#registroEducativoProgramas").hide();
-		$("#antecedentesAcademicos").hide();
-		$("#jornadasActualizacion").hide();
-		$("#datosBasicosProgramas").hide();
-		$("#programasAvalEconomia").hide();
-		$("#programasAvalar").hide();
-		$("#docentes").hide();
-		$("#plataforma").hide();
-	});
-
-	$("#verDocLegalMenuAdmin").click(function () {
-		$("#informacion").hide();
-		$("#documentacion").show();
-		$("#registroEducativoProgramas").hide();
-		$("#antecedentesAcademicos").hide();
-		$("#jornadasActualizacion").hide();
-		$("#datosBasicosProgramas").hide();
-		$("#programasAvalEconomia").hide();
-		$("#programasAvalar").hide();
-		$("#docentes").hide();
-		$("#plataforma").hide();
-	});
-
-	$("#verRegAcaMenuAdmin").click(function () {
-		$("#informacion").hide();
-		$("#documentacion").hide();
-		$("#registroEducativoProgramas").show();
-		$("#antecedentesAcademicos").hide();
-		$("#jornadasActualizacion").hide();
-		$("#datosBasicosProgramas").hide();
-		$("#programasAvalEconomia").hide();
-		$("#programasAvalar").hide();
-		$("#docentes").hide();
-		$("#plataforma").hide();
-	});
-
-	$("#verAntAcaMenuAdmin").click(function () {
-		$("#informacion").hide();
-		$("#documentacion").hide();
-		$("#registroEducativoProgramas").hide();
-		$("#antecedentesAcademicos").show();
-		$("#jornadasActualizacion").hide();
-		$("#datosBasicosProgramas").hide();
-		$("#programasAvalEconomia").hide();
-		$("#programasAvalar").hide();
-		$("#docentes").hide();
-		$("#plataforma").hide();
-	});
-
-	$("#verJorActMenuAdmin").click(function () {
-		$("#informacion").hide();
-		$("#documentacion").hide();
-		$("#registroEducativoProgramas").hide();
-		$("#antecedentesAcademicos").hide();
-		$("#jornadasActualizacion").show();
-		$("#datosBasicosProgramas").hide();
-		$("#programasAvalEconomia").hide();
-		$("#programasAvalar").hide();
-		$("#docentes").hide();
-		$("#plataforma").hide();
-	});
-
-	$("#verProgBasMenuAdmin").click(function () {
-		$("#informacion").hide();
-		$("#documentacion").hide();
-		$("#registroEducativoProgramas").hide();
-		$("#antecedentesAcademicos").hide();
-		$("#jornadasActualizacion").hide();
-		$("#datosBasicosProgramas").show();
-		$("#programasAvalEconomia").hide();
-		$("#programasAvalar").hide();
-		$("#docentes").hide();
-		$("#plataforma").hide();
-	});
-
-	$("#verProgAvaMenuAdmin").click(function () {
-		$("#informacion").hide();
-		$("#documentacion").hide();
-		$("#registroEducativoProgramas").hide();
-		$("#antecedentesAcademicos").hide();
-		$("#jornadasActualizacion").hide();
-		$("#datosBasicosProgramas").hide();
-		$("#programasAvalEconomia").show();
-		$("#programasAvalar").hide();
-		$("#docentes").hide();
-		$("#plataforma").hide();
-	});
-
-	$("#verProgsMenuAdmin").click(function () {
-		$("#informacion").hide();
-		$("#documentacion").hide();
-		$("#registroEducativoProgramas").hide();
-		$("#antecedentesAcademicos").hide();
-		$("#jornadasActualizacion").hide();
-		$("#datosBasicosProgramas").hide();
-		$("#programasAvalEconomia").hide();
-		$("#programasAvalar").show();
-		$("#docentes").hide();
-		$("#plataforma").hide();
-	});
-
-	$("#verFaciliMenuAdmin").click(function () {
-		$("#informacion").hide();
-		$("#documentacion").hide();
-		$("#registroEducativoProgramas").hide();
-		$("#antecedentesAcademicos").hide();
-		$("#jornadasActualizacion").hide();
-		$("#datosBasicosProgramas").hide();
-		$("#programasAvalEconomia").hide();
-		$("#programasAvalar").hide();
-		$("#docentes").show();
-		$("#plataforma").hide();
-	});
-
-	$("#verDatPlatMenuAdmin").click(function () {
-		$("#informacion").hide();
-		$("#documentacion").hide();
-		$("#registroEducativoProgramas").hide();
-		$("#antecedentesAcademicos").hide();
-		$("#jornadasActualizacion").hide();
-		$("#datosBasicosProgramas").hide();
-		$("#programasAvalEconomia").hide();
-		$("#programasAvalar").hide();
-		$("#docentes").hide();
-		$("#plataforma").show();
-	});
 
 	$("#verRelacionCambios").click(function () {
 		$id_organizacion = $("#id_org_ver_form").attr("data-id");
@@ -17691,8 +16833,8 @@ function verificarFormularios() {
 			$("#modalidadSolicitudesBB").html(response.modalidad);
 			$("#estadoAnteriorBB").html(response.estadoAnterior);
 			console.log(response.formularios);
-			for (var i = 0; i < response.formularios.length; i++) {
-				var step_sel = response.formularios[i].split(".");
+			for (let i = 0; i < response.formularios.length; i++) {
+				let step_sel = response.formularios[i].split(".");
 				if (i != step_sel[0]) {
 					$("span#" + step_sel[0] + ".step_no").removeClass("menu-sel");
 					$("span#" + step_sel[0] + ".step_no").addClass("NOmenu-sel");
@@ -17706,13 +16848,8 @@ function verificarFormularios() {
 			$("li.step-no>a>span.step_no.menu-sel").parent().css("text-decoration", "underline white");
 
 			if (!$("li.step-no>a").children("span.completo").length > 0) {
-				$("li.step-no>a>span.step_no.menu-sel")
-					.parent()
-					.append(
-						' <span class="completo"><small>(Completado)</small> <i class="fa fa-check" aria-hidden="true"></i></span>'
-					);
+				$("li.step-no>a>span.step_no.menu-sel").parent().append('<span class="completo"><small>(Completado)</small> <i class="fa fa-check" aria-hidden="true"></i></span>');
 			}
-
 			if ($("#modalFinalizarProceso").css("display") == "block") {
 				$("#modalFinalizarProceso").modal("toggle");
 				$("#finalizar_si").removeAttr("disabled");
@@ -17720,10 +16857,22 @@ function verificarFormularios() {
 			}
 			//$("li.step-no>a>span.step_no.menu-sel").remove();
 			//$("li.step-no>a>span.step_no.menu-sel").css("background-color", "#07385d !important");
+			//Comprobación modalidad y mostrar los formularios correspondientes
+			if(response.modalidad == "Presencial, Virtual, En Linea" || response.modalidad == "Virtual, En Linea") {
+				$("#itemPlataforma").show();
+				$("#itemEnLinea").show();
+			}
+			if (response.modalidad == "Presencial, Virtual" || response.modalidad == "Virtual" ){
+				$("#itemPlataforma").show();
+
+			}
+			if (response.modalidad == "Presencial, En Linea" || response.modalidad == "En Linea") {
+				$("#itemEnLinea").show();
+			}
+
 			//Formulario 6
 			for (let i = 0; i < response.motivos.length; i++) {
 				let motivos = response.motivos[i];
-				console.log(motivos);
 				switch (motivos) {
 					case "1":
 						$("#curso_basico_es").show();
@@ -17741,26 +16890,7 @@ function verificarFormularios() {
 						$("#curso_economia_financiera").show();
 						break;
 					default:
-
 				}
-
-			}
-
-			console.log(response.motivos);
-			if (response.motivo == "Acreditación Curso Básico de Economía Solidaria") {
-				$("#curso_basico_es").show();
-			}
-			if (response.motivo == "Acreditación, Aval de Trabajo Asociado") {
-				$("#curso_basico_aval").show();
-			}
-			if (response.motivo == "Acreditación Curso Medio de Economía Solidaria") {
-				$("#curso_medio_es").show();
-			}
-			if (response.motivo == "Acreditación Curso Avanzado de Economía Solidaria") {
-				$("#curso_avanzado_es").show();
-			}
-			if (response.motivo == "Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria") {
-				$("#curso_economia_financiera").show();
 			}
 		},
 		error: function (ev) {

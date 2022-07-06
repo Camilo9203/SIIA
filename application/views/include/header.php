@@ -226,8 +226,8 @@
 												<!-- //TODO: Formulario 8, antes comentado -->
 <!--												<li class="step-no"><a data-form="8" data-form-name="aval_personas"><span id="8" class="step_no menu-sel">8</span> Aval de Programas <i class="fa fa-signal" aria-hidden="true"></i></a></li>-->
 												<li class="step-no"><a data-form="9" data-form-name="equipo_docente"><span id="6" class="step_no menu-sel">6</span> Equipo de Facilitadores <i class="fa fa-users" aria-hidden="true"></i></a></li>
-												<li class="step-no"><a data-form="10" data-form-name="plataforma"><span id="7" class="step_no menu-sel">7</span> Datos modalidad virtual <i class="fa fa-globe" aria-hidden="true"></i></a></li>
-												<li class="step-no"><a data-form="11" data-form-name="en_linea"><span id="7" class="step_no menu-sel">8</span> Datos modalidad en linea<i class="fa fa-globe" aria-hidden="true"></i></a></li>
+												<li class="step-no" id="itemPlataforma" style="display: none;"><a data-form="10" data-form-name="plataforma"><span id="7" class="step_no menu-sel">7</span> Datos modalidad virtual <i class="fa fa-globe" aria-hidden="true"></i></a></li>
+												<li class="step-no" id="itemEnLinea" style="display: none"><a data-form="11" data-form-name="en_linea"><span id="8" class="step_no menu-sel">8</span> Datos modalidad en linea<i class="fa fa-globe" aria-hidden="true"></i></a></li>
 												<li id="act_datos_sol_org" class="step-no"><a data-form="0" data-form-name="finalizar_proceso"><span class="step_no"><i class="fa fa-check" aria-hidden="true"></i></span> Finalizar Proceso <i class="fa fa-check" aria-hidden="true"></i></a></li>
 											</ul>
 										</div>

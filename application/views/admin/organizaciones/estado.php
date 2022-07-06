@@ -52,12 +52,17 @@
 	</div>
 	<div class="form-group">
 		<div class="radio">
-			<label><input type="radio" name="estado_org" id="estado2" class="" value="Negada">Negada</label>
+			<label><input type="radio" name="estado_org" id="estado2" class="" value="Archivada">Archivada</label>
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="radio">
-			<label><input type="radio" name="estado_org" id="estado3" class="" value="Revocada">Revocada</label>
+			<label><input type="radio" name="estado_org" id="estado3" class="" value="Negada">Negada</label>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="radio">
+			<label><input type="radio" name="estado_org" id="estado4" class="" value="Revocada">Revocada</label>
 		</div>
 	</div>
 	<button class="btn btn-danger pull-left" id="volverEst_org"><i class="fa fa-arrow-left" aria-hidden="true"></i> Regresar</i></button>

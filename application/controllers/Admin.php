@@ -13,20 +13,20 @@ class Admin extends CI_Controller
 	// Encripción para recuperación de contraseña
 	public function mcdec()
 	{
-		$password = "wPxbkqz7HLuQVymOqF21Hkwtf2NoybhGQ0GjmzdoDkbSleBzv1v395QRJC1Mpy2nqA4f52I8uWLnj0LaLPM+HQl2f5cDln2KDczv/SxDQYQ+ZST22X2CDoLX1d6RojOM|T+8tLqQ9gDARCH1SloHGkN7Y6NospkVqRP/t24qglV8=";
+		$password = "MH1oGDNDSSxn7jwW6Mvp8FM9c1dQM6SAjszk8XH09u+WaCySU1T+y0khS92S0TNLFgsqig+gNmoXCNrRi12bnPJ8fdGLRcA8OYZAhVkqq8SOLb7sigkURVRfncCRoqIg|WqP4ZWSnq+//mc/zX1UMOYFp8OvT/gjOjeUkwibDO/M=";
 		$passwor2 = mc_decrypt($password, KEY_RDEL);
 		echo json_encode($passwor2);
 	}
-	private function mcenc()
+	public function mcenc()
 	{
-		$password = "Asodamas2021#";
+		$password = "Clave*21";
 		$passwor2 = mc_encrypt($password, KEY_RDEL);
 		echo json_encode($passwor2);
 	}
 
-	private function enchash()
+	public function enchash()
 	{
-		$password = "Asodamas2021#";
+		$password = "Clave*21";
 		$passwor2 = generate_hash($password);
 		echo json_encode($passwor2);
 	}
@@ -2343,7 +2343,7 @@ class Admin extends CI_Controller
 		$registroEducativoProgramas = $this->db->select("*")->from("registroEducativoProgramas")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		$antecedentesAcademicos = $this->db->select("*")->from("antecedentesAcademicos")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		$jornadasActualizacion = $this->db->select("*")->from("jornadasActualizacion")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
-		$datosBasicosProgramas = $this->db->select("*")->from("datosBasicosProgramas")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
+		$datosProgramas = $this->db->select("*")->from("datosProgramas")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		$programasAvalEconomia = $this->db->select("*")->from("programasAvalEconomia")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		$programasAvalar = $this->db->select("*")->from("programasAvalar")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		$docentes = $this->db->select("*")->from("docentes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
@@ -2356,7 +2356,7 @@ class Admin extends CI_Controller
 		$resoluciones = $this->db->select("*")->from("resoluciones")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		$archivos = $this->db->select("*")->from("archivos")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 
-		echo json_encode(array("informacionGeneral" => $informacionGeneral, "documentacionLegal" => $documentacionLegal, "registroEducativoProgramas" => $registroEducativoProgramas, "antecedentesAcademicos" => $antecedentesAcademicos, "jornadasActualizacion" => $jornadasActualizacion, "datosBasicosProgramas" => $datosBasicosProgramas, "programasAvalEconomia" => $programasAvalEconomia, "programasAvalar" => $programasAvalar, "docentes" => $docentes, "plataforma" => $plataforma, "tipoSolicitud" => $tipoSolicitud, "solicitudes" => $solicitudes, "estadoOrganizaciones" => $estadoOrganizaciones, "organizaciones" => $organizaciones, "archivos" => $archivos, "resoluciones" => $resoluciones));
+		echo json_encode(array("informacionGeneral" => $informacionGeneral, "documentacionLegal" => $documentacionLegal, "registroEducativoProgramas" => $registroEducativoProgramas, "antecedentesAcademicos" => $antecedentesAcademicos, "jornadasActualizacion" => $jornadasActualizacion, "datosProgramas" => $datosProgramas, "programasAvalEconomia" => $programasAvalEconomia, "programasAvalar" => $programasAvalar, "docentes" => $docentes, "plataforma" => $plataforma, "tipoSolicitud" => $tipoSolicitud, "solicitudes" => $solicitudes, "estadoOrganizaciones" => $estadoOrganizaciones, "organizaciones" => $organizaciones, "archivos" => $archivos, "resoluciones" => $resoluciones));
 	}
 
 	public function guardar_observacion()

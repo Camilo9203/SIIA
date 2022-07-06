@@ -73,11 +73,11 @@
 				</div>
 				<div class="form-group col-md-3">
 					<label>Años de la resolución:</label>
-					<input type="number" id="res_anos" class="form-control" name="" placeholder="3">
+					<input type="number" id="res_anos" class="form-control" name="">
 				</div>
 				<div class="form-group col-md-3">
 					<label>Número de la resolución:</label>
-					<input type="number" id="num_res_org" class="form-control" name="" placeholder="34">
+					<input type="number" id="num_res_org" class="form-control" name="">
 				</div>
 				<div class="form-group">
 					<label>Curso aprobado:</label>

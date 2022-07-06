@@ -279,93 +279,147 @@
 				<button class="btn btn-siia btn-sm guardarObservaciones pull-right" id="sigDoc">Siguiente <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
 			</div>
 		</div>
-		<div class="col-md-12" id="registroEducativoProgramas">
-			<h3>3. Registro Educativo de Programas</h3>
-		</div>
+<!--		<div class="col-md-12" id="registroEducativoProgramas">-->
+<!--			<h3>3. Registro Educativo de Programas</h3>-->
+<!--		</div>-->
 		<div class="col-md-12" id="antecedentesAcademicos">
 			<h3>4. Antecedentes Academico</h3>
 		</div>
 		<div class="col-md-12" id="jornadasActualizacion">
-			<h3>5. Jornadas de Actualizacion</h3>
+			<h3>4. Jornadas de Actualizacion</h3>
 		</div>
 		<div class="col-md-12" id="datosBasicosProgramas">
-			<h3>6. Datos Basicos de Programas</h3>
-
+			<h3>5. Datos Básicos de Programas</h3><br>
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="form-group" id="curso_basico_es" style="display: none;" >
+							<label class="underlined">
+								<input type="checkbox" id="programa" form="formulario_programas" name="curso_basico_es" value="* Acreditación Curso Básico de Economía Solidaria" disabled required checked>
+								<label for="modalCursoBasico">&nbsp;</label>
+								<a data-toggle="modal" data-target="#modalCursoBasico" data-backdrop="static" data-keyboard="false">
+									<span class="spanRojo">*</span> Acreditación Curso Básico de Economía Solidaria
+								</a>
+							</label>
+						</div>
+						<br>
+						<div class="form-group" id="curso_basico_aval" style="display: none;" >
+							<label class="underlined">
+								<input type="checkbox" id="curso_basico_aval" form="formulario_programas" name="curso_basico_aval" value="* Acreditación, Aval de Trabajo Asociado" disabled required checked>
+								<label for="modalAval">&nbsp;</label>
+								<a data-toggle="modal" data-target="#modalAval" data-backdrop="static" data-keyboard="false">
+									<span class="spanRojo">*</span> Acreditación, Aval de Trabajo Asociado
+								</a>
+							</label>
+						</div>
+						<br>
+						<div class="form-group" id="curso_medio_es" style="display: none;" >
+							<label class="underlined">
+								<input type="checkbox" id="curso_basico_aval" form="formulario_programas" name="curso_basico" value="* Acreditación Curso Medio de Economía Solidaria" disabled required checked>
+								<label for="modalCursoMedio">&nbsp;</label>
+								<a data-toggle="modal" data-target="#modalCursoMedio" data-backdrop="static" data-keyboard="false">
+									<span class="spanRojo">*</span> Acreditación Curso Medio de Economía Solidaria
+								</a>
+							</label>
+						</div>
+						<br>
+						<div class="form-group" id="curso_avanzado_es" style="display: none;" >
+							<label class="underlined">
+								<input type="checkbox" id="curso_avanzado_es" form="formulario_programas" name="curso_avanzado_es" value="* Acreditación Curso Avanzado de Economía Solidaria" disabled required checked>
+								<label for="modalCursoAvanzado">&nbsp;</label>
+								<a data-toggle="modal" data-target="#modalCursoAvanzado" data-backdrop="static" data-keyboard="false">
+									<span class="spanRojo">*</span> Acreditación Curso Avanzado de Economía Solidaria
+								</a>
+							</label>
+						</div>
+						<br>
+						<div class="form-group" id="curso_economia_financiera" style="display: none;" >
+							<label class="underlined">
+								<input type="checkbox" id="curso_economia_financiera" form="formulario_programas" name="curso_economia_financiera" value="* Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria" disabled required checked>
+								<label for="modalCursoFinanciera">&nbsp;</label>
+								<a data-toggle="modal" data-target="#modalCursoFinanciera" data-backdrop="static" data-keyboard="false" data-programa="Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria">
+									<span class="spanRojo">*</span> Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria
+								</a>
+						</div>
+						<br>
+					</div>
+				</div>
+			</div>
 			<hr />
 		</div>
 		<div class="col-md-12" id="programasAvalEconomia">
-			<h3>7. Programas con Aval en Economia</h3>
-			<div id="divAtrasProgAvalEcT">
-				<div class="form-group">
-					<p>7.1.Objetivos: </p><label class="tipoLeer" id='objetivosProgramasAvalEconomia'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Objetivos" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>7.2 Metodología a Utilizar: </p><label class="tipoLeer" id='metodologiaProgramasAvalEconomia'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Metodología a Utilizar" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>7.3 Material didáctico y ayudas Educativas incorporadas: </p><label class="tipoLeer" id='materialProgramasAvalEconomia'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Material didáctico y ayudas Educativas incorporadas" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>7.4 Bibliografia: </p><label class="tipoLeer" id='bibliografiaProgramasAvalEconomia'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Bibliografia" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>7.5 Duración del curso: </p><label class="tipoLeer" id='duracionProgramasAvalEconomia'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Duración del curso" id="" rows="3"></textarea>
-				</div>
-			</div>
-			<div id="divSiguienteProgAvalEcT">
-				<h3>7.6 Contextualización general del sector solidario</h3>
-				<div class="form-group">
-					<p>Antecedentes y aspectos axiológicos del cooperativismo y del cooperativismo de trabajo asociado: </p><label class="tipoLeer" id='antecedentesProgramasAvalEconomia'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Antecedentes y aspectos axiológicos del cooperativismo y del cooperativismo de trabajo asociado" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Diferencias entre trabajo dependiente, independiente y asociado: </p><label class="tipoLeer" id='diferenciasProgramasAvalEconomia'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Diferencias entre trabajo dependiente, independiente y asociado" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Regulación jurídica del trabajo asociado: </p><label class="tipoLeer" id='regulacionProgramasAvalEconomia'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Regulación jurídica del trabajo asociado" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Desarrollo socioempresarial del trabajo asociado: </p><label class="tipoLeer" id='desarrolloProgramasAvalEconomia'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Desarrollo socioempresarial del trabajo asociado" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Legislación tributaria y su aplicación al trabajo asociado: </p><label class="tipoLeer" id='legislacionProgramasAvalEconomia'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Legislación tributaria y su aplicación al trabajo asociado" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Administración del trabajo asociado: </p><label class="tipoLeer" id='administracionProgramasAvalEconomia'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Administración del trabajo asociado" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Regímenes de trabajo y compensación: </p><label class="tipoLeer" id='regimenesProgramasAvalEconomia'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Regímenes de trabajo y compensación" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Manejo de Seguridad social integral: </p><label class="tipoLeer" id='manejoProgramasAvalEconomia'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Manejo de Seguridad social integral" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Inspección, vigilancia y control y prohibiciones: </p><label class="tipoLeer" id='inspeccionProgramasAvalEconomia'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Inspección, vigilancia y control y prohibiciones" id="" rows="3"></textarea>
-				</div>
-			</div>
-			<button id="atrasProgAvalEcT" class="btn btn-siia btn-sm guardarObservaciones pull-left"><i class="fa fa-chevron-left" aria-hidden="true"></i> Atrás Página</button>
-			<button id="siguienteProgAvalEcT" class="btn btn-siia btn-sm guardarObservaciones pull-right" style="display: block;">Siguiente página <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
-			<div class="clearfix"></div>
-			<hr />
+<!--			<h3>7. Programas con Aval en Economia</h3>-->
+<!--			<div id="divAtrasProgAvalEcT">-->
+<!--				<div class="form-group">-->
+<!--					<p>7.1.Objetivos: </p><label class="tipoLeer" id='objetivosProgramasAvalEconomia'></label>-->
+<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Objetivos" id="" rows="3"></textarea>-->
+<!--				</div>-->
+<!--				<div class="form-group">-->
+<!--					<p>7.2 Metodología a Utilizar: </p><label class="tipoLeer" id='metodologiaProgramasAvalEconomia'></label>-->
+<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Metodología a Utilizar" id="" rows="3"></textarea>-->
+<!--				</div>-->
+<!--				<div class="form-group">-->
+<!--					<p>7.3 Material didáctico y ayudas Educativas incorporadas: </p><label class="tipoLeer" id='materialProgramasAvalEconomia'></label>-->
+<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Material didáctico y ayudas Educativas incorporadas" id="" rows="3"></textarea>-->
+<!--				</div>-->
+<!--				<div class="form-group">-->
+<!--					<p>7.4 Bibliografia: </p><label class="tipoLeer" id='bibliografiaProgramasAvalEconomia'></label>-->
+<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Bibliografia" id="" rows="3"></textarea>-->
+<!--				</div>-->
+<!--				<div class="form-group">-->
+<!--					<p>7.5 Duración del curso: </p><label class="tipoLeer" id='duracionProgramasAvalEconomia'></label>-->
+<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Duración del curso" id="" rows="3"></textarea>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--			<div id="divSiguienteProgAvalEcT">-->
+<!--				<h3>7.6 Contextualización general del sector solidario</h3>-->
+<!--				<div class="form-group">-->
+<!--					<p>Antecedentes y aspectos axiológicos del cooperativismo y del cooperativismo de trabajo asociado: </p><label class="tipoLeer" id='antecedentesProgramasAvalEconomia'></label>-->
+<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Antecedentes y aspectos axiológicos del cooperativismo y del cooperativismo de trabajo asociado" id="" rows="3"></textarea>-->
+<!--				</div>-->
+<!--				<div class="form-group">-->
+<!--					<p>Diferencias entre trabajo dependiente, independiente y asociado: </p><label class="tipoLeer" id='diferenciasProgramasAvalEconomia'></label>-->
+<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Diferencias entre trabajo dependiente, independiente y asociado" id="" rows="3"></textarea>-->
+<!--				</div>-->
+<!--				<div class="form-group">-->
+<!--					<p>Regulación jurídica del trabajo asociado: </p><label class="tipoLeer" id='regulacionProgramasAvalEconomia'></label>-->
+<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Regulación jurídica del trabajo asociado" id="" rows="3"></textarea>-->
+<!--				</div>-->
+<!--				<div class="form-group">-->
+<!--					<p>Desarrollo socioempresarial del trabajo asociado: </p><label class="tipoLeer" id='desarrolloProgramasAvalEconomia'></label>-->
+<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Desarrollo socioempresarial del trabajo asociado" id="" rows="3"></textarea>-->
+<!--				</div>-->
+<!--				<div class="form-group">-->
+<!--					<p>Legislación tributaria y su aplicación al trabajo asociado: </p><label class="tipoLeer" id='legislacionProgramasAvalEconomia'></label>-->
+<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Legislación tributaria y su aplicación al trabajo asociado" id="" rows="3"></textarea>-->
+<!--				</div>-->
+<!--				<div class="form-group">-->
+<!--					<p>Administración del trabajo asociado: </p><label class="tipoLeer" id='administracionProgramasAvalEconomia'></label>-->
+<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Administración del trabajo asociado" id="" rows="3"></textarea>-->
+<!--				</div>-->
+<!--				<div class="form-group">-->
+<!--					<p>Regímenes de trabajo y compensación: </p><label class="tipoLeer" id='regimenesProgramasAvalEconomia'></label>-->
+<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Regímenes de trabajo y compensación" id="" rows="3"></textarea>-->
+<!--				</div>-->
+<!--				<div class="form-group">-->
+<!--					<p>Manejo de Seguridad social integral: </p><label class="tipoLeer" id='manejoProgramasAvalEconomia'></label>-->
+<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Manejo de Seguridad social integral" id="" rows="3"></textarea>-->
+<!--				</div>-->
+<!--				<div class="form-group">-->
+<!--					<p>Inspección, vigilancia y control y prohibiciones: </p><label class="tipoLeer" id='inspeccionProgramasAvalEconomia'></label>-->
+<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Inspección, vigilancia y control y prohibiciones" id="" rows="3"></textarea>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--			<button id="atrasProgAvalEcT" class="btn btn-siia btn-sm guardarObservaciones pull-left"><i class="fa fa-chevron-left" aria-hidden="true"></i> Atrás Página</button>-->
+<!--			<button id="siguienteProgAvalEcT" class="btn btn-siia btn-sm guardarObservaciones pull-right" style="display: block;">Siguiente página <i class="fa fa-chevron-right" aria-hidden="true"></i></button>-->
+<!--			<div class="clearfix"></div>-->
+<!--			<hr />-->
 		</div>
 		<div class="col-md-12" id="programasAvalar">
-			<h3>8. Programas a Avalar</h3>
+<!--			<h3>8. Programas a Avalar</h3>-->
 		</div>
 		<div class="col-md-12" id="docentes">
-			<h3>9. Docentes</h3>
+			<h3>6. Docentes</h3>
 			<button id="verFrameDocentes" class="btn btn-siia btn-sm pull-left">Ver docentes aquí <i class="fa fa-eye" aria-hidden="true"></i></button>
 			<div class="clearfix"></div>
 			<hr />
@@ -377,13 +431,9 @@
 			<hr />
 		</div>
 		<div class="col-md-12" id="plataforma">
-			<h3>10. Plataforma</h3>
+			<h3>7. Plataforma</h3>
 		</div>
-		<div class="col-md-12" id="enLinea">
-			<h3>11. En linea</h3>
 
-			<hr />
-		</div>
 	</div>
 </div>
 
@@ -400,14 +450,15 @@
 			<hr />
 			<a class="toAncla" id="verInfGenMenuAdmin">1. Información General de la Entidad <i class="fa fa-home" aria-hidden="true"></i></a><br />
 			<a class="toAncla" id="verDocLegalMenuAdmin">2. Documentación Legal <i class="fa fa-book" aria-hidden="true"></i></a><br />
-			<a class="toAncla" id="verRegAcaMenuAdmin">3. Registros educativos de Programas <i class="fa fa-newspaper-o" aria-hidden="true"></i></a><br />
-			<a class="toAncla" id="verAntAcaMenuAdmin">4. Antecedentes Académicos <i class="fa fa-id-card" aria-hidden="true"></i></a><br />
-			<a class="toAncla" id="verJorActMenuAdmin">5. Jornadas de actualización <i class="fa fa-handshake-o" aria-hidden="true"></i></a><br />
-			<a class="toAncla" id="verProgBasMenuAdmin">6. Programa básico de economía solidaria <i class="fa fa-server" aria-hidden="true"></i></a><br />
-			<a class="toAncla" id="verProgAvaMenuAdmin">7. <small>Prog. de Economía Solidaria con Énfasis en Trabajo Asociado</small> <i class="fa fa-sitemap" aria-hidden="true"></i></a><br />
-			<a class="toAncla" id="verProgsMenuAdmin">8. Programas <i class="fa fa-signal" aria-hidden="true"></i></a><br />
-			<a class="toAncla" id="verFaciliMenuAdmin">9. Facilitadores <i class="fa fa-users" aria-hidden="true"></i></a><br />
-			<a class="toAncla" id="verDatPlatMenuAdmin">10. Datos Plataforma Virtual <i class="fa fa-globe" aria-hidden="true"></i></a><br />
+<!--			<a class="toAncla" id="verRegAcaMenuAdmin">3. Registros educativos de Programas <i class="fa fa-newspaper-o" aria-hidden="true"></i></a><br />-->
+			<a class="toAncla" id="verAntAcaMenuAdmin">3. Antecedentes Académicos <i class="fa fa-id-card" aria-hidden="true"></i></a><br />
+			<a class="toAncla" id="verJorActMenuAdmin">4. Jornadas de actualización <i class="fa fa-handshake-o" aria-hidden="true"></i></a><br />
+			<a class="toAncla" id="verProgBasMenuAdmin">5. Programa básico de economía solidaria <i class="fa fa-server" aria-hidden="true"></i></a><br />
+<!--			<a class="toAncla" id="verProgAvaMenuAdmin">7. <small>Prog. de Economía Solidaria con Énfasis en Trabajo Asociado</small> <i class="fa fa-sitemap" aria-hidden="true"></i></a><br />-->
+<!--			<a class="toAncla" id="verProgsMenuAdmin">8. Programas <i class="fa fa-signal" aria-hidden="true"></i></a><br />-->
+			<a class="toAncla" id="verFaciliMenuAdmin">6. Facilitadores <i class="fa fa-users" aria-hidden="true"></i></a><br />
+			<a class="toAncla" id="verDatPlatMenuAdmin">7. Datos Plataforma Virtual <i class="fa fa-globe" aria-hidden="true"></i></a><br />
+			<a class="toAncla" id="verDatPlatMenuAdmin">8. Datos Plataforma En Linea <i class="fa fa-globe" aria-hidden="true"></i></a><br />
 			<hr />
 			<a class="btn btn-siia btn-sm btn-block" id="guardarObservacionesModal" role="button" title="Guardar observaciones" data-toggle="tooltip" data-placement="right">Guardar observaciones <i class="fa fa-save" aria-hidden="true"></i></a>
 			<hr />

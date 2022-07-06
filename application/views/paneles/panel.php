@@ -126,23 +126,23 @@
 	<label for="motivo_solicitud">Motivo de la solicitud:<span class="spanRojo">*</span></label><br>
 	<!-- CheckBox Motivos de la solicitud -->
 	<div class="form-check radio">
-		<input class="form-check-input" type="checkbox" value="1" id="cursoBasico" name="motivos[]" checked>
+		<input class="form-check-input" type="checkbox" value="1" id="cursoBasico" name="motivos" checked>
 		<label class="form-check-label" for="cursoBasico">Acreditación Curso Básico de Economía Solidaria</label>
 	</div>
 	<div class="form-check radio">
-		<input class="form-check-input" type="checkbox" value="2" id="avalTrabajo" name="motivos[]">
+		<input class="form-check-input" type="checkbox" value="2" id="avalTrabajo" name="motivos">
 		<label class="form-check-label" for="avalTrabajo">Aval de Trabajo Asociado</label>
 	</div>
 	<div class="form-check radio">
-		<input class="form-check-input" type="checkbox" value="3" id="cursoMedio" name="motivos[]">
+		<input class="form-check-input" type="checkbox" value="3" id="cursoMedio" name="motivos">
 		<label class="form-check-label" for="cursoMedio">Acreditación Curso Medio de Economía Solidaria</label>
 	</div>
 	<div class="form-check radio">
-		<input class="form-check-input" type="checkbox" value="4" id="cursoAvanzado" name="motivos[]">
+		<input class="form-check-input" type="checkbox" value="4" id="cursoAvanzado" name="motivos">
 		<label class="form-check-label" for="cursoAvanzado">Acreditación Curso Avanzado de Economía Solidaria</label>
 	</div>
 	<div class="form-check radio">
-		<input class="form-check-input" type="checkbox" value="5" id="finacieraEconomia" name="motivos[]">
+		<input class="form-check-input" type="checkbox" value="5" id="finacieraEconomia" name="motivos">
 		<label class="form-check-label" for="finacieraEconomia">Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria</label>
 	</div>
 	<!-- Solo si la entidad esta o estuvo acreditada //TODO: Solo si la entidad ya fue acreditada-->
@@ -156,81 +156,71 @@
 	<!-- Modalidad de la solicitud -->
 	<label for="modalidad_solicitud">Modalidad:<span class="spanRojo">*</span></label><br>
 	<!-- Ayuda para modalidad virtual -->
-	<i data-toggle="modal" data-target="#ayudaModalidad" class="fa fa-question-circle pull-right" aria-hidden="true"></i>
-	<div class="form-check radio">
-		<input class="form-check-input" type="checkbox" value="1" id="presencial" name="modalidades[]" checked>
-		<label class="form-check-label" for="presencial">Presencial</label>
-	</div>
-	<div class="form-check radio">
-		<input class="form-check-input" type="checkbox" value="2" id="virtual" name="modalidades[]">
-		<label class="form-check-label" for="virtual">Virtual</label>
-	</div>
-	<div class="form-check radio">
-		<input class="form-check-input" type="checkbox" value="3" id="enLinea" name="modalidades[]">
-		<label class="form-check-label" for="enLinea">En Linea</label>
-	</div>
-	<!-- Presencial -->
-	<div class="form-group">
-		<div class="radio">
-			<label><input type="radio" name="modalidad_solicitud" id="modalidad1" class="" value="Presencial" checked>Presencial</label>
+	<form-group>
+		<i data-toggle="modal" data-target="#ayudaModalidad" class="fa fa-question-circle pull-right" aria-hidden="true"></i>
+		<div class="form-check radio">
+			<input class="form-check-input" type="checkbox" value="1" id="presencial" value="Presencial" name="modalidades" checked>
+			<label class="form-check-label" for="presencial">Presencial</label>
 		</div>
-	</div>
-	<!-- Virtual -->
-	<div class="form-group">
-		<div class="radio">
-			<label><input type="radio" name="modalidad_solicitud" id="modalidad2" class="" value="Virtual">Virtual</label>
+		<div class="form-check radio">
+			<input class="form-check-input" type="checkbox" value="2" id="virtual" value="Virtual" name="modalidades">
+			<label class="form-check-label" for="virtual">Virtual</label>
 		</div>
-	</div>
-	<!-- En linea -->
-	<div class="form-group">
-		<div class="radio">
-			<label><input type="radio" name="modalidad_solicitud" id="modalidad3" class="" value="Virtual">En linea</label>
+		<div class="form-check radio">
+			<input class="form-check-input" type="checkbox" value="3" id="enLinea" value="En Linea" name="modalidades">
+			<label class="form-check-label" for="enLinea">En Linea</label>
 		</div>
-	</div>
-	<!-- Ambas -->
-	<div class="form-group">
-		<div class="radio">
-			<label><input type="radio" name="modalidad_solicitud" id="modalidad4" class="" value="Virtual y Presencial">Virtual y presencial <small>(Ambos)</small></label>
-		</div>
-	</div>
-	<!-- Presencial y en linea -->
-	<div class="form-group">
-		<div class="radio">
-			<label><input type="radio" name="modalidad_solicitud" id="modalidad5" class="" value="Virtual y Presencial">Presencial y en linea <small>(Ambos)</small></label>
-		</div>
-	</div>
-	<!-- Virtual y en linea -->
-	<div class="form-group">
-		<div class="radio">
-			<label><input type="radio" name="modalidad_solicitud" id="modalidad6" class="" value="Virtual y Presencial">Virtual y en linea<small>(Ambos)</small></label>
-		</div>
-	</div>
+	</form-group>
+
 	<hr />
-	<!-- Modalidad de la solicitud -FIN -->
+	<br>
 	</form>
 	<button class="btn btn-siia btn-sm pull-right" name="" id="guardar_formulario_tipoSolicitud">Crear solicitud <i class="fa fa-check" aria-hidden="true"></i></button>
 	<button class="btn btn-danger btn-sm volver_al_panel"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 </div>
 <!-- Modal Ayuda Modalidad Virtual  -->
-<div class="modal fade in" id="ayudaModalidad" tabindex="-1" role="dialog" aria-labelledby="ayudaModalidad">
+<div class="modal fade in" id="ayudaModalidadVirtual" tabindex="-1" role="dialog" aria-labelledby="ayudaModalidadVirtual">
 	<div class="modal-dialog modal-xs" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title" id="guardarOBSSIs">¿Esta seguro de presentar la modalidad virtual?</h4>
+				<h4 class="modal-title" id="guardarOBSSIs">¿Está seguro de presentar la modalidad virtual?</h4>
 			</div>
 			<div class="modal-body">
-				<p>De acuerdo a lo establecido en los parágrafos número 2 y número 3 del artículo 9 de la resolución 110 del 31 de marzo del 2016, las entidades que soliciten la acreditación por la modalidad virtual deben tener en cuenta lo siguiente:</p>
-				<p><strong>Parágrafo 2.</strong> El Curso de economía solidaria podrá ser impartido en las modalidades presencial o virtual. <strong><i>Para el caso de la modalidad virtual la entidad solicitante deberá demostrar contar con una plataforma que permita la interacción permanente y efectiva en el proceso de aprendizaje.</i></strong></p>
-				<p><strong>Parágrafo 3.</strong> La entidad acreditada <strong>sólo podrá impartir el curso de economía solidaria</strong> en la modalidad o modalidades (virtual o presencial) que la <strong>Unidad Administrativa señale en la resolución que la acredita.</strong></p>
-				<a class="pull-right" target="_blank" href="https://www.orgsolidarias.gov.co/sites/default/files/archivos/Res_110%20del%2031%20de%20marzo%20de%202016.pdf">Recurso de la resolución 110</a>
+				<p>De acuerdo a lo establecido en el parágrafo número 1 del artículo 6 de la resolución 152 del 23 de junio del 2022, las entidades que soliciten la acreditación por la modalidad en línea deben tener en cuenta lo siguiente:</p>
+				<p><strong>Parágrafo 1.</strong> Para la acreditación de los programas de educación en economía solidaria bajo modalidad virtual, la entidad solicitante deberá demostrar que el proceso educativo se hace en una <stron>plataforma</stron> (sesiones clase, materiales de apoyo, actividades, evaluaciones) que propicie un Ambiente Virtual de Aprendizaje - AVA y Objetos Virtuales de Aprendizaje- OVAS. </p>
+				<p>Recuerde desarrollar el proceso formativo acorde a lo establecido en el anexo técnico.</p>
+				<p>La UAEOS realizará seguimiento a las organizaciones acreditadas en el cumplimiento de los programas de educación solidaria acreditados.</p>
+<!--				<a class="pull-right" target="_blank" href="https://www.orgsolidarias.gov.co/sites/default/files/archivos/Res_110%20del%2031%20de%20marzo%20de%202016.pdf">Recurso de la resolución 110</a>-->
 			</div>
 			<div class="modal-footer">
 				<button type="button" id="noModVirt" class="btn btn-danger btn-sm pull-left">No, quizá mas adelante <i class="fa fa-times" aria-hidden="true"></i></button>
-				<button type="button" class="btn btn-siia btn-sm pull-right" data-dismiss="modal">Si, esto seguro de presentar la modalidad virtual <i class="fa fa-check" aria-hidden="true"></i></button>
+				<button type="button" id="siModVirt" class="btn btn-siia btn-sm pull-right" data-dismiss="modal">Si, esto seguro de presentar la modalidad virtual <i class="fa fa-check" aria-hidden="true"></i></button>
 			</div>
 		</div>
 	</div>
 </div>
+<!-- Modal Ayuda Modalidad En Linea  -->
+<div class="modal fade in" id="ayudaModalidadEnLinea" tabindex="-1" role="dialog" aria-labelledby="ayudaModalidadEnLinea">
+	<div class="modal-dialog modal-xs" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="guardarOBSSIs">¿Está seguro de presentar la modalidad en Línea?</h4>
+			</div>
+			<div class="modal-body">
+				<p>De acuerdo a lo establecido en los parágrafos número 2 y número 3 del artículo 9 de la resolución 110 del 31 de marzo del 2016, las entidades que soliciten la acreditación por la modalidad en linea deben tener en cuenta lo siguiente:</p>
+				<p><strong>Parágrafo 2.</strong> Para la acreditación de los programas de educación en economía solidaria bajo modalidad línea, aquella donde los docentes y participantes interactúan a través de recursos tecnológicos. La mediación tecnológica puede ser a través de herramientas tecnológica (Zoom, Teams, Meet, Good Meet, entre otras) plataformas de comunicación, chats, foros, videoconferencias, grupos de discusión, <strong>caracterizadas por encuentros sincrónicos.</strong> </p>
+				<p>Recuerde desarrollar el proceso formativo acorde a lo establecido en el anexo técnico.</p>
+				<p>La UAEOS realizará seguimiento a las organizaciones acreditadas en el cumplimiento de los programas de educación solidaria acreditados.</p>
+<!--				<a class="pull-right" target="_blank" href="https://www.orgsolidarias.gov.co/sites/default/files/archivos/Res_110%20del%2031%20de%20marzo%20de%202016.pdf">Recurso de la resolución 110</a>-->
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="noModEnLinea" class="btn btn-danger btn-sm pull-left">No, quizá más adelante <i class="fa fa-times" aria-hidden="true"></i></button>
+				<button type="button" id="siModEnLinea" class="btn btn-siia btn-sm pull-right" data-dismiss="modal">Si, esto seguro de presentar la modalidad en linea <i class="fa fa-check" aria-hidden="true"></i></button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <!-- Formularios //TODO: Formularios usuario -->
 <div class="col-md-9 formularios" role="main">
 	<!-- Inicio del Panel Inicial -->
@@ -562,11 +552,11 @@
 		<!-- Camara de comercio -->
 		<div class="col-md-12">
 			<hr />
-			<?php echo form_open('', array('id' => 'formulario_documentacion_legal')); ?>
 			<label>2.1. Certificado de Camara de Comercio.</label>
 			<div class="checkbox">
 				<label for="camaraComercio">La entidad cuenta con Certificado de Camara de Comercio:</label>
 				<?php foreach ($data_documentacion_legal as $documentacion) : ?>
+
 					<?php if ($documentacion->entidadRegistro == "Camara de Comercio") : ?>
 						<label><input type="radio" class="camaraComercio" name="camaraComercio" id="camaraComercio" value="Si" checked> Si</label>
 						<label><input type="radio" class="camaraComercio" name="camaraComercio" id="camaraComercio" value="No"> No</label>
@@ -585,13 +575,12 @@
 			</div>
 		</div>
 		<!-- Certificado de existencia y representación legal -->
+		<hr />
 		<div class="col-md-12">
-			<hr />
-			<?php echo form_open('', array('id' => 'formulario_documentacion_legal')); ?>
 			<label>2.2. Certificado de Existencia y Representación Legal.</label>
 			<div class="checkbox">
 				<label for="certificadoExistencia">La entidad presenta Certificado de Existencia y Representación Legal:</label>
-
+				<!-- Opciones radio -->
 				<?php foreach ($data_documentacion_legal as $documentacion) : ?>
 					<?php if ($documentacion->registroEducativo == "certificadoExistencia") : ?>
 						<label><input type="radio" class="certificadoExistencia" name="certificadoExistencia" id="certificadoExistencia" value="Si" checked> Si</label>
@@ -606,55 +595,62 @@
 					<label><input type="radio" class="certificadoExistencia" name="certificadoExistencia" id="" value="No" checked> No</label>
 				<?php endif ?>
 			</div>
+			<!-- Formulario: Certificado de Existencia y Representación Legal -->
 			<div id="div_certificado_existencia">
+				<?php echo form_open('', array('id' => 'formulario_certificado_existencia')); ?>
+				<!-- Numero de documento de Existencia-->
 				<div class="form-group">
 					<label for="numeroExistencia">Número del Documento de Existencia y Representación Legal:<span class="spanRojo">*</span></label>
-					<input type="text" class="form-control" name="numeroExistencia" id="numeroExistencia" placeholder="Número del Documento de Existencia y Representación Legal" value="<?php echo $data_documentacion_legal->numeroExistencia; ?>">
+					<input type="number" class="form-control" name="numeroExistencia" id="numeroExistencia" placeholder="Número del Documento de Existencia y Representación Legal" required>
 				</div>
+				<!-- Fecha de expedición-->
 				<div class="form-group">
 					<label for="fechaExpedicion">Fecha de Expedición:<span class="spanRojo">*</span></label>
-					<input type="date" class="form-control" name="fechaExpedicion" id="fechaExpedicion" value="<?php echo $data_documentacion_legal->fechaExpedicion; ?>">
+					<input type="date" class="form-control" name="fechaExpedicion" id="fechaExpedicion" required>
 				</div>
-				<!-- //TODO: Quitar de base de datos -->
-				<!-- <div class="form-group">
-					<label for="objetoSocial">Objeto social según certificado Cámara de Comercio:<span class="spanRojo">*</span></label>
-					<textarea name="objetoSocial" class=" form-control" id="objetoSocial" placeholder="Objeto social según certificado Cámara de Comercio" maxlength="300"><?php echo $data_documentacion_legal->objetoSocial; ?></textarea>
-				</div>-->
+				<!-- Departamento-->
 				<div class="form-group">
 					<label for="departamentos">Departamento:<span class="spanRojo">*</span></label>
 					<br>
 					<select name="departamentos" data-id-dep="2" id="departamentos2" class="selectpicker form-control show-tick departamentos" required="">
-						<?php
-						foreach ($departamentos as $departamento) {
-						?>
+						<?php foreach ($departamentos as $departamento):?>
 							<option id="<?php echo $departamento->id_departamento; ?>" value="<?php echo $departamento->nombre; ?>"><?php echo $departamento->nombre; ?></option>
-						<?php
-						}
-						?>
+						<?php endforeach;?>
 					</select>
 				</div>
+				<!-- Municicipio -->
 				<div class="form-group">
 					<div id="div_municipios2">
 						<label for="municipios2">Municipio:<span class="spanRojo">*</span></label>
 						<br>
-						<select name="municipios2" id="municipios2" class="selectpicker form-control show-tick municipios" required="">
-							<?php
-							foreach ($municipios as $municipio) {
-							?>
+						<select name="municipios2" id="municipios2" class="selectpicker form-control show-tick municipios" required>
+							<?php foreach ($municipios as $municipio): ?>
 								<option id="<?php echo $municipio->id_municipio; ?>" value="<?php echo $municipio->nombre; ?>"><?php echo $municipio->nombre; ?></option>
-							<?php
-							}
-							?>
+							<?php endforeach;?>
 						</select>
 					</div>
 				</div>
+				<!-- Archivo adjunto -->
+				<div class="form-group">
+					</br><label>Certificado de existencia (PDF):<span class="spanRojo"> *</span></label>
+					</br>
+					<div class="col-md-4">
+						<input type="file" required accept="application/pdf" class="form-control archivo_form_certificado_existencia" data-name="certifcadoExistencia"  data-val="certifcadoExistencia" name="certifcadoExistencia" id="certifcadoExistencia" required>
+					</div>
+					</br></br>
+				</div>
+				<button name="guardar_formulario_certificado_existencia" id="guardar_formulario_certificado_existencia" class="btn btn-siia btn-sm pull-right">
+					Guardar datos <i class="fa fa-check" aria-hidden="true"></i>
+				</button>
+				</form>
 			</div>
 		</div>
+		<hr />
 		<!-- Registro educativo -->
 		<div class="col-md-12">
-			<hr />
 			<label>2.3. Registro Educativo.</label>
 			<small> Estos datos aplican solamente a Entidades Educativas (Opcional)*.</small>
+			<!-- Opciones radio -->
 			<div class="checkbox">
 				<label for="registroEducativo">La entidad presenta registro educativo:</label>
 				<?php foreach ($data_documentacion_legal as $documentacion) : ?>
@@ -671,57 +667,60 @@
 					<label><input type="radio" class="registroEducativo" name="registroEducativo" id="registroEducativo" value="No" checked> No</label>
 				<?php endif ?>
 			</div>
+			<!-- Formulario: Registro educativo -->
 			<div id="div_registro_educativo">
+				<?php echo form_open('', array('id' => 'formulario_registro_educativo')); ?>
 				<div class="form-group">
-					<label for="entidadRegistro">Entidad que emitió el registro:<span class="spanRojo">*</span></label>
+					<label for="tipoEducacion">Tipo de educación:<span class="spanRojo">*</span></label>
 					<br>
-					<select name="entidadRegistro" id="entidadRegistro" class="selectpicker form-control show-tick">
+					<select name="tipoEducacion" id="tipoEducacion" class="selectpicker form-control show-tick">
+						<option id="1" value="Educacion para el trabajo y el desarrollo humano">Educacion para el trabajo y el desarrollo humano</option>
+						<option id="2" value="Formal">Formal</option>
+						<option id="3" value="Informal">Informal</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="fechaResolucionProgramas">Fecha de resolución:<span class="spanRojo">*</span></label>
+					<input class="form-control" type="date" name="fechaResolucionProgramas" id="fechaResolucionProgramas">
+				</div>
+				<div class="form-group">
+					<label for="numeroResolucionProgramas">Número de Resolución:<span class="spanRojo">*</span></label>
+					<input class="form-control" type="text" name="numeroResolucionProgramas" id="numeroResolucionProgramas" placeholder="Número de Resolución...">
+				</div>
+				<div class="form-group">
+					<label for="nombrePrograma">Nombre del Programa:<span class="spanRojo">*</span></label>
+					<input type="text" name="" class="form-control" name="nombrePrograma" id="nombrePrograma" placeholder="Nombre del Programa...">
+				</div>
+				<div class="form-group">
+					<label for="objetoResolucionProgramas">Objeto resolución:<span class="spanRojo">*</span></label>
+					<textarea class="form-control" name="objetoResolucionProgramas" id="objetoResolucionProgramas" placeholder="Objeto resolución..."></textarea>
+				</div>
+				<div class="form-group">
+					<label for="entidadResolucion">Entidad que expide la resolución:<span class="spanRojo">*</span></label>
+					<br>
+					<select name="entidadResolucion" id="entidadResolucion" class="selectpicker form-control show-tick">
 						<option id="1" value="Ministerio De Educación">Ministerio De Educación</option>
 						<option id="2" value="Secretaria De Educación Departamental">Secretaria De Educación Departamental</option>
 						<option id="3" value="Secretaria De Educación Municipal">Secretaria De Educación Municipal</option>
 					</select>
 				</div>
+				<!-- Archivo adjunto -->
 				<div class="form-group">
-					<label for="numeroResolucion">Número de resolución:<span class="spanRojo">*</span></label>
-					<input type="text" name="numeroResolucion" id="numeroResolucion" class="form-control" placeholder="Número de resolución...">
-				</div>
-				<div class="form-group">
-					<label for="fechaResolucion">Fecha de resolución:<span class="spanRojo">*</span></label>
-					<input type="date" name="fechaResolucion" id="fechaResolucion" class="form-control">
-				</div>
-				<div class="form-group">
-					<label for="departamentos3">Departamento:<span class="spanRojo">*</span></label>
-					<br>
-					<select name="departamentos3" data-id-dep="3" id="departamentos3" class="selectpicker form-control show-tick departamentos" required="">
-						<?php
-						foreach ($departamentos as $departamento) {
-						?>
-							<option id="<?php echo $departamento->id_departamento; ?>" value="<?php echo $departamento->nombre; ?>"><?php echo $departamento->nombre; ?></option>
-						<?php
-						}
-						?>
-					</select>
-				</div>
-				<div class="form-group">
-					<div id="div_municipios3">
-						<label for="municipios3">Municipio:<span class="spanRojo">*</span></label>
-						<br>
-						<select name="municipios3" id="municipios3" class="selectpicker form-control show-tick municipios" required="">
-							<?php
-							foreach ($municipios as $municipio) {
-							?>
-								<option id="<?php echo $municipio->id_municipio; ?>" value="<?php echo $municipio->nombre; ?>"><?php echo $municipio->nombre; ?></option>
-							<?php
-							}
-							?>
-						</select>
+					</br><label>Registro Educativo (PDF):<span class="spanRojo"> *</span></label>
+					</br>
+					<div class="col-md-4">
+						<input type="file" required accept="application/pdf" class="form-control archivos_form_registro" data-val="registroEdu" data-name="registroEdu" name="registroEdu" id="registroEdu">
 					</div>
+					</br></br>
 				</div>
+				<button name="guardar_formulario_documentacion_legal" id="guardar_formulario_registro_educativo" class="btn btn-siia btn-sm pull-right ">
+					Guardar datos <i class="fa fa-check" aria-hidden="true"></i>
+				</button>
+				</form>
 				<hr />
 			</div>
 		</div>
 		</form>
-		<button name="guardar_formulario_documentacion_legal" id="guardar_formulario_documentacion_legal" class="btn btn-siia btn-sm pull-right">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
 		<div class="clearfix"></div>
 		<!-- Tabla de documentación -->
 		<?php if (count($data_documentacion_legal) > 0) : ?>
@@ -1046,13 +1045,15 @@
 	<div id="programa_basico_de_economia_solidaria" data-form="6" class=" formulario_panel">
 		<?php // echo form_open('', array('id' => 'formulario_programa_basico')); ?>
 		<h3>5. Programas de educación en economía solidaria <i class="fa fa-server" aria-hidden="true"></i></h3>
-		<p>Por favor lea atentamente los temas a desarrollar en cada curso y <strong>acepte </strong>desarrollarlos, creando las metodologías y materiales adecuados para el proceso de enseñanza y aprendizaje.</p>
-		<p>Recuerde que al <strong>aceptar</strong> se registrara un compromiso y este quedara en nuestra base de datos.</p>
-		<p>Pulsa en el <strong>enlace</strong> del curso para ver sus temas a desarrollar y acepté en la parte inferior del cuadro emergente para poder continuar.</p>
+		<p>Le invitamos a leer atentamente el anexo técnico del curso o los cursos a acreditar, seguido de la lectura es importante dar clic en <strong>aceptar</strong>. Esta aceptación compromete a su organización a desarrollar el programa de economía solidaria establecido en la resolución 152 de 2022, es importante que su organización cree y desarrolle las metodologías y materiales adecuados para el proceso de enseñanza y aprendizaje.</p>
+		<p>Recuerde que al  <strong>aceptar</strong> se registrara automáticamente el compromiso y este quedara en nuestra base de datos.</p>
+		<p> Pulsé en el enlace del curso para ver los temas, objetivo y contenidos a desarrollar y <strong>acepté</strong> en la parte inferior del cuadro emergente para poder continuar con el registro del trámite de acreditación</p>
 		<hr />
+		<!-- Grupo de check con los diferentes cursos -->
 		<div class="container">
 			<div class="row">
 				<div class="col">
+					<!-- Check Curso Basico -->
 					<div class="form-group" id="curso_basico_es" style="display: none;" >
 						<label class="underlined">
 							<input type="checkbox" id="programa" form="formulario_programas" name="curso_basico_es" value="* Acreditación Curso Básico de Economía Solidaria" disabled required>
@@ -1062,6 +1063,7 @@
 							</a>
 						</label>
 					</div>
+					<!-- Check Curso Aval -->
 					<div class="form-group" id="curso_basico_aval" style="display: none;" >
 						<label class="underlined">
 							<input type="checkbox" id="curso_basico_aval" form="formulario_programas" name="curso_basico_aval" value="* Acreditación, Aval de Trabajo Asociado" disabled required>
@@ -1071,6 +1073,7 @@
 							</a>
 						</label>
 					</div>
+					<!-- Check Curso Medio -->
 					<div class="form-group" id="curso_medio_es" style="display: none;" >
 						<label class="underlined">
 							<input type="checkbox" id="curso_basico_aval" form="formulario_programas" name="curso_basico" value="* Acreditación Curso Medio de Economía Solidaria" disabled required>
@@ -1080,6 +1083,7 @@
 							</a>
 						</label>
 					</div>
+					<!-- Check Curso Avanzando -->
 					<div class="form-group" id="curso_avanzado_es" style="display: none;" >
 						<label class="underlined">
 							<input type="checkbox" id="curso_avanzado_es" form="formulario_programas" name="curso_avanzado_es" value="* Acreditación Curso Avanzado de Economía Solidaria" disabled required>
@@ -1089,6 +1093,7 @@
 							</a>
 						</label>
 					</div>
+					<!-- Check Curso Economía Financiera -->
 					<div class="form-group" id="curso_economia_financiera" style="display: none;" >
 						<label class="underlined">
 							<input type="checkbox" id="curso_economia_financiera" form="formulario_programas" name="curso_economia_financiera" value="* Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria" disabled required>
@@ -1097,6 +1102,7 @@
 								<span class="spanRojo">*</span> Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria
 							</a>
 					</div>
+					<!-- Campo oculto con ID de la organización -->
 					<input type="text" name="id_organizacion" id="id_organizacion" value="<?php echo $data_organizacion->id_organizacion;?>" style="display: none">
 				</div>
 			</div>
@@ -1493,78 +1499,79 @@
 	</div>
 	<!-- Formulario Datos Plataforma 10 - FIN -->
 	<!-- Formulario Datos Plataforma 9 - INICIO -->
-	<div id="datos_en_linea" data-form="11" class=" formulario_panel">
+	<div id="datos_en_linea" data-form="11" class="formulario_panel">
 		<h3>8. Datos modalidad en linea<i class="fa fa-globe" aria-hidden="true"></i></h3>
-		<p>Ingrese los datos de ingreso con un instructivo para poder navegar dentro del curso.</p>
+		<p>Ingrese los datos de las herramientas a utilizar en esta modalidad dentro del curso.</p>
 		<div class="form-group">
-			<label for="datos_plataforma_url">URL:<span class="spanRojo">*</span></label>
-			<input type="text" class="form-control" name="datos_plataforma_url" id="datos_plataforma_url" placeholder="https://www.orgsolidarias.gov.co/">
+			<label for="nombre_herramienta">Nombre de la herramienta:<span class="spanRojo">*</span></label>
+			<input type="text" class="form-control" name="nombre_herramienta" id="nombre_herramienta" placeholder="Ej: WhastApp, Zoom, Skype..." required>
 		</div>
 		<div class="form-group">
-			<label for="datos_plataforma_usuario">Usuario:<span class="spanRojo">*</span></label>
-			<input type="text" class="form-control" name="datos_plataforma_usuario" id="datos_plataforma_usuario" placeholder="usuario.aplicacion">
+			<label for="descripcion_herramienta">Descripción:<span class="spanRojo">*</span></label>
+			<input type="text" class="form-control" name="descripcion_herramienta" id="descripcion_herramienta" placeholder="Chat en línea" required>
 		</div>
+		<!-- Check Aceptar Modalidad En Linea -->
 		<div class="form-group">
-			<label for="datos_plataforma_contrasena">Contraseña:<span class="spanRojo">*</span></label>
-			<input type="text" class="form-control" name="datos_plataforma_contrasena" id="datos_plataforma_contrasena" placeholder="contraseña123@">
+			<label class="underlined">
+				<input type="checkbox" id="acepta_mod_en_linea" form="formulario_programas" name="acepta_mod_en_linea" value="Si Acepto" disabled required>
+				<label for="acepta_mod_en_linea">&nbsp;</label>
+				<a data-toggle="modal" data-target="#modalAceptarEnLinea" data-backdrop="static" data-keyboard="false">
+					<span class="spanRojo">*</span> Acepta las recomendaciones ?
+				</a>
+			</label>
 		</div>
+		<hr />
+		<!-- Modal Aceptar Modalidad En Linea -->
+		<div class="modal fade" id="modalAceptarEnLinea" tabindex="-1" role="dialog" aria-labelledby="modalCursoAvanzado">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<div class="row">
+							<div id="header_politicas" class="col-md-12">
+								<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="http://localhost/siia/assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
+							</div>
+							<div class="clearfix"></div>
+							<hr />
+							<!-- Tablas de cursos -->
+							<div class="col-md-12">
+								Texto Recomendaciones Modalidad En Linea
+							</div>
+						</div>
+					</div>
+					<div class="modal-body">
+						<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
+						<button type="button" class="btn btn-siia btn-sm pull-right" id="acepto_mod_en_linea">Sí, acepto. <i class="fa fa-check"></i></button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_modalidad_en_linea" id="guardar_formulario_modalidad_en_linea">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
 		<div class="clearfix"></div>
 		<hr />
 		<div class="">
-			<?php echo form_open_multipart('', array('id' => 'formulario_material_programas_basicos')); ?>
-			<label>Instructivo (PDF):<span class="spanRojo">*</span></label>
-			<br />
-			<div class="col-md-4">
-				<input type="file" required accept="application/pdf" class="form-control" data-val="instructivoPlataforma" name="instructivoPlataforma" id="instructivoPlataforma">
-			</div>
-			<div class="col-md-3">
-				<input type="button" class="btn btn-siia btn-sm archivos_form_instructivoPlataforma fa-fa center-block" data-name="instructivoPlataforma" name="materialDicAvalEco" id="materialDicAvalEco" value="Guardar archivo(s) &#xf0c7">
-			</div>
-			</form>
-		</div>
-		<div class="clearfix"></div>
-		<div class="">
-			<hr />
-			<label>Plataforma:</label>
+			<label>Datos de herramientas:</label>
 			<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
 			<table id="" width="100%" border=0 class="table table-striped table-bordered">
 				<thead>
 				<tr>
-					<td>URL aplicación</td>
-					<td>Usuario aplicación</td>
-					<td>Contraseña aplicación</td>
+					<td>Herramienta</td>
+					<td>Descripción</td>
+					<td>Fecha de registro</td>
 					<td>Acción</td>
 				</tr>
 				</thead>
 				<tbody id="tbody">
 				<?php
-				foreach ($data_plataforma as $datosPlataforma) {
-					echo "<tr><td>" . $datosPlataforma->urlAplicacion . "</td>";
-					echo "<td>" . $datosPlataforma->usuarioAplicacion . "</td>";
-					echo "<td>" . $datosPlataforma->contrasenaAplicacion . "</td>";
-					echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosPlataforma' data-id-datosPlataforma=" . $datosPlataforma->id_datosAplicacion . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+				foreach ($data_modalidad_en_linea as $data) {
+					echo "<tr><td>" . $data->nombreHerramienta . "</td>";
+					echo "<td>" . $data->descripcionHerramienta . "</td>";
+					echo "<td>" . $data->fecha . "</td>";
+					echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosEnlinea' data-id=" . $data->id . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
 				}
 				?>
 				</tbody>
 			</table>
 		</div>
-		<div class="">
-			<hr />
-			<label>Archivos:</label>
-			<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>
-			<table id="tabla_archivos_formulario" width="100%" border=0 class="table table-striped table-bordered tabla_form">
-				<thead>
-				<tr>
-					<td class="col-md-4">Nombre</td>
-					<td class="col-md-4">Tipo</td>
-					<td class="col-md-4">Acción</td>
-				</tr>
-				</thead>
-				<tbody id="tbody">
-				</tbody>
-			</table>
-		</div>
-		<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_plataforma" id="guardar_formulario_plataforma">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
 	</div>
 	<!-- Formulario Datos Plataforma 9 - FIN -->
 	<!-- Fin de Formularios -->
