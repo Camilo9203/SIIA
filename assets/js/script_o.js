@@ -16848,6 +16848,7 @@ function verificarFormularios() {
 			}
 			//$("li.step-no>a>span.step_no.menu-sel").remove();
 			//$("li.step-no>a>span.step_no.menu-sel").css("background-color", "#07385d !important");
+			/** Formularios virtual y en linea */
 			//Comprobación modalidad y mostrar los formularios correspondientes
 			if(response.modalidad == "Presencial, Virtual, En Linea" || response.modalidad == "Virtual, En Linea") {
 				$("#itemPlataforma").show();
@@ -16855,13 +16856,12 @@ function verificarFormularios() {
 			}
 			if (response.modalidad == "Presencial, Virtual" || response.modalidad == "Virtual" ){
 				$("#itemPlataforma").show();
-
 			}
 			if (response.modalidad == "Presencial, En Linea" || response.modalidad == "En Linea") {
 				$("#itemEnLinea").show();
 			}
-
-			//Formulario 6
+			/** Formulario 6 */
+			// Visualización checkbox de aceptación según los motivos registrados en tipoSolicitud
 			for (let i = 0; i < response.motivos.length; i++) {
 				let motivos = response.motivos[i];
 				switch (motivos) {
@@ -16879,6 +16879,28 @@ function verificarFormularios() {
 						break;
 					case "5":
 						$("#curso_economia_financiera").show();
+						break;
+					default:
+				}
+			}
+			// Check activo si el curso ya se encuentra en base de datos.
+			for (let i = 0; i < response.programas.length; i++) {
+				let programa = response.programas[i].nombrePrograma;
+				switch (programa) {
+					case "Acreditación Curso Básico de Economía Solidaria":
+						$("#check_curso_basico_es").prop("checked", true);
+						break;
+					case "Acreditación, Aval de Trabajo Asociado":
+						$("#check_curso_basico_aval").prop("checked", true);
+						break;
+					case "Acreditación Curso Medio de Economía Solidaria":
+						$("#check_curso_medio_aval").prop("checked", true);
+						break;
+					case "Acreditación Curso Avanzado de Economía Solidaria":
+						$("#check_curso_avanzado_es").prop("checked", true);
+						break;
+					case "Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria":
+						$("#check_curso_economia_financiera").prop("checked", true);
 						break;
 					default:
 				}

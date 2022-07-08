@@ -145,9 +145,9 @@
 											<strong><label>Número NIT:</label></strong>
 											<p><?php echo $organizacion->numNIT; ?></p>
 											<strong><label>Acepta Curso:</label></strong>
-											<p><?php echo $data->nombrePrograma; ?></p>
+											<p><?php echo $data['nombrePrograma']; ?></p>
 											<strong><label>Fecha:</label></strong>
-											<p><?php echo $data->fecha; ?></p>
+											<p><?php echo $data['fecha']; ?></p>
 											<p>Organizaciones Solidarias le recuerda que es importante mantener la información básica de contacto de la entidad actualizada, para facilitar el desarrollo procesos derivados de la acreditación. Le recomendamos cada vez que se realice algún cambio sea reportado por medio del SIIA. En razón a la política de manejo de datos institucional y para verificar la identidad de la organización, es necesario activar su cuenta en el siguiente link:</p><br />
 										</td>
 									</tr>

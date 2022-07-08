@@ -46,6 +46,7 @@ class Panel extends CI_Controller
 		$data['data_programas_avalar'] = $this->cargarDatos_formulario_programas_avalar();
 		$data['data_plataforma'] = $this->cargarDatos_formulario_datos_plataforma();
 		$data['data_modalidad_en_linea'] = $this->cargarDatos_modalidad_en_linea();
+		$data['data_programas'] = $this->cargarDatos_programas();
 		$data["camara"] = $this->cargarCamaraComercio();
 		$data['informacionModal'] = $this->cargar_informacionModal();
 
@@ -322,7 +323,14 @@ class Panel extends CI_Controller
 		$data = $this->db->select("*")->from("datosEnLinea")->where("organizaciones_id_organizacion", $datos_organizacion->id_organizacion)->get()->result();
 		return $data;
 	}
-
+	public function cargarDatos_programas()
+	{
+		// TODO: Tener en cuenta el numero de id de la solicitud
+		$usuario_id = $this->session->userdata('usuario_id');
+		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
+		$data = $this->db->select("*")->from("datosProgramas")->where("organizaciones_id_organizacion", $datos_organizacion->id_organizacion)->get()->result();
+		return $data;
+	}
 	public function cargarDepartamentos()
 	{
 		$departamentos = $this->db->select("*")->from("departamentos")->get()->result();
@@ -465,6 +473,18 @@ class Panel extends CI_Controller
 			}
 		}
 	}
+	public function eliminarDatosProgramas()
+	{
+		$programa = $this->db->select('*')->from('datosProgramas')->where('id', $this->input->post('id'))->get()->row();
+		$this->db->where('id', $programa->id);
+		if ($this->db->delete('datosProgramas')) {
+			echo json_encode(array('url' => "panel", 'msg' => "Se eliminaron los datos de aceptación del programa: " . $programa->nombrePrograma, 'status' => 1));
+		}
+		else {
+			echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los datos de aceptación del programa: " . $programa->nombrePrograma, 'status' => 2));
+		}
+
+	}
 
 	public function cargarObservaciones()
 	{
@@ -591,11 +611,12 @@ class Panel extends CI_Controller
 		$motivoSolicitud = $this->cargarMotivoSolicitud();
 		$motivosSolicitud = $this->cargarMotivosSolicitud();
 		$modalidadSolicitud = $this->cargarModalidadSolicitud();
+		$programas = $this->cargarDatos_programas();
 
 		switch ($estadoOrganizaciones) {
 			case "En Proceso":
 				if ($tipoSolicitud != NULL || $tipoSolicitud != "Eliminar" && $estadoOrganizaciones == "En Proceso") {
-					echo json_encode(array('url' => "panel", 'msg' => "Continue diligenciando los formularios, Solicitud número: " . $numeroSolicitudes, 'tipo' => $tipoSolicitud, "numero" => $numeroSolicitudes, 'motivo' => $motivoSolicitud, 'motivos' =>$motivosSolicitud, 'modalidad' => $modalidadSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior));
+					echo json_encode(array('url' => "panel", 'msg' => "Continue diligenciando los formularios, Solicitud número: " . $numeroSolicitudes, 'tipo' => $tipoSolicitud, "numero" => $numeroSolicitudes, 'motivo' => $motivoSolicitud, 'motivos' =>$motivosSolicitud, 'modalidad' => $modalidadSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior, 'programas' => $programas));
 				}
 				break;
 			case "En Proceso de Renovación":
@@ -915,11 +936,15 @@ class Panel extends CI_Controller
 		 	Comprobación Formularios
 		 */
 		$formularios = array();
-
-		switch ($motivoSolicitud) {
-			case "1":
+		// TODO: Comprobación de formulario 6 = numero de motivos
+		$solicitud = $this->db->select('*')->from('solicitudes')->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
+		$totalProgramas = $this->db->select('*')->from('datosProgramas')->where("solicitudes_id_solicitud", $solicitud->id_solicitud)->get()->result();
+		$cantProgramasSeleccionados = count(json_decode($tipoSolicitud->motivosSolicitud));
+		$cantProgramasAceptados = count($totalProgramas);
+		if ($cantProgramasSeleccionados == $cantProgramasAceptados) {
+			$datosProgramasAceptados = 'TRUE';
 		}
-
+		// Comprobar todos los formularios
 		if ($informacionGeneral == NULL || $certificacionesForm == NULL || $lugar == NULL || $carta == NULL) {
 			array_push($formularios, "1. Falta el formulario de Informacion General.");
 		}
@@ -935,7 +960,7 @@ class Panel extends CI_Controller
 		if ($jornadasActualizacion == NULL || $jornada == NULL) {
 			array_push($formularios, "4. Falta el formulario de Jornadas Actualización.");
 		}
-		if ($datosProgramas == NULL) {
+		if ($datosProgramasAceptados == NULL) {
 			array_push($formularios, "5. Falta el formulario de Datos Basicos Programas.");
 		}
 		if ($docentes == NULL || $numeroDocentes < 3) {
@@ -1390,7 +1415,7 @@ class Panel extends CI_Controller
 	public function guardar_formulario_datos_programas()
 	{
 		if ($this->input->post()) {
-			$data_Programas = $this->db->select("*")->from("datosProgramas")->where("organizaciones_id_organizacion", $this->input->post('organizacion'))->get()->row();
+			$data_Programas = $this->db->select("*")->from("datosProgramas")->where("organizaciones_id_organizacion", $this->input->post('organizacion'))->get()->result();
 			$solicitud = $this->db->select("id_solicitud")->from("solicitudes")->where("organizaciones_id_organizacion", $this->input->post('organizacion'))->get()->row();
 			$organizacion = $this->db->select('*')->from('organizaciones')->where('id_organizacion', $this->input->post('organizacion'))->get()->row();
 			$data = array(
@@ -1401,23 +1426,15 @@ class Panel extends CI_Controller
 				'solicitudes_id_solicitud' => $solicitud->id_solicitud,
 			);
 			/** Comprobar si el programa ya se encuentra aceptado */
-			if ($data_Programas->nombrePrograma == "Acreditación Curso Básico de Economía Solidaria") {
-				echo json_encode(array('url' => "panel", 'msg' => "El programa ya se encuentra registrado en esta solicitud"));
+			$programas = array();
+			foreach ($data_Programas as $programa) {
+				array_push($programas, $programa->nombrePrograma);
 			}
-			elseif ($data_Programas->nombrePrograma == "Acreditación, Aval de Trabajo Asociado"){
-				echo json_encode(array('url' => "panel", 'msg' => "El programa ya se encuentra registrado en esta solicitud"));
-			}
-			elseif ($data_Programas->nombrePrograma == "Acreditación Curso Medio de Economía Solidaria"){
-				echo json_encode(array('url' => "panel", 'msg' => "Se guardo Programas Básicos."));
-			}
-			elseif ($data_Programas->nombrePrograma == "Acreditación Curso Avanzado de Economía Solidaria"){
-				echo json_encode(array('url' => "panel", 'msg' => "El programa ya se encuentra registrado en esta solicitud"));
-			}
-			elseif ($data_Programas->nombrePrograma == "Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria"){
-				echo json_encode(array('url' => "panel", 'msg' => "El programa ya se encuentra registrado en esta solicitud"));
+			$programaIngresado = $this->input->post('programa');
+			if (in_array($programaIngresado, $programas)) {
+				echo json_encode(array('url' => "panel", 'msg' => "Programa: " . $programaIngresado .  " ya registrado."));
 			}
 			else {
-				/** Guardar data en programas */
 				if ($this->db->insert('datosProgramas', $data)){
 					$this->logs_sia->session_log('Formulario Programas Básicos');
 					$this->logs_sia->logQueries();
@@ -1448,7 +1465,7 @@ class Panel extends CI_Controller
 		$this->email->subject('SIIA - Aceptación de programa.');
 		$data_email = array (
 			'organizacion' => $organizacion,
-			'data' => $datos
+			'data' => $data
 		);
 		$email_view = $this->load->view('email/aceptacion_cursos', $data_email, true);
 		$this->email->message($email_view);
@@ -1470,7 +1487,7 @@ class Panel extends CI_Controller
 				echo json_encode(array('url' => "panel", 'msg' => "Se envío un correo a: " . $organizacion->direccionCorreoElectronicoOrganizacion . ", por favor verifíquelo", "status" => 1));
 			}
 			else {
-				echo json_encode(array('msg' => "Se envío el correo de activación pero no se guardo registro en base de datos", "status" => 1));
+				echo json_encode(array('msg' => "Se envío el correo de activación pero no se guardo registro en base de datos", "status" => 2));
 			}
 
 		}

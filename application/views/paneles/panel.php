@@ -1041,8 +1041,8 @@
 		</div>
 	</div>
 	<!-- Formulario de jornadas de actualizacion 5 - FIN -->
-	<!-- Formulario de programa básico de economía solidaria 6 - INICIO -->
-	<div id="programa_basico_de_economia_solidaria" data-form="6" class=" formulario_panel">
+	<!-- Formulario de programas de educación en economía solidaria 5 - INICIO -->
+	<div id="programa_basico_de_economia_solidaria" data-form="5" class=" formulario_panel">
 		<?php // echo form_open('', array('id' => 'formulario_programa_basico')); ?>
 		<h3>5. Programas de educación en economía solidaria <i class="fa fa-server" aria-hidden="true"></i></h3>
 		<p>Le invitamos a leer atentamente el anexo técnico del curso o los cursos a acreditar, seguido de la lectura es importante dar clic en <strong>aceptar</strong>. Esta aceptación compromete a su organización a desarrollar el programa de economía solidaria establecido en la resolución 152 de 2022, es importante que su organización cree y desarrolle las metodologías y materiales adecuados para el proceso de enseñanza y aprendizaje.</p>
@@ -1053,10 +1053,10 @@
 		<div class="container">
 			<div class="row">
 				<div class="col">
-					<!-- Check Curso Basico -->
+					<!-- Check Curso Básico -->
 					<div class="form-group" id="curso_basico_es" style="display: none;" >
 						<label class="underlined">
-							<input type="checkbox" id="programa" form="formulario_programas" name="curso_basico_es" value="* Acreditación Curso Básico de Economía Solidaria" disabled required>
+							<input type="checkbox" id="check_curso_basico_es" form="formulario_programas" name="curso_basico_es" value="* Acreditación Curso Básico de Economía Solidaria" disabled>
 							<label for="modalCursoBasico">&nbsp;</label>
 							<a data-toggle="modal" data-target="#modalCursoBasico" data-backdrop="static" data-keyboard="false">
 								<span class="spanRojo">*</span> Acreditación Curso Básico de Economía Solidaria
@@ -1066,7 +1066,7 @@
 					<!-- Check Curso Aval -->
 					<div class="form-group" id="curso_basico_aval" style="display: none;" >
 						<label class="underlined">
-							<input type="checkbox" id="curso_basico_aval" form="formulario_programas" name="curso_basico_aval" value="* Acreditación, Aval de Trabajo Asociado" disabled required>
+							<input type="checkbox" id="check_curso_basico_aval" form="formulario_programas" name="curso_basico_aval" value="* Acreditación, Aval de Trabajo Asociado" disabled required>
 							<label for="modalAval">&nbsp;</label>
 							<a data-toggle="modal" data-target="#modalAval" data-backdrop="static" data-keyboard="false">
 								<span class="spanRojo">*</span> Acreditación, Aval de Trabajo Asociado
@@ -1076,7 +1076,7 @@
 					<!-- Check Curso Medio -->
 					<div class="form-group" id="curso_medio_es" style="display: none;" >
 						<label class="underlined">
-							<input type="checkbox" id="curso_basico_aval" form="formulario_programas" name="curso_basico" value="* Acreditación Curso Medio de Economía Solidaria" disabled required>
+							<input type="checkbox" id="check_curso_medio_aval" form="formulario_programas" name="check_curso_medio_aval" value="* Acreditación Curso Medio de Economía Solidaria" disabled required>
 							<label for="modalCursoMedio">&nbsp;</label>
 							<a data-toggle="modal" data-target="#modalCursoMedio" data-backdrop="static" data-keyboard="false">
 								<span class="spanRojo">*</span> Acreditación Curso Medio de Economía Solidaria
@@ -1086,7 +1086,7 @@
 					<!-- Check Curso Avanzando -->
 					<div class="form-group" id="curso_avanzado_es" style="display: none;" >
 						<label class="underlined">
-							<input type="checkbox" id="curso_avanzado_es" form="formulario_programas" name="curso_avanzado_es" value="* Acreditación Curso Avanzado de Economía Solidaria" disabled required>
+							<input type="checkbox" id="check_curso_avanzado_es" form="formulario_programas" name="check_curso_avanzado_es" value="* Acreditación Curso Avanzado de Economía Solidaria" disabled required>
 							<label for="modalCursoAvanzado">&nbsp;</label>
 							<a data-toggle="modal" data-target="#modalCursoAvanzado" data-backdrop="static" data-keyboard="false">
 								<span class="spanRojo">*</span> Acreditación Curso Avanzado de Economía Solidaria
@@ -1096,7 +1096,7 @@
 					<!-- Check Curso Economía Financiera -->
 					<div class="form-group" id="curso_economia_financiera" style="display: none;" >
 						<label class="underlined">
-							<input type="checkbox" id="curso_economia_financiera" form="formulario_programas" name="curso_economia_financiera" value="* Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria" disabled required>
+							<input type="checkbox" id="check_curso_economia_financiera" form="formulario_programas" name="check_curso_economia_financiera" value="* Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria" disabled required>
 							<label for="modalCursoFinanciera">&nbsp;</label>
 							<a data-toggle="modal" data-target="#modalCursoFinanciera" data-backdrop="static" data-keyboard="false" data-programa="Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria">
 								<span class="spanRojo">*</span> Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria
@@ -1107,6 +1107,33 @@
 				</div>
 			</div>
 		</div>
+		<!-- Tabla herramientas -->
+		<?php if($data_programas): ?>
+			<div class="">
+				<label>Datos programas aceptados</label>
+				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+				<table id="" width="100%" border=0 class="table table-striped table-bordered">
+					<thead>
+					<tr>
+						<td>Nombre programa</td>
+						<td>Acepta</td>
+						<td>Fecha</td>
+						<td>Acción</td>
+					</tr>
+					</thead>
+					<tbody id="tbody">
+					<?php
+					foreach ($data_programas as $data) {
+						echo "<tr><td>" . $data->nombrePrograma . "</td>";
+						echo "<td>" . $data->aceptarPrograma . "</td>";
+						echo "<td>" . $data->fecha . "</td>";
+						echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosProgramas' data-id=" . $data->id . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+					}
+					?>
+					</tbody>
+				</table>
+			</div>
+		<?php endif	?>
 	</div>
 	<!-- Formulario de programa basico de economia solidaria 6 - FIN -->
 	<!-- Formulario de aval de economia 7 - Inicio -->
@@ -1561,6 +1588,7 @@
 		<hr />
 		</form>
 		<!-- Tabla herramientas -->
+		<?php if($data_modalidad_en_linea): ?>
 		<div class="">
 			<label>Datos de herramientas:</label>
 			<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
@@ -1587,6 +1615,7 @@
 				</tbody>
 			</table>
 		</div>
+		<?php endif	?>
 	</div>
 	<!-- Formulario Datos Plataforma 9 - FIN -->
 	<!-- Fin de Formularios -->
@@ -1639,7 +1668,7 @@
 				</div>
 				<div class="modal-body">
 					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button type="button" class="btn btn-siia btn-sm pull-right" id="acepto_programa" data-programa="Acreditación Curso Básico de Economía Solidaria">Sí, acepto. <i class="fa fa-check"></i></button>
+					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_curso_basico_es" data-programa="Acreditación Curso Básico de Economía Solidaria" data-modal="modalCursoBasico" data-check="check_curso_basico_es">Sí, acepto. <i class="fa fa-check"></i></button>
 				</div>
 			</div>
 		</div>
@@ -1662,7 +1691,7 @@
 				</div>
 				<div class="modal-body">
 					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button type="button" class="btn btn-siia btn-sm pull-right" id="acepto_programa" data-programa="Acreditación, Aval de Trabajo Asociado">Sí, acepto. <i class="fa fa-check"></i></button>
+					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_aval_trabajo" data-programa="Acreditación, Aval de Trabajo Asociado"  data-modal="modalAval" data-check="check_curso_basico_aval">Sí, acepto. <i class="fa fa-check"></i></button>
 				</div>
 			</div>
 		</div>
@@ -1685,7 +1714,7 @@
 				</div>
 				<div class="modal-body">
 					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button type="button" class="btn btn-siia btn-sm pull-right" id="acepto_programa" data-programa="Acreditación Curso Medio de Economía Solidaria">Sí, acepto. <i class="fa fa-check"></i></button>
+					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_curso_medio_es" data-programa="Acreditación Curso Medio de Economía Solidaria"  data-modal="modalCursoMedio" data-check="check_curso_medio_es">Sí, acepto. <i class="fa fa-check"></i></button>
 				</div>
 			</div>
 		</div>
@@ -1708,7 +1737,7 @@
 				</div>
 				<div class="modal-body">
 					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button type="button" class="btn btn-siia btn-sm pull-right" id="acepto_programa" data-programa="Acreditación Curso Avanzado de Economía Solidaria">Sí, acepto. <i class="fa fa-check"></i></button>
+					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_avanzado_medio_es" data-programa="Acreditación Curso Avanzado de Economía Solidaria" data-modal="modalCursoAvanzado" data-check="check_curso_avanzado_es">Sí, acepto. <i class="fa fa-check"></i></button>
 				</div>
 			</div>
 		</div>
@@ -1732,7 +1761,7 @@
 				</div>
 				<div class="modal-body">
 					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button type="button" class="btn btn-siia btn-sm pull-right" id="acepto_programa" data-programa="Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria">Sí, acepto. <i class="fa fa-check"></i></button>
+					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_educacion_financiera" data-programa="Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria" data-modal="modalCursoFinanciera" data-check="check_curso_economia_financiera">Sí, acepto. <i class="fa fa-check"></i></button>
 				</div>
 			</div>
 		</div>

@@ -317,15 +317,48 @@ $("#guardar_formulario_registro_educativo").click(function (){
 	});
 });
 /** Formulario 6: Programas de Educación */
-$("#acepto_programa").click(function () {
-	$("#programa_educativo").prop("checked", true);
+// Acciones de cada modal de aceptación
+$("#aceptar_curso_basico_es").click(function () {
+	let curso = $(this).attr("data-programa");
+	let modal = $(this).attr("data-modal");
+	let check = $(this).attr("data-check");
+	guardarDatosProgramas(curso,modal,check);
+});
+$("#aceptar_aval_trabajo").click(function () {
+	let curso = $(this).attr("data-programa");
+	let modal = $(this).attr("data-modal");
+	let check = $(this).attr("data-check");
+	guardarDatosProgramas(curso,modal,check);
+});
+$("#aceptar_curso_medio_es").click(function () {
+	let curso = $(this).attr("data-programa");
+	let modal = $(this).attr("data-modal");
+	let check = $(this).attr("data-check");
+	guardarDatosProgramas(curso,modal,check);
+});
+$("#aceptar_avanzado_medio_es").click(function () {
+	let curso = $(this).attr("data-programa");
+	let modal = $(this).attr("data-modal");
+	let check = $(this).attr("data-check");
+	guardarDatosProgramas(curso,modal,check);
+});
+$("#aceptar_educacion_financiera").click(function () {
+	let curso = $(this).attr("data-programa");
+	let modal = $(this).attr("data-modal");
+	let check = $(this).attr("data-check");
+	guardarDatosProgramas(curso,modal,check);
+});
+// Función para guardar datos al aceptar programa
+function guardarDatosProgramas (curso,modal, check){
+	$("#" + modal).modal("toggle");
+	$("#" + check).prop("checked", true);
 	$(this).attr("disabled", true);
+	event.preventDefault();
 	data = {
-		programa: $(this).attr("data-programa"),
+		programa: curso,
 		organizacion:  $("#id_organizacion").val(),
 		aceptar: "Si Acepta"
 	};
-	console.log(data);
 	$.ajax({
 		url: baseURL + "panel/guardar_formulario_datos_programas",
 		type: "post",
@@ -336,15 +369,42 @@ $("#acepto_programa").click(function () {
 		},
 		success: function (response) {
 			notificacion(response.msg, "success");
-			setInterval(function () {
-				reload();
-			}, 2000);
+			if(response.status == 1) {
+				setInterval(function () {
+					reload();
+				}, 2000);
+			}
 		},
 		error: function (ev) {
 			//Do nothing
 		},
 	});
-	$("#aceptar_programa").modal("toggle");
+}
+// Eliminar datos plataforma
+$(".eliminarDatosProgramas").click(function () {
+	data = {
+		id: $(this).attr("data-id"),
+	};
+	$.ajax({
+		url: baseURL + "panel/eliminarDatosProgramas",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		beforeSend: function () {
+			notificacion("Espere...", "success");
+		},
+		success: function (response) {
+			notificacion(response.msg, "success");
+			if(response.status == 1) {
+				setInterval(function () {
+					reload();
+				}, 2000);
+			}
+		},
+		error: function (ev) {
+			//Do nothing
+		},
+	});
 });
 /** Formulario 8: Modalidad En Línea */
 // Aceptar recomendaciones modalidad en linea
@@ -354,7 +414,7 @@ $("#acepto_mod_en_linea").click(function () {
 });
 // Guardar formulario
 $("#guardar_formulario_modalidad_en_linea").click(function () {
-	$(this).attr("disabled", true);
+	//$(this).attr("disabled", true);
 	// Validar formulario
 	validFroms(8);
 	if ($("#formulario_modalidad_en_linea").valid()) {
@@ -435,6 +495,9 @@ $(".eliminarDatosEnlinea").click(function () {
 		},
 		success: function (response) {
 			notificacion(response.msg, "success");
+			setInterval(function () {
+				reload();
+			}, 2000);
 		},
 		error: function (ev) {
 			//Do nothing
