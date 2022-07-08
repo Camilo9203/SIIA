@@ -354,31 +354,70 @@ $("#acepto_mod_en_linea").click(function () {
 });
 // Guardar formulario
 $("#guardar_formulario_modalidad_en_linea").click(function () {
-	//$(this).attr("disabled", true);
-	//Datos a guardar
+	$(this).attr("disabled", true);
+	// Validar formulario
+	validFroms(8);
+	if ($("#formulario_modalidad_en_linea").valid()) {
+		if ($("#acepta_mod_en_linea").prop("checked") == true) {
+			event.preventDefault();
+			// Capturar datos formulario
+			let form_data = new FormData();
+			form_data.append("file", $("#instructivoEnLinea").prop("files")[0]);
+			form_data.append("tipoArchivo", $("#instructivoEnLinea").attr("data-val"));
+			form_data.append("append_name", $("#instructivoEnLinea").attr("data-val"));
+			form_data.append("nombreHerramienta",  $("#nombre_herramienta").val());
+			form_data.append("descripcionHerramienta", $("#descripcion_herramienta").val());
+			form_data.append("aceptacion", $("#acepta_mod_en_linea").val());
+			// Petición para guardar datos
+			$.ajax({
+				url: baseURL + "panel/guardar_formulario_modalidad_en_linea",
+				cache: false,
+				contentType: false,
+				processData: false,
+				type: "post",
+				dataType: "JSON",
+				data: form_data,
+				beforeSend: function () {
+					notificacion("Espere...", "success");
+				},
+				success: function (response) {
+					notificacion(response.msg, "success");
+					setInterval(function () {
+						reload();
+					}, 2000);
+				},
+				error: function (ev) {
+					event.preventDefault();
+					console.log(ev);
+					notificacion("Ocurrió un error y no se guardaron los datos");
+				},
+			});
+		}
+		else {
+			notificacion("Acepte modalidad en línea");
+			event.preventDefault();
+		}
+	}
+	else {
+		notificacion("No se validaron campos");
+		event.preventDefault();
+	}
+
+});
+// Ver Documento
+$(".verDocDatosEnlinea").click(function (){
 	data = {
-		nombreHerramienta: $("#nombre_herramienta").val(),
-		descripcionHerramienta: $("#descripcion_herramienta").val(),
-		aceptacion:$("#acepta_mod_en_linea").val(),
-	};
-	// Petifición para guardar datos
+		id: $(this).attr("data-id"),
+		formulario: 8,
+	}
 	$.ajax({
-		url: baseURL + "panel/guardar_formulario_modalidad_en_linea",
+		url: baseURL + "panel/verDocumento",
 		type: "post",
 		dataType: "JSON",
 		data: data,
-		beforeSend: function () {
-			notificacion("Espere...", "success");
-		},
-		success: function (response) {
-			notificacion(response.msg, "success");
-			setInterval(function () {
-				reload();
-			}, 2000);
-		},
-		error: function (ev) {
-			//Do nothing
-		},
+		success: function (response){
+			window.open(response.file, '_blank');
+		}
 	});
 });
 // Eliminar datos plataforma
@@ -386,7 +425,6 @@ $(".eliminarDatosEnlinea").click(function () {
 	data = {
 		id: $(this).attr("data-id"),
 	};
-	console.log(data);
 	$.ajax({
 		url: baseURL + "panel/eliminarDatosEnLinea",
 		type: "post",
@@ -403,3 +441,39 @@ $(".eliminarDatosEnlinea").click(function () {
 		},
 	});
 });
+/** Validaciones formularios */
+function validFroms (form){
+	switch (form) {
+		case 8:
+			$("form[id='formulario_modalidad_en_linea']").validate({
+				rules: {
+					nombre_herramienta: {
+						required: true,
+						minlength: 3,
+					},
+					descripcion_herramienta: {
+						required: true,
+					},
+					acepta_mod_en_linea: {
+						required: true,
+					}
+				},
+				messages: {
+					nombre_herramienta: {
+						required: "Por favor, ingrese el nombre de la herramienta.",
+						minlength: "Mínimo 3 caracteres"
+					},
+					descripcion_herramienta: {
+						required: "Por favor, ingrese la descripción de la herramienta.",
+					},
+					acepta_mod_en_linea: {
+						required: "Por favor, lea y acepte las recomendaciones de la modalidad en línea.",
+					},
+					instructivoEnLinea: {
+						required: "Adjunte por favor instructivo de la herramienta.",
+					},
+				},
+			})
+		default:
+	}
+}

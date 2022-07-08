@@ -552,7 +552,6 @@ $(document).ready(function(){
 	$(".ingresar").click(function() {
 		redirect(baseURL+'login');
 	});
-
 	//Click en boton Registrar.
 	$(".registrar").click(function() {
 		redirect(baseURL+'registro');

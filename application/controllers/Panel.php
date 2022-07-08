@@ -7,6 +7,7 @@ class Panel extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
+		$this->load->helper(array('download', 'file', 'url', 'html', 'form'));
 		verify_session();
 	}
 
@@ -451,13 +452,17 @@ class Panel extends CI_Controller
 	}
 	public function eliminarDatosEnLinea()
 	{
-		$id = $this->input->post('id');
-		$this->db->where('id', $id);
-		if ($this->db->delete('datosEnLinea')) {
-			echo json_encode(array('url' => "panel", 'msg' => "Se eliminaron los datos de la herramienta."));
-		}
-		else {
-			echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los datos de la herramienta."));
+		$archivo = $this->db->select('*')->from('archivos')->where('id_registro', $this->input->post('id'))->get()->row();
+		$this->db->where('id_archivo', $archivo->id_archivo);
+		if($this->db->delete('archivos')){
+			unlink('uploads/instructivoEnLinea/' . $archivo->nombre);
+			$this->db->where('id', $this->input->post('id'));
+			if ($this->db->delete('datosEnLinea')) {
+				echo json_encode(array('url' => "panel", 'msg' => "Se eliminaron los datos de la herramienta."));
+			}
+			else {
+				echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los datos de la herramienta."));
+			}
 		}
 	}
 
@@ -1679,9 +1684,48 @@ class Panel extends CI_Controller
 			'solicitudes_id_solicitud' => $solicitud->id_solicitud,
 		);
 		// Guardar datos.
-		$this->db->insert('datosEnLinea', $data_aplicacion);
-		echo json_encode(array('url' => "panel", 'msg' => "Se guardo la información de la herramienta ha utilizar."));
+		if($this->db->insert('datosEnLinea', $data_aplicacion)) {
+			$name_random = random(10);
+			$size = 100000000;
+			$registro = $this->db->select('*')->from('datosEnLinea')->where('nombreHerramienta', $data_aplicacion['nombreHerramienta'])->get()->row();
+			$nombreArchivo =  $this->input->post('append_name') . "_" . $name_random . "_" . $_FILES['file']['name'];
+			$ext_archivo = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
+			if ($this->input->post('tipoArchivo') == "instructivoEnLinea") {
+				$ruta = 'uploads/instructivoEnLinea';
+				$mensaje = "Se guardo el " . $this->input->post('append_name');
+			}
+			$data_archivo = array(
+				'tipo' => $this->input->post('tipoArchivo'),
+				'nombre' => $nombreArchivo ,
+				'id_formulario' => 8,
+				'id_registro' => $registro->id,
+				'organizaciones_id_organizacion' => $datos_organizacion->id_organizacion,
+			);
+
+			if (0 < $_FILES['file']['error']) {
+				echo json_encode(array('url' => "", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
+			}
+			else if ($_FILES['file']['size'] > $size) {
+				echo json_encode(array('url' => "", 'msg' => "El tamaño supera las 10 Mb, intente con otro archivo PDF."));
+			}
+			else if ($ext_archivo != "pdf") {
+				echo json_encode(array('url' => "", 'msg' => "La extensión del archivo no es correcta, debe ser PDF. (archivo.pdf)"));
+			}
+			else if ($this->db->insert('archivos', $data_archivo)) {
+				if (move_uploaded_file($_FILES['file']['tmp_name'], $ruta . '/' . $nombreArchivo)) {
+					echo json_encode(array('url' => "", 'msg' => $mensaje));
+					//$this->logs_sia->session_log('Actualizacion de Imagen / Logo');){
+				}
+				else {
+					echo json_encode(array('url' => "", 'msg' => "No se guardo el archivo(s)."));
+				}
+			}
+			$this->logs_sia->logs('URL_TYPE');
+			$this->logs_sia->logQueries();
+
+		}
 	}
+
 	// Informe de actividades
 	public function guardar_cursoInformeActividades()
 	{
@@ -2549,18 +2593,13 @@ class Panel extends CI_Controller
 		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
 		$tipoArchivo = $this->input->post('tipoArchivo');
 		$append_name = $this->input->post('append_name');
-
-		$usuario_id = $this->session->userdata('usuario_id');
 		$name_random = random(10);
 		$size = 100000000;
-
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
 		$id_organizacion = $datos_organizacion->id_organizacion;
 		$id_formulario = 10;
-
 		$archivos = $this->db->select('*')->from('archivos')->where('organizaciones_id_organizacion', $id_organizacion)->get()->row();
-
 
 		if ($tipoArchivo == "instructivoPlataforma") {
 			$ruta = 'uploads/instructivosPlataforma';
@@ -3264,12 +3303,22 @@ class Panel extends CI_Controller
 		if ($this->email->send()) {
 			// Do nothing.
 		} else {
-			echo json_encode(array('url' => "login", 'msg' => "Lo sentimos, hubo un error y no se envio el correo."));
+			echo json_encode(array('url' => "login", 'msg' => "Lo sentimos, hubo un error y no se envío el correo."));
 		}
 	}
 	public function cargar_informacionModal()
 	{
 		$informacionModal = $this->db->select("valor")->from("opciones")->where("nombre", "informacionModal")->get()->row()->valor;
 		return $informacionModal;
+	}
+	// TODO: Ver Documentos
+	public function verDocumento (){
+		$archivo = $this->db->select('*')->from('archivos')->where('id_registro', $this->input->post('id'))->get()->row();
+		switch($this->input->post('formulario')){
+			case 8:
+				$file = base_url()."uploads/instructivoEnLinea" . "/" . $archivo->nombre;
+				echo json_encode(array('file' => $file));
+			default:
+		}
 	}
 }

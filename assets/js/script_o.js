@@ -15982,7 +15982,6 @@ function validaciones() {
 			},
 		},
 	});
-
 	// Formulario Login Administradores.
 	$("form[id='formulario_login_admin']").validate({
 		rules: {
@@ -16006,7 +16005,6 @@ function validaciones() {
 			},
 		},
 	});
-
 	// Formulario Recordar Contraseña.
 	$("form[id='formulario_recordar']").validate({
 		rules: {
@@ -16039,7 +16037,6 @@ function validaciones() {
 			},
 		},
 	});
-
 	// Formulario Actualizar.
 	$("form[id='formulario_actualizar']").validate({
 		rules: {
@@ -16133,7 +16130,6 @@ function validaciones() {
 			},
 		},
 	});
-
 	// Formulario Actualizar Contraseña.
 	$("form[id='formulario_actualizar_contrasena']").validate({
 		rules: {
@@ -16183,7 +16179,6 @@ function validaciones() {
 			},
 		},
 	});
-
 	// Formulario Actualizar Nombre de usuario.
 	$("form[id='formulario_actualizar_usuario']").validate({
 		rules: {
@@ -16199,7 +16194,6 @@ function validaciones() {
 			},
 		},
 	});
-
 	// Formulario Actualizar Nombre de usuario.
 	$("form[id='formulario_actualizar_imagen']").validate({
 		rules: {
@@ -16224,7 +16218,6 @@ function validaciones() {
 			},
 		},
 	});
-
 	$("form[id='formulario_informacion_general_entidad']").validate({
 		rules: {
 			tipo_organizacion: {
@@ -16286,7 +16279,6 @@ function validaciones() {
 		},
 	});
 	//
-
 	$("form[id='formulario_docentes']").validate({
 		rules: {
 			docentes_cedula: {
@@ -16333,8 +16325,7 @@ function validaciones() {
 				min: "Por favor, debe tener mínimo 60 horas de capacitación.",
 			},
 		},
-	});
-
+	})
 	/*$("form[id='div_llenar_curso']").validate({
 		rules: {
 	      informe_nombre_curso: {
@@ -16420,6 +16411,8 @@ function validaciones() {
 	      }
 	    }
 	});*/
+
+
 
 	/**
 		Termina Forms validations
@@ -16692,9 +16685,7 @@ function cargarArchivos() {
 							$tipo = "Archivo de jornada ó Carta de compromiso";
 							break;
 					}
-					$("<td><small>" + nombre_r + "</small></td>").appendTo(
-						".tabla_form > tbody"
-					);
+					$("<td><small>" + nombre_r + "</small></td>").appendTo(".tabla_form > tbody");
 					$("<td>" + $tipo + "</td>").appendTo(".tabla_form > tbody");
 					$(
 						'<td><a target="_blank" href="' +

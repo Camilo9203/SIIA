@@ -1499,16 +1499,19 @@
 	</div>
 	<!-- Formulario Datos Plataforma 10 - FIN -->
 	<!-- Formulario Datos Plataforma 9 - INICIO -->
-	<div id="datos_en_linea" data-form="11" class="formulario_panel">
+	<div id="datos_en_linea" data-form="8" class="formulario_panel">
 		<h3>8. Datos modalidad en linea<i class="fa fa-globe" aria-hidden="true"></i></h3>
 		<p>Ingrese los datos de las herramientas a utilizar en esta modalidad dentro del curso.</p>
+		<?php echo form_open_multipart('', array('id' => 'formulario_modalidad_en_linea')); ?>
+		<!-- Nombre de la herramienta-->
 		<div class="form-group">
 			<label for="nombre_herramienta">Nombre de la herramienta:<span class="spanRojo">*</span></label>
-			<input type="text" class="form-control" name="nombre_herramienta" id="nombre_herramienta" placeholder="Ej: WhastApp, Zoom, Skype..." required>
+			<input type="text" class="form-control" name="nombre_herramienta" id="nombre_herramienta" placeholder="Ej: MSTeams, Meet, Zoom, Skype, WhastApp, entre otros..." required>
 		</div>
+		<!-- Descripción de la herramienta-->
 		<div class="form-group">
-			<label for="descripcion_herramienta">Descripción:<span class="spanRojo">*</span></label>
-			<input type="text" class="form-control" name="descripcion_herramienta" id="descripcion_herramienta" placeholder="Chat en línea" required>
+			<label for="descripcion_herramienta">Descripción de la utilización de la herramienta en línea:<span class="spanRojo">*</span></label>
+			<input type="text" class="form-control" name="descripcion_herramienta" id="descripcion_herramienta" placeholder="Registre la descripción de la herramienta" required>
 		</div>
 		<!-- Check Aceptar Modalidad En Linea -->
 		<div class="form-group">
@@ -1516,13 +1519,20 @@
 				<input type="checkbox" id="acepta_mod_en_linea" form="formulario_programas" name="acepta_mod_en_linea" value="Si Acepto" disabled required>
 				<label for="acepta_mod_en_linea">&nbsp;</label>
 				<a data-toggle="modal" data-target="#modalAceptarEnLinea" data-backdrop="static" data-keyboard="false">
-					<span class="spanRojo">*</span> Acepta las recomendaciones ?
+					<span class="spanRojo">*</span>¿Acepta modalidad en línea?
 				</a>
 			</label>
 		</div>
+		<!-- Archivo Instructivo-->
+		<div class="form-group">
+			<label class="underlined">
+				<label for="instructivoEnLinea">Instructivo: (PDF)<span class="spanRojo">*</span></label>
+				<input type="file" required accept="application/pdf" class="form-control" data-val="instructivoEnLinea" name="instructivoEnLinea" id="instructivoEnLinea">
+			</label>
+		</div>
 		<hr />
-		<!-- Modal Aceptar Modalidad En Linea -->
-		<div class="modal fade" id="modalAceptarEnLinea" tabindex="-1" role="dialog" aria-labelledby="modalCursoAvanzado">
+		<!-- Modal Aceptar Modalidad En Línea -->
+		<div class="modal fade" id="modalAceptarEnLinea" tabindex="-1" role="dialog" aria-labelledby="modalAceptarEnLinea">
 			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -1534,7 +1544,7 @@
 							<hr />
 							<!-- Tablas de cursos -->
 							<div class="col-md-12">
-								Texto Recomendaciones Modalidad En Linea
+								Texto Recomendaciones Modalidad En Línea
 							</div>
 						</div>
 					</div>
@@ -1545,37 +1555,42 @@
 				</div>
 			</div>
 		</div>
+		<!-- Botón para guardar datos -->
 		<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_modalidad_en_linea" id="guardar_formulario_modalidad_en_linea">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
 		<div class="clearfix"></div>
 		<hr />
+		</form>
+		<!-- Tabla herramientas -->
 		<div class="">
 			<label>Datos de herramientas:</label>
 			<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
 			<table id="" width="100%" border=0 class="table table-striped table-bordered">
 				<thead>
-				<tr>
-					<td>Herramienta</td>
-					<td>Descripción</td>
-					<td>Fecha de registro</td>
-					<td>Acción</td>
-				</tr>
+					<tr>
+						<td>Herramienta</td>
+						<td>Descripción</td>
+						<td>Fecha de registro</td>
+						<td>Fecha de registro</td>
+						<td>Acción</td>
+					</tr>
 				</thead>
 				<tbody id="tbody">
-				<?php
-				foreach ($data_modalidad_en_linea as $data) {
-					echo "<tr><td>" . $data->nombreHerramienta . "</td>";
-					echo "<td>" . $data->descripcionHerramienta . "</td>";
-					echo "<td>" . $data->fecha . "</td>";
-					echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosEnlinea' data-id=" . $data->id . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
-				}
-				?>
+					<?php
+						foreach ($data_modalidad_en_linea as $data) {
+							echo "<tr><td>" . $data->nombreHerramienta . "</td>";
+							echo "<td>" . $data->descripcionHerramienta . "</td>";
+							echo "<td>" . $data->fecha . "</td>";
+							echo "<td><button class='btn btn-primary btn-sm verDocDatosEnlinea' data-id=" . $data->id . ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
+							echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosEnlinea' data-id=" . $data->id . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+						}
+					?>
 				</tbody>
 			</table>
 		</div>
 	</div>
 	<!-- Formulario Datos Plataforma 9 - FIN -->
 	<!-- Fin de Formularios -->
-	<!-- Continuar para finalizar Acreditacion - INICIO -->
+	<!-- Continuar para finalizar Acreditación - INICIO -->
 	<div id="finalizar_proceso" data-form="0" class="col-md-9 formulario_panel">
 		<div id="verificacion_formularios"></div>
 		<div class="container">
@@ -1587,7 +1602,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- Continuar para finalizar Acreditacion - FIN -->
+	<!-- Continuar para finalizar Acreditación - FIN -->
 	<a id="hide-sidevar" class="btn btn-siia btn-sm hide-sidevar" role="button" title="Ocultar Menú" data-toggle="tooltip" data-placement="left"><i class="fa fa-window-close-o" aria-hidden="true"></i>
 		<v>Ocultar menú</v>
 	</a>
