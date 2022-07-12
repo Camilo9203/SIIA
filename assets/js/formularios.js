@@ -207,115 +207,176 @@ $(".registroEducativo").click(function () {
 		$("#reg_doc_cond").hide();
 	}
 });
+/** Formulario 2: Formularios documentación legal */
+// Guardar formulario certificado camara de comercio
+$("#guardar_formulario_camara_comercio").click(function () {
+	event.preventDefault();
+	// Capturar datos formulario
+	let data = {
+		tipo: 1
+	};
+	// Petición para guardar datos
+	$.ajax({
+		url: baseURL + "panel/guardar_formulario_documentacion_legal",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		beforeSend: function () {
+			notificacion("Espere...", "success");
+		},
+		success: function (response) {
+			notificacion(response.msg, "success");
+			setInterval(function () {
+				reload();
+			}, 2000);
+		},
+		error: function (ev) {
+			event.preventDefault();
+			console.log(ev);
+			notificacion("Ocurrió un error y no se guardaron los datos");
+		},
+	});
+
+});
 // Guardar certificado de existencia
 $("#guardar_formulario_certificado_existencia").click(function () {
 	//$(this).attr("disabled", true);
-	data = {
-		numeroExistencia: $("#numeroExistencia").val(),
-		fechaExpedicion: $('#fechaExpedicion').val(),
-		departamentoCertificado: $('#departamentos2').val(),
-		municipioCertificado: $('#municipios2').val(),
-	};
-	//if($("#formulario_certificado_existencia").valid()){
-	$data_name = $(".archivo_form_certificado_existencia").attr("data-name");
-	let file_data = $("#" + $data_name).prop("files")[0];
-	let form_data = new FormData();
-	form_data.append("file", file_data);
-	form_data.append("tipoArchivo", $("#" + $data_name).attr("data-val"));
-	form_data.append("append_name", $data_name);
-	$.ajax({
-		url: baseURL + "panel/guardarArchivoCertificadoExistencia",
-		dataType: "text",
-		cache: false,
-		contentType: false,
-		processData: false,
-		data: form_data,
-		type: "post",
-		dataType: "JSON",
-		beforeSubmit: function () {
-			$("#loading").show();
-		},
-		success: function (response) {
-			$.ajax({
-				url: baseURL + "panel/guardar_formulario_certificado_existencia",
-				type: "post",
-				dataType: "JSON",
-				data: data,
-				beforeSend: function () {
-					notificacion("Espere...", "success");
-				},
-				success: function (response) {
-					notificacion(response.msg, "success");
-					cargarArchivos();
-					setInterval(function () {
-						reload();
-					}, 2000);
-				},
-				error: function (ev) {
-					//Do nothing
-				},
-			});
-		},
-		error: function (ev) {
-			notificacion("Verifique los datos del formulario.", "success");
-		},
-	});
+	event.preventDefault();
+	validFroms (2.1);
+	if($("#formulario_certificado_existencia").valid()) {
+		let formData = new FormData();
+		formData.append("file", $("#archivoCertifcadoExistencia").prop("files")[0]);
+		formData.append("append_name", "CertificadoExistencia");
+		formData.append("entidadCertificadoExistencia", $("#entidadCertificadoExistencia").val());
+		formData.append("fechaExpedicion", $('#fechaExpedicion').val());
+		formData.append("departamentoCertificado", $('#departamentos2').val());
+		formData.append("municipioCertificado", $('#municipios2').val());
+		formData.append("tipo", 2);
+		console.log(formData);
+		// Petición para guardar datos
+		$.ajax({
+			url: baseURL + "panel/guardar_formulario_documentacion_legal",
+			cache: false,
+			contentType: false,
+			processData: false,
+			type: "post",
+			dataType: "JSON",
+			data: formData,
+			beforeSend: function () {
+				notificacion("Espere...", "success");
+			},
+			success: function (response) {
+				notificacion(response.msg, "success");
+				setInterval(function () {
+					reload();
+				}, 2000);
+			},
+			error: function (ev) {
+				event.preventDefault();
+				console.log(ev);
+				notificacion("Ocurrió un error y no se guardaron los datos");
+			},
+		});
+	}
 });
 // Guardar registro educativo
 $("#guardar_formulario_registro_educativo").click(function (){
 	//$(this).attr("disabled", true);
-
+	event.preventDefault();
+	validFroms (2.2);
+	if($("#formulario_registro_educativo").valid()) {
+		let formData = new FormData();
+		formData.append("tipoEducacion", $("#tipoEducacion").val());
+		formData.append("fechaResolucionProgramas", $('#fechaResolucionProgramas').val());
+		formData.append("numeroResolucionProgramas", $('#numeroResolucionProgramas').val());
+		formData.append("nombrePrograma", $('#nombreProgramaResolucion').val());
+		formData.append("objetoResolucionProgramas", $('#objetoResolucionProgramas').val());
+		formData.append("entidadResolucion", $('#entidadResolucion').val());
+		formData.append("file", $("#archivoRegistroEdu").prop("files")[0]);
+		formData.append("append_name", "registroEdu");
+		formData.append("tipo", 3);
+		// Petición para guardar datos
+		$.ajax({
+			url: baseURL + "panel/guardar_formulario_documentacion_legal",
+			cache: false,
+			contentType: false,
+			processData: false,
+			type: "post",
+			dataType: "JSON",
+			data: formData,
+			beforeSend: function () {
+				notificacion("Espere...", "success");
+			},
+			success: function (response) {
+				notificacion(response.msg, "success");
+				setInterval(function () {
+					reload();
+				}, 2000);
+			},
+			error: function (ev) {
+				event.preventDefault();
+				console.log(ev);
+				notificacion("Ocurrió un error y no se guardaron los datos");
+			},
+		});
+	}
+});
+// Ver Documento
+$(".verDocRegistro").click(function (){
 	data = {
-		tipoEducacion: $("#tipoEducacion").val(),
-		fechaResolucionProgramas: $("#fechaResolucionProgramas").val(),
-		numeroResolucionProgramas: $("#numeroResolucion").val(),
-		nombrePrograma: $("#nombrePrograma").val(),
-		objetoResolucionProgramas: $("#objetoResolucionProgramas").val(),
-		entidadResolucion: $("#municipios3").val()
-	};
-	//if($("#formulario_documentacion_legal").valid()){
-	$data_name = $(".archivos_form_registro").attr("data-name");
-	let file_data = $("#" + $data_name).prop("files")[0];
-	let form_data = new FormData();
-	form_data.append("file", file_data);
-	form_data.append("tipoArchivo", $("#" + $data_name).attr("data-val"));
-	form_data.append("append_name", $data_name);
+		id: $(this).attr("data-id"),
+		formulario: 2.2,
+	}
 	$.ajax({
-		url: baseURL + "panel/guardarArchivoRegistro",
-		dataType: "text",
-		cache: false,
-		contentType: false,
-		processData: false,
-		data: form_data,
+		url: baseURL + "panel/verDocumento",
 		type: "post",
 		dataType: "JSON",
-		beforeSubmit: function () {
-			$("#loading").show();
-		},
-		success: function (response) {
-			$.ajax({
-				url: baseURL + "panel/guardar_formulario_registro_educativo",
-				type: "post",
-				dataType: "JSON",
-				data: data,
-				beforeSend: function () {
-					notificacion("Espere...", "success");
-				},
-				success: function (response) {
-					notificacion(response.msg, "success");
-					cargarArchivos();
-
-				},
-				error: function (ev) {
-					//Do nothing
-				},
-			});
-		},
-		error: function (ev) {
-			notificacion("Verifique los datos del formulario.", "success");
-		},
+		data: data,
+		success: function (response){
+			window.open(response.file, '_blank');
+		}
 	});
 });
+/** Formulario 3: Antecedentes Académicos */
+// Guardar formulario antecedentes académicos
+$("#guardar_formulario_antecedentes_academicos").click(function () {
+	validFroms(3);
+	if($("#formulario_antecedentes_academicos").valid()){
+		let data = {
+			descripcionProceso: $("#descripcionProceso").val(),
+			justificacionAcademicos: $("#justificacionAcademicos").val(),
+			objetivosAcademicos: $("#objetivosAcademicos").val(),
+			metodologiaAcademicos: $("#metodologiaAcademicos").val(),
+			materialDidacticoAcademicos: $("#materialDidacticoAcademicos").val(),
+			bibliografiaAcademicos: $("#bibliografiaAcademicos").val(),
+			duracionCursoAcademicos: $("#duracionCursoAcademicos").val(),
+		};
+		$.ajax({
+			url: baseURL + "panel/guardar_formulario_antecedentes_academicos",
+			type: "post",
+			dataType: "JSON",
+			data: data,
+			beforeSend: function () {
+				$(this).attr("disabled", true);
+				notificacion("Espere...", "success");
+			},
+			success: function (response) {
+				notificacion(response.msg, "success");
+				clearInputs("formulario_antecedentes_academicos");
+				setInterval(function () {
+					reload();
+				}, 2000);
+			},
+			error: function (ev) {
+				//Do nothing
+			},
+		});
+	}
+	else {
+		notificacion('Validar campos');
+	}
+});
+
 /** Formulario 6: Programas de Educación */
 // Acciones de cada modal de aceptación
 $("#aceptar_curso_basico_es").click(function () {
@@ -357,7 +418,6 @@ function guardarDatosProgramas (curso,modal, check){
 	data = {
 		programa: curso,
 		organizacion:  $("#id_organizacion").val(),
-		aceptar: "Si Acepta"
 	};
 	$.ajax({
 		url: baseURL + "panel/guardar_formulario_datos_programas",
@@ -376,7 +436,8 @@ function guardarDatosProgramas (curso,modal, check){
 			}
 		},
 		error: function (ev) {
-			//Do nothing
+			console.log(ev);
+			notificacion("Error");
 		},
 	});
 }
@@ -406,6 +467,67 @@ $(".eliminarDatosProgramas").click(function () {
 		},
 	});
 });
+/** Formulario 7: Modalidad Virtual*/
+// Guardar datos de plataforma
+$("#guardar_formulario_plataforma").click(function () {
+	validFroms(7);
+	event.preventDefault();
+	if ($("#formulario_modalidad_virtual").valid()) {
+		let data = {
+			datos_plataforma_url: $("#datos_plataforma_url").val(),
+			datos_plataforma_usuario: $("#datos_plataforma_usuario").val(),
+			datos_plataforma_contrasena: $("#datos_plataforma_contrasena").val(),
+		};
+		$.ajax({
+			url: baseURL + "panel/guardar_formulario_aplicacion",
+			type: "post",
+			dataType: "JSON",
+			data: data,
+			beforeSend: function () {
+				$(this).attr("disabled", true);
+				notificacion("Espere...", "success");
+			},
+			success: function (response) {
+				notificacion(response.msg, "success");
+				setInterval(function () {
+					reload();
+				}, 2000);
+			},
+			error: function (ev) {
+				//Do nothing
+			},
+		});
+	}
+	else {
+		notificacion("No se validaron campos");
+		event.preventDefault();
+	}
+});
+// Eliminar datos de plataforma
+$(".eliminarDatosPlataforma").click(function () {
+	$id_plataforma = $(this).attr("data-id-datosPlataforma");
+	data = {
+		id_plataforma: $id_plataforma,
+	};
+	$.ajax({
+		url: baseURL + "panel/eliminarDatosPlataforma",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		beforeSend: function () {
+			notificacion("Espere...", "success");
+		},
+		success: function (response) {
+			notificacion(response.msg, "success");
+			setInterval(function () {
+				reload();
+			}, 2000);
+		},
+		error: function (ev) {
+			//Do nothing
+		},
+	});
+});
 /** Formulario 8: Modalidad En Línea */
 // Aceptar recomendaciones modalidad en linea
 $("#acepto_mod_en_linea").click(function () {
@@ -422,7 +544,6 @@ $("#guardar_formulario_modalidad_en_linea").click(function () {
 			event.preventDefault();
 			// Capturar datos formulario
 			let form_data = new FormData();
-			form_data.append("file", $("#instructivoEnLinea").prop("files")[0]);
 			form_data.append("tipoArchivo", $("#instructivoEnLinea").attr("data-val"));
 			form_data.append("append_name", $("#instructivoEnLinea").attr("data-val"));
 			form_data.append("nombreHerramienta",  $("#nombre_herramienta").val());
@@ -480,7 +601,7 @@ $(".verDocDatosEnlinea").click(function (){
 		}
 	});
 });
-// Eliminar datos plataforma
+// Eliminar datos en linea
 $(".eliminarDatosEnlinea").click(function () {
 	data = {
 		id: $(this).attr("data-id"),
@@ -507,7 +628,142 @@ $(".eliminarDatosEnlinea").click(function () {
 /** Validaciones formularios */
 function validFroms (form){
 	switch (form) {
-		case 8:
+		case 2.1:
+			$("form[id='formulario_certificado_existencia']").validate({
+				rules: {
+					entidadCertificadoExistencia: {
+						required: true,
+					},
+					fechaExpedicion: {
+						required: true,
+					},
+					departamentos2: {
+						required: true,
+					},
+					municipios2: {
+						required: true,
+					},
+					archivoCertifcadoExistencia: {
+						required: true
+					}
+				},
+				messages: {
+					entidadCertificadoExistencia: {
+						required: "Entidad requerida, por favor ingresarlo.",
+					},
+					fechaExpedicion: {
+						required: "Fecha requerida, por favor ingresarlo.",
+					},
+					departamentos2: {
+						required: "Departamento requerido, por favor ingresarlo.",
+					},
+					municipios2: {
+						required: "Municipio requerido, por favor ingresarlo.",
+					},
+					archivoCertifcadoExistencia: {
+						required: "Archivo requerido, por favor ingresarlo.",
+					},
+				},
+			})
+		case 2.2:
+			$("form[id='formulario_registro_educativo']").validate({
+				rules: {
+					tipoEducacion: {
+						required: true,
+					},
+					fechaResolucionProgramas: {
+						required: true,
+					},
+					numeroResolucionProgramas: {
+						required: true,
+					},
+					nombreProgramaResolucion: {
+						required: true,
+					},
+					objetoResolucionProgramas: {
+						required: true
+					},
+					entidadResolucion: {
+						required: true
+					},
+					archivoRegistroEdu: {
+						required: true
+					}
+				},
+				messages: {
+					tipoEducacion: {
+						required: "Tipo educación requerida, por favor ingresarla.",
+					},
+					fechaResolucionProgramas: {
+						required: "Fecha requerida, por favor ingresarla.",
+					},
+					numeroResolucionProgramas: {
+						required: "Numero de resolución requerida, por favor ingresarlo.",
+					},
+					nombreProgramaResolucion: {
+						required: "Nombre del programa requerido, por favor ingresarlo.",
+					},
+					objetoResolucionProgramas: {
+						required: "Objeto de la resolución requerida, por favor ingresarlo.",
+					},
+					entidadResolucion: {
+						required: "Entidad quien emite la resolución requerida, por favor ingresarla.",
+					},
+					archivoRegistroEdu: {
+						required: "Archivo requerido, por favor adjuntarlo.",
+					},
+				},
+			})
+		case 3:
+			$("form[id='formulario_antecedentes_academicos']").validate({
+				rules: {
+					descripcionProceso: {
+						required: true,
+					},
+					justificacionAcademicos: {
+						required: true,
+					},
+					objetivosAcademicos: {
+						required: true,
+					},
+					metodologiaAcademicos: {
+						required: true,
+					},
+					materialDidacticoAcademicos: {
+						required: true
+					},
+					bibliografiaAcademicos: {
+						required: true
+					},
+					duracionCursoAcademicos: {
+						required: true
+					}
+				},
+				messages: {
+					descripcionProceso: {
+						required: "Descripción del proceso requerida, por favor ingresarla.",
+					},
+					justificacionAcademicos: {
+						required: "Justificación requerida, por favor ingresarla.",
+					},
+					objetivosAcademicos: {
+						required: "Objetivos requeridos, por favor ingresarlos.",
+					},
+					metodologiaAcademicos: {
+						required: "Metodología requerida, por favor ingresarlo.",
+					},
+					materialDidacticoAcademicos: {
+						required: "Material didáctico requerido, por favor ingresarlo.",
+					},
+					bibliografiaAcademicos: {
+						required: "Bibliografía requerida, por favor ingresarla.",
+					},
+					duracionCursoAcademicos: {
+						required: "Duración del cursos requerida, por favor ingresarla.",
+					},
+				},
+			})
+		case 7:
 			$("form[id='formulario_modalidad_en_linea']").validate({
 				rules: {
 					nombre_herramienta: {
@@ -535,6 +791,37 @@ function validFroms (form){
 					instructivoEnLinea: {
 						required: "Adjunte por favor instructivo de la herramienta.",
 					},
+				},
+			})
+		case 8:
+			$("form[id='formulario_modalidad_virtual']").validate({
+				rules: {
+					datos_plataforma_url: {
+						required: true,
+						minlength: 10,
+					},
+					datos_plataforma_usuario: {
+						required: true,
+						minlength: 5,
+					},
+					datos_plataforma_contrasena: {
+						required: true,
+						minlength: 5,
+					}
+				},
+				messages: {
+					datos_plataforma_url: {
+						required: "Por favor, ingrese la url de la plataforma.",
+						minlength: "Mínimo 10 caracteres"
+					},
+					datos_plataforma_usuario: {
+						required: "Por favor, ingrese el usuario de la plataforma.",
+						minlength: "Mínimo 5 caracteres"
+					},
+					datos_plataforma_contrasena: {
+						required: "Por favor, ingrese la contraseña de la plataforma.",
+						minlength: "Mínimo 5 caracteres"
+					}
 				},
 			})
 		default:

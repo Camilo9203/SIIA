@@ -134,75 +134,57 @@
 			<div class="col-md-12">
 				<div class="form-group">
 					<p>Tip Organización: </p><label class="tipoLeer" id='tipoOrganizacion'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="informacionGeneral" data-title="Tipo de Organización" id="" rows="3"></textarea>
 				</div>
 				<div class="form-group">
 					<p>Departamento: </p><label class="tipoLeer" id='nomDepartamentoUbicacion'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="informacionGeneral" data-title="Departamento" id="" rows="3"></textarea>
 				</div>
 				<div class="form-group">
 					<p>Municipio: </p><label class="tipoLeer" id='nomMunicipioNacional'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="informacionGeneral" data-title="Municipio" id="" rows="3"></textarea>
 				</div>
 				<div class="form-group">
 					<p>Dirección: </p><label class="tipoLeer" id='direccionOrganizacion'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="informacionGeneral" data-title="Dirección" id="" rows="3"></textarea>
 				</div>
 				<div class="form-group">
-					<p>Telefono - Fax: </p><label class="tipoLeer" id='fax'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="informacionGeneral" data-title="Telefono" id="" rows="3"></textarea>
+					<p>Teléfono - Fax: </p><label class="tipoLeer" id='fax'></label>
 				</div>
 				<div class="form-group">
 					<p>Extensión: </p><label class="tipoLeer" id='extension'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="informacionGeneral" data-title="Extensión" id="" rows="3"></textarea>
 				</div>
 				<div class="form-group">
 					<p>URL de la Organización: </p><label class="tipoLeer" id='urlOrganizacion'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="informacionGeneral" data-title="URL" id="" rows="3"></textarea>
 				</div>
 				<div class="form-group">
 					<p>Actuación: </p><label class="tipoLeer" id='actuacionOrganizacion'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="informacionGeneral" data-title="Actuación" id="" rows="3"></textarea>
 				</div>
 				<div class="form-group">
 					<p>Tipo de educación: </p><label class="tipoLeer" id='tipoEducacion'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="informacionGeneral" data-title="Tipo de Educación" id="" rows="3"></textarea>
 				</div>
 				<div class="form-group">
 					<p>Cédula del representante Legal: </p><label class="tipoLeer" id='numCedulaCiudadaniaPersona'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="informacionGeneral" data-title="Cédula del representante legal" id="" rows="3"></textarea>
 				</div>
 				<div class="form-group">
 					<p>Presentación institucional: </p><label class="tipoLeer" id='presentacionInstitucional'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="informacionGeneral" data-title="Presentación" id="" rows="3"></textarea>
 				</div>
 				<div class="form-group">
 					<p>Objeto social: </p><label class="tipoLeer" id='objetoSocialEstatutos'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="informacionGeneral" data-title="Objeto social" id="" rows="3"></textarea>
 				</div>
 				<div class="form-group">
 					<p>Misión: </p><label class="tipoLeer" id='mision'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="informacionGeneral" data-title="Misión" id="" rows="3"></textarea>
 				</div>
 				<div class="form-group">
 					<p>Visión: </p><label class="tipoLeer" id='vision'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="informacionGeneral" data-title="Visión" id="" rows="3"></textarea>
 				</div>
 				<div class="form-group">
 					<p>Principios: </p><label class="tipoLeer" id='principios'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="informacionGeneral" data-title="Principios" id="" rows="3"></textarea>
 				</div>
 				<div class="form-group">
 					<p>Fines: </p><label class="tipoLeer" id='fines'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="informacionGeneral" data-title="Fines" id="" rows="3"></textarea>
 				</div>
 				<div class="form-group">
 					<p>Portafolio: </p><label class="tipoLeer" id='portafolio'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="informacionGeneral" data-title="Portafolio" id="" rows="3"></textarea>
 				</div>
 				<div class="form-group">
 					<p>Otros: </p><label class="tipoLeer" id='otros'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="informacionGeneral" data-title="Otros" id="" rows="3"></textarea>
 				</div>
 			</div>
 			<div class="clearfix"></div>
@@ -212,61 +194,38 @@
 			</div>
 			<div class="clearfix"></div>
 			<hr />
-			<div class="form-group">
-				<button class="btn btn-siia btn-sm guardarObservaciones pull-right" id="sigInf">Siguiente <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+			<!-- Formulario Observación form1 -->
+			<div class="col-12">
+				<?php echo form_open('', array('id' => 'formulario_observacion_form1')); ?>
+				<div class="form-group">
+					<label for="observacionesForm5">Observaciones Información General</label>
+					<textarea class="form-control obs_admin_" name="observacionesForm1" id="observacionesForm1" cols="30" rows="5" required></textarea>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-siia guardarObservacionesForm1">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+				</div>
+				</form>
 			</div>
 		</div>
 		<div class="col-md-12" id="documentacion">
 			<h3>2. Documentación Legal</h3>
-			<!-- 			<div class="col-md-6">
-				<div class="form-group">
-					<p>Certificado de existencia: </p><label class="tipoLeer" id='certificadoExistencia'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type='documentacionLegal' data-title="Certificacdo" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Numero de existencia certificado: </p><label class="tipoLeer" id='numeroExistencia'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type='documentacionLegal' data-title="Numero existencia" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Fecha de expedicion: </p><label class="tipoLeer" id='fechaExpedicion'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type='documentacionLegal' data-title="Fecha de expedicion" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Objeto social: </p><label class="tipoLeer" id='objetoSocial'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type='documentacionLegal' data-title="Objeto" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Departamento del certificado: </p><label class="tipoLeer" id='departamentoCertificado'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type='documentacionLegal' data-title="Departamento" id="" rows="3"></textarea>
-				</div>
-				<div class="form-group">
-					<p>Municipio del certificado: </p><label class="tipoLeer" id='municipioCertificado'></label>
-					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type='documentacionLegal' data-title="Municipio" id="" rows="3"></textarea>
-				</div>
-			</div> -->
 			<div class="form-group">
 				<p>Registro Educativo: </p><label class="tipoLeer" id='registroEducativo'></label>
-				<textarea class="form-control obs_admin_" placeholder="Observación..." data-type='documentacionLegal' data-title="Registro" id="" rows="3"></textarea>
 			</div>
 			<div class="form-group">
 				<p>Entindad que registro: </p><label class="tipoLeer" id='entidadRegistro'></label>
-				<textarea class="form-control obs_admin_" placeholder="Observación..." data-type='documentacionLegal' data-title="Entindad" id="" rows="3"></textarea>
 			</div>
 			<div class="form-group">
 				<p>Numero de la resolucion: </p><label class="tipoLeer" id='numeroResolucion'></label>
-				<textarea class="form-control obs_admin_" placeholder="Observación..." data-type='documentacionLegal' data-title="Numero resolucion" id="" rows="3"></textarea>
 			</div>
 			<div class="form-group">
 				<p>Fecha de la resolucion: </p><label class="tipoLeer" id='fechaResolucion'></label>
-				<textarea class="form-control obs_admin_" placeholder="Observación..." data-type='documentacionLegal' data-title="Fecha" id="" rows="3"></textarea>
 			</div>
 			<div class="form-group">
 				<p>Departamento de la resolucion: </p><label class="tipoLeer" id='departamentoResolucion'></label>
-				<textarea class="form-control obs_admin_" placeholder="Observación..." data-type='documentacionLegal' data-title="Departamento" id="" rows="3"></textarea>
 			</div>
 			<div class="form-group">
 				<p>Municipio de la resolucion: </p><label class="tipoLeer" id='municipioResolucion'></label>
-				<textarea class="form-control obs_admin_" placeholder="Observación..." data-type='documentacionLegal' data-title="Municipio" id="" rows="3"></textarea>
 			</div>
 			<div class="col-md-12 form-group" id="archivos_documentacionLegal">
 				<p>Archivos:</label>
@@ -274,25 +233,53 @@
 			<div id="ll"></div>
 			<div class="clearfix"></div>
 			<hr />
-			<div class="form-groups">
-				<button class="btn btn-siia btn-sm guardarObservaciones pull-left" id="atrDoc"><i class="fa fa-arrow-left" aria-hidden="true"></i> Atrás</button>
-				<button class="btn btn-siia btn-sm guardarObservaciones pull-right" id="sigDoc">Siguiente <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+			<!-- Formulario Observación form2 -->
+			<div class="col-12">
+				<?php echo form_open('', array('id' => 'formulario_observacion_form2')); ?>
+				<div class="form-group">
+					<label for="observacionesForm2">Observaciones Documentación Legal</label>
+					<textarea class="form-control obs_admin_" name="observacionesForm2" id="observacionesForm2" cols="30" rows="5" required></textarea>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-siia guardarObservacionesForm2" id="sigInf">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+				</div>
+				</form>
 			</div>
 		</div>
-<!--		<div class="col-md-12" id="registroEducativoProgramas">-->
-<!--			<h3>3. Registro Educativo de Programas</h3>-->
-<!--		</div>-->
 		<div class="col-md-12" id="antecedentesAcademicos">
-			<h3>4. Antecedentes Academico</h3>
+			<h3>3. Antecedentes Academico</h3>
+			<!-- Formulario Observación form3 -->
+			<div class="col-12">
+				<?php echo form_open('', array('id' => 'formulario_observacion_form3')); ?>
+				<div class="form-group">
+					<label for="observacionesForm3">Observaciones Antecedentes Academicos</label>
+					<textarea class="form-control obs_admin_" name="observacionesForm3" id="observacionesForm3" cols="30" rows="5" required></textarea>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-siia guardarObservacionesForm3" id="sigInf">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+				</div>
+				</form>
+			</div>
 		</div>
 		<div class="col-md-12" id="jornadasActualizacion">
 			<h3>4. Jornadas de Actualizacion</h3>
+			<div class="col-12">
+				<?php echo form_open('', array('id' => 'formulario_observacion_form4')); ?>
+				<div class="form-group">
+					<label for="observacionesForm4">Observaciones Jornadas de Actualización</label>
+					<textarea class="form-control obs_admin_" name="observacionesForm4" id="observacionesForm4" cols="30" rows="5" required></textarea>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-siia guardarObservacionesForm4" id="sigInf">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+				</div>
+				</form>
+			</div>
 		</div>
 		<div class="col-md-12" id="datosBasicosProgramas">
 			<h3>5. Datos Básicos de Programas</h3><br>
 			<div class="container">
 				<div class="row">
-					<div class="col">
+					<div class="col-12">
 						<div class="form-group" id="curso_basico_es" style="display: none;" >
 							<label class="underlined">
 								<input type="checkbox" id="programa" form="formulario_programas" name="curso_basico_es" value="* Acreditación Curso Básico de Economía Solidaria" disabled required checked>
@@ -343,80 +330,20 @@
 						</div>
 						<br>
 					</div>
+					<div class="col-12">
+						<?php echo form_open('', array('id' => 'formulario_observacion_form6')); ?>
+						<div class="form-group">
+							<label for="observacionesForm5">Observaciones Datos Básicos de Programas</label>
+							<textarea class="form-control obs_admin_" name="observacionesForm5" id="observacionesForm5" cols="30" rows="5" required></textarea>
+						</div>
+						<div class="form-group">
+							<button class="btn btn-siia guardarObservacionesForm5">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+						</div>
+						</form>
+					</div>
 				</div>
 			</div>
 			<hr />
-		</div>
-		<div class="col-md-12" id="programasAvalEconomia">
-<!--			<h3>7. Programas con Aval en Economia</h3>-->
-<!--			<div id="divAtrasProgAvalEcT">-->
-<!--				<div class="form-group">-->
-<!--					<p>7.1.Objetivos: </p><label class="tipoLeer" id='objetivosProgramasAvalEconomia'></label>-->
-<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Objetivos" id="" rows="3"></textarea>-->
-<!--				</div>-->
-<!--				<div class="form-group">-->
-<!--					<p>7.2 Metodología a Utilizar: </p><label class="tipoLeer" id='metodologiaProgramasAvalEconomia'></label>-->
-<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Metodología a Utilizar" id="" rows="3"></textarea>-->
-<!--				</div>-->
-<!--				<div class="form-group">-->
-<!--					<p>7.3 Material didáctico y ayudas Educativas incorporadas: </p><label class="tipoLeer" id='materialProgramasAvalEconomia'></label>-->
-<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Material didáctico y ayudas Educativas incorporadas" id="" rows="3"></textarea>-->
-<!--				</div>-->
-<!--				<div class="form-group">-->
-<!--					<p>7.4 Bibliografia: </p><label class="tipoLeer" id='bibliografiaProgramasAvalEconomia'></label>-->
-<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Bibliografia" id="" rows="3"></textarea>-->
-<!--				</div>-->
-<!--				<div class="form-group">-->
-<!--					<p>7.5 Duración del curso: </p><label class="tipoLeer" id='duracionProgramasAvalEconomia'></label>-->
-<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Duración del curso" id="" rows="3"></textarea>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--			<div id="divSiguienteProgAvalEcT">-->
-<!--				<h3>7.6 Contextualización general del sector solidario</h3>-->
-<!--				<div class="form-group">-->
-<!--					<p>Antecedentes y aspectos axiológicos del cooperativismo y del cooperativismo de trabajo asociado: </p><label class="tipoLeer" id='antecedentesProgramasAvalEconomia'></label>-->
-<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Antecedentes y aspectos axiológicos del cooperativismo y del cooperativismo de trabajo asociado" id="" rows="3"></textarea>-->
-<!--				</div>-->
-<!--				<div class="form-group">-->
-<!--					<p>Diferencias entre trabajo dependiente, independiente y asociado: </p><label class="tipoLeer" id='diferenciasProgramasAvalEconomia'></label>-->
-<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Diferencias entre trabajo dependiente, independiente y asociado" id="" rows="3"></textarea>-->
-<!--				</div>-->
-<!--				<div class="form-group">-->
-<!--					<p>Regulación jurídica del trabajo asociado: </p><label class="tipoLeer" id='regulacionProgramasAvalEconomia'></label>-->
-<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Regulación jurídica del trabajo asociado" id="" rows="3"></textarea>-->
-<!--				</div>-->
-<!--				<div class="form-group">-->
-<!--					<p>Desarrollo socioempresarial del trabajo asociado: </p><label class="tipoLeer" id='desarrolloProgramasAvalEconomia'></label>-->
-<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Desarrollo socioempresarial del trabajo asociado" id="" rows="3"></textarea>-->
-<!--				</div>-->
-<!--				<div class="form-group">-->
-<!--					<p>Legislación tributaria y su aplicación al trabajo asociado: </p><label class="tipoLeer" id='legislacionProgramasAvalEconomia'></label>-->
-<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Legislación tributaria y su aplicación al trabajo asociado" id="" rows="3"></textarea>-->
-<!--				</div>-->
-<!--				<div class="form-group">-->
-<!--					<p>Administración del trabajo asociado: </p><label class="tipoLeer" id='administracionProgramasAvalEconomia'></label>-->
-<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Administración del trabajo asociado" id="" rows="3"></textarea>-->
-<!--				</div>-->
-<!--				<div class="form-group">-->
-<!--					<p>Regímenes de trabajo y compensación: </p><label class="tipoLeer" id='regimenesProgramasAvalEconomia'></label>-->
-<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Regímenes de trabajo y compensación" id="" rows="3"></textarea>-->
-<!--				</div>-->
-<!--				<div class="form-group">-->
-<!--					<p>Manejo de Seguridad social integral: </p><label class="tipoLeer" id='manejoProgramasAvalEconomia'></label>-->
-<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Manejo de Seguridad social integral" id="" rows="3"></textarea>-->
-<!--				</div>-->
-<!--				<div class="form-group">-->
-<!--					<p>Inspección, vigilancia y control y prohibiciones: </p><label class="tipoLeer" id='inspeccionProgramasAvalEconomia'></label>-->
-<!--					<textarea class="form-control obs_admin_" placeholder="Observación..." data-type="programasAvalEconomia" data-title="Inspección, vigilancia y control y prohibiciones" id="" rows="3"></textarea>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--			<button id="atrasProgAvalEcT" class="btn btn-siia btn-sm guardarObservaciones pull-left"><i class="fa fa-chevron-left" aria-hidden="true"></i> Atrás Página</button>-->
-<!--			<button id="siguienteProgAvalEcT" class="btn btn-siia btn-sm guardarObservaciones pull-right" style="display: block;">Siguiente página <i class="fa fa-chevron-right" aria-hidden="true"></i></button>-->
-<!--			<div class="clearfix"></div>-->
-<!--			<hr />-->
-		</div>
-		<div class="col-md-12" id="programasAvalar">
-<!--			<h3>8. Programas a Avalar</h3>-->
 		</div>
 		<div class="col-md-12" id="docentes">
 			<h3>6. Docentes</h3>
@@ -431,9 +358,50 @@
 			<hr />
 		</div>
 		<div class="col-md-12" id="plataforma">
-			<h3>7. Plataforma</h3>
+			<h3>7. Datos modalidad virtual</h3>
+			<div class="col-12">
+				<?php echo form_open('', array('id' => 'formulario_observacion_form7')); ?>
+				<div class="form-group">
+					<label for="observacionesForm7">Observaciones modalidad virtual</label>
+					<textarea class="form-control obs_admin_" name="observacionesForm7" id="observacionesForm7" cols="30" rows="5" required></textarea>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-siia guardarObservacionesForm7">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+				</div>
+				</form>
+			</div>
 		</div>
-
+		<div class="col-md-12" id="enLinea">
+			<h3>8. Datos modalidad en línea</h3>
+			<!-- Tabla herramientas -->
+			<div class="">
+				<label>Datos de herramientas:</label>
+				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+				<table id="" width="100%" border=0 class="table table-striped table-bordered">
+					<thead>
+					<tr>
+						<td>Herramienta</td>
+						<td>Descripción</td>
+						<td>Fecha de registro</td>
+						<td>Documento</td>
+					</tr>
+					</thead>
+					<tbody id="tbody" class="datos_herramientas"></tbody>
+				</table>
+			</div>
+			<hr />
+			<div class="col-12">
+				<?php echo form_open('', array('id' => 'formulario_observacion_form8')); ?>
+				<div class="form-group">
+					<label for="observacionesForm8">Observaciones modalidad en Línea</label>
+					<textarea class="form-control obs_admin_" name="observacionesForm8" id="observacionesForm8" cols="30" rows="5" required></textarea>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-siia guardarObservacionesForm8">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+				</div>
+				</form>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -458,7 +426,7 @@
 <!--			<a class="toAncla" id="verProgsMenuAdmin">8. Programas <i class="fa fa-signal" aria-hidden="true"></i></a><br />-->
 			<a class="toAncla" id="verFaciliMenuAdmin">6. Facilitadores <i class="fa fa-users" aria-hidden="true"></i></a><br />
 			<a class="toAncla" id="verDatPlatMenuAdmin">7. Datos Plataforma Virtual <i class="fa fa-globe" aria-hidden="true"></i></a><br />
-			<a class="toAncla" id="verDatPlatMenuAdmin">8. Datos Plataforma En Linea <i class="fa fa-globe" aria-hidden="true"></i></a><br />
+			<a class="toAncla" id="verDataEnLinea" data-id="<?php echo $organizaciones->id_organizacion?>">8. Datos Plataforma En Linea <i class="fa fa-globe" aria-hidden="true"></i></a><br />
 			<hr />
 			<a class="btn btn-siia btn-sm btn-block" id="guardarObservacionesModal" role="button" title="Guardar observaciones" data-toggle="tooltip" data-placement="right">Guardar observaciones <i class="fa fa-save" aria-hidden="true"></i></a>
 			<hr />

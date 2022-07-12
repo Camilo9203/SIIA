@@ -239,18 +239,18 @@ class Panel extends CI_Controller
 	public function cargarDatos_formulario_documentacion_legal()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$documentacionLegal = $this->db->select('*')->from('documentacionLegal')->where('organizaciones_id_organizacion', $datos_organizacion->id_organizacion)->get()->row();
-		if ($documentacionLegal->tipo == 'Camara de comercio') {
-			return NULL;
+		$organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
+		$documentacion = $this->db->select('*')->from('documentacion')->where('organizaciones_id_organizacion', $organizacion->id_organizacion)->get()->row();
+		if ($documentacion->tipo == 1) {
+			return $documentacion;
 		}
-		else if ($documentacionLegal->tipo == 'Certificado Existencia') {
-			$certificados_existencias = $this->db->select('*')->from('certificaExistencia')->where('organizaciones_id_organizacion', $datos_organizacion->id_organizacion)->get()->result();
-			return $certificados_existencias;
+		else if ($documentacion->tipo == 2) {
+			$CertificadosExistencias = $this->db->select('*')->from('certificadoExistencia')->where('organizaciones_id_organizacion', $organizacion->id_organizacion)->get()->row();
+			return $CertificadosExistencias;
 		}
-		else if ($documentacionLegal->tipo == 'Registro Educativo') {
-			$registros_educativos =  $this->db->select('*')->from('registroEducativoProgramas')->where('organizaciones_id_organizacion', $datos_organizacion->id_organizacion)->get()->result();
-			return $certificados_existencias;
+		else if ($documentacion->tipo == 3) {
+			$registrosEducativos =  $this->db->select('*')->from('registroEducativoProgramas')->where('organizaciones_id_organizacion', $organizacion->id_organizacion)->get()->row();
+			return $registrosEducativos;
 		}
 	}
 
@@ -851,7 +851,7 @@ class Panel extends CI_Controller
 		}
 		/** Variables Formularios */
 		$informacionGeneral = $this->db->select("*")->from("informacionGeneral")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$documentacionLegal = $this->db->select("*")->from("documentacionLegal")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
+		$documentacionLegal = $this->db->select("*")->from("documentacion")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
 		$registroE = $documentacionLegal->registroEducativo;
 		$registroEducativoProgramas = $this->db->select("*")->from("registroEducativoProgramas")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
 		$antecedentesAcademicos = $this->db->select("*")->from("antecedentesAcademicos")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
@@ -950,9 +950,6 @@ class Panel extends CI_Controller
 		}
 		if ($documentacionLegal == NULL) {
 			array_push($formularios, "2. Falta el formulario de Documentacion Legal.");
-		}
-		if ($registroEducativoProgramas == NULL && $documentacionLegal != NULL && $registroE != "No Tiene") {
-			array_push($formularios, "3. Falta el formulario de Registro Educativo Programas.");
 		}
 		if ($antecedentesAcademicos == NULL) {
 			array_push($formularios, "3. Falta el formulario de Antecedentes Academicos.");
@@ -1230,86 +1227,145 @@ class Panel extends CI_Controller
 			}
 		}
 	}
-	// Formulario 2.2
-	public function guardar_formulario_certificado_existencia()
+	// Formulario 2
+	public function guardar_formulario_documentacion_legal()
 	{
-		/*$this->form_validation->set_rules('tipo_solicitud','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('motivo_solicitud','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('tipo_organizacion','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('departamento','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('municipio','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('direccion','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('fax','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('extension','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('urlOrganizacion','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('actuacion','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('educacion','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('numCedulaCiudadaniaPersona','','trim|required|min_length[3]|xss_clean');
-
-    	if($this->form_validation->run("formulario_informacion_general_entidad") == FALSE){
-    		echo json_encode(array('url'=>"panel", 'msg'=>"Verifique los datos ingresado, no son correctos."));
-    	}else{**/
-		if ($this->input->post()) {
-			$usuario_id = $this->session->userdata('usuario_id');
-			$datos_organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-			$solicitud = $this->db->select("*")->from("solicitudes")->where("organizaciones_id_organizacion", $datos_organizacion->id_organizacion)->get()->row();
-			$data_documentacion = array(
-				'tipo' => 'Certificado Existencia',
-				'organizaciones_id_organizacion' => $datos_organizacion->id_organizacion,
-				'solicitudes_id_solicitud' => $solicitud->id_solicitud
-			);
-			if ($this->db->insert('documentacion', $data_documentacion)){
-				$data = array(
-					'numero' =>  $this->input->post('numeroExistencia'),
-					'fechaExpedicion' => $this->input->post('fechaExpedicion'),
-					'departamento' => $this->input->post('departamentoCertificado'),
-					'municipio' => $this->input->post('municipioCertificado'),
-					'organizaciones_id_organizacion' => $datos_organizacion->id_organizacion,
+		$tipoForm = $this->input->post('tipo');
+		$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $this->session->userdata('usuario_id'))->get()->row();
+		$solicitud = $this->db->select("*")->from("solicitudes")->where("organizaciones_id_organizacion", $organizacion->id_organizacion)->get()->row();
+		// TODO: Validar si ya existen registros
+		switch ($tipoForm) {
+			case 1:
+				$data = array (
+					'tipo' => $this->input->post('tipo'),
+					'organizaciones_id_organizacion' => $organizacion->id_organizacion,
 					'solicitudes_id_solicitud' => $solicitud->id_solicitud
 				);
-				if($this->db->insert('certificadoExistencia', $data)) {
-					echo json_encode(array('url' => "panel", 'msg' => "Se guardo la Documentación Legal."));
-					$this->logs_sia->session_log('Formulario Documentacion Legal');
-					$this->logs_sia->logQueries();
+				if ($this->db->insert('documentacion', $data)){
+					echo json_encode(array('url' => "panel", 'msg' => "Datos de camara de comercio guardados"));
 				}
 				else {
 					echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no son correctos."));
 				}
-			}
-		}
-		else {
-			echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no son correctos."));
-		}
-		//}
-	}
-	// Formulario 2.3
-	public function guardar_formulario_registro_educativo()
-	{
-		if ($this->input->post()) {
-			$usuario_id = $this->session->userdata('usuario_id');
-			$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-			$datos_registroEducativoProgramas = $this->db->select("*")->from("registroEducativoProgramas")->where("organizaciones_id_organizacion", $datos_organizacion->id_organizacion)->get()->row();
-			$data_registroEducativoProgramas = array(
-				'tipoEducacion' => $this->input->post('tipoEducacion'),
-				'fechaResolucion' => $this->input->post('fechaResolucionProgramas'),
-				'numeroResolucion' =>$this->input->post('numeroResolucionProgramas'),
-				'nombrePrograma' => $this->input->post('nombrePrograma'),
-				'objetoResolucion' => $this->input->post('objetoResolucionProgramas'),
-				'entidadResolucion' =>$this->input->post('entidadResolucion'),
-				'organizaciones_id_organizacion' => $this->input->post('entidadResolucion')
-			);
-			if ($this->db->insert('registroEducativoProgramas', $data_registroEducativoProgramas)){
-				echo json_encode(array('url' => "panel", 'msg' => "Se guardo el registro educativo"));
-				$this->logs_sia->session_log('Formulario Registro Educativo Programas');
-				$this->logs_sia->logQueries();
-			}
-			else{
+				break;
+			case 2:
+				$dataDocumentacion = array (
+					'tipo' => $this->input->post('tipo'),
+					'organizaciones_id_organizacion' => $organizacion->id_organizacion,
+					'solicitudes_id_solicitud' => $solicitud->id_solicitud
+				);
+				if ($this->db->insert('documentacion', $dataDocumentacion)){
+					$dataCertificadoExistencia = array (
+						'entidad' => $this->input->post('entidadCertificadoExistencia'),
+						'fechaExpedicion' => $this->input->post('fechaExpedicion'),
+						'departamento' => $this->input->post('departamentoCertificado'),
+						'municipio' => $this->input->post('municipioCertificado'),
+						'organizaciones_id_organizacion' => $organizacion->id_organizacion,
+						'solicitudes_id_solicitud' => $solicitud->id_solicitud
+					);
+					if($this->db->insert('certificadoExistencia', $dataCertificadoExistencia)) {
+						$name_random = random(10);
+						$size = 100000000;
+						$registro = $this->db->select('*')->from('certificadoExistencia')->where('fechaExpedicion', $dataRegistro['fechaExpedicion'])->get()->row();
+						$nombreArchivo =  $this->input->post('append_name') . "_" . $name_random . "_" . $_FILES['file']['name'];
+						$extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
+						$ruta = 'uploads/certifcadoExistencia';
+						$mensaje = "Se guardo el " . $this->input->post('append_name');
+						$dataArchivo = array(
+							'tipo' => 'registroEdu',
+							'nombre' => $nombreArchivo ,
+							'id_formulario' => 2,
+							'id_registro' => $registro->id,
+							'organizaciones_id_organizacion' => $organizacion->id_organizacion,
+						);
 
-			}
-		} else {
+						if (0 < $_FILES['file']['error']) {
+							echo json_encode(array('url' => "", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
+						}
+						else if ($_FILES['file']['size'] > $size) {
+							echo json_encode(array('url' => "", 'msg' => "El tamaño supera las 10 Mb, intente con otro archivo PDF."));
+						}
+						else if ($extension != "pdf") {
+							echo json_encode(array('url' => "", 'msg' => "La extensión del archivo no es correcta, debe ser PDF. (archivo.pdf)"));
+						}
+						else if ($this->db->insert('archivos', $dataArchivo)) {
+							if (move_uploaded_file($_FILES['file']['tmp_name'], $ruta . '/' . $nombreArchivo)) {
+								echo json_encode(array('url' => "", 'msg' => $mensaje));
+								//$this->logs_sia->session_log('Actualizacion de Imagen / Logo');){
+							}
+							else {
+								echo json_encode(array('url' => "", 'msg' => "No se guardo el archivo(s)."));
+							}
+						}
+						$this->logs_sia->logs('URL_TYPE');
+						$this->logs_sia->logQueries();
+					}
+				}
+				else {
+					echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no son correctos."));
+				}
+				break;
+			case 3:
+				$dataDocumentacion = array (
+					'tipo' => $this->input->post('tipo'),
+					'organizaciones_id_organizacion' => $organizacion->id_organizacion,
+					'solicitudes_id_solicitud' => $solicitud->id_solicitud
+				);
+				if ($this->db->insert('documentacion', $dataDocumentacion)){
+					$dataRegistro = array(
+						'tipoEducacion' =>  $this->input->post('tipoEducacion'),
+						'fechaResolucion' => $this->input->post('fechaResolucionProgramas'),
+						'numeroResolucion' => $this->input->post('numeroResolucionProgramas'),
+						'nombrePrograma' => $this->input->post('nombrePrograma'),
+						'objetoResolucion' => $this->input->post('objetoResolucionProgramas'),
+						'entidadResolucion' => $this->input->post('entidadResolucion'),
+						'organizaciones_id_organizacion' => $organizacion->id_organizacion,
+						'solicitudes_id_solicitud' => $solicitud->id_solicitud
+					);
+					if($this->db->insert('registroEducativoProgramas', $dataRegistro)) {
+						$name_random = random(10);
+						$size = 100000000;
+						$registro = $this->db->select('*')->from('registroEducativoProgramas')->where('numeroResolucion', $dataRegistro['numeroResolucion'])->get()->row();
+						$nombreArchivo =  $this->input->post('append_name') . "_" . $name_random . "_" . $_FILES['file']['name'];
+						$extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
+						$ruta = 'uploads/registrosEducativos';
+						$mensaje = "Se guardo el " . $this->input->post('append_name');
+						$dataArchivo = array(
+							'tipo' => 'registroEdu',
+							'nombre' => $nombreArchivo ,
+							'id_formulario' => 2,
+							'id_registro' => $registro->id,
+							'organizaciones_id_organizacion' => $organizacion->id_organizacion,
+						);
 
+						if (0 < $_FILES['file']['error']) {
+							echo json_encode(array('url' => "", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
+						}
+						else if ($_FILES['file']['size'] > $size) {
+							echo json_encode(array('url' => "", 'msg' => "El tamaño supera las 10 Mb, intente con otro archivo PDF."));
+						}
+						else if ($extension != "pdf") {
+							echo json_encode(array('url' => "", 'msg' => "La extensión del archivo no es correcta, debe ser PDF. (archivo.pdf)"));
+						}
+						else if ($this->db->insert('archivos', $dataArchivo)) {
+							if (move_uploaded_file($_FILES['file']['tmp_name'], $ruta . '/' . $nombreArchivo)) {
+								echo json_encode(array('url' => "", 'msg' => $mensaje));
+								//$this->logs_sia->session_log('Actualizacion de Imagen / Logo');){
+							}
+							else {
+								echo json_encode(array('url' => "", 'msg' => "No se guardo el archivo(s)."));
+							}
+						}
+						$this->logs_sia->logs('URL_TYPE');
+						$this->logs_sia->logQueries();
+					}
+				}
+				else {
+					echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no son correctos."));
+				}
+				break;
+			default:
 		}
-		//}
 	}
 	// Formulario 4
 	public function guardar_formulario_antecedentes_academicos()
@@ -1420,7 +1476,7 @@ class Panel extends CI_Controller
 			$organizacion = $this->db->select('*')->from('organizaciones')->where('id_organizacion', $this->input->post('organizacion'))->get()->row();
 			$data = array(
 				'nombrePrograma' => $this->input->post('programa'),
-				'aceptarPrograma' => $this->input->post('aceptar') ,
+				'aceptarPrograma' => "Si Acepta",
 				'fecha' => date("Y/m/d H:i:s"),
 				'organizaciones_id_organizacion' => $this->input->post('organizacion'),
 				'solicitudes_id_solicitud' => $solicitud->id_solicitud,
@@ -1438,30 +1494,19 @@ class Panel extends CI_Controller
 				if ($this->db->insert('datosProgramas', $data)){
 					$this->logs_sia->session_log('Formulario Programas Básicos');
 					$this->logs_sia->logQueries();
-					$this->enviomail_aceptar_programas(CORREO_SIA, $organizacion, $data);
+					$this->enviomail_aceptar_programas($organizacion, $data);
 					//echo json_encode(array('url' => "panel", 'msg' => "Se guardo Programas Básicos."));
 				}
 			}
-//			if ($data_Programas != NULL) {
-//				$this->db->where('organizaciones_id_organizacion', $this->input->post('organizacion'));
-//				$this->db->update('datosProgramas', $data);
-//				echo json_encode(array('url' => "panel", 'msg' => "Se actualizo programas básicos."));
-//				$this->logs_sia->session_log('Formulario Actualización programas básicos');
-//				$this->logs_sia->logQueries();
-//			} else {
-//				$this->db->insert('datosProgramas', $data);
-//				echo json_encode(array('url' => "panel", 'msg' => "Se guardo Programas Básicos."));
-//				$this->logs_sia->session_log('Formulario Programas Básicos');
-//				$this->logs_sia->logQueries();
-//			}
 		} else {
-			echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no son correctos."));
+			echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no se están envíando las variables tipo post necesarios."));
 		}
 	}
-	function enviomail_aceptar_programas ($from, $organizacion, $data){
-		$this->email->from($from, "Acreditaciones");
+	// Envío de email al momento de aceptar un programa
+	function enviomail_aceptar_programas ($organizacion, $data){
+		$this->email->from(CORREO_SIA, "Acreditaciones");
 		$this->email->to($organizacion->direccionCorreoElectronicoOrganizacion);
-		$this->email->cc($from);
+		$this->email->cc(CORREO_SIA);
 		$this->email->subject('SIIA - Aceptación de programa.');
 		$data_email = array (
 			'organizacion' => $organizacion,
@@ -1473,9 +1518,9 @@ class Panel extends CI_Controller
 			//Capturar datos para guardar en base de datos registro del correo enviado.
 			$correo_registro = array(
 				'fecha' => date('Y/m/d H:i:s'),
-				'de' => $from,
+				'de' => CORREO_SIA,
 				'para' => $organizacion->direccionCorreoElectronicoOrganizacion,
-				'cc' => $from,
+				'cc' => CORREO_SIA,
 				'asunto' => "Aceptación Cursos",
 				'cuerpo' => json_encode($data),
 				'estado' => "1",
@@ -1684,7 +1729,6 @@ class Panel extends CI_Controller
 		$this->db->insert('datosAplicacion', $data_aplicacion);
 		echo json_encode(array('url' => "panel", 'msg' => "Se guardo la información de la plataforma."));
 	}
-
 	// Formulario 8
 	public function guardar_formulario_modalidad_en_linea()
 	{
@@ -1702,47 +1746,9 @@ class Panel extends CI_Controller
 		);
 		// Guardar datos.
 		if($this->db->insert('datosEnLinea', $data_aplicacion)) {
-			$name_random = random(10);
-			$size = 100000000;
-			$registro = $this->db->select('*')->from('datosEnLinea')->where('nombreHerramienta', $data_aplicacion['nombreHerramienta'])->get()->row();
-			$nombreArchivo =  $this->input->post('append_name') . "_" . $name_random . "_" . $_FILES['file']['name'];
-			$ext_archivo = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
-			if ($this->input->post('tipoArchivo') == "instructivoEnLinea") {
-				$ruta = 'uploads/instructivoEnLinea';
-				$mensaje = "Se guardo el " . $this->input->post('append_name');
-			}
-			$data_archivo = array(
-				'tipo' => $this->input->post('tipoArchivo'),
-				'nombre' => $nombreArchivo ,
-				'id_formulario' => 8,
-				'id_registro' => $registro->id,
-				'organizaciones_id_organizacion' => $datos_organizacion->id_organizacion,
-			);
-
-			if (0 < $_FILES['file']['error']) {
-				echo json_encode(array('url' => "", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
-			}
-			else if ($_FILES['file']['size'] > $size) {
-				echo json_encode(array('url' => "", 'msg' => "El tamaño supera las 10 Mb, intente con otro archivo PDF."));
-			}
-			else if ($ext_archivo != "pdf") {
-				echo json_encode(array('url' => "", 'msg' => "La extensión del archivo no es correcta, debe ser PDF. (archivo.pdf)"));
-			}
-			else if ($this->db->insert('archivos', $data_archivo)) {
-				if (move_uploaded_file($_FILES['file']['tmp_name'], $ruta . '/' . $nombreArchivo)) {
-					echo json_encode(array('url' => "", 'msg' => $mensaje));
-					//$this->logs_sia->session_log('Actualizacion de Imagen / Logo');){
-				}
-				else {
-					echo json_encode(array('url' => "", 'msg' => "No se guardo el archivo(s)."));
-				}
-			}
-			$this->logs_sia->logs('URL_TYPE');
-			$this->logs_sia->logQueries();
-
+			echo json_encode(array('url' => "", 'msg' => "Se guardo correctamente la información"));
 		}
 	}
-
 	// Informe de actividades
 	public function guardar_cursoInformeActividades()
 	{
@@ -3334,6 +3340,12 @@ class Panel extends CI_Controller
 		switch($this->input->post('formulario')){
 			case 8:
 				$file = base_url()."uploads/instructivoEnLinea" . "/" . $archivo->nombre;
+				echo json_encode(array('file' => $file));
+			case 2.1:
+				$file = base_url()."uploads/certifcadoExistencia" . "/" . $archivo->nombre;
+				echo json_encode(array('file' => $file));
+			case 2.2:
+				$file = base_url()."uploads/registrosEducativos" . "/" . $archivo->nombre;
 				echo json_encode(array('file' => $file));
 			default:
 		}

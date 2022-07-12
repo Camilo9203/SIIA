@@ -2337,7 +2337,6 @@ class Admin extends CI_Controller
 	public function cargar_todaInformacion()
 	{
 		$id_organizacion = $this->input->post('id_organizacion');
-
 		$informacionGeneral = $this->db->select("*")->from("informacionGeneral")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		$documentacionLegal = $this->db->select("*")->from("documentacionLegal")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		$registroEducativoProgramas = $this->db->select("*")->from("registroEducativoProgramas")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
@@ -2348,15 +2347,37 @@ class Admin extends CI_Controller
 		$programasAvalar = $this->db->select("*")->from("programasAvalar")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		$docentes = $this->db->select("*")->from("docentes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		$plataforma = $this->db->select("*")->from("datosAplicacion")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
-
+		$enLinea = $this->db->select("*")->from("datosEnLinea")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		$tipoSolicitud = $this->db->select("*")->from("tipoSolicitud")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		$solicitudes = $this->db->select("*")->from("solicitudes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		$estadoOrganizaciones = $this->db->select("*")->from("estadoOrganizaciones")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		$organizaciones = $this->db->select("*")->from("organizaciones")->where("id_organizacion", $id_organizacion)->get()->result();
 		$resoluciones = $this->db->select("*")->from("resoluciones")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		$archivos = $this->db->select("*")->from("archivos")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
+		echo json_encode(array("informacionGeneral" => $informacionGeneral, "documentacionLegal" => $documentacionLegal, "registroEducativoProgramas" => $registroEducativoProgramas, "antecedentesAcademicos" => $antecedentesAcademicos, "jornadasActualizacion" => $jornadasActualizacion, "datosProgramas" => $datosProgramas, "programasAvalEconomia" => $programasAvalEconomia, "programasAvalar" => $programasAvalar, "docentes" => $docentes, "plataforma" => $plataforma, "enLinea" => $enLinea, "tipoSolicitud" => $tipoSolicitud, "solicitudes" => $solicitudes, "estadoOrganizaciones" => $estadoOrganizaciones, "organizaciones" => $organizaciones, "archivos" => $archivos, "resoluciones" => $resoluciones));
+	}
+	// Guardar una sola observacion
+	public function guardarObservacion()
+	{
+		$organizacion = $this->db->select('*')->from('organizaciones')->where('id_organizacion', $this->input->post('id'))->get()->row();
+		$solicitud = $this->db->select('*')->from('solicitudes')->where('organizaciones_id_organizacion', $organizacion->id_organizacion)->get()->row();
+		$tipoSolicitud = $this->db->select('*')->from('tipoSolicitud')->where('organizaciones_id_organizacion', $organizacion->id_organizacion)->get()->row();
 
-		echo json_encode(array("informacionGeneral" => $informacionGeneral, "documentacionLegal" => $documentacionLegal, "registroEducativoProgramas" => $registroEducativoProgramas, "antecedentesAcademicos" => $antecedentesAcademicos, "jornadasActualizacion" => $jornadasActualizacion, "datosProgramas" => $datosProgramas, "programasAvalEconomia" => $programasAvalEconomia, "programasAvalar" => $programasAvalar, "docentes" => $docentes, "plataforma" => $plataforma, "tipoSolicitud" => $tipoSolicitud, "solicitudes" => $solicitudes, "estadoOrganizaciones" => $estadoOrganizaciones, "organizaciones" => $organizaciones, "archivos" => $archivos, "resoluciones" => $resoluciones));
+		$data_observacion = array(
+			'idForm' => $this->input->post('id_formulario'),
+			'keyForm' => $this->input->post('formulario'),
+			'valueForm' => $this->input->post('valueForm'),
+			'observacion' => $this->input->post('observacion'),
+			'fechaObservacion' => date('Y/m/d H:i:s'),
+			'numeroRevision' => $solicitud->numeroRevisiones,
+			'idSolicitud' => $tipoSolicitud->idSolicitud,
+			'organizaciones_id_organizacion' => $this->input->post('id')
+		);
+
+
+		if ($this->db->insert('observaciones', $data_observacion)) {
+			echo json_encode(array('url' => "", 'msg' => "Se guardaron las observaciones."));
+		}
 	}
 
 	public function guardar_observacion()
@@ -3170,5 +3191,15 @@ class Admin extends CI_Controller
 	{
 		$informacionModal = $this->db->select("valor")->from("opciones")->where("nombre", "informacionModal")->get()->row()->valor;
 		return $informacionModal;
+	}
+	// TODO: Ver Documentos
+	public function verDocumento (){
+		$archivo = $this->db->select('*')->from('archivos')->where('id_registro', $this->input->post('id'))->get()->row();
+		switch($this->input->post('formulario')){
+			case 8:
+				$file = base_url()."uploads/instructivoEnLinea" . "/" . $archivo->nombre;
+				echo json_encode(array('file' => $file));
+			default:
+		}
 	}
 }

@@ -543,7 +543,6 @@
 			<button class="btn btn-siia btn-sm pull-right guardar" name="guardar_formulario_informacion_general_entidad" id="guardar_formulario_informacion_general_entidad">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
 		</div>
 	</div>
-	<!-- Formulario de informacion general de la entidad 1 - FIN -->
 	<!-- Formulario de documentacion legal 2 - INICIO -->
 	<div id="documentacion_legal" data-form="2" class=" formulario_panel">
 		<h3>2. Documentación Legal <i class="fa fa-book" aria-hidden="true"></i></h3>
@@ -555,53 +554,50 @@
 			<label>2.1. Certificado de Camara de Comercio.</label>
 			<div class="checkbox">
 				<label for="camaraComercio">La entidad cuenta con Certificado de Camara de Comercio:</label>
-				<?php foreach ($data_documentacion_legal as $documentacion) : ?>
-
-					<?php if ($documentacion->entidadRegistro == "Camara de Comercio") : ?>
-						<label><input type="radio" class="camaraComercio" name="camaraComercio" id="camaraComercio" value="Si" checked> Si</label>
-						<label><input type="radio" class="camaraComercio" name="camaraComercio" id="camaraComercio" value="No"> No</label>
-					<?php elseif ($documentacion->entidadRegistro != "Camara de Comercio") : ?>
-						<label><input type="radio" class="camaraComercio" name="camaraComercio" id="camaraComercio" value="Si" disabled> Si</label>
-						<label><input type="radio" class="camaraComercio" name="camaraComercio" id="camaraComercio" value="No" checked disabled> No</label>
-					<?php endif ?>
-				<?php endforeach ?>
-				<?php if ($data_documentacion_legal == NULL) : ?>
+				<?php if ($data_documentacion_legal): ?>
+					<label><input type="radio" class="camaraComercio" name="camaraComercio" id="camaraComercio" value="Si" disabled> Si</label>
+					<label><input type="radio" class="camaraComercio" name="camaraComercio" id="camaraComercio" value="No" disabled> No</label>
+				<?php else: ?>
 					<label><input type="radio" class="camaraComercio" name="camaraComercio" id="camaraComercio" value="Si"> Si</label>
 					<label><input type="radio" class="camaraComercio" name="camaraComercio" id="camaraComercio" value="No" checked> No</label>
-				<?php endif ?>
+				<?php endif; ?>
 			</div>
 			<div id="div_camara_comercio" hidden>
+				<?php echo form_open('', array('id' => 'formulario_certificado_existencia')); ?>
 				<p>En caso que el Certificado de Existencia y Representación Legal sea emitido por Cámara de Comercio, la Unidad Administrativa realizará la verificación de este requisito por medio de consulta directa a la base de datos del Registro Único Empresarial Y Social RUES. Por tal motivo no es necesario anexar el certificado. Es responsabilidad de la entidad mantener renovado el registro mercantil en el certificado. Los Campos marcados con (*) son obligatorios.</p>
+				<button name="guardar_formulario_camara_comercio" id="guardar_formulario_camara_comercio" class="btn btn-siia btn-sm pull-right">
+					Guardar datos <i class="fa fa-check" aria-hidden="true"></i>
+				</button>
+				</form>
 			</div>
 		</div>
-		<!-- Certificado de existencia y representación legal -->
 		<hr />
+		<!-- Certificado de existencia y representación legal -->
 		<div class="col-md-12">
 			<label>2.2. Certificado de Existencia y Representación Legal.</label>
 			<div class="checkbox">
 				<label for="certificadoExistencia">La entidad presenta Certificado de Existencia y Representación Legal:</label>
 				<!-- Opciones radio -->
-				<?php foreach ($data_documentacion_legal as $documentacion) : ?>
-					<?php if ($documentacion->registroEducativo == "certificadoExistencia") : ?>
-						<label><input type="radio" class="certificadoExistencia" name="certificadoExistencia" id="certificadoExistencia" value="Si" checked> Si</label>
-						<label><input type="radio" class="certificadoExistencia" name="certificadoExistencia" id="" value="No"> No</label>
-					<?php elseif ($documentacion->registroEducativo != "certificadoExistencia") : ?>
-						<label><input type="radio" class="certificadoExistencia" name="certificadoExistencia" id="certificadoExistencia" value="Si" disabled> Si</label>
-						<label><input type="radio" class="certificadoExistencia" name="certificadoExistencia" id="" value="No" checked disabled> No</label>
-					<?php endif ?>
-				<?php endforeach ?>
-				<?php if ($data_documentacion_legal == NULL) : ?>
+				<?php if($data_documentacion_legal): ?>
+					<label><input type="radio" class="certificadoExistencia" name="certificadoExistencia" id="certificadoExistencia" value="Si" disabled> Si</label>
+					<label><input type="radio" class="certificadoExistencia" name="certificadoExistencia" id="certificadoExistencia" value="No" disabled> No</label>
+				<?php else: ?>
 					<label><input type="radio" class="certificadoExistencia" name="certificadoExistencia" id="certificadoExistencia" value="Si"> Si</label>
-					<label><input type="radio" class="certificadoExistencia" name="certificadoExistencia" id="" value="No" checked> No</label>
+					<label><input type="radio" class="certificadoExistencia" name="certificadoExistencia" id="certificadoExistencia" value="No" checked> No</label>
 				<?php endif ?>
 			</div>
 			<!-- Formulario: Certificado de Existencia y Representación Legal -->
 			<div id="div_certificado_existencia">
-				<?php echo form_open('', array('id' => 'formulario_certificado_existencia')); ?>
-				<!-- Numero de documento de Existencia-->
+				<?php echo form_open_multipart('', array('id' => 'formulario_certificado_existencia')); ?>
+				<!-- Entidad -->
 				<div class="form-group">
-					<label for="numeroExistencia">Número del Documento de Existencia y Representación Legal:<span class="spanRojo">*</span></label>
-					<input type="number" class="form-control" name="numeroExistencia" id="numeroExistencia" placeholder="Número del Documento de Existencia y Representación Legal" required>
+					<label for="entidadCertificadoExistencia">Entidad que expide certificado existencia:<span class="spanRojo">*</span></label>
+					<br>
+					<select name="entidadCertificadoExistencia" id="entidadCertificadoExistencia" class="selectpicker form-control show-tick">
+						<option id="1" value="Ministerio De Educación">Ministerio De Educación</option>
+						<option id="2" value="Secretaria De Educación Departamental">Secretaria De Educación Departamental</option>
+						<option id="3" value="Secretaria De Educación Municipal">Secretaria De Educación Municipal</option>
+					</select>
 				</div>
 				<!-- Fecha de expedición-->
 				<div class="form-group">
@@ -610,9 +606,9 @@
 				</div>
 				<!-- Departamento-->
 				<div class="form-group">
-					<label for="departamentos">Departamento:<span class="spanRojo">*</span></label>
+					<label for="departamentoCertificado">Departamento:<span class="spanRojo">*</span></label>
 					<br>
-					<select name="departamentos" data-id-dep="2" id="departamentos2" class="selectpicker form-control show-tick departamentos" required="">
+					<select name="departamentos2" data-id-dep="2" id="departamentos2" class="selectpicker form-control show-tick departamentos" required="">
 						<?php foreach ($departamentos as $departamento):?>
 							<option id="<?php echo $departamento->id_departamento; ?>" value="<?php echo $departamento->nombre; ?>"><?php echo $departamento->nombre; ?></option>
 						<?php endforeach;?>
@@ -635,10 +631,11 @@
 					</br><label>Certificado de existencia (PDF):<span class="spanRojo"> *</span></label>
 					</br>
 					<div class="col-md-4">
-						<input type="file" required accept="application/pdf" class="form-control archivo_form_certificado_existencia" data-name="certifcadoExistencia"  data-val="certifcadoExistencia" name="certifcadoExistencia" id="certifcadoExistencia" required>
+						<input type="file" required accept="application/pdf" class="form-control" name="archivoCertifcadoExistencia" id="archivoCertifcadoExistencia" required>
 					</div>
 					</br></br>
 				</div>
+				<!-- Botón guardar -->
 				<button name="guardar_formulario_certificado_existencia" id="guardar_formulario_certificado_existencia" class="btn btn-siia btn-sm pull-right">
 					Guardar datos <i class="fa fa-check" aria-hidden="true"></i>
 				</button>
@@ -653,18 +650,12 @@
 			<!-- Opciones radio -->
 			<div class="checkbox">
 				<label for="registroEducativo">La entidad presenta registro educativo:</label>
-				<?php foreach ($data_documentacion_legal as $documentacion) : ?>
-					<?php if ($documentacion->registroEducativo == "Si Tiene") : ?>
-						<label><input type="radio" class="registroEducativo" name="registroEducativo" id="registroEducativo" value="Si" checked>Si</label>
-						<label><input type="radio" class="registroEducativo" name="registroEducativo" id="" value="No">No</label>
-					<?php elseif ($documentacion->registroEducativo != "Si Tiene") : ?>
-						<label><input type="radio" class="registroEducativo" name="registroEducativo" id="registroEducativo" value="Si" disabled>Si</label>
-						<label><input type="radio" class="registroEducativo" name="registroEducativo" id="registroEducativo" value="No" checked disabled>No</label>
-					<?php endif ?>
-				<?php endforeach ?>
-				<?php if ($data_documentacion_legal == NULL) : ?>
-					<label><input type="radio" class="registroEducativo" name="registroEducativo" id="registroEducativo" value="Si"> Si</label>
-					<label><input type="radio" class="registroEducativo" name="registroEducativo" id="registroEducativo" value="No" checked> No</label>
+				<?php if ($data_documentacion_legal): ?>
+					<label><input type="radio" class="registroEducativo" name="registroEducativo" id="registroEducativo" value="Si" disabled>Si</label>
+					<label><input type="radio" class="registroEducativo" name="registroEducativo" id="" value="No" disabled>No</label>
+				<?php else: ?>
+					<label><input type="radio" class="registroEducativo" name="registroEducativo" id="registroEducativo" value="Si">Si</label>
+					<label><input type="radio" class="registroEducativo" name="registroEducativo" id="" value="No" checked>No</label>
 				<?php endif ?>
 			</div>
 			<!-- Formulario: Registro educativo -->
@@ -689,7 +680,7 @@
 				</div>
 				<div class="form-group">
 					<label for="nombrePrograma">Nombre del Programa:<span class="spanRojo">*</span></label>
-					<input type="text" name="" class="form-control" name="nombrePrograma" id="nombrePrograma" placeholder="Nombre del Programa...">
+					<input type="text" name="nombreProgramaResolucion" class="form-control"  id="nombreProgramaResolucion" placeholder="Nombre del Programa...">
 				</div>
 				<div class="form-group">
 					<label for="objetoResolucionProgramas">Objeto resolución:<span class="spanRojo">*</span></label>
@@ -709,222 +700,159 @@
 					</br><label>Registro Educativo (PDF):<span class="spanRojo"> *</span></label>
 					</br>
 					<div class="col-md-4">
-						<input type="file" required accept="application/pdf" class="form-control archivos_form_registro" data-val="registroEdu" data-name="registroEdu" name="registroEdu" id="registroEdu">
+						<input type="file" required accept="application/pdf" class="form-control"name="archivoRegistroEdu" id="archivoRegistroEdu">
 					</div>
 					</br></br>
 				</div>
-				<button name="guardar_formulario_documentacion_legal" id="guardar_formulario_registro_educativo" class="btn btn-siia btn-sm pull-right ">
+				<button name="guardar_formulario_registro_educativo" id="guardar_formulario_registro_educativo" class="btn btn-siia btn-sm pull-right ">
 					Guardar datos <i class="fa fa-check" aria-hidden="true"></i>
 				</button>
 				</form>
 				<hr />
+				<!-- Tabla herramientas -->
+				<?php if($data_documentacion_legal): ?>
+					<div class="">
+						<label>Datos de herramientas:</label>
+						<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+						<table id="" width="100%" border=0 class="table table-striped table-bordered">
+							<thead>
+							<tr>
+								<td>Herramienta</td>
+								<td>Descripción</td>
+								<td>Fecha de registro</td>
+								<td>Fecha de registro</td>
+								<td>Acción</td>
+							</tr>
+							</thead>
+							<tbody id="tbody">
+							<?php
+							foreach ($data_modalidad_en_linea as $data) {
+								echo "<tr><td>" . $data->nombreHerramienta . "</td>";
+								echo "<td>" . $data->descripcionHerramienta . "</td>";
+								echo "<td>" . $data->fecha . "</td>";
+								echo "<td><button class='btn btn-primary btn-sm verDocDatosEnlinea' data-id=" . $data->id . ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
+								echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosEnlinea' data-id=" . $data->id . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+							}
+							?>
+							</tbody>
+						</table>
+					</div>
+				<?php endif	?>
 			</div>
 		</div>
 		</form>
 		<div class="clearfix"></div>
-		<!-- Tabla de documentación -->
-		<?php if (count($data_documentacion_legal) > 0) : ?>
-			<div class="">
-				<div class="clearfix"></div>
-				<!-- Tabla de documentacion -->
+		<br><br>
+
+		<!-- Tabla Documentación Legal -->
+		<?php if($data_documentacion_legal): ?>
+			<?php if($data_documentacion_legal->entidad): ?>
 				<div class="">
-					<hr />
-					<label>Documentación:</label>
+				<label>Datos Certificado existencia:</label>
+				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+				<table id="" width="100%" border=0 class="table table-striped table-bordered">
+					<thead>
+					<tr>
+						<td>Entidad</td>
+						<td>Fecha Expedición</td>
+						<td>Departamento</td>
+						<td>Municipio</td>
+						<td>Documento</td>
+						<td>Acción</td>
+					</tr>
+					</thead>
+					<tbody id="tbody">
+					<?php
+						echo "<tr><td>" . $data_documentacion_legal->entidad . "</td>";
+						echo "<td>" . $data_documentacion_legal->fechaExpedicion . "</td>";
+						echo "<td>" . $data_documentacion_legal->departamento . "</td>";
+						echo "<td>" . $data_documentacion_legal->municipio . "</td>";
+						echo "<td><button class='btn btn-primary btn-sm verDocDatosEnlinea' data-id=" . $data_documentacion_legal->id . ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
+						echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosEnlinea' data-id=" . $data_documentacion_legal->id . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+					?>
+					</tbody>
+				</table>
+			</div>
+			<?php endif; ?>
+			<?php if($data_documentacion_legal->numeroResolucion): ?>
+				<div class="">
+					<label>Datos Certificado existencia:</label>
 					<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
 					<table id="" width="100%" border=0 class="table table-striped table-bordered">
 						<thead>
-							<tr>
-								<td>Certificado existencia</td>
-								<td>Número existencia</td>
-								<td>Fecha expedición</td>
-								<td>Departamento certificado</td>
-								<td>Municipio certificado</td>
-								<td>Objeto aocial</td>
-								<td>Registro Educativo</td>
-								<td>Entidad registro</td>
-								<td>Número resolución</td>
-								<td>Fecha resolución</td>
-								<td>Departamento resolución</td>
-								<td>Municipio resolución</td>
-								<td>Acción</td>
-							</tr>
+						<tr>
+							<td>Tipo Educación</td>
+							<td>Fecha Resolución</td>
+							<td>Numero Resolución</td>
+							<td>Nombre Programa</td>
+							<td>Objeto</td>
+							<td>Entidad</td>
+							<td>Documento</td>
+							<td>Acción</td>
+						</tr>
 						</thead>
 						<tbody id="tbody">
 							<?php
-							foreach ($data_documentacion_legal as $documentacion) {
-								echo "<tr><td>" . $documentacion->certificadoExistencia . "</td>";
-								echo "<td>" . $documentacion->numeroExistencia . "</td>";
-								echo "<td>" . $documentacion->fechaExpedicion . "</td>";
-								echo "<td>" . $documentacion->departamentoCertificado . "</td>";
-								echo "<td>" . $documentacion->municipioCertificado . "</td>";
-								echo "<td>" . $documentacion->objetoSocial . "</td>";
-								echo "<td>" . $documentacion->registroEducativo . "</td>";
-								echo "<td>" . $documentacion->entidadRegistro . "</td>";
-								echo "<td>" . $documentacion->numeroResolucion . "</td>";
-								echo "<td>" . $documentacion->fechaResolucion . "</td>";
-								echo "<td>" . $documentacion->departamentoResolucion . "</td>";
-								echo "<td>" . $documentacion->municipioResolucion . "</td>";
-								echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDocumentacionLegal' data-id-documentacion=" . $documentacion->id_documentacionLegal . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
-							}
+								echo "<tr><td>" . $data_documentacion_legal->tipoEducacion . "</td>";
+								echo "<td>" . $data_documentacion_legal->fechaResolucion . "</td>";
+								echo "<td>" . $data_documentacion_legal->numeroResolucion . "</td>";
+								echo "<td>" . $data_documentacion_legal->nombrePrograma . "</td>";
+								echo "<td>" . $data_documentacion_legal->objetoResolucion . "</td>";
+								echo "<td>" . $data_documentacion_legal->entidadResolucion . "</td>";
+								echo "<td><button class='btn btn-primary btn-sm verDocRegistro' data-id=" . $data_documentacion_legal->id . ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
+								echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosEnlinea' data-id=" . $data_documentacion_legal->id . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
 							?>
 						</tbody>
 					</table>
 				</div>
-				<!-- Tabla de archivos -->
-				<?php foreach ($data_documentacion_legal as $documentacion) : ?>
-					<?php if ($documentacion->entidadRegistro != "Camara de Comercio") : ?>
-						<hr />
-						<div class="form-group">
-							<?php echo form_open_multipart('', array('id' => 'formulario_registro_educativo')); ?>
-							<label>Registro Educativo (PDF):<span class="spanRojo"> *</span></label>
-							<br />
-							<div class="col-md-4">
-								<input type="file" required accept="application/pdf" class="form-control" data-val="registroEdu" name="registroEdu" id="registroEdu">
-							</div>
-							<div class="col-md-3">
-								<input type="button" class="btn btn-siia btn-sm archivos_form_registro fa-fa center-block" data-name="registroEdu" name="registro" id="registro" value="Guardar archivo(s) &#xf0c7">
-							</div>
-							</form></br></br>
-						</div>
-						<div class="">
-							<label>Archivos:</label>
-							<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>
-							<table id="tabla_archivos_formulario" width="100%" border=0 class="table table-striped table-bordered tabla_form">
-								<thead>
-									<tr>
-										<td class="col-md-4">Nombre</td>
-										<td class="col-md-4">Tipo</td>
-										<td class="col-md-4">Acción</td>
-									</tr>
-								</thead>
-								<tbody id="tbody">
-								</tbody>
-							</table>
-						</div>
-					<?php endif ?>
-				<?php endforeach ?>
-			</div>
-		<?php endif ?>
+			<?php endif; ?>
+		<?php endif	?>
+
 	</div>
 	<!-- Formulario de documentacion legal 2 - FIN -->
-	<!-- Formulario de registro de programas 3 - INICIO -->
-	<div id="registros_educativos_de_programas" data-form="2" class="formulario_panel">
-		<div class="">
-			<?php echo form_open('', array('id' => 'formulario_registro_educativo_de_programas')); ?>
-			<h3>3. Registros educativos de Programas <i class="fa fa-newspaper-o" aria-hidden="true"></i></h3>
-			<p>Ingrese sólo la información de los programas que cuentan con registro educativo. Para adicionar un nuevo registro presione sobre adicionar y para terminar presione en Continuar, los Campos marcados con (*) son obligatorios</p>
-			<hr />
-			<div class="form-group">
-				<label for="tipoEducacion">Tipo de educación:<span class="spanRojo">*</span></label>
-				<br>
-				<select name="tipoEducacion" id="tipoEducacion" class="selectpicker form-control show-tick">
-					<option id="1" value="Educacion para el trabajo y el desarrollo humano">Educacion para el trabajo y el desarrollo humano</option>
-					<option id="2" value="Formal">Formal</option>
-					<option id="3" value="Informal">Informal</option>
-				</select>
-			</div>
-			<div class="form-group">
-				<label for="fechaResolucionProgramas">Fecha de resolución:<span class="spanRojo">*</span></label>
-				<input class="form-control" type="date" name="fechaResolucionProgramas" id="fechaResolucionProgramas">
-			</div>
-			<div class="form-group">
-				<label for="numeroResolucionProgramas">Número de Resolución:<span class="spanRojo">*</span></label>
-				<input class="form-control" type="text" name="numeroResolucionProgramas" id="numeroResolucionProgramas" placeholder="Número de Resolución...">
-			</div>
-			<div class="form-group">
-				<label for="nombrePrograma">Nombre del Programa:<span class="spanRojo">*</span></label>
-				<input type="text" name="" class="form-control" name="nombrePrograma" id="nombrePrograma" placeholder="Nombre del Programa...">
-			</div>
-			<div class="form-group">
-				<label for="objetoResolucionProgramas">Objeto resolución:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="objetoResolucionProgramas" id="objetoResolucionProgramas" placeholder="Objeto resolución..."></textarea>
-			</div>
-			<div class="form-group">
-				<label for="entidadResolucion">Entidad que expide la resolución:<span class="spanRojo">*</span></label>
-				<br>
-				<select name="entidadResolucion" id="entidadResolucion" class="selectpicker form-control show-tick">
-					<option id="1" value="Ministerio De Educación">Ministerio De Educación</option>
-					<option id="2" value="Secretaria De Educación Departamental">Secretaria De Educación Departamental</option>
-					<option id="3" value="Secretaria De Educación Municipal">Secretaria De Educación Municipal</option>
-				</select>
-			</div>
-			</form>
-			<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_registro_educativo" id="guardar_formulario_registro_educativo">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
-			<div class="clearfix"></div>
-			<hr />
-			<label>Registro de programas:</label>
-			<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-			<table id="" width="100%" border=0 class="table table-striped table-bordered">
-				<thead>
-					<tr>
-						<td>Tipo</td>
-						<td>Fecha</td>
-						<td>Número</td>
-						<td>Nombre</td>
-						<td>Objeto</td>
-						<td>Entidad</td>
-						<td>Acción</td>
-					</tr>
-				</thead>
-				<tbody id="tbody">
-					<?php
-					foreach ($data_registro_educativo as $registro) {
-						echo "<tr><td>" . $registro->tipoEducacion . "</td>";
-						echo "<td>" . $registro->fechaResolucion . "</td>";
-						echo "<td>" . $registro->numeroResolucion . "</td>";
-						echo "<td>" . $registro->nombrePrograma . "</td>";
-						echo "<td>" . $registro->objetoResolucion . "</td>";
-						echo "<td>" . $registro->entidadResolucion . "</td>";
-						echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarRegistroPrograma' data-id-registro=" . $registro->id_registroEducativoPro . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
-					}
-					?>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<!-- Formulario de registro de programas 3 - FIN -->
-	<!-- Formulario de antecedentes academicos 4 - INICIO -->
-	<div id="antecedentes_academicos" data-form="4" class=" formulario_panel">
+	<!-- Formulario de antecedentes academicos 3 - INICIO -->
+	<div id="antecedentes_academicos" data-form="3" class=" formulario_panel">
 		<div class="">
 			<?php echo form_open('', array('id' => 'formulario_antecedentes_academicos')); ?>
-			<h3>3. Antecedentes Académicos <i class="fa fa-id-card" aria-hidden="true"></i></h3>
-			<p>Se debe hacer un análisis de los niveles de formación, las necesidades y los avances de los procesos adelantados en materia pedagógica. También se deben determinar las áreas en donde se requiera afianzar y profundizar conocimientos. Los Campos marcados con (*) son obligatorios</p>
-			<div class="form-group">
-				<label for="descripcionProceso">Describa de manera cualitativa los procesos de formación que ha realizado:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="descripcionProceso" id="descripcionProceso" placeholder="Descripción cualitativa de los procesos de formación que ha realizado..."></textarea>
-			</div>
-			<div class="form-group">
-				<label for="justificacionAcademicos">Justificación:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="justificacionAcademicos" id="justificacionAcademicos" placeholder="Justificación..."></textarea>
-			</div>
-			<div class="form-group">
-				<label for="objetivosAcademicos">Objetivos:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="objetivosAcademicos" id="objetivosAcademicos" placeholder="Objetivos..."></textarea>
-			</div>
-			<div class="form-group">
-				<label for="metodologiaAcademicos">Metodología:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="metodologiaAcademicos" id="metodologiaAcademicos" placeholder="Metodología..."></textarea>
-			</div>
-			<div class="form-group">
-				<label for="materialDidacticoAcademicos">Describa el material didáctico y las ayudas educativas utilizadas:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="materialDidacticoAcademicos" id="materialDidacticoAcademicos" placeholder="Material didáctico y ayudas Educativas incorporadas..."></textarea>
-			</div>
-			<div class="form-group">
-				<label for="bibliografiaAcademicos">Bibliografia:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="bibliografiaAcademicos" id="bibliografiaAcademicos" placeholder="Bibliografia..."></textarea>
-			</div>
-			<div class="form-group">
-				<label for="duracionCursoAcademicos">Duración del curso:<span class="spanRojo">*</span> (Horas)</label>
-				<input type="number" class="form-control" name="duracionCursoAcademicos" id="duracionCursoAcademicos" placeholder="">
-			</div>
+				<h3>3. Antecedentes Académicos <i class="fa fa-id-card" aria-hidden="true"></i></h3>
+				<p>Se debe hacer un análisis de los niveles de formación, las necesidades y los avances de los procesos adelantados en materia pedagógica. También se deben determinar las áreas en donde se requiera afianzar y profundizar conocimientos. Los Campos marcados con (*) son obligatorios</p>
+				<div class="form-group">
+					<label for="descripcionProceso">Describa de manera cualitativa los procesos de formación que ha realizado:<span class="spanRojo">*</span></label>
+					<textarea class="form-control" name="descripcionProceso" id="descripcionProceso" placeholder="Descripción cualitativa de los procesos de formación que ha realizado..."></textarea>
+				</div>
+				<div class="form-group">
+					<label for="justificacionAcademicos">Justificación:<span class="spanRojo">*</span></label>
+					<textarea class="form-control" name="justificacionAcademicos" id="justificacionAcademicos" placeholder="Justificación..."></textarea>
+				</div>
+				<div class="form-group">
+					<label for="objetivosAcademicos">Objetivos:<span class="spanRojo">*</span></label>
+					<textarea class="form-control" name="objetivosAcademicos" id="objetivosAcademicos" placeholder="Objetivos..."></textarea>
+				</div>
+				<div class="form-group">
+					<label for="metodologiaAcademicos">Metodología:<span class="spanRojo">*</span></label>
+					<textarea class="form-control" name="metodologiaAcademicos" id="metodologiaAcademicos" placeholder="Metodología..."></textarea>
+				</div>
+				<div class="form-group">
+					<label for="materialDidacticoAcademicos">Describa el material didáctico y las ayudas educativas utilizadas:<span class="spanRojo">*</span></label>
+					<textarea class="form-control" name="materialDidacticoAcademicos" id="materialDidacticoAcademicos" placeholder="Material didáctico y ayudas Educativas incorporadas..."></textarea>
+				</div>
+				<div class="form-group">
+					<label for="bibliografiaAcademicos">Bibliografia:<span class="spanRojo">*</span></label>
+					<textarea class="form-control" name="bibliografiaAcademicos" id="bibliografiaAcademicos" placeholder="Bibliografia..."></textarea>
+				</div>
+				<div class="form-group">
+					<label for="duracionCursoAcademicos">Duración del curso:<span class="spanRojo">*</span> (Horas)</label>
+					<input type="number" class="form-control" name="duracionCursoAcademicos" id="duracionCursoAcademicos" placeholder="">
+				</div>
+				<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_antecedentes_academicos" id="guardar_formulario_antecedentes_academicos">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
 			</form>
-			<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_antecedentes_academicos" id="guardar_formulario_antecedentes_academicos">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
 			<div class="clearfix"></div>
-			<hr />
-			<label>Antecedentes:</label>
-			<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-			<table id="" width="100%" border=0 class="table table-striped table-bordered ">
-				<thead>
+			<?php if($data_antecedentes_academicos): ?>
+				<hr />
+				<label>Antecedentes:</label>
+				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+				<table id="" width="100%" border=0 class="table table-striped table-bordered ">
+					<thead>
 					<tr>
 						<td>Descripcion proceso</td>
 						<td>Justificación</td>
@@ -935,8 +863,8 @@
 						<td>Duración curso</td>
 						<td>Acción</td>
 					</tr>
-				</thead>
-				<tbody id="tbody">
+					</thead>
+					<tbody id="tbody">
 					<?php
 					foreach ($data_antecedentes_academicos as $antecedentes) {
 						echo "<tr><td>" . $antecedentes->descripcionProceso . "</td>";
@@ -949,13 +877,13 @@
 						echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarAntecedentes' data-id-antecedentes=" . $antecedentes->id_antecedentesAcademicos . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
 					}
 					?>
-				</tbody>
-			</table>
+					</tbody>
+				</table>
+			<?php endif; ?>
 		</div>
 	</div>
-	<!-- Formulario de antecedentes academicos 4 - FIN -->
-	<!-- Formulario de jornadas de actualización 5 - INICIO -->
-	<div id="jornadas_de_actualizacion" data-form="5" class=" formulario_panel">
+	<!-- Formulario de jornadas de actualización 4 - INICIO -->
+	<div id="jornadas_de_actualizacion" data-form="4" class=" formulario_panel">
 		<div class="">
 			<?php echo form_open('', array('id' => 'formulario_jornadas_actualizacion')); ?>
 			<h3>4. Jornadas de actualización <i class="fa fa-handshake-o" aria-hidden="true"></i></h3>
@@ -1040,7 +968,6 @@
 			<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_jornadas_actualizacion" id="guardar_formulario_jornadas_actualizacion">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
 		</div>
 	</div>
-	<!-- Formulario de jornadas de actualizacion 5 - FIN -->
 	<!-- Formulario de programas de educación en economía solidaria 5 - INICIO -->
 	<div id="programa_basico_de_economia_solidaria" data-form="5" class=" formulario_panel">
 		<?php // echo form_open('', array('id' => 'formulario_programa_basico')); ?>
@@ -1107,7 +1034,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- Tabla herramientas -->
+		<!-- Tabla programas aceptados -->
 		<?php if($data_programas): ?>
 			<div class="">
 				<label>Datos programas aceptados</label>
@@ -1135,264 +1062,8 @@
 			</div>
 		<?php endif	?>
 	</div>
-	<!-- Formulario de programa basico de economia solidaria 6 - FIN -->
-	<!-- Formulario de aval de economia 7 - Inicio -->
-	<div id="programas_aval_de_economia_solidaria_con_enfasis_en_trabajo_asociado" data-form="7" class=" formulario_panel">
-		<?php echo form_open('', array('id' => 'formulario_programas_aval')); ?>
-		<h3>7. Programas Aval de economía solidaria con énfasis en trabajo asociado <i class="fa fa-sitemap" aria-hidden="true"></i></h3>
-		<p>Los campos marcados con (<span class="spanRojo">*</span>) son <strong>obligatorios</strong>.</p>
-		<p>Recuerde presionar el botón <strong>guardar datos</strong> siempre que actualice o agregue información, se encontrara en la última página del formulario actual.</p>
-		<div id="divAtrasProgAvalEcT">
-			<div class="form-group">
-				<label for="programas_aval_objetivos">7.1.Objetivos:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programas_aval_objetivos" id="programas_aval_objetivos" placeholder="Objetivos..."><?php echo $data_aval_economia->objetivos; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programas_aval_metodologia">7.2 Metodología a Utilizar:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programas_aval_metodologia" id="programas_aval_metodologia" placeholder="Metodología a Utilizar..."><?php echo $data_aval_economia->metodologia; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programas_aval_material">7.3 Material didáctico y ayudas Educativas incorporadas:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programas_aval_material" id="programas_aval_material" placeholder="Material didáctico y ayudas Educativas incorporadas..."><?php echo $data_aval_economia->materialDidactico; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programas_aval_bibliografia">7.4 Bibliografia:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programas_aval_bibliografia" id="programas_aval_bibliografia" placeholder="Bibliografia..."><?php echo $data_aval_economia->bibliografia; ?></textarea>
-			</div>
-			<!--<a>Ir al centro de documentacion de Organizaciones Solidarias.</a>-->
-			<div class="form-group">
-				<label for="programas_aval_duracion">7.5 Duración del curso:<span class="spanRojo">*</span></label>
-				<input type="number" class="form-control" name="programas_aval_duracion" id="programas_aval_duracion" value="<?php echo $data_aval_economia->duracionCurso; ?>" placeholder="23">
-			</div>
-		</div>
-		<div id="divSiguienteProgAvalEcT">
-			<h3>7.6 Contextualización general del sector solidario</h3>
-			<div class="form-group">
-				<label for="programas_avalar_antecedentesAspectos">Antecedentes y aspectos axiológicos del cooperativismo y del cooperativismo de trabajo asociado:<span class="spanRojo">*</span></label>
-				<textarea name="programas_avalar_antecedentesAspectos" id="programas_avalar_antecedentesAspectos" class="form-control" placeholder="Antecedentes y aspectos axiológicos del cooperativismo y del cooperativismo de trabajo asociado..."><?php echo $data_aval_economia->antecedentesAspectos; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programas_avalar_diferencias">Diferencias entre trabajo dependiente, independiente y asociado:<span class="spanRojo">*</span></label>
-				<textarea name="programas_avalar_diferencias" id="programas_avalar_diferencias" class="form-control" placeholder="Diferencias entre trabajo dependiente, independiente y asociado..."><?php echo $data_aval_economia->diferencias; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programas_avalar_regulacionJuridica">Regulación jurídica del trabajo asociado:<span class="spanRojo">*</span></label>
-				<textarea name="programas_avalar_regulacionJuridica" id="programas_avalar_regulacionJuridica" class="form-control" placeholder="Regulación jurídica del trabajo asociado..."><?php echo $data_aval_economia->regulacionJuridica; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programas_avalar_desarrolloSocioempresarial">Desarrollo socioempresarial del trabajo asociado:<span class="spanRojo">*</span></label>
-				<textarea name="programas_avalar_desarrolloSocioempresarial" id="programas_avalar_desarrolloSocioempresarial" class="form-control" placeholder="Desarrollo socioempresarial del trabajo asociado..."><?php echo $data_aval_economia->desarrolloSocioempresarial; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programas_avalar_legislacionTributaria">Legislación tributaria y su aplicación al trabajo asociado:<span class="spanRojo">*</span></label>
-				<textarea name="programas_avalar_legislacionTributaria" id="programas_avalar_legislacionTributaria" class="form-control" placeholder="Legislación tributaria y su aplicación al trabajo asociado..."><?php echo $data_aval_economia->legislacionTributaria; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programas_avalar_administracionTrabajo">Administración del trabajo asociado:<span class="spanRojo">*</span></label>
-				<textarea name="programas_avalar_administracionTrabajo" id="programas_avalar_administracionTrabajo" class="form-control" placeholder="Administración del trabajo asociado..."><?php echo $data_aval_economia->administracionTrabajo; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programas_avalar_regimenesTrabajo">Regímenes de trabajo y compensación:<span class="spanRojo">*</span></label>
-				<textarea name="programas_avalar_regimenesTrabajo" id="programas_avalar_regimenesTrabajo" class="form-control" placeholder="Regímenes de trabajo y compensación..."><?php echo $data_aval_economia->regimenesTrabajo; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programas_avalar_manejoSeguridad">Manejo de Seguridad social integral:<span class="spanRojo">*</span></label>
-				<textarea name="programas_avalar_manejoSeguridad" id="programas_avalar_manejoSeguridad" class="form-control" placeholder="Manejo de Seguridad social integral..."><?php echo $data_aval_economia->manejoSeguridad; ?></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programas_avalar_inspeccionVigilancia">Inspección, vigilancia y control y prohibiciones:<span class="spanRojo">*</span></label>
-				<textarea name="programas_avalar_inspeccionVigilancia" id="programas_avalar_inspeccionVigilancia" class="form-control" placeholder="Inspección, vigilancia y control y prohibiciones..."><?php echo $data_aval_economia->inspeccionVigilancia; ?></textarea>
-			</div>
-		</div>
-		</form>
-		<button id="atrasProgAvalEcT" class="btn btn-warning btn-sm pull-left"><i class="fa fa-chevron-left" aria-hidden="true"></i> Página atrás</button>
-		<button id="siguienteProgAvalEcT" class="btn btn-warning btn-sm pull-right">Siguiente página <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
-		<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_programas_aval" id="guardar_formulario_programas_aval">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
-		<div class="clearfix"></div>
-		<hr />
-		<div class="form-group">
-			<?php echo form_open_multipart('', array('id' => 'formulario_material_programas_basicos')); ?>
-			<label>Archivos de Material Didactico (PDF):</label>
-			<br />
-			<div class="col-md-4">
-				<input type="file" required accept="application/pdf" class="form-control" data-val="materialDidacticoAvalEconomia" name="materialDidacticoAvalEconomia" id="materialDidacticoAvalEconomia">
-			</div>
-			<div class="col-md-3">
-				<input type="button" class="btn btn-siia btn-sm archivos_form_aval_economia fa-fa center-block" data-name="materialDidacticoAvalEconomia" name="materialDicAvalEco" id="materialDicAvalEco" value="Guardar archivo(s) &#xf0c7">
-			</div>
-			</form>
-		</div>
-		<!--<div class="clearfix"></div>
-        <hr/>
-		<label>Datos:</label>-->
-		<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-		<!--<table id="" width="100%" border=0 class="table table-striped table-bordered">
-			<thead>
-				<tr>
-					<td>Objetivos</td>
-					<td>Metodología</td>
-					<td>Material didactico</td>
-					<td>Bibliografía</td>
-					<td>Duración curso</td>
-					<td>Acción</td>
-				</tr>
-			</thead>
-			<tbody id="tbody">
-			<?php
-			foreach ($data_aval_economia as $programasAvalEconomia) {
-				echo "<tr><td>" . $programasAvalEconomia->objetivos . "</td>";
-				echo "<td>" . $programasAvalEconomia->metodologia . "</td>";
-				echo "<td>" . $programasAvalEconomia->materialDidactico . "</td>";
-				echo "<td>" . $programasAvalEconomia->bibliografia . "</td>";
-				echo "<td>" . $programasAvalEconomia->duracionCurso . "</td>";
-				echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarProgramasAval' data-id-programasAval=" . $programasAvalEconomia->id_programasAvalEconomia . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
-			}
-			?>
-			</tbody>
-		</table>-->
-		<div class="clearfix"></div>
-		<hr />
-		<label>Archivos:</label>
-		<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>
-		<table id="tabla_archivos_formulario" width="100%" border=0 class="table table-striped table-bordered tabla_form">
-			<thead>
-				<tr>
-					<td class="col-md-4">Nombre</td>
-					<td class="col-md-4">Tipo</td>
-					<td class="col-md-4">Acción</td>
-				</tr>
-			</thead>
-			<tbody id="tbody">
-			</tbody>
-		</table>
-	</div>
-	<!-- Formulario de aval de economia 7 - FIN -->
-	<!-- Formulario de programas 8 - INICIO -->
-	<div id="programas" data-form="8" class=" formulario_panel">
-		<?php echo form_open_multipart('', array('id' => 'formulario_programas_avalar')); ?>
-		<h3>8. Programas <i class="fa fa-signal" aria-hidden="true"></i></h3>
-		<p>Ingrese solo la información de los programas que desea avalar. Recuerde incluir los archivos del material didáctico y evaluación. Para adicionar un nuevo registro presione sobre adicionar y para terminar presione en continuar, los Campos marcados con (*) son obligatorios</p>
-		<div class="col-md-6">
-			<div class="form-group">
-				<label for="programas_avalar_nombre">8.1 Nombre del programa:<span class="spanRojo">*</span></label>
-				<input type="text" class="form-control" name="programas_avalar_nombre" id="programas_avalar_nombre" placeholder="Nombre del programa">
-			</div>
-			<div class="form-group">
-				<label for="programas_avalar_objetivo">8.2 Objetivo:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programas_avalar_objetivo" id="programas_avalar_objetivo" placeholder="Objetivo..."></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programas_avalar_metodologia">8.3 Metodología:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programas_avalar_metodologia" id="programas_avalar_metodologia" placeholder="Metodología..."></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programas_avalar_contenidos">8.4 Contenidos planteados:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programas_avalar_contenidos" id="programas_avalar_contenidos" placeholder="Contenidos planteados..."></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programas_avalar_material">8.5 Material didactico:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programas_avalar_material" id="programas_avalar_material" placeholder="Material didactico..."></textarea>
-			</div>
-		</div>
-		<div class="col-md-6">
-			<div class="form-group">
-				<label for="programas_avalar_bibliografia">8.6 Bibliografía:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programas_avalar_bibliografia" id="programas_avalar_bibliografia" placeholder="Bibliografía..."></textarea>
-			</div>
-			<div class="form-group">
-				<label for="programas_avalar_intensidad">8.7 Intensidad horaria (Horas):<span class="spanRojo">*</span></label>
-				<input type="text" class="form-control" name="programas_avalar_intensidad" id="programas_avalar_intensidad" placeholder="15">
-			</div>
-			<div class="form-group">
-				<label for="programas_avalar_evaluacion">8.8 Evaluación:<span class="spanRojo">*</span></label>
-				<textarea class="form-control" name="programas_avalar_evaluacion" id="programas_avalar_evaluacion" placeholder="Evaluación..."></textarea>
-			</div>
-		</div>
-		</form>
-		<div class="clearfix"></div>
-		<hr />
-		<div class="col-md-6">
-			<?php echo form_open_multipart('', array('id' => 'formulario_formatosEval')); ?>
-			<label>Formatos Evaluación (PDF):<span class="spanRojo">*</span></label>
-			<br />
-			<div class="col-md-6">
-				<input type="file" required accept="application/pdf" class="form-control" data-val="formatosEvalProgAvalar" name="formatosEvalProgAvalar" id="formatosEvalProgAvalar">
-			</div>
-			<div class="col-md-6">
-				<input type="button" class="btn btn-siia btn-sm archivos_form_formatosEvalProgAva fa-fa center-block" data-name="formatosEvalProgAvalar" name="materialDicProgAvalar" id="materialDicProgAvalar" value="Guardar archivo(s) &#xf0c7">
-			</div>
-			</form>
-		</div>
-		<div class="col-md-6">
-			<?php echo form_open_multipart('', array('id' => 'formulario_material_programas_basicos')); ?>
-			<label>Material Didáctico (PDF):<span class="spanRojo">*</span></label>
-			<br />
-			<div class="col-md-6">
-				<input type="file" required accept="application/pdf" class="form-control" data-val="materialDidacticoProgAvalar" name="materialDidacticoProgAvalar" id="materialDidacticoProgAvalar">
-			</div>
-			<div class="col-md-6">
-				<input type="button" class="btn btn-siia btn-sm archivos_form_materialDidacProgAvalar fa-fa center-block" data-name="materialDidacticoProgAvalar" name="materialDicAvalEco" id="materialDicAvalEco" value="Guardar archivo(s) &#xf0c7">
-			</div>
-			</form>
-		</div>
-		<div class="clearfix"></div>
-		<div class="">
-			<hr />
-			<label>Programas:</label>
-			<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-			<table id="" width="100%" border=0 class="table table-striped table-bordered">
-				<thead>
-					<tr>
-						<td>Nombre programa</td>
-						<td>objetivos</td>
-						<td>Metodología</td>
-						<td>Contenidos planteados</td>
-						<td>Material didactico</td>
-						<td>Bibliografia</td>
-						<td>Intensidad horaria</td>
-						<td>Evaluación</td>
-						<td>Acción</td>
-					</tr>
-				</thead>
-				<tbody id="tbody">
-					<?php
-					foreach ($data_programas_avalar as $programasAvalar) {
-						echo "<tr><td>" . $programasAvalar->nombrePrograma . "</td>";
-						echo "<td>" . $programasAvalar->objetivos . "</td>";
-						echo "<td>" . $programasAvalar->metodologia . "</td>";
-						echo "<td>" . $programasAvalar->contenidosPlanteados . "</td>";
-						echo "<td>" . $programasAvalar->materialDidactico . "</td>";
-						echo "<td>" . $programasAvalar->bibliografia . "</td>";
-						echo "<td>" . $programasAvalar->intensidadHoraria . "</td>";
-						echo "<td>" . $programasAvalar->evaluacion . "</td>";
-						echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarProgramasAvalar' data-id-programasAvalar=" . $programasAvalar->id_programasAvalar . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
-					}
-					?>
-				</tbody>
-			</table>
-			<div class="">
-				<hr />
-				<label>Archivos:</label>
-				<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>
-				<table id="tabla_archivos_formulario" width="100%" border=0 class="table table-striped table-bordered tabla_form">
-					<thead>
-						<tr>
-							<td class="col-md-4">Nombre</td>
-							<td class="col-md-4">Tipo</td>
-							<td class="col-md-4">Acción</td>
-						</tr>
-					</thead>
-					<tbody id="tbody">
-					</tbody>
-				</table>
-			</div>
-			<hr />
-			<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_programas_avalar" id="guardar_formulario_programas_avalar">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
-		</div>
-	</div>
-	<!-- Formulario de programas 8 - FIN -->
-	<!-- Formulario de docentes 9 - INICIO -->
-	<div id="docentes" data-form="9" class=" formulario_panel">
+	<!-- Formulario de docentes 6 - INICIO -->
+	<div id="docentes" data-form="6" class=" formulario_panel">
 		<h3>6. Facilitadores <i class="fa fa-users" aria-hidden="true"></i></h3>
 		<div class="container">
 			<div class="jumbotron">
@@ -1449,52 +1120,43 @@
 				<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_docentes" id="guardar_formulario_docentes">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
 			</div>-->
 	</div>
-	<!-- Formulario de docentes 9 - FIN -->
-	<!-- Formulario Datos Plataforma 10 - INICIO -->
-	<div id="datos_plataforma" data-form="10" class=" formulario_panel">
+	<!-- Formulario Datos Plataforma 7 - INICIO -->
+	<div id="datos_plataforma" data-form="7" class=" formulario_panel">
 		<h3>7. Datos modalidad virtual<i class="fa fa-globe" aria-hidden="true"></i></h3>
 		<p>Ingrese los datos de ingreso con un instructivo para poder navegar dentro del curso.</p>
-		<div class="form-group">
-			<label for="datos_plataforma_url">URL:<span class="spanRojo">*</span></label>
-			<input type="text" class="form-control" name="datos_plataforma_url" id="datos_plataforma_url" placeholder="https://www.orgsolidarias.gov.co/">
-		</div>
-		<div class="form-group">
-			<label for="datos_plataforma_usuario">Usuario:<span class="spanRojo">*</span></label>
-			<input type="text" class="form-control" name="datos_plataforma_usuario" id="datos_plataforma_usuario" placeholder="usuario.aplicacion">
-		</div>
-		<div class="form-group">
-			<label for="datos_plataforma_contrasena">Contraseña:<span class="spanRojo">*</span></label>
-			<input type="text" class="form-control" name="datos_plataforma_contrasena" id="datos_plataforma_contrasena" placeholder="contraseña123@">
-		</div>
-		<div class="clearfix"></div>
-		<hr />
-		<div class="">
-			<?php echo form_open_multipart('', array('id' => 'formulario_material_programas_basicos')); ?>
-			<label>Instructivo (PDF):<span class="spanRojo">*</span></label>
-			<br />
-			<div class="col-md-4">
-				<input type="file" required accept="application/pdf" class="form-control" data-val="instructivoPlataforma" name="instructivoPlataforma" id="instructivoPlataforma">
+		<?php echo form_open('', array('id' => 'formulario_modalidad_virtual')); ?>
+			<div class="form-group">
+				<label for="datos_plataforma_url">URL:<span class="spanRojo">*</span></label>
+				<input type="text" class="form-control" name="datos_plataforma_url" id="datos_plataforma_url" placeholder="EJ: https://www.orgsolidarias.gov.co/" required>
 			</div>
-			<div class="col-md-3">
-				<input type="button" class="btn btn-siia btn-sm archivos_form_instructivoPlataforma fa-fa center-block" data-name="instructivoPlataforma" name="materialDicAvalEco" id="materialDicAvalEco" value="Guardar archivo(s) &#xf0c7">
+			<div class="form-group">
+				<label for="datos_plataforma_usuario">Usuario:<span class="spanRojo">*</span></label>
+				<input type="text" class="form-control" name="datos_plataforma_usuario" id="datos_plataforma_usuario" placeholder="EJ: usuario.aplicacion" required>
 			</div>
-			</form>
-		</div>
-		<div class="clearfix"></div>
-		<div class="">
+			<div class="form-group">
+				<label for="datos_plataforma_contrasena">Contraseña:<span class="spanRojo">*</span></label>
+				<input type="text" class="form-control" name="datos_plataforma_contrasena" id="datos_plataforma_contrasena" placeholder="EJ: contraseña123@" required>
+			</div>
+			<div class="clearfix"></div>
 			<hr />
-			<label>Plataforma:</label>
-			<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-			<table id="" width="100%" border=0 class="table table-striped table-bordered">
-				<thead>
+			<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_plataforma" id="guardar_formulario_plataforma">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
+		</form>
+			<div class="clearfix"></div>
+		<?php if($data_plataforma): ?>
+			<div class="">
+				<hr />
+				<label>Plataforma:</label>
+				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+				<table id="" width="100%" border=0 class="table table-striped table-bordered">
+					<thead>
 					<tr>
 						<td>URL aplicación</td>
 						<td>Usuario aplicación</td>
 						<td>Contraseña aplicación</td>
 						<td>Acción</td>
 					</tr>
-				</thead>
-				<tbody id="tbody">
+					</thead>
+					<tbody id="tbody">
 					<?php
 					foreach ($data_plataforma as $datosPlataforma) {
 						echo "<tr><td>" . $datosPlataforma->urlAplicacion . "</td>";
@@ -1503,33 +1165,16 @@
 						echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosPlataforma' data-id-datosPlataforma=" . $datosPlataforma->id_datosAplicacion . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
 					}
 					?>
-				</tbody>
-			</table>
-		</div>
-		<div class="">
-			<hr />
-			<label>Archivos:</label>
-			<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>
-			<table id="tabla_archivos_formulario" width="100%" border=0 class="table table-striped table-bordered tabla_form">
-				<thead>
-					<tr>
-						<td class="col-md-4">Nombre</td>
-						<td class="col-md-4">Tipo</td>
-						<td class="col-md-4">Acción</td>
-					</tr>
-				</thead>
-				<tbody id="tbody">
-				</tbody>
-			</table>
-		</div>
-		<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_plataforma" id="guardar_formulario_plataforma">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
+					</tbody>
+				</table>
+			</div>
+		<?php endif; ?>
 	</div>
-	<!-- Formulario Datos Plataforma 10 - FIN -->
-	<!-- Formulario Datos Plataforma 9 - INICIO -->
+	<!-- Formulario Datos En Lina 8 - INICIO -->
 	<div id="datos_en_linea" data-form="8" class="formulario_panel">
 		<h3>8. Datos modalidad en linea<i class="fa fa-globe" aria-hidden="true"></i></h3>
 		<p>Ingrese los datos de las herramientas a utilizar en esta modalidad dentro del curso.</p>
-		<?php echo form_open_multipart('', array('id' => 'formulario_modalidad_en_linea')); ?>
+		<?php echo form_open('', array('id' => 'formulario_modalidad_en_linea')); ?>
 		<!-- Nombre de la herramienta-->
 		<div class="form-group">
 			<label for="nombre_herramienta">Nombre de la herramienta:<span class="spanRojo">*</span></label>
@@ -1548,13 +1193,6 @@
 				<a data-toggle="modal" data-target="#modalAceptarEnLinea" data-backdrop="static" data-keyboard="false">
 					<span class="spanRojo">*</span>¿Acepta modalidad en línea?
 				</a>
-			</label>
-		</div>
-		<!-- Archivo Instructivo-->
-		<div class="form-group">
-			<label class="underlined">
-				<label for="instructivoEnLinea">Instructivo: (PDF)<span class="spanRojo">*</span></label>
-				<input type="file" required accept="application/pdf" class="form-control" data-val="instructivoEnLinea" name="instructivoEnLinea" id="instructivoEnLinea">
 			</label>
 		</div>
 		<hr />
@@ -1598,7 +1236,6 @@
 						<td>Herramienta</td>
 						<td>Descripción</td>
 						<td>Fecha de registro</td>
-						<td>Fecha de registro</td>
 						<td>Acción</td>
 					</tr>
 				</thead>
@@ -1608,7 +1245,6 @@
 							echo "<tr><td>" . $data->nombreHerramienta . "</td>";
 							echo "<td>" . $data->descripcionHerramienta . "</td>";
 							echo "<td>" . $data->fecha . "</td>";
-							echo "<td><button class='btn btn-primary btn-sm verDocDatosEnlinea' data-id=" . $data->id . ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
 							echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosEnlinea' data-id=" . $data->id . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
 						}
 					?>
@@ -1617,7 +1253,6 @@
 		</div>
 		<?php endif	?>
 	</div>
-	<!-- Formulario Datos Plataforma 9 - FIN -->
 	<!-- Fin de Formularios -->
 	<!-- Continuar para finalizar Acreditación - INICIO -->
 	<div id="finalizar_proceso" data-form="0" class="col-md-9 formulario_panel">
@@ -1661,8 +1296,8 @@
 						<div class="clearfix"></div>
 						<hr />
 						<!-- Tablas de cursos -->
-						<div class="col-md-12">
-							Texto Curso Básico
+						<div class="col-md-12" style="text-align: center">
+							<object data="http://localhost/siia/assets/metodologiaResolucion/CursoBasico.html" type="text/html" width="750" height="1220"></object>
 						</div>
 					</div>
 				</div>
@@ -1684,8 +1319,8 @@
 						<div class="clearfix"></div>
 						<hr />
 						<!-- Tablas de cursos -->
-						<div class="col-md-12">
-							Texto Acreditación, Aval
+						<div class="col-md-12" style="text-align: center">
+							<object data="http://localhost/siia/assets/metodologiaResolucion/CursoAval.html" type="text/html" width="750" height="1220"></object>
 						</div>
 					</div>
 				</div>
@@ -1707,8 +1342,8 @@
 						<div class="clearfix"></div>
 						<hr />
 						<!-- Tablas de cursos -->
-						<div class="col-md-12">
-							Texto Curso Medio
+						<div class="col-md-12" style="text-align: center">
+							<object data="http://localhost/siia/assets/metodologiaResolucion/CursoMedio.html" type="text/html" width="750" height="1100"></object>
 						</div>
 					</div>
 				</div>
@@ -1730,8 +1365,8 @@
 						<div class="clearfix"></div>
 						<hr />
 						<!-- Tablas de cursos -->
-						<div class="col-md-12">
-							Texto Curso Avanzado
+						<div class="col-md-12" style="text-align: center">
+							<object data="http://localhost/siia/assets/metodologiaResolucion/CursoAvanzado.html" type="text/html" width="750" height="1220"></object>
 						</div>
 					</div>
 				</div>
@@ -1754,8 +1389,8 @@
 						<div class="clearfix"></div>
 						<hr />
 						<!-- Tablas de cursos -->
-						<div class="col-md-12">
-							Texto Curso Financiera
+						<div class="col-md-12" style="text-align: center">
+							<object data="http://localhost/siia/assets/metodologiaResolucion/CursoFinanciera.html" type="text/html" width="750" height="1000"></object>
 						</div>
 					</div>
 				</div>
