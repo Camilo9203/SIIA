@@ -14465,7 +14465,7 @@ function verificarFormularios() {
 					case "Acreditación Curso Básico de Economía Solidaria":
 						$("#check_curso_basico_es").prop("checked", true);
 						break;
-					case "Acreditación, Aval de Trabajo Asociado":
+					case "Acreditación Aval de Trabajo Asociado":
 						$("#check_curso_basico_aval").prop("checked", true);
 						break;
 					case "Acreditación Curso Medio de Economía Solidaria":

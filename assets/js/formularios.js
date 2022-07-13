@@ -279,6 +279,23 @@ $("#guardar_formulario_certificado_existencia").click(function () {
 		});
 	}
 });
+// Ver Documento Certificado Existencia
+$(".verDocCertificadoExistencia").click(function (){
+	let data = {
+		id: $(this).attr("data-id"),
+		formulario: 2.1,
+	}
+	console.log(data);
+	$.ajax({
+		url: baseURL + "panel/verDocumento",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		success: function (response){
+			window.open(response.file, '_blank');
+		}
+	});
+});
 // Guardar registro educativo
 $("#guardar_formulario_registro_educativo").click(function (){
 	//$(this).attr("disabled", true);
@@ -321,12 +338,13 @@ $("#guardar_formulario_registro_educativo").click(function (){
 		});
 	}
 });
-// Ver Documento
+// Ver Documento Registro Educativo
 $(".verDocRegistro").click(function (){
-	data = {
+	let data = {
 		id: $(this).attr("data-id"),
 		formulario: 2.2,
 	}
+	console.log(data);
 	$.ajax({
 		url: baseURL + "panel/verDocumento",
 		type: "post",
@@ -335,6 +353,32 @@ $(".verDocRegistro").click(function (){
 		success: function (response){
 			window.open(response.file, '_blank');
 		}
+	});
+});
+// Eliminar datos registro educativo
+$(".eliminarDatosRegistro").click(function () {
+	data = {
+		id: $(this).attr("data-id"),
+		ruta: 'uploads/registrosEducativos/',
+		tipo: 2.2
+	};
+	$.ajax({
+		url: baseURL + "panel/eliminarDocumentacionLegal",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		beforeSend: function () {
+			notificacion("Espere...", "success");
+		},
+		success: function (response) {
+			notificacion(response.msg, "success");
+			setInterval(function () {
+				reload();
+			}, 2000);
+		},
+		error: function (ev) {
+			//Do nothing
+		},
 	});
 });
 /** Formulario 3: Antecedentes Académicos */
@@ -376,7 +420,6 @@ $("#guardar_formulario_antecedentes_academicos").click(function () {
 		notificacion('Validar campos');
 	}
 });
-
 /** Formulario 6: Programas de Educación */
 // Acciones de cada modal de aceptación
 $("#aceptar_curso_basico_es").click(function () {
@@ -529,7 +572,7 @@ $(".eliminarDatosPlataforma").click(function () {
 	});
 });
 /** Formulario 8: Modalidad En Línea */
-// Aceptar recomendaciones modalidad en linea
+// Aceptar recomendaciones modalidad en línea
 $("#acepto_mod_en_linea").click(function () {
 	$("#acepta_mod_en_linea").prop("checked", true);
 	$("#modalAceptarEnLinea").modal("hide");
@@ -601,7 +644,7 @@ $(".verDocDatosEnlinea").click(function (){
 		}
 	});
 });
-// Eliminar datos en linea
+// Eliminar datos en línea
 $(".eliminarDatosEnlinea").click(function () {
 	data = {
 		id: $(this).attr("data-id"),

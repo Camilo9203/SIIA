@@ -221,7 +221,7 @@
 	</div>
 </div>
 
-<!-- Formularios //TODO: Formularios usuario -->
+<!-- Formularios -->
 <div class="col-md-9 formularios" role="main">
 	<!-- Inicio del Panel Inicial -->
 	<div id="estado_solicitud">
@@ -269,7 +269,7 @@
 				<div class="modal-body">
 					<h4>Atención:</h4>
 					<ul>
-						<li>Se borraran todos los datos de la solicitud actual.</li>
+						<li>Se borrarán todos los datos de la solicitud actual.</li>
 						<li>Se borrara la solicitud actual.</li>
 						<li>Los datos y archivos de los formularios <strong>permanecen guardados en el sistema</strong>.</li>
 					</ul>
@@ -743,7 +743,6 @@
 		</form>
 		<div class="clearfix"></div>
 		<br><br>
-
 		<!-- Tabla Documentación Legal -->
 		<?php if($data_documentacion_legal): ?>
 			<?php if($data_documentacion_legal->entidad): ?>
@@ -767,7 +766,7 @@
 						echo "<td>" . $data_documentacion_legal->fechaExpedicion . "</td>";
 						echo "<td>" . $data_documentacion_legal->departamento . "</td>";
 						echo "<td>" . $data_documentacion_legal->municipio . "</td>";
-						echo "<td><button class='btn btn-primary btn-sm verDocDatosEnlinea' data-id=" . $data_documentacion_legal->id . ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
+						echo "<td><button class='btn btn-primary btn-sm verDocCertificadoExistencia' data-id=" . $data_documentacion_legal->id_certificadoExistencia . ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
 						echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosEnlinea' data-id=" . $data_documentacion_legal->id . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
 					?>
 					</tbody>
@@ -799,17 +798,15 @@
 								echo "<td>" . $data_documentacion_legal->nombrePrograma . "</td>";
 								echo "<td>" . $data_documentacion_legal->objetoResolucion . "</td>";
 								echo "<td>" . $data_documentacion_legal->entidadResolucion . "</td>";
-								echo "<td><button class='btn btn-primary btn-sm verDocRegistro' data-id=" . $data_documentacion_legal->id . ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
-								echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosEnlinea' data-id=" . $data_documentacion_legal->id . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+								echo "<td><button class='btn btn-primary btn-sm verDocRegistro' data-id=" . $data_documentacion_legal->id_registroEducativoPro . ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
+								echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosRegistro' data-id=" . $data_documentacion_legal->id_registroEducativoPro . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
 							?>
 						</tbody>
 					</table>
 				</div>
 			<?php endif; ?>
 		<?php endif	?>
-
 	</div>
-	<!-- Formulario de documentacion legal 2 - FIN -->
 	<!-- Formulario de antecedentes academicos 3 - INICIO -->
 	<div id="antecedentes_academicos" data-form="3" class=" formulario_panel">
 		<div class="">
@@ -993,10 +990,10 @@
 					<!-- Check Curso Aval -->
 					<div class="form-group" id="curso_basico_aval" style="display: none;" >
 						<label class="underlined">
-							<input type="checkbox" id="check_curso_basico_aval" form="formulario_programas" name="curso_basico_aval" value="* Acreditación, Aval de Trabajo Asociado" disabled required>
+							<input type="checkbox" id="check_curso_basico_aval" form="formulario_programas" name="curso_basico_aval" value="* Acreditación Aval de Trabajo Asociado" disabled required>
 							<label for="modalAval">&nbsp;</label>
 							<a data-toggle="modal" data-target="#modalAval" data-backdrop="static" data-keyboard="false">
-								<span class="spanRojo">*</span> Acreditación, Aval de Trabajo Asociado
+								<span class="spanRojo">*</span> Acreditación Aval de Trabajo Asociado
 							</a>
 						</label>
 					</div>
@@ -1182,7 +1179,7 @@
 		</div>
 		<!-- Descripción de la herramienta-->
 		<div class="form-group">
-			<label for="descripcion_herramienta">Descripción de la utilización de la herramienta en línea:<span class="spanRojo">*</span></label>
+			<label for="descripcion_herramienta">Breve descripción de la utilización educativa de la herramienta en línea:<span class="spanRojo">*</span></label>
 			<input type="text" class="form-control" name="descripcion_herramienta" id="descripcion_herramienta" placeholder="Registre la descripción de la herramienta" required>
 		</div>
 		<!-- Check Aceptar Modalidad En Linea -->
@@ -1326,7 +1323,7 @@
 				</div>
 				<div class="modal-body">
 					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_aval_trabajo" data-programa="Acreditación, Aval de Trabajo Asociado"  data-modal="modalAval" data-check="check_curso_basico_aval">Sí, acepto. <i class="fa fa-check"></i></button>
+					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_aval_trabajo" data-programa="Acreditación Aval de Trabajo Asociado"  data-modal="modalAval" data-check="check_curso_basico_aval">Sí, acepto. <i class="fa fa-check"></i></button>
 				</div>
 			</div>
 		</div>

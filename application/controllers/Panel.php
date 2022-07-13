@@ -363,18 +363,52 @@ class Panel extends CI_Controller
 
 	public function eliminarDocumentacionLegal()
 	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-
-		$documentacion = $this->input->post('documentacion');
-
-		$this->db->where('id_documentacionLegal', $documentacion)->where('organizaciones_id_organizacion', $id_organizacion);
-		if ($this->db->delete('documentacionLegal')) {
-			echo json_encode(array('url' => "", 'msg' => "Se elimino la documentacion legal."));
+		$archivo = $this->db->select('*')->from('archivos')->where('id_registro', $this->input->post('id'))->get()->row();
+		$this->db->where('id_archivo', $archivo->id_archivo);
+		if($this->db->delete('archivos')){
+			unlink($this->input->post('ruta') . $archivo->nombre);
+			switch ($this->input->post('tipo')) {
+				case 2.1:
+					$certificadoExistencia = $this->db->select('*')->from('certificadoExistencia')->where('id_certificadoExistencia', $this->input->post('id'))->get()->row();
+					$documentacion = $this->db->select('*')->from('documentacion')->where('solicitudes_id_solicitud', $certificadoExistencia->solicitudes_id_solicitud)->get()->row();
+					$this->db->where('id_tipoDocumentacion', $documentacion->id_tipoDocumentacion);
+					if ($this->db->delete('documentacion')) {
+						$this->db->where('id_registroEducativoPro', $certificadoExistencia->id_registroEducativoPro);
+						if ($this->db->delete('certificadoExistencia')) {
+							echo json_encode(array('url' => "panel", 'msg' => "Se eliminaron los datos del certificado existencia."));
+						}
+						else {
+							echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los datos del certificado existencia."));
+						}
+					}
+					else {
+						echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los datos de la documentación legal."));
+					}
+					break;
+				case 2.2:
+					$registroEducativo = $this->db->select('*')->from('registroEducativoProgramas')->where('id_registroEducativoPro', $this->input->post('id'))->get()->row();
+					$documentacion = $this->db->select('*')->from('documentacion')->where('solicitudes_id_solicitud', $registroEducativo->solicitudes_id_solicitud)->get()->row();
+					$this->db->where('id_tipoDocumentacion', $documentacion->id_tipoDocumentacion);
+					if ($this->db->delete('documentacion')) {
+						$this->db->where('id_registroEducativoPro', $registroEducativo->id_registroEducativoPro);
+						if ($this->db->delete('registroEducativoProgramas')) {
+							echo json_encode(array('url' => "panel", 'msg' => "Se eliminaron los datos del registro educativo."));
+						}
+						else {
+							echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los datos del registro educativo."));
+						}
+					}
+					else {
+						echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los datos de la documentación legal."));
+					}
+					break;
+				default:
+			}
+		}
+		else {
+			echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los archivos, vuelve a intentar o comunicate con el administrador."));
 		}
 	}
-
 	public function eliminarAntecedentes()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');

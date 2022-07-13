@@ -1146,7 +1146,7 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 						case "Acreditación Curso Básico de Economía Solidaria":
 							$("#curso_basico_es").show();
 							break;
-						case "Acreditación, Aval de Trabajo Asociado":
+						case "Acreditación Aval de Trabajo Asociado":
 							$("#curso_basico_aval").show();
 							break;
 						case "Acreditación Curso Medio de Economía Solidaria":
