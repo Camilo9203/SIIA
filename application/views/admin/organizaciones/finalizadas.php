@@ -129,62 +129,51 @@
 		<div class="clearfix"></div>
 		<hr />
 		<div id="anclaInicio"></div>
+		<!-- Información General Organización -->
 		<div class="col-md-12" id="informacion">
-			<h3>1. Información General.</h3>
-			<div class="col-md-12">
-				<div class="form-group">
-					<p>Tip Organización: </p><label class="tipoLeer" id='tipoOrganizacion'></label>
-				</div>
-				<div class="form-group">
-					<p>Departamento: </p><label class="tipoLeer" id='nomDepartamentoUbicacion'></label>
-				</div>
-				<div class="form-group">
-					<p>Municipio: </p><label class="tipoLeer" id='nomMunicipioNacional'></label>
-				</div>
-				<div class="form-group">
-					<p>Dirección: </p><label class="tipoLeer" id='direccionOrganizacion'></label>
-				</div>
-				<div class="form-group">
-					<p>Teléfono - Fax: </p><label class="tipoLeer" id='fax'></label>
-				</div>
-				<div class="form-group">
-					<p>Extensión: </p><label class="tipoLeer" id='extension'></label>
-				</div>
-				<div class="form-group">
-					<p>URL de la Organización: </p><label class="tipoLeer" id='urlOrganizacion'></label>
-				</div>
-				<div class="form-group">
-					<p>Actuación: </p><label class="tipoLeer" id='actuacionOrganizacion'></label>
-				</div>
-				<div class="form-group">
-					<p>Tipo de educación: </p><label class="tipoLeer" id='tipoEducacion'></label>
-				</div>
-				<div class="form-group">
-					<p>Cédula del representante Legal: </p><label class="tipoLeer" id='numCedulaCiudadaniaPersona'></label>
-				</div>
-				<div class="form-group">
-					<p>Presentación institucional: </p><label class="tipoLeer" id='presentacionInstitucional'></label>
-				</div>
-				<div class="form-group">
-					<p>Objeto social: </p><label class="tipoLeer" id='objetoSocialEstatutos'></label>
-				</div>
-				<div class="form-group">
-					<p>Misión: </p><label class="tipoLeer" id='mision'></label>
-				</div>
-				<div class="form-group">
-					<p>Visión: </p><label class="tipoLeer" id='vision'></label>
-				</div>
-				<div class="form-group">
-					<p>Principios: </p><label class="tipoLeer" id='principios'></label>
-				</div>
-				<div class="form-group">
-					<p>Fines: </p><label class="tipoLeer" id='fines'></label>
-				</div>
-				<div class="form-group">
-					<p>Portafolio: </p><label class="tipoLeer" id='portafolio'></label>
-				</div>
-				<div class="form-group">
-					<p>Otros: </p><label class="tipoLeer" id='otros'></label>
+			<h3>1. Información General.</h3><br>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-6">
+						<!-- Tipo Organizacion -->
+						<h5>Tip Organización: </h5><p class="tipoLeer" id='tipoOrganizacion'></p>
+						<!-- Departamento -->
+						<h5>Departamento: </h5><p class="tipoLeer" id='nomDepartamentoUbicacion'></p>
+						<!-- Municipio -->
+						<h5>Municipio: </h5><p class="tipoLeer" id='nomMunicipioNacional'></p>
+						<!-- Dirección -->
+						<h5>Dirección: </h5><p class="tipoLeer" id='direccionOrganizacion'></p>
+						<!-- Teléfono - Fax -->
+						<h5>Teléfono - Fax: </h5><p class="tipoLeer" id='fax'></p>
+						<!-- Extensión -->
+						<h5>Extensión: </h5><p class="tipoLeer" id='extension'></p>
+						<!-- URL de la Organización -->
+						<h5>URL de la Organización: </h5><p class="tipoLeer" id='urlOrganizacion'></p>
+						<!-- Actuación -->
+						<h5>Actuación: </h5><p class="tipoLeer" id='actuacionOrganizacion'></p>
+						<!-- Tipo Educación -->
+						<h5>Tipo de educación: </h5><p class="tipoLeer" id='tipoEducacion'></p>
+					</div>
+					<div class="col-lg-6">
+						<!-- Cédula Representante Legal -->
+						<h5>Cédula del representante Legal: </h5><p class="tipoLeer" id='numCedulaCiudadaniaPersona'></p>
+						<!-- Presentación Institucional -->
+						<h5>Presentación institucional: </h5><p class="tipoLeer" id='presentacionInstitucional'></p>
+						<!-- Objeto Social -->
+						<h5>Objeto social: </h5><p class="tipoLeer" id='objetoSocialEstatutos'></p>
+						<!-- Misión -->
+						<h5>Misión: </h5><p class="tipoLeer" id='mision'></p>
+						<!-- Visión -->
+						<h5>Visión: </h5><p class="tipoLeer" id='vision'></p>
+						<!-- Principios -->
+						<h5>Principios: </h5><p class="tipoLeer" id='principios'></p>
+						<!-- Fines -->
+						<h5>Fines: </h5><p class="tipoLeer" id='fines'></p>
+						<!-- Portafolio -->
+						<h5>Portafolio: </h5><p class="tipoLeer" id='portafolio'></p>
+						<!-- Otros -->
+						<h5>Otros: </h5><p class="tipoLeer" id='otros'></p>
+					</div>
 				</div>
 			</div>
 			<div class="clearfix"></div>
@@ -197,40 +186,44 @@
 			<!-- Formulario Observación form1 -->
 			<div class="col-12">
 				<?php echo form_open('', array('id' => 'formulario_observacion_form1')); ?>
-				<div class="form-group">
-					<label for="observacionesForm5">Observaciones Información General</label>
-					<textarea class="form-control obs_admin_" name="observacionesForm1" id="observacionesForm1" cols="30" rows="5" required></textarea>
-				</div>
-				<div class="form-group">
-					<button class="btn btn-siia guardarObservacionesForm1">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
-				</div>
+					<div class="form-group">
+						<label for="observacionesForm1">Observaciones Información General</label>
+						<textarea class="form-control obs_admin_" name="observacionesForm1" id="observacionesForm1" cols="30" rows="5" required></textarea>
+					</div>
+					<div class="form-group">
+						<button class="btn btn-siia guardarObservacionesForm1">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+					</div>
 				</form>
+			</div>
+			<hr />
+			<div class="">
+				<label>Observaciones Realizadas</label>
+				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+				<table width="100%" border=0 class="table table-striped table-bordered" id="tabla_observaciones_form1">
+					<thead>
+					<tr>
+						<td>Fecha Observación</td>
+						<td># Revisión</td>
+						<td>Observación</td>
+						<td>Acción</td>
+					</tr>
+					</thead>
+					<tbody id="tbody" class="tabla_observaciones_form1"></tbody>
+				</table>
 			</div>
 		</div>
 		<div class="col-md-12" id="documentacion">
 			<h3>2. Documentación Legal</h3>
-			<div class="form-group">
-				<p>Registro Educativo: </p><label class="tipoLeer" id='registroEducativo'></label>
+			<div class="">
+				<label>Datos Documentación Legal:</label>
+				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+				<table id="tabla_datos_documentacion_legal" width="100%" border=0 class="table table-striped table-bordered">
+					<thead class="head_tabla_datos_documentacion_legal">
+					</thead>
+					<tbody id="tbody" class="tabla_datos_documentacion_legal"></tbody>
+				</table>
 			</div>
-			<div class="form-group">
-				<p>Entindad que registro: </p><label class="tipoLeer" id='entidadRegistro'></label>
-			</div>
-			<div class="form-group">
-				<p>Numero de la resolucion: </p><label class="tipoLeer" id='numeroResolucion'></label>
-			</div>
-			<div class="form-group">
-				<p>Fecha de la resolucion: </p><label class="tipoLeer" id='fechaResolucion'></label>
-			</div>
-			<div class="form-group">
-				<p>Departamento de la resolucion: </p><label class="tipoLeer" id='departamentoResolucion'></label>
-			</div>
-			<div class="form-group">
-				<p>Municipio de la resolucion: </p><label class="tipoLeer" id='municipioResolucion'></label>
-			</div>
-			<div class="col-md-12 form-group" id="archivos_documentacionLegal">
-				<p>Archivos:</label>
-			</div>
-			<div id="ll"></div>
+			<hr />
 			<div class="clearfix"></div>
 			<hr />
 			<!-- Formulario Observación form2 -->
@@ -245,9 +238,45 @@
 				</div>
 				</form>
 			</div>
+			<hr />
+			<div class="">
+				<label>Observaciones Realizadas</label>
+				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+				<table width="100%" border=0 class="table table-striped table-bordered" id="tabla_observaciones_form2">
+					<thead>
+					<tr>
+						<td>Fecha Observación</td>
+						<td># Revisión</td>
+						<td>Observación</td>
+						<td>Acción</td>
+					</tr>
+					</thead>
+					<tbody id="tbody" class="tabla_observaciones_form2"></tbody>
+				</table>
+			</div>
 		</div>
 		<div class="col-md-12" id="antecedentesAcademicos">
 			<h3>3. Antecedentes Academico</h3>
+			<!-- Tabla Antecedentes Académicos -->
+			<div class="">
+				<label>Datos de Atecedentes Academicos:</label>
+				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+				<table id="" width="100%" border=0 class="table table-striped table-bordered">
+					<thead>
+					<tr>
+						<td>Descripción Proceso</td>
+						<td>justificación</td>
+						<td>Objetivos</td>
+						<td>Metodología</td>
+						<td>Material Didáctico</td>
+						<td>Bibliografía</td>
+						<td>Duración Curso</td>
+					</tr>
+					</thead>
+					<tbody id="tbody" class="tabla_datos_antecedentes"></tbody>
+				</table>
+			</div>
+			<hr />
 			<!-- Formulario Observación form3 -->
 			<div class="col-12">
 				<?php echo form_open('', array('id' => 'formulario_observacion_form3')); ?>
@@ -260,9 +289,42 @@
 				</div>
 				</form>
 			</div>
+			<hr />
+			<div class="">
+				<label>Observaciones Realizadas</label>
+				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+				<table width="100%" border=0 class="table table-striped table-bordered" id="tabla_observaciones_form3">
+					<thead>
+					<tr>
+						<td>Fecha Observación</td>
+						<td># Revisión</td>
+						<td>Observación</td>
+						<td>Acción</td>
+					</tr>
+					</thead>
+					<tbody id="tbody" class="tabla_observaciones_form3"></tbody>
+				</table>
+			</div>
 		</div>
 		<div class="col-md-12" id="jornadasActualizacion">
-			<h3>4. Jornadas de Actualizacion</h3>
+			<h3>4. Jornadas de Actualización</h3>
+			<!-- Tabla Jornadas de Actualización -->
+			<div class="">
+				<label>Datos de Atecedentes Academicos:</label>
+				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+				<table id="" width="100%" border=0 class="table table-striped table-bordered">
+					<thead>
+					<tr>
+						<td>Cantidad Personas</td>
+						<td>Fecha Asistencia</td>
+					</tr>
+					</thead>
+					<tbody id="tbody" class="tabla_datos_jornadas"></tbody>
+				</table>
+			</div>
+			<div id="archivosJornadasActualizacion"></div>
+			<hr />
+			<!-- Formulario Observación form3 -->
 			<div class="col-12">
 				<?php echo form_open('', array('id' => 'formulario_observacion_form4')); ?>
 				<div class="form-group">
@@ -273,6 +335,22 @@
 					<button class="btn btn-siia guardarObservacionesForm4" id="sigInf">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
 				</div>
 				</form>
+			</div>
+			<hr />
+			<div class="">
+				<label>Observaciones Realizadas</label>
+				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+				<table width="100%" border=0 class="table table-striped table-bordered" id="tabla_observaciones_form4">
+					<thead>
+					<tr>
+						<td>Fecha Observación</td>
+						<td># Revisión</td>
+						<td>Observación</td>
+						<td>Acción</td>
+					</tr>
+					</thead>
+					<tbody id="tbody" class="tabla_observaciones_form4"></tbody>
+				</table>
 			</div>
 		</div>
 		<div class="col-md-12" id="datosBasicosProgramas">
@@ -341,6 +419,22 @@
 						</div>
 						</form>
 					</div>
+					<hr />
+					<div class="">
+						<label>Observaciones Realizadas</label>
+						<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+						<table width="100%" border=0 class="table table-striped table-bordered" id="tabla_observaciones_form5">
+							<thead>
+							<tr>
+								<td>Fecha Observación</td>
+								<td># Revisión</td>
+								<td>Observación</td>
+								<td>Acción</td>
+							</tr>
+							</thead>
+							<tbody id="tbody" class="tabla_observaciones_form5"></tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 			<hr />
@@ -359,6 +453,21 @@
 		</div>
 		<div class="col-md-12" id="plataforma">
 			<h3>7. Datos modalidad virtual</h3>
+			<div class="">
+				<label>Datos de herramientas:</label>
+				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+				<table id="tabla_datos_plataforma" width="100%" border=0 class="table table-striped table-bordered">
+					<thead>
+					<tr>
+						<td>UrlAplicación</td>
+						<td>Usuario</td>
+						<td>Contraseña</td>
+					</tr>
+					</thead>
+					<tbody id="tbody" class="tabla_datos_plataforma"></tbody>
+				</table>
+			</div>
+			<hr />
 			<div class="col-12">
 				<?php echo form_open('', array('id' => 'formulario_observacion_form7')); ?>
 				<div class="form-group">
@@ -369,6 +478,22 @@
 					<button class="btn btn-siia guardarObservacionesForm7">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
 				</div>
 				</form>
+			</div>
+			<hr />
+			<div class="">
+				<label>Observaciones Realizadas</label>
+				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+				<table width="100%" border=0 class="table table-striped table-bordered" id="tabla_observaciones_form7">
+					<thead>
+					<tr>
+						<td>Fecha Observación</td>
+						<td># Revisión</td>
+						<td>Observación</td>
+						<td>Acción</td>
+					</tr>
+					</thead>
+					<tbody id="tbody" class="tabla_observaciones_form7"></tbody>
+				</table>
 			</div>
 		</div>
 		<div class="col-md-12" id="enLinea">
@@ -383,7 +508,6 @@
 						<td>Herramienta</td>
 						<td>Descripción</td>
 						<td>Fecha de registro</td>
-						<td>Documento</td>
 					</tr>
 					</thead>
 					<tbody id="tbody" class="datos_herramientas"></tbody>
@@ -400,6 +524,22 @@
 					<button class="btn btn-siia guardarObservacionesForm8">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
 				</div>
 				</form>
+			</div>
+			<hr />
+			<div class="">
+				<label>Observaciones Realizadas</label>
+				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+				<table width="100%" border=0 class="table table-striped table-bordered" id="tabla_observaciones_form8">
+					<thead>
+					<tr>
+						<td>Fecha Observación</td>
+						<td># Revisión</td>
+						<td>Observación</td>
+						<td>Acción</td>
+					</tr>
+					</thead>
+					<tbody id="tbody" class="datos_observacion_form8"></tbody>
+				</table>
 			</div>
 		</div>
 	</div>

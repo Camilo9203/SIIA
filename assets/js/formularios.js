@@ -685,6 +685,28 @@ $(".eliminarDatosEnlinea").click(function () {
 		},
 	});
 });
+/** Finalizar Solicitud  */
+$("#finalizar_si").click(function () {
+	$(this).attr("disabled", true);
+
+	$.ajax({
+		url: baseURL + "panel/finalizarProceso",
+		type: "post",
+		dataType: "JSON",
+		success: function (response) {
+			notificacion(response.msg, "success");
+			if (response.estado == "0") {
+				$(this).attr("disabled", false);
+				$("#sidebar-menu>.menu_section>a").click();
+			} else {
+				redirect(baseURL + "panel");
+			}
+		},
+		error: function (ev) {
+			//Do nothing
+		},
+	});
+});
 /** Validaciones formularios */
 function validFroms (form){
 	switch (form) {

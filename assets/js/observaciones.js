@@ -14,6 +14,36 @@ $("#verInfGenMenuAdmin").click(function () {
 	$("#docentes").hide();
 	$("#plataforma").hide();
 	$("#enLinea").hide();
+/** Formulario 1 Tablas **/
+	let html = "";
+	let data = {
+		id_organizacion: data_orgFinalizada["0"].organizaciones['0']['id_organizacion'],
+		idSolicitud: data_orgFinalizada["0"].tipoSolicitud['0']['idSolicitud'],
+		keyForm: 1,
+	}
+	// Consultar datos por ajax
+	$.ajax({
+		url: baseURL + "admin/cargar_todaInformacion",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		success: function (response) {
+			// Llenar tabla de datos en línea registrados
+			if(response.observaciones.length == 0){
+				html += "<td colspan='4'>No hay datos </td></tr>";
+			}
+			else {
+				for (let i = 0; i < response.observaciones.length; i++) {
+					html += "<tr><td>" + response.observaciones[i]['fechaObservacion'] + "</td>";
+					html += "<td>" + response.observaciones[i]['numeroRevision'] + "</td>";
+					html += "<td>" + response.observaciones[i]['observacion'] + "</td>";
+					html += "<td><button class='btn btn-danger btn-sm eliminarDataTabla' id='eliminarObservacionForm' data-id=" + response.observaciones[i]['id_observacion'] + ">Eliminar <i class='fa fa-file-o' aria-hidden='true'></i></button></td></tr>";
+				}
+			}
+			$(".tabla_observaciones_form1").html(html);
+
+		}
+	});
 });
 $("#verDocLegalMenuAdmin").click(function () {
 	$("#informacion").hide();
@@ -25,17 +55,87 @@ $("#verDocLegalMenuAdmin").click(function () {
 	$("#docentes").hide();
 	$("#plataforma").hide();
 	$("#enLinea").hide();
-});
-$("#verRegAcaMenuAdmin").click(function () {
-	$("#informacion").hide();
-	$("#documentacion").hide();
-	$("#registroEducativoProgramas").show();
-	$("#antecedentesAcademicos").hide();
-	$("#jornadasActualizacion").hide();
-	$("#datosBasicosProgramas").hide();
-	$("#docentes").hide();
-	$("#plataforma").hide();
-	$("#enLinea").hide();
+/** Formulario 2 Tablas **/
+	let html = "";
+	let data = {
+		id_organizacion: data_orgFinalizada["0"].organizaciones['0']['id_organizacion'],
+		idSolicitud: data_orgFinalizada["0"].tipoSolicitud['0']['idSolicitud'],
+		keyForm: 2,
+	}
+	// Consultar datos por ajax
+	$.ajax({
+		url: baseURL + "admin/cargar_todaInformacion",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		success: function (response) {
+			// Llenar tabla de datos documentación legal
+			let tipo = response.documentacion['tipo'];
+			if (tipo == 1){
+				html = "";
+				html += "<tr><td>La organización registro Cámara de Comercio </td>";
+				$(".head_tabla_datos_documentacion_legal").html(html);
+				html = "";
+				html += "<td>La organización registro Cámara de Comercio </td></tr>";
+				$(".tabla_datos_documentacion_legal").html(html);
+			}
+			if (tipo == 2){
+				html = "";
+				html +=	"<tr><td colspan='5'>Certificado de existencia y representación legal</td></tr>"
+				html +=	"<tr><td>Entidad</td>"
+				html +=	"<td>Fecha Expedición</td>"
+				html +=	"<td>Departamento</td>"
+				html +=	"<td>Municipio</td>"
+				html +=	"<td>Documento</td></tr>"
+				$(".head_tabla_datos_documentacion_legal").html(html);
+				html = "";
+				html += "<tr><td>" + response.certificadoExistencia['entidad'] + "</td>";
+				html += "<td>" + response.certificadoExistencia['fechaExpedicion'] + "</td>";
+				html += "<td>" + response.certificadoExistencia['departamento'] + "</td>";
+				html += "<td>" + response.certificadoExistencia['municipio'] + "</td>";
+				html += "<td><button class='btn btn-success btn-sm' id='verDocCertificadoExperiencia' data-id=" + response.certificadoExistencia['id_certificadoExistencia'] + ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td></tr>";
+				console.log(response.certificadoExistencia);
+				$(".tabla_datos_documentacion_legal").html(html);
+			}
+			if (tipo == 3){
+				html = "";
+				html +=	"<tr><td colspan='7'>Registro Educativo</td></tr>"
+				html +=	"<tr><td>Entidad</td>"
+				html +=	"<td>Fecha Expedición</td>"
+				html +=	"<td>Nombre Programa</td>"
+				html +=	"<td>Numero Resolución</td>"
+				html +=	"<td>Objeto</td>"
+				html +=	"<td>Tipo Educación</td>"
+				html +=	"<td>Documento</td></tr>"
+				$(".head_tabla_datos_documentacion_legal").html(html);
+				html = "";
+				html += "<tr><td>" + response.registroEducativoProgramas['entidadResolucion'] + "</td>";
+				html += "<td>" + response.registroEducativoProgramas['fechaResolucion'] + "</td>";
+				html += "<td>" + response.registroEducativoProgramas['nombrePrograma'] + "</td>";
+				html += "<td>" + response.registroEducativoProgramas['numeroResolucion'] + "</td>";
+				html += "<td>" + response.registroEducativoProgramas['objetoResolucion'] + "</td>";
+				html += "<td>" + response.registroEducativoProgramas['tipoEducacion'] + "</td>";
+				html += "<td><button class='btn btn-success btn-sm' id='verDocRegistroEducativo' data-id=" + response.registroEducativoProgramas['id_registroEducativoPro'] + ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td></tr>";
+				console.log(response.registroEducativoProgramas);
+				$(".tabla_datos_documentacion_legal").html(html);
+			}
+			html = "";
+			// Llenar tabla de datos documentación legal
+			if(response.observaciones.length == 0){
+				html += "<td colspan='4'>No hay datos </td></tr>";
+			}
+			else {
+				for (let i = 0; i < response.observaciones.length; i++) {
+					html += "<tr><td>" + response.observaciones[i]['fechaObservacion'] + "</td>";
+					html += "<td>" + response.observaciones[i]['numeroRevision'] + "</td>";
+					html += "<td>" + response.observaciones[i]['observacion'] + "</td>";
+					html += "<td><button class='btn btn-danger btn-sm eliminarDataTabla' id='eliminarObservacionForm' data-id=" + response.observaciones[i]['id_observacion'] + ">Eliminar <i class='fa fa-file-o' aria-hidden='true'></i></button></td></tr>";
+				}
+			}
+			$(".tabla_observaciones_form2").html(html);
+
+		}
+	});
 });
 $("#verAntAcaMenuAdmin").click(function () {
 	$("#informacion").hide();
@@ -46,6 +146,54 @@ $("#verAntAcaMenuAdmin").click(function () {
 	$("#docentes").hide();
 	$("#plataforma").hide();
 	$("#enLinea").hide();
+	/** Formulario 3 Tablas **/
+	let html = "";
+	let data = {
+		id_organizacion: data_orgFinalizada["0"].organizaciones['0']['id_organizacion'],
+		idSolicitud: data_orgFinalizada["0"].tipoSolicitud['0']['idSolicitud'],
+		keyForm: 3,
+	}
+	// Consultar datos por ajax
+	$.ajax({
+		url: baseURL + "admin/cargar_todaInformacion",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		success: function (response) {
+			// Llenar tabla de datos antecedentes académicos
+			if(response.antecedentesAcademicos.length == 0){
+				html += "<td colspan='4'>No hay datos </td></tr>";
+			}
+			else {
+				for (let i = 0; i < response.antecedentesAcademicos.length; i++) {
+					html += "<tr><td>" + response.antecedentesAcademicos[i]['descripcionProceso'] + "</td>";
+					html += "<td>" + response.antecedentesAcademicos[i]['justificacion'] + "</td>";
+					html += "<td>" + response.antecedentesAcademicos[i]['objetivos'] + "</td>";
+					html += "<td>" + response.antecedentesAcademicos[i]['metodologia'] + "</td>";
+					html += "<td>" + response.antecedentesAcademicos[i]['materialDidactico'] + "</td>";
+					html += "<td>" + response.antecedentesAcademicos[i]['bibliografia'] + "</td>";
+					html += "<td>" + response.antecedentesAcademicos[i]['duracionCurso'] + "</td>";
+				}
+			}
+			console.log(response.observaciones);
+			$(".tabla_datos_antecedentes").html(html);
+			html = "";
+			// Llenar tabla de datos en línea registrados
+			if(response.observaciones.length == 0){
+				html += "<td colspan='4'>No hay datos </td></tr>";
+			}
+			else {
+				for (let i = 0; i < response.observaciones.length; i++) {
+					html += "<tr><td>" + response.observaciones[i]['fechaObservacion'] + "</td>";
+					html += "<td>" + response.observaciones[i]['numeroRevision'] + "</td>";
+					html += "<td>" + response.observaciones[i]['observacion'] + "</td>";
+					html += "<td><button class='btn btn-danger btn-sm eliminarDataTabla' id='eliminarObservacionForm' data-id=" + response.observaciones[i]['id_observacion'] + ">Eliminar <i class='fa fa-file-o' aria-hidden='true'></i></button></td></tr>";
+				}
+			}
+			$(".tabla_observaciones_form3").html(html);
+
+		}
+	});
 });
 $("#verJorActMenuAdmin").click(function () {
 	$("#informacion").hide();
@@ -54,10 +202,51 @@ $("#verJorActMenuAdmin").click(function () {
 	$("#antecedentesAcademicos").hide();
 	$("#jornadasActualizacion").show();
 	$("#datosBasicosProgramas").hide();
-
 	$("#docentes").hide();
 	$("#plataforma").hide();
 	$("#enLinea").hide();
+	/** Formulario 2 Tablas **/
+	let html = "";
+	let data = {
+		id_organizacion: data_orgFinalizada["0"].organizaciones['0']['id_organizacion'],
+		idSolicitud: data_orgFinalizada["0"].tipoSolicitud['0']['idSolicitud'],
+		keyForm: 4,
+	}
+	// Consultar datos por ajax
+	$.ajax({
+		url: baseURL + "admin/cargar_todaInformacion",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		success: function (response) {
+			// Llenar tabla de datos antecedentes académicos
+			if(response.jornadasActualizacion.length == 0){
+				html += "<td colspan='4'>No hay datos </td></tr>";
+			}
+			else {
+				for (let i = 0; i < response.jornadasActualizacion.length; i++) {
+					html += "<tr><td>" + response.jornadasActualizacion[i]['numeroPersonas'] + "</td>";
+					html += "<td>" + response.jornadasActualizacion[i]['fechaAsistencia'] + "</td>";
+				}
+			}
+			$(".tabla_datos_jornadas").html(html);
+			html = "";
+			// Llenar tabla de datos en línea registrados
+			if(response.observaciones.length == 0){
+				html += "<td colspan='4'>No hay datos </td></tr>";
+			}
+			else {
+				for (let i = 0; i < response.observaciones.length; i++) {
+					html += "<tr><td>" + response.observaciones[i]['fechaObservacion'] + "</td>";
+					html += "<td>" + response.observaciones[i]['numeroRevision'] + "</td>";
+					html += "<td>" + response.observaciones[i]['observacion'] + "</td>";
+					html += "<td><button class='btn btn-danger btn-sm eliminarDataTabla' id='eliminarObservacionForm' data-id=" + response.observaciones[i]['id_observacion'] + ">Eliminar <i class='fa fa-file-o' aria-hidden='true'></i></button></td></tr>";
+				}
+			}
+			$(".tabla_observaciones_form4").html(html);
+
+		}
+	});
 });
 $("#verProgBasMenuAdmin").click(function () {
 	$("#informacion").hide();
@@ -69,17 +258,36 @@ $("#verProgBasMenuAdmin").click(function () {
 	$("#docentes").hide();
 	$("#plataforma").hide();
 	$("#enLinea").hide();
-});
-$("#verProgsMenuAdmin").click(function () {
-	$("#informacion").hide();
-	$("#documentacion").hide();
-	$("#registroEducativoProgramas").hide();
-	$("#antecedentesAcademicos").hide();
-	$("#jornadasActualizacion").hide();
-	$("#datosBasicosProgramas").hide();
-	$("#docentes").hide();
-	$("#plataforma").hide();
-	$("#enLinea").hide();
+	/** Formulario 4 Tablas **/
+	let html = "";
+	let data = {
+		id_organizacion: data_orgFinalizada["0"].organizaciones['0']['id_organizacion'],
+		idSolicitud: data_orgFinalizada["0"].tipoSolicitud['0']['idSolicitud'],
+		keyForm: 5,
+	}
+	// Consultar datos por ajax
+	$.ajax({
+		url: baseURL + "admin/cargar_todaInformacion",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		success: function (response) {
+			// Llenar tabla de datos en línea registrados
+			if(response.observaciones.length == 0){
+				html += "<td colspan='4'>No hay datos </td></tr>";
+			}
+			else {
+				for (let i = 0; i < response.observaciones.length; i++) {
+					html += "<tr><td>" + response.observaciones[i]['fechaObservacion'] + "</td>";
+					html += "<td>" + response.observaciones[i]['numeroRevision'] + "</td>";
+					html += "<td>" + response.observaciones[i]['observacion'] + "</td>";
+					html += "<td><button class='btn btn-danger btn-sm eliminarDataTabla' id='eliminarObservacionForm' data-id=" + response.observaciones[i]['id_observacion'] + ">Eliminar <i class='fa fa-file-o' aria-hidden='true'></i></button></td></tr>";
+				}
+			}
+			$(".tabla_observaciones_form5").html(html);
+
+		}
+	});
 });
 $("#verFaciliMenuAdmin").click(function () {
 	$("#informacion").hide();
@@ -102,6 +310,51 @@ $("#verDatPlatMenuAdmin").click(function () {
 	$("#docentes").hide();
 	$("#plataforma").show();
 	$("#enLinea").hide();
+	/** Formulario 7 Tabla **/
+	let html = "";
+	let data = {
+		id_organizacion: data_orgFinalizada["0"].organizaciones['0']['id_organizacion'],
+		idSolicitud: data_orgFinalizada["0"].tipoSolicitud['0']['idSolicitud'],
+		keyForm: 7,
+	}
+	// Consultar datos por ajax
+	$.ajax({
+		url: baseURL + "admin/cargar_todaInformacion",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		success: function (response) {
+			$("#tabla_observaciones_form7").dataTable();
+			// Llenar tabla de datos en línea registrados
+			if(response.plataforma.length == 0){
+				html += "<td colspan='4'>No hay datos </td></tr>";
+			}
+			else {
+				for (let i = 0; i < response.plataforma.length; i++) {
+					html += "<tr><td><a href='http://" + response.plataforma[i]['urlAplicacion'] + "' target='_blank'>" +response.plataforma[i]['urlAplicacion'] + "</a></td>";
+					html += "<td>" + response.plataforma[i]['usuarioAplicacion'] + "</td>";
+					html += "<td>" + response.plataforma[i]['contrasenaAplicacion'] + "</td>";
+				}
+			}
+			console.log(response.observaciones);
+			$(".tabla_datos_plataforma").html(html);
+			html = "";
+			// Llenar tabla de datos en línea registrados
+			if(response.observaciones.length == 0){
+				html += "<td colspan='4'>No hay datos </td></tr>";
+			}
+			else {
+				for (let i = 0; i < response.observaciones.length; i++) {
+					html += "<tr><td>" + response.observaciones[i]['fechaObservacion'] + "</td>";
+					html += "<td>" + response.observaciones[i]['numeroRevision'] + "</td>";
+					html += "<td>" + response.observaciones[i]['observacion'] + "</td>";
+					html += "<td><button class='btn btn-danger btn-sm eliminarDataTabla' id='eliminarObservacionForm7' data-id=" + response.observaciones[i]['id_observacion'] + ">Eliminar</button></td></tr>";
+				}
+			}
+			$(".tabla_observaciones_form7").html(html);
+
+		}
+	});
 });
 $("#verDataEnLinea").click(function () {
 	//Acción mostrar solo formulario 8
@@ -114,10 +367,12 @@ $("#verDataEnLinea").click(function () {
 	$("#docentes").hide();
 	$("#plataforma").hide();
 	$("#enLinea").show();
-	/** Formulario 8 (Nuevo) **/
+	/** Formulario 8 Tabla **/
 	let html = "";
 	let data = {
-		id_organizacion: data_orgFinalizada["0"].organizaciones['0']['id_organizacion']
+		id_organizacion: data_orgFinalizada["0"].organizaciones['0']['id_organizacion'],
+		idSolicitud: data_orgFinalizada["0"].tipoSolicitud['0']['idSolicitud'],
+		keyForm: 8,
 	}
 	// Consultar datos por ajax
 	$.ajax({
@@ -128,15 +383,32 @@ $("#verDataEnLinea").click(function () {
 		success: function (response) {
 			// Llenar tabla de datos en línea registrados
 			if(response.enLinea.length == 0){
-
+				html += "<td colspan='4'>No hay datos </td></tr>";
 			}
-			for (let i = 0; i < response.enLinea.length; i++) {
-				html += "<tr><td>" + response.enLinea[i]['nombreHerramienta'] + "</td>";
-				html += "<td>" + response.enLinea[i]['descripcionHerramienta'] + "</td>";
-				html += "<td>" + response.enLinea[i]['fecha'] + "</td>";
-				html += "<td><button class='btn btn-success btn-sm' id='verDocHerrramientasAdmin' data-id=" + response.enLinea[i]['id'] + ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td></tr>";
+			else {
+				for (let i = 0; i < response.enLinea.length; i++) {
+					html += "<tr><td>" + response.enLinea[i]['nombreHerramienta'] + "</td>";
+					html += "<td>" + response.enLinea[i]['descripcionHerramienta'] + "</td>";
+					html += "<td>" + response.enLinea[i]['fecha'] + "</td>";
+				}
 			}
+			console.log(response.observaciones);
 			$(".datos_herramientas").html(html);
+			html = "";
+			// Llenar tabla de datos en línea registrados
+			if(response.observaciones.length == 0){
+				html += "<td colspan='4'>No hay datos </td></tr>";
+			}
+			else {
+				for (let i = 0; i < response.observaciones.length; i++) {
+					html += "<tr><td>" + response.observaciones[i]['fechaObservacion'] + "</td>";
+					html += "<td>" + response.observaciones[i]['numeroRevision'] + "</td>";
+					html += "<td>" + response.observaciones[i]['observacion'] + "</td>";
+					html += "<td><button class='btn btn-danger btn-sm eliminarDataTabla' id='eliminarObservacionForm8' data-id=" + response.observaciones[i]['id_observacion'] + ">Eliminar <i class='fa fa-thras-o' aria-hidden='true'></i></button></td></tr>";
+				}
+			}
+			$(".datos_observacion_form8").html(html);
+
 		}
 	});
 });
@@ -169,115 +441,45 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 				$("#modSol").html(response.tipoSolicitud[i].modalidadSolicitud);
 				$("#motSol").html(response.tipoSolicitud[i].motivoSolicitud);
 				$("#numeroSol").html(response.solicitudes[i].numeroSolicitudes);
-				$("#revFechaFin").html(
-					response.estadoOrganizaciones[i].fechaFinalizado
-				);
+				$("#revFechaFin").html(response.estadoOrganizaciones[i].fechaFinalizado);
 				$("#revSol").html(response.solicitudes[i].numeroRevisiones);
 				$("#revFechaSol").html(response.solicitudes[i].fechaUltimaRevision);
 				$("#estOrg").html(response.estadoOrganizaciones[i].nombre);
-				$("#camaraComercio_org").attr(
-					"href",
-					baseURL +
-					"uploads/camaraComercio/" +
-					response.organizaciones[i].camaraComercio
-				);
+				$("#camaraComercio_org").attr("href", baseURL + "uploads/camaraComercio/" + response.organizaciones[i].camaraComercio);
 				$("#nOrgSol").html(response.organizaciones[i].nombreOrganizacion);
 				$("#sOrgSol").html(response.organizaciones[i].sigla);
 				$("#nitOrgSol").html(response.organizaciones[i].numNIT);
-				$("#nrOrgSol").html(
-					response.organizaciones[i].primerNombreRepLegal +
-					" " +
-					response.organizaciones[i].primerApellidoRepLegal
-				);
-				$("#cOrgSol").html(
-					response.organizaciones[i].direccionCorreoElectronicoOrganizacion
-				);
+				$("#nrOrgSol").html(response.organizaciones[i].primerNombreRepLegal + " " + response.organizaciones[i].primerApellidoRepLegal);
+				$("#cOrgSol").html(response.organizaciones[i].direccionCorreoElectronicoOrganizacion);
 			}
 			/** Formulario 1 **/
 			for (var i = 0; i < response.informacionGeneral.length; i++) {
-				$("#actuacionOrganizacion").html(
-					response.informacionGeneral[i].actuacionOrganizacion
-				);
-				$("#direccionOrganizacion").html(
-					response.informacionGeneral[i].direccionOrganizacion
-				);
+				$("#actuacionOrganizacion").html(response.informacionGeneral[i].actuacionOrganizacion);
+				$("#direccionOrganizacion").html(response.informacionGeneral[i].direccionOrganizacion);
 				$("#extension").html(response.informacionGeneral[i].extension);
 				$("#fax").html(response.informacionGeneral[i].fax);
 				$("#fines").html(response.informacionGeneral[i].fines);
 				$("#mision").html(response.informacionGeneral[i].mision);
-				$("#nomDepartamentoUbicacion").html(
-					response.informacionGeneral[i].nomDepartamentoUbicacion
-				);
-				$("#nomMunicipioNacional").html(
-					response.informacionGeneral[i].nomMunicipioNacional
-				);
-				$("#numCedulaCiudadaniaPersona").html(
-					response.informacionGeneral[i].numCedulaCiudadaniaPersona
-				);
-				$("#objetoSocialEstatutos").html(
-					response.informacionGeneral[i].objetoSocialEstatutos
-				);
+				$("#nomDepartamentoUbicacion").html(response.informacionGeneral[i].nomDepartamentoUbicacion);
+				$("#nomMunicipioNacional").html(response.informacionGeneral[i].nomMunicipioNacional);
+				$("#numCedulaCiudadaniaPersona").html(response.informacionGeneral[i].numCedulaCiudadaniaPersona);
+				$("#objetoSocialEstatutos").html(response.informacionGeneral[i].objetoSocialEstatutos);
 				$("#otros").html(response.informacionGeneral[i].otros);
 				$("#portafolio").html(response.informacionGeneral[i].portafolio);
-				$("#presentacionInstitucional").html(
-					response.informacionGeneral[i].presentacionInstitucional
-				);
+				$("#presentacionInstitucional").html(response.informacionGeneral[i].presentacionInstitucional);
 				$("#principios").html(response.informacionGeneral[i].principios);
-				$("#tipoEducacion").html(
-					response.informacionGeneral[i].tipoEducacion
-				);
-				$("#tipoOrganizacion").html(
-					response.informacionGeneral[i].tipoOrganizacion
-				);
-				$("#urlOrganizacion").html(
-					response.informacionGeneral[i].urlOrganizacion
-				);
+				$("#tipoEducacion").html(response.informacionGeneral[i].tipoEducacion);
+				$("#tipoOrganizacion").html(response.informacionGeneral[i].tipoOrganizacion);
+				$("#urlOrganizacion").html(response.informacionGeneral[i].urlOrganizacion);
 				$("#vision").html(response.informacionGeneral[i].vision);
-				//___
-				$("#actuacionOrganizacion")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						response.informacionGeneral[i].actuacionOrganizacion
-					);
-				$("#direccionOrganizacion")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						response.informacionGeneral[i].direccionOrganizacion
-					);
-				$("#extension")
-					.parent()
-					.next()
-					.attr("data-text", response.informacionGeneral[i].extension);
-				$("#fax")
-					.parent()
-					.next()
-					.attr("data-text", response.informacionGeneral[i].fax);
-				$("#fines")
-					.parent()
-					.next()
-					.attr("data-text", response.informacionGeneral[i].fines);
-				$("#mision")
-					.parent()
-					.next()
-					.attr("data-text", response.informacionGeneral[i].mision);
-				$("#nomDepartamentoUbicacion")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						response.informacionGeneral[i].nomDepartamentoUbicacion
-					);
-				$("#nomMunicipioNacional")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						response.informacionGeneral[i].nomMunicipioNacional
-					);
+				$("#actuacionOrganizacion").parent().next().attr(response.informacionGeneral[i].actuacionOrganizacion);
+				$("#direccionOrganizacion").parent().next().attr("data-text", response.informacionGeneral[i].direccionOrganizacion);
+				$("#extension").parent().next().attr("data-text", response.informacionGeneral[i].extension);
+				$("#fax").parent().next().attr("data-text", response.informacionGeneral[i].fax);
+				$("#fines").parent().next().attr("data-text", response.informacionGeneral[i].fines);
+				$("#mision").parent().next().attr("data-text", response.informacionGeneral[i].mision);
+				$("#nomDepartamentoUbicacion").parent().next().attr("data-text", response.informacionGeneral[i].nomDepartamentoUbicacion);
+				$("#nomMunicipioNacional").parent().next().attr("data-text", response.informacionGeneral[i].nomMunicipioNacional);
 				$("#numCedulaCiudadaniaPersona")
 					.parent()
 					.next()
@@ -354,89 +556,6 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 					i +
 					'">'
 				);
-				$("#archivos_informacionGeneral>div").append(
-					"<p>Observaciones de archivos:</p>"
-				);
-				$("#archivos_informacionGeneral>div").append(
-					"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Observaciones de archivos de informacion general' data-text='Observaciones de archivos de la informacion general' data-type='informacionGeneral' id='obs-inf-gen-ing" +
-					i +
-					"' rows='3'></textarea>"
-				);
-				$("#archivos_informacionGeneral").append("</div>");
-			}
-			/** Formulario 2 **/
-			for (var i = 0; i < response.documentacionLegal.length; i++) {
-				if (response.documentacionLegal[i].registroEducativo != "No Tiene") {
-					$("#departamentoResolucion").html(response.documentacionLegal[i].departamentoResolucion);
-					$("#entidadRegistro").html(response.documentacionLegal[i].entidadRegistro);
-					$("#fechaResolucion").html(response.documentacionLegal[i].fechaResolucion);
-					$("#municipioResolucion").html(response.documentacionLegal[i].municipioResolucion);
-					$("#numeroResolucion").html(response.documentacionLegal[i].numeroResolucion);
-					$("#registroEducativo").html(response.documentacionLegal[i].registroEducativo);
-					$("#departamentoResolucion").parent().next().attr("data-text", response.documentacionLegal[i].departamentoResolucion);
-					$("#entidadRegistro").parent().next().attr("data-text", response.documentacionLegal[i].entidadRegistro);
-					$("#fechaResolucion").parent().next().attr("data-text", response.documentacionLegal[i].fechaResolucion);
-					$("#municipioResolucion").parent().next().attr("data-text", response.documentacionLegal[i].municipioResolucion);
-					$("#numeroResolucion").parent().next().attr("data-text", response.documentacionLegal[i].numeroResolucion);
-					$("#registroEducativo").parent().next().attr("data-text", response.documentacionLegal[i].registroEducativo);
-					for ($a = 0; $a < data_orgFinalizada["0"].archivos.length; $a++) {
-						if (data_orgFinalizada["0"].archivos[$a].id_formulario == "2") {
-							if (
-								data_orgFinalizada["0"].archivos[$a].tipo == "registroEdu"
-							) {
-								$carpeta = baseURL + "uploads/registrosEducativos/";
-							}
-
-							$("#archivos_documentacionLegal").append(
-								"<li class='listaArchivos'><a href='" +
-								$carpeta +
-								data_orgFinalizada["0"].archivos[$a].nombre +
-								"' target='_blank'>" +
-								data_orgFinalizada["0"].archivos[$a].nombre +
-								"</a></li>"
-							);
-						}
-					}
-					$("#archivos_documentacionLegal").append(
-						'<div class="form-group" id="documentacionLegal-observacionesGeneral' +
-						i +
-						'">'
-					);
-					$("#archivos_documentacionLegal>div").append(
-						"<p>Observaciones de archivos:</p>"
-					);
-					$("#archivos_documentacionLegal>div").append(
-						"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Observaciones de archivos documentacion legal' data-text='Observaciones de archivos de la documentacion legal' data-type='documentacionLegal' id='obs-inf-gen-docl" +
-						i +
-						"' rows='3'></textarea>"
-					);
-					$("#archivos_documentacionLegal").append("</div>");
-				} else {
-					$("#documentacion>.form-group").empty();
-
-					$("#documentacion>#ll").append(
-						'<div class="col-md-12" id="col' + i + '">'
-					);
-					$("#documentacion>#ll>#col" + i + "").append(
-						"<p>Ningún registro educativo.</p>"
-					);
-
-					$("#documentacion>#ll>#col" + i + "").append(
-						'<div class="form-group" id="documentacionLegal-observacionesGeneral' +
-						i +
-						'">'
-					);
-					$("#documentacion>#ll>#col" + i + "").append(
-						"<p>Observaciones en general:</p>"
-					);
-					$("#documentacion>#ll>#col" + i + "").append(
-						"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Observaciones en general' data-text='Observaciones de la documentacion legal' data-type='documentacionLegal' id='obs-inf-gen-ja" +
-						i +
-						"' rows='3'></textarea>"
-					);
-					$("#documentacion>#ll>#col" + i + "").append("</div>");
-					$("#documentacion>#ll").append("</div>");
-				}
 			}
 			/** Formulario 3 **/
 			if (response.registroEducativoProgramas.length > 0) {
@@ -622,519 +741,22 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 				$("#registroEducativoProgramas>#col" + i + "").append("<hr/>");
 				$("#registroEducativoProgramas").append("</div>");
 			}
-			/** Formulario 4 **/
-			for (var i = 0; i < response.antecedentesAcademicos.length; i++) {
-				$cols = 12 / parseFloat(response.antecedentesAcademicos.length);
-				if ($cols < 3) {
-					$cols = 4;
-				}
-
-				$("#antecedentesAcademicos").append(
-					'<div class="col-md-' + $cols + '" id="col' + i + '">'
-				);
-
-				$("#antecedentesAcademicos>#col" + i + "").append(
-					"<h3>Antecendente # " + (i + 1) + "</h3>"
-				);
-
-				$("#antecedentesAcademicos>#col" + i + "").append(
-					'<div class="form-group" id="antecedentesAcademicos-descripcionProceso' +
-					$cols +
-					i +
-					'">'
-				);
-				$(
-					"#antecedentesAcademicos>#col" +
-					i +
-					">#antecedentesAcademicos-descripcionProceso" +
-					$cols +
-					i +
-					""
-				).append(
-					"<p>Descripcion del proceso:</p><label class='tipoLeer'>" +
-					response.antecedentesAcademicos[i].descripcionProceso +
-					"</label>"
-				);
-				$(
-					"#antecedentesAcademicos>#col" +
-					i +
-					">#antecedentesAcademicos-descripcionProceso" +
-					$cols +
-					i +
-					""
-				).append(
-					"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Descripcion del proceso' data-text='" +
-					response.antecedentesAcademicos[i].descripcionProceso +
-					"' data-type='antecedentesAcademicos' id='obs-pnombre-docente" +
-					i +
-					"' rows='3'></textarea>"
-				);
-				$(
-					"#antecedentesAcademicos>#col" +
-					i +
-					">#antecedentesAcademicos-descripcionProceso" +
-					$cols +
-					i +
-					""
-				).append("</div>");
-
-				$("#antecedentesAcademicos>#col" + i + "").append(
-					'<div class="form-group" id="antecedentesAcademicos-justificacion' +
-					$cols +
-					i +
-					'">'
-				);
-				$(
-					"#antecedentesAcademicos>#col" +
-					i +
-					">#antecedentesAcademicos-justificacion" +
-					$cols +
-					i +
-					""
-				).append(
-					"<p>Justificacion:</p><label class='tipoLeer'>" +
-					response.antecedentesAcademicos[i].justificacion +
-					"</label>"
-				);
-				$(
-					"#antecedentesAcademicos>#col" +
-					i +
-					">#antecedentesAcademicos-justificacion" +
-					$cols +
-					i +
-					""
-				).append(
-					"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Justificacion' data-text='" +
-					response.antecedentesAcademicos[i].justificacion +
-					"' data-type='antecedentesAcademicos' id='obs-pnombre-docente" +
-					i +
-					"' rows='3'></textarea>"
-				);
-				$(
-					"#antecedentesAcademicos>#col" +
-					i +
-					">#antecedentesAcademicos-justificacion" +
-					$cols +
-					i +
-					""
-				).append("</div>");
-
-				$("#antecedentesAcademicos>#col" + i + "").append(
-					'<div class="form-group" id="antecedentesAcademicos-objetivos' +
-					$cols +
-					i +
-					'">'
-				);
-				$(
-					"#antecedentesAcademicos>#col" +
-					i +
-					">#antecedentesAcademicos-objetivos" +
-					$cols +
-					i +
-					""
-				).append(
-					"<p>Objetivos:</p><label class='tipoLeer'>" +
-					response.antecedentesAcademicos[i].objetivos +
-					"</label>"
-				);
-				$(
-					"#antecedentesAcademicos>#col" +
-					i +
-					">#antecedentesAcademicos-objetivos" +
-					$cols +
-					i +
-					""
-				).append(
-					"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Objetivos' data-text='" +
-					response.antecedentesAcademicos[i].objetivos +
-					"' data-type='antecedentesAcademicos' id='obs-pnombre-docente" +
-					i +
-					"' rows='3'></textarea>"
-				);
-				$(
-					"#antecedentesAcademicos>#col" +
-					i +
-					">#antecedentesAcademicos-objetivos" +
-					$cols +
-					i +
-					""
-				).append("</div>");
-
-				$("#antecedentesAcademicos>#col" + i + "").append(
-					'<div class="form-group" id="antecedentesAcademicos-metodologia' +
-					$cols +
-					i +
-					'">'
-				);
-				$(
-					"#antecedentesAcademicos>#col" +
-					i +
-					">#antecedentesAcademicos-metodologia" +
-					$cols +
-					i +
-					""
-				).append(
-					"<p>Metodologia:</p><label class='tipoLeer'>" +
-					response.antecedentesAcademicos[i].metodologia +
-					"</label>"
-				);
-				$(
-					"#antecedentesAcademicos>#col" +
-					i +
-					">#antecedentesAcademicos-metodologia" +
-					$cols +
-					i +
-					""
-				).append(
-					"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Metodologia' data-text='" +
-					response.antecedentesAcademicos[i].metodologia +
-					"' data-type='antecedentesAcademicos' id='obs-pnombre-docente" +
-					i +
-					"' rows='3'></textarea>"
-				);
-				$(
-					"#antecedentesAcademicos>#col" +
-					i +
-					">#antecedentesAcademicos-metodologia" +
-					$cols +
-					i +
-					""
-				).append("</div>");
-
-				$("#antecedentesAcademicos>#col" + i + "").append(
-					'<div class="form-group" id="antecedentesAcademicos-materialDidactico' +
-					$cols +
-					i +
-					'">'
-				);
-				$(
-					"#antecedentesAcademicos>#col" +
-					i +
-					">#antecedentesAcademicos-materialDidactico" +
-					$cols +
-					i +
-					""
-				).append(
-					"<p>Material didactico:</p><label class='tipoLeer'>" +
-					response.antecedentesAcademicos[i].materialDidactico +
-					"</label>"
-				);
-				$(
-					"#antecedentesAcademicos>#col" +
-					i +
-					">#antecedentesAcademicos-materialDidactico" +
-					$cols +
-					i +
-					""
-				).append(
-					"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Material didactico' data-text='" +
-					response.antecedentesAcademicos[i].materialDidactico +
-					"' data-type='antecedentesAcademicos' id='obs-pnombre-docente" +
-					i +
-					"' rows='3'></textarea>"
-				);
-				$(
-					"#antecedentesAcademicos>#col" +
-					i +
-					">#antecedentesAcademicos-materialDidactico" +
-					$cols +
-					i +
-					""
-				).append("</div>");
-
-				$("#antecedentesAcademicos>#col" + i + "").append(
-					'<div class="form-group" id="antecedentesAcademicos-bilbiografia' +
-					$cols +
-					i +
-					'">'
-				);
-				$(
-					"#antecedentesAcademicos>#col" +
-					i +
-					">#antecedentesAcademicos-bilbiografia" +
-					$cols +
-					i +
-					""
-				).append(
-					"<p>Bibliografia:</p><label class='tipoLeer'>" +
-					response.antecedentesAcademicos[i].bibliografia +
-					"</label>"
-				);
-				$(
-					"#antecedentesAcademicos>#col" +
-					i +
-					">#antecedentesAcademicos-bilbiografia" +
-					$cols +
-					i +
-					""
-				).append(
-					"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Bibliografia' data-text='" +
-					response.antecedentesAcademicos[i].bibliografia +
-					"' data-type='antecedentesAcademicos' id='obs-pnombre-docente" +
-					i +
-					"' rows='3'></textarea>"
-				);
-				$(
-					"#antecedentesAcademicos>#col" +
-					i +
-					">#antecedentesAcademicos-bilbiografia" +
-					$cols +
-					i +
-					""
-				).append("</div>");
-
-				$("#antecedentesAcademicos>#col" + i + "").append(
-					'<div class="form-group" id="antecedentesAcademicos-duracionCurso' +
-					$cols +
-					i +
-					'">'
-				);
-				$(
-					"#antecedentesAcademicos>#col" +
-					i +
-					">#antecedentesAcademicos-duracionCurso" +
-					$cols +
-					i +
-					""
-				).append(
-					"<p>Duracion del curso:</p><label class='tipoLeer'>" +
-					response.antecedentesAcademicos[i].duracionCurso +
-					"</label>"
-				);
-				$(
-					"#antecedentesAcademicos>#col" +
-					i +
-					">#antecedentesAcademicos-duracionCurso" +
-					$cols +
-					i +
-					""
-				).append(
-					"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Duracion del curso' data-text='" +
-					response.antecedentesAcademicos[i].duracionCurso +
-					"' data-type='antecedentesAcademicos' id='obs-pnombre-docente" +
-					i +
-					"' rows='3'></textarea>"
-				);
-				$(
-					"#antecedentesAcademicos>#col" +
-					i +
-					">#antecedentesAcademicos-duracionCurso" +
-					$cols +
-					i +
-					""
-				).append("</div>");
-
-				$("#antecedentesAcademicos>#col" + i + "").append(
-					'<div class="clearfix"></div>'
-				);
-				$("#antecedentesAcademicos>#col" + i + "").append("<hr/>");
-				$("#antecedentesAcademicos").append("</div>");
-			}
 			/** Formulario 5 **/
 			for (var i = 0; i < response.jornadasActualizacion.length; i++) {
 				if (response.jornadasActualizacion[i].numeroPersonas != 0) {
-					console.log(
-						"j " + parseFloat(response.jornadasActualizacion.length)
-					);
-					$cols = 12 / parseFloat(response.jornadasActualizacion.length);
-					$("#jornadasActualizacion").append(
-						'<div class="col-md-' + $cols + '" id="col' + i + '">'
-					);
-
-					$("#jornadasActualizacion>#col" + i + "").append(
-						'<div class="form-group" id="jornadasActualizacion-fechaAsistentes' +
-						i +
-						'">'
-					);
-					$(
-						"#jornadasActualizacion>#col" +
-						i +
-						">#jornadasActualizacion-fechaAsistentes" +
-						i +
-						""
-					).append(
-						"<p>Fecha de asistencia:</p><label class='tipoLeer'>" +
-						response.jornadasActualizacion[i].fechaAsistencia +
-						"</label>"
-					);
-					$(
-						"#jornadasActualizacion>#col" +
-						i +
-						">#jornadasActualizacion-fechaAsistentes" +
-						i +
-						""
-					).append(
-						"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Fecha de asistencia' data-text='" +
-						response.jornadasActualizacion[i].fechaAsistencia +
-						"' data-type='jornadasActualizacion' id='obs-pnombre-docente" +
-						i +
-						"' rows='3'></textarea>"
-					);
-					$(
-						"#jornadasActualizacion>#col" +
-						i +
-						">#jornadasActualizacion-fechaAsistentes" +
-						i +
-						""
-					).append("</div>");
-
-					$("#jornadasActualizacion>#col" + i + "").append(
-						'<div class="form-group" id="jornadasActualizacion-numeroPersonas' +
-						$cols +
-						i +
-						'">'
-					);
-					$(
-						"#jornadasActualizacion>#col" +
-						i +
-						">#jornadasActualizacion-numeroPersonas" +
-						$cols +
-						i +
-						""
-					).append(
-						"<p>Numero de personas:</p><label class='tipoLeer'>" +
-						response.jornadasActualizacion[i].numeroPersonas +
-						"</label>"
-					);
-					$(
-						"#jornadasActualizacion>#col" +
-						i +
-						">#jornadasActualizacion-numeroPersonas" +
-						$cols +
-						i +
-						""
-					).append(
-						"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Numero de personas' data-text='" +
-						response.jornadasActualizacion[i].numeroPersonas +
-						"' data-type='jornadasActualizacion' id='obs-pnombre-docente" +
-						i +
-						"' rows='3'></textarea>"
-					);
-					$(
-						"#jornadasActualizacion>#col" +
-						i +
-						">#jornadasActualizacion-numeroPersonas" +
-						$cols +
-						i +
-						""
-					).append("</div>");
-
-					$("#jornadasActualizacion").append("</div>");
-					$("#jornadasActualizacion").append(
-						'<div class="col-md-12" id="archivos_jornadasActualizacion">'
-					);
-					$("#jornadasActualizacion>#archivos_jornadasActualizacion").append(
-						"<p>Archivos:</p>"
-					);
+					$("#archivosJornadasActualizacion").append('<div class="col-md-12" id="archivos_jornadasActualizacion">');
+					$("#archivosJornadasActualizacion>#archivos_jornadasActualizacion").append("<p>Archivos:</p>");
 					for ($a = 0; $a < data_orgFinalizada["0"].archivos.length; $a++) {
 						if (data_orgFinalizada["0"].archivos[$a].id_formulario == "5") {
 							if (data_orgFinalizada["0"].archivos[$a].tipo == "jornadaAct") {
 								$carpeta = baseURL + "uploads/jornadas/";
 							}
-
-							$(
-								"#jornadasActualizacion>#archivos_jornadasActualizacion"
-							).append(
-								"<li class='listaArchivos'><a href='" +
-								$carpeta +
-								data_orgFinalizada["0"].archivos[$a].nombre +
-								"' target='_blank'>" +
-								data_orgFinalizada["0"].archivos[$a].nombre +
-								"</a></li>"
+							$("#archivosJornadasActualizacion>#archivos_jornadasActualizacion").append(
+								"<li class='listaArchivos'><a href='" + $carpeta + data_orgFinalizada["0"].archivos[$a].nombre + "' target='_blank'>" + data_orgFinalizada["0"].archivos[$a].nombre + "</a></li><br>"
 							);
 						}
 					}
-					$("#archivos_jornadasActualizacion").append(
-						'<div class="form-group" id="jornadasActualizacion-observacionesGeneral' +
-						i +
-						'">'
-					);
-					$("#archivos_jornadasActualizacion>div").append(
-						"<p>Observaciones de archivos:</p>"
-					);
-					$("#archivos_jornadasActualizacion>div").append(
-						"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Observaciones de archivos jornadas de actualizacion' data-text='Observaciones de archivos jornadas de actualizacion' data-type='jornadasActualizacion' id='obs-inf-gen-jact" +
-						i +
-						"' rows='3'></textarea>"
-					);
-					$("#archivos_jornadasActualizacion").append("</div>");
-					$("#jornadasActualizacion").append("</div>");
-				} else {
-					$("#jornadasActualizacion").append(
-						'<div class="col-md-' + $cols + '" id="col' + i + '">'
-					);
-					$("#jornadasActualizacion>#col" + i + "").append(
-						"<p>No ha asistido a ninguna jornada.</p>"
-					);
-					$("#jornadasActualizacion").append("</div>");
-
-					$("#jornadasActualizacion").append(
-						'<div class="col-md-12" id="archivos_jornadasActualizacion">'
-					);
-					$("#jornadasActualizacion>#archivos_jornadasActualizacion").append(
-						"<p>Archivos:</p>"
-					);
-
-					for ($a = 0; $a < data_orgFinalizada["0"].archivos.length; $a++) {
-						if (data_orgFinalizada["0"].archivos[$a].id_formulario == "5") {
-							if (data_orgFinalizada["0"].archivos[$a].tipo == "jornadaAct") {
-								$carpeta = baseURL + "uploads/jornadas/";
-							}
-
-							$(
-								"#jornadasActualizacion>#archivos_jornadasActualizacion"
-							).append(
-								"<li class='listaArchivos'><a href='" +
-								$carpeta +
-								data_orgFinalizada["0"].archivos[$a].nombre +
-								"' target='_blank'>" +
-								data_orgFinalizada["0"].archivos[$a].nombre +
-								"</a></li>"
-							);
-						}
-					}
-
-					$("#jornadasActualizacion>#col" + i + "").append(
-						'<div class="form-group" id="jornadasActualizacion-observacionesGeneral' +
-						$cols +
-						i +
-						'">'
-					);
-					$(
-						"#jornadasActualizacion>#col" +
-						i +
-						">#jornadasActualizacion-observacionesGeneral" +
-						$cols +
-						i +
-						""
-					).append("<p>Observaciones en general:</p>");
-					$(
-						"#jornadasActualizacion>#col" +
-						i +
-						">#jornadasActualizacion-observacionesGeneral" +
-						$cols +
-						i +
-						""
-					).append(
-						"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Observaciones en general' data-text='Observaciones de la Jornadas de actualizacion' data-type='jornadasActualizacion' id='obs-inf-gen-ja" +
-						i +
-						"' rows='3'></textarea>"
-					);
-					$(
-						"#jornadasActualizacion>#col" +
-						i +
-						">#jornadasActualizacion-observacionesGeneral" +
-						$cols +
-						i +
-						""
-					).append("</div>");
-
-					$("#jornadasActualizacion>#archivos_jornadasActualizacion").append(
-						'<div class="clearfix"></div>'
-					);
-					$("#jornadasActualizacion>#archivos_jornadasActualizacion").append(
-						"<hr/>"
-					);
+					$("#archivosJornadasActualizacion").append('</div>');
 				}
 			}
 			/** Formulario 6 **/
@@ -1838,343 +1460,7 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 					$("#docentes").append("</div>");
 				}
 			}
-			/** TODO: Formulario 10 **/
-			for (var i = 0; i < response.plataforma.length; i++) {
-				$cols = 12 / parseFloat(response.plataforma.length);
-				$("#plataforma").append(
-					'<div class="col-md-' + $cols + '" id="col' + i + '">'
-				);
 
-				$("#plataforma>#col" + i + "").append(
-					'<div class="form-group" id="plataforma-urlAplicacion' +
-					$cols +
-					i +
-					'">'
-				);
-				$(
-					"#plataforma>#col" +
-					i +
-					">#plataforma-urlAplicacion" +
-					$cols +
-					i +
-					""
-				).append(
-					"<p>URL de la aplicación:</p><label class='tipoLeer'>" +
-					response.plataforma[i].urlAplicacion +
-					"</label>"
-				);
-				$(
-					"#plataforma>#col" +
-					i +
-					">#plataforma-urlAplicacion" +
-					$cols +
-					i +
-					""
-				).append(
-					"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='URL de la aplicación' data-text='" +
-					response.plataforma[i].urlAplicacion +
-					"' data-type='plataforma' id='obs-pnombre-docente" +
-					i +
-					"' rows='3'></textarea>"
-				); //<a href='"+response.plataforma[i].urlAplicacion+"' target='_blank'>Ingresar.</a>
-				$(
-					"#plataforma>#col" +
-					i +
-					">#plataforma-urlAplicacion" +
-					$cols +
-					i +
-					""
-				).append("</div>");
-
-				$("#plataforma>#col" + i + "").append(
-					'<div class="form-group" id="plataforma-usuarioAplicacion' +
-					$cols +
-					i +
-					'">'
-				);
-				$(
-					"#plataforma>#col" +
-					i +
-					">#plataforma-usuarioAplicacion" +
-					$cols +
-					i +
-					""
-				).append(
-					"<p>Nombre de usuario en la aplicación:</p><label class='tipoLeer'>" +
-					response.plataforma[i].usuarioAplicacion +
-					"</label>"
-				);
-				$(
-					"#plataforma>#col" +
-					i +
-					">#plataforma-usuarioAplicacion" +
-					$cols +
-					i +
-					""
-				).append(
-					"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Nombre de usuario en la aplicación' data-text='" +
-					response.plataforma[i].usuarioAplicacion +
-					"' data-type='plataforma' id='obs-pnombre-docente" +
-					i +
-					"' rows='3'></textarea>"
-				);
-				$(
-					"#plataforma>#col" +
-					i +
-					">#plataforma-usuarioAplicacion" +
-					$cols +
-					i +
-					""
-				).append("</div>");
-
-				$("#plataforma>#col" + i + "").append(
-					'<div class="form-group" id="plataforma-contrasenaAplicacion' +
-					$cols +
-					i +
-					'">'
-				);
-				$(
-					"#plataforma>#col" +
-					i +
-					">#plataforma-contrasenaAplicacion" +
-					$cols +
-					i +
-					""
-				).append(
-					"<p>Contraseña en la aplicacion:</p><label class='tipoLeer'>" +
-					response.plataforma[i].contrasenaAplicacion +
-					"</label>"
-				);
-				$(
-					"#plataforma>#col" +
-					i +
-					">#plataforma-contrasenaAplicacion" +
-					$cols +
-					i +
-					""
-				).append(
-					"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Contraseña en la aplicacion' data-text='" +
-					response.plataforma[i].contrasenaAplicacion +
-					"' data-type='plataforma' id='obs-pnombre-docente" +
-					i +
-					"' rows='3'></textarea>"
-				);
-				$(
-					"#plataforma>#col" +
-					i +
-					">#plataforma-contrasenaAplicacion" +
-					$cols +
-					i +
-					""
-				).append("</div>");
-
-				$("#plataforma>#col" + i + "").append(
-					'<div class="form-group" id="plataforma-observacionesGeneral' +
-					$cols +
-					i +
-					'">'
-				);
-				$(
-					"#plataforma>#col" +
-					i +
-					">#plataforma-observacionesGeneral" +
-					$cols +
-					i +
-					""
-				).append("<p>Observaciones en general:</p>");
-				$(
-					"#plataforma>#col" +
-					i +
-					">#plataforma-observacionesGeneral" +
-					$cols +
-					i +
-					""
-				).append(
-					"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Observaciones en general' data-text='Observaciones de la plataforma' data-type='plataforma' id='obs-pnombre-docente" +
-					i +
-					"' rows='3'></textarea>"
-				);
-				$(
-					"#plataforma>#col" +
-					i +
-					">#plataforma-observacionesGeneral" +
-					$cols +
-					i +
-					""
-				).append("</div>");
-
-				$("#plataforma>#col" + i + "").append(
-					'<div class="form-group" id="plataforma-observacionesArchivo' +
-					$cols +
-					i +
-					'">'
-				);
-				$(
-					"#plataforma>#col" +
-					i +
-					">#plataforma-observacionesArchivo" +
-					$cols +
-					i +
-					""
-				).append("<p>Observaciones de la plataforma:</label>");
-				$(
-					"#plataforma>#col" +
-					i +
-					">#plataforma-observacionesArchivo" +
-					$cols +
-					i +
-					""
-				).append(
-					'<input type="file" required accept="application/pdf" class="form-control" data-val="observacionesPlataformaVirtual" name="obsPlataforma" id="obsPlataforma"><br/>'
-				);
-				$(
-					"#plataforma>#col" +
-					i +
-					">#plataforma-observacionesArchivo" +
-					$cols +
-					i +
-					""
-				).append(
-					'<input type="button" class="btn btn-siia archivos_form_obsPlataforma fa-fa" data-name="obsPlataforma" name="obsPlataforma" id="obsPlataformaV" value="Guardar archivo de observaciones &#xf00c">'
-				);
-				$(
-					"#plataforma>#col" +
-					i +
-					">#plataforma-observacionesArchivo" +
-					$cols +
-					i +
-					""
-				).append("</div>");
-
-				$("#plataforma").append("</div>");
-				$("#plataforma").append(
-					'<div class="col-md-12" id="archivos_plataforma">'
-				);
-				$("#plataforma>#archivos_plataforma").append("<p>Archivos:</p>");
-				for ($a = 0; $a < data_orgFinalizada["0"].archivos.length; $a++) {
-					if (data_orgFinalizada["0"].archivos[$a].id_formulario == "10") {
-						if (
-							data_orgFinalizada["0"].archivos[$a].tipo ==
-							"instructivoPlataforma"
-						) {
-							$carpeta = baseURL + "uploads/instructivosPlataforma/";
-						}
-
-						if (
-							data_orgFinalizada["0"].archivos[$a].tipo ==
-							"observacionesPlataformaVirtual"
-						) {
-							$carpeta = baseURL + "uploads/observacionesPlataforma/";
-						}
-
-						$("#plataforma>#archivos_plataforma").append(
-							"<li class='listaArchivos'><a href='" +
-							$carpeta +
-							data_orgFinalizada["0"].archivos[$a].nombre +
-							"' target='_blank'>" +
-							data_orgFinalizada["0"].archivos[$a].nombre +
-							"</a></li>"
-						);
-					}
-				}
-				$("#archivos_plataforma").append(
-					'<div class="form-group" id="plataforma-observacionesGeneral' +
-					i +
-					'">'
-				);
-				$("#archivos_plataforma>div").append(
-					"<p>Observaciones de archivos:</p>"
-				);
-				$("#archivos_plataforma>div").append(
-					"<textarea class='form-control obs_admin_' data-title='Observaciones de archivos plataforma' data-text='Observaciones de la plataforma' data-type='plataforma' id='obs-inf-gen-pla" +
-					i +
-					"' rows='3'></textarea>"
-				);
-				$("#archivos_plataforma").append("</div>");
-				$("#plataforma>#archivos_plataforma").append(
-					'<div class="clearfix"></div>'
-				);
-				$("#plataforma>#archivos_plataforma").append("<hr/>");
-				$("#plataforma").append("</div>");
-			}
-
-			// Botones
-			$("#registroEducativoProgramas").append('<div class="btns">');
-			//$().attr("data-text-form", "registroEducativoProgramas");
-			$("#registroEducativoProgramas>.btns").append(
-				'<button class="btn btn-siia btn-sm guardarObservaciones pull-left" id="atrReg"><i class="fa fa-arrow-left" aria-hidden="true"></i> Atrás</button>'
-			);
-			$("#registroEducativoProgramas>.btns").append(
-				'<button class="btn btn-siia btn-sm guardarObservaciones pull-right" id="sigReg">Siguiente <i class="fa fa-arrow-right" aria-hidden="true"></i></button>'
-			);
-			$("#registroEducativoProgramas").append("</div>");
-
-			$("#antecedentesAcademicos").append('<div class="btns">');
-			//$().attr("data-text-form", "antecedentesAcademicos");
-			$("#antecedentesAcademicos>.btns").append(
-				'<button class="btn btn-siia btn-sm guardarObservaciones pull-left" id="atrAntA"><i class="fa fa-arrow-left" aria-hidden="true"></i> Atrás</button>'
-			);
-			$("#antecedentesAcademicos>.btns").append(
-				'<button class="btn btn-siia btn-sm guardarObservaciones pull-right" id="sigAntA">Siguiente <i class="fa fa-arrow-right" aria-hidden="true"></i></button>'
-			);
-			$("#antecedentesAcademicos").append("</div>");
-
-			$("#jornadasActualizacion").append('<div class="btns">');
-			//$().attr("data-text-form", "jornadasActualizacion");
-			$("#jornadasActualizacion>.btns").append(
-				'<button class="btn btn-siia btn-sm guardarObservaciones pull-left" id="atrJrA"><i class="fa fa-arrow-left" aria-hidden="true"></i> Atrás</button>'
-			);
-			$("#jornadasActualizacion>.btns").append(
-				'<button class="btn btn-siia btn-sm guardarObservaciones pull-right" id="sigJrA">Siguiente <i class="fa fa-arrow-right" aria-hidden="true"></i></button>'
-			);
-			$("#jornadasActualizacion").append("</div>");
-
-			$("#datosBasicosProgramas").append('<div class="btns">');
-			//$().attr("data-text-form", "datosBasicosProgramas");
-			$("#datosBasicosProgramas>.btns").append(
-				'<button class="btn btn-siia btn-sm guardarObservaciones pull-left" id="atrDBas"><i class="fa fa-arrow-left" aria-hidden="true"></i> Atrás</button>'
-			);
-			$("#datosBasicosProgramas>.btns").append(
-				'<button class="btn btn-siia btn-sm guardarObservaciones pull-right" id="sigDBas">Siguiente <i class="fa fa-arrow-right" aria-hidden="true"></i></button>'
-			);
-			$("#datosBasicosProgramas").append("</div>");
-
-			$("#programasAvalEconomia").append('<div class="btns">');
-			//$().attr("data-text-form", "programasAvalEconomia");
-			$("#programasAvalEconomia>.btns").append(
-				'<button class="btn btn-siia btn-sm guardarObservaciones pull-left" id="atrPAvalE"><i class="fa fa-arrow-left" aria-hidden="true"></i> Atrás</button>'
-			);
-			$("#programasAvalEconomia>.btns").append(
-				'<button class="btn btn-siia btn-sm guardarObservaciones pull-right" id="sigPAvalE">Siguiente <i class="fa fa-arrow-right" aria-hidden="true"></i></button>'
-			);
-			$("#programasAvalEconomia").append("</div>");
-
-			$("#programasAvalar").append('<div class="btns">');
-			//$().attr("data-text-form", "programasAvalar");
-			$("#programasAvalar>.btns").append(
-				'<button class="btn btn-siia btn-sm guardarObservaciones pull-left" id="atrPAvalar"><i class="fa fa-arrow-left" aria-hidden="true"></i> Atrás</button>'
-			);
-			$("#programasAvalar>.btns").append(
-				'<button class="btn btn-siia btn-sm guardarObservaciones pull-right" id="sigPAvalar">Siguiente <i class="fa fa-arrow-right" aria-hidden="true"></i></button>'
-			);
-			$("#programasAvalar").append("</div>");
-
-			$("#docentes").append('<div class="btns col-md-12">');
-			//$().attr("data-text-form", "docentes");
-			$("#docentes>.btns").append(
-				'<button class="btn btn-siia btn-sm guardarObservaciones pull-left" id="atrDoce"><i class="fa fa-arrow-left" aria-hidden="true"></i> Atrás</button>'
-			);
-			$("#docentes>.btns").append(
-				'<button class="btn btn-siia btn-sm guardarObservaciones pull-right" id="sigDoce">Siguiente <i class="fa fa-arrow-right" aria-hidden="true"></i></button>'
-			);
-			$("#docentes").append("</div>");
-
-			$("#plataforma").append('<div class="btns">');
-			//$().attr("data-text-form", "plataforma");
-			$("#plataforma>.btns").append(
-				'<button class="btn btn-siia btn-sm guardarObservaciones pull-left" id="atrPlat"><i class="fa fa-arrow-left" aria-hidden="true"></i> Atrás</button>'
-			);
-			$("#plataforma").append("</div>");
 		},
 		error: function (ev) {
 			//Do nothing
@@ -2263,7 +1549,74 @@ $(document).on("click", "#verDocHerrramientasAdmin", function (){
 		}
 	});
 });
-/** Guardar Observaciones */
+/** Observaciones Formularios */
+/** Formulario 1*/
+$(".guardarObservacionesForm1").click(function (){
+	let data = {
+		observacion: $("#observacionesForm1").val(),
+		id_formulario: 1,
+		formulario: "Observaciones Información General",
+		valueForm: "datosInformacionGeneral",
+		id: $("#id_org_ver_form").attr("data-id"),
+	}
+	guardarObservacion(data);
+});
+/** Formulario 2*/
+$(".guardarObservacionesForm2").click(function (){
+	let data = {
+		observacion: $("#observacionesForm2").val(),
+		id_formulario: 2,
+		formulario: "Documentación Legal",
+		valueForm: "datosDocumentacionLegal",
+		id: $("#id_org_ver_form").attr("data-id"),
+	}
+	guardarObservacion(data);
+});
+/** Formulario 3*/
+$(".guardarObservacionesForm3").click(function (){
+	let data = {
+		observacion: $("#observacionesForm8").val(),
+		id_formulario: 3,
+		formulario: "Observaciones Antecedentes Académicos",
+		valueForm: "datosAntecedentesAcademicos",
+		id: $("#id_org_ver_form").attr("data-id"),
+	}
+	guardarObservacion(data);
+});
+/** Formulario 4*/
+$(".guardarObservacionesForm4").click(function (){
+	let data = {
+		observacion: $("#observacionesForm8").val(),
+		id_formulario: 4,
+		formulario: "Jornadas de Actualización",
+		valueForm: "datosJornadasActualizacion",
+		id: $("#id_org_ver_form").attr("data-id"),
+	}
+	guardarObservacion(data);
+});
+/** Formulario 5*/
+$(".guardarObservacionesForm5").click(function (){
+	let data = {
+		observacion: $("#observacionesForm5").val(),
+		id_formulario: 5,
+		formulario: "Observaciones Programas Básicos",
+		valueForm: "datosProgramasBasicos",
+		id: $("#id_org_ver_form").attr("data-id"),
+	}
+	guardarObservacion(data);
+});
+/** Formulario 7*/
+$(".guardarObservacionesForm7").click(function (){
+	let data = {
+		observacion: $("#observacionesForm8").val(),
+		id_formulario: 7,
+		formulario: "Observaciones Plataforma Virtual",
+		valueForm: "datosPlataformaVirtual",
+		id: $("#id_org_ver_form").attr("data-id"),
+	}
+	guardarObservacion(data);
+});
+/** Formulario 8*/
 $(".guardarObservacionesForm8").click(function (){
 	let data = {
 		observacion: $("#observacionesForm8").val(),
@@ -2275,21 +1628,29 @@ $(".guardarObservacionesForm8").click(function (){
 	guardarObservacion(data);
 });
 function guardarObservacion(data) {
+	event.preventDefault();
 	$.ajax({
 		url: baseURL + "admin/guardarObservacion",
 		type: "post",
 		dataType: "JSON",
 		data: data,
+		beforeSend: function () {
+			$(this).attr("disabled", true);
+			notificacion("Espere...", "success");
+		},
 		success: function (response) {
+			event.preventDefault();
+			$("#tabla_observaciones_form8").DataTable().destroy();
+			$("#tabla_observaciones_form8").dataTable();
 			notificacion(response.msg, "success");
 		},
 		error: function (ev) {
-			//Do nothing
+			notificacion("Ocurrio un error no se guardo.");
+			console.log(ev);
+			event.preventDefault();
 		},
 	});
 }
-
-
 $("#guardarSiObs").click(function () {
 	$id_org = $("#id_org_ver_form").attr("data-id");
 	data_org = {

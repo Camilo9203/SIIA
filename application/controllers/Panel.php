@@ -76,7 +76,7 @@ class Panel extends CI_Controller
 		$data['fecha'] = $fecha;
 		$data['data_organizacion'] = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row()->id_organizacion;
 		$data['idSolicitud'] = $this->idSolicitud();
-		$data['observaciones'] = $this->cargarObservaciones();
+		$data['observaciones'] = $this->cargarObservaciones($data['idSolicitud']);
 		$data['estadoSolicitud'] = $this->cargarEstadoSolicitudAdmin();
 		$data['archivosPlataforma'] = $this->cargarObservacionesPlataforma();
 
@@ -530,17 +530,9 @@ class Panel extends CI_Controller
 
 	}
 
-	public function cargarObservaciones()
+	public function cargarObservaciones($idSolicitud)
 	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-
-		$numero_rev = $this->db->select("numeroRevisiones")->from("solicitudes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row()->numeroRevisiones;
-
-		$id_solicitud = $this->db->select("idSolicitud")->from("tipoSolicitud")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row()->idSolicitud;
-
-		$observaciones = $this->db->select("*")->from("observaciones")->where("numeroRevision", $numero_rev)->where("idSolicitud", $id_solicitud)->where("organizaciones_id_organizacion", $id_organizacion)->order_by("valueForm", "asc")->get()->result();
+		$observaciones = $this->db->select("*")->from("observaciones")->where("idSolicitud", $idSolicitud)->order_by("valueForm", "asc")->get()->result();
 		return $observaciones;
 	}
 

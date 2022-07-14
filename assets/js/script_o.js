@@ -196,20 +196,19 @@ $(document).ready(function () {
 			data: data,
 			success: function (response) {
 				console.log(response);
-				if (
-					response.estado == "Finalizado" ||
-					response.estado == "En Observaciones"
-				) {
+				if (response.estado == "Finalizado" || response.estado == "En Observaciones") {
 					$(".nuevaSolicitud").parent().css("display", "none");
 					$(".ver_estado_solicitud").parent().css("display", "block");
 					$(".ver_plan_mejoramiento").parent().css("display", "none");
 					$(".ver_informe_actividades").parent().css("display", "none");
-				} else if (response.estado == "Acreditado") {
+				}
+				else if (response.estado == "Acreditado") {
 					$(".nuevaSolicitud").parent().css("display", "block");
 					$(".ver_docentes").parent().css("display", "block");
 					$(".ver_informe_actividades").parent().css("display", "block");
 					$(".ver_estado_solicitud").parent().css("display", "none");
-				} else {
+				}
+				else {
 					$(".nuevaSolicitud").parent().css("display", "block");
 					$(".ver_estado_solicitud").parent().css("display", "none");
 					$(".ver_docentes").parent().css("display", "none");
@@ -7110,27 +7109,7 @@ $(document).ready(function () {
 		});
 	});
 
-	$("#finalizar_si").click(function () {
-		$(this).attr("disabled", true);
 
-		$.ajax({
-			url: baseURL + "panel/finalizarProceso",
-			type: "post",
-			dataType: "JSON",
-			success: function (response) {
-				notificacion(response.msg, "success");
-				if (response.estado == "0") {
-					$(this).attr("disabled", false);
-					$("#sidebar-menu>.menu_section>a").click();
-				} else {
-					redirect(baseURL + "panel");
-				}
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
 
 	// TODO: Modal Asignar Evaluador Organizacion
 	$(document).on("click", "#verModalAsignar", function () {
@@ -14022,6 +14001,13 @@ function tablas() {
 		"tabla_docentes_asignados",
 		"tabla_visitas",
 		"tabla_plan",
+		"tabla_observaciones_form1",
+		"tabla_observaciones_form2",
+		"tabla_observaciones_form3",
+		"tabla_observaciones_form4",
+		"tabla_observaciones_form5",
+		"tabla_observaciones_form7",
+		"tabla_observaciones_form8"
 	];
 
 	for (i = 0; i < tablas.length; i++) {

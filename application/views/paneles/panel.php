@@ -547,7 +547,7 @@
 	<div id="documentacion_legal" data-form="2" class=" formulario_panel">
 		<h3>2. Documentación Legal <i class="fa fa-book" aria-hidden="true"></i></h3>
 		<p>Los Campos marcados con (*) son obligatorios.</p>
-		<small>Si no tiene el registro educativo, seleccione la opción "No", y de click en guardar.</small>
+		<small>Si no tiene el registro educativo, seleccione la opción "No", y de clic  en guardar.</small>
 		<!-- Camara de comercio -->
 		<div class="col-md-12">
 			<hr />
@@ -900,7 +900,7 @@
 		<div class="">
 			<?php echo form_open('', array('id' => 'formulario_jornadas_actualizacion')); ?>
 			<h3>4. Jornadas de actualización <i class="fa fa-handshake-o" aria-hidden="true"></i></h3>
-			<p>Registre los datos de la última jornada de actualización, organizada por Organizaciones Solidarias, a la que asistió. Si selecciona "No", de click en guardar y adjunte la carta de compromiso.</p>
+			<p>Registre los datos de la última jornada de actualización, organizada por UAEOS, a la que asistió. Si selecciona "No", de clic  en guardar y adjunte la carta de compromiso.</p>
 			<div class="form-group">
 				<label for="">5.1 Ha participado en jornadas de actualización organizadas por la UAEOS?</label>
 				<div class="checkbox">
@@ -1081,7 +1081,7 @@
 		<div class="container">
 			<div class="jumbotron">
 				<h3>Facilitadores</h3>
-				<p>Para crear facilitadores y actualizar o adjuntar archivos como hojas de vida, certificaciones, por favor, de <a href="<?php base_url() ?>panel/docentes" target="_blank">click aquí.</a></p>
+				<p>Para crear facilitadores y actualizar o adjuntar archivos como hojas de vida, certificaciones, por favor, de <a href="<?php base_url() ?>panel/docentes" target="_blank">clic  aquí.</a></p>
 			</div>
 		</div>
 		<!--<h4 id="act_doc_sol"></h4>
@@ -1273,7 +1273,7 @@
 		<div class="container">
 			<div class="jumbotron" id="verificar_btn">
 				<h4>¿Desea finalizar el proceso?</h4>
-				<p>Si ya adjunto todos los documentos e información necesaria para la solicitud, de click en si, y espere a las observaciones si existen por parte del evaluador.</p>
+				<p>Si ya adjunto todos los documentos e información necesaria para la solicitud, de clic  en si, y espere a las observaciones si existen por parte del evaluador.</p>
 				<button class="btn btn-danger btn-sm" id="finalizar_no">No, voy a verificar <i class="fa fa-times" aria-hidden="true"></i></button>
 				<button class="btn btn-siia btn-sm" id="siFinSol" data-toggle="modal" data-target="#modalFinalizarProceso">Si, terminar la solicitud <i class="fa fa-check-square-o" aria-hidden="true"></i></button>
 			</div>

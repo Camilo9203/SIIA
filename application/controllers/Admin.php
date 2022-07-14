@@ -2338,8 +2338,8 @@ class Admin extends CI_Controller
 	{
 		$id_organizacion = $this->input->post('id_organizacion');
 		$informacionGeneral = $this->db->select("*")->from("informacionGeneral")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
-		$documentacionLegal = $this->db->select("*")->from("documentacionLegal")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
-		$registroEducativoProgramas = $this->db->select("*")->from("registroEducativoProgramas")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
+		$documentacion = $this->db->select("*")->from("documentacion")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
+		$registroEducativoProgramas = $this->db->select("*")->from("registroEducativoProgramas")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
 		$antecedentesAcademicos = $this->db->select("*")->from("antecedentesAcademicos")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		$jornadasActualizacion = $this->db->select("*")->from("jornadasActualizacion")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		$datosProgramas = $this->db->select("*")->from("datosProgramas")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
@@ -2354,7 +2354,9 @@ class Admin extends CI_Controller
 		$organizaciones = $this->db->select("*")->from("organizaciones")->where("id_organizacion", $id_organizacion)->get()->result();
 		$resoluciones = $this->db->select("*")->from("resoluciones")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		$archivos = $this->db->select("*")->from("archivos")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
-		echo json_encode(array("informacionGeneral" => $informacionGeneral, "documentacionLegal" => $documentacionLegal, "registroEducativoProgramas" => $registroEducativoProgramas, "antecedentesAcademicos" => $antecedentesAcademicos, "jornadasActualizacion" => $jornadasActualizacion, "datosProgramas" => $datosProgramas, "programasAvalEconomia" => $programasAvalEconomia, "programasAvalar" => $programasAvalar, "docentes" => $docentes, "plataforma" => $plataforma, "enLinea" => $enLinea, "tipoSolicitud" => $tipoSolicitud, "solicitudes" => $solicitudes, "estadoOrganizaciones" => $estadoOrganizaciones, "organizaciones" => $organizaciones, "archivos" => $archivos, "resoluciones" => $resoluciones));
+		$observaciones = $this->db->select('*')->from('observaciones')->where("idSolicitud", $this->input->post('idSolicitud'))->where("idForm", $this->input->post('keyForm'))->get()->result();
+		$certificadoExistencia = $this->db->select('*')->from('certificadoExistencia')->where("organizaciones_id_organizacion", $this->input->post('id_organizacion'))->get()->row();
+		echo json_encode(array("informacionGeneral" => $informacionGeneral, "documentacion" => $documentacion, "registroEducativoProgramas" => $registroEducativoProgramas, "antecedentesAcademicos" => $antecedentesAcademicos, "jornadasActualizacion" => $jornadasActualizacion, "datosProgramas" => $datosProgramas, "programasAvalEconomia" => $programasAvalEconomia, "programasAvalar" => $programasAvalar, "docentes" => $docentes, "plataforma" => $plataforma, "enLinea" => $enLinea, "tipoSolicitud" => $tipoSolicitud, "solicitudes" => $solicitudes, "estadoOrganizaciones" => $estadoOrganizaciones, "organizaciones" => $organizaciones, "archivos" => $archivos, "resoluciones" => $resoluciones, "observaciones" => $observaciones, "certificadoExistencia" => $certificadoExistencia));
 	}
 	// Guardar una sola observacion
 	public function guardarObservacion()
@@ -2376,7 +2378,7 @@ class Admin extends CI_Controller
 
 
 		if ($this->db->insert('observaciones', $data_observacion)) {
-			echo json_encode(array('url' => "", 'msg' => "Se guardaron las observaciones."));
+			echo json_encode(array('url' => "", 'msg' => "Se guardaron las observaciones. Formulario" . $data_observacion['idForm'] ));
 		}
 	}
 
