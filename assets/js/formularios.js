@@ -152,7 +152,7 @@ $("#eliminarSolicitud").click(function () {
 		},
 	});
 });
-/** Formulario 2: Documentación Legal*/
+/** Formulario 2: Formularios documentación legal */
 // Camara de comercio
 $(".camaraComercio").click(function () {
 	if ($("input:radio[name=camaraComercio]:checked").val() == "Si") {
@@ -207,7 +207,6 @@ $(".registroEducativo").click(function () {
 		$("#reg_doc_cond").hide();
 	}
 });
-/** Formulario 2: Formularios documentación legal */
 // Guardar formulario certificado camara de comercio
 $("#guardar_formulario_camara_comercio").click(function () {
 	event.preventDefault();
@@ -237,6 +236,15 @@ $("#guardar_formulario_camara_comercio").click(function () {
 		},
 	});
 
+});
+// Eliminar datos camara de comercio
+$(".eliminarDatosCamaraComercio").click(function () {
+	let data = {
+		id: $(this).attr("data-id"),
+		ruta: 'uploads//',
+		tipo: 2
+	};
+	eliminarFormularioDocumentacionLegal(data);
 });
 // Guardar certificado de existencia
 $("#guardar_formulario_certificado_existencia").click(function () {
@@ -285,16 +293,16 @@ $(".verDocCertificadoExistencia").click(function (){
 		id: $(this).attr("data-id"),
 		formulario: 2.1,
 	}
-	console.log(data);
-	$.ajax({
-		url: baseURL + "panel/verDocumento",
-		type: "post",
-		dataType: "JSON",
-		data: data,
-		success: function (response){
-			window.open(response.file, '_blank');
-		}
-	});
+	verDocumentos(data);
+});
+// Eliminar datos certificado existencia
+$(".eliminarDatosCertificadoExistencia").click(function () {
+	data = {
+		id: $(this).attr("data-id"),
+		ruta: 'uploads/certificadoExistencia/',
+		tipo: 2.1
+	};
+	eliminarFormularioDocumentacionLegal(data);
 });
 // Guardar registro educativo
 $("#guardar_formulario_registro_educativo").click(function (){
@@ -344,7 +352,21 @@ $(".verDocRegistro").click(function (){
 		id: $(this).attr("data-id"),
 		formulario: 2.2,
 	}
-	console.log(data);
+	verDocumentos(data);
+});
+// Eliminar datos registro educativo
+$(".eliminarDatosRegistro").click(function () {
+	data = {
+		id: $(this).attr("data-id"),
+		ruta: 'uploads/registrosEducativos/',
+		tipo: 2.2
+	};
+	eliminarFormularioDocumentacionLegal(data);
+});
+// Funciones
+// Función Ver Documentos
+function verDocumentos (data) {
+	event.preventDefault();
 	$.ajax({
 		url: baseURL + "panel/verDocumento",
 		type: "post",
@@ -354,14 +376,9 @@ $(".verDocRegistro").click(function (){
 			window.open(response.file, '_blank');
 		}
 	});
-});
-// Eliminar datos registro educativo
-$(".eliminarDatosRegistro").click(function () {
-	data = {
-		id: $(this).attr("data-id"),
-		ruta: 'uploads/registrosEducativos/',
-		tipo: 2.2
-	};
+}
+// Función Eliminar Datos Form 2
+function  eliminarFormularioDocumentacionLegal (data) {
 	$.ajax({
 		url: baseURL + "panel/eliminarDocumentacionLegal",
 		type: "post",
@@ -380,7 +397,7 @@ $(".eliminarDatosRegistro").click(function () {
 			//Do nothing
 		},
 	});
-});
+}
 /** Formulario 3: Antecedentes Académicos */
 // Guardar formulario antecedentes académicos
 $("#guardar_formulario_antecedentes_academicos").click(function () {

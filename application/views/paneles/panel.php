@@ -593,11 +593,7 @@
 				<div class="form-group">
 					<label for="entidadCertificadoExistencia">Entidad que expide certificado existencia:<span class="spanRojo">*</span></label>
 					<br>
-					<select name="entidadCertificadoExistencia" id="entidadCertificadoExistencia" class="selectpicker form-control show-tick">
-						<option id="1" value="Ministerio De Educación">Ministerio De Educación</option>
-						<option id="2" value="Secretaria De Educación Departamental">Secretaria De Educación Departamental</option>
-						<option id="3" value="Secretaria De Educación Municipal">Secretaria De Educación Municipal</option>
-					</select>
+					<input class="form-control" type="text" name="entidadCertificadoExistencia" id="entidadCertificadoExistencia" placeholder="Entidad que expide certificado existencia" required>
 				</div>
 				<!-- Fecha de expedición-->
 				<div class="form-group">
@@ -767,7 +763,7 @@
 						echo "<td>" . $data_documentacion_legal->departamento . "</td>";
 						echo "<td>" . $data_documentacion_legal->municipio . "</td>";
 						echo "<td><button class='btn btn-primary btn-sm verDocCertificadoExistencia' data-id=" . $data_documentacion_legal->id_certificadoExistencia . ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
-						echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosEnlinea' data-id=" . $data_documentacion_legal->id . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+						echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosCertificadoExistencia' data-id=" . $data_documentacion_legal->id_certificadoExistencia . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
 					?>
 					</tbody>
 				</table>
@@ -801,6 +797,26 @@
 								echo "<td><button class='btn btn-primary btn-sm verDocRegistro' data-id=" . $data_documentacion_legal->id_registroEducativoPro . ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
 								echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosRegistro' data-id=" . $data_documentacion_legal->id_registroEducativoPro . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
 							?>
+						</tbody>
+					</table>
+				</div>
+			<?php endif; ?>
+			<?php if($data_documentacion_legal->id_tipoDocumentacion): ?>
+				<div class="">
+					<label>Registraste Camara de Comercio:</label>
+					<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+					<table id="" width="100%" border=0 class="table table-striped table-bordered">
+						<thead>
+						<tr>
+							<td>Documento</td>
+							<td>Acción</td>
+						</tr>
+						</thead>
+						<tbody id="tbody">
+						<?php
+						echo "<tr><td>Camara de comercio </td>";
+						echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosCamaraComercio' data-id=" . $data_documentacion_legal->id_tipoDocumentacion . ">Deshacer <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+						?>
 						</tbody>
 					</table>
 				</div>

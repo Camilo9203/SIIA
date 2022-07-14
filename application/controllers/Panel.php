@@ -368,12 +368,22 @@ class Panel extends CI_Controller
 		if($this->db->delete('archivos')){
 			unlink($this->input->post('ruta') . $archivo->nombre);
 			switch ($this->input->post('tipo')) {
+				case 2:
+					$documentacion = $this->db->select('*')->from('documentacion')->where('id_tipoDocumentacion', $this->input->post('id'))->get()->row();
+					$this->db->where('id_tipoDocumentacion', $documentacion->id_tipoDocumentacion);
+					if ($this->db->delete('documentacion')) {
+							echo json_encode(array('url' => "panel", 'msg' => "Se eliminaron los datos de camara de comercio."));
+					}
+					else {
+						echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los datos de camara de comercio."));
+					}
+					break;
 				case 2.1:
 					$certificadoExistencia = $this->db->select('*')->from('certificadoExistencia')->where('id_certificadoExistencia', $this->input->post('id'))->get()->row();
 					$documentacion = $this->db->select('*')->from('documentacion')->where('solicitudes_id_solicitud', $certificadoExistencia->solicitudes_id_solicitud)->get()->row();
 					$this->db->where('id_tipoDocumentacion', $documentacion->id_tipoDocumentacion);
 					if ($this->db->delete('documentacion')) {
-						$this->db->where('id_registroEducativoPro', $certificadoExistencia->id_registroEducativoPro);
+						$this->db->where('id_certificadoExistencia', $certificadoExistencia->id_certificadoExistencia);
 						if ($this->db->delete('certificadoExistencia')) {
 							echo json_encode(array('url' => "panel", 'msg' => "Se eliminaron los datos del certificado existencia."));
 						}
@@ -1300,16 +1310,16 @@ class Panel extends CI_Controller
 					if($this->db->insert('certificadoExistencia', $dataCertificadoExistencia)) {
 						$name_random = random(10);
 						$size = 100000000;
-						$registro = $this->db->select('*')->from('certificadoExistencia')->where('fechaExpedicion', $dataRegistro['fechaExpedicion'])->get()->row();
+						$registro = $this->db->select('*')->from('certificadoExistencia')->where('fechaExpedicion', $this->input->post('fechaExpedicion'))->get()->row();
 						$nombreArchivo =  $this->input->post('append_name') . "_" . $name_random . "_" . $_FILES['file']['name'];
 						$extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
-						$ruta = 'uploads/certifcadoExistencia';
+						$ruta = 'uploads/certificadoExistencia';
 						$mensaje = "Se guardo el " . $this->input->post('append_name');
 						$dataArchivo = array(
-							'tipo' => 'registroEdu',
+							'tipo' => 'certificadoExistencia',
 							'nombre' => $nombreArchivo ,
 							'id_formulario' => 2,
-							'id_registro' => $registro->id,
+							'id_registro' => $registro->id_certificadoExistencia,
 							'organizaciones_id_organizacion' => $organizacion->id_organizacion,
 						);
 
@@ -1359,7 +1369,7 @@ class Panel extends CI_Controller
 					if($this->db->insert('registroEducativoProgramas', $dataRegistro)) {
 						$name_random = random(10);
 						$size = 100000000;
-						$registro = $this->db->select('*')->from('registroEducativoProgramas')->where('numeroResolucion', $dataRegistro['numeroResolucion'])->get()->row();
+						$registro = $this->db->select('*')->from('registroEducativoProgramas')->where('numeroResolucion', $this->input->post('numeroResolucionProgramas'))->get()->row();
 						$nombreArchivo =  $this->input->post('append_name') . "_" . $name_random . "_" . $_FILES['file']['name'];
 						$extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
 						$ruta = 'uploads/registrosEducativos';
@@ -1368,7 +1378,7 @@ class Panel extends CI_Controller
 							'tipo' => 'registroEdu',
 							'nombre' => $nombreArchivo ,
 							'id_formulario' => 2,
-							'id_registro' => $registro->id,
+							'id_registro' => $registro->id_registroEducativoPro,
 							'organizaciones_id_organizacion' => $organizacion->id_organizacion,
 						);
 
@@ -3375,12 +3385,15 @@ class Panel extends CI_Controller
 			case 8:
 				$file = base_url()."uploads/instructivoEnLinea" . "/" . $archivo->nombre;
 				echo json_encode(array('file' => $file));
+				break;
 			case 2.1:
-				$file = base_url()."uploads/certifcadoExistencia" . "/" . $archivo->nombre;
+				$file = base_url()."uploads/certificadoExistencia" . "/" . $archivo->nombre;
 				echo json_encode(array('file' => $file));
+				break;
 			case 2.2:
 				$file = base_url()."uploads/registrosEducativos" . "/" . $archivo->nombre;
 				echo json_encode(array('file' => $file));
+				break;
 			default:
 		}
 	}
