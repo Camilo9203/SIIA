@@ -258,7 +258,7 @@ $("#verProgBasMenuAdmin").click(function () {
 	$("#docentes").hide();
 	$("#plataforma").hide();
 	$("#enLinea").hide();
-	/** Formulario 4 Tablas **/
+	/** Formulario 6 Tablas **/
 	let html = "";
 	let data = {
 		id_organizacion: data_orgFinalizada["0"].organizaciones['0']['id_organizacion'],
@@ -273,6 +273,20 @@ $("#verProgBasMenuAdmin").click(function () {
 		data: data,
 		success: function (response) {
 			// Llenar tabla de datos en línea registrados
+			if(response.datosProgramas.length == 0){
+				alert("1");
+				html += "<td colspan='4'>No hay datos </td></tr>";
+			}
+			else {
+				for (let i = 0; i < response.datosProgramas.length; i++) {
+					html += "<tr><td>" + response.datosProgramas[i]['nombrePrograma'] + "</td>";
+					html += "<td>" + response.datosProgramas[i]['aceptarPrograma'] + "</td>";
+					html += "<td>" + response.datosProgramas[i]['fecha'] + "</td>";
+				}
+			}
+			$(".tabla_registro_programas").html(html);
+			html = "";
+			// Llenar tabla de datos en línea registrados
 			if(response.observaciones.length == 0){
 				html += "<td colspan='4'>No hay datos </td></tr>";
 			}
@@ -285,7 +299,28 @@ $("#verProgBasMenuAdmin").click(function () {
 				}
 			}
 			$(".tabla_observaciones_form5").html(html);
-
+			// Mostrar check
+			for (let i = 0; i < response.datosProgramas.length; i++) {
+				let programa = response.datosProgramas[i]['nombrePrograma'];
+				switch (programa) {
+					case "Acreditación Curso Básico de Economía Solidaria":
+						$("#curso_basico_es").show();
+						break;
+					case "Acreditación Aval de Trabajo Asociado":
+						$("#curso_basico_aval").show();
+						break;
+					case "Acreditación Curso Medio de Economía Solidaria":
+						$("#curso_medio_es").show();
+						break;
+					case "Acreditación Curso Avanzado de Economía Solidaria":
+						$("#curso_avanzado_es").show();
+						break;
+					case "Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria":
+						$("#curso_economia_financiera").show();
+						break;
+					default:
+				}
+			}
 		}
 	});
 });
@@ -558,190 +593,8 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 				);
 			}
 			/** Formulario 3 **/
-			if (response.registroEducativoProgramas.length > 0) {
-				for (var i = 0; i < response.registroEducativoProgramas.length; i++) {
-					$cols = 12 / parseFloat(response.registroEducativoProgramas.length);
-					$("#registroEducativoProgramas").append('<div class="col-md-' + $cols + '" id="col' + i + '">');
-					$("#registroEducativoProgramas>#col" + i + "").append('<div class="form-group" id="registroEducativoProgramas-tipoResolucion' + $cols + i + '">');
-					$("#registroEducativoProgramas>#col" + i + ">#registroEducativoProgramas-tipoResolucion" + $cols + i + "").append(
-						"<p>Tipo de resolucion:</p><label class='tipoLeer'>" +
-						response.registroEducativoProgramas[i].tipoEducacion +
-						"</label>"
-					);
-					$("#registroEducativoProgramas>#col" + i + ">#registroEducativoProgramas-tipoResolucion" + $cols + i + "").append(
-						"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Tipo de resolucion' data-text='" +
-						response.registroEducativoProgramas[i].tipoEducacion +
-						"' data-type='registroEducativo' id='observaciones' id='obs-pnombre-docente" +
-						i +
-						"' rows='3'></textarea>"
-					);
-					$("#registroEducativoProgramas>#col" + i + ">#registroEducativoProgramas-tipoResolucion" + $cols + i + "").append("</div>");
-					$("#registroEducativoProgramas>#col" + i + "").append('<div class="form-group" id="registroEducativoProgramas-fechaResolucion' + i + '">');
-					$("#registroEducativoProgramas>#col" + i + ">#registroEducativoProgramas-fechaResolucion" + i + "").append(
-						"<p>Fecha de la resolucion:</p><label class='tipoLeer'>" +
-						response.registroEducativoProgramas[i].fechaResolucion +
-						"</label>");
-					$("#registroEducativoProgramas>#col" + i + ">#registroEducativoProgramas-fechaResolucion" + i + "").append(
-						"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Fecha de la resolucion' data-text='" +
-						response.registroEducativoProgramas[i].fechaResolucion +
-						"' data-type='registroEducativo' id='obs-pnombre-docente" +
-						i +
-						"' rows='3'></textarea>"
-					);
-					$("#registroEducativoProgramas>#col" + i + ">#registroEducativoProgramas-fechaResolucion" + i + "").append("</div>");
-					$("#registroEducativoProgramas>#col" + i + "").append('<div class="form-group" id="registroEducativoProgramas-numeroResolucion' + $cols + i + '">');
-					$("#registroEducativoProgramas>#col" + i + ">#registroEducativoProgramas-numeroResolucion" + $cols + i + "").append(
-						"<p>Numero de la resolucion:</p><label class='tipoLeer'>" +
-						response.registroEducativoProgramas[i].numeroResolucion +
-						"</label>"
-					);
-					$("#registroEducativoProgramas>#col" + i + ">#registroEducativoProgramas-numeroResolucion" + $cols + i + "").append(
-						"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Numero de la resolucion' data-text='" +
-						response.registroEducativoProgramas[i].numeroResolucion +
-						"' data-type='registroEducativo' id='obs-pnombre-docente" +
-						i +
-						"' rows='3'></textarea>"
-					);
-					$("#registroEducativoProgramas>#col" + i + ">#registroEducativoProgramas-numeroResolucion" + $cols + i + "").append("</div>");
 
-					$("#registroEducativoProgramas>#col" + i + "").append(
-						'<div class="form-group" id="registroEducativoProgramas-nombrePrograma' +
-						$cols +
-						i +
-						'">'
-					);
-					$(
-						"#registroEducativoProgramas>#col" +
-						i +
-						">#registroEducativoProgramas-nombrePrograma" +
-						$cols +
-						i +
-						""
-					).append(
-						"<p>Nombre del programa:</p><label class='tipoLeer'>" +
-						response.registroEducativoProgramas[i].nombrePrograma +
-						"</label>"
-					);
-					$(
-						"#registroEducativoProgramas>#col" +
-						i +
-						">#registroEducativoProgramas-nombrePrograma" +
-						$cols +
-						i +
-						""
-					).append(
-						"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Nombre del programa' data-text='" +
-						response.registroEducativoProgramas[i].nombrePrograma +
-						"' data-type='registroEducativo' id='obs-pnombre-docente" +
-						i +
-						"' rows='3'></textarea>"
-					);
-					$(
-						"#registroEducativoProgramas>#col" +
-						i +
-						">#registroEducativoProgramas-nombrePrograma" +
-						$cols +
-						i +
-						""
-					).append("</div>");
-
-					$("#registroEducativoProgramas>#col" + i + "").append(
-						'<div class="form-group" id="registroEducativoProgramas-objetoResolucion' +
-						$cols +
-						i +
-						'">'
-					);
-					$(
-						"#registroEducativoProgramas>#col" +
-						i +
-						">#registroEducativoProgramas-objetoResolucion" +
-						$cols +
-						i +
-						""
-					).append(
-						"<p>Objeto de la resolucion:</p><label class='tipoLeer'>" +
-						response.registroEducativoProgramas[i].objetoResolucion +
-						"</label>"
-					);
-					$(
-						"#registroEducativoProgramas>#col" +
-						i +
-						">#registroEducativoProgramas-objetoResolucion" +
-						$cols +
-						i +
-						""
-					).append(
-						"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Objeto de la resolucion' data-text='" +
-						response.registroEducativoProgramas[i].objetoResolucion +
-						"' data-type='registroEducativo' id='obs-pnombre-docente" +
-						i +
-						"' rows='3'></textarea>"
-					);
-					$(
-						"#registroEducativoProgramas>#col" +
-						i +
-						">#registroEducativoProgramas-objetoResolucion" +
-						$cols +
-						i +
-						""
-					).append("</div>");
-
-					$("#registroEducativoProgramas>#col" + i + "").append(
-						'<div class="form-group" id="registroEducativoProgramas-entidadResolucion' +
-						$cols +
-						i +
-						'">'
-					);
-					$(
-						"#registroEducativoProgramas>#col" +
-						i +
-						">#registroEducativoProgramas-entidadResolucion" +
-						$cols +
-						i +
-						""
-					).append(
-						"<p>Entidad resolucion:</p><label class='tipoLeer'>" +
-						response.registroEducativoProgramas[i].entidadResolucion +
-						"</label>"
-					);
-					$(
-						"#registroEducativoProgramas>#col" +
-						i +
-						">#registroEducativoProgramas-entidadResolucion" +
-						$cols +
-						i +
-						""
-					).append(
-						"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Entidad resolucion' data-text='" +
-						response.registroEducativoProgramas[i].entidadResolucion +
-						"' data-type='registroEducativo' id='obs-pnombre-docente" +
-						i +
-						"' rows='3'></textarea>"
-					);
-					$(
-						"#registroEducativoProgramas>#col" +
-						i +
-						">#registroEducativoProgramas-entidadResolucion" +
-						$cols +
-						i +
-						""
-					).append("</div>");
-
-					$("#registroEducativoProgramas").append("</div>");
-				}
-			}
-			else {
-				$("#registroEducativoProgramas").append('<div class="col-md-12" id="col' + i + '">');
-				$("#registroEducativoProgramas>#col" + i + "").append("<p>Ningún registro educativo.</p>");
-				$("#registroEducativoProgramas>#col" + i + "").append('<div class="form-group" id="jornadasActualizacion-observacionesGeneral' + i + '">');
-				$("#registroEducativoProgramas>#col" + i + "").append("<p>Observaciones en general:</p>");
-				$("#registroEducativoProgramas>#col" + i + "").append("<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Observaciones en general' data-text='Observaciones de la registro educativo' data-type='registroEducativo' id='obs-inf-gen-ja" + i + "' rows='3'></textarea>");
-				$("#registroEducativoProgramas>#col" + i + "").append("</div>");
-				$("#registroEducativoProgramas>#col" + i + "").append('<div class="clearfix"></div>');
-				$("#registroEducativoProgramas>#col" + i + "").append("<hr/>");
-				$("#registroEducativoProgramas").append("</div>");
-			}
-			/** Formulario 5 **/
+			/** Formulario 4 Archivos **/
 			for (var i = 0; i < response.jornadasActualizacion.length; i++) {
 				if (response.jornadasActualizacion[i].numeroPersonas != 0) {
 					$("#archivosJornadasActualizacion").append('<div class="col-md-12" id="archivos_jornadasActualizacion">');
@@ -760,30 +613,6 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 				}
 			}
 			/** Formulario 6 **/
-			for (var i = 0; i < response.datosProgramas.length; i++) {
-				console.log(response.datosProgramas[0]['nombrePrograma']);
-				for (let i = 0; i < response.datosProgramas.length; i++) {
-					let programa = response.datosProgramas[i]['nombrePrograma'];
-					switch (programa) {
-						case "Acreditación Curso Básico de Economía Solidaria":
-							$("#curso_basico_es").show();
-							break;
-						case "Acreditación Aval de Trabajo Asociado":
-							$("#curso_basico_aval").show();
-							break;
-						case "Acreditación Curso Medio de Economía Solidaria":
-							$("#curso_medio_es").show();
-							break;
-						case "Acreditación Curso Avanzado de Economía Solidaria":
-							$("#curso_avanzado_es").show();
-							break;
-						case "Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria":
-							$("#curso_economia_financiera").show();
-							break;
-						default:
-					}
-				}
-			}
 			/** Formulario 7 **/
 			for (var i = 0; i < response.programasAvalEconomia.length; i++) {
 				$("#objetivosProgramasAvalEconomia").html(
@@ -1640,8 +1469,6 @@ function guardarObservacion(data) {
 		},
 		success: function (response) {
 			event.preventDefault();
-			$("#tabla_observaciones_form8").DataTable().destroy();
-			$("#tabla_observaciones_form8").dataTable();
 			notificacion(response.msg, "success");
 		},
 		error: function (ev) {

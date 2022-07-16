@@ -12,16 +12,28 @@
 			</div>
 		</div>
 	</div>
+	<!-- Botón Perfil -->
+<!--	<div class="col-md-3">-->
+<!--		<div class="panel panel-siia nuevaSolicitud">-->
+<!--			<div class="panel-heading">-->
+<!--				<h3 class="panel-title">Solicitud <i class="fa fa-file" aria-hidden="true"></i></h3>-->
+<!--			</div>-->
+<!--			<div class="panel-body">-->
+<!--				<button class="btn btn-default btn-block form-control nuevaSolicitud" id="nuevaSolicitud">Crear - Continuar - Actualizar la solicitud </button>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
 	<div class="col-md-3">
-		<div class="panel panel-siia nuevaSolicitud">
+		<div class="panel panel-siia verSolicitudes">
 			<div class="panel-heading">
 				<h3 class="panel-title">Solicitud <i class="fa fa-file" aria-hidden="true"></i></h3>
 			</div>
 			<div class="panel-body">
-				<button class="btn btn-default btn-block form-control nuevaSolicitud" id="nuevaSolicitud">Crear - Continuar - Actualizar la solicitud </button>
+				<button class="btn btn-default btn-block form-control verSolicitudes" id="verSolicitudes">Crear - Continuar - Actualizar la solicitud </button>
 			</div>
 		</div>
 	</div>
+	<!-- Botón Perfil -->
 	<div class="col-md-3">
 		<div class="panel panel-siia ver_perfil">
 			<div class="panel-heading">
@@ -53,7 +65,7 @@
 		</div>
 	</div>
 	<!-- Informate de actividades //TODO: Antes comentado -->
-	<div class="col-md-3">
+	<!-- <div class="col-md-3">
 		<div class="panel panel-siia ver_informe_actividades">
 			<div class="panel-heading">
 				<h3 class="panel-title">Informes <i class="fa fa-flag" aria-hidden="true"></i></h3>
@@ -62,9 +74,9 @@
 				<button class="btn btn-default btn-block ver_informe_actividades" id="ver_informe_actividades">Informe de actividades </button>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<!-- Informate de actividades //TODO: Antes no comentado -->
-	<!-- <div class="col-md-3">
+	<div class="col-md-3">
 		<div class="panel panel-siia">
 			<div class="panel-heading">
 				<h3 class="panel-title">Informes <i class="fa fa-flag" aria-hidden="true"></i></h3>
@@ -73,7 +85,8 @@
 				<button class="btn btn-default form-control" data-toggle="modal" data-toggle="modal" data-target="#modalInformeAct2019">Informes de Actividades </button>
 			</div>
 		</div>
-	</div> -->
+	</div>
+	<!-- Contacto //TODO: Antes no comentado -->
 	<!--<div class="col-md-3 hidden">
 		<div class="panel panel-siia contacto">
 		  <div class="panel-heading">
@@ -95,6 +108,38 @@
 		</div>
 	</div>
 </div>
+<div id="solicitudesRegistradas" class="container center-block">
+	<!-- Tabla herramientas -->
+	<?php if($data_solicitudes): ?>
+		<div class="">
+			<label>Datos de herramientas:</label>
+			<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+			<table id="" width="100%" border=0 class="table table-striped table-bordered">
+				<thead>
+				<tr>
+					<td>Herramienta</td>
+					<td>Descripción</td>
+					<td>Fecha de registro</td>
+					<td>Acción</td>
+				</tr>
+				</thead>
+				<tbody id="tbody">
+				<?php
+				foreach ($data_solicitudes as $solicitud) {
+					echo "<tr><td>" . $solicitud->idSolicitud . "</td>";
+					echo "<td>" . $solicitud->fecha . "</td>";
+					echo "<td>" . $solicitud->fechaUltimaRevision . "</td>";
+					echo "<td>" . $solicitud->numeroRevisiones . "</td>";
+					echo "<td>" . $solicitud->numeroRevisiones . "</td>";
+					echo "<td><button id='nuevaSolicitud' class='btn btn-danger btn-sm eliminarDataTabla' data-id=" . $solicitud->idSolicitud . ">Actualizar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+				}
+				?>
+				</tbody>
+			</table>
+		</div>
+	<?php endif	?>
+</div>
+
 <!-- Formulario tipo de solicitud //TODO: Formulario tipo de solicitud -->
 <div id="tipoSolicitud" class="col-md-5 center-block">
 	<?php echo form_open('', array('id' => 'formulario_crear_solicitud')); ?>
@@ -183,7 +228,7 @@
 	<div class="modal-dialog modal-xs" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title" id="guardarOBSSIs">¿Está seguro de presentar la modalidad virtual?</h4>
+				<h4 class="modal-title">¿Está seguro de presentar la modalidad virtual?</h4>
 			</div>
 			<div class="modal-body">
 				<p>De acuerdo a lo establecido en el parágrafo número 1 del artículo 6 de la resolución 152 del 23 de junio del 2022, las entidades que soliciten la acreditación por la modalidad en línea deben tener en cuenta lo siguiente:</p>
@@ -204,7 +249,7 @@
 	<div class="modal-dialog modal-xs" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title" id="guardarOBSSIs">¿Está seguro de presentar la modalidad en Línea?</h4>
+				<h4 class="modal-title">¿Está seguro de presentar la modalidad en Línea?</h4>
 			</div>
 			<div class="modal-body">
 				<p>De acuerdo a lo establecido en los parágrafos número 2 y número 3 del artículo 9 de la resolución 110 del 31 de marzo del 2016, las entidades que soliciten la acreditación por la modalidad en linea deben tener en cuenta lo siguiente:</p>
@@ -220,7 +265,6 @@
 		</div>
 	</div>
 </div>
-
 <!-- Formularios -->
 <div class="col-md-9 formularios" role="main">
 	<!-- Inicio del Panel Inicial -->
@@ -257,7 +301,6 @@
 		</div>
 		<hr />
 	</div>
-	<!-- Fin del Panel Inicial -->
 	<!-- Modal - Inicio - Eliminar Solicitud -->
 	<div class="modal fade" id="modalEliminarSolicitud" tabindex="-1" role="dialog" aria-labelledby="eliminarSolicitudT">
 		<div class="modal-dialog" role="document">
@@ -281,8 +324,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- Modal - FIN -->
-	<!-- Inicio de Formularios Acreditación -->
 	<!-- Formulario de información general de la entidad 1 - INICIO -->
 	<div id="informacion_general_entidad" data-form="1" class=" formulario_panel">
 		<?php echo form_open('', array('id' => 'formulario_informacion_general_entidad')); ?>
@@ -377,7 +418,7 @@
 				<input type="text" class="form-control" name="direccion" id="direccion" required="" placeholder="Dirección" value="<?php echo $data_informacion_general->direccionOrganizacion; ?>">
 			</div>
 			<div class="form-group">
-				<label>Fax - Teléfono:<span class="spanRojo">*</span></label>
+				<label>Teléfono de Contacto:<span class="spanRojo">*</span></label>
 				<input type="text" name="fax" id="fax" class="form-control" required="" placeholder="Fax - Teléfono" value="<?php echo $data_informacion_general->fax; ?>">
 			</div>
 			<div class="checkbox">
@@ -588,7 +629,7 @@
 			</div>
 			<!-- Formulario: Certificado de Existencia y Representación Legal -->
 			<div id="div_certificado_existencia">
-				<?php echo form_open_multipart('', array('id' => 'formulario_certificado_existencia')); ?>
+				<?php echo form_open_multipart('', array('id' => 'formulario_certificado_existencia_legal')); ?>
 				<!-- Entidad -->
 				<div class="form-group">
 					<label for="entidadCertificadoExistencia">Entidad que expide certificado existencia:<span class="spanRojo">*</span></label>
@@ -657,6 +698,7 @@
 			<!-- Formulario: Registro educativo -->
 			<div id="div_registro_educativo">
 				<?php echo form_open('', array('id' => 'formulario_registro_educativo')); ?>
+				<!-- Entidad -->
 				<div class="form-group">
 					<label for="tipoEducacion">Tipo de educación:<span class="spanRojo">*</span></label>
 					<br>
@@ -1138,17 +1180,59 @@
 		<h3>7. Datos modalidad virtual<i class="fa fa-globe" aria-hidden="true"></i></h3>
 		<p>Ingrese los datos de ingreso con un instructivo para poder navegar dentro del curso.</p>
 		<?php echo form_open('', array('id' => 'formulario_modalidad_virtual')); ?>
+			<!-- URL Plataforma -->
 			<div class="form-group">
-				<label for="datos_plataforma_url">URL:<span class="spanRojo">*</span></label>
-				<input type="text" class="form-control" name="datos_plataforma_url" id="datos_plataforma_url" placeholder="EJ: https://www.orgsolidarias.gov.co/" required>
+					<label for="datos_plataforma_url">URL:<span class="spanRojo">*</span></label>
+					<input type="text" class="form-control" name="datos_plataforma_url" id="datos_plataforma_url" placeholder="EJ: https://www.orgsolidarias.gov.co/" required>
+				</div>
+			<!-- Usuario -->
+			<div class="form-group">
+					<label for="datos_plataforma_usuario">Usuario:<span class="spanRojo">*</span></label>
+					<input type="text" class="form-control" name="datos_plataforma_usuario" id="datos_plataforma_usuario" placeholder="EJ: usuario.aplicacion" required>
+				</div>
+			<!-- Contraseña -->
+			<div class="form-group">
+					<label for="datos_plataforma_contrasena">Contraseña:<span class="spanRojo">*</span></label>
+					<input type="text" class="form-control" name="datos_plataforma_contrasena" id="datos_plataforma_contrasena" placeholder="EJ: contraseña123@" required>
+				</div>
+			<!-- Check Aceptar Modalidad Virtual -->
+			<div class="form-group">
+				<label class="underlined">
+					<input type="checkbox" id="acepta_mod_en_virtual" form="formulario_programas" name="acepta_mod_en_virtual" value="Si Acepto" disabled required>
+					<label for="acepta_mod_en_linea">&nbsp;</label>
+					<a data-toggle="modal" data-target="#modalAceptarVirtual" data-backdrop="static" data-keyboard="false">
+						<span class="spanRojo">*</span>¿Acepta modalidad virtual?
+					</a>
+				</label>
 			</div>
-			<div class="form-group">
-				<label for="datos_plataforma_usuario">Usuario:<span class="spanRojo">*</span></label>
-				<input type="text" class="form-control" name="datos_plataforma_usuario" id="datos_plataforma_usuario" placeholder="EJ: usuario.aplicacion" required>
-			</div>
-			<div class="form-group">
-				<label for="datos_plataforma_contrasena">Contraseña:<span class="spanRojo">*</span></label>
-				<input type="text" class="form-control" name="datos_plataforma_contrasena" id="datos_plataforma_contrasena" placeholder="EJ: contraseña123@" required>
+			<hr />
+			<!-- Modal Aceptar Modalidad Virtual -->
+			<div class="modal fade" id="modalAceptarVirtual" tabindex="-1" role="dialog" aria-labelledby="modalAceptarVirtual">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<div class="row">
+								<div id="header_politicas" class="col-md-12">
+									<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="http://localhost/siia/assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
+								</div>
+								<div class="clearfix"></div>
+								<hr />
+								<div class="col-md-12">
+									Texto Recomendaciones Modalidad Virtual
+								</div>
+							</div>
+						</div>
+						<div class="modal-body">
+							<p>De acuerdo a lo establecido en el parágrafo número 1 del artículo 6 de la resolución 152 del 23 de junio del 2022, las entidades que soliciten la acreditación por la modalidad en línea deben tener en cuenta lo siguiente:</p>
+							<p><strong>Parágrafo 1.</strong> Para la acreditación de los programas de educación en economía solidaria bajo modalidad virtual, la entidad solicitante deberá demostrar que el proceso educativo se hace en una <stron>plataforma</stron> (sesiones clase, materiales de apoyo, actividades, evaluaciones) que propicie un Ambiente Virtual de Aprendizaje - AVA y Objetos Virtuales de Aprendizaje- OVAS. </p>
+							<p>Recuerde desarrollar el proceso formativo acorde a lo establecido en el anexo técnico.</p>
+							<p>La UAEOS realizará seguimiento a las organizaciones acreditadas en el cumplimiento de los programas de educación solidaria acreditados.</p>
+							<!--				<a class="pull-right" target="_blank" href="https://www.orgsolidarias.gov.co/sites/default/files/archivos/Res_110%20del%2031%20de%20marzo%20de%202016.pdf">Recurso de la resolución 110</a>-->
+							<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
+							<button type="button" class="btn btn-siia btn-sm pull-right" id="acepto_mod_virtual">Sí, acepto. <i class="fa fa-check"></i></button>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="clearfix"></div>
 			<hr />
@@ -1220,13 +1304,17 @@
 							</div>
 							<div class="clearfix"></div>
 							<hr />
-							<!-- Tablas de cursos -->
 							<div class="col-md-12">
 								Texto Recomendaciones Modalidad En Línea
 							</div>
 						</div>
 					</div>
 					<div class="modal-body">
+						<p>De acuerdo a lo establecido en los parágrafos número 2 y número 3 del artículo 9 de la resolución 110 del 31 de marzo del 2016, las entidades que soliciten la acreditación por la modalidad en linea deben tener en cuenta lo siguiente:</p>
+						<p><strong>Parágrafo 2.</strong> Para la acreditación de los programas de educación en economía solidaria bajo modalidad línea, aquella donde los docentes y participantes interactúan a través de recursos tecnológicos. La mediación tecnológica puede ser a través de herramientas tecnológica (Zoom, Teams, Meet, Good Meet, entre otras) plataformas de comunicación, chats, foros, videoconferencias, grupos de discusión, <strong>caracterizadas por encuentros sincrónicos.</strong> </p>
+						<p>Recuerde desarrollar el proceso formativo acorde a lo establecido en el anexo técnico.</p>
+						<p>La UAEOS realizará seguimiento a las organizaciones acreditadas en el cumplimiento de los programas de educación solidaria acreditados.</p>
+						<!--				<a class="pull-right" target="_blank" href="https://www.orgsolidarias.gov.co/sites/default/files/archivos/Res_110%20del%2031%20de%20marzo%20de%202016.pdf">Recurso de la resolución 110</a>-->
 						<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
 						<button type="button" class="btn btn-siia btn-sm pull-right" id="acepto_mod_en_linea">Sí, acepto. <i class="fa fa-check"></i></button>
 					</div>
@@ -1266,29 +1354,28 @@
 		</div>
 		<?php endif	?>
 	</div>
-	<!-- Fin de Formularios -->
 	<!-- Continuar para finalizar Acreditación - INICIO -->
 	<div id="finalizar_proceso" data-form="0" class="col-md-9 formulario_panel">
 		<div id="verificacion_formularios"></div>
 		<div class="container">
 			<div class="jumbotron" id="verificar_btn">
 				<h4>¿Desea finalizar el proceso?</h4>
-				<p>Si ya adjunto todos los documentos e información necesaria para la solicitud, de clic  en si, y espere a las observaciones si existen por parte del evaluador.</p>
+				<p>Si ya adjunto todos los documentos e información necesaria para la solicitud, de clic en si, y espere a las observaciones si existen por parte del evaluador.</p>
 				<button class="btn btn-danger btn-sm" id="finalizar_no">No, voy a verificar <i class="fa fa-times" aria-hidden="true"></i></button>
 				<button class="btn btn-siia btn-sm" id="siFinSol" data-toggle="modal" data-target="#modalFinalizarProceso">Si, terminar la solicitud <i class="fa fa-check-square-o" aria-hidden="true"></i></button>
 			</div>
 		</div>
 	</div>
-	<!-- Continuar para finalizar Acreditación - FIN -->
 	<a id="hide-sidevar" class="btn btn-siia btn-sm hide-sidevar" role="button" title="Ocultar Menú" data-toggle="tooltip" data-placement="left"><i class="fa fa-window-close-o" aria-hidden="true"></i>
 		<v>Ocultar menú</v>
 	</a>
+	<!-- Modal Finalizar Proceso -->
 	<div class="modal fade" id="modalFinalizarProceso" tabindex="-1" role="dialog" aria-labelledby="finalizarSeguro">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="finalizarSeguro">¿Esta seguro de finalizar el proceso de solicitud?</h4>
+					<h4 class="modal-title" id="finalizarSeguro">¿Está seguro de finalizar el proceso de solicitud?</h4>
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-danger btn-sm pull-left" data-dismiss="modal">No, voy a verificar <i class="fa fa-times" aria-hidden="true"></i></button>

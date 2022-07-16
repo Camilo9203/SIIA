@@ -1,31 +1,3 @@
-/** Modales modalidades */
-$("#virtual").click(function () {
-	if(this.checked) {
-		$("#ayudaModalidadVirtual").modal("toggle");
-	}
-});
-$("#enLinea").click(function () {
-	if(this.checked) {
-		$("#ayudaModalidadEnLinea").modal("toggle");
-	}
-});
-/** Opciones modales modalidades */
-$("#noModVirt").click(function () {
-	$("#virtual").prop("checked", false);
-	$("#ayudaModalidadVirtual").modal("hide");
-});
-$("#siModVirt").click(function () {
-	$("#virtual").prop("checked", true);
-	$("#ayudaModalidadVirtual").modal("hide");
-});
-$("#noModEnLinea").click(function () {
-	$("#enLinea").prop("checked", false);
-	$("#ayudaModalidadEnLinea").modal("hide");
-});
-$("#siModEnLinea").click(function () {
-	$("#enLinea").prop("checked", true);
-	$("#ayudaModalidadEnLinea").modal("hide");
-});
 /** Guardar formulario tipo de solicitud */
 $("#guardar_formulario_tipoSolicitud").click(function () {
 	if ($("#formulario_crear_solicitud").valid()) {
@@ -79,7 +51,7 @@ $("#guardar_formulario_tipoSolicitud").click(function () {
 			}
 		});
 		// Datos a enviar
-		data = {
+		let data = {
 			tipo_solicitud: $("input:radio[name=tipo_solicitud]:checked").val(),
 			motivo_solicitud: motivo_solicitud.substring(0, motivo_solicitud.length -2),
 			modalidad_solicitud: modalidad_solicitud.substring(0, modalidad_solicitud.length -2),
@@ -148,6 +120,206 @@ $("#eliminarSolicitud").click(function () {
 			}, 2000);
 		},
 		error: function (ev) {
+			//Do nothing
+		},
+	});
+});
+/** Modales modalidades */
+$("#virtual").click(function () {
+	if(this.checked) {
+		$("#ayudaModalidadVirtual").modal("toggle");
+	}
+});
+$("#enLinea").click(function () {
+	if(this.checked) {
+		$("#ayudaModalidadEnLinea").modal("toggle");
+	}
+});
+/** Opciones modales modalidades */
+$("#noModVirt").click(function () {
+	$("#virtual").prop("checked", false);
+	$("#ayudaModalidadVirtual").modal("hide");
+});
+$("#siModVirt").click(function () {
+	$("#virtual").prop("checked", true);
+	$("#ayudaModalidadVirtual").modal("hide");
+});
+$("#noModEnLinea").click(function () {
+	$("#enLinea").prop("checked", false);
+	$("#ayudaModalidadEnLinea").modal("hide");
+});
+$("#siModEnLinea").click(function () {
+	$("#enLinea").prop("checked", true);
+	$("#ayudaModalidadEnLinea").modal("hide");
+});
+/** Formulario 1: Formularios Información general */
+// Guardar formulario 1
+$("#guardar_formulario_informacion_general_entidad").click(function () {
+	validFroms(1);
+	event.preventDefault();
+	if ($("#formulario_informacion_general_entidad").valid()) {
+		$(this).attr("disabled", true);
+		let tipo_organizacion = $("#tipo_organizacion").val();
+		let departamento = $("#departamentos").val();
+		let municipio = $("#municipios").val();
+		let direccion = $("#direccion").val();
+		let fax = $("#fax").val();
+		if ($("input:checkbox[name=extension_checkbox]:checked").val()) {
+			let extension = $("#extension").val();
+		} else {
+			var extension = "No Tiene";
+		}
+		if ($("#urlOrganizacion").val()) {
+			let urlOrganizacion = $("#urlOrganizacion").val();
+		} else {
+			let urlOrganizacion = "No Tiene";
+		}
+		let actuacion = $("#actuacion").val();
+		let educacion = $("#educacion").val();
+		let numCedulaCiudadaniaPersona = $("#numCedulaCiudadaniaPersona").val();
+		let presentacion = $("#presentacion").val();
+		let objetoSocialEstatutos = $("#objetoSocialEstatutos").val();
+		let mision = $("#mision").val();
+		let vision = $("#vision").val();
+		let principios = $("#principios").val();
+		let fines = $("#fines").val();
+		let portafolio = $("#portafolio").val();
+		let otros = $("#otros").val();
+
+
+		data = {
+			tipo_organizacion: tipo_organizacion,
+			departamento: departamento,
+			municipio: municipio,
+			direccion: direccion,
+			fax: fax,
+			extension: extension,
+			urlOrganizacion: urlOrganizacion,
+			actuacion: actuacion,
+			educacion: educacion,
+			numCedulaCiudadaniaPersona: numCedulaCiudadaniaPersona,
+			presentacion: presentacion,
+			objetoSocialEstatutos: objetoSocialEstatutos,
+			mision: mision,
+			vision: vision,
+			principios: principios,
+			fines: fines,
+			portafolio: portafolio,
+			otros: otros,
+		};
+
+		$.ajax({
+			url: baseURL + "panel/guardar_formulario_informacion_general_entidad",
+			type: "post",
+			dataType: "JSON",
+			data: data,
+			beforeSend: function () {
+				notificacion("Espere...", "success");
+			},
+			success: function (response) {
+				notificacion(response.msg, "success");
+				setInterval(function () {
+					reload();
+				}, 2000);
+			},
+			error: function (ev) {
+				//Do nothing
+			},
+		});
+	}
+});
+// Guardar archivos tipo carta
+$(".archivos_form_carta").on("click", function () {
+	$data_name = $(".archivos_form_carta").attr("data-name");
+	var file_data = $("#" + $data_name).prop("files")[0];
+	var form_data = new FormData();
+	form_data.append("file", file_data);
+	form_data.append("tipoArchivo", $("#" + $data_name).attr("data-val"));
+	form_data.append("append_name", $data_name);
+	$.ajax({
+		url: baseURL + "panel/guardarArchivoCarta",
+		dataType: "text",
+		cache: false,
+		contentType: false,
+		processData: false,
+		data: form_data,
+		type: "post",
+		dataType: "JSON",
+		beforeSubmit: function () {
+			$("#loading").show();
+		},
+		success: function (response) {
+			notificacion(response.msg, "success");
+			cargarArchivos();
+		},
+		error: function (ev) {
+			notificacion("Verifique los datos del formulario.", "success");
+		},
+	});
+});
+// Guardar archivos tipo certificaciones
+$(".archivos_form_certificacion").on("click", function () {
+	$data_name = $(".archivos_form_certificacion").attr("data-name");
+	var form_data = new FormData();
+	$.each(
+		$("#formulario_certificaciones input[type='file']"),
+		function (obj, v) {
+			var file = v.files[0];
+			form_data.append("file[" + obj + "]", file);
+		}
+	);
+	form_data.append("tipoArchivo", $("#" + $data_name + "1").attr("data-val"));
+	form_data.append("append_name", $data_name);
+	$.ajax({
+		url: baseURL + "panel/guardarArchivos",
+		dataType: "text",
+		cache: false,
+		contentType: false,
+		processData: false,
+		data: form_data,
+		type: "post",
+		dataType: "JSON",
+		beforeSubmit: function () {
+			$("#loading").show();
+		},
+		success: function (response) {
+			notificacion(response.msg, "success");
+			cargarArchivos();
+		},
+		error: function (ev) {
+			cargarArchivos();
+			//Do nothing
+		},
+	});
+});
+// Guardar imágenes del lugar
+$(".archivos_form_lugar").on("click", function () {
+	$data_name = $(".archivos_form_lugar").attr("data-name");
+	var form_data = new FormData();
+	$.each($("#formulario_lugar input[type='file']"), function (obj, v) {
+		var file = v.files[0];
+		form_data.append("file[" + obj + "]", file);
+	});
+	form_data.append("tipoArchivo", $("#" + $data_name + "1").attr("data-val"));
+	form_data.append("append_name", $data_name);
+	$.ajax({
+		url: baseURL + "panel/guardarArchivos",
+		dataType: "text",
+		cache: false,
+		contentType: false,
+		processData: false,
+		data: form_data,
+		type: "post",
+		dataType: "JSON",
+		beforeSubmit: function () {
+			$("#loading").show();
+		},
+		success: function (response) {
+			notificacion(response.msg, "success");
+			cargarArchivos();
+		},
+		error: function (ev) {
+			cargarArchivos();
 			//Do nothing
 		},
 	});
@@ -224,6 +396,30 @@ $("#guardar_formulario_camara_comercio").click(function () {
 			notificacion("Espere...", "success");
 		},
 		success: function (response) {
+			$id_organizacion = $("#id_org_ver_form").attr("data-id");
+			console.log($id_organizacion);
+			idOrg = {
+				id_organizacion: $id_organizacion,
+			};
+			$.ajax({
+				url: baseURL + "recordar/pedirCamara",
+				type: "post",
+				dataType: "JSON",
+				data: idOrg,
+				beforeSend: function () {
+					notificacion("Espere enviado correo...", "success");
+					$("#volverPedirCamara").attr("disabled", true);
+				},
+				success: function (response) {
+					notificacion("Se pidio la cámara de comercio.", "success");
+				},
+				error: function (ev) {
+					event.preventDefault();
+					console.log(ev);
+					notificacion("Ocurrió un error al solicitar camara de comercio");
+				},
+			});
+
 			notificacion(response.msg, "success");
 			setInterval(function () {
 				reload();
@@ -251,7 +447,7 @@ $("#guardar_formulario_certificado_existencia").click(function () {
 	//$(this).attr("disabled", true);
 	event.preventDefault();
 	validFroms (2.1);
-	if($("#formulario_certificado_existencia").valid()) {
+	if($("#formulario_certificado_existencia_legal").valid()) {
 		let formData = new FormData();
 		formData.append("file", $("#archivoCertifcadoExistencia").prop("files")[0]);
 		formData.append("append_name", "CertificadoExistencia");
@@ -437,6 +633,32 @@ $("#guardar_formulario_antecedentes_academicos").click(function () {
 		notificacion('Validar campos');
 	}
 });
+// Eliminar antecedentes académicos
+$(".eliminarAntecedentes").click(function () {
+	let data = {
+		id_antecedentes: $(this).attr("data-id-antecedentes"),
+	};
+	$.ajax({
+		url: baseURL + "panel/eliminarAntecedentes",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		beforeSend: function () {
+			notificacion("Espere...", "success");
+		},
+		success: function (response) {
+			notificacion(response.msg, "success");
+			setInterval(function () {
+				reload();
+			}, 2000);
+		},
+		error: function (ev) {
+			event.preventDefault();
+			console.log(ev);
+			notificacion("Ocurrió un error y no se guardaron los datos");
+		},
+	});
+});
 /** Formulario 6: Programas de Educación */
 // Acciones de cada modal de aceptación
 $("#aceptar_curso_basico_es").click(function () {
@@ -528,35 +750,46 @@ $(".eliminarDatosProgramas").click(function () {
 	});
 });
 /** Formulario 7: Modalidad Virtual*/
+// Aceptar recomendaciones modalidad virtual
+$("#acepto_mod_virtual").click(function () {
+	$("#acepta_mod_en_virtual").prop("checked", true);
+	$("#modalAceptarVirtual").modal("hide");
+});
 // Guardar datos de plataforma
 $("#guardar_formulario_plataforma").click(function () {
 	validFroms(7);
-	event.preventDefault();
 	if ($("#formulario_modalidad_virtual").valid()) {
-		let data = {
-			datos_plataforma_url: $("#datos_plataforma_url").val(),
-			datos_plataforma_usuario: $("#datos_plataforma_usuario").val(),
-			datos_plataforma_contrasena: $("#datos_plataforma_contrasena").val(),
-		};
-		$.ajax({
-			url: baseURL + "panel/guardar_formulario_aplicacion",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			beforeSend: function () {
-				$(this).attr("disabled", true);
-				notificacion("Espere...", "success");
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-				setInterval(function () {
-					reload();
-				}, 2000);
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
+		if ($("#acepta_mod_en_virtual").prop("checked") == true) {
+			event.preventDefault();
+			let data = {
+				datos_plataforma_url: $("#datos_plataforma_url").val(),
+				datos_plataforma_usuario: $("#datos_plataforma_usuario").val(),
+				datos_plataforma_contrasena: $("#datos_plataforma_contrasena").val(),
+			};
+			$.ajax({
+				url: baseURL + "panel/guardar_formulario_aplicacion",
+				type: "post",
+				dataType: "JSON",
+				data: data,
+				beforeSend: function () {
+					$(this).attr("disabled", true);
+					notificacion("Espere...", "success");
+				},
+				success: function (response) {
+					notificacion(response.msg, "success");
+					setInterval(function () {
+						reload();
+					}, 2000);
+				},
+				error: function (ev) {
+					//Do nothing
+				},
+			});
+		}
+		else {
+			notificacion("Acepte modalidad virtual");
+			event.preventDefault();
+		}
 	}
 	else {
 		notificacion("No se validaron campos");
@@ -710,8 +943,72 @@ $("#finalizar_si").click(function () {
 /** Validaciones formularios */
 function validFroms (form){
 	switch (form) {
+		case 1:
+			// Formulario Información General
+			$("form[id='formulario_informacion_general_entidad']").validate({
+				rules: {
+					tipo_organizacion: {
+						required: true,
+					},
+					departamentos: {
+						required: true,
+					},
+					municipios: {
+						required: true,
+					},
+					direccion: {
+						required: true,
+						minlength: 3,
+					},
+					fax: {
+						required: true,
+						minlength: 3,
+					},
+					actuacion: {
+						required: true,
+					},
+					educacion: {
+						required: true,
+					},
+					numCedulaCiudadaniaPersona: {
+						required: true,
+						minlength: 3,
+					},
+				},
+				messages: {
+					tipo_organizacion: {
+						required: "Por favor, seleccione un tipo de la lista.",
+					},
+					departamentos: {
+						required: "Por favor, seleccione un departamento de la lista.",
+					},
+					municipios: {
+						required: "Por favor, seleccione un municipio de la lista.",
+					},
+					direccion: {
+						required: "Por favor, escriba la direccion.",
+						minlength: "La dirección debe tener mínimo 3 caracteres.",
+					},
+					fax: {
+						required: "Por favor, escriba el fax/numero.",
+						minlength: "El numero debe tener mínimo 3 caracteres.",
+					},
+					actuacion: {
+						required: "Por favor, seleccione una actuación de la lista.",
+					},
+					educacion: {
+						required: "Por favor, seleccione un tipo de la lista.",
+					},
+					numCedulaCiudadaniaPersona: {
+						required: "Por favor, escriba la cedula del Representante Legal.",
+						minlength: "La Cedula debe tener mínimo 3 caracteres.",
+					},
+				},
+			});
+			break;
 		case 2.1:
-			$("form[id='formulario_certificado_existencia']").validate({
+			// Formulario Certificado de existencia
+			$("form[id='formulario_certificado_existencia_legal']").validate({
 				rules: {
 					entidadCertificadoExistencia: {
 						required: true,
@@ -746,7 +1043,8 @@ function validFroms (form){
 						required: "Archivo requerido, por favor ingresarlo.",
 					},
 				},
-			})
+			});
+			break;
 		case 2.2:
 			$("form[id='formulario_registro_educativo']").validate({
 				rules: {
@@ -795,7 +1093,8 @@ function validFroms (form){
 						required: "Archivo requerido, por favor adjuntarlo.",
 					},
 				},
-			})
+			});
+			break;
 		case 3:
 			$("form[id='formulario_antecedentes_academicos']").validate({
 				rules: {
@@ -844,37 +1143,41 @@ function validFroms (form){
 						required: "Duración del cursos requerida, por favor ingresarla.",
 					},
 				},
-			})
+			});
+			break;
 		case 7:
-			$("form[id='formulario_modalidad_en_linea']").validate({
+			$("form[id='formulario_modalidad_virtual']").validate({
 				rules: {
-					nombre_herramienta: {
+					datos_plataforma_url: {
 						required: true,
-						minlength: 3,
+						minlength: 10,
 					},
-					descripcion_herramienta: {
+					datos_plataforma_usuario: {
 						required: true,
+						minlength: 5,
 					},
-					acepta_mod_en_linea: {
+					datos_plataforma_contrasena: {
 						required: true,
+						minlength: 5,
 					}
 				},
 				messages: {
-					nombre_herramienta: {
-						required: "Por favor, ingrese el nombre de la herramienta.",
-						minlength: "Mínimo 3 caracteres"
+					datos_plataforma_url: {
+						required: "Por favor, ingrese la url de la plataforma virtual.",
+						minlength: "Mínimo 10 caracteres"
 					},
-					descripcion_herramienta: {
-						required: "Por favor, ingrese la descripción de la herramienta.",
+					datos_plataforma_usuario: {
+						required: "Por favor, ingrese usuario para ingresar a la plataforma.",
+						minlength: "Mínimo 5 caracteres"
+
 					},
-					acepta_mod_en_linea: {
-						required: "Por favor, lea y acepte las recomendaciones de la modalidad en línea.",
-					},
-					instructivoEnLinea: {
-						required: "Adjunte por favor instructivo de la herramienta.",
+					datos_plataforma_contrasena: {
+						required: "Por favor, ingrese contraseña para ingresar a la plataforma.",
+						minlength: "Mínimo 5 caracteres"
 					},
 				},
-			})
+			});
+			break;
 		case 8:
 			$("form[id='formulario_modalidad_virtual']").validate({
 				rules: {
@@ -905,7 +1208,8 @@ function validFroms (form){
 						minlength: "Mínimo 5 caracteres"
 					}
 				},
-			})
+			});
+			break;
 		default:
 	}
 }

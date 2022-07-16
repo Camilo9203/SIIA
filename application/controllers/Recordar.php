@@ -378,7 +378,6 @@ class Recordar extends CI_Controller {
 
 	public function pedirCamara(){
 		$id_organizacion = $this->input->post('id_organizacion');
-
 		$imagen_db = $this->db->select('camaraComercio')->from('organizaciones')->where('id_organizacion', $id_organizacion)->get()->row();
 		$imagen_db_nombre = $imagen_db ->camaraComercio;
 
@@ -389,7 +388,7 @@ class Recordar extends CI_Controller {
 
 		$this->db->where('id_organizacion', $id_organizacion);
 		if($this->db->update('organizaciones', $data_update)){
-			$this->logs_sia->session_log('Administrador:'.$this->session->userdata('nombre_usuario').' pidio nueva camara de comercio a la organizacion con id: '.$id_organizacion.'.');
+			$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario').' pidio nueva camara de comercio a la organizacion con id: '.$id_organizacion.'.');
 			$this->recordarToCamaraMail();
 		}
 
@@ -398,13 +397,11 @@ class Recordar extends CI_Controller {
 	}
 
 	public function recordarToCamaraMail(){
-		$correo = "";
-		$usuarioCamara = $this->db->select("*")->from("administradores")->where("nivel", 3)->get()->row();
-		$nombre = $usuarioCamara->primerNombreAdministrador;
-		$apellido = $usuarioCamara->primerApellidoAdministrador;
-		$correoCamara = $usuarioCamara->direccionCorreoElectronico;
 
-		$inicio = "Buen día ".$nombre." ".$apellido.", <br>Las siguientes organizaciones estan pendientes por subir la camara de comercio:<br><br>";
+		$usuarioCamara = $this->db->select("*")->from("administradores")->where("nivel", 3)->get()->row();
+		$correo = $usuarioCamara->direccionCorreoElectronico;
+
+		$head = "Buen día " . $usuarioCamara->primerNombreAdministrador . " " . $usuarioCamara->primerApellidoAdministrador . ", <br><br>Es necesario cargar las Camaras de Comercio de las siguientes organizaciones:<br><br>";
 		$orgTotales = "Organizaciones inscritas en la aplicación (todas): <br><br>";
 		$orgFinalizadas = "Organizaciones que finalizaron o en observaciones <strong>(prioritarias)</strong>: <br><br>";
 
@@ -419,20 +416,19 @@ class Recordar extends CI_Controller {
 			$documentacionLegal = $this->db->select("*")->from("documentacionLegal")->where("organizaciones_id_organizacion",$id_org)->get()->row();
 	 		$data_organizaciones_est = $this->db->select("*")->from("estadoOrganizaciones")->where("organizaciones_id_organizacion", $id_org)->get()->row();
 	 		$estadoOrganizacion = $data_organizaciones_est->nombre;
-	 		$registro = $documentacionLegal->registroEducativo;
 
-	 		if(($estadoOrganizacion == "Finalizado" || $estadoOrganizacion == "En Observaciones") && $camaraComercio == "default.pdf" && $registro == "No Tiene"){
-	 			$texto1 .= "Nombre: ".$data_organizaciones->nombreOrganizacion." con NIT: <strong>".$data_organizaciones->numNIT."</strong><br>";
+	 		if(($estadoOrganizacion == "Finalizado" || $estadoOrganizacion == "En Observaciones") && $camaraComercio == "default.pdf"){
+	 			$texto1 .= "<li> Nombre: ".$data_organizaciones->nombreOrganizacion." con NIT: <strong>".$data_organizaciones->numNIT."</strong></li>";
 	 		}
 	 		
 	 		if($data_organizaciones != NULL && $camaraComercio == "default.pdf"){
-	 			$texto .= "Nombre: ".$data_organizaciones->nombreOrganizacion." con NIT: <strong>".$data_organizaciones->numNIT."</strong><br>";
+	 			$texto .= "<li> Nombre: ".$data_organizaciones->nombreOrganizacion." con NIT: <strong>".$data_organizaciones->numNIT."</strong><br></li>";
 	 		}	 		
 		}
 
-		$correo = $inicio."".$orgFinalizadas."".$texto1."<br>".$orgTotales."".$texto;
+		$mensaje = $head . "" . $orgFinalizadas . "" . $texto1 . "<br>" . $orgTotales . "" . $texto;
 
-		$this->envio_mail_camara_admin($correo, $correoCamara);
+		$this->envio_mail_camara_admin($mensaje, $correo);
 	}
 
 	public function calculo_tiempo(){

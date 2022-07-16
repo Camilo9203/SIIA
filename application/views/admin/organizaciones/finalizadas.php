@@ -408,6 +408,21 @@
 						</div>
 						<br>
 					</div>
+					<hr />
+					<div class="">
+						<label>Registro de programas aceptados</label>
+						<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+						<table width="100%" border=0 class="table table-striped table-bordered" id="tabla_observaciones_form4">
+							<thead>
+							<tr>
+								<td>Nombre Programa</td>
+								<td>Acepta</td>
+								<td>fecha</td>
+							</tr>
+							</thead>
+							<tbody id="tbody" class="tabla_registro_programas"></tbody>
+						</table>
+					</div>
 					<div class="col-12">
 						<?php echo form_open('', array('id' => 'formulario_observacion_form6')); ?>
 						<div class="form-group">
@@ -544,7 +559,6 @@
 		</div>
 	</div>
 </div>
-
 <!-- Botón Menu de formulario -->
 <div class="icono--div4">
 	<a class="btn btn-siia btn-sm icono3 desOptSiia" role="button" title="Menu Formulario" data-toggle="tooltip" data-placement="right">Menu Formulario <i class="fa fa-bars" aria-hidden="true"></i></a>
@@ -567,8 +581,6 @@
 			<a class="toAncla" id="verFaciliMenuAdmin">6. Facilitadores <i class="fa fa-users" aria-hidden="true"></i></a><br />
 			<a class="toAncla" id="verDatPlatMenuAdmin">7. Datos Plataforma Virtual <i class="fa fa-globe" aria-hidden="true"></i></a><br />
 			<a class="toAncla" id="verDataEnLinea" data-id="<?php echo $organizaciones->id_organizacion?>">8. Datos Plataforma En Linea <i class="fa fa-globe" aria-hidden="true"></i></a><br />
-			<hr />
-			<a class="btn btn-siia btn-sm btn-block" id="guardarObservacionesModal" role="button" title="Guardar observaciones" data-toggle="tooltip" data-placement="right">Guardar observaciones <i class="fa fa-save" aria-hidden="true"></i></a>
 			<hr />
 			<button class="btn btn-siia btn-sm btn-block" data-toggle="modal" id="verModTermObs" data-target="#terminarProcObs">Terminar proceso de observaciones <i class="fa fa-check" aria-hidden="true"></i></button>
 		</div>

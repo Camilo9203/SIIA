@@ -1,7 +1,7 @@
 /* PLEASE DO NOT COPY AND PASTE THIS CODE. */
 /**
 	@Autor Camilo Rios
-	@Date 2021
+	@Date 2022
 **/
 $(document).ready(function () {
 	initJS();
@@ -260,7 +260,6 @@ $(document).ready(function () {
 			$("#adjCamara").remove();
 			$(".cambiar_img_hd").remove();
 			$(".guardarValidoDocente").remove();
-			$("#guardarObservacionesModal").remove();
 			$("#verModTermObs").remove();
 			$("#asigOrg").remove();
 			// Docentes
@@ -300,7 +299,6 @@ $(document).ready(function () {
 			$("#adjCamara").remove();
 			$(".cambiar_img_hd").remove();
 			$(".guardarValidoDocente").remove();
-			$("#guardarObservacionesModal").remove();
 			$("#verModTermObs").remove();
 			$("#asigOrg").remove();
 			// Docentes
@@ -3761,1052 +3759,6 @@ $(document).ready(function () {
 		$("#datos_org_resolucion").slideUp();
 	});
 
-	var datos_observaciones = [];
-	$("#sigInf").click(function () {
-		$("#informacion").slideUp();
-		$("#documentacion").slideDown();
-	});
-
-
-	$(".guardarObservaciones").on("click", function () {
-		$id_org = $("#id_org_ver_form").attr("data-id");
-		data_org = {
-			id_organizacion: $id_org,
-		};
-		$observaciones_adm = [];
-		for ($i = 0; $i < $("#datos_org_final textarea.obs_admin_").length; $i++) {
-			$type = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-type");
-			$title = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-title");
-			$texto = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-text");
-			$valor = $("#datos_org_final textarea.obs_admin_").eq($i).val();
-			$rev = $("#revSol").html();
-			$id_solicitud = $("#idSol").html();
-			$numero_rev = parseFloat($rev) + 1;
-
-			data = {
-				type: $type,
-				title: $title,
-				text: $texto,
-				valor: $valor,
-				numero_rev: $numero_rev,
-				id_solicitud: $id_solicitud,
-				id_organizacion: $id_org,
-			};
-			$observaciones_adm.push(data);
-		}
-
-		for ($j = 0; $j < $observaciones_adm.length; $j++) {
-			if ($observaciones_adm[$j].valor == "") {
-				$("#guardarOBSSI").modal("hide");
-				notificacion("No hay observaciones que guardar...", "success");
-			} else {
-				$.ajax({
-					url: baseURL + "admin/guardar_observacion",
-					type: "post",
-					dataType: "JSON",
-					data: $observaciones_adm[$j],
-					success: function (response) {
-						notificacion(response.msg, "success");
-						$("#guardarOBSSI").modal("hide");
-						for (
-							$i = 0;
-							$i < $("#datos_org_final textarea.obs_admin_").length;
-							$i++
-						) {
-							$(".obs_admin_").eq($i).val("");
-						}
-					},
-					error: function (ev) {
-						//Do nothing
-					},
-				});
-			}
-		}
-	});
-
-	$("#guardarObservacionesModal").click(function () {
-		$("#guardarOBSSI").modal("show");
-	});
-
-	$("#atrDoc").click(function () {
-		$("#documentacion").slideUp();
-		$("#informacion").slideDown();
-	});
-
-	$("#sigDoc").click(function () {
-		$("#documentacion").slideUp();
-		$("#registroEducativoProgramas").slideDown();
-	});
-	// TODO: Borrar funciones de botones siguiente y atrás
-	$(document).on("click", "#atrReg", function () {
-		$("#registroEducativoProgramas").slideUp();
-		$("#documentacion").slideDown();
-		$id_org = $("#id_org_ver_form").attr("data-id");
-		data_org = {
-			id_organizacion: $id_org,
-		};
-		$observaciones_adm = [];
-		for ($i = 0; $i < $("#datos_org_final textarea.obs_admin_").length; $i++) {
-			$type = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-type");
-			$title = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-title");
-			$texto = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-text");
-			$valor = $("#datos_org_final textarea.obs_admin_").eq($i).val();
-			$rev = $("#revSol").html();
-			$id_solicitud = $("#idSol").html();
-			$numero_rev = parseFloat($rev) + 1;
-
-			data = {
-				type: $type,
-				title: $title,
-				text: $texto,
-				valor: $valor,
-				numero_rev: $numero_rev,
-				id_solicitud: $id_solicitud,
-				id_organizacion: $id_org,
-			};
-			$observaciones_adm.push(data);
-		}
-
-		for ($j = 0; $j < $observaciones_adm.length; $j++) {
-			if ($observaciones_adm[$j].valor == "") {
-				$("#guardarOBSSI").modal("hide");
-				notificacion("No hay observaciones que guardar...", "success");
-			} else {
-				$.ajax({
-					url: baseURL + "admin/guardar_observacion",
-					type: "post",
-					dataType: "JSON",
-					data: $observaciones_adm[$j],
-					success: function (response) {
-						notificacion(response.msg, "success");
-						$("#guardarOBSSI").modal("hide");
-						for (
-							$i = 0;
-							$i < $("#datos_org_final textarea.obs_admin_").length;
-							$i++
-						) {
-							$(".obs_admin_").eq($i).val("");
-						}
-					},
-					error: function (ev) {
-						//Do nothing
-					},
-				});
-			}
-		}
-	});
-
-	$(document).on("click", "#sigReg", function () {
-		$("#registroEducativoProgramas").slideUp();
-		$("#antecedentesAcademicos").slideDown();
-		$id_org = $("#id_org_ver_form").attr("data-id");
-		data_org = {
-			id_organizacion: $id_org,
-		};
-		$observaciones_adm = [];
-		for ($i = 0; $i < $("#datos_org_final textarea.obs_admin_").length; $i++) {
-			$type = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-type");
-			$title = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-title");
-			$texto = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-text");
-			$valor = $("#datos_org_final textarea.obs_admin_").eq($i).val();
-			$rev = $("#revSol").html();
-			$id_solicitud = $("#idSol").html();
-			$numero_rev = parseFloat($rev) + 1;
-
-			data = {
-				type: $type,
-				title: $title,
-				text: $texto,
-				valor: $valor,
-				numero_rev: $numero_rev,
-				id_solicitud: $id_solicitud,
-				id_organizacion: $id_org,
-			};
-			$observaciones_adm.push(data);
-		}
-
-		for ($j = 0; $j < $observaciones_adm.length; $j++) {
-			if ($observaciones_adm[$j].valor == "") {
-				$("#guardarOBSSI").modal("hide");
-				notificacion("No hay observaciones que guardar...", "success");
-			} else {
-				$.ajax({
-					url: baseURL + "admin/guardar_observacion",
-					type: "post",
-					dataType: "JSON",
-					data: $observaciones_adm[$j],
-					success: function (response) {
-						notificacion(response.msg, "success");
-						$("#guardarOBSSI").modal("hide");
-						for (
-							$i = 0;
-							$i < $("#datos_org_final textarea.obs_admin_").length;
-							$i++
-						) {
-							$(".obs_admin_").eq($i).val("");
-						}
-					},
-					error: function (ev) {
-						//Do nothing
-					},
-				});
-			}
-		}
-	});
-
-	$(document).on("click", "#atrAntA", function () {
-		$("#antecedentesAcademicos").slideUp();
-		$("#registroEducativoProgramas").slideDown();
-		$id_org = $("#id_org_ver_form").attr("data-id");
-		data_org = {
-			id_organizacion: $id_org,
-		};
-		$observaciones_adm = [];
-		for ($i = 0; $i < $("#datos_org_final textarea.obs_admin_").length; $i++) {
-			$type = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-type");
-			$title = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-title");
-			$texto = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-text");
-			$valor = $("#datos_org_final textarea.obs_admin_").eq($i).val();
-			$rev = $("#revSol").html();
-			$id_solicitud = $("#idSol").html();
-			$numero_rev = parseFloat($rev) + 1;
-
-			data = {
-				type: $type,
-				title: $title,
-				text: $texto,
-				valor: $valor,
-				numero_rev: $numero_rev,
-				id_solicitud: $id_solicitud,
-				id_organizacion: $id_org,
-			};
-			$observaciones_adm.push(data);
-		}
-
-		for ($j = 0; $j < $observaciones_adm.length; $j++) {
-			if ($observaciones_adm[$j].valor == "") {
-				$("#guardarOBSSI").modal("hide");
-				notificacion("No hay observaciones que guardar...", "success");
-			} else {
-				$.ajax({
-					url: baseURL + "admin/guardar_observacion",
-					type: "post",
-					dataType: "JSON",
-					data: $observaciones_adm[$j],
-					success: function (response) {
-						notificacion(response.msg, "success");
-						$("#guardarOBSSI").modal("hide");
-						for (
-							$i = 0;
-							$i < $("#datos_org_final textarea.obs_admin_").length;
-							$i++
-						) {
-							$(".obs_admin_").eq($i).val("");
-						}
-					},
-					error: function (ev) {
-						//Do nothing
-					},
-				});
-			}
-		}
-	});
-
-	$(document).on("click", "#sigAntA", function () {
-		$("#antecedentesAcademicos").slideUp();
-		$("#jornadasActualizacion").slideDown();
-		$id_org = $("#id_org_ver_form").attr("data-id");
-		data_org = {
-			id_organizacion: $id_org,
-		};
-		$observaciones_adm = [];
-		for ($i = 0; $i < $("#datos_org_final textarea.obs_admin_").length; $i++) {
-			$type = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-type");
-			$title = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-title");
-			$texto = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-text");
-			$valor = $("#datos_org_final textarea.obs_admin_").eq($i).val();
-			$rev = $("#revSol").html();
-			$id_solicitud = $("#idSol").html();
-			$numero_rev = parseFloat($rev) + 1;
-
-			data = {
-				type: $type,
-				title: $title,
-				text: $texto,
-				valor: $valor,
-				numero_rev: $numero_rev,
-				id_solicitud: $id_solicitud,
-				id_organizacion: $id_org,
-			};
-			$observaciones_adm.push(data);
-		}
-
-		for ($j = 0; $j < $observaciones_adm.length; $j++) {
-			if ($observaciones_adm[$j].valor == "") {
-				$("#guardarOBSSI").modal("hide");
-				notificacion("No hay observaciones que guardar...", "success");
-			} else {
-				$.ajax({
-					url: baseURL + "admin/guardar_observacion",
-					type: "post",
-					dataType: "JSON",
-					data: $observaciones_adm[$j],
-					success: function (response) {
-						notificacion(response.msg, "success");
-						$("#guardarOBSSI").modal("hide");
-						for (
-							$i = 0;
-							$i < $("#datos_org_final textarea.obs_admin_").length;
-							$i++
-						) {
-							$(".obs_admin_").eq($i).val("");
-						}
-					},
-					error: function (ev) {
-						//Do nothing
-					},
-				});
-			}
-		}
-	});
-
-	$(document).on("click", "#atrJrA", function () {
-		$("#jornadasActualizacion").slideUp();
-		$("#antecedentesAcademicos").slideDown();
-		$id_org = $("#id_org_ver_form").attr("data-id");
-		data_org = {
-			id_organizacion: $id_org,
-		};
-		$observaciones_adm = [];
-		for ($i = 0; $i < $("#datos_org_final textarea.obs_admin_").length; $i++) {
-			$type = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-type");
-			$title = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-title");
-			$texto = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-text");
-			$valor = $("#datos_org_final textarea.obs_admin_").eq($i).val();
-			$rev = $("#revSol").html();
-			$id_solicitud = $("#idSol").html();
-			$numero_rev = parseFloat($rev) + 1;
-
-			data = {
-				type: $type,
-				title: $title,
-				text: $texto,
-				valor: $valor,
-				numero_rev: $numero_rev,
-				id_solicitud: $id_solicitud,
-				id_organizacion: $id_org,
-			};
-			$observaciones_adm.push(data);
-		}
-
-		for ($j = 0; $j < $observaciones_adm.length; $j++) {
-			if ($observaciones_adm[$j].valor == "") {
-				$("#guardarOBSSI").modal("hide");
-				notificacion("No hay observaciones que guardar...", "success");
-			} else {
-				$.ajax({
-					url: baseURL + "admin/guardar_observacion",
-					type: "post",
-					dataType: "JSON",
-					data: $observaciones_adm[$j],
-					success: function (response) {
-						notificacion(response.msg, "success");
-						$("#guardarOBSSI").modal("hide");
-						for (
-							$i = 0;
-							$i < $("#datos_org_final textarea.obs_admin_").length;
-							$i++
-						) {
-							$(".obs_admin_").eq($i).val("");
-						}
-					},
-					error: function (ev) {
-						//Do nothing
-					},
-				});
-			}
-		}
-	});
-
-	$(document).on("click", "#sigJrA", function () {
-		$("#jornadasActualizacion").slideUp();
-		$("#datosBasicosProgramas").slideDown();
-		$id_org = $("#id_org_ver_form").attr("data-id");
-		data_org = {
-			id_organizacion: $id_org,
-		};
-		$observaciones_adm = [];
-		for ($i = 0; $i < $("#datos_org_final textarea.obs_admin_").length; $i++) {
-			$type = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-type");
-			$title = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-title");
-			$texto = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-text");
-			$valor = $("#datos_org_final textarea.obs_admin_").eq($i).val();
-			$rev = $("#revSol").html();
-			$id_solicitud = $("#idSol").html();
-			$numero_rev = parseFloat($rev) + 1;
-
-			data = {
-				type: $type,
-				title: $title,
-				text: $texto,
-				valor: $valor,
-				numero_rev: $numero_rev,
-				id_solicitud: $id_solicitud,
-				id_organizacion: $id_org,
-			};
-			$observaciones_adm.push(data);
-		}
-
-		for ($j = 0; $j < $observaciones_adm.length; $j++) {
-			if ($observaciones_adm[$j].valor == "") {
-				$("#guardarOBSSI").modal("hide");
-				notificacion("No hay observaciones que guardar...", "success");
-			} else {
-				$.ajax({
-					url: baseURL + "admin/guardar_observacion",
-					type: "post",
-					dataType: "JSON",
-					data: $observaciones_adm[$j],
-					success: function (response) {
-						notificacion(response.msg, "success");
-						$("#guardarOBSSI").modal("hide");
-						for (
-							$i = 0;
-							$i < $("#datos_org_final textarea.obs_admin_").length;
-							$i++
-						) {
-							$(".obs_admin_").eq($i).val("");
-						}
-					},
-					error: function (ev) {
-						//Do nothing
-					},
-				});
-			}
-		}
-	});
-
-	$(document).on("click", "#atrDBas", function () {
-		$("#datosBasicosProgramas").slideUp();
-		$("#jornadasActualizacion").slideDown();
-		$id_org = $("#id_org_ver_form").attr("data-id");
-		data_org = {
-			id_organizacion: $id_org,
-		};
-		$observaciones_adm = [];
-		for ($i = 0; $i < $("#datos_org_final textarea.obs_admin_").length; $i++) {
-			$type = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-type");
-			$title = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-title");
-			$texto = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-text");
-			$valor = $("#datos_org_final textarea.obs_admin_").eq($i).val();
-			$rev = $("#revSol").html();
-			$id_solicitud = $("#idSol").html();
-			$numero_rev = parseFloat($rev) + 1;
-
-			data = {
-				type: $type,
-				title: $title,
-				text: $texto,
-				valor: $valor,
-				numero_rev: $numero_rev,
-				id_solicitud: $id_solicitud,
-				id_organizacion: $id_org,
-			};
-			$observaciones_adm.push(data);
-		}
-
-		for ($j = 0; $j < $observaciones_adm.length; $j++) {
-			if ($observaciones_adm[$j].valor == "") {
-				$("#guardarOBSSI").modal("hide");
-				notificacion("No hay observaciones que guardar...", "success");
-			} else {
-				$.ajax({
-					url: baseURL + "admin/guardar_observacion",
-					type: "post",
-					dataType: "JSON",
-					data: $observaciones_adm[$j],
-					success: function (response) {
-						notificacion(response.msg, "success");
-						$("#guardarOBSSI").modal("hide");
-						for (
-							$i = 0;
-							$i < $("#datos_org_final textarea.obs_admin_").length;
-							$i++
-						) {
-							$(".obs_admin_").eq($i).val("");
-						}
-					},
-					error: function (ev) {
-						//Do nothing
-					},
-				});
-			}
-		}
-	});
-
-	$(document).on("click", "#sigDBas", function () {
-		$("#datosBasicosProgramas").slideUp();
-		$("#programasAvalEconomia").slideDown();
-		$id_org = $("#id_org_ver_form").attr("data-id");
-		data_org = {
-			id_organizacion: $id_org,
-		};
-		$observaciones_adm = [];
-		for ($i = 0; $i < $("#datos_org_final textarea.obs_admin_").length; $i++) {
-			$type = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-type");
-			$title = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-title");
-			$texto = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-text");
-			$valor = $("#datos_org_final textarea.obs_admin_").eq($i).val();
-			$rev = $("#revSol").html();
-			$id_solicitud = $("#idSol").html();
-			$numero_rev = parseFloat($rev) + 1;
-
-			data = {
-				type: $type,
-				title: $title,
-				text: $texto,
-				valor: $valor,
-				numero_rev: $numero_rev,
-				id_solicitud: $id_solicitud,
-				id_organizacion: $id_org,
-			};
-			$observaciones_adm.push(data);
-		}
-
-		for ($j = 0; $j < $observaciones_adm.length; $j++) {
-			if ($observaciones_adm[$j].valor == "") {
-				$("#guardarOBSSI").modal("hide");
-				notificacion("No hay observaciones que guardar...", "success");
-			} else {
-				$.ajax({
-					url: baseURL + "admin/guardar_observacion",
-					type: "post",
-					dataType: "JSON",
-					data: $observaciones_adm[$j],
-					success: function (response) {
-						notificacion(response.msg, "success");
-						$("#guardarOBSSI").modal("hide");
-						for (
-							$i = 0;
-							$i < $("#datos_org_final textarea.obs_admin_").length;
-							$i++
-						) {
-							$(".obs_admin_").eq($i).val("");
-						}
-					},
-					error: function (ev) {
-						//Do nothing
-					},
-				});
-			}
-		}
-	});
-
-	$(document).on("click", "#atrPAvalE", function () {
-		$("#programasAvalEconomia").slideUp();
-		$("#datosBasicosProgramas").slideDown();
-		$id_org = $("#id_org_ver_form").attr("data-id");
-		data_org = {
-			id_organizacion: $id_org,
-		};
-		$observaciones_adm = [];
-		for ($i = 0; $i < $("#datos_org_final textarea.obs_admin_").length; $i++) {
-			$type = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-type");
-			$title = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-title");
-			$texto = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-text");
-			$valor = $("#datos_org_final textarea.obs_admin_").eq($i).val();
-			$rev = $("#revSol").html();
-			$id_solicitud = $("#idSol").html();
-			$numero_rev = parseFloat($rev) + 1;
-
-			data = {
-				type: $type,
-				title: $title,
-				text: $texto,
-				valor: $valor,
-				numero_rev: $numero_rev,
-				id_solicitud: $id_solicitud,
-				id_organizacion: $id_org,
-			};
-			$observaciones_adm.push(data);
-		}
-		for ($j = 0; $j < $observaciones_adm.length; $j++) {
-			if ($observaciones_adm[$j].valor == "") {
-				$("#guardarOBSSI").modal("hide");
-				notificacion("No hay observaciones que guardar...", "success");
-			} else {
-				$.ajax({
-					url: baseURL + "admin/guardar_observacion",
-					type: "post",
-					dataType: "JSON",
-					data: $observaciones_adm[$j],
-					success: function (response) {
-						notificacion(response.msg, "success");
-						$("#guardarOBSSI").modal("hide");
-						for (
-							$i = 0;
-							$i < $("#datos_org_final textarea.obs_admin_").length;
-							$i++
-						) {
-							$(".obs_admin_").eq($i).val("");
-						}
-					},
-					error: function (ev) {
-						//Do nothing
-					},
-				});
-			}
-		}
-	});
-
-	$(document).on("click", "#sigPAvalE", function () {
-		$("#programasAvalEconomia").slideUp();
-		$("#docentes").slideDown();
-		//$("#programasAvalar").slideDown();
-		$id_org = $("#id_org_ver_form").attr("data-id");
-		data_org = {
-			id_organizacion: $id_org,
-		};
-		$observaciones_adm = [];
-		for ($i = 0; $i < $("#datos_org_final textarea.obs_admin_").length; $i++) {
-			$type = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-type");
-			$title = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-title");
-			$texto = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-text");
-			$valor = $("#datos_org_final textarea.obs_admin_").eq($i).val();
-			$rev = $("#revSol").html();
-			$id_solicitud = $("#idSol").html();
-			$numero_rev = parseFloat($rev) + 1;
-
-			data = {
-				type: $type,
-				title: $title,
-				text: $texto,
-				valor: $valor,
-				numero_rev: $numero_rev,
-				id_solicitud: $id_solicitud,
-				id_organizacion: $id_org,
-			};
-			$observaciones_adm.push(data);
-		}
-
-		for ($j = 0; $j < $observaciones_adm.length; $j++) {
-			if ($observaciones_adm[$j].valor == "") {
-				$("#guardarOBSSI").modal("hide");
-				notificacion("No hay observaciones que guardar...", "success");
-			} else {
-				$.ajax({
-					url: baseURL + "admin/guardar_observacion",
-					type: "post",
-					dataType: "JSON",
-					data: $observaciones_adm[$j],
-					success: function (response) {
-						notificacion(response.msg, "success");
-						$("#guardarOBSSI").modal("hide");
-						for (
-							$i = 0;
-							$i < $("#datos_org_final textarea.obs_admin_").length;
-							$i++
-						) {
-							$(".obs_admin_").eq($i).val("");
-						}
-					},
-					error: function (ev) {
-						//Do nothing
-					},
-				});
-			}
-		}
-	});
-
-	$(document).on("click", "#atrPAvalar", function () {
-		$("#docentes").slideUp();
-		$("#programasAvalEconomia").slideDown();
-		$id_org = $("#id_org_ver_form").attr("data-id");
-		data_org = {
-			id_organizacion: $id_org,
-		};
-		$observaciones_adm = [];
-		for ($i = 0; $i < $("#datos_org_final textarea.obs_admin_").length; $i++) {
-			$type = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-type");
-			$title = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-title");
-			$texto = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-text");
-			$valor = $("#datos_org_final textarea.obs_admin_").eq($i).val();
-			$rev = $("#revSol").html();
-			$id_solicitud = $("#idSol").html();
-			$numero_rev = parseFloat($rev) + 1;
-
-			data = {
-				type: $type,
-				title: $title,
-				text: $texto,
-				valor: $valor,
-				numero_rev: $numero_rev,
-				id_solicitud: $id_solicitud,
-				id_organizacion: $id_org,
-			};
-			$observaciones_adm.push(data);
-		}
-
-		for ($j = 0; $j < $observaciones_adm.length; $j++) {
-			if ($observaciones_adm[$j].valor == "") {
-				$("#guardarOBSSI").modal("hide");
-				notificacion("No hay observaciones que guardar...", "success");
-			} else {
-				$.ajax({
-					url: baseURL + "admin/guardar_observacion",
-					type: "post",
-					dataType: "JSON",
-					data: $observaciones_adm[$j],
-					success: function (response) {
-						notificacion(response.msg, "success");
-						$("#guardarOBSSI").modal("hide");
-						for (
-							$i = 0;
-							$i < $("#datos_org_final textarea.obs_admin_").length;
-							$i++
-						) {
-							$(".obs_admin_").eq($i).val("");
-						}
-					},
-					error: function (ev) {
-						//Do nothing
-					},
-				});
-			}
-		}
-	});
-
-	$(document).on("click", "#sigPAvalar", function () {
-		//$("#programasAvalar").slideUp();
-		$("#programasAvalEconomia").slideUp();
-		$("#docentes").slideDown();
-		$id_org = $("#id_org_ver_form").attr("data-id");
-		data_org = {
-			id_organizacion: $id_org,
-		};
-		$observaciones_adm = [];
-		for ($i = 0; $i < $("#datos_org_final textarea.obs_admin_").length; $i++) {
-			$type = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-type");
-			$title = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-title");
-			$texto = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-text");
-			$valor = $("#datos_org_final textarea.obs_admin_").eq($i).val();
-			$rev = $("#revSol").html();
-			$id_solicitud = $("#idSol").html();
-			$numero_rev = parseFloat($rev) + 1;
-
-			data = {
-				type: $type,
-				title: $title,
-				text: $texto,
-				valor: $valor,
-				numero_rev: $numero_rev,
-				id_solicitud: $id_solicitud,
-				id_organizacion: $id_org,
-			};
-			$observaciones_adm.push(data);
-		}
-
-		for ($j = 0; $j < $observaciones_adm.length; $j++) {
-			if ($observaciones_adm[$j].valor == "") {
-				$("#guardarOBSSI").modal("hide");
-				notificacion("No hay observaciones que guardar...", "success");
-			} else {
-				$.ajax({
-					url: baseURL + "admin/guardar_observacion",
-					type: "post",
-					dataType: "JSON",
-					data: $observaciones_adm[$j],
-					success: function (response) {
-						notificacion(response.msg, "success");
-						$("#guardarOBSSI").modal("hide");
-						for (
-							$i = 0;
-							$i < $("#datos_org_final textarea.obs_admin_").length;
-							$i++
-						) {
-							$(".obs_admin_").eq($i).val("");
-						}
-					},
-					error: function (ev) {
-						//Do nothing
-					},
-				});
-			}
-		}
-	});
-
-	$(document).on("click", "#atrDoce", function () {
-		$("#docentes").slideUp();
-		//$("#programasAvalar").slideDown();
-		$("#programasAvalEconomia").slideDown();
-		$id_org = $("#id_org_ver_form").attr("data-id");
-		data_org = {
-			id_organizacion: $id_org,
-		};
-		$observaciones_adm = [];
-		for ($i = 0; $i < $("#datos_org_final textarea.obs_admin_").length; $i++) {
-			$type = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-type");
-			$title = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-title");
-			$texto = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-text");
-			$valor = $("#datos_org_final textarea.obs_admin_").eq($i).val();
-			$rev = $("#revSol").html();
-			$id_solicitud = $("#idSol").html();
-			$numero_rev = parseFloat($rev) + 1;
-
-			data = {
-				type: $type,
-				title: $title,
-				text: $texto,
-				valor: $valor,
-				numero_rev: $numero_rev,
-				id_solicitud: $id_solicitud,
-				id_organizacion: $id_org,
-			};
-			$observaciones_adm.push(data);
-		}
-
-		for ($j = 0; $j < $observaciones_adm.length; $j++) {
-			if ($observaciones_adm[$j].valor == "") {
-				$("#guardarOBSSI").modal("hide");
-				notificacion("No hay observaciones que guardar...", "success");
-			} else {
-				$.ajax({
-					url: baseURL + "admin/guardar_observacion",
-					type: "post",
-					dataType: "JSON",
-					data: $observaciones_adm[$j],
-					success: function (response) {
-						notificacion(response.msg, "success");
-						$("#guardarOBSSI").modal("hide");
-						for (
-							$i = 0;
-							$i < $("#datos_org_final textarea.obs_admin_").length;
-							$i++
-						) {
-							$(".obs_admin_").eq($i).val("");
-						}
-					},
-					error: function (ev) {
-						//Do nothing
-					},
-				});
-			}
-		}
-	});
-
-	$(document).on("click", "#sigDoce", function () {
-		$("#docentes").slideUp();
-		$("#plataforma").slideDown();
-		$id_org = $("#id_org_ver_form").attr("data-id");
-		data_org = {
-			id_organizacion: $id_org,
-		};
-		$observaciones_adm = [];
-		for ($i = 0; $i < $("#datos_org_final textarea.obs_admin_").length; $i++) {
-			$type = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-type");
-			$title = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-title");
-			$texto = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-text");
-			$valor = $("#datos_org_final textarea.obs_admin_").eq($i).val();
-			$rev = $("#revSol").html();
-			$id_solicitud = $("#idSol").html();
-			$numero_rev = parseFloat($rev) + 1;
-
-			data = {
-				type: $type,
-				title: $title,
-				text: $texto,
-				valor: $valor,
-				numero_rev: $numero_rev,
-				id_solicitud: $id_solicitud,
-				id_organizacion: $id_org,
-			};
-			$observaciones_adm.push(data);
-		}
-
-		for ($j = 0; $j < $observaciones_adm.length; $j++) {
-			if ($observaciones_adm[$j].valor == "") {
-				$("#guardarOBSSI").modal("hide");
-				notificacion("No hay observaciones que guardar...", "success");
-			} else {
-				$.ajax({
-					url: baseURL + "admin/guardar_observacion",
-					type: "post",
-					dataType: "JSON",
-					data: $observaciones_adm[$j],
-					success: function (response) {
-						notificacion(response.msg, "success");
-						$("#guardarOBSSI").modal("hide");
-						for (
-							$i = 0;
-							$i < $("#datos_org_final textarea.obs_admin_").length;
-							$i++
-						) {
-							$(".obs_admin_").eq($i).val("");
-						}
-					},
-					error: function (ev) {
-						//Do nothing
-					},
-				});
-			}
-		}
-	});
-
-	$(document).on("click", "#atrPlat", function () {
-		$("#plataforma").slideUp();
-		$("#docentes").slideDown();
-		$id_org = $("#id_org_ver_form").attr("data-id");
-		data_org = {
-			id_organizacion: $id_org,
-		};
-		$observaciones_adm = [];
-		for ($i = 0; $i < $("#datos_org_final textarea.obs_admin_").length; $i++) {
-			$type = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-type");
-			$title = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-title");
-			$texto = $("#datos_org_final textarea.obs_admin_")
-				.eq($i)
-				.attr("data-text");
-			$valor = $("#datos_org_final textarea.obs_admin_").eq($i).val();
-			$rev = $("#revSol").html();
-			$id_solicitud = $("#idSol").html();
-			$numero_rev = parseFloat($rev) + 1;
-
-			data = {
-				type: $type,
-				title: $title,
-				text: $texto,
-				valor: $valor,
-				numero_rev: $numero_rev,
-				id_solicitud: $id_solicitud,
-				id_organizacion: $id_org,
-			};
-			$observaciones_adm.push(data);
-		}
-
-		for ($j = 0; $j < $observaciones_adm.length; $j++) {
-			if ($observaciones_adm[$j].valor == "") {
-				$("#guardarOBSSI").modal("hide");
-				notificacion("No hay observaciones que guardar...", "success");
-			} else {
-				$.ajax({
-					url: baseURL + "admin/guardar_observacion",
-					type: "post",
-					dataType: "JSON",
-					data: $observaciones_adm[$j],
-					success: function (response) {
-						notificacion(response.msg, "success");
-						$("#guardarOBSSI").modal("hide");
-						for (
-							$i = 0;
-							$i < $("#datos_org_final textarea.obs_admin_").length;
-							$i++
-						) {
-							$(".obs_admin_").eq($i).val("");
-						}
-					},
-					error: function (ev) {
-						//Do nothing
-					},
-				});
-			}
-		}
-	});
-
-
 	$(".eliminarDocumentacionLegal").click(function () {
 		$documentacion = $(this).attr("data-id-documentacion");
 
@@ -4869,30 +3821,6 @@ $(document).ready(function () {
 
 		$.ajax({
 			url: baseURL + "panel/eliminarRegistroPrograma",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			beforeSend: function () {
-				notificacion("Espere...", "success");
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
-
-	$(".eliminarAntecedentes").click(function () {
-		$id_antecedentes = $(this).attr("data-id-antecedentes");
-
-		data = {
-			id_antecedentes: $id_antecedentes,
-		};
-
-		$.ajax({
-			url: baseURL + "panel/eliminarAntecedentes",
 			type: "post",
 			dataType: "JSON",
 			data: data,
@@ -5829,26 +4757,61 @@ $(document).ready(function () {
 		Click en Actualizar Nombre de Usuario.
 	**/
 	$("#adjuntar_resolucion").on("click", function () {
+		event.preventDefault();
 		//if($("#formulario_actualizar_imagen").valid()){
+		let cursos_aprobados = '';
+		let modalidades = '';
+		// Recorrer motivos de la solicitud y guardar variables
+		$("#formulario_resoluciones input[name=motivos]").each(function (){
+			if (this.checked){
+				switch ($(this).val()) {
+					case '1':
+						cursos_aprobados += 'Acreditación Curso Básico de Economía Solidaria' + ', ';
+						break;
+					case '2':
+						cursos_aprobados += 'Aval de Trabajo Asociado' + ', ';
+						break;
+					case '3':
+						cursos_aprobados += 'Acreditación Curso Medio de Economía Solidaria' + ', ';
+						break;
+					case '4':
+						cursos_aprobados += 'Acreditación Curso Avanzado de Economía Solidaria' + ', ';
+						break;
+					case '5':
+						cursos_aprobados += 'Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria' + ', ';
+						break;
+					default:
+				}
+			}
+		});
+		// Recorrer motivos de la solicitud y guardar variables
+		$("#formulario_resoluciones input[name=modalidades]").each(function (){
+			if (this.checked){
+				switch ($(this).val()) {
+					case '1':
+						modalidades += 'Presencial' + ', ';
+						break;
+					case '2':
+						modalidades += 'Virtual' + ', ';
+						break;
+					case '3':
+						modalidades += 'En Linea' + ', ';
+						break;
+					default:
+				}
+			}
+		});
 		var file_data = $("#resolucion").prop("files")[0];
-		$fechaResolucionInicial = $("#res_fech_inicio").val();
-		$fechaResolucionFinal = $("#res_fech_fin").val();
-		$cursoAprobado = $("#cursoAprobado").val();
-		$modalidadAprobada = $("#modalidadAprobada").val();
-		$anosResolucion = $("#res_anos").val();
-		$numeroResolucion = $("#num_res_org").val();
-		$tipoResolucion = $("input:radio[name=tipoResolucion]:checked").val();
-		$id_organizacion = $(this).attr("data-id-org");
 		var form_data = new FormData();
 		form_data.append("file", file_data);
-		form_data.append("fechaResolucionInicial", $fechaResolucionInicial);
-		form_data.append("fechaResolucionFinal", $fechaResolucionFinal);
-		form_data.append("cursoAprobado", $cursoAprobado);
-		form_data.append("modalidadAprobada", $modalidadAprobada);
-		form_data.append("anosResolucion", $anosResolucion);
-		form_data.append("numeroResolucion", $numeroResolucion);
-		form_data.append("tipoResolucion", $tipoResolucion);
-		form_data.append("id_organizacion", $id_organizacion);
+		form_data.append("fechaResolucionInicial", $("#res_fech_inicio").val());
+		form_data.append("fechaResolucionFinal", $("#res_fech_fin").val());
+		form_data.append("cursoAprobado", cursos_aprobados.substring(0, cursos_aprobados.length -2));
+		form_data.append("modalidadAprobada", modalidades.substring(0, modalidades.length -2));
+		form_data.append("anosResolucion",$("#res_anos").val());
+		form_data.append("numeroResolucion", $("#num_res_org").val());
+		form_data.append("tipoResolucion", $("input:radio[name=tipoResolucion]:checked").val());
+		form_data.append("id_organizacion",$(this).attr("data-id-org"));
 		$.ajax({
 			url: baseURL + "admin/upload_resolucion",
 			dataType: "text",
@@ -6263,80 +5226,6 @@ $(document).ready(function () {
 		}
 	});
 
-	$("#guardar_formulario_informacion_general_entidad").click(function () {
-		if ($("#formulario_informacion_general_entidad").valid()) {
-			$(this).attr("disabled", true);
-			var tipo_organizacion = $("#tipo_organizacion").val();
-			var departamento = $("#departamentos").val();
-			var municipio = $("#municipios").val();
-			var direccion = $("#direccion").val();
-			var fax = $("#fax").val();
-
-			if ($("input:checkbox[name=extension_checkbox]:checked").val()) {
-				var extension = $("#extension").val();
-			} else {
-				var extension = "No Tiene";
-			}
-			if ($("#urlOrganizacion").val()) {
-				var urlOrganizacion = $("#urlOrganizacion").val();
-			} else {
-				var urlOrganizacion = "No Tiene";
-			}
-
-			var actuacion = $("#actuacion").val();
-			var educacion = $("#educacion").val();
-			var numCedulaCiudadaniaPersona = $("#numCedulaCiudadaniaPersona").val();
-			var presentacion = $("#presentacion").val();
-			var objetoSocialEstatutos = $("#objetoSocialEstatutos").val();
-			var mision = $("#mision").val();
-			var vision = $("#vision").val();
-			var principios = $("#principios").val();
-			var fines = $("#fines").val();
-			var portafolio = $("#portafolio").val();
-			var otros = $("#otros").val();
-
-			data = {
-				tipo_organizacion: tipo_organizacion,
-				departamento: departamento,
-				municipio: municipio,
-				direccion: direccion,
-				fax: fax,
-				extension: extension,
-				urlOrganizacion: urlOrganizacion,
-				actuacion: actuacion,
-				educacion: educacion,
-				numCedulaCiudadaniaPersona: numCedulaCiudadaniaPersona,
-				presentacion: presentacion,
-				objetoSocialEstatutos: objetoSocialEstatutos,
-				mision: mision,
-				vision: vision,
-				principios: principios,
-				fines: fines,
-				portafolio: portafolio,
-				otros: otros,
-			};
-
-			$.ajax({
-				url: baseURL + "panel/guardar_formulario_informacion_general_entidad",
-				type: "post",
-				dataType: "JSON",
-				data: data,
-				beforeSend: function () {
-					notificacion("Espere...", "success");
-				},
-				success: function (response) {
-					notificacion(response.msg, "success");
-					setInterval(function () {
-						reload();
-					}, 2000);
-				},
-				error: function (ev) {
-					//Do nothing
-				},
-			});
-		}
-	});
-
 	$("#guardar_formulario_jornadas_actualizacion").click(function () {
 		$(this).attr("disabled", true);
 		var numeroPersonas = $("#jornadasNumeroPersonas").val();
@@ -6678,71 +5567,6 @@ $(document).ready(function () {
 		});
 	});
 
-	$(".archivos_form_carta").on("click", function () {
-		$data_name = $(".archivos_form_carta").attr("data-name");
-		var file_data = $("#" + $data_name).prop("files")[0];
-		var form_data = new FormData();
-		form_data.append("file", file_data);
-		form_data.append("tipoArchivo", $("#" + $data_name).attr("data-val"));
-		form_data.append("append_name", $data_name);
-		$.ajax({
-			url: baseURL + "panel/guardarArchivoCarta",
-			dataType: "text",
-			cache: false,
-			contentType: false,
-			processData: false,
-			data: form_data,
-			type: "post",
-			dataType: "JSON",
-			beforeSubmit: function () {
-				$("#loading").show();
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-				cargarArchivos();
-			},
-			error: function (ev) {
-				notificacion("Verifique los datos del formulario.", "success");
-			},
-		});
-	});
-
-	$(".archivos_form_certificacion").on("click", function () {
-		$data_name = $(".archivos_form_certificacion").attr("data-name");
-		var form_data = new FormData();
-		$.each(
-			$("#formulario_certificaciones input[type='file']"),
-			function (obj, v) {
-				var file = v.files[0];
-				form_data.append("file[" + obj + "]", file);
-			}
-		);
-		form_data.append("tipoArchivo", $("#" + $data_name + "1").attr("data-val"));
-		form_data.append("append_name", $data_name);
-		$.ajax({
-			url: baseURL + "panel/guardarArchivos",
-			dataType: "text",
-			cache: false,
-			contentType: false,
-			processData: false,
-			data: form_data,
-			type: "post",
-			dataType: "JSON",
-			beforeSubmit: function () {
-				$("#loading").show();
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-				cargarArchivos();
-			},
-			error: function (ev) {
-				cargarArchivos();
-				//Do nothing
-			},
-		});
-	});
-
-
 	$(".archivos_form_jornada").on("click", function () {
 		$data_name = $(".archivos_form_jornada").attr("data-name");
 		let file_data = $("#" + $data_name).prop("files")[0];
@@ -7077,40 +5901,6 @@ $(document).ready(function () {
 		});
 	});
 
-	$(".archivos_form_lugar").on("click", function () {
-		$data_name = $(".archivos_form_lugar").attr("data-name");
-		var form_data = new FormData();
-		$.each($("#formulario_lugar input[type='file']"), function (obj, v) {
-			var file = v.files[0];
-			form_data.append("file[" + obj + "]", file);
-		});
-		form_data.append("tipoArchivo", $("#" + $data_name + "1").attr("data-val"));
-		form_data.append("append_name", $data_name);
-		$.ajax({
-			url: baseURL + "panel/guardarArchivos",
-			dataType: "text",
-			cache: false,
-			contentType: false,
-			processData: false,
-			data: form_data,
-			type: "post",
-			dataType: "JSON",
-			beforeSubmit: function () {
-				$("#loading").show();
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-				cargarArchivos();
-			},
-			error: function (ev) {
-				cargarArchivos();
-				//Do nothing
-			},
-		});
-	});
-
-
-
 	// TODO: Modal Asignar Evaluador Organizacion
 	$(document).on("click", "#verModalAsignar", function () {
 		$id_organizacion = $(this).attr("data-organizacion");
@@ -7121,7 +5911,6 @@ $(document).ready(function () {
 		$("#nombreAsigOrg").html($nombreOrganizacion);
 		$("#nitAsigOrg").html($numNIT);
 	});
-
 	// TODO: Asignar evaluador a organización
 	$("#asignarOrganizacionEvaluador").click(function () {
 		$id_organizacion = $("#idAsigOrg").html();
@@ -7649,52 +6438,7 @@ $(document).ready(function () {
 		notificacion("Archivos cargados...");
 	});
 
-	$("#nuevaSolicitud").click(function () {
-		$("#ayudaModalidad").modal({ backdrop: "static", keyboard: false });
-		$("#ayudaModalidad").modal("hide");
-		$(".formulario_panel").hide();
-		$("#panel_inicial").hide();
-		$("#tipoSolicitud").show();
-		if (hash_url == "#actualizarSolicitud") {
-			//Do Nothing
-		}
-		$.ajax({
-			url: baseURL + "panel/verificar_tipoSolicitud",
-			type: "post",
-			dataType: "JSON",
-			success: function (response) {
-				console.log(response);
-				if (response.estado == "1") {
-					notificacion(response.msg, "success");
-					$("#tipoSolicitud").hide();
-					$("#estado_solicitud").show();
-					$(".side_main_menu").show();
-					verificarFormularios();
-				} else if (response.estado == "0") {
-					$("#div_solicitud").show();
-					$("#div_motivo_actualizar").show();
-				}
-				if (
-					response.est == "En Proceso de Renovación" ||
-					response.est == "En Proceso de Actualización"
-				) {
-					window.location.hash = "enProcesoActualizacion";
-				} else if (
-					response.est == "En Proceso" ||
-					response.est == "Negada" ||
-					response.est == "Revocada" ||
-					response.est == "Acreditado"
-				) {
-					window.location.hash = "enProceso";
-					//$("#el_sol").attr("disabled", true);
-					//$("#el_sol").remove();
-				}
-			},
-			error: function (ev) {
-				notificacion("Seleccione los campos y de click en crear.", "success");
-			},
-		});
-	});
+
 
 	$(".guardar").click(function () {
 		$(".archivos").toggle();
@@ -12133,8 +10877,6 @@ $(document).ready(function () {
 		$("#guardar_formulario_programas_aval").show();
 	});
 
-
-
 	$("input:radio[name=jornaSelect]").change(function () {
 		if ($("input:radio[name=jornaSelect]:checked").val() == "Si") {
 			$("#divIngJor").show();
@@ -12156,7 +10898,6 @@ $(document).ready(function () {
 		$("#acepto_cond").prop("checked", true);
 		$("#aceptar_programa").modal("toggle");
 	});
-
 
 	$("#verRelacionCambios").click(function () {
 		$id_organizacion = $("#id_org_ver_form").attr("data-id");
@@ -13329,7 +12070,6 @@ function sleep(milliseconds) {
 /**
 	TODO: Validaciones para los formularios.
 **/
-
 function validaciones() {
 	/**
 		Forms validations TODO.
@@ -13480,7 +12220,6 @@ function validaciones() {
 			},
 		},
 	});
-
 	// Formulario Login.
 	$("form[id='formulario_login']").validate({
 		rules: {
@@ -13772,67 +12511,7 @@ function validaciones() {
 			},
 		},
 	});
-	$("form[id='formulario_informacion_general_entidad']").validate({
-		rules: {
-			tipo_organizacion: {
-				required: true,
-			},
-			departamentos: {
-				required: true,
-			},
-			municipios: {
-				required: true,
-			},
-			direccion: {
-				required: true,
-				minlength: 3,
-			},
-			fax: {
-				required: true,
-				minlength: 3,
-			},
-			actuacion: {
-				required: true,
-			},
-			educacion: {
-				required: true,
-			},
-			numCedulaCiudadaniaPersona: {
-				required: true,
-				minlength: 3,
-			},
-		},
-		messages: {
-			tipo_organizacion: {
-				required: "Por favor, seleccione un tipo de la lista.",
-			},
-			departamentos: {
-				required: "Por favor, seleccione un departamento de la lista.",
-			},
-			municipios: {
-				required: "Por favor, seleccione un municipio de la lista.",
-			},
-			direccion: {
-				required: "Por favor, escriba la direccion.",
-				minlength: "La dirección debe tener mínimo 3 caracteres.",
-			},
-			fax: {
-				required: "Por favor, escriba el fax/numero.",
-				minlength: "El numero debe tener mínimo 3 caracteres.",
-			},
-			actuacion: {
-				required: "Por favor, seleccione una actuación de la lista.",
-			},
-			educacion: {
-				required: "Por favor, seleccione un tipo de la lista.",
-			},
-			numCedulaCiudadaniaPersona: {
-				required: "Por favor, escriba la cedula del Representante Legal.",
-				minlength: "La Cedula debe tener mínimo 3 caracteres.",
-			},
-		},
-	});
-	//
+	// Fomulario Docentes
 	$("form[id='formulario_docentes']").validate({
 		rules: {
 			docentes_cedula: {
@@ -14517,7 +13196,7 @@ function mensajeConsola() {
 	//console.clear();
 	//console.log("%cATENCIÓN:\n*Esta consola es solo para desarrolladores.\n*Si tiene algún inconveniente comuníquese con nosotros.\n*Si tiene instalado algún AdBlock por favor deshabilitelo para esta aplicación.\nUnidad Administrativa Especial de Organizaciones Solidarias (U.A.E.O.S).\nLinea gratuita:01 8000 12 2020\nPBX:57+1 3275252\nFax:3275248\nCorreo:atencionalciudadano@orgsolidarias.gov.co", "font: 2em consolas; color: #c61f1b; background-color: #EEF3FB;");
 }
-
+/** Inicializa funciones principales **/
 function initJS() {
 	validaciones();
 	tablas();

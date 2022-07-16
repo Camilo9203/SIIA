@@ -34,8 +34,8 @@ class Panel extends CI_Controller
 		$data['fecha'] = $fecha;
 		$data['estado'] = $this->estadoOrganizaciones();
 		$data['departamentos'] = $this->cargarDepartamentos();
-
 		$data['data_organizacion'] = $this->cargarDatosOrganizacion();
+		$data['data_solicitudes'] = $this->cargarSolicitudes();
 		$data['data_informacion_general'] = $this->cargarDatos_formulario_informacion_general_entidad();
 		$data['data_documentacion_legal'] = $this->cargarDatos_formulario_documentacion_legal();
 		$data['data_registro_educativo'] = $this->cargarDatos_formulario_registro_educativo();
@@ -49,7 +49,6 @@ class Panel extends CI_Controller
 		$data['data_programas'] = $this->cargarDatos_programas();
 		$data["camara"] = $this->cargarCamaraComercio();
 		$data['informacionModal'] = $this->cargar_informacionModal();
-
 		$this->load->view('include/header', $data);
 		$this->load->view('paneles/panel', $data);
 		$this->load->view('include/footer', $data);
@@ -706,6 +705,13 @@ class Panel extends CI_Controller
 		$fecha = $this->db->select("fechaUltimaRevision")->from("solicitudes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
 		$fechaUltimaRevision = $fecha->fechaUltimaRevision;
 		return $fechaUltimaRevision;
+	}
+	public function cargarSolicitudes()
+	{
+		$usuario_id = $this->session->userdata('usuario_id');
+		$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
+		$solicitudes = $this->db->select("*")->from("solicitudes")->join('tipoSolicitud', "tipoSolicitud.idSolicitud = solicitudes.idSolicitud")->where('solicitudes.organizaciones_id_organizacion', $organizacion->id_organizacion)->get()->result();
+		return $solicitudes;
 	}
 
 	public function cargarTipoSolicitud()
@@ -2614,54 +2620,6 @@ class Panel extends CI_Controller
 
 		if ($tipoArchivo == "materialDidacticoProgAvalar") {
 			$ruta = 'uploads/materialDidacticoProgAvalar';
-			$mensaje = "Se guardo el " . $append_name;
-		}
-
-		$nombre_imagen =  $append_name . "_" . $name_random . "_" . $_FILES['file']['name'];
-		$tipo_archivo = pathinfo($nombre_imagen, PATHINFO_EXTENSION);
-
-		$data_update = array(
-			'tipo' => $tipoArchivo,
-			'nombre' => $nombre_imagen,
-			'id_formulario' => $id_formulario,
-			'organizaciones_id_organizacion' => $id_organizacion
-		);
-
-
-		if (0 < $_FILES['file']['error']) {
-			echo json_encode(array('url' => "", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
-		} else if ($_FILES['file']['size'] > $size) {
-			echo json_encode(array('url' => "", 'msg' => "El tamaño supera las 10 Mb, intente con otro archivo PDF."));
-		} else if ($tipo_archivo != "pdf") {
-			echo json_encode(array('url' => "", 'msg' => "La extensión del archivo no es correcta, debe ser PDF. (archivo.pdf)"));
-		} else if ($this->db->insert('archivos', $data_update)) {
-			if (move_uploaded_file($_FILES['file']['tmp_name'], $ruta . '/' . $nombre_imagen)) {
-				echo json_encode(array('url' => "", 'msg' => $mensaje));
-				//$this->logs_sia->session_log('Actualizacion de Imagen / Logo');){	
-			} else {
-				echo json_encode(array('url' => "", 'msg' => "No se guardo el archivo(s)."));
-			}
-		}
-
-		$this->logs_sia->logs('URL_TYPE');
-		$this->logs_sia->logQueries();
-	}
-
-	public function guardarArchivoInstructivoPlataforma()
-	{
-		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
-		$tipoArchivo = $this->input->post('tipoArchivo');
-		$append_name = $this->input->post('append_name');
-		$name_random = random(10);
-		$size = 100000000;
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-		$id_formulario = 10;
-		$archivos = $this->db->select('*')->from('archivos')->where('organizaciones_id_organizacion', $id_organizacion)->get()->row();
-
-		if ($tipoArchivo == "instructivoPlataforma") {
-			$ruta = 'uploads/instructivosPlataforma';
 			$mensaje = "Se guardo el " . $append_name;
 		}
 

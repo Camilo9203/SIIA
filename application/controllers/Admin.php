@@ -2612,14 +2612,13 @@ class Admin extends CI_Controller
 			$data_update = array(
 				'fechaResolucionInicial' => $fechaResolucionInicial,
 				'fechaResolucionFinal' => $fechaResolucionFinal,
-				'añosResolucion' => $anosResolucion,
+				'anosResolucion' => $anosResolucion,
 				'resolucion' => $nombre_imagen,
 				'numeroResolucion' => $numeroResolucion,
 				'cursoAprobado' => $cursoAprobado,
 				'modalidadAprobada' => $modalidadAprobada,
 				'organizaciones_id_organizacion' => $id_organizacion
 			);
-
 			$this->db->insert('resoluciones', $data_update);
 			echo json_encode(array('url' => "admin", 'msg' => "Se ingreso la resolución."));
 			$this->logs_sia->session_log('Resolución Adjuntada');

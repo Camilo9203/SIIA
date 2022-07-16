@@ -28,7 +28,7 @@
 					<h4 class="modal-title" id="modalInformeAct2019j">Módulo de informe de actividades <i class="fa fa-flag" aria-hidden="true"></i></h4>
 				</div>
 				<div class="modal-body">
-					<p><strong>¡Este módulo estará disponible en el 2019, espéralo!</strong></p>
+					<p><strong>¡Este módulo estará disponible en el 2023, espéralo!</strong></p>
 					<p><small>En cumplimiento de la circular 001 de 2018 este módulo se activará en enero de 2019. En 2018 se emitirán las certificaciones de cursos como tradicionalmente se ha venido realizando.” Esto con el fin de evitar que se emitan certificaciones este año."</small></p>
 				</div>
 				<div class="modal-footer">
@@ -512,6 +512,7 @@
 	<script src="<?php echo base_url('assets/js/vis.min.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/script_o.js?v=1.0.8.61219') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/observaciones.js?v=1.1.1') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/panel.js?v=1.0.1') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/formularios.js?v=1.0.1') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/contacto.js?v=1.0.8.61') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/estadisticas.js?v=1.0.8.62') . time() ?>" type="text/javascript"></script>
