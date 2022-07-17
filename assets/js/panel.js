@@ -8,6 +8,41 @@ $("#verSolicitudes").click(function () {
 	$("#tipoSolicitud").hide();
 	$("#solicitudesRegistradas").show();
 });
+/** Volver Solicitudes */
+$(".volverSolicitudes").click(function () {
+	$("#ayudaModalidad").modal({ backdrop: "static", keyboard: false });
+	$("#ayudaModalidad").modal("hide");
+	$(".formulario_panel").hide();
+	$("#panel_inicial").hide();
+	$("#tipoSolicitud").hide();
+	$("#solicitudesRegistradas").show();
+});
+/** Volver Panel */
+$(".volverPanel").click(function () {
+	$("#ayudaModalidad").modal({ backdrop: "static", keyboard: false });
+	$("#ayudaModalidad").modal("hide");
+	$(".formulario_panel").hide();
+	$("#panel_inicial").show();
+	$("#tipoSolicitud").hide();
+	$("#solicitudesRegistradas").hide();
+});
+/** Ver Solicitud */
+$("#verSolicitud").click(function () {
+	let idSolicitud = $(this).attr("data-id");
+	window.open(baseURL + "panel/solicitud/" + idSolicitud, '_blank');
+});
+function irSolicitud (data) {
+	event.preventDefault();
+	$.ajax({
+		url: baseURL + "panel/verDocumento",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		success: function (response){
+			window.open(response.file, '_blank');
+		}
+	});
+}
 /** Crear Solicitud */
 $("#nuevaSolicitud").click(function () {
 	$("#ayudaModalidad").modal({ backdrop: "static", keyboard: false });

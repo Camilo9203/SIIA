@@ -135,6 +135,7 @@ $route['recordar'] = 'Recordar';
 //$route['panel/contacto'] = 'Contacto';
 $route['panel/contacto'] = 'Contacto';
 $route['panel/contacto/ayuda'] = 'Contacto/ayuda';
+$route['panel/solicitud/'] = 'Panel/solicitud';
 $route['Certificado'] = 'Certificaciones/crearCertificacion';
 // $route['panel/obtenerCertificado'] = 'Certificaciones/obtenerCertificado';
 $route['panel/estadoSolicitud'] = 'Panel/estadoSolicitud';

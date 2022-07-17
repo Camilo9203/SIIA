@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Panel extends CI_Controller
+class Formularios extends CI_Controller
 {
 
 	function __construct()
@@ -656,19 +656,19 @@ class Panel extends CI_Controller
 				break;
 			case "En Proceso de Renovación":
 				if ($estadoOrganizaciones == "En Proceso de Renovación") {
-					echo json_encode(array('url' => "panel", 'msg' => "Continue diligenciando los formularios, solicitud número: " . $numeroSolicitudes, 'tipo' => $tipoSolicitud, "numero" => $numeroSolicitudes, 'motivo' => $motivoSolicitud, 'motivos' =>$motivosSolicitud, 'modalidad' => $modalidadSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior, 'programas' => $programas));
+					echo json_encode(array('url' => "panel", 'msg' => "Continue diligenciando los formularios, solicitud número: " . $numeroSolicitudes, 'tipo' => $tipoSolicitud, "numero" => $numeroSolicitudes, 'motivo' => $motivoSolicitud, 'motivos' =>$motivosSolicitud, 'modalidad' => $modalidadSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior));
 				}
 				break;
 			case "En Proceso de Actualización":
 				if ($numeroSolicitudes != "0" || $numeroSolicitudes != 0 && $estadoOrganizaciones == "En Proceso de Actualización") {
-					echo json_encode(array('url' => "panel", 'msg' => "Continue diligenciando los formularios, solicitud número: " . $numeroSolicitudes, 'tipo' => $tipoSolicitud, "numero" => $numeroSolicitudes, 'motivo' => $motivoSolicitud, 'motivos' =>$motivosSolicitud, 'modalidad' => $modalidadSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior, 'programas' => $programas));
+					echo json_encode(array('url' => "panel", 'msg' => "Continue diligenciando los formularios, solicitud número: " . $numeroSolicitudes, 'tipo' => $tipoSolicitud, "numero" => $numeroSolicitudes, 'motivo' => $motivoSolicitud, 'motivos' =>$motivosSolicitud, 'modalidad' => $modalidadSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior));
 				}
 				break;
 			case "En Observaciones":
-				echo json_encode(array('url' => "panel", 'msg' => "Verifique el estado de la acreditación y las observaciones en el panel.", 'tipo' => $tipoSolicitud, "numero" => $numeroSolicitudes, 'motivo' => $motivoSolicitud, 'motivos' =>$motivosSolicitud, 'modalidad' => $modalidadSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior, 'programas' => $programas));
+				echo json_encode(array('url' => "panel", 'msg' => "Verifique el estado de la acreditación y las observaciones en el panel.", 'tipo' => $tipoSolicitud, "numero" => $numeroSolicitudes, 'motivo' => $motivoSolicitud, 'motivos' =>$motivosSolicitud, 'modalidad' => $modalidadSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior));
 				break;
 			default:
-				echo json_encode(array('url' => "panel", 'msg' => "Verifique el estado de la acreditacion en el panel.", 'estado' => $numeroSolicitudes, 'tipo' => $tipoSolicitud, 'motivo' => $motivoSolicitud, 'motivos' =>$motivosSolicitud, 'modalidad' => $modalidadSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior, 'programas' => $programas));
+				echo json_encode(array('url' => "panel", 'msg' => "Verifique el estado de la acreditacion en el panel.", 'estado' => $numeroSolicitudes, 'tipo' => $tipoSolicitud, 'motivo' => $motivoSolicitud, 'motivos' =>$motivosSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior));
 				break;
 		}
 		// Para contar el array de formularios si se necesita (count($formularios) == 0)
