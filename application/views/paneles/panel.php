@@ -128,7 +128,7 @@
 			<hr />
 			<br>
 			<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-			<table id="" width="100%" border=0 class="table table-striped table-bordered">
+			<table id="" width="100%" border=0 class="table table-striped table-bordered" id="">
 				<thead>
 				<tr>
 					<td colspan="8">Historial de solicitudes</td>

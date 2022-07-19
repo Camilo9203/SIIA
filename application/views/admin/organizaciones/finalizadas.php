@@ -31,7 +31,7 @@
 						echo "<td>" . $organizaciones->fechaFinalizado . "</td>";
 						echo "<td>" . $organizaciones->fechaUltimaRevision . "</td>";
 						echo "<td>" . $organizaciones->asignada . "</td>";
-						echo "<td class='verFinOrgInf'><button class='btn btn-siia btn-sm ver_organizacion_finalizada' id='' data-organizacion='" . $organizaciones->id_organizacion . "'>Ver información <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
+						echo "<td class='verFinOrgInf'><button class='btn btn-siia btn-sm ver_organizacion_finalizada' id='' data-organizacion='" . $organizaciones->id_organizacion . "' data-solicitud='" . $organizaciones->idSolicitud . "'>Ver información <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
 						echo "</tr>";
 					} else if ($nivel == 0 || $nivel == 6) {
 						echo "<tr>";
@@ -43,7 +43,7 @@
 						echo "<td>" . $organizaciones->fechaFinalizado . "</td>";
 						echo "<td>" . $organizaciones->fechaUltimaRevision . "</td>";
 						echo "<td>" . $organizaciones->asignada . "</td>";
-						echo "<td class='verFinOrgInf'><button class='btn btn-siia btn-sm ver_organizacion_finalizada' id='' data-organizacion='" . $organizaciones->id_organizacion . "'>Ver información <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
+						echo "<td class='verFinOrgInf'><button class='btn btn-siia btn-sm ver_organizacion_finalizada' id='' data-organizacion='" . $organizaciones->id_organizacion . "' data-solicitud='" . $organizaciones->idSolicitud . "'>Ver información <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
 						echo "</tr>";
 					}
 				}

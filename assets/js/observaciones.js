@@ -149,7 +149,7 @@ $("#verAntAcaMenuAdmin").click(function () {
 	/** Formulario 3 Tablas **/
 	let html = "";
 	let data = {
-		id_organizacion: data_orgFinalizada["0"].organizaciones['0']['id_organizacion'],
+		id_organizacion: data_orgFinalizada["0"].organizaciones['id_organizacion'],
 		idSolicitud: data_orgFinalizada["0"].tipoSolicitud['0']['idSolicitud'],
 		keyForm: 3,
 	}
@@ -454,6 +454,7 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 	$("body").append("<div id='id_org_ver_form' class='hidden' data-id='" + $id_org + "'>");
 	let data = {
 		id_organizacion: $id_org,
+		idSolicitud: $(this).attr("data-solicitud")
 	};
 	$.ajax({
 		url: baseURL + "admin/cargar_todaInformacion",

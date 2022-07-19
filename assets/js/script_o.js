@@ -12266,13 +12266,14 @@ function tablas() {
 		"tabla_docentes_asignados",
 		"tabla_visitas",
 		"tabla_plan",
+		"tabla_solicitudes",
 		"tabla_observaciones_form1",
 		"tabla_observaciones_form2",
 		"tabla_observaciones_form3",
 		"tabla_observaciones_form4",
 		"tabla_observaciones_form5",
 		"tabla_observaciones_form7",
-		"tabla_observaciones_form8"
+		"tabla_observaciones_form8",
 	];
 
 	for (i = 0; i < tablas.length; i++) {

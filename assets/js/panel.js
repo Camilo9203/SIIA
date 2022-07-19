@@ -27,13 +27,11 @@ $(".volverPanel").click(function () {
 });
 /** Ver Solicitud */
 $(".verSolicitud").click(function () {
-	alert();
 	let idSolicitud = $(this).attr("data-id");
 	window.open(baseURL + "panel/solicitud/" + idSolicitud, '_blank');
 });
 /** Ver Solicitud */
 $(".verObservaciones").click(function () {
-	alert();
 	let idSolicitud = $(this).attr("data-id");
 	window.open(baseURL + "panel/estadoSolicitud/" + idSolicitud, '_blank');
 });
