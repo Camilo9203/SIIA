@@ -2336,10 +2336,11 @@ class Admin extends CI_Controller
 
 	public function cargar_todaInformacion()
 	{
+		$idSolicitud = $this->input->post('idSolicitud');
 		$id_organizacion = $this->input->post('id_organizacion');
 		$informacionGeneral = $this->db->select("*")->from("informacionGeneral")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		$documentacion = $this->db->select("*")->from("documentacion")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$registroEducativoProgramas = $this->db->select("*")->from("registroEducativoProgramas")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
+		$registroEducativoProgramas = $this->db->select("*")->from("registroEducativoProgramas")->where("idSolicitud", $id_organizacion)->get()->row();
 		$antecedentesAcademicos = $this->db->select("*")->from("antecedentesAcademicos")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		$jornadasActualizacion = $this->db->select("*")->from("jornadasActualizacion")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		$datosProgramas = $this->db->select("*")->from("datosProgramas")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();

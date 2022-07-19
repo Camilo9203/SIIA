@@ -1,4 +1,3 @@
-let hash_url = window.location.hash;
 /** Ver Solicitudes */
 $("#verSolicitudes").click(function () {
 	$("#ayudaModalidad").modal({ backdrop: "static", keyboard: false });
@@ -27,9 +26,16 @@ $(".volverPanel").click(function () {
 	$("#solicitudesRegistradas").hide();
 });
 /** Ver Solicitud */
-$("#verSolicitud").click(function () {
+$(".verSolicitud").click(function () {
+	alert();
 	let idSolicitud = $(this).attr("data-id");
 	window.open(baseURL + "panel/solicitud/" + idSolicitud, '_blank');
+});
+/** Ver Solicitud */
+$(".verObservaciones").click(function () {
+	alert();
+	let idSolicitud = $(this).attr("data-id");
+	window.open(baseURL + "panel/estadoSolicitud/" + idSolicitud, '_blank');
 });
 function irSolicitud (data) {
 	event.preventDefault();

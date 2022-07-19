@@ -1,14 +1,9 @@
-var url = unescape(window.location.href);
-var activate = url.split("/");
-var baseURL = activate[0] + "//" + activate[2] + "/" + activate[3] + "/";
-var entidades;
-var html = "";
-var resultado;
-var departamentos = [];
-var municipios = [];
-var tipoOrg = [];
+let entidades;
+let resultado;
+let departamentos = [];
+let municipios = [];
+let tipoOrg = [];
 // var domainName = window.location.origin + "/beneficiados/public/";
-
 $.ajax({
 	url: baseURL + "Estadisticas",
 	type: "GET",
@@ -16,7 +11,6 @@ $.ajax({
 		entidades = JSON.parse(data);
 	},
 });
-
 //filtro tipo de informacion
 $("#tipoInformacion").change(function () {
 	tipoOrg = [];

@@ -1,9 +1,10 @@
 $(document).ready(function () {
-	verificarFormularios();
-	cargarArchivos()
 	let url = unescape(window.location.href);
+	let solicitud = url.substr(url.lastIndexOf('/') + 1);
 	let activate = url.split("/");
 	let baseURL = activate[0] + "//" + activate[2] + "/" + activate[3] + "/";
+	verificarFormularios(solicitud);
+	cargarArchivos()
 });
 //TODO: Eventos del menu
 $("#sidebar-menu>.menu_section>#wizard_verticle>.side-menu>li>a").click(
@@ -176,19 +177,9 @@ $("#guardar_formulario_tipoSolicitud").click(function () {
 				},
 				success: function (response) {
 					notificacion(response.msg, "success");
-					$("#tipoSolicitud").hide();
-					$("#estado_solicitud").show();
-					$(".side_main_menu").show();
-					$(".hide-sidevar").show();
-					// Si la data se almacena correctamente se verifican formularios
-					verificarFormularios();
-					// Comprobación estado de la solicitud
-					if (response.est == "En Proceso de Renovación" || response.est == "En Proceso de Actualización") {
-						window.location.hash = "enProcesoActualizacion";
-					} else if (response.est == "En Proceso" || response.est == "Negada" || response.est == "Revocada" || response.est == "Acreditado"
-					) {
-						window.location.hash = "enProceso";
-					}
+					setInterval(function () {
+						redirect(baseURL + "panel/solicitud/" + response.est);
+					}, 2000);
 				},
 				error: function (ev) {
 					//Do nothing
@@ -275,9 +266,6 @@ $("#guardar_formulario_informacion_general_entidad").click(function () {
 		let principios = $("#principios").val();
 		let fines = $("#fines").val();
 		let portafolio = $("#portafolio").val();
-		let otros = $("#otros").val();
-
-
 		data = {
 			tipo_organizacion: tipo_organizacion,
 			departamento: departamento,
@@ -298,6 +286,9 @@ $("#guardar_formulario_informacion_general_entidad").click(function () {
 			portafolio: portafolio,
 			otros: otros,
 		};
+
+
+		let otros = $("#otros").val();
 
 		$.ajax({
 			url: baseURL + "panel/guardar_formulario_informacion_general_entidad",
@@ -506,7 +497,8 @@ $("#guardar_formulario_camara_comercio").click(function () {
 	event.preventDefault();
 	// Capturar datos formulario
 	let data = {
-		tipo: 1
+		tipo: 1,
+		idSolicitud: $(this).attr('data-id')
 	};
 	// Petición para guardar datos
 	$.ajax({
@@ -578,6 +570,7 @@ $("#guardar_formulario_certificado_existencia").click(function () {
 		formData.append("departamentoCertificado", $('#departamentos2').val());
 		formData.append("municipioCertificado", $('#municipios2').val());
 		formData.append("tipo", 2);
+		formData.append("idSolicitud", $(this).attr('data-id'));
 		console.log(formData);
 		// Petición para guardar datos
 		$.ajax({
@@ -638,6 +631,7 @@ $("#guardar_formulario_registro_educativo").click(function (){
 		formData.append("file", $("#archivoRegistroEdu").prop("files")[0]);
 		formData.append("append_name", "registroEdu");
 		formData.append("tipo", 3);
+		formData.append("idSolicitud", $(this).attr('data-id'));
 		// Petición para guardar datos
 		$.ajax({
 			url: baseURL + "panel/guardar_formulario_documentacion_legal",
@@ -729,6 +723,7 @@ $("#guardar_formulario_antecedentes_academicos").click(function () {
 			materialDidacticoAcademicos: $("#materialDidacticoAcademicos").val(),
 			bibliografiaAcademicos: $("#bibliografiaAcademicos").val(),
 			duracionCursoAcademicos: $("#duracionCursoAcademicos").val(),
+			idSolicitud: $(this).attr('data-id')
 		};
 		$.ajax({
 			url: baseURL + "panel/guardar_formulario_antecedentes_academicos",
@@ -781,40 +776,80 @@ $(".eliminarAntecedentes").click(function () {
 		},
 	});
 });
-/** Formulario 6: Programas de Educación */
+/** Formulario 4: Jornadas de actualización */
+$("#guardar_formulario_jornadas_actualizacion").click(function () {
+	$(this).attr("disabled", true);
+	let numeroPersonas = $("#jornadasNumeroPersonas").val();
+	let fechaAsistencia = $("#jornadasFechaAsistencia").val();
+	if (numeroPersonas == "" && fechaAsistencia == "") {
+		numeroPersonas = 0;
+		fechaAsistencia = "1900-01-01";
+	}
+	data = {
+		numeroPersonas: numeroPersonas,
+		fechaAsistencia: fechaAsistencia,
+		idSolicitud: $(this).attr('data-id')
+	};
+
+	$.ajax({
+		url: baseURL + "panel/guardar_formulario_jornadas_actualizacion",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		beforeSend: function () {
+			notificacion("Espere...", "success");
+		},
+		success: function (response) {
+			notificacion(response.msg, "success");
+			//clearInputs("formulario_jornadas_actualizacion");
+			setInterval(function () {
+				reload();
+			}, 2000);
+		},
+		error: function (ev) {
+			//Do nothing
+		},
+	});
+});
+/** Formulario 5: Programas de Educación */
 // Acciones de cada modal de aceptación
 $("#aceptar_curso_basico_es").click(function () {
 	let curso = $(this).attr("data-programa");
 	let modal = $(this).attr("data-modal");
 	let check = $(this).attr("data-check");
-	guardarDatosProgramas(curso,modal,check);
+	let idSolicitud = $(this).attr("data-id");
+	guardarDatosProgramas(curso,modal,check, idSolicitud);
 });
 $("#aceptar_aval_trabajo").click(function () {
 	let curso = $(this).attr("data-programa");
 	let modal = $(this).attr("data-modal");
 	let check = $(this).attr("data-check");
-	guardarDatosProgramas(curso,modal,check);
+	let idSolicitud = $(this).attr("data-id");
+	guardarDatosProgramas(curso,modal,check, idSolicitud);
 });
 $("#aceptar_curso_medio_es").click(function () {
 	let curso = $(this).attr("data-programa");
 	let modal = $(this).attr("data-modal");
 	let check = $(this).attr("data-check");
-	guardarDatosProgramas(curso,modal,check);
+	let idSolicitud = $(this).attr("data-id");
+	guardarDatosProgramas(curso,modal,check, idSolicitud);
 });
 $("#aceptar_avanzado_medio_es").click(function () {
 	let curso = $(this).attr("data-programa");
 	let modal = $(this).attr("data-modal");
 	let check = $(this).attr("data-check");
-	guardarDatosProgramas(curso,modal,check);
+	let idSolicitud = $(this).attr("data-id");
+	guardarDatosProgramas(curso,modal,check, idSolicitud);
 });
 $("#aceptar_educacion_financiera").click(function () {
 	let curso = $(this).attr("data-programa");
 	let modal = $(this).attr("data-modal");
 	let check = $(this).attr("data-check");
-	guardarDatosProgramas(curso,modal,check);
+	let idSolicitud = $(this).attr("data-check");
+	guardarDatosProgramas(curso,modal,chec, idSolicitud);
 });
 // Función para guardar datos al aceptar programa
-function guardarDatosProgramas (curso,modal, check){
+function guardarDatosProgramas (curso,modal, check, idSolicitud){
 	$("#" + modal).modal("toggle");
 	$("#" + check).prop("checked", true);
 	$(this).attr("disabled", true);
@@ -822,6 +857,7 @@ function guardarDatosProgramas (curso,modal, check){
 	data = {
 		programa: curso,
 		organizacion:  $("#id_organizacion").val(),
+		idSolicitud: idSolicitud
 	};
 	$.ajax({
 		url: baseURL + "panel/guardar_formulario_datos_programas",
@@ -887,6 +923,7 @@ $("#guardar_formulario_plataforma").click(function () {
 				datos_plataforma_url: $("#datos_plataforma_url").val(),
 				datos_plataforma_usuario: $("#datos_plataforma_usuario").val(),
 				datos_plataforma_contrasena: $("#datos_plataforma_contrasena").val(),
+				idSolicitud: $(this).attr('data-id')
 			};
 			$.ajax({
 				url: baseURL + "panel/guardar_formulario_aplicacion",
@@ -964,6 +1001,8 @@ $("#guardar_formulario_modalidad_en_linea").click(function () {
 			form_data.append("nombreHerramienta",  $("#nombre_herramienta").val());
 			form_data.append("descripcionHerramienta", $("#descripcion_herramienta").val());
 			form_data.append("aceptacion", $("#acepta_mod_en_linea").val());
+			form_data.append("aceptacion", $(this).attr('data-id'));
+
 			// Petición para guardar datos
 			$.ajax({
 				url: baseURL + "panel/guardar_formulario_modalidad_en_linea",
@@ -1042,19 +1081,22 @@ $(".eliminarDatosEnlinea").click(function () {
 });
 /** Finalizar Solicitud  */
 $("#finalizar_si").click(function () {
-	$(this).attr("disabled", true);
-
+	//$(this).attr("disabled", true);
+	let	data = {
+		idSolicitud:  $(this).attr('data-id'),
+	};
 	$.ajax({
 		url: baseURL + "panel/finalizarProceso",
 		type: "post",
 		dataType: "JSON",
+		data: data,
 		success: function (response) {
 			notificacion(response.msg, "success");
 			if (response.estado == "0") {
 				$(this).attr("disabled", false);
 				$("#sidebar-menu>.menu_section>a").click();
 			} else {
-				redirect(baseURL + "panel");
+				redirect(baseURL + "panel/estadoSolicitud/" + $(this).attr('data-id'));
 			}
 		},
 		error: function (ev) {
@@ -1336,10 +1378,14 @@ function validFroms (form){
 	}
 }
 // TODO: Verificación de formularios
-function verificarFormularios() {
+function verificarFormularios(solicitud) {
 	$("#formulariosFaltantes").empty();
+	let data = {
+		'solicitud': solicitud
+	};
 	$.ajax({
 		url: baseURL + "panel/cargarEstadoSolicitud",
+		data: data,
 		type: "post",
 		dataType: "JSON",
 		success: function (response) {

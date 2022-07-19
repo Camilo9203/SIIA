@@ -1,9 +1,6 @@
-var url = unescape(window.location.href);
-var activate = url.split("/");
-var baseURL = activate[0] + "//" + activate[2] + "/" + activate[3] + "/";
-var correos;
-var correosAcreditadas;
-var correosTodos;
+let correos;
+let correosAcreditadas;
+let correosTodos;
 $.ajax({
 	url: baseURL + "Admin/cargarCorreos",
 	type: "GET",

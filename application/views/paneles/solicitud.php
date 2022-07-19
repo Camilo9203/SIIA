@@ -58,21 +58,22 @@
 		<hr />
 		<div class="form-group">
 			<h3>Datos de la solicitud: <small>Los archivos y campos marcados en los formularios con asterisco (<span class="spanRojo">*</span>) son requeridos en la solicitud.</small></h3>
-			<label>Solicitud número:</label>
-			<p id="numeroSolicitudesBD"></p>
+			<label>ID Solicitud:</label>
+			<p><?php echo $data_solicitud->idSolicitud ?></p>
 			<label>Estado de la organización:</label>
-			<p id="estadoOrgBD"></p>
+			<p><?php echo $data_solicitud->nombre ?></p>
 			<label>Tipo de Solicitud:</label>
-			<p id="tipoSolicitudesBB"></p>
+			<p><?php echo $data_solicitud->tipoSolicitud ?></p>
 			<label>Motivo de Solicitud:</label>
-			<p id="motivoSolicitudesBB"></p>
+			<p><?php echo $data_solicitud->motivoSolicitudAcreditado ?></p>
 			<label>Modalidad de Solicitud:</label>
-			<p id="modalidadSolicitudesBB"></p>
+			<p><?php echo $data_solicitud->modalidadSolicitudAcreditado ?></p>
 			<hr />
 			<label>Estado anterior:</label>
-			<p id="estadoAnteriorBB"></p>
+			<p><?php echo $data_solicitud->estadoAnterior ?></p>
+
 			<hr />
-			<button class="btn btn-siia btn-sm verHistObsUs pull-right" id="hist_org_obs" data-toggle='modal' data-id-org="<?php echo $data_organizacion->id_organizacion;; ?>" data-target='#verHistObsUs'>Historial de observaciones <i class="fa fa-history" aria-hidden="true"></i></button>
+			<button class="btn btn-siia btn-sm verHistObsUs pull-right" id="hist_org_obs" data-toggle='modal' data-id-org="<?php echo $data_solicitud->organizaciones_id_organizacion; ?>" data-target='#verHistObsUs'>Historial de observaciones <i class="fa fa-history" aria-hidden="true"></i></button>
 <!--			<button class="btn btn-siia btn-sm pull-right" data-toggle="modal" data-target="#modalEliminarSolicitud" id="el_sol">Actualizar/Cambiar el tipo de solicitud actual <i class="fa fa-refresh" aria-hidden="true"></i></button>-->
 			<hr />
 		</div>
@@ -392,7 +393,7 @@
 			<div id="div_camara_comercio" hidden>
 				<?php echo form_open('', array('id' => 'formulario_certificado_existencia')); ?>
 				<p>En caso que el Certificado de Existencia y Representación Legal sea emitido por Cámara de Comercio, la Unidad Administrativa realizará la verificación de este requisito por medio de consulta directa a la base de datos del Registro Único Empresarial Y Social RUES. Por tal motivo no es necesario anexar el certificado. Es responsabilidad de la entidad mantener renovado el registro mercantil en el certificado. Los Campos marcados con (*) son obligatorios.</p>
-				<button name="guardar_formulario_camara_comercio" id="guardar_formulario_camara_comercio" class="btn btn-siia btn-sm pull-right">
+				<button name="guardar_formulario_camara_comercio" id="guardar_formulario_camara_comercio" class="btn btn-siia btn-sm pull-right" data-id="<?php  echo $data_solicitud->idSolicitud;?>">
 					Guardar datos <i class="fa fa-check" aria-hidden="true"></i>
 				</button>
 				</form>
@@ -459,7 +460,7 @@
 					</br></br>
 				</div>
 				<!-- Botón guardar -->
-				<button name="guardar_formulario_certificado_existencia" id="guardar_formulario_certificado_existencia" class="btn btn-siia btn-sm pull-right">
+				<button name="guardar_formulario_certificado_existencia" id="guardar_formulario_certificado_existencia" class="btn btn-siia btn-sm pull-right" data-id="<?php  echo $data_solicitud->idSolicitud;?>">
 					Guardar datos <i class="fa fa-check" aria-hidden="true"></i>
 				</button>
 				</form>
@@ -528,7 +529,7 @@
 					</div>
 					</br></br>
 				</div>
-				<button name="guardar_formulario_registro_educativo" id="guardar_formulario_registro_educativo" class="btn btn-siia btn-sm pull-right ">
+				<button name="guardar_formulario_registro_educativo" id="guardar_formulario_registro_educativo" class="btn btn-siia btn-sm pull-right " data-id="<?php  echo $data_solicitud->idSolicitud;?>">
 					Guardar datos <i class="fa fa-check" aria-hidden="true"></i>
 				</button>
 				</form>
@@ -586,12 +587,12 @@
 						</thead>
 						<tbody id="tbody">
 						<?php
-						echo "<tr><td>" . $data_documentacion_legal->entidad . "</td>";
-						echo "<td>" . $data_documentacion_legal->fechaExpedicion . "</td>";
-						echo "<td>" . $data_documentacion_legal->departamento . "</td>";
-						echo "<td>" . $data_documentacion_legal->municipio . "</td>";
-						echo "<td><button class='btn btn-primary btn-sm verDocCertificadoExistencia' data-id=" . $data_documentacion_legal->id_certificadoExistencia . ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
-						echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosCertificadoExistencia' data-id=" . $data_documentacion_legal->id_certificadoExistencia . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+							echo "<tr><td>" . $data_documentacion_legal->entidad . "</td>";
+							echo "<td>" . $data_documentacion_legal->fechaExpedicion . "</td>";
+							echo "<td>" . $data_documentacion_legal->departamento . "</td>";
+							echo "<td>" . $data_documentacion_legal->municipio . "</td>";
+							echo "<td><button class='btn btn-primary btn-sm verDocCertificadoExistencia' data-id=" . $data_documentacion_legal->id_certificadoExistencia . ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
+							echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosCertificadoExistencia' data-id=" . $data_documentacion_legal->id_certificadoExistencia . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
 						?>
 						</tbody>
 					</table>
@@ -685,7 +686,7 @@
 				<label for="duracionCursoAcademicos">Duración del curso:<span class="spanRojo">*</span> (Horas)</label>
 				<input type="number" class="form-control" name="duracionCursoAcademicos" id="duracionCursoAcademicos" placeholder="">
 			</div>
-			<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_antecedentes_academicos" id="guardar_formulario_antecedentes_academicos">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
+			<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_antecedentes_academicos" id="guardar_formulario_antecedentes_academicos" data-id="<?php  echo $data_solicitud->idSolicitud;?>">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
 			</form>
 			<div class="clearfix"></div>
 			<?php if($data_antecedentes_academicos): ?>
@@ -806,7 +807,7 @@
 				</table>
 			</div>
 			<hr />
-			<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_jornadas_actualizacion" id="guardar_formulario_jornadas_actualizacion">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
+			<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_jornadas_actualizacion" id="guardar_formulario_jornadas_actualizacion" data-id="<?php  echo $data_solicitud->idSolicitud;?>">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
 		</div>
 	</div>
 	<!-- Formulario de programas de educación en economía solidaria 5 - INICIO -->
@@ -866,7 +867,7 @@
 						<label class="underlined">
 							<input type="checkbox" id="check_curso_economia_financiera" form="formulario_programas" name="check_curso_economia_financiera" value="* Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria" disabled required>
 							<label for="modalCursoFinanciera">&nbsp;</label>
-							<a data-toggle="modal" data-target="#modalCursoFinanciera" data-backdrop="static" data-keyboard="false" data-programa="Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria">
+							<a data-toggle="modal" data-target="#modalCursoFinanciera" data-backdrop="static" data-keyboard="false" data-programa="Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria" data-id="<?php  echo $data_solicitud->idSolicitud;?>">
 								<span class="spanRojo">*</span> Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria
 							</a>
 					</div>
@@ -1022,7 +1023,7 @@
 		</div>
 		<div class="clearfix"></div>
 		<hr />
-		<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_plataforma" id="guardar_formulario_plataforma">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
+		<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_plataforma" id="guardar_formulario_plataforma" data-id="<?php  echo $data_solicitud->idSolicitud;?>">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
 		</form>
 		<div class="clearfix"></div>
 		<?php if($data_plataforma): ?>
@@ -1108,7 +1109,7 @@
 			</div>
 		</div>
 		<!-- Botón para guardar datos -->
-		<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_modalidad_en_linea" id="guardar_formulario_modalidad_en_linea">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
+		<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_modalidad_en_linea" id="guardar_formulario_modalidad_en_linea" data-id="<?php  echo $data_solicitud->idSolicitud;?>">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
 		<div class="clearfix"></div>
 		<hr />
 		</form>
@@ -1165,7 +1166,7 @@
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-danger btn-sm pull-left" data-dismiss="modal">No, voy a verificar <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button class="btn btn-siia btn-sm pull-right" id="finalizar_si">Si, estoy completamente seguro de terminar y enviar la solicitud <i class="fa fa-check-square-o" aria-hidden="true"></i></button>
+					<button class="btn btn-siia btn-sm pull-right" id="finalizar_si" data-id="<?php echo $data_solicitud->idSolicitud ?>">Si, estoy completamente seguro de terminar y enviar la solicitud <i class="fa fa-check-square-o" aria-hidden="true"></i></button>
 				</div>
 			</div>
 		</div>
@@ -1189,7 +1190,7 @@
 				</div>
 				<div class="modal-body">
 					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_curso_basico_es" data-programa="Acreditación Curso Básico de Economía Solidaria" data-modal="modalCursoBasico" data-check="check_curso_basico_es">Sí, acepto. <i class="fa fa-check"></i></button>
+					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_curso_basico_es" data-programa="Acreditación Curso Básico de Economía Solidaria" data-modal="modalCursoBasico" data-check="check_curso_basico_es"  data-id="<?php echo $data_solicitud->idSolicitud;?>">Sí, acepto. <i class="fa fa-check"></i></button>
 				</div>
 			</div>
 		</div>
@@ -1212,7 +1213,7 @@
 				</div>
 				<div class="modal-body">
 					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_aval_trabajo" data-programa="Acreditación Aval de Trabajo Asociado"  data-modal="modalAval" data-check="check_curso_basico_aval">Sí, acepto. <i class="fa fa-check"></i></button>
+					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_aval_trabajo" data-programa="Acreditación Aval de Trabajo Asociado"  data-modal="modalAval" data-check="check_curso_basico_aval"  data-id="<?php  echo $data_solicitud->idSolicitud;?>">Sí, acepto. <i class="fa fa-check"></i></button>
 				</div>
 			</div>
 		</div>
@@ -1235,7 +1236,7 @@
 				</div>
 				<div class="modal-body">
 					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_curso_medio_es" data-programa="Acreditación Curso Medio de Economía Solidaria"  data-modal="modalCursoMedio" data-check="check_curso_medio_es">Sí, acepto. <i class="fa fa-check"></i></button>
+					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_curso_medio_es" data-programa="Acreditación Curso Medio de Economía Solidaria"  data-modal="modalCursoMedio" data-check="check_curso_medio_es"  data-id="<?php  echo $data_solicitud->idSolicitud;?>">Sí, acepto. <i class="fa fa-check"></i></button>
 				</div>
 			</div>
 		</div>
@@ -1258,7 +1259,7 @@
 				</div>
 				<div class="modal-body">
 					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_avanzado_medio_es" data-programa="Acreditación Curso Avanzado de Economía Solidaria" data-modal="modalCursoAvanzado" data-check="check_curso_avanzado_es">Sí, acepto. <i class="fa fa-check"></i></button>
+					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_avanzado_medio_es" data-programa="Acreditación Curso Avanzado de Economía Solidaria" data-modal="modalCursoAvanzado" data-check="check_curso_avanzado_es"  data-id="<?php  echo $data_solicitud->idSolicitud;?>">Sí, acepto. <i class="fa fa-check"></i></button>
 				</div>
 			</div>
 		</div>
@@ -1282,7 +1283,7 @@
 				</div>
 				<div class="modal-body">
 					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_educacion_financiera" data-programa="Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria" data-modal="modalCursoFinanciera" data-check="check_curso_economia_financiera">Sí, acepto. <i class="fa fa-check"></i></button>
+					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_educacion_financiera" data-programa="Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria" data-modal="modalCursoFinanciera" data-check="check_curso_economia_financiera" data-id="<?php  echo $data_solicitud->idSolicitud;?>">Sí, acepto. <i class="fa fa-check"></i></button>
 				</div>
 			</div>
 		</div>

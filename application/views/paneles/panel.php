@@ -152,8 +152,8 @@
 					echo "<td>" . $solicitud->nombre . "</td>";
 					echo "<td>" . $solicitud->motivoSolicitudAcreditado . "</td>";
 					echo "<td>" . $solicitud->modalidadSolicitudAcreditado . "</td>";
-					echo "<td><div class='btn-group-vertical' role='group mr-2' aria-label='acciones'><button id='verSolicitud' class='btn btn-siia btn-sm' data-id=" . $solicitud->idSolicitud . " title='Ver Solicitud'>Ver <i class='fa fa-eye' aria-hidden='true'></i></button>";
-					echo "<button id='verObservaciones' class='btn btn-warning btn-sm' data-id=" . $solicitud->idSolicitud . " title='Ver Observaciones'>Observaciones<i class='fa fa-eye' aria-hidden='true'></i></button>";
+					echo "<td><div class='btn-group-vertical' role='group mr-2' aria-label='acciones'><button class='btn btn-siia btn-sm verSolicitud' data-id=" . $solicitud->idSolicitud . " title='Ver Solicitud'>Ver <i class='fa fa-eye' aria-hidden='true'></i></button>";
+					echo "<button id='verObservaciones' class='btn btn-warning btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Observaciones'>Observaciones<i class='fa fa-eye' aria-hidden='true'></i></button>";
 					echo "<button id='verDetalle' class='btn btn-info btn-sm' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false'  data-id=" . $solicitud->idSolicitud . " title='Ver Detalle'>Detalle <i class='fa fa-info' aria-hidden='true'></i></button></div></td></tr>";
 				}
 				?>
