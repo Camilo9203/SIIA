@@ -424,12 +424,13 @@ $(document).ready(function () {
 			type: "post",
 			dataType: "JSON",
 			success: function (response) {
+				console.log(response);
 				if (response.estado == "En Observaciones") {
-					$(".actualizar_solicitud").attr("disabled", false);
 				} else {
-					$(".actualizar_solicitud").attr("disabled", true);
-					$(".actualizar_solicitud").remove();
-					$("#obs_orgs").remove();
+					$(".actualizar_solicitud").attr("disabled", false);
+					//$(".actualizar_solicitud").attr("disabled", true);
+					//$(".actualizar_solicitud").remove();
+					//$("#obs_orgs").remove();
 				}
 			},
 			error: function (ev) {
@@ -8735,82 +8736,6 @@ $(document).ready(function () {
 		});
 	});
 
-	$(".verHistObsUs").click(function () {
-		$id_organizacion = $(this).attr("data-id-org");
-
-		data = {
-			id_organizacion: $id_organizacion,
-		};
-
-		$.ajax({
-			url: baseURL + "panel/cargarObservacionesUsuario",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			success: function (response) {
-				$("#tbody_hist_obs").empty();
-				for (var i = 0; i < response.observaciones.length; i++) {
-					switch (response.observaciones[i].valueForm) {
-						case "informacionGeneral":
-							$formulario = "Formulario 1. Informacion general";
-							break;
-						case "documentacionLegal":
-							$formulario = "Formulario 2. Documentacion legal";
-							break;
-						case "registroEducativo":
-							$formulario = "Formulario 3. Registro educativo";
-							break;
-						case "antecedentesAcademicos":
-							$formulario = "Formulario 4. Antecedentes academicos";
-							break;
-						case "jornadasActualizacion":
-							$formulario = "Formulario 5. Jornadas actualización";
-							break;
-						case "datosBasicosProgramas":
-							$formulario =
-								"Formulario 6. Programa básico de economía solidaria";
-							break;
-						case "programasAvalEconomia":
-							$formulario =
-								"Formulario 7. Prog. de Economía Solidaria con Énfasis en Trabajo Asociado";
-							break;
-						case "programasAvalar":
-							$formulario = "Formulario 8. Programas";
-							break;
-						case "docentes":
-							$formulario = "Formulario 9. Facilitadores";
-							break;
-						case "plataforma":
-							$formulario = "Formulario 10. Plataforma";
-							break;
-					}
-					$("#tbody_hist_obs").append("<tr id=" + i + ">");
-					$("#tbody_hist_obs>tr#" + i + "").append(
-						"<td>" + $formulario + "</td>"
-					);
-					$("#tbody_hist_obs>tr#" + i + "").append(
-						"<td>" + response.observaciones[i].keyForm + "</td>"
-					);
-					$("#tbody_hist_obs>tr#" + i + "").append(
-						"<td>" + response.observaciones[i].idForm + "</td>"
-					);
-					//$("#tbody_hist_obs>tr#"+i+"").append("<td>"+response.observaciones[i].observacion+"</td>");
-					$("#tbody_hist_obs>tr#" + i + "").append(
-						"<td>" + response.observaciones[i].fechaObservacion + "</td>"
-					);
-					$("#tbody_hist_obs>tr#" + i + "").append(
-						"<td>" + response.observaciones[i].numeroRevision + "</td>"
-					);
-					//$("#tbody_hist_obs>tr#"+i+"").append("<td>"+response.observaciones[i].idSolicitud+"</td>");
-					$("#tbody_hist_obs").append("</tr>");
-				}
-				paging("tabla_historial_obs");
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
 
 	$("#crr_hist_obs").click(function () {
 		$("#tbody_hist_obs").empty();
@@ -9893,43 +9818,11 @@ $(document).ready(function () {
 		$("#v_estado_org").slideUp();
 	});
 
-	$(".ver_estado_org").click(function () {
-		var $id_org = $(this).attr("data-organizacion");
-		$("#id_org_ver_form").remove();
-		$("body").append(
-			"<div id='id_org_ver_form' class='hidden' data-id='" + $id_org + "'>"
-		);
-		var data = {
-			id_organizacion: $id_org,
-		};
-		$.ajax({
-			url: baseURL + "admin/cargar_todaInformacion",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			success: function (response) {
-				$("#admin_ver_finalizadas").slideUp();
-				$("#v_estado_org").slideDown();
-				$("#actualizarEstadoOrganizacion").attr("data-id-org", $id_org);
-				$("#resolucion_nombre_org").html(
-					response.organizaciones["0"].nombreOrganizacion
-				);
-				$("#resolucion_nit_org").html(response.organizaciones["0"].numNIT);
-				$("#resolucion_nombreRep_org").html(
-					response.organizaciones["0"].primerNombreRepLegal +
-						" " +
-						response.organizaciones["0"].segundoNombreRepLegal +
-						" " +
-						response.organizaciones["0"].primerApellidoRepLegal +
-						" " +
-						response.organizaciones["0"].segundoApellidoRepLegal
-				);
-				$("#estado_actual_org").html(response.estadoOrganizaciones["0"].nombre);
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
+	$(".ver_estado_2").click(function () {
+		let $id_org = $(this).attr("data-organizacion");
+		let idSolicitud = $(this).attr("data-solicitud");
+		alert(idSolicitud);
+
 	});
 
 	$("#crearBateriaObservacion").click(function () {
@@ -10034,8 +9927,10 @@ $(document).ready(function () {
 			e.preventDefault();
 	});
 
-	$(".actualizar_solicitud").click(function () {
-		window.open(baseURL + "panel#actualizarSolicitud", "_blank");
+	$("#actualizar_solicitud").click(function () {
+		let idsolicitud = $(this).attr("data-solicitud");
+		alert(idsolicitud);
+		//window.open(baseURL + "panel/solicitud/" + idSolicitud, '_self');
 	});
 	//TODO: Leer Notificaciones
 	$(".notificaciones").click(function () {

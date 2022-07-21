@@ -648,7 +648,7 @@ table > tbody > tr > td {
 #organizaciones_encontradas,
 #divIngJor,
 #divSiguienteProgBasiES1,
-#v_estado_org,
+/*#v_estado_org,*/
 #datos_org_camara,
 #datos_org_resolucion,
 #divSiguienteProgBasiES2,
@@ -679,6 +679,7 @@ table > tbody > tr > td {
 #div_solicitud,
 #tipoSolicitud,
 #solicitudesRegistradas,
+#crearSolicitudes,
 #div_motivo_actualizar,
 #div_municipios5,
 #div_municipios4,

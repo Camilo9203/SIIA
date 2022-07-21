@@ -256,10 +256,10 @@
 			</div>
 		</div>
 		<div class="col-md-12" id="antecedentesAcademicos">
-			<h3>3. Antecedentes Academico</h3>
+			<h3>3. Antecedentes Académicos</h3>
 			<!-- Tabla Antecedentes Académicos -->
 			<div class="">
-				<label>Datos de Atecedentes Academicos:</label>
+				<label>Datos de Atecedentes Académicos:</label>
 				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
 				<table id="" width="100%" border=0 class="table table-striped table-bordered">
 					<thead>

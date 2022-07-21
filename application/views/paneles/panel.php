@@ -112,21 +112,26 @@
 		</div>
 	</div>
 </div>
+<!-- Crear Solicitud-->
+<div id="crearSolicitudes" class="container center-block">
+	<div class="container-fluid">
+		<h3>Solicitudes registradas</h3>
+		<p>Si cuentas con solicitudes, aquí puedes revisar su estado, para crear una nueva solicitud por favor pulsa en el botón "Crear Nueva"</p>
+		<hr />
+		<div class="form-group">
+			<button id='nuevaSolicitud' class='btn btn-siia pull-right' data-id=" . $solicitud->idSolicitud . ">
+				Crear Nueva  <i class='fa fa-plus' aria-hidden='true'></i>
+			</button>
+		</div>
+		<hr />
+		<br>
+	</div>
+</div>
 <!-- Solicitudes Registradas -->
 <div id="solicitudesRegistradas" class="container center-block">
+	<div class="">
 	<!-- Tabla herramientas -->
 	<?php if($data_solicitudes): ?>
-		<div class="">
-			<h3>Solicitudes registradas:</h3>
-			<p>Si cuentas con solicitudes, aquí puedes revisar su estado, para crear una nueva solicitud por favor pulsa en el botón "Crear Nueva"</p>
-			<hr />
-			<div class="form-group">
-				<button id='nuevaSolicitud' class='btn btn-siia pull-right' data-id=" . $solicitud->idSolicitud . ">
-					Crear Nueva  <i class='fa fa-plus' aria-hidden='true'></i>
-				</button>
-			</div>
-			<hr />
-			<br>
 			<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
 			<table id="" width="100%" border=0 class="table table-striped table-bordered" id="">
 				<thead>

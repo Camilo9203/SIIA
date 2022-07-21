@@ -74,7 +74,7 @@ class Panel extends CI_Controller
 		$data['data_organizacion'] = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row()->id_organizacion;
 		//$data['idSolicitud'] = $this->idSolicitud();
 		$data['observaciones'] = $this->cargarObservaciones($idSolicitud);
-		$data['estadoSolicitud'] = $this->cargarEstadoSolicitudAdmin($idSolicitud);
+		$data['solicitud'] = $this->cargarSolicitud($idSolicitud);
 		//$data['archivosPlataforma'] = $this->cargarObservacionesPlataforma();
 
 		$this->load->view('include/header', $data);
@@ -224,9 +224,12 @@ class Panel extends CI_Controller
 		return $planMejoramiento;
 	}
 
-	public function cargarDatos_formulario_informacion_general_entidad($idSolicitud)
+	public function cargarDatos_formulario_informacion_general_entidad()
 	{
-		$datos_formulario = $this->db->select("*")->from("informacionGeneral")->where("idSolicitud", $idSolicitud)->get()->row();
+		$usuario_id = $this->session->userdata('usuario_id');
+		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
+		$id_organizacion = $datos_organizacion->id_organizacion;
+		$datos_formulario = $this->db->select("*")->from("informacionGeneral")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
 		return $datos_formulario;
 	}
 	public function cargarDatos_formulario_documentacion_legal($idSolicitud)
@@ -1568,8 +1571,8 @@ class Panel extends CI_Controller
 		$data_aplicacion = array(
 			'nombreHerramienta' => $this->input->post("nombreHerramienta"),
 			'descripcionHerramienta' => $this->input->post("descripcionHerramienta"),
-			'aceptacion' => $this->input->post("aceptacion"),
 			'fecha' => date('Y/m/d H:i:s'),
+			'aceptacion' => $this->input->post("aceptacion"),
 			'organizaciones_id_organizacion' => $datos_organizacion->id_organizacion,
 			'idSolicitud' => $this->input->post('idSolicitud'),
 		);

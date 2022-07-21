@@ -1103,7 +1103,7 @@
 						<p>La UAEOS realizará seguimiento a las organizaciones acreditadas en el cumplimiento de los programas de educación solidaria acreditados.</p>
 						<!--				<a class="pull-right" target="_blank" href="https://www.orgsolidarias.gov.co/sites/default/files/archivos/Res_110%20del%2031%20de%20marzo%20de%202016.pdf">Recurso de la resolución 110</a>-->
 						<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
-						<button type="button" class="btn btn-siia btn-sm pull-right" id="acepto_mod_en_linea">Sí, acepto. <i class="fa fa-check"></i></button>
+						<button type="button" class="btn btn-siia btn-sm pull-right" id="acepto_mod_en_linea" value="Si Acepta">Sí, acepto. <i class="fa fa-check"></i></button>
 					</div>
 				</div>
 			</div>

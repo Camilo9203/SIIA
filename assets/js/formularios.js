@@ -12,7 +12,6 @@ $("#sidebar-menu>.menu_section>#wizard_verticle>.side-menu>li>a").click(
 		$(".formulario_panel").hide();
 		$("#panel_inicial").hide();
 		$("#estado_solicitud").hide();
-		$("#tipoSolicitud").hide();
 		$(".archivos").toggle();
 		var $id_form = $(this).attr("data-form");
 		var $step = $("#sidebar-menu>.menu_section>#wizard_verticle>.side-menu>li>a>span#" + $id_form);
@@ -79,7 +78,6 @@ $("#sidebar-menu>.menu_section>a").click(function () {
 			$("#programas").hide();
 			$("#docentes").hide();
 			$("#datos_plataforma").hide();
-			$("#tipoSolicitud").hide();
 			$("#finalizar_proceso").hide();
 			$(".archivos").toggle();
 			break;
@@ -266,6 +264,7 @@ $("#guardar_formulario_informacion_general_entidad").click(function () {
 		let principios = $("#principios").val();
 		let fines = $("#fines").val();
 		let portafolio = $("#portafolio").val();
+		let otros = $("#otros").val();
 		data = {
 			tipo_organizacion: tipo_organizacion,
 			departamento: departamento,
@@ -288,7 +287,7 @@ $("#guardar_formulario_informacion_general_entidad").click(function () {
 		};
 
 
-		let otros = $("#otros").val();
+
 
 		$.ajax({
 			url: baseURL + "panel/guardar_formulario_informacion_general_entidad",
@@ -845,8 +844,8 @@ $("#aceptar_educacion_financiera").click(function () {
 	let curso = $(this).attr("data-programa");
 	let modal = $(this).attr("data-modal");
 	let check = $(this).attr("data-check");
-	let idSolicitud = $(this).attr("data-check");
-	guardarDatosProgramas(curso,modal,chec, idSolicitud);
+	let idSolicitud = $(this).attr("data-id");
+	guardarDatosProgramas(curso,modal,check, idSolicitud);
 });
 // Función para guardar datos al aceptar programa
 function guardarDatosProgramas (curso,modal, check, idSolicitud){
@@ -1001,7 +1000,7 @@ $("#guardar_formulario_modalidad_en_linea").click(function () {
 			form_data.append("nombreHerramienta",  $("#nombre_herramienta").val());
 			form_data.append("descripcionHerramienta", $("#descripcion_herramienta").val());
 			form_data.append("aceptacion", $("#acepta_mod_en_linea").val());
-			form_data.append("aceptacion", $(this).attr('data-id'));
+			form_data.append("idSolicitud", $(this).attr('data-id'));
 
 			// Petición para guardar datos
 			$.ajax({

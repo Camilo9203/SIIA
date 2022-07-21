@@ -14,7 +14,7 @@
 				<td>Direccion E-Mail Rep</td>
 				<td>Estado actual</td>
 				<td>Estado anterior</td>
-				<td>Accion</td>
+				<td>Acción</td>
 			</tr>
 		</thead>
 		<tbody id="tbody">
@@ -28,7 +28,7 @@
 				echo "<td>".$organizaciones_en_proceso[$i] ->direccionCorreoElectronicoRepLegal."</td>";
 				echo "<td>".$organizaciones_en_proceso[$i] ->nombre."</td>";
 				echo "<td>".$organizaciones_en_proceso[$i] ->estadoAnterior."</td>";
-				echo "<td><button class='btn btn-siia btn-sm ver_estado_org' id='' data-organizacion='".$organizaciones_en_proceso[$i] ->id_organizacion."'>Ver estado <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
+				echo "<td><button class='btn btn-siia btn-sm ver_estado_2' data-organizacion='" . $organizaciones_en_proceso[$i]->id_organizacion . "' data-solicitud='" . $organizaciones_en_proceso[$i]->idSolicitudAcreditado . "'>Ver estado <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
 				echo "</tr>";
 			}
 		?>

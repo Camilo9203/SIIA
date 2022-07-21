@@ -17,7 +17,7 @@ $("#verInfGenMenuAdmin").click(function () {
 /** Formulario 1 Tablas **/
 	let html = "";
 	let data = {
-		id_organizacion: data_orgFinalizada["0"].organizaciones['0']['id_organizacion'],
+		id_organizacion: data_orgFinalizada["0"].organizaciones['id_organizacion'],
 		idSolicitud: data_orgFinalizada["0"].tipoSolicitud['0']['idSolicitud'],
 		keyForm: 1,
 	}
@@ -28,6 +28,7 @@ $("#verInfGenMenuAdmin").click(function () {
 		dataType: "JSON",
 		data: data,
 		success: function (response) {
+			console.log(response);
 			// Llenar tabla de datos en línea registrados
 			if(response.observaciones.length == 0){
 				html += "<td colspan='4'>No hay datos </td></tr>";
@@ -58,7 +59,7 @@ $("#verDocLegalMenuAdmin").click(function () {
 /** Formulario 2 Tablas **/
 	let html = "";
 	let data = {
-		id_organizacion: data_orgFinalizada["0"].organizaciones['0']['id_organizacion'],
+		id_organizacion: data_orgFinalizada["0"].organizaciones['id_organizacion'],
 		idSolicitud: data_orgFinalizada["0"].tipoSolicitud['0']['idSolicitud'],
 		keyForm: 2,
 	}
@@ -69,6 +70,7 @@ $("#verDocLegalMenuAdmin").click(function () {
 		dataType: "JSON",
 		data: data,
 		success: function (response) {
+			console.log(response);
 			// Llenar tabla de datos documentación legal
 			let tipo = response.documentacion['tipo'];
 			if (tipo == 1){
@@ -208,7 +210,7 @@ $("#verJorActMenuAdmin").click(function () {
 	/** Formulario 2 Tablas **/
 	let html = "";
 	let data = {
-		id_organizacion: data_orgFinalizada["0"].organizaciones['0']['id_organizacion'],
+		id_organizacion: data_orgFinalizada["0"].organizaciones['id_organizacion'],
 		idSolicitud: data_orgFinalizada["0"].tipoSolicitud['0']['idSolicitud'],
 		keyForm: 4,
 	}
@@ -261,7 +263,7 @@ $("#verProgBasMenuAdmin").click(function () {
 	/** Formulario 6 Tablas **/
 	let html = "";
 	let data = {
-		id_organizacion: data_orgFinalizada["0"].organizaciones['0']['id_organizacion'],
+		id_organizacion: data_orgFinalizada["0"].organizaciones['id_organizacion'],
 		idSolicitud: data_orgFinalizada["0"].tipoSolicitud['0']['idSolicitud'],
 		keyForm: 5,
 	}
@@ -348,7 +350,7 @@ $("#verDatPlatMenuAdmin").click(function () {
 	/** Formulario 7 Tabla **/
 	let html = "";
 	let data = {
-		id_organizacion: data_orgFinalizada["0"].organizaciones['0']['id_organizacion'],
+		id_organizacion: data_orgFinalizada["0"].organizaciones['id_organizacion'],
 		idSolicitud: data_orgFinalizada["0"].tipoSolicitud['0']['idSolicitud'],
 		keyForm: 7,
 	}
@@ -405,7 +407,7 @@ $("#verDataEnLinea").click(function () {
 	/** Formulario 8 Tabla **/
 	let html = "";
 	let data = {
-		id_organizacion: data_orgFinalizada["0"].organizaciones['0']['id_organizacion'],
+		id_organizacion: data_orgFinalizada["0"].organizaciones['id_organizacion'],
 		idSolicitud: data_orgFinalizada["0"].tipoSolicitud['0']['idSolicitud'],
 		keyForm: 8,
 	}
@@ -467,134 +469,87 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 			$("#hist_org_obs").attr("data-id-org", $id_org);
 			data_orgFinalizada.push(response);
 			console.log(data_orgFinalizada["0"]);
+			console.log(response);
 			$("#admin_ver_finalizadas").slideUp();
 			$("#admin_panel_ver_finalizada").slideDown();
 			/** Solicitud **/
-			for (var i = 0; i < response.solicitudes.length; i++) {
-				$("#fechaSol").html(response.solicitudes[i].fecha);
-				$("#idSol").html(response.tipoSolicitud[i].idSolicitud);
-				$("#tipoSol").html(response.tipoSolicitud[i].tipoSolicitud);
-				$("#modSol").html(response.tipoSolicitud[i].modalidadSolicitud);
-				$("#motSol").html(response.tipoSolicitud[i].motivoSolicitud);
-				$("#numeroSol").html(response.solicitudes[i].numeroSolicitudes);
-				$("#revFechaFin").html(response.estadoOrganizaciones[i].fechaFinalizado);
-				$("#revSol").html(response.solicitudes[i].numeroRevisiones);
-				$("#revFechaSol").html(response.solicitudes[i].fechaUltimaRevision);
-				$("#estOrg").html(response.estadoOrganizaciones[i].nombre);
-				$("#camaraComercio_org").attr("href", baseURL + "uploads/camaraComercio/" + response.organizaciones[i].camaraComercio);
-				$("#nOrgSol").html(response.organizaciones[i].nombreOrganizacion);
-				$("#sOrgSol").html(response.organizaciones[i].sigla);
-				$("#nitOrgSol").html(response.organizaciones[i].numNIT);
-				$("#nrOrgSol").html(response.organizaciones[i].primerNombreRepLegal + " " + response.organizaciones[i].primerApellidoRepLegal);
-				$("#cOrgSol").html(response.organizaciones[i].direccionCorreoElectronicoOrganizacion);
-			}
+			$("#fechaSol").html(response.solicitudes.fecha);
+			$("#idSol").html(response.solicitudes.idSolicitud);
+			$("#tipoSol").html(response.estadoOrganizaciones.tipoSolicitudAcreditado);
+			$("#modSol").html(response.estadoOrganizaciones.modalidadSolicitudAcreditado);
+			$("#motSol").html(response.estadoOrganizaciones.motivoSolicitudAcreditado);
+			$("#numeroSol").html(response.solicitudes.numeroSolicitudes);
+			$("#revFechaFin").html(response.estadoOrganizaciones.fechaFinalizado);
+			$("#revSol").html(response.solicitudes.numeroRevisiones);
+			$("#revFechaSol").html(response.solicitudes.fechaUltimaRevision);
+			$("#estOrg").html(response.estadoOrganizaciones.nombre);
+			$("#camaraComercio_org").attr("href", baseURL + "uploads/camaraComercio/" + response.organizaciones.camaraComercio);
+			$("#nOrgSol").html(response.organizaciones.nombreOrganizacion);
+			$("#sOrgSol").html(response.organizaciones.sigla);
+			$("#nitOrgSol").html(response.organizaciones.numNIT);
+			$("#nrOrgSol").html(response.organizaciones.primerNombreRepLegal + " " + response.organizaciones.primerApellidoRepLegal);
+			$("#cOrgSol").html(response.organizaciones.direccionCorreoElectronicoOrganizacion);
 			/** Formulario 1 **/
-			for (var i = 0; i < response.informacionGeneral.length; i++) {
-				$("#actuacionOrganizacion").html(response.informacionGeneral[i].actuacionOrganizacion);
-				$("#direccionOrganizacion").html(response.informacionGeneral[i].direccionOrganizacion);
-				$("#extension").html(response.informacionGeneral[i].extension);
-				$("#fax").html(response.informacionGeneral[i].fax);
-				$("#fines").html(response.informacionGeneral[i].fines);
-				$("#mision").html(response.informacionGeneral[i].mision);
-				$("#nomDepartamentoUbicacion").html(response.informacionGeneral[i].nomDepartamentoUbicacion);
-				$("#nomMunicipioNacional").html(response.informacionGeneral[i].nomMunicipioNacional);
-				$("#numCedulaCiudadaniaPersona").html(response.informacionGeneral[i].numCedulaCiudadaniaPersona);
-				$("#objetoSocialEstatutos").html(response.informacionGeneral[i].objetoSocialEstatutos);
-				$("#otros").html(response.informacionGeneral[i].otros);
-				$("#portafolio").html(response.informacionGeneral[i].portafolio);
-				$("#presentacionInstitucional").html(response.informacionGeneral[i].presentacionInstitucional);
-				$("#principios").html(response.informacionGeneral[i].principios);
-				$("#tipoEducacion").html(response.informacionGeneral[i].tipoEducacion);
-				$("#tipoOrganizacion").html(response.informacionGeneral[i].tipoOrganizacion);
-				$("#urlOrganizacion").html(response.informacionGeneral[i].urlOrganizacion);
-				$("#vision").html(response.informacionGeneral[i].vision);
-				$("#actuacionOrganizacion").parent().next().attr(response.informacionGeneral[i].actuacionOrganizacion);
-				$("#direccionOrganizacion").parent().next().attr("data-text", response.informacionGeneral[i].direccionOrganizacion);
-				$("#extension").parent().next().attr("data-text", response.informacionGeneral[i].extension);
-				$("#fax").parent().next().attr("data-text", response.informacionGeneral[i].fax);
-				$("#fines").parent().next().attr("data-text", response.informacionGeneral[i].fines);
-				$("#mision").parent().next().attr("data-text", response.informacionGeneral[i].mision);
-				$("#nomDepartamentoUbicacion").parent().next().attr("data-text", response.informacionGeneral[i].nomDepartamentoUbicacion);
-				$("#nomMunicipioNacional").parent().next().attr("data-text", response.informacionGeneral[i].nomMunicipioNacional);
-				$("#numCedulaCiudadaniaPersona")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						response.informacionGeneral[i].numCedulaCiudadaniaPersona
-					);
-				$("#objetoSocialEstatutos")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						response.informacionGeneral[i].objetoSocialEstatutos
-					);
-				$("#otros")
-					.parent()
-					.next()
-					.attr("data-text", response.informacionGeneral[i].otros);
-				$("#portafolio")
-					.parent()
-					.next()
-					.attr("data-text", response.informacionGeneral[i].portafolio);
-				$("#presentacionInstitucional")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						response.informacionGeneral[i].presentacionInstitucional
-					);
-				$("#principios")
-					.parent()
-					.next()
-					.attr("data-text", response.informacionGeneral[i].principios);
-				$("#tipoEducacion")
-					.parent()
-					.next()
-					.attr("data-text", response.informacionGeneral[i].tipoEducacion);
-				$("#tipoOrganizacion")
-					.parent()
-					.next()
-					.attr("data-text", response.informacionGeneral[i].tipoOrganizacion);
-				$("#urlOrganizacion")
-					.parent()
-					.next()
-					.attr("data-text", response.informacionGeneral[i].urlOrganizacion);
-				$("#vision")
-					.parent()
-					.next()
-					.attr("data-text", response.informacionGeneral[i].vision);
-				for ($a = 0; $a < data_orgFinalizada["0"].archivos.length; $a++) {
-					if (data_orgFinalizada["0"].archivos[$a].id_formulario == "1") {
-						if (data_orgFinalizada["0"].archivos[$a].tipo == "carta") {
-							$carpeta = baseURL + "uploads/cartaRep/";
-						} else if (
-							data_orgFinalizada["0"].archivos[$a].tipo == "certificaciones"
-						) {
-							$carpeta = baseURL + "uploads/certificaciones/";
-						} else if (data_orgFinalizada["0"].archivos[$a].tipo == "lugar") {
-							$carpeta = baseURL + "uploads/lugarAtencion/";
-						}
-
-						$("#archivos_informacionGeneral").append(
-							"<li class='listaArchivos'><a href='" +
-							$carpeta +
-							data_orgFinalizada["0"].archivos[$a].nombre +
-							"' target='_blank'>" +
-							data_orgFinalizada["0"].archivos[$a].nombre +
-							"</a></li>"
-						);
+			$("#actuacionOrganizacion").html(response.informacionGeneral.actuacionOrganizacion);
+			$("#direccionOrganizacion").html(response.informacionGeneral.direccionOrganizacion);
+			$("#extension").html(response.informacionGeneral.extension);
+			$("#fax").html(response.informacionGeneral.fax);
+			$("#fines").html(response.informacionGeneral.fines);
+			$("#mision").html(response.informacionGeneral.mision);
+			$("#nomDepartamentoUbicacion").html(response.informacionGeneral.nomDepartamentoUbicacion);
+			$("#nomMunicipioNacional").html(response.informacionGeneral.nomMunicipioNacional);
+			$("#numCedulaCiudadaniaPersona").html(response.informacionGeneral.numCedulaCiudadaniaPersona);
+			$("#objetoSocialEstatutos").html(response.informacionGeneral.objetoSocialEstatutos);
+			$("#otros").html(response.informacionGeneral.otros);
+			$("#portafolio").html(response.informacionGeneral.portafolio);
+			$("#presentacionInstitucional").html(response.informacionGeneral.presentacionInstitucional);
+			$("#principios").html(response.informacionGeneral.principios);
+			$("#tipoEducacion").html(response.informacionGeneral.tipoEducacion);
+			$("#tipoOrganizacion").html(response.informacionGeneral.tipoOrganizacion);
+			$("#urlOrganizacion").html(response.informacionGeneral.urlOrganizacion);
+			$("#vision").html(response.informacionGeneral.vision);
+			$("#actuacionOrganizacion").parent().next().attr(response.informacionGeneral.actuacionOrganizacion);
+			$("#direccionOrganizacion").parent().next().attr("data-text", response.informacionGeneral.direccionOrganizacion);
+			$("#extension").parent().next().attr("data-text", response.informacionGeneral.extension);
+			$("#fax").parent().next().attr("data-text", response.informacionGeneral.fax);
+			$("#fines").parent().next().attr("data-text", response.informacionGeneral.fines);
+			$("#mision").parent().next().attr("data-text", response.informacionGeneral.mision);
+			$("#nomDepartamentoUbicacion").parent().next().attr("data-text", response.informacionGeneral.nomDepartamentoUbicacion);
+			$("#nomMunicipioNacional").parent().next().attr("data-text", response.informacionGeneral.nomMunicipioNacional);
+			$("#numCedulaCiudadaniaPersona").parent().next().attr("data-text", response.informacionGeneral.numCedulaCiudadaniaPersona);
+			$("#objetoSocialEstatutos").parent().next().attr("data-text", response.informacionGeneral.objetoSocialEstatutos);
+			$("#otros").parent().next().attr("data-text", response.informacionGeneral.otros);
+			$("#portafolio").parent().next().attr("data-text", response.informacionGeneral.portafolio);
+			$("#presentacionInstitucional").parent().next().attr("data-text", response.informacionGeneral.presentacionInstitucional);
+			$("#principios").parent().next().attr("data-text", response.informacionGeneral.principios);
+			$("#tipoEducacion").parent().next().attr("data-text", response.informacionGeneral.tipoEducacion);
+			$("#tipoOrganizacion").parent().next().attr("data-text", response.informacionGeneral.tipoOrganizacion);
+			$("#urlOrganizacion").parent().next().attr("data-text", response.informacionGeneral.urlOrganizacion);
+			$("#vision").parent().next().attr("data-text", response.informacionGeneral.vision);
+			// Archivos formulario 1.
+			for ($a = 0; $a < data_orgFinalizada["0"].archivos.length; $a++) {
+				if (data_orgFinalizada["0"].archivos[$a].id_formulario == "1") {
+					if (data_orgFinalizada["0"].archivos[$a].tipo == "carta") {
+						$carpeta = baseURL + "uploads/cartaRep/";
+					} else if (
+						data_orgFinalizada["0"].archivos[$a].tipo == "certificaciones"
+					) {
+						$carpeta = baseURL + "uploads/certificaciones/";
+					} else if (data_orgFinalizada["0"].archivos[$a].tipo == "lugar") {
+						$carpeta = baseURL + "uploads/lugarAtencion/";
 					}
-				}
-				$("#archivos_informacionGeneral").append(
-					'<div class="form-group" id="documentacionLegal-observacionesGeneral' +
-					i +
-					'">'
-				);
-			}
-			/** Formulario 3 **/
 
+					$("#archivos_informacionGeneral").append(
+						"<li class='listaArchivos'><a href='" +
+						$carpeta +
+						data_orgFinalizada["0"].archivos[$a].nombre +
+						"' target='_blank'>" +
+						data_orgFinalizada["0"].archivos[$a].nombre +
+						"</a></li>"
+					);
+				}
+			}
+			$("#archivos_informacionGeneral").append('<div class="form-group" id="documentacionLegal-observacionesGeneral' + i + '">');
 			/** Formulario 4 Archivos **/
 			for (var i = 0; i < response.jornadasActualizacion.length; i++) {
 				if (response.jornadasActualizacion[i].numeroPersonas != 0) {
@@ -1405,7 +1360,7 @@ $(".guardarObservacionesForm2").click(function (){
 /** Formulario 3*/
 $(".guardarObservacionesForm3").click(function (){
 	let data = {
-		observacion: $("#observacionesForm8").val(),
+		observacion: $("#observacionesForm3").val(),
 		id_formulario: 3,
 		formulario: "Observaciones Antecedentes Académicos",
 		valueForm: "datosAntecedentesAcademicos",
@@ -1416,7 +1371,7 @@ $(".guardarObservacionesForm3").click(function (){
 /** Formulario 4*/
 $(".guardarObservacionesForm4").click(function (){
 	let data = {
-		observacion: $("#observacionesForm8").val(),
+		observacion: $("#observacionesForm4").val(),
 		id_formulario: 4,
 		formulario: "Jornadas de Actualización",
 		valueForm: "datosJornadasActualizacion",
@@ -1438,7 +1393,7 @@ $(".guardarObservacionesForm5").click(function (){
 /** Formulario 7*/
 $(".guardarObservacionesForm7").click(function (){
 	let data = {
-		observacion: $("#observacionesForm8").val(),
+		observacion: $("#observacionesForm7").val(),
 		id_formulario: 7,
 		formulario: "Observaciones Plataforma Virtual",
 		valueForm: "datosPlataformaVirtual",
@@ -1530,4 +1485,66 @@ $("#guardarSiObs").click(function () {
 		}
 	}
 });
+/** Ver Observaciones */
+$(".verHistObsUs").click(function () {
+	let $id_organizacion = $(this).attr("data-id-org");
+	let $formulario = '';
+	data = {
+		id_organizacion: $id_organizacion,
+	};
+
+	$.ajax({
+		url: baseURL + "panel/cargarObservacionesUsuario",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		success: function (response) {
+			$("#tbody_hist_obs").empty();
+			for (var i = 0; i < response.observaciones.length; i++) {
+				switch (response.observaciones[i].valueForm) {
+					case "datosInformacionGeneral":
+						$formulario = "Formulario 1. Informacion general";
+						break;
+					case "datosDocumentacionLegal":
+						$formulario = "Formulario 2. Documentacion legal";
+						break;
+					case "datosAntecedentesAcademicos":
+						$formulario = "Formulario 3. Antecedentes academicos";
+						break;
+					case "datosJornadasActualizacion":
+						$formulario = "Formulario 4. Jornadas actualización";
+						break;
+					case "datosProgramasBasicos":
+						$formulario = "Formulario 5. ProgramaS Economía Solidaria";
+						break;
+					case "docentes":
+						$formulario = "Formulario 6. Facilitadores";
+						break;
+					case "datosPlataformaVirtual":
+						$formulario = "Formulario 7. Datos modalidad virtual";
+						break;
+					case "datosEnLinea":
+						$formulario = "Formulario 8. Datos modalidad en linea";
+						break;
+				}
+				$("#tbody_hist_obs").append("<tr id=" + i + ">");
+				$("#tbody_hist_obs>tr#" + i + "").append("<td>" + $formulario + "</td>");
+				$("#tbody_hist_obs>tr#" + i + "").append("<td>" + response.observaciones[i].keyForm + "</td>");
+				$("#tbody_hist_obs>tr#" + i + "").append("<td>" + response.observaciones[i].idForm + "</td>");
+				//$("#tbody_hist_obs>tr#"+i+"").append("<td>"+response.observaciones[i].observacion+"</td>");
+				$("#tbody_hist_obs>tr#" + i + "").append("<td>" + response.observaciones[i].fechaObservacion + "</td>");
+				$("#tbody_hist_obs>tr#" + i + "").append(
+					"<td>" + response.observaciones[i].numeroRevision + "</td>"
+				);
+				//$("#tbody_hist_obs>tr#"+i+"").append("<td>"+response.observaciones[i].idSolicitud+"</td>");
+				$("#tbody_hist_obs").append("</tr>");
+			}
+			paging("tabla_historial_obs");
+		},
+		error: function (ev) {
+			//Do nothing
+		},
+	});
+});
+
 

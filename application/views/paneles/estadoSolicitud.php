@@ -8,34 +8,34 @@
 	<hr/>
 	<div class="col-md-6">
 		<div class="form-group">
-			<h4>Numero de solicitudes:</h4><label><?php echo $estadoSolicitud['numero']; ?></label>
+			<h4>Fecha creación:</h4><label><?php echo $solicitud->fecha; ?></label>
 		</div>
 		<div class="form-group">
-			<h4>Estado de la organización:</h4><label><?php echo $estadoSolicitud['estado']; ?></label>
+			<h4>Estado de la organización:</h4><label><?php echo $solicitud->nombre; ?></label>
 		</div>
 		<div class="form-group">
-			<h4>Tipo de solicitud:</h4><label><?php echo $estadoSolicitud['tipoSolicitud']; ?></label>
+			<h4>Tipo de solicitud:</h4><label><?php echo $solicitud->tipoSolicitud; ?></label>
 		</div>
 		<div class="form-group">
-			<h4>Motivo de la solicitud:</h4><label><?php echo $estadoSolicitud['motivoSolicitud']; ?></label>
+			<h4>Motivo de la solicitud:</h4><label><?php echo  $solicitud->motivoSolicitud; ?></label>
 		</div>
 		<button class="btn btn-danger btn-sm volver_al_panel"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
-		<?php if($estadoSolicitud['estado'] == "En Observaciones"){ ?>
+		<?php if($solicitud->nombre == "En Observaciones"){ ?>
 			<button class="btn btn-siia btn-sm pull-right verHistObsUs" id="hist_org_obs" data-toggle='modal' data-id-org="<?php echo $data_organizacion; ?>" data-target='#verHistObsUs'>Historial de observaciones <i class="fa fa-history" aria-hidden="true"></i></button>
 		<?php } ?>
 	</div>
 	<div class="col-md-6">
 		<div class="form-group">
-			<h4>Modalidad de la solicitud:</h4><label><?php echo $estadoSolicitud['modalidadSolicitud']; ?></label>
+			<h4>Modalidad de la solicitud:</h4><label><?php echo $solicitud->modalidadSolicitud; ?></label>
 		</div>
 		<div class="form-group">
-			<h4>ID de la solicitud:</h4><label><?php echo $idSolicitud; ?></label>
+			<h4>ID de la solicitud:</h4><label><?php echo  $solicitud->idSolicitudAcreditado; ?></label>
 		</div>
 		<div class="form-group">
-			<h4>Número de revisiones:</h4><label><?php echo $estadoSolicitud['numeroRevisiones']; ?></label>
-			<h4>Fecha de la ultima revision:</h4><label><?php echo $estadoSolicitud['fechaUltimaRevision']; ?></label>
+			<h4>Número de revisiones:</h4><label><?php echo  $solicitud->numeroRevisiones; ?></label>
+			<h4>Fecha de la última revision:</h4><label><?php echo $solicitud->fechaUltimaRevision; ?></label>
 		</div>
-	<button class="btn btn-success btn-lg btn-block actualizar_solicitud" disabled="true">Actualizar la solicitud <i class="fa fa-repeat" aria-hidden="true"></i></button>
+	<button class="btn btn-success btn-lg btn-block" id="actualizar_solicitud" disabled="true" data-solicitud="<?php $solicitud->idSolicitudAcreditado ?>">Actualizar la solicitud <i class="fa fa-repeat" aria-hidden="true"></i></button>
 	</div>
 	<div class="clearfix"></div>
 	<hr/>

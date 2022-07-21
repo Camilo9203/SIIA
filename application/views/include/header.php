@@ -109,13 +109,13 @@
                     <h3 id="titulo_sistema"></h3>
                 </div> -->
 				<div class="col-md-12">
-					<a href="https://www.gov.co/home/" target="_blank"><img src="https://www.uaeos.gov.co/sites/default/files/archivos/govco.png" class="img-responsive" style="width: 1903px;margin-bottom: 2%;"></a>
+<!--					<a href="https://www.gov.co/home/" target="_blank"><img src="https://www.uaeos.gov.co/sites/default/files/archivos/govco.png" class="img-responsive" style="width: 1903px;margin-bottom: 2%;"></a>-->
 				</div>
 				<div class="col-md-6">
-					<a href="http://www.uaeos.gov.co/"><img alt="Uaeos" id="imagen_header" class="pull-left img-responsive" src="https://acreditacion.uaeos.gov.co/siia/assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png"></a>
+<!--					<a href="http://www.uaeos.gov.co/"><img alt="Uaeos" id="imagen_header" class="pull-left img-responsive" src="https://acreditacion.uaeos.gov.co/siia/assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png"></a>-->
 				</div>
 				<div class="col-md-6">
-					<a href="<?php echo base_url(); ?>"><img alt="SIIA" id="imagen_header_sia" class="pull-right img-responsive" src="https://acreditacion.uaeos.gov.co/siia/assets/img/siia_logo.png"></a>
+<!--					<a href="--><?php //echo base_url(); ?><!--"><img alt="SIIA" id="imagen_header_sia" class="pull-right img-responsive" src="https://acreditacion.uaeos.gov.co/siia/assets/img/siia_logo.png"></a>-->
 				</div>
 			</div>
 		</section>
