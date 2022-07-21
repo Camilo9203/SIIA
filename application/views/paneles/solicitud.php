@@ -910,7 +910,7 @@
 		<div class="container">
 			<div class="jumbotron">
 				<h3>Facilitadores</h3>
-				<p>Para crear facilitadores y actualizar o adjuntar archivos como hojas de vida, certificaciones, por favor, de <a href="<?php base_url() ?>panel/docentes" target="_blank">clic  aquí.</a></p>
+				<p>Para crear facilitadores y actualizar o adjuntar archivos como hojas de vida, certificaciones, por favor, de <a href="" id="irDocentes">clic  aquí.</a></p>
 			</div>
 		</div>
 		<!--<h4 id="act_doc_sol"></h4>

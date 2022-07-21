@@ -28,7 +28,7 @@
 				echo "<td>".$organizaciones_en_proceso[$i] ->direccionCorreoElectronicoRepLegal."</td>";
 				echo "<td>".$organizaciones_en_proceso[$i] ->nombre."</td>";
 				echo "<td>".$organizaciones_en_proceso[$i] ->estadoAnterior."</td>";
-				echo "<td><button class='btn btn-siia btn-sm ver_estado_2' data-organizacion='" . $organizaciones_en_proceso[$i]->id_organizacion . "' data-solicitud='" . $organizaciones_en_proceso[$i]->idSolicitudAcreditado . "'>Ver estado <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
+				echo "<td><button class='btn btn-siia btn-sm ver_estado_org' data-organizacion='" . $organizaciones_en_proceso[$i]->id_organizacion . "' data-solicitud='" . $organizaciones_en_proceso[$i]->idSolicitudAcreditado . "'>Ver estado <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
 				echo "</tr>";
 			}
 		?>

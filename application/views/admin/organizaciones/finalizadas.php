@@ -412,9 +412,11 @@
 					<div class="">
 						<label>Registro de programas aceptados</label>
 						<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-						<table width="100%" border=0 class="table table-striped table-bordered" id="tabla_observaciones_form4">
+						<table width="100%" border=0 class="table table-striped table-bordered" id="tabla_registro_programas">
 							<thead>
 							<tr>
+								<td>Organización</td>
+								<td>Numero NIT</td>
 								<td>Nombre Programa</td>
 								<td>Acepta</td>
 								<td>fecha</td>
@@ -598,21 +600,21 @@
 				<div class="row">
 					<div class="col-md-12">
 						<label>Historial de observaciones:</label>
-						<label><a id="verObsFiltrada" target="_blank" class="pull-right">Ver tabla de observaciones para filtrar y descargar <i class="fa fa-table" aria-hidden="true"></i></a></label>
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Buscar una observación..." id="buscarObsTextOrg" />
-							<div class="clearfix"></div>
-							<br />
-						</div>
-						<table id="tabla_historial_obsPlataforma" width="100%" border=0 class="table table-striped table-bordered tabla_form">
-							<thead>
-								<tr>
-									<td class="col-md-12">Archivos de observaciones de la plataforma</td>
-								</tr>
-							</thead>
-							<tbody id="tbody_hist_obsPlataforma">
-							</tbody>
-						</table>
+<!--						<label><a id="verObsFiltrada" target="_blank" class="pull-right">Ver tabla de observaciones para filtrar y descargar <i class="fa fa-table" aria-hidden="true"></i></a></label>-->
+<!--						<div class="input-group">-->
+<!--							<input type="text" class="form-control" placeholder="Buscar una observación..." id="buscarObsTextOrg" />-->
+<!--							<div class="clearfix"></div>-->
+<!--							<br />-->
+<!--						</div>-->
+<!--						<table id="tabla_historial_obsPlataforma" width="100%" border=0 class="table table-striped table-bordered tabla_form">-->
+<!--							<thead>-->
+<!--								<tr>-->
+<!--									<td class="col-md-12">Archivos de observaciones de la plataforma</td>-->
+<!--								</tr>-->
+<!--							</thead>-->
+<!--							<tbody id="tbody_hist_obsPlataforma">-->
+<!--							</tbody>-->
+<!--						</table>-->
 						<div class="clearfix"></div>
 						<br />
 						<table id="tabla_historial_obs" width="100%" border=0 class="table table-striped table-bordered tabla_form">

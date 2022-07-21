@@ -674,7 +674,7 @@ $(".eliminarDatosRegistro").click(function () {
 	};
 	eliminarFormularioDocumentacionLegal(data);
 });
-// Funciones
+// Funciones formulario 2
 // Función Ver Documentos
 function verDocumentos (data) {
 	event.preventDefault();
@@ -906,6 +906,11 @@ $(".eliminarDatosProgramas").click(function () {
 		},
 	});
 });
+/** Formulario 6: Llevar a modulo docentes */
+$("#irDocentes").click(function () {
+	event.preventDefault();
+	window.open(baseURL + "panel/docentes/", '_blank');
+});
 /** Formulario 7: Modalidad Virtual*/
 // Aceptar recomendaciones modalidad virtual
 $("#acepto_mod_virtual").click(function () {
@@ -1081,8 +1086,9 @@ $(".eliminarDatosEnlinea").click(function () {
 /** Finalizar Solicitud  */
 $("#finalizar_si").click(function () {
 	//$(this).attr("disabled", true);
+	let idSolicitud =  $(this).attr('data-id');
 	let	data = {
-		idSolicitud:  $(this).attr('data-id'),
+		idSolicitud: idSolicitud,
 	};
 	$.ajax({
 		url: baseURL + "panel/finalizarProceso",
@@ -1095,7 +1101,7 @@ $("#finalizar_si").click(function () {
 				$(this).attr("disabled", false);
 				$("#sidebar-menu>.menu_section>a").click();
 			} else {
-				redirect(baseURL + "panel/estadoSolicitud/" + $(this).attr('data-id'));
+				redirect(baseURL + "panel/estadoSolicitud/" + idSolicitud);
 			}
 		},
 		error: function (ev) {

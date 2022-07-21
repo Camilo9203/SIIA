@@ -32,12 +32,12 @@ $(".volverPanel").click(function () {
 /** Ver Solicitud */
 $(".verSolicitud").click(function () {
 	let idSolicitud = $(this).attr("data-id");
-	window.open(baseURL + "panel/solicitud/" + idSolicitud, '_blank');
+	window.open(baseURL + "panel/solicitud/" + idSolicitud, '_self');
 });
 /** Ver Solicitud */
 $(".verObservaciones").click(function () {
 	let idSolicitud = $(this).attr("data-id");
-	window.open(baseURL + "panel/estadoSolicitud/" + idSolicitud, '_blank');
+	window.open(baseURL + "panel/estadoSolicitud/" + idSolicitud, '_self');
 });
 function irSolicitud (data) {
 	event.preventDefault();
@@ -47,7 +47,7 @@ function irSolicitud (data) {
 		dataType: "JSON",
 		data: data,
 		success: function (response){
-			window.open(response.file, '_blank');
+			window.open(response.file, '_self');
 		}
 	});
 }

@@ -95,7 +95,7 @@ $("#verDocLegalMenuAdmin").click(function () {
 				html += "<td>" + response.certificadoExistencia['fechaExpedicion'] + "</td>";
 				html += "<td>" + response.certificadoExistencia['departamento'] + "</td>";
 				html += "<td>" + response.certificadoExistencia['municipio'] + "</td>";
-				html += "<td><button class='btn btn-success btn-sm' id='verDocCertificadoExperiencia' data-id=" + response.certificadoExistencia['id_certificadoExistencia'] + ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td></tr>";
+				html += "<td><button class='btn btn-success btn-sm verDocCertificadoExistenciaEvaluador' data-form='2' data-id=" + response.certificadoExistencia['id_certificadoExistencia'] + ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td></tr>";
 				console.log(response.certificadoExistencia);
 				$(".tabla_datos_documentacion_legal").html(html);
 			}
@@ -138,7 +138,30 @@ $("#verDocLegalMenuAdmin").click(function () {
 
 		}
 	});
+})
+/** Todo: Funciones Formulario 2 */
+// Ver Documento
+$(".verDocCertificadoExistenciaEvaluador").click(function (){
+	alert();
+	let data = {
+		id: $(this).attr("data-id"),
+		formulario: $(this).attr("data-form"),
+	}
+	verDocumentos(data);
 });
+// Función Ver Documentos
+function verDocumentos (data) {
+	event.preventDefault();
+	$.ajax({
+		url: baseURL + "panel/verDocumento",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		success: function (response){
+			window.open(response.file, '_blank');
+		}
+	});
+}
 $("#verAntAcaMenuAdmin").click(function () {
 	$("#informacion").hide();
 	$("#documentacion").hide();
@@ -274,6 +297,7 @@ $("#verProgBasMenuAdmin").click(function () {
 		dataType: "JSON",
 		data: data,
 		success: function (response) {
+			console.log(response);
 			// Llenar tabla de datos en línea registrados
 			if(response.datosProgramas.length == 0){
 				alert("1");
@@ -281,7 +305,9 @@ $("#verProgBasMenuAdmin").click(function () {
 			}
 			else {
 				for (let i = 0; i < response.datosProgramas.length; i++) {
-					html += "<tr><td>" + response.datosProgramas[i]['nombrePrograma'] + "</td>";
+					html += "<tr><td>" + response.organizaciones['nombreOrganizacion'] + "</td>";
+					html += "<td>" + response.organizaciones['numNIT'] + "</td>";
+					html += "<td>" + response.datosProgramas[i]['nombrePrograma'] + "</td>";
 					html += "<td>" + response.datosProgramas[i]['aceptarPrograma'] + "</td>";
 					html += "<td>" + response.datosProgramas[i]['fecha'] + "</td>";
 				}
@@ -568,581 +594,6 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 					$("#archivosJornadasActualizacion").append('</div>');
 				}
 			}
-			/** Formulario 6 **/
-			/** Formulario 7 **/
-			for (var i = 0; i < response.programasAvalEconomia.length; i++) {
-				$("#objetivosProgramasAvalEconomia").html(
-					response.programasAvalEconomia[i].objetivos
-				);
-				$("#metodologiaProgramasAvalEconomia").html(
-					response.programasAvalEconomia[i].metodologia
-				);
-				$("#materialProgramasAvalEconomia").html(
-					response.programasAvalEconomia[i].materialDidactico
-				);
-				$("#bibliografiaProgramasAvalEconomia").html(
-					response.programasAvalEconomia[i].bibliografia
-				);
-				$("#duracionProgramasAvalEconomia").html(
-					response.programasAvalEconomia[i].duracionCurso
-				);
-				$("#antecedentesProgramasAvalEconomia").html(
-					response.programasAvalEconomia[i].antecedentesAspectos
-				);
-				$("#diferenciasProgramasAvalEconomia").html(
-					response.programasAvalEconomia[i].diferencias
-				);
-				$("#regulacionProgramasAvalEconomia").html(
-					response.programasAvalEconomia[i].regulacionJuridica
-				);
-				$("#desarrolloProgramasAvalEconomia").html(
-					response.programasAvalEconomia[i].desarrolloSocioempresarial
-				);
-				$("#legislacionProgramasAvalEconomia").html(
-					response.programasAvalEconomia[i].legislacionTributaria
-				);
-				$("#administracionProgramasAvalEconomia").html(
-					response.programasAvalEconomia[i].administracionTrabajo
-				);
-				$("#regimenesProgramasAvalEconomia").html(
-					response.programasAvalEconomia[i].regimenesTrabajo
-				);
-				$("#manejoProgramasAvalEconomia").html(
-					response.programasAvalEconomia[i].manejoSeguridad
-				);
-				$("#inspeccionProgramasAvalEconomia").html(
-					response.programasAvalEconomia[i].inspeccionVigilancia
-				);
-				//___
-				$("#objetivosProgramasAvalEconomia")
-					.parent()
-					.next()
-					.attr("data-text", response.programasAvalEconomia[i].objetivos);
-				$("#metodologiaProgramasAvalEconomia")
-					.parent()
-					.next()
-					.attr("data-text", response.programasAvalEconomia[i].metodologia);
-				$("#materialProgramasAvalEconomia")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						response.programasAvalEconomia[i].materialDidactico
-					);
-				$("#bibliografiaProgramasAvalEconomia")
-					.parent()
-					.next()
-					.attr("data-text", response.programasAvalEconomia[i].bibliografia);
-				$("#duracionProgramasAvalEconomia")
-					.parent()
-					.next()
-					.attr("data-text", response.programasAvalEconomia[i].duracionCurso);
-				$("#antecedentesProgramasAvalEconomia")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						response.programasAvalEconomia[i].antecedentesAspectos
-					);
-				$("#diferenciasProgramasAvalEconomia")
-					.parent()
-					.next()
-					.attr("data-text", response.programasAvalEconomia[i].diferencias);
-				$("#regulacionProgramasAvalEconomia")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						response.programasAvalEconomia[i].regulacionJuridica
-					);
-				$("#desarrolloProgramasAvalEconomia")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						response.programasAvalEconomia[i].desarrolloSocioempresarial
-					);
-				$("#legislacionProgramasAvalEconomia")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						response.programasAvalEconomia[i].legislacionTributaria
-					);
-				$("#administracionProgramasAvalEconomia")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						response.programasAvalEconomia[i].administracionTrabajo
-					);
-				$("#regimenesProgramasAvalEconomia")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						response.programasAvalEconomia[i].regimenesTrabajo
-					);
-				$("#manejoProgramasAvalEconomia")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						response.programasAvalEconomia[i].manejoSeguridad
-					);
-				$("#inspeccionProgramasAvalEconomia")
-					.parent()
-					.next()
-					.attr(
-						"data-text",
-						response.programasAvalEconomia[i].inspeccionVigilancia
-					);
-
-				$("#programasAvalEconomia").append(
-					'<div class="col-md-12" id="archivos_programasAvalEconomia">'
-				);
-				$("#programasAvalEconomia>#archivos_programasAvalEconomia").append(
-					"<p>Archivos:</p>"
-				);
-				for ($a = 0; $a < data_orgFinalizada["0"].archivos.length; $a++) {
-					if (data_orgFinalizada["0"].archivos[$a].id_formulario == "7") {
-						if (
-							data_orgFinalizada["0"].archivos[$a].tipo ==
-							"materialDidacticoAvalEconomia"
-						) {
-							$carpeta = baseURL + "uploads/materialDidacticoAvalEconomia/";
-						}
-
-						$(
-							"#programasAvalEconomia>#archivos_programasAvalEconomia"
-						).append(
-							"<li class='listaArchivos'><a href='" +
-							$carpeta +
-							data_orgFinalizada["0"].archivos[$a].nombre +
-							"' target='_blank'>" +
-							data_orgFinalizada["0"].archivos[$a].nombre +
-							"</a></li>"
-						);
-					}
-				}
-				$("#archivos_programasAvalEconomia").append(
-					'<div class="form-group" id="programasAvalEconomia-observacionesGeneral' +
-					i +
-					'">'
-				);
-				$("#archivos_programasAvalEconomia>div").append(
-					"<p>Observaciones de archivos:</p>"
-				);
-				$("#archivos_programasAvalEconomia>div").append(
-					"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Observaciones de archivos aval economia' data-text='Observaciones de archivos de aval economia' data-type='programasAvalEconomia' id='obs-inf-gen-progaeco" +
-					i +
-					"' rows='3'></textarea>"
-				);
-				$("#archivos_programasAvalEconomia").append("</div>");
-				$("#programasAvalEconomia>#archivos_programasAvalEconomia").append(
-					'<div class="clearfix"></div>'
-				);
-				$("#programasAvalEconomia>#archivos_programasAvalEconomia").append(
-					"<hr/>"
-				);
-				$("#programasAvalEconomia").append("</div>");
-
-				/*$cols = 12/(parseFloat(response.programasAvalEconomia.length));
-				$("#programasAvalEconomia").append('<div class="col-md-'+$cols+'" id="col'+i+'">');
-
-				$("#programasAvalEconomia>#col"+i+"").append('<div class="form-group" id="programasAvalEconomia-bibliografia'+$cols+i+'">');
-					$("#programasAvalEconomia>#col"+i+">#programasAvalEconomia-bibliografia"+$cols+i+"").append("<p>Bibliografía:</p><label class='tipoLeer'>"+response.programasAvalEconomia[i].bibliografia+"</label>");
-					$("#programasAvalEconomia>#col"+i+">#programasAvalEconomia-bibliografia"+$cols+i+"").append("<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Bibliografía' data-text='"+response.programasAvalEconomia[i].bibliografia+"' data-type='programasAvalEconomia' id='obs-pnombre-docente"+i+"' rows='3'></textarea>");
-				$("#programasAvalEconomia>#col"+i+">#programasAvalEconomia-bibliografia"+$cols+i+"").append('</div>');
-
-				$("#programasAvalEconomia>#col"+i+"").append('<div class="form-group" id="programasAvalEconomia-duracionCurso'+$cols+i+'">');
-					$("#programasAvalEconomia>#col"+i+">#programasAvalEconomia-duracionCurso"+$cols+i+"").append("<p>Duración del curso:</p><label class='tipoLeer'>"+response.programasAvalEconomia[i].duracionCurso+"</label>");
-					$("#programasAvalEconomia>#col"+i+">#programasAvalEconomia-duracionCurso"+$cols+i+"").append("<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Duración del curso' data-text='"+response.programasAvalEconomia[i].duracionCurso+"' data-type='programasAvalEconomia' id='obs-pnombre-docente"+i+"' rows='3'></textarea>");
-				$("#programasAvalEconomia>#col"+i+">#programasAvalEconomia-duracionCurso"+$cols+i+"").append('</div>');
-
-				$("#programasAvalEconomia>#col"+i+"").append('<div class="form-group" id="programasAvalEconomia-materialDidactico'+$cols+i+'">');
-					$("#programasAvalEconomia>#col"+i+">#programasAvalEconomia-materialDidactico"+$cols+i+"").append("<p>Material didactico:</p><label class='tipoLeer'>"+response.programasAvalEconomia[i].materialDidactico+"</label>");
-					$("#programasAvalEconomia>#col"+i+">#programasAvalEconomia-materialDidactico"+$cols+i+"").append("<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Material didactico' data-text='"+response.programasAvalEconomia[i].materialDidactico+"' data-type='programasAvalEconomia' id='obs-pnombre-docente"+i+"' rows='3'></textarea>");
-				$("#programasAvalEconomia>#col"+i+">#programasAvalEconomia-materialDidactico"+$cols+i+"").append('</div>');
-
-				$("#programasAvalEconomia>#col"+i+"").append('<div class="form-group" id="programasAvalEconomia-metodologia'+$cols+i+'">');
-					$("#programasAvalEconomia>#col"+i+">#programasAvalEconomia-metodologia"+$cols+i+"").append("<p>Metodología:</p><label class='tipoLeer'>"+response.programasAvalEconomia[i].metodologia+"</label>");
-					$("#programasAvalEconomia>#col"+i+">#programasAvalEconomia-metodologia"+$cols+i+"").append("<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Metodología' data-text='"+response.programasAvalEconomia[i].metodologia+"' data-type='programasAvalEconomia' id='obs-papellido-docente"+i+"' rows='3'></textarea>");
-				$("#programasAvalEconomia>#col"+i+">#programasAvalEconomia-metodologia"+$cols+i+"").append('</div>');
-
-				$("#programasAvalEconomia>#col"+i+"").append('<div class="form-group" id="programasAvalEconomia-objetivos'+$cols+i+'">');
-					$("#programasAvalEconomia>#col"+i+">#programasAvalEconomia-objetivos"+$cols+i+"").append("<p>Objetivos:</p><label class='tipoLeer'>"+response.programasAvalEconomia[i].objetivos+"</label>");
-					$("#programasAvalEconomia>#col"+i+">#programasAvalEconomia-objetivos"+$cols+i+"").append("<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Objetivos' data-text='"+response.programasAvalEconomia[i].objetivos+"' data-type='programasAvalEconomia' id='obs-sapellido-docente"+i+"' rows='3'></textarea>");
-				$("#programasAvalEconomia>#col"+i+">#programasAvalEconomia-objetivos"+$cols+i+"").append('</div>');
-
-				$("#programasAvalEconomia").append('</div>');
-				$("#programasAvalEconomia").append('<div class="col-md-12" id="archivos_programasAvalEconomia">');
-				$("#programasAvalEconomia>#archivos_programasAvalEconomia").append("<p>Archivos:</p>");
-				for($a = 0; $a < data_orgFinalizada['0'].archivos.length; $a++){
-					if(data_orgFinalizada['0'].archivos[$a].id_formulario == "7"){
-						if(data_orgFinalizada['0'].archivos[$a].tipo == "materialDidacticoAvalEconomia"){
-							$carpeta = baseURL+"uploads/materialDidacticoAvalEconomia/";
-						}
-
-						$("#programasAvalEconomia>#archivos_programasAvalEconomia").append("<li class='listaArchivos'><a href='"+$carpeta+data_orgFinalizada['0'].archivos[$a].nombre+"' target='_blank'>"+data_orgFinalizada['0'].archivos[$a].nombre+"</a></li>");
-					}
-				}
-				$("#programasAvalEconomia>#archivos_programasAvalEconomia").append('<div class="clearfix"></div>');
-				$("#programasAvalEconomia>#archivos_programasAvalEconomia").append('<hr/>');
-				$("#programasAvalEconomia").append('</div>');*/
-			}
-			/** Formulario 8 **/
-			for (var i = 0; i < response.programasAvalar.length; i++) {
-				console.log(parseFloat(response.programasAvalar.length));
-				$cols = 12 / parseFloat(response.programasAvalar.length);
-				if ($cols < 3) {
-					$cols = 4;
-				}
-				$("#programasAvalar").append(
-					'<div class="col-md-' + $cols + '" id="col' + i + '">'
-				);
-				$("#programasAvalar>#col" + i + "").append(
-					"<h3>Programa # " + (i + 1) + "</h3>"
-				);
-
-				$("#programasAvalar>#col" + i + "").append(
-					'<div class="form-group" id="programasAvalar-bibliografia' +
-					$cols +
-					i +
-					'">'
-				);
-				$(
-					"#programasAvalar>#col" +
-					i +
-					">#programasAvalar-bibliografia" +
-					$cols +
-					i +
-					""
-				).append(
-					"<p>Bibliografía:</p><label class='tipoLeer'>" +
-					response.programasAvalar[i].bibliografia +
-					"</label>"
-				);
-				$(
-					"#programasAvalar>#col" +
-					i +
-					">#programasAvalar-bibliografia" +
-					$cols +
-					i +
-					""
-				).append(
-					"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Bibliografía' data-text='" +
-					response.programasAvalar[i].bibliografia +
-					"' data-type='programasAvalar' id='obs-pnombre-docente" +
-					i +
-					"' rows='3'></textarea>"
-				);
-				$(
-					"#programasAvalar>#col" +
-					i +
-					">#programasAvalar-bibliografia" +
-					$cols +
-					i +
-					""
-				).append("</div>");
-
-				$("#programasAvalar>#col" + i + "").append(
-					'<div class="form-group" id="programasAvalar-contenidosPlanteados' +
-					$cols +
-					i +
-					'">'
-				);
-				$(
-					"#programasAvalar>#col" +
-					i +
-					">#programasAvalar-contenidosPlanteados" +
-					$cols +
-					i +
-					""
-				).append(
-					"<p>Contenidos planteados:</p><label class='tipoLeer'>" +
-					response.programasAvalar[i].contenidosPlanteados +
-					"</label>"
-				);
-				$(
-					"#programasAvalar>#col" +
-					i +
-					">#programasAvalar-contenidosPlanteados" +
-					$cols +
-					i +
-					""
-				).append(
-					"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Contenidos planteados' data-text='" +
-					response.programasAvalar[i].contenidosPlanteados +
-					"' data-type='programasAvalar' id='obs-pnombre-docente" +
-					i +
-					"' rows='3'></textarea>"
-				);
-				$(
-					"#programasAvalar>#col" +
-					i +
-					">#programasAvalar-contenidosPlanteados" +
-					$cols +
-					i +
-					""
-				).append("</div>");
-
-				$("#programasAvalar>#col" + i + "").append(
-					'<div class="form-group" id="programasAvalar-materialDidactico' +
-					$cols +
-					i +
-					'">'
-				);
-				$(
-					"#programasAvalar>#col" +
-					i +
-					">#programasAvalar-materialDidactico" +
-					$cols +
-					i +
-					""
-				).append(
-					"<p>Material didactico:</p><label class='tipoLeer'>" +
-					response.programasAvalar[i].materialDidactico +
-					"</label>"
-				);
-				$(
-					"#programasAvalar>#col" +
-					i +
-					">#programasAvalar-materialDidactico" +
-					$cols +
-					i +
-					""
-				).append(
-					"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Material didactico' data-text='" +
-					response.programasAvalar[i].materialDidactico +
-					"' data-type='programasAvalar' id='obs-pnombre-docente" +
-					i +
-					"' rows='3'></textarea>"
-				);
-				$(
-					"#programasAvalar>#col" +
-					i +
-					">#programasAvalar-materialDidactico" +
-					$cols +
-					i +
-					""
-				).append("</div>");
-
-				$("#programasAvalar>#col" + i + "").append(
-					'<div class="form-group" id="programasAvalar-metodologia' +
-					$cols +
-					i +
-					'">'
-				);
-				$(
-					"#programasAvalar>#col" +
-					i +
-					">#programasAvalar-metodologia" +
-					$cols +
-					i +
-					""
-				).append(
-					"<p>Metodología:</p><label class='tipoLeer'>" +
-					response.programasAvalar[i].metodologia +
-					"</label>"
-				);
-				$(
-					"#programasAvalar>#col" +
-					i +
-					">#programasAvalar-metodologia" +
-					$cols +
-					i +
-					""
-				).append(
-					"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Metodología' data-text='" +
-					response.programasAvalar[i].metodologia +
-					"' data-type='programasAvalar' id='obs-papellido-docente" +
-					i +
-					"' rows='3'></textarea>"
-				);
-				$(
-					"#programasAvalar>#col" +
-					i +
-					">#programasAvalar-metodologia" +
-					$cols +
-					i +
-					""
-				).append("</div>");
-
-				$("#programasAvalar>#col" + i + "").append(
-					'<div class="form-group" id="programasAvalar-objetivos' +
-					$cols +
-					i +
-					'">'
-				);
-				$(
-					"#programasAvalar>#col" +
-					i +
-					">#programasAvalar-objetivos" +
-					$cols +
-					i +
-					""
-				).append(
-					"<p>Objetivos:</p><label class='tipoLeer'>" +
-					response.programasAvalar[i].objetivos +
-					"</label>"
-				);
-				$(
-					"#programasAvalar>#col" +
-					i +
-					">#programasAvalar-objetivos" +
-					$cols +
-					i +
-					""
-				).append(
-					"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Objetivos' data-text='" +
-					response.programasAvalar[i].objetivos +
-					"' data-type='programasAvalar' id='obs-sapellido-docente" +
-					i +
-					"' rows='3'></textarea>"
-				);
-				$(
-					"#programasAvalar>#col" +
-					i +
-					">#programasAvalar-objetivos" +
-					$cols +
-					i +
-					""
-				).append("</div>");
-
-				$("#programasAvalar>#col" + i + "").append(
-					'<div class="form-group" id="programasAvalar-intensidadHoraria' +
-					$cols +
-					i +
-					'">'
-				);
-				$(
-					"#programasAvalar>#col" +
-					i +
-					">#programasAvalar-intensidadHoraria" +
-					$cols +
-					i +
-					""
-				).append(
-					"<p>Intensidad horaria:</p><label class='tipoLeer'>" +
-					response.programasAvalar[i].intensidadHoraria +
-					"</label>"
-				);
-				$(
-					"#programasAvalar>#col" +
-					i +
-					">#programasAvalar-intensidadHoraria" +
-					$cols +
-					i +
-					""
-				).append(
-					"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Intensidad horaria' data-text='" +
-					response.programasAvalar[i].intensidadHoraria +
-					"' data-type='programasAvalar' id='obs-sapellido-docente" +
-					i +
-					"' rows='3'></textarea>"
-				);
-				$(
-					"#programasAvalar>#col" +
-					i +
-					">#programasAvalar-intensidadHoraria" +
-					$cols +
-					i +
-					""
-				).append("</div>");
-
-				$("#programasAvalar>#col" + i + "").append(
-					'<div class="form-group" id="programasAvalar-nombrePrograma' +
-					$cols +
-					i +
-					'">'
-				);
-				$(
-					"#programasAvalar>#col" +
-					i +
-					">#programasAvalar-nombrePrograma" +
-					$cols +
-					i +
-					""
-				).append(
-					"<p>Nombre del programa:</p><label class='tipoLeer'>" +
-					response.programasAvalar[i].nombrePrograma +
-					"</label>"
-				);
-				$(
-					"#programasAvalar>#col" +
-					i +
-					">#programasAvalar-nombrePrograma" +
-					$cols +
-					i +
-					""
-				).append(
-					"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Nombre del programa' data-text='" +
-					response.programasAvalar[i].nombrePrograma +
-					"' data-type='programasAvalar' id='obs-sapellido-docente" +
-					i +
-					"' rows='3'></textarea>"
-				);
-				$(
-					"#programasAvalar>#col" +
-					i +
-					">#programasAvalar-nombrePrograma" +
-					$cols +
-					i +
-					""
-				).append("</div>");
-
-				$("#programasAvalar").append("</div>");
-			}
-			for (var i = 0; i < 1; i++) {
-				$("#programasAvalar").append(
-					'<div class="col-md-12" id="archivos_programasAvalar">'
-				);
-				$("#programasAvalar>#archivos_programasAvalar").append(
-					"<p>Archivos:</p>"
-				);
-				for ($a = 0; $a < data_orgFinalizada["0"].archivos.length; $a++) {
-					if (data_orgFinalizada["0"].archivos[$a].id_formulario == "8") {
-						if (
-							data_orgFinalizada["0"].archivos[$a].tipo ==
-							"materialDidacticoProgAvalar"
-						) {
-							$carpeta = baseURL + "uploads/materialDidacticoProgAvalar/";
-						} else if (
-							data_orgFinalizada["0"].archivos[$a].tipo ==
-							"formatosEvalProgAvalar"
-						) {
-							$carpeta = baseURL + "uploads/formatosEvalProgAvalar/";
-						}
-
-						$("#programasAvalar>#archivos_programasAvalar").append(
-							"<li class='listaArchivos'><a href='" +
-							$carpeta +
-							data_orgFinalizada["0"].archivos[$a].nombre +
-							"' target='_blank'>" +
-							data_orgFinalizada["0"].archivos[$a].nombre +
-							"</a></li>"
-						);
-					}
-				}
-				$("#archivos_programasAvalar").append(
-					'<div class="form-group" id="programasAvalar-observacionesGeneral' +
-					i +
-					'">'
-				);
-				$("#archivos_programasAvalar>div").append(
-					"<p>Observaciones de archivos:</p>"
-				);
-				$("#archivos_programasAvalar>div").append(
-					"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Observaciones de archivos programas a avalar' data-text='Observaciones de programas a avalar' data-type='programasAvalar' id='obs-inf-gen-progavl" +
-					i +
-					"' rows='3'></textarea>"
-				);
-				$("#archivos_programasAvalar").append("</div>");
-				//$("#programasAvalar>#archivos_programasAvalar").append('<div class="clearfix"></div>');
-				//$("#programasAvalar>#archivos_programasAvalar").append('<hr/>');
-				$("#programasAvalar").append("</div>");
-			}
 			/** Formulario 9 **/
 			for (var i = 0; i < response.docentes.length; i++) {
 				/*$cols = 12/(parseFloat(response.docentes.length));
@@ -1200,29 +651,16 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 						"<p>Para ver los documentos de los facilitadores haga click <a href='" +
 						baseURL +
 						"panelAdmin/organizaciones/docentes#organizacion:" +
-						response.organizaciones[i].numNIT +
+						response.organizaciones.numNIT +
 						"' target='_blank'>aquí.</a> Tambien puede ingresar al módulo de facilitadores y seleccione la organización con el número NIT: <label>" +
-						response.organizaciones[i].numNIT +
+						response.organizaciones.numNIT +
 						"</label>.</label>"
 					);
-					$(".txtOrgDocen").append(
-						"<p id='cantidadDocentesOrg'>Número de facilitadores: " +
-						response.docentes.length +
-						"</p>"
-					);
-					$("#frameDocentes").attr(
-						"src",
-						baseURL +
-						"panelAdmin/organizaciones/solodocentes#organizacion:" +
-						response.organizaciones[i].numNIT
-					);
-
+					$(".txtOrgDocen").append("<p id='cantidadDocentesOrg'>Número de facilitadores: " + response.docentes.length + "</p>");
+					$("#frameDocentes").attr("src", baseURL + "panelAdmin/organizaciones/solodocentes#organizacion:" + response.organizaciones.numNIT);
 					setTimeout(function () {
-						document
-							.getElementById("frameDocentes")
-							.contentDocument.location.reload(true);
+						document.getElementById("frameDocentes").contentDocument.location.reload(true);
 					}, 2000);
-
 					/*for($i = 0; $i < response.docentes.length; $i++){
 						$("#tbody_orgDocentes").append("<tr>");
 						$("#tbody_orgDocentes").append("<td class='tDoce"+response.docentes[$i].id_docente+"'>");
@@ -1232,16 +670,9 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 					}*/
 					//$("#docentes").append('<div class="clearfix"></div>');
 					//$("#docentes").append('<hr/>');
-
-					$("#docentes").append(
-						'<div class="form-group" id="docentes-observacionesGeneral0">'
-					);
-					$("#docentes>#docentes-observacionesGeneral0").append(
-						"<p>Observaciones de los docentes en general:</label>"
-					);
-					$("#docentes>#docentes-observacionesGeneral0").append(
-						"<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Observaciones de los docentes en general' data-text='Observaciones de los docentes en general' data-type='docentes' id='obs-docen-gen-0' rows='3'></textarea>"
-					);
+					$("#docentes").append('<div class="form-group" id="docentes-observacionesGeneral0">');
+					$("#docentes>#docentes-observacionesGeneral0").append("<p>Observaciones de los docentes en general:</label>");
+					$("#docentes>#docentes-observacionesGeneral0").append("<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Observaciones de los docentes en general' data-text='Observaciones de los docentes en general' data-type='docentes' id='obs-docen-gen-0' rows='3'></textarea>");
 					$("#docentes").append("</div>");
 				}
 			}
@@ -1486,19 +917,103 @@ $("#guardarSiObs").click(function () {
 	}
 });
 /** Ver Observaciones */
+// Ver historial evaluador
+$(".verHistObs").click(function () {
+	$id_organizacion = $(this).attr("data-id-org");
+	let $formulario = '';
+	data = {
+		id_organizacion: $id_organizacion,
+	};
+	$.ajax({
+		url: baseURL + "admin/cargarObservaciones",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		success: function (response) {
+			$("#tbody_hist_obs").empty();
+			for (var i = 0; i < response.observaciones.length; i++) {
+				switch (response.observaciones[i].valueForm) {
+					case "informacionGeneral":
+						$formulario = "Formulario 1. Informacion general";
+						break;
+					case "documentacionLegal":
+						$formulario = "Formulario 2. Documentacion legal";
+						break;
+					case "registroEducativo":
+						$formulario = "Formulario 3. Registro educativo";
+						break;
+					case "antecedentesAcademicos":
+						$formulario = "Formulario 4. Antecedentes academicos";
+						break;
+					case "jornadasActualizacion":
+						$formulario = "Formulario 5. Jornadas actualización";
+						break;
+					case "datosBasicosProgramas":
+						$formulario =
+							"Formulario 6. Programa básico de economía solidaria";
+						break;
+					case "programasAvalEconomia":
+						$formulario =
+							"Formulario 7. Prog. de Economía Solidaria con Énfasis en Trabajo Asociado";
+						break;
+					case "programasAvalar":
+						$formulario = "Formulario 8. Programas";
+						break;
+					case "docentes":
+						$formulario = "Formulario 9. Facilitadores";
+						break;
+					case "plataforma":
+						$formulario = "Formulario 10. Plataforma";
+						break;
+				}
+				$("#tbody_hist_obs").append("<tr id=" + i + " class='obsCampo' data-search-term='" + response.observaciones[i].keyForm.toLowerCase() + "'>");
+				$("#tbody_hist_obs>tr#" + i + "").append("<td>" + $formulario + "</td>");
+				$("#tbody_hist_obs>tr#" + i + "").append("<td>" + response.observaciones[i].keyForm + "</td>");
+				$("#tbody_hist_obs>tr#" + i + "").append("<td class='obsCopy'>" + response.observaciones[i].observacion + "</td>");
+				//$("#tbody_hist_obs>tr#"+i+"").append("<td>"+response.observaciones[i].observacion+"</td>");
+				$("#tbody_hist_obs>tr#" + i + "").append("<td>" + response.observaciones[i].fechaObservacion + "</td>");
+				$("#tbody_hist_obs>tr#" + i + "").append("<td>" + response.observaciones[i].numeroRevision + "</td>");
+				//$("#tbody_hist_obs>tr#"+i+"").append("<td>"+response.observaciones[i].idSolicitud+"</td>");
+				$("#tbody_hist_obs").append("</tr>");
+			}
+			$("#tbody_hist_obsPlataforma").empty();
+			for (var i = 0; i < response.archivosPlataforma.length; i++) {
+				$("#tbody_hist_obsPlataforma").append("<tr id=" + i + ">");
+				$("#tbody_hist_obsPlataforma").append(
+					"<a target='_blank' href=../../uploads/observacionesPlataforma/" +
+					response.archivosPlataforma[i].nombre +
+					">Archivo de observaciones <i class='fa fa-eye' aria-hidden='true'></i></a><br/>"
+				);
+				$("#tbody_hist_obsPlataforma").append("</tr>");
+			}
+			paging("tabla_historial_obs");
+			paging("tabla_historial_obsPlataforma");
+			$("#verObsFiltrada").attr(
+				"href",
+				baseURL +
+				"admin/cargarObservacionesExportar/organizacion:" +
+				$id_organizacion
+			);
+		},
+		error: function (ev) {
+			//Do nothing
+		},
+	});
+});
+// Ver Historial Usuario
 $(".verHistObsUs").click(function () {
 	let $id_organizacion = $(this).attr("data-id-org");
 	let $formulario = '';
 	data = {
 		id_organizacion: $id_organizacion,
 	};
-
 	$.ajax({
 		url: baseURL + "panel/cargarObservacionesUsuario",
 		type: "post",
 		dataType: "JSON",
 		data: data,
 		success: function (response) {
+			console.log(response);
 			$("#tbody_hist_obs").empty();
 			for (var i = 0; i < response.observaciones.length; i++) {
 				switch (response.observaciones[i].valueForm) {
@@ -1530,7 +1045,7 @@ $(".verHistObsUs").click(function () {
 				$("#tbody_hist_obs").append("<tr id=" + i + ">");
 				$("#tbody_hist_obs>tr#" + i + "").append("<td>" + $formulario + "</td>");
 				$("#tbody_hist_obs>tr#" + i + "").append("<td>" + response.observaciones[i].keyForm + "</td>");
-				$("#tbody_hist_obs>tr#" + i + "").append("<td>" + response.observaciones[i].idForm + "</td>");
+				$("#tbody_hist_obs>tr#" + i + "").append("<td>" + response.observaciones[i].observacion + "</td>");
 				//$("#tbody_hist_obs>tr#"+i+"").append("<td>"+response.observaciones[i].observacion+"</td>");
 				$("#tbody_hist_obs>tr#" + i + "").append("<td>" + response.observaciones[i].fechaObservacion + "</td>");
 				$("#tbody_hist_obs>tr#" + i + "").append(
@@ -1546,5 +1061,9 @@ $(".verHistObsUs").click(function () {
 		},
 	});
 });
-
+/** Actualizar Solicitud */
+$("#actualizar_solicitud").click(function () {
+	let idSolicitud = $(this).attr("data-solicitud");
+	window.open(baseURL + "panel/solicitud/" + idSolicitud, '_self');
+});
 

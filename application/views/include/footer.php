@@ -299,7 +299,7 @@
 										<td class="col-md-2">Campo del formulario</td>
 										<td class="col-md-2">Observación</td>
 										<!--<td class="col-md-2">Valor del usuario</td>-->
-										<td class="col-md-2">Fecha de Observacion</td>
+										<td class="col-md-2">Fecha de Observación</td>
 										<td class="col-md-1">Número de Revision</td>
 										<!--<td class="col-md-1">Id de Solicitud</td>-->
 									</tr>

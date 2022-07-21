@@ -2,7 +2,7 @@
 	<div class="clearfix"></div>
 	<hr/>
 	<h4>Nit de organizaciones ya acreditadas</h4>
-	<p>Se deben escribir los nits de las organizaciones que ya estan acreditadas para cuando hagan el registro quede con estado "Acreditado".</p>
+	<p>Se deben escribir los nits de las organizaciones que ya están acreditadas para cuando hagan el registro quede con estado "Acreditado".</p>
 	<div class="col-md-12">
 		<div class="form-group">
 			<label>Nit:</label>
@@ -35,7 +35,7 @@
 			</tr>
 		</thead>
 		<tbody id="tbody">
-		<?php 
+		<?php
 			foreach ($nits as $nit) {
 				echo "<tr><td>".$nit->numNIT."</td>";
 				echo "<td>".$nit->nombreOrganizacion."</td>";

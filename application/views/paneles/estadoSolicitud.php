@@ -35,10 +35,13 @@
 			<h4>Número de revisiones:</h4><label><?php echo  $solicitud->numeroRevisiones; ?></label>
 			<h4>Fecha de la última revision:</h4><label><?php echo $solicitud->fechaUltimaRevision; ?></label>
 		</div>
-	<button class="btn btn-success btn-lg btn-block" id="actualizar_solicitud" disabled="true" data-solicitud="<?php $solicitud->idSolicitudAcreditado ?>">Actualizar la solicitud <i class="fa fa-repeat" aria-hidden="true"></i></button>
+		<?php if($solicitud->nombre == "En Observaciones"){ ?>
+			<button class="btn btn-success btn-lg btn-block" id="actualizar_solicitud" data-solicitud="<?php echo $solicitud->idSolicitudAcreditado ?>">Actualizar la solicitud <i class="fa fa-repeat" aria-hidden="true"></i></button>
+		<?php } ?>
 	</div>
 	<div class="clearfix"></div>
 	<hr/>
+	<?php if($solicitud->nombre == "En Observaciones"){ ?>
 	<div id="obs_orgs">
 		<?php 
 			$opciones = array("informacionGeneral", "documentacionLegal", "registroEducativo", "antecedentesAcademicos", "jornadasActualizacion", "datosBasicosProgramas", "programasAvalEconomia", "programasAvalar", "docentes", "plataforma");
@@ -235,4 +238,5 @@
 			echo "</div>";
 		?>
 	</div>
+	<?php } ?>
 </div>
