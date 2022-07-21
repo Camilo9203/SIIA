@@ -119,7 +119,7 @@
 		<p>Si cuentas con solicitudes, aquí puedes revisar su estado, para crear una nueva solicitud por favor pulsa en el botón "Crear Nueva"</p>
 		<hr />
 		<div class="form-group">
-			<button id='nuevaSolicitud' class='btn btn-siia pull-right' data-id=" . $solicitud->idSolicitud . ">
+			<button id='nuevaSolicitud' class='btn btn-siia pull-right'>
 				Crear Nueva  <i class='fa fa-plus' aria-hidden='true'></i>
 			</button>
 		</div>
