@@ -355,6 +355,7 @@
 		</div>
 		<div class="col-md-12" id="datosBasicosProgramas">
 			<h3>5. Datos Básicos de Programas</h3><br>
+			<p>A continuación se relaciona el motivo de la solicitud registrado por la organización.</p><br><br>
 			<div class="container">
 				<div class="row">
 					<div class="col-12">

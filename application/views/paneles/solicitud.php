@@ -600,7 +600,7 @@
 			<?php endif; ?>
 			<?php if($data_documentacion_legal->numeroResolucion): ?>
 				<div class="">
-					<label>Datos Certificado existencia:</label>
+					<label>Datos Registro Educativo:</label>
 					<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
 					<table id="" width="100%" border=0 class="table table-striped table-bordered">
 						<thead>
@@ -657,7 +657,7 @@
 		<div class="">
 			<?php echo form_open('', array('id' => 'formulario_antecedentes_academicos')); ?>
 			<h3>3. Antecedentes Académicos <i class="fa fa-id-card" aria-hidden="true"></i></h3>
-			<p>Se debe hacer un análisis de los niveles de formación, las necesidades y los avances de los procesos adelantados en materia pedagógica. También se deben determinar las áreas en donde se requiera afianzar y profundizar conocimientos. Los Campos marcados con (*) son obligatorios</p>
+			<p>Relacione la experiencia en materia educativa, formativa y pedagógica. Los Campos marcados con (*) son obligatorios</p>
 			<div class="form-group">
 				<label for="descripcionProceso">Describa de manera cualitativa los procesos de formación que ha realizado:<span class="spanRojo">*</span></label>
 				<textarea class="form-control" name="descripcionProceso" id="descripcionProceso" placeholder="Descripción cualitativa de los procesos de formación que ha realizado..."></textarea>
@@ -965,7 +965,7 @@
 	<!-- Formulario Datos Plataforma 7 - INICIO -->
 	<div id="datos_plataforma" data-form="7" class=" formulario_panel">
 		<h3>7. Datos modalidad virtual<i class="fa fa-globe" aria-hidden="true"></i></h3>
-		<p>Ingrese los datos de ingreso con un instructivo para poder navegar dentro del curso.</p>
+		<p>Relacione los datos para ingresar a la plataforma y verificar su funcionamiento.</p>
 		<?php echo form_open('', array('id' => 'formulario_modalidad_virtual')); ?>
 		<!-- URL Plataforma -->
 		<div class="form-group">
@@ -1067,7 +1067,7 @@
 		<!-- Descripción de la herramienta-->
 		<div class="form-group">
 			<label for="descripcion_herramienta">Breve descripción de la utilización educativa de la herramienta en línea:<span class="spanRojo">*</span></label>
-			<input type="text" class="form-control" name="descripcion_herramienta" id="descripcion_herramienta" placeholder="Registre la descripción de la herramienta" required>
+			<textarea type="text" class="form-control" name="descripcion_herramienta" id="descripcion_herramienta" placeholder="Registre la descripción de la herramienta" required></textarea>
 		</div>
 		<!-- Check Aceptar Modalidad En Linea -->
 		<div class="form-group">
@@ -1182,7 +1182,6 @@
 						</div>
 						<div class="clearfix"></div>
 						<hr />
-						<!-- Tablas de cursos -->
 						<div class="col-md-12" style="text-align: center">
 							<object data="http://localhost/siia/assets/metodologiaResolucion/CursoBasico.html" type="text/html" width="750" height="1220"></object>
 						</div>
@@ -1205,7 +1204,6 @@
 						</div>
 						<div class="clearfix"></div>
 						<hr />
-						<!-- Tablas de cursos -->
 						<div class="col-md-12" style="text-align: center">
 							<object data="http://localhost/siia/assets/metodologiaResolucion/CursoAval.html" type="text/html" width="750" height="1220"></object>
 						</div>

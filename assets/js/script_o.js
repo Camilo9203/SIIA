@@ -4699,6 +4699,7 @@ $(document).ready(function () {
 					dataType: "JSON",
 					data: form_data,
 					success: function (response) {
+						console.log(response);
 						$("#tbodyResoluciones").empty();
 						$("#tbodyResoluciones>.odd").remove();
 						for (var i = 0; i < response.resoluciones.length; i++) {
@@ -4712,7 +4713,7 @@ $(document).ready(function () {
 								"<td>" + response.resoluciones[i].fechaResolucionFinal + "</td>"
 							);
 							$("#tbodyResoluciones>tr#" + i + "").append(
-								"<td>" + response.resoluciones[i].añosResolucion + "</td>"
+								"<td>" + response.resoluciones[i].anosResolucion + "</td>"
 							);
 							$("#tbodyResoluciones>tr#" + i + "").append(
 								"<td><a href='" +

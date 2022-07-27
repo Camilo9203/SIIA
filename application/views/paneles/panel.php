@@ -116,7 +116,7 @@
 <div id="crearSolicitudes" class="container center-block">
 	<div class="container-fluid">
 		<h3>Solicitudes registradas</h3>
-		<p>Si cuentas con solicitudes, aquí puedes revisar su estado, para crear una nueva solicitud por favor pulsa en el botón "Crear Nueva"</p>
+		<p>Para crear una nueva solicitud por favor pulsa en el botón "Crear Nueva". Si cuentas con solicitudes, aquí puedes revisar su estado. </p>
 		<hr />
 		<div class="form-group">
 			<button id='nuevaSolicitud' class='btn btn-siia pull-right'>
@@ -334,11 +334,28 @@
 	<hr />
 	<br>
 	</form>
-	<button class="btn btn-siia btn-sm pull-right" name="" id="guardar_formulario_tipoSolicitud">Crear solicitud <i class="fa fa-check" aria-hidden="true"></i></button>
+	<button data-toggle="modal" data-target="#ayudaCrearSolicitud" data-backdrop="static" data-keyboard="false" class="btn btn-siia btn-sm pull-right">Crear solicitud <i class="fa fa-check" aria-hidden="true"></i></button>
 	<button class="btn btn-danger btn-sm volverSolicitudes"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver a solicitudes</button>
 </div>
+<!-- Modal Ayuda crear solicitud  -->
+<div class="modal fade" id="ayudaCrearSolicitud" tabindex="-1" role="dialog" aria-labelledby="ayudaCrearSolicitud">
+	<div class="modal-dialog modal-xs" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">¿Está seguro de crear la solicitud?</h4>
+			</div>
+			<div class="modal-body">
+				<p>Verifique la modalidad y los motivos registrados en la solicitud. Tenga en cuenta que una vez creada la solicitud no podrá borrar ni editar la misma.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="noAceptoCrear" class="btn btn-danger btn-sm pull-left">No, quizá más adelante <i class="fa fa-times" aria-hidden="true"></i></button>
+				<button type="button" id="guardar_formulario_tipoSolicitud" class="btn btn-siia btn-sm pull-right" data-dismiss="modal">Si, esto seguro de crear solicitud <i class="fa fa-check" aria-hidden="true"></i></button>
+			</div>
+		</div>
+	</div>
+</div>
 <!-- Modal Ayuda Modalidad Virtual  -->
-<div class="modal fade in" id="ayudaModalidadVirtual" tabindex="-1" role="dialog" aria-labelledby="ayudaModalidadVirtual">
+<div class="modal fade" id="ayudaModalidadVirtual" tabindex="-1" role="dialog" aria-labelledby="ayudaModalidadVirtual">
 	<div class="modal-dialog modal-xs" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -359,7 +376,7 @@
 	</div>
 </div>
 <!-- Modal Ayuda Modalidad En Linea  -->
-<div class="modal fade in" id="ayudaModalidadEnLinea" tabindex="-1" role="dialog" aria-labelledby="ayudaModalidadEnLinea">
+<div class="modal fade" id="ayudaModalidadEnLinea" tabindex="-1" role="dialog" aria-labelledby="ayudaModalidadEnLinea">
 	<div class="modal-dialog modal-xs" role="document">
 		<div class="modal-content">
 			<div class="modal-header">

@@ -13,7 +13,7 @@ class Admin extends CI_Controller
 	// Encripción para recuperación de contraseña
 	public function mcdec()
 	{
-		$password = "MH1oGDNDSSxn7jwW6Mvp8FM9c1dQM6SAjszk8XH09u+WaCySU1T+y0khS92S0TNLFgsqig+gNmoXCNrRi12bnPJ8fdGLRcA8OYZAhVkqq8SOLb7sigkURVRfncCRoqIg|WqP4ZWSnq+//mc/zX1UMOYFp8OvT/gjOjeUkwibDO/M=";
+		$password = "XMCDUWmE1vu+kN9GeU9Rdb/QPM9JtL0PvUcIrahwy+JyMx5mjolqwKOORCPV5/xjGlGs2TCBE/cigQqK+Z3Ji8EOR5XSSE7Z8l+JQYbeYxFizo66HSsMw/ST5uQmNOKJ|PzhcdKvFXEMh36Rj18g7rLATqF3eBZ40d1e0qdAvKWE=";
 		$passwor2 = mc_decrypt($password, KEY_RDEL);
 		echo json_encode($passwor2);
 	}

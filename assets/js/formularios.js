@@ -3,8 +3,11 @@ $(document).ready(function () {
 	let solicitud = url.substr(url.lastIndexOf('/') + 1);
 	let activate = url.split("/");
 	let baseURL = activate[0] + "//" + activate[2] + "/" + activate[3] + "/";
-	verificarFormularios(solicitud);
-	cargarArchivos()
+	let siValidadForm = solicitud.substring(0,2);
+	if (siValidadForm == 20) {
+		verificarFormularios(solicitud);
+		cargarArchivos()
+	}
 });
 //TODO: Eventos del menu
 $("#sidebar-menu>.menu_section>#wizard_verticle>.side-menu>li>a").click(
@@ -87,6 +90,10 @@ $("#sidebar-menu>.menu_section>a").click(function () {
 				$step.removeClass("menu-sel");
 			}*/
 	verificarFormularios();
+});
+/** Aceptar crear solicitud */
+$("#noAceptoCrear").click(function () {
+	$("#ayudaCrearSolicitud").modal("hide");
 });
 /** Guardar formulario tipo de solicitud */
 $("#guardar_formulario_tipoSolicitud").click(function () {
@@ -1348,34 +1355,29 @@ function validFroms (form){
 			});
 			break;
 		case 8:
-			$("form[id='formulario_modalidad_virtual']").validate({
+			$("form[id='formulario_modalidad_en_linea']").validate({
 				rules: {
-					datos_plataforma_url: {
-						required: true,
-						minlength: 10,
-					},
-					datos_plataforma_usuario: {
+					nombre_herramienta: {
 						required: true,
 						minlength: 5,
 					},
-					datos_plataforma_contrasena: {
+					descripcion_herramienta: {
 						required: true,
-						minlength: 5,
-					}
+						minlength: 210,
+						maxlength: 420,
+					},
+
 				},
 				messages: {
-					datos_plataforma_url: {
-						required: "Por favor, ingrese la url de la plataforma.",
-						minlength: "Mínimo 10 caracteres"
-					},
-					datos_plataforma_usuario: {
-						required: "Por favor, ingrese el usuario de la plataforma.",
+					nombre_herramienta: {
+						required: "Por favor, ingrese el nombre de la herramienta.",
 						minlength: "Mínimo 5 caracteres"
 					},
-					datos_plataforma_contrasena: {
-						required: "Por favor, ingrese la contraseña de la plataforma.",
-						minlength: "Mínimo 5 caracteres"
-					}
+					descripcion_herramienta: {
+						required: "Por favor, ingrese descripción de la herramienta.",
+						minlength: "Mínimo 210 caracteres",
+						maxlength: "Máximo 420 caracteres"
+					},
 				},
 			});
 			break;
