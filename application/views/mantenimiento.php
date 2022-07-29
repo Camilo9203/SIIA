@@ -98,8 +98,8 @@ p {
       <h1>SIIA en Mantenimiento.</h1>
       <h3>Se informa que el día de hoy <?php echo $fecha; ?>, se realizara un mantenimiento en la plataforma, debido a esto se presentara intermitencia en el servicio, se pondra en funcionamiento lo mas pronto posible.</h3>
       <h4>Agradecemos su compresión, todo con el fin de poder brindarles un mejor servicio.</h4>
-      <h5>Causas: Resolver problemas de correos electronicos.</h5>
-      <h5>Hora de reestablecimiento estimado: 03:20 PM</h5>
+      <h5>Causas: Implementación de nuevas funcionalidades.</h5>
+      <h5>Hora de reestablecimiento estimado: 06:00 PM</h5>
       </p>
     </div>
   </div>
