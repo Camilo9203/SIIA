@@ -84,7 +84,8 @@ class Recordar extends CI_Controller {
 		if($this->email->send()){
 			echo json_encode(array('url'=>"", 'msg'=>"Se envio un correo, por favor verifiquelo."));
 		}else{
-			echo json_encode(array('url'=>"login", 'msg'=>"Lo sentimos, hubo un error y no se envio el correo."));
+			$error = $this->email->print_debugger();
+			echo json_encode(array('url'=>"login", 'msg'=>"Lo sentimos, hubo un error y no se envio el correo." + $error));
 		}
 	}
 

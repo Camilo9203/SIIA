@@ -92,7 +92,7 @@ class CI_Email
 	 *
 	 * @var	string
 	 */
-	public $smtp_pass	= 'acreditorg_2018'; //'P4ssw0rd';  Tics2016 92b5ea620b4255
+	public $smtp_pass	= 'Tics2022*'; //'P4ssw0rd';  Tics2016 92b5ea620b4255
 
 	/**
 	 * SMTP Server port
