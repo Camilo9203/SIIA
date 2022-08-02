@@ -7,24 +7,24 @@ class Admin extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		//verify_session_admin();
+		verify_session_admin();
 		$this->load->model('DocentesModel');
 	}
 	// Encripción para recuperación de contraseña
-	public function mcdec()
+	private function mcdec()
 	{
-		$password = "XMCDUWmE1vu+kN9GeU9Rdb/QPM9JtL0PvUcIrahwy+JyMx5mjolqwKOORCPV5/xjGlGs2TCBE/cigQqK+Z3Ji8EOR5XSSE7Z8l+JQYbeYxFizo66HSsMw/ST5uQmNOKJ|PzhcdKvFXEMh36Rj18g7rLATqF3eBZ40d1e0qdAvKWE=";
+		$password = "KSR8ztt//8Fj7FfSaDjLphyJKJq/X2LdFL4GoJnNgO2OQWaeJZvIHTAf9T+fFFbwHtwImhK9LMs4tOW7VnKZfRkR7t8cT4ebcoIANjtwRszS+DzZxD14J9CL+9sbV4Fj|SSSBKczEmOxdrUuN2qtZOWh/wPzJljlsXkR2hK4jcko=";
 		$passwor2 = mc_decrypt($password, KEY_RDEL);
 		echo json_encode($passwor2);
 	}
-	public function mcenc()
+	private function mcenc()
 	{
 		$password = "Clave*21";
 		$passwor2 = mc_encrypt($password, KEY_RDEL);
 		echo json_encode($passwor2);
 	}
 
-	public function enchash()
+	private function enchash()
 	{
 		$password = "Clave*21";
 		$passwor2 = generate_hash($password);

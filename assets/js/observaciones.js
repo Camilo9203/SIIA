@@ -300,7 +300,6 @@ $("#verProgBasMenuAdmin").click(function () {
 			console.log(response);
 			// Llenar tabla de datos en línea registrados
 			if(response.datosProgramas.length == 0){
-				alert("1");
 				html += "<td colspan='4'>No hay datos </td></tr>";
 			}
 			else {
