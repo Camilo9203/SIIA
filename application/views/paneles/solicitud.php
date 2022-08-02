@@ -1183,7 +1183,7 @@
 						<div class="clearfix"></div>
 						<hr />
 						<div class="col-md-12" style="text-align: center">
-							<object data="http://localhost/siia/assets/metodologiaResolucion/CursoBasico.html" type="text/html" width="750" height="1220"></object>
+							<object data="https://acreditacion.uaeos.gov.co/siia/assets/metodologiaResolucion/CursoBasico.html" type="text/html" width="750" height="1220"></object>
 						</div>
 					</div>
 				</div>
@@ -1205,7 +1205,7 @@
 						<div class="clearfix"></div>
 						<hr />
 						<div class="col-md-12" style="text-align: center">
-							<object data="http://localhost/siia/assets/metodologiaResolucion/CursoAval.html" type="text/html" width="750" height="1220"></object>
+							<object data="https://acreditacion.uaeos.gov.co/siia/assets/metodologiaResolucion/CursoAval.html" type="text/html" width="750" height="1220"></object>
 						</div>
 					</div>
 				</div>
@@ -1228,7 +1228,7 @@
 						<hr />
 						<!-- Tablas de cursos -->
 						<div class="col-md-12" style="text-align: center">
-							<object data="http://localhost/siia/assets/metodologiaResolucion/CursoMedio.html" type="text/html" width="750" height="1100"></object>
+							<object data="https://acreditacion.uaeos.gov.co/siia/assets/metodologiaResolucion/CursoMedio.html" type="text/html" width="750" height="1100"></object>
 						</div>
 					</div>
 				</div>
@@ -1251,7 +1251,7 @@
 						<hr />
 						<!-- Tablas de cursos -->
 						<div class="col-md-12" style="text-align: center">
-							<object data="http://localhost/siia/assets/metodologiaResolucion/CursoAvanzado.html" type="text/html" width="750" height="1220"></object>
+							<object data="https://acreditacion.uaeos.gov.co/siia/assets/metodologiaResolucion/CursoAvanzado.html" type="text/html" width="750" height="1220"></object>
 						</div>
 					</div>
 				</div>
@@ -1275,7 +1275,7 @@
 						<hr />
 						<!-- Tablas de cursos -->
 						<div class="col-md-12" style="text-align: center">
-							<object data="http://localhost/siia/assets/metodologiaResolucion/CursoFinanciera.html" type="text/html" width="750" height="1000"></object>
+							<object data="https://acreditacion.uaeos.gov.co/siia/assets/metodologiaResolucion/CursoFinanciera.html" type="text/html" width="750" height="1000"></object>
 						</div>
 					</div>
 				</div>

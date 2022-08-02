@@ -11,9 +11,9 @@ class Admin extends CI_Controller
 		$this->load->model('DocentesModel');
 	}
 	// Encripción para recuperación de contraseña
-	private function mcdec()
+	public function mcdec()
 	{
-		$password = "KSR8ztt//8Fj7FfSaDjLphyJKJq/X2LdFL4GoJnNgO2OQWaeJZvIHTAf9T+fFFbwHtwImhK9LMs4tOW7VnKZfRkR7t8cT4ebcoIANjtwRszS+DzZxD14J9CL+9sbV4Fj|SSSBKczEmOxdrUuN2qtZOWh/wPzJljlsXkR2hK4jcko=";
+		$password = "IoMopzqV88p+k+krQKUroeVHur7ikMFJnOSV0OP0lggT5h49WqL9mvSw9QC0tEY68A9aY6/QR6VwHGhPXL2DHJbRRkqXDpVaq/rMaZVxhUBCqRRh5qtBsQ/4e6KnD90l|LGWbB+AjidXGzkKLgHffgURlFDILlbB6TvV7kvW4axg=";
 		$passwor2 = mc_decrypt($password, KEY_RDEL);
 		echo json_encode($passwor2);
 	}
