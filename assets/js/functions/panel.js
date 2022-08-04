@@ -56,12 +56,8 @@ $("#nuevaSolicitud").click(function () {
 	$("#ayudaModalidad").modal({ backdrop: "static", keyboard: false });
 	$("#ayudaModalidad").modal("hide");
 	$("#crearSolicitudes").hide();
+	$("#solicitudesRegistradas").hide();
 	$("#tipoSolicitud").show();
-	let display =  $("#solicitudesRegistradas").css("display");
-	if(display == "none"){
-		alert("1");
-		$("#solicitudesRegistradas").show();
-	}
 	// if (hash_url == "#actualizarSolicitud") {
 	// 	//Do Nothing
 	// }

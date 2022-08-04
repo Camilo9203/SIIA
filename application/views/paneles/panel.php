@@ -1,3 +1,20 @@
+<!-- Modal Ayuda crear solicitud  -->
+<div class="modal fade" id="ayudaCrearSolicitud" tabindex="-1" role="dialog" aria-labelledby="ayudaCrearSolicitud">
+	<div class="modal-dialog modal-xs" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">¿Está seguro de crear la solicitud?</h4>
+			</div>
+			<div class="modal-body">
+				<p>Verifique la modalidad y los motivos registrados en la solicitud. Tenga en cuenta que una vez creada la solicitud no podrá borrar ni editar la misma.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="noAceptoCrear" class="btn btn-danger btn-sm pull-left">No, quizá más adelante <i class="fa fa-times" aria-hidden="true"></i></button>
+				<button type="button" id="guardar_formulario_tipoSolicitud" class="btn btn-siia btn-sm pull-right" data-dismiss="modal">Si, esto seguro de crear solicitud <i class="fa fa-check" aria-hidden="true"></i></button>
+			</div>
+		</div>
+	</div>
+</div>
 <!-- Panel Principal -->
 <div id="panel_inicial" class="container center-block">
 	<div class="clearfix"></div>
@@ -116,6 +133,7 @@
 		<h3>Solicitudes registradas</h3>
 		<p>Para crear una nueva solicitud por favor pulsa en el botón "Crear Nueva". Si cuentas con solicitudes, aquí puedes revisar su estado. </p>
 		<hr />
+		<button class="btn btn-danger btn-sm volverPanel"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 		<div class="form-group">
 			<button id='nuevaSolicitud' class='btn btn-siia pull-right'>
 				Crear Nueva  <i class='fa fa-plus' aria-hidden='true'></i>
@@ -123,6 +141,131 @@
 		</div>
 		<hr />
 		<br>
+	</div>
+</div>
+<!-- Formulario Crear Solicitud  -->
+<div id="tipoSolicitud" class="col-md-5 center-block">
+	<?php echo form_open('', array('id' => 'formulario_crear_solicitud')); ?>
+	<div class="clearfix"></div>
+	<hr />
+	<!-- Tipo d solicitud -->
+	<!--	<label for="tipo_solicitud">Tipo de solicitud:<span class="spanRojo">*</span></label><br>-->
+	<!--	<div class="form-group">-->
+	<!--		<div class="radio">-->
+	<!--			<label><input type="radio" name="tipo_solicitud" id="tipo1" class="" value="Acreditación Primera vez" checked>Acreditación primera vez.</label>-->
+	<!--		</div>-->
+	<!--	</div>-->
+	<!-- Solo si la entidad esta o estuvo acreditada //TODO: Solo si la entidad ya fue acreditada-->
+	<!--	<div id="div_solicitud">-->
+	<!--		<div class="form-group">-->
+	<!--			<div class="radio">-->
+	<!--				<label><input type="radio" name="tipo_solicitud" id="tipo2" class="" value="Renovación de Acreditación">Renovación de acreditación.</label>-->
+	<!--			</div>-->
+	<!--		</div>-->
+	<!--		<div class="form-group">-->
+	<!--			<div class="radio">-->
+	<!--				<label><input type="radio" name="tipo_solicitud" id="tipo3" class="" value="Actualización de datos">Actualización de datos.</label>-->
+	<!--			</div>-->
+	<!--		</div>-->
+	<!--	</div>-->
+	<!--	<hr />-->
+	<!-- Tipo d solicitud -FIN -->
+	<!-- Motivo de la solicitud -->
+	<label for="motivo_solicitud">Motivo de la solicitud:<span class="spanRojo">*</span></label><br>
+	<!-- CheckBox Motivos de la solicitud -->
+	<div class="form-check radio">
+		<input class="form-check-input" type="checkbox" value="1" id="cursoBasico" name="motivos" checked>
+		<label class="form-check-label" for="cursoBasico">Acreditación Curso Básico de Economía Solidaria</label>
+	</div>
+	<div class="form-check radio">
+		<input class="form-check-input" type="checkbox" value="2" id="avalTrabajo" name="motivos">
+		<label class="form-check-label" for="avalTrabajo">Aval de Trabajo Asociado</label>
+	</div>
+	<div class="form-check radio">
+		<input class="form-check-input" type="checkbox" value="3" id="cursoMedio" name="motivos">
+		<label class="form-check-label" for="cursoMedio">Acreditación Curso Medio de Economía Solidaria</label>
+	</div>
+	<div class="form-check radio">
+		<input class="form-check-input" type="checkbox" value="4" id="cursoAvanzado" name="motivos">
+		<label class="form-check-label" for="cursoAvanzado">Acreditación Curso Avanzado de Economía Solidaria</label>
+	</div>
+	<div class="form-check radio">
+		<input class="form-check-input" type="checkbox" value="5" id="finacieraEconomia" name="motivos">
+		<label class="form-check-label" for="finacieraEconomia">Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria</label>
+	</div>
+	<!-- Solo si la entidad esta o estuvo acreditada //TODO: Solo si la entidad ya fue acreditada-->
+	<!--	<div class="form-group" id="div_motivo_actualizar">-->
+	<!--		<div class="radio">-->
+	<!--			<label><input type="radio" name="motivo_solicitud" id="motivo5" class="motivo_sol" value="Actualizar Datos">Actualizar datos</label>-->
+	<!--		</div>-->
+	<!--	</div>-->
+	<hr />
+	<!-- Motivo de la solicitud -FIN-->
+	<!-- Modalidad de la solicitud -->
+	<label for="modalidad_solicitud">Modalidad:<span class="spanRojo">*</span></label><br>
+	<!-- Ayuda para modalidad virtual -->
+	<form-group>
+		<i data-toggle="modal" data-target="#ayudaModalidad" class="fa fa-question-circle pull-right" aria-hidden="true"></i>
+		<div class="form-check radio">
+			<input class="form-check-input" type="checkbox" value="1" id="presencial" value="Presencial" name="modalidades" checked>
+			<label class="form-check-label" for="presencial">Presencial</label>
+		</div>
+		<div class="form-check radio">
+			<input class="form-check-input" type="checkbox" value="2" id="virtual" value="Virtual" name="modalidades">
+			<label class="form-check-label" for="virtual">Virtual</label>
+		</div>
+		<div class="form-check radio">
+			<input class="form-check-input" type="checkbox" value="3" id="enLinea" value="En Linea" name="modalidades">
+			<label class="form-check-label" for="enLinea">En Linea</label>
+		</div>
+	</form-group>
+
+	<hr />
+	<br>
+	</form>
+	<button data-toggle="modal" data-target="#ayudaCrearSolicitud" data-backdrop="static" data-keyboard="false" class="btn btn-siia btn-sm pull-right">Crear solicitud <i class="fa fa-check" aria-hidden="true"></i></button>
+	<button class="btn btn-danger btn-sm volverSolicitudes"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver a solicitudes</button>
+	<!-- Modal Ayuda Modalidad Virtual  -->
+	<div class="modal fade" id="ayudaModalidadVirtual" tabindex="-1" role="dialog" aria-labelledby="ayudaModalidadVirtual">
+		<div class="modal-dialog modal-xs" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">¿Está seguro de presentar la modalidad virtual?</h4>
+				</div>
+				<div class="modal-body">
+					<p>De acuerdo a lo establecido en el parágrafo número 1 del artículo 6 de la resolución 152 del 23 de junio del 2022, las entidades que soliciten la acreditación por la modalidad en línea deben tener en cuenta lo siguiente:</p>
+					<p><strong>Parágrafo 1.</strong> Para la acreditación de los programas de educación en economía solidaria bajo modalidad virtual, la entidad solicitante deberá demostrar que el proceso educativo se hace en una <stron>plataforma</stron> (sesiones clase, materiales de apoyo, actividades, evaluaciones) que propicie un Ambiente Virtual de Aprendizaje - AVA y Objetos Virtuales de Aprendizaje- OVAS. </p>
+					<p>Recuerde desarrollar el proceso formativo acorde a lo establecido en el anexo técnico.</p>
+					<p>La UAEOS realizará seguimiento a las organizaciones acreditadas en el cumplimiento de los programas de educación solidaria acreditados.</p>
+					<!--				<a class="pull-right" target="_blank" href="https://www.orgsolidarias.gov.co/sites/default/files/archivos/Res_110%20del%2031%20de%20marzo%20de%202016.pdf">Recurso de la resolución 110</a>-->
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="noModVirt" class="btn btn-danger btn-sm pull-left">No, quizá mas adelante <i class="fa fa-times" aria-hidden="true"></i></button>
+					<button type="button" id="siModVirt" class="btn btn-siia btn-sm pull-right" data-dismiss="modal">Si, esto seguro de presentar la modalidad virtual <i class="fa fa-check" aria-hidden="true"></i></button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal Ayuda Modalidad En Linea  -->
+	<div class="modal fade" id="ayudaModalidadEnLinea" tabindex="-1" role="dialog" aria-labelledby="ayudaModalidadEnLinea">
+		<div class="modal-dialog modal-xs" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">¿Está seguro de presentar la modalidad en Línea?</h4>
+				</div>
+				<div class="modal-body">
+					<p>De acuerdo a lo establecido en los parágrafos número 2 y número 3 del artículo 9 de la resolución 110 del 31 de marzo del 2016, las entidades que soliciten la acreditación por la modalidad en linea deben tener en cuenta lo siguiente:</p>
+					<p><strong>Parágrafo 2.</strong> Para la acreditación de los programas de educación en economía solidaria bajo modalidad línea, aquella donde los docentes y participantes interactúan a través de recursos tecnológicos. La mediación tecnológica puede ser a través de herramientas tecnológica (Zoom, Teams, Meet, Good Meet, entre otras) plataformas de comunicación, chats, foros, videoconferencias, grupos de discusión, <strong>caracterizadas por encuentros sincrónicos.</strong> </p>
+					<p>Recuerde desarrollar el proceso formativo acorde a lo establecido en el anexo técnico.</p>
+					<p>La UAEOS realizará seguimiento a las organizaciones acreditadas en el cumplimiento de los programas de educación solidaria acreditados.</p>
+					<!--				<a class="pull-right" target="_blank" href="https://www.orgsolidarias.gov.co/sites/default/files/archivos/Res_110%20del%2031%20de%20marzo%20de%202016.pdf">Recurso de la resolución 110</a>-->
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="noModEnLinea" class="btn btn-danger btn-sm pull-left">No, quizá más adelante <i class="fa fa-times" aria-hidden="true"></i></button>
+					<button type="button" id="siModEnLinea" class="btn btn-siia btn-sm pull-right" data-dismiss="modal">Si, esto seguro de presentar la modalidad en linea <i class="fa fa-check" aria-hidden="true"></i></button>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 <!-- Solicitudes Registradas -->
@@ -155,13 +298,13 @@
 					echo "<td>" . $solicitud->motivoSolicitudAcreditado . "</td>";
 					echo "<td>" . $solicitud->modalidadSolicitudAcreditado . "</td>";
 					if ($solicitud->nombre == "En Proceso") {
-						echo "<td><div class='btn-group-vertical' role='group mr-2' aria-label='acciones'><button class='btn btn-siia btn-sm verSolicitud' data-id=" . $solicitud->idSolicitud . " title='Continuar Solicitud'>Continuar <i class='fa fa-check' aria-hidden='true'></i></button>";
+						echo "<td><button class='btn btn-siia btn-sm verSolicitud' data-id=" . $solicitud->idSolicitud . " title='Continuar Solicitud'>Continuar <i class='fa fa-check' aria-hidden='true'></i></button>";
 					}
 					if ($solicitud->nombre == "Acreditado"){
-						echo "<button id='verDetalle' class='btn btn-info btn-sm' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false'  data-id=" . $solicitud->idSolicitud . " title='Ver Detalle'>Detalle <i class='fa fa-info' aria-hidden='true'></i></button></div></td></tr>";
+						echo "<td><button id='verDetalle' class='btn btn-info btn-sm' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false'  data-id=" . $solicitud->idSolicitud . " title='Ver Detalle'>Detalle <i class='fa fa-info' aria-hidden='true'></i></button></div></td></tr>";
 					}
 					if ($solicitud->nombre == "En Observaciones" || $solicitud->nombre == "Finalizado"){
-						echo "<button id='verObservaciones' class='btn btn-warning btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Observaciones'>Observaciones<i class='fa fa-eye' aria-hidden='true'></i></button>";
+						echo "<td><button id='verObservaciones' class='btn btn-warning btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Observaciones'>Observaciones<i class='fa fa-eye' aria-hidden='true'></i></button>";
 					}
 				}
 				?>
@@ -233,10 +376,9 @@
 			</div>
 			<div class="clearfix"></div>
 			<hr />
-			<button class="btn btn-danger btn-sm volverPanel"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 		</div>
 	<?php endif	?>
-	<div class="modal fade in" id="detallesSolicitud" tabindex="-1" role="dialog" aria-labelledby="ayudaModalidadEnLinea">
+	<div class="modal fade in" id="detallesSolicitud" tabindex="-1" role="dialog" aria-labelledby="detallesSolicitud">
 		<div class="modal-dialog modal-xs" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -257,145 +399,5 @@
 		</div>
 	</div>
 </div>
-<!-- Formulario Crear Solicitud  -->
-<div id="tipoSolicitud" class="col-md-5 center-block">
-	<?php echo form_open('', array('id' => 'formulario_crear_solicitud')); ?>
-	<div class="clearfix"></div>
-	<hr />
-	<!-- Tipo d solicitud -->
-<!--	<label for="tipo_solicitud">Tipo de solicitud:<span class="spanRojo">*</span></label><br>-->
-<!--	<div class="form-group">-->
-<!--		<div class="radio">-->
-<!--			<label><input type="radio" name="tipo_solicitud" id="tipo1" class="" value="Acreditación Primera vez" checked>Acreditación primera vez.</label>-->
-<!--		</div>-->
-<!--	</div>-->
-	<!-- Solo si la entidad esta o estuvo acreditada //TODO: Solo si la entidad ya fue acreditada-->
-<!--	<div id="div_solicitud">-->
-<!--		<div class="form-group">-->
-<!--			<div class="radio">-->
-<!--				<label><input type="radio" name="tipo_solicitud" id="tipo2" class="" value="Renovación de Acreditación">Renovación de acreditación.</label>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--		<div class="form-group">-->
-<!--			<div class="radio">-->
-<!--				<label><input type="radio" name="tipo_solicitud" id="tipo3" class="" value="Actualización de datos">Actualización de datos.</label>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--	</div>-->
-<!--	<hr />-->
-	<!-- Tipo d solicitud -FIN -->
-	<!-- Motivo de la solicitud -->
-	<label for="motivo_solicitud">Motivo de la solicitud:<span class="spanRojo">*</span></label><br>
-	<!-- CheckBox Motivos de la solicitud -->
-	<div class="form-check radio">
-		<input class="form-check-input" type="checkbox" value="1" id="cursoBasico" name="motivos" checked>
-		<label class="form-check-label" for="cursoBasico">Acreditación Curso Básico de Economía Solidaria</label>
-	</div>
-	<div class="form-check radio">
-		<input class="form-check-input" type="checkbox" value="2" id="avalTrabajo" name="motivos">
-		<label class="form-check-label" for="avalTrabajo">Aval de Trabajo Asociado</label>
-	</div>
-	<div class="form-check radio">
-		<input class="form-check-input" type="checkbox" value="3" id="cursoMedio" name="motivos">
-		<label class="form-check-label" for="cursoMedio">Acreditación Curso Medio de Economía Solidaria</label>
-	</div>
-	<div class="form-check radio">
-		<input class="form-check-input" type="checkbox" value="4" id="cursoAvanzado" name="motivos">
-		<label class="form-check-label" for="cursoAvanzado">Acreditación Curso Avanzado de Economía Solidaria</label>
-	</div>
-	<div class="form-check radio">
-		<input class="form-check-input" type="checkbox" value="5" id="finacieraEconomia" name="motivos">
-		<label class="form-check-label" for="finacieraEconomia">Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria</label>
-	</div>
-	<!-- Solo si la entidad esta o estuvo acreditada //TODO: Solo si la entidad ya fue acreditada-->
-<!--	<div class="form-group" id="div_motivo_actualizar">-->
-<!--		<div class="radio">-->
-<!--			<label><input type="radio" name="motivo_solicitud" id="motivo5" class="motivo_sol" value="Actualizar Datos">Actualizar datos</label>-->
-<!--		</div>-->
-<!--	</div>-->
-	<hr />
-	<!-- Motivo de la solicitud -FIN-->
-	<!-- Modalidad de la solicitud -->
-	<label for="modalidad_solicitud">Modalidad:<span class="spanRojo">*</span></label><br>
-	<!-- Ayuda para modalidad virtual -->
-	<form-group>
-		<i data-toggle="modal" data-target="#ayudaModalidad" class="fa fa-question-circle pull-right" aria-hidden="true"></i>
-		<div class="form-check radio">
-			<input class="form-check-input" type="checkbox" value="1" id="presencial" value="Presencial" name="modalidades" checked>
-			<label class="form-check-label" for="presencial">Presencial</label>
-		</div>
-		<div class="form-check radio">
-			<input class="form-check-input" type="checkbox" value="2" id="virtual" value="Virtual" name="modalidades">
-			<label class="form-check-label" for="virtual">Virtual</label>
-		</div>
-		<div class="form-check radio">
-			<input class="form-check-input" type="checkbox" value="3" id="enLinea" value="En Linea" name="modalidades">
-			<label class="form-check-label" for="enLinea">En Linea</label>
-		</div>
-	</form-group>
-
-	<hr />
-	<br>
-	</form>
-	<button data-toggle="modal" data-target="#ayudaCrearSolicitud" data-backdrop="static" data-keyboard="false" class="btn btn-siia btn-sm pull-right">Crear solicitud <i class="fa fa-check" aria-hidden="true"></i></button>
-	<button class="btn btn-danger btn-sm volverSolicitudes"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver a solicitudes</button>
-</div>
-<!-- Modal Ayuda crear solicitud  -->
-<div class="modal fade" id="ayudaCrearSolicitud" tabindex="-1" role="dialog" aria-labelledby="ayudaCrearSolicitud">
-	<div class="modal-dialog modal-xs" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">¿Está seguro de crear la solicitud?</h4>
-			</div>
-			<div class="modal-body">
-				<p>Verifique la modalidad y los motivos registrados en la solicitud. Tenga en cuenta que una vez creada la solicitud no podrá borrar ni editar la misma.</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" id="noAceptoCrear" class="btn btn-danger btn-sm pull-left">No, quizá más adelante <i class="fa fa-times" aria-hidden="true"></i></button>
-				<button type="button" id="guardar_formulario_tipoSolicitud" class="btn btn-siia btn-sm pull-right" data-dismiss="modal">Si, esto seguro de crear solicitud <i class="fa fa-check" aria-hidden="true"></i></button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Modal Ayuda Modalidad Virtual  -->
-<div class="modal fade" id="ayudaModalidadVirtual" tabindex="-1" role="dialog" aria-labelledby="ayudaModalidadVirtual">
-	<div class="modal-dialog modal-xs" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">¿Está seguro de presentar la modalidad virtual?</h4>
-			</div>
-			<div class="modal-body">
-				<p>De acuerdo a lo establecido en el parágrafo número 1 del artículo 6 de la resolución 152 del 23 de junio del 2022, las entidades que soliciten la acreditación por la modalidad en línea deben tener en cuenta lo siguiente:</p>
-				<p><strong>Parágrafo 1.</strong> Para la acreditación de los programas de educación en economía solidaria bajo modalidad virtual, la entidad solicitante deberá demostrar que el proceso educativo se hace en una <stron>plataforma</stron> (sesiones clase, materiales de apoyo, actividades, evaluaciones) que propicie un Ambiente Virtual de Aprendizaje - AVA y Objetos Virtuales de Aprendizaje- OVAS. </p>
-				<p>Recuerde desarrollar el proceso formativo acorde a lo establecido en el anexo técnico.</p>
-				<p>La UAEOS realizará seguimiento a las organizaciones acreditadas en el cumplimiento de los programas de educación solidaria acreditados.</p>
-<!--				<a class="pull-right" target="_blank" href="https://www.orgsolidarias.gov.co/sites/default/files/archivos/Res_110%20del%2031%20de%20marzo%20de%202016.pdf">Recurso de la resolución 110</a>-->
-			</div>
-			<div class="modal-footer">
-				<button type="button" id="noModVirt" class="btn btn-danger btn-sm pull-left">No, quizá mas adelante <i class="fa fa-times" aria-hidden="true"></i></button>
-				<button type="button" id="siModVirt" class="btn btn-siia btn-sm pull-right" data-dismiss="modal">Si, esto seguro de presentar la modalidad virtual <i class="fa fa-check" aria-hidden="true"></i></button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Modal Ayuda Modalidad En Linea  -->
-<div class="modal fade" id="ayudaModalidadEnLinea" tabindex="-1" role="dialog" aria-labelledby="ayudaModalidadEnLinea">
-	<div class="modal-dialog modal-xs" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">¿Está seguro de presentar la modalidad en Línea?</h4>
-			</div>
-			<div class="modal-body">
-				<p>De acuerdo a lo establecido en los parágrafos número 2 y número 3 del artículo 9 de la resolución 110 del 31 de marzo del 2016, las entidades que soliciten la acreditación por la modalidad en linea deben tener en cuenta lo siguiente:</p>
-				<p><strong>Parágrafo 2.</strong> Para la acreditación de los programas de educación en economía solidaria bajo modalidad línea, aquella donde los docentes y participantes interactúan a través de recursos tecnológicos. La mediación tecnológica puede ser a través de herramientas tecnológica (Zoom, Teams, Meet, Good Meet, entre otras) plataformas de comunicación, chats, foros, videoconferencias, grupos de discusión, <strong>caracterizadas por encuentros sincrónicos.</strong> </p>
-				<p>Recuerde desarrollar el proceso formativo acorde a lo establecido en el anexo técnico.</p>
-				<p>La UAEOS realizará seguimiento a las organizaciones acreditadas en el cumplimiento de los programas de educación solidaria acreditados.</p>
-<!--				<a class="pull-right" target="_blank" href="https://www.orgsolidarias.gov.co/sites/default/files/archivos/Res_110%20del%2031%20de%20marzo%20de%202016.pdf">Recurso de la resolución 110</a>-->
-			</div>
-			<div class="modal-footer">
-				<button type="button" id="noModEnLinea" class="btn btn-danger btn-sm pull-left">No, quizá más adelante <i class="fa fa-times" aria-hidden="true"></i></button>
-				<button type="button" id="siModEnLinea" class="btn btn-siia btn-sm pull-right" data-dismiss="modal">Si, esto seguro de presentar la modalidad en linea <i class="fa fa-check" aria-hidden="true"></i></button>
-			</div>
-		</div>
-	</div>
+<!-- Div cerrado de abajo Arregla que no exista footer cuando no hay solicitudes-->
 </div>
