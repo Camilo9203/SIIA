@@ -1501,9 +1501,8 @@ function verificarFormularios(solicitud) {
 // TODO: Cargar Archivos
 function cargarArchivos() {
 	$(".tabla_form > #tbody").empty();
-	$data_form = $("#idDataForm").attr("data-form");
-	var data = {
-		id_form: $data_form,
+	let data = {
+		id_form: $("#idDataForm").attr("data-form"),
 	};
 	$.ajax({
 		url: baseURL + "panel/cargarDatosArchivos",
@@ -1511,8 +1510,8 @@ function cargarArchivos() {
 		dataType: "JSON",
 		data: data,
 		success: function (response) {
-			var url;
-			var carpeta;
+			let url;
+			let carpeta;
 			if (response.length == 0) {
 				$("<tr>").appendTo(".tabla_form > tbody");
 				$("<td>Ningún dato</td>").appendTo(".tabla_form > tbody");
@@ -1523,43 +1522,43 @@ function cargarArchivos() {
 				for (var i = 0; i < response.length; i++) {
 					if (response[i].tipo == "carta") {
 						carpeta = "cartaRep";
-						url = "uploads/" + carpeta + "/";
+						url = baseURL + "uploads/" + carpeta + "/";
 					}
 					if (response[i].tipo == "certificaciones") {
 						carpeta = "certificaciones";
-						url = "uploads/" + carpeta + "/";
+						url = baseURL + "uploads/" + carpeta + "/";
 					}
 					if (response[i].tipo == "lugar") {
 						carpeta = "lugarAtencion";
-						url = "uploads/" + carpeta + "/";
+						url = baseURL + "uploads/" + carpeta + "/";
 					}
 					if (response[i].tipo == "registroEdu") {
 						carpeta = "registrosEducativos";
-						url = "uploads/" + carpeta + "/";
+						url = baseURL + "uploads/" + carpeta + "/";
 					}
 					if (response[i].tipo == "jornadaAct") {
 						carpeta = "jornadas";
-						url = "uploads/" + carpeta + "/";
+						url = baseURL + "uploads/" + carpeta + "/";
 					}
 					if (response[i].tipo == "materialDidacticoProgBasicos") {
 						carpeta = "materialDidacticoProgBasicos";
-						url = "uploads/" + carpeta + "/";
+						url = baseURL + "uploads/" + carpeta + "/";
 					}
 					if (response[i].tipo == "materialDidacticoAvalEconomia") {
 						carpeta = "materialDidacticoAvalEconomia";
-						url = "uploads/" + carpeta + "/";
+						url = baseURL + "uploads/" + carpeta + "/";
 					}
 					if (response[i].tipo == "formatosEvalProgAvalar") {
 						carpeta = "formatosEvalProgAvalar";
-						url = "uploads/" + carpeta + "/";
+						url = baseURL + "uploads/" + carpeta + "/";
 					}
 					if (response[i].tipo == "materialDidacticoProgAvalar") {
 						carpeta = "materialDidacticoProgAvalar";
-						url = "uploads/" + carpeta + "/";
+						url = baseURL + "uploads/" + carpeta + "/";
 					}
 					if (response[i].tipo == "instructivoPlataforma") {
 						carpeta = "instructivosPlataforma";
-						url = "uploads/" + carpeta + "/";
+						url = baseURL + "uploads/" + carpeta + "/";
 					}
 
 					$("<tr>").appendTo(".tabla_form > tbody");

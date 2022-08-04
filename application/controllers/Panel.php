@@ -1936,14 +1936,14 @@ class Panel extends CI_Controller
 			$datos_organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
 			$id_organizacion = $datos_organizacion->id_organizacion;
 			$nombreOrganizacion = $datos_organizacion->nombreOrganizacion;
-			$data_estado = array(
+			$updateEstado = array(
 				'nombre' => "Finalizado",
 				'fecha' => date('Y/m/d H:i:s'),
 				'estadoAnterior' => "En Proceso",
 				'fechaFinalizado' => date('Y/m/d H:i:s'),
 			);
 			$this->db->where('idSolicitud', $idSolicitud);
-			$this->db->update('estadoOrganizaciones', $data_estado);
+			$this->db->update('estadoOrganizaciones', $updateEstado);
 			echo json_encode(array('url' => "panel", 'msg' => "Solicitud Terminada, cambio de estado a Finalizado.", 'estado' => "1"));
 			$this->envio_mailcontacto("finaliza", 2);
 			$this->logs_sia->session_log('Finalizada la Solicitud');
