@@ -504,7 +504,8 @@ $("#guardar_formulario_camara_comercio").click(function () {
 	// Capturar datos formulario
 	let data = {
 		tipo: 1,
-		idSolicitud: $(this).attr('data-id')
+		idSolicitud: $(this).attr('data-id'),
+		id_organizacion: $(this).attr('data-idOrg')
 	};
 	// Petición para guardar datos
 	$.ajax({
@@ -516,22 +517,20 @@ $("#guardar_formulario_camara_comercio").click(function () {
 			notificacion("Espere...", "success");
 		},
 		success: function (response) {
-			$id_organizacion = $("#id_org_ver_form").attr("data-id");
-			console.log($id_organizacion);
-			idOrg = {
-				id_organizacion: $id_organizacion,
-			};
 			$.ajax({
 				url: baseURL + "recordar/pedirCamara",
 				type: "post",
 				dataType: "JSON",
-				data: idOrg,
+				data: data,
 				beforeSend: function () {
 					notificacion("Espere enviado correo...", "success");
 					$("#volverPedirCamara").attr("disabled", true);
 				},
 				success: function (response) {
-					notificacion("Se pidio la cámara de comercio.", "success");
+					notificacion(response.msg, "success");
+					setInterval(function () {
+						reload();
+					}, 4000);
 				},
 				error: function (ev) {
 					event.preventDefault();
@@ -539,11 +538,6 @@ $("#guardar_formulario_camara_comercio").click(function () {
 					notificacion("Ocurrió un error al solicitar camara de comercio");
 				},
 			});
-
-			notificacion(response.msg, "success");
-			setInterval(function () {
-				reload();
-			}, 2000);
 		},
 		error: function (ev) {
 			event.preventDefault();

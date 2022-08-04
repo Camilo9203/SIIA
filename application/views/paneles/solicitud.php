@@ -393,7 +393,7 @@
 			<div id="div_camara_comercio" hidden>
 				<?php echo form_open('', array('id' => 'formulario_certificado_existencia')); ?>
 				<p>En caso que el Certificado de Existencia y Representación Legal sea emitido por Cámara de Comercio, la Unidad Administrativa realizará la verificación de este requisito por medio de consulta directa a la base de datos del Registro Único Empresarial Y Social RUES. Por tal motivo no es necesario anexar el certificado. Es responsabilidad de la entidad mantener renovado el registro mercantil en el certificado. Los Campos marcados con (*) son obligatorios.</p>
-				<button name="guardar_formulario_camara_comercio" id="guardar_formulario_camara_comercio" class="btn btn-siia btn-sm pull-right" data-id="<?php  echo $data_solicitud->idSolicitud;?>">
+				<button name="guardar_formulario_camara_comercio" id="guardar_formulario_camara_comercio" class="btn btn-siia btn-sm pull-right" data-id="<?php echo $data_solicitud->idSolicitud;?>" data-idOrg="<?php echo $data_organizacion->id_organizacion;?>">
 					Guardar datos <i class="fa fa-check" aria-hidden="true"></i>
 				</button>
 				</form>
