@@ -7,7 +7,7 @@ class Admin extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		verify_session_admin();
+		//verify_session_admin();
 		$this->load->model('DocentesModel');
 	}
 	// Encripción para recuperación de contraseña

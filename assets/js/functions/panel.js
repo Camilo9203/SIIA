@@ -69,7 +69,7 @@ $("#nuevaSolicitud").click(function () {
 	// 	url: baseURL + "panel/verificar_tipoSolicitud",
 	// 	type: "post",
 	// 	dataType: "JSON",
-	// 	success: function (response) {
+	// 	success: functions (response) {
 	// 		console.log(response);
 	// 		if (response.estado == "1") {
 	// 			notificacion(response.msg, "success");
@@ -91,7 +91,7 @@ $("#nuevaSolicitud").click(function () {
 	// 			//$("#el_sol").remove();
 	// 		}
 	// 	},
-	// 	error: function (ev) {
+	// 	error: functions (ev) {
 	// 		notificacion("Seleccione los campos y de click en crear.", "success");
 	// 	},
 	// });

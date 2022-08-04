@@ -728,8 +728,8 @@
 	<div id="jornadas_de_actualizacion" data-form="4" class=" formulario_panel">
 		<div class="">
 			<?php echo form_open('', array('id' => 'formulario_jornadas_actualizacion')); ?>
-			<h3>4. Jornadas de actualización <i class="fa fa-handshake-o" aria-hidden="true"></i></h3>
-			<p>Registre los datos de la última jornada de actualización, organizada por UAEOS, a la que asistió. Si selecciona "No", de clic  en guardar y adjunte la carta de compromiso.</p>
+			<h3>4. Jornada de actualización pedagógica <i class="fa fa-handshake-o" aria-hidden="true"></i></h3>
+			<p>Registre los datos de la última jornada de actualización, organizada por UAEOS, a la que asistió. Si selecciona "No", de clic en guardar y adjunte la carta de compromiso.</p>
 			<div class="form-group">
 				<label for="">5.1 Ha participado en jornadas de actualización organizadas por la UAEOS?</label>
 				<div class="checkbox">

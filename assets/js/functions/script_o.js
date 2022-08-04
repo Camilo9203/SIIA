@@ -17,7 +17,7 @@ $(document).ready(function () {
 	var theme = {};
 	var hash_url = window.location.hash;
 	/**
-		Funcion para activar cuenta.
+		Función para activar cuenta.
 	**/
 	var url = unescape(window.location.href);
 	var activate = url.split("/");
@@ -30,7 +30,7 @@ $(document).ready(function () {
 	var baseURL = activate[0]+'//'+activate[2]+'/';
 	var funcion = activate[3];*/
 
-	var dataStyle = {
+	let dataStyle = {
 		normal: {
 			label: {
 				show: false,
@@ -41,7 +41,7 @@ $(document).ready(function () {
 		},
 	};
 
-	var placeHolderStyle = {
+	let placeHolderStyle = {
 		normal: {
 			color: "rgba(0,0,0,0)",
 			label: {
@@ -55,7 +55,7 @@ $(document).ready(function () {
 			color: "rgba(0,0,0,0)",
 		},
 	};
-	var hashUrl = window.location.hash;
+	let hashUrl = window.location.hash;
 	hash = hashUrl.split(":");
 	if (hash[0] == "#organizacion") {
 		var table = $("#tabla_enProceso_organizacion").DataTable();
@@ -81,7 +81,7 @@ $(document).ready(function () {
 		type: "post",
 		dataType: "JSON",
 		success: function (response) {
-			for (var i = 0; i < response.length; i++) {
+			for (let i = 0; i < response.length; i++) {
 				if (response[i].nombre == "titulo") {
 					$("#titulo_sistema").html(response[i].valor);
 				}
@@ -524,17 +524,17 @@ $(document).ready(function () {
 			type: "post",
 			dataType: "JSON",
 			data: data,
-		beforeSend: function(){
+		beforeSend: functions(){
 			notificacion("Espere...", "success");
 		},
-		success:  function (response) {
+		success:  functions (response) {
 			if(response.url == "sia"){
 				redirect(baseURL);
 			}else{
 				redirect(response.url);
 			}
 		},
-		error: function(ev){
+		error: functions(ev){
 			notificacion("Ingresa la contraseña valida.", "success");
 		}
 		});*/
@@ -921,7 +921,6 @@ $(document).ready(function () {
 	$("#ver_plan_mejoramiento").click(function () {
 		redirect(baseURL + "panel/planMejora");
 	});
-
 	// Click admin INICIO
 	// Se manejan id's en botones.
 	//Reportes
@@ -3234,7 +3233,7 @@ $(document).ready(function () {
 		}
 	}
 
-	// $(document).on("click", ".verUnaObs", function (){
+	// $(document).on("click", ".verUnaObs", functions (){
 
 	// });
 
@@ -4688,7 +4687,7 @@ $(document).ready(function () {
 			},
 			success: function (response) {
 				notificacion(response.msg, "success");
-				//setInterval(function(){ redirect('resoluciones') }, 2000);
+				//setInterval(functions(){ redirect('resoluciones') }, 2000);
 				$.ajax({
 					url: baseURL + "admin/cargar_todaInformacion",
 					dataType: "text",
@@ -6325,7 +6324,7 @@ $(document).ready(function () {
 		Back to top Scroll page :3
 	**/
 
-	/**$('input[type=file]').change(function () {
+	/**$('input[type=file]').change(functions () {
 	        var val = $(this).val().toLowerCase();
 	        var regex = new RegExp("(.*?)\.(jpg|png)$");
 	        if (!(regex.test(val))) {
@@ -11159,7 +11158,7 @@ $(document).ready(function () {
 	});
 
 	/*
-	var check = function(string){
+	var check = functions(string){
 		for(i = 0; i < specialChars.length;i++){
 			if(string.indexOf(specialChars[i]) > -1){
 				return true
@@ -11320,12 +11319,12 @@ function notificaciones(baseURL) {
 				);
 			},
 		});
-		/*interval_notificacion = setInterval(function() {
+		/*interval_notificacion = setInterval(functions() {
 		$.ajax({
 	        url: baseURL+"notificaciones/cargarNotificaciones",
 	        type: "post",
 	        dataType: "JSON",
-		    success:  function (response) {
+		    success:  functions (response) {
 		    	$(".badge").html("");
 		    	$(".badge").html(response.count);
 		    	$for_count = parseFloat(response.count);
@@ -11346,7 +11345,7 @@ function notificaciones(baseURL) {
 		    	}
 		    	$("li.notificaciones").append("</ul>");
 		    },
-		    error: function(ev){
+		    error: functions(ev){
 		    	notificacion("Hubo un error al cargar las notificaciones, por favor, vuelva a iniciar sesión.", "success");
 		    }
 		    });
@@ -12321,7 +12320,7 @@ function submenu() {
 	$(".submenu");
 	//despliega solo el submenu de ese menu concreto
 	$(document).on("click", ".menu__enlace", function (event) {
-		//$('.menu__enlace').click(function(event){
+		//$('.menu__enlace').click(functions(event){
 		var elem = $(this).next();
 		if (elem.is("ul")) {
 			event.preventDefault();
@@ -12365,7 +12364,7 @@ function dragElemento(elmnt) {
 		pos3 = e.clientX;
 		pos4 = e.clientY;
 		document.onmouseup = closeDragElement;
-		// call a function whenever the cursor moves:
+		// call a functions whenever the cursor moves:
 		document.onmousemove = elementDrag;
 	}
 

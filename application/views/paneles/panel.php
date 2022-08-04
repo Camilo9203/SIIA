@@ -13,17 +13,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- Botón Perfil -->
-<!--	<div class="col-md-3">-->
-<!--		<div class="panel panel-siia nuevaSolicitud">-->
-<!--			<div class="panel-heading">-->
-<!--				<h3 class="panel-title">Solicitud <i class="fa fa-file" aria-hidden="true"></i></h3>-->
-<!--			</div>-->
-<!--			<div class="panel-body">-->
-<!--				<button class="btn btn-default btn-block form-control nuevaSolicitud" id="nuevaSolicitud">Crear - Continuar - Actualizar la solicitud </button>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--	</div>-->
 	<!-- Botón Solicitudes -->
 	<div class="col-md-3">
 		<div class="panel panel-siia verSolicitudes">
@@ -57,40 +46,48 @@
 			</div>
 		</div>
 	</div>
-	<!-- Botón Plan Mejoramiento -->
-	<div class="col-md-3">
-		<div class="panel panel-siia ver_plan_mejoramiento">
-			<div class="panel-heading">
-				<h3 class="panel-title">Planes de mejoramiento <i class="fa fa-thumbs-up" aria-hidden="true"></i></h3>
+	<?php if($data_solicitudes): ?>
+		<?php
+			$estado = array();
+			foreach ($data_solicitudes as $solicitud):
+				array_push($estado, $solicitud->nombre);
+			endforeach; ?>
+		<?php if(in_array("Acreditado", $estado)): ?>
+			<!-- Botón Plan Mejoramiento -->
+			<div class="col-md-3">
+				<div class="panel panel-siia ver_plan_mejoramiento">
+					<div class="panel-heading">
+						<h3 class="panel-title">Planes de mejoramiento <i class="fa fa-thumbs-up" aria-hidden="true"></i></h3>
+					</div>
+					<div class="panel-body">
+						<button class="btn btn-default btn-block ver_plan_mejoramiento" id="ver_plan_mejoramiento">Plan de mejoramiento </button>
+					</div>
+				</div>
 			</div>
-			<div class="panel-body">
-				<button class="btn btn-default btn-block ver_plan_mejoramiento" id="ver_plan_mejoramiento">Plan de mejoramiento </button>
+			<!-- Informe de actividades (Desarrollo) -->
+			<!-- <div class="col-md-3">
+				<div class="panel panel-siia ver_informe_actividades">
+					<div class="panel-heading">
+						<h3 class="panel-title">Informes <i class="fa fa-flag" aria-hidden="true"></i></h3>
+					</div>
+					<div class="panel-body">
+						<button class="btn btn-default btn-block ver_informe_actividades" id="ver_informe_actividades">Informe de actividades </button>
+					</div>
+				</div>
+			</div> -->
+			<!-- Informe de actividades -->
+			<div class="col-md-3">
+				<div class="panel panel-siia">
+					<div class="panel-heading">
+						<h3 class="panel-title">Informes <i class="fa fa-flag" aria-hidden="true"></i></h3>
+					</div>
+					<div class="panel-body">
+						<button class="btn btn-default form-control" data-toggle="modal" data-toggle="modal" data-target="#modalInformeAct2019">Informes de Actividades </button>
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
-	<!-- Informe de actividades (Desarrollo) -->
-	<!-- <div class="col-md-3">
-		<div class="panel panel-siia ver_informe_actividades">
-			<div class="panel-heading">
-				<h3 class="panel-title">Informes <i class="fa fa-flag" aria-hidden="true"></i></h3>
-			</div>
-			<div class="panel-body">
-				<button class="btn btn-default btn-block ver_informe_actividades" id="ver_informe_actividades">Informe de actividades </button>
-			</div>
-		</div>
-	</div> -->
-	<!-- Informe de actividades -->
-	<div class="col-md-3">
-		<div class="panel panel-siia">
-			<div class="panel-heading">
-				<h3 class="panel-title">Informes <i class="fa fa-flag" aria-hidden="true"></i></h3>
-			</div>
-			<div class="panel-body">
-				<button class="btn btn-default form-control" data-toggle="modal" data-toggle="modal" data-target="#modalInformeAct2019">Informes de Actividades </button>
-			</div>
-		</div>
-	</div>
-	<!-- Contacto -->
+		<?php endif; ?>
+		<!-- Contacto -->
 	<!--<div class="col-md-3 hidden">
 		<div class="panel panel-siia contacto">
 		  <div class="panel-heading">
@@ -101,6 +98,7 @@
 		  </div>
 		</div>
 	</div>-->
+	<?php endif; ?>
 	<div class="col-md-3">
 		<div class="panel panel-siia ayuda">
 			<div class="panel-heading">
@@ -149,17 +147,22 @@
 				</tr>
 				</thead>
 				<tbody id="tbody">
-				<?php
-				foreach ($data_solicitudes as $solicitud) {
+				<?php foreach ($data_solicitudes as $solicitud) {
 					echo "<tr><td>" . $solicitud->idSolicitud . "</td>";
 					echo "<td>" . $solicitud->fecha . "</td>";
 					echo "<td>" . $solicitud->fechaUltimaRevision . "</td>";
 					echo "<td>" . $solicitud->nombre . "</td>";
 					echo "<td>" . $solicitud->motivoSolicitudAcreditado . "</td>";
 					echo "<td>" . $solicitud->modalidadSolicitudAcreditado . "</td>";
-					echo "<td><div class='btn-group-vertical' role='group mr-2' aria-label='acciones'><button class='btn btn-siia btn-sm verSolicitud' data-id=" . $solicitud->idSolicitud . " title='Ver Solicitud'>Ver <i class='fa fa-eye' aria-hidden='true'></i></button>";
-					echo "<button id='verObservaciones' class='btn btn-warning btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Observaciones'>Observaciones<i class='fa fa-eye' aria-hidden='true'></i></button>";
-					echo "<button id='verDetalle' class='btn btn-info btn-sm' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false'  data-id=" . $solicitud->idSolicitud . " title='Ver Detalle'>Detalle <i class='fa fa-info' aria-hidden='true'></i></button></div></td></tr>";
+					if ($solicitud->nombre == "En Proceso") {
+						echo "<td><div class='btn-group-vertical' role='group mr-2' aria-label='acciones'><button class='btn btn-siia btn-sm verSolicitud' data-id=" . $solicitud->idSolicitud . " title='Continuar Solicitud'>Continuar <i class='fa fa-check' aria-hidden='true'></i></button>";
+					}
+					if ($solicitud->nombre == "Acreditado"){
+						echo "<button id='verDetalle' class='btn btn-info btn-sm' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false'  data-id=" . $solicitud->idSolicitud . " title='Ver Detalle'>Detalle <i class='fa fa-info' aria-hidden='true'></i></button></div></td></tr>";
+					}
+					if ($solicitud->nombre == "En Observaciones" || $solicitud->nombre == "Finalizado"){
+						echo "<button id='verObservaciones' class='btn btn-warning btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Observaciones'>Observaciones<i class='fa fa-eye' aria-hidden='true'></i></button>";
+					}
 				}
 				?>
 				</tbody>

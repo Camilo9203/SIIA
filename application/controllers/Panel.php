@@ -21,21 +21,22 @@ class Panel extends CI_Controller
 		$nombre_usuario = $this->session->userdata('nombre_usuario');
 		$usuario_id = $this->session->userdata('usuario_id');
 		$tipo_usuario = $this->session->userdata('type_user');
-		$hora = date("H:i", time());
-		$fecha = date('Y/m/d');
 
-		$data['title'] = 'Panel Principal';
-		$data['logged_in'] = $logged;
-		$datos_usuario = $this->db->select('usuario')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
-		$data['nombre_usuario'] = $datos_usuario->usuario;
-		$data['usuario_id'] = $usuario_id;
-		$data['tipo_usuario'] = $tipo_usuario;
-		$data['hora'] = $hora;
-		$data['fecha'] = $fecha;
+		$usuario = $this->db->select('usuario')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
+		$data = array (
+			'title' => 'Panel Principal',
+			'logged_in' => $logged,
+			'nombre_usuario' => $usuario->usuario,
+			'usuario_id' => $usuario_id,
+			'tipo_usuario' => $tipo_usuario,
+			'hora' => date("H:i", time()),
+			'fecha' => date('Y/m/d'),
+			'departamentos' => $this->cargarDepartamentos(),
+			'data_organizacion' => $this->cargarDatosOrganizacion(),
+			'data_solicitudes' => $this->cargarSolicitudes()
+	);
+
 		//$data['estado'] = $this->estadoOrganizaciones();
-		$data['departamentos'] = $this->cargarDepartamentos();
-		$data['data_organizacion'] = $this->cargarDatosOrganizacion();
-		$data['data_solicitudes'] = $this->cargarSolicitudes();
 		//$data['data_informacion_general'] = $this->cargarDatos_formulario_informacion_general_entidad();
 		//$data['data_documentacion_legal'] = $this->cargarDatos_formulario_documentacion_legal();
 		//$data['data_registro_educativo'] = $this->cargarDatos_formulario_registro_educativo();
@@ -3175,7 +3176,7 @@ class Panel extends CI_Controller
 
 function var_dump_pre($mixed = null) {
   echo '<pre>';
-  var_dump($mixed);
+  	var_dump($mixed);
   echo '</pre>';
   return null;
 }

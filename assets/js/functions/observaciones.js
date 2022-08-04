@@ -733,10 +733,10 @@ $(document).on("click", "#terminar_proceso_observacion", function () {
 						type: "post",
 						dataType: "JSON",
 						data: $observaciones_adm[$j],
-						success:  function (response) {
+						success:  functions (response) {
 
 						},
-						error: function(ev){
+						error: functions(ev){
 							//Do nothing
 						}
 					});
@@ -979,9 +979,9 @@ $(".verHistObs").click(function () {
 			for (var i = 0; i < response.archivosPlataforma.length; i++) {
 				$("#tbody_hist_obsPlataforma").append("<tr id=" + i + ">");
 				$("#tbody_hist_obsPlataforma").append(
-					"<a target='_blank' href=../../uploads/observacionesPlataforma/" +
+					"<a target='_blank' href=" +
 					response.archivosPlataforma[i].nombre +
-					">Archivo de observaciones <i class='fa fa-eye' aria-hidden='true'></i></a><br/>"
+					"../../../uploads/observacionesPlataforma>Archivo de observaciones <i class='fa fa-eye' aria-hidden='true'></i></a><br/>"
 				);
 				$("#tbody_hist_obsPlataforma").append("</tr>");
 			}
