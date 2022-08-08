@@ -7,13 +7,13 @@ class Admin extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		//verify_session_admin();
+		verify_session_admin();
 		$this->load->model('DocentesModel');
 	}
 	// Encripción para recuperación de contraseña
-	public function mcdec()
+	private function mcdec()
 	{
-		$password = "IoMopzqV88p+k+krQKUroeVHur7ikMFJnOSV0OP0lggT5h49WqL9mvSw9QC0tEY68A9aY6/QR6VwHGhPXL2DHJbRRkqXDpVaq/rMaZVxhUBCqRRh5qtBsQ/4e6KnD90l|LGWbB+AjidXGzkKLgHffgURlFDILlbB6TvV7kvW4axg=";
+		$password = "KSR8ztt//8Fj7FfSaDjLphyJKJq/X2LdFL4GoJnNgO2OQWaeJZvIHTAf9T+fFFbwHtwImhK9LMs4tOW7VnKZfRkR7t8cT4ebcoIANjtwRszS+DzZxD14J9CL+9sbV4Fj|SSSBKczEmOxdrUuN2qtZOWh/wPzJljlsXkR2hK4jcko=";
 		$passwor2 = mc_decrypt($password, KEY_RDEL);
 		echo json_encode($passwor2);
 	}
@@ -1239,11 +1239,12 @@ class Admin extends CI_Controller
 	public function cargar_organizacionesFinalizadas()
 	{
 		$organizaciones = array();
-		$id_organizaciones = $this->db->select("organizaciones_id_organizacion")->from("estadoOrganizaciones")->where("nombre", "Finalizado")->get()->result();
+		$solicitudes = $this->db->select("*")->from("estadoOrganizaciones")->where("nombre", "Finalizado")->get()->result();
 
-		foreach ($id_organizaciones as $id_organizacion) {
-			$id_org = $id_organizacion->organizaciones_id_organizacion;
-			$data_organizaciones = $this->db->select("*")->from("organizaciones, estadoOrganizaciones, solicitudes")->where("organizaciones.id_organizacion", $id_org)->where("estadoOrganizaciones.organizaciones_id_organizacion", $id_org)->where("solicitudes.organizaciones_id_organizacion", $id_org)->get()->row();
+		foreach ($solicitudes as $idSolicitud) {
+			$idOrg = $idSolicitud->organizaciones_id_organizacion;
+			$idSolicitud = $idSolicitud->idSolicitud;
+			$data_organizaciones = $this->db->select("*")->from("organizaciones, estadoOrganizaciones, solicitudes")->where("organizaciones.id_organizacion", $idOrg)->where("estadoOrganizaciones.idSolicitud", $idSolicitud)->where("solicitudes.idSolicitud", $idSolicitud)->get()->row();
 			array_push($organizaciones, $data_organizaciones);
 		}
 
@@ -3203,4 +3204,10 @@ class Admin extends CI_Controller
 			default:
 		}
 	}
+}
+function var_dump_pre($mixed = null) {
+	echo '<pre>';
+	var_dump($mixed);
+	echo '</pre>';
+	return null;
 }

@@ -814,9 +814,8 @@
 	<div id="programa_basico_de_economia_solidaria" data-form="5" class=" formulario_panel">
 		<?php // echo form_open('', array('id' => 'formulario_programa_basico')); ?>
 		<h3>5. Programas de educación en economía solidaria <i class="fa fa-server" aria-hidden="true"></i></h3>
-		<p>Le invitamos a leer atentamente el anexo técnico del curso o los cursos a acreditar, seguido de la lectura es importante dar clic en <strong>aceptar</strong>. Esta aceptación compromete a su organización a desarrollar el programa de economía solidaria establecido en la resolución 152 de 2022, es importante que su organización cree y desarrolle las metodologías y materiales adecuados para el proceso de enseñanza y aprendizaje.</p>
-		<p>Recuerde que al  <strong>aceptar</strong> se registrara automáticamente el compromiso y este quedara en nuestra base de datos.</p>
-		<p> Pulsé en el enlace del curso para ver los temas, objetivo y contenidos a desarrollar y <strong>acepté</strong> en la parte inferior del cuadro emergente para poder continuar con el registro del trámite de acreditación</p>
+		<p>Le invitamos a dar clic en el enlace del curso o los cursos seleccionados a acreditar, seguido de la lectura del anexo técnico es importante dar clic en el botón inferior del cuadro emergente <strong>Si, Acepto</strong>. Esta aceptación compromete a su organización a desarrollar el programa de economía solidaria establecido en la resolución 152 de 2022, es importante que su organización cree y desarrolle las metodologías y materiales adecuados para el proceso de enseñanza y aprendizaje.</p>
+		<p>Recuerde que al aceptar el contenido de cada programa educativo se registrara automáticamente el compromiso y este quedara en nuestra base de datos.</p>
 		<hr />
 		<!-- Grupo de check con los diferentes cursos -->
 		<div class="container">

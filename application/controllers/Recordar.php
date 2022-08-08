@@ -376,7 +376,7 @@ class Recordar extends CI_Controller {
 
 		$this->envio_mail_asginar_admin($correo, $correoCoordinacion);
 	}
-
+	// Solicitar Camara de Comercio
 	public function pedirCamara(){
 		$idOrganizacion = $this->input->post('id_organizacion');
 		$imagen_db = $this->db->select('camaraComercio')->from('organizaciones')->where('id_organizacion', $idOrganizacion)->get()->row();
@@ -412,7 +412,7 @@ class Recordar extends CI_Controller {
 			}
 
 		}
-
+		// LogQueries
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
