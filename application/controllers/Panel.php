@@ -72,10 +72,11 @@ class Panel extends CI_Controller
 		$data['tipo_usuario'] = $tipo_usuario;
 		$data['hora'] = $hora;
 		$data['fecha'] = $fecha;
-		$data['data_organizacion'] = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row()->id_organizacion;
-		//$data['idSolicitud'] = $this->idSolicitud();
+		$data['organizacion'] = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
 		$data['observaciones'] = $this->cargarObservaciones($idSolicitud);
+		$data['observacionesDocentes'] = $this->cargarObservaciones($data['organizacion']->id_organizacion);
 		$data['solicitud'] = $this->cargarSolicitud($idSolicitud);
+		//$data['idSolicitud'] = $this->idSolicitud();
 		//$data['archivosPlataforma'] = $this->cargarObservacionesPlataforma();
 
 		$this->load->view('include/header', $data);
@@ -480,6 +481,11 @@ class Panel extends CI_Controller
 	{
 		$observaciones = $this->db->select("*")->from("observaciones")->where("idSolicitud", $idSolicitud)->order_by("valueForm", "asc")->get()->result();
 		return $observaciones;
+	}
+	public function cargarObservacionesDocentes($idOrg)
+	{
+		//$observacionesDocentes = $this->db->select("*")->from("observaciones")->where("organizaciones_id_organizacion", $idOrg)->where("")->order_by("valueForm", "asc")->get()->result();
+		return $observacionesDocentes;
 	}
 
 	public function cargarObservacionesPlataforma()

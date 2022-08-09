@@ -29,14 +29,14 @@
 			<h4>Modalidad de la solicitud:</h4><label><?php echo $solicitud->modalidadSolicitud; ?></label>
 		</div>
 		<div class="form-group">
-			<h4>ID de la solicitud:</h4><label><?php echo  $solicitud->idSolicitudAcreditado; ?></label>
+			<h4>ID de la solicitud:</h4><label><?php echo  $solicitud->idSolicitud; ?></label>
 		</div>
 		<div class="form-group">
 			<h4>Número de revisiones:</h4><label><?php echo  $solicitud->numeroRevisiones; ?></label>
 			<h4>Fecha de la última revision:</h4><label><?php echo $solicitud->fechaUltimaRevision; ?></label>
 		</div>
 		<?php if($solicitud->nombre == "En Observaciones"){ ?>
-			<button class="btn btn-success btn-lg btn-block" id="actualizar_solicitud" data-solicitud="<?php echo $solicitud->idSolicitudAcreditado ?>">Actualizar la solicitud <i class="fa fa-repeat" aria-hidden="true"></i></button>
+			<button class="btn btn-success btn-lg btn-block" id="actualizar_solicitud" data-solicitud="<?php echo $solicitud->idSolicitud ?>">Actualizar la solicitud <i class="fa fa-repeat" aria-hidden="true"></i></button>
 		<?php } ?>
 	</div>
 	<div class="clearfix"></div>
