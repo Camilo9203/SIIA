@@ -298,13 +298,17 @@
 					echo "<td>" . $solicitud->motivoSolicitudAcreditado . "</td>";
 					echo "<td>" . $solicitud->modalidadSolicitudAcreditado . "</td>";
 					if ($solicitud->nombre == "En Proceso") {
-						echo "<td><button class='btn btn-siia btn-sm verSolicitud' data-id=" . $solicitud->idSolicitud . " title='Continuar Solicitud'>Continuar <i class='fa fa-check' aria-hidden='true'></i></button>";
+						echo "<td><div class='btn-group-vertical' role='group' aria-label='acciones'><button type='button' class='btn btn-siia btn-sm verSolicitud' data-id=" . $solicitud->idSolicitud . " title='Continuar Solicitud'>Continuar <i class='fa fa-check' aria-hidden='true'></i></button>";
+						echo "<button type='button' class='btn btn-danger btn-sm eliminarSolicitud' data-id=" . $solicitud->idSolicitud . " title='Eliminar Solicitud'>Eliminar <i class='fa fa-trash' aria-hidden='true'></i></button></div></td></tr>";
 					}
 					if ($solicitud->nombre == "Acreditado"){
 						echo "<td><button id='verDetalle' class='btn btn-info btn-sm' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false'  data-id=" . $solicitud->idSolicitud . " title='Ver Detalle'>Detalle <i class='fa fa-info' aria-hidden='true'></i></button></div></td></tr>";
 					}
-					if ($solicitud->nombre == "En Observaciones" || $solicitud->nombre == "Finalizado"){
-						echo "<td><button id='verObservaciones' class='btn btn-warning btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Observaciones'>Observaciones<i class='fa fa-eye' aria-hidden='true'></i></button>";
+					if ($solicitud->nombre == "Finalizado"){
+						echo "<td><button id='verObservaciones' class='btn btn-info btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Estado'>Estado<i class='fa fa-eye' aria-hidden='true'></i></button></td></tr>";
+					}
+					if ($solicitud->nombre == "En Observaciones"){
+						echo "<td><button id='verObservaciones' class='btn btn-warning btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Observaciones'>Observaciones<i class='fa fa-eye' aria-hidden='true'></i></button></td></tr>";
 					}
 				}
 				?>

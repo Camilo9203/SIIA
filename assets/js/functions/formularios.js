@@ -517,27 +517,10 @@ $("#guardar_formulario_camara_comercio").click(function () {
 			notificacion("Espere...", "success");
 		},
 		success: function (response) {
-			$.ajax({
-				url: baseURL + "recordar/pedirCamara",
-				type: "post",
-				dataType: "JSON",
-				data: data,
-				beforeSend: function () {
-					notificacion("Espere enviado correo...", "success");
-					$("#volverPedirCamara").attr("disabled", true);
-				},
-				success: function (response) {
-					notificacion(response.msg, "success");
-					setInterval(function () {
-						reload();
-					}, 4000);
-				},
-				error: function (ev) {
-					event.preventDefault();
-					console.log(ev);
-					notificacion("Ocurrió un error al solicitar camara de comercio");
-				},
-			});
+			notificacion(response.msg, "success");
+			setInterval(function () {
+				reload();
+			}, 4000);
 		},
 		error: function (ev) {
 			event.preventDefault();

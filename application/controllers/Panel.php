@@ -2730,49 +2730,6 @@ class Panel extends CI_Controller
 		echo json_encode(array('url' => "", 'msg' => "Error intente de nuevo, nombres diferentes de los archivos."));
 	}
 
-	public function eliminarSolicitud()
-	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-		$numeroSolicitudes = $this->numeroSolicitudes();
-
-		$data_update_solicitud = array(
-			'numeroSolicitudes' => $numeroSolicitudes - 1,
-			'fecha' =>  date('Y/m/d H:i:s'),
-			'organizaciones_id_organizacion' => $id_organizacion
-		);
-
-		$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-		$this->db->update('solicitudes', $data_update_solicitud);
-
-		$estadoAnterior = $this->estadoAnteriorOrganizaciones();
-
-		$data_estado = array(
-			'nombre' => $estadoAnterior,
-			'fecha' => date('Y/m/d H:i:s'),
-			'estadoAnterior' => $estadoAnterior
-		);
-
-		$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-		$this->db->update('estadoOrganizaciones', $data_estado);
-
-		$data_update_solicitud2 = array(
-			'tipoSolicitud' => "Eliminar",
-			'motivoSolicitud' =>  "Eliminar",
-			'modalidadSolicitud' =>  "Eliminar",
-			'idSolicitud' => "0",
-			'organizaciones_id_organizacion' => $id_organizacion,
-			'motivosSolicitud' => NULL,
-		);
-
-		$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-		$this->db->update('tipoSolicitud', $data_update_solicitud2);
-		echo json_encode(array('url' => "", 'msg' => "Solicitud eliminada."));
-		$this->logs_sia->session_log('Eliminar Solicitud');
-		$this->logs_sia->logQueries();
-	}
-
 	private function checkExtensionImagenes($extension)
 	{
 		//aqui podemos añadir las extensiones que deseemos permitir
@@ -3176,6 +3133,14 @@ class Panel extends CI_Controller
 		$this->load->view('paneles/solicitud', $data);
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
+	}
+	public function eliminarSolicitud()
+	{
+		$tables = array('estadoOrganizaciones', 'solicitudes', 'tipoSolicitud', 'documentacion', 'certificadoexistencia', 'registroeducativoprogramas', 'jornadasactualizacion', 'datosprogramas', 'datosenlinea', 'datosaplicacion');
+		$idSolicitud = $this->input->post('idSolicitud');
+		$this->db->where('idSolicitud', $idSolicitud);
+		$this->db->delete($tables);
+		echo json_encode(array('url' => "panel", 'msg' => "Se elimino el solicitud."));
 	}
 }
 

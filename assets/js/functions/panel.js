@@ -34,6 +34,32 @@ $(".verSolicitud").click(function () {
 	let idSolicitud = $(this).attr("data-id");
 	window.open(baseURL + "panel/solicitud/" + idSolicitud, '_self');
 });
+/** Ver Eliminar */
+$(".eliminarSolicitud").click(function () {
+	let data = {
+		idSolicitud: $(this).attr('data-id'),
+	};
+	$.ajax({
+		url: baseURL + "panel/eliminarSolicitud",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		beforeSend: function () {
+			notificacion("Espere...", "success");
+		},
+		success: function (response) {
+			notificacion(response.msg, "success");
+			setInterval(function () {
+				reload();
+			}, 4000);
+		},
+		error: function (ev) {
+			event.preventDefault();
+			console.log(ev);
+			notificacion("Ocurrió un error y no se elimino solicitud");
+		},
+	});
+});
 /** Ver Solicitud */
 $(".verObservaciones").click(function () {
 	let idSolicitud = $(this).attr("data-id");
