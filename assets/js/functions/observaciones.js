@@ -256,6 +256,21 @@ $("#verJorActMenuAdmin").click(function () {
 			}
 			$(".tabla_datos_jornadas").html(html);
 			html = "";
+			/** Formulario 4 Archivos **/
+			$("#archivosJornadasActualizacion").append('<div class="col-md-12" id="archivos_jornadasActualizacion">');
+			$("#archivosJornadasActualizacion>#archivos_jornadasActualizacion").append("<p>Archivos:</p>");
+			for ($a = 0; $a < data_orgFinalizada["0"].archivos.length; $a++) {
+				if (data_orgFinalizada["0"].archivos[$a].id_formulario == "5") {
+					if (data_orgFinalizada["0"].archivos[$a].tipo == "jornadaAct") {
+						$carpeta = baseURL + "uploads/jornadas/";
+					}
+					$("#archivosJornadasActualizacion>#archivos_jornadasActualizacion").append(
+						"<li class='listaArchivos'><a href='" + $carpeta + data_orgFinalizada["0"].archivos[$a].nombre + "' target='_blank'>" + data_orgFinalizada["0"].archivos[$a].nombre + "</a></li><br>"
+					);
+				}
+			}
+			$("#archivosJornadasActualizacion").append('</div>');
+
 			// Llenar tabla de datos en línea registrados
 			if(response.observaciones.length == 0){
 				html += "<td colspan='4'>No hay datos </td></tr>";
@@ -361,6 +376,46 @@ $("#verFaciliMenuAdmin").click(function () {
 	$("#docentes").show();
 	$("#plataforma").hide();
 	$("#enLinea").hide();
+	/** Formulario 7 Tabla **/
+	let html = "";
+	let data = {
+		id_organizacion: data_orgFinalizada["0"].organizaciones['id_organizacion'],
+		idSolicitud: data_orgFinalizada["0"].tipoSolicitud['0']['idSolicitud'],
+		keyForm: 7,
+	}
+	// Consultar datos por ajax
+	$.ajax({
+		url: baseURL + "admin/cargar_todaInformacion",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		success: function (response) {
+			/** Formulario 6 Docentes **/
+			for (var i = 0; i < response.docentes.length; i++) {
+				if (i == 0) {
+					$(".txtOrgDocen").append(
+						"<p>Para ver los documentos de los facilitadores haga click <a href='" +
+						baseURL +
+						"panelAdmin/organizaciones/docentes#organizacion:" +
+						response.organizaciones.numNIT +
+						"' target='_blank'>aquí.</a> Tambien puede ingresar al módulo de facilitadores y seleccione la organización con el número NIT: <label>" +
+						response.organizaciones.numNIT +
+						"</label>.</label>"
+					);
+					$(".txtOrgDocen").append("<p id='cantidadDocentesOrg'>Número de facilitadores: " + response.docentes.length + "</p>");
+					console.log(response.organizaciones.numNIT);
+					$("#frameDocentes").attr("src", baseURL + "panelAdmin/organizaciones/solodocentes#organizacion:" + response.organizaciones.numNIT);
+					setTimeout(function () {
+						document.getElementById("frameDocentes").contentDocument.location.reload(true);
+					}, 2000);
+					//$("#docentes").append('<div class="form-group" id="docentes-observacionesGeneral0">');
+					//$("#docentes>#docentes-observacionesGeneral0").append("<p>Observaciones de los docentes en general:</label>");
+					//$("#docentes>#docentes-observacionesGeneral0").append("<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Observaciones de los docentes en general' data-text='Observaciones de los docentes en general' data-type='docentes' id='obs-docen-gen-0' rows='3'></textarea>");
+					$("#docentes").append("</div>");
+				}
+			}
+		}
+	});
 });
 $("#verDatPlatMenuAdmin").click(function () {
 	$("#informacion").hide();
@@ -581,58 +636,7 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 				}
 			}
 			$("#archivos_informacionGeneral").append('<div class="form-group" id="documentacionLegal-observacionesGeneral' + i + '">');
-			/** Formulario 4 Archivos **/
-			for (var i = 0; i < response.jornadasActualizacion.length; i++) {
-				if (response.jornadasActualizacion[i].numeroPersonas != 0) {
-					$("#archivosJornadasActualizacion").append('<div class="col-md-12" id="archivos_jornadasActualizacion">');
-					$("#archivosJornadasActualizacion>#archivos_jornadasActualizacion").append("<p>Archivos:</p>");
-					console.log(data_orgFinalizada["0"].archivos.length);
 
-					for ($a = 0; $a < data_orgFinalizada["0"].archivos.length; $a++) {
-						if (data_orgFinalizada["0"].archivos[$a].id_formulario == "5") {
-							if (data_orgFinalizada["0"].archivos[$a].tipo == "jornadaAct") {
-								$carpeta = baseURL + "uploads/jornadas/";
-							}
-							$("#archivosJornadasActualizacion>#archivos_jornadasActualizacion").append(
-								"<li class='listaArchivos'><a href='" + $carpeta + data_orgFinalizada["0"].archivos[$a].nombre + "' target='_blank'>" + data_orgFinalizada["0"].archivos[$a].nombre + "</a></li><br>"
-							);
-						}
-					}
-					$("#archivosJornadasActualizacion").append('</div>');
-				}
-			}
-			/** Formulario 6 Docentes **/
-			for (var i = 0; i < response.docentes.length; i++) {
-				if (i == 0) {
-					$(".txtOrgDocen").append(
-						"<p>Para ver los documentos de los facilitadores haga click <a href='" +
-						baseURL +
-						"panelAdmin/organizaciones/docentes#organizacion:" +
-						response.organizaciones.numNIT +
-						"' target='_blank'>aquí.</a> Tambien puede ingresar al módulo de facilitadores y seleccione la organización con el número NIT: <label>" +
-						response.organizaciones.numNIT +
-						"</label>.</label>"
-					);
-					$(".txtOrgDocen").append("<p id='cantidadDocentesOrg'>Número de facilitadores: " + response.docentes.length + "</p>");
-					$("#frameDocentes").attr("src", baseURL + "panelAdmin/organizaciones/solodocentes#organizacion:" + response.organizaciones.numNIT);
-					setTimeout(function () {
-						document.getElementById("frameDocentes").contentDocument.location.reload(true);
-					}, 2000);
-					/*for($i = 0; $i < response.docentes.length; $i++){
-						$("#tbody_orgDocentes").append("<tr>");
-						$("#tbody_orgDocentes").append("<td class='tDoce"+response.docentes[$i].id_docente+"'>");
-						$("#tbody_orgDocentes>.tDoce"+response.docentes[$i].id_docente).append(response.docentes[$i].primerNombreDocente);
-						$("#tbody_orgDocentes").append("</td");
-						$("#tbody_orgDocentes").append("</tr>");
-					}*/
-					//$("#docentes").append('<div class="clearfix"></div>');
-					//$("#docentes").append('<hr/>');
-					$("#docentes").append('<div class="form-group" id="docentes-observacionesGeneral0">');
-					$("#docentes>#docentes-observacionesGeneral0").append("<p>Observaciones de los docentes en general:</label>");
-					$("#docentes>#docentes-observacionesGeneral0").append("<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Observaciones de los docentes en general' data-text='Observaciones de los docentes en general' data-type='docentes' id='obs-docen-gen-0' rows='3'></textarea>");
-					$("#docentes").append("</div>");
-				}
-			}
 
 		},
 		error: function (ev) {

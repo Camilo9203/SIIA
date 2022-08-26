@@ -53,37 +53,6 @@
 			<tbody id="tbody_orgDocentes">
 			</tbody>
 		</table>
-		<!--<div class="col-md-12 text-center" id="informacion_organizacion">
-			<h4>Información de la Organización:</h4>
-			<div class="form-group">
-			    <label for="">Cantidad de Docentes:</label>
-				<strong><p id="cantidadDocentesOrg"></p></strong>
-			</div>
-			<div class="form-group">
-			    <label for="">Nombre de la Organización:</label>
-				<p id="nombre_organizacion"></p>
-			</div>
-			<div class="form-group">
-			    <label for="">Número NIT:</label>
-				<p id="numero_nit"></p>
-			</div>
-			<div class="form-group">
-			    <label for="">Sigla:</label>
-				<p id="sigla_org"></p>
-			</div>
-			<div class="form-group">
-			    <label for="">Dirección Correo Electrónico Organización:</label>
-				<p id="dir_cor_org"></p>
-			</div>
-			<div class="form-group">
-			    <label for="">Dirección Correo del Rep Legal:</label>
-				<p id="dir_cor_rep"></p>
-			</div>
-			<div class="form-group">
-			    <label for="">Nombre del Rep Legal:</label>
-				<p id="nombre_rep_legal"></p>
-			</div>
-		</div>-->
 		<div class="col-md-12" id="informacion_docentes">
 			<h4>Docente #<label id="id_docente"></label>:</h4>
 			<div class="col-md-6">

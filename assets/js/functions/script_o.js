@@ -3241,9 +3241,7 @@ $(document).ready(function () {
 
 	$("#verFrameDocentes").click(function () {
 		$("#frameDocDiv").slideDown();
-		document
-			.getElementById("frameDocentes")
-			.contentDocument.location.reload(true);
+		document.getElementById("frameDocentes").contentDocument.location.reload(true);
 	});
 
 	$(".actualizar_tipocurso").click(function () {
@@ -10395,12 +10393,9 @@ $(document).ready(function () {
 
 	$("#volverPedirCamara").click(function () {
 		$id_organizacion = $("#id_org_ver_form").attr("data-id");
-		console.log($id_organizacion);
-
 		data = {
 			id_organizacion: $id_organizacion,
 		};
-
 		$.ajax({
 			url: baseURL + "recordar/pedirCamara",
 			type: "post",
@@ -10411,7 +10406,7 @@ $(document).ready(function () {
 				$("#volverPedirCamara").attr("disabled", true);
 			},
 			success: function (response) {
-				notificacion("Se pidio la cámara de comercio.", "success");
+				notificacion("Se pidió la cámara de comercio.", "success");
 				$("#modalPedirCamara").modal("toggle");
 			},
 			error: function (ev) {
