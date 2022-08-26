@@ -193,24 +193,6 @@ $("#guardar_formulario_tipoSolicitud").click(function () {
 		}
 	}
 });
-/** Eliminar Solicitud */
-$("#eliminarSolicitud").click(function () {
-	$(this).attr("disabled", true);
-	$.ajax({
-		url: baseURL + "panel/eliminarSolicitud",
-		type: "post",
-		dataType: "JSON",
-		success: function (response) {
-			notificacion(response.msg, "success");
-			setInterval(function () {
-				redirect(baseURL + "panel");
-			}, 2000);
-		},
-		error: function (ev) {
-			//Do nothing
-		},
-	});
-});
 /** Modales modalidades */
 $("#virtual").click(function () {
 	if(this.checked) {

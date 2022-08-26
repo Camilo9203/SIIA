@@ -299,10 +299,10 @@
 					echo "<td>" . $solicitud->modalidadSolicitudAcreditado . "</td>";
 					if ($solicitud->nombre == "En Proceso") {
 						echo "<td><div class='btn-group-vertical' role='group' aria-label='acciones'><button type='button' class='btn btn-siia btn-sm verSolicitud' data-id=" . $solicitud->idSolicitud . " title='Continuar Solicitud'>Continuar <i class='fa fa-check' aria-hidden='true'></i></button>";
-						echo "<button type='button' class='btn btn-danger btn-sm eliminarSolicitud' data-id=" . $solicitud->idSolicitud . " title='Eliminar Solicitud'>Eliminar <i class='fa fa-trash' aria-hidden='true'></i></button></div></td></tr>";
+						echo "<button type='button' class='btn btn-danger btn-sm' data-toggle='modal' data-target='#modalEliminarSolicitud' data-backdrop='static' data-keyboard='false' title='Eliminar Solicitud'>Eliminar <i class='fa fa-trash' aria-hidden='true'></i></button></div></td></tr>";
 					}
 					if ($solicitud->nombre == "Acreditado"){
-						echo "<td><button id='verDetalle' class='btn btn-info btn-sm' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false'  data-id=" . $solicitud->idSolicitud . " title='Ver Detalle'>Detalle <i class='fa fa-info' aria-hidden='true'></i></button></div></td></tr>";
+						echo "<td><button id='verDetalle' class='btn btn-info btn-sm' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false' data-id=" . $solicitud->idSolicitud . " title='Ver Detalle'>Detalle <i class='fa fa-info' aria-hidden='true'></i></button></div></td></tr>";
 					}
 					if ($solicitud->nombre == "Finalizado"){
 						echo "<td><button id='verObservaciones' class='btn btn-info btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Estado'>Estado<i class='fa fa-eye' aria-hidden='true'></i></button></td></tr>";
@@ -314,7 +314,7 @@
 				?>
 				</tbody>
 			</table>
-			<!-- Modal Aceptar Modalidad Virtual -->
+			<!-- Modal Detalle Solicitud -->
 			<div class="modal fade" id="modalVerDetalle" tabindex="-1" role="dialog" aria-labelledby="modalVerDetalle">
 				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
@@ -378,30 +378,29 @@
 					</div>
 				</div>
 			</div>
+			<!-- Modal Aceptar Modalidad Virtual -->
+			<!-- Modal Ayuda crear solicitud  -->
+			<div class="modal fade" id="modalEliminarSolicitud" tabindex="-1" role="dialog" aria-labelledby="modalEliminarSolicitud">
+			<div class="modal-dialog modal-xs" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">¿Está seguro de eliminar la solicitud?</h4>
+					</div>
+					<div class="modal-body">
+						<p>Tenga en cuenta que la información registrada en los formularios de dentro de esta solicitud serán eliminados y no se podrán recuperar.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" id="noEliminarSolicitud" class="btn btn-danger btn-sm pull-left">No, eliminar <i class="fa fa-times" aria-hidden="true"></i></button>
+						<button type="button" id="eliminarSolicitud" class="btn btn-siia btn-sm pull-right eliminarSolicitud" data-dismiss="modal"  data-id="<?php echo $solicitud->idSolicitud ?>">Si, eliminar solicitud<i class="fa fa-check" aria-hidden="true"></i></button>
+					</div>
+				</div>
+			</div>
+		</div>
 			<div class="clearfix"></div>
 			<hr />
 		</div>
 	<?php endif	?>
-	<div class="modal fade in" id="detallesSolicitud" tabindex="-1" role="dialog" aria-labelledby="detallesSolicitud">
-		<div class="modal-dialog modal-xs" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">¿Está seguro de presentar la modalidad en Línea?</h4>
-				</div>
-				<div class="modal-body">
-					<p>De acuerdo a lo establecido en los parágrafos número 2 y número 3 del artículo 9 de la resolución 110 del 31 de marzo del 2016, las entidades que soliciten la acreditación por la modalidad en linea deben tener en cuenta lo siguiente:</p>
-					<p><strong>Parágrafo 2.</strong> Para la acreditación de los programas de educación en economía solidaria bajo modalidad línea, aquella donde los docentes y participantes interactúan a través de recursos tecnológicos. La mediación tecnológica puede ser a través de herramientas tecnológica (Zoom, Teams, Meet, Good Meet, entre otras) plataformas de comunicación, chats, foros, videoconferencias, grupos de discusión, <strong>caracterizadas por encuentros sincrónicos.</strong> </p>
-					<p>Recuerde desarrollar el proceso formativo acorde a lo establecido en el anexo técnico.</p>
-					<p>La UAEOS realizará seguimiento a las organizaciones acreditadas en el cumplimiento de los programas de educación solidaria acreditados.</p>
-					<!--				<a class="pull-right" target="_blank" href="https://www.orgsolidarias.gov.co/sites/default/files/archivos/Res_110%20del%2031%20de%20marzo%20de%202016.pdf">Recurso de la resolución 110</a>-->
-				</div>
-				<div class="modal-footer">
-					<button type="button" id="noModEnLinea" class="btn btn-danger btn-sm pull-left">No, quizá más adelante <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button type="button" id="siModEnLinea" class="btn btn-siia btn-sm pull-right" data-dismiss="modal">Si, esto seguro de presentar la modalidad en linea <i class="fa fa-check" aria-hidden="true"></i></button>
-				</div>
-			</div>
-		</div>
-	</div>
+
 </div>
 <!-- Div cerrado de abajo Arregla que no exista footer cuando no hay solicitudes-->
 </div>
