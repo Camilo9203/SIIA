@@ -305,10 +305,10 @@
 						echo "<td><button id='verDetalle' class='btn btn-info btn-sm' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false' data-id=" . $solicitud->idSolicitud . " title='Ver Detalle'>Detalle <i class='fa fa-info' aria-hidden='true'></i></button></div></td></tr>";
 					}
 					if ($solicitud->nombre == "Finalizado"){
-						echo "<td><button id='verObservaciones' class='btn btn-info btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Estado'>Estado<i class='fa fa-eye' aria-hidden='true'></i></button></td></tr>";
+						echo "<td><button class='btn btn-success btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Estado'>Estado<i class='fa fa-eye' aria-hidden='true'></i></button></td></tr>";
 					}
 					if ($solicitud->nombre == "En Observaciones"){
-						echo "<td><button id='verObservaciones' class='btn btn-warning btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Observaciones'>Observaciones<i class='fa fa-eye' aria-hidden='true'></i></button></td></tr>";
+						echo "<td><button class='btn btn-warning btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Observaciones'>Observaciones<i class='fa fa-eye' aria-hidden='true'></i></button></td></tr>";
 					}
 				}
 				?>
@@ -335,37 +335,21 @@
 								<div class="card-body">
 									<div class="container-fluid">
 										<div class="row">
-											<div class="col-6">
-												<label>Solicitud número:</label>
-												<p id="numeroSolicitudesBD"></p>
-												<label>Estado de la organización:</label>
-												<p id="estadoOrgBD"></p>
-												<label>Tipo de Solicitud:</label>
-												<p id="tipoSolicitudesBB"></p>
-												<label>Motivo de Solicitud:</label>
-												<p id="motivoSolicitudesBB"></p>
-												<label>Modalidad de Solicitud:</label>
-												<p id="modalidadSolicitudesBB"></p>
-												<hr />
-												<label>Estado anterior:</label>
-												<p id="estadoAnteriorBB"></p>
+											<div class="col-lg-6" style="text-align: left;">
+												<p><label>Solicitud Número:</label> <?php echo $solicitud->idSolicitud ?></p>
+												<p><label>Estado Anterior:</label> <?php echo $solicitud->estadoAnterior ?></p>
+												<p><label>Tipo:</label> <?php echo $solicitud->tipoSolicitud ?></p>
+												<p><label>Motivo:</label> <?php echo $solicitud->motivoSolicitud ?></p>
+												<p><label>Modalidad:</label> <?php echo $solicitud->modalidadSolicitud ?></p>
+
 											</div>
-											<div class="col-6">
-												<label>Solicitud número:</label>
-												<p id="numeroSolicitudesBD"></p>
-												<label>Estado de la organización:</label>
-												<p id="estadoOrgBD"></p>
-												<label>Tipo de Solicitud:</label>
-												<p id="tipoSolicitudesBB"></p>
-												<label>Motivo de Solicitud:</label>
-												<p id="motivoSolicitudesBB"></p>
-												<label>Modalidad de Solicitud:</label>
-												<p id="modalidadSolicitudesBB"></p>
-												<hr />
-												<label>Estado anterior:</label>
-												<p id="estadoAnteriorBB"></p>
+											<div class="col-lg-6" style="text-align: left;">
+												<p><label>Fecha de Creación:</label> <?php echo $solicitud->fecha ?></p>
+												<p><label>Fecha Ultima Revisión:</label> <?php echo $solicitud->fechaUltimaRevision ?></p>
 											</div>
 										</div>
+										<hr />
+										<p><label>Estado:</label> <?php echo $solicitud->nombre ?></p>
 									</div>
 
 								</div>
@@ -378,13 +362,12 @@
 					</div>
 				</div>
 			</div>
-			<!-- Modal Aceptar Modalidad Virtual -->
-			<!-- Modal Ayuda crear solicitud  -->
+			<!-- Modal eliminar solicitud  -->
 			<div class="modal fade" id="modalEliminarSolicitud" tabindex="-1" role="dialog" aria-labelledby="modalEliminarSolicitud">
 			<div class="modal-dialog modal-xs" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title">¿Está seguro de eliminar la solicitud?</h4>
+						<h4 class="modal-title">¿Está seguro de eliminar la solicitud: <?php echo $solicitud->idSolicitud ?>?</h4>
 					</div>
 					<div class="modal-body">
 						<p>Tenga en cuenta que la información registrada en los formularios de dentro de esta solicitud serán eliminados y no se podrán recuperar.</p>
