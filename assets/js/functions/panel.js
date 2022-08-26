@@ -34,7 +34,6 @@ $(".verSolicitud").click(function () {
 	let idSolicitud = $(this).attr("data-id");
 	window.open(baseURL + "panel/solicitud/" + idSolicitud, '_self');
 });
-
 /** Ver Eliminar */
 $(".eliminarSolicitud").click(function () {
 	let data = {
@@ -64,7 +63,7 @@ $(".eliminarSolicitud").click(function () {
 $("#noEliminarSolicitud").click(function () {
 	$("#modalEliminarSolicitud").modal("hide");
 });
-/** Ver Solicitud */
+/** Ver Estado Solicitud */
 $(".verObservaciones").click(function () {
 	let idSolicitud = $(this).attr("data-id");
 	window.open(baseURL + "panel/estadoSolicitud/" + idSolicitud, '_self');

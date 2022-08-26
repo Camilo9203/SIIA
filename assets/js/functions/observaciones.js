@@ -495,6 +495,12 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 			data_orgFinalizada.push(response);
 			console.log(data_orgFinalizada["0"]);
 			console.log(response);
+			if(data_orgFinalizada["0"]["plataforma"].length == 0){
+				$("#verDatPlatMenuAdmin").hide();
+			}
+			if(data_orgFinalizada["0"]["enLinea"].length == 0){
+				$("#verDataEnLinea").hide();
+			}
 			$("#admin_ver_finalizadas").slideUp();
 			$("#admin_panel_ver_finalizada").slideDown();
 			/** Solicitud **/
@@ -580,6 +586,8 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 				if (response.jornadasActualizacion[i].numeroPersonas != 0) {
 					$("#archivosJornadasActualizacion").append('<div class="col-md-12" id="archivos_jornadasActualizacion">');
 					$("#archivosJornadasActualizacion>#archivos_jornadasActualizacion").append("<p>Archivos:</p>");
+					console.log(data_orgFinalizada["0"].archivos.length);
+
 					for ($a = 0; $a < data_orgFinalizada["0"].archivos.length; $a++) {
 						if (data_orgFinalizada["0"].archivos[$a].id_formulario == "5") {
 							if (data_orgFinalizada["0"].archivos[$a].tipo == "jornadaAct") {
@@ -593,58 +601,8 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 					$("#archivosJornadasActualizacion").append('</div>');
 				}
 			}
-			/** Formulario 9 **/
+			/** Formulario 6 Docentes **/
 			for (var i = 0; i < response.docentes.length; i++) {
-				/*$cols = 12/(parseFloat(response.docentes.length));
-				if($cols <= 3){
-					$cols = 3;
-				}
-
-				$("#docentes").append('<div class="col-md-'+$cols+'" id="col'+i+'">');
-				$("#docentes>#col"+i+"").append('<div class="form-group" id="docentes-'+$cols+i+response.docentes[i].id_docente+'">');
-					$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].id_docente+"").append("<p>ID:</p><label class='tipoLeer'>"+response.docentes[i].id_docente+"</label>");
-				$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].id_docente+"").append('</div>');
-
-				$("#docentes>#col"+i+"").append('<div class="form-group" id="docentes-'+$cols+i+response.docentes[i].valido+'">');
-					$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].valido+"").append("<p>Valido:</p><label class='tipoLeer'>"+response.docentes[i].valido+"</label>");
-				$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].valido+"").append('</div>');
-
-				$("#docentes>#col"+i+"").append('<div class="form-group" id="docentes-'+$cols+i+response.docentes[i].primerNombreDocente+'">');
-					$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].primerNombreDocente+"").append("<p>Primer nombre:</p><label class='tipoLeer'>"+response.docentes[i].primerNombreDocente+"</label>");
-					$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].primerNombreDocente+"").append("<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Primer nombre' data-text='"+response.docentes[i].primerNombreDocente+"' data-type='docente' id='obs-pnombre-docente"+i+"' rows='3'></textarea>");
-				$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].primerNombreDocente+"").append('</div>');
-
-				$("#docentes>#col"+i+"").append('<div class="form-group" id="docentes-'+$cols+i+response.docentes[i].segundoNombreDocente+'">');
-					$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].segundoNombreDocente+"").append("<p>Segundo nombre:</p><label class='tipoLeer'>"+response.docentes[i].segundoNombreDocente+"</label>");
-					$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].segundoNombreDocente+"").append("<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Segundo nombre' data-text='"+response.docentes[i].segundoNombreDocente+"' data-type='docente' id='obs-snombre-docente"+i+"' rows='3'></textarea>");
-				$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].segundoNombreDocente+"").append('</div>');
-
-				$("#docentes>#col"+i+"").append('<div class="form-group" id="docentes-'+$cols+i+response.docentes[i].primerApellidoDocente+'">');
-					$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].primerApellidoDocente+"").append("<p>Primer apellido:</p><label class='tipoLeer'>"+response.docentes[i].primerApellidoDocente+"</label>");
-					$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].primerApellidoDocente+"").append("<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Primer apellido' data-text='"+response.docentes[i].primerApellidoDocente+"' data-type='docente' id='obs-papellido-docente"+i+"' rows='3'></textarea>");
-				$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].primerApellidoDocente+"").append('</div>');
-
-				$("#docentes>#col"+i+"").append('<div class="form-group" id="docentes-'+$cols+i+response.docentes[i].segundoApellidoDocente+'">');
-					$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].segundoApellidoDocente+"").append("<p>Segundo apellido:</p><label class='tipoLeer'>"+response.docentes[i].segundoApellidoDocente+"</label>");
-					$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].segundoApellidoDocente+"").append("<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Segundo apellido' data-text='"+response.docentes[i].segundoApellidoDocente+"' data-type='docente' id='obs-sapellido-docente"+i+"' rows='3'></textarea>");
-				$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].segundoApellidoDocente+"").append('</div>');
-
-				$("#docentes>#col"+i+"").append('<div class="form-group" id="docentes-'+$cols+i+response.docentes[i].numCedulaCiudadaniaDocente+'">');
-					$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].numCedulaCiudadaniaDocente+"").append("<p>Número cedula:</p><label class='tipoLeer'>"+response.docentes[i].numCedulaCiudadaniaDocente+"</label>");
-					$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].numCedulaCiudadaniaDocente+"").append("<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Número cedula' data-text='"+response.docentes[i].numCedulaCiudadaniaDocente+"' data-type='docente' id='obs-ncedula-docente"+i+"' rows='3'></textarea>");
-				$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].numCedulaCiudadaniaDocente+"").append('</div>');
-
-				$("#docentes>#col"+i+"").append('<div class="form-group" id="docentes-'+$cols+i+response.docentes[i].profesion+'">');
-					$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].profesion+"").append("<p>Profesion:</p><label class='tipoLeer'>"+response.docentes[i].profesion+"</label>");
-					$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].profesion+"").append("<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Profesion' data-text='"+response.docentes[i].profesion+"' data-type='docente' id='obs-profesion-docente"+i+"' rows='3'></textarea>");
-				$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].profesion+"").append('</div>');
-
-				$("#docentes>#col"+i+"").append('<div class="form-group" id="docentes-'+$cols+i+response.docentes[i].horaCapacitacion+'">');
-					$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].horaCapacitacion+"").append("<p>Horas de capacitacion:</p><label class='tipoLeer'>"+response.docentes[i].horaCapacitacion+"</label>");
-					$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].horaCapacitacion+"").append("<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Horas de capacitacion' data-text='"+response.docentes[i].horaCapacitacion+"' data-type='docente' id='obs-horas-docente"+i+"' rows='3'></textarea>");
-				$("#docentes>#col"+i+">#docentes-"+$cols+i+response.docentes[i].horaCapacitacion+"").append('</div>');
-
-				$("#docentes").append('</div>');*/
 				if (i == 0) {
 					$(".txtOrgDocen").append(
 						"<p>Para ver los documentos de los facilitadores haga click <a href='" +
