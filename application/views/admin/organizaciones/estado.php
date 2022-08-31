@@ -1,3 +1,4 @@
+<!-- Tabla de solicitudes -->
 <div class="col-md-12" id="admin_ver_finalizadas">
 <div class="clearfix"></div>
 <hr/>
@@ -39,15 +40,26 @@
 	<button class="btn btn-danger btn-sm pull-left" id="admin_ver_org_volver"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 	</div>
 </div>
+<!-- Ver estado de la solicitud-->
 <div class="container" id="v_estado_org">
 	<div class="clearfix"></div>
 	<hr/>
-	<h5>Nombre de la Organización: <label id="resolucion_nombre_org"></label></h5>
-	<h5>NIT: <label id="id_solicitud"></label></h5>
-	<h5>Motivo: <label id="motivo_solicitud"></label></h5>
-	<h5>Modalidad: <label id="estado_actual_org"></label></h5>
-	<h5>Fecha de Finalización: <label id="estado_actual_org"></label></h5>
+	<br>
+	<h4>Estado de la solicitud: </h4>
 	<hr/>
+	<div class="card">
+		<div class="card-body">
+			<h4>Nombre de la Organización: <label id="resolucion_nombre_org"></label></h4>
+			<h4>NIT: <label id="nit_organizacion"></label></h4>
+			<h4>ID Solicitud: <label id="id_solicitud"></label></h4>
+			<h4>Estado Actual: <label id="estado_actual_org"></label></h4>
+			<h4>Modalidad: <label id="modalidad_solicitud"></label></h4>
+			<h4>Motivo: <label id="motivo_solicitud"></label></h4>
+			<h4>Fecha de Finalización: <label id="fecha_finalización"></label></h4>
+		</div>
+	</div>
+	<hr/>
+	<!-- Select cambiar estado organización-->
 	<div class="form-group">
 		<label for="estadoSolicitud">Seleccionar nuevo estado</label>
 		<select class="form-control" name="estadoSolicitud" id="estadoSolicitud">
@@ -58,7 +70,6 @@
 		</select>
 	</div>
 	<hr/>
-	<br>
 	<button class="btn btn-danger pull-left" id="volverEst_org"><i class="fa fa-arrow-left" aria-hidden="true"></i> Regresar</i></button>
 	<button class="btn btn-siia pull-right" id="actualizarEstadoOrganizacion">Actualizar estado <i class="fa fa-check" aria-hidden="true"></i></button>
 </div>

@@ -47,9 +47,12 @@ $("#tabla_enProceso_organizacion tbody").on("click", '.ver_estado_org', function
 			$("#actualizarEstadoOrganizacion").attr("data-id-organizacion", id_org);
 			$("#actualizarEstadoOrganizacion").attr("data-id-solicitud", data["idSolicitud"]);
 			$("#resolucion_nombre_org").html(response.organizaciones.nombreOrganizacion);
+			$("#nit_organizacion").html(response.organizaciones.numNIT);
 			$("#id_solicitud").html(response.estadoOrganizaciones.idSolicitud);
-			$("#motivo_solicitud").html(response.estadoOrganizaciones.motivoSolicitudAcreditado);
 			$("#estado_actual_org").html(response.estadoOrganizaciones.nombre);
+			$("#modalidad_solicitud").html(response.estadoOrganizaciones.modalidadSolicitudAcreditado);
+			$("#motivo_solicitud").html(response.estadoOrganizaciones.motivoSolicitudAcreditado);
+			$("#fecha_finalización").html(response.estadoOrganizaciones.fechaFinalizado);
 		},
 		error: function (ev) {
 			//Do nothing
