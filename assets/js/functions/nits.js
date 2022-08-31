@@ -60,7 +60,7 @@ $("#res_acre_org").change( function (){
 });
 
 $("#guardar_nit_org_acre").click(function () {
-	$nit_org = ;
+	$nit_org = $("#nit_acre_org").val();
 	$nombreOrganizacion = $("#nombre_acre_org").val();
 	$numeroResolucion = $("#res_acre_org").val();
 	$fechaFinalizacion = $("#fech_fin_acre_org").val();
