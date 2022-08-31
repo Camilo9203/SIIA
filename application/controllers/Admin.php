@@ -384,7 +384,7 @@ class Admin extends CI_Controller
 		$data['hora'] = $hora;
 		$data['fecha'] = $fecha;
 		$data['departamentos'] = $this->cargarDepartamentos();
-		$data['organizaciones_en_proceso'] = $this->cargar_organizacionesAcreditadas();
+		$data['organizaciones_en_proceso'] = $this->organizacionesInscritas();
 
 		$this->load->view('include/header', $data);
 		$this->load->view('admin/organizaciones/resoluciones', $data);
@@ -1258,15 +1258,9 @@ class Admin extends CI_Controller
 		return $organizaciones;
 	}
 	// TODO: Organizaciones acreditadas
-	public function cargar_organizacionesAcreditadas()
+	public function organizacionesInscritas()
 	{
-		$organizaciones = array();
-		$id_organizaciones = $this->db->select("organizaciones_id_organizacion")->from("estadoOrganizaciones")->where("nombre", "Acreditado")->or_where("estadoAnterior", "Acreditado")->get()->result();
-
-		for ($i = 0; $i < count($id_organizaciones); $i++) {
-			$data_organizaciones = $this->db->select("*")->from("organizaciones, estadoOrganizaciones")->where("organizaciones.id_organizacion", $id_organizaciones[$i]->organizaciones_id_organizacion)->where("estadoOrganizaciones.organizaciones_id_organizacion", $id_organizaciones[$i]->organizaciones_id_organizacion)->get()->row();
-			array_push($organizaciones, $data_organizaciones);
-		}
+		$organizaciones = $this->db->select("*")->from("organizaciones")->get()->result();
 		return $organizaciones;
 	}
 
@@ -1288,7 +1282,7 @@ class Admin extends CI_Controller
 		$data['hora'] = $hora;
 		$data['fecha'] = $fecha;
 		$data['departamentos'] = $this->cargarDepartamentos();
-		$data['organizaciones_en_proceso'] = $this->cargar_organizacionesInscritas();
+		$data['organizaciones_en_proceso'] = $this->organizacionesInscritas();
 
 		$this->load->view('include/header', $data);
 		$this->load->view('admin/organizaciones/inscritas', $data);
