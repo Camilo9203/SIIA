@@ -40,7 +40,7 @@
 <div id="datos_org_resolucion">
 	<div class="container-fluid">
 		<div class="row-fluid">
-			<div class="col-md-2">
+			<div class="col-md-4">
 				<div class="form-group">
 					<label>Nombre de la Organización: </label>
 					<p id="resolucion_nombre_org"></p>
@@ -55,7 +55,7 @@
 				</div>
 				<button class="btn btn-danger btn-sm" id="volver_cama_org"><i class="fa fa-arrow-left" aria-hidden="true"></i> Regresar</button>
 			</div>
-			<div class="col-md-10">
+			<div class="col-md-8">
 				<?php echo form_open('', array('id' => 'formulario_resoluciones')); ?>
 					<div class="form-group">
 						<label for="tipoResolucion">Tipo de resolución:*</label><br>

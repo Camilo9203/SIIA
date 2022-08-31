@@ -3381,12 +3381,10 @@ $(document).ready(function () {
 	});
 
 	$("#tabla_enProceso_organizacion tbody").on("click", '.ver_resolucion_org', function () {
-		var $id_org = $(this).attr("data-organizacion");
+		let $id_org = $(this).attr("data-organizacion");
 		$("#id_org_ver_form").remove();
-		$("body").append(
-			"<div id='id_org_ver_form' class='hidden' data-id='" + $id_org + "'>"
-		);
-		var data = {
+		$("body").append("<div id='id_org_ver_form' class='hidden' data-id='" + $id_org + "'>");
+		let data = {
 			id_organizacion: $id_org,
 			idSolicitud: $(this).attr("data-solicitud")
 		};
@@ -3410,7 +3408,7 @@ $(document).ready(function () {
 					$("#tbodyResoluciones").append("<tr id=" + i + ">");
 					$("#tbodyResoluciones>tr#" + i + "").append("<td>" + response.resoluciones[i].fechaResolucionInicial + "</td>");
 					$("#tbodyResoluciones>tr#" + i + "").append("<td>" + response.resoluciones[i].fechaResolucionFinal + "</td>");
-					$("#tbodyResoluciones>tr#" + i + "").append("<td>" + response.resoluciones[i].añosResolucion + "</td>");
+					$("#tbodyResoluciones>tr#" + i + "").append("<td>" + response.resoluciones[i].anosResolucion + "</td>");
 					$("#tbodyResoluciones>tr#" + i + "").append("<td><a href='" + baseURL + "uploads/resoluciones/" + response.resoluciones[i].resolucion + "' target='_blank'>Ver resolución</a></td>");
 					$("#tbodyResoluciones>tr#" + i + "").append("<td>" + response.resoluciones[i].numeroResolucion + "</td>");
 					$("#tbodyResoluciones>tr#" + i + "").append("<td>" + response.resoluciones[i].cursoAprobado + "</td>");
@@ -3534,7 +3532,7 @@ $(document).ready(function () {
 				$("#actualizarDatosResolucion").attr("id-org", $id_organizacion);
 				$("#res_fech_inicio").val(response.resolucion.fechaResolucionInicial);
 				$("#res_fech_fin").val(response.resolucion.fechaResolucionFinal);
-				$("#res_anos").val(response.resolucion.añosResolucion);
+				$("#res_anos").val(response.resolucion.anosResolucion);
 				$("#num_res_org").val(response.resolucion.numeroResolucion);
 				$("#cursoAprobado").selectpicker(
 					"val",
@@ -3709,30 +3707,6 @@ $(document).ready(function () {
 
 		$.ajax({
 			url: baseURL + "panel/eliminarRegistroPrograma",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			beforeSend: function () {
-				notificacion("Espere...", "success");
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
-
-	$(".eliminarJornadaActualizacion").click(function () {
-		$id_jornada = $(this).attr("data-id-jornada");
-
-		data = {
-			id_jornada: $id_jornada,
-		};
-
-		$.ajax({
-			url: baseURL + "panel/eliminarJornadaActualizacion",
 			type: "post",
 			dataType: "JSON",
 			data: data,
@@ -5126,34 +5100,7 @@ $(document).ready(function () {
 		});
 	});
 
-	$(".archivos_form_jornada").on("click", function () {
-		$data_name = $(".archivos_form_jornada").attr("data-name");
-		let file_data = $("#" + $data_name).prop("files")[0];
-		let form_data = new FormData();
-		form_data.append("file", file_data);
-		form_data.append("tipoArchivo", $("#" + $data_name).attr("data-val"));
-		form_data.append("append_name", $data_name);
-		$.ajax({
-			url: baseURL + "panel/guardarArchivoJornada",
-			dataType: "text",
-			cache: false,
-			contentType: false,
-			processData: false,
-			data: form_data,
-			type: "post",
-			dataType: "JSON",
-			beforeSubmit: function () {
-				$("#loading").show();
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-				cargarArchivos();
-			},
-			error: function (ev) {
-				notificacion("Verifique los datos del formulario.", "success");
-			},
-		});
-	});
+
 
 	$(".archivos_form_basico_economia").on("click", function () {
 		$data_name = $(".archivos_form_basico_economia").attr("data-name");
@@ -5980,24 +5927,10 @@ $(document).ready(function () {
 		}
 	});
 
-	$(".motivo_sol").click(function () {
-		console.log($(this).attr("id"));
-		$id_motivo = $(this).attr("id");
-
-		if ($id_motivo == "motivo1") {
-		} else if ($id_motivo == "motivo2") {
-		} else if ($id_motivo == "motivo3") {
-		}
-	});
-
-
-
 	$(".dataReload").click(function () {
 		cargarArchivos();
 		notificacion("Archivos cargados...");
 	});
-
-
 
 	$(".guardar").click(function () {
 		$(".archivos").toggle();
@@ -6014,49 +5947,15 @@ $(document).ready(function () {
 	$("#nueva_desc").click(function () {
 		console.log(cont_desc);
 		if (cont_desc >= 2 && cont_desc != 12) {
-			$(".div_desc").append(
-				'<div class="descripciones" id="descrp_' + cont_desc + '">'
-			);
-			$(".div_desc>#descrp_" + cont_desc + "").append(
-				'<div class="form-group txt_descripcion" id="form-group-desc-' +
-					cont_desc +
-					'">'
-			);
-			$(
-				".div_desc>#descrp_" + cont_desc + ">#form-group-desc-" + cont_desc + ""
-			).append("<label>" + cont_desc + ". Descripcion:</label>");
-			$(
-				".div_desc>#descrp_" + cont_desc + ">#form-group-desc-" + cont_desc + ""
-			).append(
-				'<textarea class="form-control" rows="3" placeholder="Escriba aquí la descripción..."></textarea>'
-			);
-			$(
-				".div_desc>#descrp_" + cont_desc + ">#form-group-desc-" + cont_desc + ""
-			).append("</div>");
-
-			$(".div_desc>#descrp_" + cont_desc + "").append(
-				'<div class="form-group txt_fecha" id="form-group-fecha-' +
-					cont_desc +
-					'">'
-			);
-			$(
-				".div_desc>#descrp_" +
-					cont_desc +
-					">#form-group-fecha-" +
-					cont_desc +
-					""
-			).append("<label>" + cont_desc + ". Fecha:</label>");
-			$(
-				".div_desc>#descrp_" +
-					cont_desc +
-					">#form-group-fecha-" +
-					cont_desc +
-					""
-			).append(
-				'<input type="date" name="" id="" class="form-control" value="">'
-			);
-			$(
-				".div_desc>#descrp_" +
+			$(".div_desc").append('<div class="descripciones" id="descrp_' + cont_desc + '">');
+			$(".div_desc>#descrp_" + cont_desc + "").append('<div class="form-group txt_descripcion" id="form-group-desc-' + cont_desc + '">');
+			$(".div_desc>#descrp_" + cont_desc + ">#form-group-desc-" + cont_desc + "").append("<label>" + cont_desc + ". Descripcion:</label>");
+			$(".div_desc>#descrp_" + cont_desc + ">#form-group-desc-" + cont_desc + "").append('<textarea class="form-control" rows="3" placeholder="Escriba aquí la descripción..."></textarea>');
+			$(".div_desc>#descrp_" + cont_desc + ">#form-group-desc-" + cont_desc + "").append("</div>");
+			$(".div_desc>#descrp_" + cont_desc + "").append('<div class="form-group txt_fecha" id="form-group-fecha-' + cont_desc + '">');
+			$(".div_desc>#descrp_" + cont_desc + ">#form-group-fecha-" + cont_desc + "").append("<label>" + cont_desc + ". Fecha:</label>");
+			$(".div_desc>#descrp_" + cont_desc + ">#form-group-fecha-" + cont_desc + "").append('<input type="date" name="" id="" class="form-control" value="">');
+			$(".div_desc>#descrp_" +
 					cont_desc +
 					">#form-group-fecha-" +
 					cont_desc +
@@ -9660,30 +9559,6 @@ $(document).ready(function () {
 		);
 	});
 
-	$("#actualizarEstadoOrganizacion").click(function () {
-		$id_organizacion = $(this).attr("data-id-org");
-		$estado_org = $("input:radio[name=estado_org]:checked").val();
-
-		var data = {
-			id_organizacion: $id_organizacion,
-			estadoOrg: $estado_org,
-		};
-		$.ajax({
-			url: baseURL + "admin/actualizarEstadoOrganizacion",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			beforeSend: function () {
-				notificacion("Cargando...", "success");
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
 
 	$("#volverEst_org").click(function () {
 		$("#admin_ver_finalizadas").slideDown();
@@ -9691,35 +9566,7 @@ $(document).ready(function () {
 	});
 
 
-	$("#tabla_enProceso_organizacion tbody").on("click", '.ver_estado_org', function () {
-		var $id_org = $(this).attr("data-organizacion");
-		let idSolicitud = $(this).attr("data-solicitud");
-		$("#id_org_ver_form").remove();
-		$("body").append(
-			"<div id='id_org_ver_form' class='hidden' data-id='" + $id_org + "'>"
-		);
-		var data = {
-			id_organizacion: $id_org,
-		};
-		$.ajax({
-			url: baseURL + "admin/cargar_todaInformacion",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			success: function (response) {
-				$("#admin_ver_finalizadas").slideUp();
-				$("#v_estado_org").slideDown();
-				$("#actualizarEstadoOrganizacion").attr("data-id-org", $id_org);
-				$("#resolucion_nombre_org").html(response.organizaciones.nombreOrganizacion);
-				$("#resolucion_nit_org").html(response.organizaciones.numNIT);
-				$("#resolucion_nombreRep_org").html(response.organizaciones.primerNombreRepLegal + " " + response.organizaciones.segundoNombreRepLegal + " " + response.organizaciones.primerApellidoRepLegal + " " + response.organizaciones.segundoApellidoRepLegal);
-				$("#estado_actual_org").html(response.estadoOrganizaciones.nombre);
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
+
 
 	$("#crearBateriaObservacion").click(function () {
 		$tipoBateriaObservacion = $("#tipoBateriaObservacion").val();

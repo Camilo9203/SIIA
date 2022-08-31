@@ -748,26 +748,10 @@
 					<input class="form-control" type="date" name="jornadasFechaAsistencia" id="jornadasFechaAsistencia">
 				</div>
 			</div>
+			<button class="btn btn-siia btn-sm" name="guardar_formulario_jornadas_actualizacion" id="guardar_formulario_jornadas_actualizacion" data-id="<?php  echo $data_solicitud->idSolicitud;?>">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
 			</form>
-			<div class="clearfix"></div>
-			<hr />
-			<div class="form-group">
-				<label>Documento de la Jornada de Actualización o carta de compromiso </label>
-				<p>En caso de haber participado en la jornada de actualización adjunte el certificado. En caso de no haber participado adjunte una carta de compromiso de participación en la jornada de actualización. (PDF)</p>
-				<br />
-				<?php echo form_open_multipart('', array('id' => 'formulario_jornada_actualizacion')); ?>
-				<label>Archivo (PDF):<span class="spanRojo">*</span></label>
-				<br />
-				<div class="col-md-4">
-					<input type="file" required accept="application/pdf" class="form-control" data-val="jornadaAct" name="jornadaAct" id="jornadaAct">
-				</div>
-				<div class="col-md-3">
-					<input type="button" class="btn btn-siia btn-sm archivos_form_jornada fa-fa center-block" data-name="jornadaAct" name="jornadaAc" id="jornadaAc" value="Guardar archivo(s) &#xf0c7">
-				</div>
-				</form>
-			</div>
-			<div class="clearfix"></div>
-			<div class="archivoss">
+			<?php if ($data_jornadas_actualizacion): ?>
+			<div class="">
 				<hr />
 				<label>Jornadas:</label>
 				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
@@ -790,10 +774,36 @@
 					</tbody>
 				</table>
 			</div>
+			<?php endif; ?>
+			<div class="clearfix"></div>
+			<hr />
+			<div class="form-group">
+				<label>Documento de la Jornada de Actualización o carta de compromiso (PDF) </label>
+				<ul>
+					<li>
+						En caso de haber participado en la jornada de actualización adjunté el certificado.
+					</li>
+					<li>
+						En caso de no haber participado adjunté una carta de compromiso de participación en la jornada de actualización.
+					</li>
+				</ul>
+				<br />
+				<?php echo form_open_multipart('', array('id' => 'formulario_jornada_actualizacion')); ?>
+				<label>Archivo (PDF):<span class="spanRojo">*</span></label>
+				<br />
+				<div class="col-md-4">
+					<input type="file" required accept="application/pdf" class="form-control" data-val="jornadaAct" name="jornadaAct" id="jornadaAct">
+				</div>
+				<div class="col-md-3">
+					<input type="button" class="btn btn-siia btn-sm archivos_form_jornada fa-fa center-block" data-name="jornadaAct" name="jornadaAc" id="jornadaAc" value="Guardar archivo(s) &#xf0c7">
+				</div>
+				</form>
+			</div>
+			<div class="clearfix"></div>
+
 			<div class="">
 				<hr />
-				<label>Archivos:</label>
-				<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>
+				<label>Archivos:</label><a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>
 				<table id="tabla_archivos_formulario" width="100%" border=0 class="table table-striped table-bordered tabla_form">
 					<thead>
 					<tr>
@@ -807,7 +817,6 @@
 				</table>
 			</div>
 			<hr />
-			<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_jornadas_actualizacion" id="guardar_formulario_jornadas_actualizacion" data-id="<?php  echo $data_solicitud->idSolicitud;?>">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
 		</div>
 	</div>
 	<!-- Formulario de programas de educación en economía solidaria 5 - INICIO -->

@@ -323,6 +323,9 @@ $(document).on("click", ".eliminar_archivo_carta", function () {
 		success: function (response) {
 			notificacion(response.msg, "success");
 			cargarArchivos();
+			setInterval(function () {
+				reload();
+			}, 2000);
 		},
 		error: function (ev) {
 			//Do nothing
@@ -742,6 +745,7 @@ $(".eliminarAntecedentes").click(function () {
 	});
 });
 /** Formulario 4: Jornadas de actualización */
+// Guardar formulario jornada actualización
 $("#guardar_formulario_jornadas_actualizacion").click(function () {
 	$(this).attr("disabled", true);
 	let numeroPersonas = $("#jornadasNumeroPersonas").val();
@@ -755,7 +759,6 @@ $("#guardar_formulario_jornadas_actualizacion").click(function () {
 		fechaAsistencia: fechaAsistencia,
 		idSolicitud: $(this).attr('data-id')
 	};
-
 	$.ajax({
 		url: baseURL + "panel/guardar_formulario_jornadas_actualizacion",
 		type: "post",
@@ -773,6 +776,63 @@ $("#guardar_formulario_jornadas_actualizacion").click(function () {
 		},
 		error: function (ev) {
 			//Do nothing
+		},
+	});
+});
+// Eliminar jornada actualización
+$(".eliminarJornadaActualizacion").click(function () {
+	$id_jornada = $(this).attr("data-id-jornada");
+	data = {
+		id_jornada: $id_jornada,
+	};
+	$.ajax({
+		url: baseURL + "panel/eliminarJornadaActualizacion",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		beforeSend: function () {
+			notificacion("Espere...", "success");
+		},
+		success: function (response) {
+			notificacion(response.msg, "success");
+			setInterval(function () {
+				reload();
+			}, 2000);
+		},
+		error: function (ev) {
+			//Do nothing
+		},
+	});
+});
+// Guardar archivo jornada actualización
+$(".archivos_form_jornada").on("click", function () {
+	$data_name = $(".archivos_form_jornada").attr("data-name");
+	let file_data = $("#" + $data_name).prop("files")[0];
+	let form_data = new FormData();
+	form_data.append("file", file_data);
+	form_data.append("tipoArchivo", $("#" + $data_name).attr("data-val"));
+	form_data.append("append_name", $data_name);
+	$.ajax({
+		url: baseURL + "panel/guardarArchivoJornada",
+		dataType: "text",
+		cache: false,
+		contentType: false,
+		processData: false,
+		data: form_data,
+		type: "post",
+		dataType: "JSON",
+		beforeSubmit: function () {
+			$("#loading").show();
+		},
+		success: function (response) {
+			notificacion(response.msg, "success");
+			cargarArchivos();
+			setInterval(function () {
+				reload();
+			}, 2000);
+		},
+		error: function (ev) {
+			notificacion("Verifique los datos del formulario.", "success");
 		},
 	});
 });

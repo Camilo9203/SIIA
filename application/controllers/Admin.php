@@ -13,7 +13,7 @@ class Admin extends CI_Controller
 	// Encripción para recuperación de contraseña
 	private function mcdec()
 	{
-		$password = "KSR8ztt//8Fj7FfSaDjLphyJKJq/X2LdFL4GoJnNgO2OQWaeJZvIHTAf9T+fFFbwHtwImhK9LMs4tOW7VnKZfRkR7t8cT4ebcoIANjtwRszS+DzZxD14J9CL+9sbV4Fj|SSSBKczEmOxdrUuN2qtZOWh/wPzJljlsXkR2hK4jcko=";
+		$password = "AhUR7s1YGYVITHmv47l1WDp8F2oM8rIShQhwBTNzG+fizZed6EmpKm+3Ag0OCRhZ+nj5ElyWzXXxTRj1ulbJHCyla/XcrrnditJUt+ubHMxmaXgv1ZmeYG1WxkHNLg+X|drPbfaS9utSAc92FpzkW+FsfFQfaOPEVBRCIIO8WmMo=";
 		$passwor2 = mc_decrypt($password, KEY_RDEL);
 		echo json_encode($passwor2);
 	}
@@ -384,7 +384,7 @@ class Admin extends CI_Controller
 		$data['hora'] = $hora;
 		$data['fecha'] = $fecha;
 		$data['departamentos'] = $this->cargarDepartamentos();
-		$data['organizaciones_en_proceso'] = $this->cargar_organizacionesInscritas();
+		$data['organizaciones_en_proceso'] = $this->cargar_organizacionesAcreditadas();
 
 		$this->load->view('include/header', $data);
 		$this->load->view('admin/organizaciones/resoluciones', $data);
@@ -412,7 +412,7 @@ class Admin extends CI_Controller
 		$data['hora'] = $hora;
 		$data['fecha'] = $fecha;
 		$data['departamentos'] = $this->cargarDepartamentos();
-		$data['organizaciones_en_proceso'] = $this->cargar_organizacionesInscritas();
+		$data['solicitudes'] = $this->cargarSolicitudesRegistradas();
 
 		$this->load->view('include/header', $data);
 		$this->load->view('admin/organizaciones/estado', $data);
@@ -967,62 +967,41 @@ class Admin extends CI_Controller
 		echo json_encode(array("informacion" => $informacion, "visita" => $datos_visita, "seguimiento" => $datos_seguimiento, "plan" => $datos_plan));
 	}
 
-
+	/** TODO: ESTADO - Actualizar estado de las solicitudes */
 	public function actualizarEstadoOrganizacion()
 	{
-		$id_organizacion = $this->input->post('id_organizacion');
-		$estadoOrg = $this->input->post('estadoOrg');
-
-		$estado = $this->db->select("nombre")->from("estadoOrganizaciones")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row()->nombre;
-		$data_sol = $this->db->select("*")->from("tipoSolicitud")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-
-		if ($estado == "Finalizado" || $estado == "En Observaciones" || $estado == "Inscrito" && $estadoOrg == "Acreditado") {
-			$tipoSolicitud = $data_sol->tipoSolicitud;
-			$motivoSolicitud = $data_sol->motivoSolicitud;
-			$modalidadSolicitud = $data_sol->modalidadSolicitud;
-			$idSolicitud = $data_sol->idSolicitud;
-
-			$data_estado = array(
-				'nombre' => $estadoOrg,
-				'fecha' => date('Y/m/d H:i:s'),
-				'estadoAnterior' => "Finalizado",
-				'tipoSolicitudAcreditado' => $tipoSolicitud,
-				'motivoSolicitudAcreditado' => $motivoSolicitud,
-				'modalidadSolicitudAcreditado' => $modalidadSolicitud,
-				'idSolicitudAcreditado' => $idSolicitud,
-				'organizaciones_id_organizacion' => $id_organizacion
-			);
-			$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-			if ($this->db->update('estadoOrganizaciones', $data_estado)) {
-				echo json_encode(array('url' => "", 'msg' => "Se cambio de estado la organización."));
-				$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' actualizó el estado de la organización con id: ' . $id_organizacion . ' y el estado: ' . $estadoOrg . '.');
+		$idOrganizacion = $this->input->post('idOrganizacion');
+		$estadoSolicitud = $this->input->post('estadoSolicitud');
+		$idSolicitud = $this->input->post('idSolicitud');
+		$estadoActualSolicitud = $this->db->select("nombre")->from("estadoOrganizaciones")->where("idSolicitud", $idSolicitud)->get()->row()->nombre;
+		$dataEstado = array(
+			'nombre' => $estadoSolicitud,
+			'fecha' => date('Y/m/d H:i:s'),
+			'estadoAnterior' => $estadoActualSolicitud,
+			'idSolicitudAcreditado' => $idSolicitud,
+		);
+		if($estadoSolicitud == $estadoActualSolicitud) {
+			echo json_encode(array('estado' => 0, 'msg' => "Seleccione un estado diferente al actual."));
+		} elseif($estadoSolicitud == "Acreditado") {
+			$this->db->where('idSolicitud', $idSolicitud);
+			if ($this->db->update('estadoOrganizaciones', $dataEstado)) {
+				$dataOrganizacion = array(
+					'estado' => $estadoSolicitud,
+				);
+				$this->db->where('id_organizacion', $idOrganizacion);
+				if ($this->db->update('organizaciones', $dataOrganizacion)) {
+					$this->envio_mail("estado", $idOrganizacion, 1, "");
+					$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' actualizó el estado de la organización con id: ' . $idOrganizacion . ' y el estado: ' . $estadoSolicitud . '.');
+					echo json_encode(array('estado' => 1, 'msg' => "Se cambio de estado la organización."));
+				}
 			}
-		} else if ($estado == "Finalizado" || $estado == "En Observaciones" && $estadoOrg == "Negada") {
-			$data_estado = array(
-				'nombre' => $estadoOrg,
-				'fecha' => date('Y/m/d H:i:s'),
-				'estadoAnterior' => "Finalizado",
-				'organizaciones_id_organizacion' => $id_organizacion
-			);
-			$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-			if ($this->db->update('estadoOrganizaciones', $data_estado)) {
-				echo json_encode(array('url' => "", 'msg' => "Se cambio de estado la organización."));
-				$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' actualizó el estado de la organización con id: ' . $id_organizacion . ' y el estado: ' . $estadoOrg . '.');
-			}
-		} else if ($estado == "Acreditado" && $estadoOrg == "Revocada") {
-			$data_estado = array(
-				'nombre' => $estadoOrg,
-				'fecha' => date('Y/m/d H:i:s'),
-				'estadoAnterior' => "Finalizado",
-				'organizaciones_id_organizacion' => $id_organizacion
-			);
-			$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-			if ($this->db->update('estadoOrganizaciones', $data_estado)) {
-				echo json_encode(array('url' => "", 'msg' => "Se cambio de estado la organización."));
-				$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' actualizó el estado de la organizacion con id: ' . $id_organizacion . ' y el estado: ' . $estadoOrg . '.');
+		} else {
+			$this->db->where('idSolicitud', $idSolicitud);
+			if ($this->db->update('estadoOrganizaciones', $dataEstado)) {
+				$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' actualizó el estado de la organización con id: ' . $idOrganizacion . ' y el estado: ' . $estadoSolicitud . '.');
+				echo json_encode(array('estado' => 1, 'msg' => "Se cambio de estado la organización."));
 			}
 		}
-		$this->envio_mail("estado", $id_organizacion, 1, "");
 	}
 
 	public function cargarDepartamentos()
@@ -1247,7 +1226,6 @@ class Admin extends CI_Controller
 			$data_organizaciones = $this->db->select("*")->from("organizaciones, estadoOrganizaciones, solicitudes")->where("organizaciones.id_organizacion", $idOrg)->where("estadoOrganizaciones.idSolicitud", $idSolicitud)->where("solicitudes.idSolicitud", $idSolicitud)->get()->row();
 			array_push($organizaciones, $data_organizaciones);
 		}
-
 		return $organizaciones;
 		// echo json_encode($organizaciones);
 	}
@@ -1402,18 +1380,19 @@ class Admin extends CI_Controller
 	}
 
 
-	public function cargar_organizacionesInscritas()
+	public function cargarSolicitudesRegistradas()
 	{
-		$organizaciones = array();
-		$id_organizaciones = $this->db->select("id_organizacion")->from("organizaciones")->get()->result();
+		$solicitudesRegistradas = array();
+		$solicitudes = $this->db->select("*")->from("estadoOrganizaciones")->get()->result();
 
-		for ($i = 0; $i < count($id_organizaciones); $i++) {
-			$data_organizaciones = $this->db->select("*")->from("organizaciones, estadoOrganizaciones")->where("organizaciones.id_organizacion", $id_organizaciones[$i]->id_organizacion)->where("estadoOrganizaciones.organizaciones_id_organizacion", $id_organizaciones[$i]->id_organizacion)->get()->row();
-			array_push($organizaciones, $data_organizaciones);
+		foreach ($solicitudes as $solicitud) {
+			$idOrg = $solicitud->organizaciones_id_organizacion;
+			$idSolicitud = $solicitud->idSolicitud;
+			$data = $this->db->select("*")->from("organizaciones, estadoOrganizaciones, solicitudes")->where("organizaciones.id_organizacion", $idOrg)->where("estadoOrganizaciones.idSolicitud", $idSolicitud)->where("solicitudes.idSolicitud", $idSolicitud)->get()->row();
+			array_push($solicitudesRegistradas, $data);
 		}
-
-		return $organizaciones;
-
+		return $solicitudesRegistradas;
+		// echo json_encode($organizaciones);
 	}
 	// TODO: Cargar docentes 
 	public function cargar_docentesDeshabilitados()
@@ -3205,9 +3184,13 @@ class Admin extends CI_Controller
 		}
 	}
 }
+
 function var_dump_pre($mixed = null) {
 	echo '<pre>';
 	var_dump($mixed);
 	echo '</pre>';
 	return null;
 }
+
+
+

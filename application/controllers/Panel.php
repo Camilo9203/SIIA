@@ -3097,7 +3097,7 @@ class Panel extends CI_Controller
 			default:
 		}
 	}
-
+	/** Solicitud */
 	public function solicitud($idSolicitud)
 	{
 		date_default_timezone_set("America/Bogota");
@@ -3134,11 +3134,21 @@ class Panel extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
+	// Eliminar Solicitud
 	public function eliminarSolicitud()
 	{
-		$tables = array('estadoOrganizaciones', 'solicitudes', 'tipoSolicitud', 'documentacion', 'certificadoexistencia', 'registroeducativoprogramas', 'jornadasactualizacion', 'datosprogramas', 'datosenlinea', 'datosaplicacion');
-		$idSolicitud = $this->input->post('idSolicitud');
-		$this->db->where('idSolicitud', $idSolicitud);
+		$this->db->where('idSolicitud', $this->input->post('idSolicitud'));
+		$tables = array(
+			'estadoOrganizaciones',
+			'solicitudes',
+			'tipoSolicitud',
+			'documentacion',
+			'certificadoexistencia',
+			'registroeducativoprogramas',
+			'jornadasactualizacion',
+			'datosprogramas',
+			'datosenlinea',
+			'datosaplicacion');
 		$this->db->delete($tables);
 		echo json_encode(array('url' => "panel", 'msg' => "Se elimino el solicitud."));
 	}
