@@ -47,13 +47,12 @@ class Nit extends CI_Controller
 	public function cargarDatosOrganizacion()
 	{
 		$id= $this->input->post('id');
-		$organizacion = $this->db->select('*')->from('organizaciones')->where('organizaciones.id_organizacion', $id)->get()->result();
+		$organizacion = $this->db->select('*')->from('organizaciones')->where('organizaciones.numNIT', $id)->get()->row();
 		$solicitudes = $this->db->select('*')->from('estadoOrganizaciones')
 			->join('solicitudes', 'solicitudes.organizaciones_id_organizacion = estadoOrganizaciones.organizaciones_id_organizacion')
 			->join('tipoSolicitud', 'tipoSolicitud.organizaciones_id_organizacion = estadoOrganizaciones.organizaciones_id_organizacion')
 			->where('estadoOrganizaciones.organizaciones_id_organizacion', $id)->get()->result();
-		$resoluciones = $this->db->select('*')->from('resoluciones')->where('resoluciones.organizaciones_id_organizacion', $id)->get()->result();
-
+		$resoluciones = $this->db->select('*')->from('resoluciones')->where('resoluciones.organizaciones_id_organizacion', $organizacion->id_organizacion)->get()->result();
 		echo json_encode(array('msg' => 'Información Cargada' ,'organizacion' => $organizacion, 'solicitudes' => $solicitudes, 'resoluciones' => $resoluciones));
 	}
 	public function cargarDatosResolucion()

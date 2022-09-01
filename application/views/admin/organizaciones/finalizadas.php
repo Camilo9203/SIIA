@@ -259,7 +259,7 @@
 			<h3>3. Antecedentes Académicos</h3>
 			<!-- Tabla Antecedentes Académicos -->
 			<div class="">
-				<label>Datos de Atecedentes Académicos:</label>
+				<label>Datos de Antecedentes Educativos y Académicos:</label>
 				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
 				<table id="" width="100%" border=0 class="table table-striped table-bordered">
 					<thead>
@@ -310,7 +310,7 @@
 			<h3>4. Jornadas de Actualización</h3>
 			<!-- Tabla Jornadas de Actualización -->
 			<div class="">
-				<label>Datos de Atecedentes Academicos:</label>
+				<label>Datos de Jornadas de Actualización:</label>
 				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
 				<table id="" width="100%" border=0 class="table table-striped table-bordered">
 					<thead>

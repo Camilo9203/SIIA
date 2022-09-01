@@ -11,7 +11,7 @@ $("#nit_acre_org").change( function (){
 		data: data,
 		success: function (response) {
 			notificacion(response.msg, "success");
-			let nombreOrganizacion = response.organizacion[0].nombreOrganizacion;
+			let nombreOrganizacion = response.organizacion.nombreOrganizacion;
 			let resoluciones = response.resoluciones;
 			$("#nombre_acre_org").val(nombreOrganizacion);
 			html += "<option selected> Seleccionar Resolución</option>"
@@ -25,7 +25,7 @@ $("#nit_acre_org").change( function (){
 					resolucion.numeroResolucion +
 					"</option>";
 			});
-			// Añadir varible de opción html al select de municipio
+			// Añadir variable de opción html al select de municipio
 			$("#res_acre_org").html(html);
 			$("#res_acre_org").prop('disabled', false);
 		},

@@ -9,10 +9,10 @@
 				<label>Nit:</label>
 				<br/>
 				<br/>
-				<select name="nit_acre_org" id="nit_acre_org" class="selectpicker form-control show-tick">
+				<select name="nit_acre_org" id="nit_acre_org" class="selectpicker form-control show-tick nit_acre_org">
 					<option selected>Seleccion una opción</option>
 					<?php foreach ($organizaciones as $organizacion) : ?>
-						<option value="<?php echo $organizacion->id_organizacion ?>"><?php echo $organizacion->numNIT ?></option>
+						<option value="<?php echo $organizacion->numNIT ?>"><?php echo $organizacion->numNIT ?></option>
 					<?php endforeach; ?>
 				</select>
 			</div>

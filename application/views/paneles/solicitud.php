@@ -784,7 +784,7 @@
 						En caso de haber participado en la jornada de actualización adjunté el certificado.
 					</li>
 					<li>
-						En caso de no haber participado adjunté una carta de compromiso de participación en la jornada de actualización.
+						En caso de no haber participado adjunté una carta de compromiso de participación en la jornada de actualización pedagógica.
 					</li>
 				</ul>
 				<br />
@@ -1105,8 +1105,8 @@
 						</div>
 					</div>
 					<div class="modal-body">
-						<p>De acuerdo a lo establecido en los parágrafos número 2 y número 3 del artículo 9 de la resolución 110 del 31 de marzo del 2016, las entidades que soliciten la acreditación por la modalidad en linea deben tener en cuenta lo siguiente:</p>
-						<p><strong>Parágrafo 2.</strong> Para la acreditación de los programas de educación en economía solidaria bajo modalidad línea, aquella donde los docentes y participantes interactúan a través de recursos tecnológicos. La mediación tecnológica puede ser a través de herramientas tecnológica (Zoom, Teams, Meet, Good Meet, entre otras) plataformas de comunicación, chats, foros, videoconferencias, grupos de discusión, <strong>caracterizadas por encuentros sincrónicos.</strong> </p>
+						<p>De acuerdo a lo establecido en el parágrafo número 2 del artículo 6 de la resolución 152 del 23 de junio del 2022, las entidades que soliciten la acreditación por la modalidad en línea, deben tener en cuenta lo siguiente:</p>
+						<p><strong>Parágrafo 2.</strong> Para la acreditación de los programas de educación en economía solidaria bajo modalidad línea, aquella donde los docentes y participantes interactúan a través de recursos tecnológicos. La mediación tecnológica puede ser a través de herramientas tecnológica (Zoom, Teams, Meet, Good Meet, entre otras) plataformas de comunicación, chats, foros, videoconferencias, grupos de discusión, caracterizadas por encuentros sincrónicos.</strong> </p>
 						<p>Recuerde desarrollar el proceso formativo acorde a lo establecido en el anexo técnico.</p>
 						<p>La UAEOS realizará seguimiento a las organizaciones acreditadas en el cumplimiento de los programas de educación solidaria acreditados.</p>
 						<!--				<a class="pull-right" target="_blank" href="https://www.orgsolidarias.gov.co/sites/default/files/archivos/Res_110%20del%2031%20de%20marzo%20de%202016.pdf">Recurso de la resolución 110</a>-->
