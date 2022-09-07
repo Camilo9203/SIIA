@@ -13,6 +13,7 @@ $("#nit_acre_org").change( function (){
 			notificacion(response.msg, "success");
 			let nombreOrganizacion = response.organizacion.nombreOrganizacion;
 			let resoluciones = response.resoluciones;
+			console.log(response);
 			$("#nombre_acre_org").val(nombreOrganizacion);
 			html += "<option selected> Seleccionar Resolución</option>"
 			// Recorrer respuesta del controlador
@@ -21,6 +22,8 @@ $("#nit_acre_org").change( function (){
 				html +=
 					"<option value=" +
 					resolucion.numeroResolucion +
+					" data-id=" +
+					resolucion.id_resoluciones +
 					">" +
 					resolucion.numeroResolucion +
 					"</option>";
@@ -34,11 +37,11 @@ $("#nit_acre_org").change( function (){
 		},
 	});
 });
-/** Campo automatico fecha fin de resolución */
+/** Campo automático fecha fin de resolución */
 $("#res_acre_org").change( function (){
 	$("#fech_fin_acre_org").val('');
 	let data = {
-		idResolucion: $("#res_acre_org").val()
+		idResolucion: $("#res_acre_org option:selected").attr('data-id')
 	};
 	$.ajax({
 		url: baseURL + "Nit/cargarDatosResolucion",

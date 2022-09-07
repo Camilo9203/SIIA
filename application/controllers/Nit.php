@@ -57,8 +57,8 @@ class Nit extends CI_Controller
 	}
 	public function cargarDatosResolucion()
 	{
-		$idResolucion= $this->input->post('idResolucion');
-		$resolucion = $this->db->select('*')->from('resoluciones')->where('resoluciones.numeroResolucion', $idResolucion)->get()->row();
+		$idResolucion = $this->input->post('idResolucion');
+		$resolucion = $this->db->select('*')->from('resoluciones')->where('resoluciones.id_resoluciones', $idResolucion)->get()->row();
 		echo json_encode(array('msg' => 'Información Cargada', 'resolucion' => $resolucion));
 	}
 
