@@ -9667,7 +9667,7 @@ $(document).ready(function () {
 	//Politica
 	$("#acepto_politica").click(function () {
 		$("#acepto_cond").prop("checked", true);
-		$("#aceptar_programa").modal("toggle");
+		$("#politica_ventana").modal("toggle");
 	});
 
 	$("#verRelacionCambios").click(function () {
