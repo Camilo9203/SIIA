@@ -3331,12 +3331,12 @@ $(document).ready(function () {
 	});
 
 	$(".ver_adjuntar_camara").click(function () {
-		var $id_org = $(this).attr("data-organizacion");
+		let $id_org = $(this).attr("data-organizacion");
 		$("#id_org_ver_form").remove();
 		$("body").append(
 			"<div id='id_org_ver_form' class='hidden' data-id='" + $id_org + "'>"
 		);
-		var data = {
+		let data = {
 			id_organizacion: $id_org,
 		};
 		$.ajax({
@@ -3345,28 +3345,29 @@ $(document).ready(function () {
 			dataType: "JSON",
 			data: data,
 			success: function (response) {
+				console.log(response);
 				$("#admin_ver_finalizadas").slideUp();
 				$("#datos_org_camara").slideDown();
 				$("#adjuntar_camara").attr("data-id-org", $id_org);
 				$("#camara").attr("data-id-org", $id_org);
 				$("#camara_nombre_org").html(
-					response.organizaciones["0"].nombreOrganizacion
+					response.organizaciones.nombreOrganizacion
 				);
-				$("#camara_nit_org").html(response.organizaciones["0"].numNIT);
+				$("#camara_nit_org").html(response.organizaciones.numNIT);
 				$("#camara_nombreRep_org").html(
-					response.organizaciones["0"].primerNombreRepLegal +
+					response.organizaciones.primerNombreRepLegal +
 						" " +
-						response.organizaciones["0"].segundoNombreRepLegal +
+						response.organizaciones.segundoNombreRepLegal +
 						" " +
-						response.organizaciones["0"].primerApellidoRepLegal +
+						response.organizaciones.primerApellidoRepLegal +
 						" " +
-						response.organizaciones["0"].segundoApellidoRepLegal
+						response.organizaciones.segundoApellidoRepLegal
 				);
 				$("#ver_camara_org").attr(
 					"href",
 					baseURL +
 						"uploads/camaraComercio/" +
-						response.organizaciones["0"].camaraComercio
+						response.organizaciones.camaraComercio
 				);
 			},
 			error: function (ev) {

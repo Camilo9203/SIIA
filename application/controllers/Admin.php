@@ -356,7 +356,7 @@ class Admin extends CI_Controller
 		$data['hora'] = $hora;
 		$data['fecha'] = $fecha;
 		$data['departamentos'] = $this->cargarDepartamentos();
-		$data['organizaciones_en_proceso'] = $this->cargar_organizacionesInscritas();
+		$data['organizaciones_en_proceso'] = $this->organizacionesInscritas();
 
 		$this->load->view('include/header', $data);
 		$this->load->view('admin/organizaciones/camara', $data);

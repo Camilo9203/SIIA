@@ -212,7 +212,7 @@
 			echo "</table>";
 			echo "</div>";
 			/** Observaciones formulario 8 */
-			echo "<div class='clearfix'></div><hr/></div><h3>7. Datos modalidad en linea: </h3><div class='col-md-12'>";
+			echo "<div class='clearfix'></div><hr/></div><h3>8. Datos modalidad en línea: </h3><div class='col-md-12'>";
 			echo "<div class=''>";
 			echo "<table id='tabla_observaciones_form8' width='100%' border=0 class='table table-striped table-bordered'>";
 			echo "<thead>";
