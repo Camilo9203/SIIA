@@ -31,7 +31,6 @@ class Registro extends CI_Controller
 	{
 		$this->form_validation->set_rules('organizacion', '', 'trim|required|min_length[3]|xss_clean');
 		$this->form_validation->set_rules('nit', '', 'trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('nit_digito', '', 'trim|required|min_length[3]|xss_clean');
 		$this->form_validation->set_rules('sigla', '', 'trim|required|min_length[3]|xss_clean');
 		$this->form_validation->set_rules('nombre', '', 'trim|required|min_length[3]|xss_clean');
 		$this->form_validation->set_rules('nombre_s', '', 'trim|xss_clean');
@@ -46,11 +45,12 @@ class Registro extends CI_Controller
 
 		if ($this->form_validation->run("formulario_registro") == FALSE) {
 			echo json_encode(array('url' => "registro", 'msg' => "Verifique los datos, no son válidos."));
-			// var_dump(validation_errors());
-		} else {
+			var_dump(validation_errors());
+		}
+		else {
 			$fromSIA = "Unidad Administrativa Especial de Organizaciones Solidarias UAEOS - Aplicación SIIA.";
 			$organizacion = $this->input->post('organizacion');
-			$nit = $this->input->post('nit') + "-" + $this->input->post('nit_digito');
+			$nit = $this->input->post('nit');
 			$sigla = $this->input->post('sigla');
 			$nombre = $this->input->post('nombre');
 			$nombre_s = $this->input->post('nombre_s');
