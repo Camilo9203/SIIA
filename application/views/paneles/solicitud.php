@@ -1013,7 +1013,7 @@
 							<div class="clearfix"></div>
 							<hr />
 							<div class="col-md-12">
-								Texto Recomendaciones Modalidad Virtual
+								Recomendaciones Modalidad Virtual
 							</div>
 						</div>
 					</div>
@@ -1100,7 +1100,7 @@
 							<div class="clearfix"></div>
 							<hr />
 							<div class="col-md-12">
-								Texto Recomendaciones Modalidad En Línea
+								Recomendaciones Modalidad En Línea
 							</div>
 						</div>
 					</div>

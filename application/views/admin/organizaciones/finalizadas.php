@@ -1,8 +1,10 @@
+<!-- Organizaciones en evaluación -->
 <div class="col-md-12" id="admin_ver_finalizadas">
 	<div class="clearfix"></div>
 	<hr />
 	<h3>Organizaciones en evaluación:</h3>
 	<br />
+	<!-- Tabla de organizaciones en evaluación	-->
 	<div class="table">
 		<table id="tabla_enProceso_organizacion" width="100%" border=0 class="table table-striped table-bordered tabla_form">
 			<thead>
@@ -31,7 +33,7 @@
 						echo "<td>" . $organizaciones->fechaFinalizado . "</td>";
 						echo "<td>" . $organizaciones->fechaUltimaRevision . "</td>";
 						echo "<td>" . $organizaciones->asignada . "</td>";
-						echo "<td class='verFinOrgInf'><button class='btn btn-siia btn-sm ver_organizacion_finalizada' id='' data-organizacion='" . $organizaciones->id_organizacion . "' data-solicitud='" . $organizaciones->idSolicitud . "'>Ver información <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
+						echo "<td class='verFinOrgInf'><button class='btn btn-siia btn-sm ver_organizacion_finalizada' id='' data-organizacion='" . $organizaciones->id_organizacion . "' data-solicitud='" . $organizaciones->idSolicitudAcreditado . "'>Ver información <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
 						echo "</tr>";
 					} else if ($nivel == 0 || $nivel == 6) {
 						echo "<tr>";
@@ -43,7 +45,7 @@
 						echo "<td>" . $organizaciones->fechaFinalizado . "</td>";
 						echo "<td>" . $organizaciones->fechaUltimaRevision . "</td>";
 						echo "<td>" . $organizaciones->asignada . "</td>";
-						echo "<td class='verFinOrgInf'><button class='btn btn-siia btn-sm ver_organizacion_finalizada' id='' data-organizacion='" . $organizaciones->id_organizacion . "' data-solicitud='" . $organizaciones->idSolicitud . "'>Ver información <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
+						echo "<td class='verFinOrgInf'><button class='btn btn-siia btn-sm ver_organizacion_finalizada' id='' data-organizacion='" . $organizaciones->id_organizacion . "' data-solicitud='" . $organizaciones->idSolicitudAcreditado . "'>Ver información <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
 						echo "</tr>";
 					}
 				}
@@ -427,7 +429,7 @@
 						</table>
 					</div>
 					<div class="col-12">
-						<?php echo form_open('', array('id' => 'formulario_observacion_form6')); ?>
+						<?php echo form_open('', array('id' => 'formulario_observacion_form5')); ?>
 						<div class="form-group">
 							<label for="observacionesForm5">Observaciones Datos Básicos de Programas</label>
 							<textarea class="form-control obs_admin_" name="observacionesForm5" id="observacionesForm5" cols="30" rows="5" required></textarea>
@@ -468,6 +470,33 @@
 			</div>
 			<div class="clearfix"></div>
 			<hr />
+			<div class="col-12">
+				<?php echo form_open('', array('id' => 'formulario_observacion_form6')); ?>
+				<div class="form-group">
+					<label for="observacionesForm6">Observaciones Generales Facilitadores</label>
+					<textarea class="form-control obs_admin_" name="observacionesForm6" id="observacionesForm6" cols="30" rows="5" required></textarea>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-siia guardarObservacionesForm6">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+				</div>
+				</form>
+			</div>
+			<hr />
+			<div class="">
+				<label>Observaciones Realizadas</label>
+				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+				<table width="100%" border=0 class="table table-striped table-bordered" id="tabla_observaciones_form6">
+					<thead>
+					<tr>
+						<td>Fecha Observación</td>
+						<td># Revisión</td>
+						<td>Observación</td>
+						<td>Acción</td>
+					</tr>
+					</thead>
+					<tbody id="tbody" class="tabla_observaciones_form6"></tbody>
+				</table>
+			</div>
 		</div>
 		<div class="col-md-12" id="plataforma">
 			<h3>7. Datos modalidad virtual</h3>

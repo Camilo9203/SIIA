@@ -215,4 +215,14 @@ class Solicitudes extends CI_Controller
 			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "18", 'estado' => "1"));
 		}
 	}
+	public function numeroSolicitudes()
+	{
+		$usuario_id = $this->session->userdata('usuario_id');
+		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
+		$id_organizacion = $datos_organizacion->id_organizacion;
+
+		$solicitudes = $this->db->select("numeroSolicitudes")->from("solicitudes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
+		$numeroSolicitudes = $solicitudes->numeroSolicitudes;
+		return $numeroSolicitudes;
+	}
 }

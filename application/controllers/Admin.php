@@ -2329,7 +2329,7 @@ class Admin extends CI_Controller
 		$organizaciones = $this->db->select("*")->from("organizaciones")->where("id_organizacion", $id_organizacion)->get()->row();
 		$resoluciones = $this->db->select("*")->from("resoluciones")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		$archivos = $this->db->select("*")->from("archivos")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
-		$observaciones = $this->db->select('*')->from('observaciones')->where("idSolicitud", $idSolicitud)->where("idForm", $this->input->post('keyForm'))->get()->result();
+		$observaciones = $this->db->select('*')->from('observaciones')->where("idSolicitud", $idSolicitud)->get()->result();
 		echo json_encode(array("informacionGeneral" => $informacionGeneral, "documentacion" => $documentacion, "registroEducativoProgramas" => $registroEducativoProgramas, "antecedentesAcademicos" => $antecedentesAcademicos, "jornadasActualizacion" => $jornadasActualizacion, "datosProgramas" => $datosProgramas, "docentes" => $docentes, "plataforma" => $plataforma, "enLinea" => $enLinea, "tipoSolicitud" => $tipoSolicitud, "solicitudes" => $solicitudes, "estadoOrganizaciones" => $estadoOrganizaciones, "organizaciones" => $organizaciones, "archivos" => $archivos, "resoluciones" => $resoluciones, "observaciones" => $observaciones, "certificadoExistencia" => $certificadoExistencia));
 	}
 	// Guardar una sola observacion
@@ -2410,48 +2410,6 @@ class Admin extends CI_Controller
 		$observacion = $this->db->select("*")->from("bateriaObservaciones")->where("id_bateriaObservaciones", $id_observacion)->get()->row();
 
 		echo json_encode($observacion);
-	}
-
-	public function cambiarEstado_Observaciones()
-	{
-		$id_organizacion = $this->input->post('id_organizacion');
-		$id_usuario = $this->db->select("usuarios_id_usuario")->from("organizaciones")->where("id_organizacion", $id_organizacion)->get()->row()->usuarios_id_usuario;
-		$nombreOrganizacion = $this->db->select("nombreOrganizacion")->from("organizaciones")->where("id_organizacion", $id_organizacion)->get()->row()->nombreOrganizacion;
-		$nombre_usuario = $this->db->select("usuario")->from("usuarios")->where("id_usuario", $id_usuario)->get()->row()->usuario;
-
-		$numero = $this->db->select("numeroRevisiones")->from("solicitudes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row()->numeroRevisiones;
-		$data_update = array(
-			'numeroRevisiones' => ($numero + 1),
-			'fechaUltimaRevision' =>  date('Y/m/d H:i:s')
-		);
-
-		$estado = $this->db->select("nombre")->from("estadoOrganizaciones")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row()->nombre;
-		if ($estado == "En Observaciones") {
-			$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-			if ($this->db->update('solicitudes', $data_update)) {
-				echo json_encode(array('url' => "", 'msg' => "Se cambiaron las observaciones."));
-				$this->notif_sia->notification('OBSERVACIONES', $nombre_usuario, $nombreOrganizacion);
-				$this->envio_mail("obs", $id_organizacion, 1, "");
-				$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' cambio el estado de la organizacion id: ' . $id_organizacion . '.');
-			}
-		} else {
-			$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-			if ($this->db->update('solicitudes', $data_update)) {
-				$data_estado = array(
-					'nombre' => "En Observaciones",
-					'fecha' => date('Y/m/d H:i:s'),
-					'estadoAnterior' => "Finalizado",
-					'organizaciones_id_organizacion' => $id_organizacion
-				);
-				$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-				if ($this->db->update('estadoOrganizaciones', $data_estado)) {
-					echo json_encode(array('url' => "", 'msg' => "Se cambio de estado la organización y se añadieron las observaciones."));
-					$this->envio_mail("obs", $id_organizacion, 1, "");
-					$this->notif_sia->notification('OBSERVACIONES', $nombre_usuario, $nombreOrganizacion);
-					$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' cambio el estado de la organizacion id: ' . $id_organizacion . '.');
-				}
-			}
-		}
 	}
 
 	public function upload_camara()

@@ -11455,6 +11455,7 @@ function tablas() {
 		"tabla_observaciones_form3",
 		"tabla_observaciones_form4",
 		"tabla_observaciones_form5",
+		"tabla_observaciones_form6",
 		"tabla_observaciones_form7",
 		"tabla_observaciones_form8",
 		"tabla_registro_programas",
