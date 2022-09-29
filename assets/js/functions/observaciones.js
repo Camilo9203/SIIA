@@ -533,7 +533,6 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 			$("#archivos_informacionGeneral").append('<div class="form-group" id="documentacionLegal-observacionesGeneral' + i + '">');
 			// Observaciones formulario 1
 			verObservaciones(1);
-			$(".tabla_observaciones_form1").html(html);
 			/** Formulario 4 Archivos **/
 			$("#archivosJornadasActualizacion").append('<div class="col-md-12" id="archivos_jornadasActualizacion">');
 			$("#archivosJornadasActualizacion>#archivos_jornadasActualizacion").append("<p>Archivos:</p>");
