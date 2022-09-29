@@ -585,7 +585,7 @@
 						<td>Acción</td>
 					</tr>
 					</thead>
-					<tbody id="tbody" class="datos_observacion_form8"></tbody>
+					<tbody id="tbody" class="tabla_observaciones_form8"></tbody>
 				</table>
 			</div>
 		</div>

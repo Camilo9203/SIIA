@@ -2329,24 +2329,23 @@ class Admin extends CI_Controller
 		$organizaciones = $this->db->select("*")->from("organizaciones")->where("id_organizacion", $id_organizacion)->get()->row();
 		$resoluciones = $this->db->select("*")->from("resoluciones")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		$archivos = $this->db->select("*")->from("archivos")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
-		$observaciones = $this->db->select('*')->from('observaciones')->where("idSolicitud", $idSolicitud)->get()->result();
+		$observaciones = $this->db->select('*')->from('observaciones')->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		echo json_encode(array("informacionGeneral" => $informacionGeneral, "documentacion" => $documentacion, "registroEducativoProgramas" => $registroEducativoProgramas, "antecedentesAcademicos" => $antecedentesAcademicos, "jornadasActualizacion" => $jornadasActualizacion, "datosProgramas" => $datosProgramas, "docentes" => $docentes, "plataforma" => $plataforma, "enLinea" => $enLinea, "tipoSolicitud" => $tipoSolicitud, "solicitudes" => $solicitudes, "estadoOrganizaciones" => $estadoOrganizaciones, "organizaciones" => $organizaciones, "archivos" => $archivos, "resoluciones" => $resoluciones, "observaciones" => $observaciones, "certificadoExistencia" => $certificadoExistencia));
 	}
 	// Guardar una sola observacion
 	public function guardarObservacion()
 	{
 		$organizacion = $this->db->select('*')->from('organizaciones')->where('id_organizacion', $this->input->post('id'))->get()->row();
-		$solicitud = $this->db->select('*')->from('solicitudes')->where('organizaciones_id_organizacion', $organizacion->id_organizacion)->get()->row();
-		$tipoSolicitud = $this->db->select('*')->from('tipoSolicitud')->where('organizaciones_id_organizacion', $organizacion->id_organizacion)->get()->row();
-
+		$solicitud = $this->db->select('*')->from('solicitudes')->where('idSolicitud', $this->input->post('idSolicitud'))->get()->row();
+		$tipoSolicitud = $this->db->select('*')->from('tipoSolicitud')->where('idSolicitud', $this->input->post('idSolicitud'))->get()->row();
 		$data_observacion = array(
 			'idForm' => $this->input->post('id_formulario'),
 			'keyForm' => $this->input->post('formulario'),
 			'valueForm' => $this->input->post('valueForm'),
 			'observacion' => $this->input->post('observacion'),
 			'fechaObservacion' => date('Y/m/d H:i:s'),
-			'numeroRevision' => $solicitud->numeroRevisiones,
-			'idSolicitud' => $tipoSolicitud->idSolicitud,
+			'numeroRevision' => $solicitud->numeroRevisiones += 1,
+			'idSolicitud' => $this->input->post('idSolicitud'),
 			'organizaciones_id_organizacion' => $this->input->post('id')
 		);
 

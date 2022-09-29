@@ -8,43 +8,7 @@ class Solicitudes extends CI_Controller
 		parent::__construct();
 		$this->load->model('EstadisticasModel');
 	}
-	// Traer datos solicitud
-	public function solicitud($idSolicitud)
-	{
-		date_default_timezone_set("America/Bogota");
-		$logged = $this->session->userdata('logged_in');
-		$nombre_usuario = $this->session->userdata('nombre_usuario');
-		$usuario_id = $this->session->userdata('usuario_id');
-		$tipo_usuario = $this->session->userdata('type_user');
-		$hora = date("H:i", time());
-		$fecha = date('Y/m/d');
-		$data['title'] = 'Panel Principal';
-		$data['logged_in'] = $logged;
-		$datos_usuario = $this->db->select('usuario')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
-		$data['nombre_usuario'] = $datos_usuario->usuario;
-		$data['usuario_id'] = $usuario_id;
-		$data['tipo_usuario'] = $tipo_usuario;
-		$data['hora'] = $hora;
-		$data['fecha'] = $fecha;
-		$data['estado'] = $this->estadoOrganizaciones();
-		$data['departamentos'] = $this->cargarDepartamentos();
-		$data['data_organizacion'] = $this->cargarDatosOrganizacion();
-		$data['data_solicitud'] = $this->cargarSolicitud($idSolicitud);
-		$data['data_informacion_general'] = $this->cargarDatos_formulario_informacion_general_entidad($idSolicitud);
-		$data['data_documentacion_legal'] = $this->cargarDatos_formulario_documentacion_legal($idSolicitud);
-		$data['data_registro_educativo'] = $this->cargarDatos_formulario_registro_educativo($idSolicitud);
-		$data['data_antecedentes_academicos'] = $this->cargarDatos_formulario_antecedentes_academicos($idSolicitud);
-		$data['data_jornadas_actualizacion'] = $this->cargarDatos_formulario_jornadas_actualizacion($idSolicitud);
-		$data['data_plataforma'] = $this->cargarDatos_formulario_datos_plataforma($idSolicitud);
-		$data['data_modalidad_en_linea'] = $this->cargarDatos_modalidad_en_linea($idSolicitud);
-		$data['data_programas'] = $this->cargarDatos_programas($idSolicitud);
-		$data["camara"] = $this->cargarCamaraComercio();
-		$data['informacionModal'] = $this->cargar_informacionModal();
-		$this->load->view('include/header', $data);
-		$this->load->view('paneles/solicitud', $data);
-		$this->load->view('include/footer', $data);
-		$this->logs_sia->logs('PLACE_USER');
-	}
+
 	// Variables de Session
 	public function datosSession()
 	{
@@ -81,8 +45,7 @@ class Solicitudes extends CI_Controller
 				'modalidadesSolicitud' => json_encode($this->input->post('modalidades_solicitud'))
 			);
 
-			$estado = $this->estadoOrganizaciones();
-			$numeroSolicitudes = $this->numeroSolicitudes();
+
 			$data_update_solicitud = array(
 				'numeroSolicitudes' => $numeroSolicitudes += 1,
 				'fecha' =>  date('Y/m/d H:i:s'),

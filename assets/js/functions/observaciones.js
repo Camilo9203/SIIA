@@ -16,23 +16,7 @@ $("#verInfGenMenuAdmin").click(function () {
 	$("#plataforma").hide();
 	$("#enLinea").hide();
 	/** Formulario 1 Tablas **/
-	html = "";
-	obsForm = 0;
-	let data = {
-		id_organizacion: data_orgFinalizada["0"].organizaciones['id_organizacion'],
-		idSolicitud: data_orgFinalizada["0"].tipoSolicitud['0']['idSolicitud'],
-	}
-	// Consultar datos por ajax
-	$.ajax({
-		url: baseURL + "admin/cargar_todaInformacion",
-		type: "post",
-		dataType: "JSON",
-		data: data,
-		success: function (response) {
-			// Llenar tabla de observaciones en línea registrados
-			verObservaciones(1);
-		}
-	});
+	verObservaciones(1);
 });
 $("#verDocLegalMenuAdmin").click(function () {
 	$("#informacion").hide();
@@ -372,6 +356,7 @@ function verObservaciones(idForm) {
 		dataType: "JSON",
 		data: data,
 		success: function (response) {
+			console.log(idForm);
 			// Llenar tabla de datos en línea registrados
 			for (let i = 0; i < response.observaciones.length; i++) {
 				if (response.observaciones[i]['idForm'] == idForm) {
@@ -424,8 +409,9 @@ function verObservaciones(idForm) {
 /** Ver Información Organizaciones Finalizadas */
 $(document).on("click", ".ver_organizacion_finalizada", function () {
 	let $id_org = $(this).attr("data-organizacion");
+	let $idSolicitud = $(this).attr("data-solicitud");
 	$("#id_org_ver_form").remove();
-	$("body").append("<div id='id_org_ver_form' class='hidden' data-id='" + $id_org + "'>");
+	$("body").append("<div id='id_org_ver_form' class='hidden' data-id='" + $id_org + "' data-solicitud='"+ $idSolicitud + "'>");
 	console.log($(this).attr("data-solicitud"));
 	let data = {
 		id_organizacion: $id_org,
@@ -627,6 +613,7 @@ $(".guardarObservacionesForm1").click(function (){
 		id_formulario: 1,
 		formulario: "Observaciones Información General",
 		valueForm: "datosInformacionGeneral",
+		idSolicitud:  $("#id_org_ver_form").attr("data-solicitud"),
 		id: $("#id_org_ver_form").attr("data-id"),
 	}
 	guardarObservacion(data);
@@ -640,6 +627,7 @@ $(".guardarObservacionesForm2").click(function (){
 		id_formulario: 2,
 		formulario: "Documentación Legal",
 		valueForm: "datosDocumentacionLegal",
+		idSolicitud:  $("#id_org_ver_form").attr("data-solicitud"),
 		id: $("#id_org_ver_form").attr("data-id"),
 	}
 	guardarObservacion(data);
@@ -653,6 +641,7 @@ $(".guardarObservacionesForm3").click(function (){
 		id_formulario: 3,
 		formulario: "Observaciones Antecedentes Académicos",
 		valueForm: "datosAntecedentesAcademicos",
+		idSolicitud:  $("#id_org_ver_form").attr("data-solicitud"),
 		id: $("#id_org_ver_form").attr("data-id"),
 	}
 	guardarObservacion(data);
@@ -666,6 +655,7 @@ $(".guardarObservacionesForm4").click(function (){
 		id_formulario: 4,
 		formulario: "Jornadas de Actualización",
 		valueForm: "datosJornadasActualizacion",
+		idSolicitud:  $("#id_org_ver_form").attr("data-solicitud"),
 		id: $("#id_org_ver_form").attr("data-id"),
 	}
 	guardarObservacion(data);
@@ -679,6 +669,7 @@ $(".guardarObservacionesForm5").click(function (){
 		id_formulario: 5,
 		formulario: "Observaciones Programas Básicos",
 		valueForm: "datosProgramasBasicos",
+		idSolicitud:  $("#id_org_ver_form").attr("data-solicitud"),
 		id: $("#id_org_ver_form").attr("data-id"),
 	}
 	guardarObservacion(data);
@@ -692,6 +683,7 @@ $(".guardarObservacionesForm6").click(function (){
 		id_formulario: 6,
 		formulario: "Observaciones Generales Facilitadores",
 		valueForm: "docentes",
+		idSolicitud:  $("#id_org_ver_form").attr("data-solicitud"),
 		id: $("#id_org_ver_form").attr("data-id"),
 	}
 	guardarObservacion(data);
@@ -705,6 +697,7 @@ $(".guardarObservacionesForm7").click(function (){
 		id_formulario: 7,
 		formulario: "Observaciones Plataforma Virtual",
 		valueForm: "datosPlataformaVirtual",
+		idSolicitud:  $("#id_org_ver_form").attr("data-solicitud"),
 		id: $("#id_org_ver_form").attr("data-id"),
 	}
 	guardarObservacion(data);
@@ -718,6 +711,7 @@ $(".guardarObservacionesForm8").click(function (){
 		id_formulario: 8,
 		formulario: "Observaciones Modalidad En Linea",
 		valueForm: "datosEnLinea",
+		idSolicitud:  $("#id_org_ver_form").attr("data-solicitud"),
 		id: $("#id_org_ver_form").attr("data-id"),
 	}
 	guardarObservacion(data);
@@ -756,7 +750,6 @@ function eliminarObservacion(data){
 $(document).on("click", ".eliminarDataTabla", function () {
 	$(this).parent().parent().hide();
 });
-
 function guardarObservacion(data) {
 	event.preventDefault();
 	$.ajax({
@@ -773,7 +766,7 @@ function guardarObservacion(data) {
 			notificacion(response.msg, "success");
 		},
 		error: function (ev) {
-			notificacion("Ocurrio un error no se guardo.");
+			notificacion("Ocurrió un error no se guardo.");
 			console.log(ev);
 			event.preventDefault();
 		},
