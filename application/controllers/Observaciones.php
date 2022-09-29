@@ -101,7 +101,7 @@ class Observaciones extends CI_Controller
 		switch ($type) {
 			case 'obs':
 				$asunto = "Observaciones";
-				$mensaje = "Organización " . $to_correo->nombreOrganizacion . ": Organizaciones Solidarias le informa que se realizó la revisión de su solicitud de acreditación. Para verificar la totalidad de los requisitos establecidos en la normatividad vigente es necesario complementar la información presentada. Le invitamos a ingresar al aplicativo SIIA, donde encontrará las observaciones respectivas en cada parte del formulario y desarrollar lo indicado en cada una de ellas. Tenga presente que usted cuenta con un plazo máximo de diez (10) días hábiles para realizar los ajustes sugeridos y enviar nuevamente la información. De lo contrario su solicitud será archivada aplicando lo establecido en el numeral 4 del artículo 5 de la Resolución 110 de 2016.";
+				$mensaje = "Organización " . $to_correo->nombreOrganizacion . ": Organizaciones Solidarias le informa que se realizó la revisión de su solicitud de acreditación. Para verificar la totalidad de los requisitos establecidos en la normatividad vigente es necesario complementar la información presentada. Le invitamos a ingresar al aplicativo SIIA, donde encontrará las observaciones respectivas en cada parte del formulario y desarrollar lo indicado en cada una de ellas. Tenga presente que usted cuenta con un plazo máximo de cinco (5) días hábiles para realizar los ajustes sugeridos y enviar nuevamente la información. De lo contrario su solicitud será archivada aplicando lo establecido en el numeral 4 del artículo 5 de la Resolución 110 de 2016.";
 				break;
 			case 'plan':
 				$asunto = "Plan de mejoramiento";

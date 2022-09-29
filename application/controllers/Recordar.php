@@ -153,7 +153,7 @@ class Recordar extends CI_Controller {
 									$this->envio_mail_tiempoUser($mensaje, $direccionOrganizacion, $direccionRepresentante);
 							}
 							if(($dia_ - $dia) == 0){
-								$mensaje = "Hola, la organización: ".$nombreOrganizacion.", Organizaciones Solidarias le recuerda que en diez (10) días hábiles vence el plazo para enviar la información complementaria requerida en la verificación de requisitos de su solicitud de acreditación. Tenga presente que vencido este tiempo su solicitud será archivada aplicando lo establecido en el numeral 4 del artículo 5 de la Resolución 110 de 2016.\nDatos:\nCorreo organización:".$direccionOrganizacion."\nCorreo representante:".$direccionRepresentante."\nNIT:".$nit.".";
+								$mensaje = "Hola, la organización: ".$nombreOrganizacion.", Organizaciones Solidarias le recuerda que en cinco (5) días hábiles vence el plazo para enviar la información complementaria requerida en la verificación de requisitos de su solicitud de acreditación. Tenga presente que vencido este tiempo su solicitud será archivada aplicando lo establecido en el numeral 4 del artículo 5 de la Resolución 110 de 2016.\nDatos:\nCorreo organización:".$direccionOrganizacion."\nCorreo representante:".$direccionRepresentante."\nNIT:".$nit.".";
 									$this->envio_mail_tiempoUser($mensaje, $direccionOrganizacion, $direccionRepresentante);
 							}
 						}
@@ -267,7 +267,7 @@ class Recordar extends CI_Controller {
 								$this->envio_mail_tiempo_admin($mensaje, CORREO_AREA, CORREO_COORDINADOR);
 						}
 						if(($dia_ - $dia) == 0){
-							$mensaje = "Hola, la organización: ".$nombreOrganizacion.", Organizaciones Solidarias le recuerda que en diez (10) días hábiles vence el plazo para enviar la información complementaria requerida en la verificación de requisitos de su solicitud de acreditación. Tenga presente que vencido este tiempo su solicitud será archivada aplicando lo establecido en el numeral 4 del artículo 5 de la Resolución 110 de 2016.\nDatos:\nCorreo organización:".$direccionOrganizacion."\nCorreo representante:".$direccionRepresentante."\nNIT:".$nit.".";
+							$mensaje = "Hola, la organización: ".$nombreOrganizacion.", Organizaciones Solidarias le recuerda que en cinco (5) días hábiles vence el plazo para enviar la información complementaria requerida en la verificación de requisitos de su solicitud de acreditación. Tenga presente que vencido este tiempo su solicitud será archivada aplicando lo establecido en el numeral 4 del artículo 5 de la Resolución 110 de 2016.\nDatos:\nCorreo organización:".$direccionOrganizacion."\nCorreo representante:".$direccionRepresentante."\nNIT:".$nit.".";
 								$this->envio_mail_tiempo_admin($mensaje, CORREO_DIRECTOR, CORREO_AREA);
 						}
 					}

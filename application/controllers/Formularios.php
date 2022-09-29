@@ -3234,7 +3234,7 @@ class Formularios extends CI_Controller
 		switch ($tipo) {
 			case 'finaliza':
 				$asunto = "Finaliza el diligenciamiento de la solicitud";
-				$mensaje = "Organización " . $to_correo->nombreOrganizacion . ": Organizaciones Solidarias le informa que su solicitud de acreditación ha sido enviada por el SIIA para ser evaluada. En este momento no puede visualizarla en el aplicativo hasta que se realice la verificación de requisitos. De ser necesario, le será devuelta con las observaciones pertinentes, dentro de los siguientes diez (10) días hábiles. 
+				$mensaje = "Organización " . $to_correo->nombreOrganizacion . ": Organizaciones Solidarias le informa que su solicitud de acreditación ha sido enviada por el SIIA para ser evaluada. En este momento no puede visualizarla en el aplicativo hasta que se realice la verificación de requisitos. De ser necesario, le será devuelta con las observaciones pertinentes, dentro de los siguientes cinco (5) días hábiles. 
 					<br/><br/>
 					<label>Datos de recepción:</label> <br/>
 					Fecha de recepcion de solicitud: <strong>" . date("Y-m-d h:m:s") . "</strong>. <br/> 
@@ -3247,7 +3247,6 @@ class Formularios extends CI_Controller
 				break;
 			case 'docentes':
 				$asunto = "Docentes";
-				$mensaje = "Organización " . $to_correo->nombreOrganizacion . ": Organizaciones Solidarias le informa que  por medio del SIIA se recibió de su entidad una solicitud de revisión de hojas de vida para ampliar el equipo de facilitadores aprobados. En los próximos  diez (10) días hábiles será realizada la verificación de los requisitos establecidos en el numeral 6 del artículo 4 de la resolución 110 de 2016. Una vez realizada esta verificación, se procederá a  actualizar el listado de facilitadores de la entidad acreditada.";
 				break;
 			default:
 				$asunto = "";
