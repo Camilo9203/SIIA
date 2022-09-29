@@ -531,24 +531,8 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 				}
 			}
 			$("#archivos_informacionGeneral").append('<div class="form-group" id="documentacionLegal-observacionesGeneral' + i + '">');
-			for (let i = 0; i < response.observaciones.length; i++) {
-				if (response.observaciones[i]['idForm'] == "1") {
-					obsForm += 1;
-				}
-			}
-			if (obsForm == 0) {
-				html += "<td colspan='4'>No hay datos </td></tr>";
-			}
-			else {
-				for (let i = 0; i < response.observaciones.length; i++) {
-					if (response.observaciones[i]['idForm'] == "1") {
-						html += "<tr><td>" + response.observaciones[i]['fechaObservacion'] + "</td>";
-						html += "<td>" + response.observaciones[i]['numeroRevision'] + "</td>";
-						html += "<td>" + response.observaciones[i]['observacion'] + "</td>";
-						html += "<td><button class='btn btn-danger btn-sm eliminarObservacionForm eliminarDataTabla' data-id=" + response.observaciones[i]['id_observacion'] + ">Eliminar <i class='fa fa-file-o' aria-hidden='true'></i></button></td></tr>";
-					}
-				}
-			}
+			// Observaciones formulario 1
+			verObservaciones(1);
 			$(".tabla_observaciones_form1").html(html);
 			/** Formulario 4 Archivos **/
 			$("#archivosJornadasActualizacion").append('<div class="col-md-12" id="archivos_jornadasActualizacion">');
