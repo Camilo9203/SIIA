@@ -5012,22 +5012,23 @@ $(document).ready(function () {
 
 	// TODO: Modal Asignar Evaluador Organizacion
 	$(document).on("click", "#verModalAsignar", function () {
-		$id_organizacion = $(this).attr("data-organizacion");
-		$nombreOrganizacion = $(this).attr("data-nombre");
-		$numNIT = $(this).attr("data-nit");
+		let id_organizacion = $(this).attr("data-organizacion");
+		let nombreOrganizacion = $(this).attr("data-nombre");
+		let numNIT = $(this).attr("data-nit");
+		let idSolicitud = $(this).attr("data-solicitud");
 
-		$("#idAsigOrg").html($id_organizacion);
-		$("#nombreAsigOrg").html($nombreOrganizacion);
-		$("#nitAsigOrg").html($numNIT);
+		$("#idAsigOrg").html(id_organizacion);
+		$("#nombreAsigOrg").html(nombreOrganizacion);
+		$("#nitAsigOrg").html(numNIT);
+		$("#idSolicitud").html(idSolicitud);
 	});
 	// TODO: Asignar evaluador a organización
 	$("#asignarOrganizacionEvaluador").click(function () {
-		$id_organizacion = $("#idAsigOrg").html();
-		$evaluadorAsignar = $("#evaluadorAsignar").val();
 
 		data = {
-			id_organizacion: $id_organizacion,
-			evaluadorAsignar: $evaluadorAsignar,
+			id_organizacion: $("#idAsigOrg").html(),
+			idSolicitud: $("#idSolicitud").html(),
+			evaluadorAsignar: $("#evaluadorAsignar").val(),
 		};
 
 		$.ajax({

@@ -963,7 +963,7 @@ class Panel extends CI_Controller
 				'numeroSolicitudes' => $numeroSolicitudes += 1,
 				'fecha' =>  date('Y/m/d H:i:s'),
 				'idSolicitud' => $idSolicitud,
-				'organizaciones_id_organizacion' => $organizacion->id_organizacion
+				'organizaciones_id_organizacion' => $organizacion->id_organizacion,
 			);
 			$data_tipoSolicitud = array(
 				'tipoSolicitud' =>$tipoSolicitud,

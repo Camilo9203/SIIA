@@ -10,10 +10,10 @@ class Admin extends CI_Controller
 		verify_session_admin();
 		$this->load->model('DocentesModel');
 	}
-	// Encripción para recuperación de contraseña
+	// Desencripción para recuperación de contraseña
 	private function mcdec()
 	{
-		$password = "AhUR7s1YGYVITHmv47l1WDp8F2oM8rIShQhwBTNzG+fizZed6EmpKm+3Ag0OCRhZ+nj5ElyWzXXxTRj1ulbJHCyla/XcrrnditJUt+ubHMxmaXgv1ZmeYG1WxkHNLg+X|drPbfaS9utSAc92FpzkW+FsfFQfaOPEVBRCIIO8WmMo=";
+		$password = "eaPO2mivrzzMiliHqIG/N2Y4tV3smaddnLMendilwC93JnwKzqzRgemPXFmc9hhWK0ISANyeFzQVoIpYPJB5aYHGUKXcG+VJwTyrwUcYoAm/L4F/mTpNk5MDA4bfFtJL|V38hF55/fBM6WoGu31TyuZOADQZpCGrM7EifNUyrJzM=";
 		$passwor2 = mc_decrypt($password, KEY_RDEL);
 		echo json_encode($passwor2);
 	}
@@ -1178,7 +1178,7 @@ class Admin extends CI_Controller
 		$data['hora'] = $hora;
 		$data['fecha'] = $fecha;
 		$data['departamentos'] = $this->cargarDepartamentos();
-		$data['organizaciones_en_proceso'] = $this->cargar_organizacionesFinalizadasObs();
+		$data['organizaciones_en_proceso'] = $this->cargar_organizacionesFinalizadas();
 		$data['administradores'] = $this->cargar_administradores();
 
 		$this->load->view('include/header', $data);
@@ -1533,21 +1533,19 @@ class Admin extends CI_Controller
 		$id_organizacion = $this->input->post('id_organizacion');
 		$evaluadorAsignar = $this->input->post('evaluadorAsignar');
 
-		$organizacion = $this->db->select("*")->from("organizaciones")->where("id_organizacion", $id_organizacion)->get()->row();
-		$evaluador = $this->db->select("*")->from("administradores")->where("usuario", $evaluadorAsignar)->get()->row();
-		$nombreOrganizacion = $organizacion->nombreOrganizacion;
+		$organizacion = $this->db->select("*")->from("organizaciones")->where("id_organizacion", $this->input->post('id_organizacion'))->get()->row();
+		$evaluador = $this->db->select("*")->from("administradores")->where("usuario", $this->input->post('evaluadorAsignar'))->get()->row();
 		$nombreEvaluador = $evaluador->primerNombreAdministrador . " " .  $evaluador->primerApellidoAdministrador;
-		$correoEvaluador = $evaluador->direccionCorreoElectronico;
 
 		$data_asignar = array(
-			'asignada' => $evaluadorAsignar
+			'asignada' => $this->input->post('evaluadorAsignar')
 		);
 
-		$this->db->where('id_organizacion', $id_organizacion);
-		if ($this->db->update('organizaciones', $data_asignar)) {
-			$this->logs_sia->session_log('Se asigno ' . $nombreOrganizacion . ' a ' . $nombreEvaluador . ' en la fecha ' . date("Y/m/d H:m:s") . '.');
-			echo json_encode(array('url' => "panelAdmin/organizaciones/asignar", 'msg' => 'Se asigno ' . $nombreOrganizacion . ' a ' . $nombreEvaluador . ' en la fecha ' . date("Y/m/d H:m:s") . '.'));
-			$this->envio_mail_admin("asignar", $correoEvaluador, 2, $organizacion);
+		$this->db->where('idSolicitud', $this->input->post('idSolicitud'));
+		if ($this->db->update('solicitudes', $data_asignar)) {
+			$this->logs_sia->session_log('Se asigno ' . $organizacion->nombreOrganizacion . ' a ' . $nombreEvaluador . ' en la fecha ' . date("Y/m/d H:m:s") . '.');
+			echo json_encode(array('url' => "panelAdmin/organizaciones/asignar", 'msg' => 'Se asigno ' . $organizacion->nombreOrganizacion . ' a ' . $nombreEvaluador . ' en la fecha ' . date("Y/m/d H:m:s") . '.'));
+			$this->envio_mail_admin("asignar", $evaluador->direccionCorreoElectronico, 2, $organizacion);
 		}
 	}
 	// TODO: Asignar evaluador a docente a evaluar
@@ -3076,8 +3074,8 @@ class Admin extends CI_Controller
 		5 => '5 (Lowest)'
 		 **/
 		$this->email->from(CORREO_SIA, "Acreditaciones");
-		$this->email->to(CORREO_SIA); // Pruebas
-		// $this->email->to($correoAdmin);
+		//$this->email->to(CORREO_SIA); // Pruebas
+		$this->email->to($correoAdmin);
 		$this->email->subject('SIIA: ' . $asunto);
 		$this->email->set_priority($prioridad);
 
