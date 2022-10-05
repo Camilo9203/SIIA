@@ -7,6 +7,7 @@ class Panel extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
+		$this->load->helper(array('download', 'file', 'url', 'html', 'form'));
 		verify_session();
 	}
 
@@ -20,40 +21,40 @@ class Panel extends CI_Controller
 		$nombre_usuario = $this->session->userdata('nombre_usuario');
 		$usuario_id = $this->session->userdata('usuario_id');
 		$tipo_usuario = $this->session->userdata('type_user');
-		$hora = date("H:i", time());
-		$fecha = date('Y/m/d');
 
-		$data['title'] = 'Panel Principal';
-		$data['logged_in'] = $logged;
-		$datos_usuario = $this->db->select('usuario')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
-		$data['nombre_usuario'] = $datos_usuario->usuario;
-		$data['usuario_id'] = $usuario_id;
-		$data['tipo_usuario'] = $tipo_usuario;
-		$data['hora'] = $hora;
-		$data['fecha'] = $fecha;
-		$data['estado'] = $this->estadoOrganizaciones();
-		$data['departamentos'] = $this->cargarDepartamentos();
+		$usuario = $this->db->select('usuario')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
+		$data = array (
+			'title' => 'Panel Principal',
+			'logged_in' => $logged,
+			'nombre_usuario' => $usuario->usuario,
+			'usuario_id' => $usuario_id,
+			'tipo_usuario' => $tipo_usuario,
+			'hora' => date("H:i", time()),
+			'fecha' => date('Y/m/d'),
+			'departamentos' => $this->cargarDepartamentos(),
+			'data_organizacion' => $this->cargarDatosOrganizacion(),
+			'data_solicitudes' => $this->cargarSolicitudes()
+	);
 
-		$data['data_organizacion'] = $this->cargarDatosOrganizacion();
-		$data['data_informacion_general'] = $this->cargarDatos_formulario_informacion_general_entidad();
-		$data['data_documentacion_legal'] = $this->cargarDatos_formulario_documentacion_legal();
-		$data['data_registro_educativo'] = $this->cargarDatos_formulario_registro_educativo();
-		$data['data_antecedentes_academicos'] = $this->cargarDatos_formulario_antecedentes_academicos();
-		$data['data_jornadas_actualizacion'] = $this->cargarDatos_formulario_jornadas_actualizacion();
-		$data['data_basicos_programas'] = $this->cargarDatos_formulario_basicos_programas();
-		$data['data_aval_economia'] = $this->cargarDatos_formulario_aval_economia();
-		$data['data_programas_avalar'] = $this->cargarDatos_formulario_programas_avalar();
-		$data['data_plataforma'] = $this->cargarDatos_formulario_datos_plataforma();
+		//$data['estado'] = $this->estadoOrganizaciones();
+		//$data['data_informacion_general'] = $this->cargarDatos_formulario_informacion_general_entidad();
+		//$data['data_documentacion_legal'] = $this->cargarDatos_formulario_documentacion_legal();
+		//$data['data_registro_educativo'] = $this->cargarDatos_formulario_registro_educativo();
+		//$data['data_antecedentes_academicos'] = $this->cargarDatos_formulario_antecedentes_academicos();
+		//$data['data_jornadas_actualizacion'] = $this->cargarDatos_formulario_jornadas_actualizacion();
+		//$data['data_basicos_programas'] = $this->cargarDatos_formulario_basicos_programas();
+		//$data['data_plataforma'] = $this->cargarDatos_formulario_datos_plataforma();
+		//$data['data_modalidad_en_linea'] = $this->cargarDatos_modalidad_en_linea();
+		//$data['data_programas'] = $this->cargarDatos_programas();
 		$data["camara"] = $this->cargarCamaraComercio();
 		$data['informacionModal'] = $this->cargar_informacionModal();
-
 		$this->load->view('include/header', $data);
 		$this->load->view('paneles/panel', $data);
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
 
-	public function estadoSolicitud()
+	public function estadoSolicitud($idSolicitud)
 	{
 		date_default_timezone_set("America/Bogota");
 		$logged = $this->session->userdata('logged_in');
@@ -71,11 +72,12 @@ class Panel extends CI_Controller
 		$data['tipo_usuario'] = $tipo_usuario;
 		$data['hora'] = $hora;
 		$data['fecha'] = $fecha;
-		$data['data_organizacion'] = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row()->id_organizacion;
-		$data['idSolicitud'] = $this->idSolicitud();
-		$data['observaciones'] = $this->cargarObservaciones();
-		$data['estadoSolicitud'] = $this->cargarEstadoSolicitudAdmin();
-		$data['archivosPlataforma'] = $this->cargarObservacionesPlataforma();
+		$data['organizacion'] = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
+		$data['observaciones'] = $this->cargarObservaciones($idSolicitud);
+		$data['observacionesDocentes'] = $this->cargarObservaciones($data['organizacion']->id_organizacion);
+		$data['solicitud'] = $this->cargarSolicitud($idSolicitud);
+		//$data['idSolicitud'] = $this->idSolicitud();
+		//$data['archivosPlataforma'] = $this->cargarObservacionesPlataforma();
 
 		$this->load->view('include/header', $data);
 		$this->load->view('paneles/estadoSolicitud', $data);
@@ -183,7 +185,6 @@ class Panel extends CI_Controller
 	public function cargarDatosOrganizacion()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
-
 		$datos_organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
 		return $datos_organizacion;
 	}
@@ -232,77 +233,50 @@ class Panel extends CI_Controller
 		$datos_formulario = $this->db->select("*")->from("informacionGeneral")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
 		return $datos_formulario;
 	}
-
-	public function cargarDatos_formulario_documentacion_legal()
+	public function cargarDatos_formulario_documentacion_legal($idSolicitud)
 	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-		$datos_formulario = $this->db->select("*")->from("documentacionLegal")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
+		$documentacion = $this->db->select('*')->from('documentacion')->where('idSolicitud', $idSolicitud)->get()->row();
+		if ($documentacion->tipo == 1) {
+			return $documentacion;
+		}
+		else if ($documentacion->tipo == 2) {
+			$CertificadosExistencias = $this->db->select('*')->from('certificadoExistencia')->where('idSolicitud',$idSolicitud)->get()->row();
+			return $CertificadosExistencias;
+		}
+		else if ($documentacion->tipo == 3) {
+			$registrosEducativos =  $this->db->select('*')->from('registroEducativoProgramas')->where('idSolicitud', $idSolicitud)->get()->row();
+			return $registrosEducativos;
+		}
+	}
+	public function cargarDatos_formulario_registro_educativo($idSolicitud)
+	{
+		$data = $this->db->select("*")->from("registroEducativoProgramas")->where("idSolicitud", $idSolicitud)->get()->result();
+		return $data;
+	}
+	public function cargarDatos_formulario_antecedentes_academicos($idSolicitud)
+	{
+		$datos_formulario = $this->db->select("*")->from("antecedentesAcademicos")->where("idSolicitud", $idSolicitud)->get()->result();
 		return $datos_formulario;
 	}
-
-	public function cargarDatos_formulario_registro_educativo()
+	public function cargarDatos_formulario_jornadas_actualizacion($idSolicitud)
 	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-		$datos_formulario = $this->db->select("*")->from("registroEducativoProgramas")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
+		$datos_formulario = $this->db->select("*")->from("jornadasActualizacion")->where("idSolicitud", $idSolicitud)->get()->result();
 		return $datos_formulario;
 	}
-
-	public function cargarDatos_formulario_antecedentes_academicos()
+	public function cargarDatos_formulario_datos_plataforma($idSolicitud)
 	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-		$datos_formulario = $this->db->select("*")->from("antecedentesAcademicos")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
-		return $datos_formulario;
+		$data = $this->db->select("*")->from("datosAplicacion")->where("idSolicitud", $idSolicitud)->get()->result();
+		return $data;
 	}
-
-	public function cargarDatos_formulario_jornadas_actualizacion()
+	public function cargarDatos_modalidad_en_linea($idSolicitud)
 	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-		$datos_formulario = $this->db->select("*")->from("jornadasActualizacion")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
-		return $datos_formulario;
+		$data = $this->db->select("*")->from("datosEnLinea")->where("idSolicitud", $idSolicitud)->get()->result();
+		return $data;
 	}
-
-	public function cargarDatos_formulario_aval_economia()
+	public function cargarDatos_programas($idSolicitud)
 	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-		$datos_formulario = $this->db->select("*")->from("programasAvalEconomia")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		return $datos_formulario;
-	}
-
-	public function cargarDatos_formulario_basicos_programas()
-	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-		$datos_formulario = $this->db->select("*")->from("datosBasicosProgramas")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		return $datos_formulario;
-	}
-
-	public function cargarDatos_formulario_programas_avalar()
-	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-		$datos_formulario = $this->db->select("*")->from("programasAvalar")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
-		return $datos_formulario;
-	}
-
-	public function cargarDatos_formulario_datos_plataforma()
-	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-		$datos_formulario = $this->db->select("*")->from("datosAplicacion")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
-		return $datos_formulario;
+		$data = $this->db->select("*")->from("datosProgramas")->where("idSolicitud", $idSolicitud)->get()->result();
+		return $data;
 	}
 
 	public function cargarDepartamentos()
@@ -334,21 +308,64 @@ class Panel extends CI_Controller
 			echo json_encode(array('url' => "", 'msg' => "Se elimino el programa."));
 		}
 	}
-
 	public function eliminarDocumentacionLegal()
 	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-
-		$documentacion = $this->input->post('documentacion');
-
-		$this->db->where('id_documentacionLegal', $documentacion)->where('organizaciones_id_organizacion', $id_organizacion);
-		if ($this->db->delete('documentacionLegal')) {
-			echo json_encode(array('url' => "", 'msg' => "Se elimino la documentacion legal."));
+		$archivo = $this->db->select('*')->from('archivos')->where('id_registro', $this->input->post('id'))->get()->row();
+		$this->db->where('id_archivo', $archivo->id_archivo);
+		if($this->db->delete('archivos')){
+			unlink($this->input->post('ruta') . $archivo->nombre);
+			switch ($this->input->post('tipo')) {
+				case 2:
+					$documentacion = $this->db->select('*')->from('documentacion')->where('id_tipoDocumentacion', $this->input->post('id'))->get()->row();
+					$this->db->where('id_tipoDocumentacion', $documentacion->id_tipoDocumentacion);
+					if ($this->db->delete('documentacion')) {
+							echo json_encode(array('url' => "panel", 'msg' => "Se eliminaron los datos de camara de comercio."));
+					}
+					else {
+						echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los datos de camara de comercio."));
+					}
+					break;
+				case 2.1:
+					$certificadoExistencia = $this->db->select('*')->from('certificadoExistencia')->where('id_certificadoExistencia', $this->input->post('id'))->get()->row();
+					$documentacion = $this->db->select('*')->from('documentacion')->where('idSolicitud', $certificadoExistencia->idSolicitud)->get()->row();
+					$this->db->where('id_tipoDocumentacion', $documentacion->id_tipoDocumentacion);
+					if ($this->db->delete('documentacion')) {
+						$this->db->where('id_certificadoExistencia', $certificadoExistencia->id_certificadoExistencia);
+						if ($this->db->delete('certificadoExistencia')) {
+							echo json_encode(array('url' => "panel", 'msg' => "Se eliminaron los datos del certificado existencia."));
+						}
+						else {
+							echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los datos del certificado existencia."));
+						}
+					}
+					else {
+						echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los datos de la documentación legal."));
+					}
+					break;
+				case 2.2:
+					$registroEducativo = $this->db->select('*')->from('registroEducativoProgramas')->where('id_registroEducativoPro', $this->input->post('id'))->get()->row();
+					$documentacion = $this->db->select('*')->from('documentacion')->where('idSolicitud', $registroEducativo->idSolicitud)->get()->row();
+					$this->db->where('id_tipoDocumentacion', $documentacion->id_tipoDocumentacion);
+					if ($this->db->delete('documentacion')) {
+						$this->db->where('id_registroEducativoPro', $registroEducativo->id_registroEducativoPro);
+						if ($this->db->delete('registroEducativoProgramas')) {
+							echo json_encode(array('url' => "panel", 'msg' => "Se eliminaron los datos del registro educativo."));
+						}
+						else {
+							echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los datos del registro educativo."));
+						}
+					}
+					else {
+						echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los datos de la documentación legal."));
+					}
+					break;
+				default:
+			}
+		}
+		else {
+			echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los archivos, vuelve a intentar o comunicate con el administrador."));
 		}
 	}
-
 	public function eliminarAntecedentes()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -432,19 +449,43 @@ class Panel extends CI_Controller
 			echo json_encode(array('url' => "", 'msg' => "Se eliminaron los datos de la plataforma."));
 		}
 	}
-
-	public function cargarObservaciones()
+	public function eliminarDatosEnLinea()
 	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
+		$archivo = $this->db->select('*')->from('archivos')->where('id_registro', $this->input->post('id'))->get()->row();
+		$this->db->where('id_archivo', $archivo->id_archivo);
+		if($this->db->delete('archivos')){
+			unlink('uploads/instructivoEnLinea/' . $archivo->nombre);
+			$this->db->where('id', $this->input->post('id'));
+			if ($this->db->delete('datosEnLinea')) {
+				echo json_encode(array('url' => "panel", 'msg' => "Se eliminaron los datos de la herramienta."));
+			}
+			else {
+				echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los datos de la herramienta."));
+			}
+		}
+	}
+	public function eliminarDatosProgramas()
+	{
+		$programa = $this->db->select('*')->from('datosProgramas')->where('id', $this->input->post('id'))->get()->row();
+		$this->db->where('id', $programa->id);
+		if ($this->db->delete('datosProgramas')) {
+			echo json_encode(array('url' => "panel", 'msg' => "Se eliminaron los datos de aceptación del programa: " . $programa->nombrePrograma, 'status' => 1));
+		}
+		else {
+			echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los datos de aceptación del programa: " . $programa->nombrePrograma, 'status' => 2));
+		}
 
-		$numero_rev = $this->db->select("numeroRevisiones")->from("solicitudes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row()->numeroRevisiones;
+	}
 
-		$id_solicitud = $this->db->select("idSolicitud")->from("tipoSolicitud")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row()->idSolicitud;
-
-		$observaciones = $this->db->select("*")->from("observaciones")->where("numeroRevision", $numero_rev)->where("idSolicitud", $id_solicitud)->where("organizaciones_id_organizacion", $id_organizacion)->order_by("valueForm", "asc")->get()->result();
+	public function cargarObservaciones($idSolicitud)
+	{
+		$observaciones = $this->db->select("*")->from("observaciones")->where("idSolicitud", $idSolicitud)->order_by("valueForm", "asc")->get()->result();
 		return $observaciones;
+	}
+	public function cargarObservacionesDocentes($idOrg)
+	{
+		//$observacionesDocentes = $this->db->select("*")->from("observaciones")->where("organizaciones_id_organizacion", $idOrg)->where("")->order_by("valueForm", "asc")->get()->result();
+		return $observacionesDocentes;
 	}
 
 	public function cargarObservacionesPlataforma()
@@ -526,60 +567,63 @@ class Panel extends CI_Controller
 		return $docentes;
 	}
 
-	public function cargarEstadoSolicitudAdmin()
+	public function cargarEstadoSolicitudAdmin($idSolicitud)
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
 		$id_organizacion = $datos_organizacion->id_organizacion;
 
-		$formularios = $this->verificarFormularios();
-		$numeroSolicitudes = $this->numeroSolicitudes();
-		$estadoOrganizaciones = $this->estadoOrganizaciones();
-		$estadoAnterior = $this->estadoAnteriorOrganizaciones();
-		$tipoSolicitud = $this->cargarTipoSolicitud();
-		$motivoSolicitud = $this->cargarMotivoSolicitud();
-		$modalidadSolicitud = $this->cargarModalidadSolicitud();
-		$numeroRevisiones = $this->numeroRevisiones();
-		$fechaUltimaRevision = $this->fechaUltimaRevision();
+		$formularios = $this->verificarFormularios($idSolicitud);
+		//$solicitudes = $this->solicitudes();
+		$estadoOrganizaciones = $this->estadoOrganizaciones($idSolicitud);
+		//$estadoAnterior = $this->estadoAnteriorOrganizaciones();
+		$tipoSolicitud = $this->cargarTipoSolicitud($idSolicitud);
+		$motivoSolicitud = $this->cargarMotivoSolicitud($idSolicitud);
+		$modalidadSolicitud = $this->cargarModalidadSolicitud($idSolicitud);
+		$numeroRevisiones = $this->numeroRevisiones($idSolicitud);
+		$fechaUltimaRevision = $this->fechaUltimaRevision($idSolicitud);
 
-		return array("numero" => $numeroSolicitudes, "estado" => $estadoOrganizaciones, "tipoSolicitud" => $tipoSolicitud, "modalidadSolicitud" => $modalidadSolicitud, "motivoSolicitud" => $motivoSolicitud, "numeroRevisiones" => $numeroRevisiones, "fechaUltimaRevision" => $fechaUltimaRevision, 'estadoAnterior' => $estadoAnterior);
+		return array("numero" => $solicitudes, "estado" => $estadoOrganizaciones, "tipoSolicitud" => $tipoSolicitud, "modalidadSolicitud" => $modalidadSolicitud, "motivoSolicitud" => $motivoSolicitud, "numeroRevisiones" => $numeroRevisiones, "fechaUltimaRevision" => $fechaUltimaRevision, 'estadoAnterior' => $estadoAnterior);
 	}
 
 	public function cargarEstadoSolicitud()
 	{
+
+		$idSolicitud = $this->input->post('solicitud');
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
 		$id_organizacion = $datos_organizacion->id_organizacion;
-
-		$formularios = $this->verificarFormularios();
+		$formularios = $this->verificarFormularios($idSolicitud);
 		$numeroSolicitudes = $this->numeroSolicitudes();
-		$estadoOrganizaciones = $this->estadoOrganizaciones();
-		$estadoAnterior = $this->estadoAnteriorOrganizaciones();
-		$tipoSolicitud = $this->cargarTipoSolicitud();
-		$motivoSolicitud = $this->cargarMotivoSolicitud();
-		$modalidadSolicitud = $this->cargarModalidadSolicitud();
+		$estadoOrganizaciones = $this->estadoOrganizaciones($idSolicitud);
+		//$estadoAnterior = $this->estadoAnteriorOrganizaciones();
+		$tipoSolicitud = $this->cargarTipoSolicitud($idSolicitud);
+		$motivoSolicitud = $this->cargarMotivoSolicitud($idSolicitud);
+		$motivosSolicitud = $this->cargarMotivosSolicitud($idSolicitud);
+		$modalidadSolicitud = $this->cargarModalidadSolicitud($idSolicitud);
+		$programas = $this->cargarDatos_programas($idSolicitud);
 
 		switch ($estadoOrganizaciones) {
 			case "En Proceso":
 				if ($tipoSolicitud != NULL || $tipoSolicitud != "Eliminar" && $estadoOrganizaciones == "En Proceso") {
-					echo json_encode(array('url' => "panel", 'msg' => "Continue diligenciando los formularios, Solicitud número: " . $numeroSolicitudes, 'tipo' => $tipoSolicitud, "numero" => $numeroSolicitudes, 'motivo' => $motivoSolicitud, 'modalidad' => $modalidadSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior));
+					echo json_encode(array('url' => "panel", 'msg' => "Continue diligenciando los formularios, Solicitud número: " . $numeroSolicitudes, 'tipo' => $tipoSolicitud, "numero" => $numeroSolicitudes, 'motivo' => $motivoSolicitud, 'motivos' =>$motivosSolicitud, 'modalidad' => $modalidadSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior, 'programas' => $programas));
 				}
 				break;
 			case "En Proceso de Renovación":
 				if ($estadoOrganizaciones == "En Proceso de Renovación") {
-					echo json_encode(array('url' => "panel", 'msg' => "Continue diligenciando los formularios, solicitud número: " . $numeroSolicitudes, 'tipo' => $tipoSolicitud, "numero" => $numeroSolicitudes, 'motivo' => $motivoSolicitud, 'modalidad' => $modalidadSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior));
+					echo json_encode(array('url' => "panel", 'msg' => "Continue diligenciando los formularios, solicitud número: " . $numeroSolicitudes, 'tipo' => $tipoSolicitud, "numero" => $numeroSolicitudes, 'motivo' => $motivoSolicitud, 'motivos' =>$motivosSolicitud, 'modalidad' => $modalidadSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior, 'programas' => $programas));
 				}
 				break;
 			case "En Proceso de Actualización":
 				if ($numeroSolicitudes != "0" || $numeroSolicitudes != 0 && $estadoOrganizaciones == "En Proceso de Actualización") {
-					echo json_encode(array('url' => "panel", 'msg' => "Continue diligenciando los formularios, solicitud número: " . $numeroSolicitudes, 'tipo' => $tipoSolicitud, "numero" => $numeroSolicitudes, 'motivo' => $motivoSolicitud, 'modalidad' => $modalidadSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior));
+					echo json_encode(array('url' => "panel", 'msg' => "Continue diligenciando los formularios, solicitud número: " . $numeroSolicitudes, 'tipo' => $tipoSolicitud, "numero" => $numeroSolicitudes, 'motivo' => $motivoSolicitud, 'motivos' =>$motivosSolicitud, 'modalidad' => $modalidadSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior, 'programas' => $programas));
 				}
 				break;
 			case "En Observaciones":
-				echo json_encode(array('url' => "panel", 'msg' => "Verifique el estado de la acreditación y las observaciones en el panel.", 'tipo' => $tipoSolicitud, "numero" => $numeroSolicitudes, 'motivo' => $motivoSolicitud, 'modalidad' => $modalidadSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior));
+				echo json_encode(array('url' => "panel", 'msg' => "Verifique el estado de la acreditación y las observaciones en el panel.", 'tipo' => $tipoSolicitud, "numero" => $numeroSolicitudes, 'motivo' => $motivoSolicitud, 'motivos' =>$motivosSolicitud, 'modalidad' => $modalidadSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior, 'programas' => $programas));
 				break;
 			default:
-				echo json_encode(array('url' => "panel", 'msg' => "Verifique el estado de la acreditacion en el panel.", 'estado' => $numeroSolicitudes, 'tipo' => $tipoSolicitud, 'motivo' => $motivoSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior));
+				echo json_encode(array('url' => "panel", 'msg' => "Verifique el estado de la acreditacion en el panel.", 'estado' => $numeroSolicitudes, 'tipo' => $tipoSolicitud, 'motivo' => $motivoSolicitud, 'motivos' =>$motivosSolicitud, 'modalidad' => $modalidadSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior, 'programas' => $programas));
 				break;
 		}
 		// Para contar el array de formularios si se necesita (count($formularios) == 0)
@@ -588,93 +632,84 @@ class Panel extends CI_Controller
 	public function numeroSolicitudes()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-
-		$solicitudes = $this->db->select("numeroSolicitudes")->from("solicitudes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$numeroSolicitudes = $solicitudes->numeroSolicitudes;
-		return $numeroSolicitudes;
+		$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
+		$solicitudes = $this->db->select("*")->from("solicitudes")->where("organizaciones_id_organizacion", $organizacion->id_organizacion)->get()->result();
+		return count($solicitudes);
 	}
 
-	public function numeroRevisiones()
+	public function numeroRevisiones($idSolicitud)
 	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-
-		$revisiones = $this->db->select("numeroRevisiones")->from("solicitudes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
+		$revisiones = $this->db->select("numeroRevisiones")->from("solicitudes")->where("idSolicitud", $idSolicitud)->get()->row();
 		$numeroRevisiones = $revisiones->numeroRevisiones;
 		return $numeroRevisiones;
 	}
 
-	public function fechaUltimaRevision()
+	public function fechaUltimaRevision($idSolicitud)
 	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-
-		$fecha = $this->db->select("fechaUltimaRevision")->from("solicitudes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
+		$fecha = $this->db->select("fechaUltimaRevision")->from("solicitudes")->where("idSolicitud", $idSolicitud)->get()->row();
 		$fechaUltimaRevision = $fecha->fechaUltimaRevision;
 		return $fechaUltimaRevision;
 	}
-
-	public function cargarTipoSolicitud()
+	public function cargarSolicitudes()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
+		$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
+		$solicitudes = $this->db->select("*")->from("solicitudes")->join('tipoSolicitud', "tipoSolicitud.idSolicitud = solicitudes.idSolicitud")->join('estadoOrganizaciones', "estadoOrganizaciones.idSolicitud = solicitudes.idSolicitud")->where('solicitudes.organizaciones_id_organizacion', $organizacion->id_organizacion)->get()->result();
+		return $solicitudes;
+	}
+	public function cargarSolicitud($idSolicitud)
+	{
+		$usuario_id = $this->session->userdata('usuario_id');
+		$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
+		$solicitud = $this->db->select("*")->from("solicitudes")->join('tipoSolicitud', "tipoSolicitud.idSolicitud = solicitudes.idSolicitud")->join('estadoOrganizaciones', "estadoOrganizaciones.idSolicitud = solicitudes.idSolicitud")->where("solicitudes.idSolicitud", $idSolicitud)->get()->row();
+		return $solicitud;
+	}
 
-		$tipoSolicitud = $this->db->select("tipoSolicitud")->from("tipoSolicitud")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
+	// Cargar tipo solicitud
+	public function cargarTipoSolicitud($idSolicitud)
+	{
+		$tipoSolicitud = $this->db->select("tipoSolicitud")->from("tipoSolicitud")->where("idSolicitud", $idSolicitud)->get()->row();
 		$tipoSolicitudBD = $tipoSolicitud->tipoSolicitud;
 		return $tipoSolicitudBD;
 	}
-
-	public function cargarMotivoSolicitud()
+	// Cargar motivo solicitud
+	public function cargarMotivoSolicitud($idSolicitud)
 	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-
-		$motivoSolicitud = $this->db->select("motivoSolicitud")->from("tipoSolicitud")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
+		$motivoSolicitud = $this->db->select("motivoSolicitud")->from("tipoSolicitud")->where("idSolicitud", $idSolicitud)->get()->row();
 		$motivoSolicitudBD = $motivoSolicitud->motivoSolicitud;
 		return $motivoSolicitudBD;
 	}
-
-	public function cargarModalidadSolicitud()
+	// Cargar motivos solicitud
+	public function cargarMotivosSolicitud($idSolicitud)
 	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-
-		$modalidadSolicitud = $this->db->select("modalidadSolicitud")->from("tipoSolicitud")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
+		$motivosSolicitud = $this->db->select("motivosSolicitud")->from("tipoSolicitud")->where("idSolicitud", $idSolicitud)->get()->row();
+		$motivosSolicitudBD = $motivosSolicitud->motivosSolicitud;
+		return json_decode($motivosSolicitudBD);
+	}
+	// Cargar modalidad solicitud
+	public function cargarModalidadSolicitud($idSolicitud)
+	{
+		$modalidadSolicitud = $this->db->select("modalidadSolicitud")->from("tipoSolicitud")->where("idSolicitud", $idSolicitud)->get()->row();
 		$modalidadSolicitudBD = $modalidadSolicitud->modalidadSolicitud;
 		return $modalidadSolicitudBD;
 	}
-
 	public function cargarTiposCursoInforme()
 	{
 		$tiposCursoInformes = $this->db->select("*")->from("tiposCursoInformes")->get()->result();
 		return $tiposCursoInformes;
 	}
-
-	public function estadoAnteriorOrganizaciones()
+	// Cargar estado solicitud
+	public function estadoOrganizacion()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-
-		$estado = $this->db->select("estadoAnterior")->from("estadoOrganizaciones")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$nombreEstado = $estado->estadoAnterior;
-		return $nombreEstado;
+		$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
+		$estado = $organizacion->estado;
+		return $estado;
 	}
-
-	public function estadoOrganizaciones()
+	// Cargar estado solicitud
+	public function estadoOrganizaciones($idSolicitud)
 	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-
-		$estado = $this->db->select("nombre")->from("estadoOrganizaciones")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
+		$estado = $this->db->select("*")->from("estadoOrganizaciones")->where("idSolicitud", $idSolicitud)->get()->row();
 		$nombreEstado = $estado->nombre;
 		return $nombreEstado;
 		/*
@@ -701,7 +736,7 @@ class Panel extends CI_Controller
 		}*/
 	}
 
-	public function verificarFormularios()
+	public function verificarFormularios($idSolicitud)
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
@@ -720,16 +755,15 @@ class Panel extends CI_Controller
 		$datosBasicosProg = TRUE;
 		$datosAvalEcon = TRUE;
 
-		$tipoSolicitud = $this->db->select("*")->from("tipoSolicitud")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$motivoSolicitud = $tipoSolicitud->motivoSolicitud;
+		$tipoSolicitud = $this->db->select("*")->from("tipoSolicitud")->where("idSolicitud", $idSolicitud)->get()->row();
+		$motivoSolicitud = json_decode($tipoSolicitud->motivosSolicitud);
 		$modalidadSolicitud = $tipoSolicitud->modalidadSolicitud;
 
 		$archivosBD = $this->db->select("*")->from("archivos")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
-
+		/** Comprobar archivos en formularios */
 		foreach ($archivosBD as $archivo) {
 			$tipo = $archivo->tipo;
 			$formulario = $archivo->id_formulario;
-
 			switch ($formulario) {
 				case 1:
 					switch ($tipo) {
@@ -785,38 +819,19 @@ class Panel extends CI_Controller
 					break;
 			}
 		}
-
+		/** Variables Formularios */
 		$informacionGeneral = $this->db->select("*")->from("informacionGeneral")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$documentacionLegal = $this->db->select("*")->from("documentacionLegal")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$registroE = $documentacionLegal->registroEducativo;
-		$registroEducativoProgramas = $this->db->select("*")->from("registroEducativoProgramas")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$antecedentesAcademicos = $this->db->select("*")->from("antecedentesAcademicos")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$jornadasActualizacion = $this->db->select("*")->from("jornadasActualizacion")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-
-		$datosBasicosProgramas = $this->db->select("*")->from("datosBasicosProgramas")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$formularioProg = array('objetivos', 'metodologia', 'materialDidactico', 'bibliografia', 'duracionCurso', 'eticaValoresPrincipios', 'solidaridad', 'economia', 'economiaSolidaria', 'asosiatividadEmprendimiento', 'organizacionSolidaria', 'trabajoEquipo', 'educacionSolidaria', 'responsabilidadSocial', 'medioAmbiente', 'contextoEconomicoSocial', 'necesidadesSerHumano', 'porqueFomentar', 'principiosValoresFines', 'marcoNormativo', 'tiposOrganizacionesEconomiaSolidaria', 'antecedentesHistoricos', 'caracteristicasEconomicas', 'estructuraInterna', 'marcoJuridicoAplicable', 'fundamentosAdministrativos', 'orientacionElaboracionEstatutos', 'unidadAdministrativa', 'superintendencia', 'fondoGarantias', 'consejoNacional', 'fondoNacional', 'mesasRegionales');
-		foreach ($formularioProg as $prog) {
-			$prog = $datosBasicosProgramas->$prog;
-			if ($prog == NULL) {
-				$datosBasicosProg = NULL;
-			}
-		}
-
-		$programasAvalEconomia = $this->db->select("*")->from("programasAvalEconomia")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$formularioAval = array('objetivos', 'metodologia', 'materialDidactico', 'bibliografia', 'duracionCurso', 'antecedentesAspectos', 'diferencias', 'regulacionJuridica', 'desarrolloSocioempresarial', 'legislacionTributaria', 'administracionTrabajo', 'regimenesTrabajo', 'manejoSeguridad', 'inspeccionVigilancia');
-		foreach ($formularioAval as $aval) {
-			$aval = $programasAvalEconomia->$aval;
-			if ($aval == NULL) {
-				$datosAvalEcon = NULL;
-			}
-		}
-		$programasAvalar = $this->db->select("*")->from("programasAvalar")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
+		$documentacion = $this->db->select("*")->from("documentacion")->where("idSolicitud", $idSolicitud)->get()->row();
+		$registroEducativoProgramas = $this->db->select("*")->from("registroEducativoProgramas")->where("idSolicitud", $idSolicitud)->get()->row();
+		$antecedentesAcademicos = $this->db->select("*")->from("antecedentesAcademicos")->where("idSolicitud", $idSolicitud)->get()->row();
+		$jornadasActualizacion = $this->db->select("*")->from("jornadasActualizacion")->where("idSolicitud", $idSolicitud)->get()->row();
+		$datosProgramas = $this->db->select("*")->from("datosProgramas")->where("idSolicitud", $idSolicitud)->get()->row();
+		$aplicacion = $this->db->select("*")->from("datosAplicacion")->where("idSolicitud", $idSolicitud)->get()->row();
+		$datosEnLinea = $this->db->select("*")->from("datosEnLinea")->where("idSolicitud", $idSolicitud)->get()->row();
+		// Comprobación docentes
 		$docentes = $this->db->select("*")->from("docentes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		$numeroDocentes = $this->db->select("count(docentes.id_docente) as numeroDocentes")->from("docentes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row()->numeroDocentes;
-		$aplicacion = $this->db->select("*")->from("datosAplicacion")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-
 		$strDocentes = "";
-
 		foreach ($docentes as $docente) {
 			$hoja = false;
 			$titulo = false;
@@ -867,121 +882,48 @@ class Panel extends CI_Controller
 			}
 		}
 
+		/** @var  $formularios
+		 	Comprobación Formularios
+		 */
 		$formularios = array();
-
-		if ($motivoSolicitud == "Acreditación Curso Basico de Economia Solidaria") {
-			if ($informacionGeneral == NULL || $certificacionesForm == NULL || $lugar == NULL || $carta == NULL) {
-				array_push($formularios, "1. Falta el formulario de Informacion General.");
-			}
-			if ($documentacionLegal == NULL) {
-				array_push($formularios, "2. Falta el formulario de Documentacion Legal.");
-			}
-			if ($registroEducativoProgramas == NULL && $documentacionLegal != NULL && $registroE != "No Tiene") {
-				array_push($formularios, "3. Falta el formulario de Registro Educativo Programas.");
-			}
-			if ($antecedentesAcademicos == NULL) {
-				array_push($formularios, "4. Falta el formulario de Antecedentes Academicos.");
-			}
-			if ($jornadasActualizacion == NULL || $jornada == NULL) {
-				array_push($formularios, "5. Falta el formulario de Jornadas Actualización.");
-			}
-			if ($datosBasicosProgramas == NULL || $datosBasicosProg == NULL || $materialProgBasicos == NULL) {
-				array_push($formularios, "6. Falta el formulario de Datos Basicos Programas.");
-			}
-			if ($docentes == NULL || $numeroDocentes < 3) {
-				array_push($formularios, "9. Faltan facilitadores y/o archivos, deben ser tres (3) con sus respectivos documentos.");
-			}
-			if (($modalidadSolicitud == "Virtual" || $modalidadSolicitud == "Virtual y Presencial") && $aplicacion == NULL) {
-				array_push($formularios, "10. Falta el formulario de Ingreso a la Plataforma Virtual.");
-			}
-		} else if ($motivoSolicitud == "Acreditación, Aval de Trabajo Asociado") {
-			if ($informacionGeneral == NULL || $certificacionesForm == NULL || $lugar == NULL || $carta == NULL) {
-				array_push($formularios, "1. Falta el formulario de Informacion General.");
-			}
-			if ($documentacionLegal == NULL) {
-				array_push($formularios, "2. Falta el formulario de Documentacion Legal.");
-			}
-			if ($registroEducativoProgramas == NULL && $documentacionLegal != NULL && $registroE != "No Tiene") {
-				array_push($formularios, "3. Falta el formulario de Registro Educativo Programas.");
-			}
-			if ($antecedentesAcademicos == NULL) {
-				array_push($formularios, "4. Falta el formulario de Antecedentes Academicos.");
-			}
-			if ($jornadasActualizacion == NULL || $jornada == NULL) {
-				array_push($formularios, "5. Falta el formulario de Jornadas Actualización.");
-			}
-			if ($datosBasicosProgramas == NULL || $datosBasicosProg == NULL || $materialProgBasicos == NULL) {
-				array_push($formularios, "6. Falta el formulario de Datos Basicos Programas.");
-			}
-			if ($programasAvalEconomia == NULL || $datosAvalEcon == NULL || $materialAvalEcon == NULL) {
-				array_push($formularios, "7. Falta el formulario de Programas Aval Economia.");
-			}
-			if ($docentes == NULL || $numeroDocentes < 3) {
-				array_push($formularios, "9. Faltan facilitadores y/o archivos, deben ser tres (3) con sus respectivos documentos.");
-			}
-			if (($modalidadSolicitud == "Virtual" || $modalidadSolicitud == "Virtual y Presencial") && $aplicacion == NULL) {
-				array_push($formularios, "10. Falta el formulario de Ingreso a la Plataforma Virtual.");
-			}
-		} else if ($motivoSolicitud == "Acreditación, Aval a otros Programas") {
-			if ($informacionGeneral == NULL || $certificacionesForm == NULL || $lugar == NULL || $carta == NULL) {
-				array_push($formularios, "1. Falta el formulario de Informacion General.");
-			}
-			if ($documentacionLegal == NULL) {
-				array_push($formularios, "2. Falta el formulario de Documentacion Legal.");
-			}
-			if ($registroEducativoProgramas == NULL && $documentacionLegal != NULL && $registroE != "No Tiene") {
-				array_push($formularios, "3. Falta el formulario de Registro Educativo Programas.");
-			}
-			if ($antecedentesAcademicos == NULL) {
-				array_push($formularios, "4. Falta el formulario de Antecedentes Academicos.");
-			}
-			if ($jornadasActualizacion == NULL || $jornada == NULL) {
-				array_push($formularios, "5. Falta el formulario de Jornadas Actualización.");
-			}
-			if ($datosBasicosProgramas == NULL || $datosBasicosProg == NULL || $materialProgBasicos == NULL) {
-				array_push($formularios, "6. Falta el formulario de Datos Basicos Programas.");
-			}
-			if ($programasAvalar == NULL || $formatosEval == NULL || $materialProgEval == NULL) {
-				array_push($formularios, "8. Falta el formulario de Programas Avalar.");
-			}
-			if ($docentes == NULL || $numeroDocentes < 3) {
-				array_push($formularios, "9. Faltan facilitadores y/o archivos, deben ser tres (3) con sus respectivos documentos.");
-			}
-			if (($modalidadSolicitud == "Virtual" || $modalidadSolicitud == "Virtual y Presencial") && $aplicacion == NULL) {
-				array_push($formularios, "10. Falta el formulario de Ingreso a la Plataforma Virtual.");
-			}
-		} else if ($motivoSolicitud == "Acreditación, Aval de Trabajo Asociado, Aval a otros Programas") {
-			if ($informacionGeneral == NULL || $certificacionesForm == NULL || $lugar == NULL || $carta == NULL) {
-				array_push($formularios, "1. Falta el formulario de Informacion General.");
-			}
-			if ($documentacionLegal == NULL) {
-				array_push($formularios, "2. Falta el formulario de Documentacion Legal.");
-			}
-			if ($registroEducativoProgramas == NULL && $documentacionLegal != NULL && $registroE != "No Tiene") {
-				array_push($formularios, "3. Falta el formulario de Registro Educativo Programas.");
-			}
-			if ($antecedentesAcademicos == NULL) {
-				array_push($formularios, "4. Falta el formulario de Antecedentes Academicos.");
-			}
-			if ($jornadasActualizacion == NULL || $jornada == NULL) {
-				array_push($formularios, "5. Falta el formulario de Jornadas Actualización.");
-			}
-			if ($datosBasicosProgramas == NULL || $datosBasicosProg == NULL || $materialProgBasicos == NULL) {
-				array_push($formularios, "6. Falta el formulario de Datos Basicos Programas.");
-			}
-			if ($programasAvalEconomia == NULL || $datosAvalEcon == NULL || $materialAvalEcon == NULL) {
-				array_push($formularios, "7. Falta el formulario de Programas Aval Economia.");
-			}
-			if ($programasAvalar == NULL || $formatosEval == NULL || $materialProgEval == NULL) {
-				array_push($formularios, "8. Falta el formulario de Programas Avalar.");
-			}
-			if ($docentes == NULL || $numeroDocentes < 3) {
-				array_push($formularios, "9. Faltan facilitadores y/o archivos, deben ser tres (3) con sus respectivos documentos.");
-			}
-			if (($modalidadSolicitud == "Virtual" || $modalidadSolicitud == "Virtual y Presencial") && $aplicacion == NULL) {
-				array_push($formularios, "10. Falta el formulario de Ingreso a la Plataforma Virtual.");
-			}
-		} else if ($motivoSolicitud == "Actualizar Datos") {
+		// TODO: Comprobación de formulario 6 = numero de motivos
+		$solicitud = $this->db->select('*')->from('solicitudes')->where("idSolicitud", $idSolicitud)->get()->row();
+		$totalProgramas = $this->db->select('*')->from('datosProgramas')->where("idSolicitud", $idSolicitud)->get()->result();
+		// Contar programas seleccionados por medio de campo motivos
+		$cantProgramasSeleccionados = count(json_decode($tipoSolicitud->motivosSolicitud));
+		// Asignar variable para la cantidad de programas actualmente registrados en la solicitud
+		$cantProgramasAceptados = count($totalProgramas);
+		// Comparar si la cantidad de motivos seleccionados conincide con la cantidad de programas aceptados en la solicitud.
+		if ($cantProgramasSeleccionados == $cantProgramasAceptados) {
+			$datosProgramasAceptados = 'TRUE';
+		}
+		/** Comprobar todos los formularios */
+		if ($informacionGeneral == NULL || $certificacionesForm == NULL || $lugar == NULL || $carta == NULL) {
+			array_push($formularios, "1. Falta el formulario de Informacion General.");
+		}
+		if ($documentacion == NULL) {
+			array_push($formularios, "2. Falta el formulario de Documentacion Legal.");
+		}
+		if ($antecedentesAcademicos == NULL) {
+			array_push($formularios, "3. Falta el formulario de Antecedentes Academicos.");
+		}
+		if ($jornadasActualizacion == NULL || $jornada == NULL) {
+			array_push($formularios, "4. Falta el formulario de Jornadas Actualización.");
+		}
+		if ($datosProgramasAceptados == NULL) {
+			array_push($formularios, "5. Falta el formulario de Datos Basicos Programas.");
+		}
+		if ($docentes == NULL || $numeroDocentes < 3) {
+			array_push($formularios, "6. Faltan facilitadores y/o archivos, deben ser tres (3) con sus respectivos documentos.");
+		}
+		if (($modalidadSolicitud == "Virtual" || $modalidadSolicitud == "Presencial, Virtual" || $modalidadSolicitud == "Presencial, Virtual, En Linea"  || $modalidadSolicitud == "Virtual, En Linea") && $aplicacion == NULL) {
+			array_push($formularios, "7. Falta el formulario de Ingreso a la Plataforma Virtual.");
+		}
+		if (($modalidadSolicitud == "En Linea" || $modalidadSolicitud == "Presencial, En Linea" || $modalidadSolicitud == "Presencial, Virtual, En Linea"  || $modalidadSolicitud == "Virtual, En Linea") && $datosEnLinea == NULL) {
+			array_push($formularios, "8. Falta el formulario de datos modalidad en linea.");
+		}
+		// Actualizar Datos
+		else if ($motivoSolicitud == "Actualizar Datos") {
 			if ($informacionGeneral == NULL) {
 				array_push($formularios, "Llene los formularios que requieran actualizacion." && $aplicacion == NULL);
 			}
@@ -992,85 +934,71 @@ class Panel extends CI_Controller
 		array_push($formularios, "0. Tenga en cuenta la siguiente lista de sus facilitadores y hacer lo correspondiente:<br/><strong><small><i>" . $strDocentes . "</i></small></strong>");
 		return $formularios;
 	}
-	/**
-		Guardar datos
-	 **/
+	/** Guardar datos **/
 	// Tipo solicitud
 	public function guardar_tipoSolicitud()
 	{
-		/*$this->form_validation->set_rules('tipo_solicitud','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('motivo_solicitud','','trim|required|min_length[3]|xss_clean');*/
-		$tipo_solicitud = $this->input->post('tipo_solicitud');
-		$motivo_solicitud = $this->input->post('motivo_solicitud');
-		$modalidad_solicitud = $this->input->post('modalidad_solicitud');
-
+		/* $this->form_validation->set_rules('tipo_solicitud','','trim|required|min_length[3]|xss_clean');
+    	$this->form_validation->set_rules('motivo_solicitud','','trim|required|min_length[3]|xss_clean'); */
 		if ($this->input->post()) {
 			$usuario_id = $this->session->userdata('usuario_id');
-			$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-			$id_organizacion = $datos_organizacion->id_organizacion;
-
-			$nombre_org = $this->db->select("nombreOrganizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row()->nombreOrganizacion;
-
-			$numeroSolicitud = date('YmdHis') . $nombre_org[3] . random(2);
-
-			$data_tipoSolicitud = array(
-				'tipoSolicitud' => $tipo_solicitud,
-				'motivoSolicitud' => $motivo_solicitud,
-				'modalidadSolicitud' => $modalidad_solicitud,
-				'idSolicitud' => $numeroSolicitud,
-				'organizaciones_id_organizacion' => $id_organizacion
-			);
-			$estado = $this->estadoOrganizaciones();
-
+			$organizacion = $this->db->select('*')->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
+			$nombre_org =  $organizacion->nombreOrganizacion;
+			$estado = $this->estadoOrganizacion();
 			$numeroSolicitudes = $this->numeroSolicitudes();
-
-			$data_update_solicitud = array(
+			$idSolicitud = date('YmdHis') . $nombre_org[3] . random(2);
+			$solicitudes = $this->cargarSolicitudes();
+			if(count($solicitudes) > 0) {
+				if($estado == "Acreditado") {
+					$tipoSolicitud = "Renovación de Acreditación";
+				}
+				else {
+					$tipoSolicitud = 'Solicitud Nueva';
+				}
+			}
+			else {
+				$tipoSolicitud = 'Acreditación Primera vez';
+			}
+			$data_solicitud = array(
 				'numeroSolicitudes' => $numeroSolicitudes += 1,
 				'fecha' =>  date('Y/m/d H:i:s'),
-				'organizaciones_id_organizacion' => $id_organizacion
+				'idSolicitud' => $idSolicitud,
+				'organizaciones_id_organizacion' => $organizacion->id_organizacion,
 			);
-
-			$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-			$this->db->update('solicitudes', $data_update_solicitud);
-
-			if ($tipo_solicitud == "Acreditación Primera vez" && $motivo_solicitud != "Actualizar Datos") {
-				$nombre = "En Proceso";
-			} else if ($tipo_solicitud == "Renovacion de Acreditación") {
-				$nombre = "En Proceso de Renovación";
-			} else if ($tipo_solicitud == "Actualización de datos") {
-				$nombre = "En Proceso de Actualización";
-			} else if ($motivo_solicitud == "Actualizar Datos") {
-				$nombre = "En Proceso de Actualización";
-			}
-
+			$data_tipoSolicitud = array(
+				'tipoSolicitud' =>$tipoSolicitud,
+				'motivoSolicitud' => $this->input->post('motivo_solicitud'),
+				'modalidadSolicitud' => $this->input->post('modalidad_solicitud'),
+				'idSolicitud' => $idSolicitud,
+				'organizaciones_id_organizacion' => $organizacion->id_organizacion,
+				'motivosSolicitud' => json_encode($this->input->post('motivos_solicitud')),
+				'modalidadesSolicitud' => json_encode($this->input->post('modalidades_solicitud'))
+			);
 			$data_estado = array(
-				'nombre' => $nombre,
+				'nombre' => "En Proceso",
 				'fecha' => date('Y/m/d H:i:s'),
 				'estadoAnterior' => $estado,
-				'organizaciones_id_organizacion' => $id_organizacion
+				'tipoSolicitudAcreditado' => $tipoSolicitud,
+				'motivoSolicitudAcreditado' => $this->input->post('motivo_solicitud'),
+				'modalidadSolicitudAcreditado' => $this->input->post('modalidad_solicitud'),
+				'idSolicitudAcreditado' => $idSolicitud,
+				'organizaciones_id_organizacion' => $organizacion->id_organizacion,
+				'idSolicitud' => $idSolicitud,
+
 			);
-			$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-			$this->db->update('estadoOrganizaciones', $data_estado);
-
-			$datos_tipos = $this->db->select("*")->from("tipoSolicitud")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-
-			if ($datos_tipos == NULL) {
-				$this->db->insert('tipoSolicitud', $data_tipoSolicitud);
-				echo json_encode(array('url' => "panel", 'msg' => "Se guardo el tipo de soliditud.", "est" => $nombre));
-				$this->envio_mailcontacto("inicia", 2);
-				$this->logs_sia->session_log('Formulario Motivo Solicitud tipoSolicitud motivoSolicitud modalidadSolicitud: ' . $tipo_solicitud . ' con el ID: ' . $numeroSolicitud);
-				$this->logs_sia->logQueries();
-			} else {
-				$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-				$this->db->update('tipoSolicitud', $data_tipoSolicitud);
-				echo json_encode(array('url' => "panel", 'msg' => "Se guardo el tipo de soliditud.", "est" => $nombre));
-				$this->envio_mailcontacto("inicia", 2);
-				$this->logs_sia->session_log('Formulario Motivo Solicitud - Tipo Solicitud: ' . $tipo_solicitud . '. Motivo Solicitud: ' . $motivo_solicitud . '. Modalidad Solicitud: ' . $modalidad_solicitud . '. ID: ' . $numeroSolicitud . '. Fecha: ' . date('Y/m/d') . '.');
-				$this->logs_sia->logQueries();
+			if($this->db->insert('solicitudes', $data_solicitud)) {
+				if($this->db->insert('tipoSolicitud', $data_tipoSolicitud)) {
+					if($this->db->insert('estadoOrganizaciones', $data_estado)) {
+						echo json_encode(array('url' => "panel", 'msg' => "Se creo nueva solicitud.", "est" => $data_tipoSolicitud['idSolicitud']));
+						$this->envio_mailcontacto("inicia", 2);
+						$this->logs_sia->session_log('Formulario Motivo Solicitud - Tipo Solicitud: ' . '. Motivo Solicitud: ' . $this->input->post('motivo_solicitud') . '. Modalidad Solicitud: ' . $this->input->post('modalidad_solicitud') . '. ID: ' . $data_tipoSolicitud['idSolicitud'] . '. Fecha: ' . date('Y/m/d') . '.');
+						$this->logs_sia->logQueries();
+					}
+				}
 			}
 		}
 	}
-
+	// Verificar Solicitud
 	public function verificar_tipoSolicitud()
 	{
 		/*$usuario_id = $this->session->userdata('usuario_id');
@@ -1222,9 +1150,8 @@ class Panel extends CI_Controller
 					'portafolio' => $portafolio,
 					'otros' => $otros,
 					'fecha' => date('Y/m/d H:i:s'),
-					'organizaciones_id_organizacion' => $id_organizacion
+					'organizaciones_id_organizacion' => $id_organizacion,
 				);
-
 				if ($datos_informacion_general != NULL) {
 					$this->db->where('organizaciones_id_organizacion', $id_organizacion);
 					$this->db->update('informacionGeneral', $data_informacion_general);
@@ -1245,133 +1172,142 @@ class Panel extends CI_Controller
 	// Formulario 2
 	public function guardar_formulario_documentacion_legal()
 	{
+		$tipoForm = $this->input->post('tipo');
+		$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $this->session->userdata('usuario_id'))->get()->row();
+		switch ($tipoForm) {
+			case 1:
+				$data = array (
+					'tipo' => $this->input->post('tipo'),
+					'organizaciones_id_organizacion' => $organizacion->id_organizacion,
+					'idSolicitud' => $this->input->post('idSolicitud')
+				);
+				if ($this->db->insert('documentacion', $data)){
+					echo json_encode(array('url' => "panel", 'msg' => "Datos de camara de comercio guardados"));
+				}
+				else {
+					echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no son correctos."));
+				}
+				break;
+			case 2:
+				$dataDocumentacion = array (
+					'tipo' => $this->input->post('tipo'),
+					'organizaciones_id_organizacion' => $organizacion->id_organizacion,
+					'idSolicitud' => $this->input->post('idSolicitud')
+				);
+				if ($this->db->insert('documentacion', $dataDocumentacion)){
+					$dataCertificadoExistencia = array (
+						'entidad' => $this->input->post('entidadCertificadoExistencia'),
+						'fechaExpedicion' => $this->input->post('fechaExpedicion'),
+						'departamento' => $this->input->post('departamentoCertificado'),
+						'municipio' => $this->input->post('municipioCertificado'),
+						'organizaciones_id_organizacion' => $organizacion->id_organizacion,
+						'idSolicitud' => $this->input->post('idSolicitud')
+					);
+					if($this->db->insert('certificadoExistencia', $dataCertificadoExistencia)) {
+						$name_random = random(10);
+						$size = 100000000;
+						$registro = $this->db->select('*')->from('certificadoExistencia')->where('idSolicitud', $this->input->post('idSolicitud'))->get()->row();
+						$nombreArchivo =  $this->input->post('append_name') . "_" . $name_random . "_" . $_FILES['file']['name'];
+						$extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
+						$ruta = 'uploads/certificadoExistencia';
+						$mensaje = "Se guardo el " . $this->input->post('append_name');
+						$dataArchivo = array(
+							'tipo' => 'certificadoExistencia',
+							'nombre' => $nombreArchivo ,
+							'id_formulario' => 2,
+							'id_registro' => $registro->id_certificadoExistencia,
+							'organizaciones_id_organizacion' => $organizacion->id_organizacion,
+						);
 
-		/*$this->form_validation->set_rules('tipo_solicitud','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('motivo_solicitud','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('tipo_organizacion','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('departamento','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('municipio','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('direccion','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('fax','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('extension','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('urlOrganizacion','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('actuacion','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('educacion','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('numCedulaCiudadaniaPersona','','trim|required|min_length[3]|xss_clean');
+						if (0 < $_FILES['file']['error']) {
+							echo json_encode(array('url' => "", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
+						}
+						else if ($_FILES['file']['size'] > $size) {
+							echo json_encode(array('url' => "", 'msg' => "El tamaño supera las 10 Mb, intente con otro archivo PDF."));
+						}
+						else if ($extension != "pdf") {
+							echo json_encode(array('url' => "", 'msg' => "La extensión del archivo no es correcta, debe ser PDF. (archivo.pdf)"));
+						}
+						else if ($this->db->insert('archivos', $dataArchivo)) {
+							if (move_uploaded_file($_FILES['file']['tmp_name'], $ruta . '/' . $nombreArchivo)) {
+								echo json_encode(array('url' => "", 'msg' => $mensaje));
+								//$this->logs_sia->session_log('Actualizacion de Imagen / Logo');){
+							}
+							else {
+								echo json_encode(array('url' => "", 'msg' => "No se guardo el archivo(s)."));
+							}
+						}
+						$this->logs_sia->logs('URL_TYPE');
+						$this->logs_sia->logQueries();
+					}
+				}
+				else {
+					echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no son correctos."));
+				}
+				break;
+			case 3:
+				$dataDocumentacion = array (
+					'tipo' => $this->input->post('tipo'),
+					'organizaciones_id_organizacion' => $organizacion->id_organizacion,
+					'idSolicitud' => $this->input->post('idSolicitud')
+				);
+				if ($this->db->insert('documentacion', $dataDocumentacion)){
+					$dataRegistro = array(
+						'tipoEducacion' =>  $this->input->post('tipoEducacion'),
+						'fechaResolucion' => $this->input->post('fechaResolucionProgramas'),
+						'numeroResolucion' => $this->input->post('numeroResolucionProgramas'),
+						'nombrePrograma' => $this->input->post('nombrePrograma'),
+						'objetoResolucion' => $this->input->post('objetoResolucionProgramas'),
+						'entidadResolucion' => $this->input->post('entidadResolucion'),
+						'organizaciones_id_organizacion' => $organizacion->id_organizacion,
+						'idSolicitud' => $this->input->post('idSolicitud')
+					);
+					if($this->db->insert('registroEducativoProgramas', $dataRegistro)) {
+						$name_random = random(10);
+						$size = 100000000;
+						$registro = $this->db->select('*')->from('registroEducativoProgramas')->where('numeroResolucion', $this->input->post('numeroResolucionProgramas'))->get()->row();
+						$nombreArchivo =  $this->input->post('append_name') . "_" . $name_random . "_" . $_FILES['file']['name'];
+						$extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
+						$ruta = 'uploads/registrosEducativos';
+						$mensaje = "Se guardo el " . $this->input->post('append_name');
+						$dataArchivo = array(
+							'tipo' => 'registroEdu',
+							'nombre' => $nombreArchivo ,
+							'id_formulario' => 2,
+							'id_registro' => $registro->id_registroEducativoPro,
+							'organizaciones_id_organizacion' => $organizacion->id_organizacion,
+						);
 
-    	if($this->form_validation->run("formulario_informacion_general_entidad") == FALSE){
-    		echo json_encode(array('url'=>"panel", 'msg'=>"Verifique los datos ingresado, no son correctos."));
-    	}else{**/
-
-		/**$certificadoExistencia = $this->input->post('certificadoExistencia');
-    		$numeroExistencia = $this->input->post('numeroExistencia');
-    		$fechaExpedicion = $this->input->post('fechaExpedicion');
-    		$departamentoCertificado = $this->input->post('departamentoCertificado');
-    		$municipioCertificado = $this->input->post('municipioCertificado');
-    		$objetoSocial = $this->input->post('objetoSocial');**/
-		$registroEducativo = $this->input->post('registroEducativo');
-		$entidadRegistro = $this->input->post('entidadRegistro');
-		$numeroResolucion = $this->input->post('numeroResolucion');
-		$fechaResolucion = $this->input->post('fechaResolucion');
-		$departamentoResolucion = $this->input->post('departamentoResolucion');
-		$municipioResolucion = $this->input->post('municipioResolucion');
-
-		if ($this->input->post()) {
-			$usuario_id = $this->session->userdata('usuario_id');
-			$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-			$id_organizacion = $datos_organizacion->id_organizacion;
-
-			$datos_documentacionLegal = $this->db->select("*")->from("documentacionLegal")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-
-			$data_documentacionLegal = array(
-				/**'certificadoExistencia' => $certificadoExistencia,
-					'numeroExistencia' => $numeroExistencia,
-					'fechaExpedicion' => $fechaExpedicion,
-					'departamentoCertificado' => $departamentoCertificado,
-					'municipioCertificado' => $municipioCertificado,
-					'objetoSocial' => $objetoSocial,*/
-				'registroEducativo' => $registroEducativo,
-				'entidadRegistro' => $entidadRegistro,
-				'numeroResolucion' => $numeroResolucion,
-				'fechaResolucion' => $fechaResolucion,
-				'departamentoResolucion' => $departamentoResolucion,
-				'municipioResolucion' => $municipioResolucion,
-				'organizaciones_id_organizacion' => $id_organizacion
-			);
-
-			/*if($datos_documentacionLegal != NULL){
-    				$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-					$this->db->update('documentacionLegal', $data_documentacionLegal);
-					echo json_encode(array('url'=>"panel", 'msg'=>"Se actualizó la Documentación Legal."));
-					$this->logs_sia->session_log('Formulario Actualización Documentacion Legal');
-					$this->logs_sia->logQueries();
-    			}else{*/
-			$this->db->insert('documentacionLegal', $data_documentacionLegal);
-			echo json_encode(array('url' => "panel", 'msg' => "Se guardo la Documentación Legal."));
-			$this->logs_sia->session_log('Formulario Documentacion Legal');
-			$this->logs_sia->logQueries();
-			//}
-		} else {
-			echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no son correctos."));
+						if (0 < $_FILES['file']['error']) {
+							echo json_encode(array('url' => "", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
+						}
+						else if ($_FILES['file']['size'] > $size) {
+							echo json_encode(array('url' => "", 'msg' => "El tamaño supera las 10 Mb, intente con otro archivo PDF."));
+						}
+						else if ($extension != "pdf") {
+							echo json_encode(array('url' => "", 'msg' => "La extensión del archivo no es correcta, debe ser PDF. (archivo.pdf)"));
+						}
+						else if ($this->db->insert('archivos', $dataArchivo)) {
+							if (move_uploaded_file($_FILES['file']['tmp_name'], $ruta . '/' . $nombreArchivo)) {
+								echo json_encode(array('url' => "", 'msg' => $mensaje));
+								//$this->logs_sia->session_log('Actualizacion de Imagen / Logo');){
+							}
+							else {
+								echo json_encode(array('url' => "", 'msg' => "No se guardo el archivo(s)."));
+							}
+						}
+						$this->logs_sia->logs('URL_TYPE');
+						$this->logs_sia->logQueries();
+					}
+				}
+				else {
+					echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no son correctos."));
+				}
+				break;
+			default:
 		}
-		//}
 	}
 	// Formulario 3
-	public function guardar_formulario_registro_educativo()
-	{
-
-		/*$this->form_validation->set_rules('tipo_solicitud','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('motivo_solicitud','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('tipo_organizacion','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('departamento','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('municipio','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('direccion','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('fax','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('extension','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('urlOrganizacion','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('actuacion','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('educacion','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('numCedulaCiudadaniaPersona','','trim|required|min_length[3]|xss_clean');
-
-    	if($this->form_validation->run("formulario_informacion_general_entidad") == FALSE){
-    		echo json_encode(array('url'=>"panel", 'msg'=>"Verifique los datos ingresado, no son correctos."));
-    	}else{**/
-
-		$tipoEducacion = $this->input->post('tipoEducacion');
-		$fechaResolucionProgramas = $this->input->post('fechaResolucionProgramas');
-		$numeroResolucionProgramas = $this->input->post('numeroResolucionProgramas');
-		$nombrePrograma = $this->input->post('nombrePrograma');
-		$objetoResolucionProgramas = $this->input->post('objetoResolucionProgramas');
-		$entidadResolucion = $this->input->post('entidadResolucion');
-
-
-		if ($this->input->post()) {
-			$usuario_id = $this->session->userdata('usuario_id');
-			$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-			$id_organizacion = $datos_organizacion->id_organizacion;
-
-			$datos_registroEducativoProgramas = $this->db->select("*")->from("registroEducativoProgramas")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-
-			$data_registroEducativoProgramas = array(
-				'tipoEducacion' => $tipoEducacion,
-				'fechaResolucion' => $fechaResolucionProgramas,
-				'numeroResolucion' => $numeroResolucionProgramas,
-				'nombrePrograma' => $nombrePrograma,
-				'objetoResolucion' => $objetoResolucionProgramas,
-				'entidadResolucion' => $entidadResolucion,
-				'organizaciones_id_organizacion' => $id_organizacion
-			);
-
-			$this->db->insert('registroEducativoProgramas', $data_registroEducativoProgramas);
-			echo json_encode(array('url' => "panel", 'msg' => "Se guardo el registro educativo"));
-			$this->logs_sia->session_log('Formulario Registro Educativo Programas');
-			$this->logs_sia->logQueries();
-		} else {
-			echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no son correctos."));
-		}
-		//}
-	}
-	// Formulario 4
 	public function guardar_formulario_antecedentes_academicos()
 	{
 
@@ -1416,7 +1352,8 @@ class Panel extends CI_Controller
 				'materialDidactico' => $materialDidacticoAcademicos,
 				'bibliografia' => $bibliografiaAcademicos,
 				'duracionCurso' => $duracionCursoAcademicos,
-				'organizaciones_id_organizacion' => $id_organizacion
+				'organizaciones_id_organizacion' => $id_organizacion,
+				'idSolicitud' => $this->input->post('idSolicitud')
 			);
 
 			/*if($datos_antecedentesAcademicos != NULL){
@@ -1436,7 +1373,7 @@ class Panel extends CI_Controller
 		}
 		//}
 	}
-	// Formulario 5
+	// Formulario 4
 	public function guardar_formulario_jornadas_actualizacion()
 	{
 		$numeroPersonas = $this->input->post('numeroPersonas');
@@ -1452,7 +1389,8 @@ class Panel extends CI_Controller
 			$data_jornadasActualizacion = array(
 				'numeroPersonas' => $numeroPersonas,
 				'fechaAsistencia' => $fechaAsistencia,
-				'organizaciones_id_organizacion' => $id_organizacion
+				'organizaciones_id_organizacion' => $id_organizacion,
+				'idSolicitud' => $this->input->post('idSolicitud')
 			);
 
 			/*if($datos_jornadasActualizacion != NULL){
@@ -1471,212 +1409,98 @@ class Panel extends CI_Controller
 			echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no son correctos."));
 		}
 	}
+	// Formulario 5
+	public function guardar_formulario_datos_programas()
+	{
+		if ($this->input->post()) {
+			$data_Programas = $this->db->select("*")->from("datosProgramas")->where("idSolicitud", $this->input->post('idSolicitud'))->get()->result();
+			$solicitud = $this->db->select("id_solicitud")->from("solicitudes")->where("organizaciones_id_organizacion", $this->input->post('organizacion'))->get()->row();
+			$organizacion = $this->db->select('*')->from('organizaciones')->where('id_organizacion', $this->input->post('organizacion'))->get()->row();
+			$data = array(
+				'nombrePrograma' => $this->input->post('programa'),
+				'aceptarPrograma' => "Si Acepta",
+				'fecha' => date("Y/m/d H:i:s"),
+				'organizaciones_id_organizacion' => $this->input->post('organizacion'),
+				'idSolicitud' => $this->input->post('idSolicitud'),
+			);
+			/** Comprobar si el programa ya se encuentra aceptado */
+			$programas = array();
+			foreach ($data_Programas as $programa) {
+				array_push($programas, $programa->nombrePrograma);
+			}
+			$programaIngresado = $this->input->post('programa');
+			if (in_array($programaIngresado, $programas)) {
+				echo json_encode(array('url' => "panel", 'msg' => "Programa: " . $programaIngresado .  " ya registrado."));
+			}
+			else {
+				if ($this->db->insert('datosProgramas', $data)){
+					$this->logs_sia->session_log('Formulario Programas Básicos');
+					$this->logs_sia->logQueries();
+					$this->enviomail_aceptar_programas($organizacion, $data);
+					//echo json_encode(array('url' => "panel", 'msg' => "Se guardo Programas Básicos."));
+				}
+				else {
+					echo json_encode(array('url' => "panel", 'msg' => "Ocurrió un error y no se guardaron los datos del programa seleccionado."));
+				}
+            }
+		} else {
+			echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no se están enviando las variables tipo post necesarios."));
+		}
+	}
+	// Envío de email al momento de aceptar un programa
+	function enviomail_aceptar_programas ($organizacion, $data){
+		$this->email->from(CORREO_SIA, "Acreditaciones");
+		$this->email->to($organizacion->direccionCorreoElectronicoOrganizacion);
+		$this->email->cc(CORREO_SIA);
+		$this->email->subject('SIIA - Aceptación de programa.');
+		$data_email = array (
+			'organizacion' => $organizacion,
+			'data' => $data
+		);
+		$email_view = $this->load->view('email/aceptacion_cursos', $data_email, true);
+		$this->email->message($email_view);
+		if($this->email->send()) {
+			//Capturar datos para guardar en base de datos registro del correo enviado.
+			$correo_registro = array(
+				'fecha' => date('Y/m/d H:i:s'),
+				'de' => CORREO_SIA,
+				'para' => $organizacion->direccionCorreoElectronicoOrganizacion,
+				'cc' => CORREO_SIA,
+				'asunto' => "Aceptación Cursos",
+				'cuerpo' => json_encode($data),
+				'estado' => "1",
+				'tipo' => "Notificación externa",
+				'error' => $this->email->print_debugger()
+			);
+			//Comprobar que se guardó o no el registro en la tabla correosRegistro
+			if($this->db->insert('correosRegistro', $correo_registro)){
+				echo json_encode(array('url' => "panel", 'msg' => "Se envío un correo a: " . $organizacion->direccionCorreoElectronicoOrganizacion . ", por favor verifíquelo", "status" => 1));
+			}
+			else {
+				echo json_encode(array('msg' => "Se envío el correo de activación pero no se guardo registro en base de datos", "status" => 2));
+			}
+
+		}
+		else {
+			//Capturar datos para guardar en base de datos registro del correo no enviado.
+			$correo_registro = array(
+				'fecha' => date('Y/m/d H:i:s'),
+				'de' => CORREO_SIA,
+				'para' => $organizacion->direccionCorreoElectronicoOrganizacion,
+				'cc' => CORREO_SIA,
+				'asunto' => "Correo de activación no enviado",
+				'cuerpo' => json_encode($data),
+				'estado' => "0",
+				'tipo' => "Notificación interna",
+				'error' => $this->email->print_debugger()
+			);
+			//Comprobar que se guardó o no el registro en la tabla correosRegistro
+			if($this->db->insert('correosRegistro', $correo_registro)){
+				echo json_encode(array('msg' => "Se han guardado tus datos registrados, pero no se logro enviar correo de activación, sin embargo se registro error en base de datos para verificación por parte del administrador"));
+			}
+		}
+	}
 	// Formulario 6
-	public function guardar_formulario_datos_basicos_programas()
-	{
-		$objetivos = $this->input->post('objetivos');
-		$metodologia = $this->input->post('metodologia');
-		$material = $this->input->post('material');
-		$bibliografia = $this->input->post('bibliografia');
-		$duracion = $this->input->post('duracion');
-		//Nuevo
-		$programa_basico_eticaValoresPrincipios = $this->input->post('programa_basico_eticaValoresPrincipios');
-		$programa_basico_solidaridad = $this->input->post('programa_basico_solidaridad');
-		$programa_basico_economia = $this->input->post('programa_basico_economia');
-		$programa_basico_economiaSolidaria = $this->input->post('programa_basico_economiaSolidaria');
-		$programa_basico_asosiatividadEmprendimiento = $this->input->post('programa_basico_asosiatividadEmprendimiento');
-		$programa_basico_organizacionSolidaria = $this->input->post('programa_basico_organizacionSolidaria');
-		$programa_basico_trabajoEquipo = $this->input->post('programa_basico_trabajoEquipo');
-		$programa_basico_educacionSolidaria = $this->input->post('programa_basico_educacionSolidaria');
-		$programa_basico_responsabilidadSocial = $this->input->post('programa_basico_responsabilidadSocial');
-		$programa_basico_medioAmbiente = $this->input->post('programa_basico_medioAmbiente');
-		$programa_basico_contextoEconomicoSocial = $this->input->post('programa_basico_contextoEconomicoSocial');
-		$programa_basico_necesidadesSerHumano = $this->input->post('programa_basico_necesidadesSerHumano');
-		$programa_basico_porqueFomentar = $this->input->post('programa_basico_porqueFomentar');
-		$programa_basico_principiosValoresFines = $this->input->post('programa_basico_principiosValoresFines');
-		$programa_basico_marcoNormativo = $this->input->post('programa_basico_marcoNormativo');
-		$programa_basico_tiposOrganizacionesEconomiaSolidaria = $this->input->post('programa_basico_tiposOrganizacionesEconomiaSolidaria');
-		$programa_basico_antecedentesHistoricos = $this->input->post('programa_basico_antecedentesHistoricos');
-		$programa_basico_caracteristicasEconomicas = $this->input->post('programa_basico_caracteristicasEconomicas');
-		$programa_basico_estructuraInterna = $this->input->post('programa_basico_estructuraInterna');
-		$programa_basico_marcoJuridicoAplicable = $this->input->post('programa_basico_marcoJuridicoAplicable');
-		$programa_basico_fundamentosAdministrativos = $this->input->post('programa_basico_fundamentosAdministrativos');
-		$programa_basico_orientacionElaboracionEstatutos = $this->input->post('programa_basico_orientacionElaboracionEstatutos');
-		$programa_basico_unidadAdministrativa = $this->input->post('programa_basico_unidadAdministrativa');
-		$programa_basico_superintendencia = $this->input->post('programa_basico_superintendencia');
-		$programa_basico_fondoGarantias = $this->input->post('programa_basico_fondoGarantias');
-		$programa_basico_consejoNacional = $this->input->post('programa_basico_consejoNacional');
-		$programa_basico_fondoNacional = $this->input->post('programa_basico_fondoNacional');
-		$programa_basico_mesasRegionales = $this->input->post('programa_basico_mesasRegionales');
-
-		if ($this->input->post()) {
-			$usuario_id = $this->session->userdata('usuario_id');
-			$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-			$id_organizacion = $datos_organizacion->id_organizacion;
-
-			$datos_datosBasicosProgramas = $this->db->select("*")->from("datosBasicosProgramas")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-
-			$data_datosBasicosProgramas = array(
-				'objetivos' => $objetivos,
-				'metodologia' => $metodologia,
-				'materialDidactico' => $material,
-				'bibliografia' => $bibliografia,
-				'duracionCurso' => $duracion,
-				'eticaValoresPrincipios' => $programa_basico_eticaValoresPrincipios,
-				'solidaridad' => $programa_basico_solidaridad,
-				'economia' => $programa_basico_economia,
-				'economiaSolidaria' => $programa_basico_economiaSolidaria,
-				'asosiatividadEmprendimiento' => $programa_basico_asosiatividadEmprendimiento,
-				'organizacionSolidaria' => $programa_basico_organizacionSolidaria,
-				'trabajoEquipo' => $programa_basico_trabajoEquipo,
-				'educacionSolidaria' => $programa_basico_educacionSolidaria,
-				'responsabilidadSocial' => $programa_basico_responsabilidadSocial,
-				'medioAmbiente' => $programa_basico_medioAmbiente,
-				'contextoEconomicoSocial' => $programa_basico_contextoEconomicoSocial,
-				'necesidadesSerHumano' => $programa_basico_necesidadesSerHumano,
-				'porqueFomentar' => $programa_basico_porqueFomentar,
-				'principiosValoresFines' => $programa_basico_principiosValoresFines,
-				'marcoNormativo' => $programa_basico_marcoNormativo,
-				'tiposOrganizacionesEconomiaSolidaria' => $programa_basico_tiposOrganizacionesEconomiaSolidaria,
-				'antecedentesHistoricos' => $programa_basico_antecedentesHistoricos,
-				'caracteristicasEconomicas' => $programa_basico_caracteristicasEconomicas,
-				'estructuraInterna' => $programa_basico_estructuraInterna,
-				'marcoJuridicoAplicable' => $programa_basico_marcoJuridicoAplicable,
-				'fundamentosAdministrativos' => $programa_basico_fundamentosAdministrativos,
-				'orientacionElaboracionEstatutos' => $programa_basico_orientacionElaboracionEstatutos,
-				'unidadAdministrativa' => $programa_basico_unidadAdministrativa,
-				'superintendencia' => $programa_basico_superintendencia,
-				'fondoGarantias' => $programa_basico_fondoGarantias,
-				'consejoNacional' => $programa_basico_consejoNacional,
-				'fondoNacional' => $programa_basico_fondoNacional,
-				'mesasRegionales' => $programa_basico_mesasRegionales,
-				'organizaciones_id_organizacion' => $id_organizacion
-			);
-
-			if ($datos_datosBasicosProgramas != NULL) {
-				$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-				$this->db->update('datosBasicosProgramas', $data_datosBasicosProgramas);
-				echo json_encode(array('url' => "panel", 'msg' => "Se actualizo programas básicos."));
-				$this->logs_sia->session_log('Formulario Actualización programas básicos');
-				$this->logs_sia->logQueries();
-			} else {
-				$this->db->insert('datosBasicosProgramas', $data_datosBasicosProgramas);
-				echo json_encode(array('url' => "panel", 'msg' => "Se guardo Programas Basicos."));
-				$this->logs_sia->session_log('Formulario Programas Basicos');
-				$this->logs_sia->logQueries();
-			}
-		} else {
-			echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no son correctos."));
-		}
-	}
-	// Formulario 7
-	public function guardar_formulario_programas_aval()
-	{
-		$objetivos = $this->input->post('objetivos');
-		$metodologia = $this->input->post('metodologia');
-		$material = $this->input->post('material');
-		$bibliografia = $this->input->post('bibliografia');
-		$duracion = $this->input->post('duracion');
-		//Nuevo
-		$antecedentesAspectos = $this->input->post("antecedentesAspectos");
-		$diferencias = $this->input->post("diferencias");
-		$regulacionJuridica = $this->input->post("regulacionJuridica");
-		$desarrolloSocioempresarial = $this->input->post("desarrolloSocioempresarial");
-		$legislacionTributaria = $this->input->post("legislacionTributaria");
-		$administracionTrabajo = $this->input->post("administracionTrabajo");
-		$regimenesTrabajo = $this->input->post("regimenesTrabajo");
-		$manejoSeguridad = $this->input->post("manejoSeguridad");
-		$inspeccionVigilancia = $this->input->post("inspeccionVigilancia");
-
-		if ($this->input->post()) {
-			$usuario_id = $this->session->userdata('usuario_id');
-			$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-			$id_organizacion = $datos_organizacion->id_organizacion;
-
-			$datos_programasAvalEconomia = $this->db->select("*")->from("programasAvalEconomia")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-
-			$data_programasAvalEconomia = array(
-				'objetivos' => $objetivos,
-				'metodologia' => $metodologia,
-				'materialDidactico' => $material,
-				'bibliografia' => $bibliografia,
-				'duracionCurso' => $duracion,
-				'antecedentesAspectos' => $antecedentesAspectos,
-				'diferencias' => $diferencias,
-				'regulacionJuridica' => $regulacionJuridica,
-				'desarrolloSocioempresarial' => $desarrolloSocioempresarial,
-				'legislacionTributaria' => $legislacionTributaria,
-				'administracionTrabajo' => $administracionTrabajo,
-				'regimenesTrabajo' => $regimenesTrabajo,
-				'manejoSeguridad' => $manejoSeguridad,
-				'inspeccionVigilancia' => $inspeccionVigilancia,
-				'organizaciones_id_organizacion' => $id_organizacion
-			);
-
-			if ($datos_programasAvalEconomia != NULL) {
-				$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-				$this->db->update('programasAvalEconomia', $data_programasAvalEconomia);
-				echo json_encode(array('url' => "panel", 'msg' => "Se actualizo Programas Aval."));
-				$this->logs_sia->session_log('Formulario Actualización Programas Aval');
-				$this->logs_sia->logQueries();
-			} else {
-				$this->db->insert('programasAvalEconomia', $data_programasAvalEconomia);
-				echo json_encode(array('url' => "panel", 'msg' => "Se guardo Programas Aval."));
-				$this->logs_sia->session_log('Formulario Programas Aval');
-				$this->logs_sia->logQueries();
-			}
-		} else {
-			echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no son correctos."));
-		}
-	}
-	// Formulario 8
-	public function guardar_formulario_programas_avalar()
-	{
-		$nombre = $this->input->post("nombre");
-		$objetivos = $this->input->post("objetivos");
-		$metodologia = $this->input->post("metodologia");
-		$contenido = $this->input->post("contenido");
-		$material = $this->input->post("material");
-		$bibliografia = $this->input->post("bibliografia");
-		$intensidad = $this->input->post("intensidad");
-		$evaluacion = $this->input->post("evaluacion");
-
-		if ($this->input->post()) {
-			$usuario_id = $this->session->userdata('usuario_id');
-			$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-			$id_organizacion = $datos_organizacion->id_organizacion;
-
-			$datos_programasAvalar = $this->db->select("*")->from("programasAvalar")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-
-			$data_programasAvalar = array(
-				'nombrePrograma' => $nombre,
-				'objetivos' => $objetivos,
-				'metodologia' => $metodologia,
-				'contenidosPlanteados' => $contenido,
-				'materialDidactico' => $material,
-				'bibliografia' => $bibliografia,
-				'intensidadHoraria' => $intensidad,
-				'evaluacion' => $evaluacion,
-				'organizaciones_id_organizacion' => $id_organizacion
-			);
-
-			/*if($datos_jornadasActualizacion != NULL){
-				$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-				$this->db->update('jornadasActualizacion', $data_jornadasActualizacion);
-				echo json_encode(array('url'=>"panel", 'msg'=>"Se actualizo la Jornada de Actualización."));
-				$this->logs_sia->session_log('Formulario Actualización Jornadas Actualización');
-				$this->logs_sia->logQueries();
-			}else{*/
-			$this->db->insert('programasAvalar', $data_programasAvalar);
-			echo json_encode(array('url' => "panel", 'msg' => "Se guardo Programas a Avalar."));
-			$this->logs_sia->session_log('Formulario Programas a Avalar');
-			$this->logs_sia->logQueries();
-			//}
-		} else {
-			echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no son correctos."));
-		}
-	}
-	// Formulario 9
 	public function guardar_formulario_docentes()
 	{
 		$cedula = $this->input->post("cedula");
@@ -1722,7 +1546,7 @@ class Panel extends CI_Controller
 			echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no son correctos."));
 		}
 	}
-	// Formulario 10
+	// Formulario 7
 	public function guardar_formulario_aplicacion()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -1737,13 +1561,33 @@ class Panel extends CI_Controller
 			'urlAplicacion' => $datos_plataforma_url,
 			'usuarioAplicacion' => $datos_plataforma_usuario,
 			'contrasenaAplicacion' => $datos_plataforma_contrasena,
-			'organizaciones_id_organizacion' => $id_organizacion
+			'organizaciones_id_organizacion' => $id_organizacion,
+			'idSolicitud' => $this->input->post('idSolicitud'),
 		);
 
 		$this->db->insert('datosAplicacion', $data_aplicacion);
 		echo json_encode(array('url' => "panel", 'msg' => "Se guardo la información de la plataforma."));
 	}
-
+	// Formulario 8
+	public function guardar_formulario_modalidad_en_linea()
+	{
+		$usuario_id = $this->session->userdata('usuario_id');
+		$datos_organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
+		$solicitud = $this->db->select("*")->from("solicitudes")->where("organizaciones_id_organizacion", $datos_organizacion->id_organizacion)->get()->row();
+		// Datos formulario
+		$data_aplicacion = array(
+			'nombreHerramienta' => $this->input->post("nombreHerramienta"),
+			'descripcionHerramienta' => $this->input->post("descripcionHerramienta"),
+			'fecha' => date('Y/m/d H:i:s'),
+			'aceptacion' => $this->input->post("aceptacion"),
+			'organizaciones_id_organizacion' => $datos_organizacion->id_organizacion,
+			'idSolicitud' => $this->input->post('idSolicitud'),
+		);
+		// Guardar datos.
+		if($this->db->insert('datosEnLinea', $data_aplicacion)) {
+			echo json_encode(array('url' => "", 'msg' => "Se guardo correctamente la información"));
+		}
+	}
 	// Informe de actividades
 	public function guardar_cursoInformeActividades()
 	{
@@ -2091,24 +1935,21 @@ class Panel extends CI_Controller
 	//TODO: Finalizar proceso
 	public function finalizarProceso()
 	{
-		$formularios = $this->verificarFormularios();
-
+		$idSolicitud = $this->input->post('idSolicitud');
+		$formularios = $this->verificarFormularios($idSolicitud);
 		if (count($formularios) == 1) {
 			$usuario_id = $this->session->userdata('usuario_id');
 			$datos_organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
 			$id_organizacion = $datos_organizacion->id_organizacion;
 			$nombreOrganizacion = $datos_organizacion->nombreOrganizacion;
-
-			$data_estado = array(
+			$updateEstado = array(
 				'nombre' => "Finalizado",
 				'fecha' => date('Y/m/d H:i:s'),
 				'estadoAnterior' => "En Proceso",
 				'fechaFinalizado' => date('Y/m/d H:i:s'),
-				'organizaciones_id_organizacion' => $id_organizacion
 			);
-
-			$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-			$this->db->update('estadoOrganizaciones', $data_estado);
+			$this->db->where('idSolicitud', $idSolicitud);
+			$this->db->update('estadoOrganizaciones', $updateEstado);
 			echo json_encode(array('url' => "panel", 'msg' => "Solicitud Terminada, cambio de estado a Finalizado.", 'estado' => "1"));
 			$this->envio_mailcontacto("finaliza", 2);
 			$this->logs_sia->session_log('Finalizada la Solicitud');
@@ -2241,23 +2082,20 @@ class Panel extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-
+	/** Guardar Archivo de Registro Educativo */
 	public function guardarArchivoRegistro()
 	{
 		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
 		$tipoArchivo = $this->input->post('tipoArchivo');
 		$append_name = $this->input->post('append_name');
-
-		$usuario_id = $this->session->userdata('usuario_id');
 		$name_random = random(10);
 		$size = 100000000;
 
 		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
+		$datos_organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
 		$id_formulario = 2;
 
-		$archivos = $this->db->select('*')->from('archivos')->where('organizaciones_id_organizacion', $id_organizacion)->get()->row();
+		$archivos = $this->db->select('*')->from('archivos')->where('organizaciones_id_organizacion', $datos_organizacion->id_organizacion)->get()->row();
 
 
 		if ($tipoArchivo == "registroEdu") {
@@ -2286,6 +2124,55 @@ class Panel extends CI_Controller
 			if (move_uploaded_file($_FILES['file']['tmp_name'], $ruta . '/' . $nombre_imagen)) {
 				echo json_encode(array('url' => "", 'msg' => $mensaje));
 				//$this->logs_sia->session_log('Actualizacion de Imagen / Logo');){	
+			} else {
+				echo json_encode(array('url' => "", 'msg' => "No se guardo el archivo(s)."));
+			}
+		}
+
+		$this->logs_sia->logs('URL_TYPE');
+		$this->logs_sia->logQueries();
+	}
+	/** Guardar Archivo de Certificado de Existencia*/
+	public function guardarArchivoCertificadoExistencia()
+	{
+		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
+		$tipoArchivo = $this->input->post('tipoArchivo');
+		$append_name = $this->input->post('append_name');
+		$name_random = random(10);
+		$size = 100000000;
+
+		$usuario_id = $this->session->userdata('usuario_id');
+		$datos_organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
+		$id_formulario = 2;
+		$archivos = $this->db->select('*')->from('archivos')->where('organizaciones_id_organizacion', $datos_organizacion->id_organizacion)->get()->row();
+
+
+		if ($tipoArchivo == "certifcadoExistencia") {
+			$ruta = 'uploads/certifcadoExistencia';
+			$mensaje = "Se guardo el " . $append_name;
+		}
+
+		$nombre_imagen =  $append_name . "_" . $name_random . "_" . $_FILES['file']['name'];
+		$tipo_archivo = pathinfo($nombre_imagen, PATHINFO_EXTENSION);
+
+		$data_update = array(
+			'tipo' => $tipoArchivo,
+			'nombre' => $nombre_imagen,
+			'id_formulario' => $id_formulario,
+			'organizaciones_id_organizacion' => $datos_organizacion->id_organizacion
+		);
+
+
+		if (0 < $_FILES['file']['error']) {
+			echo json_encode(array('url' => "", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
+		} else if ($_FILES['file']['size'] > $size) {
+			echo json_encode(array('url' => "", 'msg' => "El tamaño supera las 10 Mb, intente con otro archivo PDF."));
+		} else if ($tipo_archivo != "pdf") {
+			echo json_encode(array('url' => "", 'msg' => "La extensión del archivo no es correcta, debe ser PDF. (archivo.pdf)"));
+		} else if ($this->db->insert('archivos', $data_update)) {
+			if (move_uploaded_file($_FILES['file']['tmp_name'], $ruta . '/' . $nombre_imagen)) {
+				echo json_encode(array('url' => "", 'msg' => $mensaje));
+				//$this->logs_sia->session_log('Actualizacion de Imagen / Logo');){
 			} else {
 				echo json_encode(array('url' => "", 'msg' => "No se guardo el archivo(s)."));
 			}
@@ -2527,59 +2414,6 @@ class Panel extends CI_Controller
 
 		if ($tipoArchivo == "materialDidacticoProgAvalar") {
 			$ruta = 'uploads/materialDidacticoProgAvalar';
-			$mensaje = "Se guardo el " . $append_name;
-		}
-
-		$nombre_imagen =  $append_name . "_" . $name_random . "_" . $_FILES['file']['name'];
-		$tipo_archivo = pathinfo($nombre_imagen, PATHINFO_EXTENSION);
-
-		$data_update = array(
-			'tipo' => $tipoArchivo,
-			'nombre' => $nombre_imagen,
-			'id_formulario' => $id_formulario,
-			'organizaciones_id_organizacion' => $id_organizacion
-		);
-
-
-		if (0 < $_FILES['file']['error']) {
-			echo json_encode(array('url' => "", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
-		} else if ($_FILES['file']['size'] > $size) {
-			echo json_encode(array('url' => "", 'msg' => "El tamaño supera las 10 Mb, intente con otro archivo PDF."));
-		} else if ($tipo_archivo != "pdf") {
-			echo json_encode(array('url' => "", 'msg' => "La extensión del archivo no es correcta, debe ser PDF. (archivo.pdf)"));
-		} else if ($this->db->insert('archivos', $data_update)) {
-			if (move_uploaded_file($_FILES['file']['tmp_name'], $ruta . '/' . $nombre_imagen)) {
-				echo json_encode(array('url' => "", 'msg' => $mensaje));
-				//$this->logs_sia->session_log('Actualizacion de Imagen / Logo');){	
-			} else {
-				echo json_encode(array('url' => "", 'msg' => "No se guardo el archivo(s)."));
-			}
-		}
-
-		$this->logs_sia->logs('URL_TYPE');
-		$this->logs_sia->logQueries();
-	}
-
-	public function guardarArchivoInstructivoPlataforma()
-	{
-		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
-		$tipoArchivo = $this->input->post('tipoArchivo');
-		$append_name = $this->input->post('append_name');
-
-		$usuario_id = $this->session->userdata('usuario_id');
-		$name_random = random(10);
-		$size = 100000000;
-
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-		$id_formulario = 10;
-
-		$archivos = $this->db->select('*')->from('archivos')->where('organizaciones_id_organizacion', $id_organizacion)->get()->row();
-
-
-		if ($tipoArchivo == "instructivoPlataforma") {
-			$ruta = 'uploads/instructivosPlataforma';
 			$mensaje = "Se guardo el " . $append_name;
 		}
 
@@ -2897,52 +2731,10 @@ class Panel extends CI_Controller
 		echo json_encode(array('url' => "", 'msg' => "Error intente de nuevo, nombres diferentes de los archivos."));
 	}
 
-	public function eliminarSolicitud()
-	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-		$numeroSolicitudes = $this->numeroSolicitudes();
-
-		$data_update_solicitud = array(
-			'numeroSolicitudes' => $numeroSolicitudes - 1,
-			'fecha' =>  date('Y/m/d H:i:s'),
-			'organizaciones_id_organizacion' => $id_organizacion
-		);
-
-		$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-		$this->db->update('solicitudes', $data_update_solicitud);
-
-		$estadoAnterior = $this->estadoAnteriorOrganizaciones();
-
-		$data_estado = array(
-			'nombre' => $estadoAnterior,
-			'fecha' => date('Y/m/d H:i:s'),
-			'estadoAnterior' => $estadoAnterior
-		);
-
-		$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-		$this->db->update('estadoOrganizaciones', $data_estado);
-
-		$data_update_solicitud2 = array(
-			'tipoSolicitud' => "Eliminar",
-			'motivoSolicitud' =>  "Eliminar",
-			'modalidadSolicitud' =>  "Eliminar",
-			'idSolicitud' => "0",
-			'organizaciones_id_organizacion' => $id_organizacion
-		);
-
-		$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-		$this->db->update('tipoSolicitud', $data_update_solicitud2);
-		echo json_encode(array('url' => "", 'msg' => "Solicitud eliminada."));
-		$this->logs_sia->session_log('Eliminar Solicitud');
-		$this->logs_sia->logQueries();
-	}
-
 	private function checkExtensionImagenes($extension)
 	{
 		//aqui podemos añadir las extensiones que deseemos permitir
-		$extensiones = array("jpg", "png");
+		$extensiones = array("jpg", "png", "jpeg");
 		if (in_array(strtolower($extension), $extensiones)) {
 			return TRUE;
 		} else {
@@ -3279,7 +3071,7 @@ class Panel extends CI_Controller
 		if ($this->email->send()) {
 			// Do nothing.
 		} else {
-			echo json_encode(array('url' => "login", 'msg' => "Lo sentimos, hubo un error y no se envio el correo."));
+			echo json_encode(array('url' => "login", 'msg' => "Lo sentimos, hubo un error y no se envío el correo."));
 		}
 	}
 	public function cargar_informacionModal()
@@ -3287,4 +3079,87 @@ class Panel extends CI_Controller
 		$informacionModal = $this->db->select("valor")->from("opciones")->where("nombre", "informacionModal")->get()->row()->valor;
 		return $informacionModal;
 	}
+	// TODO: Ver Documentos
+	public function verDocumento (){
+		$archivo = $this->db->select('*')->from('archivos')->where('id_registro', $this->input->post('id'))->get()->row();
+		switch($this->input->post('formulario')){
+			case 8:
+				$file = base_url()."uploads/instructivoEnLinea" . "/" . $archivo->nombre;
+				echo json_encode(array('file' => $file));
+				break;
+			case 2.1:
+				$file = base_url()."uploads/certificadoExistencia" . "/" . $archivo->nombre;
+				echo json_encode(array('file' => $file));
+				break;
+			case 2.2:
+				$file = base_url()."uploads/registrosEducativos" . "/" . $archivo->nombre;
+				echo json_encode(array('file' => $file));
+				break;
+			default:
+		}
+	}
+	/** Solicitud */
+	public function solicitud($idSolicitud)
+	{
+		date_default_timezone_set("America/Bogota");
+		$logged = $this->session->userdata('logged_in');
+		$nombre_usuario = $this->session->userdata('nombre_usuario');
+		$usuario_id = $this->session->userdata('usuario_id');
+		$tipo_usuario = $this->session->userdata('type_user');
+		$hora = date("H:i", time());
+		$fecha = date('Y/m/d');
+		$data['title'] = 'Panel Principal';
+		$data['logged_in'] = $logged;
+		$datos_usuario = $this->db->select('usuario')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
+		$data['nombre_usuario'] = $datos_usuario->usuario;
+		$data['usuario_id'] = $usuario_id;
+		$data['tipo_usuario'] = $tipo_usuario;
+		$data['hora'] = $hora;
+		$data['fecha'] = $fecha;
+		$data['estado'] = $this->estadoOrganizaciones($idSolicitud);
+		$data['departamentos'] = $this->cargarDepartamentos();
+		$data['data_organizacion'] = $this->cargarDatosOrganizacion();
+		$data['data_solicitud'] = $this->cargarSolicitud($idSolicitud);
+		$data['data_informacion_general'] = $this->cargarDatos_formulario_informacion_general_entidad($idSolicitud);
+		$data['data_documentacion_legal'] = $this->cargarDatos_formulario_documentacion_legal($idSolicitud);
+		$data['data_registro_educativo'] = $this->cargarDatos_formulario_registro_educativo($idSolicitud);
+		$data['data_antecedentes_academicos'] = $this->cargarDatos_formulario_antecedentes_academicos($idSolicitud);
+		$data['data_jornadas_actualizacion'] = $this->cargarDatos_formulario_jornadas_actualizacion($idSolicitud);
+		$data['data_plataforma'] = $this->cargarDatos_formulario_datos_plataforma($idSolicitud);
+		$data['data_modalidad_en_linea'] = $this->cargarDatos_modalidad_en_linea($idSolicitud);
+		$data['data_programas'] = $this->cargarDatos_programas($idSolicitud);
+		$data["camara"] = $this->cargarCamaraComercio();
+		$data['informacionModal'] = $this->cargar_informacionModal();
+		$this->load->view('include/header', $data);
+		$this->load->view('paneles/solicitud', $data);
+		$this->load->view('include/footer', $data);
+		$this->logs_sia->logs('PLACE_USER');
+	}
+	// Eliminar Solicitud
+	public function eliminarSolicitud()
+	{
+		$this->db->where('idSolicitud', $this->input->post('idSolicitud'));
+		$tables = array(
+			'estadoOrganizaciones',
+			'solicitudes',
+			'tipoSolicitud',
+			'documentacion',
+			'certificadoexistencia',
+			'registroeducativoprogramas',
+			'jornadasactualizacion',
+			'datosprogramas',
+			'datosenlinea',
+			'datosaplicacion');
+		$this->db->delete($tables);
+		echo json_encode(array('url' => "panel", 'msg' => "Se elimino el solicitud."));
+	}
 }
+
+function var_dump_pre($mixed = null) {
+  echo '<pre>';
+  	var_dump($mixed);
+  echo '</pre>';
+  return null;
+}
+
+

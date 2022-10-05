@@ -34,6 +34,22 @@
 	<link href="<?php echo base_url('assets/css/bootstrap-dropdownhover.min.css') ?>" rel="stylesheet" type="text/css" />
 	<link href="<?php echo base_url('assets/css/mdb.min.css') ?>" rel="stylesheet" type="text/css" />
 	<!-- Scripts -->
+	<!-- Styles -->
+	<!--<link href="<?php /*echo base_url('assets/fonts/Oswald.css')*/ ?>" rel="stylesheet" />
+	<link href="<?php /*echo base_url('assets/fonts/Oswald300.css')*/ ?>" rel="stylesheet" />
+	<link href="<?php /*echo base_url('assets/fonts/Oswald500.css')*/ ?>" rel="stylesheet" />
+	<link href="<?php /*echo base_url('assets/fonts/CrimsonText.css')*/ ?>" rel="stylesheet" />
+	<link href="<?php /*echo base_url('assets/fonts/CrimsonTextOpenSans400Oswald.css')*/ ?>" rel="stylesheet" />
+	<link href="<?php /*echo base_url('assets/fonts/OpenSans400700.css')*/ ?>" rel="stylesheet" />-->
+	<!--<link href="<?php echo base_url('assets/css/styles.min.css') ?>" rel="stylesheet" type="text/css" />-->
+	<link href="<?php echo base_url('assets/css/notifIt.css') ?>" rel="stylesheet" type="text/css" />
+	<link href="<?php echo base_url('assets/css/dataTables.bootstrap.css') ?>" rel="stylesheet" type="text/css" />
+	<link href="<?php echo base_url('assets/css/bootstrap-select.min.css') ?>" rel="stylesheet" type="text/css" />
+	<link href="<?php echo base_url('assets/css/animate.min.css') ?>" rel="stylesheet" type="text/css" />
+	<link href="<?php echo base_url('assets/css/bootstrap-dropdownhover.min.css') ?>" rel="stylesheet" type="text/css" />
+	<link href="<?php echo base_url('assets/css/mdb.min.css') ?>" rel="stylesheet" type="text/css" />
+	<link href="<?php echo base_url('assets/css/vis.min.css') ?>" rel="stylesheet" type="text/css" />
+	<!-- Scripts -->
 	<script src="<?php echo base_url('assets/js/modernizr.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/jquery-3.1.1.min.js') ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/jquery-ui.min.js') ?>"></script>
@@ -43,7 +59,9 @@
 	<script src="<?php echo base_url('assets/js/bootstrap-select.min.js') ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/langs/selector-i18n/defaults-es_ES.js') ?>" type="text/javascript"></script>
 	<!-- Data Tables -->
-	<script src="<?php echo base_url('assets/js/jquery.dataTables.min.js') ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/popper.min.js') ?>" type="text/javascript"></script>
+	<!-- <script src="<?php echo base_url('assets/js/jquery.dataTables.min.js') ?>" type="text/javascript"></script> -->
+	<script src="<?php echo base_url('assets/js/jquery.dataTables.nuevo.min.js') ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/dataTables.buttons.min.js') ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/dataTables.bootstrap.js') ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/buttons.html5.min.js') ?>" type="text/javascript"></script>
@@ -63,17 +81,21 @@
 	<!--<script src="<?php echo base_url('assets/js/mdbs.min.js') ?>"></script>-->
 	<script src="<?php echo base_url('assets/js/ckeditor.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/initck.js') ?>"></script>
-	<script src="<?php echo base_url('assets/js/script_o.js?v=1.0.9.47192') ?>" type="text/javascript"></script>
-	<!-- //TODO:Pendiente por enlazar -->
-	<script src="<?php echo base_url('assets/js/function/asignaciones.js') ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/vis.min.js') ?>"></script>
+	<script src="<?php echo base_url('assets/js/functions/script_o.js?v=1.0.8.61219') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/observaciones.js?v=1.1.1') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/panel.js?v=1.0.1') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/formularios.js?v=1.0.1') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/contacto.js?v=1.0.8.61') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/estadisticas.js?v=1.0.8.62') . time() ?>" type="text/javascript"></script>
 	<!--<script src="<?php echo base_url('assets/js/script_o.min.js') ?>" type="text/javascript"></script>
-    <script src="<?php echo base_url('assets/js/script.js') ?>" type="text/javascript"></script>-->
+	<script src="<?php echo base_url('assets/js/script.js') ?>" type="text/javascript"></script>-->
 	<script type="text/javascript">
 		$(window).on('load', function() {
-			$(".se-pre-con").fadeOut("fast");
+			$(".se-pre-con").fadeOut("slow");
 		});
 	</script>
-	<!-- Google -->
-	<script src="https://www.google.com/recaptcha/api.js"></script>
+	<!--Add the following script at the bottom of the web page (immediately before the </body> tag)-->
+	<!--<script type="text/javascript" async="async" defer="defer" data-cfasync="false" src="https://mylivechat.com/chatinline.aspx?hccid=49054954"></script>-->
 </head>
 <title>Docentes</title>
