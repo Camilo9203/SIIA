@@ -902,7 +902,7 @@ function guardarDatosProgramas (curso,modal, check, idSolicitud){
 		},
 		error: function (ev) {
 			console.log(ev);
-			notificacion("Error");
+			notificacion("No se guardo la información adecuadamente, por favor intente de nuevo o consulte con el administrador del sitio");
 		},
 	});
 }

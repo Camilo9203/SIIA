@@ -1439,9 +1439,12 @@ class Panel extends CI_Controller
 					$this->enviomail_aceptar_programas($organizacion, $data);
 					//echo json_encode(array('url' => "panel", 'msg' => "Se guardo Programas Básicos."));
 				}
-			}
+				else {
+					echo json_encode(array('url' => "panel", 'msg' => "Ocurrió un error y no se guardaron los datos del programa seleccionado."));
+				}
+            }
 		} else {
-			echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no se están envíando las variables tipo post necesarios."));
+			echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no se están enviando las variables tipo post necesarios."));
 		}
 	}
 	// Envío de email al momento de aceptar un programa

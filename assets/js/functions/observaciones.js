@@ -42,6 +42,7 @@ $("#verDocLegalMenuAdmin").click(function () {
 		dataType: "JSON",
 		data: data,
 		success: function (response) {
+			console.log(response);
 			// Llenar tabla de datos documentación legal
 			if (response.documentacion['tipo'] == 1) {
 				html = "";
@@ -65,7 +66,7 @@ $("#verDocLegalMenuAdmin").click(function () {
 				html += "<td>" + response.certificadoExistencia['fechaExpedicion'] + "</td>";
 				html += "<td>" + response.certificadoExistencia['departamento'] + "</td>";
 				html += "<td>" + response.certificadoExistencia['municipio'] + "</td>";
-				html += "<td><button class='btn btn-success btn-sm verDocCertificadoExistenciaEvaluador' data-form='2' data-id=" + response.certificadoExistencia['id_certificadoExistencia'] + ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td></tr>";
+				html += "<td><button class='btn btn-success btn-sm verDocumentoLegal' data-form='2.1' data-id=" + response.certificadoExistencia['id_certificadoExistencia'] + ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td></tr>";
 				console.log(response.certificadoExistencia);
 				$(".tabla_datos_documentacion_legal").html(html);
 			}
@@ -87,7 +88,7 @@ $("#verDocLegalMenuAdmin").click(function () {
 				html += "<td>" + response.registroEducativoProgramas['numeroResolucion'] + "</td>";
 				html += "<td>" + response.registroEducativoProgramas['objetoResolucion'] + "</td>";
 				html += "<td>" + response.registroEducativoProgramas['tipoEducacion'] + "</td>";
-				html += "<td><button class='btn btn-success btn-sm' id='verDocRegistroEducativo' data-id=" + response.registroEducativoProgramas['id_registroEducativoPro'] + ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td></tr>";
+				html += "<td><button class='btn btn-success btn-sm verDocumentoLegal' data-form='2.2' data-id=" + response.registroEducativoProgramas['id_registroEducativoPro'] + ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td></tr>";
 				console.log(response.registroEducativoProgramas);
 				$(".tabla_datos_documentacion_legal").html(html);
 			}
@@ -97,8 +98,7 @@ $("#verDocLegalMenuAdmin").click(function () {
 })
 /** Todo: Funciones Formulario 2 */
 // Ver Documento
-$(".verDocCertificadoExistenciaEvaluador").click(function (){
-	alert();
+$(document).on("click", ".verDocumentoLegal", function () {
 	let data = {
 		id: $(this).attr("data-id"),
 		formulario: $(this).attr("data-form"),
