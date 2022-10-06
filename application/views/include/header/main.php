@@ -18,8 +18,8 @@
 <!--	<link href="https://cdn.www.gov.co/assets/css/styles.css" rel="stylesheet">-->
 <!--	<link href="--><?php //echo base_url('assets/css/font-awesome.min.css') ?><!--" rel="stylesheet" type="text/css" />-->
 <!--	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
-	<!--	<link href="--><?php //echo base_url('assets/css/bootstrap.min.css') ?><!--" rel="stylesheet" type="text/css" />-->
-	<!-- Custom CSS -->
+<!--		<link href="--><?php //echo base_url('assets/css/bootstrap.min.css') ?><!--" rel="stylesheet" type="text/css" />-->
+<!--	 Custom CSS-->
 <!--	<link href="--><?php //echo base_url('assets/css/style.css?v=1.0.8.1919') ?><!--" rel="stylesheet" type="text/css" />-->
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon16.png') ?>" type="image/png" sizes="16x16" />
@@ -40,68 +40,6 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/js/dashboard/vendors/select2/select2.min.css') ?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/js/dashboard/vendors/mdi/css/materialdesignicons.min.css') ?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/js/dashboard/vendors/select2-bootstrap-theme/select2-bootstrap.min.css') ?>">
-	<!-- End plugin css for this page -->
-
-	<!-- Google -->
-	<script src="https://www.google.com/recaptcha/api.js"></script>
-	<!-- Google Tag Manager -->
-	<script>
-		(function(w, d, s, l, i) {
-			w[l] = w[l] || [];
-			w[l].push({
-				'gtm.start': new Date().getTime(),
-				event: 'gtm.js'
-			});
-			var f = d.getElementsByTagName(s)[0],
-				j = d.createElement(s),
-				dl = l != 'dataLayer' ? '&l=' + l : '';
-			j.async = true;
-			j.src =
-				'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-			f.parentNode.insertBefore(j, f);
-		})(window, document, 'script', 'dataLayer', 'GTM-WHVM3FM');
-	</script>
-	<!-- Google Optimize -->
-	<style>
-		.async-hide {
-			opacity: 0 !important
-		}
-	</style>
-	<script>
-		(function(a, s, y, n, c, h, i, d, e) {
-			s.className += ' ' + y;
-			h.start = 1 * new Date;
-			h.end = i = function() {
-				s.className = s.className.replace(RegExp(' ?' + y), '')
-			};
-			(a[n] = a[n] || []).hide = h;
-			setTimeout(function() {
-				i();
-				h.end = null
-			}, c);
-			h.timeout = c;
-		})(window, document.documentElement, 'async-hide', 'dataLayer', 4000, {
-			'GTM-MX4WGRN': true
-		});
-	</script>
-	<!-- End Google Tag Manager -->
-	<script>
-		(function(i, s, o, g, r, a, m) {
-			i['GoogleAnalyticsObject'] = r;
-			i[r] = i[r] || function() {
-				(i[r].q = i[r].q || []).push(arguments)
-			}, i[r].l = 1 * new Date();
-			a = s.createElement(o),
-				m = s.getElementsByTagName(o)[0];
-			a.async = 1;
-			a.src = g;
-			m.parentNode.insertBefore(a, m)
-		})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-		ga('create', 'UA-99079478-1', 'auto');
-		ga('require', 'GTM-MX4WGRN');
-		ga('send', 'pageview');
-	</script>
 	<!--Start of Tawk.to Script-->
 	<script type="text/javascript">
 		var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();

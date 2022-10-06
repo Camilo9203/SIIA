@@ -17,8 +17,6 @@
 	<!-- Styles -->
 	<link href="<?php echo base_url('assets/css/font-awesome.min.css') ?>" rel="stylesheet" type="text/css" />
 	<link href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css" />
-
-
 	<!-- Custom CSS -->
 	<link href="<?php echo base_url('assets/css/styles.css?v=1.0.8.1919') ?>" rel="stylesheet" type="text/css" />
 	<link href="<?php echo base_url('assets/img/favicon16.png') ?>" type="image/png" sizes="16x16" rel="icon" />
@@ -26,73 +24,20 @@
 	<link href="<?php echo base_url('assets/img/favicon64.png') ?>" type="image/png" sizes="64x64" rel="icon" />
 	<link href="<?php echo base_url('assets/img/favicon128.png') ?>" type="image/png" sizes="128x128" rel="shortcut icon" />
 	<link href="https://fonts.googleapis.com/css?family=Dosis&display=swap" rel="stylesheet">
-	<!-- Graficas //TODO: Charts Graficas para las estadisticas -->
+	<!-- Graficas -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.js" integrity="sha512-XcsV/45eM/syxTudkE8AoKK1OfxTrlFpOltc9NmHXh3HF+0ZA917G9iG6Fm7B6AzP+UeEzV8pLwnbRNPxdUpfA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
 	<meta name="theme-color" content="#09476E" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="white-translucent" />
 	<meta name="google-site-verification" content="DloHloB2_mQ9o7BPTd9xXEYHUeXrnWQqKGGKeuGrkLk" />
 	<!-- Google -->
 	<script src="https://www.google.com/recaptcha/api.js"></script>
-	<!-- Google Tag Manager -->
-	<script>
-		(function(w, d, s, l, i) {
-			w[l] = w[l] || [];
-			w[l].push({
-				'gtm.start': new Date().getTime(),
-				event: 'gtm.js'
-			});
-			var f = d.getElementsByTagName(s)[0],
-				j = d.createElement(s),
-				dl = l != 'dataLayer' ? '&l=' + l : '';
-			j.async = true;
-			j.src =
-				'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-			f.parentNode.insertBefore(j, f);
-		})(window, document, 'script', 'dataLayer', 'GTM-WHVM3FM');
-	</script>
-	<!-- Google Optimize -->
 	<style>
 		.async-hide {
 			opacity: 0 !important
 		}
 	</style>
-	<script>
-		(function(a, s, y, n, c, h, i, d, e) {
-			s.className += ' ' + y;
-			h.start = 1 * new Date;
-			h.end = i = function() {
-				s.className = s.className.replace(RegExp(' ?' + y), '')
-			};
-			(a[n] = a[n] || []).hide = h;
-			setTimeout(function() {
-				i();
-				h.end = null
-			}, c);
-			h.timeout = c;
-		})(window, document.documentElement, 'async-hide', 'dataLayer', 4000, {
-			'GTM-MX4WGRN': true
-		});
-	</script>
-	<!-- End Google Tag Manager -->
-	<script>
-		(function(i, s, o, g, r, a, m) {
-			i['GoogleAnalyticsObject'] = r;
-			i[r] = i[r] || function() {
-				(i[r].q = i[r].q || []).push(arguments)
-			}, i[r].l = 1 * new Date();
-			a = s.createElement(o),
-				m = s.getElementsByTagName(o)[0];
-			a.async = 1;
-			a.src = g;
-			m.parentNode.insertBefore(a, m)
-		})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-		ga('create', 'UA-99079478-1', 'auto');
-		ga('require', 'GTM-MX4WGRN');
-		ga('send', 'pageview');
-	</script>
 	<!-- Title -->
 	<title>Sistema Integrado de Información de Acreditación | <?php echo $title; ?></title>
 </head>
@@ -101,8 +46,6 @@
 	<div class="se-pre-con"></div>
 	<!-- Cabecera y Navbar -->
 	<header>
-		<!-- Google Tag Manager (noscript) -->
-		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WHVM3FM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<!-- End Google Tag Manager (noscript) -->
 		<section class="top-nav">
 			<div class="container">

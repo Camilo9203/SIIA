@@ -444,10 +444,10 @@
 	<!--	Validaciones de formularios	-->
 	<script src="<?php echo base_url('assets/js/jquery.validate.js') ?>" type="text/javascript"></script>
 	<!--	Script Propios	-->
-	<script src="<?php echo base_url('assets/js/script_o.js?v=1.0.8.61219') . time() ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/funciones/registro.js?v=1.0.0.1') . time() ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/funciones/login.js?v=1.0.7.61342') . time() ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/funciones/encuesta.js?v=1.0.8.62') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/script_o.js?v=1.0.8.61219') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/registro.js?v=1.0.0.1') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/login.js?v=1.0.7.61342') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/encuesta.js?v=1.0.8.62') . time() ?>" type="text/javascript"></script>
 	<script type="text/javascript">
 		$(window).on('load', function() {
 			$(".se-pre-con").fadeOut("slow");

@@ -181,7 +181,7 @@
 			<div class="clearfix"></div>
 			<hr />
 			<div class="col-md-12" id="archivos_informacionGeneral">
-				<p>Archivos:</label>
+				<label>Archivos:</label>
 			</div>
 			<div class="clearfix"></div>
 			<hr />

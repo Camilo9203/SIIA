@@ -366,12 +366,18 @@
 <!--	<script src="--><?php //echo base_url('assets/js/ckeditor.js') ?><!--"></script>-->
 <!--	<script src="--><?php //echo base_url('assets/js/initck.js') ?><!--"></script>-->
 <!--	<script src="--><?php //echo base_url('assets/js/vis.min.js') ?><!--"></script>-->
-	<script src="<?php echo base_url('assets/js/script_o.js?v=1.0.8.61219') . time() ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/funciones/registro.js?v=1.0.0.1') . time() ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/funciones/login.js?v=1.0.7.61342') . time() ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/funciones/contacto.js?v=1.0.8.61') . time() ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/funciones/estadisticas.js?v=1.0.8.62') . time() ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/funciones/encuesta.js?v=1.0.8.62') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/script_o.js?v=1.0.8.61219') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/registro.js?v=1.0.0.1') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/login.js?v=1.0.7.61342') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/contacto.js?v=1.0.8.61') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/estadisticas.js?v=1.0.8.62') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/encuesta.js?v=1.0.8.62') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/observaciones.js?v=1.1.1') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/estados.js?v=1.2.1') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/resoluciones.js?v=1.4.1') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/nits.js?v=1.5.1') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/panel.js?v=1.0.1') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/formularios.js?v=1.0.1') . time() ?>" type="text/javascript"></script>
 	<script type="text/javascript">
 		$(window).on('load', function() {
 			$(".se-pre-con").fadeOut("slow");
