@@ -2,14 +2,16 @@
 <div class="clearfix"></div>
 <hr/>
 	<h4>Información a tener en cuenta:</h4>
+		<p>Ingrese solo la información del equipo de facilitadores que desarrollará los cursos. Este debe ser de <span class="spanRojo">mínimo 3 facilitadores</span>. Anexe los soportes de estudios y de experiencia solicitados.</p>
+		<p>Ingrese los datos del facilitador y de clic en <label>"Crear facilitador"</label>. Los archivos que debe adjuntar son: </p>
 	<ul>
-		<li>Ingrese solo la información del equipo docente que desarrollará los cursos <span class="spanRojo">mínimo 3</span>.</li>
-		<li>Recuerde anexar los <label>soportes de estudios y de experiencia relacionados</label> con el sector de la economía solidaria.</li>
-		<li>Ingrese los datos del docente y de click en <label>"Crear facilitador".</label></li>
-		<li>Los archivos son: <label>Hoja de vida, Titulo profesional,</label> Tres <span class="spanRojo">(3)</span> <label>certificados de experiencia</label> y Tres <span class="spanRojo">(3)</span> <label>certificados de economia solidaria</label> donde todos sumen <label>mínimo</label> <span class="spanRojo">60 Horas</span>.</li>
-		<li>Si no cumple con los archivos y horas, el facilitador no sera válido y no podra presentar <label>"Informes de actividad"</label> con ese facilitador.</li>
-		<li>Podrá ver el <label>estado del docente si es válido o no</label>, si no lo es, debera tener observaciones.</li>
+		<li>Hoja de vida</li>
+		<li>Título de técnico, tecnólogo o profesional.</li>
+		<li>Certificado o certificados que acrediten experiencia en actividades formativas, capacitación, como docente, facilitador, capacitador o instructor, en mínimo tres procesos formativos.</li>
+		<li>Certificados que acrediten haber recibido capacitación en economía solidaria por mínimo <span class="spanRojo">60 Horas</span>.</li>
 	</ul>
+	<p>Recuerde que, si no cumple con los requisitos (documentos, certificados, horas), el facilitador no será válido, para dar continuidad con el trámite en caso de que solo registre tres (3) docentes.</p>
+	<p>Su organización podrá visualizar el estado del docente si es válido o no, si no lo es, deberá subsanar las observaciones realizadas.</p>
 	<!--<div class="form-group col-md-12">
 		<p>Aqui puede buscar si el docente ya se encuentra registrado en nuestra base de datos los datos se añadiran en los campos.</p>
 		<div class="col-md-6">
@@ -23,17 +25,13 @@
 	<hr/>
 	<!-- <a id=""><i class="fa fa-plus" aria-hidden="true"></i></a><a id=""><i class="fa fa-minus" aria-hidden="true"></i></a>-->
 	<div class="col-md-12" id="">
-	<?php
-		if($dataInformacionGeneral == null || $dataInformacionGeneral == ""){
-    ?>
+	<?php if($dataInformacionGeneral == null || $dataInformacionGeneral == ""){?>
     	<div class="jumbotron">
 			<h3>Información general:</h3> 
 			<p>Por favor primero llene el formulario número 1 de <strong>Información General</strong> en el <strong>panel principal</strong> de <strong>Crear/Continuar Solicitud</strong> para continuar actualizando los docentes.</p> 
 			<button class="btn btn-danger btn-sm volver_al_panel" id="informe_volver"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 		</div>
-    <?php
-		}else{
-	?>
+    <?php } else{ ?>
 	<div class="divAgregarDoc col-md-6 center-block">
 		<h4>Nuevo facilitador:</h4>
 		<?php echo form_open('', array('id' => 'formulario_docentes')); ?>

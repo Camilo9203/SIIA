@@ -3,7 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 setlocale(LC_TIME, 'es_CO.UTF-8');
 $nombre = strftime("%B",mktime(0, 0, 0, date('m'), 1, 2000));
 $fecha = date('d')." de ".$nombre." del ".date('Y');
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
@@ -88,7 +89,7 @@ p {
 <div class="row-fluid">
 <!-- page content -->
 <div class="col-md-12">
-    <a href="https://www.uaeos.gov.co/"><img alt="Logo Orgsolidarias" id="logo_mantenimiento" class="img-responsive center-block" src=""></a>
+    <a href="https://www.uaeos.gov.co/"><img alt="Logo Organización Solidarias" id="logo_mantenimiento" class="img-responsive center-block" src=""></a>
     <a href="https://acreditacion.uaeos.gov.co/"><img alt="Logo SIIA" id="logo_mantenimiento_sia" class="img-responsive center-block" src=""></a>
 </div>
 <hr/>
@@ -98,8 +99,8 @@ p {
       <h1>SIIA en Mantenimiento.</h1>
       <h3>Se informa que el día de hoy <?php echo $fecha; ?>, se realizara un mantenimiento en la plataforma, debido a esto se presentara intermitencia en el servicio, se pondra en funcionamiento lo mas pronto posible.</h3>
       <h4>Agradecemos su compresión, todo con el fin de poder brindarles un mejor servicio.</h4>
-      <h5>Causas: Resolver problemas de correos electronicos.</h5>
-      <h5>Hora de reestablecimiento estimado: 03:20 PM</h5>
+      <h5>Causas: Implementación de nuevas funcionalidades.</h5>
+      <h5>Hora de restablecimiento estimado: 06:00 PM</h5>
       </p>
     </div>
   </div>

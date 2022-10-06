@@ -90,7 +90,8 @@ class Recordar extends CI_Controller {
 			$this->db->insert('correosRegistro', $data);
 			echo json_encode(array('url'=>"", 'msg'=>"Se envio un correo, por favor verifiquelo."));
 		}else{
-			echo json_encode(array('url'=>"login", 'msg'=>"Lo sentimos, hubo un error y no se envio el correo."));
+			$error = $this->email->print_debugger();
+			echo json_encode(array('url'=>"login", 'msg'=>"Lo sentimos, hubo un error y no se envio el correo." . $error));
 		}
 	}
 
@@ -122,7 +123,7 @@ class Recordar extends CI_Controller {
 							if(($dia_ - $dia) == 10){
 								$mensaje = "Hola, la organización: ".$nombreOrganizacion.": Organizaciones Solidarias le informa que aplicando lo establecido en el numeral 4 del artículo 5 de la Resolución 110 de 2016,  solicitud de acreditación ha sido archivada. Su cuenta se activará en un mes a partir de hoy,  para que pueda presentar una nueva solicitud de acreditación, según lo establecido en  parágrafo 2 del artículo 5 de la mencionada Resolución. \nDatos:\nCorreo organización:".$direccionOrganizacion."\nCorreo representante:".$direccionRepresentante."\nNIT:".$nit.".";
 
-									$fechaAct = strtotime('+1 month', strtotime($today));
+									$fechaAct = strtotime('.1 month', strtotime($today));
 									$fechaAct = date('Y-m-d', $fechaAct);
 									 
 									$dataToken = array(
@@ -158,7 +159,7 @@ class Recordar extends CI_Controller {
 									$this->envio_mail_tiempoUser($mensaje, $direccionOrganizacion, $direccionRepresentante);
 							}
 							if(($dia_ - $dia) == 0){
-								$mensaje = "Hola, la organización: ".$nombreOrganizacion.", Organizaciones Solidarias le recuerda que en diez (10) días hábiles vence el plazo para enviar la información complementaria requerida en la verificación de requisitos de su solicitud de acreditación. Tenga presente que vencido este tiempo su solicitud será archivada aplicando lo establecido en el numeral 4 del artículo 5 de la Resolución 110 de 2016.\nDatos:\nCorreo organización:".$direccionOrganizacion."\nCorreo representante:".$direccionRepresentante."\nNIT:".$nit.".";
+								$mensaje = "Hola, la organización: ".$nombreOrganizacion.", Organizaciones Solidarias le recuerda que en cinco (5) días hábiles vence el plazo para enviar la información complementaria requerida en la verificación de requisitos de su solicitud de acreditación. Tenga presente que vencido este tiempo su solicitud será archivada aplicando lo establecido en el numeral 4 del artículo 5 de la Resolución 110 de 2016.\nDatos:\nCorreo organización:".$direccionOrganizacion."\nCorreo representante:".$direccionRepresentante."\nNIT:".$nit.".";
 									$this->envio_mail_tiempoUser($mensaje, $direccionOrganizacion, $direccionRepresentante);
 							}
 						}
@@ -272,7 +273,7 @@ class Recordar extends CI_Controller {
 								$this->envio_mail_tiempo_admin($mensaje, CORREO_AREA, CORREO_COORDINADOR);
 						}
 						if(($dia_ - $dia) == 0){
-							$mensaje = "Hola, la organización: ".$nombreOrganizacion.", Organizaciones Solidarias le recuerda que en diez (10) días hábiles vence el plazo para enviar la información complementaria requerida en la verificación de requisitos de su solicitud de acreditación. Tenga presente que vencido este tiempo su solicitud será archivada aplicando lo establecido en el numeral 4 del artículo 5 de la Resolución 110 de 2016.\nDatos:\nCorreo organización:".$direccionOrganizacion."\nCorreo representante:".$direccionRepresentante."\nNIT:".$nit.".";
+							$mensaje = "Hola, la organización: ".$nombreOrganizacion.", Organizaciones Solidarias le recuerda que en cinco (5) días hábiles vence el plazo para enviar la información complementaria requerida en la verificación de requisitos de su solicitud de acreditación. Tenga presente que vencido este tiempo su solicitud será archivada aplicando lo establecido en el numeral 4 del artículo 5 de la Resolución 110 de 2016.\nDatos:\nCorreo organización:".$direccionOrganizacion."\nCorreo representante:".$direccionRepresentante."\nNIT:".$nit.".";
 								$this->envio_mail_tiempo_admin($mensaje, CORREO_DIRECTOR, CORREO_AREA);
 						}
 					}
@@ -381,64 +382,45 @@ class Recordar extends CI_Controller {
 
 		$this->envio_mail_asginar_admin($correo, $correoCoordinacion);
 	}
-
+	// Solicitar Camara de Comercio
 	public function pedirCamara(){
-		$id_organizacion = $this->input->post('id_organizacion');
-
-		$imagen_db = $this->db->select('camaraComercio')->from('organizaciones')->where('id_organizacion', $id_organizacion)->get()->row();
+		$idOrganizacion = $this->input->post('id_organizacion');
+		$imagen_db = $this->db->select('camaraComercio')->from('organizaciones')->where('id_organizacion', $idOrganizacion)->get()->row();
 		$imagen_db_nombre = $imagen_db ->camaraComercio;
-
-		unlink('uploads/camaraComercio/'.$imagen_db_nombre);
-		$data_update = array(
+		unlink('uploads/camaraComercio/' . $imagen_db_nombre);
+		$camaraComercio = array(
 			'camaraComercio' => "default.pdf"
 		);
+		$this->db->where('id_organizacion', $idOrganizacion);
+		if($this->db->update('organizaciones', $camaraComercio)){
+			$this->logs_sia->session_log('Organización:' . $this->session->userdata('nombre_usuario').' pidió nueva camara de comercio a la organización con ID: ' . $idOrganizacion . '.');
+			$usuarioCamara = $this->db->select("*")->from("administradores")->where("nivel", 3)->get()->row();
+			$correo = $usuarioCamara->direccionCorreoElectronico;
+			$head = "Buen día " . $usuarioCamara->primerNombreAdministrador . " " . $usuarioCamara->primerApellidoAdministrador . ", <br><br>Es necesario cargar la Camara de Comercio de la siguiente organización:<br><br>";
+			$organizacion = $this->db->select("*")->from("organizaciones")->where('id_organizacion', $idOrganizacion)->get()->row();
+			$body = "<li> Nombre: " . $organizacion->nombreOrganizacion . " con NIT: <strong>" . $organizacion->numNIT . "</strong></li>";
+			$mensaje = $head . "" . $body;
+			$num_prioridad = 1;
+			$asunto = "Cámaras de comercio: " . $organizacion->sigla;
+			$this->email->from(CORREO_SIA, "Acreditaciones");
+			$this->email->to($correo);
+			$this->email->cc(CORREO_SIA);
+			$this->email->subject('SIIA - ' . $asunto);
+			$this->email->set_priority($num_prioridad);
+			$msgEmail['mensaje'] = $mensaje;
+			$email_view = $this->load->view('email/contacto', $msgEmail, true);
+			$this->email->message($email_view);
+			if($this->email->send()){
+				echo json_encode(array('url' => "panel", 'msg' => "Correo enviado a " . $correo . " solicitando camara de comercio. No es necesario subir archivos en este formulario."));
+			}else{
+				$error = $this->email->print_debugger();
+				echo json_encode(array('url' => "panel", 'msg'=>"Lo sentimos, hubo un error y no se envío el correo." . $error));
+			}
 
-		$this->db->where('id_organizacion', $id_organizacion);
-		if($this->db->update('organizaciones', $data_update)){
-			$this->logs_sia->session_log('Administrador:'.$this->session->userdata('nombre_usuario').' pidio nueva camara de comercio a la organizacion con id: '.$id_organizacion.'.');
-			$this->recordarToCamaraMail();
 		}
-
+		// LogQueries
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
-	}
-
-	public function recordarToCamaraMail(){
-		$correo = "";
-		$usuarioCamara = $this->db->select("*")->from("administradores")->where("nivel", 3)->get()->row();
-		$nombre = $usuarioCamara->primerNombreAdministrador;
-		$apellido = $usuarioCamara->primerApellidoAdministrador;
-		$correoCamara = $usuarioCamara->direccionCorreoElectronico;
-
-		$inicio = "Buen día ".$nombre." ".$apellido.", <br>Las siguientes organizaciones estan pendientes por subir la camara de comercio:<br><br>";
-		$orgTotales = "Organizaciones inscritas en la aplicación (todas): <br><br>";
-		$orgFinalizadas = "Organizaciones que finalizaron o en observaciones <strong>(prioritarias)</strong>: <br><br>";
-
-		$dataOrganizaciones = $this->db->select("organizaciones_id_organizacion")->from("estadoOrganizaciones")->get()->result();
-		
-		foreach ($dataOrganizaciones as $organizacionDB) {
-			$id_organizacion = $organizacionDB->organizaciones_id_organizacion;
-			$data_organizaciones = $this->db->select("nombreOrganizacion, numNIT, camaraComercio, id_organizacion")->from("organizaciones")->where("id_organizacion", $id_organizacion)->get()->row();
-			$id_org = $data_organizaciones->id_organizacion;
-			$camaraComercio = $data_organizaciones->camaraComercio;
-	 		$data_organizaciones_inf = $this->db->select("*")->from("informacionGeneral")->where("organizaciones_id_organizacion", $id_org)->get()->row();
-			$documentacionLegal = $this->db->select("*")->from("documentacionLegal")->where("organizaciones_id_organizacion",$id_org)->get()->row();
-	 		$data_organizaciones_est = $this->db->select("*")->from("estadoOrganizaciones")->where("organizaciones_id_organizacion", $id_org)->get()->row();
-	 		$estadoOrganizacion = $data_organizaciones_est->nombre;
-	 		$registro = $documentacionLegal->registroEducativo;
-
-	 		if(($estadoOrganizacion == "Finalizado" || $estadoOrganizacion == "En Observaciones") && $camaraComercio == "default.pdf" && $registro == "No Tiene"){
-	 			$texto1 .= "Nombre: ".$data_organizaciones->nombreOrganizacion." con NIT: <strong>".$data_organizaciones->numNIT."</strong><br>";
-	 		}
-	 		
-	 		if($data_organizaciones != NULL && $camaraComercio == "default.pdf"){
-	 			$texto .= "Nombre: ".$data_organizaciones->nombreOrganizacion." con NIT: <strong>".$data_organizaciones->numNIT."</strong><br>";
-	 		}	 		
-		}
-
-		$correo = $inicio."".$orgFinalizadas."".$texto1."<br>".$orgTotales."".$texto;
-
-		$this->envio_mail_camara_admin($correo, $correoCamara);
 	}
 
 	public function calculo_tiempo(){
@@ -584,28 +566,6 @@ class Recordar extends CI_Controller {
 
 		if($this->email->send()){
 			echo json_encode("Correo enviado a ".$correo_1." y ".$correo_2." con mensaje: ".$mensaje."");
-		}else{
-			echo json_encode("Lo sentimos, hubo un error y no se envio el correo.");
-		}
-	}
-
-	public function envio_mail_camara_admin($mensaje, $correo){
-		$num_prioridad = 1;
-		$asunto = "Camaras de comercio";
-		$this->email->from(CORREO_SIA, "Acreditaciones");
-		$this->email->to($correo);
-		$this->email->cc(CORREO_SIA);
-		$this->email->subject('SIIA - : '.$asunto);
-		$this->email->set_priority($num_prioridad);
-
-		$data_msg['mensaje'] = $mensaje;
-
-		$email_view = $this->load->view('email/contacto', $data_msg, true);
-
-		$this->email->message($email_view);
-
-		if($this->email->send()){
-			echo json_encode("Correo enviado a ".$correo." de camaras de comercio.");
 		}else{
 			echo json_encode("Lo sentimos, hubo un error y no se envio el correo.");
 		}

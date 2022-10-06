@@ -29,7 +29,7 @@
 						echo "<td>" . $organizaciones->direccionCorreoElectronicoRepLegal . "</td>";
 						echo "<td>" . $organizaciones->fechaFinalizado . "</td>";
 						echo "<td>" . $organizaciones->asignada . "</td>";
-						echo "<td class='verFinOrgInf'><button class='btn btn-siia btn-sm' id='verModalAsignar' data-organizacion='" . $organizaciones->id_organizacion . "' data-nombre='" . $organizaciones->nombreOrganizacion . "' data-nit='" . $organizaciones->numNIT . "' data-toggle='modal' data-target='#asignarOrganizacion'>Asignar <i class='fa fa-pencil' aria-hidden='true'></i></a></td>";
+						echo "<td class='verFinOrgInf'><button class='btn btn-siia btn-sm' id='verModalAsignar' data-organizacion='" . $organizaciones->id_organizacion . "' data-nombre='" . $organizaciones->nombreOrganizacion . "' data-nit='" . $organizaciones->numNIT . "' data-solicitud='" . $organizaciones->idSolicitud . "' data-toggle='modal' data-target='#asignarOrganizacion'>Asignar <i class='fa fa-pencil' aria-hidden='true'></i></a></td>";
 						echo "</tr>";
 					}
 				}
@@ -66,7 +66,7 @@
 							echo "<td>" . $organizaciones->direccionCorreoElectronicoRepLegal . "</td>";
 							echo "<td>" . $organizaciones->fechaFinalizado . "</td>";
 							echo "<td>" . $organizaciones->asignada . "</td>";
-							echo "<td class='verFinOrgInf'><button class='btn btn-siia btn-sm' id='verModalAsignar' data-organizacion='" . $organizaciones->id_organizacion . "' data-nombre='" . $organizaciones->nombreOrganizacion . "' data-nit='" . $organizaciones->numNIT . "' data-toggle='modal' data-target='#asignarOrganizacion'>Asignar <i class='fa fa-pencil' aria-hidden='true'></i></a></td>";
+							echo "<td class='verFinOrgInf'><button class='btn btn-siia btn-sm' id='verModalAsignar' data-organizacion='" . $organizaciones->id_organizacion . "' data-nombre='" . $organizaciones->nombreOrganizacion . "' data-nit='" . $organizaciones->numNIT . "' data-solicitud='" . $organizaciones->idSolicitud . "' data-toggle='modal' data-target='#asignarOrganizacion'>Asignar <i class='fa fa-pencil' aria-hidden='true'></i></a></td>";
 							echo "</tr>";
 						}
 					}
@@ -87,25 +87,21 @@
 					<p>Seleccione de la siguiente lista los usuarios que tienen el rol de evaluadores para que pueda asignarlo a una organización y que pueda verificar la solicitud.</p>
 					<hr />
 					<select name="evaluadorAsignar" id="evaluadorAsignar" class="selectpicker form-control show-tick" required="">
-						<?php
-						foreach ($administradores as $administrador) {
-							if ($administrador->nivel == 1) {
-						?>
+						<?php foreach ($administradores as $administrador):
+								if ($administrador->nivel == 1): ?>
 								<option id="<?php echo $administrador->id_administrador; ?>" value="<?php echo $administrador->usuario; ?>"><?php echo $administrador->primerNombreAdministrador . " " . $administrador->primerApellidoAdministrador; ?></option>
-						<?php
-							}
-						}
-						?>
+						<?php endif; endforeach;?>
 					</select>
 					<div class="clearfix"></div>
 					<hr />
 					<p>ID de la organización:</p><label id="idAsigOrg"></label>
 					<p>Nombre de la organización:</p><label id="nombreAsigOrg"></label>
 					<p>Número NIT:</p><label id="nitAsigOrg"></label>
+					<p>ID Solicitud:</p><label id="idSolicitud"></label>
 					<hr />
 					<p>Luego haber seleccionado al usuario, puede dar clic en asignar para que se haga lo siguiente:</p>
 					<ul>
-						<li>Se le enviara un correo a la persona con la información de la organización.</li>
+						<li>Se le enviará un correo a la persona con la información de la organización.</li>
 						<li>Solamente esa persona podrá acceder a ver la solicitud de la organización.</li>
 					</ul>
 					<div class="clearfix"></div>

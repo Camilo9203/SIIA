@@ -206,31 +206,7 @@
 					</div>
 					<!-- Menu formulario acreditación //TODO: Menu Formulario para acreditación-->
 					<?php if ($tipo_usuario == "user") { ?>
-						<div class="col-md-3 side_main_menu">
-							<div class="left_col scroll-view">
-								<div id="sidebar-menu" class="main_menu_side hidden-print main_menu sidebar-menu">
-									<div class="menu_section">
-										<a data-form="inicio">
-											<h3 class="underlined text-center">Inicio - Ver solicitud <i class="fa fa-home" aria-hidden="true"></i></h3>
-										</a>
-										<div id="wizard_verticle" class="form_wizard wizard_verticle">
-											<ul class="nav side-menu list-unstyled wizard_steps">
-												<li class="step-no"><a data-form="1" data-form-name="informacion_general"><span id="1" class="step_no menu-sel">1</span> Informacion General de la Entidad <i class="fa fa-home" aria-hidden="true"></i></a></li>
-												<li class="step-no"><a data-form="2" data-form-name="documentacion_legal"><span id="2" class="step_no menu-sel">2</span> Documentacion Legal <i class="fa fa-book" aria-hidden="true"></i></a></li>
-												<li class="step-no" id="reg_doc_cond"><a data-form="3" data-form-name="registros_educativos"><span id="3" class="step_no menu-sel">3</span> Registros Educativos de Programas <i class="fa fa-newspaper-o" aria-hidden="true"></i></a></li>
-												<li class="step-no"><a data-form="4" data-form-name="antecedentes_academicos"><span id="4" class="step_no menu-sel">4</span> Antecedentes Académicos <i class="fa fa-id-card" aria-hidden="true"></i></a></li>
-												<li class="step-no"><a data-form="5" data-form-name="jornadas_actualizacion"><span id="5" class="step_no menu-sel">5</span> Jornadas de Actualizacion <i class="fa fa-handshake-o" aria-hidden="true"></i></a></li>
-												<li class="step-no"><a data-form="6" data-form-name="programa_economia"><span id="6" class="step_no menu-sel">6</span> Programa Básico de Economía Solidaria <i class="fa fa-server" aria-hidden="true"></i></a></li>
-												<li class="step-no"><a data-form="7" data-form-name="programa_economia" style="text-align: left;"><span id="7" class="step_no menu-sel">7</span> <small>Prog. de Economía Solidaria con Énfasis en Trabajo Asociado <i class="fa fa-sitemap" aria-hidden="true"></i></a></small></li>
-												<!-- //TODO: Formulario 8, antes comentado -->
-												<li class="step-no"><a data-form="8" data-form-name="aval_personas"><span id="8" class="step_no menu-sel">8</span> Aval de Programas <i class="fa fa-signal" aria-hidden="true"></i></a></li>
-												<li class="step-no"><a data-form="9" data-form-name="equipo_docente"><span id="9" class="step_no menu-sel">9</span> Equipo de Facilitadores <i class="fa fa-users" aria-hidden="true"></i></a></li>
-												<li class="step-no"><a data-form="10" data-form-name="plataforma"><span id="10" class="step_no menu-sel">10</span> Datos Plataforma <i class="fa fa-globe" aria-hidden="true"></i></a></li>
-												<li id="act_datos_sol_org" class="step-no"><a data-form="0" data-form-name="finalizar_proceso"><span class="step_no"><i class="fa fa-check" aria-hidden="true"></i></span> Finalizar Proceso <i class="fa fa-check" aria-hidden="true"></i></a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
+
 								<!-- <div class="col-md-12">
 								<hr />
 								<a class="col-md-1 ayuda" title="Ayuda">

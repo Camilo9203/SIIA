@@ -11,7 +11,7 @@
 ## ALTER TABLE administradores AUTO_INCREMENT = 99999999;
 ## SET GLOBAL FOREIGN_KEY_CHECKS=0;
 cd uploads
-mkdir asistentes camaraComercio observacionesPlataforma resoluciones docentes jornadas materialDidacticoProgBasicos materialDidacticoAvalEconomia materialDidacticoProgAvalar formatosEvalProgAvalar registrosEducativos instructivosPlataforma lugarAtencion cartaRep certificaciones logosOrganizaciones
+mkdir asistentes camaraComercio observacionesPlataforma resoluciones docentes jornadas materialDidacticoProgBasicos materialDidacticoAvalEconomia materialDidacticoProgAvalar formatosEvalProgAvalar registrosEducativos instructivosPlataforma lugarAtencion cartaRep certificaciones logosOrganizaciones certifcadoExistencia instructivoEnLinea
 cd logosOrganizaciones
 mkdir firma
 mkdir firmaCert
