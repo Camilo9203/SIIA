@@ -65,7 +65,7 @@ class Panel extends CI_Controller
 
 		$data['title'] = 'Panel Principal';
 		$data['logged_in'] = $logged;
-		$data['activeLink'] = 'panel';
+		$data['activeLink'] = 'formularios';
 		$datos_usuario = $this->db->select('usuario')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
 		$data['nombre_usuario'] = $datos_usuario->usuario;
 		$data['usuario_id'] = $usuario_id;
@@ -106,7 +106,7 @@ class Panel extends CI_Controller
 
 		$data['title'] = 'Panel Principal';
 		$data['logged_in'] = $logged;
-		$data['activeLink'] = 'panel';
+		$data['activeLink'] = 'facilitadores';
 		$datos_usuario = $this->db->select('usuario')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
 		$data['nombre_usuario'] = $datos_usuario->usuario;
 		$data['usuario_id'] = $usuario_id;
@@ -147,7 +147,7 @@ class Panel extends CI_Controller
 
 		$data['title'] = 'Panel Principal';
 		$data['logged_in'] = $logged;
-		$data['activeLink'] = 'panel';
+		$data['activeLink'] = 'estadisticas';
 		$datos_usuario = $this->db->select('usuario')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
 		$data['nombre_usuario'] = $datos_usuario->usuario;
 		$data['usuario_id'] = $usuario_id;

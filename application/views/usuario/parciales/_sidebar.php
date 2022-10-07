@@ -7,6 +7,12 @@
 				<span class="menu-title">Panel</span>
 			</a>
 		</li>
+		<li class="nav-item <?php if ($activeLink == 'perfil') {echo 'active';} ?>">
+			<a class="nav-link" href="<?php echo base_url('panel/perfil')?>">
+				<i class="icon-grid menu-icon"></i>
+				<span class="menu-title">Perfil</span>
+			</a>
+		</li>
 		<li class="nav-item <?php if ($activeLink == 'solicitudes') {echo 'active';} ?>">
 			<a class="nav-link" data-toggle="collapse" href="#solicitudes" aria-expanded="false" aria-controls="solicitudes">
 				<i class="icon-layout menu-icon"></i>

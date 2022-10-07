@@ -13368,7 +13368,7 @@ input[type="button"].btn-block {
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: #fff;
-  background-color: #007bff;
+  background-color: #004884;
 }
 
 .nav-fill > .nav-link,
@@ -24831,9 +24831,9 @@ dl li {
 }
 
 .tab-content {
-  border: 1px solid #CED4DA;
+  /* border: 1px solid #CED4DA; */
   border-top: 0;
-  padding: 2rem 1rem;
+  /* padding: 2rem 1rem;*/
   text-align: justify;
 }
 

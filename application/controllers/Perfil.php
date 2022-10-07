@@ -33,47 +33,62 @@ class Perfil extends CI_Controller {
 
 		$datos_registro = $this->db->select('*')->from('organizaciones')->where('usuarios_id_usuario', $usuario_id)->get()->row();
 		$datos_usuario = $this->db->select('usuario')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
-		$data['nombre_usuario'] = $datos_usuario ->usuario;
+		$data['nombre_usuario'] = $datos_usuario->usuario;
 		
 		$data_registro = array(
-							'nombreOrganizacion' => $datos_registro->nombreOrganizacion,
-			            	'numNIT' => $datos_registro ->numNIT,
-			            	'sigla' => $datos_registro ->sigla,
-			            	'primerNombreRepLegal' => $datos_registro ->primerNombreRepLegal,
-			            	'segundoNombreRepLegal' => $datos_registro ->segundoNombreRepLegal,
-			            	'primerApellidoRepLegal' => $datos_registro ->primerApellidoRepLegal,
-			            	'segundoApellidoRepLegal' => $datos_registro ->segundoApellidoRepLegal,
-			            	'direccionCorreoElectronicoOrganizacion' => $datos_registro ->direccionCorreoElectronicoOrganizacion,
-			            	'direccionCorreoElectronicoRepLegal' => $datos_registro ->direccionCorreoElectronicoRepLegal,
-			            	'primerNombrePersona' => $datos_registro ->primerNombrePersona,
-			            	'primerApellidoPersona' => $datos_registro ->primerApellidoPersona,
-			            	'nombre_usuario' => $datos_usuario ->usuario,
-			            	'imagen' => $datos_registro ->imagenOrganizacion,
-			            	'firma' => $datos_registro ->firmaRepLegal,
-			            	'firmaCert' => $datos_registro ->firmaCert,
-			            	'personaCert' => $datos_registro ->personaCert,
-			            	'cargoCert' => $datos_registro ->cargoCert,
-				        );
+			'nombreOrganizacion' => $datos_registro->nombreOrganizacion,
+			'numNIT' => $datos_registro ->numNIT,
+			'sigla' => $datos_registro ->sigla,
+			'primerNombreRepLegal' => $datos_registro ->primerNombreRepLegal,
+			'segundoNombreRepLegal' => $datos_registro ->segundoNombreRepLegal,
+			'primerApellidoRepLegal' => $datos_registro ->primerApellidoRepLegal,
+			'segundoApellidoRepLegal' => $datos_registro ->segundoApellidoRepLegal,
+			'direccionCorreoElectronicoOrganizacion' => $datos_registro ->direccionCorreoElectronicoOrganizacion,
+			'direccionCorreoElectronicoRepLegal' => $datos_registro ->direccionCorreoElectronicoRepLegal,
+			'primerNombrePersona' => $datos_registro->primerNombrePersona,
+			'primerApellidoPersona' => $datos_registro->primerApellidoPersona,
+			'nombre_usuario' => $datos_usuario->usuario,
+			'imagen' => $datos_registro->imagenOrganizacion,
+			'firma' => $datos_registro->firmaRepLegal,
+			'firmaCert' => $datos_registro->firmaCert,
+			'personaCert' => $datos_registro->personaCert,
+			'cargoCert' => $datos_registro->cargoCert,
+		);
+
 		$data['departamentos'] = $this->cargarDepartamentos();
+		$data['activeLink'] = 'perfil';
 		$data['title'] = 'Perfil - Información de '.$datos_registro ->nombreOrganizacion;
-		$data_actividad['actividad'] = $this->actividad();
+		$data['actividad'] = $this->actividad();
 		$data['mis_notificaciones'] = $this->cargarMisNotificaciones();
 		$data_registro["resolucion"] = $this->cargarResolucion();
 		$data_registro["camara"] = $this->cargarCamaraComercio();
 
-		$this->load->view('include/header', $data);
+		$this->load->view('include/header/main', $data);
 		$this->load->view('paneles/perfil', $data_registro);
-		$this->load->view('paneles/actividad', $data_actividad);
-		$this->load->view('include/footer');
+		//$this->load->view('paneles/actividad', $dataActividad);
+		$this->load->view('include/footer/main');
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
+	// Variables de Session
+	public function datosSession()
+	{
+		date_default_timezone_set("America/Bogota");
+		$data = array(
+			'logged_in' => $this->session->userdata('logged_in'),
+			'nombre_usuario' => $this->session->userdata('nombre_usuario'),
+			'usuario_id' => $this->session->userdata('usuario_id'),
+			'tipo_usuario' => $this->session->userdata('type_user'),
+			'nivel' => $this->session->userdata('nivel'),
+			'hora' => date("H:i", time()),
+			'fecha' => date('Y/m/d'),
+		);
+		return $data;
+	}
 	public function actividad(){
-		$usuario_id = $this->session->userdata('usuario_id');
 
-		$datos_actividad = $this->db->select('*')->from('session_log')->where('usuario_id', $usuario_id)->order_by("id_session_log", "desc")->limit(70)->get()->result();
+		$datosActividad = $this->db->select('*')->from('session_log')->where('usuario_id', $this->session->userdata('usuario_id'))->order_by("id_session_log", "desc")->limit(70)->get()->result();
 
-		return $datos_actividad;
+		return $datosActividad;
 	}
 
 	public function idSolicitud(){

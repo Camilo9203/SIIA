@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
@@ -20,7 +19,7 @@
 <!--	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
 <!--		<link href="--><?php //echo base_url('assets/css/bootstrap.min.css') ?><!--" rel="stylesheet" type="text/css" />-->
 <!--	 Custom CSS-->
-<!--	<link href="--><?php //echo base_url('assets/css/style.css?v=1.0.8.1919') ?><!--" rel="stylesheet" type="text/css" />-->
+	<link href="<?php echo base_url('assets/css/style.css?v=1.0.8.1919') ?>" rel="stylesheet" type="text/css" />
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon16.png') ?>" type="image/png" sizes="16x16" />
 	<link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon32.png') ?>" type="image/png" sizes="32x32" />
@@ -56,7 +55,6 @@
 	<!-- Title -->
 	<title>Sistema Integrado de Información de Acreditación | <?php echo $title; ?></title>
 </head>
-
 <body class="nav-md">
 <div class="container-scroller">
 	<!-- Navbar Usuario no registrado //TODO: Navbar de usuario no registrado -->
