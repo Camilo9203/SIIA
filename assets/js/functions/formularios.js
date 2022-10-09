@@ -228,58 +228,28 @@ $("#guardar_formulario_informacion_general_entidad").click(function () {
 	event.preventDefault();
 	if ($("#formulario_informacion_general_entidad").valid()) {
 		$(this).attr("disabled", true);
-		let tipo_organizacion = $("#tipo_organizacion").val();
-		let departamento = $("#departamentos").val();
-		let municipio = $("#municipios").val();
-		let direccion = $("#direccion").val();
-		let fax = $("#fax").val();
-		if ($("input:checkbox[name=extension_checkbox]:checked").val()) {
-			let extension = $("#extension").val();
-		} else {
-			var extension = "No Tiene";
-		}
-		if ($("#urlOrganizacion").val()) {
-			let urlOrganizacion = $("#urlOrganizacion").val();
-		} else {
-			let urlOrganizacion = "No Tiene";
-		}
-		let actuacion = $("#actuacion").val();
-		let educacion = $("#educacion").val();
-		let numCedulaCiudadaniaPersona = $("#numCedulaCiudadaniaPersona").val();
-		let presentacion = $("#presentacion").val();
-		let objetoSocialEstatutos = $("#objetoSocialEstatutos").val();
-		let mision = $("#mision").val();
-		let vision = $("#vision").val();
-		let principios = $("#principios").val();
-		let fines = $("#fines").val();
-		let portafolio = $("#portafolio").val();
-		let otros = $("#otros").val();
 		data = {
-			tipo_organizacion: tipo_organizacion,
-			departamento: departamento,
-			municipio: municipio,
-			direccion: direccion,
-			fax: fax,
-			extension: extension,
-			urlOrganizacion: urlOrganizacion,
-			actuacion: actuacion,
-			educacion: educacion,
-			numCedulaCiudadaniaPersona: numCedulaCiudadaniaPersona,
-			presentacion: presentacion,
-			objetoSocialEstatutos: objetoSocialEstatutos,
-			mision: mision,
-			vision: vision,
-			principios: principios,
-			fines: fines,
-			portafolio: portafolio,
-			otros: otros,
+			tipo_organizacion: $("#tipo_organizacion").val(),
+			departamento: $("#departamentos").val(),
+			municipio: $("#municipios").val(),
+			direccion: $("#direccion").val(),
+			fax: $("#fax").val(),
+			extension:  $("#extension").val(),
+			urlOrganizacion: $("#urlOrganizacion").val(),
+			actuacion: $("#actuacion").val(),
+			educacion: $("#educacion").val(),
+			numCedulaCiudadaniaPersona: $("#numCedulaCiudadaniaPersona").val(),
+			presentacion: $("#presentacion").val(),
+			objetoSocialEstatutos: $("#objetoSocialEstatutos").val(),
+			mision: $("#mision").val(),
+			vision: $("#vision").val(),
+			principios: $("#principios").val(),
+			fines: $("#fines").val(),
+			portafolio: $("#portafolio").val(),
+			otros: $("#otros").val(),
 		};
-
-
-
-
 		$.ajax({
-			url: baseURL + "panel/guardar_formulario_informacion_general_entidad",
+			url: baseURL + "formularios/guardar_formulario_informacion_general_entidad",
 			type: "post",
 			dataType: "JSON",
 			data: data,
@@ -287,13 +257,19 @@ $("#guardar_formulario_informacion_general_entidad").click(function () {
 				notificacion("Espere...", "success");
 			},
 			success: function (response) {
-				notificacion(response.msg, "success");
-				setInterval(function () {
-					reload();
-				}, 2000);
+				if(response.status == 1) {
+					notificacion(response.msg, "success");
+					setInterval(function () {
+						reload();
+					}, 2000);
+				}
+				else{
+					notificacion(response.msg, "success");
+				}
 			},
 			error: function (ev) {
-				//Do nothing
+				event.preventDefault();
+				notificacion(ev.responseText, "success");
 			},
 		});
 	}
@@ -1169,6 +1145,34 @@ function validFroms (form){
 						required: true,
 						minlength: 3,
 					},
+					presentacion: {
+						required: true,
+						minlength: 20,
+					},
+					objetoSocialEstatutos: {
+						required: true,
+						minlength: 20,
+					},
+					mision: {
+						required: true,
+						minlength: 20,
+					},
+					vision: {
+						required: true,
+						minlength: 20,
+					},
+					principios: {
+						required: true,
+						minlength: 20,
+					},
+					fines: {
+						required: true,
+						minlength: 20,
+					},
+					portafolio: {
+						required: true,
+						minlength: 20,
+					}
 				},
 				messages: {
 					tipo_organizacion: {
@@ -1195,9 +1199,37 @@ function validFroms (form){
 						required: "Por favor, seleccione un tipo de la lista.",
 					},
 					numCedulaCiudadaniaPersona: {
-						required: "Por favor, escriba la cedula del Representante Legal.",
-						minlength: "La Cedula debe tener mínimo 3 caracteres.",
+						required: "Por favor, escriba la cédula del Representante Legal.",
+						minlength: "La cédula debe tener mínimo 3 caracteres.",
 					},
+					presentacion: {
+						required: "Por favor, escriba la presentación institucional.",
+						minlength: "La presentación institucional debe tener mínimo 20 caracteres.",
+					},
+					objetoSocialEstatutos: {
+						required: "Por favor, escriba el objeto social.",
+						minlength: "El objeto social  debe tener mínimo 20 caracteres.",
+					},
+					mision: {
+						required: "Por favor, escriba la misión.",
+						minlength: "La misión debe tener mínimo 20 caracteres.",
+					},
+					vision: {
+						required: "Por favor, escriba la visión.",
+						minlength: "La visión debe tener mínimo 20 caracteres.",
+					},
+					principios: {
+						required: "Por favor, escriba los principios.",
+						minlength: "Los principios deben tener mínimo 20 caracteres.",
+					},
+					fines: {
+						required: "Por favor, escriba los fines.",
+						minlength: "Los fines deben tener mínimo 20 caracteres.",
+					},
+					portafolio: {
+						required: "Por favor, escriba el portafolio.",
+						minlength: "El portafolio  debe tener mínimo 20 caracteres.",
+					}
 				},
 			});
 			break;

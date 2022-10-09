@@ -8,7 +8,7 @@ class Panel extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->helper(array('download', 'file', 'url', 'html', 'form'));
-		verify_session();
+		//verify_session();
 	}
 
 	/**
@@ -1080,95 +1080,7 @@ class Panel extends CI_Controller
 			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "18", 'estado' => "1"));
 		}
 	}
-	// Formulario 1
-	public function guardar_formulario_informacion_general_entidad()
-	{
-		$this->form_validation->set_rules('tipo_organizacion', '', 'trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('departamento', '', 'trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('municipio', '', 'trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('direccion', '', 'trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('fax', '', 'trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('extension', '', 'trim|min_length[1]|xss_clean');
-		$this->form_validation->set_rules('urlOrganizacion', '', 'trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('actuacion', '', 'trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('educacion', '', 'trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('numCedulaCiudadaniaPersona', '', 'trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('presentacion', '', 'trim|min_length[1]|xss_clean');
-		$this->form_validation->set_rules('objetoSocialEstatutos', '', 'trim|min_length[1]|xss_clean');
-		$this->form_validation->set_rules('mision', '', 'trim|min_length[1]|xss_clean');
-		$this->form_validation->set_rules('vision', '', 'trim|min_length[1]|xss_clean');
-		$this->form_validation->set_rules('principios', '', 'trim|min_length[1]|xss_clean');
-		$this->form_validation->set_rules('fines', '', 'trim|min_length[1]|xss_clean');
-		$this->form_validation->set_rules('portafolio', '', 'trim|min_length[1]|xss_clean');
-		$this->form_validation->set_rules('otros', '', 'trim|min_length[1]|xss_clean');
 
-		if ($this->form_validation->run("formulario_informacion_general_entidad") == FALSE) {
-			echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no son correctos."));
-		} else {
-			$tipo_organizacion = $this->input->post('tipo_organizacion');
-			$departamento = $this->input->post('departamento');
-			$municipio = $this->input->post('municipio');
-			$direccion = $this->input->post('direccion');
-			$fax = $this->input->post('fax');
-			$extension = $this->input->post('extension');
-			$urlOrganizacion = $this->input->post('urlOrganizacion');
-			$actuacion = $this->input->post('actuacion');
-			$educacion = $this->input->post('educacion');
-			$numCedulaCiudadaniaPersona = $this->input->post('numCedulaCiudadaniaPersona');
-			$presentacion = $this->input->post('presentacion');
-			$objetoSocialEstatutos = $this->input->post('objetoSocialEstatutos');
-			$mision = $this->input->post('mision');
-			$vision = $this->input->post('vision');
-			$principios = $this->input->post('principios');
-			$fines = $this->input->post('fines');
-			$portafolio = $this->input->post('portafolio');
-			$otros = $this->input->post('otros');
-
-			if ($this->input->post()) {
-				$usuario_id = $this->session->userdata('usuario_id');
-				$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-				$id_organizacion = $datos_organizacion->id_organizacion;
-				$datos_informacion_general = $this->db->select("*")->from("informacionGeneral")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-
-				$data_informacion_general = array(
-					'tipoOrganizacion' => $tipo_organizacion,
-					'direccionOrganizacion' => $direccion,
-					'nomDepartamentoUbicacion' => $departamento,
-					'nomMunicipioNacional' => $municipio,
-					'fax' => $fax,
-					'extension' => $extension,
-					'urlOrganizacion' => $urlOrganizacion,
-					'actuacionOrganizacion' => $actuacion,
-					'tipoEducacion' => $educacion,
-					'numCedulaCiudadaniaPersona' => $numCedulaCiudadaniaPersona,
-					'presentacionInstitucional' => $presentacion,
-					'objetoSocialEstatutos' => $objetoSocialEstatutos,
-					'mision' => $mision,
-					'vision' => $vision,
-					'principios' => $principios,
-					'fines' => $fines,
-					'portafolio' => $portafolio,
-					'otros' => $otros,
-					'fecha' => date('Y/m/d H:i:s'),
-					'organizaciones_id_organizacion' => $id_organizacion,
-				);
-				if ($datos_informacion_general != NULL) {
-					$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-					$this->db->update('informacionGeneral', $data_informacion_general);
-					echo json_encode(array('url' => "panel", 'msg' => "Se actualizó la Información General."));
-					$this->logs_sia->session_log('Formulario Actualización Informacion General');
-					$this->logs_sia->logQueries();
-				} else {
-					$this->db->insert('informacionGeneral', $data_informacion_general);
-					echo json_encode(array('url' => "panel", 'msg' => "Se guardo la Información General."));
-					$this->logs_sia->session_log('Formulario Informacion General');
-					$this->logs_sia->logQueries();
-				}
-			} else {
-				echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no son correctos."));
-			}
-		}
-	}
 	// Formulario 2
 	public function guardar_formulario_documentacion_legal()
 	{
