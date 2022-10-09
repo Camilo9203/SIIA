@@ -11702,7 +11702,6 @@ function initJS() {
 	validaciones();
 	tablas();
 	back_to_top();
-	init_echarts();
 }
 
 function dragElemento(elmnt) {
