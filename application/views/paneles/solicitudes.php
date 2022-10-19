@@ -2,7 +2,7 @@
 <div class="main-panel">
 	<div class="content-wrapper">
 		<div class="row">
-			<?php if($dataInformacionGeneral == null || $dataInformacionGeneral == ""):?>
+			<?php if($solicitudes == null || $solicitudes == ""):?>
 				<!-- Tarjeta si no existe información en formulario 1 -->
 				<div class="col-lg-12 grid-margin stretch-card">
 					<div class="card">
@@ -20,17 +20,8 @@
 					<div class="card">
 						<div class="card-body">
 							<h4 class="card-title">Información a tener en cuenta:</h4>
-							<p class="card-description">Ingrese solo la información del equipo de facilitadores que desarrollará los cursos. Este debe ser de <span class="spanRojo">mínimo 3 facilitadores</span>. Anexe los soportes de estudios y de experiencia solicitados.</p>
-							<p class="card-description">Ingrese los datos del facilitador y de clic en <label>"Crear facilitador"</label>. Los archivos que debe adjuntar son: </p>
-							<ul class="list-arrow">
-								<li class="card-description">Hoja de vida</lilist-arrow>
-								<li class="card-description">Título de técnico, tecnólogo o profesional.</li>
-								<li class="card-description">Certificado o certificados que acrediten experiencia en actividades formativas, capacitación, como docente, facilitador, capacitador o instructor, en mínimo tres procesos formativos.</li>
-								<li class="card-description">Certificados que acrediten haber recibido capacitación en economía solidaria por mínimo <span class="spanRojo">60 Horas</span>.</li>
-							</ul>
-							<br>
-							<p class="card-description">Recuerde que, si no cumple con los requisitos (documentos, certificados, horas), el facilitador no será válido, para dar continuidad con el trámite en caso de que solo registre tres (3) docentes.</p>
-							<p class="card-description">Su organización podrá visualizar el estado del docente si es válido o no, si no lo es, deberá subsanar las observaciones realizadas.</p>
+							<p class="card-description">En este espacio podrás encontrar las solicitudes creadas anteriormente o podrás crear una nueva.</p>
+							<p class="card-description">Antes de iniciar con el proceso te recomendamos leas el manual con atención, el cual se encuentra en el siguiente enlace<a href="#"> <code>Manual SIIA</code></a></p>
 						</div>
 					</div>
 				</div>
@@ -38,34 +29,49 @@
 				<div class="col-lg-12 grid-margin stretch-card">
 					<div class="card">
 						<div class="card-body">
-							<h4 class="card-title">Facilitadores</h4>
+							<h4 class="card-title">Solicitudes</h4>
 							<p class="card-description">
-								Facilitadores <code>registrados</code>
+								Solicitudes <code>registradas</code>
 							</p>
 							<hr/>
-							<a class="btn btn-primary btn-sm" id="verDivAgregarDoc" href="#divAgregarDoc">Agregar nuevo facilitador <i class="fa fa-plus" aria-hidden="true"></i></a>
-							<?php if($docentes): ?>
+							<a class="btn btn-primary btn-sm" id="verDivAgregarSolicitud" href="#verDivAgregarSolicitud">Agregar nueva solicitud <i class="fa fa-plus" aria-hidden="true"></i></a>
+							<?php if($solicitudes): ?>
 							<div class="table-responsive">
-								<table id="tabla_docentes" class="table table-striped">
+								<table id="tabla_solicitudes" class="table table-striped">
 									<thead>
 									<tr>
-										<th>Foto</th>
-										<th>Nombre</th>
-										<th>Nº cédula</th>
-										<th>Profesión</th>
-										<th>¿Aprobado?</th>
-										<th>Acciones / Archivos</th>
+										<th>IDSolicitud</th>
+										<th>Fecha de Inscripción</th>
+										<th>Fecha de Última Revisión</th>
+										<th>Estado Solicitud</th>
+										<th>Motivo</th>
+										<th>Modalidad</th>
+										<th>Acciones</th>
 									</tr>
 									</thead>
 									<tbody id="tbody">
-									<?php foreach ($docentes as $docente) :
-										echo "<tr><td class='py-1'><img src=" .  base_url('assets/img/images/faces/face1.jpg') . " alt='image'/> </td>";
-										echo "<td>$docente->primerNombreDocente" . " " . "$docente->primerApellidoDocente</td>";
-										echo "<td>$docente->numCedulaCiudadaniaDocente</td>";
-										echo "<td>$docente->profesion</td>";
-										if($docente->valido == '0'){ echo "<td>No</td>"; }else if($docente->valido == '1'){ echo "<td>Si</td>"; }
-										echo "<td><button class='btn btn-primary btn-sm verDocenteOrg' data-toggle='modal' data-nombre='$docente->primerNombreDocente $docente->primerApellidoDocente' data-id='$docente->id_docente' data-target='#verDocenteOrg'><i class='ti-eye' aria-hidden='true'></i> Ver / Adjuntar <i class='fa fa-plus' aria-hidden='true'></i></button></td></tr>";
-									endforeach; ?>
+									<?php foreach ($solicitudes as $solicitud) {
+										echo "<tr><td>" . $solicitud->idSolicitud . "</td>";
+										echo "<td>" . $solicitud->fecha . "</td>";
+										echo "<td>" . $solicitud->fechaUltimaRevision . "</td>";
+										echo "<td>" . $solicitud->nombre . "</td>";
+										echo "<td>" . $solicitud->motivoSolicitudAcreditado . "</td>";
+										echo "<td>" . $solicitud->modalidadSolicitudAcreditado . "</td>";
+										if ($solicitud->nombre == "En Proceso") {
+											echo "<td><div class='btn-group-vertical' role='group' aria-label='acciones'><button type='button' class='btn btn-siia btn-sm verSolicitud' data-id=" . $solicitud->idSolicitud . " title='Continuar Solicitud'>Continuar <i class='fa fa-check' aria-hidden='true'></i></button>";
+											echo "<button type='button' class='btn btn-danger btn-sm' data-toggle='modal' data-target='#modalEliminarSolicitud' data-backdrop='static' data-keyboard='false' title='Eliminar Solicitud'>Eliminar <i class='fa fa-trash' aria-hidden='true'></i></button></div></td></tr>";
+										}
+										if ($solicitud->nombre == "Acreditado" || $solicitud->nombre == "Archivada" || $solicitud->nombre == "Negada" || $solicitud->nombre == "Revocada" ){
+											echo "<td><button id='verDetalle' class='btn btn-info btn-sm' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false' data-id=" . $solicitud->idSolicitud . " title='Ver Detalle'>Detalle <i class='fa fa-info' aria-hidden='true'></i></button></div></td></tr>";
+										}
+										if ($solicitud->nombre == "Finalizado"){
+											echo "<td><button class='btn btn-success btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Estado'>Estado<i class='fa fa-eye' aria-hidden='true'></i></button></td></tr>";
+										}
+										if ($solicitud->nombre == "En Observaciones"){
+											echo "<td><button class='btn btn-warning btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Observaciones'>Observaciones<i class='fa fa-eye' aria-hidden='true'></i></button></td></tr>";
+										}
+									}
+									?>
 									</tbody>
 								</table>
 							</div>
@@ -74,7 +80,7 @@
 					</div>
 				</div>
 				<!-- Formulario de creación de usuario -->
-				<div class="col-lg-12 grid-margin stretch-card" id="divAgregarDoc">
+				<div class="col-lg-12 grid-margin stretch-card" id="divAgregarSolicitud">
 					<div class="card">
 						<div class="card-body">
 							<h4 class="card-title">Crear Facilitador</h4>

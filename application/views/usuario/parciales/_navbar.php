@@ -71,7 +71,7 @@
 			</li>
 			<li class="nav-item nav-profile dropdown">
 				<a class="nav-link dropdown-toggle" href="#"  data-toggle="dropdown" id="profileDropdown">
-					<img src="<?php echo base_url('assets/img/default.png') ?>" alt="profile"/>
+					<img src="<?php echo base_url('uploads/logosOrganizaciones/' . $data_organizacion->imagenOrganizacion . '')?>" alt="profile"/>
 				</a>
 				<div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
 					<a href="<?php echo base_url('panel/perfil')?>" class="dropdown-item">
@@ -105,7 +105,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="cerrarSesion">¿Está seguro de cerrar sesión <label class="user-profile"><?php echo $data_organizacion->nombreOrganizacion ?></label>?</h5>
-				<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">×</span>
 				</button>
 			</div>

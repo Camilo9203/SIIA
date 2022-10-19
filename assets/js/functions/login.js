@@ -111,7 +111,6 @@ $("#inicio_sesion").click(function () {
 		alert('arregla el formulario');
 	}
 });
-
 /**
 		Clic en Recordar Contraseña
  **/
@@ -157,8 +156,6 @@ $("#recordar_contrasena").click(function () {
 
 	}
 });
-
-
 
 /**
 		Click en Salir de Sesión.

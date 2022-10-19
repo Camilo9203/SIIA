@@ -6,13 +6,13 @@ class Solicitudes extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('EstadisticasModel');
+		$this->load->model('DocentesModel');
+		$this->load->model('AdminModel');
 	}
-
-	// Variables de Session
+	/** Datos Iniciales */
 	public function datosSession()
 	{
-		verify_session_admin();
+		verify_session();
 		date_default_timezone_set("America/Bogota");
 		$data = array(
 			'logged_in' => $this->session->userdata('logged_in'),
@@ -22,170 +22,74 @@ class Solicitudes extends CI_Controller
 			'nivel' => $this->session->userdata('nivel'),
 			'hora' => date("H:i", time()),
 			'fecha' => date('Y/m/d'),
+			'administradores' => $this->AdminModel->cargarAdministradores(),
+			'data_organizacion' => $this->db->select('*')->from('organizaciones')->where('usuarios_id_usuario', $this->session->userdata('usuario_id'))->get()->row(),
+			'solicitudes' => $this->cargar_solicitudes(),
 		);
 		return $data;
 	}
-	// Tipo solicitud
-	public function guardar_tipoSolicitud()
+	/** Vista Inicial */
+	public function index()
 	{
-		/* $this->form_validation->set_rules('tipo_solicitud','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('motivo_solicitud','','trim|required|min_length[3]|xss_clean'); */
-		if ($this->input->post()) {
-			$usuario_id = $this->session->userdata('usuario_id');
-			$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-			$id_organizacion = $organizacion->id_organizacion;
-			$nombre_org =  $organizacion->nombreOrganizacion;
-			$data_tipoSolicitud = array(
-				'tipoSolicitud' =>$this->input->post('tipo_solicitud'),
-				'motivoSolicitud' => $this->input->post('motivo_solicitud'),
-				'modalidadSolicitud' => $this->input->post('modalidad_solicitud'),
-				'idSolicitud' => date('YmdHis') . $nombre_org[3] . random(2),
-				'organizaciones_id_organizacion' => $organizacion->id_organizacion,
-				'motivosSolicitud' => json_encode($this->input->post('motivos_solicitud')),
-				'modalidadesSolicitud' => json_encode($this->input->post('modalidades_solicitud'))
-			);
-
-
-			$data_update_solicitud = array(
-				'numeroSolicitudes' => $numeroSolicitudes += 1,
-				'fecha' =>  date('Y/m/d H:i:s'),
-				'organizaciones_id_organizacion' => $id_organizacion
-			);
-			$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-			// TODO: Cambiar por insert
-			$this->db->update('solicitudes', $data_update_solicitud);
-			// TODO: Borrar inicio
-			if ($tipo_solicitud == "Acreditación Primera vez" && $motivo_solicitud != "Actualizar Datos") {
-				$nombre = "En Proceso";
-			}
-			else if ($tipo_solicitud == "Renovacion de Acreditación") {
-				$nombre = "En Proceso de Renovación";
-			}
-			else if ($tipo_solicitud == "Actualización de datos") {
-				$nombre = "En Proceso de Actualización";
-			}
-			else if ($motivo_solicitud == "Actualizar Datos") {
-				$nombre = "En Proceso de Actualización";
-			}
-			// TODO: Borrar fin
-			// TODO: Se cambio la variable $nombre por "En Proceso"
-			$data_estado = array(
-				'nombre' => "En Proceso",
-				'fecha' => date('Y/m/d H:i:s'),
-				'estadoAnterior' => $estado,
-				'organizaciones_id_organizacion' => $id_organizacion
-			);
-			$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-			// TODO: Cambiar por insert
-			$this->db->update('estadoOrganizaciones', $data_estado);
-			$datos_tipos = $this->db->select("*")->from("tipoSolicitud")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-			if ($datos_tipos == NULL) {
-				$this->db->insert('tipoSolicitud', $data_tipoSolicitud);
-				echo json_encode(array('url' => "panel", 'msg' => "Se guardo el tipo de solicitud.", "est" => $nombre));
-				$this->envio_mailcontacto("inicia", 2);
-				$this->logs_sia->session_log('Formulario Motivo Solicitud tipoSolicitud motivoSolicitud modalidadSolicitud: ' . $tipo_solicitud . ' con el ID: ' . $numeroSolicitud);
-				$this->logs_sia->logQueries();
-			}
-			else {
-				$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-				$this->db->update('tipoSolicitud', $data_tipoSolicitud);
-				echo json_encode(array('url' => "panel", 'msg' => "Se guardo el tipo de soliditud.", "est" => $nombre));
-				$this->envio_mailcontacto("inicia", 2);
-				$this->logs_sia->session_log('Formulario Motivo Solicitud - Tipo Solicitud: ' . $tipo_solicitud . '. Motivo Solicitud: ' . $motivo_solicitud . '. Modalidad Solicitud: ' . $modalidad_solicitud . '. ID: ' . $numeroSolicitud . '. Fecha: ' . date('Y/m/d') . '.');
-				$this->logs_sia->logQueries();
-			}
-		}
+		$data = $this->datosSession();
+		$data['title'] = 'Panel Principal - Solicitudes';
+		$data['activeLink'] = 'solicitudes';
+		$this->load->view('include/header/main', $data);
+		$this->load->view('paneles/solicitudes', $data);
+		$this->load->view('include/footer/main', $data);
+		$this->logs_sia->logs('PLACE_USER');
 	}
-	// Verificar tipo solicitud
-	public function verificar_tipoSolicitud()
-	{
-		/*$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion ->id_organizacion;
 
-		$tipoSolicitudBD = $this->db->select("*")->from("tipoSolicitud")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$tipoSolicitud = $tipoSolicitudBD ->tipoSolicitud;
-
-		$motivoSolicitudBD = $this->db->select("*")->from("tipoSolicitud")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$motivoSolicitud = $motivoSolicitudBD ->motivoSolicitud;
-
-		$estadoBD = $this->db->select("*")->from("estadoOrganizaciones")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$estadoAnterior = $estadoBD ->estadoAnterior;
-		$estado = $estadoBD ->nombre;*/
-
-		$tipoSolicitud = $this->cargarTipoSolicitud();
-		$estado = $this->estadoOrganizaciones();
-		$estadoAnterior = $this->estadoAnteriorOrganizaciones();
-
-		if ($estado == "En Proceso" && ($estadoAnterior == "Inscrito" || $estadoAnterior == "Revocada" || $estadoAnterior == "Finalizado")) {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "1", 'estado' => "1"));
-		}
-		if ($estado == "En Proceso" && $estadoAnterior == "Inscrito" && $tipoSolicitud == NULL) {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "2", 'estado' => "2"));
-		}
-		if ($estado == "En Proceso" && $estadoAnterior == "Inscrito" && $tipoSolicitud == "Eliminar") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "3", 'estado' => "2"));
-		}
-		if ($estado == "En Proceso de Renovación" && $estadoAnterior == "Acreditado") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "4", 'estado' => "1"));
-		}
-		if ($estado == "En Proceso de Renovación" && $estadoAnterior == "Acreditado" && $tipoSolicitud == "Eliminar") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "5", 'estado' => "0"));
-		}
-		if ($estado == "En Proceso de Actualización" && $estadoAnterior == "Acreditado") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "6", 'estado' => "1"));
-		}
-		if ($estado == "En Proceso de Actualización" && $estadoAnterior == "Finalizado") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "6.1", 'estado' => "1"));
-		}
-		/*if($estado == "Finalizado" && $estadoAnterior == "Finalizado"){
-			echo json_encode(array('est' => $estado, 'url'=>"panel", 'msg'=>"6.2", 'estado' => "0"));
-		}*/
-		if ($estado == "En Proceso de Actualización" && $estadoAnterior == "Acreditado" && $tipoSolicitud == "Eliminar") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "7", 'estado' => "0"));
-		}
-		if ($estado == "Acreditado") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "8", 'estado' => "0"));
-		}
-		if ($estado == "En Observaciones" && $estadoAnterior == "En Proceso") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "9", 'estado' => "1"));
-		}
-		if ($estado == "En Proceso" && $estadoAnterior == "Acreditado") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "10", 'estado' => "1"));
-		}
-		if ($estado == "En Observaciones" && $estadoAnterior == "Finalizado") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "11", 'estado' => "1"));
-		}
-		if ($estado == "Negada" && $estadoAnterior == "Finalizado") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "12", 'estado' => "2"));
-		}
-		if ($estado == "Revocada" && $estadoAnterior == "Finalizado") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "13", 'estado' => "2"));
-		}
-		if ($estado == "Negada" && $estadoAnterior == "Negada") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "14", 'estado' => "2"));
-		}
-		if ($estado == "Revocada" && $estadoAnterior == "Revocada") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "15", 'estado' => "2"));
-		}
-		if ($estado == "En Proceso" && $estadoAnterior == "Negada") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "16", 'estado' => "1"));
-		}
-		if ($estado == "Finalizado" && $estadoAnterior == "Finalizado" && $tipoSolicitud == "Eliminar") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "17", 'estado' => "0"));
-		}
-		if ($estado == "En Proceso de Renovación" && $estadoAnterior == "Finalizado" && $tipoSolicitud == "Renovacion de Acreditación") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "18", 'estado' => "1"));
-		}
-	}
-	public function numeroSolicitudes()
+	public function cargar_solicitudes()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
+		$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
+		$solicitudes = $this->db->select("*")->from("solicitudes")->join('tipoSolicitud', "tipoSolicitud.idSolicitud = solicitudes.idSolicitud")->join('estadoOrganizaciones', "estadoOrganizaciones.idSolicitud = solicitudes.idSolicitud")->where('solicitudes.organizaciones_id_organizacion', $organizacion->id_organizacion)->get()->result();
+		return $solicitudes;
+	}
 
-		$solicitudes = $this->db->select("numeroSolicitudes")->from("solicitudes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$numeroSolicitudes = $solicitudes->numeroSolicitudes;
-		return $numeroSolicitudes;
+	/** TODO: Notificaciones Email */
+	function envilo_mailadmin($type, $prioridad, $docente)
+	{
+		$usuario_id = $this->session->userdata('usuario_id');
+		$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
+		// $id_organizacion = $organizacion->id_organizacion;
+		$docente = $this->db->select("*")->from("docentes")->where("numCedulaCiudadaniaDocente", $docente)->get()->row();
+		switch ($type) {
+			// Actualización de facilitadores
+			case 'actualizacion':
+				$asunto = "Actualización Docente";
+				$mensaje = "La organización <strong>" . $organizacion->nombreOrganizacion . "</strong>: Realizo una solicitud para actualización del facilitador <strong>" . $docente->primerNombreDocente . " " . $docente->primerApellidoDocente . "</strong>, por favor ingrese al sistema para asignar dicha solicitud, gracias. 
+					<br/><br/>
+					<label>Datos de recepción:</label> <br/>
+					Fecha de recepcion de solicitud: <strong>" . date("Y-m-d h:m:s") . "</strong>. <br/>";
+				break;
+			default:
+				$asunto = "";
+				$mensaje = "";
+				break;
+		}
+		/**
+		 * Datos para envío de Email al administrador
+		 * Prioridad
+		1 => '1 (Highest)',
+		2 => '2 (High)',
+		3 => '3 (Normal)',
+		4 => '4 (Low)',
+		5 => '5 (Lowest)'
+		 **/
+		$this->email->from(CORREO_SIA, "Acreditaciones");
+		$this->email->to(CORREO_SIA);
+		$this->email->cc(CORREO_SIA);
+		$this->email->subject('SIIA: ' . $asunto);
+		$this->email->set_priority($prioridad);
+		$data_msg['mensaje'] = $mensaje;
+		$email_view = $this->load->view('email/contacto', $data_msg, true);
+		$this->email->message($email_view);
+		if ($this->email->send()) {
+			echo json_encode(array("msg" => "Docente " . $docente->primerNombreDocente . " " . $docente->primerApellidoDocente . " Actualizado. Se ha enviado correo para asignar solicitud"));
+		} else {
+			echo json_encode(array('url' => "login", 'msg' => "Lo sentimos, hubo un error y no se envío el correo."));
+		}
 	}
 }

@@ -57,6 +57,7 @@ class Perfil extends CI_Controller {
 		);
 
 		$data['departamentos'] = $this->cargarDepartamentos();
+		$data['imagen'] = $datos_registro->imagenOrganizacion;
 		$data['activeLink'] = 'perfil';
 		$data['title'] = 'Perfil - Información de '.$datos_registro ->nombreOrganizacion;
 		$data['actividad'] = $this->actividad();

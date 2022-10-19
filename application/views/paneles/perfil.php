@@ -74,214 +74,237 @@
 											</div>
 										</div>
 									</div>
-										<!-- Información básica -->
-										<div class="row">
-											<div class="col-md-12 grid-margin stretch-card">
-												<div class="card">
-													<div class="card-body">
-														<h4 class="card-title">Información Básica</h4>
-														<p class="card-description">
-															Información Organización
-														</p>
+									<!-- Información básica -->
+									<div class="row">
+										<div class="col-md-12 grid-margin stretch-card">
+											<div class="card">
+												<div class="card-body">
+													<h4 class="card-title">Información Básica</h4>
+													<p class="card-description">
+														Información Organización
+													</p>
+													<hr />
+													<?php echo form_open('', array('id' => 'formulario_actualizar_perfil')); ?>
+														<!-- Campos de formulario información básica -->
+														<div class="row">
+															<!-- Organización -->
+															<div class="col-md-6">
+																<div class="form-group row">
+																	<div class="col-sm-12">
+																		<label class="col-sm-12 col-form-label">Organización</label>
+																		<input type="text" class="form-control" form="formulario_actualizar_perfil" name="organizacion" id="organizacion" placeholder="Nombre Organización" value="<?php echo $nombreOrganizacion; ?>" readonly>
+																	</div>
+																</div>
+															</div>
+															<!-- NIT -->
+															<div class="col-md-6">
+																<div class="form-group row">
+																	<div class="col-sm-12">
+																		<label class="col-sm-12 col-form-label">NIT Organización</label>
+																		<input type="text" class="form-control" form="formulario_actualizar_perfil" name="nit" id="nit" placeholder="Numero NIT" value="<?php echo $numNIT;?>" readonly>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<!-- Sigla -->
+															<div class="col-md-6">
+																<div class="form-group row">
+																	<div class="col-sm-12">
+																		<label class="col-sm-12 col-form-label">Siglas</label>
+																		<input type="text" class="form-control" form="formulario_actualizar_perfil" name="sigla" id="sigla" placeholder="Sigla de la organización"  value="<?php echo $sigla;?>" readonly>
+																	</div>
+																</div>
+															</div>
+															<!-- Cédula -->
+															<div class="col-md-6">
+																<div class="form-group row">
+																	<div class="col-sm-12">
+																		<label class="col-sm-12 col-form-label">Numero de cédula representante legal</label>
+																		<input type="text" name="numCedulaCiudadaniaPersona" form="formulario_actualizar_perfil" id="numCedulaCiudadaniaPersona" placeholder="Numero de cédula..." class="form-control" required value="<?php echo $data_informacion_general ->numCedulaCiudadaniaPersona; ?>">
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<!-- 1er Nombre RL -->
+															<div class="col-md-6">
+																<div class="form-group row">
+																	<div class="col-sm-12">
+																		<label class="col-sm-12 col-form-label">Primer Nombre representante legal</label>
+																		<input type="text" class="form-control" form="formulario_actualizar_perfil" name="primer_nombre_rep_legal" id="nombre" placeholder="Primer nombre representante" required="" value="<?php echo $primerNombreRepLegal; ?>">
+																	</div>
+																</div>
+															</div>
+															<!-- 2do nombre RL -->
+															<div class="col-md-6">
+																<div class="form-group row">
+																	<div class="col-sm-12">
+																		<label class="col-sm-12 col-form-label">Segundo nombre del representante legal</label>
+																		<input type="text" class="form-control" form="formulario_actualizar_perfil" name="segundo_nombre_rep_legal" id="nombre_s" placeholder="Segundo nombre representante" value="<?php echo $segundoNombreRepLegal; ?>">
+																	</div>
+																</div>
+															</div>
+
+														</div>
+														<div class="row">
+															<!-- 1er apellido RL -->
+															<div class="col-md-6">
+																<div class="form-group row">
+																	<div class="col-sm-12">
+																		<label class="col-sm-12 col-form-label">Primer apellido del representante legal</label>
+																		<input type="text" class="form-control" form="formulario_actualizar_perfil" name="primer_apellido_rep_regal" id="apellido" placeholder="Primer apellido representante" required="" value="<?php echo $primerApellidoRepLegal; ?>">
+																	</div>
+																</div>
+															</div>
+															<!-- 2do apellido RL -->
+															<div class="col-md-6">
+																<div class="form-group row">
+																	<div class="col-sm-12">
+																		<label class="col-sm-12 col-form-label"">Segundo apellido del representante legal</label>
+																		<input type="text" class="form-control" form="formulario_actualizar_perfil" name="segundo_apellido_rep_regal" id="apellido_s" placeholder="Segundo apellido representante" value="<?php echo $segundoApellidoRepLegal; ?>">
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<!-- Correo electrónico representante legal -->
+															<div class="col-sm-6">
+																<div class="form-group row">
+																	<div class="col-sm-12">
+																		<label class="col-sm-12 col-form-label">Correo electrónico representante legal </label>
+																		<input type="email" class="form-control" form="formulario_actualizar_perfil" name="correo_electronico_rep_legal" id="correo_electronico_rep_legal" placeholder="Correo electrónico del representante legal" required="" value="<?php echo $direccionCorreoElectronicoRepLegal ?>">
+																	</div>
+																</div>
+															</div>
+															<!-- Correo Electrónico -->
+															<div class="col-sm-6">
+																<div class="form-group row">
+																	<div class="col-sm-12">
+																		<label class="col-sm-12 col-form-label">Correo electrónico (Notificaciones) </label>
+																		<input type="email" class="form-control" form="formulario_actualizar_perfil" name="correo_electronico" id="correo_electronico" placeholder="Correo electrónico de la organización" required="" value="<?php echo $direccionCorreoElectronicoOrganizacion ?>">
+																	</div>
+																</div>
+															</div>
+
+														</div>
+														<div class="row">
+															<!-- Tipo de Organización-->
+															<div class="col-sm-6">
+																<div class="form-group row">
+																	<div class="col-sm-12">
+																		<label class="col-sm-12 col-form-label">Tipo de Organización</label>
+																		<select name="tipo_organizacion" form="formulario_actualizar_perfil" id="tipo_organizacion" class="selectpicker form-control show-tick" required="">
+																			<optgroup label="Actual">
+																				<option id="0" value="<?php echo $data_informacion_general->tipoOrganizacion; ?>" selected><?php echo $data_informacion_general->tipoOrganizacion; ?></option>
+																			</optgroup>
+																			<optgroup label="Actualizar">
+																				<option id="1" value="Asociación">Asociación</option>
+																				<option id="2" value="Asociación Mutual">Asociación Mutual</option>
+																				<option id="3" value="Cooperativa de Trabajo Asociado">Cooperativa de Trabajo Asociado</option>
+																				<option id="4" value="Cooperativa Especializada">Cooperativa Especializada</option>
+																				<option id="5" value="Cooperativa Integral">Cooperativa Integral</option>
+																				<option id="6" value="Cooperativa Multiactiva">Cooperativa Multiactiva</option>
+																				<option id="7" value="Corporación">Corporación</option>
+																				<option id="8" value="Empresa asociativa de trabajo">Empresa asociativa de trabajo</option>
+																				<option id="9" value="Empresa Comunitaria">Empresa Comunitaria</option>
+																				<option id="10" value="Empresa de servicios en forma de administración pública">Empresa de servicios en forma de administración pública</option>
+																				<option id="11" value="Empresa Solidaria de Salud">Empresa Solidaria de Salud</option>
+																				<option id="12" value="Federación y Confederación">Federación y Confederación</option>
+																				<option id="13" value="Fondo de empleados">Fondo de empleados</option>
+																				<option id="14" value="Fundación">Fundación</option>
+																				<option id="15" value="Institución Universitaria">Institución Universitaria</option>
+																				<option id="16" value="Instituciones auxiliares de Economía Solidaria">Instituciones auxiliares de Economía Solidaria</option>
+																				<option id="17" value="Precooperativa">Precooperativa</option>
+																			</optgroup>
+																		</select>
+																	</div>
+																</div>
+															</div>
+															<!-- Ámbito -->
+															<div class="col-sm-6">
+																<div class="form-group row">
+																	<div class="col-sm-12">
+																		<label class="col-sm-12 col-form-label">Ámbito de Actuación de la Entidad</label>
+																		<br>
+																		<select name="actuacion" form="formulario_actualizar_perfil" id="actuacion" class="selectpicker form-control show-tick" required="">
+																			<optgroup label="Actual">
+																				<option id="0" value="<?php echo $data_informacion_general->actuacionOrganizacion; ?>" selected><?php echo $data_informacion_general->actuacionOrganizacion; ?></option>
+																			</optgroup>
+																			<optgroup label="Actualizar">
+																				<option id="1" value="Departamental">Departamental</option>
+																				<option id="2" value="Municipal">Municipal</option>
+																				<option id="3" value="Nacional">Nacional</option>
+																				<option id="4" value="Regional">Regional</option>
+																			</optgroup>
+																		</select>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<!-- Tipo Educación -->
+															<div class="col-sm-6">
+																<div class="form-group row">
+																	<div class="col-sm-12">
+																		<label class="col-sm-12 col-form-label">Tipo de Educación</span></label>
+																		<select name="educacion" form="formulario_actualizar_perfil" id="educacion" class="selectpicker form-control show-tick" required="">
+																			<optgroup label="Actual">
+																				<option id="0" value="<?php echo $data_informacion_general->tipoEducacion; ?>" selected><?php echo $data_informacion_general->tipoEducacion; ?></option>
+																			</optgroup>
+																			<optgroup label="Actualizar">
+																				<option id="1" value="Educación para el trabajo y el desarrollo humano">Educación para el trabajo y el desarrollo humano</option>
+																				<option id="2" value="Formal">Formal</option>
+																				<option id="3" value="Informal">Informal</option>
+																			</optgroup>
+																		</select>
+																	</div>
+																</div>
+															</div>
+														</div>
 														<hr />
-														<?php echo form_open('', array('id' => 'formulario_actualizar_perfil')); ?>
-															<!-- Campos de formulario información básica -->
-															<div class="row">
-																<!-- Organización -->
-																<div class="col-md-6">
-																	<div class="form-group row">
-																		<div class="col-sm-12">
-																			<label class="col-sm-12 col-form-label">Organización</label>
-																			<input type="text" class="form-control" form="formulario_actualizar_perfil" name="organizacion" id="organizacion" placeholder="Nombre Organización" value="<?php echo $nombreOrganizacion; ?>" readonly>
-																		</div>
-																	</div>
-																</div>
-																<!-- NIT -->
-																<div class="col-md-6">
-																	<div class="form-group row">
-																		<div class="col-sm-12">
-																			<label class="col-sm-12 col-form-label">NIT Organización</label>
-																			<input type="text" class="form-control" form="formulario_actualizar_perfil" name="nit" id="nit" placeholder="Numero NIT" value="<?php echo $numNIT;?>" readonly>
-																		</div>
-																	</div>
-																</div>
-															</div>
-															<div class="row">
-																<!-- Sigla -->
-																<div class="col-md-6">
-																	<div class="form-group row">
-																		<div class="col-sm-12">
-																			<label class="col-sm-12 col-form-label">Siglas</label>
-																			<input type="text" class="form-control" form="formulario_actualizar_perfil" name="sigla" id="sigla" placeholder="Sigla de la organización"  value="<?php echo $sigla;?>" readonly>
-																		</div>
-																	</div>
-																</div>
-																<!-- Cédula -->
-																<div class="col-md-6">
-																	<div class="form-group row">
-																		<div class="col-sm-12">
-																			<label class="col-sm-12 col-form-label">Numero de cédula representante legal</label>
-																			<input type="text" name="numCedulaCiudadaniaPersona" form="formulario_actualizar_perfil" id="numCedulaCiudadaniaPersona" placeholder="Numero de cédula..." class="form-control" required value="<?php echo $data_informacion_general ->numCedulaCiudadaniaPersona; ?>">
-																		</div>
+														<p class="card-description">
+															Información de Contacto
+														</p>
+														<hr/>
+														<div class="row">
+															<!-- Departamento -->
+															<div class="col-sm-6">
+																<div class="form-group row">
+																	<div class="col-sm-12">
+																		<label class="col-sm-12 col-form-label">Departamento</label>
+																		<select name="departamentos" form="formulario_actualizar_perfil" id="departamentos" data-id-dep="1" class="selectpicker form-control show-tick departamentos" required="">
+																			<optgroup label="Actual">
+																				<option id="0" value="<?php echo $data_informacion_general->nomDepartamentoUbicacion; ?>" selected><?php echo $data_informacion_general->nomDepartamentoUbicacion; ?></option>
+																			</optgroup>
+																			<optgroup label="Actualizar">
+																				<?php
+																				foreach($departamentos as $departamento){
+																					?>
+																					<option id="<?php echo $departamento->id_departamento; ?>" value="<?php echo $departamento->nombre; ?>"><?php echo $departamento->nombre; ?></option>
+																					<?php
+																				}
+																				?>
+																			</optgroup>
+																		</select>
 																	</div>
 																</div>
 															</div>
-															<div class="row">
-																<!-- 1er Nombre RL -->
-																<div class="col-md-6">
-																	<div class="form-group row">
-																		<div class="col-sm-12">
-																			<label class="col-sm-12 col-form-label">Primer Nombre representante legal</label>
-																			<input type="text" class="form-control" form="formulario_actualizar_perfil" name="primer_nombre_rep_legal" id="nombre" placeholder="Primer nombre representante" required="" value="<?php echo $primerNombreRepLegal; ?>">
-																		</div>
-																	</div>
-																</div>
-																<!-- 2do nombre RL -->
-																<div class="col-md-6">
-																	<div class="form-group row">
-																		<div class="col-sm-12">
-																			<label class="col-sm-12 col-form-label">Segundo nombre del representante legal</label>
-																			<input type="text" class="form-control" form="formulario_actualizar_perfil" name="segundo_nombre_rep_legal" id="nombre_s" placeholder="Segundo nombre representante" value="<?php echo $segundoNombreRepLegal; ?>">
-																		</div>
-																	</div>
-																</div>
-
-															</div>
-															<div class="row">
-																<!-- 1er apellido RL -->
-																<div class="col-md-6">
-																	<div class="form-group row">
-																		<div class="col-sm-12">
-																			<label class="col-sm-12 col-form-label">Primer apellido del representante legal</label>
-																			<input type="text" class="form-control" form="formulario_actualizar_perfil" name="primer_apellido_rep_regal" id="apellido" placeholder="Primer apellido representante" required="" value="<?php echo $primerApellidoRepLegal; ?>">
-																		</div>
-																	</div>
-																</div>
-																<!-- 2do apellido RL -->
-																<div class="col-md-6">
-																	<div class="form-group row">
-																		<div class="col-sm-12">
-																			<label class="col-sm-12 col-form-label"">Segundo apellido del representante legal</label>
-																			<input type="text" class="form-control" form="formulario_actualizar_perfil" name="segundo_apellido_rep_regal" id="apellido_s" placeholder="Segundo apellido representante" value="<?php echo $segundoApellidoRepLegal; ?>">
-																		</div>
-																	</div>
-																</div>
-															</div>
-															<div class="row">
-																<!-- Correo electrónico representante legal -->
-																<div class="col-sm-6">
-																	<div class="form-group row">
-																		<div class="col-sm-12">
-																			<label class="col-sm-12 col-form-label">Correo electrónico representante legal </label>
-																			<input type="email" class="form-control" form="formulario_actualizar_perfil" name="correo_electronico_rep_legal" id="correo_electronico_rep_legal" placeholder="Correo electrónico del representante legal" required="" value="<?php echo $direccionCorreoElectronicoRepLegal ?>">
-																		</div>
-																	</div>
-																</div>
-																<!-- Correo Electrónico -->
-																<div class="col-sm-6">
-																	<div class="form-group row">
-																		<div class="col-sm-12">
-																			<label class="col-sm-12 col-form-label">Correo electrónico (Notificaciones) </label>
-																			<input type="email" class="form-control" form="formulario_actualizar_perfil" name="correo_electronico" id="correo_electronico" placeholder="Correo electrónico de la organización" required="" value="<?php echo $direccionCorreoElectronicoOrganizacion ?>">
-																		</div>
-																	</div>
-																</div>
-
-															</div>
-															<div class="row">
-																<!-- Tipo de Organización-->
-																<div class="col-sm-6">
-																	<div class="form-group row">
-																		<div class="col-sm-12">
-																			<label class="col-sm-12 col-form-label">Tipo de Organización</label>
-																			<select name="tipo_organizacion" form="formulario_actualizar_perfil" id="tipo_organizacion" class="selectpicker form-control show-tick" required="">
+															<!-- Municipios -->
+															<div class="col-sm-6">
+																<div class="form-group row">
+																	<div class="col-sm-12">
+																		<div id="div_municipios">
+																			<label class="col-sm-12 col-form-label">Municipio: <span class="spanRojo">*</span></label>
+																			<select name="municipios" id="municipios" form="formulario_actualizar_perfil" class="selectpicker form-control show-tick municipios" required=>
 																				<optgroup label="Actual">
-																					<option id="0" value="<?php echo $data_informacion_general->tipoOrganizacion; ?>" selected><?php echo $data_informacion_general->tipoOrganizacion; ?></option>
-																				</optgroup>
-																				<optgroup label="Actualizar">
-																					<option id="1" value="Asociación">Asociación</option>
-																					<option id="2" value="Asociación Mutual">Asociación Mutual</option>
-																					<option id="3" value="Cooperativa de Trabajo Asociado">Cooperativa de Trabajo Asociado</option>
-																					<option id="4" value="Cooperativa Especializada">Cooperativa Especializada</option>
-																					<option id="5" value="Cooperativa Integral">Cooperativa Integral</option>
-																					<option id="6" value="Cooperativa Multiactiva">Cooperativa Multiactiva</option>
-																					<option id="7" value="Corporación">Corporación</option>
-																					<option id="8" value="Empresa asociativa de trabajo">Empresa asociativa de trabajo</option>
-																					<option id="9" value="Empresa Comunitaria">Empresa Comunitaria</option>
-																					<option id="10" value="Empresa de servicios en forma de administración pública">Empresa de servicios en forma de administración pública</option>
-																					<option id="11" value="Empresa Solidaria de Salud">Empresa Solidaria de Salud</option>
-																					<option id="12" value="Federación y Confederación">Federación y Confederación</option>
-																					<option id="13" value="Fondo de empleados">Fondo de empleados</option>
-																					<option id="14" value="Fundación">Fundación</option>
-																					<option id="15" value="Institución Universitaria">Institución Universitaria</option>
-																					<option id="16" value="Instituciones auxiliares de Economía Solidaria">Instituciones auxiliares de Economía Solidaria</option>
-																					<option id="17" value="Precooperativa">Precooperativa</option>
-																				</optgroup>
-																			</select>
-																		</div>
-																	</div>
-																</div>
-																<!-- Ámbito -->
-																<div class="col-sm-6">
-																	<div class="form-group row">
-																		<div class="col-sm-12">
-																			<label class="col-sm-12 col-form-label">Ámbito de Actuación de la Entidad</label>
-																			<br>
-																			<select name="actuacion" form="formulario_actualizar_perfil" id="actuacion" class="selectpicker form-control show-tick" required="">
-																				<optgroup label="Actual">
-																					<option id="0" value="<?php echo $data_informacion_general->actuacionOrganizacion; ?>" selected><?php echo $data_informacion_general->actuacionOrganizacion; ?></option>
-																				</optgroup>
-																				<optgroup label="Actualizar">
-																					<option id="1" value="Departamental">Departamental</option>
-																					<option id="2" value="Municipal">Municipal</option>
-																					<option id="3" value="Nacional">Nacional</option>
-																					<option id="4" value="Regional">Regional</option>
-																				</optgroup>
-																			</select>
-																		</div>
-																	</div>
-																</div>
-															</div>
-															<div class="row">
-																<!-- Tipo Educación -->
-																<div class="col-sm-6">
-																	<div class="form-group row">
-																		<div class="col-sm-12">
-																			<label class="col-sm-12 col-form-label">Tipo de Educación</span></label>
-																			<select name="educacion" form="formulario_actualizar_perfil" id="educacion" class="selectpicker form-control show-tick" required="">
-																				<optgroup label="Actual">
-																					<option id="0" value="<?php echo $data_informacion_general->tipoEducacion; ?>" selected><?php echo $data_informacion_general->tipoEducacion; ?></option>
-																				</optgroup>
-																				<optgroup label="Actualizar">
-																					<option id="1" value="Educación para el trabajo y el desarrollo humano">Educación para el trabajo y el desarrollo humano</option>
-																					<option id="2" value="Formal">Formal</option>
-																					<option id="3" value="Informal">Informal</option>
-																				</optgroup>
-																			</select>
-																		</div>
-																	</div>
-																</div>
-															</div>
-															<hr />
-															<p class="card-description">
-																Información de Contacto
-															</p>
-															<hr/>
-															<div class="row">
-																<!-- Departamento -->
-																<div class="col-sm-6">
-																	<div class="form-group row">
-																		<div class="col-sm-12">
-																			<label class="col-sm-12 col-form-label">Departamento</label>
-																			<select name="departamentos" form="formulario_actualizar_perfil" id="departamentos" data-id-dep="1" class="selectpicker form-control show-tick departamentos" required="">
-																				<optgroup label="Actual">
-																					<option id="0" value="<?php echo $data_informacion_general->nomDepartamentoUbicacion; ?>" selected><?php echo $data_informacion_general->nomDepartamentoUbicacion; ?></option>
+																					<option id="0" value="<?php echo $data_informacion_general->nomMunicipioNacional; ?>" selected><?php echo $data_informacion_general->nomMunicipioNacional; ?></option>
 																				</optgroup>
 																				<optgroup label="Actualizar">
 																					<?php
-																					foreach($departamentos as $departamento){
+																					foreach($municipios as $municipio){
 																						?>
-																						<option id="<?php echo $departamento->id_departamento; ?>" value="<?php echo $departamento->nombre; ?>"><?php echo $departamento->nombre; ?></option>
+																						<option id="<?php echo $municipio->id_municipio; ?>" value="<?php echo $municipio->nombre; ?>"><?php echo $municipio->nombre; ?></option>
 																						<?php
 																					}
 																					?>
@@ -290,105 +313,82 @@
 																		</div>
 																	</div>
 																</div>
-																<!-- Municipios -->
-																<div class="col-sm-6">
-																	<div class="form-group row">
-																		<div class="col-sm-12">
-																			<div id="div_municipios">
-																				<label class="col-sm-12 col-form-label">Municipio: <span class="spanRojo">*</span></label>
-																				<select name="municipios" id="municipios" form="formulario_actualizar_perfil" class="selectpicker form-control show-tick municipios" required=>
-																					<optgroup label="Actual">
-																						<option id="0" value="<?php echo $data_informacion_general->nomMunicipioNacional; ?>" selected><?php echo $data_informacion_general->nomMunicipioNacional; ?></option>
-																					</optgroup>
-																					<optgroup label="Actualizar">
-																						<?php
-																						foreach($municipios as $municipio){
-																							?>
-																							<option id="<?php echo $municipio->id_municipio; ?>" value="<?php echo $municipio->nombre; ?>"><?php echo $municipio->nombre; ?></option>
-																							<?php
-																						}
-																						?>
-																					</optgroup>
-																				</select>
-																			</div>
+															</div>
+														</div>
+														<div class="row">
+															<!-- Dirección -->
+															<div class="col-sm-6">
+																<div class="form-group row">
+																	<div class="col-sm-12">
+																		<label class="col-sm-12 col-form-label">Dirección: <span class="spanRojo">*</span></label>
+																		<input type="text" class="form-control" form="formulario_actualizar_perfil" name="direccion" id="direccion" required="" placeholder="Dirección" value="<?php echo $data_informacion_general ->direccionOrganizacion; ?>">
+																	</div>
+																</div>
+															</div>
+															<!-- Dirección Web -->
+															<div class="col-sm-6">
+																<div class="form-group row">
+																	<div class="col-sm-12">
+																		<label class="col-sm-12 col-form-label">Dirección Web</label>
+																		<input type="text" name="urlOrganizacion" form="formulario_actualizar_perfil" id="urlOrganizacion" placeholder="www.orgsolidarias.gov.co" class="form-control" value="<?php echo $data_informacion_general ->urlOrganizacion; ?>">
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<!-- Teléfono -->
+															<div class="col-sm-6">
+																<div class="form-group row">
+																	<div class="col-sm-12">
+																		<label class="col-sm-12 col-form-label">Teléfono - Celular</label>
+																		<input type="text" name="fax" id="fax" form="formulario_actualizar_perfil" class="form-control" required="" placeholder="Fax - Teléfono" value="<?php echo $data_informacion_general ->fax; ?>">
+																		<div class="checkbox">
+																			<label class="col-sm-12 col-form-label"><input type="checkbox" name="extension_checkbox" id="extension_checkbox" class=""> ¿Tiene Extensión?</label>
 																		</div>
 																	</div>
 																</div>
 															</div>
-															<div class="row">
-																<!-- Dirección -->
-																<div class="col-sm-6">
-																	<div class="form-group row">
-																		<div class="col-sm-12">
-																			<label class="col-sm-12 col-form-label">Dirección: <span class="spanRojo">*</span></label>
-																			<input type="text" class="form-control" form="formulario_actualizar_perfil" name="direccion" id="direccion" required="" placeholder="Dirección" value="<?php echo $data_informacion_general ->direccionOrganizacion; ?>">
-																		</div>
-																	</div>
-																</div>
-																<!-- Dirección Web -->
-																<div class="col-sm-6">
-																	<div class="form-group row">
-																		<div class="col-sm-12">
-																			<label class="col-sm-12 col-form-label">Dirección Web</label>
-																			<input type="text" name="urlOrganizacion" form="formulario_actualizar_perfil" id="urlOrganizacion" placeholder="www.orgsolidarias.gov.co" class="form-control" value="<?php echo $data_informacion_general ->urlOrganizacion; ?>">
+															<!-- Extensión -->
+															<div class="col-sm-6">
+																<div class="form-group row">
+																	<div class="col-sm-12">
+																		<div  id="div_extension">
+																			<label class="col-sm-12 col-form-label">Extensión</label>
+																			<input type="text" name="extension" form="formulario_actualizar_perfil" id="extension" class="form-control" placeholder="Extensión" value="<?php echo $data_informacion_general->extension; ?>">
 																		</div>
 																	</div>
 																</div>
 															</div>
-															<div class="row">
-																<!-- Teléfono -->
-																<div class="col-sm-6">
-																	<div class="form-group row">
-																		<div class="col-sm-12">
-																			<label class="col-sm-12 col-form-label">Teléfono - Celular</label>
-																			<input type="text" name="fax" id="fax" form="formulario_actualizar_perfil" class="form-control" required="" placeholder="Fax - Teléfono" value="<?php echo $data_informacion_general ->fax; ?>">
-																			<div class="checkbox">
-																				<label class="col-sm-12 col-form-label"><input type="checkbox" name="extension_checkbox" id="extension_checkbox" class=""> ¿Tiene Extensión?</label>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-																<!-- Extensión -->
-																<div class="col-sm-6">
-																	<div class="form-group row">
-																		<div class="col-sm-12">
-																			<div  id="div_extension">
-																				<label class="col-sm-12 col-form-label">Extensión</label>
-																				<input type="text" name="extension" form="formulario_actualizar_perfil" id="extension" class="form-control" placeholder="Extensión" value="<?php echo $data_informacion_general->extension; ?>">
-																			</div>
-																		</div>
+														</div>
+														<hr />
+														<h4>¿Quien actualiza la información?</h4>
+														<hr />
+														<div class="row">
+															<!-- Primer nombre quien actualiza -->
+															<div class="col-sm-6">
+																<div class="form-group row">
+																	<div class="col-sm-12">
+																		<label class="col-sm-12 col-form-label">Primer nombre</label>
+																		<input type="text" class="form-control" form="formulario_actualizar_perfil" name="nombre_p" id="nombre_p" placeholder="Primer Nombre" required>
 																	</div>
 																</div>
 															</div>
-															<hr />
-															<h4>¿Quien actualiza la información?</h4>
-															<hr />
-															<div class="row">
-																<!-- Primer nombre quien actualiza -->
-																<div class="col-sm-6">
-																	<div class="form-group row">
-																		<div class="col-sm-12">
-																			<label class="col-sm-12 col-form-label">Primer nombre</label>
-																			<input type="text" class="form-control" form="formulario_actualizar_perfil" name="nombre_p" id="nombre_p" placeholder="Primer Nombre" required>
-																		</div>
-																	</div>
-																</div>
-																<!-- Primer nombre quien actualiza -->
-																<div class="col-sm-6">
-																	<div class="form-group row">
-																		<div class="col-sm-12">
-																			<label class="col-sm-12 col-form-label">Primer apellido</label>
-																			<input type="text" class="form-control" form="formulario_actualizar_perfil" name="apellido_p" id="apellido_p" placeholder="Primer Apellido" required>
-																		</div>
+															<!-- Primer nombre quien actualiza -->
+															<div class="col-sm-6">
+																<div class="form-group row">
+																	<div class="col-sm-12">
+																		<label class="col-sm-12 col-form-label">Primer apellido</label>
+																		<input type="text" class="form-control" form="formulario_actualizar_perfil" name="apellido_p" id="apellido_p" placeholder="Primer Apellido" required>
 																	</div>
 																</div>
 															</div>
-															<button class="btn btn-primary btn-sm submit" name="actualizar_informacion" id="actualizar_informacion">Actualizar información <i class="fa fa-check" aria-hidden="true"></i></button>
-														</form>
-													</div>
+														</div>
+														<button class="btn btn-primary btn-sm submit" name="actualizar_informacion" id="actualizar_informacion">Actualizar información <i class="fa fa-check" aria-hidden="true"></i></button>
+													</form>
 												</div>
 											</div>
 										</div>
+									</div>
 								</div>
 								<!-- Contenido Tab Firma RL -->
 								<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
@@ -582,6 +582,7 @@
 			</div>
 		</div>
 	</div>
+
 	<!--	</div>-->
 <!--<hr/>-->
 <!--<div class="col-md-12">-->
