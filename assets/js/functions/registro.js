@@ -1,8 +1,7 @@
 /** Capturar BaseUrl */
-var url = unescape(window.location.href);
-var activate = url.split("/");
-var baseURL = activate[0] + "//" + activate[2] + "/" + activate[3] + "/";
-var encuestas;
+let url = unescape(window.location.href);
+let activate = url.split("/");
+let baseURL = activate[0] + "//" + activate[2] + "/" + activate[3] + "/";
 ValidarFormRegistro();
 /** Notificación Toast SweetAlert */
 const Toast = Swal.mixin({

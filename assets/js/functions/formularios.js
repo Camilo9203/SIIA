@@ -274,10 +274,6 @@ $("#guardar_formulario_informacion_general_entidad").click(function () {
 			portafolio: portafolio,
 			otros: otros,
 		};
-
-
-
-
 		$.ajax({
 			url: baseURL + "panel/guardar_formulario_informacion_general_entidad",
 			type: "post",

@@ -9,7 +9,7 @@
 		</li>
 		<li class="nav-item <?php if ($activeLink == 'perfil') {echo 'active';} ?>">
 			<a class="nav-link" href="<?php echo base_url('panel/perfil')?>">
-				<i class="icon-grid menu-icon"></i>
+				<i class="ti-user menu-icon"></i>
 				<span class="menu-title">Perfil</span>
 			</a>
 		</li>

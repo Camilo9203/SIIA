@@ -1,7 +1,4 @@
-var url = unescape(window.location.href);
-var activate = url.split("/");
-var baseURL = activate[0] + "//" + activate[2] + "/" + activate[3] + "/";
-var encuestas;
+let encuestas;
 $.ajax({
 	url: baseURL + "Encuesta/cargar",
 	type: "GET",

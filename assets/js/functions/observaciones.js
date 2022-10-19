@@ -1,6 +1,3 @@
-let url = unescape(window.location.href);
-let activate = url.split("/");
-let baseURL = activate[0] + "//" + activate[2] + "/" + activate[3] + "/";
 let html = "";
 let obsForm = 0;
 let data_orgFinalizada = [];
@@ -44,7 +41,7 @@ $("#verDocLegalMenuAdmin").click(function () {
 		success: function (response) {
 			console.log(response);
 			// Llenar tabla de datos documentación legal
-			if (response.documentacion['tipo'] == 1) {
+			if (response.documentacion['tipo'] === 1) {
 				html = "";
 				html += "<tr><td>La organización registro Cámara de Comercio </td>";
 				$(".head_tabla_datos_documentacion_legal").html(html);
@@ -52,7 +49,7 @@ $("#verDocLegalMenuAdmin").click(function () {
 				html += "<td>La organización registro Cámara de Comercio </td></tr>";
 				$(".tabla_datos_documentacion_legal").html(html);
 			}
-			if (response.documentacion['tipo'] == 2) {
+			if (response.documentacion['tipo'] === 2) {
 				html = "";
 				html += "<tr><td colspan='5'>Certificado de existencia y representación legal</td></tr>"
 				html += "<tr><td>Entidad</td>"
@@ -70,7 +67,7 @@ $("#verDocLegalMenuAdmin").click(function () {
 				console.log(response.certificadoExistencia);
 				$(".tabla_datos_documentacion_legal").html(html);
 			}
-			if (response.documentacion['tipo'] == 3) {
+			if (response.documentacion['tipo'] === 3) {
 				html = "";
 				html += "<tr><td colspan='7'>Registro Educativo</td></tr>"
 				html += "<tr><td>Entidad</td>"
@@ -142,7 +139,7 @@ $("#verAntAcaMenuAdmin").click(function () {
 		data: data,
 		success: function (response) {
 			// Llenar tabla de datos antecedentes académicos
-			if(response.antecedentesAcademicos.length == 0){
+			if(response.antecedentesAcademicos.length === 0){
 				html += "<td colspan='4'>No hay datos </td></tr>";
 			}
 			else {
@@ -186,7 +183,7 @@ $("#verJorActMenuAdmin").click(function () {
 		data: data,
 		success: function (response) {
 			// Llenar tabla de datos antecedentes académicos
-			if(response.jornadasActualizacion.length == 0){
+			if(response.jornadasActualizacion.length === 0){
 				html += "<td colspan='4'>No hay datos </td></tr>";
 			}
 			else {
@@ -228,7 +225,7 @@ $("#verProgBasMenuAdmin").click(function () {
 		success: function (response) {
 			console.log(response);
 			// Llenar tabla de datos en línea registrados
-			if(response.datosProgramas.length == 0){
+			if(response.datosProgramas.length === 0){
 				html += "<td colspan='4'>No hay datos </td></tr>";
 			}
 			else {
@@ -284,7 +281,7 @@ $("#verDatPlatMenuAdmin").click(function () {
 		success: function (response) {
 			$("#tabla_observaciones_form7").dataTable();
 			// Llenar tabla de datos en línea registrados
-			if(response.plataforma.length == 0){
+			if(response.plataforma.length === 0){
 				html += "<td colspan='4'>No hay datos </td></tr>";
 			}
 			else {
@@ -326,7 +323,7 @@ $("#verDataEnLinea").click(function () {
 		data: data,
 		success: function (response) {
 			// Llenar tabla de datos en línea registrados
-			if(response.enLinea.length == 0){
+			if(response.enLinea.length === 0){
 				html += "<td colspan='4'>No hay datos </td></tr>";
 			}
 			else {
@@ -359,16 +356,16 @@ function verObservaciones(idForm) {
 			console.log(idForm);
 			// Llenar tabla de datos en línea registrados
 			for (let i = 0; i < response.observaciones.length; i++) {
-				if (response.observaciones[i]['idForm'] == idForm) {
+				if (response.observaciones[i]['idForm'] === idForm) {
 					obsForm += 1;
 				}
 			}
-			if(obsForm == 0){
+			if(obsForm === 0){
 				html += "<td colspan='4'>No hay datos </td></tr>";
 			}
 			else {
 				for (let i = 0; i < response.observaciones.length; i++) {
-					if (response.observaciones[i]['idForm'] == idForm) {
+					if (response.observaciones[i]['idForm'] === idForm) {
 						html += "<tr><td>" + response.observaciones[i]['fechaObservacion'] + "</td>";
 						html += "<td>" + response.observaciones[i]['numeroRevision'] + "</td>";
 						html += "<td>" + response.observaciones[i]['observacion'] + "</td>";
@@ -431,10 +428,10 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 			data_orgFinalizada.push(response);
 			console.log(data_orgFinalizada["0"]);
 			console.log(response);
-			if(data_orgFinalizada["0"]["plataforma"].length == 0){
+			if(data_orgFinalizada["0"]["plataforma"].length === 0){
 				$("#verDatPlatMenuAdmin").hide();
 			}
-			if(data_orgFinalizada["0"]["enLinea"].length == 0){
+			if(data_orgFinalizada["0"]["enLinea"].length === 0){
 				$("#verDataEnLinea").hide();
 			}
 			$("#admin_ver_finalizadas").slideUp();
@@ -541,7 +538,7 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 						baseURL +
 						"panelAdmin/organizaciones/docentes#organizacion:" +
 						response.organizaciones.numNIT +
-						"' target='_blank'>aquí.</a> Tambien puede ingresar al módulo de facilitadores y seleccione la organización con el número NIT: <label>" +
+						"' target='_blank'>aquí.</a> Tambien puede ingresar al módulo de facilitadores y seleccioné la organización con el número NIT: <label>" +
 						response.organizaciones.numNIT +
 						"</label>.</label>"
 					);

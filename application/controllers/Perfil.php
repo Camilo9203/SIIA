@@ -30,11 +30,12 @@ class Perfil extends CI_Controller {
 		$data['numeroSolicitudes'] = $this->numeroSolicitudes();
 		$data['idSolicitud'] = $this->idSolicitud();
 		$data['data_informacion_general'] = $this->cargarDatos_formulario_informacion_general_entidad();
+		$data['data_organizacion'] = $this->cargarDatosOrganizacion();
 
 		$datos_registro = $this->db->select('*')->from('organizaciones')->where('usuarios_id_usuario', $usuario_id)->get()->row();
 		$datos_usuario = $this->db->select('usuario')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
 		$data['nombre_usuario'] = $datos_usuario->usuario;
-		
+
 		$data_registro = array(
 			'nombreOrganizacion' => $datos_registro->nombreOrganizacion,
 			'numNIT' => $datos_registro ->numNIT,
@@ -47,7 +48,7 @@ class Perfil extends CI_Controller {
 			'direccionCorreoElectronicoRepLegal' => $datos_registro ->direccionCorreoElectronicoRepLegal,
 			'primerNombrePersona' => $datos_registro->primerNombrePersona,
 			'primerApellidoPersona' => $datos_registro->primerApellidoPersona,
-			'nombre_usuario' => $datos_usuario->usuario,
+			'nombre_usuario' => $nombre_usuario,
 			'imagen' => $datos_registro->imagenOrganizacion,
 			'firma' => $datos_registro->firmaRepLegal,
 			'firmaCert' => $datos_registro->firmaCert,
@@ -68,6 +69,13 @@ class Perfil extends CI_Controller {
 		//$this->load->view('paneles/actividad', $dataActividad);
 		$this->load->view('include/footer/main');
 		$this->logs_sia->logs('PLACE_USER');
+	}
+
+	public function cargarDatosOrganizacion()
+	{
+		$usuario_id = $this->session->userdata('usuario_id');
+		$datos_organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
+		return $datos_organizacion;
 	}
 	// Variables de Session
 	public function datosSession()
@@ -178,8 +186,8 @@ class Perfil extends CI_Controller {
 		$resolucion = $this->db->select("*")->from("organizaciones")->where("id_organizacion", $id_organizacion)->get()->row();
 		return $resolucion;
 	}
-
-	public function upload_imagen_logo()
+	/** Actualizar Logo Organización */
+	public function actualizar_imagen_logo()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
 		$name_random = random(10);
@@ -235,6 +243,107 @@ class Perfil extends CI_Controller {
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
+	/** Actualizar Perfil Organizacion */
+	public function actualizar_perfil()
+	{
+		$this->form_validation->set_rules('organizacion','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('sigla','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('nombre','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('nombre_s','','trim|xss_clean');
+		$this->form_validation->set_rules('apellido','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('apellido_s','','trim|xss_clean');
+		$this->form_validation->set_rules('correo_electronico','','trim|required|min_length[3]|valid_email|xss_clean');
+		$this->form_validation->set_rules('correo_electronico_rep_legal','','trim|required|min_length[3]|valid_email|xss_clean');
+		$this->form_validation->set_rules('nombre_p','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('apellido_p','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('tipo_organizacion','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('departamento','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('municipio','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('direccion','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('fax','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('actuacion','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('educacion','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('numCedulaCiudadaniaPersona','','trim|required|min_length[3]|xss_clean');
+
+		if ($this->form_validation->run("formulario_actualizar") == FALSE)
+		{
+			$error = validation_errors();
+			echo json_encode(array('url'=>"perfil", 'msg'=>$error));
+		}
+		else
+		{
+			$organizacion = $this->input->post('organizacion');
+			$nit = $this->input->post('nit');
+			$sigla = $this->input->post('sigla');
+			$nombre = $this->input->post('nombre');
+			$nombre_s = $this->input->post('nombre_s');
+			$apellido = $this->input->post('apellido');
+			$apellido_s = $this->input->post('apellido_s');
+			$correo_electronico = $this->input->post('correo_electronico');
+			$correo_electronico_rep_legal = $this->input->post('correo_electronico_rep_legal');
+			$nombre_p = $this->input->post('nombre_p');
+			$apellido_p = $this->input->post('apellido_p');
+			$tipo_organizacion = $this->input->post('tipo_organizacion');
+			$departamento = $this->input->post('departamento');
+			$municipio = $this->input->post('municipio');
+			$direccion = $this->input->post('direccion');
+			$fax = $this->input->post('fax');
+			$extension = $this->input->post('extension');
+			$urlOrganizacion = $this->input->post('urlOrganizacion');
+			$actuacion = $this->input->post('actuacion');
+			$educacion = $this->input->post('educacion');
+			$numCedulaCiudadaniaPersona = $this->input->post('numCedulaCiudadaniaPersona');
+			$usuario_id = $this->session->userdata('usuario_id');
+			$id_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row()->id_organizacion;
+			$data_informacion_generalDB = $this->db->select("*")->from("informacionGeneral")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
+
+			$data_update = array(
+				'nombreOrganizacion' => $organizacion,
+				'numNIT' => $nit,
+				'sigla' => $sigla,
+				'primerNombreRepLegal' => $nombre,
+				'segundoNombreRepLegal' => $nombre_s,
+				'primerApellidoRepLegal' => $apellido,
+				'segundoApellidoRepLegal' => $apellido_s,
+				'direccionCorreoElectronicoOrganizacion' => $correo_electronico,
+				'direccionCorreoElectronicoRepLegal' => $correo_electronico_rep_legal,
+				'primerNombrePersona' => $nombre_p,
+				'primerApellidoPersona' => $apellido_p,
+			);
+
+			$data_informacion_general = array(
+				'tipoOrganizacion' => $tipo_organizacion,
+				'direccionOrganizacion' => $direccion,
+				'nomDepartamentoUbicacion' => $departamento,
+				'nomMunicipioNacional' => $municipio,
+				'fax' => $fax,
+				'extension' => $extension,
+				'urlOrganizacion' => $urlOrganizacion,
+				'actuacionOrganizacion' => $actuacion,
+				'tipoEducacion' => $educacion,
+				'numCedulaCiudadaniaPersona' => $numCedulaCiudadaniaPersona,
+				'fecha' => date('Y/m/d H:i:s'),
+				'organizaciones_id_organizacion' => $id_organizacion
+			);
+
+			$this->db->where('usuarios_id_usuario', $usuario_id);
+			if($this->db->update('organizaciones', $data_update)){
+				if($data_informacion_generalDB == NULL || $data_informacion_generalDB == ""){
+					$this->db->insert('informacionGeneral', $data_informacion_general);
+				}else{
+					$this->db->where('organizaciones_id_organizacion', $id_organizacion);
+					$this->db->update('informacionGeneral', $data_informacion_general);
+				}
+				$this->envio_mailcontacto("update", 3);
+				$this->logs_sia->session_log('Actualizacion de datos básicos');
+				$this->logs_sia->logQueries();
+				$this->logs_sia->logs('URL_TYPE');
+				$this->notif_sia->notification('ACTUALIZAR_DATOS', 'admin', $organizacion);
+				echo json_encode(array('url'=>"perfil", 'msg'=>"Se actualizó la información."));
+			}
+		}
+	}
+
 
 	public function upload_firma()
 	{

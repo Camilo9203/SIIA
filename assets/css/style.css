@@ -69,20 +69,20 @@
 .navbar-header {
 	padding: 40px;
 }
-nav li
-.navbar-nav .nav-item.active, .navbar-nav .nav-item:hover, .navbar-nav .nav-item:focus {
-	background: #0a2031 !important;
-}
-.navbar-nav .nav-item.active a, .navbar-nav .nav-item:hover a, .navbar-nav .nav-item:focus a {
-	color: #ffffff !important;
-}
-/* Link Activo*/
-.navbar-nav .nav-item.active, .navbar-nav .nav-item:hover, .navbar-nav .nav-item:focus {
-	background: #3365ca !important;
-}
-.navbar-nav a:hover, .navbar-nav a:focus {
-	background: #6597fe !important;
-}
+/*nav li*/
+/*.navbar-nav .nav-item.active, .navbar-nav .nav-item:hover, .navbar-nav .nav-item:focus {*/
+/*	background: #0a2031 !important;*/
+/*}*/
+/*.navbar-nav .nav-item.active a, .navbar-nav .nav-item:hover a, .navbar-nav .nav-item:focus a {*/
+/*	color: #ffffff !important;*/
+/*}*/
+/*!* Link Activo*!*/
+/*.navbar-nav .nav-item.active, .navbar-nav .nav-item:hover, .navbar-nav .nav-item:focus {*/
+/*	background: #3365ca !important;*/
+/*}*/
+/*.navbar-nav a:hover, .navbar-nav a:focus {*/
+/*	background: #6597fe !important;*/
+/*}*/
 /* Link Activo Fin*/
 /* Botón ir arriba*/
 .backtoTop .btn-svg-up-hover {

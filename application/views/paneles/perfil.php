@@ -6,7 +6,20 @@
 				<!-- Perfil INICIO -->
 					<div class="col-md-12">
 						<div class="col-md-12">
-							<img src="<?php echo base_url('uploads/logosOrganizaciones/' . $imagen . '')?>" class="center-block img-responsive thumbnail" id="imagen_organizacion">
+							<div class="card mb-3" style="max-width: 540px;">
+								<div class="row no-gutters">
+									<div class="col-md-4">
+										<img height="160" width="160"  src="<?php echo base_url('uploads/logosOrganizaciones/' . $imagen . '')?>" class="rounded center-block img-responsive" id="imagen_organizacion" alt="Logo Organización"></div>
+									<div class="col-md-8">
+										<div class="card-body">
+											<h5 class="card-title"><?php echo $nombre_usuario; ?></h5>
+											<p class="card-text"><?php echo $nombreOrganizacion; ?></p>
+											<p class="card-text"><?php echo $direccionCorreoElectronicoOrganizacion; ?></p>
+											<p class="card-text"><small class="text-muted">NIT. <?php echo $numNIT; ?></small></p>
+										</div>
+									</div>
+								</div>
+							</div>
 							<hr/>
 							<!-- Menu Tabs -->
 							<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -47,15 +60,15 @@
 													<hr />
 													<?php echo form_open_multipart('', array('id' => 'formulario_actualizar_imagen')); ?>
 													<div class="form-group">
-														<input type="file" class="file-upload-default" form="formulario_actualizar_usuario" name="imagen" id="imagen" required="" accept="image/jpeg, image/png">
+														<input type="file" class="file-upload-default" form="formulario_actualizar_usuario" name="imagen" id="imagen_perfil" accept="image/jpeg, image/png" required>
 														<div class="input-group col-xs-12">
 															<input type="text" class="form-control file-upload-info" disabled="" placeholder="Cargar logo">
 															<span class="input-group-append">
-																		<button class="file-upload-browse btn btn-primary" type="button">Buscar</button>
-																	</span>
+																<button class="file-upload-browse btn btn-primary" type="button">Buscar</button>
+															</span>
 														</div>
 													</div>
-													<button class="btn btn-primary btn-sm submit" name="actualizar_imagen" id="actualizar_imagen">Cargar logo<i class="fa fa-check" aria-hidden="true"></i></button>
+													<button class="btn btn-primary btn-sm" id="cargar_imagen_perfil">Cargar logo<i class="fa fa-check" aria-hidden="true"></i></button>
 													</form>
 												</div>
 											</div>
@@ -71,7 +84,7 @@
 															Información Organización
 														</p>
 														<hr />
-														<?php echo form_open('', array('id' => 'formulario_actualizar')); ?>
+														<?php echo form_open('', array('id' => 'formulario_actualizar_perfil')); ?>
 															<!-- Campos de formulario información básica -->
 															<div class="row">
 																<!-- Organización -->
@@ -79,7 +92,7 @@
 																	<div class="form-group row">
 																		<div class="col-sm-12">
 																			<label class="col-sm-12 col-form-label">Organización</label>
-																			<input type="text" class="form-control" form="formulario_actualizar" name="organizacion" id="organizacion" placeholder="Nombre Organización" required="" value="<?php echo $nombreOrganizacion; ?>">
+																			<input type="text" class="form-control" form="formulario_actualizar_perfil" name="organizacion" id="organizacion" placeholder="Nombre Organización" value="<?php echo $nombreOrganizacion; ?>" readonly>
 																		</div>
 																	</div>
 																</div>
@@ -88,7 +101,7 @@
 																	<div class="form-group row">
 																		<div class="col-sm-12">
 																			<label class="col-sm-12 col-form-label">NIT Organización</label>
-																			<input type="text" class="form-control" form="formulario_actualizar" name="nit" id="nit" placeholder="Numero NIT" required="" value="<?php echo $numNIT;?>">
+																			<input type="text" class="form-control" form="formulario_actualizar_perfil" name="nit" id="nit" placeholder="Numero NIT" value="<?php echo $numNIT;?>" readonly>
 																		</div>
 																	</div>
 																</div>
@@ -99,7 +112,7 @@
 																	<div class="form-group row">
 																		<div class="col-sm-12">
 																			<label class="col-sm-12 col-form-label">Siglas</label>
-																			<input type="text" class="form-control" form="formulario_actualizar" name="sigla" id="sigla" placeholder="Sigla de la organización" required="" value="<?php echo $sigla;?>">
+																			<input type="text" class="form-control" form="formulario_actualizar_perfil" name="sigla" id="sigla" placeholder="Sigla de la organización"  value="<?php echo $sigla;?>" readonly>
 																		</div>
 																	</div>
 																</div>
@@ -108,7 +121,7 @@
 																	<div class="form-group row">
 																		<div class="col-sm-12">
 																			<label class="col-sm-12 col-form-label">Numero de cédula representante legal</label>
-																			<input type="text" name="numCedulaCiudadaniaPersona" id="numCedulaCiudadaniaPersona" placeholder="Numero de cédula..." class="form-control" required="" value="<?php echo $data_informacion_general ->numCedulaCiudadaniaPersona; ?>">
+																			<input type="text" name="numCedulaCiudadaniaPersona" form="formulario_actualizar_perfil" id="numCedulaCiudadaniaPersona" placeholder="Numero de cédula..." class="form-control" required value="<?php echo $data_informacion_general ->numCedulaCiudadaniaPersona; ?>">
 																		</div>
 																	</div>
 																</div>
@@ -119,7 +132,7 @@
 																	<div class="form-group row">
 																		<div class="col-sm-12">
 																			<label class="col-sm-12 col-form-label">Primer Nombre representante legal</label>
-																			<input type="text" class="form-control" form="formulario_actualizar" name="primer_nombre_rep_legal" id="nombre" placeholder="Primer nombre representante" required="" value="<?php echo $primerNombreRepLegal; ?>">
+																			<input type="text" class="form-control" form="formulario_actualizar_perfil" name="primer_nombre_rep_legal" id="nombre" placeholder="Primer nombre representante" required="" value="<?php echo $primerNombreRepLegal; ?>">
 																		</div>
 																	</div>
 																</div>
@@ -128,7 +141,7 @@
 																	<div class="form-group row">
 																		<div class="col-sm-12">
 																			<label class="col-sm-12 col-form-label">Segundo nombre del representante legal</label>
-																			<input type="text" class="form-control" form="formulario_actualizar" name="segundo_nombre_rep_legal" id="nombre_s" placeholder="Segundo nombre representante" value="<?php echo $segundoNombreRepLegal; ?>">
+																			<input type="text" class="form-control" form="formulario_actualizar_perfil" name="segundo_nombre_rep_legal" id="nombre_s" placeholder="Segundo nombre representante" value="<?php echo $segundoNombreRepLegal; ?>">
 																		</div>
 																	</div>
 																</div>
@@ -140,7 +153,7 @@
 																	<div class="form-group row">
 																		<div class="col-sm-12">
 																			<label class="col-sm-12 col-form-label">Primer apellido del representante legal</label>
-																			<input type="text" class="form-control" form="formulario_actualizar" name="primer_apellido_rep_regal" id="apellido" placeholder="Primer apellido representante" required="" value="<?php echo $primerApellidoRepLegal; ?>">
+																			<input type="text" class="form-control" form="formulario_actualizar_perfil" name="primer_apellido_rep_regal" id="apellido" placeholder="Primer apellido representante" required="" value="<?php echo $primerApellidoRepLegal; ?>">
 																		</div>
 																	</div>
 																</div>
@@ -149,7 +162,7 @@
 																	<div class="form-group row">
 																		<div class="col-sm-12">
 																			<label class="col-sm-12 col-form-label"">Segundo apellido del representante legal</label>
-																			<input type="text" class="form-control" form="formulario_actualizar" name="segundo_apellido_rep_regal" id="apellido_s" placeholder="Segundo apellido representante" value="<?php echo $segundoApellidoRepLegal; ?>">
+																			<input type="text" class="form-control" form="formulario_actualizar_perfil" name="segundo_apellido_rep_regal" id="apellido_s" placeholder="Segundo apellido representante" value="<?php echo $segundoApellidoRepLegal; ?>">
 																		</div>
 																	</div>
 																</div>
@@ -160,7 +173,7 @@
 																	<div class="form-group row">
 																		<div class="col-sm-12">
 																			<label class="col-sm-12 col-form-label">Correo electrónico representante legal </label>
-																			<input type="email" class="form-control" form="formulario_actualizar" name="correo_electronico_rep_legal" id="correo_electronico_rep_legal" placeholder="Correo electrónico del representante legal" required="" value="<?php echo $direccionCorreoElectronicoRepLegal ?>">
+																			<input type="email" class="form-control" form="formulario_actualizar_perfil" name="correo_electronico_rep_legal" id="correo_electronico_rep_legal" placeholder="Correo electrónico del representante legal" required="" value="<?php echo $direccionCorreoElectronicoRepLegal ?>">
 																		</div>
 																	</div>
 																</div>
@@ -169,7 +182,7 @@
 																	<div class="form-group row">
 																		<div class="col-sm-12">
 																			<label class="col-sm-12 col-form-label">Correo electrónico (Notificaciones) </label>
-																			<input type="email" class="form-control" form="formulario_actualizar" name="correo_electronico" id="correo_electronico" placeholder="Correo electrónico de la organización" required="" value="<?php echo $direccionCorreoElectronicoOrganizacion ?>">
+																			<input type="email" class="form-control" form="formulario_actualizar_perfil" name="correo_electronico" id="correo_electronico" placeholder="Correo electrónico de la organización" required="" value="<?php echo $direccionCorreoElectronicoOrganizacion ?>">
 																		</div>
 																	</div>
 																</div>
@@ -181,7 +194,7 @@
 																	<div class="form-group row">
 																		<div class="col-sm-12">
 																			<label class="col-sm-12 col-form-label">Tipo de Organización</label>
-																			<select name="tipo_organizacion" id="tipo_organizacion" class="selectpicker form-control show-tick" required="">
+																			<select name="tipo_organizacion" form="formulario_actualizar_perfil" id="tipo_organizacion" class="selectpicker form-control show-tick" required="">
 																				<optgroup label="Actual">
 																					<option id="0" value="<?php echo $data_informacion_general->tipoOrganizacion; ?>" selected><?php echo $data_informacion_general->tipoOrganizacion; ?></option>
 																				</optgroup>
@@ -214,7 +227,7 @@
 																		<div class="col-sm-12">
 																			<label class="col-sm-12 col-form-label">Ámbito de Actuación de la Entidad</label>
 																			<br>
-																			<select name="actuacion" id="actuacion" class="selectpicker form-control show-tick" required="">
+																			<select name="actuacion" form="formulario_actualizar_perfil" id="actuacion" class="selectpicker form-control show-tick" required="">
 																				<optgroup label="Actual">
 																					<option id="0" value="<?php echo $data_informacion_general->actuacionOrganizacion; ?>" selected><?php echo $data_informacion_general->actuacionOrganizacion; ?></option>
 																				</optgroup>
@@ -235,7 +248,7 @@
 																	<div class="form-group row">
 																		<div class="col-sm-12">
 																			<label class="col-sm-12 col-form-label">Tipo de Educación</span></label>
-																			<select name="educacion" id="educacion" class="selectpicker form-control show-tick" required="">
+																			<select name="educacion" form="formulario_actualizar_perfil" id="educacion" class="selectpicker form-control show-tick" required="">
 																				<optgroup label="Actual">
 																					<option id="0" value="<?php echo $data_informacion_general->tipoEducacion; ?>" selected><?php echo $data_informacion_general->tipoEducacion; ?></option>
 																				</optgroup>
@@ -260,7 +273,7 @@
 																	<div class="form-group row">
 																		<div class="col-sm-12">
 																			<label class="col-sm-12 col-form-label">Departamento</label>
-																			<select name="departamentos" id="departamentos" data-id-dep="1" class="selectpicker form-control show-tick departamentos" required="">
+																			<select name="departamentos" form="formulario_actualizar_perfil" id="departamentos" data-id-dep="1" class="selectpicker form-control show-tick departamentos" required="">
 																				<optgroup label="Actual">
 																					<option id="0" value="<?php echo $data_informacion_general->nomDepartamentoUbicacion; ?>" selected><?php echo $data_informacion_general->nomDepartamentoUbicacion; ?></option>
 																				</optgroup>
@@ -283,7 +296,7 @@
 																		<div class="col-sm-12">
 																			<div id="div_municipios">
 																				<label class="col-sm-12 col-form-label">Municipio: <span class="spanRojo">*</span></label>
-																				<select name="municipios" id="municipios" class="selectpicker form-control show-tick municipios" required="">
+																				<select name="municipios" id="municipios" form="formulario_actualizar_perfil" class="selectpicker form-control show-tick municipios" required=>
 																					<optgroup label="Actual">
 																						<option id="0" value="<?php echo $data_informacion_general->nomMunicipioNacional; ?>" selected><?php echo $data_informacion_general->nomMunicipioNacional; ?></option>
 																					</optgroup>
@@ -308,7 +321,7 @@
 																	<div class="form-group row">
 																		<div class="col-sm-12">
 																			<label class="col-sm-12 col-form-label">Dirección: <span class="spanRojo">*</span></label>
-																			<input type="text" class="form-control" name="direccion" id="direccion" required="" placeholder="Dirección" value="<?php echo $data_informacion_general ->direccionOrganizacion; ?>">
+																			<input type="text" class="form-control" form="formulario_actualizar_perfil" name="direccion" id="direccion" required="" placeholder="Dirección" value="<?php echo $data_informacion_general ->direccionOrganizacion; ?>">
 																		</div>
 																	</div>
 																</div>
@@ -317,7 +330,7 @@
 																	<div class="form-group row">
 																		<div class="col-sm-12">
 																			<label class="col-sm-12 col-form-label">Dirección Web</label>
-																			<input type="text" name="urlOrganizacion" id="urlOrganizacion" placeholder="www.orgsolidarias.gov.co" class="form-control" value="<?php echo $data_informacion_general ->urlOrganizacion; ?>">
+																			<input type="text" name="urlOrganizacion" form="formulario_actualizar_perfil" id="urlOrganizacion" placeholder="www.orgsolidarias.gov.co" class="form-control" value="<?php echo $data_informacion_general ->urlOrganizacion; ?>">
 																		</div>
 																	</div>
 																</div>
@@ -328,7 +341,7 @@
 																	<div class="form-group row">
 																		<div class="col-sm-12">
 																			<label class="col-sm-12 col-form-label">Teléfono - Celular</label>
-																			<input type="text" name="fax" id="fax" class="form-control" required="" placeholder="Fax - Teléfono" value="<?php echo $data_informacion_general ->fax; ?>">
+																			<input type="text" name="fax" id="fax" form="formulario_actualizar_perfil" class="form-control" required="" placeholder="Fax - Teléfono" value="<?php echo $data_informacion_general ->fax; ?>">
 																			<div class="checkbox">
 																				<label class="col-sm-12 col-form-label"><input type="checkbox" name="extension_checkbox" id="extension_checkbox" class=""> ¿Tiene Extensión?</label>
 																			</div>
@@ -341,7 +354,7 @@
 																		<div class="col-sm-12">
 																			<div  id="div_extension">
 																				<label class="col-sm-12 col-form-label">Extensión</label>
-																				<input type="text" name="extension" id="extension" class="form-control" placeholder="Extensión" value="<?php echo $data_informacion_general ->extension; ?>">
+																				<input type="text" name="extension" form="formulario_actualizar_perfil" id="extension" class="form-control" placeholder="Extensión" value="<?php echo $data_informacion_general->extension; ?>">
 																			</div>
 																		</div>
 																	</div>
@@ -356,7 +369,7 @@
 																	<div class="form-group row">
 																		<div class="col-sm-12">
 																			<label class="col-sm-12 col-form-label">Primer nombre</label>
-																			<input type="text" class="form-control" form="formulario_actualizar" name="primer_nombre_persona" id="nombre_p" placeholder="Primer Nombre" required="">
+																			<input type="text" class="form-control" form="formulario_actualizar_perfil" name="nombre_p" id="nombre_p" placeholder="Primer Nombre" required>
 																		</div>
 																	</div>
 																</div>
@@ -365,7 +378,7 @@
 																	<div class="form-group row">
 																		<div class="col-sm-12">
 																			<label class="col-sm-12 col-form-label">Primer apellido</label>
-																			<input type="text" class="form-control" form="formulario_actualizar" name="primer_apellido_persona" id="apellido_p" placeholder="Primer Apellido" required="">
+																			<input type="text" class="form-control" form="formulario_actualizar_perfil" name="apellido_p" id="apellido_p" placeholder="Primer Apellido" required>
 																		</div>
 																	</div>
 																</div>
