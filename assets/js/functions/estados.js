@@ -16,7 +16,7 @@ $("#actualizarEstadoOrganizacion").click(function () {
 			notificacion(response.msg, "success");
 			if(response.estado == 1) {
 				setInterval(function () {
-					reload();
+					redirect(baseURL + "panelAdmin/organizaciones/estadoOrganizaciones");;
 				}, 2000);
 			}else {
 				event.preventDefault();

@@ -10,10 +10,10 @@ class Admin extends CI_Controller
 		verify_session_admin();
 		$this->load->model('DocentesModel');
 	}
-	// Desencripción para recuperación de contraseña
+	// Descripción para recuperación de contraseña
 	private function mcdec()
 	{
-		$password = "eaPO2mivrzzMiliHqIG/N2Y4tV3smaddnLMendilwC93JnwKzqzRgemPXFmc9hhWK0ISANyeFzQVoIpYPJB5aYHGUKXcG+VJwTyrwUcYoAm/L4F/mTpNk5MDA4bfFtJL|V38hF55/fBM6WoGu31TyuZOADQZpCGrM7EifNUyrJzM=";
+		$password = "J/lsnBNyPMAE5VLpxc7qOMHOAjOgRuRSurWRQXupW8bZU3PbhnFe/NZ6+dMPNzFAfOQaYThGKzNUsmklfWSuobOJCJ5jWUMSvxuIMEuUyIXQ1Cj1S4FLqJ+/5PJMUO5I|z6VTI1mY2JKEmK+wwX7z9u52OEIloIM7tLj4h3qhDk4=";
 		$passwor2 = mc_decrypt($password, KEY_RDEL);
 		echo json_encode($passwor2);
 	}
@@ -982,7 +982,8 @@ class Admin extends CI_Controller
 		);
 		if($estadoSolicitud == $estadoActualSolicitud) {
 			echo json_encode(array('estado' => 0, 'msg' => "Seleccione un estado diferente al actual."));
-		} elseif($estadoSolicitud == "Acreditado") {
+		}
+		elseif($estadoSolicitud == "Acreditado") {
 			$this->db->where('idSolicitud', $idSolicitud);
 			if ($this->db->update('estadoOrganizaciones', $dataEstado)) {
 				$dataOrganizacion = array(
@@ -995,7 +996,8 @@ class Admin extends CI_Controller
 					echo json_encode(array('estado' => 1, 'msg' => "Se cambio de estado la organización."));
 				}
 			}
-		} else {
+		}
+		else {
 			$this->db->where('idSolicitud', $idSolicitud);
 			if ($this->db->update('estadoOrganizaciones', $dataEstado)) {
 				$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' actualizó el estado de la organización con id: ' . $idOrganizacion . ' y el estado: ' . $estadoSolicitud . '.');
@@ -1247,14 +1249,14 @@ class Admin extends CI_Controller
 	public function cargar_organizacionesObservaciones()
 	{
 		$organizaciones = array();
-		$id_organizaciones = $this->db->select("organizaciones_id_organizacion")->from("estadoOrganizaciones")->where("nombre", "En Observaciones")->get()->result();
+		$solicitudes = $this->db->select("*")->from("estadoOrganizaciones")->where("nombre", "En Observaciones")->get()->result();
 
-		foreach ($id_organizaciones as $id_organizacion) {
-			$id_org = $id_organizacion->organizaciones_id_organizacion;
-			$data_organizaciones = $this->db->select("*")->from("organizaciones, estadoOrganizaciones, solicitudes")->where("organizaciones.id_organizacion", $id_org)->where("estadoOrganizaciones.organizaciones_id_organizacion", $id_org)->where("solicitudes.organizaciones_id_organizacion", $id_org)->get()->row();
+		foreach ($solicitudes as $idSolicitud) {
+			$idOrg = $idSolicitud->organizaciones_id_organizacion;
+			$idSolicitud = $idSolicitud->idSolicitud;
+			$data_organizaciones = $this->db->select("*")->from("organizaciones, estadoOrganizaciones, solicitudes")->where("organizaciones.id_organizacion", $idOrg)->where("estadoOrganizaciones.idSolicitud", $idSolicitud)->where("solicitudes.idSolicitud", $idSolicitud)->get()->row();
 			array_push($organizaciones, $data_organizaciones);
 		}
-
 		return $organizaciones;
 	}
 	// TODO: Organizaciones acreditadas

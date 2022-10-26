@@ -9,7 +9,7 @@
 				<tr>
 					<td class="col-md-2">Organización</td>
 					<td class="col-md-2">NIT Org</td>
-					<td class="col-md-2">Cedula Docente</td>
+					<td class="col-md-2">Cédula Docente</td>
 					<td class="col-md-2">Nombre</td>
 					<td class="col-md-2">Horas De Capacitación</td>
 					<td class="col-md-2">Aprobado</td>
