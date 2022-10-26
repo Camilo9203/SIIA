@@ -36,24 +36,24 @@ class Perfil extends CI_Controller {
 		$data['nombre_usuario'] = $datos_usuario ->usuario;
 		
 		$data_registro = array(
-							'nombreOrganizacion' => $datos_registro->nombreOrganizacion,
-			            	'numNIT' => $datos_registro ->numNIT,
-			            	'sigla' => $datos_registro ->sigla,
-			            	'primerNombreRepLegal' => $datos_registro ->primerNombreRepLegal,
-			            	'segundoNombreRepLegal' => $datos_registro ->segundoNombreRepLegal,
-			            	'primerApellidoRepLegal' => $datos_registro ->primerApellidoRepLegal,
-			            	'segundoApellidoRepLegal' => $datos_registro ->segundoApellidoRepLegal,
-			            	'direccionCorreoElectronicoOrganizacion' => $datos_registro ->direccionCorreoElectronicoOrganizacion,
-			            	'direccionCorreoElectronicoRepLegal' => $datos_registro ->direccionCorreoElectronicoRepLegal,
-			            	'primerNombrePersona' => $datos_registro ->primerNombrePersona,
-			            	'primerApellidoPersona' => $datos_registro ->primerApellidoPersona,
-			            	'nombre_usuario' => $datos_usuario ->usuario,
-			            	'imagen' => $datos_registro ->imagenOrganizacion,
-			            	'firma' => $datos_registro ->firmaRepLegal,
-			            	'firmaCert' => $datos_registro ->firmaCert,
-			            	'personaCert' => $datos_registro ->personaCert,
-			            	'cargoCert' => $datos_registro ->cargoCert,
-				        );
+			'nombreOrganizacion' => $datos_registro->nombreOrganizacion,
+			'numNIT' => $datos_registro ->numNIT,
+			'sigla' => $datos_registro ->sigla,
+			'primerNombreRepLegal' => $datos_registro ->primerNombreRepLegal,
+			'segundoNombreRepLegal' => $datos_registro ->segundoNombreRepLegal,
+			'primerApellidoRepLegal' => $datos_registro ->primerApellidoRepLegal,
+			'segundoApellidoRepLegal' => $datos_registro ->segundoApellidoRepLegal,
+			'direccionCorreoElectronicoOrganizacion' => $datos_registro ->direccionCorreoElectronicoOrganizacion,
+			'direccionCorreoElectronicoRepLegal' => $datos_registro ->direccionCorreoElectronicoRepLegal,
+			'primerNombrePersona' => $datos_registro ->primerNombrePersona,
+			'primerApellidoPersona' => $datos_registro ->primerApellidoPersona,
+			'nombre_usuario' => $datos_usuario ->usuario,
+			'imagen' => $datos_registro ->imagenOrganizacion,
+			'firma' => $datos_registro ->firmaRepLegal,
+			'firmaCert' => $datos_registro ->firmaCert,
+			'personaCert' => $datos_registro ->personaCert,
+			'cargoCert' => $datos_registro ->cargoCert,
+		);
 		$data['departamentos'] = $this->cargarDepartamentos();
 		$data['title'] = 'Perfil - Información de '.$datos_registro ->nombreOrganizacion;
 		$data_actividad['actividad'] = $this->actividad();

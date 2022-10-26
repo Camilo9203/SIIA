@@ -379,13 +379,17 @@ class Docentes extends CI_Controller
 			echo json_encode(array('url' => "", 'msg' => $msg));
 		}
 	}
-	/** Cargar Información Docente */
+	/** Cargar Información Docente Organización */
 	public function cargar_docentes()
 	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-		$docentes = $this->db->select("*")->from("docentes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
+		$organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $this->session->userdata('usuario_id'))->get()->row();
+		$docentes = $this->db->select("*")->from("docentes")->where("organizaciones_id_organizacion", $organizacion->id_organizacion)->get()->result();
+		return $docentes;
+	}
+	/** Cargar Información Docente Organización */
+	public function cargarDocentesAdmin()
+	{
+		$docentes = $this->db->select("*")->from("organizaciones")->join("docentes", 'docentes.organizaciones_id_organizacion = organizaciones.id_organizacion')->get()->result();
 		return $docentes;
 	}
 	public function cargarInformacionDocente()
@@ -420,6 +424,7 @@ class Docentes extends CI_Controller
 	{
 		$data = $this->datosSession();
 		$data['title'] = 'Panel Principal / Administrador / Facilitadores / Asignar';
+		$data['docentes'] = $this->cargarDocentesAdmin();
 		$this->load->view('include/header', $data);
 		$this->load->view('admin/organizaciones/docentes/asignarDocentes', $data);
 		$this->load->view('include/footer', $data);
@@ -430,6 +435,7 @@ class Docentes extends CI_Controller
 	{
 		$data = $this->datosSession();
 		$data['title'] = 'Panel Principal / Administrador / Facilitadores / Evaluar';
+		$data['docentes'] = $this->cargarDocentesAdmin();
 		$this->load->view('include/header', $data);
 		$this->load->view('admin/organizaciones/docentes/evaluarDocentes', $data);
 		$this->load->view('include/footer', $data);

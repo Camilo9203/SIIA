@@ -1,50 +1,52 @@
 <div class="col-md-12">
 	<!-- Tabla Solicitudes Docentes no asignados -->
-	<div id="organizaciones_docentes">
-		<hr />
-		<h3>Docentes pendientes por ser asignados:</h3>
-		<br />
-		<table id="tabla_docentes_no_asignados" width="100%" border=0 class="table table-striped table-bordered tabla_form">
-			<thead>
-				<tr>
-					<td class="col-md-2">Organizacion</td>
-					<td class="col-md-2">NIT Org</td>
-					<td class="col-md-2">Cedula Docente</td>
-					<td class="col-md-2">Nombre</td>
-					<td class="col-md-2">Apellido</td>
-					<td class="col-md-2">Horas de Capacitación</td>
-					<td class="col-md-2">Aprobado</td>
-					<td class="col-md-2">Asignado</td>
-					<td class="col-md-2">Observaciones</td>
-					<td class="col-md-2">Acciones</td>
-				</tr>
-			</thead>
-			<tbody id="tbody">
-				<?php
-				for ($i = 0; $i < count($docentes); $i++) {
-					if ($docentes[$i]->asignado == "No") {
-						echo "<tr>";
-						echo "<td>" . $docentes[$i]->nombreOrganizacion . "</td>";
-						echo "<td>" . $docentes[$i]->numNIT . "</td>";
-						echo "<td>" . $docentes[$i]->numCedulaCiudadaniaDocente . "</td>";
-						echo "<td>" . $docentes[$i]->primerNombreDocente . "</td>";
-						echo "<td>" . $docentes[$i]->primerApellidoDocente . "</td>";
-						echo "<td>" . $docentes[$i]->horaCapacitacion . "</td>";
-						if ($docentes[$i]->valido == '0') {
-							echo "<td>No</td>";
-						} else if ($docentes[$i]->valido == '1') {
-							echo "<td>Si</td>";
-						}
-						echo "<td>" . $docentes[$i]->asignado . "</td>";
-						echo "<td>" . $docentes[$i]->observacion . "</td>";
-						echo "<td><button class='btn btn-siia btn-sm' id='verModalAsignarDocente' data-id='" . $docentes[$i]->id_docente . "' data-docente='" . $docentes[$i]->numCedulaCiudadaniaDocente . "' data-nombre='" . $docentes[$i]->primerNombreDocente . "' data-apellido='" . $docentes[$i]->primerApellidoDocente . "' data-toggle='modal' data-target='#asignarDocente'>Asignar <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
-						echo "</tr>";
-					}
-				}
-				?>
-			</tbody>
-		</table>
-	</div><br />
+	<?php if($docentes): ?>
+		<div id="organizaciones_docentes">
+			<hr />
+			<h3>Docentes pendientes por ser asignados:</h3>
+			<br />
+			<table id="tabla_docentes_no_asignados" width="100%" border=0 class="table table-striped table-bordered tabla_form">
+				<thead>
+					<tr>
+						<td class="col-md-2">Organización</td>
+						<td class="col-md-2">NIT Org</td>
+						<td class="col-md-2">Cédula Docente</td>
+						<td class="col-md-2">Nombre</td>
+						<td class="col-md-2">Apellido</td>
+						<td class="col-md-2">Horas de Capacitación</td>
+						<td class="col-md-2">Aprobado</td>
+						<td class="col-md-2">Asignado</td>
+						<td class="col-md-2">Observaciones</td>
+						<td class="col-md-2">Acciones</td>
+					</tr>
+				</thead>
+				<tbody id="tbody">
+					<?php
+					foreach ($docentes as $docente):
+						if ($docente->asignado == "No"):
+							echo "<tr>";
+							echo "<td>" . $docente->nombreOrganizacion . "</td>";
+							echo "<td>" . $docente->numNIT . "</td>";
+							echo "<td>" . $docente->numCedulaCiudadaniaDocente . "</td>";
+							echo "<td>" . $docente->primerNombreDocente . "</td>";
+							echo "<td>" . $docente->primerApellidoDocente . "</td>";
+							echo "<td>" . $docente->horaCapacitacion . "</td>";
+							if ($docente->valido == 0):
+								echo "<td>No</td>";
+							elseif ($docente->valido == 1):
+								echo "<td>Si</td>";
+							endif;
+							echo "<td>" . $docente->asignado . "</td>";
+							echo "<td>" . $docente->observacion . "</td>";
+							echo "<td><button class='btn btn-siia btn-sm' id='verModalAsignarDocente' data-id='" . $docente->id_docente . "' data-docente='" . $docente->numCedulaCiudadaniaDocente . "' data-nombre='" . $docente->primerNombreDocente . "' data-apellido='" . $docente->primerApellidoDocente . "' data-toggle='modal' data-target='#asignarDocente'>Asignar <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
+							echo "</tr>";
+						endif;
+					endforeach;
+					?>
+				</tbody>
+			</table>
+		</div><br />
+	<?php endif; ?>
 	<!-- Tabla Solicitudes Docentes no asignados -->
 	<div id="organizaciones_docentes">
 		<hr />
@@ -53,7 +55,7 @@
 		<table id="tabla_docentes_asignados" width="100%" border=0 class="table table-striped table-bordered tabla_form">
 			<thead>
 				<tr>
-					<td class="col-md-2">Organizacion</td>
+					<td class="col-md-2">Organización</td>
 					<td class="col-md-2">NIT Org</td>
 					<td class="col-md-2">Cedula Docente</td>
 					<td class="col-md-2">Nombre</td>

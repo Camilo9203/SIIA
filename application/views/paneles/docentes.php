@@ -149,6 +149,9 @@
 					<label>Horas de Capacitación:<span class="spanRojo">*</span></label>
 					<input type="text" class="form-control" id="horas_doc">
 				</div>
+				<div class="form-group">
+					<button type="button" class="btn btn-siia btn-sm actualizar_docente" value="No">Actualizar datos del facilitador <i class="fa fa-refresh" aria-hidden="true"></i></button>
+				</div>
 			</div>
 			<div class="clearfix"></div>
 			<hr/>
@@ -242,7 +245,6 @@
     <div class="modal-footer">
     	<button type="button" class="btn btn-warning btn-sm pull-left" data-toggle='modal' data-target='#eliminarDocente'>Eliminar facilitador <i class="fa fa-trash-o" aria-hidden="true"></i></button>
     	<button type="button" class="btn btn-success btn-sm actualizar_docente" value="Si">Enviar actualización como solicitud <i class="fa fa-refresh" aria-hidden="true"></i></button>
-    	<button type="button" class="btn btn-siia btn-sm actualizar_docente" value="No">Solo actualizar datos del facilitador <i class="fa fa-refresh" aria-hidden="true"></i></button>
     	<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cerrar <i class="fa fa-times" aria-hidden="true"></i></button>
     </div>
   </div>
