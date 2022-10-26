@@ -469,6 +469,7 @@
 	<link href="<?php /*echo base_url('assets/fonts/CrimsonText.css')*/ ?>" rel="stylesheet" />
 	<link href="<?php /*echo base_url('assets/fonts/CrimsonTextOpenSans400Oswald.css')*/ ?>" rel="stylesheet" />
 	<link href="<?php /*echo base_url('assets/fonts/OpenSans400700.css')*/ ?>" rel="stylesheet" />-->
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<!--<link href="<?php echo base_url('assets/css/styles.min.css') ?>" rel="stylesheet" type="text/css" />-->
 	<link href="<?php echo base_url('assets/css/notifIt.css') ?>" rel="stylesheet" type="text/css" />
 	<link href="<?php echo base_url('assets/css/dataTables.bootstrap.css') ?>" rel="stylesheet" type="text/css" />
@@ -518,6 +519,7 @@
 	<script src="<?php echo base_url('assets/js/functions/nits.js?v=1.5.1') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/panel.js?v=1.0.1') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/formularios.js?v=1.0.1') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/docentes.js?v=1.61342') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/contacto.js?v=1.0.8.61') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/estadisticas.js?v=1.0.8.62') . time() ?>" type="text/javascript"></script>
 	<!--<script src="<?php echo base_url('assets/js/script_o.min.js') ?>" type="text/javascript"></script>

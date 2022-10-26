@@ -44,8 +44,8 @@ class Registro extends CI_Controller
 		$this->form_validation->set_rules('password', '', 'trim|required|min_length[3]|xss_clean');
 
 		if ($this->form_validation->run("formulario_registro") == FALSE) {
-			echo json_encode(array('url' => "registro", 'msg' => "Verifique los datos, no son válidos."));
-			var_dump(validation_errors());
+			$error = validation_errors();
+			echo json_encode(array('url' => "registro", 'msg' => $error));
 		}
 		else {
 			$fromSIA = "Unidad Administrativa Especial de Organizaciones Solidarias UAEOS - Aplicación SIIA.";
@@ -273,11 +273,31 @@ class Registro extends CI_Controller
 						if ($this->db->delete('usuarios')) {
 							$this->db->where('token', $token);
 							if ($this->db->delete('token')) {
-								echo json_encode(array('url' => "login", 'msg' => "Lo sentimos, hubo un error y no se envio el correo, intente de nuevo.", "status" => 0));
+								echo json_encode(array('url' => "registro", 'msg' => "Lo sentimos, hubo un error y no se envio el correo, intente de nuevo.", "status" => 0));
+							}
+							else {
+								$error = $this->db->_error_message();
+								echo json_encode(array('url' => 'registro', 'msg' => $error));
 							}
 						}
+						else {
+							$error = $this->db->error();
+							echo json_encode(array('url' => 'registro', 'msg' => $error));
+						}
+					}
+					else {
+						$error = $this->db->error();
+						echo json_encode(array('url' => 'registro', 'msg' => $error));
 					}
 				}
+				else {
+					$error = $this->db->error();
+					echo json_encode(array('url' => 'registro', 'msg' => $error));
+				}
+			}
+			else {
+				$error = $this->db->error();
+				echo json_encode(array('url' => 'registro', 'msg' => $error));
 			}
 		}
 	}

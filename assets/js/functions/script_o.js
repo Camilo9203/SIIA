@@ -3613,37 +3613,6 @@ $(document).ready(function () {
 		});
 	});
 
-	$(document).on("click", ".eliminar_archivo_docente", function () {
-		$id_archivoDocente = $(this).attr("data-id-archivoDocente");
-		$id_docente = $(this).attr("data-id-docente");
-		$tipo = $(this).attr("data-id-tipo");
-		$nombre = $(this).attr("data-nombre-ar");
-
-		data = {
-			id_archivoDocente: $id_archivoDocente,
-			id_docente: $id_docente,
-			tipo: $tipo,
-			nombre: $nombre,
-		};
-
-		$.ajax({
-			url: baseURL + "panel/eliminarArchivoDocente",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			beforeSend: function () {
-				notificacion("Espere...", "success");
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-				cargarArchivosDocente($id_docente);
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
-
 	$("#admin_buscar_organizacion").click(function () {
 		if ($("#admin_buscar_nombre").val().length == 0) {
 			$("#admin_buscar_nombre").val("*");
@@ -4060,11 +4029,9 @@ $(document).ready(function () {
 											success: function (response) {
 												$("#ayuda_registro").attr("data-backdrop", "static");
 												$("#ayuda_registro").attr("data-keyboard", "false");
-												$("#correo_electronico_rese").attr(
-													"data-org",
-													JSON.stringify(response).replace(/'/g, "\\'")
-												);
-												mensaje(response.msg, "alert-success");
+												$("#correo_electronico_rese").attr("data-org", JSON.stringify(response).replace(/'/g, "\\'"));
+
+												mensaje(response.msg['message'], "alert-success");
 												$("#loading").toggle();
 												if (response.status == 0) {
 													notificacion(
@@ -4821,68 +4788,6 @@ $(document).ready(function () {
 		});
 	});
 
-	$(".archivos_form_hojaVidaDocente").on("click", function () {
-		$data_name = $(".archivos_form_hojaVidaDocente").attr("data-name");
-		$id_docente = $("#docente_arch_id").attr("data-docente-id");
-		var file_data = $("#" + $data_name).prop("files")[0];
-		var form_data = new FormData();
-		form_data.append("file", file_data);
-		form_data.append("tipoArchivo", $("#" + $data_name).attr("data-val"));
-		form_data.append("append_name", $data_name);
-		form_data.append("id_docente", $id_docente);
-		$.ajax({
-			url: baseURL + "panel/guardarArchivoHojaVidaDocente",
-			dataType: "text",
-			cache: false,
-			contentType: false,
-			processData: false,
-			data: form_data,
-			type: "post",
-			dataType: "JSON",
-			beforeSubmit: function () {
-				$("#loading").show();
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-				cargarArchivosDocente($id_docente);
-			},
-			error: function (ev) {
-				notificacion("Verifique los datos del formulario.", "success");
-			},
-		});
-	});
-
-	$(".archivos_form_tituloDocente").on("click", function () {
-		$data_name = $(".archivos_form_tituloDocente").attr("data-name");
-		$id_docente = $("#docente_arch_id").attr("data-docente-id");
-		var file_data = $("#" + $data_name).prop("files")[0];
-		var form_data = new FormData();
-		form_data.append("file", file_data);
-		form_data.append("tipoArchivo", $("#" + $data_name).attr("data-val"));
-		form_data.append("append_name", $data_name);
-		form_data.append("id_docente", $id_docente);
-		$.ajax({
-			url: baseURL + "panel/guardarArchivoTituloDocente",
-			dataType: "text",
-			cache: false,
-			contentType: false,
-			processData: false,
-			data: form_data,
-			type: "post",
-			dataType: "JSON",
-			beforeSubmit: function () {
-				$("#loading").show();
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-				cargarArchivosDocente($id_docente);
-			},
-			error: function (ev) {
-				notificacion("Verifique los datos del formulario.", "success");
-			},
-		});
-	});
-
 	$(document).on("click", ".archivos_form_obsPlataforma", function () {
 		$data_name = $(".archivos_form_obsPlataforma").attr("data-name");
 		$id_organizacion = $("#id_org_ver_form").attr("data-id");
@@ -4908,72 +4813,6 @@ $(document).ready(function () {
 			},
 			success: function (response) {
 				notificacion(response.msg, "success");
-			},
-			error: function (ev) {
-				notificacion("Verifique los datos del formulario.", "success");
-			},
-		});
-	});
-
-	$(".archivos_form_certificadoDocente").on("click", function () {
-		$data_name = $(".archivos_form_certificadoDocente").attr("data-name");
-		$id_docente = $("#docente_arch_id").attr("data-docente-id");
-		var file_data = $("#" + $data_name).prop("files")[0];
-		var form_data = new FormData();
-		form_data.append("file", file_data);
-		form_data.append("tipoArchivo", $("#" + $data_name).attr("data-val"));
-		form_data.append("append_name", $data_name);
-		form_data.append("id_docente", $id_docente);
-		$.ajax({
-			url: baseURL + "panel/guardarArchivoCertificadoDocente",
-			dataType: "text",
-			cache: false,
-			contentType: false,
-			processData: false,
-			data: form_data,
-			type: "post",
-			dataType: "JSON",
-			beforeSubmit: function () {
-				$("#loading").show();
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-				cargarArchivosDocente($id_docente);
-			},
-			error: function (ev) {
-				notificacion("Verifique los datos del formulario.", "success");
-			},
-		});
-	});
-
-	$(".archivos_form_certificadoEconomiaDocente").on("click", function () {
-		$data_name = $(".archivos_form_certificadoEconomiaDocente").attr(
-			"data-name"
-		);
-		$id_docente = $("#docente_arch_id").attr("data-docente-id");
-		$horasCertEcoSol = $("#horasCertEcoSol").val();
-		var file_data = $("#" + $data_name).prop("files")[0];
-		var form_data = new FormData();
-		form_data.append("file", file_data);
-		form_data.append("tipoArchivo", $("#" + $data_name).attr("data-val"));
-		form_data.append("append_name", $data_name);
-		form_data.append("id_docente", $id_docente);
-		form_data.append("horas", $horasCertEcoSol);
-		$.ajax({
-			url: baseURL + "panel/guardarArchivoCertificadoEconomiaDocente",
-			dataType: "text",
-			cache: false,
-			contentType: false,
-			processData: false,
-			data: form_data,
-			type: "post",
-			dataType: "JSON",
-			beforeSubmit: function () {
-				$("#loading").show();
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-				cargarArchivosDocente($id_docente);
 			},
 			error: function (ev) {
 				notificacion("Verifique los datos del formulario.", "success");
@@ -8068,163 +7907,11 @@ $(document).ready(function () {
 		});
 	});
 
-	$(".verDocenteOrg").click(function () {
-		$nombre_docente = $(this).attr("data-nombre");
-		$id_docente = $(this).attr("data-id");
-
-		data = {
-			id_docente: $id_docente,
-		};
-
-		$.ajax({
-			url: baseURL + "panel/cargarInformacionDocente",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			success: function (response) {
-				$("#nombre_doc").html($nombre_docente);
-				$("#nombre_doc").attr("data-id", $id_docente);
-				$("#siEliminarDocente").attr("data-id", $id_docente);
-				$("#primer_nombre_doc").val(response.primerNombreDocente);
-				$("#segundo_nombre_doc").val(response.segundoNombreDocente);
-				$("#primer_apellido_doc").val(response.primerApellidoDocente);
-				$("#segundo_apellido_doc").val(response.segundoApellidoDocente);
-				$("#numero_cedula_doc").val(response.numCedulaCiudadaniaDocente);
-				$("#profesion_doc").val(response.profesion);
-				$("#horas_doc").val(response.horaCapacitacion);
-				if (response.valido == 1) {
-					$("#valido_doc").html("Sí");
-				} else {
-					$("#valido_doc").html("No");
-				}
-				$("#docente_arch_id	").remove();
-				$("body").append(
-					"<div data-docente-id='" +
-						$id_docente +
-						"' id='docente_arch_id'></div>"
-				);
-				cargarArchivosDocente($id_docente);
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
-
-
 	$("#crr_hist_obs").click(function () {
 		$("#tbody_hist_obs").empty();
 		$("#tbody_hist_obs").html("");
 	});
-	// TODO: Actualizar docente
-	$("#actualizar_docente").click(function () {
-		$id_docente = $("#nombre_doc").attr("data-id");
-		$primer_nombre_doc = $("#primer_nombre_doc").val();
-		$segundo_nombre_doc = $("#segundo_nombre_doc").val();
-		$primer_apellido_doc = $("#primer_apellido_doc").val();
-		$segundo_apellido_doc = $("#segundo_apellido_doc").val();
-		$numero_cedula_doc = $("#numero_cedula_doc").val();
-		$profesion_doc = $("#profesion_doc").val();
-		$horas_doc = $("#horas_doc").val();
-		$solicitud = $(".actualizar_docente").val();
 
-		data = {
-			id_docente: $id_docente,
-			primer_nombre_doc: $primer_nombre_doc,
-			segundo_nombre_doc: $segundo_nombre_doc,
-			primer_apellido_doc: $primer_apellido_doc,
-			segundo_apellido_doc: $segundo_apellido_doc,
-			numero_cedula_doc: $numero_cedula_doc,
-			profesion_doc: $profesion_doc,
-			horas_doc: $horas_doc,
-			solicitud: $solicitud,
-		};
-
-		$.ajax({
-			url: baseURL + "panel/actualizarDocente",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			beforeSend: function () {
-				notificacion("Actualizando docente, espere...", "success");
-			},
-			success: function (response) {
-				notificacion(response.msg + " Espere...", "success");
-				setInterval(function () {
-					redirect(baseURL + "panel/docentes");
-				}, 2000);
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
-
-	$("#añadirNuevoDocente").click(function () {
-		if ($("#formulario_docentes").valid()) {
-			var cedula = $("#docentes_cedula").val();
-			var primer_nombre = $("#docentes_primer_nombre").val();
-			var segundo_nombre = $("#docentes_segundo_nombre").val();
-			var primer_apellido = $("#docentes_primer_apellido").val();
-			var segundo_apellido = $("#docentes_segundo_apellido").val();
-			var profesion = $("#docentes_profesion").val();
-			var horas = $("#docentes_horas").val();
-
-			data = {
-				cedula: cedula,
-				primer_nombre: primer_nombre,
-				segundo_nombre: segundo_nombre,
-				primer_apellido: primer_apellido,
-				segundo_apellido: segundo_apellido,
-				profesion: profesion,
-				horas: horas,
-				valido: 0,
-			};
-
-			$.ajax({
-				url: baseURL + "panel/anadirNuevoDocente",
-				type: "post",
-				dataType: "JSON",
-				data: data,
-				beforeSend: function () {
-					notificacion("Añadiendo docente, espere...", "success");
-				},
-				success: function (response) {
-					notificacion(response.msg + " Espere...", "success");
-					setInterval(function () {
-						redirect(baseURL + "panel/docentes");
-					}, 2000);
-				},
-				error: function (ev) {
-					//Do nothing
-				},
-			});
-		}
-	});
-
-	$("#siEliminarDocente").click(function () {
-		$id_docente = $(this).attr("data-id");
-
-		data = {
-			id_docente: $id_docente,
-		};
-
-		$.ajax({
-			url: baseURL + "panel/eliminarDocente",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			success: function (response) {
-				notificacion(response.msg + " Espere...", "success");
-				setInterval(function () {
-					redirect(baseURL + "panel/docentes");
-				}, 2000);
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
 	// TODO: Validar docente
 	$(".guardarValidoDocente").click(function () {
 		$(".guardarObsArchivoDoc").each(function () {
@@ -10536,11 +10223,6 @@ $(document).ready(function () {
 	dragDivForm("contenedor--menu2");
 	//dragDivForm("contenedor--menu");
 
-	$("#verDivAgregarDoc").click(function () {
-		$(".divAgregarDoc").slideDown();
-		$(this).hide();
-	});
-
 	$("#verDivAgregarOrgHist").click(function () {
 		$(".divAgregarOrgHist").slideDown();
 		$(".tablaOrgHist").slideUp();
@@ -11245,54 +10927,6 @@ function validaciones() {
 			},
 		},
 	});
-	// Fomulario Docentes
-	$("form[id='formulario_docentes']").validate({
-		rules: {
-			docentes_cedula: {
-				required: true,
-				minlength: 3,
-			},
-			docentes_primer_nombre: {
-				required: true,
-				minlength: 3,
-			},
-			docentes_primer_apellido: {
-				required: true,
-				minlength: 3,
-			},
-			docentes_profesion: {
-				required: true,
-				minlength: 3,
-			},
-			docentes_horas: {
-				required: true,
-			},
-		},
-		messages: {
-			docentes_cedula: {
-				required: "Por favor, escriba la cedula del facilitador.",
-				minlength: "La Cedula debe tener mínimo 3 caracteres.",
-			},
-			docentes_primer_nombre: {
-				required: "Por favor, escriba el primer nombre del facilitador.",
-				minlength: "El primer nombre debe tener mínimo 3 caracteres.",
-			},
-			docentes_primer_apellido: {
-				required: "Por favor, escriba el primer apellido del facilitador.",
-				minlength: "El primer apellido debe tener mínimo 3 caracteres.",
-			},
-			docentes_profesion: {
-				required:
-					"Por favor, escriba la profesión del facilitador sin abreviación alguna.",
-				minlength: "La profesion debe tener mínimo 3 caracteres.",
-			},
-			docentes_horas: {
-				required:
-					"Por favor, escriba las horas que tiene de capacitación el facilitador.",
-				min: "Por favor, debe tener mínimo 60 horas de capacitación.",
-			},
-		},
-	})
 	/*$("form[id='div_llenar_curso']").validate({
 		rules: {
 	      informe_nombre_curso: {
@@ -11563,96 +11197,7 @@ function tablas() {
 	paging("tabla_encuestas");
 	$(".selectpicker").selectpicker("refresh");
 }
-// TODO: CargarArchivosDocentes
-function cargarArchivosDocente($id) {
-	$(".tabla_form > #tbody").empty();
-	$id_docente = $id;
-	var data = {
-		id_docente: $id_docente,
-	};
-	$.ajax({
-		url: "cargarDatosArchivosDocente",
-		type: "post",
-		dataType: "JSON",
-		data: data,
-		success: function (response) {
-			console.log(response);
-			var url;
-			var carpeta;
-			if (response.length == 0) {
-				$("<tr>").appendTo(".tabla_form > tbody");
-				$("<td>Ningún dato</td>").appendTo(".tabla_form > tbody");
-				$("<td>Ningún dato</td>").appendTo(".tabla_form > tbody");
-				$("<td>Ningún dato</td>").appendTo(".tabla_form > tbody");
-				$(".tabla_form > tbody > tr.odd").remove();
-			} else {
-				for (var i = 0; i < response.length; i++) {
-					if (response[i].tipo == "docenteHojaVida") {
-						carpeta = "docentes/hojasVida";
-						url = "../uploads/" + carpeta + "/";
-					}
-					if (response[i].tipo == "docenteTitulo") {
-						carpeta = "docentes/titulos";
-						url = "../uploads/" + carpeta + "/";
-					}
-					if (response[i].tipo == "docenteCertificados") {
-						carpeta = "docentes/certificados";
-						url = "../uploads/" + carpeta + "/";
-					}
-					if (response[i].tipo == "docenteCertificadosEconomia") {
-						carpeta = "docentes/certificadosEconomia";
-						url = "../uploads/" + carpeta + "/";
-					}
 
-					$("<tr>").appendTo(".tabla_form > tbody");
-					var nombre_r = response[i].nombre.replace('"', "").replace('"', "");
-					var tipo_r = response[i].tipo.replace('"', "").replace('"', "");
-					switch (tipo_r) {
-						case "docenteHojaVida":
-							$tipo = "Hoja de vida";
-							break;
-						case "docenteTitulo":
-							$tipo = "Titulo profesional";
-							break;
-						case "docenteCertificadosEconomia":
-							$tipo = "Certificado de economía solidaria";
-							break;
-						case "docenteCertificados":
-							$tipo = "Certificado de experiencia";
-							break;
-					}
-					$("<td><small>" + nombre_r + "</small></td>").appendTo(
-						".tabla_form > tbody"
-					);
-					$("<td>" + $tipo + "</td>").appendTo(".tabla_form > tbody");
-					$(
-						'<td><textarea class="form-control" rows="4">' +
-							response[i].observacionArchivo +
-							"</textarea></td>"
-					).appendTo(".tabla_form > tbody");
-					$(
-						'<td><a target="_blank" href="' +
-							url +
-							response[i].nombre +
-							'"><button class="btn btn-success btn-sm">Ver <i class="fa fa-eye" aria-hidden="true"></i></button></a> - <button class="btn btn-danger btn-sm eliminar_archivo_docente" data-id-tipo="' +
-							response[i].tipo +
-							'" data-nombre-ar="' +
-							response[i].nombre +
-							'" data-id-archivoDocente="' +
-							response[i].id_archivosDocente +
-							'" data-id-docente="' +
-							response[i].docentes_id_docente +
-							'">Eliminar <i class="fa fa-trash-o" aria-hidden="true"></i></button></td>'
-					).appendTo(".tabla_form > tbody");
-					$("</tr>").appendTo(".tabla_form > tbody");
-				}
-			}
-		},
-		error: function (ev) {
-			//Do nothing
-		},
-	});
-}
 /**
 	Parametros de los selects options.
 	@URL: https://silviomoreto.github.io/bootstrap-select/

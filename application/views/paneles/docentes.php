@@ -27,8 +27,8 @@
 	<div class="col-md-12" id="">
 	<?php if($dataInformacionGeneral == null || $dataInformacionGeneral == ""){?>
     	<div class="jumbotron">
-			<h3>Información general:</h3> 
-			<p>Por favor primero llene el formulario número 1 de <strong>Información General</strong> en el <strong>panel principal</strong> de <strong>Crear/Continuar Solicitud</strong> para continuar actualizando los docentes.</p> 
+			<h3>Información general:</h3>
+			<p>Por favor primero llene el formulario número 1 de <strong>Información General</strong> en el <strong>panel principal</strong> de <strong>Crear/Continuar Solicitud</strong> para continuar actualizando los docentes.</p>
 			<button class="btn btn-danger btn-sm volver_al_panel" id="informe_volver"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 		</div>
     <?php } else{ ?>
@@ -90,7 +90,7 @@
 		</tr>
 	</thead>
 	<tbody id="tbody">
-	<?php 
+	<?php
 	foreach ($docentes as $docente) {
 		echo "<tr><td>$docente->primerNombreDocente</td>";
 		echo "<td>$docente->segundoNombreDocente</td>";
@@ -241,8 +241,8 @@
     </div>
     <div class="modal-footer">
     	<button type="button" class="btn btn-warning btn-sm pull-left" data-toggle='modal' data-target='#eliminarDocente'>Eliminar facilitador <i class="fa fa-trash-o" aria-hidden="true"></i></button>
-    	<button type="button" class="btn btn-success btn-sm" id="actualizar_docente" value="Si">Enviar Actualizacion Como Solicitud <i class="fa fa-refresh" aria-hidden="true"></i></button>
-    	<button type="button" class="btn btn-siia btn-sm" id="actualizar_docente" value="No">Solo Actualizar datos del facilitador <i class="fa fa-refresh" aria-hidden="true"></i></button>
+    	<button type="button" class="btn btn-success btn-sm actualizar_docente" value="Si">Enviar actualización como solicitud <i class="fa fa-refresh" aria-hidden="true"></i></button>
+    	<button type="button" class="btn btn-siia btn-sm actualizar_docente" value="No">Solo actualizar datos del facilitador <i class="fa fa-refresh" aria-hidden="true"></i></button>
     	<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cerrar <i class="fa fa-times" aria-hidden="true"></i></button>
     </div>
   </div>
@@ -263,3 +263,5 @@
     </div>
   </div>
 </div>
+
+ </div>
