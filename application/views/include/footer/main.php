@@ -371,6 +371,7 @@
 	<script src="<?php echo base_url('assets/js/functions/login.js?v=1.0.7.61342') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/super.js?v=1.0.0.1') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/perfil.js?v=1.0.1.61342') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/solicitudes.js?v=1.0') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/docentes.js?v=1.61342') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/contacto.js?v=1.0.8.61') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/estadisticas.js?v=1.0.8.62') . time() ?>" type="text/javascript"></script>

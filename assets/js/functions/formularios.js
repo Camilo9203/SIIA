@@ -91,10 +91,6 @@ $("#sidebar-menu>.menu_section>a").click(function () {
 			}*/
 	verificarFormularios();
 });
-/** Aceptar crear solicitud */
-$("#noAceptoCrear").click(function () {
-	$("#ayudaCrearSolicitud").modal("hide");
-});
 /** Guardar formulario tipo de solicitud */
 $("#guardar_formulario_tipoSolicitud").click(function () {
 	if ($("#formulario_crear_solicitud").valid()) {
@@ -164,30 +160,54 @@ $("#guardar_formulario_tipoSolicitud").click(function () {
 		});
 		// Comprobar que si se seleccione algún motivo y/o modalidad
 		if (seleccionMotivo == '') {
-			notificacion("Seleccione al menos un motivo");
+			Toast.fire({
+				icon: 'error',
+				title: 'Seleccione al menos un motivo.'
+			})
 		}
 		else if (seleccionModalidad == 0){
-			notificacion("Seleccione al menos una modalidad");
+			Toast.fire({
+				icon: 'error',
+				title: 'Seleccione al menos una modalidad.'
+			})
 		}
 		else {
 			//Si la data es validada se envía al controlador para guardar con ajax
 			$(this).attr("disabled", true);
 			$.ajax({
-				url: baseURL + "panel/guardar_tipoSolicitud",
+				url: baseURL + "solicitudes/guardar_tipoSolicitud",
 				type: "post",
 				dataType: "JSON",
 				data: data,
 				beforeSend: function () {
-					notificacion("Espere...", "success");
+					Toast.fire({
+						icon: 'info',
+						title: 'Espere....'
+					})
 				},
 				success: function (response) {
-					notificacion(response.msg, "success");
-					setInterval(function () {
-						redirect(baseURL + "panel/solicitud/" + response.est);
-					}, 2000);
+					Swal.fire({
+						title: 'Solicitud Creada!',
+						text: response.msg,
+						icon: 'success',
+						showDenyButton: true,
+						confirmButtonText: 'Ir a solicitud',
+						denyButtonText: 'No ir'
+					}).then((result) => {
+						if (result.isConfirmed) {
+							setInterval(function () {
+								redirect(baseURL + "panel/solicitud/" + response.est);
+							}, 2000);
+						}
+						else {
+							setInterval(function () {
+								reload();
+							}, 2000);
+						}
+					});
 				},
 				error: function (ev) {
-					//Do nothing
+					console.log(ev);
 				},
 			});
 		}
