@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Super extends CI_Controller {
-	
+
 	/**
 	 * Index Page for this controller.
 	 *
@@ -15,7 +15,7 @@ class Super extends CI_Controller {
 	 * config/routes.php, it's displayed at http://example.com/
 	 *
 	 * So any other public methods not prefixed with an underscore will
-	 * map to /register.php/welcome/<method_name>
+	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 	function __construct(){
@@ -24,71 +24,70 @@ class Super extends CI_Controller {
 
 	public function index()
 	{
-		$data = array(
-			'title' => 'SUP',
-			'tipo_usuario' => "none",
-			'logged_in' => FALSE
-		);
-		$this->load->view('include/header_new', $data);
-		$this->load->view('super/index');
-		$this->load->view('include/footer_new');
+		$data['title'] = 'SUP';
+		$data['tipo_usuario'] = "none";
+		$data['logged_in'] = FALSE;
+
+		$this->load->view('include/header/main', $data);
+		$this->load->view('super/panel');
+		$this->load->view('include/footer/main');
 		$this->logs_sia->logs('PLACE_USER');
 	}
 
-	public function verify($clave){
+	public function verify(){
 		$ps = $this->input->post('sp');
-		if($clave == SUPER_PS){
+		if($ps == SUPER_PS){
 			$data_update = array(
-						'valor' => 'TRUE'
+				'valor' => 'TRUE'
 			);
+
 			$this->db->where('nombre', 'super');
 			if($this->db->update('opciones', $data_update)){
 				$usuario_ip = $_SERVER['REMOTE_ADDR'];
 				echo json_encode(array("url"=>"panel", "msg" => "SUPER!"));
 				$datos_sesion = array(
 					'usuario_id'     => "1-666-1", // Number of the beast #-#
-		        	'nombre_usuario'  => "super",
-		        	'type_user' => 'super',
-		        	'logged_in' => 1,
-		        	'usuario_ip' => $usuario_ip,
-		        	'usuario_ip_proxy' => $usuario_ip,
-		        	'user_agent' => $_SERVER['HTTP_USER_AGENT']
-		        );
-			$this->session->set_userdata($datos_sesion);
+					'nombre_usuario'  => "super",
+					'type_user' => 'super',
+					'logged_in' => 1,
+					'usuario_ip' => $usuario_ip,
+					'usuario_ip_proxy' => $usuario_ip,
+					'user_agent' => $_SERVER['HTTP_USER_AGENT']
+				);
+				$this->session->set_userdata($datos_sesion);
 			}
 		}else if($ps == ""){
 			// Se sabe si esta ingresando el /?
 			$data_update = array(
-						'valor' => 'FALSE'
+				'valor' => 'FALSE'
 			);
 
 			$this->db->where('nombre', 'super');
 			if($this->db->update('opciones', $data_update)){}
 		}else{
 			$data_update = array(
-						'valor' => 'FALSE'
+				'valor' => 'FALSE'
 			);
 
 			$this->db->where('nombre', 'super');
 			if($this->db->update('opciones', $data_update)){
-				echo json_encode(array("url" => "sia"));
+				echo json_encode(array("url" => "siia"));
 			}
 		}
 	}
 
 	public function panel(){
-		$clave = "C82LQnyMg1QWUr2bTct0";
-		$this->verify($clave);
-		//verify_session_admin();
-		$is = $this->db->select("valor")->from("opciones")->where("nombre","super")->get()->row()->valor;
-		if($is == "TRUE"){
+		verify_session_admin();
+		$super = $this->db->select("valor")->from("opciones")->where("nombre","super")->get()->row()->valor;
+		if($super == "TRUE"){
 			$data['title'] = 'SUPER';
 			$data['tipo_usuario'] = $this->session->userdata('type_user');
 			$data['logged_in'] = $this->session->userdata('logged_in');
 			$data['administradores'] = $this->cargarAdministradores();
-			$this->load->view('include/header_new', $data);
+			$data['activeLink'] = 'administradores';
+			$this->load->view('include/header/main', $data);
 			$this->load->view('super/panel', $data);
-			$this->load->view('include/footer_new');
+			$this->load->view('include/footer/main');
 			$this->logs_sia->logs('PLACE_USER');
 		}else{
 		}
@@ -109,7 +108,7 @@ class Super extends CI_Controller {
 
 		$last_id = $this->db->select("id_administrador")->from("administradores")->order_by("id_administrador", "desc")->get()->row()->id_administrador;
 		$adm_exist_data = $this->db->select("usuario")->from("administradores")->where("usuario", $super_nombre_admin)->get()->row();
-		
+
 		if($adm_exist_data == ""){
 			$data_admin = array(
 				'primerNombreAdministrador' => $super_primernombre_admin,
@@ -129,7 +128,7 @@ class Super extends CI_Controller {
 				echo json_encode(array("msg" => "Administador no Agregado"));
 			}
 		}else{
-				echo json_encode(array("msg" => "El nombre de usuario ya esta en uso."));
+			echo json_encode(array("msg" => "El nombre de usuario ya esta en uso."));
 		}
 	}
 

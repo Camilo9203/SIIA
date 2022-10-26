@@ -378,7 +378,10 @@ $(".archivos_form_certificadoEconomiaDocente").on("click", function () {
 			cargarArchivosDocente($id_docente);
 		},
 		error: function (ev) {
-			notificacion("Verifique los datos del formulario.", "success");
+			Toast.fire({
+				icon: 'warning',
+				title: 'Verifique los datos del formulario.'
+			});
 		},
 	});
 });

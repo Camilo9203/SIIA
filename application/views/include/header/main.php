@@ -60,15 +60,15 @@
 	<!-- Navbar Usuario no registrado //TODO: Navbar de usuario no registrado -->
 	<?php
 		echo "<div class='hidden' id='data_logg' data-log='$logged_in'></div>";
-		if ($logged_in && $tipo_usuario == "user") {
+		if ($logged_in && $tipo_usuario == "user"):
 			$this->load->view('usuario/parciales/_navbar', $data_organizacion);
-		}
-		elseif ($logged_in && $tipo_usuario == "admin") {
-			$this->load->view('usuario/parciales/_navbar', $data_organizacion);
-		}
-		elseif (!$logged_in && $tipo_usuario == "none") {
+		elseif ($logged_in && $tipo_usuario == "admin"):
+			//$this->load->view('admin/parciales/_navbar', $opciones);
+		elseif ($logged_in && $tipo_usuario == "super"):
+			$this->load->view('super/parciales/_navbar', $logo);
+		elseif (!$logged_in && $tipo_usuario == "none"):
 			$this->load->view('include/navbar/guest', $activeLink);
-		}
+		endif;
 		?>
 
 	<!-- partial ajustes visuales-->
@@ -246,8 +246,12 @@
 		<!-- partial sidebar -->
 		<!-- partial:../../partials/_sidebar.html -->
 		<?php
-			if ($logged_in && $tipo_usuario == "user") {
-				$this->load->view('usuario/parciales/_sidebar', $activeLink);
-			}
-			?>
+		if ($logged_in && $tipo_usuario == "user"):
+			$this->load->view('usuario/parciales/_sidebar', $activeLink);
+		elseif ($logged_in && $tipo_usuario == "admin"):
+			// $this->load->view('usuario/parciales/_sidebar', $activeLink);
+		elseif ($logged_in && $tipo_usuario == "super"):
+			$this->load->view('super/parciales/_sidebar', $activeLink);
+		endif;
+		?>
 
