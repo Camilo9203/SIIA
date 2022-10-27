@@ -1,4 +1,3 @@
-let hash_url = window.location.hash;
 /** Crear Solicitud */
 $("#nuevaSolicitud").click(function () {
 	$("#crearSolicitudes").hide();

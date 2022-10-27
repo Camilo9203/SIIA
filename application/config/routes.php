@@ -69,7 +69,7 @@ $route['panel'] = 'Panel';
 
 //TODAS las rutas para el registro
 $route['registro'] = 'Registro';
-//Recordar para cron por si existe algun error
+//Recordar para cron por si existe algún error
 $route['tiempo'] = 'Recordar/calculo_tiempo';
 $route['tiempoAdmin'] = 'Recordar/recordarToAdmin';
 $route['tiempoUser'] = 'Recordar/recordarToUser';
@@ -133,7 +133,6 @@ $route['actualizacion'] = 'Update/update_info_user';
 //Recodar Contrasena
 $route['recordar'] = 'Recordar';
 //Panel usuario
-//$route['panel/contacto'] = 'Contacto';
 $route['panel/contacto'] = 'Contacto';
 $route['panel/contacto/ayuda'] = 'Contacto/ayuda';
 $route['panel/solicitudes'] = 'Solicitudes';
@@ -144,12 +143,10 @@ $route['panel/estadoSolicitud'] = 'Panel/estadoSolicitud';
 $route['panel/informeActividades'] = 'Panel/informeActividades';
 $route['panel/facilitadores'] = 'Docentes';
 $route['panel/planMejora'] = 'Panel/planMejora';
-$route['panel/formularios'] = 'Panel/formularios';
-//$route['panel/facilitadores'] = 'Panel/facilitadores';
 $route['panel/estadisticas'] = 'Panel/estadisticas';
 //Perfil Usuario
 $route['panel/perfil'] = 'Perfil';
-//Mapa Gestion
+//Mapa Gestión
 $route['mapa'] = 'home/mapa';
 // 404 ...
 $route['404_override'] = '';

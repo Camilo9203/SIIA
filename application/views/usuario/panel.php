@@ -51,7 +51,7 @@
 						<div class="card card-tale">
 							<div class="card-body">
 								<p class="mb-4">Total de facilitadores</p>
-								<p class="fs-30 mb-2">6</p>
+								<p class="fs-30 mb-2"><?php echo count($docentes)?></p>
 								<p>10.00% (30 días)</p>
 							</div>
 						</div>
@@ -60,7 +60,7 @@
 						<div class="card card-dark-blue">
 							<div class="card-body">
 								<p class="mb-4">Total Solicitudes</p>
-								<p class="fs-30 mb-2">100</p>
+								<p class="fs-30 mb-2"><?php echo count($solicitudes)?></p>
 								<p>22.00% (30 días)</p>
 							</div>
 						</div>

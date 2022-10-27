@@ -13,4 +13,11 @@ class DocentesModel extends CI_Model
 		// echo json_encode($docentes);
 		return $docentes;
 	}
+	/** Cargar Información Docentes */
+	public function cargarDocentes()
+	{
+		$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $this->session->userdata('usuario_id'))->get()->row();
+		$docentes = $this->db->select("*")->from("docentes")->where("organizaciones_id_organizacion", $organizacion->id_organizacion)->get()->result();
+		return $docentes;
+	}
 }

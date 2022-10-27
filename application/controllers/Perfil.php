@@ -66,7 +66,7 @@ class Perfil extends CI_Controller {
 		$data_registro["camara"] = $this->cargarCamaraComercio();
 
 		$this->load->view('include/header/main', $data);
-		$this->load->view('paneles/perfil', $data_registro);
+		$this->load->view('usuario/paginas/perfil', $data_registro);
 		//$this->load->view('paneles/actividad', $dataActividad);
 		$this->load->view('include/footer/main');
 		$this->logs_sia->logs('PLACE_USER');

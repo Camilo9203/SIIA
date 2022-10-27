@@ -82,9 +82,9 @@ class Contacto extends CI_Controller
 		$data['nombre_usuario'] = $datos_usuario->usuario;
 		$data['administradores'] = $this->verAdministradores();
 
-		$this->load->view('include/header', $data);
+		$this->load->view('include/header/main', $data);
 		$this->load->view('contacto/ayuda');
-		$this->load->view('include/footer');
+		$this->load->view('include/footer/main');
 		$this->logs_sia->logs('PLACE_USER');
 	}
 

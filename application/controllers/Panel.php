@@ -8,45 +8,37 @@ class Panel extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->helper(array('download', 'file', 'url', 'html', 'form'));
-		verify_session();
+		$this->load->model('DocentesModel');
+		$this->load->model('SolicitudesModel');
+		$this->load->model('OrganizacionesModel');
 	}
-
+	/** Datos Iniciales */
+	public function datosSession()
+	{
+		verify_session();
+		date_default_timezone_set("America/Bogota");
+		$data = array(
+			'logged_in' => $this->session->userdata('logged_in'),
+			'nombre_usuario' => $this->session->userdata('nombre_usuario'),
+			'usuario_id' => $this->session->userdata('usuario_id'),
+			'tipo_usuario' => $this->session->userdata('type_user'),
+			'nivel' => $this->session->userdata('nivel'),
+			'hora' => date("H:i", time()),
+			'fecha' => date('Y/m/d'),
+			'data_organizacion' => $this->OrganizacionesModel->getOrganizacion(),
+			'solicitudes' => $this->SolicitudesModel->cargarSolicitudes(),
+			'docentes' => $this->DocentesModel->cargarDocentes()
+		);
+		return $data;
+	}
 	/**
-		Funcion Index para cargar las vistas necesarias.
+		Función Index para cargar las vistas necesarias.
 	 **/
 	public function index()
 	{
-		date_default_timezone_set("America/Bogota");
-		$logged = $this->session->userdata('logged_in');
-		$nombre_usuario = $this->session->userdata('nombre_usuario');
-		$usuario_id = $this->session->userdata('usuario_id');
-		$tipo_usuario = $this->session->userdata('type_user');
-
+		$data = $this->datosSession();
 		$data['title'] = 'Panel Principal';
-		$data['logged_in'] = $logged;
 		$data['activeLink'] = 'panel';
-		$datos_usuario = $this->db->select('usuario')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
-		$data['nombre_usuario'] = $datos_usuario->usuario;
-		$data['usuario_id'] = $usuario_id;
-		$data['tipo_usuario'] = $tipo_usuario;
-		$data['hora'] = $hora;
-		$data['fecha'] = $fecha;
-//		$data['estado'] = $this->estadoOrganizaciones();
-//		$data['departamentos'] = $this->cargarDepartamentos();
-//
-		$data['data_organizacion'] = $this->cargarDatosOrganizacion();
-//		$data['data_informacion_general'] = $this->cargarDatos_formulario_informacion_general_entidad();
-//		$data['data_documentacion_legal'] = $this->cargarDatos_formulario_documentacion_legal();
-//		$data['data_registro_educativo'] = $this->cargarDatos_formulario_registro_educativo();
-//		$data['data_antecedentes_academicos'] = $this->cargarDatos_formulario_antecedentes_academicos();
-//		$data['data_jornadas_actualizacion'] = $this->cargarDatos_formulario_jornadas_actualizacion();
-//		$data['data_basicos_programas'] = $this->cargarDatos_formulario_basicos_programas();
-//		$data['data_aval_economia'] = $this->cargarDatos_formulario_aval_economia();
-//		$data['data_programas_avalar'] = $this->cargarDatos_formulario_programas_avalar();
-//		$data['data_plataforma'] = $this->cargarDatos_formulario_datos_plataforma();
-//		$data["camara"] = $this->cargarCamaraComercio();
-//		$data['informacionModal'] = $this->cargar_informacionModal();
-
 		$this->load->view('include/header/main', $data);
 		$this->load->view('usuario/panel', $data);
 		$this->load->view('include/footer/main', $data);
@@ -90,47 +82,6 @@ class Panel extends CI_Controller
 
 		$this->load->view('include/header/main', $data);
 		$this->load->view('usuario/paginas/formularios', $data);
-		$this->load->view('include/footer/main', $data);
-		$this->logs_sia->logs('PLACE_USER');
-	}
-
-	public function facilitadores()
-	{
-		date_default_timezone_set("America/Bogota");
-		$logged = $this->session->userdata('logged_in');
-		$nombre_usuario = $this->session->userdata('nombre_usuario');
-		$usuario_id = $this->session->userdata('usuario_id');
-		$tipo_usuario = $this->session->userdata('type_user');
-		$hora = date("H:i", time());
-		$fecha = date('Y/m/d');
-
-		$data['title'] = 'Panel Principal';
-		$data['logged_in'] = $logged;
-		$data['activeLink'] = 'facilitadores';
-		$datos_usuario = $this->db->select('usuario')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
-		$data['nombre_usuario'] = $datos_usuario->usuario;
-		$data['usuario_id'] = $usuario_id;
-		$data['tipo_usuario'] = $tipo_usuario;
-		$data['hora'] = $hora;
-		$data['fecha'] = $fecha;
-//		$data['estado'] = $this->estadoOrganizaciones();
-//		$data['departamentos'] = $this->cargarDepartamentos();
-//
-		$data['data_organizacion'] = $this->cargarDatosOrganizacion();
-//		$data['data_informacion_general'] = $this->cargarDatos_formulario_informacion_general_entidad();
-//		$data['data_documentacion_legal'] = $this->cargarDatos_formulario_documentacion_legal();
-//		$data['data_registro_educativo'] = $this->cargarDatos_formulario_registro_educativo();
-//		$data['data_antecedentes_academicos'] = $this->cargarDatos_formulario_antecedentes_academicos();
-//		$data['data_jornadas_actualizacion'] = $this->cargarDatos_formulario_jornadas_actualizacion();
-//		$data['data_basicos_programas'] = $this->cargarDatos_formulario_basicos_programas();
-//		$data['data_aval_economia'] = $this->cargarDatos_formulario_aval_economia();
-//		$data['data_programas_avalar'] = $this->cargarDatos_formulario_programas_avalar();
-//		$data['data_plataforma'] = $this->cargarDatos_formulario_datos_plataforma();
-//		$data["camara"] = $this->cargarCamaraComercio();
-//		$data['informacionModal'] = $this->cargar_informacionModal();
-
-		$this->load->view('include/header/main', $data);
-		$this->load->view('usuario/paginas/facilitadores', $data);
 		$this->load->view('include/footer/main', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
@@ -233,33 +184,6 @@ class Panel extends CI_Controller
 
 		$this->load->view('include/header', $data);
 		$this->load->view('paneles/informe', $data);
-		$this->load->view('include/footer', $data);
-		$this->logs_sia->logs('PLACE_USER');
-	}
-
-	public function docentes()
-	{
-		date_default_timezone_set("America/Bogota");
-		$logged = $this->session->userdata('logged_in');
-		$nombre_usuario = $this->session->userdata('nombre_usuario');
-		$usuario_id = $this->session->userdata('usuario_id');
-		$tipo_usuario = $this->session->userdata('type_user');
-		$hora = date("H:i", time());
-		$fecha = date('Y/m/d');
-
-		$data['title'] = 'Panel Principal - Facilitadores';
-		$data['logged_in'] = $logged;
-		$datos_usuario = $this->db->select('usuario')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
-		$data['nombre_usuario'] = $datos_usuario->usuario;
-		$data['usuario_id'] = $usuario_id;
-		$data['tipo_usuario'] = $tipo_usuario;
-		$data['hora'] = $hora;
-		$data['fecha'] = $fecha;
-		$data['dataInformacionGeneral'] = $this->cargarDatos_formulario_informacion_general_entidad();
-		$data['docentes'] = $this->cargar_docentes();
-
-		$this->load->view('include/header', $data);
-		$this->load->view('paneles/docentes', $data);
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
@@ -677,16 +601,6 @@ class Panel extends CI_Controller
 	{
 		$data_archivos = $this->db->select("*")->from("archivosDocente")->where('docentes_id_docente', $id)->get()->result();
 		return $data_archivos;
-	}
-
-	public function cargar_docentes()
-	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-
-		$docentes = $this->db->select("*")->from("docentes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
-		return $docentes;
 	}
 
 	public function cargarEstadoSolicitudAdmin($idSolicitud)
@@ -1935,7 +1849,6 @@ class Panel extends CI_Controller
 			echo json_encode(array('url' => "", 'msg' => "Se elimino el archivo."));
 		}
 	}
-
 
 	public function guardarArchivoCarta()
 	{
