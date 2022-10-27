@@ -2833,24 +2833,7 @@ class Panel extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-	// Eliminar Solicitud
-	public function eliminarSolicitud()
-	{
-		$this->db->where('idSolicitud', $this->input->post('idSolicitud'));
-		$tables = array(
-			'estadoOrganizaciones',
-			'solicitudes',
-			'tipoSolicitud',
-			'documentacion',
-			'certificadoexistencia',
-			'registroeducativoprogramas',
-			'jornadasactualizacion',
-			'datosprogramas',
-			'datosenlinea',
-			'datosaplicacion');
-		$this->db->delete($tables);
-		echo json_encode(array('url' => "panel", 'msg' => "Se elimino el solicitud."));
-	}
+
 }
 
 function var_dump_pre($mixed = null) {

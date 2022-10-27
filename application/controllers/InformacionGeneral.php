@@ -1,16 +1,13 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Solicitudes extends CI_Controller
+class InformacionGeneral extends CI_Controller
 {
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('DocentesModel');
-		$this->load->model('AdminModel');
 		$this->load->model('InformacionGeneralModel');
-		$this->load->model('SolicitudesModel');
-		$this->load->model('OrganizacionesModel');
+		$this->load->model('AdminModel');
 	}
 	/** Datos Iniciales */
 	public function datosSession()
@@ -26,9 +23,9 @@ class Solicitudes extends CI_Controller
 			'hora' => date("H:i", time()),
 			'fecha' => date('Y/m/d'),
 			'administradores' => $this->AdminModel->cargarAdministradores(),
-			'data_organizacion' => $this->OrganizacionesModel->getOrganizacion(),
-			'solicitudes' => $this->SolicitudesModel->cargarSolicitudes(),
-			'dataInformacionGeneral' => $this->InformacionGeneralModel->cargarDatosInformacionGeneral(),
+			'data_organizacion' => $this->db->select('*')->from('organizaciones')->where('usuarios_id_usuario', $this->session->userdata('usuario_id'))->get()->row(),
+			'solicitudes' => $this->cargar_solicitudes(),
+			'dataInformacionGeneral' => $this->cargarDatos_informacion_general(),
 		);
 		return $data;
 	}
@@ -44,104 +41,7 @@ class Solicitudes extends CI_Controller
 		$this->logs_sia->logs('PLACE_USER');
 	}
 
-	public function cargarDatosSolicitud(){
-		$solicitud = $this->SolicitudesModel->solicitudes($this->input->post('idSolicitud'));
-		echo json_encode(array('solicitud' => $solicitud));
-	}
 
-	/** Manejo de  datos **/
-	// Tipo solicitud
-	public function guardarTipoSolicitud()
-	{
-		if ($this->input->post()) {
-			$organizacion = $this->OrganizacionesModel->getOrganizacion();
-			$nombre_org =  $organizacion->nombreOrganizacion;
-			$idSolicitud = date('YmdHis') . $nombre_org[3] . random(2);
-			$estado = $this->OrganizacionesModel->getOrganizacion()->estado;
-			$solicitudes = $this->SolicitudesModel->cargarSolicitudes();
-			$numeroSolicitudes = count($solicitudes);
-			if($numeroSolicitudes > 0) {
-				if($estado == "Acreditado") {
-					$tipoSolicitud = "Renovación de Acreditación";
-				}
-				else {
-					$tipoSolicitud = 'Solicitud Nueva';
-				}
-			}
-			else {
-				$tipoSolicitud = 'Acreditación Primera vez';
-			}
-			$data_solicitud = array(
-				'numeroSolicitudes' => $numeroSolicitudes += 1,
-				'fecha' =>  date('Y/m/d H:i:s'),
-				'idSolicitud' => $idSolicitud,
-				'organizaciones_id_organizacion' => $organizacion->id_organizacion,
-			);
-			$data_tipoSolicitud = array(
-				'tipoSolicitud' =>$tipoSolicitud,
-				'motivoSolicitud' => $this->input->post('motivo_solicitud'),
-				'modalidadSolicitud' => $this->input->post('modalidad_solicitud'),
-				'idSolicitud' => $idSolicitud,
-				'organizaciones_id_organizacion' => $organizacion->id_organizacion,
-				'motivosSolicitud' => json_encode($this->input->post('motivos_solicitud')),
-				'modalidadesSolicitud' => json_encode($this->input->post('modalidades_solicitud'))
-			);
-			$data_estado = array(
-				'nombre' => "En Proceso",
-				'fecha' => date('Y/m/d H:i:s'),
-				'estadoAnterior' => $estado,
-				'tipoSolicitudAcreditado' => $tipoSolicitud,
-				'motivoSolicitudAcreditado' => $this->input->post('motivo_solicitud'),
-				'modalidadSolicitudAcreditado' => $this->input->post('modalidad_solicitud'),
-				'idSolicitudAcreditado' => $idSolicitud,
-				'organizaciones_id_organizacion' => $organizacion->id_organizacion,
-				'idSolicitud' => $idSolicitud,
-
-			);
-			if($this->db->insert('solicitudes', $data_solicitud)) {
-				if($this->db->insert('tipoSolicitud', $data_tipoSolicitud)) {
-					if($this->db->insert('estadoOrganizaciones', $data_estado)) {
-						echo json_encode(array('url' => "panel", 'msg' => "Se creo nueva solicitud.", "est" => $data_tipoSolicitud['idSolicitud']));
-						$this->envio_mailcontacto("inicia", 2);
-						$this->logs_sia->session_log('Formulario Motivo Solicitud - Tipo Solicitud: ' . '. Motivo Solicitud: ' . $this->input->post('motivo_solicitud') . '. Modalidad Solicitud: ' . $this->input->post('modalidad_solicitud') . '. ID: ' . $data_tipoSolicitud['idSolicitud'] . '. Fecha: ' . date('Y/m/d') . '.');
-						$this->logs_sia->logQueries();
-					}
-					else {
-						echo json_encode(array('url' => "panel/solicitudes", 'msg' => "Lo sentimos, no se guardo en base de datos el estado de la solicitud."));
-					}
-				}
-				else {
-					echo json_encode(array('url' => "panel/solicitudes", 'msg' => "Lo sentimos, no se guardo en base de datos el tipo de la solicitud."));
-				}
-			}
-			else {
-				echo json_encode(array('url' => "panel/solicitudes", 'msg' => "Lo sentimos, no se guardo en base de datos la solicitud."));
-			}
-		}
-		else {
-			echo json_encode(array('url' => "panel/solicitudes", 'msg' => "No se ingresan datos"));
-
-		}
-	}
-
-	// Eliminar Solicitud
-	public function eliminarSolicitud()
-	{
-		$this->db->where('idSolicitud', $this->input->post('idSolicitud'));
-		$tables = array(
-			'estadoOrganizaciones',
-			'solicitudes',
-			'tipoSolicitud',
-			'documentacion',
-			'certificadoexistencia',
-			'registroeducativoprogramas',
-			'jornadasactualizacion',
-			'datosprogramas',
-			'datosenlinea',
-			'datosaplicacion');
-		$this->db->delete($tables);
-		echo json_encode(array('url' => "panel", 'msg' => "Se elimino solicitud: " + $this->input->post('idSolicitud')));
-	}
 	/**  TODO: Enviar Correos a contacto de la solicitud */
 	function envio_mailcontacto($tipo, $prioridad)
 	{
@@ -245,11 +145,4 @@ class Solicitudes extends CI_Controller
 			echo json_encode(array('url' => "login", 'msg' => "Lo sentimos, hubo un error y no se envío el correo."));
 		}
 	}
-}
-// Pruebas
-function var_dump_pre($mixed = null) {
-	echo '<pre>';
-	var_dump($mixed);
-	echo '</pre>';
-	return null;
 }

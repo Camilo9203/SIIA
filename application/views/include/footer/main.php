@@ -298,6 +298,7 @@
 <!-- container-scroller -->
 
 <div class="hidden" id="scripts-sia">
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<!-- plugins:js -->
 	<script src="<?php echo base_url('assets/js/dashboard/vendors/js/vendor.bundle.base.js') ?>"></script>
 	<!-- endinject -->
@@ -336,7 +337,7 @@
 <!--	<link href="--><?php //echo base_url('assets/css/vis.min.css') ?><!--" rel="stylesheet" type="text/css" />-->
 	<!-- Scripts -->
 <!--	<script src="--><?php //echo base_url('assets/js/modernizr.js') ?><!--"></script>-->
-	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
 	<script src="<?php echo base_url('assets/js/notifIt.js') ?>" type="text/javascript"></script>
 <!--	<script src="--><?php //echo base_url('assets/js/bootstrap.min.js') ?><!--" type="text/javascript"></script>-->
 	<script src="<?php echo base_url('assets/js/jquery.validate.js') ?>" type="text/javascript"></script>

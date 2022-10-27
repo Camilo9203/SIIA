@@ -56,8 +56,8 @@
 											echo "<td>" . $solicitud->nombre . "</td>";
 											if ($solicitud->nombre == "En Proceso") {
 												echo "<td><div class='btn-group-vertical' role='group' aria-label='acciones'><button type='button' class='btn btn-primary btn-sm verSolicitud' data-id=" . $solicitud->idSolicitud . " title='Continuar Solicitud'>Continuar <i class='fa fa-check' aria-hidden='true'></i></button>";
-												echo "<button type='button' class='btn btn-danger btn-sm' data-toggle='modal' data-target='#modalEliminarSolicitud' data-backdrop='static' data-keyboard='false' title='Eliminar Solicitud'>Eliminar <i class='fa fa-trash' aria-hidden='true'></i></button>";
-												echo "<button id='verDetalle' class='btn btn-info btn-sm' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false' data-id=" . $solicitud->idSolicitud . " title='Ver Detalle'>Detalle <i class='fa fa-info' aria-hidden='true'></i></button></div></td></tr>";
+												echo "<button type='button' class='btn btn-danger btn-sm eliminarSolicitudModal' data-id='" . $solicitud->idSolicitud . "' data-toggle='modal' data-target='#modalEliminarSolicitud' data-backdrop='static' data-keyboard='false' title='Eliminar Solicitud'>Eliminar <i class='fa fa-trash' aria-hidden='true'></i></button>";
+												echo "<button class='btn btn-info btn-sm verDetalleSolicitud' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false' data-id=" . $solicitud->idSolicitud . " title='Ver Detalle'>Detalle <i class='fa fa-info' aria-hidden='true'></i></button></div></td></tr>";
 
 											}
 											if ($solicitud->nombre == "Acreditado" || $solicitud->nombre == "Archivada" || $solicitud->nombre == "Negada" || $solicitud->nombre == "Revocada" ){
@@ -91,25 +91,35 @@
 								<label for="motivo_solicitud">Motivo de la solicitud:<code>*</code></label><br>
 								<!-- CheckBox motivos de la solicitud -->
 								<div class="form-group">
-									<div class="form-check radio">
-										<input class="form-check-input" type="checkbox" value="1" id="cursoBasico" name="motivos" checked>
-										<label class="form-check-label" for="cursoBasico">Acreditación Curso Básico de Economía Solidaria</label>
+									<div class="form-check form-check-flat form-check-primary">
+										<label class="form-check-label" for="cursoBasico">
+											<input class="form-check-input" type="checkbox" value="1" id="cursoBasico" name="motivos" checked>
+											Acreditación Curso Básico de Economía Solidaria
+										</label>
 									</div>
-									<div class="form-check radio">
-										<input class="form-check-input" type="checkbox" value="2" id="avalTrabajo" name="motivos">
-										<label class="form-check-label" for="avalTrabajo">Aval de Trabajo Asociado</label>
+									<div class="form-check form-check-flat form-check-primary">
+										<label class="form-check-label" for="avalTrabajo">
+											<input class="form-check-input" type="checkbox" value="2" id="avalTrabajo" name="motivos">
+											Aval de Trabajo Asociado
+										</label>
 									</div>
-									<div class="form-check radio">
-										<input class="form-check-input" type="checkbox" value="3" id="cursoMedio" name="motivos">
-										<label class="form-check-label" for="cursoMedio">Acreditación Curso Medio de Economía Solidaria</label>
+									<div class="form-check form-check-flat form-check-primary">
+										<label class="form-check-label" for="cursoMedio">
+											<input class="form-check-input" type="checkbox" value="3" id="cursoMedio" name="motivos">
+											Acreditación Curso Medio de Economía Solidaria
+										</label>
 									</div>
-									<div class="form-check radio">
-										<input class="form-check-input" type="checkbox" value="4" id="cursoAvanzado" name="motivos">
-										<label class="form-check-label" for="cursoAvanzado">Acreditación Curso Avanzado de Economía Solidaria</label>
+									<div class="form-check form-check-flat form-check-primary">
+										<label class="form-check-label" for="cursoAvanzado">
+											<input class="form-check-input" type="checkbox" value="4" id="cursoAvanzado" name="motivos">
+											Acreditación Curso Avanzado de Economía Solidaria
+										</label>
 									</div>
-									<div class="form-check radio">
-										<input class="form-check-input" type="checkbox" value="5" id="finacieraEconomia" name="motivos">
-										<label class="form-check-label" for="finacieraEconomia">Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria</label>
+									<div class="form-check form-check-flat form-check-primary">
+										<label class="form-check-label" for="finacieraEconomia">
+											<input class="form-check-input" type="checkbox" value="5" id="finacieraEconomia" name="motivos">
+											Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria
+										</label>
 									</div>
 								</div>
 								<hr />
@@ -117,18 +127,24 @@
 								<label for="modalidad_solicitud">Modalidad:<code>*</code></label><br>
 								<!-- CheckBox modalidades de la solicitud -->
 								<div class="form-group">
-									<i data-toggle="modal" data-target="#ayudaModalidad" class="fa fa-question-circle pull-right" aria-hidden="true"></i>
-									<div class="form-check radio">
-										<input class="form-check-input" type="checkbox" value="1" id="presencial" value="Presencial" name="modalidades" checked>
-										<label class="form-check-label" for="presencial">Presencial</label>
+									<i data-toggle="modal" data-target="#ayudaModalidad" class="fa fa-question-circle pull-right" aria-hidden="true" data-keyboard='false'></i>
+									<div class="form-check form-check-flat form-check-primary">
+										<label class="form-check-label" for="presencial">
+											<input class="form-check-input" type="checkbox" value="1" id="presencial" value="Presencial" name="modalidades" checked>
+											Presencial
+										</label>
 									</div>
-									<div class="form-check radio">
-										<input class="form-check-input" type="checkbox" value="2" id="virtual" value="Virtual" name="modalidades">
-										<label class="form-check-label" for="virtual">Virtual</label>
+									<div class="form-check form-check-flat form-check-primary">
+										<label class="form-check-label" for="virtual">
+											<input class="form-check-input" type="checkbox" value="2" id="virtualCheck" value="Virtual" name="modalidades">
+											Virtual
+										</label>
 									</div>
-									<div class="form-check radio">
-										<input class="form-check-input" type="checkbox" value="3" id="enLinea" value="En Linea" name="modalidades">
-										<label class="form-check-label" for="enLinea">En Linea</label>
+									<div class="form-check form-check-flat form-check-primary">
+										<label class="form-check-label" for="enLinea">
+											<input class="form-check-input" type="checkbox" value="3" id="enLineaCheck" value="En Linea" name="modalidades">
+											En Linea
+										</label>
 									</div>
 								</div>
 								<hr />
@@ -162,15 +178,15 @@
 				</div>
 				<div class="modal-footer">
 					<div class="btn-group">
-						<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">No, quizá más adelante </button>
-						<button type="button" id="guardar_formulario_tipoSolicitud" class="btn btn-primary btn-sm" data-dismiss="modal">Si, estoy seguro de crear solicitud <i class="fa fa-check" aria-hidden="true"></i></button>
+						<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, quizá más adelante </button>
+						<button type="button" id="guardar_formulario_tipoSolicitud" class="btn btn-success btn-sm" data-dismiss="modal">Si, estoy seguro de crear solicitud <i class="fa fa-check" aria-hidden="true"></i></button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Modal Ayuda Modalidad Virtual  -->
-	<div class="modal fade" id="ayudaModalidadVirtual" tabindex="-1" role="dialog" aria-labelledby="ayudaModalidadVirtual">
+	<div class="modal fade" id="ayudaModalidadVirtual" data-backdrop="static" data-keyboard='false' tabindex="-1" role="dialog" aria-labelledby="ayudaModalidadVirtual">
 		<div class="modal-dialog modal-xs" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -184,14 +200,16 @@
 					<!--				<a class="pull-right" target="_blank" href="https://www.orgsolidarias.gov.co/sites/default/files/archivos/Res_110%20del%2031%20de%20marzo%20de%202016.pdf">Recurso de la resolución 110</a>-->
 				</div>
 				<div class="modal-footer">
-					<button type="button" id="noModVirt" class="btn btn-danger btn-sm pull-left">No, quizá mas adelante <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button type="button" id="siModVirt" class="btn btn-siia btn-sm pull-right" data-dismiss="modal">Si, esto seguro de presentar la modalidad virtual <i class="fa fa-check" aria-hidden="true"></i></button>
+					<div class="btn-group">
+						<button type="button" id="noModVirtCheck" class="btn btn-danger btn-sm">No, quizá más adelante</button>
+						<button type="button" id="siModVirt" class="btn btn-success btn-sm " data-dismiss="modal">Si, esto seguro de presentar la modalidad virtual</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Modal Ayuda Modalidad En Línea  -->
-	<div class="modal fade" id="ayudaModalidadEnLinea" tabindex="-1" role="dialog" aria-labelledby="ayudaModalidadEnLinea">
+	<div class="modal fade" id="ayudaModalidadEnLinea" data-backdrop="static" data-keyboard='false' tabindex="-1" role="dialog" aria-labelledby="ayudaModalidadEnLinea">
 		<div class="modal-dialog modal-xs" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -205,8 +223,10 @@
 					<!--				<a class="pull-right" target="_blank" href="https://www.orgsolidarias.gov.co/sites/default/files/archivos/Res_110%20del%2031%20de%20marzo%20de%202016.pdf">Recurso de la resolución 110</a>-->
 				</div>
 				<div class="modal-footer">
-					<button type="button" id="noModEnLinea" class="btn btn-danger btn-sm pull-left">No, quizá más adelante <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button type="button" id="siModEnLinea" class="btn btn-siia btn-sm pull-right" data-dismiss="modal">Si, esto seguro de presentar la modalidad en linea <i class="fa fa-check" aria-hidden="true"></i></button>
+					<div class="btn-group">
+						<button type="button" id="noModEnLinea" class="btn btn-danger btn-sm">No, quizá más adelante</button>
+						<button type="button" id="siModEnLinea" class="btn btn-success btn-sm" data-dismiss="modal">Si, esto seguro de presentar la modalidad en linea</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -216,55 +236,39 @@
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<div class="row">
-						<div id="header_politicas" class="col-md-12">
-							<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="http://localhost/siia/assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
-						</div>
-						<div class="clearfix"></div>
-						<hr />
-						<div class="col-md-12">
-							<h3>Detalles de la solicitud</h3>
-						</div>
-					</div>
+					<h4 class="modal-title" id="exampleModalLabel">Detalles de la solicitud</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
 				</div>
 				<div class="modal-body">
 					<div class="card">
 						<div class="card-body">
-							<div class="container-fluid">
+							<div class="container">
 								<div class="row">
-									<div class="col-lg-6" style="text-align: left;">
-										<p><label>Solicitud Número:</label> <?php echo $solicitud->idSolicitud ?></p>
-										<p><label>Estado Anterior:</label> <?php echo $solicitud->estadoAnterior ?></p>
-										<p><label>Tipo:</label> <?php echo $solicitud->tipoSolicitud ?></p>
-										<p><label>Motivo:</label> <?php echo $solicitud->motivoSolicitud ?></p>
-										<p><label>Modalidad:</label> <?php echo $solicitud->modalidadSolicitud ?></p>
-
+									<div class="col-6" style="text-align: left;" id="informacionSolicitudBasico">
 									</div>
-									<div class="col-lg-6" style="text-align: left;">
-										<p><label>Fecha de Creación:</label> <?php echo $solicitud->fecha ?></p>
-										<p><label>Fecha Ultima Revisión:</label> <?php echo $solicitud->fechaUltimaRevision ?></p>
+									<div class="col-6" style="text-align: left;" id="informacionSolicitudFechas">
 									</div>
 								</div>
 								<hr />
-								<p><label>Estado:</label> <?php echo $solicitud->nombre ?></p>
+								<div id="informacionSolicitudEstado"></div>
 							</div>
-
 						</div>
 					</div>
-
-					<hr />
-					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cerrar. <i class="fa fa-times" aria-hidden="true"></i></button>
-					<!--							<button type="button" class="btn btn-siia btn-sm pull-right" id="">Sí, acepto. <i class="fa fa-check"></i></button>-->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- Modal eliminar solicitud  -->
+	<!-- Modal Eliminar Solicitud  -->
 	<div class="modal fade" id="modalEliminarSolicitud" tabindex="-1" role="dialog" aria-labelledby="modalEliminarSolicitud">
 		<div class="modal-dialog modal-xs" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title">¿Está seguro de eliminar la solicitud: <?php echo $solicitud->idSolicitud ?>?</h4>
+					<h5 class="modal-title" id="solicitudAEliminar"></h5>
 					<button type="button" class="close" data-dismiss="modal"  aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
@@ -275,7 +279,7 @@
 				<div class="modal-footer">
 					<div class="btn-group">
 						<button type="button" data-dismiss="modal" class="btn btn-danger btn-sm ">No, eliminar <i class="fa fa-times" aria-hidden="true"></i></button>
-						<button type="button" id="eliminarSolicitud" class="btn btn-success btn-sm pull-right eliminarSolicitud" data-dismiss="modal"  data-id="<?php echo $solicitud->idSolicitud ?>">Si, eliminar solicitud<i class="fa fa-check" aria-hidden="true"></i></button>
+						<button type="button" id="eliminarSolicitud" class="btn btn-success btn-sm eliminarSolicitud" data-dismiss="modal">Si, eliminar solicitud<i class="fa fa-check" aria-hidden="true"></i></button>
 					</div>
 				</div>
 			</div>
