@@ -11,6 +11,7 @@ class Docentes extends CI_Controller
 		$this->load->model('OrganizacionesModel');
 		$this->load->model('InformacionGeneralModel');
 	}
+
 	/** Datos Iniciales */
 	public function datosSession()
 	{
@@ -32,6 +33,7 @@ class Docentes extends CI_Controller
 		);
 		return $data;
 	}
+
 	/** Vista Inicial */
 	public function index()
 	{
@@ -43,6 +45,7 @@ class Docentes extends CI_Controller
 		$this->load->view('include/footer/main', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
+
 	/** Añadir nuevo docente */
 	public function anadirNuevoDocente()
 	{
@@ -58,31 +61,24 @@ class Docentes extends CI_Controller
 			'valido' => 0,
 			'organizaciones_id_organizacion' => $organizacion->id_organizacion
 		);
-		if($this->db->insert('docentes', $data_docentes)) {
+		if ($this->db->insert('docentes', $data_docentes)) {
 			echo json_encode(array('url' => "panel", 'msg' => "Información de docente guardada exitosamente."));
 		};
 	}
-	/** Actializar docente */
+
+	/** Actualizar docente */
 	public function actualizarDocente()
 	{
-		// Traer datos organanzación, se captura usuario id y se trae organización que pertenece al id del usuario.
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		// ID organización & Nombre de la organización
-		$id_organizacion = $datos_organizacion->id_organizacion;
-		$nombreOrganizacion = $datos_organizacion->nombreOrganizacion;
-		// ID docente desde post y solicitud
-		$id_docente = $this->input->post("id_docente");
-		$solicitud = $this->input->post("solicitud");
-		// TODO: Variables nuevas para asignación de docente según su estado.
-		$informacionDocente = $this->db->select("*")->from("docentes")->where("id_docente", $id_docente)->get()->row();
+		// Traer datos organización y docente
+		$organizacion = $this->datosSession()['data_organizacion'];
+		$informacionDocente = $this->DocentesModel->cargarDocentes($this->input->post("id_docente"));
 		// Asignar "No" a valor de asignación y evitar que se reemplace el valor ya asignado
-		$asignado = $informacionDocente->asignado;
-		if ($asignado == NULL && $informacionDocente->valido == "0") {
+		$asignado = $informacionDocente['asignado'];
+		if ($asignado == null && $informacionDocente['valido'] == "0") {
 			$asignado = "No";
 		}
 		// Datos para la actualización de docentes en Array
-		$data_update = array(
+		$dataUpdate = array(
 			'primerNombreDocente' => $this->input->post("primer_nombre_doc"),
 			'segundoNombreDocente' => $this->input->post("segundo_nombre_doc"),
 			'primerApellidoDocente' => $this->input->post("primer_apellido_doc"),
@@ -95,28 +91,37 @@ class Docentes extends CI_Controller
 			'asignado' => $asignado,
 		);
 
-		$where = array('organizaciones_id_organizacion' => $id_organizacion, 'id_docente' => $id_docente);
+		$where = array('organizaciones_id_organizacion' => $organizacion->id_organizacion, 'id_docente' => $informacionDocente['id_docente']);
 		$this->db->where($where);
-		if ($this->db->update('docentes', $data_update)) {
+		if ($this->db->update('docentes', $dataUpdate)) {
 			// Solo actualización como log
 			$this->logs_sia->session_log('Docentes Actualizados');
-			// Si se marca actualizar con envio de solicitud
-			if ($solicitud == "Si") {
-				// Se enviara notificación en caso de no estar aprobado el docente, adicional correo eléctronico en caso de no estar asignado a evaluador
-				if ($informacionDocente->valido == "0") {
-					// Solo envia notificación si no esta aprobado
-					$this->notif_sia->notification('Docentes', 'admin', $nombreOrganizacion);
-					// Solo envia correo si no esta asignado
-					if ($asignado != NULL || $asignado == "No") {
-						$this->envilo_mailadmin("actualizacion", "2", $numero_cedula_doc);
+			// Si se marca actualizar con envío de solicitud
+			if ($this->input->post("solicitud") == "Si") {
+				// Se enviara notificación en caso de no estar aprobado el docente, adicional correo electrónico en caso de no estar asignado a evaluador
+				if ($informacionDocente['valido'] == null || $informacionDocente['valido'] == 0) {
+					// Solo envía notificación si no esta aprobado
+					$this->notif_sia->notification('Docentes', 'admin', $organizacion->nombreOrganizacion);
+					// Solo envía correo si no esta asignado
+					if ($asignado == null || $asignado == "No") {
+						enviar_correo_admin("solicitudDocente", "2", $informacionDocente['numCedulaCiudadaniaDocente']);
+					}
+					else {
+						echo json_encode(array("msg" => "Docente " . $dataUpdate['primerNombreDocente'] . " " . $dataUpdate['primerApellidoDocente'] . " ya asignado a: " . $informacionDocente['asignado']));
 					}
 				}
+				else {
+					echo json_encode(array("msg" => "Docente valido " . $dataUpdate['primerNombreDocente'] . " " . $dataUpdate['primerApellidoDocente'] . " Actualizado."));
+				}
+
+
+			}else {
+				echo json_encode(array("msg" => "Docente " . $dataUpdate['primerNombreDocente'] . " " . $dataUpdate['primerApellidoDocente'] . " Actualizado."));
 			}
-			else {
-				echo json_encode(array("msg" => "Docente " . $data_update['primerNombreDocente'] . " " . $data_update['primerApellidoDocente'] . " Actualizado."));
-			}
+
 		}
 	}
+
 	/** Eliminar docente */
 	public function eliminarDocente()
 	{
@@ -152,6 +157,7 @@ class Docentes extends CI_Controller
 			echo json_encode(array("msg" => "Docente eliminado de su organización."));
 		}
 	}
+
 	/** Guardar archivo HV docente */
 	public function guardarArchivoHojaVidaDocente()
 	{
@@ -176,7 +182,7 @@ class Docentes extends CI_Controller
 			$mensaje = "Se guardo la " . $append_name;
 		}
 
-		$nombre_imagen =  $append_name . "_" . $name_random . "_" . $_FILES['file']['name'];
+		$nombre_imagen = $append_name . "_" . $name_random . "_" . $_FILES['file']['name'];
 		$tipo_archivo = pathinfo($nombre_imagen, PATHINFO_EXTENSION);
 
 		$data_update = array(
@@ -203,6 +209,7 @@ class Docentes extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
+
 	/** Guardar archivo titulo docente */
 	public function guardarArchivoTituloDocente()
 	{
@@ -227,7 +234,7 @@ class Docentes extends CI_Controller
 			$mensaje = "Se guardo el " . $append_name;
 		}
 
-		$nombre_imagen =  $append_name . "_" . $name_random . "_" . $_FILES['file']['name'];
+		$nombre_imagen = $append_name . "_" . $name_random . "_" . $_FILES['file']['name'];
 		$tipo_archivo = pathinfo($nombre_imagen, PATHINFO_EXTENSION);
 
 		$data_update = array(
@@ -254,6 +261,7 @@ class Docentes extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
+
 	/** Guardar archivo certificados docente */
 	public function guardarArchivoCertificadoDocente()
 	{
@@ -278,7 +286,7 @@ class Docentes extends CI_Controller
 			$mensaje = "Se guardo la " . $append_name;
 		}
 
-		$nombre_imagen =  $append_name . "_" . $name_random . "_" . $_FILES['file']['name'];
+		$nombre_imagen = $append_name . "_" . $name_random . "_" . $_FILES['file']['name'];
 		$tipo_archivo = pathinfo($nombre_imagen, PATHINFO_EXTENSION);
 
 		$data_update = array(
@@ -305,6 +313,7 @@ class Docentes extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
+
 	/** Guardar archivo certificado ES docente */
 	public function guardarArchivoCertificadoEconomiaDocente()
 	{
@@ -327,7 +336,7 @@ class Docentes extends CI_Controller
 				$ruta = 'uploads/docentes/certificadosEconomia';
 				$mensaje = "Se guardo la " . $append_name;
 			}
-			$nombre_imagen =  $append_name . "_" . $horas . "Horas_" . $name_random . "_" . $_FILES['file']['name'];
+			$nombre_imagen = $append_name . "_" . $horas . "Horas_" . $name_random . "_" . $_FILES['file']['name'];
 			$tipo_archivo = pathinfo($nombre_imagen, PATHINFO_EXTENSION);
 			$data_update = array(
 				'tipo' => $tipoArchivo,
@@ -353,6 +362,7 @@ class Docentes extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
+
 	/** Eliminar archivo docente */
 	public function eliminarArchivoDocente()
 	{
@@ -382,6 +392,7 @@ class Docentes extends CI_Controller
 		}
 	}
 
+	/** Cargar Información docente */
 	public function cargarInformacionDocente()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -393,6 +404,7 @@ class Docentes extends CI_Controller
 		echo json_encode($informacionDocente);
 	}
 
+	/** Panel docente Admin */
 	public function panelDocentes()
 	{
 		$data = $this->datosSession();
@@ -402,7 +414,8 @@ class Docentes extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-	// TODO: Código nuevo para la asignación de solicitudes de actulización de docentes.
+
+	// Código nuevo para la asignación de solicitudes de actualización de docentes.
 	public function asignarDocentes()
 	{
 		$data = $this->datosSession();
@@ -412,7 +425,8 @@ class Docentes extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-	// TODO: Código nuevo para la asignación de solicitudes de actulización de docentes.
+
+	// Código nuevo para la asignación de solicitudes de actualización de docentes.
 	public function evaluarDocentes()
 	{
 		$data = $this->datosSession();
@@ -422,48 +436,12 @@ class Docentes extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-	/** TODO: Notificaciones Email */
-	function envilo_mailadmin($type, $prioridad, $docente)
-	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		// $id_organizacion = $organizacion->id_organizacion;
-		$docente = $this->db->select("*")->from("docentes")->where("numCedulaCiudadaniaDocente", $docente)->get()->row();
-		switch ($type) {
-			// Actualización de facilitadores
-			case 'actualizacion':
-				$asunto = "Actualización Docente";
-				$mensaje = "La organización <strong>" . $organizacion->nombreOrganizacion . "</strong>: Realizo una solicitud para actualización del facilitador <strong>" . $docente->primerNombreDocente . " " . $docente->primerApellidoDocente . "</strong>, por favor ingrese al sistema para asignar dicha solicitud, gracias. 
-					<br/><br/>
-					<label>Datos de recepción:</label> <br/>
-					Fecha de recepcion de solicitud: <strong>" . date("Y-m-d h:m:s") . "</strong>. <br/>";
-				break;
-			default:
-				$asunto = "";
-				$mensaje = "";
-				break;
-		}
-		/**
-		 * Datos para envío de Email al administrador
-		 * Prioridad
-		1 => '1 (Highest)',
-		2 => '2 (High)',
-		3 => '3 (Normal)',
-		4 => '4 (Low)',
-		5 => '5 (Lowest)'
-		 **/
-		$this->email->from(CORREO_SIA, "Acreditaciones");
-		$this->email->to(CORREO_SIA);
-		$this->email->cc(CORREO_SIA);
-		$this->email->subject('SIIA: ' . $asunto);
-		$this->email->set_priority($prioridad);
-		$data_msg['mensaje'] = $mensaje;
-		$email_view = $this->load->view('email/contacto', $data_msg, true);
-		$this->email->message($email_view);
-		if ($this->email->send()) {
-			echo json_encode(array("msg" => "Docente " . $docente->primerNombreDocente . " " . $docente->primerApellidoDocente . " Actualizado. Se ha enviado correo para asignar solicitud"));
-		} else {
-			echo json_encode(array('url' => "login", 'msg' => "Lo sentimos, hubo un error y no se envío el correo."));
-		}
-	}
+
+}
+function var_dump_pre($mixed = null)
+{
+	echo '<pre>';
+	var_dump($mixed);
+	echo '</pre>';
+	return null;
 }

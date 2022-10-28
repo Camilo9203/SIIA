@@ -142,6 +142,7 @@ class Perfil extends CI_Controller {
 		return $datos_formulario;
 	}
 
+
 	public function estadoAnteriorOrganizaciones(){
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();

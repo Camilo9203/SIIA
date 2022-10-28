@@ -14,10 +14,15 @@ class DocentesModel extends CI_Model
 		return $docentes;
 	}
 	/** Cargar Información Docentes */
-	public function cargarDocentes()
+	public function cargarDocentes($id = null)
 	{
-		$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $this->session->userdata('usuario_id'))->get()->row();
-		$docentes = $this->db->select("*")->from("docentes")->where("organizaciones_id_organizacion", $organizacion->id_organizacion)->get()->result();
-		return $docentes;
+		if ($id === null){
+			$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $this->session->userdata('usuario_id'))->get()->row();
+			$docentes = $this->db->select("*")->from("docentes")->where("organizaciones_id_organizacion", $organizacion->id_organizacion)->get()->result();
+			return $docentes;
+		}
+		// Traer docentes por id
+		$query = $this->db->get_where('docentes', array('id_docente' => $id));
+		return $query->row_array();
 	}
 }

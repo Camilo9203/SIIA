@@ -143,8 +143,8 @@ $(".actualizar_docente").click(function () {
 				reload();
 			}, 4000);
 		},
-		error: function (ev) {
-			//Do nothing
+		error: function (ev, response) {
+			console.log(ev, response);
 		},
 	});
 });
