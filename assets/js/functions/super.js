@@ -97,7 +97,6 @@ $(".super_ver_admin_modal").click(function () {
 	let data = {
 		id_adm: id_adm,
 	};
-
 	$.ajax({
 		url: baseURL + "super/cargarDatosAdministrador",
 		type: "post",
@@ -108,7 +107,7 @@ $(".super_ver_admin_modal").click(function () {
 			$("#super_status_adm").html("");
 			$("#super_status_adm").css("color", "white");
 			$("#super_status_adm").css("padding", "5px");
-			$("#super_id_admin_modal").html($id_adm);
+			$("#super_id_admin_modal").html(id_adm);
 			$("#super_primernombre_admin_modal").val(response[0].primerNombreAdministrador);
 			$("#super_segundonombre_admin_modal").val(response[0].segundoNombreAdministrador);
 			$("#super_primerapellido_admin_modal").val(response[0].primerApellidoAdministrador);
@@ -155,19 +154,40 @@ $(".super_ver_admin_modal").click(function () {
 });
 /** Eliminar administrador */
 $("#super_eliminar_admin").click(function () {
-	$lbl_adm = $("#verAdmin>label").attr("id");
-	$id_adm = $("#" + $lbl_adm).html();
-
-	data = {
-		id_adm: $id_adm,
+	let lblAdmin = $("#verAdmin>label").attr("id");
+	let idAdmin = $("#" + lblAdmin).html();
+	let data = {
+		id_adm: idAdmin,
 	};
 	$.ajax({
 		url: baseURL + "super/eliminarAdministrador",
 		type: "post",
 		dataType: "JSON",
 		data: data,
+		beforeSend: function () {
+			Toast.fire({
+				icon: 'warning',
+				title: 'Eliminado administrador'
+			});
+		},
 		success: function (response) {
-			notificacion(response.msg, "success");
+			Swal.fire({
+				title: 'Administrador eliminado!',
+				text: response.msg,
+				icon: 'success',
+				confirmButtonText: 'Aceptar',
+			}).then((result) => {
+				if (result.isConfirmed) {
+					setInterval(function () {
+						reload();
+					}, 2000);
+				}
+				else {
+					setInterval(function () {
+						reload();
+					}, 2000);
+				}
+			});
 		},
 		error: function (ev) {
 			//Do nothing
@@ -176,7 +196,6 @@ $("#super_eliminar_admin").click(function () {
 });
 /** Actualizar administrador */
 $("#super_actualizar_admin").click(function () {
-	console.log("asdsad");
 	$lbl_adm = $("#verAdmin>label").attr("id");
 	$id_adm = $("#" + $lbl_adm).html();
 	$primerNombre = $("#super_primernombre_admin_modal").val();
@@ -207,8 +226,30 @@ $("#super_actualizar_admin").click(function () {
 		type: "post",
 		dataType: "JSON",
 		data: data,
+		beforeSend: function () {
+			Toast.fire({
+				icon: 'info',
+				title: 'Actualizando administrador'
+			});
+		},
 		success: function (response) {
-			notificacion(response.msg, "success");
+			Swal.fire({
+				title: 'Administrador actualizado!',
+				text: response.msg,
+				icon: 'success',
+				confirmButtonText: 'Aceptar',
+			}).then((result) => {
+				if (result.isConfirmed) {
+					setInterval(function () {
+						reload();
+					}, 2000);
+				}
+				else {
+					setInterval(function () {
+						reload();
+					}, 2000);
+				}
+			});
 		},
 		error: function (ev) {
 			//Do nothing

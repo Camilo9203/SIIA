@@ -139,11 +139,10 @@ class Super extends CI_Controller {
 
 	public function cargarDatosAdministrador(){
 		$datos = array();
-		$id_adm = $this->input->post('id_adm');
-		$datos_adm = $this->db->select("*")->from("administradores")->where("id_administrador", $id_adm)->get()->row();
+		$administrador = $this->db->select("*")->from("administradores")->where("id_administrador", $this->input->post('id_adm'))->get()->row();
 		$contrasena_rdel = $datos_adm->contrasena_rdel;
 		$password = mc_decrypt($contrasena_rdel, KEY_RDEL);
-		array_push($datos, $datos_adm);
+		array_push($datos, $administrador);
 		array_push($datos, $password);
 		echo json_encode($datos);
 	}
@@ -164,40 +163,31 @@ class Super extends CI_Controller {
 	}
 
 	public function actualizarAdministrador(){
-		$id_adm = $this->input->post('id_adm');
-		$primerNombreAdministrador = $this->input->post('primerNombre');
-		$segundoNombreAdministrador = $this->input->post('segundoNombre');
-		$primerApellidoAdministrador = $this->input->post('primerApellido');
-		$segundoApellidoAdministrador = $this->input->post('segundoApellido');
-		$cedula = $this->input->post('cedula');
-		$correo_electronico = $this->input->post('correo_electronico');
-		$nombre = $this->input->post('nombre');
+
 		$contrasena = $this->input->post('contrasena');
-		$super_acceso_nvl = $this->input->post('super_acceso_nvl');
 		$password_rdel = mc_encrypt($contrasena, KEY_RDEL);
 		$password_hash = generate_hash($contrasena);
-
-		$datos = $this->db->select("*")->from("administradores")->where("id_administrador", $id_adm)->get()->row();
-		$logged_in = $datos ->logged_in;
+		$datosAdmin = $this->db->select("*")->from("administradores")->where("id_administrador", $this->input->post('id_adm'))->get()->row();
+		$logged_in = $datosAdmin->logged_in;
 
 		if($logged_in == 1){
-			echo json_encode(array("msg" => "El Administador esta en linea."));
+			echo json_encode(array("msg" => "El Administrador esta en linea."));
 		}else{
 			$data_admin = array(
-				'primerNombreAdministrador' => $primerNombreAdministrador,
-				'segundoNombreAdministrador' => $segundoNombreAdministrador,
-				'primerApellidoAdministrador' => $primerApellidoAdministrador,
-				'segundoApellidoAdministrador' => $segundoApellidoAdministrador,
-				'numCedulaCiudadaniaAdministrador' => $cedula,
-				'direccionCorreoElectronico' => $correo_electronico,
-				'usuario' => $nombre,
+				'primerNombreAdministrador' => $this->input->post('primerNombre'),
+				'segundoNombreAdministrador' => $this->input->post('segundoNombre'),
+				'primerApellidoAdministrador' => $this->input->post('primerApellido'),
+				'segundoApellidoAdministrador' =>  $this->input->post('segundoApellido'),
+				'numCedulaCiudadaniaAdministrador' => $this->input->post('cedula'),
+				'direccionCorreoElectronico' => $this->input->post('correo_electronico'),
+				'usuario' =>  $this->input->post('nombre'),
 				'contrasena' => $password_hash,
 				'contrasena_rdel' => $password_rdel,
-				'nivel' => $super_acceso_nvl
+				'nivel' => $this->input->post('super_acceso_nvl')
 			);
-			$this->db->where('id_administrador', $id_adm);
+			$this->db->where('id_administrador', $datosAdmin->id_administrador);
 			if($this->db->update('administradores', $data_admin)){
-				echo json_encode(array("msg" => "El Administador ha sido actualizado."));
+				echo json_encode(array("msg" => "El administrador " . $datosAdmin->primerNombreAdministrador . " " . $datosAdmin->primerApellidoAdministrador . " ha sido actualizado." ));
 			}
 		}
 	}

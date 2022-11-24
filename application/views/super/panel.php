@@ -172,7 +172,7 @@
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-warning" id="super_eliminar_admin">Eliminar</button>
-													<button type="button" class="btn btn-siia" id="super_actualizar_admin">Actualizar</button>
+													<button type="button" class="btn btn-primary" id="super_actualizar_admin">Actualizar</button>
 													<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
 												</div>
 											</div>

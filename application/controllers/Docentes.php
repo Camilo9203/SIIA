@@ -33,7 +33,6 @@ class Docentes extends CI_Controller
 		);
 		return $data;
 	}
-
 	/** Vista Inicial */
 	public function index()
 	{
@@ -45,7 +44,6 @@ class Docentes extends CI_Controller
 		$this->load->view('include/footer/main', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	/** Añadir nuevo docente */
 	public function anadirNuevoDocente()
 	{
@@ -59,13 +57,17 @@ class Docentes extends CI_Controller
 			'profesion' => $this->input->post("profesion"),
 			'horaCapacitacion' => $this->input->post("horas"),
 			'valido' => 0,
-			'organizaciones_id_organizacion' => $organizacion->id_organizacion
+			'organizaciones_id_organizacion' => $organizacion->id_organizacion,
+			'asignado' => "No"
 		);
 		if ($this->db->insert('docentes', $data_docentes)) {
-			echo json_encode(array('url' => "panel", 'msg' => "Información de docente guardada exitosamente."));
-		};
-	}
+			echo json_encode(array('msg' => "Información de docente guardada exitosamente."));
+		}
+		else {
+			echo json_encode(array('msg' => "La información del docente no fue guardada."));
 
+		}
+	}
 	/** Actualizar docente */
 	public function actualizarDocente()
 	{
@@ -77,7 +79,7 @@ class Docentes extends CI_Controller
 		if ($asignado == null && $informacionDocente['valido'] == "0") {
 			$asignado = "No";
 		}
-		// Datos para la actualización de docentes en Array
+		// Actualización docente
 		$dataUpdate = array(
 			'primerNombreDocente' => $this->input->post("primer_nombre_doc"),
 			'segundoNombreDocente' => $this->input->post("segundo_nombre_doc"),
@@ -90,7 +92,6 @@ class Docentes extends CI_Controller
 			'observacionAnterior' => $informacionDocente->observacion,
 			'asignado' => $asignado,
 		);
-
 		$where = array('organizaciones_id_organizacion' => $organizacion->id_organizacion, 'id_docente' => $informacionDocente['id_docente']);
 		$this->db->where($where);
 		if ($this->db->update('docentes', $dataUpdate)) {
@@ -113,15 +114,15 @@ class Docentes extends CI_Controller
 				else {
 					echo json_encode(array("msg" => "Docente valido " . $dataUpdate['primerNombreDocente'] . " " . $dataUpdate['primerApellidoDocente'] . " Actualizado."));
 				}
-
-
-			}else {
-				echo json_encode(array("msg" => "Docente " . $dataUpdate['primerNombreDocente'] . " " . $dataUpdate['primerApellidoDocente'] . " Actualizado."));
 			}
-
+			else {
+				echo json_encode(array("msg" => "Docente " . $dataUpdate['primerNombreDocente'] . " " . $dataUpdate['primerApellidoDocente'] . " actualizado."));
+			}
+		}
+		else {
+			echo json_encode(array("msg" => "Docente " . $dataUpdate['primerNombreDocente'] . " " . $dataUpdate['primerApellidoDocente'] . " no actualizado."));
 		}
 	}
-
 	/** Eliminar docente */
 	public function eliminarDocente()
 	{
@@ -157,7 +158,6 @@ class Docentes extends CI_Controller
 			echo json_encode(array("msg" => "Docente eliminado de su organización."));
 		}
 	}
-
 	/** Guardar archivo HV docente */
 	public function guardarArchivoHojaVidaDocente()
 	{
@@ -209,7 +209,6 @@ class Docentes extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-
 	/** Guardar archivo titulo docente */
 	public function guardarArchivoTituloDocente()
 	{
@@ -261,7 +260,6 @@ class Docentes extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-
 	/** Guardar archivo certificados docente */
 	public function guardarArchivoCertificadoDocente()
 	{
@@ -313,7 +311,6 @@ class Docentes extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-
 	/** Guardar archivo certificado ES docente */
 	public function guardarArchivoCertificadoEconomiaDocente()
 	{
@@ -362,7 +359,6 @@ class Docentes extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-
 	/** Eliminar archivo docente */
 	public function eliminarArchivoDocente()
 	{
@@ -391,7 +387,6 @@ class Docentes extends CI_Controller
 			echo json_encode(array('url' => "", 'msg' => $msg));
 		}
 	}
-
 	/** Cargar Información docente */
 	public function cargarInformacionDocente()
 	{
@@ -403,7 +398,6 @@ class Docentes extends CI_Controller
 		$informacionDocente = $this->db->select("*")->from("docentes")->where("id_docente", $id_docente)->get()->row();
 		echo json_encode($informacionDocente);
 	}
-
 	/** Panel docente Admin */
 	public function panelDocentes()
 	{
@@ -414,7 +408,6 @@ class Docentes extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	// Código nuevo para la asignación de solicitudes de actualización de docentes.
 	public function asignarDocentes()
 	{
@@ -425,7 +418,6 @@ class Docentes extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	// Código nuevo para la asignación de solicitudes de actualización de docentes.
 	public function evaluarDocentes()
 	{
@@ -436,7 +428,6 @@ class Docentes extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 }
 function var_dump_pre($mixed = null)
 {
