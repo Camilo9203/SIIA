@@ -440,7 +440,7 @@ function cargarArchivosDocente(id) {
 		id_docente: id_docente,
 	};
 	$.ajax({
-		url: "cargarDatosArchivosDocente",
+		url: baseURL + "panel/cargarDatosArchivosDocente",
 		type: "post",
 		dataType: "JSON",
 		data: data,
