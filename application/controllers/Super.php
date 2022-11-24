@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Super extends CI_Controller {
-	
+
 	/**
 	 * Index Page for this controller.
 	 *
@@ -38,7 +38,7 @@ class Super extends CI_Controller {
 		$ps = $this->input->post('sp');
 		if($ps == SUPER_PS){
 			$data_update = array(
-						'valor' => 'TRUE'
+				'valor' => 'TRUE'
 			);
 
 			$this->db->where('nombre', 'super');
@@ -47,26 +47,26 @@ class Super extends CI_Controller {
 				echo json_encode(array("url"=>"panel", "msg" => "SUPER!"));
 				$datos_sesion = array(
 					'usuario_id'     => "1-666-1", // Number of the beast #-#
-		        	'nombre_usuario'  => "super",
-		        	'type_user' => 'super',
-		        	'logged_in' => 1,
-		        	'usuario_ip' => $usuario_ip,
-		        	'usuario_ip_proxy' => $usuario_ip,
-		        	'user_agent' => $_SERVER['HTTP_USER_AGENT']
-		        );
-			$this->session->set_userdata($datos_sesion);
+					'nombre_usuario'  => "super",
+					'type_user' => 'super',
+					'logged_in' => 1,
+					'usuario_ip' => $usuario_ip,
+					'usuario_ip_proxy' => $usuario_ip,
+					'user_agent' => $_SERVER['HTTP_USER_AGENT']
+				);
+				$this->session->set_userdata($datos_sesion);
 			}
 		}else if($ps == ""){
 			// Se sabe si esta ingresando el /?
 			$data_update = array(
-						'valor' => 'FALSE'
+				'valor' => 'FALSE'
 			);
 
 			$this->db->where('nombre', 'super');
 			if($this->db->update('opciones', $data_update)){}
 		}else{
 			$data_update = array(
-						'valor' => 'FALSE'
+				'valor' => 'FALSE'
 			);
 
 			$this->db->where('nombre', 'super');
@@ -84,7 +84,7 @@ class Super extends CI_Controller {
 			$data['tipo_usuario'] = $this->session->userdata('type_user');
 			$data['logged_in'] = $this->session->userdata('logged_in');
 			$data['administradores'] = $this->cargarAdministradores();
-			
+
 			$this->load->view('include/header', $data);
 			$this->load->view('admin/super/super', $data);
 			$this->load->view('include/footer');
@@ -108,7 +108,7 @@ class Super extends CI_Controller {
 
 		$last_id = $this->db->select("id_administrador")->from("administradores")->order_by("id_administrador", "desc")->get()->row()->id_administrador;
 		$adm_exist_data = $this->db->select("usuario")->from("administradores")->where("usuario", $super_nombre_admin)->get()->row();
-		
+
 		if($adm_exist_data == ""){
 			$data_admin = array(
 				'primerNombreAdministrador' => $super_primernombre_admin,
@@ -128,7 +128,7 @@ class Super extends CI_Controller {
 				echo json_encode(array("msg" => "Administador no Agregado"));
 			}
 		}else{
-				echo json_encode(array("msg" => "El nombre de usuario ya esta en uso."));
+			echo json_encode(array("msg" => "El nombre de usuario ya esta en uso."));
 		}
 	}
 
