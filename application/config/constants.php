@@ -85,14 +85,16 @@ defined('EXIT__AUTO_MIN')      or define('EXIT__AUTO_MIN', 9); // lowest automat
 defined('EXIT__AUTO_MAX')      or define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 define('KEY_RDEL', 'd0a7e7997b6d5fcd55f4b5c32611b87c'); // Key AES For passwords d0a7e7997b6d5fcd55f4b5c32611b87cd923e88837b63bf2941ef819dc8ca282
 define('APP_URL_DATOS', 'datos.gov.co'); // URL de datos abiertos
-define('APP_DATOS_TOKEN', '34gNFwkJaEVjZQdRRrCPBHwGk'); // Token de la aplicacion en datos abiertos
-define('APP_DATOS_USER', 'uaeostics@gmail.com'); // Usuario de la aplicacion en datos abiertos
-define('APP_DATOS_PASSWORD', 'Lr563serv*'); // Contraseña de la aplicacion en datos abiertos
+define('APP_DATOS_TOKEN', '34gNFwkJaEVjZQdRRrCPBHwGk'); // Token de la aplicación en datos abiertos
+define('APP_DATOS_USER', 'uaeostics@gmail.com'); // Usuario de la aplicación en datos abiertos
+define('APP_DATOS_PASSWORD', 'Lr563serv*'); // Contraseña de la aplicación en datos abiertos
 define('APP_DATOS_VIEWIUD', '2tsa-2de2'); // https://www.datos.gov.co/resource/43dx-dcjb.json https://www.datos.gov.co/resource/9qtj-epz2.json
-define('CORREO_SIA', 'acreditaciones@uaeos.gov.co'); // Correo electronico del sia para el contacto
-define('CORREO_ATENCION', 'acreditaciones@uaeos.gov.co'); // Correo electronico de ATENCION AL CIUDADANO PRIORIDAD BAJA
-define('CORREO_COORDINADOR', 'acreditaciones@uaeos.gov.co'); // Correo electronico de COORDINADOR DE EDUCACION PRIORIDAD MEDIA
-define('CORREO_AREA', 'acreditaciones@uaeos.gov.co'); // Correo electronico de COORDINADOR DE AREA PRIORIDAD ALTA
-define('CORREO_DIRECTOR', 'acreditaciones@uaeos.gov.co'); // Correo electronico de DIRECTOR NACIONAL PRIORIDAD MUY ALTA
+define('PAGINA_WEB', 'https://www.unidadsolidaria.gov.co/'); // Correo electrónico del sia para el contacto
+define('CORREO_SIA', 'acreditaciones@unidadsolidaria.gov.co'); // Correo electrónico del sia para el contacto
+define('CORREO_ATENCION', 'atencionalciudadano@unidadsolidaria.gov.co'); // Correo electrónico de ATENCIÓN AL CIUDADANO PRIORIDAD BAJA
+define('CORREO_COORDINADOR', 'acreditaciones@unidadsolidaria.gov.co'); // Correo electrónico de COORDINADOR DE EDUCACIÓN PRIORIDAD MEDIA
+define('CORREO_AREA', 'acreditaciones@unidadsolidaria.gov.co'); // Correo electrónico de COORDINADOR DE AREA PRIORIDAD ALTA
+define('CORREO_DIRECTOR', 'acreditaciones@unidadsolidaria.gov.co'); // Correo electrónico de DIRECTOR NACIONAL PRIORIDAD MUY ALTA
+define('CORREO_DIRECTOR', 'acreditaciones@unidadsolidaria.gov.co'); // Correo electrónico de DIRECTOR NACIONAL PRIORIDAD MUY ALTA
 define('SUPER_PS', 'C82LQnyMg1QWUr2bTct0'); // PS de super
 define('user_sia_db', 'SKGqzlw8gL'); // PS de bd sia user portal pruebas

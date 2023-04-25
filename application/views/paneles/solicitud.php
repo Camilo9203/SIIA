@@ -1186,12 +1186,12 @@
 				<div class="modal-header">
 					<div class="row">
 						<div id="header_politicas" class="col-md-12">
-							<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="https://acreditacion.uaeos.gov.co/siia/assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
+							<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="<?php echo base_url(); ?>assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
 						</div>
 						<div class="clearfix"></div>
 						<hr />
 						<div class="col-md-12" style="text-align: center">
-							<object data="https://acreditacion.uaeos.gov.co/siia/assets/metodologiaResolucion/CursoBasico.html" type="text/html" width="750" height="1220"></object>
+							<object data="<?php echo base_url(); ?>assets/metodologiaResolucion/CursoBasico.html" type="text/html" width="750" height="1220"></object>
 						</div>
 					</div>
 				</div>
@@ -1208,12 +1208,12 @@
 				<div class="modal-header">
 					<div class="row">
 						<div id="header_politicas" class="col-md-12">
-							<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="https://acreditacion.uaeos.gov.co/siia/assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
+							<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="<?php echo base_url(); ?>assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
 						</div>
 						<div class="clearfix"></div>
 						<hr />
 						<div class="col-md-12" style="text-align: center">
-							<object data="https://acreditacion.uaeos.gov.co/siia/assets/metodologiaResolucion/CursoAval.html" type="text/html" width="750" height="1220"></object>
+							<object data="<?php echo base_url(); ?>assets/metodologiaResolucion/CursoAval.html" type="text/html" width="750" height="1220"></object>
 						</div>
 					</div>
 				</div>
@@ -1230,13 +1230,13 @@
 				<div class="modal-header">
 					<div class="row">
 						<div id="header_politicas" class="col-md-12">
-							<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="https://acreditacion.uaeos.gov.co/siia/assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
+							<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="<?php echo base_url(); ?>assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
 						</div>
 						<div class="clearfix"></div>
 						<hr />
 						<!-- Tablas de cursos -->
 						<div class="col-md-12" style="text-align: center">
-							<object data="https://acreditacion.uaeos.gov.co/siia/assets/metodologiaResolucion/CursoMedio.html" type="text/html" width="750" height="1100"></object>
+							<object data="<?php echo base_url(); ?>assets/metodologiaResolucion/CursoMedio.html" type="text/html" width="750" height="1100"></object>
 						</div>
 					</div>
 				</div>
@@ -1259,7 +1259,7 @@
 						<hr />
 						<!-- Tablas de cursos -->
 						<div class="col-md-12" style="text-align: center">
-							<object data="https://acreditacion.uaeos.gov.co/siia/assets/metodologiaResolucion/CursoAvanzado.html" type="text/html" width="750" height="1220"></object>
+							<object data="<?php echo base_url(); ?>assets/metodologiaResolucion/CursoAvanzado.html" type="text/html" width="750" height="1220"></object>
 						</div>
 					</div>
 				</div>
@@ -1276,14 +1276,14 @@
 				<div class="modal-header">
 					<div class="row">
 						<div id="header_politicas" class="col-md-12">
-							<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="https://acreditacion.uaeos.gov.co/siia/assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
+							<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="<?php echo base_url(); ?>assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
 
 						</div>
 						<div class="clearfix"></div>
 						<hr />
 						<!-- Tablas de cursos -->
 						<div class="col-md-12" style="text-align: center">
-							<object data="https://acreditacion.uaeos.gov.co/siia/assets/metodologiaResolucion/CursoFinanciera.html" type="text/html" width="750" height="1000"></object>
+							<object data="<?php echo base_url(); ?>assets/metodologiaResolucion/CursoFinanciera.html" type="text/html" width="750" height="1000"></object>
 						</div>
 					</div>
 				</div>

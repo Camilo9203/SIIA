@@ -139,7 +139,7 @@
 	<h4>PQR (Preguntas - Quejas - Reclamos):</h4>
 	<div class="form-group">
 		<label>PQRD:</label>
-		<a href="http://sitios.uaeos.gov.co/portal/pqr/index.php?idcategoria=6" target="_blank">Click aquí</a>
+		<a href="http://sitios.unidadsolidaria.gov.co/portal/pqr/index.php?idcategoria=6" target="_blank">Click aquí</a>
 	</div>
 	<div id="encuesta_satisfaccion">
 		<hr />

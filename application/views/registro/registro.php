@@ -267,7 +267,7 @@
 							</div>
 							<p>N/A.</p>
 						</div>
-						<small><a class="pull-right" title="Recurso de Politica" target="_blank" href="https://www.uaeos.gov.co/sites/default/files/archivos/POLITICA%20PROTECCION%20DE%20DATOS%20V1.pdf">Recurso de la política.</a></small>
+						<small><a class="pull-right" title="Recurso de Politica" target="_blank" href="<?php echo PAGINA_WEB ?>sites/default/files/archivos/POLITICA%20PROTECCION%20DE%20DATOS%20V1.pdf">Recurso de la política.</a></small>
 					</div>
 				</div>
 			</div>

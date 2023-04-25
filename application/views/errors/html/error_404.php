@@ -3,7 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
@@ -102,10 +101,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <body>
 	<div class="container-fluid">
 		<div class="row-fluid">
+
 			<!-- page content -->
 			<div class="col-md-12">
-				<a href="http://acreditacion.uaeos.gov.co/"><img alt="logo" class="img-responsive center-block" src="http://acreditacion.uaeos.gov.co/siia/assets/img/uaeos-logo.png"></a>
-				<a href="http://acreditacion.uaeos.gov.co/"><img alt="logo" class="img-responsive center-block" src="http://acreditacion.uaeos.gov.co/siia/assets/img/siia_logo.png"></a>
+				<a href="http://acreditacion.unidadsolidaria.gov.co/"><img alt="logo" class="img-responsive center-block" src="http://acreditacion.unidadsolidaria.gov.co/siia/assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png"></a>
+				<a href="http://acreditacion.unidadsolidaria.gov.co/"><img alt="logo" class="img-responsive center-block" src="http://acreditacion.unidadsolidaria.gov.co/siia/assets/img/siia_logo.png"></a>
 			</div>
 			<hr />
 			<div class="col-md-12">
@@ -113,7 +113,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="text-center text-center">
 						<h4>Error: 404 - Página no encontrada.</h4>
 						<h2>La página que buscas no se encuentra.</h2>
-						<p>Se reportara al administrador del sistema sobre el incidente.</p>
+						<h6>Se reportará al administrador del sistema sobre el incidente.</h6>
 						</p>
 					</div>
 				</div>

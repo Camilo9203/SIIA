@@ -78,28 +78,28 @@ class CI_Email
 	 *
 	 * @var	string
 	 */
-	public $smtp_host	= 'smtp.office365.com'; //smtp.mailtrap.io
+	public $smtp_host	= 'smtp.office365.com'; //smtp.mailtrap.io smtp.office365.com
 
 	/**
 	 * SMTP Username
 	 *
 	 * @var	string
 	 */
-	public $smtp_user	= 'acreditaciones@uaeos.gov.co'; // uaeostics@gmail.com; 46614340f4ed6f
+	public $smtp_user	= 'acreditaciones@unidadsolidaria.gov.co'; // '46614340f4ed6f'; acreditaciones@unidadsolidaria.gov.co
 
 	/**
 	 * SMTP Password
 	 *
 	 * @var	string
 	 */
-	public $smtp_pass	= 'Tics2022*'; //'P4ssw0rd';  Tics2016 92b5ea620b4255
+	public $smtp_pass	= 'Tics2022*'; // uaeos: Tics2022* mailtrap:92b5ea620b4255
 
 	/**
 	 * SMTP Server port
 	 *
 	 * @var	int
 	 */
-	public $smtp_port = 587; //g:465 25
+	public $smtp_port = 587; //g:465 25 587 2525
 
 	/**
 	 * SMTP connection timeout in seconds

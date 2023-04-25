@@ -108,7 +108,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="row-fluid">
 			<!-- page content -->
 			<div class="col-md-12">
-				<a href="http://www.uaeos.gov.co/"><img alt="logo" class="img-responsive center-block" src="http://acreditacion.uaeos.gov.co/siia/assets/img/logoHeader_Zf0q552dpQlogoOrgsolidarias_.png"></a>
+				<a href="<?php echo PAGINA_WEB ?>"><img alt="logo" class="img-responsive center-block" src="<?php echo base_url(); ?>/assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png"></a>
 			</div>
 			<hr />
 			<div class="col-md-12">
@@ -116,7 +116,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="text-center text-center">
 						<h2>Unidad Administrativa Especial de Organizaciones Solidarias</h2>
 						<h3>Sitio en construcción.</h3>
-						<h4>Para ir a la aplicación de Acreditación de click <a href='http://sitios.uaeos.gov.co/SIA/index.php'>aquí.</a></h4>
+						<h4>Para ir a la aplicación de Acreditación de click <a href='<?php echo base_url(); ?>'>aquí.</a></h4>
 						</p>
 					</div>
 				</div>

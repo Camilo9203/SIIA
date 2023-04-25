@@ -169,7 +169,7 @@
 						<div id="reenvio_pre">
 							<div class="container">
 								<div class="jumbotron">
-									<p>Si el correo no le llega en los próximos 5 minutos, y no está en la bandeja de spam, por favor, escriba otro correo electrónico (Gmail.com, Outlook.com, Yahoo.com, Hotmail.com), y de click en "Volver a enviar el correo". Si el problema persiste, contactese con <a href="mailto:atencionalciudadano@uaeos.gov.co">atencionalciudadano@uaeos.gov.co</a></p>
+									<p>Si el correo no le llega en los próximos 5 minutos, y no está en la bandeja de spam, por favor, escriba otro correo electrónico (Gmail.com, Outlook.com, Yahoo.com, Hotmail.com), y de click en "Volver a enviar el correo". Si el problema persiste, contactese con <a href="mailto:<?php echo CORREO_ATENCION ?>"><?php echo CORREO_ATENCION ?></a></p>
 									<div class="clearfix"></div>
 									<hr />
 									<div class="form-group">
@@ -267,8 +267,8 @@
 				</div>
 				<div class="modal-body">
 					<ul>
-						<li><a href="https://www.uaeos.gov.co/" target="_blank">Página web de la Unidad Administrativa Especial de Organizaciones Solidarias</a></li>
-						<li><a href="mailto:atencionalciudadano@uaeos.gov.co" target="_blank">atencionalciudadano@uaeos.gov.co</a></li>
+						<li><a href="<?php echo PAGINA_WEB ?>" target="_blank">Página web de la Unidad Administrativa Especial de Organizaciones Solidarias</a></li>
+						<li><a href="mailto:<?php echo CORREO_ATENCION ?>" target="_blank"><?php echo CORREO_ATENCION ?></a></li>
 						<li>Atención telefónica al <strong>3275252</strong> Ext. <strong>192-301</strong> (Bogotá); línea gratuita nacional <strong>018000122020</strong></li>
 						<li>Atención personalizada: <strong>Carrera 10 No. 15 - 22</strong> Lunes a viernes de <strong>8 a.m. a 5:00 p.m.</strong>, en la ciudad de Bogotá.</li>
 						<li>A través del Chat en la página web los días <strong>martes y jueves</strong> de <strong>9 am a 12 pm</strong></li>
@@ -402,7 +402,7 @@
 						<a target="_blank" class="icon-flickr-footer" title="Flickr" href="https://www.flickr.com/photos/orgsolidarias"></a>
 						<a target="_blank" class="icon-twitter-footer" title="Twitter" href="https://twitter.com/orgsolidarias"></a>
 						<a target="_blank" class="icon-youtube-footer" title="Youtube" href="https://www.youtube.com/orgsolidariastv/"></a>
-						<a target="_blank" class="icon-rss-footer" title="Fuente RSS" href="https://www.uaeos.gov.co/RSS"></a>
+						<a target="_blank" class="icon-rss-footer" title="Fuente RSS" href="<?php echo PAGINA_WEB ?>RSS"></a>
 					</div>
 				</div>
 				<div class="clearfix"></div>
@@ -436,7 +436,7 @@
 					<div class="col-md-10 text-footer-l-i">
 						<label><a href="" target="_blank" title="Contáctenos">Contáctenos</a></label>
 						<br /><br />
-						<p><a href="mailto:atencionalciudadano@uaeos.gov.co" target="_blank" id="mailto_org" title="atencionalciudadano@uaeos.gov.co"> atencionalciudadano@uaeos.gov.co</a></p>
+						<p><a href="mailto:<?php echo CORREO_ATENCION ?>" target="_blank" id="mailto_org" title="<?php echo CORREO_ATENCION ?>"><?php echo CORREO_ATENCION ?></a></p>
 					</div>
 				</div>
 				<div class="clearfix"></div>
@@ -454,7 +454,7 @@
 			<div id="col-md-12" class="text-center">
 				<small>
 					<p title="Unidad Administrativa Especial Organizaciones Solidarias">Copyright © <?php echo date('Y'); ?> UAEOS |
-						<a target="_blank" title="Politicas de Privacidad y Condiciones de Uso" href="https://www.uaeos.gov.co/sites/default/files/archivos/terminos%20de%20uso.pdf">Politicas de Privacidad y Condiciones de Uso</a> | <a title="Administrador" href="<?php echo base_url() ?>admin">Administrador</a> | SIIA v1.0.8.181022-Prod
+						<a target="_blank" title="Politicas de Privacidad y Condiciones de Uso" href="<?php echo PAGINA_WEB ?>sites/default/files/archivos/terminos%20de%20uso.pdf">Politicas de Privacidad y Condiciones de Uso</a> | <a title="Administrador" href="<?php echo base_url() ?>admin">Administrador</a> | SIIA v1.0.8.181022-Prod
 					</p>
 				</small>
 			</div>

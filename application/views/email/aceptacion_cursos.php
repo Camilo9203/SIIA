@@ -117,7 +117,7 @@
 								<table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
 									<tr>
 										<td align="center" valign="top">
-											<img src="https://acreditacion.uaeos.gov.co/siia/assets/img/siiaheadercorreo.png" width="720" height="157" style="margin:0; padding:0; border:none; display:block;" border="0" class="imgClass" alt="" />
+											<img src="<?php echo base_url();?>assets/img/siiaheadercorreo.png" width="720" height="157" style="margin:0; padding:0; border:none; display:block;" border="0" class="imgClass" alt="" />
 										</td>
 									</tr>
 								</table>
@@ -172,9 +172,9 @@
 										<td align="center" valign="top">
 											<small>Si tiene alguna duda puede comunicarse con nosotros a través de los siguientes canales:
 												<br />
-												Atención al ciudadano <a target="_blank" href="mailto:atencionalciudadano@uaeos.gov.co">atencionalciudadano@uaeos.gov.co</a>
+												Atención al ciudadano <a target="_blank" href="mailto:<?php echo CORREO_ATENCION ?>"><?php echo CORREO_ATENCION ?></a>
 												<br />
-												Chat en página web <a target="_blank" href="http://www.uaeos.gov.co">Organizaciones Solidarias</a> martes y jueves de 9 am a 12 pm.
+												Chat en página web <a target="_blank" href="<?php echo PAGINA_WEB ?>">Organizaciones Solidarias</a> martes y jueves de 9 am a 12 pm.
 												<br />
 												Atención telefónica al <a target="_blank" href="tel:0313275252">3275252</a> Ext. 301 (Bogotá); línea gratuita nacional <a target="_blank" href="tel:018000122020">018000122020</a>
 												<br />
