@@ -5,11 +5,10 @@
 		<button class="btn btn-default form-control" id="reporte_org_acreditadas">Reporte Organizaciones Acreditadas</button>
 	</div>
 	<div class="form-group">
-		<button class="btn btn-default form-control" id="reporte_org_historico">Reporte Organizaciones Historico</button>
+		<button class="btn btn-default form-control" id="reporte_org_historico">Reporte Organizaciones Histórico</button>
 	</div>
-	<!-- //TODO: Reporte Informe de actividades -->
 	<div class="form-group">
-		<button class="btn btn-default form-control" id="reporte_org_historico">Reporte Informe Actividades Pedagogicas</button>
+		<button class="btn btn-default form-control" id="reporte_org_historico">Reporte Informe Actividades Pedagógicas</button>
 	</div>
 	<div class="form-group">
 		<button class="btn btn-default form-control" id="reportes_ver_asistentes">Todos los Asistentes</button>
@@ -18,7 +17,7 @@
 		<button class="btn btn-default form-control" id="reporte_doc_habi">Docentes Habilitados</button>
 	</div>
 	<div class="form-group">
-		<button class="btn btn-default form-control" id="reporte_reg_tele">Registros teléfonicos</button>
+		<button class="btn btn-default form-control" id="reporte_reg_tele">Registros telefónicos</button>
 	</div>
 	<div class="form-group">
 		<button class="btn btn-siia form-control" id="verReportes">Ver reportes <i class="fa fa-area-chart" aria-hidden="true"></i></button>

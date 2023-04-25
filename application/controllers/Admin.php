@@ -23,14 +23,12 @@ class Admin extends CI_Controller
 		$passwor2 = mc_encrypt($password, KEY_RDEL);
 		echo json_encode($passwor2);
 	}
-
 	private function enchash()
 	{
 		$password = "Clave*21";
 		$passwor2 = generate_hash($password);
 		echo json_encode($passwor2);
 	}
-
 	// Socrata
 	public function socrata()
 	{
@@ -391,7 +389,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function estadoOrg()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -419,7 +416,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function informes()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -503,7 +499,6 @@ class Admin extends CI_Controller
 		$this->load->view('admin/organizaciones/docentes', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function llamadas()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -531,7 +526,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function opciones()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -565,7 +559,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function panel_reportes()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -592,7 +585,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function ver_organizaciones()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -619,7 +611,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function enProceso()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -647,7 +638,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function evaluacion()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -674,7 +664,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function notificacionesAntiguas()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -702,7 +691,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function cambioContrasena()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -736,7 +724,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function bateriaObservaciones()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -764,7 +751,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function registroActividad()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -792,7 +778,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function opcionesSistema()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -820,7 +805,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function tiposCursos()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -848,7 +832,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function nitEntidades()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -876,7 +859,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function resultadosEncuesta()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -904,7 +886,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function cargar_organizacionesEnProceso()
 	{
 		$organizaciones = array();
@@ -922,38 +903,32 @@ class Admin extends CI_Controller
 		}
 		return $organizaciones;
 	}
-
 	public function cargar_administradores()
 	{
 		$administradores = $this->db->select("*")->from("administradores")->get()->result();
 		return $administradores;
 	}
-
 	public function cargarBateriaObservaciones()
 	{
 		$bateriaObservaciones = $this->db->select("*")->from("bateriaObservaciones")->get()->result();
 		return $bateriaObservaciones;
 	}
-
 	public function cargarBateriaObservacionesE()
 	{
 		$bateriaObservaciones = $this->db->select("*")->from("bateriaObservaciones")->get()->result();
 		echo json_encode($bateriaObservaciones);
 	}
-
 	public function cargar_visitas()
 	{
 		$nombre_usuario = $this->session->userdata('nombre_usuario');
 		$visitas = $this->db->select("*")->from("visitas")->where("usuarioVisita", $nombre_usuario)->get()->result();
 		return $visitas;
 	}
-
 	public function cargar_seguimientos()
 	{
 		$seguimientos = $this->db->select("*")->from("seguimientoSimple")->get()->result();
 		return $seguimientos;
 	}
-
 	public function cargar_informacionVisita()
 	{
 		$id_organizacion = $this->input->post('id_organizacion');
@@ -966,7 +941,6 @@ class Admin extends CI_Controller
 
 		echo json_encode(array("informacion" => $informacion, "visita" => $datos_visita, "seguimiento" => $datos_seguimiento, "plan" => $datos_plan));
 	}
-
 	/** TODO: ESTADO - Actualizar estado de las solicitudes */
 	public function actualizarEstadoOrganizacion()
 	{
@@ -1005,13 +979,11 @@ class Admin extends CI_Controller
 			}
 		}
 	}
-
 	public function cargarDepartamentos()
 	{
 		$departamentos = $this->db->select("*")->from("departamentos")->get()->result();
 		return $departamentos;
 	}
-
 	public function actualizarPlanMejoramiento()
 	{
 		$observaciones_plan = $this->input->post('observaciones_plan');
@@ -1030,7 +1002,6 @@ class Admin extends CI_Controller
 			$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' actualizó el plan de mejora.');
 		}
 	}
-
 	public function crearBateriaObservacion()
 	{
 		$tipoBateriaObservacion = $this->input->post('tipoBateriaObservacion');
@@ -1047,7 +1018,6 @@ class Admin extends CI_Controller
 			echo json_encode(array("msg" => "Se creo la observación."));
 		}
 	}
-
 	public function actualizarBateriaObservacion()
 	{
 		$id_observacion = $this->input->post('id_observacion');
@@ -1066,7 +1036,6 @@ class Admin extends CI_Controller
 			echo json_encode(array("msg" => "Se actualizó la observación."));
 		}
 	}
-
 	public function crearVisita()
 	{
 		$id_organizacion = $this->input->post('id_organizacion');
@@ -1092,7 +1061,6 @@ class Admin extends CI_Controller
 			$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' creo una visita a: ' . $nombreOrganizacion . ', a las: ' . $fechaVisita . ' - ' . $horaVisita . ' el usuario de la visita es: ' . $encargadoVisita . '.');
 		}
 	}
-
 	public function crearSeguimiento()
 	{
 		$id_organizacion = $this->input->post('id_organizacion');
@@ -1114,7 +1082,6 @@ class Admin extends CI_Controller
 			$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' creo un seguimiento a: ' . $nombreOrganizacion . '.');
 		}
 	}
-
 	public function darRespuestaSeguimiento()
 	{
 		$id_seguimiento = $this->input->post("id_seguimiento");
@@ -1131,7 +1098,6 @@ class Admin extends CI_Controller
 			echo json_encode(array('url' => "panel", 'msg' => "Se respondio al seguimiento."));
 		}
 	}
-
 	public function finalizadas()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -1159,7 +1125,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function asignar()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -1188,7 +1153,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function enObservaciones()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -1216,7 +1180,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function cargar_organizacionesFinalizadas()
 	{
 		$organizaciones = array();
@@ -1231,7 +1194,6 @@ class Admin extends CI_Controller
 		return $organizaciones;
 		// echo json_encode($organizaciones);
 	}
-
 	public function cargar_organizacionesFinalizadasObs()
 	{
 		$organizaciones = array();
@@ -1245,7 +1207,6 @@ class Admin extends CI_Controller
 
 		return $organizaciones;
 	}
-
 	public function cargar_organizacionesObservaciones()
 	{
 		$organizaciones = array();
@@ -1265,7 +1226,6 @@ class Admin extends CI_Controller
 		$organizaciones = $this->db->select("*")->from("organizaciones")->get()->result();
 		return $organizaciones;
 	}
-
 	public function inscritas()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -1291,7 +1251,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function informacion()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -1320,7 +1279,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function modalInformacion()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -1349,7 +1307,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function cargar_todaInformacionInf($id)
 	{
 		$id_organizacion = $id;
@@ -1374,8 +1331,6 @@ class Admin extends CI_Controller
 
 		return json_encode(array("informacionGeneral" => $informacionGeneral, "documentacionLegal" => $documentacionLegal, "registroEducativoProgramas" => $registroEducativoProgramas, "antecedentesAcademicos" => $antecedentesAcademicos, "jornadasActualizacion" => $jornadasActualizacion, "datosBasicosProgramas" => $datosBasicosProgramas, "programasAvalEconomia" => $programasAvalEconomia, "programasAvalar" => $programasAvalar, "docentes" => $docentes, "plataforma" => $plataforma, "tipoSolicitud" => $tipoSolicitud, "solicitudes" => $solicitudes, "estadoOrganizaciones" => $estadoOrganizaciones, "organizaciones" => $organizaciones, "archivos" => $archivos, "resoluciones" => $resoluciones));
 	}
-
-
 	public function cargarSolicitudesRegistradas()
 	{
 		$solicitudesRegistradas = array();
@@ -1404,14 +1359,12 @@ class Admin extends CI_Controller
 		$data_organizacionesBD = $this->db->select("DISTINCT(docentes.organizaciones_id_organizacion), organizaciones.*", null, false)->from("organizaciones, docentes")->where("docentes.organizaciones_id_organizacion = organizaciones.id_organizacion")->get()->result();
 		return $data_organizacionesBD;
 	}
-
 	public function cargar_llamadas()
 	{
 		$registroTelefonico = $this->db->select("*")->from("registroTelefonico")->get()->result();
 
 		return $registroTelefonico;
 	}
-
 	public function obtenerLlamada()
 	{
 		$idLlamada = $this->input->post('idLlamada');
@@ -1419,7 +1372,6 @@ class Admin extends CI_Controller
 
 		echo json_encode(array('llamada' => $registroTelefonico));
 	}
-
 	public function actualizarLlamada()
 	{
 		$idLlamada = $this->input->post("idLlamada");
@@ -1472,7 +1424,6 @@ class Admin extends CI_Controller
 			$this->logs_sia->session_log('Se actualizó la llamada con id: ' . $idLlamada);
 		}
 	}
-
 	public function cargar_docentesOrganizacion()
 	{
 		$data_archivos = array();
@@ -1487,7 +1438,6 @@ class Admin extends CI_Controller
 		}
 		echo json_encode(array("organizacion" => $organizacion, "docentes" => $docentes, "archivos" => $data_archivos, "numeroDocentes" => $cuentaDocentes));
 	}
-
 	public function validarDocentes()
 	{
 		$id_docente = $this->input->post('id_docente');
@@ -1573,13 +1523,11 @@ class Admin extends CI_Controller
 			$this->envio_mail_admin("asignarDocente", $correoEvaluador, 2, $docente);
 		}
 	}
-
 	public function cargar_informes()
 	{
 		$informes = $this->db->select("*")->from("informeActividades")->get()->result();
 		return $informes;
 	}
-
 	public function cargar_informacionInforme()
 	{
 		$id_curso = $this->input->post('id_curso');
@@ -1587,7 +1535,6 @@ class Admin extends CI_Controller
 		$asistentes = $this->db->select("*")->from("asistentes")->where("informeActividades_id_informeActividades", $id_curso)->get()->result();
 		echo json_encode(array("curso" => $curso, "asistentes" => $asistentes));
 	}
-
 	public function buscar_organizacion()
 	{
 		$nombre = $this->input->post('nombre_organizacion');
@@ -1657,7 +1604,6 @@ class Admin extends CI_Controller
 		echo json_encode(array("organizaciones" => $query->result()));
 		$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' buscó una organización con los datos:' . $nombre . ', ' . $sigla_organizacion . ', ' . $nit_organizacion . '.');
 	}
-
 	public function cargar_datosBasicosOrganizacion()
 	{
 		$id_organizacion = $this->input->post('id_organizacion');
@@ -1671,7 +1617,6 @@ class Admin extends CI_Controller
 
 		echo json_encode(array('data_organizacion' => $data_organizaciones, 'registro_actividad' => $registro_actividad, 'estado' => $data_organizacionesEstado, 'usuario' => $data_usuario));
 	}
-
 	public function verRelacionCambios()
 	{
 		$id_organizacion = $this->input->post('id_organizacion');
@@ -1686,7 +1631,6 @@ class Admin extends CI_Controller
 
 		echo json_encode($notificaciones);
 	}
-
 	public function verRelacionCambiosVista()
 	{
 		//$q2 = $this->db->select('*')->from('notificaciones')->where("quienEnvia", $usuario)->where("quienRecibe", $usuario)->get()->result();
@@ -1732,19 +1676,16 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function verUsuarios()
 	{
 		$usuarios = $this->db->select("*")->from("usuarios")->where("logged_in", 1)->get()->result();
 		return $usuarios;
 	}
-
 	public function cargar_actividadUsuario($id)
 	{
 		$datos_actividad = $this->db->select('*')->from('session_log')->where('usuario_id', $id)->order_by("id_session_log", "desc")->limit(70)->get()->result();
 		return $datos_actividad;
 	}
-
 	public function cargar_todaActividadUsuario()
 	{
 		$url = $_SERVER["REQUEST_URI"];
@@ -1753,14 +1694,12 @@ class Admin extends CI_Controller
 		$datos_actividad = $this->db->select('*')->from('session_log')->where('usuario_id', $id)->order_by("id_session_log", "desc")->get()->result();
 		echo json_encode($datos_actividad);
 	}
-
 	public function cargarOrganizacionesHistoricas()
 	{
 		$data_organizaciones = $this->db->select("organizacionesHistorial.*, historial.*")->from("organizacionesHistorial, historial")->where("historial.organizaciones_id_organizacion = organizacionesHistorial.id_organizacionHistorial", false, false)->get()->result();
 
 		return $data_organizaciones;
 	}
-
 	public function informacionOrganizacionHistorial()
 	{
 		$id_organizacion_historial = $this->input->post('id_organizacion_historial');
@@ -1772,7 +1711,6 @@ class Admin extends CI_Controller
 
 		echo json_encode(array("organizacion" => $datos_organizacion, "resolucion_historial" => $datos_historial_res, "historial" => $datos_historial_org));
 	}
-
 	public function guardarRegistroTelefonico()
 	{
 		$telefonicoNombre = $this->input->post('telefonicoNombre');
@@ -1824,7 +1762,6 @@ class Admin extends CI_Controller
 			$this->logs_sia->session_log('Se ingreso el registro telefonico con NIT:' . $telefonicoNit . ' nombre:' . $telefonicoNombreOrganizacion . ' y correo de contacto:' . $telefonicoCorreoContacto);
 		}
 	}
-
 	public function guardar_organizacionHistorial()
 	{
 		$personeria = $this->input->post('personeria');
@@ -1951,7 +1888,6 @@ class Admin extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-
 	public function cargarObservaciones()
 	{
 		$id_organizacion = $this->input->post('id_organizacion');
@@ -1962,7 +1898,6 @@ class Admin extends CI_Controller
 
 		echo json_encode(array("observaciones" => $observaciones, "archivosPlataforma" => $archivos));
 	}
-
 	public function cargarObservacionesExportar()
 	{
 		$url = $_SERVER["REQUEST_URI"];
@@ -1999,7 +1934,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function actualizar_organizacionHistorial()
 	{
 		$id_historial = $this->input->post('id_historial');
@@ -2200,7 +2134,6 @@ class Admin extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-
 	public function guardarSeguimiento()
 	{
 		$certificadoExistencia = $this->input->post('certificadoExistencia');
@@ -2266,7 +2199,6 @@ class Admin extends CI_Controller
 			$this->logs_sia->session_log('Se guardo el seguimiento.');
 		}
 	}
-
 	public function guardarPlanMejoramiento()
 	{
 		$txt_descripcion = $this->input->post('txt_descripcion');
@@ -2295,20 +2227,17 @@ class Admin extends CI_Controller
 			}
 		}
 	}
-
 	public function cargarActividadAdmin()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_actividad = $this->db->select('*')->from('session_log')->where('usuario_id', $usuario_id)->order_by("id_session_log", "desc")->get()->result();
 		return $datos_actividad;
 	}
-
 	public function cargarMisNotificaciones()
 	{
 		$notificaciones = $this->db->select("*")->from("notificaciones")->where("quienRecibe", "admin")->get()->result();
 		return $notificaciones;
 	}
-
 	public function cargar_todaInformacion()
 	{
 		$idSolicitud = $this->input->post('idSolicitud');
@@ -2354,7 +2283,6 @@ class Admin extends CI_Controller
 			echo json_encode(array('url' => "", 'msg' => "Se guardaron las observaciones. Formulario" . $data_observacion['idForm'] ));
 		}
 	}
-
 	public function guardar_observacion()
 	{
 		$datavalue = $this->input->post('type');
@@ -2382,7 +2310,6 @@ class Admin extends CI_Controller
 			echo json_encode(array('url' => "", 'msg' => "Se guardaron las observaciones."));
 		}
 	}
-
 	public function guardarContrasenaAdmin()
 	{
 		$id_usuario = $this->session->userdata('usuario_id');
@@ -2401,7 +2328,6 @@ class Admin extends CI_Controller
 			echo json_encode(array('url' => "admin", 'msg' => "Se cambio la contraseña."));
 		}
 	}
-
 	public function verBateriaObservacion()
 	{
 		$id_observacion = $this->input->post('id_observacion');
@@ -2410,7 +2336,6 @@ class Admin extends CI_Controller
 
 		echo json_encode($observacion);
 	}
-
 	public function upload_camara()
 	{
 		/**
@@ -2478,7 +2403,6 @@ class Admin extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-
 	public function upload_resolucion()
 	{
 		$fechaResolucionInicial = $this->input->post('fechaResolucionInicial');
@@ -2564,7 +2488,6 @@ class Admin extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-
 	public function eliminarResolucion()
 	{
 		$id_resolucion = $this->input->post('id_resolucion');
@@ -2583,7 +2506,6 @@ class Admin extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-
 	public function editarResolucion()
 	{
 		$id_resolucion = $this->input->post('id_resolucion');
@@ -2591,7 +2513,6 @@ class Admin extends CI_Controller
 		$resolucion = $this->db->select('*')->from('resoluciones')->where('id_resoluciones', $id_resolucion)->get()->row();
 		echo json_encode(array('resolucion' => $resolucion));
 	}
-
 	public function actualizarResolucion()
 	{
 		$id_res = $this->input->post('id_res');
@@ -2617,19 +2538,16 @@ class Admin extends CI_Controller
 			$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' actualizó resolucion.');
 		}
 	}
-
 	public function cargarOpcionesSistema()
 	{
 		$opciones = $this->db->select("*")->from("opciones")->get()->result();
 		return $opciones;
 	}
-
 	public function cargarCursosInforme()
 	{
 		$tiposCursoInformes = $this->db->select("*")->from("tiposCursoInformes")->get()->result();
 		return $tiposCursoInformes;
 	}
-
 	public function actualizarTiposCursoInforme()
 	{
 		$id_tiposCursoInformes = $this->input->post('id_tiposCursoInformes');
@@ -2645,7 +2563,6 @@ class Admin extends CI_Controller
 			$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' actualizó los cursos del informe de actividades.');
 		}
 	}
-
 	public function eliminarCursoInforme()
 	{
 		$id_curso = $this->input->post('id_curso');
@@ -2656,7 +2573,6 @@ class Admin extends CI_Controller
 			$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' elimino el cruso de informes.');
 		}
 	}
-
 	public function crearTiposCursoInforme()
 	{
 		$nombre = $this->input->post('nombre');
@@ -2731,19 +2647,16 @@ class Admin extends CI_Controller
 			//$this->email->print_debugger();
 		}
 	}
-
 	public function cargarNits()
 	{
 		$nits = $this->db->select("*")->from("nits_db")->get()->result();
 		return $nits;
 	}
-
 	public function cargarResultadosEncuesta()
 	{
 		$resultados = $this->db->select("*")->from("encuesta")->get()->result();
 		return $resultados;
 	}
-
 	public function guardarNitAcreditadas()
 	{
 		$nit_org = $this->input->post('nit_org');
@@ -2762,7 +2675,6 @@ class Admin extends CI_Controller
 			$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' creo un nit de entidades acreditadas.');
 		}
 	}
-
 	public function eliminarNitAcreditadas()
 	{
 		$id_nit = $this->input->post('id_nit');
@@ -2773,7 +2685,6 @@ class Admin extends CI_Controller
 			$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' elimino el nit de una entidad acreditada con id: ' . $id_nit . '.');
 		}
 	}
-
 	public function actualizarArchivoDocente()
 	{
 		$id_archivoDocente = $this->input->post('id_archivoDocente');
@@ -2802,7 +2713,6 @@ class Admin extends CI_Controller
 			echo json_encode(array('msg' => "Nombre de la aplicación actualizado"));
 		}
 	}
-
 	public function guardarArchivoObsPlataforma() //TODO: Guardar Archivos
 	{
 		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
@@ -2855,7 +2765,6 @@ class Admin extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-
 	public function upload_imagen_header_der()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -2892,7 +2801,6 @@ class Admin extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-
 	public function upload_imagen_header_izq()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -2929,7 +2837,6 @@ class Admin extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-
 	/**
 		Funcion para cerrar la sesion del usuario.
 		Destruye la sesion actual del usuario y redirecciona a Login.
@@ -2957,7 +2864,6 @@ class Admin extends CI_Controller
 		echo json_encode(array('url' => base_url() . "admin", 'msg' => "Sesión terminada."));
 		$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' cerró sesión.');
 	}
-
 	/**
 		Funcion para enviar un correo electronico.
 		$this->envio_mail("obs", $id_organizacion, 1);
@@ -3093,7 +2999,6 @@ class Admin extends CI_Controller
 			echo json_encode(array('url' => "login", 'msg' => "Lo sentimos, hubo un error y no se envio el correo."));
 		}
 	}
-
 	public function modalInformacionUpdate()
 	{
 		$habilitarModal = $this->input->post('habilitarModal');
@@ -3118,7 +3023,6 @@ class Admin extends CI_Controller
 			}
 		}
 	}
-
 	public function cargar_informacionModal()
 	{
 		$informacionModal = $this->db->select("valor")->from("opciones")->where("nombre", "informacionModal")->get()->row()->valor;
@@ -3135,13 +3039,9 @@ class Admin extends CI_Controller
 		}
 	}
 }
-
 function var_dump_pre($mixed = null) {
 	echo '<pre>';
 	var_dump($mixed);
 	echo '</pre>';
 	return null;
 }
-
-
-

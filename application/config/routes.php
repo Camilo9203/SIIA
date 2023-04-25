@@ -119,7 +119,7 @@ $route['panelAdmin/organizaciones/docentes/panel'] = 'Docentes/panelDocentes';
 $route['panelAdmin/organizaciones/docentes/asignar'] = 'Docentes/asignarDocentes';
 $route['panelAdmin/organizaciones/docentes/evaluar'] = 'Docentes/evaluarDocentes';
 //Estadisticas 
-//TODO:Rutas nuevas para estadisticas
+//TODO:Rutas nuevas para estadísticas
 $route['panelAdmin/estadisticas'] = 'Estadisticas/panel';
 $route['panelAdmin/estadisticas/acreditacion'] = 'Estadisticas/acreditacion';
 // Super

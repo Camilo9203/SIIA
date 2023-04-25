@@ -8,7 +8,7 @@ class Panel extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->helper(array('download', 'file', 'url', 'html', 'form'));
-		//verify_session();
+		verify_session();
 	}
 
 	/**
