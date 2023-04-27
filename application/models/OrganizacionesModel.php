@@ -35,4 +35,17 @@ class OrganizacionesModel extends CI_Model
 		$data_organizaciones = $this->db->select("*")->from("organizacionesHistorial")->get()->result();
 		return $data_organizaciones;
 	}
+	public function getOrganizacionesFinalizadas()
+	{
+		$organizaciones = array();
+		$solicitudes = $this->db->select("*")->from("estadoOrganizaciones")->where("nombre", "Finalizado")->get()->result();
+		foreach ($solicitudes as $idSolicitud) {
+			$idOrg = $idSolicitud->organizaciones_id_organizacion;
+			$idSolicitud = $idSolicitud->idSolicitud;
+			$data_organizaciones = $this->db->select("*")->from("organizaciones, estadoOrganizaciones, solicitudes")->where("organizaciones.id_organizacion", $idOrg)->where("estadoOrganizaciones.idSolicitud", $idSolicitud)->where("solicitudes.idSolicitud", $idSolicitud)->get()->row();
+			array_push($organizaciones, $data_organizaciones);
+		}
+		return $organizaciones;
+		// echo json_encode($organizaciones);
+	}
 }

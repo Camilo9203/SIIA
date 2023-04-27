@@ -62,18 +62,17 @@ if ($this->config->item('mantenimiento') == TRUE) {
 $route['estado'] = 'Home/estadoSolicitud';
 $route['facilitadores'] = 'Home/facilitadores';
 
-//TODAS las rutas para usuarios
+/** Usuarios */
 $route['login'] = 'Sesion';
 $route['panel'] = 'Panel';
-
-//TODAS las rutas para el registro
 $route['registro'] = 'Registro';
-//Recordar para cron por si existe algun error
+
+//Recordar para cron por si existe algún error
 $route['tiempo'] = 'Recordar/calculo_tiempo';
 $route['tiempoAdmin'] = 'Recordar/recordarToAdmin';
 $route['tiempoUser'] = 'Recordar/recordarToUser';
 $route['tiempoUserActivation'] = 'Recordar/recordarToUserActivation';
-// TODAS las rutas para el administrador
+
 $route['admin'] = 'Sesion/login_admin';
 $route['socrata'] = 'Admin/socrata';
 $route['clean_socrata'] = 'Admin/clean_socrata';
@@ -82,11 +81,12 @@ $route['llamadas'] = 'Admin/llamadas';
 $route['panelAdmin/socrata'] = 'Admin/socrataPanel';
 $route['panelAdmin'] = 'Admin/panel_admin';
 $route['panelAdmin/reportes'] = 'Admin/panel_reportes';
+/** Administrador Organizaciones */
 $route['panelAdmin/organizaciones'] = 'Admin/ver_organizaciones';
 $route['panelAdmin/organizaciones/en_Proceso'] = 'Admin/enProceso';
 $route['panelAdmin/organizaciones/finalizadas'] = 'Admin/finalizadas';
 $route['panelAdmin/organizaciones/observaciones'] = 'Admin/enObservaciones';
-$route['panelAdmin/organizaciones/asignar'] = 'Admin/asignar';
+$route['panelAdmin/organizaciones/asignar'] = 'Organizaciones/asignar';
 $route['panelAdmin/organizaciones/inscritas'] = 'Admin/inscritas';
 $route['panelAdmin/organizaciones/informacion'] = 'Admin/informacion';
 $route['panelAdmin/contacto'] = 'Admin/contacto';
