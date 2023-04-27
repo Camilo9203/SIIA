@@ -50,7 +50,7 @@ class Organizaciones extends CI_Controller
 	{
 		$data = $this->datosSession();
 		$data['title'] = 'Panel Principal / Organizaciones / Asignar';
-		$data['organizaciones_en_proceso'] = $this->SolicitudesModel->getSolicitudesFinalizadas();
+		$data['solicitudes'] = $this->SolicitudesModel->getSolicitudesFinalizadas();
 		$data['administradores'] = $this->AdministradoresModel->getAdministradores();
 		$this->load->view('include/header', $data);
 		$this->load->view('admin/organizaciones/asignar', $data);
