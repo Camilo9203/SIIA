@@ -1,86 +1,113 @@
 <div class="col-md-12" id="admin_ver_finalizadas">
 	<div class="clearfix"></div>
-	<hr />
-	<h3>Solicitudes sin asignar:</h3>
-	<br />
-	<div class="table">
-		<table id="tabla_sinasignar" width="100%" border=0 class="table table-striped table-bordered tabla_form">
-			<thead>
-				<tr>
-					<td class="col-md-2">Organización</td>
-					<td class="col-md-2">ID Solicitud</td>
-					<td class="col-md-2">Tipo</td>
-					<td class="col-md-2">Motivo</td>
-					<td class="col-md-2">Modalidad</td>
-					<td class="col-md-2">Fecha de finalización</td>
-					<td class="col-md-2">Asignada a</td>
-					<td class="col-md-2">Acción</td>
-				</tr>
-			</thead>
-			<tbody id="tbody">
-			<?php
-				$j = 0;
-				for ($i = 0; $i < count($solicitudes); $i++) {
-					if ($solicitudes[$i][$j]->asignada == "SIN ASIGNAR") {
-						echo "<tr>";
-						echo "<td>" . $solicitudes[$i][$j]->nombreOrganizacion . "</td>";
-						echo "<td>" . $solicitudes[$i][$j]->idSolicitud . "</td>";
-						echo "<td>" . $solicitudes[$i][$j]->tipoSolicitud . "</td>";
-						echo "<td>" . $solicitudes[$i][$j]->motivoSolicitud . "</td>";
-						echo "<td>" . $solicitudes[$i][$j]->modalidadSolicitud . "</td>";
-						echo "<td>" . $solicitudes[$i][$j]->fechaFinalizado . "</td>";
-						echo "<td>" . $solicitudes[$i][$j]->asignada . "</td>";
-						echo "<td class='verFinOrgInf'><button class='btn btn-siia btn-sm' id='verModalAsignar' data-organizacion='" . $solicitudes[$i][$j]->id_organizacion . "' data-nombre='" . $solicitudes[$i][$j]->nombreOrganizacion . "' data-nit='" . $solicitudes[$i][$j]->numNIT . "' data-solicitud='" . $solicitudes[$i][$j]->idSolicitud . "' data-toggle='modal' data-target='#asignarOrganizacion'>Asignar <i class='fa fa-pencil' aria-hidden='true'></i></a></td>";
-						echo "</tr>";
-					}
-					$j = $j++;
-				}
-			?>
-			</tbody>
-		</table>
-		<div class="clearfix"></div>
-		<hr />
-		<h3>Solicitudes Asignadas:</h3>
-		<br />
-		<div class="table">
-			<table id="tabla_asginadas" width="100%" border=0 class="table table-striped table-bordered tabla_form">
-				<thead>
-					<tr>
-						<td class="col-md-2">Organización</td>
-						<td class="col-md-2">ID Solicitud</td>
-						<td class="col-md-2">Tipo</td>
-						<td class="col-md-2">Motivo</td>
-						<td class="col-md-2">Modalidad</td>
-						<td class="col-md-2">Fecha de finalización</td>
-						<td class="col-md-2">Asignada a</td>
-						<td class="col-md-2">Acción</td>
-					</tr>
-				</thead>
-				<tbody id="tbody">
-				<?php
-					$k = 0;
-					//echo '<pre>'; var_dump($solicitudes[0]); echo '</pre>';
-					for ($i = 0; $i < count($solicitudes); $i++) {
-						if ($solicitudes[$i][$k]->asignada != "SIN ASIGNAR") {
-							echo "<tr>";
-							echo "<td>" . $solicitudes[$i][$k]->nombreOrganizacion . "</td>";
-							echo "<td>" . $solicitudes[$i][$k]->idSolicitud . "</td>";
-							echo "<td>" . $solicitudes[$i][$k]->tipoSolicitud . "</td>";
-							echo "<td>" . $solicitudes[$i][$k]->motivoSolicitud . "</td>";
-							echo "<td>" . $solicitudes[$i][$k]->modalidadSolicitud . "</td>";
-							echo "<td>" . $solicitudes[$i][$k]->fechaFinalizado . "</td>";
-							echo "<td>" . $solicitudes[$i][$k]->asignada . "</td>";
-							echo "<td class='verFinOrgInf'><button class='btn btn-siia btn-sm' id='verModalAsignar' data-organizacion='" . $solicitudes[$i][$k]->id_organizacion . "' data-nombre='" . $solicitudes[$i][$k]->nombreOrganizacion . "' data-nit='" . $solicitudes[$i][$k]->numNIT . "' data-solicitud='" . $solicitudes[$i][$k]->idSolicitud . "' data-toggle='modal' data-target='#asignarOrganizacion'>Asignar <i class='fa fa-pencil' aria-hidden='true'></i></a></td>";
-							echo "</tr>";
-						}
-						$k = $k++;
-					}
-				?>
+	<hr/>
+	<!-- Tablas -->
+		<!-- Tabla solicitudes sin asignar -->
+		<?php if($solicitudesSinAsignar): ?>
+			<h3>Solicitudes sin asignar:</h3>
+			<br>
+			<div class="table">
+				<table id="tabla_sinasignar" width="100%" border=0 class="table table-striped table-bordered tabla_form">
+					<thead>
+						<tr>
+							<td class="col-md-2">Organización</td>
+							<td class="col-md-2">ID Solicitud</td>
+							<td class="col-md-2">Tipo</td>
+							<td class="col-md-2">Motivo</td>
+							<td class="col-md-2">Modalidad</td>
+							<td class="col-md-2">Fecha de finalización</td>
+							<td class="col-md-2">Asignada a</td>
+							<td class="col-md-2">Acción</td>
+						</tr>
+					</thead>
+					<tbody id="tbody">
+						<?php
+							foreach ($solicitudesSinAsignar as $solicitud) {
+								if ($solicitud->asignada == "SIN ASIGNAR") {
+									echo "<tr>";
+									echo "<td>" . $solicitud->nombreOrganizacion . "</td>";
+									echo "<td>" . $solicitud->idSolicitud . "</td>";
+									echo "<td>" . $solicitud->tipoSolicitud . "</td>";
+									echo "<td>" . $solicitud->motivoSolicitud . "</td>";
+									echo "<td>" . $solicitud->modalidadSolicitud . "</td>";
+									echo "<td>" . $solicitud->fechaFinalizado . "</td>";
+									echo "<td>" . $solicitud->asignada . "</td>";
+									echo "<td class='verFinOrgInf'><button class='btn btn-siia btn-sm' id='verModalAsignar' data-organizacion='" . $solicitud->id_organizacion . "' data-nombre='" . $solicitud->nombreOrganizacion . "' data-nit='" . $solicitud->numNIT . "' data-solicitud='" . $solicitud->idSolicitud . "' data-toggle='modal' data-target='#asignarOrganizacion'>Asignar <i class='fa fa-pencil' aria-hidden='true'></i></a></td>";
+									echo "</tr>";
+								}
+							}
+						?>
 				</tbody>
 			</table>
-			<button class="btn btn-danger btn-sm pull-left" id="admin_ver_org_volver"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
-		</div>
-	</div>
+			</div>
+			<div class="clearfix"></div>
+			<hr/>
+		<?php else: ?>
+			<div class="container">
+				<div class="alert alert-success" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="alert-heading">Solicitudes Sin Asignar: </h4>
+					<p>En este momento no existen solicitudes pendientes por asignar a los evaluadores</p>
+					<hr>
+					<p class="mb-0">En el momento que se finalicen nuevas solicitudes, se mostrarán en este espacio para ser asignadas.</p>
+				</div>
+			</div>
+		<?php endif; ?>
+		<!-- Tabla solicitudes sin asignar -->
+		<?php if($solicitudesAsignadas): ?>
+			<h3>Solicitudes Asignadas:</h3>
+			<br>
+			<div class="table">
+				<table id="tabla_asginadas" width="100%" border=0 class="table table-striped table-bordered tabla_form">
+					<thead>
+						<tr>
+							<td class="col-md-2">Organización</td>
+							<td class="col-md-2">ID Solicitud</td>
+							<td class="col-md-2">Tipo</td>
+							<td class="col-md-2">Motivo</td>
+							<td class="col-md-2">Modalidad</td>
+							<td class="col-md-2">Fecha de finalización</td>
+							<td class="col-md-2">Asignada a</td>
+							<td class="col-md-2">Acción</td>
+						</tr>
+					</thead>
+					<tbody id="tbody">
+						<?php
+							foreach ($solicitudesAsignadas as $solicitud) {
+								if ($solicitud->asignada != "SIN ASIGNAR") {
+									echo "<tr>";
+									echo "<td>" . $solicitud->nombreOrganizacion . "</td>";
+									echo "<td>" . $solicitud->idSolicitud . "</td>";
+									echo "<td>" . $solicitud->tipoSolicitud . "</td>";
+									echo "<td>" . $solicitud->motivoSolicitud . "</td>";
+									echo "<td>" . $solicitud->modalidadSolicitud . "</td>";
+									echo "<td>" . $solicitud->fechaFinalizado . "</td>";
+									echo "<td>" . $solicitud->asignada . "</td>";
+									echo "<td class='verFinOrgInf'><button class='btn btn-siia btn-sm' id='verModalAsignar' data-organizacion='" . $solicitud->id_organizacion . "' data-nombre='" . $solicitud->nombreOrganizacion . "' data-nit='" . $solicitud->numNIT . "' data-solicitud='" . $solicitud->idSolicitud . "' data-toggle='modal' data-target='#asignarOrganizacion'>Asignar <i class='fa fa-pencil' aria-hidden='true'></i></a></td>";
+									echo "</tr>";
+								}
+							}
+						?>
+					</tbody>
+				</table>
+			</div>
+		<?php else: ?>
+			<div class="container">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<div class="alert alert-success" role="alert">
+					<h4 class="alert-heading">Solicitudes Asignadas: </h4>
+					<p>En este momento no existen solicitudes asignadas a los evaluadores</p>
+					<hr>
+					<p class="mb-0">En el momento que se asignen solicitudes, se mostrarán en este espacio.</p>
+				</div>
+			</div>
+		<?php endif; ?>
+		<button class="btn btn-danger btn-sm pull-left" id="admin_ver_org_volver"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
+	<!-- Modal asignación-->
 	<div class="modal fade" id="asignarOrganizacion" tabindex="-1" role="dialog" aria-labelledby="ariaAsignar">
 		<div class="modal-dialog modal-md" role="document">
 			<div class="modal-content">

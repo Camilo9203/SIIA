@@ -1007,7 +1007,7 @@ $(document).ready(function () {
 		redirect(baseURL + "panelAdmin");
 	});
 	$("#admin_asignar_org").click(function () {
-		redirect(baseURL + "panelAdmin/organizaciones/asignar");
+		redirect(baseURL + "panelAdmin/solicitudes/asignar");
 	});
 	$("#admin_organizaciones_inscritas").click(function () {
 		redirect(baseURL + "panelAdmin/organizaciones/inscritas");

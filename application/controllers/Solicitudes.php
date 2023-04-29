@@ -7,9 +7,12 @@ class Solicitudes extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('EstadisticasModel');
+		$this->load->model('SolicitudesModel');
+		$this->load->model('DepartamentosModel');
+		$this->load->model('AdministradoresModel');
 	}
 
-	// Variables de Session
+	/** Datos de sesión administrador */
 	public function datosSession()
 	{
 		verify_session_admin();
@@ -22,10 +25,12 @@ class Solicitudes extends CI_Controller
 			'nivel' => $this->session->userdata('nivel'),
 			'hora' => date("H:i", time()),
 			'fecha' => date('Y/m/d'),
+			'activeLink' => 'solicitudes',
+			'departamentos' => $this->DepartamentosModel->getDepartamentos(),
 		);
 		return $data;
 	}
-	// Tipo solicitud
+	/** Tipo solicitud */
 	public function guardar_tipoSolicitud()
 	{
 		/* $this->form_validation->set_rules('tipo_solicitud','','trim|required|min_length[3]|xss_clean');
@@ -96,7 +101,7 @@ class Solicitudes extends CI_Controller
 			}
 		}
 	}
-	// Verificar tipo solicitud
+	/** Verificar tipo solicitud */
 	public function verificar_tipoSolicitud()
 	{
 		/*$usuario_id = $this->session->userdata('usuario_id');
@@ -178,6 +183,7 @@ class Solicitudes extends CI_Controller
 			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "18", 'estado' => "1"));
 		}
 	}
+	/** Verificar numero de solicitudes */
 	public function numeroSolicitudes()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -188,4 +194,23 @@ class Solicitudes extends CI_Controller
 		$numeroSolicitudes = $solicitudes->numeroSolicitudes;
 		return $numeroSolicitudes;
 	}
+	/** Solicitudes finalizadas  */
+	public function asignarSolicitudes()
+	{
+		$data = $this->datosSession();
+		$data['title'] = 'Panel Principal / Organizaciones / Asignar';
+		$data['solicitudesSinAsignar'] = $this->SolicitudesModel->getSolicitudesFinalizadas()[0]['solicitudesSinAsignar'];
+		$data['solicitudesAsignadas'] = $this->SolicitudesModel->getSolicitudesFinalizadas()[0]['solicitudesAsignadas'];
+		$data['administradores'] = $this->AdministradoresModel->getAdministradores();
+		$this->load->view('include/header', $data);
+		$this->load->view('admin/organizaciones/asignar', $data);
+		$this->load->view('include/footer', $data);
+		$this->logs_sia->logs('PLACE_USER');
+	}
+}
+function var_dump_pre($mixed = null) {
+	echo '<pre>';
+	var_dump($mixed);
+	echo '</pre>';
+	return null;
 }

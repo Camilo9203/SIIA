@@ -3,16 +3,16 @@
 	<hr/>
 </div>
 <div id="panel_admin_organizaciones" class="container center-block">
-	<!--<div class="col-md-3" id="busOrg">
-		<div class="panel panel-siia">
-		  <div class="panel-heading">
-		    <h3 class="panel-title">Buscar Organizacion <i class="fa fa-search" aria-hidden="true"></i></h3>
-		  </div>
-		  <div class="panel-body">
-			<button class="btn btn-default form-control" id="admin_buscar_org">Buscar</button>
-		  </div>
-		</div>
-	</div>-->
+<!--	<div class="col-md-3" id="busOrg">-->
+<!--		<div class="panel panel-siia">-->
+<!--		  <div class="panel-heading">-->
+<!--		    <h3 class="panel-title">Buscar Organización <i class="fa fa-search" aria-hidden="true"></i></h3>-->
+<!--		  </div>-->
+<!--		  <div class="panel-body">-->
+<!--			<button class="btn btn-default form-control" id="admin_buscar_org">Buscar</button>-->
+<!--		  </div>-->
+<!--		</div>-->
+<!--	</div>-->
 	<div class="col-md-3" id="asigOrg">
 		<div class="panel panel-siia">
 		  <div class="panel-heading">
@@ -33,16 +33,16 @@
 		  </div>
 		</div>
 	</div>
-	<!--<div class="col-md-3" id="verOrgPro">
-		<div class="panel panel-siia">
-		  <div class="panel-heading">
-		    <h3 class="panel-title">Organizaciones en Proceso <i class="fa fa-spinner" aria-hidden="true"></i></h3>
-		  </div>
-		  <div class="panel-body">
-			<button class="btn btn-default form-control" id="admin_organizaciones_enproceso">En proceso</button>
-		  </div>
-		</div>
-	</div>-->
+<!--	<div class="col-md-3" id="verOrgPro">-->
+<!--		<div class="panel panel-siia">-->
+<!--		  <div class="panel-heading">-->
+<!--		    <h3 class="panel-title">Organizaciones en Proceso <i class="fa fa-spinner" aria-hidden="true"></i></h3>-->
+<!--		  </div>-->
+<!--		  <div class="panel-body">-->
+<!--			<button class="btn btn-default form-control" id="admin_organizaciones_enproceso">En proceso</button>-->
+<!--		  </div>-->
+<!--		</div>-->
+<!--	</div>-->
 	<div class="col-md-3" id="verOrgFin">
 		<div class="panel panel-siia">
 		  <div class="panel-heading">

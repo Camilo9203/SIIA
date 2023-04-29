@@ -45,18 +45,6 @@ class Organizaciones extends CI_Controller
 		);
 		return $data;
 	}
-
-	public function asignar()
-	{
-		$data = $this->datosSession();
-		$data['title'] = 'Panel Principal / Organizaciones / Asignar';
-		$data['solicitudes'] = $this->SolicitudesModel->getSolicitudesFinalizadas();
-		$data['administradores'] = $this->AdministradoresModel->getAdministradores();
-		$this->load->view('include/header', $data);
-		$this->load->view('admin/organizaciones/asignar', $data);
-		$this->load->view('include/footer', $data);
-		$this->logs_sia->logs('PLACE_USER');
-	}
 }
 function var_dump_pre($mixed = null) {
 	echo '<pre>';

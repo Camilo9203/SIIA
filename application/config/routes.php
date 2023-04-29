@@ -81,6 +81,8 @@ $route['llamadas'] = 'Admin/llamadas';
 $route['panelAdmin/socrata'] = 'Admin/socrataPanel';
 $route['panelAdmin'] = 'Admin/panel_admin';
 $route['panelAdmin/reportes'] = 'Admin/panel_reportes';
+/** Administrador Solicitudes */
+$route['panelAdmin/solicitudes/asignar'] = 'Solicitudes/asignarSolicitudes';
 /** Administrador Organizaciones */
 $route['panelAdmin/organizaciones'] = 'Admin/ver_organizaciones';
 $route['panelAdmin/organizaciones/en_Proceso'] = 'Admin/enProceso';
