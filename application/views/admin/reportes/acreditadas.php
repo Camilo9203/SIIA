@@ -30,7 +30,7 @@
 					<td><?php echo (isset($organizacion['data_organizaciones_inf']->tipoOrganizacion)) ? strtoupper($organizacion['data_organizaciones_inf']->tipoOrganizacion) : strtoupper("Falta por actualizar datos...");?></td>
 					<td><?php echo (isset($organizacion['resoluciones']->cursoAprobado)) ? strtoupper($organizacion['resoluciones']->cursoAprobado) : strtoupper("Falta por actualizar datos...");?></td>
 					<td><?php echo (isset($organizacion['resoluciones']->modalidadAprobada)) ? strtoupper($organizacion['resoluciones']->modalidadAprobada) : strtoupper("Falta por actualizar datos...");?></td>
-					<td><a href='<?php echo base_url("uploads/resoluciones/" . $organizacion['resoluciones']->numeroResolucion) ?>' target='_blank'>RESOLUCIÓN NÚMERO " <?php echo $organizacion['resoluciones']->numeroResolucion ?>"</a></td>
+					<td><a href='<?php echo base_url("uploads/resoluciones/" . $organizacion['resoluciones']->resolucion) ?>' target='_blank'>RESOLUCIÓN NÚMERO " <?php echo $organizacion['resoluciones']->numeroResolucion ?>"</a></td>
 <!--					<td>--><?php //echo strtoupper(date('d-m-Y', strtotime("+" . $organizacion["resoluciones"]->añosResolucion . " year", strtotime($organizacion["resoluciones"]->fechaResolucionInicial))))?><!--</td>-->
 					<td><?php echo (isset($organizacion["resoluciones"]->fechaResolucionFinal)) ? strtoupper($organizacion["resoluciones"]->fechaResolucionFinal) : strtoupper("Falta por actualizar datos...");?></td>
 					<td><?php echo (isset($organizacion['data_organizaciones_inf']->nomDepartamentoUbicacion)) ? strtoupper($organizacion['data_organizaciones_inf']->nomDepartamentoUbicacion) : strtoupper("Falta por actualizar datos...");?></td>
