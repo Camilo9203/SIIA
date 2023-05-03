@@ -20,10 +20,10 @@ class SolicitudesModel extends CI_Model
 			$idOrg = $estado->organizaciones_id_organizacion;
 			$idSolicitud = $estado->idSolicitud;
 			if($estado->asignada != "SIN ASIGNAR"):
-				$solicitud = $this->db->select("*")->from("organizaciones, estadoOrganizaciones, solicitudes, tiposolicitud")->where("organizaciones.id_organizacion", $idOrg)->where("estadoOrganizaciones.idSolicitud", $idSolicitud)->where("solicitudes.idSolicitud", $idSolicitud)->where("tiposolicitud.idSolicitud", $idSolicitud)->get()->row();
+				$solicitud = $this->db->select("*")->from("organizaciones, estadoOrganizaciones, solicitudes, tipoSolicitud")->where("organizaciones.id_organizacion", $idOrg)->where("estadoOrganizaciones.idSolicitud", $idSolicitud)->where("solicitudes.idSolicitud", $idSolicitud)->where("tipoSolicitud.idSolicitud", $idSolicitud)->get()->row();
 				array_push($dataSolicitudesAsignadas, $solicitud);
 			else:
-				$solicitud = $this->db->select("*")->from("organizaciones, estadoOrganizaciones, solicitudes, tiposolicitud")->where("organizaciones.id_organizacion", $idOrg)->where("estadoOrganizaciones.idSolicitud", $idSolicitud)->where("solicitudes.idSolicitud", $idSolicitud)->where("tiposolicitud.idSolicitud", $idSolicitud)->get()->row();
+				$solicitud = $this->db->select("*")->from("organizaciones, estadoOrganizaciones, solicitudes, tipoSolicitud")->where("organizaciones.id_organizacion", $idOrg)->where("estadoOrganizaciones.idSolicitud", $idSolicitud)->where("solicitudes.idSolicitud", $idSolicitud)->where("tipoSolicitud.idSolicitud", $idSolicitud)->get()->row();
 				array_push($dataSolicitudesSinAsignar, $solicitud);
 			endif;
 		}
