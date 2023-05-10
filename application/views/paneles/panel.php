@@ -299,7 +299,7 @@
 					echo "<td>" . $solicitud->modalidadSolicitudAcreditado . "</td>";
 					if ($solicitud->nombre == "En Proceso") {
 						echo "<td><div class='btn-group-vertical' role='group' aria-label='acciones'><button type='button' class='btn btn-siia btn-sm verSolicitud' data-id=" . $solicitud->idSolicitud . " title='Continuar Solicitud'>Continuar <i class='fa fa-check' aria-hidden='true'></i></button>";
-						echo "<button type='button' class='btn btn-danger btn-sm' data-toggle='modal' data-target='#modalEliminarSolicitud' data-backdrop='static' data-keyboard='false' title='Eliminar Solicitud'>Eliminar <i class='fa fa-trash' aria-hidden='true'></i></button></div></td></tr>";
+						echo "<button type='button' class='btn btn-danger btn-sm eliminarSolicitudModal' data-toggle='modal' data-target='#modalEliminarSolicitud' data-id='" . $solicitud->idSolicitud . "' data-backdrop='static' data-keyboard='false' title='Eliminar Solicitud'>Eliminar <i class='fa fa-trash' aria-hidden='true'></i></button></div></td></tr>";
 					}
 					if ($solicitud->nombre == "Acreditado" || $solicitud->nombre == "Archivada" || $solicitud->nombre == "Negada" || $solicitud->nombre == "Revocada" ){
 						echo "<td><button id='verDetalle' class='btn btn-info btn-sm' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false' data-id=" . $solicitud->idSolicitud . " title='Ver Detalle'>Detalle <i class='fa fa-info' aria-hidden='true'></i></button></div></td></tr>";
@@ -367,14 +367,14 @@
 			<div class="modal-dialog modal-xs" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title">¿Está seguro de eliminar la solicitud: <?php echo $solicitud->idSolicitud ?>?</h4>
+						<h4 class="modal-title" id="solicitudAEliminar"></h4>
 					</div>
 					<div class="modal-body">
 						<p>Tenga en cuenta que la información registrada en los formularios de dentro de esta solicitud serán eliminados y no se podrán recuperar.</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" id="noEliminarSolicitud" class="btn btn-danger btn-sm pull-left">No, eliminar <i class="fa fa-times" aria-hidden="true"></i></button>
-						<button type="button" id="eliminarSolicitud" class="btn btn-siia btn-sm pull-right eliminarSolicitud" data-dismiss="modal"  data-id="<?php echo $solicitud->idSolicitud ?>">Si, eliminar solicitud<i class="fa fa-check" aria-hidden="true"></i></button>
+						<button type="button" id="eliminarSolicitud" class="btn btn-success btn-sm eliminarSolicitud" data-dismiss="modal">Si, eliminar solicitud<i class="fa fa-check" aria-hidden="true"></i></button>
 					</div>
 				</div>
 			</div>

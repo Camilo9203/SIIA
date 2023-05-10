@@ -34,6 +34,12 @@ $(".verSolicitud").click(function () {
 	let idSolicitud = $(this).attr("data-id");
 	window.open(baseURL + "panel/solicitud/" + idSolicitud, '_self');
 });
+/** Ver modal y cargar variable de solicitud */
+$(".eliminarSolicitudModal").click(function () {
+	let idSolicitud = $(this).attr("data-id");
+	$('#eliminarSolicitud').attr('data-id', idSolicitud);
+	$('#solicitudAEliminar').html("¿Estás seguro de eliminar la solicitud <span class='spanRojo'>" + idSolicitud + "</span>?");
+});
 /** Ver Eliminar */
 $(".eliminarSolicitud").click(function () {
 	let data = {
