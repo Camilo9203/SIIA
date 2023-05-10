@@ -302,7 +302,7 @@
 						echo "<button type='button' class='btn btn-danger btn-sm eliminarSolicitudModal' data-toggle='modal' data-target='#modalEliminarSolicitud' data-id='" . $solicitud->idSolicitud . "' data-backdrop='static' data-keyboard='false' title='Eliminar Solicitud'>Eliminar <i class='fa fa-trash' aria-hidden='true'></i></button></div></td></tr>";
 					}
 					if ($solicitud->nombre == "Acreditado" || $solicitud->nombre == "Archivada" || $solicitud->nombre == "Negada" || $solicitud->nombre == "Revocada" ){
-						echo "<td><button id='verDetalle' class='btn btn-info btn-sm' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false' data-id=" . $solicitud->idSolicitud . " title='Ver Detalle'>Detalle <i class='fa fa-info' aria-hidden='true'></i></button></div></td></tr>";
+						echo "<td><button class='btn btn-info btn-sm verDetalleSolicitud' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false' data-id=" . $solicitud->idSolicitud . " title='Ver Detalle'>Detalle <i class='fa fa-info' aria-hidden='true'></i></button></div></td></tr>";
 					}
 					if ($solicitud->nombre == "Finalizado"){
 						echo "<td><button class='btn btn-success btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Estado'>Estado<i class='fa fa-eye' aria-hidden='true'></i></button></td></tr>";
@@ -321,7 +321,7 @@
 						<div class="modal-header">
 							<div class="row">
 								<div id="header_politicas" class="col-md-12">
-									<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="http://localhost/siia/assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
+									<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="<?php echo base_url() ?>assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
 								</div>
 								<div class="clearfix"></div>
 								<hr />
@@ -335,21 +335,13 @@
 								<div class="card-body">
 									<div class="container-fluid">
 										<div class="row">
-											<div class="col-lg-6" style="text-align: left;">
-												<p><label>Solicitud Número:</label> <?php echo $solicitud->idSolicitud ?></p>
-												<p><label>Estado Anterior:</label> <?php echo $solicitud->estadoAnterior ?></p>
-												<p><label>Tipo:</label> <?php echo $solicitud->tipoSolicitud ?></p>
-												<p><label>Motivo:</label> <?php echo $solicitud->motivoSolicitud ?></p>
-												<p><label>Modalidad:</label> <?php echo $solicitud->modalidadSolicitud ?></p>
-
+											<div class="col-lg-6" style="text-align: left;" id="informacionSolicitudBasico">
 											</div>
-											<div class="col-lg-6" style="text-align: left;">
-												<p><label>Fecha de Creación:</label> <?php echo $solicitud->fecha ?></p>
-												<p><label>Fecha Ultima Revisión:</label> <?php echo $solicitud->fechaUltimaRevision ?></p>
+											<div class="col-lg-6" style="text-align: left;" id="informacionSolicitudFechas">
 											</div>
 										</div>
 										<hr />
-										<p><label>Estado:</label> <?php echo $solicitud->nombre ?></p>
+										<div id="informacionSolicitudEstado"></div>
 									</div>
 
 								</div>

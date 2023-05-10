@@ -4,11 +4,21 @@ class SolicitudesModel extends CI_Model
 	public function __construct()
 	{
 		$this->load->database();
-		$this->load->model('SolicitudesModel');
-		$this->load->model('DepartamentosModel');
-		$this->load->model('AdministradoresModel');
 	}
+	/** Cargar Solicitudes */
+	public function solicitudes($id = FALSE)
+	{
+		if ($id === FALSE) {
 
+			// Consulta para traer organizaciones acreditas
+			$query = $this->db->select("*")->from("solicitudes")->get();
+			return $query->result_array();
+		}
+		// Traer solicitudes por id
+
+		$query = $this->db->select("*")->from("solicitudes")->join('tipoSolicitud', "tipoSolicitud.idSolicitud = solicitudes.idSolicitud")->join('estadoOrganizaciones', "estadoOrganizaciones.idSolicitud = solicitudes.idSolicitud")->where('solicitudes.idSolicitud', $id)->get()->row();;
+		return $query;
+	}
 	/** Cargar Solicitudes Finalizadas Histórico */
 	public function getSolicitudesFinalizadas()
 	{
@@ -32,4 +42,3 @@ class SolicitudesModel extends CI_Model
 		// echo json_encode($organizaciones);
 	}
 }
-

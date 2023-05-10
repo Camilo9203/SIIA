@@ -40,6 +40,42 @@ $(".eliminarSolicitudModal").click(function () {
 	$('#eliminarSolicitud').attr('data-id', idSolicitud);
 	$('#solicitudAEliminar').html("¿Estás seguro de eliminar la solicitud <span class='spanRojo'>" + idSolicitud + "</span>?");
 });
+/** Ver Solicitud */
+$(".verDetalleSolicitud").click(function () {
+	let html = ''
+	let data = {
+		idSolicitud: $(this).attr('data-id')
+	}
+	$.ajax({
+		url: baseURL + "solicitudes/cargarDatosSolicitud",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		success: function (response) {
+			console.log(response);
+			html += "<p><label class='font-weight-bold'>Solicitud Número: </label> " + response.solicitud['idSolicitud'] + "</p>";
+			html += "<p><label class='font-weight-bold'>Tipo: </label> " + response.solicitud['tipoSolicitud'] + "</p>";
+			html += "<p><label class='font-weight-bold'>Motivo: </label> " + response.solicitud['motivoSolicitud'] + "</p>";
+			html += "<p><label class='font-weight-bold'>Modalidad: </label> " + response.solicitud['modalidadSolicitud'] + "</p>";
+			$("#informacionSolicitudBasico").html(html);
+			html = ""
+			html += "<p><label class='font-weight-bold'>Fecha de Creación: </label> " + response.solicitud['fecha'] + "</p>";
+			html += "<p><label class='font-weight-bold'>Fecha de Finalización: </label> " + response.solicitud['fechaFinalizado'] + "</p>";
+			html += "<p><label class='font-weight-bold'>Fecha Ultima Revisión: </label> " +  response.solicitud['fechaUltimaRevision'] + "</p>";
+			$("#informacionSolicitudFechas").html(html);
+			html = ""
+			html += "<p><label class='font-weight-bold'>Estado: </label> <code>" +  response.solicitud['nombre'] + "</code></p>";
+			html += "<p><label class='font-weight-bold'>Estado Anterior: </label> " + response.solicitud['estadoAnterior'] + "</p>";
+			html += "<p><label class='font-weight-bold'>Asignada: </label> " +  response.solicitud['asignada'] + "</p>";
+			html += "<p><label class='font-weight-bold'>Revisiones: </label> " +  response.solicitud['numeroRevisiones'] + "</p>";
+			html += "<p><label class='font-weight-bold'>Solicitud: </label> " +  response.solicitud['numeroSolicitudes'] + "</p>";
+			$("#informacionSolicitudEstado").html(html);
+		},
+		error: function (ev) {
+			console.log(ev);
+		},
+	})
+});
 /** Ver Eliminar */
 $(".eliminarSolicitud").click(function () {
 	let data = {

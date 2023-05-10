@@ -30,6 +30,11 @@ class Solicitudes extends CI_Controller
 		);
 		return $data;
 	}
+	/** Cargar Solicitud  */
+	public function cargarDatosSolicitud(){
+		$solicitud = $this->SolicitudesModel->solicitudes($this->input->post('idSolicitud'));
+		echo json_encode(array('solicitud' => $solicitud));
+	}
 	/** Tipo solicitud */
 	public function guardar_tipoSolicitud()
 	{
