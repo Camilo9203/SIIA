@@ -611,33 +611,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-	public function enProceso()
-	{
-		date_default_timezone_set("America/Bogota");
-		$logged = $this->session->userdata('logged_in');
-		$nombre_usuario = $this->session->userdata('nombre_usuario');
-		$usuario_id = $this->session->userdata('usuario_id');
-		$tipo_usuario = $this->session->userdata('type_user');
-		$nivel = $this->session->userdata('nivel');
-		$hora = date("H:i", time());
-		$fecha = date('Y/m/d');
-
-		$data['title'] = 'Panel Principal / Administrador / En proceso';
-		$data['logged_in'] = $logged;
-		$data['nombre_usuario'] = $nombre_usuario;
-		$data['usuario_id'] = $usuario_id;
-		$data['tipo_usuario'] = $tipo_usuario;
-		$data['nivel'] = $nivel;
-		$data['hora'] = $hora;
-		$data['fecha'] = $fecha;
-		$data['departamentos'] = $this->cargarDepartamentos();
-		$data['organizaciones_en_proceso'] = $this->cargar_organizacionesEnProceso();
-
-		$this->load->view('include/header', $data);
-		$this->load->view('admin/organizaciones/enProceso', $data);
-		$this->load->view('include/footer', $data);
-		$this->logs_sia->logs('PLACE_USER');
-	}
 	public function evaluacion()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -886,23 +859,7 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-	public function cargar_organizacionesEnProceso()
-	{
-		$organizaciones = array();
-		$id_organizaciones = $this->db->select("organizaciones_id_organizacion")->from("estadoOrganizaciones")->where("nombre", "En Proceso")->get()->result();
-		$id_organizaciones_ = $this->db->select("organizaciones_id_organizacion")->from("estadoOrganizaciones")->where("nombre", "En Proceso de Renovación")->get()->result();
 
-		for ($i = 0; $i < count($id_organizaciones); $i++) {
-			$data_organizaciones = $this->db->select("*")->from("organizaciones")->where("id_organizacion", $id_organizaciones[$i]->organizaciones_id_organizacion)->get()->row();
-			array_push($organizaciones, $data_organizaciones);
-		}
-
-		for ($i = 0; $i < count($id_organizaciones_); $i++) {
-			$data_organizaciones_ = $this->db->select("*")->from("organizaciones")->where("id_organizacion", $id_organizaciones_[$i]->organizaciones_id_organizacion)->get()->row();
-			array_push($organizaciones, $data_organizaciones_);
-		}
-		return $organizaciones;
-	}
 	public function cargar_administradores()
 	{
 		$administradores = $this->db->select("*")->from("administradores")->get()->result();
@@ -1411,27 +1368,6 @@ class Admin extends CI_Controller
 		$nombre_usuario = $this->db->select("usuario")->from("usuarios")->where("id_usuario", $id_usuario)->get()->row()->usuario;
 		$this->notif_sia->notification('Docente', $nombre_usuario, "");
 		//$this->envio_mail("docentes", $id_organizacion, 2, "");
-	}
-	// TODO: Asignar evaluador a organizacion a evaluar
-	public function asignarOrganizacion()
-	{
-		$id_organizacion = $this->input->post('id_organizacion');
-		$evaluadorAsignar = $this->input->post('evaluadorAsignar');
-
-		$organizacion = $this->db->select("*")->from("organizaciones")->where("id_organizacion", $this->input->post('id_organizacion'))->get()->row();
-		$evaluador = $this->db->select("*")->from("administradores")->where("usuario", $this->input->post('evaluadorAsignar'))->get()->row();
-		$nombreEvaluador = $evaluador->primerNombreAdministrador . " " .  $evaluador->primerApellidoAdministrador;
-
-		$data_asignar = array(
-			'asignada' => $this->input->post('evaluadorAsignar')
-		);
-
-		$this->db->where('idSolicitud', $this->input->post('idSolicitud'));
-		if ($this->db->update('solicitudes', $data_asignar)) {
-			$this->logs_sia->session_log('Se asigno ' . $organizacion->nombreOrganizacion . ' a ' . $nombreEvaluador . ' en la fecha ' . date("Y/m/d H:m:s") . '.');
-			echo json_encode(array('url' => "panelAdmin/organizaciones/asignar", 'msg' => 'Se asigno ' . $organizacion->nombreOrganizacion . ' a ' . $nombreEvaluador . ' en la fecha ' . date("Y/m/d H:m:s") . '.'));
-			$this->envio_mail_admin("asignar", $evaluador->direccionCorreoElectronico, 2, $organizacion);
-		}
 	}
 	// TODO: Asignar evaluador a docente a evaluar
 	public function asignarDocenteEvaluador()

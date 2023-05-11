@@ -200,7 +200,7 @@ class Solicitudes extends CI_Controller
 		return $numeroSolicitudes;
 	}
 	/** Asignación de solicitudes   */
-	public function asignarSolicitudes()
+	public function asignar()
 	{
 		$data = $this->datosSession();
 		$data['title'] = 'Panel Principal / Organizaciones / Asignar';
@@ -212,6 +212,19 @@ class Solicitudes extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
+	/** Asignar en proceso */
+	public function asignarEvaluadorSolicitud()
+	{
+		$organizacion = $this->db->select("*")->from("organizaciones")->where("id_organizacion", $this->input->post('id_organizacion'))->get()->row();
+		$evaluador = $this->db->select("*")->from("administradores")->where("usuario", $this->input->post('evaluadorAsignar'))->get()->row();
+		$nombreEvaluador = $evaluador->primerNombreAdministrador . " " .  $evaluador->primerApellidoAdministrador;
+		$data_asignar = array('asignada' => $this->input->post('evaluadorAsignar'));
+		$this->db->where('idSolicitud', $this->input->post('idSolicitud'));
+		if ($this->db->update('solicitudes', $data_asignar)) {
+			$this->logs_sia->session_log('Se asigno ' . $organizacion->nombreOrganizacion . ' a ' . $nombreEvaluador . ' en la fecha ' . date("Y/m/d H:m:s") . '.');
+			send_email_admin('asignarSolicitud','2', $evaluador->direccionCorreoElectronico, null, $organizacion, $this->input->post('idSolicitud'));
+		}
+	}
 	/** Solicitudes finalizadas */
 	public function finalizadas()
 	{
@@ -220,6 +233,17 @@ class Solicitudes extends CI_Controller
 		$data['solicitudesAsignadas'] = $this->SolicitudesModel->getSolicitudesFinalizadas()[0]['solicitudesAsignadas'];
 		$this->load->view('include/header', $data);
 		$this->load->view('admin/solicitudes/finalizadas', $data);
+		$this->load->view('include/footer', $data);
+		$this->logs_sia->logs('PLACE_USER');
+	}
+	/** Solicitudes en proceso */
+	public function proceso()
+	{
+		$data = $this->datosSession();
+		$data['title'] = 'Panel Principal / Administrador / En proceso';
+		$data['solicitudesEnProceso'] = $this->SolicitudesModel->getSolicitudesEnProceso();
+		$this->load->view('include/header', $data);
+		$this->load->view('admin/solicitudes/proceso', $data);
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}

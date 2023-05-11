@@ -82,11 +82,11 @@ $route['panelAdmin/socrata'] = 'Admin/socrataPanel';
 $route['panelAdmin'] = 'Admin/panel_admin';
 $route['panelAdmin/reportes'] = 'Admin/panel_reportes';
 /** Administrador Solicitudes */
-$route['panelAdmin/solicitudes/asignar'] = 'Solicitudes/asignarSolicitudes';
+$route['panelAdmin/solicitudes/asignar'] = 'Solicitudes/asignar';
 $route['panelAdmin/solicitudes/finalizadas'] = 'Solicitudes/finalizadas';
+$route['panelAdmin/solicitudes/proceso'] = 'Solicitudes/proceso';
 /** Administrador Organizaciones */
 $route['panelAdmin/organizaciones'] = 'Admin/ver_organizaciones';
-$route['panelAdmin/organizaciones/en_Proceso'] = 'Admin/enProceso';
 $route['panelAdmin/organizaciones/finalizadas'] = 'Admin/finalizadas';
 $route['panelAdmin/organizaciones/observaciones'] = 'Admin/enObservaciones';
 $route['panelAdmin/organizaciones/asignar'] = 'Organizaciones/asignar';
