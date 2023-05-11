@@ -1,55 +1,51 @@
-<!-- Organizaciones en evaluación -->
+<?php
+/***
+ * @var $solicitudesAsignadas
+ * @var Solicitudes $this
+ * @var $nombre_usuario
+ * @var $nivel
+ */
+?>
+<!-- Solicitudes a evaluar-->
 <div class="col-md-12" id="admin_ver_finalizadas">
 	<div class="clearfix"></div>
 	<hr />
-	<h3>Organizaciones en evaluación:</h3>
+	<h3>Solicitudes en evaluación:</h3>
 	<br />
-	<!-- Tabla de organizaciones en evaluación	-->
+	<!-- Tabla de solicitudes en evaluación	-->
 	<div class="table">
 		<table id="tabla_enProceso_organizacion" width="100%" border=0 class="table table-striped table-bordered tabla_form">
 			<thead>
-				<tr>
-					<td class="col-md-2">Nombre</td>
-					<td>NIT</td>
-					<td class="col-md-2">Representante Legal</td>
-					<td class="col-md-2">Correo de la Organización</td>
-					<td class="col-md-2">Correo del Representante</td>
-					<td class="col-md-2">Fecha de finalización</td>
-					<td class="col-md-2">Fecha última revisión</td>
-					<td class="col-md-2">Asignada a</td>
-					<td class="col-md-2">Acción</td>
-				</tr>
+			<tr>
+				<td class="col-md-2">Nombre</td>
+				<td class="col-md-2">ID Solicitud</td>
+				<td class="col-md-2">Tipo</td>
+				<td class="col-md-2">Motivo</td>
+				<td class="col-md-2">Modalidad</td>
+				<td class="col-md-2">Fecha de finalización</td>
+				<td class="col-md-2">Fecha última revisión</td>
+				<td class="col-md-2">Asignada a</td>
+				<td class="col-md-2">Acción</td>
+			</tr>
 			</thead>
 			<tbody id="tbody">
-				<?php
-				foreach ($organizaciones_en_proceso as $organizaciones) {
-					if ($organizaciones->asignada == $nombre_usuario && $nivel == 1) {
-						echo "<tr>";
-						echo "<td>" . $organizaciones->nombreOrganizacion . "</td>";
-						echo "<td>" . $organizaciones->numNIT . "</td>";
-						echo "<td>" . $organizaciones->primerNombreRepLegal . " " . $organizaciones->segundoNombreRepLegal . " " . $organizaciones->primerApellidoRepLegal . " " . $organizaciones->segundoApellidoRepLegal . "</td>";
-						echo "<td>" . $organizaciones->direccionCorreoElectronicoOrganizacion . "</td>";
-						echo "<td>" . $organizaciones->direccionCorreoElectronicoRepLegal . "</td>";
-						echo "<td>" . $organizaciones->fechaFinalizado . "</td>";
-						echo "<td>" . $organizaciones->fechaUltimaRevision . "</td>";
-						echo "<td>" . $organizaciones->asignada . "</td>";
-						echo "<td class='verFinOrgInf'><button class='btn btn-siia btn-sm ver_organizacion_finalizada' id='' data-organizacion='" . $organizaciones->id_organizacion . "' data-solicitud='" . $organizaciones->idSolicitud . "'>Ver información <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
-						echo "</tr>";
-					} else if ($nivel == 0 || $nivel == 6) {
-						echo "<tr>";
-						echo "<td>" . $organizaciones->nombreOrganizacion . "</td>";
-						echo "<td>" . $organizaciones->numNIT . "</td>";
-						echo "<td>" . $organizaciones->primerNombreRepLegal . " " . $organizaciones->segundoNombreRepLegal . " " . $organizaciones->primerApellidoRepLegal . " " . $organizaciones->segundoApellidoRepLegal . "</td>";
-						echo "<td>" . $organizaciones->direccionCorreoElectronicoOrganizacion . "</td>";
-						echo "<td>" . $organizaciones->direccionCorreoElectronicoRepLegal . "</td>";
-						echo "<td>" . $organizaciones->fechaFinalizado . "</td>";
-						echo "<td>" . $organizaciones->fechaUltimaRevision . "</td>";
-						echo "<td>" . $organizaciones->asignada . "</td>";
-						echo "<td class='verFinOrgInf'><button class='btn btn-siia btn-sm ver_organizacion_finalizada' id='' data-organizacion='" . $organizaciones->id_organizacion . "' data-solicitud='" . $organizaciones->idSolicitud . "'>Ver información <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
-						echo "</tr>";
-					}
-				}
-				?>
+			<?php
+			foreach ($solicitudesAsignadas as $solicitud) {
+				if (($solicitud->asignada == $nombre_usuario && $nivel == 1) || ($nivel == 0 || $nivel == 6) ):
+					echo "<tr>";
+					echo "<td>" . $solicitud->nombreOrganizacion . "</td>";
+					echo "<td>" . $solicitud->idSolicitud . "</td>";
+					echo "<td>" . $solicitud->tipoSolicitud . "</td>";
+					echo "<td>" . $solicitud->motivoSolicitud . "</td>";
+					echo "<td>" . $solicitud->modalidadSolicitud . "</td>";
+					echo "<td>" . $solicitud->fechaFinalizado . "</td>";
+					echo "<td>" . $solicitud->fechaUltimaRevision . "</td>";
+					echo "<td>" . $solicitud->asignada . "</td>";
+					echo "<td class='verFinOrgInf'><button class='btn btn-siia btn-sm ver_organizacion_finalizada' id='' data-organizacion='" . $solicitud->id_organizacion . "' data-solicitud='" . $solicitud->idSolicitud . "'>Ver información <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
+					echo "</tr>";
+				endif;
+			}
+			?>
 			</tbody>
 		</table>
 		<button class="btn btn-danger btn-sm pull-left" id="admin_ver_org_volver"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
@@ -137,7 +133,7 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-6">
-						<!-- Tipo Organizacion -->
+						<!-- Tipo Organización -->
 						<h5>Tip Organización: </h5><p class="tipoLeer" id='tipoOrganizacion'></p>
 						<!-- Departamento -->
 						<h5>Departamento: </h5><p class="tipoLeer" id='nomDepartamentoUbicacion'></p>
@@ -181,7 +177,7 @@
 			<div class="clearfix"></div>
 			<hr />
 			<div class="col-md-12" id="archivos_informacionGeneral">
-				<p>Archivos:</label>
+				<p>Archivos:</p>
 			</div>
 			<div class="clearfix"></div>
 			<hr />
@@ -195,7 +191,7 @@
 					<div class="form-group">
 						<button class="btn btn-siia guardarObservacionesForm1">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
 					</div>
-				</form>
+				<?php echo form_close(); ?>
 			</div>
 			<hr />
 			<div class="">
@@ -238,7 +234,7 @@
 				<div class="form-group">
 					<button class="btn btn-siia guardarObservacionesForm2" id="sigInf">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
 				</div>
-				</form>
+				<?php echo form_close(); ?>
 			</div>
 			<hr />
 			<div class="">
@@ -289,7 +285,7 @@
 				<div class="form-group">
 					<button class="btn btn-siia guardarObservacionesForm3" id="sigInf">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
 				</div>
-				</form>
+				<?php echo form_close(); ?>
 			</div>
 			<hr />
 			<div class="">
@@ -336,7 +332,7 @@
 				<div class="form-group">
 					<button class="btn btn-siia guardarObservacionesForm4" id="sigInf">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
 				</div>
-				</form>
+				<?php echo form_close(); ?>
 			</div>
 			<hr />
 			<div class="">
@@ -437,7 +433,7 @@
 						<div class="form-group">
 							<button class="btn btn-siia guardarObservacionesForm5">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
 						</div>
-						</form>
+						<?php echo form_close(); ?>
 					</div>
 					<hr />
 					<div class="">
@@ -479,7 +475,7 @@
 				<div class="form-group">
 					<button class="btn btn-siia guardarObservacionesForm6">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
 				</div>
-				</form>
+				<?php echo form_close(); ?>
 			</div>
 			<hr />
 			<div class="">
@@ -524,7 +520,7 @@
 				<div class="form-group">
 					<button class="btn btn-siia guardarObservacionesForm7">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
 				</div>
-				</form>
+				<?php echo form_close(); ?>
 			</div>
 			<hr />
 			<div class="">
@@ -570,7 +566,7 @@
 				<div class="form-group">
 					<button class="btn btn-siia guardarObservacionesForm8">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
 				</div>
-				</form>
+				<?php echo form_close(); ?>
 			</div>
 			<hr />
 			<div class="">
@@ -612,7 +608,7 @@
 <!--			<a class="toAncla" id="verProgsMenuAdmin">8. Programas <i class="fa fa-signal" aria-hidden="true"></i></a><br />-->
 			<a class="toAncla" id="verFaciliMenuAdmin">6. Facilitadores <i class="fa fa-users" aria-hidden="true"></i></a><br />
 			<a class="toAncla" id="verDatPlatMenuAdmin">7. Datos Plataforma Virtual <i class="fa fa-globe" aria-hidden="true"></i></a><br />
-			<a class="toAncla" id="verDataEnLinea" data-id="<?php echo $organizaciones->id_organizacion?>">8. Datos Plataforma En Linea <i class="fa fa-globe" aria-hidden="true"></i></a><br />
+			<a class="toAncla" id="verDataEnLinea">8. Datos Plataforma En Linea <i class="fa fa-globe" aria-hidden="true"></i></a><br />
 			<hr />
 			<button class="btn btn-siia btn-sm btn-block" data-toggle="modal" id="verModTermObs" data-target="#terminarProcObs">Terminar proceso de observaciones <i class="fa fa-check" aria-hidden="true"></i></button>
 		</div>

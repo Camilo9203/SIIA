@@ -109,9 +109,10 @@
 	<hr/>
 	<button class="btn btn-danger btn-sm" id="admin_volver"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 </div>
+<!-- Sección de búsqueda -->
 <div id="buscar_org" class="col-md-4 center-block">
 	<h3>Buscar una organización.</h3>
-	<p>Aqui se puede buscar cualquier organizacion que esta en el SIIA actual o historico.</p>
+	<p>Aquí se puede buscar cualquier organización registrada en el sistema.</p>
 	<div class="form-group">
 		<label for="admin_buscar_nombre">Nombre de la Organización:</label>
 		<input type="text" class="form-control" name="admin_buscar_nombre" id="admin_buscar_nombre">

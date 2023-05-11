@@ -83,6 +83,7 @@ $route['panelAdmin'] = 'Admin/panel_admin';
 $route['panelAdmin/reportes'] = 'Admin/panel_reportes';
 /** Administrador Solicitudes */
 $route['panelAdmin/solicitudes/asignar'] = 'Solicitudes/asignarSolicitudes';
+$route['panelAdmin/solicitudes/finalizadas'] = 'Solicitudes/finalizadas';
 /** Administrador Organizaciones */
 $route['panelAdmin/organizaciones'] = 'Admin/ver_organizaciones';
 $route['panelAdmin/organizaciones/en_Proceso'] = 'Admin/enProceso';

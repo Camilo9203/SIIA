@@ -1019,13 +1019,13 @@ $(document).ready(function () {
 		redirect(baseURL + "panelAdmin/organizaciones/en_Proceso");
 	});
 	$("#admin_ver_finalizadas_volver").click(function () {
-		redirect(baseURL + "panelAdmin/organizaciones/finalizadas");
+		redirect(baseURL + "panelAdmin/solicitudes/finalizadas");
 	});
 	$("#admin_ver_observaciones_volver").click(function () {
 		redirect(baseURL + "panelAdmin/organizaciones/observaciones");
 	});
 	$("#admin_organizaciones_finalizadas").click(function () {
-		redirect(baseURL + "panelAdmin/organizaciones/finalizadas");
+		redirect(baseURL + "panelAdmin/solicitudes/finalizadas");
 	});
 	$("#admin_organizaciones_observaciones").click(function () {
 		redirect(baseURL + "panelAdmin/organizaciones/observaciones");

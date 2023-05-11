@@ -454,7 +454,7 @@
 											<li><a href="<?php echo base_url('panelAdmin/organizaciones'); ?>">Organizaciones</a></li>
 											<ul>
 												<li><a href="<?php echo base_url('panelAdmin/organizaciones/inscritas'); ?>">Organizaciones inscritas</a></li>
-												<li><a href="<?php echo base_url('panelAdmin/organizaciones/finalizadas'); ?>">Organizaciones en evaluación</a></li>
+												<li><a href="<?php echo base_url('panelAdmin/solicitudes/finalizadas'); ?>">Organizaciones en evaluación</a></li>
 												<li><a href="<?php echo base_url('panelAdmin/organizaciones/observaciones'); ?>">Organizaciones en complementaria</a></li>
 												<hr />
 												<li><a href="<?php echo base_url('panelAdmin/organizaciones/docentes'); ?>">Facilitadores</a></li>

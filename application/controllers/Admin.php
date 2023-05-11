@@ -1098,61 +1098,8 @@ class Admin extends CI_Controller
 			echo json_encode(array('url' => "panel", 'msg' => "Se respondio al seguimiento."));
 		}
 	}
-	public function finalizadas()
-	{
-		date_default_timezone_set("America/Bogota");
-		$logged = $this->session->userdata('logged_in');
-		$nombre_usuario = $this->session->userdata('nombre_usuario');
-		$usuario_id = $this->session->userdata('usuario_id');
-		$tipo_usuario = $this->session->userdata('type_user');
-		$nivel = $this->session->userdata('nivel');
-		$hora = date("H:i", time());
-		$fecha = date('Y/m/d');
 
-		$data['title'] = 'Panel Principal / Administrador / En evaluación';
-		$data['logged_in'] = $logged;
-		$data['nombre_usuario'] = $nombre_usuario;
-		$data['usuario_id'] = $usuario_id;
-		$data['tipo_usuario'] = $tipo_usuario;
-		$data['nivel'] = $nivel;
-		$data['hora'] = $hora;
-		$data['fecha'] = $fecha;
-		$data['departamentos'] = $this->cargarDepartamentos();
-		$data['organizaciones_en_proceso'] = $this->cargar_organizacionesFinalizadas();
 
-		$this->load->view('include/header', $data);
-		$this->load->view('admin/organizaciones/finalizadas', $data);
-		$this->load->view('include/footer', $data);
-		$this->logs_sia->logs('PLACE_USER');
-	}
-	public function asignar()
-	{
-		date_default_timezone_set("America/Bogota");
-		$logged = $this->session->userdata('logged_in');
-		$nombre_usuario = $this->session->userdata('nombre_usuario');
-		$usuario_id = $this->session->userdata('usuario_id');
-		$tipo_usuario = $this->session->userdata('type_user');
-		$nivel = $this->session->userdata('nivel');
-		$hora = date("H:i", time());
-		$fecha = date('Y/m/d');
-
-		$data['title'] = 'Panel Principal / Administrador / Asignar';
-		$data['logged_in'] = $logged;
-		$data['nombre_usuario'] = $nombre_usuario;
-		$data['usuario_id'] = $usuario_id;
-		$data['tipo_usuario'] = $tipo_usuario;
-		$data['nivel'] = $nivel;
-		$data['hora'] = $hora;
-		$data['fecha'] = $fecha;
-		$data['departamentos'] = $this->cargarDepartamentos();
-		$data['organizaciones_en_proceso'] = $this->cargar_organizacionesFinalizadas();
-		$data['administradores'] = $this->cargar_administradores();
-
-		$this->load->view('include/header', $data);
-		$this->load->view('admin/organizaciones/asignar', $data);
-		$this->load->view('include/footer', $data);
-		$this->logs_sia->logs('PLACE_USER');
-	}
 	public function enObservaciones()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -1179,20 +1126,6 @@ class Admin extends CI_Controller
 		$this->load->view('admin/organizaciones/enObservaciones', $data);
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
-	}
-	public function cargar_organizacionesFinalizadas()
-	{
-		$organizaciones = array();
-		$solicitudes = $this->db->select("*")->from("estadoOrganizaciones")->where("nombre", "Finalizado")->get()->result();
-
-		foreach ($solicitudes as $idSolicitud) {
-			$idOrg = $idSolicitud->organizaciones_id_organizacion;
-			$idSolicitud = $idSolicitud->idSolicitud;
-			$data_organizaciones = $this->db->select("*")->from("organizaciones, estadoOrganizaciones, solicitudes")->where("organizaciones.id_organizacion", $idOrg)->where("estadoOrganizaciones.idSolicitud", $idSolicitud)->where("solicitudes.idSolicitud", $idSolicitud)->get()->row();
-			array_push($organizaciones, $data_organizaciones);
-		}
-		return $organizaciones;
-		// echo json_encode($organizaciones);
 	}
 	public function cargar_organizacionesFinalizadasObs()
 	{

@@ -112,8 +112,8 @@
 		<div class="modal-dialog modal-md" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h3 class="modal-title" id="ariaAsignar">Asignar evaluador a esta solicitud</h3>
-					<small>Pueden que existan usuario con diferente rol y tenga que comunicarse con soporte para que el super administrador pueda cambiar este rol.</small>
+					<h3 class="modal-title" id="ariaAsignar">Asignar evaluador a está solicitud</h3>
+					<small>Si no encuentra el evaluador que busca, puede que exista en el sistema y este deshabilitado o tenga otro rol. En ese caso debe comunicarse con soporte TICS.</small>
 				</div>
 				<div class="modal-body">
 					<p>Seleccione de la siguiente lista los usuarios que tienen el rol de evaluadores para que pueda asignarlo a una organización y que pueda verificar la solicitud.</p>

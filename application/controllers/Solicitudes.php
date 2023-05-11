@@ -199,7 +199,7 @@ class Solicitudes extends CI_Controller
 		$numeroSolicitudes = $solicitudes->numeroSolicitudes;
 		return $numeroSolicitudes;
 	}
-	/** Solicitudes finalizadas  */
+	/** Asignación de solicitudes   */
 	public function asignarSolicitudes()
 	{
 		$data = $this->datosSession();
@@ -208,7 +208,18 @@ class Solicitudes extends CI_Controller
 		$data['solicitudesAsignadas'] = $this->SolicitudesModel->getSolicitudesFinalizadas()[0]['solicitudesAsignadas'];
 		$data['administradores'] = $this->AdministradoresModel->getAdministradores();
 		$this->load->view('include/header', $data);
-		$this->load->view('admin/organizaciones/asignar', $data);
+		$this->load->view('admin/solicitudes/asignar', $data);
+		$this->load->view('include/footer', $data);
+		$this->logs_sia->logs('PLACE_USER');
+	}
+	/** Solicitudes finalizadas */
+	public function finalizadas()
+	{
+		$data = $this->datosSession();
+		$data['title'] = 'Panel Principal / Administrador / En evaluación';
+		$data['solicitudesAsignadas'] = $this->SolicitudesModel->getSolicitudesFinalizadas()[0]['solicitudesAsignadas'];
+		$this->load->view('include/header', $data);
+		$this->load->view('admin/solicitudes/finalizadas', $data);
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}

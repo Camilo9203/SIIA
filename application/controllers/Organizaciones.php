@@ -45,6 +45,7 @@ class Organizaciones extends CI_Controller
 		);
 		return $data;
 	}
+
 }
 function var_dump_pre($mixed = null) {
 	echo '<pre>';
