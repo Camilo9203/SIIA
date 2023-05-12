@@ -18,6 +18,7 @@
 			<thead>
 				<tr>
 					<td class="col-md-2">Nombre</td>
+					<td class="col-md-2">NIT</td>
 					<td class="col-md-2">ID Solicitud</td>
 					<td class="col-md-2">Tipo</td>
 					<td class="col-md-2">Motivo</td>
@@ -34,6 +35,7 @@
 						if (($solicitud->asignada == $nombre_usuario && $nivel == 1) || ($nivel == 0 || $nivel == 6) ):
 							echo "<tr>";
 							echo "<td>" . $solicitud->nombreOrganizacion . "</td>";
+							echo "<td>" . $solicitud->numNIT . "</td>";
 							echo "<td>" . $solicitud->idSolicitud . "</td>";
 							echo "<td>" . $solicitud->tipoSolicitud . "</td>";
 							echo "<td>" . $solicitud->motivoSolicitud . "</td>";
