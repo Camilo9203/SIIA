@@ -333,34 +333,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-	// Camara de comercio
-	public function camara()
-	{
-		date_default_timezone_set("America/Bogota");
-		$logged = $this->session->userdata('logged_in');
-		$nombre_usuario = $this->session->userdata('nombre_usuario');
-		$usuario_id = $this->session->userdata('usuario_id');
-		$tipo_usuario = $this->session->userdata('type_user');
-		$nivel = $this->session->userdata('nivel');
-		$hora = date("H:i", time());
-		$fecha = date('Y/m/d');
-
-		$data['title'] = 'Panel Principal / Administrador / Cámara de Comercio';
-		$data['logged_in'] = $logged;
-		$data['nombre_usuario'] = $nombre_usuario;
-		$data['usuario_id'] = $usuario_id;
-		$data['tipo_usuario'] = $tipo_usuario;
-		$data['nivel'] = $nivel;
-		$data['hora'] = $hora;
-		$data['fecha'] = $fecha;
-		$data['departamentos'] = $this->cargarDepartamentos();
-		$data['organizaciones_en_proceso'] = $this->organizacionesInscritas();
-
-		$this->load->view('include/header', $data);
-		$this->load->view('admin/organizaciones/camara', $data);
-		$this->load->view('include/footer', $data);
-		$this->logs_sia->logs('PLACE_USER');
-	}
 	// Resoluciones
 	public function resoluciones()
 	{
@@ -2162,73 +2134,6 @@ class Admin extends CI_Controller
 		$observacion = $this->db->select("*")->from("bateriaObservaciones")->where("id_bateriaObservaciones", $id_observacion)->get()->row();
 
 		echo json_encode($observacion);
-	}
-	public function upload_camara()
-	{
-		/**
-		<!--<div class="form-group">
-			<?php if($camara->camaraComercio != "" && $camara->camaraComercio != "default.pdf"){ ?>
-				<h4>Cámara de comercio: <a target="_blank" href="<?php echo base_url('uploads/camaraComercio/'.$camara->camaraComercio.''); ?>" id="">Ver Cámara</a></h4>
-			<?php } ?>
-			</div>-->
-		 **/
-		$id_organizacion = $this->input->post('id_organizacion');
-		$name_random = random(10);
-		$size = 100000000;
-
-		$imagen_db = $this->db->select('camaraComercio')->from('organizaciones')->where('id_organizacion', $id_organizacion)->get()->row();
-		$imagen_db_nombre = $imagen_db->camaraComercio;
-
-		if ($imagen_db_nombre != 'default.pdf') {
-			$nombre_imagen =  "camara_comercio_" . $name_random . $_FILES['file']['name'];
-			$tipo_imagen = pathinfo($nombre_imagen, PATHINFO_EXTENSION);
-
-			if (0 < $_FILES['file']['error']) {
-				echo json_encode(array('url' => "admin", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
-			} else if ($_FILES['file']['size'] > $size) {
-				echo json_encode(array('url' => "admin", 'msg' => "El tamaño supera 10 MB, intente con otro pdf."));
-			} else if ($tipo_imagen != "pdf") {
-				echo json_encode(array('url' => "admin", 'msg' => "La extensión de la cámara no es correcta, debe ser PDF"));
-			} else if (move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/camaraComercio/' . $nombre_imagen)) {
-				unlink('uploads/camaraComercio/' . $imagen_db_nombre);
-				$data_update = array(
-					'camaraComercio' => $nombre_imagen
-				);
-
-				$this->db->where('id_organizacion', $id_organizacion);
-				$this->db->update('organizaciones', $data_update);
-
-				echo json_encode(array('url' => "admin", 'msg' => "Se actualizó la cámara de comercio."));
-				$this->logs_sia->session_log('Camara de Comercio Adjuntada');
-				//$this->envio_mail("camara", $id_organizacion, 2, $nombre_imagen);
-				$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' actualizó la camara de la organizacion id: ' . $id_organizacion . '.');
-			}
-		} else {
-			$nombre_imagen =  "camara_comercio_" . $name_random . $_FILES['file']['name'];
-			$tipo_imagen = pathinfo($nombre_imagen, PATHINFO_EXTENSION);
-
-			if (0 < $_FILES['file']['error']) {
-				echo json_encode(array('url' => "admin", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
-			} else if ($_FILES['file']['size'] > $size) {
-				echo json_encode(array('url' => "admin", 'msg' => "El tamaño supera 10 MB, intente con otro pdf."));
-			} else if ($tipo_imagen != "pdf") {
-				echo json_encode(array('url' => "admin", 'msg' => "La extensión de la cámara no es correcta, debe ser PDF"));
-			} else if (move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/camaraComercio/' . $nombre_imagen)) {
-				$data_update = array(
-					'camaraComercio' => $nombre_imagen
-				);
-
-				$this->db->where('id_organizacion', $id_organizacion);
-				$this->db->update('organizaciones', $data_update);
-
-				echo json_encode(array('url' => "admin", 'msg' => "Se actualizó la cámara de comercio."));
-				$this->logs_sia->session_log('Camara de Comercio Adjuntada');
-				//$this->envio_mail("camara", $id_organizacion, 2, $nombre_imagen);
-				$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' actualizó la camara de la organizacion id: ' . $id_organizacion . '.');
-			}
-		}
-		$this->logs_sia->logs('URL_TYPE');
-		$this->logs_sia->logQueries();
 	}
 	public function upload_resolucion()
 	{

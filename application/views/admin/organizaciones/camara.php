@@ -1,9 +1,14 @@
+<?php
+/***
+ * @var $organizaciones
+ */
+?>
 <div class="col-md-12" id="admin_ver_finalizadas">
 <div class="clearfix"></div>
 <hr/>
 	<h4>Cámaras de comercio:</h4>
 	<br/>
-	<p>Ver organizaciones que son prioritarias <a href="<?php echo base_url("recordar/recordarToCamara"); ?>" target="_blank">Ver organizaciones</a>.</p>
+	<p>Ver organizaciones que son prioritarias <a href="<?php echo base_url("organizaciones/organizacionesSinCamaraDeComercio"); ?>" target="_blank">Ver organizaciones</a>.</p>
 	<p>Buscar por el número del NIT para facilidad.</p>
 	<div class="table">
 	<table id="tabla_enProceso_organizacion" width="100%" border=0 class="table table-striped table-bordered tabla_form">
@@ -12,24 +17,24 @@
 				<td class="col-md-2">Nombre</td>
 				<td class="col-md-2">NIT</td>
 				<td class="col-md-2">Representante Legal</td>
-				<td class="col-md-2">Direccion E-Mail Org</td>
-				<td class="col-md-2">Direccion E-Mail Rep</td>
+				<td class="col-md-2">Dirección E-Mail Org</td>
+				<td class="col-md-2">Dirección E-Mail Rep</td>
 				<td class="col-md-2">Accion</td>
 			</tr>
 		</thead>
 		<tbody id="tbody">
-		<?php
-			for ($i=0; $i < count($organizaciones_en_proceso); $i++) {
-				echo "<tr>";
-				echo "<td>".$organizaciones_en_proceso[$i] ->nombreOrganizacion."</td>";
-				echo "<td>".$organizaciones_en_proceso[$i] ->numNIT."</td>";
-				echo "<td>".$organizaciones_en_proceso[$i] ->primerNombreRepLegal." ".$organizaciones_en_proceso[$i] ->segundoNombreRepLegal." ".$organizaciones_en_proceso[$i] ->primerApellidoRepLegal." ".$organizaciones_en_proceso[$i] ->segundoApellidoRepLegal."</td>";
-				echo "<td>".$organizaciones_en_proceso[$i] ->direccionCorreoElectronicoOrganizacion."</td>";
-				echo "<td>".$organizaciones_en_proceso[$i] ->direccionCorreoElectronicoRepLegal."</td>";
-				echo "<td><button class='btn btn-siia btn-sm ver_adjuntar_camara' id='' data-organizacion='".$organizaciones_en_proceso[$i] ->id_organizacion."'>Ver organización <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
-				echo "</tr>";
-			}
-		?>
+			<?php
+				foreach ($organizaciones as $organizacion):
+					echo "<tr>";
+					echo "<td>".$organizacion->nombreOrganizacion."</td>";
+					echo "<td>".$organizacion->numNIT."</td>";
+					echo "<td>".$organizacion->primerNombreRepLegal." ".$organizacion->segundoNombreRepLegal." ".$organizacion->primerApellidoRepLegal." ".$organizacion->segundoApellidoRepLegal."</td>";
+					echo "<td>".$organizacion->direccionCorreoElectronicoOrganizacion."</td>";
+					echo "<td>".$organizacion->direccionCorreoElectronicoRepLegal."</td>";
+					echo "<td><button class='btn btn-siia btn-sm ver_adjuntar_camara' id='' data-organizacion='".$organizacion->id_organizacion."'>Ver organización <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
+					echo "</tr>";
+				endforeach;
+			?>
 		</tbody>
 	</table>
 	<button class="btn btn-danger btn-sm pull-left" id="admin_ver_org_volver"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>

@@ -27,6 +27,15 @@ function send_email_admin($tipo, $prioridad = null, $to = null, $docente = null,
 			$mensaje = 'Se le ha asignado la solicitud: <strong>' . $solicitud . '</strong> de la organización <strong>' . $organizacion->nombreOrganizacion . '</strong> para que pueda ver la solicitud y la información, este correo es informativo y debe ingresar a la aplicación SIIA, en organizaciones y luego en evaluación para poder ver la solicitud.';
 			$respuesta = array('url' => 'panelAdmin/solicitudes/asignar', 'msg' => 'Se asigno la solicitud: ' . $solicitud . ' de la organización: ' . $organizacion->nombreOrganizacion .   ' correctamente en la fecha ' . date("Y-m-d H:i:s") . '.');
 			break;
+		case 'solicitarCamara':
+			$asunto = "Solicitud cámara de comercio: " . $organizacion->sigla;
+			$head = "Buen día, esta es una notificación del sistema:, <br><br>Se ha enviado una solicitud para cargar la camara de comercio de la siguiente organización:<br><br>";
+			$body = "<li> Nombre: " . $organizacion->nombreOrganizacion . " con NIT: <strong>" . $organizacion->numNIT . "</strong></li>";
+			$mensaje = $head . " " . $body;
+			$respuesta = (array('url' => "panel", 'msg' => "Correo enviado a funcionario encargado de subir cámaras de comercio."));
+			$errorEmail = $CI->email->print_debugger();
+			$error = array('url' => "panel", 'msg' => "Lo sentimos, hubo un error y no se envio el correo. <br>" . $errorEmail);
+			break;
 		default:
 			$asunto = "";
 			$mensaje = "";
@@ -53,13 +62,13 @@ function send_email_admin($tipo, $prioridad = null, $to = null, $docente = null,
 			'cuerpo' => json_encode($data_msg),
 			'estado' => 1,
 			'tipo' => $tipo,
-			'error' => $CI->email->print_debugger()
+			'error' => 'Enviado'
 		);
 		//Comprobar que se guardó o no el registro en la tabla correosRegistro
 		if($CI->db->insert('correosregistro', $correo_registro)):
 			echo json_encode($respuesta);
 		else:
-			echo json_encode(array('estado' => 2, 'msg' => "Se envío el correo al administrador con tus respuesta pero no se guardo registro en base de datos"));
+			echo json_encode(array('url' => "panel", 'msg' => "Se ha enviado correo, pero no se guardo registro de este en base de datos"));
 		endif;
 	else:
 		//Capturar datos para guardar en base de datos registro del correo no enviado.
@@ -76,7 +85,7 @@ function send_email_admin($tipo, $prioridad = null, $to = null, $docente = null,
 		);
 		//Comprobar que se guardó o no el registro en la tabla correosRegistro
 		if($CI->db->insert('correosregistro', $correo_registro))
-			echo json_encode($respuesta);
+			echo json_encode($error);
 	endif;
 }
 ?>
