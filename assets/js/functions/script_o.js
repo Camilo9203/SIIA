@@ -1022,7 +1022,7 @@ $(document).ready(function () {
 		redirect(baseURL + "panelAdmin/solicitudes/finalizadas");
 	});
 	$("#admin_ver_observaciones_volver").click(function () {
-		redirect(baseURL + "panelAdmin/organizaciones/observaciones");
+		redirect(baseURL + "panelAdmin/solicitudes/observaciones");
 	});
 	$("#admin_organizaciones_finalizadas").click(function () {
 		redirect(baseURL + "panelAdmin/solicitudes/finalizadas");

@@ -5,7 +5,7 @@ class SolicitudesModel extends CI_Model
 	{
 		$this->load->database();
 	}
-	/** Cargar Solicitudes */
+	/** Solicitudes */
 	public function solicitudes($id = FALSE)
 	{
 		if ($id === FALSE) {
@@ -53,5 +53,18 @@ class SolicitudesModel extends CI_Model
 			array_push($solicitudesEnProceso, $solicitud);
 		}
 		return $solicitudesEnProceso;
+	}
+	/** Cargar Solicitudes En Observación */
+	public function getSolicitudesEnObservacion()
+	{
+		$solicitudesEnObservacion = array();
+		$estados = $this->db->select("*")->from("estadoOrganizaciones")->join('solicitudes', 'estadoOrganizaciones.idSolicitud = solicitudes.idSolicitud')->where("nombre", "En Observaciones" )->get()->result();
+		foreach ($estados as $estado) {
+			$idOrg = $estado->organizaciones_id_organizacion;
+			$idSolicitud = $estado->idSolicitud;
+			$solicitud = $this->db->select("*")->from("organizaciones, estadoOrganizaciones, solicitudes, tipoSolicitud")->where("organizaciones.id_organizacion", $idOrg)->where("estadoOrganizaciones.idSolicitud", $idSolicitud)->where("solicitudes.idSolicitud", $idSolicitud)->where("tipoSolicitud.idSolicitud", $idSolicitud)->get()->row();
+			array_push($solicitudesEnObservacion, $solicitud);
+		}
+		return $solicitudesEnObservacion;
 	}
 }

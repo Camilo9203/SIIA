@@ -4,7 +4,6 @@
  * @var Solicitudes $this
  *
  */
-
 ?>
 <div class="col-md-12">
 <div class="clearfix"></div>

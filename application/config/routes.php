@@ -85,10 +85,10 @@ $route['panelAdmin/reportes'] = 'Admin/panel_reportes';
 $route['panelAdmin/solicitudes/asignar'] = 'Solicitudes/asignar';
 $route['panelAdmin/solicitudes/finalizadas'] = 'Solicitudes/finalizadas';
 $route['panelAdmin/solicitudes/proceso'] = 'Solicitudes/proceso';
+$route['panelAdmin/solicitudes/observaciones'] = 'Solicitudes/observaciones';
 /** Administrador Organizaciones */
 $route['panelAdmin/organizaciones'] = 'Admin/ver_organizaciones';
 $route['panelAdmin/organizaciones/finalizadas'] = 'Admin/finalizadas';
-$route['panelAdmin/organizaciones/observaciones'] = 'Admin/enObservaciones';
 $route['panelAdmin/organizaciones/asignar'] = 'Organizaciones/asignar';
 $route['panelAdmin/organizaciones/inscritas'] = 'Admin/inscritas';
 $route['panelAdmin/organizaciones/informacion'] = 'Admin/informacion';

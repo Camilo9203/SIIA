@@ -236,6 +236,17 @@ class Solicitudes extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
+	/** Solicitudes en observaciones */
+	public function observaciones()
+	{
+		$data = $this->datosSession();
+		$data['title'] = 'Panel Principal / Administrador / En observaciones';
+		$data['solicitudesEnObservaciones'] = $this->SolicitudesModel->getSolicitudesEnObservacion();
+		$this->load->view('include/header', $data);
+		$this->load->view('admin/solicitudes/observaciones', $data);
+		$this->load->view('include/footer', $data);
+		$this->logs_sia->logs('PLACE_USER');
+	}
 	/** Solicitudes en proceso */
 	public function proceso()
 	{
