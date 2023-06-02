@@ -10,7 +10,7 @@
 				<br/>
 				<br/>
 				<select name="nit_acre_org" id="nit_acre_org" class="selectpicker form-control show-tick nit_acre_org">
-					<option selected>Seleccion una opción</option>
+					<option selected>Selecciona una opción</option>
 					<?php foreach ($organizaciones as $organizacion) : ?>
 						<option value="<?php echo $organizacion->numNIT ?>"><?php echo $organizacion->numNIT ?></option>
 					<?php endforeach; ?>
@@ -49,7 +49,7 @@
 			<thead>
 				<tr>
 					<td>Número NIT</td>
-					<td>Nombre de la Organzación</td>
+					<td>Nombre de la Organización</td>
 					<td>Número de la Resolución</td>
 					<td>Fecha de finalización</td>
 					<td>Acción</td>
@@ -57,13 +57,13 @@
 			</thead>
 			<tbody id="tbody">
 			<?php
-				foreach ($nits as $nit) {
-					echo "<tr><td>".$nit->numNIT."</td>";
-					echo "<td>".$nit->nombreOrganizacion."</td>";
-					echo "<td>".$nit->numeroResolucion."</td>";
-					echo "<td>".$nit->fechaFinalizacion."</td>";
-					echo "<td><button class='btn btn-danger btn-sm eliminarNitAcreOrg' data-id-nit=".$nit->idnits_db.">Eliminar</button></td></tr>";
-				}
+				for($i = 0; $i < count($nits); $i++):
+					echo "<tr><td>".$nits[$i]['numNIT']."</td>";
+					echo "<td>".$nits[$i]['nombreOrganizacion']."</td>";
+					echo "<td>".$nits[$i]['numeroResolucion']."</td>";
+					echo "<td>".$nits[$i]['fechaFinalizacion']."</td>";
+					echo "<td><button class='btn btn-danger btn-sm eliminarNitAcreOrg' data-id-nit=".$nits[$i]['idnits_db'].">Eliminar</button></td></tr>";
+				endfor;
 			?>
 			</tbody>
 		</table>

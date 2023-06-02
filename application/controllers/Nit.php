@@ -9,41 +9,40 @@ class Nit extends CI_Controller
 		parent::__construct();
 		verify_session_admin();
 		$this->load->model('OrganizacionesModel');
+		$this->load->model('DepartamentosModel');
+		$this->load->model('NitsModel');
+	}
+
+	/** Datos Sesión */
+	public function datosSession()
+	{
+		verify_session_admin();
+		date_default_timezone_set("America/Bogota");
+		$data = array(
+			'logged_in' => $this->session->userdata('logged_in'),
+			'nombre_usuario' => $this->session->userdata('nombre_usuario'),
+			'usuario_id' => $this->session->userdata('usuario_id'),
+			'tipo_usuario' => $this->session->userdata('type_user'),
+			'nivel' => $this->session->userdata('nivel'),
+			'hora' => date("H:i", time()),
+			'fecha' => date('Y/m/d'),
+			'activeLink' => 'reportes',
+			'departamentos' => $this->DepartamentosModel->getDepartamentos(),
+		);
+		return $data;
 	}
 
 	public function nitEntidades()
 	{
-		date_default_timezone_set("America/Bogota");
-		$logged = $this->session->userdata('logged_in');
-		$nombre_usuario = $this->session->userdata('nombre_usuario');
-		$usuario_id = $this->session->userdata('usuario_id');
-		$tipo_usuario = $this->session->userdata('type_user');
-		$nivel = $this->session->userdata('nivel');
-		$hora = date("H:i", time());
-		$fecha = date('Y/m/d');
-
-		$data['title'] = 'Panel Principal / Administrador / Opciones / Nit de entidades';
-		$data['logged_in'] = $logged;
-		$data['nombre_usuario'] = $nombre_usuario;
-		$data['usuario_id'] = $usuario_id;
-		$data['tipo_usuario'] = $tipo_usuario;
-		$data['nivel'] = $nivel;
-		$data['hora'] = $hora;
-		$data['fecha'] = $fecha;
-		$data['nits'] = $this->cargarNits();
-		$data['organizaciones'] = $this->OrganizacionesModel->getOrganizacionesAcreditadas();
-
+		$data = $this->datosSession();
+		$data['nits'] = $this->NitsModel->getNits();
+		$data['organizaciones'] = $this->OrganizacionesModel->getOrganizacionesEstadoAcreditado();
 		$this->load->view('include/header', $data);
 		$this->load->view('admin/opciones/nitEntidades', $data);
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
 
-	public function cargarNits()
-	{
-		$nits = $this->db->select("*")->from("nits_db")->get()->result();
-		return $nits;
-	}
 	public function cargarDatosOrganizacion()
 	{
 		$id= $this->input->post('id');
@@ -61,8 +60,20 @@ class Nit extends CI_Controller
 		$resolucion = $this->db->select('*')->from('resoluciones')->where('resoluciones.id_resoluciones', $idResolucion)->get()->row();
 		echo json_encode(array('msg' => 'Información Cargada', 'resolucion' => $resolucion));
 	}
-
-
+	/** Guardar NITS */
+	public function guardarNitAcreditadas()
+	{
+		$data_nit_acre = array(
+			'numNIT' => $this->input->post('nit_org'),
+			'nombreOrganizacion' => $this->input->post('nombreOrganizacion'),
+			'numeroResolucion' => $this->input->post('numeroResolucion'),
+			'fechaFinalizacion' => $this->input->post('fechaFinalizacion')
+		);
+		if ($this->db->insert('nits_db', $data_nit_acre)) {
+			echo json_encode(array('msg' => "El nit se guardo."));
+			$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' creo un nit de entidades acreditadas.');
+		}
+	}
 }
 
 function var_dump_pre($mixed = null) {

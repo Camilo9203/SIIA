@@ -2389,24 +2389,6 @@ class Admin extends CI_Controller
 		$resultados = $this->db->select("*")->from("encuesta")->get()->result();
 		return $resultados;
 	}
-	public function guardarNitAcreditadas()
-	{
-		$nit_org = $this->input->post('nit_org');
-		$nombreOrganizacion = $this->input->post('nombreOrganizacion');
-		$numeroResolucion = $this->input->post('numeroResolucion');
-		$fechaFinalizacion = $this->input->post('fechaFinalizacion');
-
-		$data_nit_acre = array(
-			'numNIT' => $nit_org,
-			'nombreOrganizacion' => $nombreOrganizacion,
-			'numeroResolucion' => $numeroResolucion,
-			'fechaFinalizacion' => $fechaFinalizacion
-		);
-		if ($this->db->insert('nits_db', $data_nit_acre)) {
-			echo json_encode(array('msg' => "El nit se guardo."));
-			$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' creo un nit de entidades acreditadas.');
-		}
-	}
 	public function eliminarNitAcreditadas()
 	{
 		$id_nit = $this->input->post('id_nit');

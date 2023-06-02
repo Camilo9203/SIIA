@@ -19,14 +19,7 @@ $("#nit_acre_org").change( function (){
 			// Recorrer respuesta del controlador
 			$.each(resoluciones, function (key, resolucion) {
 				// Guardar opción html en variable
-				html +=
-					"<option value=" +
-					resolucion.numeroResolucion +
-					" data-id=" +
-					resolucion.id_resoluciones +
-					">" +
-					resolucion.numeroResolucion +
-					"</option>";
+				html += "<option value=" + resolucion.numeroResolucion + " data-id=" + resolucion.id_resoluciones + ">" + resolucion.numeroResolucion + "</option>";
 			});
 			// Añadir variable de opción html al select de municipio
 			$("#res_acre_org").html(html);
@@ -63,20 +56,14 @@ $("#res_acre_org").change( function (){
 });
 
 $("#guardar_nit_org_acre").click(function () {
-	$nit_org = $("#nit_acre_org").val();
-	$nombreOrganizacion = $("#nombre_acre_org").val();
-	$numeroResolucion = $("#res_acre_org").val();
-	$fechaFinalizacion = $("#fech_fin_acre_org").val();
-
 	data = {
-		nit_org: $nit_org,
-		nombreOrganizacion: $nombreOrganizacion,
-		numeroResolucion: $numeroResolucion,
-		fechaFinalizacion: $fechaFinalizacion,
+		nit_org: $("#nit_acre_org").val(),
+		nombreOrganizacion: $("#nombre_acre_org").val(),
+		numeroResolucion: $("#res_acre_org").val(),
+		fechaFinalizacion: $("#fech_fin_acre_org").val(),
 	};
-
 	$.ajax({
-		url: baseURL + "admin/guardarNitAcreditadas",
+		url: baseURL + "nit/guardarNitAcreditadas",
 		type: "post",
 		dataType: "JSON",
 		data: data,
@@ -93,12 +80,9 @@ $("#guardar_nit_org_acre").click(function () {
 });
 
 $(".eliminarNitAcreOrg").click(function () {
-	$id_nit = $(this).attr("data-id-nit");
-
 	data = {
-		id_nit: $id_nit,
+		id_nit: $(this).attr("data-id-nit"),
 	};
-
 	$.ajax({
 		url: baseURL + "admin/eliminarNitAcreditadas",
 		type: "post",
@@ -106,6 +90,9 @@ $(".eliminarNitAcreOrg").click(function () {
 		data: data,
 		success: function (response) {
 			notificacion(response.msg, "success");
+			setInterval(function () {
+				reload();
+			}, 2000);
 		},
 		error: function (ev) {
 			//Do nothing

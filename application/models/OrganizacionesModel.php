@@ -6,10 +6,16 @@ class OrganizacionesModel extends CI_Model
 		$this->load->database();
 	}
 	/** Cargar Organizaciones */
-	public function getOrganizaciones()
+	public function getOrganizaciones($id = FALSE)
 	{
-		$organizaciones = $this->db->select("*")->from("organizaciones")->get()->result();
-		return $organizaciones;
+		if ($id === FALSE) {
+			// Consulta para traer organizaciones
+			$query = $this->db->select("*")->from("organizaciones")->get();
+			return $query->result_array();
+		}
+		// Traer organizaciones por ID
+		$query = $this->db->get_where('organizaciones', array('id' => $id));
+		return $query->row_array();
 	}
 	/** Cargar Organizaciones Acreditadas */
 	public function getOrganizacionesAcreditadas()
@@ -29,12 +35,19 @@ class OrganizacionesModel extends CI_Model
 			}
 		return $organizaciones;
 	}
+	/** Cargar organizaciones con estado "Acreditado" */
+	public function getOrganizacionesEstadoAcreditado()
+	{
+		$organizaciones = $this->db->select('*')->from('organizaciones')->where('estado', 'Acreditado')->get()->result();
+		return $organizaciones;
+	}
 	/** Cargar Organizaciones Histórico */
 	public function getOrganizacionesHistorico()
 	{
 		$data_organizaciones = $this->db->select("*")->from("organizacionesHistorial")->get()->result();
 		return $data_organizaciones;
 	}
+	/** Cargar Organizaciones finalizadas */
 	public function getOrganizacionesFinalizadas()
 	{
 		$organizaciones = array();
