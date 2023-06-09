@@ -11,11 +11,11 @@ class OrganizacionesModel extends CI_Model
 		if ($id === FALSE) {
 			// Consulta para traer organizaciones
 			$query = $this->db->select("*")->from("organizaciones")->get();
-			return $query->result_array();
+			return $query->result();
 		}
 		// Traer organizaciones por ID
 		$query = $this->db->get_where('organizaciones', array('id' => $id));
-		return $query->row_array();
+		return $query->result();
 	}
 	/** Cargar Organizaciones Acreditadas */
 	public function getOrganizacionesAcreditadas()
