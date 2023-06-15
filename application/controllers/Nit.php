@@ -12,7 +12,6 @@ class Nit extends CI_Controller
 		$this->load->model('DepartamentosModel');
 		$this->load->model('NitsModel');
 	}
-
 	/** Datos Sesión */
 	public function datosSession()
 	{
@@ -31,7 +30,7 @@ class Nit extends CI_Controller
 		);
 		return $data;
 	}
-
+	/** NITS Entidades */
 	public function nitEntidades()
 	{
 		$data = $this->datosSession();
@@ -42,7 +41,7 @@ class Nit extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
+	/** Cargar datos organizaciones */
 	public function cargarDatosOrganizacion()
 	{
 		$id= $this->input->post('id');
@@ -54,6 +53,7 @@ class Nit extends CI_Controller
 		$resoluciones = $this->db->select('*')->from('resoluciones')->where('resoluciones.organizaciones_id_organizacion', $organizacion->id_organizacion)->get()->result();
 		echo json_encode(array('msg' => 'Información Cargada' ,'organizacion' => $organizacion, 'solicitudes' => $solicitudes, 'resoluciones' => $resoluciones));
 	}
+	/** Cargar datos resolución */
 	public function cargarDatosResolucion()
 	{
 		$idResolucion = $this->input->post('idResolucion');
@@ -75,7 +75,7 @@ class Nit extends CI_Controller
 		}
 	}
 }
-
+/** Función depuración */
 function var_dump_pre($mixed = null) {
 	echo '<pre>';
 	var_dump($mixed);

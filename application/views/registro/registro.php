@@ -1,6 +1,9 @@
 <div id="registro" class="center-block col-md-7">
 	<?php echo form_open('', array('id' => 'formulario_registro')); ?>
 	<!--<button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#ayuda_registro">?</button>-->
+	<div class="form-group">
+		<div id="mensaje" class="col-md-12 alert" role="alert"></div>
+	</div>
 	<div class="col-md-6">
 		<h3>Información básica de la organización:</h3><small class="pull-right"><span class="spanRojo">*</span> Requerido</small>
 		<div class="form-group">
@@ -42,7 +45,7 @@
 		</div>
 	</div>
 	<div class="col-md-6" id="left_registro">
-		<h3>Información de la persona encargada del tramite:</h3><small class="pull-right"><span class="spanRojo">*</span> Requerido</small>
+		<h3>Información de la persona encargada del trámite:</h3><small class="pull-right"><span class="spanRojo">*</span> Requerido</small>
 		<div class="form-group">
 			<label for="primer_nombre_persona">Primer nombre: <span class="spanRojo">*</span></label>
 			<input type="text" class="form-control" form="formulario_registro" name="primer_nombre_persona" id="nombre_p" placeholder="Primer nombre..." required="">
@@ -55,7 +58,6 @@
 			<label for="correo_electronico">Correo electrónico de organización (Notificaciones): <span class="spanRojo">*</span></label>
 			<input type="email" class="form-control" form="formulario_registro" name="correo_electronico" id="correo_electronico" placeholder="Correo electrónico de la organización..." required="">
 		</div>
-		<!-- <h3>Datos de la cuenta de usuario:</h3><small class="pull-right"><span class="spanRojo">*</span> Requerido</small> -->
 		<div class="form-group">
 			<label for="nombre_usuario">Nombre de usuario (Incio de sesión): <span class="spanRojo">*</span></label>
 			<input type="text" class="form-control" form="formulario_registro" name="nombre_usuario" id="nombre_usuario" placeholder="Nombre de usuario..." required="">
@@ -87,11 +89,9 @@
 			<button type="button" class="btn btn-danger btn-sm submit ingresar" value="Iniciar Sesion">Iniciar Sesión <i class="fa fa-sign-in" aria-hidden="true"></i></button>
 		</div>
 		<img src="<?php echo base_url(); ?>assets/img/loading.gif" id="loading" class="img-responsive col-md-2">
-		<div class="form-group">
-			<div id="mensaje" class="col-md-12 alert" role="alert"></div>
-		</div>
+
 	</div>
-	</form>
+	<?php echo form_close(); ?>
 </div>
 <!-- Modal Politica de Privacidad -->
 <div class="modal fade" id="politica_ventana" tabindex="-1" role="dialog" aria-labelledby="politica">
@@ -274,6 +274,107 @@
 			<div class="modal-body">
 				<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
 				<button type="button" class="btn btn-siia btn-sm pull-right" id="acepto_politica">Sí, acepto. <i class="fa fa-check"></i></button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal Registro - INICIO -->
+<div class="modal fade" id="ayuda_registro" tabindex="-1" role="dialog" aria-labelledby="ayudaRegistro">
+	<div class="modal-dialog modal-xl" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="ayudaRegistro">¿La información ingresada és correcta?</h4>
+				<small>Por favor, verifique los correos electrónicos en este momento, se le notificara cualquier comunicación del sistema por este medio y se enviara un link de activación de la cuenta en el SIIA. ***</small>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div id="informacion_pre">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Organización:</label>
+								<p id="modalConfOrg"></p>
+							</div>
+							<div class="form-group">
+								<label>NIT de la organización:</label>
+								<p id="modalConfNit"></p>
+							</div>
+							<div class="form-group">
+								<label>Sigla de la organización:</label>
+								<p id="modalConfSigla"></p>
+							</div>
+							<div class="form-group">
+								<label>Primer nombre del representante legal:</label>
+								<p id="modalConfPNRL"></p>
+							</div>
+							<div class="form-group">
+								<label>Segundo nombre del representante legal:</label>
+								<p id="modalConfSNRL"></p>
+							</div>
+							<div class="form-group">
+								<label>Primer apellido del representante legal:</label>
+								<p id="modalConfPARL"></p>
+							</div>
+							<div class="form-group">
+								<label>Segundo apellido del representante legal:</label>
+								<p id="modalConfSARL"></p>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Correo electrónico de organización:(Notificaciones)</label>
+								<p id="modalConfCOrg"></p>
+							</div>
+							<div class="form-group">
+								<label>Correo electrónico del representante legal:</label>
+								<p id="modalConfCRep"></p>
+							</div>
+							<div class="form-group">
+								<label>Primer nombre:</label>
+								<p id="modalConfPn"></p>
+							</div>
+							<div class="form-group">
+								<label>Primer apellido:</label>
+								<p id="modalConfPa"></p>
+							</div>
+							<div class="form-group">
+								<label>Nombre de usuario:</label>
+								<p id="modalConfNU"></p>
+							</div>
+							<div class="form-group">
+								<label>Contraseña:</label>
+								<p>Su contraseña.</p>
+							</div>
+							<div class="form-check">
+								<input type="checkbox" class="form-check-input" id="aceptoComActo">
+								<label class="form-check-label" for="aceptoComActo"><span class="underlined"><a>Acepto que se envíen comunicaciones y actos administrativos vía correo electrónico <span class="spanRojo">*</span></a></span></label>
+							</div>
+						</div>
+					</div>
+					<div id="reenvio_pre">
+						<div class="container">
+							<div class="jumbotron">
+								<p>Si el correo no le llega en los próximos 5 minutos, y no está en la bandeja de spam, por favor, escriba otro correo electrónico (Gmail.com, Outlook.com, Yahoo.com, Hotmail.com), y de click en "Volver a enviar el correo". Si el problema persiste, contactese con <a href="mailto:<?php echo CORREO_ATENCION ?>"><?php echo CORREO_ATENCION ?></a></p>
+								<div class="clearfix"></div>
+								<hr />
+								<div class="form-group">
+									<label for="correo_electronico_rese">Correo electrónico de organización:*</label>
+									<input type="email" class="form-control" name="correo_electronico_rese" id="correo_electronico_rese" placeholder="Correo electrónico organización">
+								</div>
+							</div>
+							<!--<div class="jumbotron">
+									<small>Estamos teniendo inconvenientes con nuestro sistema de correos y lo estaremos solucionando lo mas pronto posible.</small>
+									<p>El registro se ha creado satisfactoriamente, ahora puede ingresar al sistema con su usuario y contraseña dando click <a href="<?php echo base_url("/login"); ?>">aquí</a>.</p>
+								</div>-->
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" name="registro" disabled="disabled" id="guardar_registro" class="btn btn-success btn-sm submit" value="Registrarme">Sí, Registrarme. <i class="fa fa-check"></i></button>
+				<button type="button" id="reenvio" class="btn btn-info btn-sm submit" value="Volver a enviar">Volver a enviar el correo. <i class="fa fa-paper-plane"></i></button>
+				<!--<button type="button" id="cerr_reen" class="btn btn-danger pull-left" data-dismiss="modal">Cerrar. <i class="fa fa-times"></i></button>-->
+				<button type="button" id="cerr_mod" class="btn btn-danger btn-sm pull-left" data-dismiss="modal">No, voy a verificar. <i class="fa fa-times" aria-hidden="true"></i></button>
 			</div>
 		</div>
 	</div>

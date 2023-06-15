@@ -49,6 +49,8 @@ class Registro extends CI_Controller
 		}
 		else {
 			$fromSIA = "Unidad Administrativa Especial de Organizaciones Solidarias UAEOS - Aplicación SIIA.";
+
+
 			$organizacion = $this->input->post('organizacion');
 			$nit = $this->input->post('nit');
 			$sigla = $this->input->post('sigla');

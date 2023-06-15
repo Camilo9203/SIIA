@@ -56,8 +56,7 @@
 				</tr>
 			</thead>
 			<tbody id="tbody">
-			<?php
-				for($i = 0; $i < count($nits); $i++):
+			<?php for($i = 0; $i < count($nits); $i++):
 					echo "<tr><td>".$nits[$i]['numNIT']."</td>";
 					echo "<td>".$nits[$i]['nombreOrganizacion']."</td>";
 					echo "<td>".$nits[$i]['numeroResolucion']."</td>";
