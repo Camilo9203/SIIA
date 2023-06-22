@@ -11,7 +11,7 @@ class OrganizacionesModel extends CI_Model
 		if ($id === FALSE) {
 			// Consulta para traer organizaciones
 			$query = $this->db->select("*")->from("organizaciones")->get();
-			return $query->result();
+			return $query->row();
 		}
 		// Traer organizaciones por ID
 		$query = $this->db->get_where('organizaciones', array('id' => $id));

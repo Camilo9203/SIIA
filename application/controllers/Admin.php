@@ -831,7 +831,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function cargar_administradores()
 	{
 		$administradores = $this->db->select("*")->from("administradores")->get()->result();
@@ -1045,31 +1044,6 @@ class Admin extends CI_Controller
 	{
 		$organizaciones = $this->db->select("*")->from("organizaciones")->get()->result();
 		return $organizaciones;
-	}
-	public function inscritas()
-	{
-		date_default_timezone_set("America/Bogota");
-		$logged = $this->session->userdata('logged_in');
-		$nombre_usuario = $this->session->userdata('nombre_usuario');
-		$usuario_id = $this->session->userdata('usuario_id');
-		$tipo_usuario = $this->session->userdata('type_user');
-		$hora = date("H:i", time());
-		$fecha = date('Y/m/d');
-
-		$data['title'] = 'Panel Principal / Administrador / Inscritas';
-		$data['logged_in'] = $logged;
-		$data['nombre_usuario'] = $nombre_usuario;
-		$data['usuario_id'] = $usuario_id;
-		$data['tipo_usuario'] = $tipo_usuario;
-		$data['hora'] = $hora;
-		$data['fecha'] = $fecha;
-		$data['departamentos'] = $this->cargarDepartamentos();
-		$data['organizaciones_en_proceso'] = $this->organizacionesInscritas();
-
-		$this->load->view('include/header', $data);
-		$this->load->view('admin/organizaciones/inscritas', $data);
-		$this->load->view('include/footer', $data);
-		$this->logs_sia->logs('PLACE_USER');
 	}
 	public function informacion()
 	{
@@ -1403,19 +1377,6 @@ class Admin extends CI_Controller
 		echo json_encode(array("organizaciones" => $query->result()));
 		$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' buscó una organización con los datos:' . $nombre . ', ' . $sigla_organizacion . ', ' . $nit_organizacion . '.');
 	}
-	public function cargar_datosBasicosOrganizacion()
-	{
-		$id_organizacion = $this->input->post('id_organizacion');
-		$data_organizaciones = $this->db->select("*")->from("organizaciones")->where("id_organizacion", $id_organizacion)->get()->row();
-
-		$id_usuario = $data_organizaciones->usuarios_id_usuario;
-		$registro_actividad = $this->cargar_actividadUsuario($id_usuario);
-
-		$data_organizacionesEstado = $this->db->select("*")->from("estadoOrganizaciones")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$data_usuario = $this->db->select("usuario")->from("usuarios")->where("id_usuario", $id_usuario)->get()->row();
-
-		echo json_encode(array('data_organizacion' => $data_organizaciones, 'registro_actividad' => $registro_actividad, 'estado' => $data_organizacionesEstado, 'usuario' => $data_usuario));
-	}
 	public function verRelacionCambios()
 	{
 		$id_organizacion = $this->input->post('id_organizacion');
@@ -1479,11 +1440,6 @@ class Admin extends CI_Controller
 	{
 		$usuarios = $this->db->select("*")->from("usuarios")->where("logged_in", 1)->get()->result();
 		return $usuarios;
-	}
-	public function cargar_actividadUsuario($id)
-	{
-		$datos_actividad = $this->db->select('*')->from('session_log')->where('usuario_id', $id)->order_by("id_session_log", "desc")->limit(70)->get()->result();
-		return $datos_actividad;
 	}
 	public function cargar_todaActividadUsuario()
 	{

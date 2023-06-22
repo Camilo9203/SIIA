@@ -47,6 +47,36 @@ class Organizaciones extends CI_Controller
 		return $data;
 	}
 
+	/** Organizaciones Inscritas  */
+	public function inscritas()
+	{
+		$data =  $this->datosSession();
+		$data['title'] = 'Panel Principal / Administrador / Inscritas';
+		$data['organizaciones'] = $this->OrganizacionesModel->getOrganizaciones();
+		$this->load->view('include/header', $data);
+		$this->load->view('admin/organizaciones/inscritas', $data);
+		$this->load->view('include/footer', $data);
+		$this->logs_sia->logs('PLACE_USER');
+	}
+	// Cargar información organización inscrita
+	public function cargar_datosBasicosOrganizacion()
+	{
+		$data_organizaciones = $this->OrganizacionesModel->getOrganizaciones($this->input->post('id_organizacion'));
+
+		$id_usuario = $data_organizaciones->usuarios_id_usuario;
+		$registro_actividad = $this->cargar_actividadUsuario($id_usuario);
+
+		$data_organizacionesEstado = $this->db->select("*")->from("estadoOrganizaciones")->where("organizaciones_id_organizacion", $this->input->post('id_organizacion'))->get()->row();
+		$data_usuario = $this->db->select("usuario")->from("usuarios")->where("id_usuario", $id_usuario)->get()->row();
+
+		echo json_encode(array('data_organizacion' => $data_organizaciones, 'registro_actividad' => $registro_actividad, 'estado' => $data_organizacionesEstado, 'usuario' => $data_usuario));
+	}
+	public function cargar_actividadUsuario($id)
+	{
+		$datos_actividad = $this->db->select('*')->from('session_log')->where('usuario_id', $id)->order_by("id_session_log", "desc")->limit(70)->get()->result();
+		return $datos_actividad;
+	}
+
 	/** Camara de comercio */
 	public function camara()
 	{

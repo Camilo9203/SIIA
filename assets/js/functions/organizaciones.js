@@ -92,3 +92,57 @@ $("#adjuntar_camara").on("click", function () {
 	});
 	//}
 });
+/** Organizaciones inscritas */
+$(".ver_organizacion_inscrita").click(function () {
+	var $id_org = $(this).attr("data-organizacion");
+	var data = {
+		id_organizacion: $id_org,
+	};
+	$.ajax({
+		url: baseURL + "admin/cargar_datosBasicosOrganizacion",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		success: function (response) {
+			$("#admin_panel_org_inscritas").slideUp();
+			$("#datos_organizaciones_inscritas").slideDown();
+			$("#datos_organizaciones_inscritas>#datos_basicos>span").empty();
+			$("#tabla_actividad_inscritas>tbody#tbody_actividad").empty();
+			$("#tabla_actividad_inscritas>tbody#tbody_actividad").html("");
+			$("#inscritas_nombre_organizacion").append("<p>" + response.data_organizacion.nombreOrganizacion + "</p>");
+			$("#inscritas_nit_organizacion").append("<p>" + response.data_organizacion.numNIT + "</p>");
+			$("#inscritas_sigla_organizacion").append("<p>" + response.data_organizacion.sigla + "</p>");
+			$("#inscritas_nombreRepLegal_organizacion").append(
+				"<p>" +
+				response.data_organizacion.primerNombreRepLegal +
+				" " +
+				response.data_organizacion.segundoNombreRepLegal +
+				" " +
+				response.data_organizacion.primerApellidoRepLegal +
+				" " +
+				response.data_organizacion.segundoApellidoRepLegal +
+				"</p>"
+			);
+			$("#inscritas_direccionCorreoElectronicoOrganizacion_organizacion").append("<p>" + response.data_organizacion.direccionCorreoElectronicoOrganizacion + "</p>");
+			$("#inscritas_direccionCorreoElectronicoRepLegal_organizacion").append("<p>" + response.data_organizacion.direccionCorreoElectronicoRepLegal + "</p>");
+			$("#inscritas_estadoActual_organizacion").append("<p>" + response.estado.nombre + "</p>");
+			$("#inscritas_estadoAnterior_organizacion").append("<p>" + response.estado.estadoAnterior + "</p>");
+			$("#inscritas_usuario").append("<p>" + response.usuario.usuario + "</p>");
+			$("#inscritas_imagenOrganizacion_organizacion").attr("src", baseURL + "uploads/logosOrganizaciones/" + response.data_organizacion.imagenOrganizacion);
+			$("#verTodaInformacion").attr("data-idOrg", response.data_organizacion.id_organizacion);
+			$("#tbody_actividad>.odd").remove();
+			for (var i = 0; i < response.registro_actividad.length; i++) {
+				$("#tbody_actividad").append("<tr id=" + i + ">");
+				$("#tbody_actividad>tr#" + i + "").append("<td>" + response.registro_actividad[i].accion + "</td>");
+				$("#tbody_actividad>tr#" + i + "").append("<td>" + response.registro_actividad[i].fecha + "</td>");
+				$("#tbody_actividad>tr#" + i + "").append("<td>" + response.registro_actividad[i].usuario_ip + "</td>");
+				$("#tbody_actividad>tr#" + i + "").append("<td>" + response.registro_actividad[i].user_agent + "</td>");
+				$("#tbody_actividad").append("</tr>");
+			}
+			paging("tabla_actividad_inscritas");
+		},
+		error: function (ev) {
+			//Do nothing
+		},
+	});
+});

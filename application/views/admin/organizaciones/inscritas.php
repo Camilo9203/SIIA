@@ -7,34 +7,32 @@
 	<table id="tabla_enProceso_organizacion" width="100%" border=0 class="table table-striped table-bordered tabla_form">
 		<thead>
 			<tr>
-				<td>ID</td>
-				<td class="col-md-2">Nombre</td>
-				<td class="col-md-2">NIT</td>
+				<td>NIT</td>
+				<td>Nombre</td>
 				<td>Representante Legal</td>
-				<td>Direccion E-Mail Org</td>
-				<td>Direccion E-Mail Rep</td>
+				<td>Dirección E-Mail Org</td>
+				<td>Dirección E-Mail Rep</td>
 				<td>Estado actual</td>
 				<td>Acciones</td>
 			</tr>
 		</thead>
 		<tbody id="tbody">
 		<?php
-			for ($i=0; $i < count($organizaciones_en_proceso); $i++) {
+			foreach ($organizaciones as $organizacion) {
 				echo "<tr>";
-				echo "<td>".$organizaciones_en_proceso[$i] ->id_organizacion."</td>";
-				echo "<td>".$organizaciones_en_proceso[$i] ->nombreOrganizacion."</td>";
-				echo "<td>".$organizaciones_en_proceso[$i] ->numNIT."</td>";
-				echo "<td>".$organizaciones_en_proceso[$i] ->primerNombreRepLegal." ".$organizaciones_en_proceso[$i] ->segundoNombreRepLegal." ".$organizaciones_en_proceso[$i] ->primerApellidoRepLegal." ".$organizaciones_en_proceso[$i] ->segundoApellidoRepLegal."</td>";
-				echo "<td>".$organizaciones_en_proceso[$i] ->direccionCorreoElectronicoOrganizacion."</td>";
-				echo "<td>".$organizaciones_en_proceso[$i] ->direccionCorreoElectronicoRepLegal."</td>";
-				echo "<td>".$organizaciones_en_proceso[$i] ->estado."</td>";
-				echo "<td><button class='btn btn-siia btn-sm ver_organizacion_inscrita' id='' data-organizacion='".$organizaciones_en_proceso[$i] ->id_organizacion."'>Ver organizacion <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
+				echo "<td>" . $organizacion->numNIT . "</td>";
+				echo "<td>" . $organizacion->nombreOrganizacion . "</td>";
+				echo "<td>" . $organizacion->primerNombreRepLegal . " " . $organizacion->segundoNombreRepLegal . " " . $organizacion->primerApellidoRepLegal . " " . $organizacion->segundoApellidoRepLegal . "</td>";
+				echo "<td>" . $organizacion->direccionCorreoElectronicoOrganizacion . "</td>";
+				echo "<td>" . $organizacion->direccionCorreoElectronicoRepLegal."</td>";
+				echo "<td>" . $organizacion->estado . "</td>";
+				echo "<td><button class='btn btn-siia btn-sm ver_organizacion_inscrita' id='' data-organizacion='" . $organizacion->id_organizacion."'>Ver organizacion <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
 				echo "</tr>";
 			}
 		?>
 		</tbody>
 	</table>
-		<button class="btn btn-danger btn-sm pull-left" id="admin_panel_org_inscritas_volver btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
+		<button class="btn btn-danger btn-sm pull-left" id="admin_panel_org_inscritas_volver btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver al panel principal</button>
 	</div>
 </div>
 <div class="col-md-12" id="datos_organizaciones_inscritas">
