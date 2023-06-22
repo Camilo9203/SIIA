@@ -82,7 +82,7 @@
 	<script src="<?php echo base_url('assets/js/ckeditor.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/initck.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/vis.min.js') ?>"></script>
-	<script src="<?php echo base_url('assets/js/functions/script_o.js?v=1.0.8.61219') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/main.js?v=1.0.8.61219') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/observaciones.js?v=1.1.1') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/panel.js?v=1.0.1') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/formularios.js?v=1.0.1') . time() ?>" type="text/javascript"></script>

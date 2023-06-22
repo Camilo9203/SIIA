@@ -411,7 +411,7 @@
 	<script src="<?php echo base_url('assets/js/ckeditor.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/initck.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/vis.min.js') ?>"></script>
-	<script src="<?php echo base_url('assets/js/functions/script_o.js?v=1.0.8.61219') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/main.js?v=1.0.8.61219') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/registro.js?v=1.0.3') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/organizaciones.js?v=1.1.0') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/observaciones.js?v=1.1.1') . time() ?>" type="text/javascript"></script>
@@ -424,7 +424,7 @@
 	<script src="<?php echo base_url('assets/js/functions/docentes.js?v=1.61342') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/contacto.js?v=1.0.8.61') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/estadisticas.js?v=1.0.8.62') . time() ?>" type="text/javascript"></script>
-	<!--<script src="<?php echo base_url('assets/js/script_o.min.js') ?>" type="text/javascript"></script>
+	<!--<script src="<?php echo base_url('assets/js/main.min.js') ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/script.js') ?>" type="text/javascript"></script>-->
 	<script type="text/javascript">
 		$(window).on('load', function() {
