@@ -93,53 +93,107 @@ $("#adjuntar_camara").on("click", function () {
 	//}
 });
 /** Organizaciones inscritas */
+// Acciones de botones
+$("#verSolicitudesRegistradas").click(function () {
+	$("#actividadOrganizacion").slideUp();
+	$("#solicitudesOrganizacion").slideDown();
+});
+$("#verActividadUsuario").click(function () {
+	$("#solicitudesOrganizacion").slideUp();
+	$("#actividadOrganizacion").slideDown();
+});
+$("#admin_ver_inscritas_volver").click(function () {
+	$("#solicitudesOrganizacion").hide();
+	$("#actividadOrganizacion").hide();
+	$("#admin_panel_org_inscritas").slideDown();
+	$("#datos_organizaciones_inscritas").slideUp();
+});
+
+$(document).on("click", ".verSolicitud", function () {
+	let idSolicitud = $(this).attr("data-id");
+	let idOrganizacion = $(this).attr("data-id-org");
+	window.open(baseURL + "panelAdmin/organizaciones/informacionSolicitud?idSolicitud=" + idSolicitud + "&idOrganizacion=" + idOrganizacion,'_blank' )
+});
+// Traer datos de la organización inscrita
 $(".ver_organizacion_inscrita").click(function () {
 	var $id_org = $(this).attr("data-organizacion");
 	var data = {
 		id_organizacion: $id_org,
 	};
 	$.ajax({
-		url: baseURL + "admin/cargar_datosBasicosOrganizacion",
+		url: baseURL + "organizaciones/datosOrganzacion",
 		type: "post",
 		dataType: "JSON",
 		data: data,
 		success: function (response) {
+			console.log(response)
 			$("#admin_panel_org_inscritas").slideUp();
 			$("#datos_organizaciones_inscritas").slideDown();
-			$("#datos_organizaciones_inscritas>#datos_basicos>span").empty();
-			$("#tabla_actividad_inscritas>tbody#tbody_actividad").empty();
-			$("#tabla_actividad_inscritas>tbody#tbody_actividad").html("");
-			$("#inscritas_nombre_organizacion").append("<p>" + response.data_organizacion.nombreOrganizacion + "</p>");
-			$("#inscritas_nit_organizacion").append("<p>" + response.data_organizacion.numNIT + "</p>");
-			$("#inscritas_sigla_organizacion").append("<p>" + response.data_organizacion.sigla + "</p>");
+			$("#datos_organizaciones_inscritas #datos_basicos span").empty();
+			$("#tabla_actividad_inscritas  #tbody_actividad").empty();
+			$("#tabla_actividad_inscritas  #tbody_actividad").html("");
+			$("#tabla_solicitudes_organizacion  #tbody_solicitudes").empty();
+			$("#tabla_solicitudes_organizacion  #tbody_solicitudes").html("");
+			$("#inscritas_nombre_organizacion").append("<p>" + response.organizacion.nombreOrganizacion + "</p>");
+			$("#inscritas_nit_organizacion").append("<p>" + response.organizacion.numNIT + "</p>");
+			$("#inscritas_sigla_organizacion").append("<p>" + response.organizacion.sigla + "</p>");
 			$("#inscritas_nombreRepLegal_organizacion").append(
 				"<p>" +
-				response.data_organizacion.primerNombreRepLegal +
+				response.organizacion.primerNombreRepLegal +
 				" " +
-				response.data_organizacion.segundoNombreRepLegal +
+				response.organizacion.segundoNombreRepLegal +
 				" " +
-				response.data_organizacion.primerApellidoRepLegal +
+				response.organizacion.primerApellidoRepLegal +
 				" " +
-				response.data_organizacion.segundoApellidoRepLegal +
+				response.organizacion.segundoApellidoRepLegal +
 				"</p>"
 			);
-			$("#inscritas_direccionCorreoElectronicoOrganizacion_organizacion").append("<p>" + response.data_organizacion.direccionCorreoElectronicoOrganizacion + "</p>");
-			$("#inscritas_direccionCorreoElectronicoRepLegal_organizacion").append("<p>" + response.data_organizacion.direccionCorreoElectronicoRepLegal + "</p>");
-			$("#inscritas_estadoActual_organizacion").append("<p>" + response.estado.nombre + "</p>");
-			$("#inscritas_estadoAnterior_organizacion").append("<p>" + response.estado.estadoAnterior + "</p>");
+			$("#inscritas_direccionCorreoElectronicoOrganizacion_organizacion").append("<p>" + response.organizacion.direccionCorreoElectronicoOrganizacion + "</p>");
+			$("#inscritas_direccionCorreoElectronicoRepLegal_organizacion").append("<p>" + response.organizacion.direccionCorreoElectronicoRepLegal + "</p>");
 			$("#inscritas_usuario").append("<p>" + response.usuario.usuario + "</p>");
-			$("#inscritas_imagenOrganizacion_organizacion").attr("src", baseURL + "uploads/logosOrganizaciones/" + response.data_organizacion.imagenOrganizacion);
-			$("#verTodaInformacion").attr("data-idOrg", response.data_organizacion.id_organizacion);
-			$("#tbody_actividad>.odd").remove();
-			for (var i = 0; i < response.registro_actividad.length; i++) {
-				$("#tbody_actividad").append("<tr id=" + i + ">");
-				$("#tbody_actividad>tr#" + i + "").append("<td>" + response.registro_actividad[i].accion + "</td>");
-				$("#tbody_actividad>tr#" + i + "").append("<td>" + response.registro_actividad[i].fecha + "</td>");
-				$("#tbody_actividad>tr#" + i + "").append("<td>" + response.registro_actividad[i].usuario_ip + "</td>");
-				$("#tbody_actividad>tr#" + i + "").append("<td>" + response.registro_actividad[i].user_agent + "</td>");
+			$("#inscritas_imagenOrganizacion_organizacion").attr("src", baseURL + "uploads/logosOrganizaciones/" + response.organizacion.imagenOrganizacion);
+			// Construir tablas
+			$("#tbody_solicitudes .odd").remove();
+			if(response.solicitudes.length > 0) {
+				for (var i = 0; i < response.solicitudes.length; i++) {
+					$("#tbody_solicitudes").append("<tr id=" + i + ">");
+					$("#tbody_solicitudes>tr#" + i + "").append("<td>" + response.solicitudes[i].idSolicitud + "</td>");
+					$("#tbody_solicitudes>tr#" + i + "").append("<td>" + response.solicitudes[i].nombre + "</td>");
+					$("#tbody_solicitudes>tr#" + i + "").append("<td>" + response.solicitudes[i].fecha + "</td>");
+					$("#tbody_solicitudes>tr#" + i + "").append("<td>" + response.solicitudes[i].asignada + "</td>");
+					$("#tbody_solicitudes>tr#" + i + "").append("<td>" + response.solicitudes[i].modalidadSolicitud + "</td>");
+					$("#tbody_solicitudes>tr#" + i + "").append("<td>" + response.solicitudes[i].motivoSolicitud + "</td>");
+					$("#tbody_solicitudes>tr#" + i + "").append("<td>" + response.solicitudes[i].tipoSolicitud + "</td>");
+					$("#tbody_solicitudes>tr#" + i + "").append("<td> <button class='btn btn-success btn-sm verSolicitud' data-id='"
+						+ response.solicitudes[i].idSolicitud
+						+ "' data-id-org='" + response.organizacion.id_organizacion + "'>Ver Solicitud<i class='fa fa-eye' aria-hidden='true' </button></td>");
+					$("#tbody_solicitudes").append("</tr>");
+				}
+				paging("tabla_solicitudes_organizacion");
+			}
+			else {
+				$("#tbody_solicitudes").append("<tr>");
+					$("#tbody_solicitudes>tr").append("<td colspan='8'> Sin datos para mostrar </td>");
+				$("#tbody_solicitudes").append("</tr>");
+			}
+			if(response.actividad.length > 0) {
+				$("#tbody_actividad .odd").remove();
+				for (var i = 0; i < response.actividad.length; i++) {
+					$("#tbody_actividad").append("<tr id=" + i + ">");
+					$("#tbody_actividad>tr#" + i + "").append("<td>" + response.actividad[i].accion + "</td>");
+					$("#tbody_actividad>tr#" + i + "").append("<td>" + response.actividad[i].fecha + "</td>");
+					$("#tbody_actividad>tr#" + i + "").append("<td>" + response.actividad[i].usuario_ip + "</td>");
+					$("#tbody_actividad>tr#" + i + "").append("<td>" + response.actividad[i].user_agent + "</td>");
+					$("#tbody_actividad").append("</tr>");
+				}
+				paging("tabla_actividad_inscritas");
+			}
+			else {
+				$("#tbody_actividad").append("<tr>");
+					$("#tbody_actividad>tr").append("<td colspan='4'> Sin datos para mostrar </td>");
 				$("#tbody_actividad").append("</tr>");
 			}
-			paging("tabla_actividad_inscritas");
+
 		},
 		error: function (ev) {
 			//Do nothing

@@ -21,7 +21,7 @@ $fecha = date('d')." de ".$nombre." del ".date('Y');
     <script src="<?php echo base_url('assets/js/jquery-3.1.1.min.js')?>" type="text/javascript"></script>
     <script src="<?php echo base_url('assets/js/bootstrap.min.js')?>" type="text/javascript"></script>
     <script src="<?php echo base_url('assets/js/jquery.validate.js')?>" type="text/javascript"></script>
-    <script src="<?php echo base_url('assets/js/script_o.js')?>" type="text/javascript"></script>
+    <script src="<?php echo base_url('assets/js/main.js')?>" type="text/javascript"></script>
     <meta name="revisit-after" content="30 days" />
     <meta name="distribution" content="web" />
     <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW" />

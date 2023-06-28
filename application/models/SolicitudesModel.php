@@ -19,6 +19,12 @@ class SolicitudesModel extends CI_Model
 		$query = $this->db->select("*")->from("solicitudes")->join('tipoSolicitud', "tipoSolicitud.idSolicitud = solicitudes.idSolicitud")->join('estadoOrganizaciones', "estadoOrganizaciones.idSolicitud = solicitudes.idSolicitud")->where('solicitudes.idSolicitud', $id)->get()->row();;
 		return $query;
 	}
+	/** Cargar Solicitudes por Organización */
+	public function getSolicitudesOrganizacion($id = FALSE)
+	{
+		$solicitudes = $this->db->select("*")->from("solicitudes")->join('tipoSolicitud', "tipoSolicitud.idSolicitud = solicitudes.idSolicitud")->join('estadoOrganizaciones', "estadoOrganizaciones.idSolicitud = solicitudes.idSolicitud")->where('solicitudes.organizaciones_id_organizacion', $id)->get()->result();
+		return $solicitudes;
+	}
 	/** Cargar Solicitudes Finalizadas Histórico */
 	public function getSolicitudesFinalizadas()
 	{
@@ -66,5 +72,27 @@ class SolicitudesModel extends CI_Model
 			array_push($solicitudesEnObservacion, $solicitud);
 		}
 		return $solicitudesEnObservacion;
+	}
+	/** Cargar toda la información de la solicitud */
+	public function getAllInformacionSolicitud($idSolicitud, $idOrganizacion)
+	{
+		$informacionGeneral = $this->db->select("*")->from("informacionGeneral")->where("organizaciones_id_organizacion", $idOrganizacion)->get()->row();
+		$documentacion = $this->db->select("*")->from("documentacion")->where("idSolicitud", $idSolicitud)->get()->row();
+		$certificadoExistencia = $this->db->select('*')->from('certificadoExistencia')->where("idSolicitud", $idSolicitud)->get()->row();
+		$registroEducativoProgramas = $this->db->select("*")->from("registroEducativoProgramas")->where("idSolicitud", $idSolicitud)->get()->row();
+		$antecedentesAcademicos = $this->db->select("*")->from("antecedentesAcademicos")->where("idSolicitud", $idSolicitud)->get()->result();
+		$jornadasActualizacion = $this->db->select("*")->from("jornadasActualizacion")->where("idSolicitud", $idSolicitud)->get()->result();
+		$datosProgramas = $this->db->select("*")->from("datosProgramas")->where("idSolicitud", $idSolicitud)->get()->result();
+		$docentes = $this->db->select("*")->from("docentes")->where("organizaciones_id_organizacion", $idOrganizacion)->get()->result();
+		$plataforma = $this->db->select("*")->from("datosAplicacion")->where("idSolicitud", $idSolicitud)->get()->result();
+		$enLinea = $this->db->select("*")->from("datosEnLinea")->where("idSolicitud", $idSolicitud)->get()->result();
+		$tipoSolicitud = $this->db->select("*")->from("tipoSolicitud")->where("idSolicitud", $idSolicitud)->get()->result();
+		$solicitudes = $this->db->select("*")->from("solicitudes")->where("idSolicitud", $idSolicitud)->get()->row();
+		$estadoOrganizaciones = $this->db->select("*")->from("estadoOrganizaciones")->where("idSolicitud", $idSolicitud)->get()->row();
+		$organizaciones = $this->db->select("*")->from("organizaciones")->where("id_organizacion", $idOrganizacion)->get()->row();
+		$resoluciones = $this->db->select("*")->from("resoluciones")->where("organizaciones_id_organizacion", $idOrganizacion)->get()->result();
+		$archivos = $this->db->select("*")->from("archivos")->where("organizaciones_id_organizacion", $idOrganizacion)->get()->result();
+		$observaciones = $this->db->select('*')->from('observaciones')->where("organizaciones_id_organizacion", $idOrganizacion)->get()->result();
+		return json_encode(array("informacionGeneral" => $informacionGeneral, "documentacion" => $documentacion, "registroEducativoProgramas" => $registroEducativoProgramas, "antecedentesAcademicos" => $antecedentesAcademicos, "jornadasActualizacion" => $jornadasActualizacion, "datosProgramas" => $datosProgramas, "docentes" => $docentes, "plataforma" => $plataforma, "enLinea" => $enLinea, "tipoSolicitud" => $tipoSolicitud, "solicitudes" => $solicitudes, "estadoOrganizaciones" => $estadoOrganizaciones, "organizaciones" => $organizaciones, "archivos" => $archivos, "resoluciones" => $resoluciones, "observaciones" => $observaciones, "certificadoExistencia" => $certificadoExistencia));
 	}
 }

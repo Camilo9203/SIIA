@@ -1045,34 +1045,7 @@ class Admin extends CI_Controller
 		$organizaciones = $this->db->select("*")->from("organizaciones")->get()->result();
 		return $organizaciones;
 	}
-	public function informacion()
-	{
-		date_default_timezone_set("America/Bogota");
-		$logged = $this->session->userdata('logged_in');
-		$nombre_usuario = $this->session->userdata('nombre_usuario');
-		$usuario_id = $this->session->userdata('usuario_id');
-		$tipo_usuario = $this->session->userdata('type_user');
-		$hora = date("H:i", time());
-		$fecha = date('Y/m/d');
 
-		$get = $this->input->get();
-		$idOrg = $get['id'];
-
-		$data['title'] = 'Panel Principal - Administrador - Información';
-		$data['logged_in'] = $logged;
-		$data['nombre_usuario'] = $nombre_usuario;
-		$data['usuario_id'] = $usuario_id;
-		$data['tipo_usuario'] = $tipo_usuario;
-		$data['hora'] = $hora;
-		$data['fecha'] = $fecha;
-		$data['departamentos'] = $this->cargarDepartamentos();
-		$data['informacion'] = $this->cargar_todaInformacionInf($idOrg);
-
-		$this->load->view('include/header', $data);
-		$this->load->view('admin/organizaciones/informacion', $data);
-		$this->load->view('include/footer', $data);
-		$this->logs_sia->logs('PLACE_USER');
-	}
 	public function modalInformacion()
 	{
 		date_default_timezone_set("America/Bogota");

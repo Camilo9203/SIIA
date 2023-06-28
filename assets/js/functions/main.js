@@ -1012,9 +1012,6 @@ $(document).ready(function () {
 	$("#admin_organizaciones_inscritas").click(function () {
 		redirect(baseURL + "panelAdmin/organizaciones/inscritas");
 	});
-	$("#admin_ver_inscritas_volver").click(function () {
-		redirect(baseURL + "panelAdmin/organizaciones/inscritas");
-	});
 	$("#admin_organizaciones_enproceso").click(function () {
 		redirect(baseURL + "panelAdmin/solicitudes/proceso");
 	});
@@ -1279,23 +1276,22 @@ $(document).ready(function () {
 		Cargar información de la org en inscritas
 		------------------------------------------------
 	*/
-	$("#verTodaInformacion").click(function () {
-		$idOrg = $(this).attr("data-idOrg");
-		redirect(baseURL + "panelAdmin/organizaciones/informacion?id=" + $idOrg);
-	});
+
 
 	if ($("#cInfO").html() != undefined) {
 		$jsonInformacion = $.parseJSON($("#cInfO").html());
+		console.log($jsonInformacion);
+
 
 		if ($jsonInformacion.organizaciones != "") {
-			$id_org = $jsonInformacion.organizaciones["0"].id_organizacion;
+			$id_org = $jsonInformacion.organizaciones.id_organizacion;
 			console.log($jsonInformacion.informacionGeneral);
 			if ($jsonInformacion.informacionGeneral.length == 0) {
 				redirect(baseURL + "panelAdmin/organizaciones/inscritas#info");
 			}
 			$("#hist_org_obs").attr(
 				"data-id-org",
-				$jsonInformacion.organizaciones["0"].id_organizacion
+				$jsonInformacion.organizaciones.id_organizacion
 			);
 			data_orgFinalizada.push($jsonInformacion);
 
@@ -1670,7 +1666,6 @@ $(document).ready(function () {
 
 				$("#registroEducativoProgramas").append("</div>");
 			}
-
 			/** Formulario 4 **/
 			for (var i = 0; i < $jsonInformacion.antecedentesAcademicos.length; i++) {
 				$cols = 12 / parseFloat($jsonInformacion.antecedentesAcademicos.length);
@@ -10576,6 +10571,7 @@ function tablas() {
 		"tabla_observaciones_form7",
 		"tabla_observaciones_form8",
 		"tabla_registro_programas",
+		"tabla_organizaciones_inscritas",
 	];
 
 	for (i = 0; i < tablas.length; i++) {
