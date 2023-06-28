@@ -1,3 +1,9 @@
+var texto_validacaptcha = "Por favor valida el captcha.";
+var alert_danger = "alert-danger";
+var alert_info = "alert-info";
+var alert_warning = "alert-warning";
+var alert_success = "alert-success";
+
 /** Politica */
 $("#acepto_politica").click(function () {
 	$("#acepto_cond").prop("checked", true);
@@ -32,7 +38,8 @@ $("#confirmaRegistro").click(function () {
 				}
 				else {
 					if ($("#organizacion").val().length > 0 &&
-						$("#nit").val() + "-" + $("#nit_digito").val().length > 0 &&
+						$("#nit").val().length  > 0 &&
+						$("#nit_digito").val().length  > 0 &&
 						$("#nombre").val().length > 0 &&
 						$("#apellido").val().length > 0 &&
 						$("#correo_electronico").val().length > 0 &&
@@ -72,6 +79,7 @@ $("#confirmaRegistro").click(function () {
 						}
 					}
 					else {
+						console.log($("#organizacion").val().length, $("#nit").val().length, $("#nit_digito").val().length, $("#nombre").val().length, $("#apellido").val().length, $("#correo_electronico").val().length, $("#nombre_usuario").val().length, $("#password").val().length, $("#re_password").val().length)
 						$("#ayuda_registro").modal("toggle");
 						mensaje("Por favor, llene los datos requeridos.", alert_danger);
 					}
@@ -89,51 +97,38 @@ $("#confirmaRegistro").click(function () {
 /** Guardar registro validado */
 $("#guardar_registro").click(function () {
 	if ($("#formulario_registro").valid()) {
-		var organizacion = $("#organizacion").val();
 		var nit = $("#nit").val() + "-" + $("#nit_digito").val();
-		var sigla = $("#sigla").val();
-		var nombre = $("#nombre").val();
-		var nombre_s = $("#nombre_s").val();
-		var apellido = $("#apellido").val();
-		var apellido_s = $("#apellido_s").val();
-		var correo_electronico = $("#correo_electronico").val();
-		var correo_electronico_rep_legal = $("#correo_electronico_rep_legal").val();
-		var nombre_p = $("#nombre_p").val();
-		var apellido_p = $("#apellido_p").val();
-		var nombre_usuario = $("#nombre_usuario").val();
 		var pass = $("#password").val();
 		var pass2 = $("#re_password").val();
 		var check = $("#acepto_cond").prop("checked");
 		var response_captcha = grecaptcha.getResponse();
-		console.log(response_captcha);
 
-		if (
-			organizacion.length > 0 &&
+		if ($("#organizacion").val().length > 0 &&
 			nit.length > 0 &&
-			nombre.length > 0 &&
-			apellido.length > 0 &&
-			correo_electronico.length > 0 &&
-			nombre_usuario.length > 0 &&
+			$("#nombre").val().length > 0 &&
+			$("#apellido").val().length > 0 &&
+			$("#correo_electronico").val().length > 0 &&
+			$("#nombre_usuario").val().length > 0 &&
 			pass.length > 0 &&
-			pass2.length > 0
-		) {
+			pass2.length > 0)
+		{
 			if (pass == pass2) {
 				if (check == true) {
 					if (response_captcha != 0) {
 						var data = {
-							organizacion: organizacion,
+							organizacion: $("#organizacion").val(),
 							nit: nit,
-							sigla: sigla,
-							nombre: nombre,
-							nombre_s: nombre_s,
-							apellido: apellido,
-							apellido_s: apellido_s,
-							correo_electronico: correo_electronico,
-							correo_electronico_rep_legal: correo_electronico_rep_legal,
-							nombre_p: nombre_p,
-							apellido_p: apellido_p,
-							nombre_usuario: nombre_usuario,
-							password: pass,
+							sigla: $("#sigla").val(),
+							nombre: $("#nombre").val(),
+							nombre_s: $("#nombre_s").val(),
+							apellido: $("#apellido").val(),
+							apellido_s: $("#apellido_s").val(),
+							correo_electronico: $("#correo_electronico").val(),
+							correo_electronico_rep_legal: $("#correo_electronico_rep_legal").val(),
+							nombre_p: $("#nombre_p").val(),
+							apellido_p: $("#apellido_p").val(),
+							nombre_usuario: $("#nombre_usuario").val(),
+							password: $("#password").val(),
 						};
 						console.log(data);
 						$.ajax({
