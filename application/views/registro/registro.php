@@ -1,5 +1,6 @@
+<?php echo validation_errors('formulario_registro'); ?>
+<?php echo form_open('', array('id' => 'formulario_registro')); ?>
 <div id="registro" class="center-block col-md-7">
-	<?php echo form_open('', array('id' => 'formulario_registro')); ?>
 	<!--<button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#ayuda_registro">?</button>-->
 	<div class="form-group">
 		<div id="mensaje" class="col-md-12 alert" role="alert"></div>
@@ -91,8 +92,8 @@
 		<img src="<?php echo base_url(); ?>assets/img/loading.gif" id="loading" class="img-responsive col-md-2">
 
 	</div>
-	<?php echo form_close(); ?>
 </div>
+<?php echo form_close(); ?>
 <!-- Modal Politica de Privacidad -->
 <div class="modal fade" id="politica_ventana" tabindex="-1" role="dialog" aria-labelledby="politica">
 	<div class="modal-dialog modal-lg" role="document">

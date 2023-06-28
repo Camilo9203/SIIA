@@ -3697,41 +3697,6 @@ $(document).ready(function () {
 		}
 	});
 
-	// Aceptar
-	$("#aceptoComActo").change(function () {
-		if ($("#aceptoComActo").is(":checked")) {
-			$("#guardar_registro").removeAttr("disabled");
-			$("#guardar_registro").attr("disabled", false);
-		} else {
-			$("#guardar_registro").attr("disabled", true);
-		}
-	});
-
-	$("#nombre_usuario").change(function () {
-		$nombre = $("#nombre_usuario").val();
-
-		datas = {
-			nombre: $nombre,
-		};
-
-		$.ajax({
-			url: baseURL + "home/verificarUsuario",
-			type: "post",
-			dataType: "JSON",
-			data: datas,
-			success: function (response) {
-				if (response.existe == 1) {
-					notificacion(
-						"El nombre de usuario ya existe... Puede usar números...",
-						"success"
-					);
-				}
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
 
 	$("#reenvio").click(function () {
 		$correo_electronico = $("#correo_electronico_rese").val();

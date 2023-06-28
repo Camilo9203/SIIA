@@ -1422,3 +1422,11 @@ FIN CUSTOM
 	padding: 20px 20px;
 	text-align: center;
 }
+
+.custom-container {
+	height: 80px;
+	width: 100px;
+	font-size: 14px;
+	align-content: center;
+	justify-content: center;
+}
