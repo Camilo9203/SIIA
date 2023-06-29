@@ -1,6 +1,3 @@
-let url = unescape(window.location.href);
-let activate = url.split("/");
-let baseURL = activate[0] + "//" + activate[2] + "/" + activate[3] + "/";
 let html = "";
 let obsForm = 0;
 let data_orgFinalizada = [];
