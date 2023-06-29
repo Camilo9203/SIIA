@@ -459,21 +459,20 @@ function cargarArchivosDocente(id) {
 				for (var i = 0; i < response.length; i++) {
 					if (response[i].tipo == "docenteHojaVida") {
 						carpeta = "docentes/hojasVida";
-						url = "../uploads/" + carpeta + "/";
+						url = "../../uploads/" + carpeta + "/";
 					}
 					if (response[i].tipo == "docenteTitulo") {
 						carpeta = "docentes/titulos";
-						url = "../uploads/" + carpeta + "/";
+						url = "../../uploads/" + carpeta + "/";
 					}
 					if (response[i].tipo == "docenteCertificados") {
 						carpeta = "docentes/certificados";
-						url = "../uploads/" + carpeta + "/";
+						url = "../../uploads/" + carpeta + "/";
 					}
 					if (response[i].tipo == "docenteCertificadosEconomia") {
 						carpeta = "docentes/certificadosEconomia";
-						url = "../uploads/" + carpeta + "/";
+						url = "../../uploads/" + carpeta + "/";
 					}
-
 					$("<tr>").appendTo(".tabla_form > tbody");
 					var nombre_r = response[i].nombre.replace('"', "").replace('"', "");
 					var tipo_r = response[i].tipo.replace('"', "").replace('"', "");

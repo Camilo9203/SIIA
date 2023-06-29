@@ -109,7 +109,7 @@ $("#admin_ver_inscritas_volver").click(function () {
 	$("#datos_organizaciones_inscritas").slideUp();
 });
 
-$(document).on("click", ".verSolicitud", function () {
+$(document).on("click", ".verSolicitudAdmin", function () {
 	let idSolicitud = $(this).attr("data-id");
 	let idOrganizacion = $(this).attr("data-id-org");
 	window.open(baseURL + "panelAdmin/organizaciones/informacionSolicitud?idSolicitud=" + idSolicitud + "&idOrganizacion=" + idOrganizacion,'_blank' )
@@ -164,7 +164,7 @@ $(".ver_organizacion_inscrita").click(function () {
 					$("#tbody_solicitudes>tr#" + i + "").append("<td>" + response.solicitudes[i].modalidadSolicitud + "</td>");
 					$("#tbody_solicitudes>tr#" + i + "").append("<td>" + response.solicitudes[i].motivoSolicitud + "</td>");
 					$("#tbody_solicitudes>tr#" + i + "").append("<td>" + response.solicitudes[i].tipoSolicitud + "</td>");
-					$("#tbody_solicitudes>tr#" + i + "").append("<td> <button class='btn btn-success btn-sm verSolicitud' data-id='"
+					$("#tbody_solicitudes>tr#" + i + "").append("<td> <button class='btn btn-success btn-sm verSolicitudAdmin' data-id='"
 						+ response.solicitudes[i].idSolicitud
 						+ "' data-id-org='" + response.organizacion.id_organizacion + "'>Ver Solicitud<i class='fa fa-eye' aria-hidden='true' </button></td>");
 					$("#tbody_solicitudes").append("</tr>");
