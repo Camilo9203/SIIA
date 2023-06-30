@@ -35,6 +35,13 @@ class Solicitudes extends CI_Controller
 		$solicitud = $this->SolicitudesModel->solicitudes($this->input->post('idSolicitud'));
 		echo json_encode(array('solicitud' => $solicitud));
 	}
+	/** Cargar todos los datos de una solicitud */
+	public function cargarInformacionCompletaSolicitud(){
+		$idSolicitud = $this->input->post('idSolicitud');
+		$idOrganizacion = $this->input->post('id_organizacion');
+		$solicitud = $this->SolicitudesModel->getAllInformacionSolicitud($idSolicitud, $idOrganizacion);
+		echo $solicitud;
+	}
 	/** Tipo solicitud */
 	public function guardar_tipoSolicitud()
 	{
@@ -244,6 +251,18 @@ class Solicitudes extends CI_Controller
 		$data['solicitudesEnObservaciones'] = $this->SolicitudesModel->getSolicitudesEnObservacion();
 		$this->load->view('include/header', $data);
 		$this->load->view('admin/solicitudes/observaciones', $data);
+		$this->load->view('include/footer', $data);
+		$this->logs_sia->logs('PLACE_USER');
+	}
+	/**  Cargar información SolicitudesModel */
+	public function informacionSolicitud()
+	{
+		$data = $this->datosSession();
+		$data['title'] = 'Panel Principal - Administrador - Información';
+		$data['idSolicitud'] = $this->input->get('idSolicitud');
+		$data['idOrganizacion'] = $this->input->get('idOrganizacion');
+		$this->load->view('include/header', $data);
+		$this->load->view('admin/organizaciones/informacion', $data);
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}

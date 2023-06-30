@@ -4,6 +4,7 @@ let correosTodos;
 $.ajax({
 	url: baseURL + "Admin/cargarCorreos",
 	type: "GET",
+	dataType: 'json',
 	success: function (response) {
 		correos = JSON.parse(response);
 	},
@@ -11,6 +12,7 @@ $.ajax({
 $.ajax({
 	url: baseURL + "Admin/cargarCorreosAcreditadas",
 	type: "GET",
+	dataType: 'json',
 	success: function (response) {
 		correosAcreditadas = JSON.parse(response);
 	},

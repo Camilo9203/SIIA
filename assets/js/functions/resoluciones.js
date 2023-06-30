@@ -33,7 +33,7 @@ $("#tabla_enProceso_organizacion tbody").on("click", '.ver_resolucion_org', func
 		idSolicitud: $(this).attr("data-solicitud")
 	};
 	$.ajax({
-		url: baseURL + "admin/cargar_todaInformacion",
+		url: baseURL + "solicitudes/cargarInformacionCompletaSolicitud",
 		type: "post",
 		dataType: "JSON",
 		data: data,
@@ -142,7 +142,7 @@ $("#adjuntar_resolucion").on("click", function () {
 			notificacion(response.msg, "success");
 			//setInterval(functions(){ redirect('resoluciones') }, 2000);
 			$.ajax({
-				url: baseURL + "admin/cargar_todaInformacion",
+				url: baseURL + "solicitudes/cargarInformacionCompletaSolicitud",
 				dataType: "text",
 				cache: false,
 				contentType: false,
@@ -184,7 +184,7 @@ $(document).on("click", ".eliminarResolucion", function () {
 		success: function (response) {
 			notificacion(response.msg, "success");
 			$.ajax({
-				url: baseURL + "admin/cargar_todaInformacion",
+				url: baseURL + "solicitudes/cargarInformacionCompletaSolicitud",
 				type: "post",
 				dataType: "JSON",
 				data: data,
@@ -270,7 +270,7 @@ $(document).on("click", "#actualizarDatosResolucion", function () {
 		success: function (response) {
 			notificacion(response.msg, "success");
 			$.ajax({
-				url: baseURL + "admin/cargar_todaInformacion",
+				url: baseURL + "solicitudes/cargarInformacionCompletaSolicitud",
 				type: "post",
 				dataType: "JSON",
 				data: data,

@@ -86,12 +86,11 @@ $route['panelAdmin/solicitudes/asignar'] = 'Solicitudes/asignar';
 $route['panelAdmin/solicitudes/finalizadas'] = 'Solicitudes/finalizadas';
 $route['panelAdmin/solicitudes/proceso'] = 'Solicitudes/proceso';
 $route['panelAdmin/solicitudes/observaciones'] = 'Solicitudes/observaciones';
+$route['panelAdmin/solicitudes/informacionSolicitud'] = 'Solicitudes/informacionSolicitud';
 /** Administrador Organizaciones */
 $route['panelAdmin/organizaciones'] = 'Admin/ver_organizaciones';
-$route['panelAdmin/organizaciones/finalizadas'] = 'Admin/finalizadas';
 $route['panelAdmin/organizaciones/asignar'] = 'Organizaciones/asignar';
 $route['panelAdmin/organizaciones/inscritas'] = 'Organizaciones/inscritas';
-$route['panelAdmin/organizaciones/informacionSolicitud'] = 'Organizaciones/informacionSolicitud';
 $route['panelAdmin/contacto'] = 'Admin/contacto';
 $route['panelAdmin/opciones'] = 'Admin/opciones';
 $route['panelAdmin/notificacionesAntiguas'] = 'Admin/notificacionesAntiguas';

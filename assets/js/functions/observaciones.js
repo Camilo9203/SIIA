@@ -34,7 +34,7 @@ $("#verDocLegalMenuAdmin").click(function () {
 	}
 	// Consultar datos por ajax
 	$.ajax({
-		url: baseURL + "admin/cargar_todaInformacion",
+		url: baseURL + "solicitudes/cargarInformacionCompletaSolicitud",
 		type: "post",
 		dataType: "JSON",
 		data: data,
@@ -133,7 +133,7 @@ $("#verAntAcaMenuAdmin").click(function () {
 	}
 	// Consultar datos por ajax
 	$.ajax({
-		url: baseURL + "admin/cargar_todaInformacion",
+		url: baseURL + "solicitudes/cargarInformacionCompletaSolicitud",
 		type: "post",
 		dataType: "JSON",
 		data: data,
@@ -177,7 +177,7 @@ $("#verJorActMenuAdmin").click(function () {
 	}
 	// Consultar datos por ajax
 	$.ajax({
-		url: baseURL + "admin/cargar_todaInformacion",
+		url: baseURL + "solicitudes/cargarInformacionCompletaSolicitud",
 		type: "post",
 		dataType: "JSON",
 		data: data,
@@ -218,7 +218,7 @@ $("#verProgBasMenuAdmin").click(function () {
 	}
 	// Consultar datos por ajax
 	$.ajax({
-		url: baseURL + "admin/cargar_todaInformacion",
+		url: baseURL + "solicitudes/cargarInformacionCompletaSolicitud",
 		type: "post",
 		dataType: "JSON",
 		data: data,
@@ -235,6 +235,24 @@ $("#verProgBasMenuAdmin").click(function () {
 					html += "<td>" + response.datosProgramas[i]['nombrePrograma'] + "</td>";
 					html += "<td>" + response.datosProgramas[i]['aceptarPrograma'] + "</td>";
 					html += "<td>" + response.datosProgramas[i]['fecha'] + "</td>";
+					switch (response.datosProgramas[i]['nombrePrograma']) {
+						case "Acreditación Curso Básico de Economía Solidaria":
+							$("#curso_basico_es").show();
+							break;
+						case "Acreditación Aval de Trabajo Asociado":
+							$("#curso_basico_aval").show();
+							break;
+						case "Acreditación Curso Medio de Economía Solidaria":
+							$("#curso_medio_es").show();
+							break;
+						case "Acreditación Curso Avanzado de Economía Solidaria":
+							$("#curso_avanzado_es").show();
+							break;
+						case "Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria":
+							$("#curso_economia_financiera").show();
+							break;
+						default:
+					}
 				}
 			}
 			$(".tabla_registro_programas").html(html);
@@ -274,7 +292,7 @@ $("#verDatPlatMenuAdmin").click(function () {
 	}
 	// Consultar datos por ajax
 	$.ajax({
-		url: baseURL + "admin/cargar_todaInformacion",
+		url: baseURL + "solicitudes/cargarInformacionCompletaSolicitud",
 		type: "post",
 		dataType: "JSON",
 		data: data,
@@ -317,7 +335,7 @@ $("#verDataEnLinea").click(function () {
 	}
 	// Consultar datos por ajax
 	$.ajax({
-		url: baseURL + "admin/cargar_todaInformacion",
+		url: baseURL + "solicitudes/cargarInformacionCompletaSolicitud",
 		type: "post",
 		dataType: "JSON",
 		data: data,
@@ -333,7 +351,6 @@ $("#verDataEnLinea").click(function () {
 					html += "<td>" + response.enLinea[i]['fecha'] + "</td>";
 				}
 			}
-			console.log(response.observaciones);
 			$(".datos_herramientas").html(html);
 			verObservaciones(8);
 		}
@@ -348,12 +365,11 @@ function verObservaciones(idForm) {
 	}
 	// Consultar datos por ajax
 	$.ajax({
-		url: baseURL + "admin/cargar_todaInformacion",
+		url: baseURL + "solicitudes/cargarInformacionCompletaSolicitud",
 		type: "post",
 		dataType: "JSON",
 		data: data,
 		success: function (response) {
-			console.log(idForm);
 			// Llenar tabla de datos en línea registrados
 			for (let i = 0; i < response.observaciones.length; i++) {
 				if (response.observaciones[i]['idForm'] == idForm) {
@@ -417,7 +433,7 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 	obsForm = 0;
 	html = "";
 	$.ajax({
-		url: baseURL + "admin/cargar_todaInformacion",
+		url: baseURL + "solicitudes/cargarInformacionCompletaSolicitud",
 		type: "post",
 		dataType: "JSON",
 		data: data,
@@ -560,6 +576,164 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 		},
 	});
 });
+/** Consultar Información Completa de la Solicitud */
+if ($("#idSolicitud").html() != undefined) {
+	if ($("#idSolicitud").html() != "") {
+		let $id_org = $('#idOrganizacion').html();
+		let $idSolicitud = $('#idSolicitud').html();
+		$("#id_org_ver_form").remove();
+		$("body").append("<div id='id_org_ver_form' class='hidden' data-id='" + $id_org + "' data-solicitud='"+ $idSolicitud + "'>");
+		let data = {
+			id_organizacion: $id_org,
+			idSolicitud: $idSolicitud
+		};
+		obsForm = 0;
+		html = "";
+		$.ajax({
+			url: baseURL + "solicitudes/cargarInformacionCompletaSolicitud",
+			type: "post",
+			dataType: "JSON",
+			data: data,
+			success: function (response) {
+				$(".icono--div3").show();
+				$(".icono--div4").show();
+				$("#hist_org_obs").attr("data-id-org", $id_org);
+				data_orgFinalizada.push(response);
+				if(data_orgFinalizada["0"]["plataforma"].length == 0){
+					$("#verDatPlatMenuAdmin").hide();
+				}
+				if(data_orgFinalizada["0"]["enLinea"].length == 0){
+					$("#verDataEnLinea").hide();
+				}
+				$("#admin_ver_finalizadas").slideUp();
+				$("#admin_panel_ver_finalizada").slideDown();
+				/** Solicitud **/
+				$("#fechaSol").html(response.solicitudes.fecha);
+				$("#idSol").html(response.solicitudes.idSolicitud);
+				$("#tipoSol").html(response.estadoOrganizaciones.tipoSolicitudAcreditado);
+				$("#modSol").html(response.estadoOrganizaciones.modalidadSolicitudAcreditado);
+				$("#motSol").html(response.estadoOrganizaciones.motivoSolicitudAcreditado);
+				$("#numeroSol").html(response.solicitudes.numeroSolicitudes);
+				$("#revFechaFin").html(response.estadoOrganizaciones.fechaFinalizado);
+				$("#revSol").html(response.solicitudes.numeroRevisiones);
+				$("#revFechaSol").html(response.solicitudes.fechaUltimaRevision);
+				$("#estOrg").html(response.estadoOrganizaciones.nombre);
+				$("#nOrgSol").html(response.organizaciones.nombreOrganizacion);
+				$("#sOrgSol").html(response.organizaciones.sigla);
+				$("#nitOrgSol").html(response.organizaciones.numNIT);
+				$("#nrOrgSol").html(response.organizaciones.primerNombreRepLegal + " " + response.organizaciones.primerApellidoRepLegal);
+				$("#cOrgSol").html(response.organizaciones.direccionCorreoElectronicoOrganizacion);
+				/** Formulario 1 **/
+				$("#actuacionOrganizacion").html(response.informacionGeneral.actuacionOrganizacion);
+				$("#direccionOrganizacion").html(response.informacionGeneral.direccionOrganizacion);
+				$("#extension").html(response.informacionGeneral.extension);
+				$("#fax").html(response.informacionGeneral.fax);
+				$("#fines").html(response.informacionGeneral.fines);
+				$("#mision").html(response.informacionGeneral.mision);
+				$("#nomDepartamentoUbicacion").html(response.informacionGeneral.nomDepartamentoUbicacion);
+				$("#nomMunicipioNacional").html(response.informacionGeneral.nomMunicipioNacional);
+				$("#numCedulaCiudadaniaPersona").html(response.informacionGeneral.numCedulaCiudadaniaPersona);
+				$("#objetoSocialEstatutos").html(response.informacionGeneral.objetoSocialEstatutos);
+				$("#otros").html(response.informacionGeneral.otros);
+				$("#portafolio").html(response.informacionGeneral.portafolio);
+				$("#presentacionInstitucional").html(response.informacionGeneral.presentacionInstitucional);
+				$("#principios").html(response.informacionGeneral.principios);
+				$("#tipoEducacion").html(response.informacionGeneral.tipoEducacion);
+				$("#tipoOrganizacion").html(response.informacionGeneral.tipoOrganizacion);
+				$("#urlOrganizacion").html(response.informacionGeneral.urlOrganizacion);
+				$("#vision").html(response.informacionGeneral.vision);
+				$("#actuacionOrganizacion").parent().next().attr(response.informacionGeneral.actuacionOrganizacion);
+				$("#direccionOrganizacion").parent().next().attr("data-text", response.informacionGeneral.direccionOrganizacion);
+				$("#extension").parent().next().attr("data-text", response.informacionGeneral.extension);
+				$("#fax").parent().next().attr("data-text", response.informacionGeneral.fax);
+				$("#fines").parent().next().attr("data-text", response.informacionGeneral.fines);
+				$("#mision").parent().next().attr("data-text", response.informacionGeneral.mision);
+				$("#nomDepartamentoUbicacion").parent().next().attr("data-text", response.informacionGeneral.nomDepartamentoUbicacion);
+				$("#nomMunicipioNacional").parent().next().attr("data-text", response.informacionGeneral.nomMunicipioNacional);
+				$("#numCedulaCiudadaniaPersona").parent().next().attr("data-text", response.informacionGeneral.numCedulaCiudadaniaPersona);
+				$("#objetoSocialEstatutos").parent().next().attr("data-text", response.informacionGeneral.objetoSocialEstatutos);
+				$("#otros").parent().next().attr("data-text", response.informacionGeneral.otros);
+				$("#portafolio").parent().next().attr("data-text", response.informacionGeneral.portafolio);
+				$("#presentacionInstitucional").parent().next().attr("data-text", response.informacionGeneral.presentacionInstitucional);
+				$("#principios").parent().next().attr("data-text", response.informacionGeneral.principios);
+				$("#tipoEducacion").parent().next().attr("data-text", response.informacionGeneral.tipoEducacion);
+				$("#tipoOrganizacion").parent().next().attr("data-text", response.informacionGeneral.tipoOrganizacion);
+				$("#urlOrganizacion").parent().next().attr("data-text", response.informacionGeneral.urlOrganizacion);
+				$("#vision").parent().next().attr("data-text", response.informacionGeneral.vision);
+				// Archivos formulario 1.
+				for ($a = 0; $a < data_orgFinalizada["0"].archivos.length; $a++) {
+					if (data_orgFinalizada["0"].archivos[$a].id_formulario == "1") {
+						if (data_orgFinalizada["0"].archivos[$a].tipo == "carta") {
+							$carpeta = baseURL + "uploads/cartaRep/";
+						} else if (
+							data_orgFinalizada["0"].archivos[$a].tipo == "certificaciones"
+						) {
+							$carpeta = baseURL + "uploads/certificaciones/";
+						} else if (data_orgFinalizada["0"].archivos[$a].tipo == "lugar") {
+							$carpeta = baseURL + "uploads/lugarAtencion/";
+						}
+
+						$("#archivos_informacionGeneral").append(
+							"<li class='listaArchivos'><a href='" +
+							$carpeta +
+							data_orgFinalizada["0"].archivos[$a].nombre +
+							"' target='_blank'>" +
+							data_orgFinalizada["0"].archivos[$a].nombre +
+							"</a></li>"
+						);
+					}
+				}
+				$("#archivos_informacionGeneral").append('<div class="form-group" id="documentacionLegal-observacionesGeneral' + i + '">');
+				// Observaciones formulario 1
+				/** Formulario 4 Archivos **/
+				$("#archivosJornadasActualizacion").append('<div class="col-md-12" id="archivos_jornadasActualizacion">');
+				$("#archivosJornadasActualizacion>#archivos_jornadasActualizacion").append("<p>Archivos:</p>");
+				for ($a = 0; $a < data_orgFinalizada["0"].archivos.length; $a++) {
+					if (data_orgFinalizada["0"].archivos[$a].id_formulario == "5") {
+						if (data_orgFinalizada["0"].archivos[$a].tipo == "jornadaAct") {
+							$carpeta = baseURL + "uploads/jornadas/";
+						}
+						$("#archivosJornadasActualizacion>#archivos_jornadasActualizacion").append(
+							"<li class='listaArchivos'><a href='" + $carpeta + data_orgFinalizada["0"].archivos[$a].nombre + "' target='_blank'>" + data_orgFinalizada["0"].archivos[$a].nombre + "</a></li><br>"
+						);
+					}
+				}
+				$("#archivosJornadasActualizacion").append('</div>');
+				/** Formulario 6 Docentes **/
+				for (var i = 0; i < response.docentes.length; i++) {
+					if (i == 0) {
+						$(".txtOrgDocen").append(
+							"<p>Para ver los documentos de los facilitadores haga click <a href='" +
+							baseURL +
+							"panelAdmin/organizaciones/docentes#organizacion:" +
+							response.organizaciones.numNIT +
+							"' target='_blank'>aquí.</a> Tambien puede ingresar al módulo de facilitadores y seleccione la organización con el número NIT: <label>" +
+							response.organizaciones.numNIT +
+							"</label>.</label>"
+						);
+						$(".txtOrgDocen").append("<p id='cantidadDocentesOrg'>Número de facilitadores: " + response.docentes.length + "</p>");
+						console.log(response.organizaciones.numNIT);
+						$("#frameDocentes").attr("src", baseURL + "panelAdmin/organizaciones/solodocentes#organizacion:" + response.organizaciones.numNIT);
+						setTimeout(function () {
+							document.getElementById("frameDocentes").contentDocument.location.reload(true);
+						}, 2000);
+						//$("#docentes").append('<div class="form-group" id="docentes-observacionesGeneral0">');
+						//$("#docentes>#docentes-observacionesGeneral0").append("<p>Observaciones de los docentes en general:</label>");
+						//$("#docentes>#docentes-observacionesGeneral0").append("<textarea class='form-control obs_admin_' placeholder='Observación...' data-title='Observaciones de los docentes en general' data-text='Observaciones de los docentes en general' data-type='docentes' id='obs-docen-gen-0' rows='3'></textarea>");
+						$("#docentes").append("</div>");
+					}
+				}
+			},
+			error: function (ev) {
+				//Do nothing
+			},
+		});
+	}
+
+	else {
+		redirect(baseURL + "panelAdmin/organizaciones/inscritas");
+	}
+}
 /** Terminar proceso de observación */
 $(document).on("click", "#terminar_proceso_observacion", function () {
 	let data = {

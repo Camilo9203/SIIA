@@ -67,17 +67,6 @@ class Organizaciones extends CI_Controller
 		$solicitudes = $this->SolicitudesModel->getSolicitudesOrganizacion($organizacion->id_organizacion);
 		echo json_encode(array('organizacion' => $organizacion, 'actividad' => $actividad, 'usuario' => $usuario, 'solicitudes' => $solicitudes));
 	}
-		// Cargar información Solicitud
-	public function informacionSolicitud()
-	{
-		$data = $this->datosSession();
-		$data['title'] = 'Panel Principal - Administrador - Información';
-		$data['informacion'] = $this->SolicitudesModel->getAllInformacionSolicitud($this->input->get('idSolicitud'), $this->input->get('idOrganizacion'));
-		$this->load->view('include/header', $data);
-		$this->load->view('admin/organizaciones/informacion', $data);
-		$this->load->view('include/footer', $data);
-		$this->logs_sia->logs('PLACE_USER');
-	}
 	/** Camara de comercio */
 	public function camara()
 	{

@@ -10,7 +10,7 @@ class Registro extends CI_Controller
 	}
 
 	/**
-	Función form de registro.
+	* Función form de registro.
 	 **/
 	public function index()
 	{
@@ -25,12 +25,10 @@ class Registro extends CI_Controller
 		$this->load->view('include/footer');
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	/**
-	Función para validar formulario de registro, almacenar datos de organización, usuario y token.
-	 * Se envía email de activación de cuenta.
+	 *	Función para validar formulario de registro, almacenar datos de organización, usuario y token.
+	 *  Se envía email de activación de cuenta.
 	 **/
-
 	public function verificarUsuario()
 	{
 		// Comprobar que el nombre de usuario no se encuentre en la base de datos.
@@ -51,7 +49,6 @@ class Registro extends CI_Controller
 			echo json_encode(array("existe" => 0));
 		}
 	}
-
 	public function registrar_info()
 	{
 		/** Reglas de validación formulario */
@@ -76,9 +73,13 @@ class Registro extends CI_Controller
 			echo json_encode(array('url' => "registro", 'msg' => $error));
 		}
 		else {
-			/**	@var $nombreUsuario Capturar nombre de usuario */
+			/**	@var $nombreUsuario
+			 * Capturar nombre de usuario
+			 */
 			$nombreUsuario = $this->db->select("usuario")->from("usuarios")->where("usuario", $this->input->post('nombre_usuario'))->get()->row()->usuario;
-			/**	@var $nit Capturar NIT de Organización */
+			/**	@var $nit
+			 * Capturar NIT de Organización
+			 */
 			$nit = $this->db->select("numNIT")->from("organizaciones")->where("numNIT", $this->input->post('nit'))->get()->row()->numNIT;
 			/** Comprobar que usuario existe */
 			if ($nombreUsuario != NULL || $nombreUsuario != "") {

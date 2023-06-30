@@ -36,7 +36,7 @@ $("#tabla_enProceso_organizacion tbody").on("click", '.ver_estado_org', function
 		idSolicitud: $(this).attr("data-solicitud")
 	};
 	$.ajax({
-		url: baseURL + "admin/cargar_todaInformacion",
+		url: baseURL + "solicitudes/cargarInformacionCompletaSolicitud",
 		type: "post",
 		dataType: "JSON",
 		data: data,

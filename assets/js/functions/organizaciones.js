@@ -32,7 +32,7 @@ $(".ver_adjuntar_camara").click(function () {
 		id_organizacion: $id_org,
 	};
 	$.ajax({
-		url: baseURL + "admin/cargar_todaInformacion",
+		url: baseURL + "solicitudes/cargarInformacionCompletaSolicitud",
 		type: "post",
 		dataType: "JSON",
 		data: data,
@@ -102,7 +102,7 @@ $("#verActividadUsuario").click(function () {
 	$("#solicitudesOrganizacion").slideUp();
 	$("#actividadOrganizacion").slideDown();
 });
-$("#admin_ver_inscritas_volver").click(function () {
+$("#admin_ver_inscritas_tabla").click(function () {
 	$("#solicitudesOrganizacion").hide();
 	$("#actividadOrganizacion").hide();
 	$("#admin_panel_org_inscritas").slideDown();
@@ -112,7 +112,7 @@ $("#admin_ver_inscritas_volver").click(function () {
 $(document).on("click", ".verSolicitudAdmin", function () {
 	let idSolicitud = $(this).attr("data-id");
 	let idOrganizacion = $(this).attr("data-id-org");
-	window.open(baseURL + "panelAdmin/organizaciones/informacionSolicitud?idSolicitud=" + idSolicitud + "&idOrganizacion=" + idOrganizacion,'_blank' )
+	window.open(baseURL + "panelAdmin/solicitudes/informacionSolicitud?idSolicitud=" + idSolicitud + "&idOrganizacion=" + idOrganizacion,'_self' )
 });
 // Traer datos de la organización inscrita
 $(".ver_organizacion_inscrita").click(function () {

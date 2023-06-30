@@ -117,7 +117,7 @@
 			<hr>
 		</div>
 		<br>
-		<button class="btn btn-danger pull-left btn-sm" id="admin_ver_inscritas_volver"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
+		<button class="btn btn-danger pull-left btn-sm" id="admin_ver_inscritas_tabla"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 		<!--		<button class="btn btn-siia pull-right btn-sm" id="verTodaInformacion">Ver toda la información registrada <i class="fa fa-eye" aria-hidden="true"></i></button>-->
 	</div>
 </div>
