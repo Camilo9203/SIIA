@@ -6,7 +6,7 @@
  *
  */
 ?>
-<div id="idSolicitud" style="display: none"><?php echo $idSolicitud; ?></div>
+<div id="idSolicitudInfo" style="display: none"><?php echo $idSolicitud; ?></div>
 <div id="idOrganizacion" style="display: none"><?php echo $idOrganizacion; ?></div>
 <!-- Registro de observaciones por formulario -->
 <div class="container">

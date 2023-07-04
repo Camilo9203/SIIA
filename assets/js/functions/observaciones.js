@@ -577,10 +577,10 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 	});
 });
 /** Consultar Información Completa de la Solicitud */
-if ($("#idSolicitud").html() != undefined) {
-	if ($("#idSolicitud").html() != "") {
+if ($("#idSolicitudInfo").html() != undefined) {
+	if ($("#idSolicitudInfo").html() != "") {
 		let $id_org = $('#idOrganizacion').html();
-		let $idSolicitud = $('#idSolicitud').html();
+		let $idSolicitud = $('#idSolicitudInfo').html();
 		$("#id_org_ver_form").remove();
 		$("body").append("<div id='id_org_ver_form' class='hidden' data-id='" + $id_org + "' data-solicitud='"+ $idSolicitud + "'>");
 		let data = {
