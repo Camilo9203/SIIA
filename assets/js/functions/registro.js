@@ -190,9 +190,7 @@ $("#confirmaRegistro").click(function () {
 		});
 	}
 });
-/**
-	 Validar Formulario Registro
- **/
+/** Validar Formulario Registro */
 function ValidarFormRegistro () {
 	$("form[id='formulario_registro']").validate({
 		rules: {
@@ -340,9 +338,7 @@ function ValidarFormRegistro () {
 		},
 	});
 }
-/**
-	 Guardar Registro
- **/
+/** Guardar Registro */
 $("#guardar_registro").click(function () {
 	/** Validar formulario registro */
 	if ($("#formulario_registro").valid()) {
@@ -352,17 +348,35 @@ $("#guardar_registro").click(function () {
 		if (response_captcha != 0) {
 			/** Data para registrar cuenta */
 			let data = {
-				organizacion: $("#organizacion").val(),
+				organizacion: $("#organizacion").val().trim().toUpperCase(),
 				nit: $("#nit").val() + "-" + $("#nit_digito").val(),
-				sigla: $("#sigla").val(),
-				nombre: $("#nombre").val(),
-				nombre_s: $("#nombre_s").val(),
-				apellido: $("#apellido").val(),
-				apellido_s: $("#apellido_s").val(),
-				correo_electronico: $("#correo_electronico").val(),
-				correo_electronico_rep_legal: $("#correo_electronico_rep_legal").val(),
-				nombre_p: $("#nombre_p").val(),
-				apellido_p: $("#apellido_p").val(),
+				sigla: $("#sigla").val().trim().toUpperCase(),
+				nombre: $("#nombre").val()
+					.trim()
+					.toLowerCase()
+					.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase())),
+				nombre_s: $("#nombre_s").val()
+					.trim()
+					.toLowerCase()
+					.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase())),
+				apellido: $("#apellido").val()
+					.trim()
+					.toLowerCase()
+					.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase())),
+				apellido_s: $("#apellido_s").val()
+					.trim()
+					.toLowerCase()
+					.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase())),
+				correo_electronico: $("#correo_electronico").val().trim().toLowerCase(),
+				correo_electronico_rep_legal: $("#correo_electronico_rep_legal").val().trim().toLowerCase(),
+				nombre_p: $("#nombre_p").val()
+					.trim()
+					.toLowerCase()
+					.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase())),
+				apellido_p: $("#apellido_p").val()
+					.trim()
+					.toLowerCase()
+					.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase())),
 				nombre_usuario: $("#nombre_usuario").val(),
 				password: $("#password").val(),
 			};

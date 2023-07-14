@@ -137,6 +137,8 @@ class Registro extends CI_Controller
 							'segundoApellidoRepLegal' => $this->input->post('apellido'),
 							'direccionCorreoElectronicoOrganizacion' => $this->input->post('correo_electronico'),
 							'direccionCorreoElectronicoRepLegal' => $this->input->post('correo_electronico_rep_legal'),
+							'primerNombrePersona' => $this->input->post('nombre_p'),
+							'primerApellidoPersona' => $this->input->post('apellido_p'),
 							'estado' => "Inscrito",
 							'usuarios_id_usuario' => $usuario->id_usuario,
 							'created_at' => date('Y/m/d H:i:s'),
