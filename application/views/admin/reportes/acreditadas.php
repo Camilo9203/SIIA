@@ -1,8 +1,22 @@
-<?php // echo '<pre>'; var_dump($organizacionesAcreditadas); echo '</pre>';
+<?php
+/***
+ * @var $organizacionesAcreditadas
+ *
+ */
 ?>
 <div class="col-md-12">
 	<div class="clearfix"></div>
 	<hr />
+	<div class="pull-right">
+		<a href="<?php echo base_url(); ?>reportes/exportarExcel"  class="btn btn-siia">
+			<i class="fa fa-download" aria-hidden="true"></i>
+			Excel
+		</a>
+		<a href="<?php echo base_url(); ?>reportes/exportarDatosAbiertos"  class="btn btn-danger">
+			<i class="fa fa-download" aria-hidden="true"></i>
+			Datos Abiertos
+		</a>
+	</div>
 	<h3>Organizaciones Acreditadas:</h3>
 	<table id="tabla_enProceso_organizacion" width="100%" border=0 class="table table-striped table-bordered tabla_form">
 		<thead>

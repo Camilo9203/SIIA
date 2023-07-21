@@ -170,7 +170,7 @@ $(document).ready(function () {
 			},
 		});
 	} else {
-		/** No hay nada que hacer aqui. **/
+		/** No hay nada que hacer aquí. **/
 	}
 
 	$(".panel").on("click", function () {
@@ -231,7 +231,7 @@ $(document).ready(function () {
 			},
 		});
 	} else {
-		/** No hay nada que hacer aqui. **/
+		/** No hay nada que hacer aquí. **/
 	}
 	//TODO: Permisos panel admin
 	if (funcion == "panelAdmin") {
@@ -239,7 +239,7 @@ $(document).ready(function () {
 		$nivel = $("#data_logg").attr("nvl");
 		console.log($("#data_logg").attr("nvl"));
 		if ($nivel == 0) {
-			/** No hay nada que hacer aqui. **/
+			/** No hay nada que hacer aquí. **/
 		} else if ($nivel == 1) {
 			$("#adjCamara").remove();
 			$(".cambiar_img_hd").remove();
@@ -323,12 +323,12 @@ $(document).ready(function () {
 			// Docentes
 			$("#asigDocentes").remove();
 		} else if ($nivel == 6) {
-			/** No hay nada que hacer aqui. **/
+			/** No hay nada que hacer aquí. **/
 		} else {
-			/** No hay nada que hacer aqui. **/
+			/** No hay nada que hacer aquí. **/
 		}
 	} else {
-		/** No hay nada que hacer aqui. **/
+		/** No hay nada que hacer aquí. **/
 	}
 
 	if (hash_url == "#actualizarSolicitud") {
@@ -359,7 +359,7 @@ $(document).ready(function () {
 	if (hash_url == "#info") {
 		notificacion("Esta organización no ha ingresado información.", "success");
 	} else {
-		/** No hay nada que hacer aqui. **/
+		/** No hay nada que hacer aquí. **/
 	}
 
 	if (hash_url == "#enProceso") {
@@ -385,7 +385,7 @@ $(document).ready(function () {
 			},
 		});
 	} else {
-		/** No hay nada que hacer aqui. **/
+		/** No hay nada que hacer aquí. **/
 	}
 
 	if (hash_url == "#enProcesoActualizacion") {
@@ -415,7 +415,7 @@ $(document).ready(function () {
 			},
 		});
 	} else {
-		/** No hay nada que hacer aqui. **/
+		/** No hay nada que hacer aquí. **/
 	}
 
 	if (funcion_ == "estadoSolicitud") {
@@ -438,7 +438,7 @@ $(document).ready(function () {
 			},
 		});
 	} else {
-		/** No hay nada que hacer aqui. **/
+		/** No hay nada que hacer aquí. **/
 	}
 
 	if (
@@ -447,7 +447,7 @@ $(document).ready(function () {
 	) {
 		initCK();
 	} else {
-		/** No hay nada que hacer aqui. **/
+		/** No hay nada que hacer aquí. **/
 	}
 
 	if (funcion_ == "reportes") {
@@ -456,7 +456,7 @@ $(document).ready(function () {
 			clearInterval($int_rep);
 		}, 1000);
 	} else {
-		/** No hay nada que hacer aqui. **/
+		/** No hay nada que hacer aquí. **/
 	}
 
 	if (funcion == "super" && funcion_ != "panel") {
@@ -484,7 +484,7 @@ $(document).ready(function () {
 			},
 		});
 	} else {
-		/** No hay nada que hacer aqui. **/
+		/** No hay nada que hacer aquí. **/
 	}
 
 	$("#super_cerrar_sesion").click(function () {
@@ -6495,14 +6495,10 @@ $(document).ready(function () {
 		);
 	});
 
-
 	$("#volverEst_org").click(function () {
 		$("#admin_ver_finalizadas").slideDown();
 		$("#v_estado_org").slideUp();
 	});
-
-
-
 
 	$("#crearBateriaObservacion").click(function () {
 		$tipoBateriaObservacion = $("#tipoBateriaObservacion").val();
@@ -6997,8 +6993,6 @@ $(document).ready(function () {
 	$(".validoDocente").change(function () {
 		$(".guardarValidoDocente").attr("disabled", false);
 	});
-
-
 
 	$("#verRelacionCambios").click(function () {
 		$id_organizacion = $("#id_org_ver_form").attr("data-id");
