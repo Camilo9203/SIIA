@@ -182,11 +182,178 @@ $("#confirmaRegistro").click(function () {
 	/** Validar formulario registro */
 
 });
+/** Guardar registro formulario de registro */
+$("#guardar_registro").click(function () {
+	grecaptcha.ready(function() {
+		grecaptcha.execute('6LeTFnYnAAAAAKl5U_RbOYnUbGFGlhG4Ffn52Sef', {
+			//action: 'submit'
+		}).then(function(token) {
+			// Add your logic to submit to your backend server here.
+			$('#formulario_registro').prepend('<input type="hidden" id="token" value="'+ token +'">');
+			/** Validar formulario registro */
+			if ($("#formulario_registro").valid()) {
+				/** Data para registrar cuenta */
+				let data = {
+					token: $('#token').val(),
+					organizacion: $("#organizacion").val().trim().toUpperCase(),
+					nit: $("#nit").val() + "-" + $("#nit_digito").val(),
+					sigla: $("#sigla").val().trim().toUpperCase(),
+					nombre: $("#nombre").val()
+						.trim()
+						.toLowerCase()
+						.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase())),
+					nombre_s: $("#nombre_s").val()
+						.trim()
+						.toLowerCase()
+						.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase())),
+					apellido: $("#apellido").val()
+						.trim()
+						.toLowerCase()
+						.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase())),
+					apellido_s: $("#apellido_s").val()
+						.trim()
+						.toLowerCase()
+						.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase())),
+					correo_electronico: $("#correo_electronico").val().trim().toLowerCase(),
+					correo_electronico_rep_legal: $("#correo_electronico_rep_legal").val().trim().toLowerCase(),
+					nombre_p: $("#nombre_p").val()
+						.trim()
+						.toLowerCase()
+						.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase())),
+					apellido_p: $("#apellido_p").val()
+						.trim()
+						.toLowerCase()
+						.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase())),
+					nombre_usuario: $("#nombre_usuario").val(),
+					password: $("#password").val(),
+				};
+				console.log(data);
+				/** Verificar si NIT ya existe */
+				$.ajax({
+					url: baseURL + "registro/verificarNIT",
+					type: "post",
+					dataType: "JSON",
+					data: data,
+					success: function (response) {
+						if (response.existe == 1) {
+							/** Alerta si NIT ya existe*/
+							Toast.fire({
+								icon: 'error',
+								title: 'El NIT ya existe.'
+							});
+						} else {
+							/** Verificar si usuario ya existe */
+							$.ajax({
+								url: baseURL + "registro/verificarUsuario",
+								type: "post",
+								dataType: "JSON",
+								data: data,
+								success: function (response) {
+									if (response.existe == 1) {
+										/** Alerta si usuario ya existe*/
+										Toast.fire({
+											icon: 'error',
+											title: 'El nombre usuario ya existe. Puede usar números.'
+										});
+										/** Ejecución de registro de información*/
+									} else {
+										$.ajax({
+											url: baseURL + "registro/registrar_info",
+											type: "post",
+											dataType: "JSON",
+											data: data,
+											beforeSend: function () {
+												$("#guardar_registro").attr("disabled", true);
+												Toast.fire({
+													icon: 'info',
+													title: 'Registrando información, espere...'
+												});
+											},
+											success: function (response) {
+												$("#ayuda_registro").attr("data-backdrop", "static");
+												$("#ayuda_registro").attr("data-keyboard", "false");
+												/** Comprobar estado de envío y creación de cuenta */
+												if (response.status == 1) {
+													Alert.fire({
+														title: 'Organización creada!',
+														text: response.msg,
+														icon: 'success',
+													})
+													/** Esconder confirmación y mostrar reenvío de email */
+													$("#informacion_previa").slideUp();
+													$("#reenvio_email").slideDown();
+													$("#guardar_registro").hide();
+													$("#btn-cerrar-modal").hide();
+													$("#btn-reenvio").show();
+													$("#btn-cerrar-reenvio").show();
+												} else {
+													/** Alerta si el correo no se envío */
+													Toast.fire({
+														icon: 'error',
+														title: 'El correo electrónico no fue enviado, intente de nuevo.'
+													});
+													/** Cerrar Modal */
+													$("#cerr_mod").click();
+												}
+											},
+											error: function (ev) {
+												//Do nothing
+											},
+										});
+									}
+								},
+								error: function (ev) {
+									//Do nothing
+								},
+							});
+						}
+					},
+				});
+			}
+		});
+	});
+
+});
+/** Reenviar correo registro */
 $('#btn-cerrar-reenvio').click(function () {
 	setInterval(function () {
 		redirect('login');
 	}, 1000);
 });
+$("#btn-reenvio").click(function () {
+	$correo_electronico = $("#correo_electronico_rese").val();
+	data = {
+		to: $("#correo_electronico_rese").val(),
+		nit: $("#nit").val() + "-" + $("#nit_digito").val()
+	};
+	$.ajax({
+		url: baseURL + "registro/reenvio",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		beforeSend: function () {
+			Toast.fire({
+				icon: 'info',
+				title: 'Registrando información, espere...'
+			});
+			$("#btn-reenvio").attr("disabled", true);
+			$("#correo_electronico_rese").attr("readonly", true);
+			$(this).attr("disabled", true);
+		},
+		success: function (response) {
+			Alert.fire({
+				title: 'Correo enviado!',
+				text: response.msg,
+				icon: 'success',
+			})
+			$("#btn-reenvio").removeAttr("disabled");
+			$("#correo_electronico_rese").removeAttr("readonly");
+		},
+		error: function (ev) {
+			//Do nothing
+		},
+	});
+})
 /** Validar formulario registro */
 function ValidarFormRegistro () {
 	$("form[id='formulario_registro']").validate({
@@ -334,169 +501,4 @@ function ValidarFormRegistro () {
 	});
 }
 /** Guardar registro */
-$("#guardar_registro").click(function () {
-	grecaptcha.ready(function() {
-		grecaptcha.execute('6LeTFnYnAAAAAKl5U_RbOYnUbGFGlhG4Ffn52Sef', {
-			//action: 'submit'
-		}).then(function(token) {
-			// Add your logic to submit to your backend server here.
-			$('#formulario_registro').prepend('<input type="hidden" id="token" value="'+ token +'">');
-			/** Validar formulario registro */
-			if ($("#formulario_registro").valid()) {
-				/** Data para registrar cuenta */
-				let data = {
-					token: $('#token').val(),
-					organizacion: $("#organizacion").val().trim().toUpperCase(),
-					nit: $("#nit").val() + "-" + $("#nit_digito").val(),
-					sigla: $("#sigla").val().trim().toUpperCase(),
-					nombre: $("#nombre").val()
-						.trim()
-						.toLowerCase()
-						.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase())),
-					nombre_s: $("#nombre_s").val()
-						.trim()
-						.toLowerCase()
-						.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase())),
-					apellido: $("#apellido").val()
-						.trim()
-						.toLowerCase()
-						.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase())),
-					apellido_s: $("#apellido_s").val()
-						.trim()
-						.toLowerCase()
-						.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase())),
-					correo_electronico: $("#correo_electronico").val().trim().toLowerCase(),
-					correo_electronico_rep_legal: $("#correo_electronico_rep_legal").val().trim().toLowerCase(),
-					nombre_p: $("#nombre_p").val()
-						.trim()
-						.toLowerCase()
-						.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase())),
-					apellido_p: $("#apellido_p").val()
-						.trim()
-						.toLowerCase()
-						.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase())),
-					nombre_usuario: $("#nombre_usuario").val(),
-					password: $("#password").val(),
-				};
-				console.log(data);
-				/** Verificar si NIT ya existe */
-				$.ajax({
-					url: baseURL + "registro/verificarNIT",
-					type: "post",
-					dataType: "JSON",
-					data: data,
-					success: function (response) {
-						if (response.existe == 1) {
-							/** Alerta si NIT ya existe*/
-							Toast.fire({
-								icon: 'error',
-								title: 'El NIT ya existe.'
-							});
-						} else {
-							/** Verificar si usuario ya existe */
-							$.ajax({
-								url: baseURL + "registro/verificarUsuario",
-								type: "post",
-								dataType: "JSON",
-								data: data,
-								success: function (response) {
-									if (response.existe == 1) {
-										/** Alerta si usuario ya existe*/
-										Toast.fire({
-											icon: 'error',
-											title: 'El nombre usuario ya existe. Puede usar números.'
-										});
-										/** Ejecución de registro de información*/
-									} else {
-										$.ajax({
-											url: baseURL + "registro/registrar_info",
-											type: "post",
-											dataType: "JSON",
-											data: data,
-											beforeSend: function () {
-												$("#guardar_registro").attr("disabled", true);
-												Toast.fire({
-													icon: 'info',
-													title: 'Registrando información, espere...'
-												});
-											},
-											success: function (response) {
-												$("#ayuda_registro").attr("data-backdrop", "static");
-												$("#ayuda_registro").attr("data-keyboard", "false");
-												/** Comprobar estado de envío y creación de cuenta */
-												if (response.status == 1) {
-													Alert.fire({
-														title: 'Organización creada!',
-														text: response.msg,
-														icon: 'success',
-													})
-													/** Esconder confirmación y mostrar reenvío de email */
-													$("#informacion_previa").slideUp();
-													$("#reenvio_email").slideDown();
-													$("#guardar_registro").hide();
-													$("#btn-cerrar-modal").hide();
-													$("#btn-reenvio").show();
-													$("#btn-cerrar-reenvio").show();
-												} else {
-													/** Alerta si el correo no se envío */
-													Toast.fire({
-														icon: 'error',
-														title: 'El correo electrónico no fue enviado, intente de nuevo.'
-													});
-													/** Cerrar Modal */
-													$("#cerr_mod").click();
-												}
-											},
-											error: function (ev) {
-												//Do nothing
-											},
-										});
-									}
-								},
-								error: function (ev) {
-									//Do nothing
-								},
-							});
-						}
-					},
-				});
-			}
-		});
-	});
-
-});
-/** Reenviar correo registro */
-$("#btn-reenvio").click(function () {
-	$correo_electronico = $("#correo_electronico_rese").val();
-	data = {
-		to: $("#correo_electronico_rese").val(),
-		nit: $("#nit").val() + "-" + $("#nit_digito").val()
-	};
-	$.ajax({
-		url: baseURL + "registro/reenvio",
-		type: "post",
-		dataType: "JSON",
-		data: data,
-		beforeSend: function () {
-			Toast.fire({
-				icon: 'info',
-				title: 'Registrando información, espere...'
-			});
-			$("#btn-reenvio").attr("disabled", true);
-			$("#correo_electronico_rese").attr("readonly", true);
-			$(this).attr("disabled", true);
-		},
-		success: function (response) {
-			Alert.fire({
-				title: 'Correo enviado!',
-				text: response.msg,
-				icon: 'success',
-			})
-			$("#btn-reenvio").removeAttr("disabled");
-			$("#correo_electronico_rese").removeAttr("readonly");
-		},
-		error: function (ev) {
-			//Do nothing
-		},
-	});
-});
+;
