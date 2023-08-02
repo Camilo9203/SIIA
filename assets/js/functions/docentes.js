@@ -10,7 +10,14 @@ const Toast = Swal.mixin({
 		toast.addEventListener('mouseleave', Swal.resumeTimer)
 	},
 	customClass: {
-		popup: 'custom-container'
+		popup: 'popup-toast'
+	},
+})
+const Alert = Swal.mixin({
+	confirmButtonText: 'Aceptar',
+	customClass: {
+		confirmButton: 'button-swalert',
+		popup: 'popup-swalert'
 	},
 })
 
@@ -56,7 +63,7 @@ $("#añadirNuevoDocente").click(function () {
 			},
 			success: function (response) {
 				event.preventDefault();
-				Swal.fire({
+				Alert.fire({
 					title: 'Se creo docente!',
 					text: response.msg,
 					icon: 'success',
@@ -222,7 +229,7 @@ $(".archivos_form_hojaVidaDocente").on("click", function () {
 		},
 		success: function (response) {
 			if(response.status === 1) {
-				Swal.fire({
+				Alert.fire({
 					title: 'Se cargo archivo!',
 					text: response.msg,
 					icon: 'success',
@@ -230,7 +237,7 @@ $(".archivos_form_hojaVidaDocente").on("click", function () {
 				})
 			}
 			else {
-				Swal.fire({
+				Alert.fire({
 					title: 'No se cargo archivo! ',
 					text: response.msg,
 					icon: 'warning',
@@ -274,7 +281,7 @@ $(".archivos_form_tituloDocente").on("click", function () {
 		},
 		success: function (response) {
 			if(response.status === 1) {
-				Swal.fire({
+				Alert.fire({
 					title: 'Se cargo archivo!',
 					text: response.msg,
 					icon: 'success',
@@ -282,7 +289,7 @@ $(".archivos_form_tituloDocente").on("click", function () {
 				})
 			}
 			else {
-				Swal.fire({
+				Alert.fire({
 					title: 'No se cargo archivo! ',
 					text: response.msg,
 					icon: 'warning',
@@ -323,7 +330,7 @@ $(".archivos_form_certificadoDocente").on("click", function () {
 		},
 		success: function (response) {
 			if(response.status === 1) {
-				Swal.fire({
+				Alert.fire({
 					title: 'Se cargo archivo!',
 					text: response.msg,
 					icon: 'success',
@@ -331,7 +338,7 @@ $(".archivos_form_certificadoDocente").on("click", function () {
 				})
 			}
 			else {
-				Swal.fire({
+				Alert.fire({
 					title: 'No se cargo archivo! ',
 					text: response.msg,
 					icon: 'warning',
@@ -376,7 +383,7 @@ $(".archivos_form_certificadoEconomiaDocente").on("click", function () {
 		},
 		success: function (response) {
 			if(response.status === 1) {
-				Swal.fire({
+				Alert.fire({
 					title: 'Se cargo archivo!',
 					text: response.msg,
 					icon: 'success',
@@ -384,7 +391,7 @@ $(".archivos_form_certificadoEconomiaDocente").on("click", function () {
 				})
 			}
 			else {
-				Swal.fire({
+				Alert.fire({
 					title: 'No se cargo archivo! ',
 					text: response.msg,
 					icon: 'warning',
@@ -419,7 +426,7 @@ $(document).on("click", ".eliminar_archivo_docente", function () {
 			});
 		},
 		success: function (response) {
-			Swal.fire({
+			Alert.fire({
 				title: 'Se elimino archivo!',
 				text: response.msg,
 				icon: 'success',

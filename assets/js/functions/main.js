@@ -1833,56 +1833,7 @@ $(document).ready(function () {
 		}
 	});
 
-
-	$("#reenvio").click(function () {
-		$correo_electronico = $("#correo_electronico_rese").val();
-		$data = $("#correo_electronico_rese").attr("data-org");
-		$datos = JSON.parse($data);
-		$tk = $datos.token.token;
-		$usuario = $datos.token.usuario_token;
-		$organizacion = $datos.organizacion.nombreOrganizacion;
-		$primerNombre = $datos.organizacion.primerNombreRepLegal;
-		$primerApellido = $datos.organizacion.primerApellidoRepLegal;
-		$nit = $datos.organizacion.numNIT;
-
-		datas = {
-			to: $correo_electronico,
-			tk: $tk,
-			usuario: $usuario,
-			organizacion: $organizacion,
-			primerNombre: $primerNombre,
-			primerApellido: $primerApellido,
-			nit: $nit,
-		};
-
-		console.log(datas);
-
-		$.ajax({
-			url: baseURL + "registro/reenvio",
-			type: "post",
-			dataType: "JSON",
-			data: datas,
-			beforeSend: function () {
-				$("#loading").show();
-				notificacion("Reenviando correo electrónico...");
-				$("#reenvio").attr("disabled", true);
-				$("#correo_electronico_rese").attr("readonly", true);
-				$("#cerr_mod").hide();
-				$("#cerr_reen").show();
-				$(this).attr("disabled", true);
-			},
-			success: function (response) {
-				notificacion(response.msg);
-				$("#reenvio").removeAttr("disabled");
-				$("#correo_electronico_rese").removeAttr("readonly");
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
-
-	// Actualizar Informacion
+	// Actualizar información
 	$("#actualizar_informacion").click(function () {
 		if ($("#formulario_actualizar").valid()) {
 			var organizacion = $("#organizacion").val();

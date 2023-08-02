@@ -1,5 +1,5 @@
 <div class="clearfix"></div>
-<!-- Modals -->
+<!-- Modales -->
 <div class="" id="modals-sia">
 	<div class="modal fade in" id="panelPrincipal" tabindex="-1" role="dialog" aria-labelledby="panelprincipalh">
 		<div class="modal-dialog modal-xl" role="document">

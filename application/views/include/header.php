@@ -32,7 +32,7 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="white-translucent" />
 	<meta name="google-site-verification" content="DloHloB2_mQ9o7BPTd9xXEYHUeXrnWQqKGGKeuGrkLk" />
 	<!-- Google -->
-	<script src="https://www.google.com/recaptcha/api.js"></script>
+	<script src="https://www.google.com/recaptcha/api.js?render=6LeTFnYnAAAAAKl5U_RbOYnUbGFGlhG4Ffn52Sef"></script>
 	<!-- Google Tag Manager -->
 	<script>
 		(function(w, d, s, l, i) {

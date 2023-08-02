@@ -81,11 +81,6 @@
 			<label class="underlined"><input type="checkbox" id="acepto_cond" form="formulario_registro" name="aceptocond" value="* Acepto condiciones y restricciones en SIA." disabled required><label for="aceptocond">&nbsp;</label> <a data-toggle="modal" data-target="#politica_ventana" data-backdrop="static" data-keyboard="false"><span class="spanRojo">*</span> Política de tratamiento de la información.</a></label> <small class="pull-right"><i><span class="spanRojo">*</span> Clic en el texto para ver política</i></small>
 		</div>
 		<div class="form-group">
-			<form>
-				<div class="g-recaptcha" id="g-recaptcha" data-sitekey="6LfCESEUAAAAAOemaQmmGTGJeiKvLmPkY7as9zPj"></div>
-			</form>
-		</div>
-		<div class="form-group">
 			<button type="button" id="confirmaRegistro" class="btn btn-siia btn-sm pull-right" data-toggle="modal" data-target="#ayuda_registro">Registrarme <i class="fa fa-check"></i></button>
 			<button type="button" class="btn btn-danger btn-sm submit ingresar" value="Iniciar Sesion">Iniciar Sesión <i class="fa fa-sign-in" aria-hidden="true"></i></button>
 		</div>
@@ -290,7 +285,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div id="informacion_pre">
+					<div id="informacion_previa">
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Organización:</label>
@@ -348,11 +343,11 @@
 							</div>
 							<div class="form-check">
 								<input type="checkbox" class="form-check-input" id="aceptoComActo">
-								<label class="form-check-label" for="aceptoComActo"><span class="underlined"><a>Acepto que se envíen comunicaciones y actos administrativos vía correo electrónico <span class="spanRojo">*</span></a></span></label>
+								<label class="form-check-label" for="aceptoComActo"><span class="underlined"><a>Acepto que se envíen comunicaciones, notificaciones y actos administrativos vía correo electrónico <span class="spanRojo">*</span></a></span></label>
 							</div>
 						</div>
 					</div>
-					<div id="reenvio_pre">
+					<div id="reenvio_email">
 						<div class="container">
 							<div class="jumbotron">
 								<p>Si el correo no le llega en los próximos 5 minutos, y no está en la bandeja de spam, por favor, escriba otro correo electrónico (Gmail.com, Outlook.com, Yahoo.com, Hotmail.com), y de click en "Volver a enviar el correo". Si el problema persiste, contactese con <a href="mailto:<?php echo CORREO_ATENCION ?>"><?php echo CORREO_ATENCION ?></a></p>
@@ -372,10 +367,10 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" name="registro" disabled="disabled" id="guardar_registro" class="btn btn-success btn-sm submit" value="Registrarme">Sí, Registrarme. <i class="fa fa-check"></i></button>
-				<button type="button" id="reenvio" class="btn btn-info btn-sm submit" value="Volver a enviar">Volver a enviar el correo. <i class="fa fa-paper-plane"></i></button>
-				<!--<button type="button" id="cerr_reen" class="btn btn-danger pull-left" data-dismiss="modal">Cerrar. <i class="fa fa-times"></i></button>-->
-				<button type="button" id="cerr_mod" class="btn btn-danger btn-sm pull-left" data-dismiss="modal">No, voy a verificar. <i class="fa fa-times" aria-hidden="true"></i></button>
+				<button type="button" id="guardar_registro" name="registro" disabled="disabled" class="btn btn-success btn-sm submit" value="Registrarme">Sí, Registrarme <i class="fa fa-check"></i></button>
+				<button type="button" id="btn-cerrar-modal" class="btn btn-danger btn-sm pull-left" data-dismiss="modal">No, voy a verificar <i class="fa fa-times" aria-hidden="true"></i></button>
+				<button type="button" id="btn-reenvio" class="btn btn-info btn-sm submit" value="Volver a enviar">Volver a enviar el correo <i class="fa fa-paper-plane"></i></button>
+				<button type="button" id="btn-cerrar-reenvio" class="btn btn-danger pull-left">Cerrar e iniciar sesión <i class="fa fa-times"></i></button>
 			</div>
 		</div>
 	</div>

@@ -88,6 +88,71 @@ function send_email_admin($tipo, $prioridad = null, $to = null, $docente = null,
 			echo json_encode($error);
 	endif;
 }
+/** Enviar correo a usuarios */
+function send_email_user($to, $type, $organizacion, $usuario = null, $token = null){
+	$CI = & get_instance();
+	/** Asuntos y correos emails */
+	switch ($type):
+		// Actualización de facilitadores
+		case 'registroUsuario':
+			$subject = 'Activación de Cuenta';
+			$mensaje = '<strong><label>Nombre de la organización:</label></strong>
+						<p>' . $organizacion->nombreOrganizacion . '</p>
+						<strong><label>Número NIT:</label></strong>
+						<p>' . $organizacion->numNIT .  '</p>
+						<strong><label>Correo de contacto:</label></strong>
+						<p>' . $to . '</p>
+						<strong><label>Representante legal:</label></strong>
+						<p>' . $organizacion->primerNombreRepLegal . ' ' . $organizacion->primerApellidoRepLegal . '</p>
+						<strong><label>Nombre de usuario:</label></strong>
+						<p>' . $usuario . '</p>
+						<p>Organizaciones Solidarias le recuerda que es importante mantener la información básica de contacto de la entidad actualizada, para facilitar el desarrollo procesos derivados de la acreditación. Le recomendamos cada vez que se realice algún cambio sea reportado por medio del SIIA. En razón a la política de manejo de datos institucional y para verificar la identidad de la organización, es necesario activar su cuenta en el siguiente link:</p><br />
+						<a target="_blank" style="font-family: Arial, sans-serif; background: #0071b9; color:white; display: inline-block; text-decoration: none; line-height:40px; font-size: 18px; width:200px; box-shadow: 2px 3px #e2e2e2; font-weight: bold;" href='. base_url() . 'activate/?tk:' . $token . ':' . $usuario . '>Activar mi cuenta</a>';
+			$response = array('url' => "registro", 'msg' => "Se envío un correo a: " . $to . ", por favor verifíquelo para activar su cuenta.", "status" => 1);
+			break;
+		default:
+			$asunto = "";
+			$mensaje = "";
+			break;
+	endswitch;
+	/** Datos de correo */
+	$CI->email->from(CORREO_SIA, "Acreditaciones");
+	$CI->email->to($to);
+	$CI->email->cc(CORREO_SIA);
+	$CI->email->subject('SIIA: ' . $subject);
+	$msg['mensaje'] = $mensaje;
+	$email_view = $CI->load->view('email/contacto', $msg, true);
+	$CI->email->message($email_view);
+	/** Envió de correo */
+	if ($CI->email->send()):
+		$error = $CI->email->print_debugger();
+		save_log_email($to, $subject, $mensaje, $type, $error, $response);
+	else:
+		$error = $CI->email->print_debugger();
+		save_log_email($to, $subject, $mensaje, $type, $error, $response);
+	endif;
+}
+/** Guardar logs correos */
+function save_log_email($to, $subject, $msg, $type, $error, $response) {
+	$CI = & get_instance();
+	$email_details = array(
+		'fecha' => date("Y-m-d H:i:s"),
+		'de' => CORREO_SIA,
+		'para' => $to,
+		'cc' => CORREO_SIA,
+		'asunto' => $subject,
+		'cuerpo' => json_encode($msg),
+		'estado' => 1,
+		'tipo' => $type,
+		'error' => $error
+	);
+	if($CI->db->insert('correosregistro', $email_details)):
+		echo json_encode($response);
+	else:
+		echo json_encode(array('url' => "panel", 'msg' => "Se ha enviado correo, pero no se guardo registro de este en base de datos"));
+	endif;
+}
+
 ?>
 
 
