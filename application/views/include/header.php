@@ -454,15 +454,15 @@
 											<li><a href="<?php echo base_url('panelAdmin/organizaciones'); ?>">Organizaciones</a></li>
 											<ul>
 												<li><a href="<?php echo base_url('panelAdmin/organizaciones/inscritas'); ?>">Organizaciones inscritas</a></li>
-												<li><a href="<?php echo base_url('panelAdmin/solicitudes/finalizadas'); ?>">Organizaciones en evaluación</a></li>
-												<li><a href="<?php echo base_url('panelAdmin/solicitudes/observaciones'); ?>">Organizaciones en complementaria</a></li>
+												<li><a href="<?php echo base_url('panelAdmin/organizaciones/solicitudes/finalizadas'); ?>">Organizaciones en evaluación</a></li>
+												<li><a href="<?php echo base_url('panelAdmin/organizaciones/solicitudes/observaciones'); ?>">Organizaciones en complementaria</a></li>
 												<hr />
 												<li><a href="<?php echo base_url('panelAdmin/organizaciones/docentes'); ?>">Facilitadores</a></li>
 												<li><a href="<?php echo base_url('panelAdmin/organizaciones/estadoOrganizaciones'); ?>">Estado organizaciones</a></li>
 												<li><a href="<?php echo base_url('panelAdmin/organizaciones/resoluciones'); ?>">Resoluciones</a></li>
 												<li><a href="<?php echo base_url('panelAdmin/organizaciones/camaraComercio'); ?>">Camara de comercio</a></li>
 											</ul>
-											<li><a href="<?php echo base_url('panelAdmin/historico'); ?>">Historico</a></li>
+											<li><a href="<?php echo base_url('panelAdmin/historico'); ?>">Histórico</a></li>
 											<li><a href="<?php echo base_url('panelAdmin/seguimiento'); ?>">Seguimientos</a></li>
 											<li><a href="<?php echo base_url('panelAdmin/opciones'); ?>">Operaciones</a></li>
 											<li><a href="<?php echo base_url('panelAdmin/socrata'); ?>">Datos abiertos</a></li>

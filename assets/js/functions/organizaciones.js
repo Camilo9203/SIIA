@@ -112,7 +112,7 @@ $("#admin_ver_inscritas_tabla").click(function () {
 $(document).on("click", ".verSolicitudAdmin", function () {
 	let idSolicitud = $(this).attr("data-id");
 	let idOrganizacion = $(this).attr("data-id-org");
-	window.open(baseURL + "panelAdmin/solicitudes/informacionSolicitud?idSolicitud=" + idSolicitud + "&idOrganizacion=" + idOrganizacion,'_self' )
+	window.open(baseURL + "panelAdmin/organizaciones/solicitudes/informacionSolicitud?idSolicitud=" + idSolicitud + "&idOrganizacion=" + idOrganizacion,'_self' )
 });
 // Traer datos de la organización inscrita
 $(".ver_organizacion_inscrita").click(function () {

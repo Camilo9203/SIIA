@@ -81,16 +81,20 @@ $route['llamadas'] = 'Admin/llamadas';
 $route['panelAdmin/socrata'] = 'Admin/socrataPanel';
 $route['panelAdmin'] = 'Admin/panel_admin';
 $route['panelAdmin/reportes'] = 'Admin/panel_reportes';
-/** Administrador Solicitudes */
-$route['panelAdmin/solicitudes/asignar'] = 'Solicitudes/asignar';
-$route['panelAdmin/solicitudes/finalizadas'] = 'Solicitudes/finalizadas';
-$route['panelAdmin/solicitudes/proceso'] = 'Solicitudes/proceso';
-$route['panelAdmin/solicitudes/observaciones'] = 'Solicitudes/observaciones';
-$route['panelAdmin/solicitudes/informacionSolicitud'] = 'Solicitudes/informacionSolicitud';
 /** Administrador Organizaciones */
-$route['panelAdmin/organizaciones'] = 'Admin/ver_organizaciones';
+$route['panelAdmin/organizaciones'] = 'Organizaciones';
 $route['panelAdmin/organizaciones/asignar'] = 'Organizaciones/asignar';
 $route['panelAdmin/organizaciones/inscritas'] = 'Organizaciones/inscritas';
+// Solicitudes
+$route['panelAdmin/organizaciones/solicitudes/asignar'] = 'Solicitudes/asignar';
+$route['panelAdmin/organizaciones/solicitudes/finalizadas'] = 'Solicitudes/finalizadas';
+$route['panelAdmin/organizaciones/solicitudes/proceso'] = 'Solicitudes/proceso';
+$route['panelAdmin/organizaciones/solicitudes/observaciones'] = 'Solicitudes/observaciones';
+$route['panelAdmin/organizaciones/solicitudes/informacionSolicitud'] = 'Solicitudes/informacionSolicitud';
+// Facilitadores
+$route['panelAdmin/organizaciones/docentes'] = 'Admin/docentes'; // TODO: Pendiente por cambiar
+$route['panelAdmin/organizaciones/docentes/asignar'] = 'Docentes/asignarDocentes';
+$route['panelAdmin/organizaciones/docentes/evaluar'] = 'Docentes/evaluarDocentes';
 $route['panelAdmin/contacto'] = 'Admin/contacto';
 $route['panelAdmin/opciones'] = 'Admin/opciones';
 $route['panelAdmin/notificacionesAntiguas'] = 'Admin/notificacionesAntiguas';
@@ -114,14 +118,7 @@ $route['panelAdmin/organizaciones/camaraComercio'] = 'Organizaciones/camara';
 $route['panelAdmin/organizaciones/resoluciones'] = 'Admin/resoluciones';
 $route['panelAdmin/organizaciones/estadoOrganizaciones'] = 'Admin/estadoOrg';
 $route['panelAdmin/seguimiento'] = 'Admin/seguimiento';
-$route['evaluacion'] = 'Admin/evaluacion';
-// TODO: Rutas nuevas para actualización de facilitadores
-$route['panelAdmin/organizaciones/docentes'] = 'Admin/docentes';
-$route['panelAdmin/organizaciones/docentes/panel'] = 'Docentes/panelDocentes';
-$route['panelAdmin/organizaciones/docentes/asignar'] = 'Docentes/asignarDocentes';
-$route['panelAdmin/organizaciones/docentes/evaluar'] = 'Docentes/evaluarDocentes';
-//Estadisticas 
-//TODO:Rutas nuevas para estadísticas
+// Estadísticas
 $route['panelAdmin/estadisticas'] = 'Estadisticas/panel';
 $route['panelAdmin/estadisticas/acreditacion'] = 'Estadisticas/acreditacion';
 // Super

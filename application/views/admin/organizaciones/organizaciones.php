@@ -2,28 +2,55 @@
 	<div class="clearfix"></div>
 	<hr/>
 </div>
+
 <div id="panel_admin_organizaciones" class="container center-block">
-<!--	<div class="col-md-3" id="busOrg">-->
-<!--		<div class="panel panel-siia">-->
-<!--		  <div class="panel-heading">-->
-<!--		    <h3 class="panel-title">Buscar Organización <i class="fa fa-search" aria-hidden="true"></i></h3>-->
-<!--		  </div>-->
-<!--		  <div class="panel-body">-->
-<!--			<button class="btn btn-default form-control" id="admin_buscar_org">Buscar</button>-->
-<!--		  </div>-->
-<!--		</div>-->
-<!--	</div>-->
-	<div class="col-md-3" id="asigOrg">
+	<!-- Solicitudes -->
+	<h3 class="title">Solicitudes</h3>
+	<div class="col-md-4" id="asigOrg">
+		<div class="panel panel-siia">
+			<div class="panel-heading">
+				<h3 class="panel-title">Asignar solicitudes <i class="fa fa-hand-rock-o" aria-hidden="true"></i></h3>
+			</div>
+			<div class="panel-body">
+				<button class="btn btn-default form-control" id="admin_asignar_org">Asignación</button>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4" id="verOrgFin">
+		<div class="panel panel-siia">
+			<div class="panel-heading">
+				<h3 class="panel-title">Solicitudes en evaluación <i class="fa fa-flag-checkered" aria-hidden="true"></i></h3>
+			</div>
+			<div class="panel-body">
+				<button class="btn btn-default form-control" id="admin_organizaciones_finalizadas">Evaluación</button>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4" id="verOrgObs">
+		<div class="panel panel-siia">
+			<div class="panel-heading">
+				<h3 class="panel-title">Solicitudes en complementaria <i class="fa fa-eye" aria-hidden="true"></i></h3>
+			</div>
+			<div class="panel-body">
+				<button class="btn btn-default form-control" id="admin_organizaciones_observaciones">Complementaria</button>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<hr/>
+	<!-- Listados y búsquedas -->
+	<h3 class="title">Listados y búsquedas</h3>
+	<div class="col-md-4" id="busOrg">
 		<div class="panel panel-siia">
 		  <div class="panel-heading">
-		    <h3 class="panel-title">Asignar solicitudes <i class="fa fa-hand-rock-o" aria-hidden="true"></i></h3>
+		    <h3 class="panel-title">Buscar Organización <i class="fa fa-search" aria-hidden="true"></i></h3>
 		  </div>
 		  <div class="panel-body">
-			<button class="btn btn-default form-control" id="admin_asignar_org">Asignación</button>
+			<button class="btn btn-default form-control" id="admin_buscar_org">Buscar</button>
 		  </div>
 		</div>
 	</div>
-	<div class="col-md-3" id="verOrgInscr">
+	<div class="col-md-4" id="verOrgInscr">
 		<div class="panel panel-siia">
 		  <div class="panel-heading">
 		    <h3 class="panel-title">Organizaciones Inscritas <small>(Todas)</small> <i class="fa fa-book" aria-hidden="true"></i></h3>
@@ -33,80 +60,89 @@
 		  </div>
 		</div>
 	</div>
-<!--	<div class="col-md-3" id="verOrgPro">-->
-<!--		<div class="panel panel-siia">-->
-<!--		  <div class="panel-heading">-->
-<!--		    <h3 class="panel-title">Organizaciones en Proceso <i class="fa fa-spinner" aria-hidden="true"></i></h3>-->
-<!--		  </div>-->
-<!--		  <div class="panel-body">-->
-<!--			<button class="btn btn-default form-control" id="admin_organizaciones_enproceso">En proceso</button>-->
-<!--		  </div>-->
-<!--		</div>-->
-<!--	</div>-->
-	<div class="col-md-3" id="verOrgFin">
+	<div class="col-md-4" id="verOrgPro">
 		<div class="panel panel-siia">
 		  <div class="panel-heading">
-		    <h3 class="panel-title">Organizaciones en Evaluación <i class="fa fa-flag-checkered" aria-hidden="true"></i></h3>
+		    <h3 class="panel-title">Organizaciones en Proceso <i class="fa fa-spinner" aria-hidden="true"></i></h3>
 		  </div>
 		  <div class="panel-body">
-			<button class="btn btn-default form-control" id="admin_organizaciones_finalizadas">En Evaluación</button>
-		  </div>
-		</div>
-	</div>
-	<div class="col-md-3" id="verOrgObs">
-		<div class="panel panel-siia">
-		  <div class="panel-heading">
-		    <h3 class="panel-title">Organizaciones Complementaria <i class="fa fa-eye" aria-hidden="true"></i></h3>
-		  </div>
-		  <div class="panel-body">
-			<button class="btn btn-default form-control" id="admin_organizaciones_observaciones">En complementaria</button>
+			<button class="btn btn-default form-control" id="admin_organizaciones_enproceso">En proceso</button>
 		  </div>
 		</div>
 	</div>
 	<div class="clearfix"></div>
-	<hr/>
-	<div class="col-md-3" id="verFacili">
+	<hr>
+	<!-- Operaciones -->
+	<h3 class="title">Operaciones</h3>
+	<div class="col-md-4" id="camEstOrg">
 		<div class="panel panel-siia">
-		  <div class="panel-heading">
-		    <h3 class="panel-title">Ver Facilitadores <i class="fa fa-graduation-cap" aria-hidden="true"></i></h3>
-		  </div>
-		  <div class="panel-body">
-			<button class="btn btn-default form-control" id="admin_docentes_panel">Facilitadores</button>
-		  </div>
+			<div class="panel-heading">
+				<h3 class="panel-title">Cambiar Estado Organizaciones <i class="fa fa-info-circle" aria-hidden="true"></i></h3>
+			</div>
+			<div class="panel-body">
+				<button class="btn btn-default form-control" id="admin_estadoorg">Estado</button>
+			</div>
 		</div>
 	</div>
-	<div class="col-md-3" id="camEstOrg">
+	<div class="col-md-4" id="adjResolucion">
 		<div class="panel panel-siia">
-		  <div class="panel-heading">
-		    <h3 class="panel-title">Cambiar Estado Organizaciones <i class="fa fa-info-circle" aria-hidden="true"></i></h3>
-		  </div>
-		  <div class="panel-body">
-			<button class="btn btn-default form-control" id="admin_estadoorg">Estado</button>
-		  </div>
+			<div class="panel-heading">
+				<h3 class="panel-title">Adjuntar Resoluciones <i class="fa fa-file" aria-hidden="true"></i></h3>
+			</div>
+			<div class="panel-body">
+				<button class="btn btn-default form-control" id="admin_resoluciones">Resoluciones</button>
+			</div>
 		</div>
 	</div>
-	<div class="col-md-3" id="adjResolucion">
+	<div class="col-md-4" id="adjCamara">
 		<div class="panel panel-siia">
-		  <div class="panel-heading">
-		    <h3 class="panel-title">Adjuntar Resoluciones <i class="fa fa-file" aria-hidden="true"></i></h3>
-		  </div>
-		  <div class="panel-body">
-			<button class="btn btn-default form-control" id="admin_resoluciones">Resoluciones</button>
-		  </div>
-		</div>
-	</div>
-	<div class="col-md-3" id="adjCamara">
-		<div class="panel panel-siia">
-		  <div class="panel-heading">
-		    <h3 class="panel-title">Adjuntar Cámara de Comercio <i class="fa fa-file-pdf-o" aria-hidden="true"></i></h3>
-		  </div>
-		  <div class="panel-body">
-			<button class="btn btn-default form-control" id="admin_camaracomercio">Cámara de Comercio</button>
-		  </div>
+			<div class="panel-heading">
+				<h3 class="panel-title">Adjuntar Cámara de Comercio <i class="fa fa-file-pdf-o" aria-hidden="true"></i></h3>
+			</div>
+			<div class="panel-body">
+				<button class="btn btn-default form-control" id="admin_camaracomercio">Cámara de Comercio</button>
+			</div>
 		</div>
 	</div>
 	<div class="clearfix"></div>
 	<hr/>
+	<!-- Facilitadores -->
+	<div id="verFacili">
+		<h3 class="title">Facilitadores</h3>
+		<div class="col-md-4" id="asigDocentes">
+			<div class="panel panel-siia">
+				<div class="panel-heading">
+					<h3 class="panel-title">Asignar solicitudes <i class="fa fa-hand-rock-o" aria-hidden="true"></i></h3>
+				</div>
+				<div class="panel-body">
+					<button class="btn btn-default btn-block form-control" id="admin_docentes_asignar">Asignar </button>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4" id="docentesEvaluar">
+			<div class="panel panel-siia">
+				<div class="panel-heading">
+					<h3 class="panel-title">Docentes en evaluacion <i class="fa fa-graduation-cap" aria-hidden="true"></i></h3>
+				</div>
+				<div class="panel-body">
+					<button class="btn btn-default form-control" id="admin_docentes_evaluar">Evaluar </button>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 admin_verDocentes">
+			<div class="panel panel-siia">
+				<div class="panel-heading">
+					<h3 class="panel-title">Docentes incritos <i class="fa fa-graduation-cap" aria-hidden="true"></i> <small>(Todos)</small></h3>
+				</div>
+				<div class="panel-body">
+					<button class="btn btn-default form-control" id="admin_verorganizaciones_docentes">Ver Docentes </button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<hr/>
+
 	<button class="btn btn-danger btn-sm" id="admin_volver"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 </div>
 <!-- Sección de búsqueda -->

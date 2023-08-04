@@ -1007,28 +1007,28 @@ $(document).ready(function () {
 		redirect(baseURL + "panelAdmin");
 	});
 	$("#admin_asignar_org").click(function () {
-		redirect(baseURL + "panelAdmin/solicitudes/asignar");
+		redirect(baseURL + "panelAdmin/organizaciones/solicitudes/asignar");
 	});
 	$("#admin_organizaciones_inscritas").click(function () {
 		redirect(baseURL + "panelAdmin/organizaciones/inscritas");
 	});
 	$("#admin_organizaciones_enproceso").click(function () {
-		redirect(baseURL + "panelAdmin/solicitudes/proceso");
+		redirect(baseURL + "panelAdmin/organizaciones/solicitudes/proceso");
 	});
 	$("#admin_ver_finalizadas_volver").click(function () {
-		redirect(baseURL + "panelAdmin/solicitudes/finalizadas");
+		redirect(baseURL + "panelAdmin/organizaciones/solicitudes/finalizadas");
 	});
 	$("#admin_ver_inscritas_volver").click(function () {
 		redirect(baseURL + "panelAdmin/organizaciones/inscritas");
 	});
 	$("#admin_ver_observaciones_volver").click(function () {
-		redirect(baseURL + "panelAdmin/solicitudes/observaciones");
+		redirect(baseURL + "panelAdmin/organizaciones/solicitudes/observaciones");
 	});
 	$("#admin_organizaciones_finalizadas").click(function () {
-		redirect(baseURL + "panelAdmin/solicitudes/finalizadas");
+		redirect(baseURL + "panelAdmin/organizaciones/solicitudes/finalizadas");
 	});
 	$("#admin_organizaciones_observaciones").click(function () {
-		redirect(baseURL + "panelAdmin/solicitudes/observaciones");
+		redirect(baseURL + "panelAdmin/organizaciones/solicitudes/observaciones");
 	});
 	$("#admin_camaracomercio").click(function () {
 		redirect(baseURL + "panelAdmin/organizaciones/camaraComercio");

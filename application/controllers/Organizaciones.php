@@ -3,21 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Organizaciones extends CI_Controller
 {
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 *        http://example.com/index.php/welco7me
-	 *    - or -
-	 *        http://example.com/index.php/welcome/index
-	 *    - or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
 	function __construct()
 	{
 		parent::__construct();
@@ -47,6 +32,16 @@ class Organizaciones extends CI_Controller
 		);
 		return $data;
 	}
+	/** Vista de panel de organizaciones */
+	public function index()
+	{
+		$data = $this->datosSession();
+		$data['title'] = 'Panel Principal / Administrador / Organizaciones';
+		$this->load->view('include/header', $data);
+		$this->load->view('admin/organizaciones/organizaciones', $data);
+		$this->load->view('include/footer', $data);
+		$this->logs_sia->logs('PLACE_USER');
+	}
 	/** Organizaciones Inscritas  */
 	public function inscritas()
 	{
@@ -58,7 +53,7 @@ class Organizaciones extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-		// Cargar información organización inscrita
+	// Cargar información organización inscrita
 	public function datosOrganzacion()
 	{
 		$organizacion = $this->OrganizacionesModel->getOrganizaciones($this->input->post('id_organizacion'));
@@ -78,7 +73,7 @@ class Organizaciones extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-	/** Solicitar Camara de Comercio */
+	// Solicitar Camara de Comercio
 	public function solicitarCamara()
 	{
 		//Buscar y borrar camara de comercio
@@ -101,7 +96,7 @@ class Organizaciones extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-	/** Recordar Camara de Comercio */
+	// Recordar Camara de Comercio
 	public function organizacionesSinCamaraDeComercio()
 	{
 		$usuarioCamara = $this->db->select("*")->from("administradores")->where("nivel", 3)->get()->row();
@@ -138,7 +133,7 @@ class Organizaciones extends CI_Controller
 		echo $orgTotales;
 		echo $texto;
 	}
-	/** Subir Camara de Comercio */
+	// Subir Camara de Comercio
 	public function subirCamara()
 	{
 		$organizacion = $this->db->select('*')->from('organizaciones')->where('id_organizacion', $this->input->post('id_organizacion'))->get()->row();
@@ -175,6 +170,7 @@ class Organizaciones extends CI_Controller
 		$this->logs_sia->logQueries();
 	}
 }
+// Validación de errores
 function var_dump_pre($mixed = null) {
 	echo '<pre>';
 	var_dump($mixed);
