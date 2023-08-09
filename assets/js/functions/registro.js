@@ -8,29 +8,41 @@ $("#nombre_usuario").change(function () {
 	usuario = {
 		nombre_usuario: $("#nombre_usuario").val(),
 	};
-	$.ajax({
-		url: baseURL + "registro/verificarUsuario",
-		type: "post",
-		dataType: "JSON",
-		data: usuario,
-		success: function (response) {
-			if (response.existe == 1) {
-				Toast.fire({
-					icon: 'error',
-					title: 'El nombre de usuario ya existe. Puede usar números.'
-				})
-			}
-			else {
-				Toast.fire({
-					icon: 'success',
-					title: 'Usuario valido'
-				})
-			}
-		},
-		error: function (ev) {
-			//Do nothing
-		},
-	});
+	if($("#nombre_usuario").val().length <= 10) {
+		$.ajax({
+			url: baseURL + "registro/verificarUsuario",
+			type: "post",
+			dataType: "JSON",
+			data: usuario,
+			success: function (response) {
+				if (response.existe == 1) {
+					Toast.fire({
+						icon: 'error',
+						title: 'El nombre de usuario ya existe. Puede usar números.'
+					});
+					$('#nombre_usuario').removeClass('valid');
+					$('#nombre_usuario').toggleClass('invalid');
+				}
+				else {
+					$('#nombre_usuario').toggleClass('valid');
+					Toast.fire({
+						icon: 'success',
+						title: 'Usuario valido'
+					})
+				}
+			},
+			error: function (ev) {
+				//Do nothing
+			},
+		});
+	}
+	else {
+		Toast.fire({
+			icon: 'error',
+			title: 'El nombre no debe ser mayo a 10 caracteres'
+		})
+	}
+
 });
 /** Verificación de nit registrado */
 $("#nit_digito").change(function () {
@@ -47,13 +59,18 @@ $("#nit_digito").change(function () {
 				Toast.fire({
 					icon: 'error',
 					title: 'El NIT ya se encuentra registrado'
-				})
+				});
+				alert($('#nit').attr('class'))
+				$("#nit").removeClass('valid');
+				$("#nit").toggleClass('invalid');
+				$("#nit_digito").removeClass('valid');
+				$("#nit_digito").toggleClass('invalid');
 			}
 			else {
 				Toast.fire({
 					icon: 'success',
 					title: 'El NIT no se encuentra registrado'
-				})
+				});
 			}
 		},
 		error: function (ev) {
@@ -102,27 +119,41 @@ $("#confirmaRegistro").click(function () {
 			data: data,
 			success: function (response){
 				if (response.existe == 1) {
+					// Alerta cuando NIT ya existe
+					$("#ayuda_registro").modal("toggle");
+					$("#nit").removeClass('valid');
+					$("#nit").toggleClass('invalid');
+					$("#nit_digito").removeClass('valid');
+					$("#nit_digito").toggleClass('invalid');
 					Toast.fire({
-						/** Alerta cuando NIT ya existe */
 						icon: 'warning',
 						title: 'El NIT ya existe.'
 					});
 				} else {
-					/** Petición ajax para comprobar usuario */
+					$("#nit").removeClass('invalid');
+					$("#nit").toggleClass('valid');
+					$("#nit_digito").removeClass('invalid');
+					$("#nit_digito").toggleClass('valid');
+					// Petición ajax para comprobar usuario
 					$.ajax({
 						url: baseURL + "registro/verificarUsuario",
 						type: "post",
 						dataType: "JSON",
 						data: data,
 						success: function (response) {
-							/** Comprobar si usuario ya */
+							// Comprobar si usuario ya
 							if (response.existe == 1) {
-								/** Alerta cuando usuario ya existe */
+								// Alerta cuando usuario ya existe
+								$("#ayuda_registro").modal("toggle");
+								$("#nombre_usuario").removeClass('valid');
+								$("#nombre_usuario").toggleClass('invalid');
 								Toast.fire({
 									icon: 'warning',
 									title: 'El nombre usuario ya existe. Puede usar números.'
 								});
 							} else {
+								$("#nombre_usuario").removeClass('invalid');
+								$("#nombre_usuario").toggleClass('valid');
 								if (pass === pass2) {
 									if (check === true) {
 										/** Alerta de verificación datos*/
@@ -146,6 +177,8 @@ $("#confirmaRegistro").click(function () {
 										$("#modalConfNU").html($("#nombre_usuario").val());
 									} else {
 										/** Alerta de políticas no aceptadas */
+										$("#ayuda_registro").modal("toggle");
+										$("#acepto_cond").toggleClass('invalid');
 										Toast.fire({
 											icon: 'warning',
 											title: 'Debes leer y aceptar las políticas'
@@ -153,10 +186,15 @@ $("#confirmaRegistro").click(function () {
 									}
 								} else {
 									/** Alerta de contraseñas diferentes */
+									$("#ayuda_registro").modal("toggle");
 									Toast.fire({
 										icon: 'warning',
 										title: 'Las contraseñas no coinciden.'
 									});
+									$("#password").removeClass('valid');
+									$("#password").toggleClass('invvalid');
+									$("#re_password").removeClass('valid');
+									$("#re_password").toggleClass('invalid');
 								}
 							}
 						},
@@ -179,8 +217,6 @@ $("#confirmaRegistro").click(function () {
 			title: 'Por favor, llene los datos requeridos.'
 		});
 	}
-	/** Validar formulario registro */
-
 });
 /** Guardar registro formulario de registro */
 $("#guardar_registro").click(function () {
