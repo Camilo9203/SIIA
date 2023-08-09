@@ -11,7 +11,6 @@ class Organizaciones extends CI_Controller
 		$this->load->model('DepartamentosModel');
 		$this->load->model('AdministradoresModel');
 		$this->load->model('OrganizacionesModel');
-		$this->load->model('SolicitudesModel');
 		$this->load->model('UsuariosModel');
 	}
 	/** Datos Sesión */

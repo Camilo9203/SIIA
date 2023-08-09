@@ -414,6 +414,7 @@
 	<script src="<?php echo base_url('assets/js/functions/main.js?v=1.0.8.61219') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/registro.js?v=1.0.3') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/login.js?v=1.0.0') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/perfil.js?v=1.1.0') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/organizaciones.js?v=1.1.0') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/observaciones.js?v=1.1.1') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/solicitudes.js?v=1.0.1') . time() ?>" type="text/javascript"></script>

@@ -5,7 +5,28 @@ class Perfil extends CI_Controller {
 	
 	function __construct(){
 		parent::__construct();
+		$this->load->model('SolicitudesModel');
+		$this->load->model('DepartamentosModel');
+		$this->load->model('OrganizacionesModel');
+		$this->load->model('UsuariosModel');
+	}
+	/** Datos Sesión */
+	public function datosSession()
+	{
 		verify_session();
+		date_default_timezone_set("America/Bogota");
+		$data = array(
+			'logged_in' => $this->session->userdata('logged_in'),
+			'nombre_usuario' => $this->session->userdata('nombre_usuario'),
+			'usuario_id' => $this->session->userdata('usuario_id'),
+			'tipo_usuario' => $this->session->userdata('type_user'),
+			'nivel' => $this->session->userdata('nivel'),
+			'hora' => date("H:i", time()),
+			'fecha' => date('Y/m/d'),
+			'activeLink' => 'reportes',
+			'departamentos' => $this->DepartamentosModel->getDepartamentos(),
+		);
+		return $data;
 	}
 
 	/**
@@ -13,69 +34,20 @@ class Perfil extends CI_Controller {
 	**/
 	public function index()
 	{
-		$logged = $this->session->userdata('logged_in');
-		$nombre_usuario = $this->session->userdata('nombre_usuario');
-		$usuario_id = $this->session->userdata('usuario_id');
-		$tipo_usuario = $this->session->userdata('type_user');
-		$hora = date ("H:i",time());
-		$fecha = date('Y/m/d');
-
-		$data['logged_in'] = $logged;
-		$data['tipo_usuario'] = $tipo_usuario;
-		$data['usuario_id'] = $usuario_id;
-		$data['hora'] = $hora;
-		$data['fecha'] = $fecha;
-		$data['estado'] = $this->estadoOrganizaciones();
-		$data['estadoAnterior'] = $this->estadoAnteriorOrganizaciones();
-		$data['numeroSolicitudes'] = $this->numeroSolicitudes();
-		$data['idSolicitud'] = $this->idSolicitud();
-		$data['data_informacion_general'] = $this->cargarDatos_formulario_informacion_general_entidad();
-
-		$datos_registro = $this->db->select('*')->from('organizaciones')->where('usuarios_id_usuario', $usuario_id)->get()->row();
-		$datos_usuario = $this->db->select('usuario')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
-		$data['nombre_usuario'] = $datos_usuario ->usuario;
-		
-		$data_registro = array(
-			'nombreOrganizacion' => $datos_registro->nombreOrganizacion,
-			'numNIT' => $datos_registro ->numNIT,
-			'sigla' => $datos_registro ->sigla,
-			'primerNombreRepLegal' => $datos_registro ->primerNombreRepLegal,
-			'segundoNombreRepLegal' => $datos_registro ->segundoNombreRepLegal,
-			'primerApellidoRepLegal' => $datos_registro ->primerApellidoRepLegal,
-			'segundoApellidoRepLegal' => $datos_registro ->segundoApellidoRepLegal,
-			'direccionCorreoElectronicoOrganizacion' => $datos_registro ->direccionCorreoElectronicoOrganizacion,
-			'direccionCorreoElectronicoRepLegal' => $datos_registro ->direccionCorreoElectronicoRepLegal,
-			'primerNombrePersona' => $datos_registro ->primerNombrePersona,
-			'primerApellidoPersona' => $datos_registro ->primerApellidoPersona,
-			'nombre_usuario' => $datos_usuario ->usuario,
-			'imagen' => $datos_registro ->imagenOrganizacion,
-			'firma' => $datos_registro ->firmaRepLegal,
-			'firmaCert' => $datos_registro ->firmaCert,
-			'personaCert' => $datos_registro ->personaCert,
-			'cargoCert' => $datos_registro ->cargoCert,
-		);
-		$data['departamentos'] = $this->cargarDepartamentos();
-		$data['title'] = 'Perfil - Información de '.$datos_registro ->nombreOrganizacion;
-		$data_actividad['actividad'] = $this->actividad();
-		$data['mis_notificaciones'] = $this->cargarMisNotificaciones();
-		$data_registro["resolucion"] = $this->cargarResolucion();
-		$data_registro["camara"] = $this->cargarCamaraComercio();
-
+		$data = $this->datosSession();
+		$usuario = $this->UsuariosModel->getUsuarios($data['usuario_id']);
+		$organizacion = $this->db->select('*')->from('organizaciones')->where('usuarios_id_usuario', $usuario->id_usuario)->get()->row();
 		$this->load->view('include/header', $data);
-		$this->load->view('paneles/perfil', $data_registro);
-		$this->load->view('paneles/actividad', $data_actividad);
+		$this->load->view('paneles/perfil', array('organizacion' => $organizacion, 'usuario' => $usuario));
+		//$this->load->view('paneles/actividad', $data_actividad);
 		$this->load->view('include/footer');
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function actividad(){
 		$usuario_id = $this->session->userdata('usuario_id');
-
 		$datos_actividad = $this->db->select('*')->from('session_log')->where('usuario_id', $usuario_id)->order_by("id_session_log", "desc")->limit(70)->get()->result();
-
 		return $datos_actividad;
 	}
-
 	public function idSolicitud(){
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
@@ -85,7 +57,6 @@ class Perfil extends CI_Controller {
 		$id_Solicitud = $idSolicitud ->idSolicitud;
 		return $id_Solicitud;
 	}
-
 	public function estadoOrganizaciones(){
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
@@ -95,12 +66,6 @@ class Perfil extends CI_Controller {
 		$nombreEstado = $estado ->nombre;
 		return $nombreEstado;
 	}
-
-	public function cargarDepartamentos(){
-		$departamentos = $this->db->select("*")->from("departamentos")->get()->result();
-		return $departamentos;
-	}
-
 	public function cargarMunicipios(){
 		$departamento = $this->input->post('departamento');
 
@@ -109,7 +74,6 @@ class Perfil extends CI_Controller {
 		$municipios = $this->db->select("*")->from("municipios")->where('departamentos_id_departamento', $id_departamento)->get()->result();
 		echo json_encode($municipios);
 	}
-
 	public function cargarDatos_formulario_informacion_general_entidad(){
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
@@ -117,7 +81,6 @@ class Perfil extends CI_Controller {
 		$datos_formulario = $this->db->select("*")->from("informacionGeneral")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
 		return $datos_formulario;
 	}
-
 	public function estadoAnteriorOrganizaciones(){
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
@@ -127,7 +90,6 @@ class Perfil extends CI_Controller {
 		$nombreEstado = $estado ->estadoAnterior;
 		return $nombreEstado;
 	}
-
 	public function numeroSolicitudes(){
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
@@ -137,7 +99,6 @@ class Perfil extends CI_Controller {
 		$numeroSolicitudes = $solicitudes ->numeroSolicitudes;
 		return $numeroSolicitudes;
 	}
-
 	public function cargarMisNotificaciones(){
 		$nombre_usuario = $this->session->userdata('nombre_usuario');
 		$tipo_usuario = $this->session->userdata('type_user');
@@ -145,7 +106,6 @@ class Perfil extends CI_Controller {
 		$notificaciones = $this->db->select("*")->from("notificaciones")->where("quienRecibe", $nombre_usuario)->get()->result();
 		return $notificaciones;
 	}
-
 	public function cargarResolucion(){
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
@@ -154,7 +114,6 @@ class Perfil extends CI_Controller {
 		$resolucion = $this->db->select("*")->from("resoluciones")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
 		return $resolucion;
 	}
-
 	public function cargarCamaraComercio(){
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
@@ -163,7 +122,6 @@ class Perfil extends CI_Controller {
 		$resolucion = $this->db->select("*")->from("organizaciones")->where("id_organizacion", $id_organizacion)->get()->row();
 		return $resolucion;
 	}
-
 	public function upload_imagen_logo()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -220,7 +178,6 @@ class Perfil extends CI_Controller {
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-
 	public function upload_firma()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -281,7 +238,6 @@ class Perfil extends CI_Controller {
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-
 	public function upload_firma_certifi()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -339,7 +295,6 @@ class Perfil extends CI_Controller {
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-
 	public function actualizar_nombreCargo(){
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
@@ -360,7 +315,6 @@ class Perfil extends CI_Controller {
 			$this->logs_sia->logQueries();
 		}
 	}
-
 	public function eliminar_firma_certifi()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
