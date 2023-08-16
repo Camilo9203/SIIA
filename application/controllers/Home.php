@@ -7,6 +7,8 @@ class Home extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
+		$this->load->model('SolicitudesModel');
+		$this->load->model('OrganizacionesModel');
 		setlocale(LC_ALL, 'es_CO.UTF-8');
 	}
 
@@ -102,23 +104,14 @@ class Home extends CI_Controller
 
 	public function consultarEstado()
 	{
-		$idoNit = $this->input->post('idoNit');
-
-		$tipoSolicitud = $this->db->select("*")->from("tipoSolicitud")->where("idSolicitud", $idoNit)->get()->row();
-		if ($tipoSolicitud == "") {
-			$organizaciones = $this->db->select("*")->from("organizaciones")->where("numNIT", $idoNit)->get()->row();
-
-			$idOrganizacion = $organizaciones->id_organizacion;
-
-			$tipoSolicitud = $this->db->select("*")->from("tipoSolicitud")->where("organizaciones_id_organizacion", $idOrganizacion)->get()->row();
-		} else {
-			$idOrganizacion = $tipoSolicitud->organizaciones_id_organizacion;
-		}
-		$estado = $this->db->select("fechaFinalizado, nombre, organizaciones_id_organizacion")->from("estadoOrganizaciones")->where("organizaciones_id_organizacion", $idOrganizacion)->get()->row();
-
-		echo json_encode(array("estado" => $estado, "tipoSolicitud" => $tipoSolicitud));
+		$solicitud = $this->SolicitudesModel->solicitudes($this->input->post('idSolicitud'));
+		$organizacion = $this->OrganizacionesModel->getOrganizacion($solicitud->organizaciones_id_organizacion);
+		if($solicitud):
+			echo json_encode(array('status' => 1, 'solicitud' => $solicitud, 'organizacion' => $organizacion));
+		else:
+			echo json_encode(array('status' => 0, 'message' => 'No existe solicitud'));
+		endif;
 	}
-
 	public function consultarFacilitadores()
 	{
 		$numeroNIT = $this->input->post('numeroNIT');

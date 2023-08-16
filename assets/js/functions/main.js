@@ -705,43 +705,6 @@ $(document).ready(function () {
 		Eventos Clicks TODO
 	**/
 
-	//Evento consultar estadoSolicitud
-	$("#consultarEstadoID").click(function () {
-		$numero = $("#numeroID").val();
-		var response_captcha = grecaptcha.getResponse();
-
-		data = {
-			idoNit: $numero,
-		};
-
-		if (response_captcha != 0) {
-			$.ajax({
-				url: baseURL + "home/consultarEstado",
-				type: "post",
-				dataType: "JSON",
-				data: data,
-				success: function (response) {
-					console.log(response);
-					$("#fechaFin").html(response.estado.fechaFinalizado);
-					$("#estadoOrg").html(response.estado.nombre);
-					//___________
-					$("#idSol").html(response.tipoSolicitud.idSolicitud);
-					$("#modSol").html(response.tipoSolicitud.modalidadSolicitud);
-					$("#motSol").html(response.tipoSolicitud.motivoSolicitud);
-					$("#tipSol").html(response.tipoSolicitud.tipoSolicitud);
-					grecaptcha.reset();
-					$("#resConEst").slideDown();
-					$("#numeroID").val("");
-				},
-				error: function (ev) {
-					//Do nothing
-				},
-			});
-		} else {
-			notificacion("Por favor, valide el captcha...");
-		}
-	});
-
 	$("#consultarFacilitadores").click(function () {
 		$numero = $("#facilitadoresNIT").val();
 		var response_captcha = grecaptcha.getResponse();
@@ -8573,3 +8536,6 @@ function dragDivFormById(div) {
 		});
 }
 
+function mayus(e) {
+	e.value = e.value.toUpperCase();
+}

@@ -1,3 +1,49 @@
+validarFormEstado();
+/** Consultar estados */
+//Evento consultar estadoSolicitud
+$("#consultarEstadoID").click(function () {
+	if ($("#formulario_estado").valid()) {
+		event.preventDefault();
+		data = {
+			idSolicitud: $("#numeroID").val(),
+		};
+		$.ajax({
+			url: baseURL + "home/consultarEstado",
+			type: "post",
+			dataType: "JSON",
+			data: data,
+			success: function (response) {
+				console.log(response);
+				if(response.status == 1) {
+					$(this).attr("disabled", true);
+					$("#idSol").html(response.solicitud.idSolicitud);
+					$("#organizacion").html(response.organizacion.nombreOrganizacion);
+					$("#estadoOrg").html('<code> ' + response.solicitud.nombre + '</code>');
+					$("#estadoAnterio").html(response.solicitud.estadoAnterio);
+					$("#fechaCreacion").html(response.solicitud.fecha);
+					$("#fechaFin").html(response.solicitud.fechaFinalizado);
+					$("#revision").html(response.solicitud.fechaUltimaRevision);
+					$("#modSol").html(response.solicitud.modalidadSolicitud);
+					$("#motSol").html(response.solicitud.motivoSolicitud);
+					$("#tipSol").html(response.solicitud.tipoSolicitud);
+					$("#asignadoSol").html(response.solicitud.asignada);
+					$("#resConEst").slideDown();
+					$("#numeroID").val("");
+				}
+				else {
+					Toast.fire({
+						icon: 'error',
+						title: response.message,
+					});
+				}
+			},
+			error: function (ev) {
+				//Do nothing
+			},
+		});
+	}
+
+});
 $("#actualizarEstadoOrganizacion").click(function () {
 	let data = {
 		idOrganizacion: $(this).attr("data-id-organizacion"),
@@ -59,3 +105,22 @@ $("#tabla_enProceso_organizacion tbody").on("click", '.ver_estado_org', function
 		},
 	});
 });
+
+/** Validar formularios */
+function validarFormEstado () {
+	// Formulario Login.
+	$("form[id='formulario_estado']").validate({
+		rules: {
+			numeroID: 	{
+				required: true,
+				minlength: 10,
+			},
+		},
+		messages: {
+			numeroID: {
+				required: "Por favor, digite su numero de solicitud.",
+				minlength: "El numero de solicitud tiene 10 dígitos o mas.",
+			},
+		},
+	});
+}

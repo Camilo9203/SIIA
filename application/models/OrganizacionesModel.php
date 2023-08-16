@@ -17,6 +17,11 @@ class OrganizacionesModel extends CI_Model
 		$query = $this->db->get_where('organizaciones', array('numNIT' => $id));
 		return $query->row();
 	}
+	/** Cargar organización por ID */
+	public function getOrganizacion($id){
+		$query = $this->db->get_where('organizaciones', array('id_organizacion' => $id));
+		return $query->row();
+	}
 	/** Cargar Organizaciones Acreditadas */
 	public function getOrganizacionesAcreditadas()
 	{
