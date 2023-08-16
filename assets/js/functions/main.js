@@ -1810,41 +1810,6 @@ $(document).ready(function () {
 		}
 	});
 
-	$("#actualizar_imagen").on("click", function () {
-		if ($("#formulario_actualizar_imagen").valid()) {
-			var file_data = $("#imagen").prop("files")[0];
-			var form_data = new FormData();
-			form_data.append("file", file_data);
-			$.ajax({
-				url: baseURL + "perfil/upload_imagen_logo",
-				dataType: "text",
-				cache: false,
-				contentType: false,
-				processData: false,
-				data: form_data,
-				type: "post",
-				dataType: "JSON",
-				beforeSubmit: function () {
-					$("#loading").show();
-				},
-				beforeSend: function () {
-					notificacion("Cargando...", "success");
-				},
-				success: function (response) {
-					mensaje(response.msg, alert_success);
-					$("#loading").toggle();
-					notificacion(response.msg, "success");
-					setInterval(function () {
-						redirect("perfil");
-					}, 2000);
-				},
-				error: function (ev) {
-					//Do nothing
-				},
-			});
-		}
-	});
-
 	$(".imagen_header_der").on("click", function () {
 		//if($("#formulario_actualizar_imagen").valid()){
 		var file_data = $("#imagen_h_der").prop("files")[0];
@@ -8070,30 +8035,6 @@ function validaciones() {
 			usuario_nuevo: {
 				required: "Por favor, escriba el nombre de usuario nuevo.",
 				minlength: "La Contraseña debe tener mínimo 3 caracteres.",
-			},
-		},
-	});
-	// Formulario Actualizar Nombre de usuario.
-	$("form[id='formulario_actualizar_imagen']").validate({
-		rules: {
-			imagen: {
-				required: true,
-				validators: {
-					notEmpty: {
-						message: "Por favor, seleccione una imagen en JPG, PNG, JPEG.",
-					},
-					file: {
-						extension: "jpeg,jpg,png",
-						type: "image/jpeg,image/png",
-						maxSize: 20000, // 2048 * 1024 1024 * 2
-						message: "La imagen selecionada no es válida, seleccione otra.",
-					},
-				},
-			},
-		},
-		messages: {
-			imagen: {
-				required: "Por favor, seleccione una imagen en JPG, PNG, JPEG.",
 			},
 		},
 	});

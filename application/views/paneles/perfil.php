@@ -239,98 +239,106 @@
 		<!-- Firma representante legal -->
 		<div class="col-12 card" id="firmaRepLegalPerfil">
 			<div class="container">
-				<div class="form-group">
-					<h4>Firma del representante legal.</h4>
-					<label>Contraseña de la firma: <span class="spanRojo">*</span></label><br>
+				<div class="col-md-12 p-5">
+					<div class="form-group">
+						<h4>Firma del representante legal.</h4>
+						<label>Contraseña de la firma: <span class="spanRojo">*</span></label><br>
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control" form="" name="contrasena_firma_rep" id="contrasena_firma_rep" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required=""><br>
+						<button class="btn btn-siia btn-sm pull-right" id="ver_fir_rep_legal">Ver firma representante <i class="fa fa-check" aria-hidden="true"></i></button>
+						<img src="<?php echo base_url('uploads/logosOrganizaciones/firma/' . $firma . '')?>" class="center-block img-responsive thumbnail" id="firma_rep_legal">
+					</div>
+					<hr/>
+					<?php echo form_open_multipart('', array('id' => 'formulario_actualizar_firma')); ?>
+						<h4>Cambio de firma del representante legal:</h4><small>La imagen actual se reemplazara con la nueva, asimismo la contraseña.</small>
+						<div class="form-group">
+							<input type="file" class="form-control" form="formulario_actualizar_firma" name="firma" id="firma" required="" accept="image/jpeg, image/png">
+							<label>Contraseña de la firma: <span class="spanRojo">*</span></label>
+							<input type="password" class="form-control" form="" name="contrasena_firma" id="contrasena_firma" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required="">
+						</div>
+						<div class="form-group">
+							<label>Vuelva a escribir la contraseña de la firma: <span class="spanRojo">*</span></label><br>
+							<input type="password" class="form-control" form="" name="re_contrasena_firma" id="re_contrasena_firma" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required="">
+						</div>
+					<?php echo form_close(); ?>
+					<button class="btn btn-siia btn-sm pull-right submit" name="actualizar_firma" id="actualizar_firma">Actualizar firma representante <i class="fa fa-check" aria-hidden="true"></i></button>
 				</div>
-				<div class="form-group">
-					<input type="password" class="form-control" form="" name="contrasena_firma_rep" id="contrasena_firma_rep" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required=""><br>
-					<button class="btn btn-siia btn-sm pull-right" id="ver_fir_rep_legal">Ver firma representante <i class="fa fa-check" aria-hidden="true"></i></button>
-					<img src="<?php echo base_url('uploads/logosOrganizaciones/firma/'.$firma.'')?>" class="center-block img-responsive thumbnail" id="firma_rep_legal">
-				</div>
-				<hr/>
-				<?php echo form_open_multipart('', array('id' => 'formulario_actualizar_firma')); ?>
-				<h4>Cambio de firma del representante legal:</h4><small>La imagen actual se reemplazara con la nueva, asimismo la contraseña.</small>
-				<div class="form-group">
-					<input type="file" class="form-control" form="formulario_actualizar_firma" name="firma" id="firma" required="" accept="image/jpeg, image/png">
-					<label>Contraseña de la firma: <span class="spanRojo">*</span></label>
-					<input type="password" class="form-control" form="" name="contrasena_firma" id="contrasena_firma" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required="">
-				</div>
-				<div class="form-group">
-					<label>Vuelva a escribir la contraseña de la firma: <span class="spanRojo">*</span></label><br>
-					<input type="password" class="form-control" form="" name="re_contrasena_firma" id="re_contrasena_firma" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required="">
-				</div>
-				</form>
-				<button class="btn btn-siia btn-sm pull-right submit" name="actualizar_firma" id="actualizar_firma">Actualizar firma representante <i class="fa fa-check" aria-hidden="true"></i></button>
 			</div>
 		</div>
+		<!-- Datos inicio sesión -->
 		<div class="col-12 card" id="datosSesion">
 			<div class="container">
-				<hr/>
-				<!--<button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#ayuda_login">?</button>-->
-				<?php echo form_open('', array('id' => 'formulario_actualizar_contrasena')); ?>
-				<h4>Cambio de contraseña:</h4>
-				<div class="form-group">
-					<label for="contrasena_anterior">Contraseña anterior: <span class="spanRojo">*</span></label>
-					<div class="pw-cont">
-						<input type="password" class="form-control" form="formulario_actualizar_contrasena" name="contrasena_anterior" id="contrasena_anterior" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required="">
-						<span id="show-pass4"><i class="fa fa-eye" aria-hidden="true"></i></span>
+				<div class="col-md-12 p-5">
+					<hr/>
+					<!--<button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#ayuda_login">?</button>-->
+					<?php echo form_open('', array('id' => 'formulario_actualizar_contrasena')); ?>
+					<h4>Cambio de contraseña:</h4>
+					<div class="form-group">
+						<label for="contrasena_anterior">Contraseña anterior: <span class="spanRojo">*</span></label>
+						<div class="pw-cont">
+							<input type="password" class="form-control" form="formulario_actualizar_contrasena" name="contrasena_anterior" id="contrasena_anterior" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required="">
+							<span id="show-pass4"><i class="fa fa-eye" aria-hidden="true"></i></span>
+						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<label for="contrasena_nueva">Contraseña nueva: <span class="spanRojo">*</span></label>
-					<div class="pw-cont">
-						<input type="password" class="form-control" form="formulario_actualizar_contrasena" name="contrasena_nueva" id="contrasena_nueva" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required="">
-						<span id="show-pass5"><i class="fa fa-eye" aria-hidden="true"></i></span>
+					<div class="form-group">
+						<label for="contrasena_nueva">Contraseña nueva: <span class="spanRojo">*</span></label>
+						<div class="pw-cont">
+							<input type="password" class="form-control" form="formulario_actualizar_contrasena" name="contrasena_nueva" id="contrasena_nueva" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required="">
+							<span id="show-pass5"><i class="fa fa-eye" aria-hidden="true"></i></span>
+						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<label for="re_contrasena_nueva">Vuelva a escribir la contraseña nueva: <span class="spanRojo">*</span></label>
-					<div class="pw-cont">
-						<input type="password" class="form-control" form="formulario_actualizar_contrasena" name="re_contrasena_nueva" id="re_contrasena_nueva" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required="">
-						<span id="show-pass6"><i class="fa fa-eye" aria-hidden="true"></i></span>
+					<div class="form-group">
+						<label for="re_contrasena_nueva">Vuelva a escribir la contraseña nueva: <span class="spanRojo">*</span></label>
+						<div class="pw-cont">
+							<input type="password" class="form-control" form="formulario_actualizar_contrasena" name="re_contrasena_nueva" id="re_contrasena_nueva" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required="">
+							<span id="show-pass6"><i class="fa fa-eye" aria-hidden="true"></i></span>
+						</div>
 					</div>
+					</form>
+					<button class="btn btn-siia btn-sm pull-right submit" name="actualizar_contrasena" id="actualizar_contrasena">Actualizar contraseña <i class="fa fa-check" aria-hidden="true"></i></button>
+					<div class="clearfix"></div>
+					<hr/>
+					<?php echo form_open('', array('id' => 'formulario_actualizar_usuario')); ?>
+					<h4>Cambio de nombre de usuario:</h4>
+					<div class="form-group">
+						<label for="usuario_nuevo">Usuario nuevo: <span class="spanRojo">*</span></label>
+						<input type="text" class="form-control" form="formulario_actualizar_usuario" name="usuario_nuevo" id="usuario_nuevo" placeholder="Nuevo Nombre de Usuario" required="">
+					</div>
+					</form>
+					<button class="btn btn-siia btn-sm pull-right submit" name="actualizar_usuario" id="actualizar_usuario">Actualizar nombre de usuario <i class="fa fa-check" aria-hidden="true"></i></button>
+					<div class="clearfix"></div>
+					<hr/>
 				</div>
-				</form>
-				<button class="btn btn-siia btn-sm pull-right submit" name="actualizar_contrasena" id="actualizar_contrasena">Actualizar contraseña <i class="fa fa-check" aria-hidden="true"></i></button>
-				<div class="clearfix"></div>
-				<hr/>
-				<?php echo form_open('', array('id' => 'formulario_actualizar_usuario')); ?>
-				<h4>Cambio de nombre de usuario:</h4>
-				<div class="form-group">
-					<label for="usuario_nuevo">Usuario nuevo: <span class="spanRojo">*</span></label>
-					<input type="text" class="form-control" form="formulario_actualizar_usuario" name="usuario_nuevo" id="usuario_nuevo" placeholder="Nuevo Nombre de Usuario" required="">
-				</div>
-				</form>
-				<button class="btn btn-siia btn-sm pull-right submit" name="actualizar_usuario" id="actualizar_usuario">Actualizar nombre de usuario <i class="fa fa-check" aria-hidden="true"></i></button>
-				<div class="clearfix"></div>
-				<hr/>
 			</div>
 		</div>
+		<!-- Centificados -->
 		<div class="col-12 card" id="certificados">
 			<div class="container">
-				<?php echo form_open_multipart('', array('id' => 'formulario_firma_certifi')); ?>
-				<h4>Firma de certificados:</h4><small>Solamente se aceptan imagenes en formato png (fondo transparente), con 450px x 300px (Ancho x Alto) para el certificado.</small>
-				<div class="form-group">
-					<input type="file" class="form-control" form="formulario_firma_certifi" name="firmaCert" id="firmaCert" required="" accept="image/png">
+				<div class="col-md-12 p-5">
+					<?php echo form_open_multipart('', array('id' => 'formulario_firma_certifi')); ?>
+					<h4>Firma de certificados:</h4><small>Solamente se aceptan imagenes en formato png (fondo transparente), con 450px x 300px (Ancho x Alto) para el certificado.</small>
+					<div class="form-group">
+						<input type="file" class="form-control" form="formulario_firma_certifi" name="firmaCert" id="firmaCert" required="" accept="image/png">
+					</div>
+					</form>
+					<button class="btn btn-siia btn-sm pull-left submit" name="eliminar_firma_certifi" id="eliminar_firma_certifi">Eliminar firma certificados <i class="fa fa-check" aria-hidden="true"></i></button>
+					<button class="btn btn-siia btn-sm pull-right submit" name="actualizar_firma_certifi" id="actualizar_firma_certifi">Actualizar firma certificados <i class="fa fa-check" aria-hidden="true"></i></button>
+					<div class="clearfix"></div>
+					<hr/>
+					<a href="<?php echo base_url("uploads/logosOrganizaciones/firmaCert/$firmaCert"); ?>" target="_blank">Ver firma de certificados</a>
+					<div class="clearfix"></div>
+					<hr/>
+					<div class="form-group">
+						<label for="nombrePersonaCert">Persona que firmara los certificados: <span class="spanRojo">*</span></label>
+						<input type="text" class="form-control" name="nombrePersonaCert" id="nombrePersonaCert" placeholder="Nombre..." value="<?php echo $personaCert; ?>">
+					</div>
+					<div class="form-group">
+						<label for="cargoPersonaCert">Cargo de la persona que firmara los certificados: <span class="spanRojo">*</span></label>
+						<input type="text" class="form-control" name="cargoPersonaCert" id="cargoPersonaCert" placeholder="Cargo..." value="<?php echo $cargoCert; ?>">
+					</div>
+					<button class="btn btn-siia btn-sm pull-right" name="actualizar_nombreCargo" id="actualizar_nombreCargo">Actualizar nombre y cargo <i class="fa fa-check" aria-hidden="true"></i></button>
 				</div>
-				</form>
-				<button class="btn btn-siia btn-sm pull-left submit" name="eliminar_firma_certifi" id="eliminar_firma_certifi">Eliminar firma certificados <i class="fa fa-check" aria-hidden="true"></i></button>
-				<button class="btn btn-siia btn-sm pull-right submit" name="actualizar_firma_certifi" id="actualizar_firma_certifi">Actualizar firma certificados <i class="fa fa-check" aria-hidden="true"></i></button>
-				<div class="clearfix"></div>
-				<hr/>
-				<a href="<?php echo base_url("uploads/logosOrganizaciones/firmaCert/$firmaCert"); ?>" target="_blank">Ver firma de certificados</a>
-				<div class="clearfix"></div>
-				<hr/>
-				<div class="form-group">
-					<label for="nombrePersonaCert">Persona que firmara los certificados: <span class="spanRojo">*</span></label>
-					<input type="text" class="form-control" name="nombrePersonaCert" id="nombrePersonaCert" placeholder="Nombre..." value="<?php echo $personaCert; ?>">
-				</div>
-				<div class="form-group">
-					<label for="cargoPersonaCert">Cargo de la persona que firmara los certificados: <span class="spanRojo">*</span></label>
-					<input type="text" class="form-control" name="cargoPersonaCert" id="cargoPersonaCert" placeholder="Cargo..." value="<?php echo $cargoCert; ?>">
-				</div>
-				<button class="btn btn-siia btn-sm pull-right" name="actualizar_nombreCargo" id="actualizar_nombreCargo">Actualizar nombre y cargo <i class="fa fa-check" aria-hidden="true"></i></button>
 			</div>
 		</div>
 		<br>
