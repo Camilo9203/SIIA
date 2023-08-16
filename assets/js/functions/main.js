@@ -1810,41 +1810,6 @@ $(document).ready(function () {
 		}
 	});
 
-	$("#actualizar_imagen").on("click", function () {
-		if ($("#formulario_actualizar_imagen").valid()) {
-			var file_data = $("#imagen").prop("files")[0];
-			var form_data = new FormData();
-			form_data.append("file", file_data);
-			$.ajax({
-				url: baseURL + "perfil/upload_imagen_logo",
-				dataType: "text",
-				cache: false,
-				contentType: false,
-				processData: false,
-				data: form_data,
-				type: "post",
-				dataType: "JSON",
-				beforeSubmit: function () {
-					$("#loading").show();
-				},
-				beforeSend: function () {
-					notificacion("Cargando...", "success");
-				},
-				success: function (response) {
-					mensaje(response.msg, alert_success);
-					$("#loading").toggle();
-					notificacion(response.msg, "success");
-					setInterval(function () {
-						redirect("perfil");
-					}, 2000);
-				},
-				error: function (ev) {
-					//Do nothing
-				},
-			});
-		}
-	});
-
 	$(".imagen_header_der").on("click", function () {
 		//if($("#formulario_actualizar_imagen").valid()){
 		var file_data = $("#imagen_h_der").prop("files")[0];
