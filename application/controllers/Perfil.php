@@ -9,6 +9,7 @@ class Perfil extends CI_Controller {
 		$this->load->model('DepartamentosModel');
 		$this->load->model('OrganizacionesModel');
 		$this->load->model('UsuariosModel');
+		$this->load->model('InformacionGeneralModel');
 	}
 	/** Datos Sesión */
 	public function datosSession()
@@ -28,17 +29,14 @@ class Perfil extends CI_Controller {
 		);
 		return $data;
 	}
-
-	/**
-		Funcion Index para cargar las vistas necesarias.
-	**/
 	public function index()
 	{
 		$data = $this->datosSession();
 		$usuario = $this->UsuariosModel->getUsuarios($data['usuario_id']);
 		$organizacion = $this->db->select('*')->from('organizaciones')->where('usuarios_id_usuario', $usuario->id_usuario)->get()->row();
+		$informacionGeneral = $this->InformacionGeneralModel->getInformacionGeneral($organizacion->id_organizacion);
 		$this->load->view('include/header', $data);
-		$this->load->view('paneles/perfil', array('organizacion' => $organizacion, 'usuario' => $usuario));
+		$this->load->view('paneles/perfil', array('organizacion' => $organizacion, 'usuario' => $usuario, 'informacionGeneral' => $informacionGeneral));
 		//$this->load->view('paneles/actividad', $data_actividad);
 		$this->load->view('include/footer');
 		$this->logs_sia->logs('PLACE_USER');
@@ -122,55 +120,52 @@ class Perfil extends CI_Controller {
 		$resolucion = $this->db->select("*")->from("organizaciones")->where("id_organizacion", $id_organizacion)->get()->row();
 		return $resolucion;
 	}
+	// Cargar logo organización
 	public function upload_imagen_logo()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
 		$name_random = random(10);
 		$size = 10000000;
-
-		$imagen_db = $this->db->select('imagenOrganizacion')->from('organizaciones')->where('usuarios_id_usuario', $usuario_id)->get()->row();
-		$imagen_db_nombre = $imagen_db ->imagenOrganizacion;
-
-		if($imagen_db_nombre != 'default.png'){
-			$nombre_imagen =  "logo_".$name_random.$_FILES['file']['name'];
-			$tipo_imagen = pathinfo($nombre_imagen,PATHINFO_EXTENSION);
-
+		$organizacion = $this->db->select('*')->from('organizaciones')->where('usuarios_id_usuario', $usuario_id)->get()->row();
+		$nombre_imagen =  "logo_".$name_random.$_FILES['file']['name'];
+		$tipo_imagen = pathinfo($nombre_imagen,PATHINFO_EXTENSION);
+		if($organizacion->imagenOrganizacion != 'default.png'){
 			if(0 < $_FILES['file']['error']) {
 			    echo json_encode(array('url'=>"perfil", 'msg'=>"Hubo un error al actualizar, intente de nuevo."));
-			}else if($_FILES['file']['size'] > $size){
+			}
+			else if($_FILES['file']['size'] > $size){
 				echo json_encode(array('url'=>"perfil", 'msg'=>"El tamaño supera las 10 Mb, intente con otra imagen."));
-			}else if($tipo_imagen != "jpeg" &&  $tipo_imagen != "png" &&  $tipo_imagen != "jpg"){
+			}
+			else if($tipo_imagen != "jpeg" &&  $tipo_imagen != "png" &&  $tipo_imagen != "jpg"){
 				echo json_encode(array('url'=>"perfil", 'msg'=>"La extensión de la imagen no es correcta, debe ser JPG, PNG"));
-			}else if(move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/logosOrganizaciones/'.$nombre_imagen)){
-				unlink('uploads/logosOrganizaciones/'.$imagen_db_nombre);
+			}
+			else if(move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/logosOrganizaciones/'.$nombre_imagen)){
+				unlink('uploads/logosOrganizaciones/'. $organizacion->imagenOrganizacion);
 				$data_update = array(
 					'imagenOrganizacion' => $nombre_imagen
 				);
-
 				$this->db->where('usuarios_id_usuario', $usuario_id);
 				$this->db->update('organizaciones', $data_update);
-
 				echo json_encode(array('url'=>"perfil", 'msg'=>"Se actualizo la imagen."));
 				$this->logs_sia->session_log('Actualización de Imagen / Logo');
 			}
-		}else{
-			$nombre_imagen =  "logo_".$name_random.$_FILES['file']['name'];
-			$tipo_imagen = pathinfo($nombre_imagen,PATHINFO_EXTENSION);
-
+		}
+		else{
 			if(0 < $_FILES['file']['error']) {
 			    echo json_encode(array('url'=>"perfil", 'msg'=>"Hubo un error al actualizar, intente de nuevo."));
-			}else if($_FILES['file']['size'] > $size){
+			}
+			else if($_FILES['file']['size'] > $size){
 				 echo json_encode(array('url'=>"perfil", 'msg'=>"El tamaño supera las 10 Mb, intente con otra imagen."));
-			}else if($tipo_imagen != "jpeg" &&  $tipo_imagen != "png" &&  $tipo_imagen != "jpg"){
+			}
+			else if($tipo_imagen != "jpeg" &&  $tipo_imagen != "png" &&  $tipo_imagen != "jpg"){
 				echo json_encode(array('url'=>"perfil", 'msg'=>"La extensión de la imagen no es correcta, debe ser JPG, PNG"));
-			}else if(move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/logosOrganizaciones/'.$nombre_imagen)){
+			}
+			else if(move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/logosOrganizaciones/'.$nombre_imagen)){
 				$data_update = array(
 					'imagenOrganizacion' => $nombre_imagen
 				);
-
 				$this->db->where('usuarios_id_usuario', $usuario_id);
 				$this->db->update('organizaciones', $data_update);
-
 				echo json_encode(array('url'=>"perfil", 'msg'=>"Se actualizo la imagen."));
 				$this->logs_sia->session_log('Actualización de Imagen / Logo');
 			}
