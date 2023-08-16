@@ -9,7 +9,7 @@
 		<h3>Información básica de la organización:</h3><small class="pull-right"><span class="spanRojo">*</span> Requerido</small>
 		<div class="form-group">
 			<label for="organizacion">Nombre de la organizacion: <span class="spanRojo">*</span></label>
-			<input type="text" class="form-control" form="formulario_registro" name="organizacion" id="organizacion" placeholder="Nombre de la organización..." required="" autofocus value="<?php echo  set_value('organizacion');  ?>">
+			<input type="text" class="form-control" form="formulario_registro" name="organizacion" id="organizacion" placeholder="Nombre de la organización..." required="" autofocus onkeyup="mayus(this);" value="<?php echo  set_value('organizacion');  ?>">
 		</div>
 		<div class="form-group">
 			<label for="nit">NIT de la organización (sin puntos + digito de verificación): <span class="spanRojo">*</span></label>
@@ -22,7 +22,7 @@
 		</div>
 		<div class="form-group">
 			<label for="sigla">Sigla de la organización: <span class="spanRojo">*</span></label>
-			<input type="text" class="form-control" form="formulario_registro" name="sigla" id="sigla" placeholder="Sigla de la organización..." required="">
+			<input type="text" class="form-control" form="formulario_registro" name="sigla" id="sigla" placeholder="Sigla de la organización..." required="" onkeyup="mayus(this);" >
 		</div>
 		<div class="form-group">
 			<label for="primer_nombre_rep_legal">Primer nombre del representante legal: <span class="spanRojo">*</span></label>

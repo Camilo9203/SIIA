@@ -60,7 +60,6 @@ $("#nit_digito").change(function () {
 					icon: 'error',
 					title: 'El NIT ya se encuentra registrado'
 				});
-				alert($('#nit').attr('class'))
 				$("#nit").removeClass('valid');
 				$("#nit").toggleClass('invalid');
 				$("#nit_digito").removeClass('valid');

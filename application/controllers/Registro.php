@@ -49,8 +49,8 @@ class Registro extends CI_Controller
 	/** Registro de información  */
 	public function registrar_info()
 	{
-		$recaptcha = recaptcha_validate($this->input->post('token'));
-		if ($recaptcha['success'] == true && $recaptcha['score'] >= 0.5):
+			$recaptcha = recaptcha_validate($this->input->post('token'));
+			if ($recaptcha['success'] == true && $recaptcha['score'] >= 0.5):
 			/** Reglas de validación formulario */
 			$this->form_validation->set_rules('organizacion', '', 'trim|required|min_length[3]|xss_clean');
 			$this->form_validation->set_rules('nit', '', 'trim|required|min_length[3]|xss_clean');
