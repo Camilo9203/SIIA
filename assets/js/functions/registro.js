@@ -15,20 +15,25 @@ $("#nombre_usuario").change(function () {
 			dataType: "JSON",
 			data: usuario,
 			success: function (response) {
-				if (response.existe == 1) {
+				let className = $('#nombre_usuario').attr('class');
+				if (response.existe === 1) {
 					Toast.fire({
 						icon: 'error',
 						title: 'El nombre de usuario ya existe. Puede usar números.'
 					});
-					$('#nombre_usuario').removeClass('valid');
-					$('#nombre_usuario').toggleClass('invalid');
+					if (className = 'form-control valid') {
+						$('#nombre_usuario').removeClass('valid');
+						$('#nombre_usuario').toggleClass('invalid');
+					}
 				}
 				else {
-					$('#nombre_usuario').toggleClass('valid');
 					Toast.fire({
 						icon: 'success',
 						title: 'Usuario valido'
 					})
+					if (className = 'form-control invalid valid') {
+						$('#nombre_usuario').removeClass('invalid');
+					}
 				}
 			},
 			error: function (ev) {
@@ -55,21 +60,29 @@ $("#nit_digito").change(function () {
 		dataType: "JSON",
 		data: organizacion,
 		success: function (response) {
-			if (response.existe == 1) {
+			let className = $('#nit_digito').attr('class');
+			if (response.existe === 1) {
 				Toast.fire({
 					icon: 'error',
-					title: 'El NIT ya se encuentra registrado'
+					title: 'El NIT ingresado ya esta registrado.'
 				});
-				$("#nit").removeClass('valid');
-				$("#nit").toggleClass('invalid');
-				$("#nit_digito").removeClass('valid');
-				$("#nit_digito").toggleClass('invalid');
+				if (className === "form-control valid") {
+					$("#nit").removeClass('valid');
+					$("#nit").toggleClass('invalid');
+					$("#nit_digito").removeClass('valid');
+					$("#nit_digito").toggleClass('invalid');
+				}
 			}
 			else {
 				Toast.fire({
 					icon: 'success',
-					title: 'El NIT no se encuentra registrado'
+					title: 'El NIT no se encuentra registrado, puede continuar.'
 				});
+				if(className === "form-control invalid valid"){
+					$("#nit").removeClass('invalid');
+					$("#nit").toggleClass('valid');
+					$("#nit_digito").removeClass('invalid');
+				}
 			}
 		},
 		error: function (ev) {
@@ -117,22 +130,26 @@ $("#confirmaRegistro").click(function () {
 			dataType: "JSON",
 			data: data,
 			success: function (response){
+				let className = $('#nit_digito').attr('class');
 				if (response.existe == 1) {
 					// Alerta cuando NIT ya existe
 					$("#ayuda_registro").modal("toggle");
-					$("#nit").removeClass('valid');
-					$("#nit").toggleClass('invalid');
-					$("#nit_digito").removeClass('valid');
-					$("#nit_digito").toggleClass('invalid');
 					Toast.fire({
 						icon: 'warning',
 						title: 'El NIT ya existe.'
 					});
+					if (className === "form-control valid") {
+						$("#nit").removeClass('valid');
+						$("#nit").toggleClass('invalid');
+						$("#nit_digito").removeClass('valid');
+						$("#nit_digito").toggleClass('invalid');
+					}
 				} else {
-					$("#nit").removeClass('invalid');
-					$("#nit").toggleClass('valid');
-					$("#nit_digito").removeClass('invalid');
-					$("#nit_digito").toggleClass('valid');
+					if(className === "form-control invalid valid"){
+						$("#nit").removeClass('invalid');
+						$("#nit").toggleClass('valid');
+						$("#nit_digito").removeClass('invalid');
+					}
 					// Petición ajax para comprobar usuario
 					$.ajax({
 						url: baseURL + "registro/verificarUsuario",
@@ -140,19 +157,23 @@ $("#confirmaRegistro").click(function () {
 						dataType: "JSON",
 						data: data,
 						success: function (response) {
+							let className = $('#nombre_usuario').attr('class');
 							// Comprobar si usuario ya
 							if (response.existe == 1) {
 								// Alerta cuando usuario ya existe
 								$("#ayuda_registro").modal("toggle");
-								$("#nombre_usuario").removeClass('valid');
-								$("#nombre_usuario").toggleClass('invalid');
 								Toast.fire({
 									icon: 'warning',
 									title: 'El nombre usuario ya existe. Puede usar números.'
 								});
+								if (className = 'form-control valid') {
+									$('#nombre_usuario').removeClass('valid');
+									$('#nombre_usuario').toggleClass('invalid');
+								}
 							} else {
-								$("#nombre_usuario").removeClass('invalid');
-								$("#nombre_usuario").toggleClass('valid');
+								if (className = 'form-control invalid valid') {
+									$('#nombre_usuario').removeClass('invalid');
+								}
 								if (pass === pass2) {
 									if (check === true) {
 										/** Alerta de verificación datos*/
@@ -190,9 +211,7 @@ $("#confirmaRegistro").click(function () {
 										icon: 'warning',
 										title: 'Las contraseñas no coinciden.'
 									});
-									$("#password").removeClass('valid');
 									$("#password").toggleClass('invvalid');
-									$("#re_password").removeClass('valid');
 									$("#re_password").toggleClass('invalid');
 								}
 							}
