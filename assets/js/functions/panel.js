@@ -32,7 +32,7 @@ $(".volverPanel").click(function () {
 /** Ver Solicitud */
 $(".verSolicitud").click(function () {
 	let idSolicitud = $(this).attr("data-id");
-	window.open(baseURL + "panel/solicitud/" + idSolicitud, '_self');
+	window.open(baseURL + "solicitudes/solicitud/" + idSolicitud, '_self');
 });
 /** Ver modal y cargar variable de solicitud */
 $(".eliminarSolicitudModal").click(function () {

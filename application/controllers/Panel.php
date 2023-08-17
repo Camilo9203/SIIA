@@ -3,17 +3,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Panel extends CI_Controller
 {
-
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->helper(array('download', 'file', 'url', 'html', 'form'));
 		verify_session();
 	}
-
-	/**
-		Funcion Index para cargar las vistas necesarias.
-	 **/
+	// Vista index
 	public function index()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -224,7 +220,6 @@ class Panel extends CI_Controller
 		$planMejoramiento = $this->db->select("*")->from("planMejoramiento")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		return $planMejoramiento;
 	}
-
 	public function cargarDatos_formulario_informacion_general_entidad()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -232,46 +227,6 @@ class Panel extends CI_Controller
 		$id_organizacion = $datos_organizacion->id_organizacion;
 		$datos_formulario = $this->db->select("*")->from("informacionGeneral")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
 		return $datos_formulario;
-	}
-	public function cargarDatos_formulario_documentacion_legal($idSolicitud)
-	{
-		$documentacion = $this->db->select('*')->from('documentacion')->where('idSolicitud', $idSolicitud)->get()->row();
-		if ($documentacion->tipo == 1) {
-			return $documentacion;
-		}
-		else if ($documentacion->tipo == 2) {
-			$CertificadosExistencias = $this->db->select('*')->from('certificadoExistencia')->where('idSolicitud',$idSolicitud)->get()->row();
-			return $CertificadosExistencias;
-		}
-		else if ($documentacion->tipo == 3) {
-			$registrosEducativos =  $this->db->select('*')->from('registroEducativoProgramas')->where('idSolicitud', $idSolicitud)->get()->row();
-			return $registrosEducativos;
-		}
-	}
-	public function cargarDatos_formulario_registro_educativo($idSolicitud)
-	{
-		$data = $this->db->select("*")->from("registroEducativoProgramas")->where("idSolicitud", $idSolicitud)->get()->result();
-		return $data;
-	}
-	public function cargarDatos_formulario_antecedentes_academicos($idSolicitud)
-	{
-		$datos_formulario = $this->db->select("*")->from("antecedentesAcademicos")->where("idSolicitud", $idSolicitud)->get()->result();
-		return $datos_formulario;
-	}
-	public function cargarDatos_formulario_jornadas_actualizacion($idSolicitud)
-	{
-		$datos_formulario = $this->db->select("*")->from("jornadasActualizacion")->where("idSolicitud", $idSolicitud)->get()->result();
-		return $datos_formulario;
-	}
-	public function cargarDatos_formulario_datos_plataforma($idSolicitud)
-	{
-		$data = $this->db->select("*")->from("datosAplicacion")->where("idSolicitud", $idSolicitud)->get()->result();
-		return $data;
-	}
-	public function cargarDatos_modalidad_en_linea($idSolicitud)
-	{
-		$data = $this->db->select("*")->from("datosEnLinea")->where("idSolicitud", $idSolicitud)->get()->result();
-		return $data;
 	}
 	public function cargarDatos_programas($idSolicitud)
 	{
@@ -2656,43 +2611,7 @@ class Panel extends CI_Controller
 			default:
 		}
 	}
-	/** Solicitud */
-	public function solicitud($idSolicitud)
-	{
-		date_default_timezone_set("America/Bogota");
-		$logged = $this->session->userdata('logged_in');
-		$nombre_usuario = $this->session->userdata('nombre_usuario');
-		$usuario_id = $this->session->userdata('usuario_id');
-		$tipo_usuario = $this->session->userdata('type_user');
-		$hora = date("H:i", time());
-		$fecha = date('Y/m/d');
-		$data['title'] = 'Panel Principal';
-		$data['logged_in'] = $logged;
-		$datos_usuario = $this->db->select('usuario')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
-		$data['nombre_usuario'] = $datos_usuario->usuario;
-		$data['usuario_id'] = $usuario_id;
-		$data['tipo_usuario'] = $tipo_usuario;
-		$data['hora'] = $hora;
-		$data['fecha'] = $fecha;
-		$data['estado'] = $this->estadoOrganizaciones($idSolicitud);
-		$data['departamentos'] = $this->cargarDepartamentos();
-		$data['data_organizacion'] = $this->cargarDatosOrganizacion();
-		$data['data_solicitud'] = $this->cargarSolicitud($idSolicitud);
-		$data['data_informacion_general'] = $this->cargarDatos_formulario_informacion_general_entidad($idSolicitud);
-		$data['data_documentacion_legal'] = $this->cargarDatos_formulario_documentacion_legal($idSolicitud);
-		$data['data_registro_educativo'] = $this->cargarDatos_formulario_registro_educativo($idSolicitud);
-		$data['data_antecedentes_academicos'] = $this->cargarDatos_formulario_antecedentes_academicos($idSolicitud);
-		$data['data_jornadas_actualizacion'] = $this->cargarDatos_formulario_jornadas_actualizacion($idSolicitud);
-		$data['data_plataforma'] = $this->cargarDatos_formulario_datos_plataforma($idSolicitud);
-		$data['data_modalidad_en_linea'] = $this->cargarDatos_modalidad_en_linea($idSolicitud);
-		$data['data_programas'] = $this->cargarDatos_programas($idSolicitud);
-		$data["camara"] = $this->cargarCamaraComercio();
-		$data['informacionModal'] = $this->cargar_informacionModal();
-		$this->load->view('include/header', $data);
-		$this->load->view('paneles/solicitud', $data);
-		$this->load->view('include/footer', $data);
-		$this->logs_sia->logs('PLACE_USER');
-	}
+
 	// Eliminar Solicitud
 	public function eliminarSolicitud()
 	{

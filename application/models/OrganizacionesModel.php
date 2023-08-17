@@ -22,6 +22,11 @@ class OrganizacionesModel extends CI_Model
 		$query = $this->db->get_where('organizaciones', array('id_organizacion' => $id));
 		return $query->row();
 	}
+	/** Cargar organización por ID */
+	public function getOrganizacionUsuario($id){
+		$query = $this->db->get_where('organizaciones', array('usuarios_id_usuario' => $id));
+		return $query->row();
+	}
 	/** Cargar Organizaciones Acreditadas */
 	public function getOrganizacionesAcreditadas()
 	{

@@ -2,7 +2,6 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 class Solicitudes extends CI_Controller
 {
-
 	public function __construct()
 	{
 		parent::__construct();
@@ -10,10 +9,20 @@ class Solicitudes extends CI_Controller
 		$this->load->model('SolicitudesModel');
 		$this->load->model('DepartamentosModel');
 		$this->load->model('AdministradoresModel');
+		$this->load->model('OrganizacionesModel');
+		$this->load->model('InformacionGeneralModel');
+		$this->load->model('DocumentacionLegalModel');
+		$this->load->model('AntecedentesAcademicosModel');
+		$this->load->model('JornadasActualizacionModel');
+		$this->load->model('DatosAplicacionModel');
+		$this->load->model('DatosEnLineaModel');
+		$this->load->model('DatosProgramasModel');
 	}
-
-	/** Datos de sesión administrador */
-	public function datosSession()
+	/**
+	 * Funciones Administrador
+	 */
+	// Datos de sesión administrador
+	public function datosSesionAdmin()
 	{
 		verify_session_admin();
 		date_default_timezone_set("America/Bogota");
@@ -30,19 +39,19 @@ class Solicitudes extends CI_Controller
 		);
 		return $data;
 	}
-	/** Cargar Solicitud  */
+	// Cargar Solicitud
 	public function cargarDatosSolicitud(){
 		$solicitud = $this->SolicitudesModel->solicitudes($this->input->post('idSolicitud'));
 		echo json_encode(array('solicitud' => $solicitud));
 	}
-	/** Cargar todos los datos de una solicitud */
+	// Cargar todos los datos de una solicitud
 	public function cargarInformacionCompletaSolicitud(){
 		$idSolicitud = $this->input->post('idSolicitud');
 		$idOrganizacion = $this->input->post('id_organizacion');
 		$solicitud = $this->SolicitudesModel->getAllInformacionSolicitud($idSolicitud, $idOrganizacion);
 		echo $solicitud;
 	}
-	/** Tipo solicitud */
+	// Tipo solicitud
 	public function guardar_tipoSolicitud()
 	{
 		/* $this->form_validation->set_rules('tipo_solicitud','','trim|required|min_length[3]|xss_clean');
@@ -113,7 +122,7 @@ class Solicitudes extends CI_Controller
 			}
 		}
 	}
-	/** Verificar tipo solicitud */
+	// Verificar tipo solicitud
 	public function verificar_tipoSolicitud()
 	{
 		/*$usuario_id = $this->session->userdata('usuario_id');
@@ -195,7 +204,7 @@ class Solicitudes extends CI_Controller
 			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "18", 'estado' => "1"));
 		}
 	}
-	/** Verificar numero de solicitudes */
+	// Verificar numero de solicitudes
 	public function numeroSolicitudes()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -206,10 +215,10 @@ class Solicitudes extends CI_Controller
 		$numeroSolicitudes = $solicitudes->numeroSolicitudes;
 		return $numeroSolicitudes;
 	}
-	/** Asignación de solicitudes   */
+	// Asignación de solicitudes
 	public function asignar()
 	{
-		$data = $this->datosSession();
+		$data = $this->datosSesionAdmin();
 		$data['title'] = 'Panel Principal / Organizaciones / Asignar';
 		$data['solicitudesSinAsignar'] = $this->SolicitudesModel->getSolicitudesFinalizadas()[0]['solicitudesSinAsignar'];
 		$data['solicitudesAsignadas'] = $this->SolicitudesModel->getSolicitudesFinalizadas()[0]['solicitudesAsignadas'];
@@ -219,7 +228,7 @@ class Solicitudes extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-	/** Asignar en proceso */
+	// Asignar en proceso
 	public function asignarEvaluadorSolicitud()
 	{
 		$organizacion = $this->db->select("*")->from("organizaciones")->where("id_organizacion", $this->input->post('id_organizacion'))->get()->row();
@@ -232,10 +241,10 @@ class Solicitudes extends CI_Controller
 			send_email_admin('asignarSolicitud','2', $evaluador->direccionCorreoElectronico, null, $organizacion, $this->input->post('idSolicitud'));
 		}
 	}
-	/** Solicitudes finalizadas */
+	// Solicitudes finalizadas
 	public function finalizadas()
 	{
-		$data = $this->datosSession();
+		$data = $this->datosSesionAdmin();
 		$data['title'] = 'Panel Principal / Administrador / En evaluación';
 		$data['solicitudesAsignadas'] = $this->SolicitudesModel->getSolicitudesFinalizadas()[0]['solicitudesAsignadas'];
 		$this->load->view('include/header', $data);
@@ -243,10 +252,10 @@ class Solicitudes extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-	/** Solicitudes en observaciones */
+	// Solicitudes en observaciones
 	public function observaciones()
 	{
-		$data = $this->datosSession();
+		$data = $this->datosSesionAdmin();
 		$data['title'] = 'Panel Principal / Administrador / En observaciones';
 		$data['solicitudesEnObservaciones'] = $this->SolicitudesModel->getSolicitudesEnObservacion();
 		$this->load->view('include/header', $data);
@@ -254,10 +263,10 @@ class Solicitudes extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-	/**  Cargar información SolicitudesModel */
+	// Cargar información SolicitudesModel
 	public function informacionSolicitud()
 	{
-		$data = $this->datosSession();
+		$data = $this->datosSesionAdmin();
 		$data['title'] = 'Panel Principal - Administrador - Información';
 		$data['idSolicitud'] = $this->input->get('idSolicitud');
 		$data['idOrganizacion'] = $this->input->get('idOrganizacion');
@@ -266,14 +275,55 @@ class Solicitudes extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-	/** Solicitudes en proceso */
+	// Solicitudes en proceso
 	public function proceso()
 	{
-		$data = $this->datosSession();
+		$data = $this->datosSesionAdmin();
 		$data['title'] = 'Panel Principal / Administrador / En proceso';
 		$data['solicitudesEnProceso'] = $this->SolicitudesModel->getSolicitudesEnProceso();
 		$this->load->view('include/header', $data);
 		$this->load->view('admin/solicitudes/proceso', $data);
+		$this->load->view('include/footer', $data);
+		$this->logs_sia->logs('PLACE_USER');
+	}
+	/**
+	 * Funciones Usuario
+	 */
+	// Datos inicio de sesión Usuario
+	public function datosSesionUsuario()
+	{
+		verify_session();
+		date_default_timezone_set("America/Bogota");
+		$data = array(
+			'logged_in' => $this->session->userdata('logged_in'),
+			'nombre_usuario' => $this->session->userdata('nombre_usuario'),
+			'usuario_id' => $this->session->userdata('usuario_id'),
+			'tipo_usuario' => $this->session->userdata('type_user'),
+			'nivel' => $this->session->userdata('nivel'),
+			'hora' => date("H:i", time()),
+			'fecha' => date('Y/m/d'),
+			'departamentos' => $this->DepartamentosModel->getDepartamentos(),
+		);
+		return $data;
+	}
+	// Solicitud
+	public function solicitud($idSolicitud)
+	{
+		$data = $this->datosSesionUsuario();
+		$data['title'] = 'Solicitud: ' . $idSolicitud;
+		$data['activeLink'] = 'solicitud';
+		$organizacion = $this->OrganizacionesModel->getOrganizacionUsuario($data['usuario_id']);
+		$data['organizacion'] = $organizacion;
+		$data['solicitud'] = $this->SolicitudesModel->solicitudes($idSolicitud);
+		$data['informacionGeneral'] = $this->InformacionGeneralModel->getInformacionGeneral($organizacion->id_organizacion);
+		$data['documentacionLegal'] = $this->DocumentacionLegalModel->getDocumentacionLegal($idSolicitud);
+		$data['antecedentesAcademicos'] = $this->AntecedentesAcademicosModel->getAntecedentesAcedemicos($idSolicitud);
+		$data['jornadasActualizacion'] = $this->JornadasActualizacionModel->getJornadasActualizacion($idSolicitud);
+		$data['aplicacion'] = $this->DatosAplicacionModel->getDatosAplicacion($idSolicitud);
+		$data['datosEnLinea'] = $this->DatosEnLineaModel->getDatosEnLinea($idSolicitud);
+		$data['datosProgramas'] = $this->DatosProgramasModel->getDatosProgramas($idSolicitud);
+		$this->load->view('include/header', $data);
+		$this->load->view('paneles/solicitud', $data);
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}

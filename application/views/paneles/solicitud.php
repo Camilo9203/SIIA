@@ -1,3 +1,16 @@
+<?php
+/***
+ * @var $organizacion
+ * @var $solicitud
+ * @var $informacionGeneral
+ * @var $documentacionLegal
+ * @var $antecedentesAcademicos
+ * @var $jornadasActualizacion
+ * @var $aplicacion
+ * @var $datosEnLinea
+ * @var $datosProgramas
+ */
+?>
 <!-- Menu Formularios -->
 <div class="col-md-3 formularios">
 	<div class="left_col scroll-view">
@@ -10,13 +23,9 @@
 					<ul class="nav side-menu list-unstyled wizard_steps">
 						<li class="step-no"><a data-form="1" data-form-name="informacion_general"><span id="1" class="step_no menu-sel">1</span> Información General de la Entidad <i class="fa fa-home" aria-hidden="true"></i></a></li>
 						<li class="step-no"><a data-form="2" data-form-name="documentacion_legal"><span id="2" class="step_no menu-sel">2</span> Documentación Legal <i class="fa fa-book" aria-hidden="true"></i></a></li>
-						<!--												<li class="step-no" id="reg_doc_cond"><a data-form="3" data-form-name="registros_educativos"><span id="3" class="step_no menu-sel">3</span> Registros Educativos de Programas <i class="fa fa-newspaper-o" aria-hidden="true"></i></a></li>-->
 						<li class="step-no"><a data-form="4" data-form-name="antecedentes_academicos"><span id="3" class="step_no menu-sel">3</span> Antecedentes Académicos <i class="fa fa-id-card" aria-hidden="true"></i></a></li>
 						<li class="step-no"><a data-form="5" data-form-name="jornadas_actualizacion"><span id="4" class="step_no menu-sel">4</span> Jornadas de Actualización <i class="fa fa-handshake-o" aria-hidden="true"></i></a></li>
 						<li class="step-no"><a data-form="6" data-form-name="programa_economia"><span id="5" class="step_no menu-sel">5</span> Programas de Educación en Economía Solidaria <i class="fa fa-server" aria-hidden="true"></i></a></li>
-						<!--												<li class="step-no"><a data-form="7" data-form-name="programa_economia" style="text-align: left;"><span id="7" class="step_no menu-sel">7</span> <small>Prog. de Economía Solidaria con Énfasis en Trabajo Asociado <i class="fa fa-sitemap" aria-hidden="true"></i></a></small></li>-->
-						<!-- //TODO: Formulario 8, antes comentado -->
-						<!--												<li class="step-no"><a data-form="8" data-form-name="aval_personas"><span id="8" class="step_no menu-sel">8</span> Aval de Programas <i class="fa fa-signal" aria-hidden="true"></i></a></li>-->
 						<li class="step-no"><a data-form="9" data-form-name="equipo_docente"><span id="6" class="step_no menu-sel">6</span> Equipo de Facilitadores <i class="fa fa-users" aria-hidden="true"></i></a></li>
 						<li class="step-no" id="itemPlataforma" style="display: none;"><a data-form="10" data-form-name="plataforma"><span id="7" class="step_no menu-sel">7</span> Datos modalidad virtual <i class="fa fa-globe" aria-hidden="true"></i></a></li>
 						<li class="step-no" id="itemEnLinea" style="display: none"><a data-form="11" data-form-name="en_linea"><span id="8" class="step_no menu-sel">8</span> Datos modalidad en linea<i class="fa fa-globe" aria-hidden="true"></i></a></li>
@@ -59,21 +68,21 @@
 		<div class="form-group">
 			<h3>Datos de la solicitud: <small>Los archivos y campos marcados en los formularios con asterisco (<span class="spanRojo">*</span>) son requeridos en la solicitud.</small></h3>
 			<label>ID Solicitud:</label>
-			<p><?php echo $data_solicitud->idSolicitud ?></p>
+			<p><?php echo $solicitud->idSolicitud ?></p>
 			<label>Estado de la organización:</label>
-			<p><?php echo $data_solicitud->nombre ?></p>
+			<p><?php echo $solicitud->nombre ?></p>
 			<label>Tipo de Solicitud:</label>
-			<p><?php echo $data_solicitud->tipoSolicitud ?></p>
+			<p><?php echo $solicitud->tipoSolicitud ?></p>
 			<label>Motivo de Solicitud:</label>
-			<p><?php echo $data_solicitud->motivoSolicitudAcreditado ?></p>
+			<p><?php echo $solicitud->motivoSolicitudAcreditado ?></p>
 			<label>Modalidad de Solicitud:</label>
-			<p><?php echo $data_solicitud->modalidadSolicitudAcreditado ?></p>
+			<p><?php echo $solicitud->modalidadSolicitudAcreditado ?></p>
 			<hr />
 			<label>Estado anterior:</label>
-			<p><?php echo $data_solicitud->estadoAnterior ?></p>
+			<p><?php echo $solicitud->estadoAnterior ?></p>
 
 			<hr />
-			<button class="btn btn-siia btn-sm verHistObsUs pull-right" id="hist_org_obs" data-toggle='modal' data-id-org="<?php echo $data_solicitud->organizaciones_id_organizacion; ?>" data-target='#verHistObsUs'>Historial de observaciones <i class="fa fa-history" aria-hidden="true"></i></button>
+			<button class="btn btn-siia btn-sm verHistObsUs pull-right" id="hist_org_obs" data-toggle='modal' data-id-org="<?php echo $solicitud->organizaciones_id_organizacion; ?>" data-target='#verHistObsUs'>Historial de observaciones <i class="fa fa-history" aria-hidden="true"></i></button>
 <!--			<button class="btn btn-siia btn-sm pull-right" data-toggle="modal" data-target="#modalEliminarSolicitud" id="el_sol">Actualizar/Cambiar el tipo de solicitud actual <i class="fa fa-refresh" aria-hidden="true"></i></button>-->
 			<hr />
 		</div>
@@ -122,22 +131,22 @@
 				<br>
 				<div class="form-group">
 					<label class="" for="nombre_organizacion">Nombre de la Organización:<span class="spanRojo">*</span></label>
-					<input type="text" name="nombre_organizacion" id="nombre_organizacion" placeholder="Nombre de la Organización" class="form-control" value="<?php echo $data_organizacion->nombreOrganizacion; ?>" disabled>
+					<input type="text" name="nombre_organizacion" id="nombre_organizacion" placeholder="Nombre de la Organización" class="form-control" value="<?php echo $organizacion->nombreOrganizacion; ?>" disabled>
 				</div>
 				<div class="form-group">
 					<label for="sigla">Sigla:<span class="spanRojo">*</span></label>
-					<input type="text" class="form-control" name="sigla" id="sigla" placeholder="Sigla" value="<?php echo $data_organizacion->sigla; ?>" disabled>
+					<input type="text" class="form-control" name="sigla" id="sigla" placeholder="Sigla" value="<?php echo $organizacion->sigla; ?>" disabled>
 				</div>
 				<div class="form-group">
 					<label>NIT de la Organizacion:<span class="spanRojo">*</span></label>
-					<input type="text" name="" id="" class="form-control" placeholder="NIT de la Organizacion" value="<?php echo $data_organizacion->numNIT; ?>" disabled>
+					<input type="text" name="" id="" class="form-control" placeholder="NIT de la Organizacion" value="<?php echo $organizacion->numNIT; ?>" disabled>
 				</div>
 				<div class="form-group">
 					<label for="tipo_organizacion">Tipo de Organización:<span class="spanRojo">*</span></label>
 					<br>
 					<select name="tipo_organizacion" id="tipo_organizacion" class="selectpicker form-control show-tick" required="">
 						<optgroup label="Actual">
-							<option id="0" value="<?php echo $data_informacion_general->tipoOrganizacion; ?>" selected><?php echo $data_informacion_general->tipoOrganizacion; ?></option>
+							<option id="0" value="<?php echo $informacionGeneral->tipoOrganizacion; ?>" selected><?php echo $informacionGeneral->tipoOrganizacion; ?></option>
 						</optgroup>
 						<optgroup label="Actualizar">
 							<option id="1" value="Asociación">Asociación</option>
@@ -167,7 +176,7 @@
 					<br>
 					<select name="departamentos" id="departamentos" data-id-dep="1" class="selectpicker form-control show-tick departamentos" required="">
 						<optgroup label="Actual">
-							<option id="0" value="<?php echo $data_informacion_general->nomDepartamentoUbicacion; ?>" selected><?php echo $data_informacion_general->nomDepartamentoUbicacion; ?></option>
+							<option id="0" value="<?php echo $informacionGeneral->nomDepartamentoUbicacion; ?>" selected><?php echo $informacionGeneral->nomDepartamentoUbicacion; ?></option>
 						</optgroup>
 						<optgroup label="Actualizar">
 							<?php
@@ -186,7 +195,7 @@
 						<br>
 						<select name="municipios" id="municipios" class="selectpicker form-control show-tick municipios" required="">
 							<optgroup label="Actual">
-								<option id="0" value="<?php echo $data_informacion_general->nomMunicipioNacional; ?>" selected><?php echo $data_informacion_general->nomMunicipioNacional; ?></option>
+								<option id="0" value="<?php echo $informacionGeneral->nomMunicipioNacional; ?>" selected><?php echo $informacionGeneral->nomMunicipioNacional; ?></option>
 							</optgroup>
 							<optgroup label="Actualizar">
 								<?php
@@ -202,11 +211,11 @@
 				</div>
 				<div class="form-group">
 					<label for="direccion">Dirección:<span class="spanRojo">*</span></label>
-					<input type="text" class="form-control" name="direccion" id="direccion" required="" placeholder="Dirección" value="<?php echo $data_informacion_general->direccionOrganizacion; ?>">
+					<input type="text" class="form-control" name="direccion" id="direccion" required="" placeholder="Dirección" value="<?php echo $informacionGeneral->direccionOrganizacion; ?>">
 				</div>
 				<div class="form-group">
 					<label>Teléfono de Contacto:<span class="spanRojo">*</span></label>
-					<input type="text" name="fax" id="fax" class="form-control" required="" placeholder="Fax - Teléfono" value="<?php echo $data_informacion_general->fax; ?>">
+					<input type="text" name="fax" id="fax" class="form-control" required="" placeholder="Fax - Teléfono" value="<?php echo $informacionGeneral->fax; ?>">
 				</div>
 				<div class="checkbox">
 					<label for="extension_checkbox"><input type="checkbox" name="extension_checkbox" id="extension_checkbox" class=""> ¿Tiene Extensión?</label>
@@ -214,26 +223,26 @@
 				<div class="form-group">
 					<div id="div_extension">
 						<label for="extension">Extensión:<span class="spanRojo">*</span></label>
-						<input type="text" name="extension" id="extension" class="form-control" placeholder="Extensión" value="<?php echo $data_informacion_general->extension; ?>">
+						<input type="text" name="extension" id="extension" class="form-control" placeholder="Extensión" value="<?php echo $informacionGeneral->extension; ?>">
 					</div>
 				</div>
 				<div class="form-group">
 					<label>Correo Electrónico de la Organizacion:<span class="spanRojo">*</span></label>
-					<input type="text" name="" id="" class="form-control" placeholder="Correo Electrónico de la Organizacion" value="<?php echo $data_organizacion->direccionCorreoElectronicoOrganizacion; ?>">
+					<input type="text" name="" id="" class="form-control" placeholder="Correo Electrónico de la Organizacion" value="<?php echo $organizacion->direccionCorreoElectronicoOrganizacion; ?>">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<hr />
 				<div class="form-group">
 					<label>Dirección Web:</label>
-					<input type="text" name="urlOrganizacion" id="urlOrganizacion" placeholder="www.orgsolidarias.gov.co" class="form-control" value="<?php echo $data_informacion_general->urlOrganizacion; ?>">
+					<input type="text" name="urlOrganizacion" id="urlOrganizacion" placeholder="www.orgsolidarias.gov.co" class="form-control" value="<?php echo $informacionGeneral->urlOrganizacion; ?>">
 				</div>
 				<div class="form-group">
 					<label for="actuacion">Ámbito de Actuación de la Entidad:<span class="spanRojo">*</span></label>
 					<br>
 					<select name="actuacion" id="actuacion" class="selectpicker form-control show-tick" required="">
 						<optgroup label="Actual">
-							<option id="0" value="<?php echo $data_informacion_general->actuacionOrganizacion; ?>" selected><?php echo $data_informacion_general->actuacionOrganizacion; ?></option>
+							<option id="0" value="<?php echo $informacionGeneral->actuacionOrganizacion; ?>" selected><?php echo $informacionGeneral->actuacionOrganizacion; ?></option>
 						</optgroup>
 						<optgroup label="Actualizar">
 							<option id="1" value="Departamental">Departamental</option>
@@ -248,7 +257,7 @@
 					<br>
 					<select name="educacion" id="educacion" class="selectpicker form-control show-tick" required="">
 						<optgroup label="Actual">
-							<option id="0" value="<?php echo $data_informacion_general->tipoEducacion; ?>" selected><?php echo $data_informacion_general->tipoEducacion; ?></option>
+							<option id="0" value="<?php echo $informacionGeneral->tipoEducacion; ?>" selected><?php echo $informacionGeneral->tipoEducacion; ?></option>
 						</optgroup>
 						<optgroup label="Actualizar">
 							<option id="1" value="Educacion para el trabajo y el desarrollo humano">Educacion para el trabajo y el desarrollo humano</option>
@@ -261,27 +270,27 @@
 				<label>Información Representante Legal:</label>
 				<div class="form-group">
 					<label for="primerNombreRepLegal">Primer Nombre:<span class="spanRojo">*</span></label>
-					<input type="text" name="primerNombreRepLegal" id="primerNombreRepLegal" class="form-control" value="<?php echo $data_organizacion->primerNombreRepLegal; ?>">
+					<input type="text" name="primerNombreRepLegal" id="primerNombreRepLegal" class="form-control" value="<?php echo $organizacion->primerNombreRepLegal; ?>">
 				</div>
 				<div class="form-group">
 					<label for="segundoNombreRepLegal">Segundo Nombre:</label>
-					<input type="text" name="segundoNombreRepLegal" id="segundoNombreRepLegal" class="form-control" value="<?php echo $data_organizacion->segundoNombreRepLegal; ?>">
+					<input type="text" name="segundoNombreRepLegal" id="segundoNombreRepLegal" class="form-control" value="<?php echo $organizacion->segundoNombreRepLegal; ?>">
 				</div>
 				<div class="form-group">
 					<label for="primerApellidoRepLegal">Primer Apellido:<span class="spanRojo">*</span></label>
-					<input type="text" name="primerApellidoRepLegal" id="primerApellidoRepLegal" class="form-control" value="<?php echo $data_organizacion->primerApellidoRepLegal; ?>">
+					<input type="text" name="primerApellidoRepLegal" id="primerApellidoRepLegal" class="form-control" value="<?php echo $organizacion->primerApellidoRepLegal; ?>">
 				</div>
 				<div class="form-group">
 					<label for="segundoApellidoRepLegal">Segundo Apellido:</label>
-					<input type="text" name="segundoApellidoRepLegal" id="segundoApellidoRepLegal" class="form-control" value="<?php echo $data_organizacion->segundoApellidoRepLegal; ?>">
+					<input type="text" name="segundoApellidoRepLegal" id="segundoApellidoRepLegal" class="form-control" value="<?php echo $organizacion->segundoApellidoRepLegal; ?>">
 				</div>
 				<div class="form-group">
 					<label>Correo Electrónico del Representante Legal:<span class="spanRojo">*</span></label>
-					<input type="text" name="" id="" class="form-control" value="<?php echo $data_organizacion->direccionCorreoElectronicoRepLegal; ?>">
+					<input type="text" name="" id="" class="form-control" value="<?php echo $organizacion->direccionCorreoElectronicoRepLegal; ?>">
 				</div>
 				<div class="form-group">
 					<label for="numCedulaCiudadaniaPersona">Numero de Cédula:<span class="spanRojo">*</span></label>
-					<input type="text" name="numCedulaCiudadaniaPersona" id="numCedulaCiudadaniaPersona" class="form-control" required="" value="<?php echo $data_informacion_general->numCedulaCiudadaniaPersona; ?>">
+					<input type="text" name="numCedulaCiudadaniaPersona" id="numCedulaCiudadaniaPersona" class="form-control" required="" value="<?php echo $informacionGeneral->numCedulaCiudadaniaPersona; ?>">
 				</div>
 			</div>
 			<div class="col-md-4">
@@ -289,35 +298,35 @@
 				<label>1.2. Identificación y Presentación Institucional</label>
 				<div class="form-group">
 					<label for="presentacion">Presentación Institucional:<span class="spanRojo">*</span></label>
-					<textarea class="form-control" name="presentacion" id="presentacion" placeholder="Presentación Institucional..."><?php echo $data_informacion_general->presentacionInstitucional; ?></textarea>
+					<textarea class="form-control" name="presentacion" id="presentacion" placeholder="Presentación Institucional..."><?php echo $informacionGeneral->presentacionInstitucional; ?></textarea>
 				</div>
 				<div class="form-group">
 					<label for="objetoSocialEstatutos">Objeto Social Segun Estatutos:<span class="spanRojo">*</span></label>
-					<textarea class="form-control" name="objetoSocialEstatutos" id="objetoSocialEstatutos" placeholder="Objeto Social Segun Estatutos..."><?php echo $data_informacion_general->objetoSocialEstatutos; ?></textarea>
+					<textarea class="form-control" name="objetoSocialEstatutos" id="objetoSocialEstatutos" placeholder="Objeto Social Segun Estatutos..."><?php echo $informacionGeneral->objetoSocialEstatutos; ?></textarea>
 				</div>
 				<div class="form-group">
 					<label for="mision">Misión:<span class="spanRojo">*</span></label>
-					<textarea class="form-control" id="mision" name="mision" placeholder="Misión..."><?php echo $data_informacion_general->mision; ?></textarea>
+					<textarea class="form-control" id="mision" name="mision" placeholder="Misión..."><?php echo $informacionGeneral->mision; ?></textarea>
 				</div>
 				<div class="form-group">
 					<label for="vision">Visión:<span class="spanRojo">*</span></label>
-					<textarea class="form-control" id="vision" name="vision" placeholder="Visión..."><?php echo $data_informacion_general->vision; ?></textarea>
+					<textarea class="form-control" id="vision" name="vision" placeholder="Visión..."><?php echo $informacionGeneral->vision; ?></textarea>
 				</div>
 				<div class="form-group">
 					<label for="principios">Principios:<span class="spanRojo">*</span></label>
-					<textarea class="form-control" id="principios" name="principios" placeholder="Principios..."><?php echo $data_informacion_general->principios; ?></textarea>
+					<textarea class="form-control" id="principios" name="principios" placeholder="Principios..."><?php echo $informacionGeneral->principios; ?></textarea>
 				</div>
 				<div class="form-group">
 					<label for="fines">Fines:<span class="spanRojo">*</span></label>
-					<textarea class="form-control" id="fines" name="fines" placeholder="Fines..."><?php echo $data_informacion_general->fines; ?></textarea>
+					<textarea class="form-control" id="fines" name="fines" placeholder="Fines..."><?php echo $informacionGeneral->fines; ?></textarea>
 				</div>
 				<div class="form-group">
 					<label for="portafolio">Portafolio de Servicios:<span class="spanRojo">*</span></label>
-					<textarea class="form-control" id="portafolio" name="portafolio" placeholder="Portafolio de Servicios..."><?php echo $data_informacion_general->portafolio; ?></textarea>
+					<textarea class="form-control" id="portafolio" name="portafolio" placeholder="Portafolio de Servicios..."><?php echo $informacionGeneral->portafolio; ?></textarea>
 				</div>
 				<div class="form-group">
 					<label for="otros">Otros:</label>
-					<textarea class="form-control" id="otros" name="otros" placeholder="Otros..."><?php echo $data_informacion_general->otros; ?></textarea>
+					<textarea class="form-control" id="otros" name="otros" placeholder="Otros..."><?php echo $informacionGeneral->otros; ?></textarea>
 				</div>
 			</div>
 			<a class="btn btn-siia btn-sm pull-right" name="guardar_formulario_informacion_general_entidad" id="guardar_formulario_informacion_general_entidad">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></a>
@@ -382,7 +391,7 @@
 			<label>2.1. Certificado de Camara de Comercio.</label>
 			<div class="checkbox">
 				<label for="camaraComercio">La entidad cuenta con Certificado de Camara de Comercio:</label>
-				<?php if ($data_documentacion_legal): ?>
+				<?php if ($documentacionLegal): ?>
 					<label><input type="radio" class="camaraComercio" name="camaraComercio" id="camaraComercio" value="Si" disabled> Si</label>
 					<label><input type="radio" class="camaraComercio" name="camaraComercio" id="camaraComercio" value="No" disabled> No</label>
 				<?php else: ?>
@@ -392,8 +401,8 @@
 			</div>
 			<div id="div_camara_comercio" hidden>
 				<?php echo form_open('', array('id' => 'formulario_certificado_existencia')); ?>
-				<p>En caso que el Certificado de Existencia y Representación Legal sea emitido por Cámara de Comercio, la Unidad Administrativa realizará la verificación de este requisito por medio de consulta directa a la base de datos del Registro Único Empresarial Y Social RUES. Por tal motivo no es necesario anexar el certificado. Es responsabilidad de la entidad mantener renovado el registro mercantil en el certificado. Los Campos marcados con (*) son obligatorios.</p>
-				<button name="guardar_formulario_camara_comercio" id="guardar_formulario_camara_comercio" class="btn btn-siia btn-sm pull-right" data-id="<?php echo $data_solicitud->idSolicitud;?>" data-idOrg="<?php echo $data_organizacion->id_organizacion;?>">
+				<p>En caso de que el Certificado de Existencia y Representación Legal sea emitido por Cámara de Comercio, la Unidad Administrativa realizará la verificación de este requisito por medio de consulta directa a la base de datos del Registro Único Empresarial Y Social RUES. Por tal motivo no es necesario anexar el certificado. Es responsabilidad de la entidad mantener renovado el registro mercantil en el certificado. Los Campos marcados con (*) son obligatorios.</p>
+				<button name="guardar_formulario_camara_comercio" id="guardar_formulario_camara_comercio" class="btn btn-siia btn-sm pull-right" data-id="<?php echo $solicitud->idSolicitud;?>" data-idOrg="<?php echo $organizacion->id_organizacion;?>">
 					Guardar datos <i class="fa fa-check" aria-hidden="true"></i>
 				</button>
 				</form>
@@ -406,7 +415,7 @@
 			<div class="checkbox">
 				<label for="certificadoExistencia">La entidad presenta Certificado de Existencia y Representación Legal:</label>
 				<!-- Opciones radio -->
-				<?php if($data_documentacion_legal): ?>
+				<?php if($documentacionLegal): ?>
 					<label><input type="radio" class="certificadoExistencia" name="certificadoExistencia" id="certificadoExistencia" value="Si" disabled> Si</label>
 					<label><input type="radio" class="certificadoExistencia" name="certificadoExistencia" id="certificadoExistencia" value="No" disabled> No</label>
 				<?php else: ?>
@@ -460,7 +469,7 @@
 					</br></br>
 				</div>
 				<!-- Botón guardar -->
-				<button name="guardar_formulario_certificado_existencia" id="guardar_formulario_certificado_existencia" class="btn btn-siia btn-sm pull-right" data-id="<?php  echo $data_solicitud->idSolicitud;?>">
+				<button name="guardar_formulario_certificado_existencia" id="guardar_formulario_certificado_existencia" class="btn btn-siia btn-sm pull-right" data-id="<?php  echo $solicitud->idSolicitud;?>">
 					Guardar datos <i class="fa fa-check" aria-hidden="true"></i>
 				</button>
 				</form>
@@ -474,7 +483,7 @@
 			<!-- Opciones radio -->
 			<div class="checkbox">
 				<label for="registroEducativo">La entidad presenta registro educativo:</label>
-				<?php if ($data_documentacion_legal): ?>
+				<?php if ($documentacionLegal): ?>
 					<label><input type="radio" class="registroEducativo" name="registroEducativo" id="registroEducativo" value="Si" disabled>Si</label>
 					<label><input type="radio" class="registroEducativo" name="registroEducativo" id="" value="No" disabled>No</label>
 				<?php else: ?>
@@ -529,13 +538,13 @@
 					</div>
 					</br></br>
 				</div>
-				<button name="guardar_formulario_registro_educativo" id="guardar_formulario_registro_educativo" class="btn btn-siia btn-sm pull-right " data-id="<?php  echo $data_solicitud->idSolicitud;?>">
+				<button name="guardar_formulario_registro_educativo" id="guardar_formulario_registro_educativo" class="btn btn-siia btn-sm pull-right " data-id="<?php  echo $solicitud->idSolicitud;?>">
 					Guardar datos <i class="fa fa-check" aria-hidden="true"></i>
 				</button>
 				</form>
 				<hr />
 				<!-- Tabla herramientas -->
-				<?php if($data_documentacion_legal): ?>
+				<?php if($datosEnLinea): ?>
 					<div class="">
 						<label>Datos de herramientas:</label>
 						<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
@@ -551,7 +560,7 @@
 							</thead>
 							<tbody id="tbody">
 							<?php
-							foreach ($data_modalidad_en_linea as $data) {
+							foreach ($datosEnLinea as $data) {
 								echo "<tr><td>" . $data->nombreHerramienta . "</td>";
 								echo "<td>" . $data->descripcionHerramienta . "</td>";
 								echo "<td>" . $data->fecha . "</td>";
@@ -569,8 +578,8 @@
 		<div class="clearfix"></div>
 		<br><br>
 		<!-- Tabla Documentación Legal -->
-		<?php if($data_documentacion_legal): ?>
-			<?php if($data_documentacion_legal->entidad): ?>
+		<?php if($documentacionLegal): ?>
+			<?php if($documentacionLegal->entidad): ?>
 				<div class="">
 					<label>Datos Certificado existencia:</label>
 					<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
@@ -587,18 +596,18 @@
 						</thead>
 						<tbody id="tbody">
 						<?php
-							echo "<tr><td>" . $data_documentacion_legal->entidad . "</td>";
-							echo "<td>" . $data_documentacion_legal->fechaExpedicion . "</td>";
-							echo "<td>" . $data_documentacion_legal->departamento . "</td>";
-							echo "<td>" . $data_documentacion_legal->municipio . "</td>";
-							echo "<td><button class='btn btn-primary btn-sm verDocCertificadoExistencia' data-id=" . $data_documentacion_legal->id_certificadoExistencia . ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
-							echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosCertificadoExistencia' data-id=" . $data_documentacion_legal->id_certificadoExistencia . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+							echo "<tr><td>" . $documentacionLegal->entidad . "</td>";
+							echo "<td>" . $documentacionLegal->fechaExpedicion . "</td>";
+							echo "<td>" . $documentacionLegal->departamento . "</td>";
+							echo "<td>" . $documentacionLegal->municipio . "</td>";
+							echo "<td><button class='btn btn-primary btn-sm verDocCertificadoExistencia' data-id=" . $documentacionLegal->id_certificadoExistencia . ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
+							echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosCertificadoExistencia' data-id=" . $documentacionLegal->id_certificadoExistencia . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
 						?>
 						</tbody>
 					</table>
 				</div>
 			<?php endif; ?>
-			<?php if($data_documentacion_legal->numeroResolucion): ?>
+			<?php if($documentacionLegal->numeroResolucion): ?>
 				<div class="">
 					<label>Datos Registro Educativo:</label>
 					<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
@@ -617,20 +626,20 @@
 						</thead>
 						<tbody id="tbody">
 						<?php
-						echo "<tr><td>" . $data_documentacion_legal->tipoEducacion . "</td>";
-						echo "<td>" . $data_documentacion_legal->fechaResolucion . "</td>";
-						echo "<td>" . $data_documentacion_legal->numeroResolucion . "</td>";
-						echo "<td>" . $data_documentacion_legal->nombrePrograma . "</td>";
-						echo "<td>" . $data_documentacion_legal->objetoResolucion . "</td>";
-						echo "<td>" . $data_documentacion_legal->entidadResolucion . "</td>";
-						echo "<td><button class='btn btn-primary btn-sm verDocRegistro' data-id=" . $data_documentacion_legal->id_registroEducativoPro . ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
-						echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosRegistro' data-id=" . $data_documentacion_legal->id_registroEducativoPro . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+						echo "<tr><td>" . $documentacionLegal->tipoEducacion . "</td>";
+						echo "<td>" . $documentacionLegal->fechaResolucion . "</td>";
+						echo "<td>" . $documentacionLegal->numeroResolucion . "</td>";
+						echo "<td>" . $documentacionLegal->nombrePrograma . "</td>";
+						echo "<td>" . $documentacionLegal->objetoResolucion . "</td>";
+						echo "<td>" . $documentacionLegal->entidadResolucion . "</td>";
+						echo "<td><button class='btn btn-primary btn-sm verDocRegistro' data-id=" . $documentacionLegal->id_registroEducativoPro . ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
+						echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosRegistro' data-id=" . $documentacionLegal->id_registroEducativoPro . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
 						?>
 						</tbody>
 					</table>
 				</div>
 			<?php endif; ?>
-			<?php if($data_documentacion_legal->id_tipoDocumentacion): ?>
+			<?php if($documentacionLegal->id_tipoDocumentacion): ?>
 				<div class="">
 					<label>Registraste Camara de Comercio:</label>
 					<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
@@ -644,7 +653,7 @@
 						<tbody id="tbody">
 						<?php
 						echo "<tr><td>Camara de comercio </td>";
-						echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosCamaraComercio' data-id=" . $data_documentacion_legal->id_tipoDocumentacion . ">Deshacer <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+						echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosCamaraComercio' data-id=" . $documentacionLegal->id_tipoDocumentacion . ">Deshacer <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
 						?>
 						</tbody>
 					</table>
@@ -686,10 +695,10 @@
 				<label for="duracionCursoAcademicos">Duración del curso:<span class="spanRojo">*</span> (Horas)</label>
 				<input type="number" class="form-control" name="duracionCursoAcademicos" id="duracionCursoAcademicos" placeholder="">
 			</div>
-			<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_antecedentes_academicos" id="guardar_formulario_antecedentes_academicos" data-id="<?php  echo $data_solicitud->idSolicitud;?>">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
+			<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_antecedentes_academicos" id="guardar_formulario_antecedentes_academicos" data-id="<?php  echo $solicitud->idSolicitud;?>">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
 			</form>
 			<div class="clearfix"></div>
-			<?php if($data_antecedentes_academicos): ?>
+			<?php if($antecedentesAcademicos): ?>
 				<hr />
 				<label>Antecedentes:</label>
 				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
@@ -708,7 +717,7 @@
 					</thead>
 					<tbody id="tbody">
 					<?php
-					foreach ($data_antecedentes_academicos as $antecedentes) {
+					foreach ($antecedentesAcademicos as $antecedentes) {
 						echo "<tr><td>" . $antecedentes->descripcionProceso . "</td>";
 						echo "<td>" . $antecedentes->justificacion . "</td>";
 						echo "<td>" . $antecedentes->objetivos . "</td>";
@@ -748,9 +757,9 @@
 					<input class="form-control" type="date" name="jornadasFechaAsistencia" id="jornadasFechaAsistencia">
 				</div>
 			</div>
-			<button class="btn btn-siia btn-sm" name="guardar_formulario_jornadas_actualizacion" id="guardar_formulario_jornadas_actualizacion" data-id="<?php  echo $data_solicitud->idSolicitud;?>">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
+			<button class="btn btn-siia btn-sm" name="guardar_formulario_jornadas_actualizacion" id="guardar_formulario_jornadas_actualizacion" data-id="<?php  echo $solicitud->idSolicitud;?>">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
 			</form>
-			<?php if ($data_jornadas_actualizacion): ?>
+			<?php if ($jornadasActualizacion): ?>
 			<div class="">
 				<hr />
 				<label>Jornadas:</label>
@@ -765,7 +774,7 @@
 					</thead>
 					<tbody id="tbody">
 					<?php
-					foreach ($data_jornadas_actualizacion as $jornada) {
+					foreach ($jornadasActualizacion as $jornada) {
 						echo "<tr><td>" . $jornada->numeroPersonas . "</td>";
 						echo "<td>" . $jornada->fechaAsistencia . "</td>";
 						echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarJornadaActualizacion' data-id-jornada=" . $jornada->id_jornadasActualizacion . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
@@ -875,17 +884,17 @@
 						<label class="underlined">
 							<input type="checkbox" id="check_curso_economia_financiera" form="formulario_programas" name="check_curso_economia_financiera" value="* Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria" disabled required>
 							<label for="modalCursoFinanciera">&nbsp;</label>
-							<a data-toggle="modal" data-target="#modalCursoFinanciera" data-backdrop="static" data-keyboard="false" data-programa="Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria" data-id="<?php  echo $data_solicitud->idSolicitud;?>">
+							<a data-toggle="modal" data-target="#modalCursoFinanciera" data-backdrop="static" data-keyboard="false" data-programa="Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria" data-id="<?php  echo $solicitud->idSolicitud;?>">
 								<span class="spanRojo">*</span> Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria
 							</a>
 					</div>
 					<!-- Campo oculto con ID de la organización -->
-					<input type="text" name="id_organizacion" id="id_organizacion" value="<?php echo $data_organizacion->id_organizacion;?>" style="display: none">
+					<input type="text" name="id_organizacion" id="id_organizacion" value="<?php echo $organizacion->id_organizacion;?>" style="display: none">
 				</div>
 			</div>
 		</div>
 		<!-- Tabla programas aceptados -->
-		<?php if($data_programas): ?>
+		<?php if($datosProgramas): ?>
 			<div class="">
 				<label>Datos programas aceptados</label>
 				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
@@ -900,7 +909,7 @@
 					</thead>
 					<tbody id="tbody">
 					<?php
-					foreach ($data_programas as $data) {
+					foreach ($datosProgramas as $data) {
 						echo "<tr><td>" . $data->nombrePrograma . "</td>";
 						echo "<td>" . $data->aceptarPrograma . "</td>";
 						echo "<td>" . $data->fecha . "</td>";
@@ -1031,10 +1040,10 @@
 		</div>
 		<div class="clearfix"></div>
 		<hr />
-		<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_plataforma" id="guardar_formulario_plataforma" data-id="<?php  echo $data_solicitud->idSolicitud;?>">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
+		<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_plataforma" id="guardar_formulario_plataforma" data-id="<?php  echo $solicitud->idSolicitud;?>">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
 		</form>
 		<div class="clearfix"></div>
-		<?php if($data_plataforma): ?>
+		<?php if($aplicacion): ?>
 			<div class="">
 				<hr />
 				<label>Plataforma:</label>
@@ -1050,7 +1059,7 @@
 					</thead>
 					<tbody id="tbody">
 					<?php
-					foreach ($data_plataforma as $datosPlataforma) {
+					foreach ($aplicacion as $datosPlataforma) {
 						echo "<tr><td>" . $datosPlataforma->urlAplicacion . "</td>";
 						echo "<td>" . $datosPlataforma->usuarioAplicacion . "</td>";
 						echo "<td>" . $datosPlataforma->contrasenaAplicacion . "</td>";
@@ -1117,12 +1126,12 @@
 			</div>
 		</div>
 		<!-- Botón para guardar datos -->
-		<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_modalidad_en_linea" id="guardar_formulario_modalidad_en_linea" data-id="<?php  echo $data_solicitud->idSolicitud;?>">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
+		<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_modalidad_en_linea" id="guardar_formulario_modalidad_en_linea" data-id="<?php  echo $solicitud->idSolicitud;?>">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
 		<div class="clearfix"></div>
 		<hr />
 		</form>
 		<!-- Tabla herramientas -->
-		<?php if($data_modalidad_en_linea): ?>
+		<?php if($datosEnLinea): ?>
 			<div class="">
 				<label>Datos de herramientas:</label>
 				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
@@ -1137,7 +1146,7 @@
 					</thead>
 					<tbody id="tbody">
 					<?php
-					foreach ($data_modalidad_en_linea as $data) {
+					foreach ($datosEnLinea as $data) {
 						echo "<tr><td>" . $data->nombreHerramienta . "</td>";
 						echo "<td>" . $data->descripcionHerramienta . "</td>";
 						echo "<td>" . $data->fecha . "</td>";
@@ -1174,7 +1183,7 @@
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-danger btn-sm pull-left" data-dismiss="modal">No, voy a verificar <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button class="btn btn-siia btn-sm pull-right" id="finalizar_si" data-id="<?php echo $data_solicitud->idSolicitud ?>">Si, estoy completamente seguro de terminar y enviar la solicitud <i class="fa fa-check-square-o" aria-hidden="true"></i></button>
+					<button class="btn btn-siia btn-sm pull-right" id="finalizar_si" data-id="<?php echo $solicitud->idSolicitud ?>">Si, estoy completamente seguro de terminar y enviar la solicitud <i class="fa fa-check-square-o" aria-hidden="true"></i></button>
 				</div>
 			</div>
 		</div>
@@ -1197,7 +1206,7 @@
 				</div>
 				<div class="modal-body">
 					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_curso_basico_es" data-programa="Acreditación Curso Básico de Economía Solidaria" data-modal="modalCursoBasico" data-check="check_curso_basico_es"  data-id="<?php echo $data_solicitud->idSolicitud;?>">Sí, acepto. <i class="fa fa-check"></i></button>
+					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_curso_basico_es" data-programa="Acreditación Curso Básico de Economía Solidaria" data-modal="modalCursoBasico" data-check="check_curso_basico_es"  data-id="<?php echo $solicitud->idSolicitud;?>">Sí, acepto. <i class="fa fa-check"></i></button>
 				</div>
 			</div>
 		</div>
@@ -1219,7 +1228,7 @@
 				</div>
 				<div class="modal-body">
 					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_aval_trabajo" data-programa="Acreditación Aval de Trabajo Asociado"  data-modal="modalAval" data-check="check_curso_basico_aval"  data-id="<?php  echo $data_solicitud->idSolicitud;?>">Sí, acepto. <i class="fa fa-check"></i></button>
+					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_aval_trabajo" data-programa="Acreditación Aval de Trabajo Asociado"  data-modal="modalAval" data-check="check_curso_basico_aval"  data-id="<?php  echo $solicitud->idSolicitud;?>">Sí, acepto. <i class="fa fa-check"></i></button>
 				</div>
 			</div>
 		</div>
@@ -1242,7 +1251,7 @@
 				</div>
 				<div class="modal-body">
 					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_curso_medio_es" data-programa="Acreditación Curso Medio de Economía Solidaria"  data-modal="modalCursoMedio" data-check="check_curso_medio_es"  data-id="<?php  echo $data_solicitud->idSolicitud;?>">Sí, acepto. <i class="fa fa-check"></i></button>
+					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_curso_medio_es" data-programa="Acreditación Curso Medio de Economía Solidaria"  data-modal="modalCursoMedio" data-check="check_curso_medio_es"  data-id="<?php  echo $solicitud->idSolicitud;?>">Sí, acepto. <i class="fa fa-check"></i></button>
 				</div>
 			</div>
 		</div>
@@ -1265,7 +1274,7 @@
 				</div>
 				<div class="modal-body">
 					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_avanzado_medio_es" data-programa="Acreditación Curso Avanzado de Economía Solidaria" data-modal="modalCursoAvanzado" data-check="check_curso_avanzado_es"  data-id="<?php  echo $data_solicitud->idSolicitud;?>">Sí, acepto. <i class="fa fa-check"></i></button>
+					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_avanzado_medio_es" data-programa="Acreditación Curso Avanzado de Economía Solidaria" data-modal="modalCursoAvanzado" data-check="check_curso_avanzado_es"  data-id="<?php  echo $solicitud->idSolicitud;?>">Sí, acepto. <i class="fa fa-check"></i></button>
 				</div>
 			</div>
 		</div>
@@ -1289,7 +1298,7 @@
 				</div>
 				<div class="modal-body">
 					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_educacion_financiera" data-programa="Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria" data-modal="modalCursoFinanciera" data-check="check_curso_economia_financiera" data-id="<?php  echo $data_solicitud->idSolicitud;?>">Sí, acepto. <i class="fa fa-check"></i></button>
+					<button type="button" class="btn btn-siia btn-sm pull-right" id="aceptar_educacion_financiera" data-programa="Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria" data-modal="modalCursoFinanciera" data-check="check_curso_economia_financiera" data-id="<?php  echo $solicitud->idSolicitud;?>">Sí, acepto. <i class="fa fa-check"></i></button>
 				</div>
 			</div>
 		</div>
