@@ -67,7 +67,8 @@ class Administradores extends CI_Controller
 				'contrasena_rdel' => $password_rdel,
 			);
 			if($this->db->insert('administradores', $data_admin)){
-				$administrador = $this->AdministradoresModel->getAdministrador($this->input->post('super_numerocedula_admin'));
+				$usuario = $this->input->post('super_nombre_admin');
+				$administrador = $this->AdministradoresModel->getAdministrador($usuario);
 				$type = "creacionAdministrador";
 				if($administrador)
 					send_email_super($type, $administrador);

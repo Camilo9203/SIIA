@@ -16,10 +16,10 @@ class AdministradoresModel extends CI_Model
 		$query = $this->db->get_where('administradores', array('id_administrador' => $id));
 		return $query->row();
 	}
-	public function getAdministrador($id)
+	public function getAdministrador($usuario)
 	{
-		// Traer administrador por numero de cédula
-		$query = $this->db->get_where('administradores', array('numCedulaCiudadaniaAdministrador' => $id));
+		// Traer administrador por usuario
+		$query = $this->db->get_where('administradores', array('usuario' => $usuario));
 		return $query->row();
 	}
 }
