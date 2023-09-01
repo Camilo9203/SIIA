@@ -32,7 +32,7 @@
 				echo "<td>" . $organizacion->direccionCorreoElectronicoOrganizacion . "</td>";
 				echo "<td>" . $organizacion->direccionCorreoElectronicoRepLegal."</td>";
 				echo "<td>" . $organizacion->estado . "</td>";
-				echo "<td><button class='btn btn-siia btn-sm ver_organizacion_inscrita' id='' data-organizacion='" . $organizacion->id_organizacion."'>Ver organizacion <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
+				echo "<td><button class='btn btn-siia btn-sm ver_organizacion_inscrita' id='' data-organizacion='" . $organizacion->numNIT ."'>Ver organizacion <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
 				echo "</tr>";
 			}
 		?>
