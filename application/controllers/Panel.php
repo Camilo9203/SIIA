@@ -2430,7 +2430,8 @@ class Panel extends CI_Controller
 		if ($this->email->send()) {
 			// Do nothing.
 		} else {
-			echo json_encode(array('url' => "login", 'msg' => "Lo sentimos, hubo un error y no se envio el correo."));
+			$error = $this->email->print_debugger();
+			echo json_encode(array('error' => $error, 'msg' => "Lo sentimos, hubo un error y no se envio el correo."));
 		}
 	}
 	// TODO: Enviar Correos a Administrador
