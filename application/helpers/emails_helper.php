@@ -1,5 +1,48 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
+ * Enviar correo desde súper admin
+ */
+function send_email_super($type, $administrador)
+{
+	$CI = & get_instance();
+	switch ($type):
+		case 'creacionAdministrador':
+				$subject = 'Creación administrador';
+				$message = '<strong><h4>Se ha creado un usuario administrador!</h4></strong>
+							<p>Buen día, ' . $administrador->primerNombreAdministrador . ' ' . $administrador->primerApellido . 'La unidad solidaria le informa que se le ha asignado un usuario administrador con los siguientes datos:</p><br />
+							<strong><label>Usuario:</label></strong>
+							<p>' . $administrador->usuario .  '</p>
+							<strong><label>Contraseña:</label></strong>
+							<p>' . $administrador->numCedulaCiudadaniaAdministrador . '</p>
+							<strong><label>Correo electrónico:</label></strong>
+							<p>' . $administrador->direccionCorreoElectronico . '</p>
+							<strong><label>Rol:</label></strong>
+							<p>' . $administrador->nivel . '</p>
+							<a target="_blank" style="font-family: Arial, sans-serif; background: #0071b9; color:white; display: inline-block; text-decoration: none; line-height:40px; font-size: 18px; width:200px; box-shadow: 2px 3px #e2e2e2; font-weight: bold;" href='. base_url() . 'admin/>Ingresar</a>';
+				$response = array('url' => "panel", 'msg' => "Se envío un correo a: " . $administrador->direccionCorreoElectronico . " y a la supervisión con la información de acceso.", "status" => 1);
+			break;
+		default:
+			break;
+	endswitch;
+	/** Datos de correo */
+	$CI->email->from(CORREO_SIA, "Acreditaciones");
+	$CI->email->to($administrador->direccionCorreoElectronico);
+	$CI->email->cc(CORREO_COORDINADOR);
+	$CI->email->subject('SIIA: ' . $subject);
+	$msg['mensaje'] = $message;
+	$email_view = $CI->load->view('email/contacto', $msg, true);
+	$CI->email->message($email_view);
+	/** Envió de correo */
+	if ($CI->email->send()):
+		$error = $CI->email->print_debugger();
+		save_log_email($administrador->direccionCorreoElectronico, $subject, $message, $type, $error, $response);
+	else:
+		$error = $CI->email->print_debugger();
+		save_log_email($administrador->direccionCorreoElectronico, $subject, $message, $type, $error, $response);
+	endif;
+
+}
+/**
  * Datos para envío de Email al administrador
  * Prioridad
 1 => '1 (Highest)',
@@ -59,7 +102,9 @@ function send_email_admin($tipo, $prioridad = null, $to = null, $docente = null,
 		save_log_email($to, $subject, $message, $tipo, $error, $response);
 	endif;
 }
-/** Enviar correo a usuarios */
+/**
+ * Enviar correo a usuarios
+ */
 function send_email_user($to, $type, $organizacion, $usuario = null, $token = null){
 	$CI = & get_instance();
 	/** Asuntos y correos emails */
@@ -103,7 +148,9 @@ function send_email_user($to, $type, $organizacion, $usuario = null, $token = nu
 		save_log_email($to, $subject, $message, $type, $error, $response);
 	endif;
 }
-/** Guardar logs correos */
+/**
+ * Guardar logs correos
+ */
 function save_log_email($to, $subject, $msg, $type, $error, $response = null) {
 	$CI = & get_instance();
 	$email_details = array(

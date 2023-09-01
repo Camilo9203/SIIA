@@ -361,13 +361,7 @@
 	</div>
 </footer>
 <div class="hidden" id="scripts-sia">
-	<!-- Styles -->
-	<!--<link href="<?php /*echo base_url('assets/fonts/Oswald.css')*/ ?>" rel="stylesheet" />
-	<link href="<?php /*echo base_url('assets/fonts/Oswald300.css')*/ ?>" rel="stylesheet" />
-	<link href="<?php /*echo base_url('assets/fonts/Oswald500.css')*/ ?>" rel="stylesheet" />
-	<link href="<?php /*echo base_url('assets/fonts/CrimsonText.css')*/ ?>" rel="stylesheet" />
-	<link href="<?php /*echo base_url('assets/fonts/CrimsonTextOpenSans400Oswald.css')*/ ?>" rel="stylesheet" />
-	<link href="<?php /*echo base_url('assets/fonts/OpenSans400700.css')*/ ?>" rel="stylesheet" />-->
+	<!-- Sweetalert2 -->
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<!--<link href="<?php echo base_url('assets/css/styles.min.css') ?>" rel="stylesheet" type="text/css" />-->
 	<link href="<?php echo base_url('assets/css/notifIt.css') ?>" rel="stylesheet" type="text/css" />
@@ -412,6 +406,7 @@
 	<script src="<?php echo base_url('assets/js/initck.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/vis.min.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/functions/main.js?v=1.0.8.61219') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/super.js?v=1.1.3.4123') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/registro.js?v=1.0.3') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/login.js?v=1.0.0') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/perfil.js?v=1.1.0') . time() ?>" type="text/javascript"></script>

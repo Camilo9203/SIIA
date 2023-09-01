@@ -97,5 +97,5 @@ define('CORREO_COORDINADOR', 'acreditaciones@unidadsolidaria.gov.co'); // Correo
 define('CORREO_AREA', 'acreditaciones@unidadsolidaria.gov.co'); // Correo electrónico de COORDINADOR DE AREA PRIORIDAD ALTA
 define('CORREO_DIRECTOR', 'acreditaciones@unidadsolidaria.gov.co'); // Correo electrónico de DIRECTOR NACIONAL PRIORIDAD MUY ALTA
 define('CORREO_DIRECTOR', 'acreditaciones@unidadsolidaria.gov.co'); // Correo electrónico de DIRECTOR NACIONAL PRIORIDAD MUY ALTA
-define('SUPER_PS', 'C82LQnyMg1QWUr2bTct0'); // PS de super
+define('SUPER_PS', 'Nm3BcJ7GJbUkIe0aLpd5'); // PS de super // https://www.clavesegura.org/es/
 define('user_sia_db', 'SKGqzlw8gL'); // PS de bd sia user portal pruebas

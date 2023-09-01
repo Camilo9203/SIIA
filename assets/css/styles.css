@@ -545,7 +545,6 @@ h4 {
 	color: #ffffff;
 	background-color: #0062ac;
 	border-color: #ffffff;
-	display: none;
 }
 .cuadro_ver_obs {
 	border: 1px solid #0062ac;
@@ -689,12 +688,14 @@ table > tbody > tr > td {
 #div_extension,
 #informacionBasicaPerfil,
 #datosSesion,
+#itemEnLinea,
+#itemPlataforma,
 #certificados,
 #firmaRepLegalPerfil,
-.side_main_menu,
 #div_registro_educativo,
 #div_certificado_existencia,
 #contacto_copia,
+#super-view-admins,
 #contacto_copia_admin {
 	display: none;
 }
@@ -726,8 +727,8 @@ small {
 	z-index: 10;
 	cursor: pointer;
 	position: fixed;
-	bottom: 80%;
-	left: 93%;
+	bottom: 30%;
+	left: 91%;
 }
 .btn-siia {
 	background-color: #07385d !important;
@@ -1437,6 +1438,13 @@ FIN CUSTOM
 .popup-swalert {
 	height: 350px;
 	width: 500px;
+	font-size: 14px;
+	align-content: center;
+	justify-content: center;
+}
+.popup-swalert-lg {
+	height: max-content;
+	width: max-content;
 	font-size: 14px;
 	align-content: center;
 	justify-content: center;

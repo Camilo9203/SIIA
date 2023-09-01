@@ -187,52 +187,7 @@ $(document).ready(function () {
 			}
 		}
 	});
-	// TODO: Permisos de visualización panel usuario
-	if (funcion == "panel") {
-		$.ajax({
-			url: baseURL + "panel/cargarEstadoSolicitud",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			success: function (response) {
-				console.log(response);
-				if (response.estado == "Finalizado" || response.estado == "En Observaciones") {
-					$(".nuevaSolicitud").parent().css("display", "none");
-					$(".ver_estado_solicitud").parent().css("display", "block");
-					$(".ver_plan_mejoramiento").parent().css("display", "none");
-					$(".ver_informe_actividades").parent().css("display", "none");
-				}
-				else if (response.estado == "Acreditado") {
-					$(".nuevaSolicitud").parent().css("display", "block");
-					$(".ver_docentes").parent().css("display", "block");
-					$(".ver_informe_actividades").parent().css("display", "block");
-					$(".ver_estado_solicitud").parent().css("display", "none");
-				}
-				else {
-					$(".nuevaSolicitud").parent().css("display", "block");
-					$(".ver_estado_solicitud").parent().css("display", "none");
-					$(".ver_docentes").parent().css("display", "none");
-					$(".ver_plan_mejoramiento").parent().css("display", "none");
-					$(".ver_informe_actividades").parent().css("display", "none");
-				}
 
-				if (response.estado == "Finalizado") {
-					if (response.tipo == "Eliminar") {
-						$(".nuevaSolicitud").parent().css("display", "block");
-						$(".ver_estado_solicitud").parent().css("display", "none");
-						$(".ver_docentes").parent().css("display", "none");
-						$(".ver_plan_mejoramiento").parent().css("display", "none");
-						$(".ver_informe_actividades").parent().css("display", "none");
-					}
-				}
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	} else {
-		/** No hay nada que hacer aquí. **/
-	}
 	//TODO: Permisos panel admin
 	if (funcion == "panelAdmin") {
 		// 0 tot - 1 ev - 2 rep - 3 cam - 4 hist - 5 seg - 6 asignar
@@ -331,116 +286,6 @@ $(document).ready(function () {
 		/** No hay nada que hacer aquí. **/
 	}
 
-	if (hash_url == "#actualizarSolicitud") {
-		$.ajax({
-			url: baseURL + "panel/cargarEstadoSolicitud",
-			type: "post",
-			dataType: "JSON",
-			success: function (response) {
-				if (response.estado == "En Observaciones") {
-					$("#nuevaSolicitud").click();
-					$("#el_sol").attr("disabled", true);
-					$("#el_sol").show();
-					$("#div_cont_frm_doc").remove();
-					$("#act_doc_sol").show();
-					$(".hide-sidevar").show();
-				} else {
-					//redirect(baseURL+"panel");
-				}
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	} else {
-		$("#el_sol").show();
-	}
-
-	if (hash_url == "#info") {
-		notificacion("Esta organización no ha ingresado información.", "success");
-	} else {
-		/** No hay nada que hacer aquí. **/
-	}
-
-	if (hash_url == "#enProceso") {
-		$.ajax({
-			url: baseURL + "panel/cargarEstadoSolicitud",
-			type: "post",
-			dataType: "JSON",
-			success: function (response) {
-				console.log(response);
-				if (response.estado == "En Proceso") {
-					$("#nuevaSolicitud").click();
-					//$("#el_sol").attr("disabled", true);
-					//$("#el_sol").remove();
-					$("#div_cont_frm_doc").remove();
-					$("#act_doc_sol").show();
-					$(".hide-sidevar").show();
-				} else {
-					redirect(baseURL + "panel");
-				}
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	} else {
-		/** No hay nada que hacer aquí. **/
-	}
-
-	if (hash_url == "#enProcesoActualizacion") {
-		$.ajax({
-			url: baseURL + "panel/cargarEstadoSolicitud",
-			type: "post",
-			dataType: "JSON",
-			success: function (response) {
-				console.log(response);
-				if (response.estado == "En Proceso de Actualización") {
-					$("#nuevaSolicitud").click();
-					$("#div_cont_frm_doc").remove();
-					$("#act_doc_sol").show();
-					$(".hide-sidevar").show();
-				}
-				if (response.estado == "En Proceso de Renovación") {
-					$("#nuevaSolicitud").click();
-					$("#div_cont_frm_doc").remove();
-					$("#act_doc_sol").show();
-					$(".hide-sidevar").show();
-				} else {
-					//redirect(baseURL+"panel");
-				}
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	} else {
-		/** No hay nada que hacer aquí. **/
-	}
-
-	if (funcion_ == "estadoSolicitud") {
-		$.ajax({
-			url: baseURL + "panel/cargarEstadoSolicitud",
-			type: "post",
-			dataType: "JSON",
-			success: function (response) {
-				console.log(response);
-				if (response.estado == "En Observaciones") {
-				} else {
-					$(".actualizar_solicitud").attr("disabled", false);
-					//$(".actualizar_solicitud").attr("disabled", true);
-					//$(".actualizar_solicitud").remove();
-					//$("#obs_orgs").remove();
-				}
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	} else {
-		/** No hay nada que hacer aquí. **/
-	}
-
 	if (
 		funcion == "panelAdmin" &&
 		(funcion_ == "contacto" || funcion_ == "modalInformacion")
@@ -459,50 +304,6 @@ $(document).ready(function () {
 		/** No hay nada que hacer aquí. **/
 	}
 
-	if (funcion == "super" && funcion_ != "panel") {
-		var $sp = url.split("?");
-		$sp = $sp[1];
-		var $spF = $sp.split(":");
-		var data = {
-			sp: $spF[1],
-		};
-
-		$.ajax({
-			url: baseURL + "super/verify",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			success: function (response) {
-				if (response.url == "sia") {
-					redirect(baseURL);
-				} else {
-					redirect(response.url);
-				}
-			},
-			error: function (ev) {
-				notificacion("Ingresa la contraseña valida.", "success");
-			},
-		});
-	} else {
-		/** No hay nada que hacer aquí. **/
-	}
-
-	$("#super_cerrar_sesion").click(function () {
-		$.ajax({
-			url: baseURL + "super/logout",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			success: function (response) {
-				if (response == "salir") {
-					redirect(baseURL);
-				}
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
 
 	if (funcion == "evaluacion" && funcion != "panel") {
 		var $sp = url.split("?");
@@ -649,49 +450,6 @@ $(document).ready(function () {
 				}
 				$(".tabla_form > #tbody_d_socrata > tr.odd").remove();
 				paging("tabla_datos_s_org");
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	}
-
-	if (funcion == "panel#") {
-		if (hash_url == "#") {
-		} else {
-			if (window.history.pushState) {
-				window.history.pushState("", "/", window.location.pathname);
-			} else {
-				window.location.hash = "";
-				reloadH();
-			}
-		}
-		$.ajax({
-			url: baseURL + "panel/cargarEstadoSolicitud",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			success: function (response) {
-				if (
-					response.estado == "Finalizado" ||
-					response.estado == "En Observaciones"
-				) {
-					$(".nuevaSolicitud").parent().css("display", "none");
-					$(".ver_estado_solicitud").parent().css("display", "block");
-					$(".ver_plan_mejoramiento").parent().css("display", "none");
-					$(".ver_informe_actividades").parent().css("display", "none");
-				} else if (response.estado == "Acreditado") {
-					$(".nuevaSolicitud").parent().css("display", "block");
-					$(".ver_docentes").parent().css("display", "block");
-					$(".ver_informe_actividades").parent().css("display", "block");
-					$(".ver_estado_solicitud").parent().css("display", "none");
-				} else {
-					$(".nuevaSolicitud").parent().css("display", "block");
-					$(".ver_estado_solicitud").parent().css("display", "none");
-					$(".ver_docentes").parent().css("display", "none");
-					$(".ver_plan_mejoramiento").parent().css("display", "none");
-					$(".ver_informe_actividades").parent().css("display", "none");
-				}
 			},
 			error: function (ev) {
 				//Do nothing
@@ -875,9 +633,7 @@ $(document).ready(function () {
 		redirect(baseURL + "panel");
 	});
 	//Click en volver al panel.
-	$("#ver_estado_solicitud").click(function () {
-		redirect(baseURL + "panel/estadoSolicitud");
-	});
+
 	$("#ver_informe_actividades").click(function () {
 		redirect(baseURL + "panel/informeActividades");
 	});
@@ -2947,187 +2703,6 @@ $(document).ready(function () {
 	            mensaje("Selecciona un archivo JPG o PNG.", alert_warning);
 	        }
         });**/
-	$("#init_sp").click(function () {
-		//http://54.202.78.126/sia/activate/?tk:$2a$60$Ae3aCGTfmdxIxABpERW9vOHg6qWG4IRdauEo6a424X4bq8gXldOCbAAj6oW5pZEa6f0=:iop
-		var $ps_sp = $("#tpssp").val();
-		$(window).attr("location", baseURL + "super/?sp:" + $ps_sp);
-	});
-
-	$("#super_nuevo_admin").click(function () {
-		var super_primernombre_admin = $("#super_primernombre_admin").val();
-		var super_segundonombre_admin = $("#super_segundonombre_admin").val();
-		var super_primerapellido_admin = $("#super_primerapellido_admin").val();
-		var super_segundoapellido_admin = $("#super_segundoapellido_admin").val();
-		var super_numerocedula_admin = $("#super_numerocedula_admin").val();
-		var super_correo_electronico_admin = $(
-			"#super_correo_electronico_admin"
-		).val();
-		var super_nombre_admin = $("#super_nombre_admin").val();
-		var super_contrasena_admin = $("#super_contrasena_admin").val();
-		var super_acceso_nvl = $("#super_acceso_nvl").val();
-
-		data = {
-			super_primernombre_admin: super_primernombre_admin,
-			super_segundonombre_admin: super_segundonombre_admin,
-			super_primerapellido_admin: super_primerapellido_admin,
-			super_segundoapellido_admin: super_segundoapellido_admin,
-			super_numerocedula_admin: super_numerocedula_admin,
-			super_correo_electronico_admin: super_correo_electronico_admin,
-			super_nombre_admin: super_nombre_admin,
-			super_acceso_nvl: super_acceso_nvl,
-			super_contrasena_admin: super_contrasena_admin,
-		};
-
-		$.ajax({
-			url: baseURL + "super/nuevoAdm",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			success: function (response) {
-				notificacion(response.msg, "success");
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
-
-	$(".super_ver_admin_modal").click(function () {
-		$id_adm = $(this).attr("data-id");
-
-		data = {
-			id_adm: $id_adm,
-		};
-
-		$.ajax({
-			url: baseURL + "super/cargarDatosAdministrador",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			success: function (response) {
-				$("#super_id_admin_modal").html("");
-				$("#super_status_adm").html("");
-				$("#super_status_adm").css("color", "white");
-				$("#super_status_adm").css("padding", "5px");
-				$("#super_id_admin_modal").html($id_adm);
-				$("#super_primernombre_admin_modal").val(
-					response[0].primerNombreAdministrador
-				);
-				$("#super_segundonombre_admin_modal").val(
-					response[0].segundoNombreAdministrador
-				);
-				$("#super_primerapellido_admin_modal").val(
-					response[0].primerApellidoAdministrador
-				);
-				$("#super_segundoapellido_admin_modal").val(
-					response[0].segundoApellidoAdministrador
-				);
-				$("#super_numerocedula_admin_modal").val(
-					response[0].numCedulaCiudadaniaAdministrador
-				);
-				$("#super_nombre_admin_modal").val(response[0].usuario);
-				$("#super_correo_electronico_admin_modal").val(
-					response[0].direccionCorreoElectronico
-				);
-
-				$("#super_contrasena_admin_modal").val(response[1]);
-				if (response[0].logged_in == 1) {
-					$("#super_status_adm").css("background-color", "#398439");
-					$("#super_status_adm").html("Estado: En linea");
-					$("#super_id_admin_modal").prop("disabled", true);
-					$("#super_eliminar_admin").prop("disabled", true);
-					$("#super_actualizar_admin").prop("disabled", true);
-					$("#super_nombre_admin_modal").prop("disabled", true);
-					$("#super_primernombre_admin_modal").prop("disabled", true);
-					$("#super_segundonombre_admin_modal").prop("disabled", true);
-					$("#super_primerapellido_admin_modal").prop("disabled", true);
-					$("#super_segundoapellido_admin_modal").prop("disabled", true);
-					$("#super_numerocedula_admin_modal").prop("disabled", true);
-					$("#super_contrasena_admin_modal").prop("disabled", true);
-					$("#super_correo_electronico_admin_modal").prop("disabled", true);
-				} else {
-					$("#super_status_adm").css("background-color", "#c61f1b");
-					$("#super_status_adm").html("Estado: No conectado");
-					$("#super_id_admin_modal").prop("disabled", false);
-					$("#super_eliminar_admin").prop("disabled", false);
-					$("#super_actualizar_admin").prop("disabled", false);
-					$("#super_primernombre_admin_modal").prop("disabled", false);
-					$("#super_segundonombre_admin_modal").prop("disabled", false);
-					$("#super_primerapellido_admin_modal").prop("disabled", false);
-					$("#super_segundoapellido_admin_modal").prop("disabled", false);
-					$("#super_numerocedula_admin_modal").prop("disabled", false);
-					$("#super_nombre_admin_modal").prop("disabled", false);
-					$("#super_contrasena_admin_modal").prop("disabled", false);
-					$("#super_correo_electronico_admin_modal").prop("disabled", false);
-				}
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
-
-	$("#super_eliminar_admin").click(function () {
-		$lbl_adm = $("#verAdmin>label").attr("id");
-		$id_adm = $("#" + $lbl_adm).html();
-
-		data = {
-			id_adm: $id_adm,
-		};
-		$.ajax({
-			url: baseURL + "super/eliminarAdministrador",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			success: function (response) {
-				notificacion(response.msg, "success");
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
-
-	$("#super_actualizar_admin").click(function () {
-		console.log("asdsad");
-		$lbl_adm = $("#verAdmin>label").attr("id");
-		$id_adm = $("#" + $lbl_adm).html();
-		$primerNombre = $("#super_primernombre_admin_modal").val();
-		$segundoNombre = $("#super_segundonombre_admin_modal").val();
-		$primerApellido = $("#super_primerapellido_admin_modal").val();
-		$segundoApellido = $("#super_segundoapellido_admin_modal").val();
-		$correo_electronico = $("#super_correo_electronico_admin_modal").val();
-		$nombre = $("#super_nombre_admin_modal").val();
-		$cedula = $("#super_numerocedula_admin_modal").val();
-		$contrasena = $("#super_contrasena_admin_modal").val();
-		$super_acceso_nvl = $("#super_acceso_nvl_modal").val();
-
-		data = {
-			id_adm: $id_adm,
-			primerNombre: $primerNombre,
-			segundoNombre: $segundoNombre,
-			primerApellido: $primerApellido,
-			segundoApellido: $segundoApellido,
-			nombre: $nombre,
-			cedula: $cedula,
-			contrasena: $contrasena,
-			correo_electronico: $correo_electronico,
-			super_acceso_nvl: $super_acceso_nvl,
-		};
-
-		$.ajax({
-			url: baseURL + "super/actualizarAdministrador",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			success: function (response) {
-				notificacion(response.msg, "success");
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
 
 	$("#guardar_curso_informe").click(function () {
 		$informe_asistentes = $("#informe_asistentes").val();
@@ -7365,28 +6940,6 @@ $(document).ready(function () {
 			},
 		});
 	})();
-
-	$(".hide-sidevar").click(function () {
-		if ($(".side_main_menu").css("display") == "none") {
-			$(".side_main_menu").css("display", "block");
-			$(".formularios").removeClass("col-md-12");
-			$(".formularios").addClass("col-md-9");
-			$(".hide-sidevar > .fa").removeClass("fa-arrows-alt");
-			$(".hide-sidevar > .fa").addClass("fa-window-close-o");
-			//$(".hide-sidevar > v").html("Ver menú");
-			$(".hide-sidevar > v").html("Ocultar menú");
-			$(".side_main_menu").addClass("bounceInLeft animated");
-		} else {
-			$(".side_main_menu").css("display", "none");
-			$(".formularios").removeClass("col-md-9");
-			$(".formularios").addClass("col-md-12");
-			$(".hide-sidevar > .fa").removeClass("fa-window-close-o");
-			$(".hide-sidevar > .fa").addClass("fa-arrows-alt");
-			//$(".hide-sidevar > v").html("Ocultar menú");
-			$(".hide-sidevar > v").html("Ver menú");
-			$(".side_main_menu").addClass("bounceInLeft animated");
-		}
-	});
 
 	$(".eliminarDataTabla").click(function () {
 		$(this).parent().parent().hide();
