@@ -10,11 +10,11 @@ class DatosEnLineaModel extends CI_Model
 	{
 		if ($id === FALSE) {
 			// Consulta para traer organizaciones
-			$query = $this->db->select("*")->from("datosenlinea")->get();
+			$query = $this->db->select("*")->from("datosEnLinea")->get();
 			return $query->result();
 		}
 		// Traer organizaciones por ID
-		$query = $this->db->get_where('datosenlinea', array('idSolicitud' => $id));
+		$query = $this->db->get_where('datosEnLinea', array('idSolicitud' => $id));
 		return $query->row();
 	}
 }

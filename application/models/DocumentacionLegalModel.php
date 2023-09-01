@@ -10,7 +10,7 @@ class DocumentacionLegalModel extends CI_Model
 	{
 		if ($id === FALSE) {
 			// Consulta para traer organizaciones
-			$query = $this->db->select("*")->from("documentacionlegal")->get();
+			$query = $this->db->select("*")->from("documentacion")->get();
 			return $query->result();
 		}
 		// Traer organizaciones por ID

@@ -10,11 +10,11 @@ class JornadasActualizacionModel extends CI_Model
 	{
 		if ($id === FALSE) {
 			// Consulta para traer organizaciones
-			$query = $this->db->select("*")->from("jornadasactualizacion")->get();
+			$query = $this->db->select("*")->from("jornadasActualizacion")->get();
 			return $query->result();
 		}
 		// Traer organizaciones por ID
-		$query = $this->db->get_where('jornadasactualizacion', array('idSolicitud' => $id));
+		$query = $this->db->get_where('jornadasActualizacion', array('idSolicitud' => $id));
 		return $query->row();
 	}
 }

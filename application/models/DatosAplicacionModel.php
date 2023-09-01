@@ -10,11 +10,11 @@ class DatosAplicacionModel extends CI_Model
 	{
 		if ($id === FALSE) {
 			// Consulta para traer organizaciones
-			$query = $this->db->select("*")->from("datosaplicacion")->get();
+			$query = $this->db->select("*")->from("datosAplicacion")->get();
 			return $query->result();
 		}
 		// Traer organizaciones por ID
-		$query = $this->db->get_where('datosaplicacion', array('idSolicitud' => $id));
+		$query = $this->db->get_where('datosAplicacion', array('idSolicitud' => $id));
 		return $query->row();
 	}
 }

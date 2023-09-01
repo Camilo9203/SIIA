@@ -10,11 +10,11 @@ class InformacionGeneralModel extends CI_Model
 	{
 		if ($id === FALSE) {
 			// Consulta para traer organizaciones
-			$query = $this->db->select("*")->from("informaciongeneral")->get();
+			$query = $this->db->select("*")->from("informacionGeneral")->get();
 			return $query->result();
 		}
 		// Traer organizaciones por ID
-		$query = $this->db->get_where('informaciongeneral', array('organizaciones_id_organizacion' => $id));
+		$query = $this->db->get_where('informacionGeneral', array('organizaciones_id_organizacion' => $id));
 		return $query->row();
 	}
 }
