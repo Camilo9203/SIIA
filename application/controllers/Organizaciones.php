@@ -6,7 +6,6 @@ class Organizaciones extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		verify_session_admin();
 		$this->load->model('SolicitudesModel');
 		$this->load->model('DepartamentosModel');
 		$this->load->model('AdministradoresModel');

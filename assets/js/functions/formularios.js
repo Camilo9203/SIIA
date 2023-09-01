@@ -9,6 +9,26 @@ $(document).ready(function () {
 		cargarArchivos()
 	}
 });
+// Botón para ocultar y mostrar menu
+$(".hide-sidevar").click(function () {
+	if ($(".side_main_menu").css("display") == "none") {
+		$(".side_main_menu").css("display", "block");
+		$(".formularios").removeClass("col-md-12");
+		$(".formularios").addClass("col-md-9");
+		$(".hide-sidevar > .fa").removeClass("fa-arrows-alt");
+		$(".hide-sidevar > .fa").addClass("fa-window-close-o");
+		$(".hide-sidevar > v").html("Ocultar menú");
+		$(".side_main_menu").addClass("bounceInLeft animated");
+	} else {
+		$(".side_main_menu").css("display", "none");
+		$(".formularios").removeClass("col-md-9");
+		$(".formularios").addClass("col-md-12");
+		$(".hide-sidevar > .fa").removeClass("fa-window-close-o");
+		$(".hide-sidevar > .fa").addClass("fa-arrows-alt");
+		$(".hide-sidevar > v").html("Ver menú");
+		$(".side_main_menu").addClass("bounceInLeft animated");
+	}
+});
 //TODO: Eventos del menu
 $("#sidebar-menu>.menu_section>#wizard_verticle>.side-menu>li>a").click(
 	function () {
@@ -16,13 +36,13 @@ $("#sidebar-menu>.menu_section>#wizard_verticle>.side-menu>li>a").click(
 		$("#panel_inicial").hide();
 		$("#estado_solicitud").hide();
 		$(".archivos").toggle();
-		var $id_form = $(this).attr("data-form");
-		var $step = $("#sidebar-menu>.menu_section>#wizard_verticle>.side-menu>li>a>span#" + $id_form);
-		$step.addClass("menu-sel");
-		$step.removeClass("keyStep");
+		let id_form = $(this).attr("data-form");
+		let step = $("#sidebar-menu>.menu_section>#wizard_verticle>.side-menu>li>a>span#" + id_form);
+		step.addClass("menu-sel");
+		step.removeClass("keyStep");
 		$("#idDataForm").remove();
-		$("body").append("<div id='idDataForm' class='hidden' data-form='" + $id_form + "'>");
-		switch ($id_form) {
+		$("body").append("<div id='idDataForm' class='hidden' data-form='" + id_form + "'>");
+		switch (id_form) {
 			case "1":
 				$("#informacion_general_entidad").show();
 				break;
@@ -30,30 +50,21 @@ $("#sidebar-menu>.menu_section>#wizard_verticle>.side-menu>li>a").click(
 				$("#documentacion_legal").show();
 				break;
 			case "3":
-				$("#registros_educativos_de_programas").show();
-				break;
-			case "4":
 				$("#antecedentes_academicos").show();
 				break;
-			case "5":
+			case "4":
 				$("#jornadas_de_actualizacion").show();
 				break;
-			case "6":
+			case "5":
 				$("#programa_basico_de_economia_solidaria").show();
 				break;
-			case "7":
-				$("#programas_aval_de_economia_solidaria_con_enfasis_en_trabajo_asociado").show();
-				break;
-			case "8":
-				$("#programas").show();
-				break;
-			case "9":
+			case "6":
 				$("#docentes").show();
 				break;
-			case "10":
+			case "7":
 				$("#datos_plataforma").show();
 				break;
-			case "11":
+			case "8":
 				$("#datos_en_linea").show();
 				break;
 			case "0":
@@ -65,32 +76,6 @@ $("#sidebar-menu>.menu_section>#wizard_verticle>.side-menu>li>a").click(
 		cargarArchivos();
 	}
 );
-$("#sidebar-menu>.menu_section>a").click(function () {
-	var $id_form = $(this).attr("data-form");
-	switch ($id_form) {
-		case "inicio":
-			$("#estado_solicitud").show();
-			$("#estado_solicitud").addClass("shake animated");
-			$("#informacion_general_entidad").hide();
-			$("#documentacion_legal").hide();
-			$("#registros_educativos_de_programas").hide();
-			$("#antecedentes_academicos").hide();
-			$("#jornadas_de_actualizacion").hide();
-			$("#programa_basico_de_economia_solidaria").hide();
-			$("#programas_aval_de_economia_solidaria_con_enfasis_en_trabajo_asociado").hide();
-			$("#programas").hide();
-			$("#docentes").hide();
-			$("#datos_plataforma").hide();
-			$("#finalizar_proceso").hide();
-			$(".archivos").toggle();
-			break;
-	}
-	/*		for (var i = 0;  i <= numero_formularios; i++) {
-				var $step = $("#sidebar-menu>.menu_section>#wizard_verticle>.side-menu>li>a>span#"+i);
-				$step.removeClass("menu-sel");
-			}*/
-	verificarFormularios();
-});
 /** Aceptar crear solicitud */
 $("#noAceptoCrear").click(function () {
 	$("#ayudaCrearSolicitud").modal("hide");
@@ -164,10 +149,16 @@ $("#guardar_formulario_tipoSolicitud").click(function () {
 		});
 		// Comprobar que si se seleccione algún motivo y/o modalidad
 		if (seleccionMotivo == '') {
-			notificacion("Seleccione al menos un motivo");
+			Toast.fire({
+				icon: 'error',
+				title: 'Seleccione al menos un motivo'
+			});
 		}
 		else if (seleccionModalidad == 0){
-			notificacion("Seleccione al menos una modalidad");
+			Toast.fire({
+				icon: 'error',
+				title: 'Seleccione al menos una modalidad'
+			});
 		}
 		else {
 			//Si la data es validada se envía al controlador para guardar con ajax
@@ -178,13 +169,25 @@ $("#guardar_formulario_tipoSolicitud").click(function () {
 				dataType: "JSON",
 				data: data,
 				beforeSend: function () {
-					notificacion("Espere...", "success");
+					Toast.fire({
+						icon: 'info',
+						title: 'Guardando Información'
+					});
 				},
 				success: function (response) {
-					notificacion(response.msg, "success");
-					setInterval(function () {
-						redirect(baseURL + "panel/solicitud/" + response.est);
-					}, 2000);
+					Alert.fire({
+						title: 'Solicitud Creada!',
+                        html: response.msg,
+						text: response.msg,
+						icon: 'success',
+						confirmButtonText: 'Aceptar',
+					}).then((result) => {
+						if (result.isConfirmed) {
+							setInterval(function () {
+								redirect(baseURL + "solicitudes/solicitud/" + response.est);
+							}, 2000);
+						}
+					})
 				},
 				error: function (ev) {
 					//Do nothing
@@ -221,7 +224,7 @@ $("#siModEnLinea").click(function () {
 	$("#enLinea").prop("checked", true);
 	$("#ayudaModalidadEnLinea").modal("hide");
 });
-/** Formulario 1: Formularios Información general */
+/** Formulario 1: formularios información general */
 // Guardar formulario 1
 $("#guardar_formulario_informacion_general_entidad").click(function () {
 	validFroms(1);
@@ -1085,9 +1088,12 @@ $(".eliminarDatosEnlinea").click(function () {
 		},
 	});
 });
-/** Finalizar Solicitud  */
+/**
+ * Finalizar Solicitud
+ *
+ */
 $("#finalizar_si").click(function () {
-	//$(this).attr("disabled", true);
+	$(this).attr("disabled", true);
 	let idSolicitud =  $(this).attr('data-id');
 	let	data = {
 		idSolicitud: idSolicitud,
@@ -1098,9 +1104,13 @@ $("#finalizar_si").click(function () {
 		dataType: "JSON",
 		data: data,
 		success: function (response) {
-			notificacion(response.msg, "success");
+			Toast.fire({
+				icon: 'alert',
+				title: response.msg
+			});
 			if (response.estado == "0") {
 				$(this).attr("disabled", false);
+				$("#sidebar-menu>.menu_section>a").attr('data-id', idSolicitud);
 				$("#sidebar-menu>.menu_section>a").click();
 			} else {
 				redirect(baseURL + "panel/estadoSolicitud/" + idSolicitud);
@@ -1111,7 +1121,29 @@ $("#finalizar_si").click(function () {
 		},
 	});
 });
-/** Validaciones formularios */
+// Si no se validad todos los formularios
+$("#sidebar-menu>.menu_section>a").click(function () {
+	switch ($(this).attr("data-form")) {
+		case "inicio":
+			$("#estado_solicitud").show();
+			$("#estado_solicitud").addClass("shake animated");
+			$("#informacion_general_entidad").hide();
+			$("#documentacion_legal").hide();
+			$("#antecedentes_academicos").hide();
+			$("#jornadas_de_actualizacion").hide();
+			$("#programa_basico_de_economia_solidaria").hide();
+			$("#docentes").hide();
+			$("#datos_plataforma").hide();
+			$("#datos_en_linea").hide();
+			$("#finalizar_proceso").hide();
+			$(".archivos").toggle();
+			break;
+	}
+	verificarFormularios($(this).attr("data-id"));
+});
+/**
+ * Validaciones formularios
+ * */
 function validFroms (form){
 	switch (form) {
 		case 1:
@@ -1442,26 +1474,12 @@ function verificarFormularios(solicitud) {
 		'solicitud': solicitud
 	};
 	$.ajax({
-		url: baseURL + "panel/cargarEstadoSolicitud",
+		url: baseURL + "solicitudes/cargarEstadoSolicitud",
 		data: data,
 		type: "post",
 		dataType: "JSON",
 		success: function (response) {
-			console.log(response);
-			notificacion(response.msg, "success");
-			$("#estadoOrgBD").html(response.estado);
-			if (response.estado == "En Proceso de Actualización" || response.motivo == "Actualizar Datos") {
-				$("#act_datos_sol_org").remove();
-				$("#at_txt_act_datos").remove();
-				//$("#el_sol").show();
-				$("#estado_solicitud").append('<h3 id="at_txt_act_datos"><span>ATENCIÓN: Cuando termine de actualizar los datos elimine la solicitud dando clic en "Cambiar el tipo de solicitud actual" para volver a su estado anterior de "Acreditado".<span></h3>');
-			}
-			$("#numeroSolicitudesBD").html(response.numero);
-			$("#tipoSolicitudesBB").html(response.tipo);
-			$("#motivoSolicitudesBB").html(response.motivo);
-			$("#modalidadSolicitudesBB").html(response.modalidad);
-			$("#estadoAnteriorBB").html(response.estadoAnterior);
-			console.log(response.formularios);
+			console.log(response)
 			for (let i = 0; i < response.formularios.length; i++) {
 				let step_sel = response.formularios[i].split(".");
 				if (i != step_sel[0]) {
@@ -1470,6 +1488,17 @@ function verificarFormularios(solicitud) {
 				}
 				$("#formulariosFaltantes").append("<p>" + response.formularios[i] + "</p>");
 			}
+			Alert.fire({
+				html: response.msg + $("#formulariosFaltantes").html(),
+				title: 'Verifique su solicitud!',
+				text: response.msg + $("#formulariosFaltantes").html(),
+				icon: response.icon,
+				allowOutsideClick: false,
+				customClass: {
+					popup: 'popup-swalert-lg',
+					confirmButton: 'button-swalert',
+				},
+			})
 			$("li.step-no>a>span.step_no.menu-sel").parent().css("background", "#008000");
 			$("li.step-no>a>span.step_no.menu-sel").parent().css("color", "white");
 			$("li.step-no>a>span.step_no.menu-sel").parent().css("border-radius", "10px");
@@ -1484,18 +1513,16 @@ function verificarFormularios(solicitud) {
 				$("#finalizar_si").removeAttr("disabled");
 				$("li.step-no>a>span.step_no.NOmenu-sel").addClass("keyStep");
 			}
-			//$("li.step-no>a>span.step_no.menu-sel").remove();
-			//$("li.step-no>a>span.step_no.menu-sel").css("background-color", "#07385d !important");
 			/** Formularios virtual y en linea */
 			//Comprobación modalidad y mostrar los formularios correspondientes
-			if(response.modalidad == "Presencial, Virtual, En Linea" || response.modalidad == "Virtual, En Linea") {
+			if(response.solicitud.modalidadSolicitud === "Presencial, Virtual, En Linea" || response.solicitud.modalidadSolicitud === "Virtual, En Linea") {
 				$("#itemPlataforma").show();
 				$("#itemEnLinea").show();
 			}
-			if (response.modalidad == "Presencial, Virtual" || response.modalidad == "Virtual" ){
+			if (response.solicitud.modalidadSolicitud === "Presencial, Virtual" || response.solicitud.modalidadSolicitud === "Virtual" ){
 				$("#itemPlataforma").show();
 			}
-			if (response.modalidad == "Presencial, En Linea" || response.modalidad == "En Linea") {
+			if (response.solicitud.modalidadSolicitud === "Presencial, En Linea" || response.solicitud.modalidadSolicitud === "En Linea") {
 				$("#itemEnLinea").show();
 			}
 			/** Formulario 6 */

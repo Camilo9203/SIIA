@@ -49,7 +49,6 @@ class Panel extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function estadoSolicitud($idSolicitud)
 	{
 		date_default_timezone_set("America/Bogota");
@@ -80,7 +79,6 @@ class Panel extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function informeActividades()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -110,7 +108,6 @@ class Panel extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function docentes()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -137,7 +134,6 @@ class Panel extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	public function planMejora()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -165,9 +161,6 @@ class Panel extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-	/**
-		Cargar datos
-	 **/
 	public function cargarCamaraComercio()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -177,20 +170,17 @@ class Panel extends CI_Controller
 		$resolucion = $this->db->select("*")->from("organizaciones")->where("id_organizacion", $id_organizacion)->get()->row();
 		return $resolucion;
 	}
-
 	public function cargarDatosOrganizacion()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
 		return $datos_organizacion;
 	}
-
 	public function cargarTodasOrganizaciones()
 	{
 		$organizaciones = $this->db->select("*")->from("organizaciones")->get()->result();
 		return $organizaciones;
 	}
-
 	public function cargarVisitas()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -200,7 +190,6 @@ class Panel extends CI_Controller
 		$visitas = $this->db->select("*")->from("visitas")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		return $visitas;
 	}
-
 	public function cargarSeguimientos()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -210,7 +199,6 @@ class Panel extends CI_Controller
 		$seguimientos = $this->db->select("*")->from("seguimientoSimple")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		return $seguimientos;
 	}
-
 	public function cargarPlanesMejoramiento()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -228,18 +216,11 @@ class Panel extends CI_Controller
 		$datos_formulario = $this->db->select("*")->from("informacionGeneral")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
 		return $datos_formulario;
 	}
-	public function cargarDatos_programas($idSolicitud)
-	{
-		$data = $this->db->select("*")->from("datosProgramas")->where("idSolicitud", $idSolicitud)->get()->result();
-		return $data;
-	}
-
 	public function cargarDepartamentos()
 	{
 		$departamentos = $this->db->select("*")->from("departamentos")->get()->result();
 		return $departamentos;
 	}
-
 	public function cargarMunicipios()
 	{
 		$departamento = $this->input->post('departamento');
@@ -249,7 +230,6 @@ class Panel extends CI_Controller
 		$municipios = $this->db->select("*")->from("municipios")->where('departamentos_id_departamento', $id_departamento)->get()->result();
 		echo json_encode($municipios);
 	}
-
 	public function eliminarRegistroPrograma()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -334,7 +314,6 @@ class Panel extends CI_Controller
 			echo json_encode(array('url' => "", 'msg' => "Se elimino el antecedente."));
 		}
 	}
-
 	public function eliminarJornadaActualizacion()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -348,7 +327,6 @@ class Panel extends CI_Controller
 			echo json_encode(array('url' => "", 'msg' => "Se elimino la jornada de actualización."));
 		}
 	}
-
 	public function eliminarProgramasBasicos()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -362,7 +340,6 @@ class Panel extends CI_Controller
 			echo json_encode(array('url' => "", 'msg' => "Se elimino el programa básico."));
 		}
 	}
-
 	public function eliminarProgramasAvalEconomia()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -376,7 +353,6 @@ class Panel extends CI_Controller
 			echo json_encode(array('url' => "", 'msg' => "Se elimino el programa aval de economía."));
 		}
 	}
-
 	public function eliminarProgramasAvalar()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -390,7 +366,6 @@ class Panel extends CI_Controller
 			echo json_encode(array('url' => "", 'msg' => "Se elimino el programa a avalar."));
 		}
 	}
-
 	public function eliminarDatosPlataforma()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -442,7 +417,6 @@ class Panel extends CI_Controller
 		//$observacionesDocentes = $this->db->select("*")->from("observaciones")->where("organizaciones_id_organizacion", $idOrg)->where("")->order_by("valueForm", "asc")->get()->result();
 		return $observacionesDocentes;
 	}
-
 	public function cargarObservacionesPlataforma()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -452,7 +426,6 @@ class Panel extends CI_Controller
 		$archivos = $this->db->select("*")->from("archivos")->where("organizaciones_id_organizacion", $id_organizacion)->where("tipo", "observacionesPlataformaVirtual")->where("id_formulario", 10)->get()->result();
 		return $archivos;
 	}
-
 	public function idSolicitud()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -463,7 +436,6 @@ class Panel extends CI_Controller
 		$id_Solicitud = $idSolicitud->idSolicitud;
 		return $id_Solicitud;
 	}
-
 	public function cargarDocentesInforme()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -473,7 +445,6 @@ class Panel extends CI_Controller
 		$docentes = $this->db->select("*")->from("docentes")->where("organizaciones_id_organizacion", $id_organizacion)->where("valido", 1)->get()->result();
 		return $docentes;
 	}
-
 	public function cargarInformacionDocente()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -484,7 +455,6 @@ class Panel extends CI_Controller
 		$informacionDocente = $this->db->select("*")->from("docentes")->where("id_docente", $id_docente)->get()->row();
 		echo json_encode($informacionDocente);
 	}
-
 	public function cargarDatosArchivos()
 	{
 		$id_form = $this->input->post('id_form');
@@ -497,7 +467,6 @@ class Panel extends CI_Controller
 		$data_archivos = $this->db->select("*")->from("archivos")->where($where)->where("tipo !=", "observacionesPlataformaVirtual", FLASE)->get()->result();
 		echo json_encode($data_archivos);
 	}
-
 	public function cargarDatosArchivosDocente()
 	{
 		$id_docente = $this->input->post('id_docente');
@@ -505,13 +474,11 @@ class Panel extends CI_Controller
 		$data_archivos = $this->db->select("*")->from("archivosDocente")->where('docentes_id_docente', $id_docente)->get()->result();
 		echo json_encode($data_archivos);
 	}
-
 	public function cargarDatosArchivosDocentes($id)
 	{
 		$data_archivos = $this->db->select("*")->from("archivosDocente")->where('docentes_id_docente', $id)->get()->result();
 		return $data_archivos;
 	}
-
 	public function cargar_docentes()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -521,7 +488,6 @@ class Panel extends CI_Controller
 		$docentes = $this->db->select("*")->from("docentes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		return $docentes;
 	}
-
 	public function cargarEstadoSolicitudAdmin($idSolicitud)
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -541,49 +507,6 @@ class Panel extends CI_Controller
 		return array("numero" => $solicitudes, "estado" => $estadoOrganizaciones, "tipoSolicitud" => $tipoSolicitud, "modalidadSolicitud" => $modalidadSolicitud, "motivoSolicitud" => $motivoSolicitud, "numeroRevisiones" => $numeroRevisiones, "fechaUltimaRevision" => $fechaUltimaRevision, 'estadoAnterior' => $estadoAnterior);
 	}
 
-	public function cargarEstadoSolicitud()
-	{
-
-		$idSolicitud = $this->input->post('solicitud');
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-		$formularios = $this->verificarFormularios($idSolicitud);
-		$numeroSolicitudes = $this->numeroSolicitudes();
-		$estadoOrganizaciones = $this->estadoOrganizaciones($idSolicitud);
-		//$estadoAnterior = $this->estadoAnteriorOrganizaciones();
-		$tipoSolicitud = $this->cargarTipoSolicitud($idSolicitud);
-		$motivoSolicitud = $this->cargarMotivoSolicitud($idSolicitud);
-		$motivosSolicitud = $this->cargarMotivosSolicitud($idSolicitud);
-		$modalidadSolicitud = $this->cargarModalidadSolicitud($idSolicitud);
-		$programas = $this->cargarDatos_programas($idSolicitud);
-
-		switch ($estadoOrganizaciones) {
-			case "En Proceso":
-				if ($tipoSolicitud != NULL || $tipoSolicitud != "Eliminar" && $estadoOrganizaciones == "En Proceso") {
-					echo json_encode(array('url' => "panel", 'msg' => "Continue diligenciando los formularios, Solicitud número: " . $numeroSolicitudes, 'tipo' => $tipoSolicitud, "numero" => $numeroSolicitudes, 'motivo' => $motivoSolicitud, 'motivos' =>$motivosSolicitud, 'modalidad' => $modalidadSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior, 'programas' => $programas));
-				}
-				break;
-			case "En Proceso de Renovación":
-				if ($estadoOrganizaciones == "En Proceso de Renovación") {
-					echo json_encode(array('url' => "panel", 'msg' => "Continue diligenciando los formularios, solicitud número: " . $numeroSolicitudes, 'tipo' => $tipoSolicitud, "numero" => $numeroSolicitudes, 'motivo' => $motivoSolicitud, 'motivos' =>$motivosSolicitud, 'modalidad' => $modalidadSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior, 'programas' => $programas));
-				}
-				break;
-			case "En Proceso de Actualización":
-				if ($numeroSolicitudes != "0" || $numeroSolicitudes != 0 && $estadoOrganizaciones == "En Proceso de Actualización") {
-					echo json_encode(array('url' => "panel", 'msg' => "Continue diligenciando los formularios, solicitud número: " . $numeroSolicitudes, 'tipo' => $tipoSolicitud, "numero" => $numeroSolicitudes, 'motivo' => $motivoSolicitud, 'motivos' =>$motivosSolicitud, 'modalidad' => $modalidadSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior, 'programas' => $programas));
-				}
-				break;
-			case "En Observaciones":
-				echo json_encode(array('url' => "panel", 'msg' => "Verifique el estado de la acreditación y las observaciones en el panel.", 'tipo' => $tipoSolicitud, "numero" => $numeroSolicitudes, 'motivo' => $motivoSolicitud, 'motivos' =>$motivosSolicitud, 'modalidad' => $modalidadSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior, 'programas' => $programas));
-				break;
-			default:
-				echo json_encode(array('url' => "panel", 'msg' => "Verifique el estado de la acreditacion en el panel.", 'estado' => $numeroSolicitudes, 'tipo' => $tipoSolicitud, 'motivo' => $motivoSolicitud, 'motivos' =>$motivosSolicitud, 'modalidad' => $modalidadSolicitud, 'formularios' => $formularios, 'estado' => $estadoOrganizaciones, 'estadoAnterior' => $estadoAnterior, 'programas' => $programas));
-				break;
-		}
-		// Para contar el array de formularios si se necesita (count($formularios) == 0)
-	}
-
 	public function numeroSolicitudes()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -591,14 +514,12 @@ class Panel extends CI_Controller
 		$solicitudes = $this->db->select("*")->from("solicitudes")->where("organizaciones_id_organizacion", $organizacion->id_organizacion)->get()->result();
 		return count($solicitudes);
 	}
-
 	public function numeroRevisiones($idSolicitud)
 	{
 		$revisiones = $this->db->select("numeroRevisiones")->from("solicitudes")->where("idSolicitud", $idSolicitud)->get()->row();
 		$numeroRevisiones = $revisiones->numeroRevisiones;
 		return $numeroRevisiones;
 	}
-
 	public function fechaUltimaRevision($idSolicitud)
 	{
 		$fecha = $this->db->select("fechaUltimaRevision")->from("solicitudes")->where("idSolicitud", $idSolicitud)->get()->row();
@@ -619,7 +540,6 @@ class Panel extends CI_Controller
 		$solicitud = $this->db->select("*")->from("solicitudes")->join('tipoSolicitud', "tipoSolicitud.idSolicitud = solicitudes.idSolicitud")->join('estadoOrganizaciones', "estadoOrganizaciones.idSolicitud = solicitudes.idSolicitud")->where("solicitudes.idSolicitud", $idSolicitud)->get()->row();
 		return $solicitud;
 	}
-
 	// Cargar tipo solicitud
 	public function cargarTipoSolicitud($idSolicitud)
 	{
@@ -635,12 +555,7 @@ class Panel extends CI_Controller
 		return $motivoSolicitudBD;
 	}
 	// Cargar motivos solicitud
-	public function cargarMotivosSolicitud($idSolicitud)
-	{
-		$motivosSolicitud = $this->db->select("motivosSolicitud")->from("tipoSolicitud")->where("idSolicitud", $idSolicitud)->get()->row();
-		$motivosSolicitudBD = $motivosSolicitud->motivosSolicitud;
-		return json_decode($motivosSolicitudBD);
-	}
+
 	// Cargar modalidad solicitud
 	public function cargarModalidadSolicitud($idSolicitud)
 	{
@@ -690,7 +605,6 @@ class Panel extends CI_Controller
 				break;
 		}*/
 	}
-
 	public function verificarFormularios($idSolicitud)
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -944,7 +858,7 @@ class Panel extends CI_Controller
 			if($this->db->insert('solicitudes', $data_solicitud)) {
 				if($this->db->insert('tipoSolicitud', $data_tipoSolicitud)) {
 					if($this->db->insert('estadoOrganizaciones', $data_estado)) {
-						echo json_encode(array('url' => "panel", 'msg' => "Se creo nueva solicitud.", "est" => $data_tipoSolicitud['idSolicitud']));
+						echo json_encode(array('url' => "panel", 'msg' => "Se créo nueva solicitud: <strong>" . $idSolicitud . "</strong> Será redireccionado a la página para diligenciar los formularios de esta solicitud.", "est" => $data_tipoSolicitud['idSolicitud']));
 						$this->envio_mailcontacto("inicia", 2);
 						$this->logs_sia->session_log('Formulario Motivo Solicitud - Tipo Solicitud: ' . '. Motivo Solicitud: ' . $this->input->post('motivo_solicitud') . '. Modalidad Solicitud: ' . $this->input->post('modalidad_solicitud') . '. ID: ' . $data_tipoSolicitud['idSolicitud'] . '. Fecha: ' . date('Y/m/d') . '.');
 						$this->logs_sia->logQueries();
@@ -1035,7 +949,6 @@ class Panel extends CI_Controller
 			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "18", 'estado' => "1"));
 		}
 	}
-
 	// Formulario 2
 	public function guardar_formulario_documentacion_legal()
 	{
@@ -1642,7 +1555,6 @@ class Panel extends CI_Controller
 		}
 		return $datos;
 	}
-
 	public function darRespuestaSeguimiento()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -1661,7 +1573,6 @@ class Panel extends CI_Controller
 			echo json_encode(array('url' => "panel", 'msg' => "Se respondio al seguimiento."));
 		}
 	}
-
 	public function verFirmaRepLegal()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -1678,7 +1589,6 @@ class Panel extends CI_Controller
 			echo json_encode(array("estado" => "0"));
 		}
 	}
-
 	//TODO: Finalizar proceso
 	public function finalizarProceso()
 	{
@@ -1706,7 +1616,6 @@ class Panel extends CI_Controller
 			echo json_encode(array('url' => "panel", 'msg' => "Verifique los formularios.", 'estado' => "0"));
 		}
 	}
-
 	public function eliminarArchivo()
 	{
 		$id_formulario = $this->input->post('id_formulario');
@@ -1750,7 +1659,6 @@ class Panel extends CI_Controller
 			echo json_encode(array('url' => "", 'msg' => "Se elimino el archivo."));
 		}
 	}
-
 	public function guardarArchivoCarta()
 	{
 		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
@@ -1902,7 +1810,6 @@ class Panel extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-
 	public function guardarArchivoJornada()
 	{
 		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
@@ -1955,7 +1862,6 @@ class Panel extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-
 	public function guardarArchivoMaterialProgBasic()
 	{
 		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
@@ -2008,7 +1914,6 @@ class Panel extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-
 	public function guardarArchivoMaterialAvalEco()
 	{
 		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
@@ -2061,7 +1966,6 @@ class Panel extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-
 	public function guardarArchivoFormatosEvalProgAval()
 	{
 		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
@@ -2114,7 +2018,6 @@ class Panel extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-
 	public function guardarArchivoMaterialDicProgAvalar()
 	{
 		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
@@ -2167,7 +2070,6 @@ class Panel extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-
 	public function guardarArchivos()
 	{
 		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
@@ -2243,7 +2145,6 @@ class Panel extends CI_Controller
 		}
 		echo json_encode(array('url' => "", 'msg' => "Error intente de nuevo, nombres diferentes de los archivos."));
 	}
-
 	private function checkExtensionImagenes($extension)
 	{
 		//aqui podemos añadir las extensiones que deseemos permitir
@@ -2254,7 +2155,6 @@ class Panel extends CI_Controller
 			return FALSE;
 		}
 	}
-
 	private function checkExtensionPDF($extension)
 	{
 		//aqui podemos añadir las extensiones que deseemos permitir
@@ -2265,7 +2165,6 @@ class Panel extends CI_Controller
 			return FALSE;
 		}
 	}
-
 	public function excelAsistentes()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -2397,7 +2296,6 @@ class Panel extends CI_Controller
 			}
 		}
 	}
-
 	public function archivoAsistencia()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -2436,7 +2334,6 @@ class Panel extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-
 	public function cargarObservacionesUsuario()
 	{
 		$id_organizacion = $this->input->post('id_organizacion');
@@ -2444,7 +2341,6 @@ class Panel extends CI_Controller
 		$observaciones = $this->db->select("*")->from("observaciones")->where("organizaciones_id_organizacion", $id_organizacion)->order_by("numeroRevision", "desc")->get()->result();
 		echo json_encode(array("observaciones" => $observaciones));
 	}
-
 	public function cargar_informacionAsistente()
 	{
 		$id_asistente = $this->input->post('id_asistente');
@@ -2452,7 +2348,6 @@ class Panel extends CI_Controller
 		$informacion = $this->db->select("*")->from("asistentes")->where("id_asistentes", $id_asistente)->get()->row();
 		echo json_encode(array("informacion" => $informacion));
 	}
-
 	public function actualizarAsistente()
 	{
 		$id_asistente = $this->input->post('id_asistente');
@@ -2611,7 +2506,6 @@ class Panel extends CI_Controller
 			default:
 		}
 	}
-
 	// Eliminar Solicitud
 	public function eliminarSolicitud()
 	{
@@ -2628,7 +2522,8 @@ class Panel extends CI_Controller
 			'datosenlinea',
 			'datosaplicacion');
 		$this->db->delete($tables);
-		echo json_encode(array('url' => "panel", 'msg' => "Se elimino el solicitud."));
+		$msg = 'Se elimino la solicitud: <strong>' . $this->input->post('idSolicitud') . '<strong>';
+		echo json_encode(array('url' => "panel", 'msg' => $msg));
 	}
 }
 

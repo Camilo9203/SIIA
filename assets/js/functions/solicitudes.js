@@ -1,4 +1,7 @@
-/** Modal Asignar Evaluador Organización */
+/**
+ * Acciones administrador
+ */
+// Modal Asignar Evaluador Organización
 $(document).on("click", "#verModalAsignar", function () {
 	let id_organizacion = $(this).attr("data-organizacion");
 	let nombreOrganizacion = $(this).attr("data-nombre");
@@ -10,7 +13,7 @@ $(document).on("click", "#verModalAsignar", function () {
 	$("#nitAsigOrg").html(numNIT);
 	$("#idSolicitud").html(idSolicitud);
 });
-/** Asignar evaluador a solicitud */
+// Asignar evaluador a solicitud
 $("#asignarOrganizacionEvaluador").click(function () {
 
 	data = {

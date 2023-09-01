@@ -14,7 +14,7 @@ class DatosProgramasModel extends CI_Model
 			return $query->result();
 		}
 		// Traer organizaciones por ID
-		$query = $this->db->get_where('datosprogramas', array('idSolicitud' => $id));
-		return $query->row();
+		$query = $this->db->select('*')->from('datosprogramas')->where('idSolicitud', $id)->get();
+		return $query->result();
 	}
 }

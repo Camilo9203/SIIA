@@ -39,7 +39,7 @@ class Solicitudes extends CI_Controller
 		);
 		return $data;
 	}
-	// Cargar Solicitud
+	// Cargar solicitud
 	public function cargarDatosSolicitud(){
 		$solicitud = $this->SolicitudesModel->solicitudes($this->input->post('idSolicitud'));
 		echo json_encode(array('solicitud' => $solicitud));
@@ -51,171 +51,6 @@ class Solicitudes extends CI_Controller
 		$solicitud = $this->SolicitudesModel->getAllInformacionSolicitud($idSolicitud, $idOrganizacion);
 		echo $solicitud;
 	}
-	// Tipo solicitud
-	public function guardar_tipoSolicitud()
-	{
-		/* $this->form_validation->set_rules('tipo_solicitud','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('motivo_solicitud','','trim|required|min_length[3]|xss_clean'); */
-		if ($this->input->post()) {
-			$usuario_id = $this->session->userdata('usuario_id');
-			$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-			$id_organizacion = $organizacion->id_organizacion;
-			$nombre_org =  $organizacion->nombreOrganizacion;
-			$data_tipoSolicitud = array(
-				'tipoSolicitud' =>$this->input->post('tipo_solicitud'),
-				'motivoSolicitud' => $this->input->post('motivo_solicitud'),
-				'modalidadSolicitud' => $this->input->post('modalidad_solicitud'),
-				'idSolicitud' => date('YmdHis') . $nombre_org[3] . random(2),
-				'organizaciones_id_organizacion' => $organizacion->id_organizacion,
-				'motivosSolicitud' => json_encode($this->input->post('motivos_solicitud')),
-				'modalidadesSolicitud' => json_encode($this->input->post('modalidades_solicitud'))
-			);
-
-
-			$data_update_solicitud = array(
-				'numeroSolicitudes' => $numeroSolicitudes += 1,
-				'fecha' =>  date('Y/m/d H:i:s'),
-				'organizaciones_id_organizacion' => $id_organizacion
-			);
-			$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-			// TODO: Cambiar por insert
-			$this->db->update('solicitudes', $data_update_solicitud);
-			// TODO: Borrar inicio
-			if ($tipo_solicitud == "Acreditación Primera vez" && $motivo_solicitud != "Actualizar Datos") {
-				$nombre = "En Proceso";
-			}
-			else if ($tipo_solicitud == "Renovacion de Acreditación") {
-				$nombre = "En Proceso de Renovación";
-			}
-			else if ($tipo_solicitud == "Actualización de datos") {
-				$nombre = "En Proceso de Actualización";
-			}
-			else if ($motivo_solicitud == "Actualizar Datos") {
-				$nombre = "En Proceso de Actualización";
-			}
-			// TODO: Borrar fin
-			// TODO: Se cambio la variable $nombre por "En Proceso"
-			$data_estado = array(
-				'nombre' => "En Proceso",
-				'fecha' => date('Y/m/d H:i:s'),
-				'estadoAnterior' => $estado,
-				'organizaciones_id_organizacion' => $id_organizacion
-			);
-			$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-			// TODO: Cambiar por insert
-			$this->db->update('estadoOrganizaciones', $data_estado);
-			$datos_tipos = $this->db->select("*")->from("tipoSolicitud")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-			if ($datos_tipos == NULL) {
-				$this->db->insert('tipoSolicitud', $data_tipoSolicitud);
-				echo json_encode(array('url' => "panel", 'msg' => "Se guardo el tipo de solicitud.", "est" => $nombre));
-				$this->envio_mailcontacto("inicia", 2);
-				$this->logs_sia->session_log('Formulario Motivo Solicitud tipoSolicitud motivoSolicitud modalidadSolicitud: ' . $tipo_solicitud . ' con el ID: ' . $numeroSolicitud);
-				$this->logs_sia->logQueries();
-			}
-			else {
-				$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-				$this->db->update('tipoSolicitud', $data_tipoSolicitud);
-				echo json_encode(array('url' => "panel", 'msg' => "Se guardo el tipo de soliditud.", "est" => $nombre));
-				$this->envio_mailcontacto("inicia", 2);
-				$this->logs_sia->session_log('Formulario Motivo Solicitud - Tipo Solicitud: ' . $tipo_solicitud . '. Motivo Solicitud: ' . $motivo_solicitud . '. Modalidad Solicitud: ' . $modalidad_solicitud . '. ID: ' . $numeroSolicitud . '. Fecha: ' . date('Y/m/d') . '.');
-				$this->logs_sia->logQueries();
-			}
-		}
-	}
-	// Verificar tipo solicitud
-	public function verificar_tipoSolicitud()
-	{
-		/*$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion ->id_organizacion;
-
-		$tipoSolicitudBD = $this->db->select("*")->from("tipoSolicitud")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$tipoSolicitud = $tipoSolicitudBD ->tipoSolicitud;
-
-		$motivoSolicitudBD = $this->db->select("*")->from("tipoSolicitud")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$motivoSolicitud = $motivoSolicitudBD ->motivoSolicitud;
-
-		$estadoBD = $this->db->select("*")->from("estadoOrganizaciones")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$estadoAnterior = $estadoBD ->estadoAnterior;
-		$estado = $estadoBD ->nombre;*/
-
-		$tipoSolicitud = $this->cargarTipoSolicitud();
-		$estado = $this->estadoOrganizaciones();
-		$estadoAnterior = $this->estadoAnteriorOrganizaciones();
-
-		if ($estado == "En Proceso" && ($estadoAnterior == "Inscrito" || $estadoAnterior == "Revocada" || $estadoAnterior == "Finalizado")) {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "1", 'estado' => "1"));
-		}
-		if ($estado == "En Proceso" && $estadoAnterior == "Inscrito" && $tipoSolicitud == NULL) {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "2", 'estado' => "2"));
-		}
-		if ($estado == "En Proceso" && $estadoAnterior == "Inscrito" && $tipoSolicitud == "Eliminar") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "3", 'estado' => "2"));
-		}
-		if ($estado == "En Proceso de Renovación" && $estadoAnterior == "Acreditado") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "4", 'estado' => "1"));
-		}
-		if ($estado == "En Proceso de Renovación" && $estadoAnterior == "Acreditado" && $tipoSolicitud == "Eliminar") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "5", 'estado' => "0"));
-		}
-		if ($estado == "En Proceso de Actualización" && $estadoAnterior == "Acreditado") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "6", 'estado' => "1"));
-		}
-		if ($estado == "En Proceso de Actualización" && $estadoAnterior == "Finalizado") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "6.1", 'estado' => "1"));
-		}
-		/*if($estado == "Finalizado" && $estadoAnterior == "Finalizado"){
-			echo json_encode(array('est' => $estado, 'url'=>"panel", 'msg'=>"6.2", 'estado' => "0"));
-		}*/
-		if ($estado == "En Proceso de Actualización" && $estadoAnterior == "Acreditado" && $tipoSolicitud == "Eliminar") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "7", 'estado' => "0"));
-		}
-		if ($estado == "Acreditado") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "8", 'estado' => "0"));
-		}
-		if ($estado == "En Observaciones" && $estadoAnterior == "En Proceso") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "9", 'estado' => "1"));
-		}
-		if ($estado == "En Proceso" && $estadoAnterior == "Acreditado") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "10", 'estado' => "1"));
-		}
-		if ($estado == "En Observaciones" && $estadoAnterior == "Finalizado") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "11", 'estado' => "1"));
-		}
-		if ($estado == "Negada" && $estadoAnterior == "Finalizado") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "12", 'estado' => "2"));
-		}
-		if ($estado == "Revocada" && $estadoAnterior == "Finalizado") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "13", 'estado' => "2"));
-		}
-		if ($estado == "Negada" && $estadoAnterior == "Negada") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "14", 'estado' => "2"));
-		}
-		if ($estado == "Revocada" && $estadoAnterior == "Revocada") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "15", 'estado' => "2"));
-		}
-		if ($estado == "En Proceso" && $estadoAnterior == "Negada") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "16", 'estado' => "1"));
-		}
-		if ($estado == "Finalizado" && $estadoAnterior == "Finalizado" && $tipoSolicitud == "Eliminar") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "17", 'estado' => "0"));
-		}
-		if ($estado == "En Proceso de Renovación" && $estadoAnterior == "Finalizado" && $tipoSolicitud == "Renovacion de Acreditación") {
-			echo json_encode(array('est' => $estado, 'url' => "panel", 'msg' => "18", 'estado' => "1"));
-		}
-	}
-	// Verificar numero de solicitudes
-	public function numeroSolicitudes()
-	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-
-		$solicitudes = $this->db->select("numeroSolicitudes")->from("solicitudes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$numeroSolicitudes = $solicitudes->numeroSolicitudes;
-		return $numeroSolicitudes;
-	}
-	// Asignación de solicitudes
 	public function asignar()
 	{
 		$data = $this->datosSesionAdmin();
@@ -286,6 +121,7 @@ class Solicitudes extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
+
 	/**
 	 * Funciones Usuario
 	 */
@@ -327,6 +163,253 @@ class Solicitudes extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
+	//Cargar estado de la solicitud
+	public function cargarEstadoSolicitud()
+	{
+		// TODO: Estado solicitud terminar!
+		$idSolicitud = $this->input->post('solicitud');
+		$solicitud = $this->SolicitudesModel->solicitudes($idSolicitud);
+		$programas = $this->DatosProgramasModel->getDatosProgramas($idSolicitud);
+        $motivos = $this->cargarMotivosSolicitud($idSolicitud);
+        $formularios = $this->verificarFormularios($idSolicitud);
+		switch ($solicitud->nombre) {
+			case "En Proceso":
+                if(count($formularios) === 0):
+                    $icon = 'success';
+                    $msg = '<p>Solicitud: <strong>' .  $idSolicitud. '</strong> cuenta con los formularios diligenciados</p>';
+                else:
+                    $icon = 'info';
+                    $msg = '<p>Continue diligenciando los formularios, Solicitud: <strong>' .  $idSolicitud. '</strong></p>';
+                endif;
+                echo json_encode(
+                    array(
+                        'icon' => $icon,
+                        'msg' => $msg,
+                        'formularios' => $formularios,
+                        'solicitud' => $solicitud,
+                        'motivos' => $motivos,
+                        'programas' => $programas
+                    )
+                );
+				break;
+			case "En Observaciones":
+
+                break;
+			default:
+				break;
+		}
+	}
+    // Cargar motivos de la solicitud para el estado
+    public function cargarMotivosSolicitud($idSolicitud)
+    {
+        $motivosSolicitud = $this->db->select("motivosSolicitud")->from("tipoSolicitud")->where("idSolicitud", $idSolicitud)->get()->row()->motivosSolicitud;
+        return json_decode($motivosSolicitud);
+    }
+	// Validad formularios de la solicitud para el estado
+	public function verificarFormularios($idSolicitud)
+	{
+		$usuario_id = $this->session->userdata('usuario_id');
+		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
+		$id_organizacion = $datos_organizacion->id_organizacion;
+
+		$certificacionesForm = NULL;
+		$lugar = NULL;
+		$carta = NULL;
+		$jornada = NULL;
+		$materialProgBasicos = NULL;
+		$materialAvalEcon = NULL;
+		$formatosEval = NULL;
+		$materialProgEval = NULL;
+		$instructivo = NULL;
+		$icert = 0;
+		$datosBasicosProg = TRUE;
+		$datosAvalEcon = TRUE;
+
+		$tipoSolicitud = $this->db->select("*")->from("tipoSolicitud")->where("idSolicitud", $idSolicitud)->get()->row();
+		$motivoSolicitud = json_decode($tipoSolicitud->motivosSolicitud);
+		$modalidadSolicitud = $tipoSolicitud->modalidadSolicitud;
+
+		$archivosBD = $this->db->select("*")->from("archivos")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
+		/** Comprobar archivos en formularios */
+		foreach ($archivosBD as $archivo) {
+			$tipo = $archivo->tipo;
+			$formulario = $archivo->id_formulario;
+			switch ($formulario) {
+				case 1:
+					switch ($tipo) {
+						case 'certificaciones':
+							$icert += 1;
+							if ($icert >= 3) {
+								$certificacionesForm = TRUE;
+							}
+							break;
+						case 'lugar':
+							$lugar = TRUE;
+							break;
+						case 'carta':
+							$carta = TRUE;
+							break;
+						default:
+							$certificacionesForm = FALSE;
+							$lugar = FALSE;
+							$carta = FALSE;
+							break;
+					}
+					break;
+				case 5:
+					if ($tipo == "jornadaAct") {
+						$jornada = TRUE;
+					}
+					break;
+				case 6:
+					if ($tipo == "materialDidacticoProgBasicos") {
+						$materialProgBasicos = TRUE;
+					}
+					break;
+				case 7:
+					if ($tipo == "materialDidacticoAvalEconomia") {
+						$materialAvalEcon = TRUE;
+					}
+					break;
+				case 8:
+					if ($tipo == "formatosEvalProgAvalar") {
+						$formatosEval = TRUE;
+					}
+
+					if ($tipo == "materialDidacticoProgAvalar") {
+						$materialProgEval = TRUE;
+					}
+					break;
+				case 10:
+					if ($tipo == "instructivoPlataforma" || $tipo == "observacionesPlataformaVirtual") {
+						$instructivo = TRUE;
+					}
+					break;
+				default:
+					break;
+			}
+		}
+		/** Variables Formularios */
+		$informacionGeneral = $this->db->select("*")->from("informacionGeneral")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
+		$documentacion = $this->db->select("*")->from("documentacion")->where("idSolicitud", $idSolicitud)->get()->row();
+		$registroEducativoProgramas = $this->db->select("*")->from("registroEducativoProgramas")->where("idSolicitud", $idSolicitud)->get()->row();
+		$antecedentesAcademicos = $this->db->select("*")->from("antecedentesAcademicos")->where("idSolicitud", $idSolicitud)->get()->row();
+		$jornadasActualizacion = $this->db->select("*")->from("jornadasActualizacion")->where("idSolicitud", $idSolicitud)->get()->row();
+		$datosProgramas = $this->db->select("*")->from("datosProgramas")->where("idSolicitud", $idSolicitud)->get()->row();
+		$aplicacion = $this->db->select("*")->from("datosAplicacion")->where("idSolicitud", $idSolicitud)->get()->row();
+		$datosEnLinea = $this->db->select("*")->from("datosEnLinea")->where("idSolicitud", $idSolicitud)->get()->row();
+		// Comprobación docentes
+		$docentes = $this->db->select("*")->from("docentes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
+		$numeroDocentes = $this->db->select("count(docentes.id_docente) as numeroDocentes")->from("docentes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row()->numeroDocentes;
+		$strDocentes = "";
+		foreach ($docentes as $docente) {
+			$hoja = false;
+			$titulo = false;
+			$certificacionesEco = false;
+			$certificaciones = false;
+			$hojas = 0;
+			$titulos = 0;
+			$certEcos = 0;
+			$certs = 0;
+
+			$id_docente = $docente->id_docente;
+			$nombre = $this->db->select("primerNombreDocente")->from("docentes")->where("id_docente", $id_docente)->get()->row()->primerNombreDocente;
+			$archivos = $this->cargarDatosArchivosDocentes($id_docente);
+
+			for ($i = 0; $i < count($archivos); $i++) {
+				$tipo = json_encode($archivos[$i]->tipo);
+
+				if ($tipo == '"docenteHojaVida"') {
+					$hojas += 1;
+					if ($hojas >= 1) {
+						$hoja = true;
+					}
+				}
+				if ($tipo == '"docenteTitulo"') {
+					$titulos += 1;
+					if ($titulos >= 1) {
+						$titulo = true;
+					}
+				}
+				if ($tipo == '"docenteCertificadosEconomia"') {
+					$certEcos += 1;
+					if ($certEcos >= 1) {
+						$certificacionesEco = true;
+					}
+				}
+				if ($tipo == '"docenteCertificados"') {
+					$certs += 1;
+					if ($certs >= 3) {
+						$certificaciones = true;
+					}
+				}
+			}
+
+			if ($hoja == true && $titulo == true && $certificacionesEco == true && $certificaciones && true) {
+				$strDocentes .= "El facilitador <span class='upper'>" . $nombre . "</span> esta correcto en los documentos mínimos requeridos. <i class='fa fa-check spanVerde' aria-hidden='true'></i><br/>";
+			} else {
+				$strDocentes .= "Verificar los documentos del facilitador <span class='upper'>" . $nombre . "</span>. <i class='fa fa-times spanRojo' aria-hidden='true'></i><br/>";
+			}
+		}
+
+		/** @var  $formularios
+		Comprobación Formularios
+		 */
+		$formularios = array();
+		// TODO: Comprobación de formulario 6 = numero de motivos
+		$solicitud = $this->db->select('*')->from('solicitudes')->where("idSolicitud", $idSolicitud)->get()->row();
+		$totalProgramas = $this->db->select('*')->from('datosProgramas')->where("idSolicitud", $idSolicitud)->get()->result();
+		// Contar programas seleccionados por medio de campo motivos
+		$cantProgramasSeleccionados = count(json_decode($tipoSolicitud->motivosSolicitud));
+		// Asignar variable para la cantidad de programas actualmente registrados en la solicitud
+		$cantProgramasAceptados = count($totalProgramas);
+		// Comparar si la cantidad de motivos seleccionados conincide con la cantidad de programas aceptados en la solicitud.
+		if ($cantProgramasSeleccionados == $cantProgramasAceptados) {
+			$datosProgramasAceptados = 'TRUE';
+		}
+		/** Comprobar todos los formularios */
+		if ($informacionGeneral == NULL || $certificacionesForm == NULL || $lugar == NULL || $carta == NULL) {
+			array_push($formularios, "1. Falta el formulario de Informacion General.");
+		}
+		if ($documentacion == NULL) {
+			array_push($formularios, "2. Falta el formulario de Documentacion Legal.");
+		}
+		if ($antecedentesAcademicos == NULL) {
+			array_push($formularios, "3. Falta el formulario de Antecedentes Academicos.");
+		}
+		if ($jornadasActualizacion == NULL || $jornada == NULL) {
+			array_push($formularios, "4. Falta el formulario de Jornadas Actualización.");
+		}
+		if ($datosProgramasAceptados == NULL) {
+			array_push($formularios, "5. Falta el formulario de Datos Basicos Programas.");
+		}
+		if ($docentes == NULL || $numeroDocentes < 3) {
+			array_push($formularios, "6. Faltan facilitadores y/o archivos, deben ser tres (3) con sus respectivos documentos.");
+		}
+		if (($modalidadSolicitud == "Virtual" || $modalidadSolicitud == "Presencial, Virtual" || $modalidadSolicitud == "Presencial, Virtual, En Linea"  || $modalidadSolicitud == "Virtual, En Linea") && $aplicacion == NULL) {
+			array_push($formularios, "7. Falta el formulario de Ingreso a la Plataforma Virtual.");
+		}
+		if (($modalidadSolicitud == "En Linea" || $modalidadSolicitud == "Presencial, En Linea" || $modalidadSolicitud == "Presencial, Virtual, En Linea"  || $modalidadSolicitud == "Virtual, En Linea") && $datosEnLinea == NULL) {
+			array_push($formularios, "8. Falta el formulario de datos modalidad en linea.");
+		}
+		// Actualizar Datos
+		else if ($motivoSolicitud == "Actualizar Datos") {
+			if ($informacionGeneral == NULL) {
+				array_push($formularios, "Llene los formularios que requieran actualizacion." && $aplicacion == NULL);
+			}
+			if ($modalidadSolicitud == "Virtual" || $modalidadSolicitud == "Virtual y Presencial" || $modalidadSolicitud == "Presencial") {
+				array_push($formularios, "10. Falta el formulario de Ingreso a la Plataforma Virtual." && $aplicacion == NULL || $instructivo == NULL);
+			}
+		}
+		array_push($formularios, "0. Tenga en cuenta la siguiente lista de sus facilitadores y hacer lo correspondiente:<br/><strong><small><i>" . $strDocentes . "</i></small></strong>");
+		return $formularios;
+	}
+    // Cargar datos archivos docentes
+    public function cargarDatosArchivosDocentes($id)
+    {
+        $data_archivos = $this->db->select("*")->from("archivosDocente")->where('docentes_id_docente', $id)->get()->result();
+        return $data_archivos;
+    }
 }
 function var_dump_pre($mixed = null) {
 	echo '<pre>';

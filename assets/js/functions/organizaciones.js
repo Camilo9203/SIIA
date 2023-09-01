@@ -116,9 +116,9 @@ $(document).on("click", ".verSolicitudAdmin", function () {
 });
 // Traer datos de la organización inscrita
 $(".ver_organizacion_inscrita").click(function () {
-	var $id_org = $(this).attr("data-organizacion");
+	var nit = $(this).attr("data-organizacion");
 	var data = {
-		id_organizacion: $id_org,
+		id_organizacion: nit,
 	};
 	$.ajax({
 		url: baseURL + "organizaciones/datosOrganzacion",

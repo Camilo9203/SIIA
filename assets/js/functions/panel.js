@@ -1,5 +1,7 @@
 let hash_url = window.location.hash;
-/** Ver Solicitudes */
+/**
+ * Ver Solicitudes
+ * */
 $("#verSolicitudes").click(function () {
 	$("#ayudaModalidad").modal({ backdrop: "static", keyboard: false });
 	$("#ayudaModalidad").modal("hide");
@@ -9,7 +11,9 @@ $("#verSolicitudes").click(function () {
 	$("#crearSolicitudes").show();
 	$("#solicitudesRegistradas").show();
 });
-/** Volver Solicitudes */
+/**
+ * Volver Solicitudes
+ * */
 $(".volverSolicitudes").click(function () {
 	$("#ayudaModalidad").modal({ backdrop: "static", keyboard: false });
 	$("#ayudaModalidad").modal("hide");
@@ -19,7 +23,9 @@ $(".volverSolicitudes").click(function () {
 	$("#crearSolicitudes").show();
 	$("#solicitudesRegistradas").show();
 });
-/** Volver Panel */
+/**
+ * Volver Panel
+ * */
 $(".volverPanel").click(function () {
 	$("#ayudaModalidad").modal({ backdrop: "static", keyboard: false });
 	$("#ayudaModalidad").modal("hide");
@@ -29,18 +35,24 @@ $(".volverPanel").click(function () {
 	$("#crearSolicitudes").hide();
 	$("#solicitudesRegistradas").hide();
 });
-/** Ver Solicitud */
+/**
+ * Ver Solicitud
+ *  */
 $(".verSolicitud").click(function () {
 	let idSolicitud = $(this).attr("data-id");
 	window.open(baseURL + "solicitudes/solicitud/" + idSolicitud, '_self');
 });
-/** Ver modal y cargar variable de solicitud */
+/**
+ * Ver modal y cargar variable de solicitud
+ * */
 $(".eliminarSolicitudModal").click(function () {
 	let idSolicitud = $(this).attr("data-id");
 	$('#eliminarSolicitud').attr('data-id', idSolicitud);
-	$('#solicitudAEliminar').html("¿Estás seguro de eliminar la solicitud <span class='spanRojo'>" + idSolicitud + "</span>?");
+	$('#solicitudAEliminar').html("¿Estás seguro de eliminar la solicitud<span class='spanRojo'>" + idSolicitud + "</span>?");
 });
-/** Ver Solicitud */
+/**
+ * Ver Solicitud
+ * */
 $(".verDetalleSolicitud").click(function () {
 	let html = ''
 	let data = {
@@ -76,7 +88,9 @@ $(".verDetalleSolicitud").click(function () {
 		},
 	})
 });
-/** Ver Eliminar */
+/**
+ * Ver eliminar
+ * */
 $(".eliminarSolicitud").click(function () {
 	let data = {
 		idSolicitud: $(this).attr('data-id'),
@@ -87,13 +101,25 @@ $(".eliminarSolicitud").click(function () {
 		dataType: "JSON",
 		data: data,
 		beforeSend: function () {
-			notificacion("Espere...", "success");
+			Toast.fire({
+				icon: 'danger',
+				title: 'Eliminando solitud'
+			});
 		},
 		success: function (response) {
-			notificacion(response.msg, "success");
-			setInterval(function () {
-				reload();
-			}, 4000);
+			Alert.fire({
+				title: 'Solicitud eliminada!',
+				html: response.msg,
+				text: response.msg,
+				icon: 'success',
+				confirmButtonText: 'Aceptar',
+			}).then((result) => {
+				if (result.isConfirmed) {
+					setInterval(function () {
+						reload();
+					}, 2000);
+				}
+			})
 		},
 		error: function (ev) {
 			event.preventDefault();
@@ -105,7 +131,9 @@ $(".eliminarSolicitud").click(function () {
 $("#noEliminarSolicitud").click(function () {
 	$("#modalEliminarSolicitud").modal("hide");
 });
-/** Ver Estado Solicitud */
+/**
+ * Ver estado solicitud
+ * */
 $(".verObservaciones").click(function () {
 	let idSolicitud = $(this).attr("data-id");
 	window.open(baseURL + "panel/estadoSolicitud/" + idSolicitud, '_self');
@@ -122,44 +150,13 @@ function irSolicitud (data) {
 		}
 	});
 }
-/** Crear Solicitud */
+/**
+ * Crear Solicitud
+ * */
 $("#nuevaSolicitud").click(function () {
 	$("#ayudaModalidad").modal({ backdrop: "static", keyboard: false });
 	$("#ayudaModalidad").modal("hide");
 	$("#crearSolicitudes").hide();
 	$("#solicitudesRegistradas").hide();
 	$("#tipoSolicitud").show();
-	// if (hash_url == "#actualizarSolicitud") {
-	// 	//Do Nothing
-	// }
-	// $.ajax({
-	// 	url: baseURL + "panel/verificar_tipoSolicitud",
-	// 	type: "post",
-	// 	dataType: "JSON",
-	// 	success: functions (response) {
-	// 		console.log(response);
-	// 		if (response.estado == "1") {
-	// 			notificacion(response.msg, "success");
-	// 			$("#tipoSolicitud").hide();
-	// 			$("#estado_solicitud").show();
-	// 			$(".side_main_menu").show();
-	// 			verificarFormularios();
-	// 		} else if (response.estado == "0") {
-	// 			$("#div_solicitud").show();
-	// 			$("#div_motivo_actualizar").show();
-	// 		}
-	// 		if (response.est == "En Proceso de Renovación" || response.est == "En Proceso de Actualización"
-	// 		) {
-	// 			window.location.hash = "enProcesoActualizacion";
-	// 		} else if (response.est == "En Proceso" || response.est == "Negada" || response.est == "Revocada" || response.est == "Acreditado"
-	// 		) {
-	// 			window.location.hash = "enProceso";
-	// 			//$("#el_sol").attr("disabled", true);
-	// 			//$("#el_sol").remove();
-	// 		}
-	// 	},
-	// 	error: functions (ev) {
-	// 		notificacion("Seleccione los campos y de click en crear.", "success");
-	// 	},
-	// });
 });
