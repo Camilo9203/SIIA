@@ -202,16 +202,25 @@ $("#super_nuevo_admin").click(function () {
 				});
 			},
 			success: function (response) {
-				Alert.fire({
-					title: 'Administrador creado!',
-					text: response.msg,
-					icon: 'success',
-					confirmButtonText: 'Aceptar',
-				}).then((result) => {
-					if (result.isConfirmed) {
-						reload();
-					}
-				})
+				if(response.status === 0) {
+					Alert.fire({
+						title: response.title,
+						text: response.msg,
+						icon: response.icon,
+						confirmButtonText: 'Aceptar',
+					})
+				}  else if(response.status === 1){
+					Alert.fire({
+						title: response.title,
+						text: response.msg,
+						icon: response.icon,
+						confirmButtonText: 'Aceptar',
+					}).then((result) => {
+						if (result.isConfirmed) {
+							reload();
+						}
+					})
+				}
 			},
 			error: function (ev) {
 				//Do nothing

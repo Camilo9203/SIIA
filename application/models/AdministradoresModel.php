@@ -22,4 +22,42 @@ class AdministradoresModel extends CI_Model
 		$query = $this->db->get_where('administradores', array('usuario' => $usuario));
 		return $query->row();
 	}
+	/**
+	 * Traer nombre de nivel administradores
+	 */
+	public function getNivel($id) {
+		switch ($id):
+			case 0:
+				return "Total";
+				break;
+			case 1:
+				return "Evaluador";
+				break;
+			case 2:
+				return "Reportes";
+				break;
+			case 3:
+				return "Cámaras";
+				break;
+			case 4:
+				return "Histório";
+				break;
+			case 5:
+				return "Segumiendo";
+				break;
+			case 6:
+				return "Asignación";
+				break;
+			default:
+				break;
+		endswitch;
+	}
+
+	/**
+	 * @return $password administrator
+	 */
+	public function getPassword ($pass) {
+		$password = mc_decrypt($pass, KEY_RDEL);
+		return $password;
+	}
 }

@@ -90,7 +90,7 @@ class Super extends CI_Controller {
 		endif;
 	}
 	/**
-	 * Cerrar sesión administrador
+	 * Cerrar sesión
 	 */
 	public function logout(){
 		$data_update = array('valor' => 'FALSE');

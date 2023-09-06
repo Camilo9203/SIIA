@@ -52,8 +52,8 @@ class Administradores extends CI_Controller
 		$pass = $this->input->post('super_contrasena_admin');
 		$password_rdel = mc_encrypt($pass, KEY_RDEL);
 		$password_hash = generate_hash($pass);
-		$adm_exist_data = $this->db->select("usuario")->from("administradores")->where("usuario", $this->input->post('super_nombre_admin'))->get()->row();
-		if($adm_exist_data == ""){
+		$administrador = $this->db->select("usuario")->from("administradores")->where("usuario", $this->input->post('super_nombre_admin'))->get()->row();
+		if($administrador == ""){
 			$data_admin = array(
 				'primerNombreAdministrador' => $this->input->post('super_primernombre_admin'),
 				'segundoNombreAdministrador' => $this->input->post('super_segundonombre_admin'),
@@ -74,10 +74,11 @@ class Administradores extends CI_Controller
 					send_email_super($type, $administrador);
 			}
 			else{
-				echo json_encode(array("msg" => "Administador no agregado"));
+				echo json_encode(array("status" => 0,"title" => "Administrador no creado!", "icon" => "error","msg" => "Administador no agregado. Error en base de datos"));
 			}
 		}else{
-			echo json_encode(array("msg" => "El nombre de usuario ya esta en uso."));
+			echo json_encode(array("status" => 0, "title" => "Administrador no creado!", "icon" => "error","msg" => "El nombre de usuario ya esta en uso."
+			));
 		}
 	}
 	/**
@@ -121,7 +122,7 @@ class Administradores extends CI_Controller
 		}else{
 			$this->db->where('id_administrador', $id);
 			if($this->db->delete('administradores')){
-				echo json_encode(array("msg" => "El administador " . $administrador->usuario . "ha sido eliminado."));
+				echo json_encode(array("msg" => "El administador " . $administrador->usuario . " ha sido eliminado."));
 			}
 		}
 	}

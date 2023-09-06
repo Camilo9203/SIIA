@@ -4,6 +4,8 @@
  * @var $logged_in
  * @var $tipo_usuario
  */
+$CI = &get_instance();
+$CI->load->model("AdministradoresModel");
 ?>
 <?php if($logged_in == FALSE && $tipo_usuario == "none"): ?>
 	<div class="container">
@@ -74,6 +76,7 @@
 							<td>Número de cédula</td>
 							<td>Nombre usuario</td>
 							<td>Correo electrónico</td>
+							<td>Rol</td>
 							<td>Estado</td>
 							<td>Accion</td>
 						</tr>
@@ -84,6 +87,7 @@
 							echo "<td>$administrador->numCedulaCiudadaniaAdministrador</td>";
 							echo "<td>$administrador->usuario</td>";
 							echo "<td>$administrador->direccionCorreoElectronico</td>";
+							echo "<td>"; echo $CI->AdministradoresModel->getNivel($administrador->nivel); echo "</td>";
 							echo "<td>";
 								if($administrador->logged_in == 1):
 									echo 'Conectado';
@@ -129,15 +133,14 @@
 									<input type="text" id="super_segundoapellido_admin" name="super_segundoapellido_admin" class="form-control" name="" value="">
 								</div>
 								<div class="form-group">
-									<label>Numero de Cedula:</label>
-									<input type="text" id="super_numerocedula_admin" name="super_numerocedula_admin" class="form-control" name="" value="">
+									<label>Numero de cédula:</label>
+									<input type="number" id="super_numerocedula_admin" name="super_numerocedula_admin" class="form-control">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Nivel de acceso:</label><br/>
 									<select class="custom-select show-tick" name="super_acceso_nvl" id="super_acceso_nvl" required>
-										<option value="seleccione">Seleccione una opción</option>
 										<option value="0">Total 0</option>
 										<option value="1">Evaluador 1</option>
 										<option value="2">Reportes 2</option>

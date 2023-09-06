@@ -7,19 +7,20 @@ function send_email_super($type, $administrador)
 	$CI = & get_instance();
 	switch ($type):
 		case 'creacionAdministrador':
+				$CI->load->model('AdministradoresModel');
 				$subject = 'Creación administrador';
 				$message = '<strong><h4>Se ha creado un usuario administrador!</h4></strong>
 							<p>Buen día, ' . $administrador->primerNombreAdministrador . ' ' . $administrador->primerApellido . 'La unidad solidaria le informa que se le ha asignado un usuario administrador con los siguientes datos:</p><br />
 							<strong><label>Usuario:</label></strong>
 							<p>' . $administrador->usuario .  '</p>
 							<strong><label>Contraseña:</label></strong>
-							<p>' . $administrador->numCedulaCiudadaniaAdministrador . '</p>
+							<p>' . $CI->AdministradoresModel->getPassword($administrador->contrasena_rdel) . '</p>
 							<strong><label>Correo electrónico:</label></strong>
 							<p>' . $administrador->direccionCorreoElectronico . '</p>
 							<strong><label>Rol:</label></strong>
-							<p>' . $administrador->nivel . '</p>
+							<p>' . $CI->AdministradoresModel->getNivel($administrador->nivel)  . '</p>
 							<a target="_blank" style="font-family: Arial, sans-serif; background: #0071b9; color:white; display: inline-block; text-decoration: none; line-height:40px; font-size: 18px; width:200px; box-shadow: 2px 3px #e2e2e2; font-weight: bold;" href='. base_url() . 'admin/>Ingresar</a>';
-				$response = array('url' => "panel", 'msg' => "Se envío un correo a: " . $administrador->direccionCorreoElectronico . " y a la supervisión con la información de acceso.", "status" => 1);
+				$response = array("status" => 1, "title" => "Administrador creado!", "icon" => "success", 'msg' => "Se envío un correo a: " . $administrador->direccionCorreoElectronico . " y a la supervisión con la información de acceso.");
 			break;
 		default:
 			break;
@@ -38,6 +39,7 @@ function send_email_super($type, $administrador)
 		save_log_email($administrador->direccionCorreoElectronico, $subject, $message, $type, $error, $response);
 	else:
 		$error = $CI->email->print_debugger();
+		$response = array("status" => 1, "title" => "Administrador creado!", "icon" => "info", 'msg' => "Se creo administrador, pero no se logro enviar correo a : " . $administrador->direccionCorreoElectronico . " Error: " . $error , );
 		save_log_email($administrador->direccionCorreoElectronico, $subject, $message, $type, $error, $response);
 	endif;
 
@@ -167,7 +169,7 @@ function save_log_email($to, $subject, $msg, $type, $error, $response = null) {
 	if($CI->db->insert('correosregistro', $email_details)):
 		echo json_encode($response);
 	else:
-		echo json_encode(array('url' => "panel", 'msg' => "Se ha enviado correo, pero no se guardo registro de este en base de datos"));
+		echo json_encode($response);
 	endif;
 }
 
