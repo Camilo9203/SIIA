@@ -12,6 +12,11 @@
  * @var $datosEnLinea
  * @var $datosProgramas
  */
+
+	/*echo '<pre>';
+	var_dump($jornadasActualizacion);
+	echo '</pre>';
+	return null;*/
 ?>
 <div class="container">
 	<div class="row">
@@ -20,7 +25,7 @@
 			<div class="left_col scroll-view">
 				<div id="sidebar-menu" class="main_menu_side hidden-print main_menu sidebar-menu">
 					<div class="menu_section">
-						<a data-form="inicio">
+						<a data-form="inicio" data-id="<?php echo $solicitud->idSolicitud ?>">
 							<h3 class="underlined text-center">Inicio - Ver solicitud <i class="fa fa-home" aria-hidden="true"></i></h3>
 						</a>
 						<div id="wizard_verticle" class="form_wizard wizard_verticle">
@@ -478,7 +483,7 @@
 					</div>
 					<!-- Formulario: Registro educativo -->
 					<div id="div_registro_educativo">
-						<?php echo form_open('', array('id' => 'formulario_registro_educativo')); ?>
+						<?php echo form_open_multipart('', array('id' => 'formulario_registro_educativo')); ?>
 						<!-- Entidad -->
 						<div class="form-group">
 							<label for="tipoEducacion">Tipo de educación:<span class="spanRojo">*</span></label>
@@ -526,7 +531,7 @@
 						<button name="guardar_formulario_registro_educativo" id="guardar_formulario_registro_educativo" class="btn btn-siia btn-sm pull-right " data-id="<?php  echo $solicitud->idSolicitud;?>">
 							Guardar datos <i class="fa fa-check" aria-hidden="true"></i>
 						</button>
-						</form>
+						<?php echo form_close() ?>
 						<hr />
 						<!-- Tabla herramientas -->
 						<?php if($datosEnLinea): ?>
@@ -559,7 +564,6 @@
 						<?php endif	?>
 					</div>
 				</div>
-				</form>
 				<div class="clearfix"></div>
 				<br><br>
 				<!-- Tabla Documentación Legal -->
@@ -720,82 +724,76 @@
 			</div>
 			<!-- Formulario de jornadas de actualización 4 - INICIO -->
 			<div id="jornadas_de_actualizacion" data-form="4" class=" formulario_panel">
-				<div class="">
-					<?php echo form_open('', array('id' => 'formulario_jornadas_actualizacion')); ?>
-					<h3>4. Jornada de actualización pedagógica <i class="fa fa-handshake-o" aria-hidden="true"></i></h3>
+				<h3>4. Jornada de actualización pedagógica <i class="fa fa-handshake-o" aria-hidden="true"></i></h3>
+				<?php if (empty($jornadasActualizacion)): ?>
 					<p>Registre los datos de la última jornada de actualización, organizada por UAEOS, a la que asistió. Si selecciona "No", de clic en guardar y adjunte la carta de compromiso.</p>
-					<div class="form-group">
-						<label for="">5.1 Ha participado en jornadas de actualización organizadas por la UAEOS?</label>
-						<div class="checkbox">
-							<label for="jornaSelect">La entidad participo en la jornada de actualización pedagógica:</label>
-							<label><input type="radio" class="jornaSelect" name="jornaSelect" id="jornaSelect" value="Si">Si</label>
-							<label><input type="radio" class="jornaSelect" name="jornaSelect" id="" value="No" checked>No</label>
-						</div>
-					</div>
-					<div id="divIngJor">
+					<br>
+					<?php echo form_open_multipart('', array('id' => 'formulario_jornadas_actualizacion')); ?>
+						<!-- Participación en jornadas -->
 						<div class="form-group">
-							<label for="jornadasNumeroPersonas">5.2 Número de personas que asistieron:</label>
-							<input class="form-control" type="text" name="jornadasNumeroPersonas" id="jornadasNumeroPersonas" placeholder="43">
+							<label for="">5.1 Ha participado en jornadas de actualización organizadas por la UAEOS?</label>
+							<div class="checkbox">
+								<label for="jornaSelect">La entidad participo en la jornada de actualización pedagógica:</label>
+								<label><input type="radio" class="jornaSelect" name="jornaSelect" id="jornaSelect" value="Si">Si</label>
+								<label><input type="radio" class="jornaSelect" name="jornaSelect" id="" value="No" checked>No</label>
+							</div>
 						</div>
+						<br>
+						<!-- Si ha participado -->
+						<div id="divIngJor">
+							<div class="form-group">
+								<label for="jornadasNumeroPersonas">5.2 Número de personas que asistieron:</label>
+								<input class="form-control" type="text" name="jornadasNumeroPersonas" id="jornadasNumeroPersonas" placeholder="43">
+							</div>
+							<br>
+							<div class="form-group">
+								<label for="jornadasFechaAsistencia">5.3 Fecha de la última actualización a la que asistió:</label>
+								<input class="form-control" type="date" name="jornadasFechaAsistencia" id="jornadasFechaAsistencia">
+							</div>
+						</div>
+						<br>
+						<!-- Archivo -->
 						<div class="form-group">
-							<label for="jornadasFechaAsistencia">5.3 Fecha de la última actualización a la que asistió:</label>
-							<input class="form-control" type="date" name="jornadasFechaAsistencia" id="jornadasFechaAsistencia">
+							<label>Documento de la Jornada de Actualización o carta de compromiso (PDF) </label>
+							<ul>
+								<li>En caso de haber participado en la jornada de actualización adjunté el certificado.</li>
+								<li>En caso de no haber participado adjunté una carta de compromiso de participación en la jornada de actualización pedagógica.</li>
+							</ul>
+							<br />
+							<label>Archivo (PDF):<span class="spanRojo">*</span></label>
+							<div class="col-md-4">
+								<input type="file" required accept="application/pdf" class="form-control" id="fileJornadas" name="fileJornadas">
+							</div>
+							<hr/>
 						</div>
-					</div>
-					<button class="btn btn-siia btn-sm" name="guardar_formulario_jornadas_actualizacion" id="guardar_formulario_jornadas_actualizacion" data-id="<?php  echo $solicitud->idSolicitud;?>">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
-					</form>
-					<?php if ($jornadasActualizacion): ?>
-						<div class="">
-							<hr />
-							<label>Jornadas:</label>
-							<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-							<table id="" width="100%" border=0 class="table table-striped table-bordered">
-								<thead>
-								<tr>
-									<td class="col-md-4">Número personas</td>
-									<td class="col-md-4">Fecha asistencia</td>
-									<td class="col-md-4">Acción</td>
-								</tr>
-								</thead>
-								<tbody id="tbody">
-								<?php
-								foreach ($jornadasActualizacion as $jornada) {
-									echo "<tr><td>" . $jornada->numeroPersonas . "</td>";
-									echo "<td>" . $jornada->fechaAsistencia . "</td>";
-									echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarJornadaActualizacion' data-id-jornada=" . $jornada->id_jornadasActualizacion . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
-								}
-								?>
-								</tbody>
-							</table>
-						</div>
-					<?php endif; ?>
-					<div class="clearfix"></div>
+						<button class="btn btn-siia btn-sm guardar_formulario_jornadas_actualizacion" data-name="jornadaAct" data-id="<?php echo $solicitud->idSolicitud;?>">
+							Guardar datos <i class="fa fa-check" aria-hidden="true"></i>
+						</button>
+					<?php echo form_close() ?>
+				<?php endif; ?>
+				<!-- Tabla jornadas -->
+				<?php if ($jornadasActualizacion): ?>
+					<p>Registro realizado para esta solicitud. Si desea modificar los datos por favor elimine primero el archivo cargado, seguido a ello elimine el registro realizado.</p>
 					<hr />
-					<div class="form-group">
-						<label>Documento de la Jornada de Actualización o carta de compromiso (PDF) </label>
-						<ul>
-							<li>
-								En caso de haber participado en la jornada de actualización adjunté el certificado.
-							</li>
-							<li>
-								En caso de no haber participado adjunté una carta de compromiso de participación en la jornada de actualización pedagógica.
-							</li>
-						</ul>
-						<br />
-						<?php echo form_open_multipart('', array('id' => 'formulario_jornada_actualizacion')); ?>
-						<label>Archivo (PDF):<span class="spanRojo">*</span></label>
-						<br />
-						<div class="col-md-4">
-							<input type="file" required accept="application/pdf" class="form-control" data-val="jornadaAct" name="jornadaAct" id="jornadaAct">
-						</div>
-						<div class="col-md-3">
-							<input type="button" class="btn btn-siia btn-sm archivos_form_jornada fa-fa center-block" data-name="jornadaAct" name="jornadaAc" id="jornadaAc" value="Guardar archivo(s) &#xf0c7">
-						</div>
-						</form>
-					</div>
-					<div class="clearfix"></div>
-
-					<div class="">
+					<label>Jornadas:</label>
+					<table id="tabla_jornada_actualizacion" width="100%" border=0 class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<td class="col-md-4">Número personas</td>
+								<td class="col-md-4">Fecha asistencia</td>
+								<td class="col-md-4">Acción</td>
+							</tr>
+						</thead>
+						<tbody id="tbody">
+							<?php
+								echo "<tr><td>" . $jornadasActualizacion->numeroPersonas . "</td>";
+								echo "<td>" . $jornadasActualizacion->fechaAsistencia . "</td>";
+								echo "<td><button class='btn btn-danger btn-sm eliminarJornadaActualizacion' data-id-jornada=" . $jornadasActualizacion->idSolicitud . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+							?>
+						</tbody>
+					</table>
+					<!-- Tabla archivos -->
+					<div class="table">
 						<hr />
 						<label>Archivos:</label><a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>
 						<table id="tabla_archivos_formulario" width="100%" border=0 class="table table-striped table-bordered tabla_form">
@@ -810,8 +808,7 @@
 							</tbody>
 						</table>
 					</div>
-					<hr />
-				</div>
+				<?php endif; ?>
 			</div>
 			<!-- Formulario de programas de educación en economía solidaria 5 - INICIO -->
 			<div id="programa_basico_de_economia_solidaria" data-form="5" class=" formulario_panel">

@@ -314,19 +314,6 @@ class Panel extends CI_Controller
 			echo json_encode(array('url' => "", 'msg' => "Se elimino el antecedente."));
 		}
 	}
-	public function eliminarJornadaActualizacion()
-	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-
-		$id_jornada = $this->input->post('id_jornada');
-
-		$this->db->where('id_jornadasActualizacion', $id_jornada)->where('organizaciones_id_organizacion', $id_organizacion);
-		if ($this->db->delete('jornadasActualizacion')) {
-			echo json_encode(array('url' => "", 'msg' => "Se elimino la jornada de actualización."));
-		}
-	}
 	public function eliminarProgramasBasicos()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -1616,49 +1603,6 @@ class Panel extends CI_Controller
 			echo json_encode(array('url' => "panel", 'msg' => "Verifique los formularios.", 'estado' => "0"));
 		}
 	}
-	public function eliminarArchivo()
-	{
-		$id_formulario = $this->input->post('id_formulario');
-		$id_archivo = $this->input->post('id_archivo');
-		$tipo = $this->input->post('tipo');
-		$nombre = $this->input->post('nombre');
-
-		if ($tipo == "carta") {
-			unlink('uploads/cartaRep/' . $nombre);
-		}
-		if ($tipo == "certificaciones") {
-			unlink('uploads/certificaciones/' . $nombre);
-		}
-		if ($tipo == "lugar") {
-			unlink('uploads/lugarAtencion/' . $nombre);
-		}
-		if ($tipo == "registroEdu") {
-			unlink('uploads/registrosEducativos/' . $nombre);
-		}
-		if ($tipo == "jornadaAct") {
-			unlink('uploads/jornadas/' . $nombre);
-		}
-		if ($tipo == "materialDidacticoProgBasicos") {
-			unlink('uploads/materialDidacticoProgBasicos/' . $nombre);
-		}
-		if ($tipo == "materialDidacticoAvalEconomia") {
-			unlink('uploads/materialDidacticoAvalEconomia/' . $nombre);
-		}
-		if ($tipo == "formatosEvalProgAvalar") {
-			unlink('uploads/formatosEvalProgAvalar/' . $nombre);
-		}
-		if ($tipo == "materialDidacticoProgAvalar") {
-			unlink('uploads/materialDidacticoProgAvalar/' . $nombre);
-		}
-		if ($tipo == "instructivoPlataforma") {
-			unlink('uploads/instructivosPlataforma/' . $nombre);
-		}
-
-		$this->db->where('id_archivo', $id_archivo)->where('id_formulario', $id_formulario);
-		if ($this->db->delete('archivos')) {
-			echo json_encode(array('url' => "", 'msg' => "Se elimino el archivo."));
-		}
-	}
 	public function guardarArchivoCarta()
 	{
 		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
@@ -1691,7 +1635,6 @@ class Panel extends CI_Controller
 			'id_formulario' => $id_formulario,
 			'organizaciones_id_organizacion' => $id_organizacion
 		);
-
 
 		if (0 < $_FILES['file']['error']) {
 			echo json_encode(array('url' => "", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
@@ -1810,58 +1753,7 @@ class Panel extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-	public function guardarArchivoJornada()
-	{
-		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
-		$tipoArchivo = $this->input->post('tipoArchivo');
-		$append_name = $this->input->post('append_name');
 
-		$usuario_id = $this->session->userdata('usuario_id');
-		$name_random = random(10);
-		$size = 100000000;
-
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-		$id_formulario = 5;
-
-		$archivos = $this->db->select('*')->from('archivos')->where('organizaciones_id_organizacion', $id_organizacion)->get()->row();
-
-
-		if ($tipoArchivo == "jornadaAct") {
-			$ruta = 'uploads/jornadas';
-			$mensaje = "Se guardo el " . $append_name;
-		}
-
-		$nombre_imagen =  $append_name . "_" . $name_random . "_" . $_FILES['file']['name'];
-		$tipo_archivo = pathinfo($nombre_imagen, PATHINFO_EXTENSION);
-
-		$data_update = array(
-			'tipo' => $tipoArchivo,
-			'nombre' => $nombre_imagen,
-			'id_formulario' => $id_formulario,
-			'organizaciones_id_organizacion' => $id_organizacion
-		);
-
-
-		if (0 < $_FILES['file']['error']) {
-			echo json_encode(array('url' => "", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
-		} else if ($_FILES['file']['size'] > $size) {
-			echo json_encode(array('url' => "", 'msg' => "El tamaño supera las 10 Mb, intente con otro archivo PDF."));
-		} else if ($tipo_archivo != "pdf") {
-			echo json_encode(array('url' => "", 'msg' => "La extensión del archivo no es correcta, debe ser PDF. (archivo.pdf)"));
-		} else if ($this->db->insert('archivos', $data_update)) {
-			if (move_uploaded_file($_FILES['file']['tmp_name'], $ruta . '/' . $nombre_imagen)) {
-				echo json_encode(array('url' => "", 'msg' => $mensaje));
-				//$this->logs_sia->session_log('Actualizacion de Imagen / Logo');){	
-			} else {
-				echo json_encode(array('url' => "", 'msg' => "No se guardo el archivo(s)."));
-			}
-		}
-
-		$this->logs_sia->logs('URL_TYPE');
-		$this->logs_sia->logQueries();
-	}
 	public function guardarArchivoMaterialProgBasic()
 	{
 		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');

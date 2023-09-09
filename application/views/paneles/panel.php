@@ -7,23 +7,6 @@
 <script>
 	var organizacion = '<?= $data_organizacion->numNIT ?>';
 </script>
-<!-- Modal Ayuda crear solicitud  -->
-<div class="modal fade" id="ayudaCrearSolicitud" tabindex="-1" role="dialog" aria-labelledby="ayudaCrearSolicitud">
-	<div class="modal-dialog modal-xs" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">¿Está seguro de crear la solicitud?</h4>
-			</div>
-			<div class="modal-body">
-				<p>Verifique la modalidad y los motivos registrados en la solicitud. Tenga en cuenta que una vez creada la solicitud no podrá borrar ni editar la misma.</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" id="noAceptoCrear" class="btn btn-danger btn-sm pull-left">No, quizá más adelante <i class="fa fa-times" aria-hidden="true"></i></button>
-				<button type="button" id="guardar_formulario_tipoSolicitud" class="btn btn-siia btn-sm pull-right" data-dismiss="modal">Si, esto seguro de crear solicitud <i class="fa fa-check" aria-hidden="true"></i></button>
-			</div>
-		</div>
-	</div>
-</div>
 <!-- Panel Principal -->
 <div id="panel_inicial" class="container center-block">
 	<div class="clearfix"></div>
@@ -135,7 +118,7 @@
 		<hr />
 		<button class="btn btn-danger btn-sm volverPanel"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 		<div class="form-group">
-			<button id='nuevaSolicitud' class='btn btn-siia pull-right'>
+			<button id='nuevaSolicitud' class='btn btn-siia btn-md pull-right'>
 				Crear Nueva  <i class='fa fa-plus' aria-hidden='true'></i>
 			</button>
 		</div>
@@ -147,60 +130,32 @@
 <div id="tipoSolicitud" class="col-md-5 center-block">
 	<?php echo form_open('', array('id' => 'formulario_crear_solicitud')); ?>
 	<div class="clearfix"></div>
-	<hr />
-	<!-- Tipo d solicitud -->
-	<!--	<label for="tipo_solicitud">Tipo de solicitud:<span class="spanRojo">*</span></label><br>-->
-	<!--	<div class="form-group">-->
-	<!--		<div class="radio">-->
-	<!--			<label><input type="radio" name="tipo_solicitud" id="tipo1" class="" value="Acreditación Primera vez" checked>Acreditación primera vez.</label>-->
-	<!--		</div>-->
-	<!--	</div>-->
-	<!-- Solo si la entidad esta o estuvo acreditada //TODO: Solo si la entidad ya fue acreditada-->
-	<!--	<div id="div_solicitud">-->
-	<!--		<div class="form-group">-->
-	<!--			<div class="radio">-->
-	<!--				<label><input type="radio" name="tipo_solicitud" id="tipo2" class="" value="Renovación de Acreditación">Renovación de acreditación.</label>-->
-	<!--			</div>-->
-	<!--		</div>-->
-	<!--		<div class="form-group">-->
-	<!--			<div class="radio">-->
-	<!--				<label><input type="radio" name="tipo_solicitud" id="tipo3" class="" value="Actualización de datos">Actualización de datos.</label>-->
-	<!--			</div>-->
-	<!--		</div>-->
-	<!--	</div>-->
-	<!--	<hr />-->
-	<!-- Tipo d solicitud -FIN -->
-	<!-- Motivo de la solicitud -->
+	<hr>
 	<label for="motivo_solicitud">Motivo de la solicitud:<span class="spanRojo">*</span></label><br>
 	<!-- CheckBox Motivos de la solicitud -->
-	<div class="form-check radio">
-		<input class="form-check-input" type="checkbox" value="1" id="cursoBasico" name="motivos" checked>
-		<label class="form-check-label" for="cursoBasico">Acreditación Curso Básico de Economía Solidaria</label>
-	</div>
-	<div class="form-check radio">
-		<input class="form-check-input" type="checkbox" value="2" id="avalTrabajo" name="motivos">
-		<label class="form-check-label" for="avalTrabajo">Aval de Trabajo Asociado</label>
-	</div>
-	<div class="form-check radio">
-		<input class="form-check-input" type="checkbox" value="3" id="cursoMedio" name="motivos">
-		<label class="form-check-label" for="cursoMedio">Acreditación Curso Medio de Economía Solidaria</label>
-	</div>
-	<div class="form-check radio">
-		<input class="form-check-input" type="checkbox" value="4" id="cursoAvanzado" name="motivos">
-		<label class="form-check-label" for="cursoAvanzado">Acreditación Curso Avanzado de Economía Solidaria</label>
-	</div>
-	<div class="form-check radio">
-		<input class="form-check-input" type="checkbox" value="5" id="finacieraEconomia" name="motivos">
-		<label class="form-check-label" for="finacieraEconomia">Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria</label>
-	</div>
-	<!-- Solo si la entidad esta o estuvo acreditada //TODO: Solo si la entidad ya fue acreditada-->
-	<!--	<div class="form-group" id="div_motivo_actualizar">-->
-	<!--		<div class="radio">-->
-	<!--			<label><input type="radio" name="motivo_solicitud" id="motivo5" class="motivo_sol" value="Actualizar Datos">Actualizar datos</label>-->
-	<!--		</div>-->
-	<!--	</div>-->
-	<hr />
-	<!-- Motivo de la solicitud -FIN-->
+	<form-group>
+		<div class="form-check radio">
+			<input class="form-check-input" type="checkbox" value="1" id="cursoBasico" name="motivos" checked>
+			<label class="form-check-label" for="cursoBasico">Acreditación Curso Básico de Economía Solidaria</label>
+		</div>
+		<div class="form-check radio">
+			<input class="form-check-input" type="checkbox" value="2" id="avalTrabajo" name="motivos">
+			<label class="form-check-label" for="avalTrabajo">Aval de Trabajo Asociado</label>
+		</div>
+		<div class="form-check radio">
+			<input class="form-check-input" type="checkbox" value="3" id="cursoMedio" name="motivos">
+			<label class="form-check-label" for="cursoMedio">Acreditación Curso Medio de Economía Solidaria</label>
+		</div>
+		<div class="form-check radio">
+			<input class="form-check-input" type="checkbox" value="4" id="cursoAvanzado" name="motivos">
+			<label class="form-check-label" for="cursoAvanzado">Acreditación Curso Avanzado de Economía Solidaria</label>
+		</div>
+		<div class="form-check radio">
+			<input class="form-check-input" type="checkbox" value="5" id="finacieraEconomia" name="motivos">
+			<label class="form-check-label" for="finacieraEconomia">Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria</label>
+		</div>
+	</form-group>
+	<hr>
 	<!-- Modalidad de la solicitud -->
 	<label for="modalidad_solicitud">Modalidad:<span class="spanRojo">*</span></label><br>
 	<!-- Ayuda para modalidad virtual -->
@@ -219,11 +174,10 @@
 			<label class="form-check-label" for="enLinea">En Linea</label>
 		</div>
 	</form-group>
-
-	<hr />
+	<hr>
 	<br>
-	</form>
-	<button data-toggle="modal" data-target="#ayudaCrearSolicitud" data-backdrop="static" data-keyboard="false" class="btn btn-siia btn-sm pull-right">Crear solicitud <i class="fa fa-check" aria-hidden="true"></i></button>
+	<?php echo form_close(); ?>
+	<button id="guardar_formulario_tipoSolicitud" class="btn btn-siia btn-sm pull-right">Crear solicitud <i class="fa fa-check" aria-hidden="true"></i></button>
 	<button class="btn btn-danger btn-sm volverSolicitudes"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver a solicitudes</button>
 	<!-- Modal Ayuda Modalidad Virtual  -->
 	<div class="modal fade" id="ayudaModalidadVirtual" tabindex="-1" role="dialog" aria-labelledby="ayudaModalidadVirtual">
@@ -298,14 +252,14 @@
 					echo "<td>" . $solicitud->modalidadSolicitudAcreditado . "</td>";
 					if ($solicitud->nombre == "En Proceso") {
 						echo "<td><div class='btn-group-vertical' role='group' aria-label='acciones'><button type='button' class='btn btn-siia btn-sm verSolicitud' data-id=" . $solicitud->idSolicitud . " title='Continuar Solicitud'>Continuar <i class='fa fa-check' aria-hidden='true'></i></button>";
-						echo "<button type='button' class='btn btn-danger btn-sm eliminarSolicitudModal' data-toggle='modal' data-target='#modalEliminarSolicitud' data-id='" . $solicitud->idSolicitud . "' data-backdrop='static' data-keyboard='false' title='Eliminar Solicitud'>Eliminar <i class='fa fa-trash' aria-hidden='true'></i></button></div></td></tr>";
+						echo "<button type='button' class='btn btn-danger btn-sm eliminarSolicitud' data-id='" . $solicitud->idSolicitud . "' title='Eliminar Solicitud'>Eliminar <i class='fa fa-trash' aria-hidden='true'></i></button></div></td></tr>";
 					}
 					if ($solicitud->nombre == "Acreditado" || $solicitud->nombre == "Archivada" || $solicitud->nombre == "Negada" || $solicitud->nombre == "Revocada" ){
 						echo "<td><button class='btn btn-info btn-sm verDetalleSolicitud' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false' data-id=" . $solicitud->idSolicitud . " title='Ver Detalle'>Detalle <i class='fa fa-info' aria-hidden='true'></i></button></div></td></tr>";
 					}
 					if ($solicitud->nombre == "Finalizado"){
 						echo "<td><div class='btn-group-vertical' role='group' aria-label='acciones'><button class='btn btn-success btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Estado'>Estado<i class='fa fa-eye' aria-hidden='true'></i></button>";
-                        echo "<button type='button' class='btn btn-danger btn-sm eliminarSolicitudModal' data-toggle='modal' data-target='#modalEliminarSolicitud' data-id='" . $solicitud->idSolicitud . "' data-backdrop='static' data-keyboard='false' title='Eliminar Solicitud'>Eliminar <i class='fa fa-trash' aria-hidden='true'></i></button></div></td></tr>";
+                        echo "<button type='button' class='btn btn-danger btn-sm eliminarSolicitud' data-id='" . $solicitud->idSolicitud . "' title='Eliminar Solicitud'>Eliminar <i class='fa fa-trash' aria-hidden='true'></i></button></div></td></tr>";
 					}
 					if ($solicitud->nombre == "En Observaciones"){
 						echo "<td><button class='btn btn-warning btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Observaciones'>Observaciones<i class='fa fa-eye' aria-hidden='true'></i></button></td></tr>";
@@ -354,25 +308,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- Modal eliminar solicitud  -->
-			<div class="modal fade" id="modalEliminarSolicitud" tabindex="-1" role="dialog" aria-labelledby="modalEliminarSolicitud">
-			<div class="modal-dialog modal-xs" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title" id="solicitudAEliminar"></h4>
-					</div>
-					<div class="modal-body">
-						<p>Tenga en cuenta que la información registrada en los formularios de dentro de esta solicitud serán eliminados y no se podrán recuperar.</p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" id="noEliminarSolicitud" class="btn btn-danger btn-sm pull-left">No, eliminar <i class="fa fa-times" aria-hidden="true"></i></button>
-						<button type="button" id="eliminarSolicitud" class="btn btn-success btn-sm eliminarSolicitud" data-dismiss="modal">Si, eliminar solicitud<i class="fa fa-check" aria-hidden="true"></i></button>
-					</div>
-				</div>
-			</div>
-		</div>
-			<div class="clearfix"></div>
-			<hr />
+
 		</div>
 	<?php endif	?>
 

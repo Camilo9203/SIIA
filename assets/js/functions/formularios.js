@@ -8,6 +8,13 @@ $(document).ready(function () {
 		verificarFormularios(solicitud);
 		cargarArchivos()
 	}
+	const AlertConfirm = Swal.mixin({
+		confirmButtonText: 'Aceptar',
+		customClass: {
+			confirmButton: 'button-swalert',
+			popup: 'popup-swalert'
+		},
+	})
 });
 // Botón para ocultar y mostrar menu
 $(".hide-sidevar").click(function () {
@@ -29,9 +36,8 @@ $(".hide-sidevar").click(function () {
 		$(".side_main_menu").addClass("bounceInLeft animated");
 	}
 });
-//TODO: Eventos del menu
-$("#sidebar-menu>.menu_section>#wizard_verticle>.side-menu>li>a").click(
-	function () {
+// Eventos del menu
+$("#sidebar-menu>.menu_section>#wizard_verticle>.side-menu>li>a").click(function () {
 		$(".formulario_panel").hide();
 		$("#panel_inicial").hide();
 		$("#estado_solicitud").hide();
@@ -76,127 +82,147 @@ $("#sidebar-menu>.menu_section>#wizard_verticle>.side-menu>li>a").click(
 		cargarArchivos();
 	}
 );
-/** Aceptar crear solicitud */
+/**
+ * Aceptar crear solicitud
+ * */
 $("#noAceptoCrear").click(function () {
 	$("#ayudaCrearSolicitud").modal("hide");
 });
-/** Guardar formulario tipo de solicitud */
+/**
+ * Guardar formulario tipo de solicitud
+ * */
 $("#guardar_formulario_tipoSolicitud").click(function () {
-	if ($("#formulario_crear_solicitud").valid()) {
-		// Declaración de variables
-		let motivos_solicitud = [];
-		let motivo_solicitud = '';
-		let modalidad_solicitud = '';
-		let modalidades_solicitud = [];
-		let seleccionModalidad = 0;
-		let seleccionMotivo = 0;
-		// Recorrer motivos de la solicitud y guardar variables
-		$("#formulario_crear_solicitud input[name=motivos]").each(function (){
-			if (this.checked){
-				switch ($(this).val()) {
-					case '1':
-						motivo_solicitud += 'Acreditación Curso Básico de Economía Solidaria' + ', ';
-						break;
-					case '2':
-						motivo_solicitud += 'Aval de Trabajo Asociado' + ', ';
-						break;
-					case '3':
-						motivo_solicitud += 'Acreditación Curso Medio de Economía Solidaria' + ', ';
-						break;
-					case '4':
-						motivo_solicitud += 'Acreditación Curso Avanzado de Economía Solidaria' + ', ';
-						break;
-					case '5':
-						motivo_solicitud += 'Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria' + ', ';
-						break;
-					default:
-				}
-				motivos_solicitud.push($(this).val());
-			}
-		});
-		// Recorrer motivos de la solicitud y guardar variables
-		$("#formulario_crear_solicitud input[name=modalidades]").each(function (){
-			if (this.checked){
-				switch ($(this).val()) {
-					case '1':
-						modalidad_solicitud += 'Presencial' + ', ';
-						break;
-					case '2':
-						modalidad_solicitud += 'Virtual' + ', ';
-						break;
-					case '3':
-						modalidad_solicitud += 'En Linea' + ', ';
-						break;
-					default:
-				}
-				modalidades_solicitud.push($(this).val());
-			}
-		});
-		// Datos a enviar
-		let data = {
-			tipo_solicitud: $("input:radio[name=tipo_solicitud]:checked").val(),
-			motivo_solicitud: motivo_solicitud.substring(0, motivo_solicitud.length -2),
-			modalidad_solicitud: modalidad_solicitud.substring(0, modalidad_solicitud.length -2),
-			motivos_solicitud: motivos_solicitud,
-			modalidades_solicitud: modalidades_solicitud
-		};
-		// Contar la cantidad de motivos y solicitudes
-		$('input[name=modalidades]:checked').each(function() {
-			seleccionModalidad += 1;
-		});
-		$('input[name=motivos]:checked').each(function() {
-			seleccionMotivo += 1;
-		});
-		// Comprobar que si se seleccione algún motivo y/o modalidad
-		if (seleccionMotivo == '') {
-			Toast.fire({
-				icon: 'error',
-				title: 'Seleccione al menos un motivo'
-			});
-		}
-		else if (seleccionModalidad == 0){
-			Toast.fire({
-				icon: 'error',
-				title: 'Seleccione al menos una modalidad'
-			});
-		}
-		else {
-			//Si la data es validada se envía al controlador para guardar con ajax
-			$(this).attr("disabled", true);
-			$.ajax({
-				url: baseURL + "panel/guardar_tipoSolicitud",
-				type: "post",
-				dataType: "JSON",
-				data: data,
-				beforeSend: function () {
-					Toast.fire({
-						icon: 'info',
-						title: 'Guardando Información'
-					});
-				},
-				success: function (response) {
-					Alert.fire({
-						title: 'Solicitud Creada!',
-                        html: response.msg,
-						text: response.msg,
-						icon: 'success',
-						confirmButtonText: 'Aceptar',
-					}).then((result) => {
-						if (result.isConfirmed) {
-							setInterval(function () {
-								redirect(baseURL + "solicitudes/solicitud/" + response.est);
-							}, 2000);
+	Alert.fire({
+		title: '¿Está seguro de crear la solicitud?',
+		text: 'Verifique la modalidad y los motivos registrados en la solicitud. Tenga en cuenta que una vez creada la solicitud no podrá borrar ni editar la misma.',
+		icon: 'info',
+		showCancelButton: true,
+		confirmButtonText: 'Si',
+		cancelButtonText: 'No',
+
+	}).then((result) => {
+		if (result.isConfirmed) {
+			if ($("#formulario_crear_solicitud").valid()) {
+				// Declaración de variables
+				let motivos_solicitud = [];
+				let motivo_solicitud = '';
+				let modalidad_solicitud = '';
+				let modalidades_solicitud = [];
+				let seleccionModalidad = 0;
+				let seleccionMotivo = 0;
+				// Recorrer motivos de la solicitud y guardar variables
+				$("#formulario_crear_solicitud input[name=motivos]").each(function (){
+					if (this.checked){
+						switch ($(this).val()) {
+							case '1':
+								motivo_solicitud += 'Acreditación Curso Básico de Economía Solidaria' + ', ';
+								break;
+							case '2':
+								motivo_solicitud += 'Aval de Trabajo Asociado' + ', ';
+								break;
+							case '3':
+								motivo_solicitud += 'Acreditación Curso Medio de Economía Solidaria' + ', ';
+								break;
+							case '4':
+								motivo_solicitud += 'Acreditación Curso Avanzado de Economía Solidaria' + ', ';
+								break;
+							case '5':
+								motivo_solicitud += 'Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria' + ', ';
+								break;
+							default:
 						}
-					})
-				},
-				error: function (ev) {
-					//Do nothing
-				},
-			});
+						motivos_solicitud.push($(this).val());
+					}
+				});
+				// Recorrer motivos de la solicitud y guardar variables
+				$("#formulario_crear_solicitud input[name=modalidades]").each(function (){
+					if (this.checked){
+						switch ($(this).val()) {
+							case '1':
+								modalidad_solicitud += 'Presencial' + ', ';
+								break;
+							case '2':
+								modalidad_solicitud += 'Virtual' + ', ';
+								break;
+							case '3':
+								modalidad_solicitud += 'En Linea' + ', ';
+								break;
+							default:
+						}
+						modalidades_solicitud.push($(this).val());
+					}
+				});
+				// Datos a enviar
+				let data = {
+					tipo_solicitud: $("input:radio[name=tipo_solicitud]:checked").val(),
+					motivo_solicitud: motivo_solicitud.substring(0, motivo_solicitud.length -2),
+					modalidad_solicitud: modalidad_solicitud.substring(0, modalidad_solicitud.length -2),
+					motivos_solicitud: motivos_solicitud,
+					modalidades_solicitud: modalidades_solicitud
+				};
+				// Contar la cantidad de motivos y solicitudes
+				$('input[name=modalidades]:checked').each(function() {
+					seleccionModalidad += 1;
+				});
+				$('input[name=motivos]:checked').each(function() {
+					seleccionMotivo += 1;
+				});
+				// Comprobar que si se seleccione algún motivo y/o modalidad
+				if (seleccionMotivo == '') {
+					Toast.fire({
+						icon: 'error',
+						title: 'Seleccione al menos un motivo'
+					});
+				}
+				else if (seleccionModalidad == 0){
+					Toast.fire({
+						icon: 'error',
+						title: 'Seleccione al menos una modalidad'
+					});
+				}
+				else {
+					//Si la data es validada se envía al controlador para guardar con ajax
+					$(this).attr("disabled", true);
+					$.ajax({
+						url: baseURL + "panel/guardar_tipoSolicitud",
+						type: "post",
+						dataType: "JSON",
+						data: data,
+						beforeSend: function () {
+							Toast.fire({
+								icon: 'info',
+								title: 'Guardando Información'
+							});
+						},
+						success: function (response) {
+							Alert.fire({
+								title: 'Solicitud Creada!',
+								html: response.msg,
+								text: response.msg,
+								icon: 'success',
+								confirmButtonText: 'Aceptar',
+							}).then((result) => {
+								if (result.isConfirmed) {
+									setInterval(function () {
+										redirect(baseURL + "solicitudes/solicitud/" + response.est);
+									}, 2000);
+								}
+							})
+						},
+						error: function (ev) {
+							//Do nothing
+						},
+					});
+				}
+			}
 		}
-	}
+
+	});
+
 });
-/** Modales modalidades */
+/**
+ * Modales modalidades
+ * */
 $("#virtual").click(function () {
 	if(this.checked) {
 		$("#ayudaModalidadVirtual").modal("toggle");
@@ -207,7 +233,9 @@ $("#enLinea").click(function () {
 		$("#ayudaModalidadEnLinea").modal("toggle");
 	}
 });
-/** Opciones modales modalidades */
+/**
+ * Opciones modales modalidades
+ * */
 $("#noModVirt").click(function () {
 	$("#virtual").prop("checked", false);
 	$("#ayudaModalidadVirtual").modal("hide");
@@ -224,7 +252,9 @@ $("#siModEnLinea").click(function () {
 	$("#enLinea").prop("checked", true);
 	$("#ayudaModalidadEnLinea").modal("hide");
 });
-/** Formulario 1: formularios información general */
+/**
+ * Formulario 1: formularios información general
+ * */
 // Guardar formulario 1
 $("#guardar_formulario_informacion_general_entidad").click(function () {
 	validFroms(1);
@@ -278,37 +308,53 @@ $("#guardar_formulario_informacion_general_entidad").click(function () {
 	}
 });
 // Eliminar archivo carta
-$(document).on("click", ".eliminar_archivo_carta", function () {
-	$id_formulario = $(this).attr("data-id-formulario");
-	$id_archivo = $(this).attr("data-id-archivo");
-	$tipo = $(this).attr("data-id-tipo");
-	$nombre = $(this).attr("data-nombre-ar");
-
-	data = {
-		id_formulario: $id_formulario,
-		id_archivo: $id_archivo,
-		tipo: $tipo,
-		nombre: $nombre,
-	};
-
-	$.ajax({
-		url: baseURL + "panel/eliminarArchivo",
-		type: "post",
-		dataType: "JSON",
-		data: data,
-		beforeSend: function () {
-			notificacion("Espere...", "success");
-		},
-		success: function (response) {
-			notificacion(response.msg, "success");
-			cargarArchivos();
-			setInterval(function () {
-				reload();
-			}, 2000);
-		},
-		error: function (ev) {
-			//Do nothing
-		},
+$(document).on("click", ".eliminar_archivo", function () {
+	Alert.fire({
+		title: 'Eliminar archivo ',
+		text: '¿Realmente desea eliminar este archivo?',
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonText: 'Si',
+		cancelButtonText: 'No',
+	}).then((result) => {
+		if (result.isConfirmed) {
+			let data = {
+				id_formulario: $(this).attr("data-id-formulario"),
+				id_archivo: $(this).attr("data-id-archivo"),
+				tipo: $(this).attr("data-id-tipo"),
+				nombre: $(this).attr("data-nombre-ar"),
+			};
+			$.ajax({
+				url: baseURL + "Archivos/delete",
+				type: "post",
+				dataType: "JSON",
+				data: data,
+				beforeSend: function () {
+					Toast.fire({
+						icon: 'info',
+						title: 'Eliminando'
+					})
+				},
+				success: function (response) {
+					Alert.fire({
+						title: 'Archivo eliminado!',
+						html: response.msg,
+						text: response.msg,
+						icon: 'success',
+					}).then((result) => {
+						if (result.isConfirmed) {
+							cargarArchivos();
+						}
+					});
+				},
+				error: function (ev) {
+					Toast.fire({
+						icon: 'error',
+						title: 'Error en el controlador consulta al administrador'
+					})
+				},
+			});
+		}
 	});
 });
 // Guardar archivos tipo carta
@@ -332,6 +378,7 @@ $(".archivos_form_carta").on("click", function () {
 			$("#loading").show();
 		},
 		success: function (response) {
+			console.log(response);
 			notificacion(response.msg, "success");
 			cargarArchivos();
 		},
@@ -407,7 +454,9 @@ $(".archivos_form_lugar").on("click", function () {
 		},
 	});
 });
-/** Formulario 2: Formularios documentación legal */
+/**
+ * Formulario 2: Formularios documentación legal
+ * */
 // Camara de comercio
 $(".camaraComercio").click(function () {
 	if ($("input:radio[name=camaraComercio]:checked").val() == "Si") {
@@ -657,7 +706,9 @@ function  eliminarFormularioDocumentacionLegal (data) {
 		},
 	});
 }
-/** Formulario 3: Antecedentes Académicos */
+/**
+ * Formulario 3: Antecedentes Académicos
+ * */
 // Guardar formulario antecedentes académicos
 $("#guardar_formulario_antecedentes_academicos").click(function () {
 	validFroms(3);
@@ -723,99 +774,118 @@ $(".eliminarAntecedentes").click(function () {
 		},
 	});
 });
-/** Formulario 4: Jornadas de actualización */
-// Guardar formulario jornada actualización
-$("#guardar_formulario_jornadas_actualizacion").click(function () {
-	$(this).attr("disabled", true);
-	let numeroPersonas = $("#jornadasNumeroPersonas").val();
-	let fechaAsistencia = $("#jornadasFechaAsistencia").val();
-	if (numeroPersonas == "" && fechaAsistencia == "") {
-		numeroPersonas = 0;
-		fechaAsistencia = "1900-01-01";
-	}
-	data = {
-		numeroPersonas: numeroPersonas,
-		fechaAsistencia: fechaAsistencia,
-		idSolicitud: $(this).attr('data-id')
-	};
+/**
+ * Formulario 4: Jornadas de actualización
+ * */
+// Guardar formulario jórnada de actualización
+$(".guardar_formulario_jornadas_actualizacion").click(function () {
+	//$(this).attr("disabled", true);
+	var form_data = new FormData();
+	form_data.append('file', $('#fileJornadas').prop('files')[0]);
+	form_data.append('tipoArchivo', $(this).attr('data-name'));
+	form_data.append('append_name', $(this).attr('data-name'));
+	form_data.append('numeroPersonas', $('#jornadasNumeroPersonas').val());
+	form_data.append('fechaAsistencia', $('#jornadasFechaAsistencia').val());
+	form_data.append('idSolicitud', $(this).attr('data-id'));
+	event.preventDefault();
 	$.ajax({
-		url: baseURL + "panel/guardar_formulario_jornadas_actualizacion",
-		type: "post",
-		dataType: "JSON",
-		data: data,
-		beforeSend: function () {
-			notificacion("Espere...", "success");
-		},
-		success: function (response) {
-			notificacion(response.msg, "success");
-			//clearInputs("formulario_jornadas_actualizacion");
-			setInterval(function () {
-				reload();
-			}, 2000);
-		},
-		error: function (ev) {
-			//Do nothing
-		},
-	});
-});
-// Eliminar jornada actualización
-$(".eliminarJornadaActualizacion").click(function () {
-	$id_jornada = $(this).attr("data-id-jornada");
-	data = {
-		id_jornada: $id_jornada,
-	};
-	$.ajax({
-		url: baseURL + "panel/eliminarJornadaActualizacion",
-		type: "post",
-		dataType: "JSON",
-		data: data,
-		beforeSend: function () {
-			notificacion("Espere...", "success");
-		},
-		success: function (response) {
-			notificacion(response.msg, "success");
-			setInterval(function () {
-				reload();
-			}, 2000);
-		},
-		error: function (ev) {
-			//Do nothing
-		},
-	});
-});
-// Guardar archivo jornada actualización
-$(".archivos_form_jornada").on("click", function () {
-	$data_name = $(".archivos_form_jornada").attr("data-name");
-	let file_data = $("#" + $data_name).prop("files")[0];
-	let form_data = new FormData();
-	form_data.append("file", file_data);
-	form_data.append("tipoArchivo", $("#" + $data_name).attr("data-val"));
-	form_data.append("append_name", $data_name);
-	$.ajax({
-		url: baseURL + "panel/guardarArchivoJornada",
+		url: baseURL + "JornadasActualizacion/create", // guardarArchivoJornada
 		dataType: "text",
 		cache: false,
 		contentType: false,
 		processData: false,
 		data: form_data,
-		type: "post",
-		dataType: "JSON",
-		beforeSubmit: function () {
-			$("#loading").show();
+		type: "POST",
+		beforeSend: function () {
+			Toast.fire({
+				icon: 'info',
+				title: 'Guardando'
+			})
 		},
 		success: function (response) {
-			notificacion(response.msg, "success");
-			cargarArchivos();
-			setInterval(function () {
-				reload();
-			}, 2000);
+			response = JSON.parse(response);
+			if (response.icon == "success") {
+				Alert.fire({
+					title: 'Guardado!',
+					text: response.msg,
+					icon: response.icon,
+					confirmButtonText: 'Aceptar',
+				}).then((result) => {
+					if (result.isConfirmed) {
+						clearInputs("formulario_jornadas_actualizacion");
+						cargarArchivos();
+						setInterval(function () {
+							reload();
+						}, 2000);
+					}
+				})
+			}
+			else if (response.icon == "error") {
+				Alert.fire({
+					title: 'Error al guardar!',
+					text: response.msg,
+					icon: response.icon,
+					confirmButtonText: 'Aceptar',
+				})
+			}
 		},
 		error: function (ev) {
-			notificacion("Verifique los datos del formulario.", "success");
+			console.log(ev);
 		},
 	});
 });
-/** Formulario 5: Programas de Educación */
+// Eliminar jornada actualización
+$(".eliminarJornadaActualizacion").click(function () {
+	Alert.fire({
+		title: 'Eliminar jornada de actualización',
+		text: '¿Realmente desea eliminar este registro?',
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonText: 'Si',
+		cancelButtonText: 'No',
+	}).then((result) => {
+		if (result.isConfirmed) {
+			let data = {
+				id_jornada: $(this).attr("data-id-jornada"),
+			};
+			$.ajax({
+				url: baseURL + "JornadasActualizacion/delete",
+				type: "post",
+				dataType: "JSON",
+				data: data,
+				beforeSend: function () {
+					Toast.fire({
+						icon: 'info',
+						title: 'Eliminando'
+					})
+				},
+				success: function (response) {
+					Alert.fire({
+						title: 'Registro eliminado!',
+						html: response.msg,
+						text: response.msg,
+						icon: 'success',
+					}).then((result) => {
+						if (result.isConfirmed) {
+							setInterval(function () {
+								reload();
+							}, 2000);
+						}
+					})
+				},
+				error: function (ev) {
+					Toast.fire({
+						icon: 'error',
+						title: 'Error en el controlador consulta al administrador'
+					})
+				},
+			});
+		}
+	});
+});
+/**
+ * Formulario 5: Programas de Educación
+ * */
 // Acciones de cada modal de aceptación
 $("#aceptar_curso_basico_es").click(function () {
 	let curso = $(this).attr("data-programa");
@@ -911,12 +981,16 @@ $(".eliminarDatosProgramas").click(function () {
 		},
 	});
 });
-/** Formulario 6: Llevar a modulo docentes */
+/**
+ * Formulario 6: Llevar a modulo docentes
+ * */
 $("#irDocentes").click(function () {
 	event.preventDefault();
 	window.open(baseURL + "panel/docentes/", '_blank');
 });
-/** Formulario 7: Modalidad Virtual*/
+/**
+ * Formulario 7: Modalidad Virtual
+ * */
 // Aceptar recomendaciones modalidad virtual
 $("#acepto_mod_virtual").click(function () {
 	$("#acepta_mod_en_virtual").prop("checked", true);
@@ -989,7 +1063,9 @@ $(".eliminarDatosPlataforma").click(function () {
 		},
 	});
 });
-/** Formulario 8: Modalidad En Línea */
+/**
+ * Formulario 8: Modalidad En Línea
+ * */
 // Aceptar recomendaciones modalidad en línea
 $("#acepto_mod_en_linea").click(function () {
 	$("#acepta_mod_en_linea").prop("checked", true);
@@ -1467,7 +1543,9 @@ function validFroms (form){
 		default:
 	}
 }
-// TODO: Verificación de formularios
+/**
+ * Verificar solicitud
+ */
 function verificarFormularios(solicitud) {
 	$("#formulariosFaltantes").empty();
 	let data = {
@@ -1576,7 +1654,9 @@ function verificarFormularios(solicitud) {
 		},
 	});
 }
-// TODO: Cargar Archivos
+/**
+ * Cargar tabla de archivos
+ */
 function cargarArchivos() {
 	$(".tabla_form > #tbody").empty();
 	let data = {
@@ -1680,7 +1760,7 @@ function cargarArchivos() {
 						'<td><a target="_blank" href="' +
 						url +
 						response[i].nombre +
-						'"><button class="btn btn-success btn-sm">Ver <i class="fa fa-eye" aria-hidden="true"></i></button></a> - <button class="btn btn-danger btn-sm eliminar_archivo_carta" data-id-tipo="' +
+						'"><button class="btn btn-success btn-sm">Ver <i class="fa fa-eye" aria-hidden="true"></i></button></a> - <button class="btn btn-danger btn-sm eliminar_archivo" data-id-tipo="' +
 						response[i].tipo +
 						'" data-nombre-ar="' +
 						response[i].nombre +
@@ -1700,4 +1780,3 @@ function cargarArchivos() {
 		},
 	});
 }
-
