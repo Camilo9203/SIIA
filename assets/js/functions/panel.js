@@ -43,12 +43,63 @@ $(".verSolicitud").click(function () {
 	window.open(baseURL + "solicitudes/solicitud/" + idSolicitud, '_self');
 });
 /**
- * Ver modal y cargar variable de solicitud
+ * Eliminar solicitud
  * */
-$(".eliminarSolicitudModal").click(function () {
+$(".eliminarSolicitud").click(function () {
 	let idSolicitud = $(this).attr("data-id");
+	let text = "¿Estás seguro de eliminar la solicitud: <strong>" + idSolicitud + "</strong>? Esta acción no se puede revertir.";
+	Alert.fire({
+		title: 'Eliminar solicitud',
+		html: text,
+		text: text,
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonText: 'Si',
+		cancelButtonText: 'No',
+
+	}).then((result) => {
+		if (result.isConfirmed) {
+			let data = {
+				idSolicitud: idSolicitud,
+			};
+			$.ajax({
+				url: baseURL + "panel/eliminarSolicitud",
+				type: "post",
+				dataType: "JSON",
+				data: data,
+				beforeSend: function () {
+					Toast.fire({
+						icon: 'danger',
+						title: 'Eliminando solitud'
+					});
+				},
+				success: function (response) {
+					Alert.fire({
+						title: 'Solicitud eliminada!',
+						html: response.msg,
+						text: response.msg,
+						icon: 'success',
+						confirmButtonText: 'Aceptar',
+					}).then((result) => {
+						if (result.isConfirmed) {
+							setInterval(function () {
+								reload();
+							}, 2000);
+						}
+					})
+				},
+				error: function (ev) {
+					event.preventDefault();
+					console.log(ev);
+					notificacion("Ocurrió un error y no se elimino solicitud");
+				},
+			});
+		}
+	})
+
 	$('#eliminarSolicitud').attr('data-id', idSolicitud);
-	$('#solicitudAEliminar').html("¿Estás seguro de eliminar la solicitud<span class='spanRojo'>" + idSolicitud + "</span>?");
+	$('#solicitudAEliminar').html();
+
 });
 /**
  * Ver Solicitud
@@ -87,49 +138,6 @@ $(".verDetalleSolicitud").click(function () {
 			console.log(ev);
 		},
 	})
-});
-/**
- * Ver eliminar
- * */
-$(".eliminarSolicitud").click(function () {
-	let data = {
-		idSolicitud: $(this).attr('data-id'),
-	};
-	$.ajax({
-		url: baseURL + "panel/eliminarSolicitud",
-		type: "post",
-		dataType: "JSON",
-		data: data,
-		beforeSend: function () {
-			Toast.fire({
-				icon: 'danger',
-				title: 'Eliminando solitud'
-			});
-		},
-		success: function (response) {
-			Alert.fire({
-				title: 'Solicitud eliminada!',
-				html: response.msg,
-				text: response.msg,
-				icon: 'success',
-				confirmButtonText: 'Aceptar',
-			}).then((result) => {
-				if (result.isConfirmed) {
-					setInterval(function () {
-						reload();
-					}, 2000);
-				}
-			})
-		},
-		error: function (ev) {
-			event.preventDefault();
-			console.log(ev);
-			notificacion("Ocurrió un error y no se elimino solicitud");
-		},
-	});
-});
-$("#noEliminarSolicitud").click(function () {
-	$("#modalEliminarSolicitud").modal("hide");
 });
 /**
  * Ver estado solicitud
