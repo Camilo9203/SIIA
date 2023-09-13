@@ -1,7 +1,3 @@
-/** Capturar BaseUrl */
-let url = unescape(window.location.href);
-let activate = url.split("/");
-let baseURL = activate[0] + "//" + activate[2] + "/" + activate[3] + "/";
 ValidarFormRegistro();
 /** Verificación de usuario registrado */
 $("#nombre_usuario").change(function () {
