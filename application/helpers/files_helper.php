@@ -8,27 +8,30 @@ function create_file($file, $metadata)
 	// Comprobar y crear ruta
 	switch ($metadata['tipo']):
 		case 'jornadaAct':
-			$ruta = 'uploads/jornadas';
+			$ruta = 'uploads/jornadas/' . $metadata['nombre'];
+			break;
+		case 'carta':
+			$ruta = 'uploads/cartaRep/' . $metadata['nombre'];
 			break;
 		default:
 			break;
 	endswitch;
 	// Comprobación de errores de archivo
 	$size = 100000000;
-	$tipo_archivo = pathinfo($metadata['nombre'], PATHINFO_EXTENSION);
+	$ext = pathinfo($metadata['nombre'], PATHINFO_EXTENSION);
 	if (0 < $file['error']) {
 		return "Hubo un error al actualizar, intente de nuevo.";
 	}
 	else if ($file['size'] > $size) {
 		return "El tamaño supera las 10 Mb, intente con otro archivo PDF.";
 	}
-	else if ($tipo_archivo != "pdf") {
+	else if ($ext != "pdf") {
 		return "La extensión del archivo no es correcta, debe ser PDF. (archivo.pdf)";
 	}
 	// Guardo de metadatos archivo
 	else if ($CI->db->insert('archivos', $metadata)) {
 		// Mover archivo temporal a carpeta correspondiente en sii/uploads
-		if (move_uploaded_file($file['tmp_name'], $ruta . '/' . $metadata['nombre'])) {
+		if (move_uploaded_file($file['tmp_name'], $ruta)) {
 			return true;
 		}
 		else {

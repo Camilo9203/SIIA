@@ -113,242 +113,242 @@
 			<!-- Formulario de información general de la entidad 1 - INICIO -->
 			<div id="informacion_general_entidad" data-form="1" class=" formulario_panel">
 				<?php echo form_open('', array('id' => 'formulario_informacion_general_entidad')); ?>
-				<h3>1. Información General de la Entidad <i class="fa fa-home" aria-hidden="true"></i></h3>
-				<p>Usted debe llenar todos y cada uno de los campos requeridos y posteriormente presionar el botón Guardar y Continuar, los Campos marcados con (*) son obligatorios</p>
-				<div class="col-md-4">
-					<hr />
-					<label>1. Información General:</label>
-					<br>
-					<div class="form-group">
-						<label class="" for="nombre_organizacion">Nombre de la Organización:<span class="spanRojo">*</span></label>
-						<input type="text" name="nombre_organizacion" id="nombre_organizacion" placeholder="Nombre de la Organización" class="form-control" value="<?php echo $organizacion->nombreOrganizacion; ?>" disabled>
-					</div>
-					<div class="form-group">
-						<label for="sigla">Sigla:<span class="spanRojo">*</span></label>
-						<input type="text" class="form-control" name="sigla" id="sigla" placeholder="Sigla" value="<?php echo $organizacion->sigla; ?>" disabled>
-					</div>
-					<div class="form-group">
-						<label>NIT de la Organizacion:<span class="spanRojo">*</span></label>
-						<input type="text" name="" id="" class="form-control" placeholder="NIT de la Organizacion" value="<?php echo $organizacion->numNIT; ?>" disabled>
-					</div>
-					<div class="form-group">
-						<label for="tipo_organizacion">Tipo de Organización:<span class="spanRojo">*</span></label>
-						<br>
-						<select name="tipo_organizacion" id="tipo_organizacion" class="selectpicker form-control show-tick" required="">
-							<optgroup label="Actual">
-								<option id="0" value="<?php echo $informacionGeneral->tipoOrganizacion; ?>" selected><?php echo $informacionGeneral->tipoOrganizacion; ?></option>
-							</optgroup>
-							<optgroup label="Actualizar">
-								<option id="1" value="Asociación">Asociación</option>
-								<option id="2" value="Asociación Mutual">Asociación Mutual</option>
-								<option id="4" value="Cooperativa">Cooperativa</option>
-								<option id="5" value="Cooperativa de Trabajo Asociado">Cooperativa de Trabajo Asociado</option>
-								<option id="6" value="Cooperativa Especializada">Cooperativa Especializada</option>
-								<option id="7" value="Cooperativa Integral">Cooperativa Integral</option>
-								<option id="8" value="Cooperativa Multiactiva">Cooperativa Multiactiva</option>
-								<option id="9" value="Cooperativa de Ahorro y Credito">Cooperativa de Ahorro y Credito</option>
-								<option id="10" value="Corporación">Corporación</option>
-								<option id="11" value="Empresa asociativa de trabajo">Empresa asociativa de trabajo</option>
-								<option id="12" value="Empresa Comunitaria">Empresa Comunitaria</option>
-								<option id="13" value="Empresa de servicios en forma de administración pública">Empresa de servicios en forma de administración pública</option>
-								<option id="14" value="Empresa Solidaria de Salud">Empresa Solidaria de Salud</option>
-								<option id="15" value="Federación y Confederación">Federación y Confederación</option>
-								<option id="16" value="Fondo de empleados">Fondo de empleados</option>
-								<option id="17" value="Fundación">Fundación</option>
-								<option id="18" value="Institución Universitaria">Institución Universitaria</option>
-								<option id="19" value="Instituciones auxiliares de Economía Solidaria">Instituciones auxiliares de Economía Solidaria</option>
-								<option id="20" value="Precooperativa">Precooperativa</option>
-							</optgroup>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="departamentos">Departamento:<span class="spanRojo">*</span></label>
-						<br>
-						<select name="departamentos" id="departamentos" data-id-dep="1" class="selectpicker form-control show-tick departamentos" required="">
-							<optgroup label="Actual">
-								<option id="0" value="<?php echo $informacionGeneral->nomDepartamentoUbicacion; ?>" selected><?php echo $informacionGeneral->nomDepartamentoUbicacion; ?></option>
-							</optgroup>
-							<optgroup label="Actualizar">
-								<?php
-								foreach ($departamentos as $departamento) {
-									?>
-									<option id="<?php echo $departamento->id_departamento; ?>" value="<?php echo $departamento->nombre; ?>"><?php echo $departamento->nombre; ?></option>
-									<?php
-								}
-								?>
-							</optgroup>
-						</select>
-					</div>
-					<div class="form-group">
-						<div id="div_municipios">
-							<label for="municipios">Municipio:<span class="spanRojo">*</span></label>
-							<br>
-							<select name="municipios" id="municipios" class="selectpicker form-control show-tick municipios" required="">
-								<optgroup label="Actual">
-									<option id="0" value="<?php echo $informacionGeneral->nomMunicipioNacional; ?>" selected><?php echo $informacionGeneral->nomMunicipioNacional; ?></option>
-								</optgroup>
-								<optgroup label="Actualizar">
-									<?php
-									foreach ($municipios as $municipio) {
-										?>
-										<option id="<?php echo $municipio->id_municipio; ?>" value="<?php echo $municipio->nombre; ?>"><?php echo $municipio->nombre; ?></option>
-										<?php
-									}
-									?>
-								</optgroup>
-							</select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="direccion">Dirección:<span class="spanRojo">*</span></label>
-						<input type="text" class="form-control" name="direccion" id="direccion" required="" placeholder="Dirección" value="<?php echo $informacionGeneral->direccionOrganizacion; ?>">
-					</div>
-					<div class="form-group">
-						<label>Teléfono de Contacto:<span class="spanRojo">*</span></label>
-						<input type="text" name="fax" id="fax" class="form-control" required="" placeholder="Fax - Teléfono" value="<?php echo $informacionGeneral->fax; ?>">
-					</div>
-					<div class="checkbox">
-						<label for="extension_checkbox"><input type="checkbox" name="extension_checkbox" id="extension_checkbox" class=""> ¿Tiene Extensión?</label>
-					</div>
-					<div class="form-group">
-						<div id="div_extension">
-							<label for="extension">Extensión:<span class="spanRojo">*</span></label>
-							<input type="text" name="extension" id="extension" class="form-control" placeholder="Extensión" value="<?php echo $informacionGeneral->extension; ?>">
-						</div>
-					</div>
-					<div class="form-group">
-						<label>Correo Electrónico de la Organizacion:<span class="spanRojo">*</span></label>
-						<input type="text" name="" id="" class="form-control" placeholder="Correo Electrónico de la Organizacion" value="<?php echo $organizacion->direccionCorreoElectronicoOrganizacion; ?>">
-					</div>
-				</div>
-				<div class="col-md-4">
-					<hr />
-					<div class="form-group">
-						<label>Dirección Web:</label>
-						<input type="text" name="urlOrganizacion" id="urlOrganizacion" placeholder="www.orgsolidarias.gov.co" class="form-control" value="<?php echo $informacionGeneral->urlOrganizacion; ?>">
-					</div>
-					<div class="form-group">
-						<label for="actuacion">Ámbito de Actuación de la Entidad:<span class="spanRojo">*</span></label>
-						<br>
-						<select name="actuacion" id="actuacion" class="selectpicker form-control show-tick" required="">
-							<optgroup label="Actual">
-								<option id="0" value="<?php echo $informacionGeneral->actuacionOrganizacion; ?>" selected><?php echo $informacionGeneral->actuacionOrganizacion; ?></option>
-							</optgroup>
-							<optgroup label="Actualizar">
-								<option id="1" value="Departamental">Departamental</option>
-								<option id="2" value="Municipal">Municipal</option>
-								<option id="3" value="Nacional">Nacional</option>
-								<option id="4" value="Regional">Regional</option>
-							</optgroup>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="educacion">Tipo de Educación:<span class="spanRojo">*</span></label>
-						<br>
-						<select name="educacion" id="educacion" class="selectpicker form-control show-tick" required="">
-							<optgroup label="Actual">
-								<option id="0" value="<?php echo $informacionGeneral->tipoEducacion; ?>" selected><?php echo $informacionGeneral->tipoEducacion; ?></option>
-							</optgroup>
-							<optgroup label="Actualizar">
-								<option id="1" value="Educacion para el trabajo y el desarrollo humano">Educacion para el trabajo y el desarrollo humano</option>
-								<option id="2" value="Formal">Formal</option>
-								<option id="3" value="Informal">Informal</option>
-							</optgroup>
-						</select>
-					</div>
-					<hr />
-					<label>Información Representante Legal:</label>
-					<div class="form-group">
-						<label for="primerNombreRepLegal">Primer Nombre:<span class="spanRojo">*</span></label>
-						<input type="text" name="primerNombreRepLegal" id="primerNombreRepLegal" class="form-control" value="<?php echo $organizacion->primerNombreRepLegal; ?>">
-					</div>
-					<div class="form-group">
-						<label for="segundoNombreRepLegal">Segundo Nombre:</label>
-						<input type="text" name="segundoNombreRepLegal" id="segundoNombreRepLegal" class="form-control" value="<?php echo $organizacion->segundoNombreRepLegal; ?>">
-					</div>
-					<div class="form-group">
-						<label for="primerApellidoRepLegal">Primer Apellido:<span class="spanRojo">*</span></label>
-						<input type="text" name="primerApellidoRepLegal" id="primerApellidoRepLegal" class="form-control" value="<?php echo $organizacion->primerApellidoRepLegal; ?>">
-					</div>
-					<div class="form-group">
-						<label for="segundoApellidoRepLegal">Segundo Apellido:</label>
-						<input type="text" name="segundoApellidoRepLegal" id="segundoApellidoRepLegal" class="form-control" value="<?php echo $organizacion->segundoApellidoRepLegal; ?>">
-					</div>
-					<div class="form-group">
-						<label>Correo Electrónico del Representante Legal:<span class="spanRojo">*</span></label>
-						<input type="text" name="" id="" class="form-control" value="<?php echo $organizacion->direccionCorreoElectronicoRepLegal; ?>">
-					</div>
-					<div class="form-group">
-						<label for="numCedulaCiudadaniaPersona">Numero de Cédula:<span class="spanRojo">*</span></label>
-						<input type="text" name="numCedulaCiudadaniaPersona" id="numCedulaCiudadaniaPersona" class="form-control" required="" value="<?php echo $informacionGeneral->numCedulaCiudadaniaPersona; ?>">
-					</div>
-				</div>
-				<div class="col-md-4">
-					<hr />
-					<label>1.2. Identificación y Presentación Institucional</label>
-					<div class="form-group">
-						<label for="presentacion">Presentación Institucional:<span class="spanRojo">*</span></label>
-						<textarea class="form-control" name="presentacion" id="presentacion" placeholder="Presentación Institucional..."><?php echo $informacionGeneral->presentacionInstitucional; ?></textarea>
-					</div>
-					<div class="form-group">
-						<label for="objetoSocialEstatutos">Objeto Social Segun Estatutos:<span class="spanRojo">*</span></label>
-						<textarea class="form-control" name="objetoSocialEstatutos" id="objetoSocialEstatutos" placeholder="Objeto Social Segun Estatutos..."><?php echo $informacionGeneral->objetoSocialEstatutos; ?></textarea>
-					</div>
-					<div class="form-group">
-						<label for="mision">Misión:<span class="spanRojo">*</span></label>
-						<textarea class="form-control" id="mision" name="mision" placeholder="Misión..."><?php echo $informacionGeneral->mision; ?></textarea>
-					</div>
-					<div class="form-group">
-						<label for="vision">Visión:<span class="spanRojo">*</span></label>
-						<textarea class="form-control" id="vision" name="vision" placeholder="Visión..."><?php echo $informacionGeneral->vision; ?></textarea>
-					</div>
-					<div class="form-group">
-						<label for="principios">Principios:<span class="spanRojo">*</span></label>
-						<textarea class="form-control" id="principios" name="principios" placeholder="Principios..."><?php echo $informacionGeneral->principios; ?></textarea>
-					</div>
-					<div class="form-group">
-						<label for="fines">Fines:<span class="spanRojo">*</span></label>
-						<textarea class="form-control" id="fines" name="fines" placeholder="Fines..."><?php echo $informacionGeneral->fines; ?></textarea>
-					</div>
-					<div class="form-group">
-						<label for="portafolio">Portafolio de Servicios:<span class="spanRojo">*</span></label>
-						<textarea class="form-control" id="portafolio" name="portafolio" placeholder="Portafolio de Servicios..."><?php echo $informacionGeneral->portafolio; ?></textarea>
-					</div>
-					<div class="form-group">
-						<label for="otros">Otros:</label>
-						<textarea class="form-control" id="otros" name="otros" placeholder="Otros..."><?php echo $informacionGeneral->otros; ?></textarea>
-					</div>
-				</div>
-				<a class="btn btn-siia btn-sm pull-right" name="guardar_formulario_informacion_general_entidad" id="guardar_formulario_informacion_general_entidad">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></a>
-				</form>
+                    <h3>1. Información General de la Entidad <i class="fa fa-home" aria-hidden="true"></i></h3>
+                    <p>Usted debe llenar todos y cada uno de los campos requeridos y posteriormente presionar el botón Guardar y Continuar, los Campos marcados con (*) son obligatorios</p>
+                    <div class="col-md-4">
+                        <hr />
+                        <label>1. Información General:</label>
+                        <br>
+                        <div class="form-group">
+                            <label class="" for="nombre_organizacion">Nombre de la Organización:<span class="spanRojo">*</span></label>
+                            <input type="text" name="nombre_organizacion" id="nombre_organizacion" placeholder="Nombre de la Organización" class="form-control" value="<?php echo $organizacion->nombreOrganizacion; ?>" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="sigla">Sigla:<span class="spanRojo">*</span></label>
+                            <input type="text" class="form-control" name="sigla" id="sigla" placeholder="Sigla" value="<?php echo $organizacion->sigla; ?>" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>NIT de la Organizacion:<span class="spanRojo">*</span></label>
+                            <input type="text" name="" id="" class="form-control" placeholder="NIT de la Organizacion" value="<?php echo $organizacion->numNIT; ?>" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="tipo_organizacion">Tipo de Organización:<span class="spanRojo">*</span></label>
+                            <br>
+                            <select name="tipo_organizacion" id="tipo_organizacion" class="selectpicker form-control show-tick" required="">
+                                <optgroup label="Actual">
+                                    <option id="0" value="<?php echo $informacionGeneral->tipoOrganizacion; ?>" selected><?php echo $informacionGeneral->tipoOrganizacion; ?></option>
+                                </optgroup>
+                                <optgroup label="Actualizar">
+                                    <option id="1" value="Asociación">Asociación</option>
+                                    <option id="2" value="Asociación Mutual">Asociación Mutual</option>
+                                    <option id="4" value="Cooperativa">Cooperativa</option>
+                                    <option id="5" value="Cooperativa de Trabajo Asociado">Cooperativa de Trabajo Asociado</option>
+                                    <option id="6" value="Cooperativa Especializada">Cooperativa Especializada</option>
+                                    <option id="7" value="Cooperativa Integral">Cooperativa Integral</option>
+                                    <option id="8" value="Cooperativa Multiactiva">Cooperativa Multiactiva</option>
+                                    <option id="9" value="Cooperativa de Ahorro y Credito">Cooperativa de Ahorro y Credito</option>
+                                    <option id="10" value="Corporación">Corporación</option>
+                                    <option id="11" value="Empresa asociativa de trabajo">Empresa asociativa de trabajo</option>
+                                    <option id="12" value="Empresa Comunitaria">Empresa Comunitaria</option>
+                                    <option id="13" value="Empresa de servicios en forma de administración pública">Empresa de servicios en forma de administración pública</option>
+                                    <option id="14" value="Empresa Solidaria de Salud">Empresa Solidaria de Salud</option>
+                                    <option id="15" value="Federación y Confederación">Federación y Confederación</option>
+                                    <option id="16" value="Fondo de empleados">Fondo de empleados</option>
+                                    <option id="17" value="Fundación">Fundación</option>
+                                    <option id="18" value="Institución Universitaria">Institución Universitaria</option>
+                                    <option id="19" value="Instituciones auxiliares de Economía Solidaria">Instituciones auxiliares de Economía Solidaria</option>
+                                    <option id="20" value="Precooperativa">Precooperativa</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="departamentos">Departamento:<span class="spanRojo">*</span></label>
+                            <br>
+                            <select name="departamentos" id="departamentos" data-id-dep="1" class="selectpicker form-control show-tick departamentos" required="">
+                                <optgroup label="Actual">
+                                    <option id="0" value="<?php echo $informacionGeneral->nomDepartamentoUbicacion; ?>" selected><?php echo $informacionGeneral->nomDepartamentoUbicacion; ?></option>
+                                </optgroup>
+                                <optgroup label="Actualizar">
+                                    <?php
+                                    foreach ($departamentos as $departamento) {
+                                        ?>
+                                        <option id="<?php echo $departamento->id_departamento; ?>" value="<?php echo $departamento->nombre; ?>"><?php echo $departamento->nombre; ?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div id="div_municipios">
+                                <label for="municipios">Municipio:<span class="spanRojo">*</span></label>
+                                <br>
+                                <select name="municipios" id="municipios" class="selectpicker form-control show-tick municipios" required="">
+                                    <optgroup label="Actual">
+                                        <option id="0" value="<?php echo $informacionGeneral->nomMunicipioNacional; ?>" selected><?php echo $informacionGeneral->nomMunicipioNacional; ?></option>
+                                    </optgroup>
+                                    <optgroup label="Actualizar">
+                                        <?php
+                                        foreach ($municipios as $municipio) {
+                                            ?>
+                                            <option id="<?php echo $municipio->id_municipio; ?>" value="<?php echo $municipio->nombre; ?>"><?php echo $municipio->nombre; ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="direccion">Dirección:<span class="spanRojo">*</span></label>
+                            <input type="text" class="form-control" name="direccion" id="direccion" required="" placeholder="Dirección" value="<?php echo $informacionGeneral->direccionOrganizacion; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono de Contacto:<span class="spanRojo">*</span></label>
+                            <input type="text" name="fax" id="fax" class="form-control" required="" placeholder="Fax - Teléfono" value="<?php echo $informacionGeneral->fax; ?>">
+                        </div>
+                        <div class="checkbox">
+                            <label for="extension_checkbox"><input type="checkbox" name="extension_checkbox" id="extension_checkbox" class=""> ¿Tiene Extensión?</label>
+                        </div>
+                        <div class="form-group">
+                            <div id="div_extension">
+                                <label for="extension">Extensión:<span class="spanRojo">*</span></label>
+                                <input type="text" name="extension" id="extension" class="form-control" placeholder="Extensión" value="<?php echo $informacionGeneral->extension; ?>">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Correo Electrónico de la Organizacion:<span class="spanRojo">*</span></label>
+                            <input type="text" name="" id="" class="form-control" placeholder="Correo Electrónico de la Organizacion" value="<?php echo $organizacion->direccionCorreoElectronicoOrganizacion; ?>">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <hr />
+                        <div class="form-group">
+                            <label>Dirección Web:</label>
+                            <input type="text" name="urlOrganizacion" id="urlOrganizacion" placeholder="www.orgsolidarias.gov.co" class="form-control" value="<?php echo $informacionGeneral->urlOrganizacion; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="actuacion">Ámbito de Actuación de la Entidad:<span class="spanRojo">*</span></label>
+                            <br>
+                            <select name="actuacion" id="actuacion" class="selectpicker form-control show-tick" required="">
+                                <optgroup label="Actual">
+                                    <option id="0" value="<?php echo $informacionGeneral->actuacionOrganizacion; ?>" selected><?php echo $informacionGeneral->actuacionOrganizacion; ?></option>
+                                </optgroup>
+                                <optgroup label="Actualizar">
+                                    <option id="1" value="Departamental">Departamental</option>
+                                    <option id="2" value="Municipal">Municipal</option>
+                                    <option id="3" value="Nacional">Nacional</option>
+                                    <option id="4" value="Regional">Regional</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="educacion">Tipo de Educación:<span class="spanRojo">*</span></label>
+                            <br>
+                            <select name="educacion" id="educacion" class="selectpicker form-control show-tick" required="">
+                                <optgroup label="Actual">
+                                    <option id="0" value="<?php echo $informacionGeneral->tipoEducacion; ?>" selected><?php echo $informacionGeneral->tipoEducacion; ?></option>
+                                </optgroup>
+                                <optgroup label="Actualizar">
+                                    <option id="1" value="Educacion para el trabajo y el desarrollo humano">Educacion para el trabajo y el desarrollo humano</option>
+                                    <option id="2" value="Formal">Formal</option>
+                                    <option id="3" value="Informal">Informal</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <hr />
+                        <label>Información Representante Legal:</label>
+                        <div class="form-group">
+                            <label for="primerNombreRepLegal">Primer Nombre:<span class="spanRojo">*</span></label>
+                            <input type="text" name="primerNombreRepLegal" id="primerNombreRepLegal" class="form-control" value="<?php echo $organizacion->primerNombreRepLegal; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="segundoNombreRepLegal">Segundo Nombre:</label>
+                            <input type="text" name="segundoNombreRepLegal" id="segundoNombreRepLegal" class="form-control" value="<?php echo $organizacion->segundoNombreRepLegal; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="primerApellidoRepLegal">Primer Apellido:<span class="spanRojo">*</span></label>
+                            <input type="text" name="primerApellidoRepLegal" id="primerApellidoRepLegal" class="form-control" value="<?php echo $organizacion->primerApellidoRepLegal; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="segundoApellidoRepLegal">Segundo Apellido:</label>
+                            <input type="text" name="segundoApellidoRepLegal" id="segundoApellidoRepLegal" class="form-control" value="<?php echo $organizacion->segundoApellidoRepLegal; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label>Correo Electrónico del Representante Legal:<span class="spanRojo">*</span></label>
+                            <input type="text" name="" id="" class="form-control" value="<?php echo $organizacion->direccionCorreoElectronicoRepLegal; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="numCedulaCiudadaniaPersona">Numero de Cédula:<span class="spanRojo">*</span></label>
+                            <input type="text" name="numCedulaCiudadaniaPersona" id="numCedulaCiudadaniaPersona" class="form-control" required="" value="<?php echo $informacionGeneral->numCedulaCiudadaniaPersona; ?>">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <hr />
+                        <label>1.2. Identificación y Presentación Institucional</label>
+                        <div class="form-group">
+                            <label for="presentacion">Presentación Institucional:<span class="spanRojo">*</span></label>
+                            <textarea class="form-control" name="presentacion" id="presentacion" placeholder="Presentación Institucional..."><?php echo $informacionGeneral->presentacionInstitucional; ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="objetoSocialEstatutos">Objeto Social Segun Estatutos:<span class="spanRojo">*</span></label>
+                            <textarea class="form-control" name="objetoSocialEstatutos" id="objetoSocialEstatutos" placeholder="Objeto Social Segun Estatutos..."><?php echo $informacionGeneral->objetoSocialEstatutos; ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="mision">Misión:<span class="spanRojo">*</span></label>
+                            <textarea class="form-control" id="mision" name="mision" placeholder="Misión..."><?php echo $informacionGeneral->mision; ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="vision">Visión:<span class="spanRojo">*</span></label>
+                            <textarea class="form-control" id="vision" name="vision" placeholder="Visión..."><?php echo $informacionGeneral->vision; ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="principios">Principios:<span class="spanRojo">*</span></label>
+                            <textarea class="form-control" id="principios" name="principios" placeholder="Principios..."><?php echo $informacionGeneral->principios; ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="fines">Fines:<span class="spanRojo">*</span></label>
+                            <textarea class="form-control" id="fines" name="fines" placeholder="Fines..."><?php echo $informacionGeneral->fines; ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="portafolio">Portafolio de Servicios:<span class="spanRojo">*</span></label>
+                            <textarea class="form-control" id="portafolio" name="portafolio" placeholder="Portafolio de Servicios..."><?php echo $informacionGeneral->portafolio; ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="otros">Otros:</label>
+                            <textarea class="form-control" id="otros" name="otros" placeholder="Otros..."><?php echo $informacionGeneral->otros; ?></textarea>
+                        </div>
+                    </div>
+                    <a class="btn btn-siia btn-sm pull-right" name="guardar_formulario_informacion_general_entidad" id="guardar_formulario_informacion_general_entidad">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></a>
+				<?php echo  form_close(); ?>
 				<div class="col-md-12">
 					<hr />
 					<label>Anexar Solicitud de representante legal, fotografías de lugar de atención al público y 3 certificaciones de procesos educativos realizados por la entidad solicitante.* (Solamente se admiten formatos PDF, PNG, JPG)</label>
 					<p>Anexar las certificaciones emitidas a nombre de la entidad solicitante, para verificar el requisito de experiencia y adjuntar fotografías del espacio físico de operación y atención al público.</p>
 					<div class="form-group col-md-4">
 						<?php echo form_open_multipart('', array('id' => 'formulario_carta')); ?>
-						<h4>Carta de solicitud de representante legal <small>PDF (1)</small></h4>
-						<input type="file" required accept="application/pdf" class="form-control" data-val="carta" name="carta" id="carta">
-						<input type="button" class="btn btn-siia btn-sm archivos_form_carta fa-fa center-block" data-name="carta" name="cartaRep" id="cartaRep" value="Guardar archivo(s) &#xf0c7">
-						</form>
+                            <h4>Carta de solicitud de representante legal <small>PDF (1)</small></h4>
+                            <input type="file" required accept="application/pdf" class="form-control" data-val="carta" name="carta" id="carta">
+                            <input type="button" class="btn btn-siia btn-sm archivos_form_carta fa-fa center-block" data-name="carta" data-form="1" data-solicitud="<?php echo $solicitud->idSolicitud ?>" name="cartaRep" id="cartaRep" value="Guardar archivo(s) &#xf0c7">
+						<?php echo form_close(); ?>
 					</div>
 					<div class="form-group div_certificaciones col-md-4">
 						<?php echo form_open_multipart('', array('id' => 'formulario_certificaciones')); ?>
-						<h4>Certificaciones <small>PDF (3)</small></h4>
-						<input type="file" required accept="application/pdf" class="form-control" data-val="certificaciones" name="certificaciones[]" id="certificaciones1">
-						<input type="file" required accept="application/pdf" class="form-control" data-val="certificaciones" name="certificaciones[]" id="certificaciones2">
-						<input type="file" required accept="application/pdf" class="form-control" data-val="certificaciones" name="certificaciones[]" id="certificaciones3">
-						<input type="button" class="btn btn-siia btn-sm archivos_form_certificacion fa-fa center-block" data-name="certificaciones" name="certificaciones_organizacion" id="certificaciones_organizacion" value="Guardar archivo(s) &#xf0c7">
-						</form>
+                            <h4>Certificaciones <small>PDF (3)</small></h4>
+                            <input type="file" required accept="application/pdf" class="form-control" data-val="certificaciones" name="certificaciones[]" id="certificaciones1">
+                            <input type="file" required accept="application/pdf" class="form-control" data-val="certificaciones" name="certificaciones[]" id="certificaciones2">
+                            <input type="file" required accept="application/pdf" class="form-control" data-val="certificaciones" name="certificaciones[]" id="certificaciones3">
+                            <input type="button" class="btn btn-siia btn-sm archivos_form_certificacion fa-fa center-block" data-name="certificaciones" name="certificaciones_organizacion" id="certificaciones_organizacion" value="Guardar archivo(s) &#xf0c7">
+						<?php echo form_close(); ?>
 					</div>
 					<div class="form-group div_imagenes_lugar col-md-4">
 						<h4>Imagenes <small>PNG, JPG (Max:10)</small> <a id="mas_files_imagenes"><i class="fa fa-plus" aria-hidden="true"></i></a><a id="menos_files_imagenes"> <i class="fa fa-minus" aria-hidden="true"></i></a></h4>
 						<?php echo form_open_multipart('', array('id' => 'formulario_lugar')); ?>
-						<div id="div_imagenes">
-							<input type="file" required accept="image/jpeg, image/png" class="form-control" data-val="lugar" name="lugar[]" id="lugar1">
-						</div>
-						<input type="button" class="btn btn-siia btn-sm fa-fa center-block archivos_form_lugar" data-name="lugar" name="lugar_organizacion" id="lugar_organizacion" value="Guardar archivo(s) &#xf0c7">
-						</form>
+                            <div id="div_imagenes">
+                                <input type="file" required accept="image/jpeg, image/png" class="form-control" data-val="lugar" name="lugar[]" id="lugar1">
+                            </div>
+                            <input type="button" class="btn btn-siia btn-sm fa-fa center-block archivos_form_lugar" data-name="lugar" name="lugar_organizacion" id="lugar_organizacion" value="Guardar archivo(s) &#xf0c7">
+						<?php echo form_close(); ?>
 					</div>
 					<div class="clearfix"></div>
 					<hr />

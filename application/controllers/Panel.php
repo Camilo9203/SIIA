@@ -399,11 +399,6 @@ class Panel extends CI_Controller
 		$observaciones = $this->db->select("*")->from("observaciones")->where("idSolicitud", $idSolicitud)->order_by("valueForm", "asc")->get()->result();
 		return $observaciones;
 	}
-	public function cargarObservacionesDocentes($idOrg)
-	{
-		//$observacionesDocentes = $this->db->select("*")->from("observaciones")->where("organizaciones_id_organizacion", $idOrg)->where("")->order_by("valueForm", "asc")->get()->result();
-		return $observacionesDocentes;
-	}
 	public function cargarObservacionesPlataforma()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -475,25 +470,6 @@ class Panel extends CI_Controller
 		$docentes = $this->db->select("*")->from("docentes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		return $docentes;
 	}
-	public function cargarEstadoSolicitudAdmin($idSolicitud)
-	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-
-		$formularios = $this->verificarFormularios($idSolicitud);
-		//$solicitudes = $this->solicitudes();
-		$estadoOrganizaciones = $this->estadoOrganizaciones($idSolicitud);
-		//$estadoAnterior = $this->estadoAnteriorOrganizaciones();
-		$tipoSolicitud = $this->cargarTipoSolicitud($idSolicitud);
-		$motivoSolicitud = $this->cargarMotivoSolicitud($idSolicitud);
-		$modalidadSolicitud = $this->cargarModalidadSolicitud($idSolicitud);
-		$numeroRevisiones = $this->numeroRevisiones($idSolicitud);
-		$fechaUltimaRevision = $this->fechaUltimaRevision($idSolicitud);
-
-		return array("numero" => $solicitudes, "estado" => $estadoOrganizaciones, "tipoSolicitud" => $tipoSolicitud, "modalidadSolicitud" => $modalidadSolicitud, "motivoSolicitud" => $motivoSolicitud, "numeroRevisiones" => $numeroRevisiones, "fechaUltimaRevision" => $fechaUltimaRevision, 'estadoAnterior' => $estadoAnterior);
-	}
-
 	public function numeroSolicitudes()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -1608,34 +1584,26 @@ class Panel extends CI_Controller
 		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
 		$tipoArchivo = $this->input->post('tipoArchivo');
 		$append_name = $this->input->post('append_name');
-
 		$usuario_id = $this->session->userdata('usuario_id');
 		$name_random = random(10);
 		$size = 100000000;
-
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
 		$id_organizacion = $datos_organizacion->id_organizacion;
 		$id_formulario = 1;
-
 		$archivos = $this->db->select('*')->from('archivos')->where('organizaciones_id_organizacion', $id_organizacion)->get()->row();
-
-
 		if ($tipoArchivo == "carta") {
 			$ruta = 'uploads/cartaRep';
 			$mensaje = "Se guardo la " . $append_name;
 		}
-
 		$nombre_imagen =  $append_name . "_" . $name_random . "_" . $_FILES['file']['name'];
 		$tipo_archivo = pathinfo($nombre_imagen, PATHINFO_EXTENSION);
-
 		$data_update = array(
 			'tipo' => $tipoArchivo,
 			'nombre' => $nombre_imagen,
 			'id_formulario' => $id_formulario,
 			'organizaciones_id_organizacion' => $id_organizacion
 		);
-
 		if (0 < $_FILES['file']['error']) {
 			echo json_encode(array('url' => "", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
 		} else if ($_FILES['file']['size'] > $size) {
@@ -1752,310 +1720,6 @@ class Panel extends CI_Controller
 
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
-	}
-
-	public function guardarArchivoMaterialProgBasic()
-	{
-		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
-		$tipoArchivo = $this->input->post('tipoArchivo');
-		$append_name = $this->input->post('append_name');
-		//var_dump("prueba ".$_FILES['file']);
-		$usuario_id = $this->session->userdata('usuario_id');
-		$name_random = random(10);
-		$size = 2000000000;
-
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-		$id_formulario = 6;
-
-		$archivos = $this->db->select('*')->from('archivos')->where('organizaciones_id_organizacion', $id_organizacion)->get()->row();
-
-
-		if ($tipoArchivo == "materialDidacticoProgBasicos") {
-			$ruta = 'uploads/materialDidacticoProgBasicos';
-			$mensaje = "Se guardo el " . $append_name;
-		}
-
-		$nombre_imagen =  $append_name . "_" . $name_random . "_" . $_FILES['file']['name'];
-		$tipo_archivo = pathinfo($nombre_imagen, PATHINFO_EXTENSION);
-
-		$data_update = array(
-			'tipo' => $tipoArchivo,
-			'nombre' => $nombre_imagen,
-			'id_formulario' => $id_formulario,
-			'organizaciones_id_organizacion' => $id_organizacion
-		);
-
-
-		if (0 < $_FILES['file']['error']) {
-			echo json_encode(array('url' => "", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
-		} else if ($_FILES['file']['size'] > $size) {
-			echo json_encode(array('url' => "", 'msg' => "El tamaño supera las 10 Mb, intente con otro archivo PDF."));
-		} else if ($tipo_archivo != "pdf") {
-			echo json_encode(array('url' => "", 'msg' => "La extensión del archivo no es correcta, debe ser PDF. (archivo.pdf)"));
-		} else if ($this->db->insert('archivos', $data_update)) {
-			if (move_uploaded_file($_FILES['file']['tmp_name'], $ruta . '/' . $nombre_imagen)) {
-				echo json_encode(array('url' => "", 'msg' => $mensaje));
-				//$this->logs_sia->session_log('Actualizacion de Imagen / Logo');){	
-			} else {
-				echo json_encode(array('url' => "", 'msg' => "No se guardo el archivo(s)."));
-			}
-		}
-
-		$this->logs_sia->logs('URL_TYPE');
-		$this->logs_sia->logQueries();
-	}
-	public function guardarArchivoMaterialAvalEco()
-	{
-		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
-		$tipoArchivo = $this->input->post('tipoArchivo');
-		$append_name = $this->input->post('append_name');
-
-		$usuario_id = $this->session->userdata('usuario_id');
-		$name_random = random(10);
-		$size = 100000000;
-
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-		$id_formulario = 7;
-
-		$archivos = $this->db->select('*')->from('archivos')->where('organizaciones_id_organizacion', $id_organizacion)->get()->row();
-
-
-		if ($tipoArchivo == "materialDidacticoAvalEconomia") {
-			$ruta = 'uploads/materialDidacticoAvalEconomia';
-			$mensaje = "Se guardo el " . $append_name;
-		}
-
-		$nombre_imagen =  $append_name . "_" . $name_random . "_" . $_FILES['file']['name'];
-		$tipo_archivo = pathinfo($nombre_imagen, PATHINFO_EXTENSION);
-
-		$data_update = array(
-			'tipo' => $tipoArchivo,
-			'nombre' => $nombre_imagen,
-			'id_formulario' => $id_formulario,
-			'organizaciones_id_organizacion' => $id_organizacion
-		);
-
-
-		if (0 < $_FILES['file']['error']) {
-			echo json_encode(array('url' => "", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
-		} else if ($_FILES['file']['size'] > $size) {
-			echo json_encode(array('url' => "", 'msg' => "El tamaño supera las 10 Mb, intente con otro archivo PDF."));
-		} else if ($tipo_archivo != "pdf") {
-			echo json_encode(array('url' => "", 'msg' => "La extensión del archivo no es correcta, debe ser PDF. (archivo.pdf)"));
-		} else if ($this->db->insert('archivos', $data_update)) {
-			if (move_uploaded_file($_FILES['file']['tmp_name'], $ruta . '/' . $nombre_imagen)) {
-				echo json_encode(array('url' => "", 'msg' => $mensaje));
-				//$this->logs_sia->session_log('Actualizacion de Imagen / Logo');){	
-			} else {
-				echo json_encode(array('url' => "", 'msg' => "No se guardo el archivo(s)."));
-			}
-		}
-
-		$this->logs_sia->logs('URL_TYPE');
-		$this->logs_sia->logQueries();
-	}
-	public function guardarArchivoFormatosEvalProgAval()
-	{
-		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
-		$tipoArchivo = $this->input->post('tipoArchivo');
-		$append_name = $this->input->post('append_name');
-
-		$usuario_id = $this->session->userdata('usuario_id');
-		$name_random = random(10);
-		$size = 100000000;
-
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-		$id_formulario = 8;
-
-		$archivos = $this->db->select('*')->from('archivos')->where('organizaciones_id_organizacion', $id_organizacion)->get()->row();
-
-
-		if ($tipoArchivo == "formatosEvalProgAvalar") {
-			$ruta = 'uploads/formatosEvalProgAvalar';
-			$mensaje = "Se guardo el " . $append_name;
-		}
-
-		$nombre_imagen =  $append_name . "_" . $name_random . "_" . $_FILES['file']['name'];
-		$tipo_archivo = pathinfo($nombre_imagen, PATHINFO_EXTENSION);
-
-		$data_update = array(
-			'tipo' => $tipoArchivo,
-			'nombre' => $nombre_imagen,
-			'id_formulario' => $id_formulario,
-			'organizaciones_id_organizacion' => $id_organizacion
-		);
-
-
-		if (0 < $_FILES['file']['error']) {
-			echo json_encode(array('url' => "", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
-		} else if ($_FILES['file']['size'] > $size) {
-			echo json_encode(array('url' => "", 'msg' => "El tamaño supera las 10 Mb, intente con otro archivo PDF."));
-		} else if ($tipo_archivo != "pdf") {
-			echo json_encode(array('url' => "", 'msg' => "La extensión del archivo no es correcta, debe ser PDF. (archivo.pdf)"));
-		} else if ($this->db->insert('archivos', $data_update)) {
-			if (move_uploaded_file($_FILES['file']['tmp_name'], $ruta . '/' . $nombre_imagen)) {
-				echo json_encode(array('url' => "", 'msg' => $mensaje));
-				//$this->logs_sia->session_log('Actualizacion de Imagen / Logo');){	
-			} else {
-				echo json_encode(array('url' => "", 'msg' => "No se guardo el archivo(s)."));
-			}
-		}
-
-		$this->logs_sia->logs('URL_TYPE');
-		$this->logs_sia->logQueries();
-	}
-	public function guardarArchivoMaterialDicProgAvalar()
-	{
-		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
-		$tipoArchivo = $this->input->post('tipoArchivo');
-		$append_name = $this->input->post('append_name');
-
-		$usuario_id = $this->session->userdata('usuario_id');
-		$name_random = random(10);
-		$size = 100000000;
-
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-		$id_formulario = 8;
-
-		$archivos = $this->db->select('*')->from('archivos')->where('organizaciones_id_organizacion', $id_organizacion)->get()->row();
-
-
-		if ($tipoArchivo == "materialDidacticoProgAvalar") {
-			$ruta = 'uploads/materialDidacticoProgAvalar';
-			$mensaje = "Se guardo el " . $append_name;
-		}
-
-		$nombre_imagen =  $append_name . "_" . $name_random . "_" . $_FILES['file']['name'];
-		$tipo_archivo = pathinfo($nombre_imagen, PATHINFO_EXTENSION);
-
-		$data_update = array(
-			'tipo' => $tipoArchivo,
-			'nombre' => $nombre_imagen,
-			'id_formulario' => $id_formulario,
-			'organizaciones_id_organizacion' => $id_organizacion
-		);
-
-
-		if (0 < $_FILES['file']['error']) {
-			echo json_encode(array('url' => "", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
-		} else if ($_FILES['file']['size'] > $size) {
-			echo json_encode(array('url' => "", 'msg' => "El tamaño supera las 10 Mb, intente con otro archivo PDF."));
-		} else if ($tipo_archivo != "pdf") {
-			echo json_encode(array('url' => "", 'msg' => "La extensión del archivo no es correcta, debe ser PDF. (archivo.pdf)"));
-		} else if ($this->db->insert('archivos', $data_update)) {
-			if (move_uploaded_file($_FILES['file']['tmp_name'], $ruta . '/' . $nombre_imagen)) {
-				echo json_encode(array('url' => "", 'msg' => $mensaje));
-				//$this->logs_sia->session_log('Actualizacion de Imagen / Logo');){	
-			} else {
-				echo json_encode(array('url' => "", 'msg' => "No se guardo el archivo(s)."));
-			}
-		}
-
-		$this->logs_sia->logs('URL_TYPE');
-		$this->logs_sia->logQueries();
-	}
-	public function guardarArchivos()
-	{
-		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
-		$tipoArchivo = $this->input->post('tipoArchivo');
-		$append_name = $this->input->post('append_name');
-
-		$usuario_id = $this->session->userdata('usuario_id');
-		$name_random = random(10);
-		$size = 100000000;
-
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-		$id_formulario = 1;
-
-		$archivos = $this->db->select('*')->from('archivos')->where('organizaciones_id_organizacion', $id_organizacion)->get()->row();
-
-		if ($tipoArchivo == "certificaciones") {
-			$ruta = 'uploads/certificaciones';
-			$mensaje = "Se guardo la " . $append_name;
-		} else if ($tipoArchivo == "lugar") {
-			$ruta = 'uploads/lugarAtencion';
-			$mensaje = "Se guardo " . $append_name;
-		}
-		//inicializamos un contador para recorrer los archivos
-		$i = 0;
-		$files = $_FILES['file']['name'];
-		//recorremos los input files del formulario
-		foreach ($files as $file) {
-			//si se está subiendo algún archivo en ese indice
-			if ($_FILES['file']['tmp_name'][$i]) {
-				//separamos los trozos del archivo, nombre extension
-				$trozos[$i] = explode(".", $_FILES["file"]["name"][$i]);
-
-				//obtenemos la extensión
-				$extension[$i] = end($trozos[$i]);
-				$tipo_archivo = pathinfo($_FILES['file']['name'][$i], PATHINFO_EXTENSION);
-				//si la extensión es una de las permitidas
-				if ($tipo_archivo == "pdf" && $tipoArchivo == "certificaciones" && $this->checkExtensionPDF($extension[$i]) === TRUE) {
-					$name_random_end = random(5);
-					$data_update = array(
-						'tipo' => $tipoArchivo,
-						'nombre' => $append_name . "_" . $name_random . $name_random_end . "_" . $_FILES['file']['name'][$i],
-						'id_formulario' => $id_formulario,
-						'organizaciones_id_organizacion' => $id_organizacion
-					);
-					if ($this->db->insert('archivos', $data_update)) {
-						if (move_uploaded_file($_FILES['file']['tmp_name'][$i], $ruta . '/' . $append_name . "_" . $name_random . $name_random_end . "_" . $_FILES['file']['name'][$i])) {
-						}
-					}
-				} else {
-					echo json_encode(array('url' => "", 'msg' => "La extensión no coindice en el archivo #" . $i . ", por favor, seleccione otro archivo."));
-				}
-				if (($tipo_archivo == "jpg" || $tipo_archivo == "png") && $tipoArchivo == "lugar" && $this->checkExtensionImagenes($extension[$i]) === TRUE) {
-					$name_random_end = random(5);
-					$data_update = array(
-						'tipo' => $tipoArchivo,
-						'nombre' => $append_name . "_" . $name_random . $name_random_end . "_" . $_FILES['file']['name'][$i],
-						'id_formulario' => $id_formulario,
-						'organizaciones_id_organizacion' => $id_organizacion
-					);
-					if ($this->db->insert('archivos', $data_update)) {
-						if (move_uploaded_file($_FILES['file']['tmp_name'][$i], $ruta . '/' . $append_name . "_" . $name_random . $name_random_end . "_" . $_FILES['file']['name'][$i])) {
-						}
-					}
-				} else {
-					echo json_encode(array('url' => "", 'msg' => "La extensión no coindice en el archivo #" . $i . ", por favor, seleccione otro archivo."));
-				}
-			} else {
-				echo json_encode(array('url' => "", 'msg' => "No hay seleccion de archivos."));
-			}
-			$i++;
-		}
-		echo json_encode(array('url' => "", 'msg' => "Error intente de nuevo, nombres diferentes de los archivos."));
-	}
-	private function checkExtensionImagenes($extension)
-	{
-		//aqui podemos añadir las extensiones que deseemos permitir
-		$extensiones = array("jpg", "png", "jpeg");
-		if (in_array(strtolower($extension), $extensiones)) {
-			return TRUE;
-		} else {
-			return FALSE;
-		}
-	}
-	private function checkExtensionPDF($extension)
-	{
-		//aqui podemos añadir las extensiones que deseemos permitir
-		$extensiones = array("pdf");
-		if (in_array(strtolower($extension), $extensiones)) {
-			return TRUE;
-		} else {
-			return FALSE;
-		}
 	}
 	public function excelAsistentes()
 	{
@@ -2408,12 +2072,12 @@ class Panel extends CI_Controller
 			'solicitudes',
 			'tipoSolicitud',
 			'documentacion',
-			'certificadoexistencia',
-			'registroeducativoprogramas',
-			'jornadasactualizacion',
-			'datosprogramas',
-			'datosenlinea',
-			'datosaplicacion');
+			'certificadoExistencia',
+			'registroEducativoProgramas',
+			'jornadasActualizacion',
+			'datosProgramas',
+			'datosEnLinea',
+			'datosAplicacion');
 		$this->db->delete($tables);
 		$msg = 'Se elimino la solicitud: <strong>' . $this->input->post('idSolicitud') . '<strong>';
 		echo json_encode(array('url' => "panel", 'msg' => $msg));

@@ -1,20 +1,21 @@
 $(document).ready(function () {
-	let url = unescape(window.location.href);
-	let solicitud = url.substr(url.lastIndexOf('/') + 1);
-	let activate = url.split("/");
-	let baseURL = activate[0] + "//" + activate[2] + "/" + activate[3] + "/";
-	let siValidadForm = solicitud.substring(0,2);
+	var url = unescape(window.location.href);
+	var solicitud = url.substr(url.lastIndexOf('/') + 1);
+	var activate = url.split("/");
+	var baseURL = activate[0] + "//" + activate[2] + "/" + activate[3] + "/";
+	var siValidadForm = solicitud.substring(0,2);
 	if (siValidadForm == 20) {
 		verificarFormularios(solicitud);
 		cargarArchivos()
 	}
-	const AlertConfirm = Swal.mixin({
-		confirmButtonText: 'Aceptar',
-		customClass: {
-			confirmButton: 'button-swalert',
-			popup: 'popup-swalert'
-		},
-	})
+});
+// Recarga tabla de archivos
+$(".dataReload").click(function () {
+	cargarArchivos();
+	Toast.fire({
+		icon: 'success',
+		text: 'Archivos cargados'
+	});
 });
 // Botón para ocultar y mostrar menu
 $(".hide-sidevar").click(function () {
@@ -282,32 +283,49 @@ $("#guardar_formulario_informacion_general_entidad").click(function () {
 			otros: $("#otros").val(),
 		};
 		$.ajax({
-			url: baseURL + "formularios/guardar_formulario_informacion_general_entidad",
+			url: baseURL + "InformacionGeneral/create",
 			type: "post",
 			dataType: "JSON",
 			data: data,
 			beforeSend: function () {
-				notificacion("Espere...", "success");
+				Toast.fire({
+					icon: 'info',
+					text: 'Guardando'
+				});
 			},
 			success: function (response) {
 				if(response.status == 1) {
-					notificacion(response.msg, "success");
-					setInterval(function () {
-						reload();
-					}, 2000);
+					Alert.fire({
+						title: 'Guardado!',
+						text: response.msg,
+						icon: 'success',
+					}).then((result) => {
+						if (result.isConfirmed) {
+							setInterval(function () {
+								reload();
+							}, 2000);
+						}
+					})
 				}
 				else{
-					notificacion(response.msg, "success");
+					Alert.fire({
+						title: 'Error al guardar!',
+						text: response.msg,
+						icon: 'error',
+					})
 				}
 			},
 			error: function (ev) {
 				event.preventDefault();
-				notificacion(ev.responseText, "success");
+				Toast.fire({
+					icon: 'error',
+					text: ev.responseText
+				});
 			},
 		});
 	}
 });
-// Eliminar archivo carta
+// Eliminar archivos
 $(document).on("click", ".eliminar_archivo", function () {
 	Alert.fire({
 		title: 'Eliminar archivo ',
@@ -359,14 +377,15 @@ $(document).on("click", ".eliminar_archivo", function () {
 });
 // Guardar archivos tipo carta
 $(".archivos_form_carta").on("click", function () {
-	$data_name = $(".archivos_form_carta").attr("data-name");
-	var file_data = $("#" + $data_name).prop("files")[0];
-	var form_data = new FormData();
-	form_data.append("file", file_data);
-	form_data.append("tipoArchivo", $("#" + $data_name).attr("data-val"));
-	form_data.append("append_name", $data_name);
+	let data_name = $(".archivos_form_carta").attr("data-name");
+	let form_data = new FormData();
+	form_data.append("file", $("#" + data_name).prop("files")[0]);
+	form_data.append("tipoArchivo", $("#" + data_name).attr("data-val"));
+	form_data.append("append_name", data_name);
+	form_data.append("id_form", $(".archivos_form_carta").attr("data-form"));
+	form_data.append("idSolicitud", $(".archivos_form_carta").attr("data-solicitud"));
 	$.ajax({
-		url: baseURL + "panel/guardarArchivoCarta",
+		url: baseURL + "Archivos/create",
 		dataType: "text",
 		cache: false,
 		contentType: false,
@@ -375,52 +394,111 @@ $(".archivos_form_carta").on("click", function () {
 		type: "post",
 		dataType: "JSON",
 		beforeSubmit: function () {
-			$("#loading").show();
+			Toast.fire({
+				icon: 'info',
+				text: 'Guardando'
+			})
 		},
 		success: function (response) {
 			console.log(response);
-			notificacion(response.msg, "success");
+			if (response.icon == "success") {
+				Alert.fire({
+					title: 'Archivo guardado!',
+					text: response.msg,
+					icon: response.icon,
+					confirmButtonText: 'Aceptar',
+				})
+			}
+			else if (response.icon == "error") {
+				Alert.fire({
+					title: 'Error al guardar!',
+					text: response.msg,
+					icon: response.icon,
+					confirmButtonText: 'Aceptar',
+				})
+			}
 			cargarArchivos();
 		},
 		error: function (ev) {
-			notificacion("Verifique los datos del formulario.", "success");
+			event.preventDefault();
+			Toast.fire({
+				icon: 'error',
+				text: ev.responseText
+			});
 		},
 	});
 });
 // Guardar archivos tipo certificaciones
 $(".archivos_form_certificacion").on("click", function () {
-	$data_name = $(".archivos_form_certificacion").attr("data-name");
+	let data_name = $(".archivos_form_certificacion").attr("data-name");
 	var form_data = new FormData();
+	let count = 0;
 	$.each(
 		$("#formulario_certificaciones input[type='file']"),
 		function (obj, v) {
 			var file = v.files[0];
-			form_data.append("file[" + obj + "]", file);
+			if (file != undefined) {
+				form_data.append("file[" + obj + "]", file);
+				count ++;
+			}
 		}
 	);
-	form_data.append("tipoArchivo", $("#" + $data_name + "1").attr("data-val"));
-	form_data.append("append_name", $data_name);
-	$.ajax({
-		url: baseURL + "panel/guardarArchivos",
-		dataType: "text",
-		cache: false,
-		contentType: false,
-		processData: false,
-		data: form_data,
-		type: "post",
-		dataType: "JSON",
-		beforeSubmit: function () {
-			$("#loading").show();
-		},
-		success: function (response) {
-			notificacion(response.msg, "success");
-			cargarArchivos();
-		},
-		error: function (ev) {
-			cargarArchivos();
-			//Do nothing
-		},
-	});
+	if (count === 3) {
+		form_data.append("tipoArchivo", $("#" + data_name + "1").attr("data-val"));
+		form_data.append("append_name", data_name);
+		$.ajax({
+			url: baseURL + "archivos/uploadFiles",
+			cache: false,
+			contentType: false,
+			processData: false,
+			data: form_data,
+			type: "post",
+			dataType: "JSON",
+			beforeSubmit: function () {
+				Toast.fire({
+					icon: 'info',
+					text: 'Cargando archivos'
+				})
+			},
+			success: function (response) {
+				console.log(response);
+				if (response.icon == "success") {
+					Alert.fire({
+						title: 'Archivos guardados!',
+						html: response.msg,
+						text: response.msg,
+						icon: response.icon,
+						confirmButtonText: 'Aceptar',
+					})
+				}
+				else if (response.icon == "error") {
+					Alert.fire({
+						title: 'Error al guardar!',
+						html: response.msg,
+						text: response.msg,
+						icon: response.icon,
+						confirmButtonText: 'Aceptar',
+					})
+				}
+				cargarArchivos();
+			},
+			error: function (ev) {
+				Alert.fire({
+					title: 'Error al guardar, consulta al administrador!',
+					icon: 'error',
+					confirmButtonText: 'Aceptar',
+				})
+				cargarArchivos();
+			},
+		});
+	}
+	else {
+		Alert.fire({
+			title: 'No se examinaron los 3 archivos!',
+			text: 'Debes cargar 3 archivos para continuar',
+			icon: 'warning',
+		})
+	}
 });
 // Guardar imágenes del lugar
 $(".archivos_form_lugar").on("click", function () {
@@ -433,8 +511,7 @@ $(".archivos_form_lugar").on("click", function () {
 	form_data.append("tipoArchivo", $("#" + $data_name + "1").attr("data-val"));
 	form_data.append("append_name", $data_name);
 	$.ajax({
-		url: baseURL + "panel/guardarArchivos",
-		dataType: "text",
+		url: baseURL + "archivos/uploadFiles",
 		cache: false,
 		contentType: false,
 		processData: false,
@@ -442,15 +519,40 @@ $(".archivos_form_lugar").on("click", function () {
 		type: "post",
 		dataType: "JSON",
 		beforeSubmit: function () {
-			$("#loading").show();
+			Toast.fire({
+				icon: 'info',
+				text: 'Cargando archivos'
+			})
 		},
 		success: function (response) {
-			notificacion(response.msg, "success");
+			console.log(response);
+			if (response.icon == "success") {
+				Alert.fire({
+					title: 'Archivos guardados!',
+					html: response.msg,
+					text: response.msg,
+					icon: response.icon,
+					confirmButtonText: 'Aceptar',
+				})
+			}
+			else if (response.icon == "error") {
+				Alert.fire({
+					title: 'Error al guardar!',
+					html: response.msg,
+					text: response.msg,
+					icon: response.icon,
+					confirmButtonText: 'Aceptar',
+				})
+			}
 			cargarArchivos();
 		},
 		error: function (ev) {
+			Alert.fire({
+				title: 'Error al guardar, consulta al administrador!',
+				icon: 'error',
+				confirmButtonText: 'Aceptar',
+			})
 			cargarArchivos();
-			//Do nothing
 		},
 	});
 });
@@ -812,8 +914,6 @@ $(".guardar_formulario_jornadas_actualizacion").click(function () {
 					confirmButtonText: 'Aceptar',
 				}).then((result) => {
 					if (result.isConfirmed) {
-						clearInputs("formulario_jornadas_actualizacion");
-						cargarArchivos();
 						setInterval(function () {
 							reload();
 						}, 2000);

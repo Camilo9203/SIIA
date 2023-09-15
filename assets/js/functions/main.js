@@ -1703,8 +1703,6 @@ $(document).ready(function () {
 		}
 	});
 
-
-
 	$("#guardar_formulario_docentes").click(function () {
 		var cedula = $("#docentes_cedula").val();
 		var primer_nombre = $("#docentes_primer_nombre").val();
@@ -1739,124 +1737,6 @@ $(document).ready(function () {
 			},
 			error: function (ev) {
 				//Do nothing
-			},
-		});
-	});
-
-
-
-	$(".archivos_form_basico_economia").on("click", function () {
-		$data_name = $(".archivos_form_basico_economia").attr("data-name");
-		var file_data = $("#" + $data_name).prop("files")[0];
-		var form_data = new FormData();
-		form_data.append("file", file_data);
-		form_data.append("tipoArchivo", $("#" + $data_name).attr("data-val"));
-		form_data.append("append_name", $data_name);
-		$.ajax({
-			url: baseURL + "panel/guardarArchivoMaterialProgBasic",
-			dataType: "text",
-			cache: false,
-			contentType: false,
-			processData: false,
-			data: form_data,
-			type: "post",
-			dataType: "JSON",
-			beforeSubmit: function () {
-				$("#loading").show();
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-				cargarArchivos();
-			},
-			error: function (ev) {
-				notificacion("Verifique los datos del formulario.", "success");
-			},
-		});
-	});
-
-	$(".archivos_form_aval_economia").on("click", function () {
-		$data_name = $(".archivos_form_aval_economia").attr("data-name");
-		var file_data = $("#" + $data_name).prop("files")[0];
-		var form_data = new FormData();
-		form_data.append("file", file_data);
-		form_data.append("tipoArchivo", $("#" + $data_name).attr("data-val"));
-		form_data.append("append_name", $data_name);
-		$.ajax({
-			url: baseURL + "panel/guardarArchivoMaterialAvalEco",
-			dataType: "text",
-			cache: false,
-			contentType: false,
-			processData: false,
-			data: form_data,
-			type: "post",
-			dataType: "JSON",
-			beforeSubmit: function () {
-				$("#loading").show();
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-				cargarArchivos();
-			},
-			error: function (ev) {
-				notificacion("Verifique los datos del formulario.", "success");
-			},
-		});
-	});
-
-	$(".archivos_form_formatosEvalProgAva").on("click", function () {
-		$data_name = $(".archivos_form_formatosEvalProgAva").attr("data-name");
-		var file_data = $("#" + $data_name).prop("files")[0];
-		var form_data = new FormData();
-		form_data.append("file", file_data);
-		form_data.append("tipoArchivo", $("#" + $data_name).attr("data-val"));
-		form_data.append("append_name", $data_name);
-		$.ajax({
-			url: baseURL + "panel/guardarArchivoFormatosEvalProgAval",
-			dataType: "text",
-			cache: false,
-			contentType: false,
-			processData: false,
-			data: form_data,
-			type: "post",
-			dataType: "JSON",
-			beforeSubmit: function () {
-				$("#loading").show();
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-				cargarArchivos();
-			},
-			error: function (ev) {
-				notificacion("Verifique los datos del formulario.", "success");
-			},
-		});
-	});
-
-	$(".archivos_form_materialDidacProgAvalar").on("click", function () {
-		$data_name = $(".archivos_form_materialDidacProgAvalar").attr("data-name");
-		var file_data = $("#" + $data_name).prop("files")[0];
-		var form_data = new FormData();
-		form_data.append("file", file_data);
-		form_data.append("tipoArchivo", $("#" + $data_name).attr("data-val"));
-		form_data.append("append_name", $data_name);
-		$.ajax({
-			url: baseURL + "panel/guardarArchivoMaterialDicProgAvalar",
-			dataType: "text",
-			cache: false,
-			contentType: false,
-			processData: false,
-			data: form_data,
-			type: "post",
-			dataType: "JSON",
-			beforeSubmit: function () {
-				$("#loading").show();
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-				cargarArchivos();
-			},
-			error: function (ev) {
-				notificacion("Verifique los datos del formulario.", "success");
 			},
 		});
 	});
@@ -2399,11 +2279,6 @@ $(document).ready(function () {
 		} else {
 			$("#div_extension").hide();
 		}
-	});
-
-	$(".dataReload").click(function () {
-		cargarArchivos();
-		notificacion("Archivos cargados...");
 	});
 
 	$(".guardar").click(function () {

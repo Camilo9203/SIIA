@@ -13,51 +13,31 @@ class ArchivosModel extends CI_Model
 			return $query->result();
 		}
 		// Traer organizaciones por ID
-		$query = $this->db->get_where('archivos', array('id_administrador' => $id));
+		$query = $this->db->get_where('archivos', array('id_archivo' => $id));
 		return $query->row();
-	}
-	public function getAdministrador($usuario)
-	{
-		// Traer administrador por usuario
-		$query = $this->db->get_where('archivos', array('id' => $usuario));
-		return $query->row();
-	}
-	/**
-	 * Traer nombre de nivel administradores
-	 */
-	public function getNivel($id) {
-		switch ($id):
-			case 0:
-				return "Total";
-				break;
-			case 1:
-				return "Evaluador";
-				break;
-			case 2:
-				return "Reportes";
-				break;
-			case 3:
-				return "Cámaras";
-				break;
-			case 4:
-				return "Histório";
-				break;
-			case 5:
-				return "Segumiendo";
-				break;
-			case 6:
-				return "Asignación";
-				break;
-			default:
-				break;
-		endswitch;
 	}
 
 	/**
-	 * @return $password administrator
+	 *  Comprobar extensiones de archivos
 	 */
-	public function getPassword ($pass) {
-		$password = mc_decrypt($pass, KEY_RDEL);
-		return $password;
+	public function checkExtensionImagenes($extension)
+	{
+		// Aquí podemos añadir las extensiones que deseemos permitir
+		$extensiones = array("jpg", "png", "jpeg");
+		if (in_array(strtolower($extension), $extensiones)) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+	public function checkExtensionPDF($extension)
+	{
+		// Aquí podemos añadir las extensiones que deseemos permitir
+		$extensiones = array("pdf");
+		if (in_array(strtolower($extension), $extensiones)) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
 	}
 }

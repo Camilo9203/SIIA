@@ -20,13 +20,9 @@ class JornadasActualizacion extends CI_Controller
 		$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
 		// Capturar datos de archivo
 		$file = $_FILES['file'];
-		$tipoArchivo = $this->input->post('tipoArchivo');
-		$append = $this->input->post('append_name');
-		$random = random(10);
-		$nombreImagen =  $append . "_" . $random . "_" . $file['name'];
 		$metadata = array(
-			'tipo' => $tipoArchivo,
-			'nombre' => $nombreImagen,
+			'tipo' => $this->input->post('tipoArchivo'),
+			'nombre' => $this->input->post('append_name') . "_" . random(10) . "_" . $file['name'],
 			'id_formulario' => 4,
 			'id_registro' => $this->input->post('idSolicitud'),
 			'organizaciones_id_organizacion' => $organizacion->id_organizacion

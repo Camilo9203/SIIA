@@ -5,7 +5,9 @@ class InformacionGeneralModel extends CI_Model
 	{
 		$this->load->database();
 	}
-	/** Cargar Usuarios */
+	/**
+     * Cargar datos información general
+     */
 	public function getInformacionGeneral($id = FALSE)
 	{
 		if ($id === FALSE) {
