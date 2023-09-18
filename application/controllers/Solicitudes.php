@@ -256,7 +256,7 @@ class Solicitudes extends CI_Controller
 							break;
 					}
 					break;
-				case 5:
+				case 4:
 					if ($tipo == "jornadaAct") {
 						$jornada = TRUE;
 					}

@@ -41,7 +41,8 @@ die();*/
 			<hr>
 			<!-- Configuración select -->
 			<h5>Configuración</h5>
-			<select id="configuracion" class="selectpicker form-control show-tick" autocomplete="off">
+			<select id="configuracion" class="form-control show-tick" autocomplete="on">
+				<option value="default" selected>Selecciona para editar tu información</option>
 				<option value="1">Información básica</option>
 				<option value="2">Firma representante legal</option>
 				<option value="3">Datos inicio de sesión</option>
@@ -57,13 +58,13 @@ die();*/
 			<div class="container">
 				<div class="row">
 					<div class="col-md-10 m-3">
-						<?php echo form_open_multipart('', array('id' => 'formulario_actualizar_imagen')); ?>
+						<?php echo form_open_multipart('', array('id' => 'formulario_actualizar_logo')); ?>
 						<h4>Cambio de imagen / logo de la organización:</h4><small>La imagen tiene que ser de 240px x 95px (Ancho x Alto) para el certificado.</small>
 						<div class="form-group">
-							<input type="file" class="form-control" form="formulario_actualizar_usuario" name="imagen" id="imagen" required="" accept="image/jpeg, image/png">
+							<input type="file" class="form-control" form="formulario_actualizar_usuario" name="logoOrganizacion" id="logoOrganizacion" required accept="image/jpeg, image/png">
 						</div>
-						<button class="btn btn-siia btn-sm pull-right submit" name="actualizar_imagen" id="actualizar_imagen">Actualizar imagen / logo <i class="fa fa-check" aria-hidden="true"></i></button>
-						</form>
+						<button class="btn btn-siia btn-sm pull-right" id="actualizar_imagen">Actualizar imagen / logo <i class="fa fa-check" aria-hidden="true"></i></button>
+						<?php echo form_close() ?>
 					</div>
 				</div>
 				<?php echo form_open('', array('id' => 'formulario_actualizar')); ?>

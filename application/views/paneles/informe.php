@@ -4,12 +4,12 @@
 	<h4>
 		<label>Información a tener en cuenta:</label>
 		<li>Manejar ortografía, mayúsculas, minúsculas y espacios.</li>
-		<li>Los facilitadores relacionados en cursos, deben estar aprobados por la UAEOS.</li>
+		<li>Los facilitadores relacionados en cursos, deben estar aprobados por la Unidad Solidaria.</li>
 		<li>Para diligenciar el informe debe tener todos los datos de los asistentes y todas las especificaciones del curso.</li>
 		<li>Verificar la información del curso y de los asistentes antes de terminar.</li>
-		<li>Si comete un error despues de haber creado el curso debe hacer click en el boton Restaurar y volver a comenzar.</li>
+		<li>Si comete un error después de haber creado el curso debe hacer clic en el botón Restaurar y volver a comenzar.</li>
 		<li>Si da click en Enviar/Ver para el certificado se le enviará un correo electrónico al asistente (Si el asistente no tiene correo, por favor ingresar el correo electrónico de la organización para que luego le haga entrega del mismo).</li>
-		<li>Para ingresar los asistentes de forma automatica en excel debe diligenciar el siguiente <a target="_blank" href="<?php echo base_url("assets/manuales/AsistentesCursosOrganizacion.xlsx"); ?>">FORMATO <i class="fa fa-file-excel-o" aria-hidden="true"></i></a> en excel, o si ya lo diligencio, seleccione el archivo y de click en subir asistentes.</li>
+		<li>Para ingresar los asistentes de forma automática en excel debe diligenciar el siguiente <a target="_blank" href="<?php echo base_url("assets/manuales/AsistentesCursosOrganizacion.xlsx"); ?>">FORMATO <i class="fa fa-file-excel-o" aria-hidden="true"></i></a> en excel, o si ya lo diligencio, seleccione el archivo y de click en subir asistentes.</li>
 		<li>Recuerde diligenciar y verificar toda la información suministrada antes de finalizar.</li>
 	</h4>
 </div>

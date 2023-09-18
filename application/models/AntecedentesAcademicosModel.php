@@ -15,6 +15,6 @@ class AntecedentesAcademicosModel extends CI_Model
 		}
 		// Traer organizaciones por ID
 		$query = $this->db->get_where('antecedentesAcademicos', array('idSolicitud' => $id));
-		return $query->row();
+		return $query->result();
 	}
 }

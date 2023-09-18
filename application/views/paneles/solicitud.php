@@ -13,10 +13,10 @@
  * @var $datosProgramas
  */
 
-	/*echo '<pre>';
+	/** echo '<pre>';
 	var_dump($jornadasActualizacion);
 	echo '</pre>';
-	return null;*/
+	return null; */
 ?>
 <div class="container">
 	<div class="row">
@@ -110,7 +110,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- Formulario de información general de la entidad 1 - INICIO -->
+			<!-- Formulario de información general de la entidad 1 -->
 			<div id="informacion_general_entidad" data-form="1" class=" formulario_panel">
 				<?php echo form_open('', array('id' => 'formulario_informacion_general_entidad')); ?>
                     <h3>1. Información General de la Entidad <i class="fa fa-home" aria-hidden="true"></i></h3>
@@ -370,7 +370,7 @@
 					<hr />
 				</div>
 			</div>
-			<!-- Formulario de documentacion legal 2 - INICIO -->
+			<!-- Formulario de documentación legal 2 -->
 			<div id="documentacion_legal" data-form="2" class=" formulario_panel">
 				<h3>2. Documentación Legal <i class="fa fa-book" aria-hidden="true"></i></h3>
 				<p>Los Campos marcados con (*) son obligatorios.</p>
@@ -650,7 +650,7 @@
 					<?php endif; ?>
 				<?php endif	?>
 			</div>
-			<!-- Formulario de antecedentes academicos 3 - INICIO -->
+			<!-- Formulario de antecedentes academicos 3 -->
 			<div id="antecedentes_academicos" data-form="3" class=" formulario_panel">
 				<div class="">
 					<?php echo form_open('', array('id' => 'formulario_antecedentes_academicos')); ?>
@@ -705,33 +705,33 @@
 							</tr>
 							</thead>
 							<tbody id="tbody">
-							<?php
-							foreach ($antecedentesAcademicos as $antecedentes) {
-								echo "<tr><td>" . $antecedentes->descripcionProceso . "</td>";
-								echo "<td>" . $antecedentes->justificacion . "</td>";
-								echo "<td>" . $antecedentes->objetivos . "</td>";
-								echo "<td>" . $antecedentes->metodologia . "</td>";
-								echo "<td>" . $antecedentes->materialDidactico . "</td>";
-								echo "<td>" . $antecedentes->bibliografia . "</td>";
-								echo "<td>" . $antecedentes->duracionCurso . "</td>";
-								echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarAntecedentes' data-id-antecedentes=" . $antecedentes->id_antecedentesAcademicos . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
-							}
-							?>
+								<?php
+								 	for ($i = 0; $i < count($antecedentesAcademicos); $i++):
+										echo "<tr><td>" . $antecedentesAcademicos[$i]->descripcionProceso . "</td>";
+										echo "<td>" . $antecedentesAcademicos[$i]->justificacion . "</td>";
+										echo "<td>" . $antecedentesAcademicos[$i]->objetivos . "</td>";
+										echo "<td>" . $antecedentesAcademicos[$i]->metodologia . "</td>";
+										echo "<td>" . $antecedentesAcademicos[$i]->materialDidactico . "</td>";
+										echo "<td>" . $antecedentesAcademicos[$i]->bibliografia . "</td>";
+										echo "<td>" . $antecedentesAcademicos[$i]->duracionCurso . "</td>";
+										echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarAntecedentes' data-id-antecedentes=" .$antecedentesAcademicos[$i]->id_antecedentesAcademicos . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+									endfor;
+								?>
 							</tbody>
 						</table>
 					<?php endif; ?>
 				</div>
 			</div>
-			<!-- Formulario de jornadas de actualización 4 - INICIO -->
+			<!-- Formulario de jornadas de actualización 4 -->
 			<div id="jornadas_de_actualizacion" data-form="4" class=" formulario_panel">
 				<h3>4. Jornada de actualización pedagógica <i class="fa fa-handshake-o" aria-hidden="true"></i></h3>
 				<?php if (empty($jornadasActualizacion)): ?>
-					<p>Registre los datos de la última jornada de actualización, organizada por UAEOS, a la que asistió. Si selecciona "No", de clic en guardar y adjunte la carta de compromiso.</p>
+					<p>Registre los datos de la última jornada de actualización, organizada por Unidad Solidaria, a la que asistió. Si selecciona 'No', adjunte por favor una carta de compromiso y de clic en guardar.</p>
 					<br>
 					<?php echo form_open_multipart('', array('id' => 'formulario_jornadas_actualizacion')); ?>
 						<!-- Participación en jornadas -->
 						<div class="form-group">
-							<label for="">5.1 Ha participado en jornadas de actualización organizadas por la UAEOS?</label>
+							<label for="">4.1 Ha participado en jornadas de actualización organizadas por la Unidad Solidaria?</label>
 							<div class="checkbox">
 								<label for="jornaSelect">La entidad participo en la jornada de actualización pedagógica:</label>
 								<label><input type="radio" class="jornaSelect" name="jornaSelect" id="jornaSelect" value="Si">Si</label>
@@ -773,25 +773,33 @@
 				<?php endif; ?>
 				<!-- Tabla jornadas -->
 				<?php if ($jornadasActualizacion): ?>
-					<p>Registro realizado para esta solicitud. Si desea modificar los datos por favor elimine primero el archivo cargado, seguido a ello elimine el registro realizado.</p>
+					<p>Registro realizado con éxito para esta solicitud. Si desea modificar los datos por favor elimine primero el archivo cargado, seguido a ello elimine el registro realizado.</p>
 					<hr />
 					<label>Jornadas:</label>
-					<table id="tabla_jornada_actualizacion" width="100%" border=0 class="table table-striped table-bordered">
-						<thead>
-							<tr>
-								<td class="col-md-4">Número personas</td>
-								<td class="col-md-4">Fecha asistencia</td>
-								<td class="col-md-4">Acción</td>
-							</tr>
-						</thead>
-						<tbody id="tbody">
-							<?php
-								echo "<tr><td>" . $jornadasActualizacion->numeroPersonas . "</td>";
-								echo "<td>" . $jornadasActualizacion->fechaAsistencia . "</td>";
-								echo "<td><button class='btn btn-danger btn-sm eliminarJornadaActualizacion' data-id-jornada=" . $jornadasActualizacion->idSolicitud . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
-							?>
-						</tbody>
-					</table>
+						<table id="tabla_jornada_actualizacion" width="100%" border=0 class="table table-striped table-bordered">
+							<thead>
+								<tr>
+									<?php if($jornadasActualizacion->numeroPersonas != 0): ?>
+										<td class="col-md-4">Número personas</td>
+										<td class="col-md-4">Fecha asistencia</td>
+									<?php else: ?>
+										<td class="col-md-4">Jornada actualización</td>
+									<?php endif; ?>
+									<td class="col-md-4">Acción</td>
+								</tr>
+							</thead>
+							<tbody id="tbody">
+								<?php
+									if ($jornadasActualizacion->numeroPersonas != 0):
+										echo "<tr><td>" . $jornadasActualizacion->numeroPersonas . "</td>";
+										echo "<td>" . $jornadasActualizacion->fechaAsistencia . "</td>";
+									else:
+										echo "<td> No registro jornada de actualización</td>";
+									endif;
+									echo "<td><button class='btn btn-danger btn-sm eliminarJornadaActualizacion' data-id-jornada=" . $jornadasActualizacion->idSolicitud . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+								?>
+							</tbody>
+						</table>
 					<!-- Tabla archivos -->
 					<div class="table">
 						<hr />
@@ -903,7 +911,7 @@
 					</div>
 				<?php endif	?>
 			</div>
-			<!-- Formulario de docentes 6 - INICIO -->
+			<!-- Formulario de docentes 6 -->
 			<div id="docentes" data-form="6" class=" formulario_panel mt-2">
 				<h3>6. Facilitadores <i class="fa fa-users" aria-hidden="true"></i></h3>
 				<div class="jumbotron">
@@ -911,7 +919,7 @@
 					<p>Para crear facilitadores y actualizar o adjuntar archivos como hojas de vida, certificaciones, por favor, de <a href="" id="irDocentes">clic  aquí.</a></p>
 				</div>
 			</div>
-			<!-- Formulario Datos Plataforma 7 - INICIO -->
+			<!-- Formulario Datos Plataforma 7 -->
 			<div id="datos_plataforma" data-form="7" class=" formulario_panel">
 				<h3>7. Datos modalidad virtual<i class="fa fa-globe" aria-hidden="true"></i></h3>
 				<p>Relacione los datos para ingresar a la plataforma y verificar su funcionamiento.</p>
@@ -949,7 +957,7 @@
 							<div class="modal-header">
 								<div class="row">
 									<div id="header_politicas" class="col-md-12">
-										<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="http://localhost/siia/assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
+										<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="<?php echo base_url(); ?>assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
 									</div>
 									<div class="clearfix"></div>
 									<hr />
@@ -962,7 +970,7 @@
 								<p>De acuerdo a lo establecido en el parágrafo número 1 del artículo 6 de la resolución 152 del 23 de junio del 2022, las entidades que soliciten la acreditación por la modalidad en línea deben tener en cuenta lo siguiente:</p>
 								<p><strong>Parágrafo 1.</strong> Para la acreditación de los programas de educación en economía solidaria bajo modalidad virtual, la entidad solicitante deberá demostrar que el proceso educativo se hace en una <stron>plataforma</stron> (sesiones clase, materiales de apoyo, actividades, evaluaciones) que propicie un Ambiente Virtual de Aprendizaje - AVA y Objetos Virtuales de Aprendizaje- OVAS. </p>
 								<p>Recuerde desarrollar el proceso formativo acorde a lo establecido en el anexo técnico.</p>
-								<p>La UAEOS realizará seguimiento a las organizaciones acreditadas en el cumplimiento de los programas de educación solidaria acreditados.</p>
+								<p>La Unidad Solidaria realizará seguimiento a las organizaciones acreditadas en el cumplimiento de los programas de educación solidaria acreditados.</p>
 								<!--				<a class="pull-right" target="_blank" href="https://www.orgsolidarias.gov.co/sites/default/files/archivos/Res_110%20del%2031%20de%20marzo%20de%202016.pdf">Recurso de la resolución 110</a>-->
 								<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
 								<button type="button" class="btn btn-siia btn-sm pull-right" id="acepto_mod_virtual">Sí, acepto. <i class="fa fa-check"></i></button>
@@ -1003,9 +1011,9 @@
 					</div>
 				<?php endif; ?>
 			</div>
-			<!-- Formulario Datos En Lina 8 - INICIO -->
+			<!-- Formulario Datos En Lina 8 -->
 			<div id="datos_en_linea" data-form="8" class="formulario_panel">
-				<h3>8. Datos modalidad en linea<i class="fa fa-globe" aria-hidden="true"></i></h3>
+				<h3>8. Datos modalidad en línea<i class="fa fa-globe" aria-hidden="true"></i></h3>
 				<p>Ingrese los datos de las herramientas a utilizar en esta modalidad dentro del curso.</p>
 				<?php echo form_open('', array('id' => 'formulario_modalidad_en_linea')); ?>
 				<!-- Nombre de la herramienta-->
@@ -1036,7 +1044,7 @@
 							<div class="modal-header">
 								<div class="row">
 									<div id="header_politicas" class="col-md-12">
-										<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="http://localhost/siia/assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
+										<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="<?php echo base_url(); ?>assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
 									</div>
 									<div class="clearfix"></div>
 									<hr />
@@ -1049,7 +1057,7 @@
 								<p>De acuerdo a lo establecido en el parágrafo número 2 del artículo 6 de la resolución 152 del 23 de junio del 2022, las entidades que soliciten la acreditación por la modalidad en línea, deben tener en cuenta lo siguiente:</p>
 								<p><strong>Parágrafo 2.</strong> Para la acreditación de los programas de educación en economía solidaria bajo modalidad línea, aquella donde los docentes y participantes interactúan a través de recursos tecnológicos. La mediación tecnológica puede ser a través de herramientas tecnológica (Zoom, Teams, Meet, Good Meet, entre otras) plataformas de comunicación, chats, foros, videoconferencias, grupos de discusión, caracterizadas por encuentros sincrónicos.</strong> </p>
 								<p>Recuerde desarrollar el proceso formativo acorde a lo establecido en el anexo técnico.</p>
-								<p>La UAEOS realizará seguimiento a las organizaciones acreditadas en el cumplimiento de los programas de educación solidaria acreditados.</p>
+								<p>La Unida Solidaria realizará seguimiento a las organizaciones acreditadas en el cumplimiento de los programas de educación solidaria acreditados.</p>
 								<!--				<a class="pull-right" target="_blank" href="https://www.orgsolidarias.gov.co/sites/default/files/archivos/Res_110%20del%2031%20de%20marzo%20de%202016.pdf">Recurso de la resolución 110</a>-->
 								<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
 								<button type="button" class="btn btn-siia btn-sm pull-right" id="acepto_mod_en_linea" value="Si Acepta">Sí, acepto. <i class="fa fa-check"></i></button>
@@ -1090,7 +1098,7 @@
 					</div>
 				<?php endif	?>
 			</div>
-			<!-- Continuar para finalizar Acreditación - INICIO -->
+			<!-- Continuar para finalizar Acreditación -->
 			<div id="finalizar_proceso" data-form="0" class="formulario_panel mt-5">
 				<div id="verificacion_formularios"></div>
 				<div class="jumbotron" id="verificar_btn">

@@ -249,4 +249,4 @@ Se usa [SemVer](http://semver.org/) para versiones.
 
 ## Licencia
 
-Este proyecto esta bajo los derechos de autor del desarrollador y de la Unidad Administrativa Especial de Organizaciones Solidarias - UAEOS
+Este proyecto está bajo los derechos de autor del desarrollador y de la Unidad Solidaria

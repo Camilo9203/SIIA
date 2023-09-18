@@ -181,7 +181,7 @@ Observaciones
                     <p class="obsCopy">Favor definir claramente los objetivos de formación de acuerdo con el desarrollo de contenidos establecidos en los artículos 8 y 9 de la Resolución 110 de 2016. Gracias.</p>
                 </li>
                 <li>
-                    <label>Objetivos: Confunden los objetivos del curso, con los objetivos de acreditarse. Por ejemplo dicen realizar convenios con UAEOS para (...):</label>
+                    <label>Objetivos: Confunden los objetivos del curso, con los objetivos de acreditarse. Por ejemplo dicen realizar convenios con Unidad Solidaria para (...):</label>
                     <p class="obsCopy">Favor definir claramente los objetivos de formación, Favor definir claramente los objetivos de formación de acuerdo con el desarrollo de contenidos establecidos en los artículos 8 y 9 de la Resolución 110 de 2016. En esta parte del formulario se delimita la información al Curso de economía solidaria, sin entrar en detalle de la gestión que con la acreditación realice la entidad. Por favor realizar los ajustes pertinentes.</p>
                 </li>
                 <li>

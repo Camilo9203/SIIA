@@ -10,7 +10,7 @@
 	<meta name="application-name" content="Sistema Integrado de Información de Acreditación - SIIA">
 	<meta name="description" content="">
 	<meta name="keywords" content="">
-	<meta name="author" content="Unidad Administrativa Especial Organizaciones Solidarias - UAEOS">
+	<meta name="author" content="Unidad Solidaria">
 	<meta name="revisit-after" content="30 days">
 	<meta name="distribution" content="web">
 	<META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">

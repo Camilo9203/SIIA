@@ -15,7 +15,7 @@ $fecha = date('d')." de ".$nombre." del ".date('Y');
     <meta name="application-name" content="Sistema Integrado de Información de Acreditación - SIIA" />
     <meta name="description" content="Sistema Integrado de Información de Acreditación (SIIA) para entidades con interés de acreditarse en cursos de economía solidaria. Unidad Administrativa Especial de Organizaciones Solidarias." />
     <meta name="keywords" content="Organizaciones Solidarias,Sector Solidario,Cooperativas,Economía solidaria,Empresa,Social,Asociatividad,Emprendimiento,Proyectos productivos,Negocios inclusivos,Productores,Empresarios,Campesinos,Asociativo,Comercio justo,Agro,Ley 454" />
-    <meta name="author" content="Unidad Administrativa Especial Organizaciones Solidarias - UAEOS" />
+    <meta name="author" content="Unidad Solidaria" />
     <link href="<?php echo base_url('assets/css/bootstrap.min.css')?>" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url('assets/css/font-awesome.min.css')?>" rel="stylesheet" type="text/css" />
     <script src="<?php echo base_url('assets/js/jquery-3.1.1.min.js')?>" type="text/javascript"></script>

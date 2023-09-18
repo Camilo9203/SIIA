@@ -121,7 +121,7 @@ class Perfil extends CI_Controller {
 		return $resolucion;
 	}
 	// Cargar logo organización
-	public function upload_imagen_logo()
+	public function actualizarLogoOrganizacion()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
 		$name_random = random(10);
@@ -129,49 +129,28 @@ class Perfil extends CI_Controller {
 		$organizacion = $this->db->select('*')->from('organizaciones')->where('usuarios_id_usuario', $usuario_id)->get()->row();
 		$nombre_imagen =  "logo_".$name_random.$_FILES['file']['name'];
 		$tipo_imagen = pathinfo($nombre_imagen,PATHINFO_EXTENSION);
-		if($organizacion->imagenOrganizacion != 'default.png'){
-			if(0 < $_FILES['file']['error']) {
-			    echo json_encode(array('url'=>"perfil", 'msg'=>"Hubo un error al actualizar, intente de nuevo."));
-			}
-			else if($_FILES['file']['size'] > $size){
-				echo json_encode(array('url'=>"perfil", 'msg'=>"El tamaño supera las 10 Mb, intente con otra imagen."));
-			}
-			else if($tipo_imagen != "jpeg" &&  $tipo_imagen != "png" &&  $tipo_imagen != "jpg"){
-				echo json_encode(array('url'=>"perfil", 'msg'=>"La extensión de la imagen no es correcta, debe ser JPG, PNG"));
-			}
-			else if(move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/logosOrganizaciones/'.$nombre_imagen)){
+
+		if(0 < $_FILES['file']['error']) {
+			echo json_encode(array('icon' => "error", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
+		}
+		else if($_FILES['file']['size'] > $size){
+			echo json_encode(array('icon' => "warning", 'msg' => "El tamaño supera las 10 Mb, intente con otra imagen."));
+		}
+		else if($tipo_imagen != "jpeg" &&  $tipo_imagen != "png" &&  $tipo_imagen != "jpg"){
+			echo json_encode(array('icon' => "warning", 'msg' => "La extensión de la imagen no es correcta, debe ser JPG, PNG"));
+		}
+		else if(move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/logosOrganizaciones/'.$nombre_imagen)){
+			if($organizacion->imagenOrganizacion != 'default.png'):
 				unlink('uploads/logosOrganizaciones/'. $organizacion->imagenOrganizacion);
-				$data_update = array(
-					'imagenOrganizacion' => $nombre_imagen
-				);
-				$this->db->where('usuarios_id_usuario', $usuario_id);
-				$this->db->update('organizaciones', $data_update);
-				echo json_encode(array('url'=>"perfil", 'msg'=>"Se actualizo la imagen."));
-				$this->logs_sia->session_log('Actualización de Imagen / Logo');
-			}
+			endif;
+
+			$data_update = array('imagenOrganizacion' => $nombre_imagen);
+			$this->db->where('usuarios_id_usuario', $usuario_id);
+			$this->db->update('organizaciones', $data_update);
+			echo json_encode(array('icon' => "success", 'msg' => "Se actualizo la imagen de perfil correctamente."));
+
 		}
-		else{
-			if(0 < $_FILES['file']['error']) {
-			    echo json_encode(array('url'=>"perfil", 'msg'=>"Hubo un error al actualizar, intente de nuevo."));
-			}
-			else if($_FILES['file']['size'] > $size){
-				 echo json_encode(array('url'=>"perfil", 'msg'=>"El tamaño supera las 10 Mb, intente con otra imagen."));
-			}
-			else if($tipo_imagen != "jpeg" &&  $tipo_imagen != "png" &&  $tipo_imagen != "jpg"){
-				echo json_encode(array('url'=>"perfil", 'msg'=>"La extensión de la imagen no es correcta, debe ser JPG, PNG"));
-			}
-			else if(move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/logosOrganizaciones/'.$nombre_imagen)){
-				$data_update = array(
-					'imagenOrganizacion' => $nombre_imagen
-				);
-				$this->db->where('usuarios_id_usuario', $usuario_id);
-				$this->db->update('organizaciones', $data_update);
-				echo json_encode(array('url'=>"perfil", 'msg'=>"Se actualizo la imagen."));
-				$this->logs_sia->session_log('Actualización de Imagen / Logo');
-			}
-		}
-		$this->logs_sia->logs('URL_TYPE');
-		$this->logs_sia->logQueries();
+
 	}
 	public function upload_firma()
 	{

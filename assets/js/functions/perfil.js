@@ -35,36 +35,41 @@ $('#configuracion').change(function () {
 });
 // Actualizar imagen perfil
 $("#actualizar_imagen").on("click", function () {
-	if ($("#formulario_actualizar_imagen").valid()) {
-		var file_data = $("#imagen").prop("files")[0];
-		var form_data = new FormData();
+	if ($("#formulario_actualizar_logo").valid()) {
+		let file_data = $("#logoOrganizacion").prop("files")[0];
+		let form_data = new FormData();
 		form_data.append("file", file_data);
 		$.ajax({
-			url: baseURL + "perfil/upload_imagen_logo",
+			url: baseURL + "perfil/actualizarLogoOrganizacion",
 			dataType: "text",
 			cache: false,
 			contentType: false,
 			processData: false,
 			data: form_data,
 			type: "post",
-			dataType: "JSON",
 			beforeSend: function () {
 				Toast.fire({
-					icon: 'alert',
+					icon: 'info',
 					title: 'Cargando...'
 				});
 			},
 			success: function (response) {
-				Toast.fire({
-					icon: 'success',
-					title: response.msg,
+				console.log(response)
+				Alert.fire({
+					title: 'Imagen de perfil actualizada!',
+					text: response.msg,
+					icon: response.icon,
+					confirmButtonText: 'Aceptar',
+				}).then((result) => {
+					if (result.isConfirmed) {
+						setInterval(function () {
+							reload();
+						}, 2000);
+					}
 				})
-				setInterval(function () {
-					redirect("perfil");
-				}, 2000);
 			},
-			error: function (ev) {
-				//Do nothing
+			error: function (jqXHR, textStatus, errorThrown) {
+				console.log(jqXHR, textStatus, errorThrown);
 			},
 		});
 	}
@@ -183,9 +188,9 @@ $("#admin_ver_inscritas_tabla").click(function () {
 // Validar formularios
 function validarFormulariosPerfil() {
 	// Formulario actualizar imagen de perfil
-	$("form[id='formulario_actualizar_imagen']").validate({
+	$("form[id='formulario_actualizar_logo']").validate({
 		rules: {
-			imagen: {
+			logoOrganizacion: {
 				required: true,
 				validators: {
 					notEmpty: {
@@ -201,7 +206,7 @@ function validarFormulariosPerfil() {
 			},
 		},
 		messages: {
-			imagen: {
+			logoOrganizacion: {
 				required: "Por favor, seleccione una imagen en JPG, PNG, JPEG.",
 			},
 		},

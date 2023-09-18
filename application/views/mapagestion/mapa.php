@@ -3,10 +3,10 @@
         <div class="col-md-11 center-block">
             <h3>Mapa de Gestión.</h3>
             <h4>Esta es una tabla la cual tiene los mismos datos que se encuentran en la página web de datos abiertos de la
-                Unidad Administrativa Especial de Organizaciones Solidarias, la puede consultar dando click
+                Unidad Administrativa Especial de Organizaciones Solidarias, la puede consultar dando clic
                 <a target="_blank" href="https://www.datos.gov.co/d/dab5-4h4v/visualization">aquí</a>, usted obtiene una vizualizacion de los datos.</h4>
-                <label class="pull-left">Nota: Esta aplicación se encuentra en desarrollo por parte de UAEOS y no existe ningún dato.</label>
-                <small class="pull-right">Para obtener mas información del conjunto de datos de click
+                <label class="pull-left">Nota: Esta aplicación se encuentra en desarrollo por parte de Unidad Solidaria y no existe ningún dato.</label>
+                <small class="pull-right">Para obtener más información del conjunto de datos de clic
                     <a target="_blank" href="https://www.datos.gov.co/Trabajo/Organizaciones-Entidades-Aplicaci-n-SIIA-Acreditad/2tsa-2de2">aqui.</a></small>
         </div>
     </div>

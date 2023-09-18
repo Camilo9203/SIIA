@@ -2438,7 +2438,7 @@ class Admin extends CI_Controller
 	 **/
 	function envio_mail($type, $id_organizacion, $prioridad, $adj)
 	{
-		$fromSIA = "Unidad Administrativa Especial de Organizaciones Solidarias UAEOS - Aplicación SIIA.";
+		$fromSIA = "Unidad Solidaria - Aplicación SIIA.";
 
 		$to_correo = $this->db->select("*")->from("organizaciones")->where("id_organizacion", $id_organizacion)->get()->row();
 		$estadoOrganizaciones = $this->db->select("*")->from("estadoOrganizaciones")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
@@ -2526,7 +2526,7 @@ class Admin extends CI_Controller
 	// TODO: Enviar Email a Administradores
 	function envio_mail_admin($tipo, $correoAdmin, $prioridad, $docente)
 	{
-		$fromSIA = "Unidad Administrativa Especial de Organizaciones Solidarias UAEOS - Aplicación SIIA.";
+		$fromSIA = "Unidad Solidarias - Aplicación SIIA.";
 
 		switch ($tipo) {
 			case 'asignar':

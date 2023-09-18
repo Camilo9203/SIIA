@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta name="application-name" content="Sistema Integrado de Información de Acreditación - SIIA" />
     <meta name="description" content="Sistema Integrado de Información de Acreditación (SIIA) para entidades con interés de acreditarse en cursos de economía solidaria. Unidad Administrativa Especial de Organizaciones Solidarias." />
     <meta name="keywords" content="Organizaciones Solidarias,Sector Solidario,Cooperativas,Economía solidaria,Empresa,Social,Asociatividad,Emprendimiento,Proyectos productivos,Negocios inclusivos,Productores,Empresarios,Campesinos,Asociativo,Comercio justo,Agro,Ley 454" />
-    <meta name="author" content="Unidad Administrativa Especial Organizaciones Solidarias - UAEOS" />
+    <meta name="author" content="Unidad Solidaria" />
     <meta name="revisit-after" content="30 days" />
     <meta name="distribution" content="web" />
     <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW" />

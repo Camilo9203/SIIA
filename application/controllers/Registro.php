@@ -147,7 +147,7 @@ class Registro extends CI_Controller
 							if ($this->db->insert('organizaciones', $data_registro_org)) {
 								$this->logs_sia->logQueries();
 								$token = $this->db->select('token')->from('token')->where('usuario_token', $data_registro_user['usuario'])->get()->row();
-								$fromSIA = "Unidad Administrativa Especial de Organizaciones Solidarias UAEOS - Aplicación SIIA.";
+								$fromSIA = "Unidad Solidaria - Aplicación SIIA.";
 								$this->logs_sia->logs('REGISTER_TYPE');
 								$this->logs_sia->logs('URL_TYPE');
 								$this->logs_sia->logQueries();

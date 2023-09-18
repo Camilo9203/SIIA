@@ -148,7 +148,7 @@
 											<p><?php echo $data['nombrePrograma']; ?></p>
 											<strong><label>Fecha:</label></strong>
 											<p><?php echo $data['fecha']; ?></p>
-											<p>La UAEOS le recuerda que es importante mantener la información básica de contacto de la entidad actualizada, para facilitar el desarrollo del proceso derivado del trámite de acreditación. Le recomendamos realizar los cambios o actualizaciones a través del SIIA. En razón a la política de manejo de datos institucional y para verificar la identidad de la organización, se recomienda conservar su usuario y contraseña:</p><br />
+											<p>La Unidad Solidaria le recuerda que es importante mantener la información básica de contacto de la entidad actualizada, para facilitar el desarrollo del proceso derivado del trámite de acreditación. Le recomendamos realizar los cambios o actualizaciones a través del SIIA. En razón a la política de manejo de datos institucional y para verificar la identidad de la organización, se recomienda conservar su usuario y contraseña:</p><br />
 										</td>
 									</tr>
 								</table>

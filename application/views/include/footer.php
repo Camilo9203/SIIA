@@ -352,7 +352,7 @@
 		<div class="row">
 			<div id="col-md-12" class="text-center">
 				<small>
-					<p title="Unidad Administrativa Especial Organizaciones Solidarias">Copyright © <?php echo date('Y'); ?> UAEOS |
+					<p title="Unidad Solidaria">Copyright © <?php echo date('Y'); ?> Unidad Solidaria |
 						<a target="_blank" title="Politicas de Privacidad y Condiciones de Uso" href="<?php echo PAGINA_WEB ?>sites/default/files/archivos/terminos%20de%20uso.pdf">Politicas de Privacidad y Condiciones de Uso</a> | <a title="Administrador" href="<?php echo base_url() ?>admin">Administrador</a> | SIIA v1.0.8.181022-Prod
 					</p>
 				</small>

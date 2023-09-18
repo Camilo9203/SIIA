@@ -31,7 +31,7 @@ class Recordar extends CI_Controller {
 		}
 		else
 		{
-			$fromSIA = "Unidad Administrativa Especial de Organizaciones Solidarias UAEOS - Aplicación SIIA.";
+			$fromSIA = "Unidad Solidaria - Aplicación SIIA.";
 			$usuario = $this->input->post('usuario');
 			$correo_electronico =  $this->input->post('correo_electronico');
 

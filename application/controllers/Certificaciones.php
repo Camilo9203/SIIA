@@ -121,7 +121,7 @@ class Certificaciones extends CI_Controller
 		$datosCurso_ = 'Participó y aprobó el programa de capacitación denominado "' . strtoupper($nombre_curso) . '"';
 		$datosCurso =  "realizado en el municipo de " . strtoupper($mun) . " - " . $dep . ". En la fecha de " . $_mes . " " . $dia . " de " . $ano . ", con una intensidad de " . $duracionCurso . " horas.";
 		$cuidad = "Se expide en Bogotá, D.C., a los " . date('d') . " días del mes de " . strftime("%B") . " del " . date('Y') . ".";
-		$uaeos1 = "La Unidad Administrativa Especial de Organizaciones Solidarias, de conformidad con el numeral 5.8";
+		$uaeos1 = "La Unidad Solidaria, de conformidad con el numeral 5.8";
 		$uaeos2 = "del capítulo V del Decreto 4904 de 2009 y artículo 2.6.6.8 del Decreto 1075 de 2015";
 		$estado = $datos_estado->nombre;
 		$motivo = $datos_estado->motivoSolicitudAcreditado;
