@@ -14,7 +14,7 @@
  */
 
 	/** echo '<pre>';
-	var_dump($jornadasActualizacion);
+	var_dump($aplicacion);
 	echo '</pre>';
 	return null; */
 ?>
@@ -319,7 +319,6 @@
                             <textarea class="form-control" id="otros" name="otros" placeholder="Otros..."><?php echo $informacionGeneral->otros; ?></textarea>
                         </div>
                     </div>
-                    <a class="btn btn-siia btn-sm pull-right" name="guardar_formulario_informacion_general_entidad" id="guardar_formulario_informacion_general_entidad">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></a>
 				<?php echo  form_close(); ?>
 				<div class="col-md-12">
 					<hr />
@@ -329,7 +328,9 @@
 						<?php echo form_open_multipart('', array('id' => 'formulario_carta')); ?>
                             <h4>Carta de solicitud de representante legal <small>PDF (1)</small></h4>
                             <input type="file" required accept="application/pdf" class="form-control" data-val="carta" name="carta" id="carta">
-                            <input type="button" class="btn btn-siia btn-sm archivos_form_carta fa-fa center-block" data-name="carta" data-form="1" data-solicitud="<?php echo $solicitud->idSolicitud ?>" name="cartaRep" id="cartaRep" value="Guardar archivo(s) &#xf0c7">
+                            <a type="submit" class="btn btn-siia btn-sm archivos_form_carta fa-fa center-block" data-name="carta" data-form="1" data-solicitud="<?php echo $solicitud->idSolicitud ?>" name="cartaRep" id="cartaRep" value="Guardar archivo(s) &#xf0c7">
+								Guardar archivo(s) &#xf0c7
+							</a>
 						<?php echo form_close(); ?>
 					</div>
 					<div class="form-group div_certificaciones col-md-4">
@@ -338,7 +339,9 @@
                             <input type="file" required accept="application/pdf" class="form-control" data-val="certificaciones" name="certificaciones[]" id="certificaciones1">
                             <input type="file" required accept="application/pdf" class="form-control" data-val="certificaciones" name="certificaciones[]" id="certificaciones2">
                             <input type="file" required accept="application/pdf" class="form-control" data-val="certificaciones" name="certificaciones[]" id="certificaciones3">
-                            <input type="button" class="btn btn-siia btn-sm archivos_form_certificacion fa-fa center-block" data-name="certificaciones" name="certificaciones_organizacion" id="certificaciones_organizacion" value="Guardar archivo(s) &#xf0c7">
+                            <a type="submit" class="btn btn-siia btn-sm archivos_form_certificacion fa-fa center-block" data-name="certificaciones" name="certificaciones_organizacion" id="certificaciones_organizacion">
+								Guardar archivo(s) &#xf0c7
+							</a>
 						<?php echo form_close(); ?>
 					</div>
 					<div class="form-group div_imagenes_lugar col-md-4">
@@ -347,7 +350,9 @@
                             <div id="div_imagenes">
                                 <input type="file" required accept="image/jpeg, image/png" class="form-control" data-val="lugar" name="lugar[]" id="lugar1">
                             </div>
-                            <input type="button" class="btn btn-siia btn-sm fa-fa center-block archivos_form_lugar" data-name="lugar" name="lugar_organizacion" id="lugar_organizacion" value="Guardar archivo(s) &#xf0c7">
+                            <a type="submit" class="btn btn-siia btn-sm fa-fa center-block archivos_form_lugar" data-name="lugar" name="lugar_organizacion" id="lugar_organizacion">
+								Guardar archivo(s) &#xf0c7
+							</a>
 						<?php echo form_close(); ?>
 					</div>
 					<div class="clearfix"></div>
@@ -369,6 +374,7 @@
 					</div>
 					<hr />
 				</div>
+				<a type="submit" class="btn btn-siia btn-md" style="width: 100%" name="guardar_formulario_informacion_general_entidad" id="guardar_formulario_informacion_general_entidad">Guardar/Actualizar/Verificar Formulario 1.<i class="fa fa-check" aria-hidden="true"></i></a>
 			</div>
 			<!-- Formulario de documentación legal 2 -->
 			<div id="documentacion_legal" data-form="2" class=" formulario_panel">
@@ -652,8 +658,7 @@
 			</div>
 			<!-- Formulario de antecedentes academicos 3 -->
 			<div id="antecedentes_academicos" data-form="3" class=" formulario_panel">
-				<div class="">
-					<?php echo form_open('', array('id' => 'formulario_antecedentes_academicos')); ?>
+				<?php echo form_open('', array('id' => 'formulario_antecedentes_academicos')); ?>
 					<h3>3. Antecedentes Académicos <i class="fa fa-id-card" aria-hidden="true"></i></h3>
 					<p>Relacione la experiencia en materia educativa, formativa y pedagógica. Los Campos marcados con (*) son obligatorios</p>
 					<div class="form-group">
@@ -682,45 +687,43 @@
 					</div>
 					<div class="form-group">
 						<label for="duracionCursoAcademicos">Duración del curso:<span class="spanRojo">*</span> (Horas)</label>
-						<input type="number" class="form-control" name="duracionCursoAcademicos" id="duracionCursoAcademicos" placeholder="">
+						<input type="number" class="form-control" name="duracionCursoAcademicos" id="duracionCursoAcademicos" placeholder="40">
 					</div>
-					<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_antecedentes_academicos" id="guardar_formulario_antecedentes_academicos" data-id="<?php  echo $solicitud->idSolicitud;?>">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
-					</form>
-					<div class="clearfix"></div>
-					<?php if($antecedentesAcademicos): ?>
-						<hr />
-						<label>Antecedentes:</label>
-						<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-						<table id="" width="100%" border=0 class="table table-striped table-bordered ">
-							<thead>
-							<tr>
-								<td>Descripcion proceso</td>
-								<td>Justificación</td>
-								<td>Objetivos</td>
-								<td>Metodología</td>
-								<td>Material didactico</td>
-								<td>Bibliografía</td>
-								<td>Duración curso</td>
-								<td>Acción</td>
-							</tr>
-							</thead>
-							<tbody id="tbody">
-								<?php
-								 	for ($i = 0; $i < count($antecedentesAcademicos); $i++):
-										echo "<tr><td>" . $antecedentesAcademicos[$i]->descripcionProceso . "</td>";
-										echo "<td>" . $antecedentesAcademicos[$i]->justificacion . "</td>";
-										echo "<td>" . $antecedentesAcademicos[$i]->objetivos . "</td>";
-										echo "<td>" . $antecedentesAcademicos[$i]->metodologia . "</td>";
-										echo "<td>" . $antecedentesAcademicos[$i]->materialDidactico . "</td>";
-										echo "<td>" . $antecedentesAcademicos[$i]->bibliografia . "</td>";
-										echo "<td>" . $antecedentesAcademicos[$i]->duracionCurso . "</td>";
-										echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarAntecedentes' data-id-antecedentes=" .$antecedentesAcademicos[$i]->id_antecedentesAcademicos . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
-									endfor;
-								?>
-							</tbody>
-						</table>
-					<?php endif; ?>
-				</div>
+					<button class="btn btn-siia btn-md" style="width: 100%" name="guardar_formulario_antecedentes_academicos" id="guardar_formulario_antecedentes_academicos" data-id="<?php  echo $solicitud->idSolicitud;?>">Guardar datos y verificar solicitud<i class="fa fa-check" aria-hidden="true"></i></button>
+				<?php echo form_close(); ?>
+				<div class="clearfix"></div>
+				<?php if($antecedentesAcademicos): ?>
+					<hr />
+					<label>Antecedentes:</label>
+					<table id="" width="100%" border=0 class="table table-striped table-bordered ">
+						<thead>
+						<tr>
+							<td>Descripción proceso</td>
+							<td>Justificación</td>
+							<td>Objetivos</td>
+							<td>Metodología</td>
+							<td>Material didactíco</td>
+							<td>Bibliografía</td>
+							<td>Duración cursó</td>
+							<td>Acción</td>
+						</tr>
+						</thead>
+						<tbody id="tbody">
+							<?php
+								for ($i = 0; $i < count($antecedentesAcademicos); $i++):
+									echo "<tr><td>" . $antecedentesAcademicos[$i]->descripcionProceso . "</td>";
+									echo "<td>" . $antecedentesAcademicos[$i]->justificacion . "</td>";
+									echo "<td>" . $antecedentesAcademicos[$i]->objetivos . "</td>";
+									echo "<td>" . $antecedentesAcademicos[$i]->metodologia . "</td>";
+									echo "<td>" . $antecedentesAcademicos[$i]->materialDidactico . "</td>";
+									echo "<td>" . $antecedentesAcademicos[$i]->bibliografia . "</td>";
+									echo "<td>" . $antecedentesAcademicos[$i]->duracionCurso . "</td>";
+									echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarAntecedentes' data-id-antecedentes=" .$antecedentesAcademicos[$i]->id_antecedentesAcademicos . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+								endfor;
+							?>
+						</tbody>
+					</table>
+				<?php endif; ?>
 			</div>
 			<!-- Formulario de jornadas de actualización 4 -->
 			<div id="jornadas_de_actualizacion" data-form="4" class=" formulario_panel">
@@ -766,7 +769,7 @@
 							</div>
 							<hr/>
 						</div>
-						<button class="btn btn-siia btn-sm guardar_formulario_jornadas_actualizacion" data-name="jornadaAct" data-id="<?php echo $solicitud->idSolicitud;?>">
+						<button class="btn btn-siia btn-md guardar_formulario_jornadas_actualizacion" style="width: 100%" data-name="jornadaAct" data-id="<?php echo $solicitud->idSolicitud;?>">
 							Guardar datos <i class="fa fa-check" aria-hidden="true"></i>
 						</button>
 					<?php echo form_close() ?>
@@ -924,32 +927,34 @@
 				<h3>7. Datos modalidad virtual<i class="fa fa-globe" aria-hidden="true"></i></h3>
 				<p>Relacione los datos para ingresar a la plataforma y verificar su funcionamiento.</p>
 				<?php echo form_open('', array('id' => 'formulario_modalidad_virtual')); ?>
-				<!-- URL Plataforma -->
-				<div class="form-group">
-					<label for="datos_plataforma_url">URL:<span class="spanRojo">*</span></label>
-					<input type="text" class="form-control" name="datos_plataforma_url" id="datos_plataforma_url" placeholder="EJ: https://www.orgsolidarias.gov.co/" required>
-				</div>
-				<!-- Usuario -->
-				<div class="form-group">
-					<label for="datos_plataforma_usuario">Usuario:<span class="spanRojo">*</span></label>
-					<input type="text" class="form-control" name="datos_plataforma_usuario" id="datos_plataforma_usuario" placeholder="EJ: usuario.aplicacion" required>
-				</div>
-				<!-- Contraseña -->
-				<div class="form-group">
-					<label for="datos_plataforma_contrasena">Contraseña:<span class="spanRojo">*</span></label>
-					<input type="text" class="form-control" name="datos_plataforma_contrasena" id="datos_plataforma_contrasena" placeholder="EJ: contraseña123@" required>
-				</div>
-				<!-- Check Aceptar Modalidad Virtual -->
-				<div class="form-group">
-					<label class="underlined">
-						<input type="checkbox" id="acepta_mod_en_virtual" form="formulario_programas" name="acepta_mod_en_virtual" value="Si Acepto" disabled required>
-						<label for="acepta_mod_en_linea">&nbsp;</label>
-						<a data-toggle="modal" data-target="#modalAceptarVirtual" data-backdrop="static" data-keyboard="false">
-							<span class="spanRojo">*</span>¿Acepta modalidad virtual?
-						</a>
-					</label>
-				</div>
-				<hr />
+					<!-- URL Plataforma -->
+					<div class="form-group">
+						<label for="datos_plataforma_url">URL:<span class="spanRojo">*</span></label>
+						<input type="text" class="form-control" name="datos_plataforma_url" id="datos_plataforma_url" placeholder="EJ: https://www.orgsolidarias.gov.co/" required>
+					</div>
+					<!-- Usuario -->
+					<div class="form-group">
+						<label for="datos_plataforma_usuario">Usuario:<span class="spanRojo">*</span></label>
+						<input type="text" class="form-control" name="datos_plataforma_usuario" id="datos_plataforma_usuario" placeholder="EJ: usuario.aplicacion" required>
+					</div>
+					<!-- Contraseña -->
+					<div class="form-group">
+						<label for="datos_plataforma_contrasena">Contraseña:<span class="spanRojo">*</span></label>
+						<input type="text" class="form-control" name="datos_plataforma_contrasena" id="datos_plataforma_contrasena" placeholder="EJ: contraseña123@" required>
+					</div>
+					<!-- Check Aceptar Modalidad Virtual -->
+					<div class="form-group">
+						<label class="underlined">
+							<input type="checkbox" id="acepta_mod_en_virtual" form="formulario_programas" name="acepta_mod_en_virtual" value="Si Acepto" disabled required>
+							<label for="acepta_mod_en_linea">&nbsp;</label>
+							<a data-toggle="modal" data-target="#modalAceptarVirtual" data-backdrop="static" data-keyboard="false">
+								<span class="spanRojo">*</span>¿Acepta modalidad virtual?
+							</a>
+						</label>
+					</div>
+					<hr />
+					<button class="btn btn-siia btn-md" style="width: 100%" name="guardar_formulario_plataforma" id="guardar_formulario_plataforma" data-id="<?php  echo $solicitud->idSolicitud;?>">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
+				<?php echo form_close(); ?>
 				<!-- Modal Aceptar Modalidad Virtual -->
 				<div class="modal fade" id="modalAceptarVirtual" tabindex="-1" role="dialog" aria-labelledby="modalAceptarVirtual">
 					<div class="modal-dialog modal-lg" role="document">
@@ -978,37 +983,29 @@
 						</div>
 					</div>
 				</div>
-				<div class="clearfix"></div>
-				<hr />
-				<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_plataforma" id="guardar_formulario_plataforma" data-id="<?php  echo $solicitud->idSolicitud;?>">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
-				</form>
-				<div class="clearfix"></div>
 				<?php if($aplicacion): ?>
-					<div class="">
-						<hr />
-						<label>Plataforma:</label>
-						<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-						<table id="" width="100%" border=0 class="table table-striped table-bordered">
-							<thead>
-							<tr>
-								<td>URL aplicación</td>
-								<td>Usuario aplicación</td>
-								<td>Contraseña aplicación</td>
-								<td>Acción</td>
-							</tr>
-							</thead>
-							<tbody id="tbody">
-							<?php
-							foreach ($aplicacion as $datosPlataforma) {
-								echo "<tr><td>" . $datosPlataforma->urlAplicacion . "</td>";
-								echo "<td>" . $datosPlataforma->usuarioAplicacion . "</td>";
-								echo "<td>" . $datosPlataforma->contrasenaAplicacion . "</td>";
-								echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosPlataforma' data-id-datosPlataforma=" . $datosPlataforma->id_datosAplicacion . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
-							}
-							?>
-							</tbody>
-						</table>
-					</div>
+					<hr />
+					<label>Plataforma:</label>
+					<table id="" width="100%" border=0 class="table table-striped table-bordered">
+						<thead>
+                            <tr>
+                                <td>URL aplicación</td>
+                                <td>Usuario aplicación</td>
+                                <td>Contraseña aplicación</td>
+                                <td>Acción</td>
+                            </tr>
+						</thead>
+						<tbody id="tbody">
+						<?php
+                             for ($i = 0; $i < count($aplicacion); $i++):
+								echo "<tr><td>" . $aplicacion[$i]->urlAplicacion . "</td>";
+								echo "<td>" . $aplicacion[$i]->usuarioAplicacion . "</td>";
+								echo "<td>" . $aplicacion[$i]->contrasenaAplicacion . "</td>";
+								echo "<td><button class='btn btn-danger btn-sm eliminarDatosPlataforma' data-id-datosPlataforma=" . $aplicacion[$i]->id_datosAplicacion . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+							endfor;
+						?>
+						</tbody>
+					</table>
 				<?php endif; ?>
 			</div>
 			<!-- Formulario Datos En Lina 8 -->
@@ -1016,86 +1013,81 @@
 				<h3>8. Datos modalidad en línea<i class="fa fa-globe" aria-hidden="true"></i></h3>
 				<p>Ingrese los datos de las herramientas a utilizar en esta modalidad dentro del curso.</p>
 				<?php echo form_open('', array('id' => 'formulario_modalidad_en_linea')); ?>
-				<!-- Nombre de la herramienta-->
-				<div class="form-group">
-					<label for="nombre_herramienta">Nombre de la herramienta:<span class="spanRojo">*</span></label>
-					<input type="text" class="form-control" name="nombre_herramienta" id="nombre_herramienta" placeholder="Ej: MSTeams, Meet, Zoom, Skype, WhastApp, entre otros..." required>
-				</div>
-				<!-- Descripción de la herramienta-->
-				<div class="form-group">
-					<label for="descripcion_herramienta">Breve descripción de la utilización educativa de la herramienta en línea:<span class="spanRojo">*</span></label>
-					<textarea type="text" class="form-control" name="descripcion_herramienta" id="descripcion_herramienta" placeholder="Registre la descripción de la herramienta" required></textarea>
-				</div>
-				<!-- Check Aceptar Modalidad En Linea -->
-				<div class="form-group">
-					<label class="underlined">
-						<input type="checkbox" id="acepta_mod_en_linea" form="formulario_programas" name="acepta_mod_en_linea" value="Si Acepto" disabled required>
-						<label for="acepta_mod_en_linea">&nbsp;</label>
-						<a data-toggle="modal" data-target="#modalAceptarEnLinea" data-backdrop="static" data-keyboard="false">
-							<span class="spanRojo">*</span>¿Acepta modalidad en línea?
-						</a>
-					</label>
-				</div>
-				<hr />
-				<!-- Modal Aceptar Modalidad En Línea -->
-				<div class="modal fade" id="modalAceptarEnLinea" tabindex="-1" role="dialog" aria-labelledby="modalAceptarEnLinea">
-					<div class="modal-dialog modal-lg" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<div class="row">
-									<div id="header_politicas" class="col-md-12">
-										<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="<?php echo base_url(); ?>assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
-									</div>
-									<div class="clearfix"></div>
-									<hr />
-									<div class="col-md-12">
-										Recomendaciones Modalidad En Línea
-									</div>
-								</div>
-							</div>
-							<div class="modal-body">
-								<p>De acuerdo a lo establecido en el parágrafo número 2 del artículo 6 de la resolución 152 del 23 de junio del 2022, las entidades que soliciten la acreditación por la modalidad en línea, deben tener en cuenta lo siguiente:</p>
-								<p><strong>Parágrafo 2.</strong> Para la acreditación de los programas de educación en economía solidaria bajo modalidad línea, aquella donde los docentes y participantes interactúan a través de recursos tecnológicos. La mediación tecnológica puede ser a través de herramientas tecnológica (Zoom, Teams, Meet, Good Meet, entre otras) plataformas de comunicación, chats, foros, videoconferencias, grupos de discusión, caracterizadas por encuentros sincrónicos.</strong> </p>
-								<p>Recuerde desarrollar el proceso formativo acorde a lo establecido en el anexo técnico.</p>
-								<p>La Unida Solidaria realizará seguimiento a las organizaciones acreditadas en el cumplimiento de los programas de educación solidaria acreditados.</p>
-								<!--				<a class="pull-right" target="_blank" href="https://www.orgsolidarias.gov.co/sites/default/files/archivos/Res_110%20del%2031%20de%20marzo%20de%202016.pdf">Recurso de la resolución 110</a>-->
-								<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
-								<button type="button" class="btn btn-siia btn-sm pull-right" id="acepto_mod_en_linea" value="Si Acepta">Sí, acepto. <i class="fa fa-check"></i></button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- Botón para guardar datos -->
-				<button class="btn btn-siia btn-sm pull-right" name="guardar_formulario_modalidad_en_linea" id="guardar_formulario_modalidad_en_linea" data-id="<?php  echo $solicitud->idSolicitud;?>">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
-				<div class="clearfix"></div>
-				<hr />
-				</form>
+                    <!-- Nombre de la herramienta-->
+                    <div class="form-group">
+                        <label for="nombre_herramienta">Nombre de la herramienta:<span class="spanRojo">*</span></label>
+                        <input type="text" class="form-control" name="nombre_herramienta" id="nombre_herramienta" placeholder="Ej: MSTeams, Meet, Zoom, Skype, WhastApp, entre otros..." required>
+                    </div>
+                    <!-- Descripción de la herramienta-->
+                    <div class="form-group">
+                        <label for="descripcion_herramienta">Breve descripción de la utilización educativa de la herramienta en línea:<span class="spanRojo">*</span></label>
+                        <textarea type="text" class="form-control" name="descripcion_herramienta" id="descripcion_herramienta" placeholder="Registre la descripción de la herramienta" required></textarea>
+                    </div>
+                    <!-- Check Aceptar Modalidad En Linea -->
+                    <div class="form-group">
+                        <label class="underlined">
+                            <input type="checkbox" id="acepta_mod_en_linea" form="formulario_programas" name="acepta_mod_en_linea" value="Si Acepto" disabled required>
+                            <label for="acepta_mod_en_linea">&nbsp;</label>
+                            <a data-toggle="modal" data-target="#modalAceptarEnLinea" data-backdrop="static" data-keyboard="false">
+                                <span class="spanRojo">*</span>¿Acepta modalidad en línea?
+                            </a>
+                        </label>
+                    </div>
+                    <hr />
+
+                    <!-- Botón para guardar datos -->
+                    <button class="btn btn-siia btn-md" style="width: 100%" name="guardar_formulario_modalidad_en_linea" id="guardar_formulario_modalidad_en_linea" data-id="<?php  echo $solicitud->idSolicitud;?>">Guardar datos <i class="fa fa-check" aria-hidden="true"></i></button>
+                    <hr />
+                    <?php echo form_close() ?>
+                <!-- Modal Aceptar Modalidad En Línea -->
+                <div class="modal fade" id="modalAceptarEnLinea" tabindex="-1" role="dialog" aria-labelledby="modalAceptarEnLinea">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="row">
+                                    <div id="header_politicas" class="col-md-12">
+                                        <img alt="logo" id="imagen_header_politicas" class="img-responsive" src="<?php echo base_url(); ?>assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <hr />
+                                    <div class="col-md-12">
+                                        Recomendaciones Modalidad En Línea
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-body">
+                                <p>De acuerdo a lo establecido en el parágrafo número 2 del artículo 6 de la resolución 152 del 23 de junio del 2022, las entidades que soliciten la acreditación por la modalidad en línea, deben tener en cuenta lo siguiente:</p>
+                                <p><strong>Parágrafo 2.</strong> Para la acreditación de los programas de educación en economía solidaria bajo modalidad línea, aquella donde los docentes y participantes interactúan a través de recursos tecnológicos. La mediación tecnológica puede ser a través de herramientas tecnológica (Zoom, Teams, Meet, Good Meet, entre otras) plataformas de comunicación, chats, foros, videoconferencias, grupos de discusión, caracterizadas por encuentros sincrónicos.</strong> </p>
+                                <p>Recuerde desarrollar el proceso formativo acorde a lo establecido en el anexo técnico.</p>
+                                <p>La Unida Solidaria realizará seguimiento a las organizaciones acreditadas en el cumplimiento de los programas de educación solidaria acreditados.</p>
+                                <!--				<a class="pull-right" target="_blank" href="https://www.orgsolidarias.gov.co/sites/default/files/archivos/Res_110%20del%2031%20de%20marzo%20de%202016.pdf">Recurso de la resolución 110</a>-->
+                                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No, declino. <i class="fa fa-times" aria-hidden="true"></i></button>
+                                <button type="button" class="btn btn-siia btn-sm pull-right" id="acepto_mod_en_linea" value="Si Acepta">Sí, acepto. <i class="fa fa-check"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 				<!-- Tabla herramientas -->
 				<?php if($datosEnLinea): ?>
-					<div class="">
-						<label>Datos de herramientas:</label>
-						<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-						<table id="" width="100%" border=0 class="table table-striped table-bordered">
-							<thead>
-							<tr>
-								<td>Herramienta</td>
-								<td>Descripción</td>
-								<td>Fecha de registro</td>
-								<td>Acción</td>
-							</tr>
-							</thead>
-							<tbody id="tbody">
-							<?php
-							foreach ($datosEnLinea as $data) {
-								echo "<tr><td>" . $data->nombreHerramienta . "</td>";
-								echo "<td>" . $data->descripcionHerramienta . "</td>";
-								echo "<td>" . $data->fecha . "</td>";
-								echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosEnlinea' data-id=" . $data->id . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
-							}
-							?>
-							</tbody>
-						</table>
-					</div>
+					<label>Datos de herramientas:</label>
+					<table id="" width="100%" border=0 class="table table-striped table-bordered">
+						<thead>
+                            <tr>
+                                <td>Herramienta</td>
+                                <td>Descripción</td>
+                                <td>Fecha de registro</td>
+                                <td>Acción</td>
+                            </tr>
+						</thead>
+						<tbody id="tbody">
+						<?php for($i = 0; $i < count($datosEnLinea); $i ++):
+								echo "<tr><td>" . $datosEnLinea[0]->nombreHerramienta . "</td>";
+								echo "<td> <textarea style='width: 282px; height: 110px; resize: none' readonly> " . $datosEnLinea[0]->descripcionHerramienta . "</textarea></td>";
+								echo "<td>" . $datosEnLinea[0]->fecha . "</td>";
+								echo "<td><button class='btn btn-danger btn-sm eliminarDatosEnlinea' data-id=" . $datosEnLinea[0]->id . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+							endfor; ?>
+						</tbody>
+					</table>
 				<?php endif	?>
 			</div>
 			<!-- Continuar para finalizar Acreditación -->
@@ -1103,24 +1095,9 @@
 				<div id="verificacion_formularios"></div>
 				<div class="jumbotron" id="verificar_btn">
 					<h4>¿Desea finalizar el proceso?</h4>
-					<p>Si ya adjunto todos los documentos e información necesaria para la solicitud, de clic en si, y espere a las observaciones si existen por parte del evaluador.</p>
+					<p>Si ya adjunto todos los documentos e información necesaria para la solicitud, de clic en sí, y espere a las observaciones si existen por parte del evaluador.</p>
 					<button class="btn btn-danger btn-sm" id="finalizar_no">No, voy a verificar <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button class="btn btn-siia btn-sm" id="siFinSol" data-toggle="modal" data-target="#modalFinalizarProceso">Si, terminar <i class="fa fa-check-square-o" aria-hidden="true"></i></button>
-				</div>
-			</div>
-			<!-- Modal Finalizar Proceso -->
-			<div class="modal fade" id="modalFinalizarProceso" tabindex="-1" role="dialog" aria-labelledby="finalizarSeguro">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="finalizarSeguro">¿Está seguro de finalizar el proceso de solicitud?</h4>
-						</div>
-						<div class="modal-footer">
-							<button class="btn btn-danger btn-sm pull-left" data-dismiss="modal">No, voy a verificar <i class="fa fa-times" aria-hidden="true"></i></button>
-							<button class="btn btn-siia btn-sm pull-right" id="finalizar_si" data-id="<?php echo $solicitud->idSolicitud ?>">Si, estoy completamente seguro de terminar y enviar la solicitud <i class="fa fa-check-square-o" aria-hidden="true"></i></button>
-						</div>
-					</div>
+					<button class="btn btn-siia btn-sm" id="finalizar_si" data-id="<?php echo $solicitud->idSolicitud ?>">Si, terminar <i class="fa fa-check-square-o" aria-hidden="true"></i></button>
 				</div>
 			</div>
 			<!-- Modal Cursos -->

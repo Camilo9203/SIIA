@@ -417,6 +417,7 @@ $(".archivos_form_carta").on("click", function () {
 					confirmButtonText: 'Aceptar',
 				})
 			}
+			clearInputs('formulario_carta');
 			cargarArchivos();
 		},
 		error: function (ev) {
@@ -468,7 +469,6 @@ $(".archivos_form_certificacion").on("click", function () {
 						html: response.msg,
 						text: response.msg,
 						icon: response.icon,
-						confirmButtonText: 'Aceptar',
 					})
 				}
 				else if (response.icon == "error") {
@@ -477,9 +477,9 @@ $(".archivos_form_certificacion").on("click", function () {
 						html: response.msg,
 						text: response.msg,
 						icon: response.icon,
-						confirmButtonText: 'Aceptar',
 					})
 				}
+				clearInputs('formulario_certificaciones');
 				cargarArchivos();
 			},
 			error: function (ev) {
@@ -504,57 +504,68 @@ $(".archivos_form_certificacion").on("click", function () {
 $(".archivos_form_lugar").on("click", function () {
 	$data_name = $(".archivos_form_lugar").attr("data-name");
 	var form_data = new FormData();
+	let count = 0;
 	$.each($("#formulario_lugar input[type='file']"), function (obj, v) {
 		var file = v.files[0];
-		form_data.append("file[" + obj + "]", file);
+		if (file != undefined) {
+			form_data.append("file[" + obj + "]", file);
+			count++;
+		}
 	});
-	form_data.append("tipoArchivo", $("#" + $data_name + "1").attr("data-val"));
-	form_data.append("append_name", $data_name);
-	$.ajax({
-		url: baseURL + "archivos/uploadFiles",
-		cache: false,
-		contentType: false,
-		processData: false,
-		data: form_data,
-		type: "post",
-		dataType: "JSON",
-		beforeSubmit: function () {
-			Toast.fire({
-				icon: 'info',
-				text: 'Cargando archivos'
-			})
-		},
-		success: function (response) {
-			console.log(response);
-			if (response.icon == "success") {
-				Alert.fire({
-					title: 'Archivos guardados!',
-					html: response.msg,
-					text: response.msg,
-					icon: response.icon,
-					confirmButtonText: 'Aceptar',
+	if (count > 0) {
+		form_data.append("tipoArchivo", $("#" + $data_name + "1").attr("data-val"));
+		form_data.append("append_name", $data_name);
+		$.ajax({
+			url: baseURL + "archivos/uploadFiles",
+			cache: false,
+			contentType: false,
+			processData: false,
+			data: form_data,
+			type: "post",
+			dataType: "JSON",
+			beforeSubmit: function () {
+				Toast.fire({
+					icon: 'info',
+					text: 'Cargando archivos'
 				})
-			}
-			else if (response.icon == "error") {
+			},
+			success: function (response) {
+				if (response.icon == "success") {
+					Alert.fire({
+						title: 'Archivos guardados!',
+						html: response.msg,
+						text: response.msg,
+						icon: response.icon,
+					})
+				}
+				else if (response.icon == "error") {
+					Alert.fire({
+						title: 'Error al guardar!',
+						html: response.msg,
+						text: response.msg,
+						icon: response.icon,
+					})
+				}
+				clearInputs('formulario_lugar');
+				cargarArchivos();
+			},
+			error: function (ev) {
+				event.preventDefault();
 				Alert.fire({
-					title: 'Error al guardar!',
-					html: response.msg,
-					text: response.msg,
-					icon: response.icon,
-					confirmButtonText: 'Aceptar',
+					title: 'Error al guardar, consulta al administrador!',
+					icon: 'error',
 				})
-			}
-			cargarArchivos();
-		},
-		error: function (ev) {
-			Alert.fire({
-				title: 'Error al guardar, consulta al administrador!',
-				icon: 'error',
-				confirmButtonText: 'Aceptar',
-			})
-			cargarArchivos();
-		},
-	});
+			},
+		});
+	}
+	else {
+		Alert.fire({
+			title: 'No se selecciono ninguna imagen!',
+			text: 'Debes cargar al menos una imagen para continuar',
+			icon: 'warning',
+		})
+	}
+
 });
 /**
  * Formulario 2: Formularios documentación legal
@@ -629,18 +640,30 @@ $("#guardar_formulario_camara_comercio").click(function () {
 		dataType: "JSON",
 		data: data,
 		beforeSend: function () {
-			notificacion("Espere...", "success");
+			Toast.fire({
+				icon: 'info',
+				title: 'Guardando'
+			})
 		},
 		success: function (response) {
-			notificacion(response.msg, "success");
-			setInterval(function () {
-				reload();
-			}, 4000);
+			Alert.fire({
+				title: 'Guardado!',
+				text: response.msg,
+				icon: 'success',
+			}).then((result) => {
+				if (result.isConfirmed) {
+					setInterval(function () {
+						reload();
+					}, 2000);
+				}
+			})
 		},
 		error: function (ev) {
 			event.preventDefault();
-			console.log(ev);
-			notificacion("Ocurrió un error y no se guardaron los datos");
+			Toast.fire({
+				icon: 'error',
+				text: ev.responseText
+			});
 		},
 	});
 
@@ -680,18 +703,30 @@ $("#guardar_formulario_certificado_existencia").click(function () {
 			dataType: "JSON",
 			data: formData,
 			beforeSend: function () {
-				notificacion("Espere...", "success");
+				Toast.fire({
+					icon: 'info',
+					title: 'Guardando'
+				})
 			},
 			success: function (response) {
-				notificacion(response.msg, "success");
-				setInterval(function () {
-					reload();
-				}, 2000);
+				Alert.fire({
+					title: 'Guardado!',
+					text: response.msg,
+					icon: 'success',
+				}).then((result) => {
+					if (result.isConfirmed) {
+						setInterval(function () {
+							reload();
+						}, 2000);
+					}
+				})
 			},
 			error: function (ev) {
 				event.preventDefault();
-				console.log(ev);
-				notificacion("Ocurrió un error y no se guardaron los datos");
+				Toast.fire({
+					icon: 'error',
+					text: ev.responseText
+				});
 			},
 		});
 	}
@@ -740,18 +775,30 @@ $("#guardar_formulario_registro_educativo").click(function (){
 			dataType: "JSON",
 			data: formData,
 			beforeSend: function () {
-				notificacion("Espere...", "success");
+				Toast.fire({
+					icon: 'info',
+					title: 'Guardando'
+				})
 			},
 			success: function (response) {
-				notificacion(response.msg, "success");
-				setInterval(function () {
-					reload();
-				}, 2000);
+				Alert.fire({
+					title: 'Guardado!',
+					text: response.msg,
+					icon: 'success',
+				}).then((result) => {
+					if (result.isConfirmed) {
+						setInterval(function () {
+							reload();
+						}, 2000);
+					}
+				})
 			},
 			error: function (ev) {
 				event.preventDefault();
-				console.log(ev);
-				notificacion("Ocurrió un error y no se guardaron los datos");
+				Toast.fire({
+					icon: 'error',
+					text: ev.responseText
+				});
 			},
 		});
 	}
@@ -789,23 +836,48 @@ function verDocumentos (data) {
 }
 // Función Eliminar Datos Form 2
 function  eliminarFormularioDocumentacionLegal (data) {
-	$.ajax({
-		url: baseURL + "panel/eliminarDocumentacionLegal",
-		type: "post",
-		dataType: "JSON",
-		data: data,
-		beforeSend: function () {
-			notificacion("Espere...", "success");
-		},
-		success: function (response) {
-			notificacion(response.msg, "success");
-			setInterval(function () {
-				reload();
-			}, 2000);
-		},
-		error: function (ev) {
-			//Do nothing
-		},
+	Alert.fire({
+		title: 'Eliminar documentación legal',
+		text: '¿Realmente desea eliminar este registro?',
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonText: 'Si',
+		cancelButtonText: 'No',
+	}).then((result) => {
+		if (result.isConfirmed) {
+			$.ajax({
+				url: baseURL + "panel/eliminarDocumentacionLegal",
+				type: "post",
+				dataType: "JSON",
+				data: data,
+				beforeSend: function () {
+					Toast.fire({
+						icon: 'info',
+						title: 'Elinando'
+					})
+				},
+				success: function (response) {
+					Alert.fire({
+						title: 'Eliminado!',
+						text: response.msg,
+						icon: 'success',
+					}).then((result) => {
+						if (result.isConfirmed) {
+							setInterval(function () {
+								reload();
+							}, 2000);
+						}
+					})
+				},
+				error: function (ev) {
+					event.preventDefault();
+					Toast.fire({
+						icon: 'error',
+						text: ev.responseText
+					});
+				},
+			});
+		}
 	});
 }
 /**
@@ -825,6 +897,7 @@ $("#guardar_formulario_antecedentes_academicos").click(function () {
 			duracionCursoAcademicos: $("#duracionCursoAcademicos").val(),
 			idSolicitud: $(this).attr('data-id')
 		};
+		event.preventDefault();
 		$.ajax({
 			url: baseURL + "panel/guardar_formulario_antecedentes_academicos",
 			type: "post",
@@ -832,48 +905,87 @@ $("#guardar_formulario_antecedentes_academicos").click(function () {
 			data: data,
 			beforeSend: function () {
 				$(this).attr("disabled", true);
-				notificacion("Espere...", "success");
+				Toast.fire({
+					icon: 'info',
+					title: 'Guardando'
+				})
 			},
 			success: function (response) {
-				notificacion(response.msg, "success");
-				clearInputs("formulario_antecedentes_academicos");
-				setInterval(function () {
-					reload();
-				}, 2000);
+				Alert.fire({
+					title: 'Guardado!',
+					text: response.msg,
+					icon: 'success',
+				}).then((result) => {
+					if (result.isConfirmed) {
+						setInterval(function () {
+							reload();
+						}, 2000);
+					}
+				})
 			},
 			error: function (ev) {
-				//Do nothing
+				event.preventDefault();
+				Toast.fire({
+					icon: 'error',
+					text: ev.responseText
+				});
 			},
 		});
 	}
 	else {
-		notificacion('Validar campos');
+		Toast.fire({
+			icon: 'info',
+			title: 'Validar campos'
+		})
 	}
 });
 // Eliminar antecedentes académicos
 $(".eliminarAntecedentes").click(function () {
-	let data = {
-		id_antecedentes: $(this).attr("data-id-antecedentes"),
-	};
-	$.ajax({
-		url: baseURL + "panel/eliminarAntecedentes",
-		type: "post",
-		dataType: "JSON",
-		data: data,
-		beforeSend: function () {
-			notificacion("Espere...", "success");
-		},
-		success: function (response) {
-			notificacion(response.msg, "success");
-			setInterval(function () {
-				reload();
-			}, 2000);
-		},
-		error: function (ev) {
-			event.preventDefault();
-			console.log(ev);
-			notificacion("Ocurrió un error y no se guardaron los datos");
-		},
+	Alert.fire({
+		title: 'Eliminar antecedente acádemico',
+		text: '¿Realmente desea eliminar este registro?',
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonText: 'Si',
+		cancelButtonText: 'No',
+	}).then((result) => {
+		if (result.isConfirmed) {
+			let data = {
+				id_antecedentes: $(this).attr("data-id-antecedentes"),
+			};
+			$.ajax({
+				url: baseURL + "panel/eliminarAntecedentes",
+				type: "post",
+				dataType: "JSON",
+				data: data,
+				beforeSend: function () {
+					Toast.fire({
+						icon: 'info',
+						title: 'Elimiando'
+					})
+				},
+				success: function (response) {
+					Alert.fire({
+						title: 'Guardado!',
+						text: response.msg,
+						icon: 'success',
+					}).then((result) => {
+						if (result.isConfirmed) {
+							setInterval(function () {
+								reload();
+							}, 2000);
+						}
+					})
+				},
+				error: function (ev) {
+					event.preventDefault();
+					Toast.fire({
+						icon: 'error',
+						text: ev.responseText
+					});
+				},
+			});
+		}
 	});
 });
 /**
@@ -911,7 +1023,6 @@ $(".guardar_formulario_jornadas_actualizacion").click(function () {
 					title: 'Guardado!',
 					text: response.msg,
 					icon: response.icon,
-					confirmButtonText: 'Aceptar',
 				}).then((result) => {
 					if (result.isConfirmed) {
 						setInterval(function () {
@@ -925,7 +1036,6 @@ $(".guardar_formulario_jornadas_actualizacion").click(function () {
 					title: 'Error al guardar!',
 					text: response.msg,
 					icon: response.icon,
-					confirmButtonText: 'Aceptar',
 				})
 			}
 		},
@@ -974,6 +1084,7 @@ $(".eliminarJornadaActualizacion").click(function () {
 					})
 				},
 				error: function (ev) {
+					event.preventDefault()
 					Toast.fire({
 						icon: 'error',
 						title: 'Error en el controlador consulta al administrador'
@@ -1039,46 +1150,80 @@ function guardarDatosProgramas (curso,modal, check, idSolicitud){
 		dataType: "JSON",
 		data: data,
 		beforeSend: function () {
-			notificacion("Espere...", "success");
+			Toast.fire({
+				icon: 'info',
+				title: 'Guardando'
+			})
 		},
 		success: function (response) {
-			notificacion(response.msg, "success");
-			if(response.status == 1) {
-				setInterval(function () {
-					reload();
-				}, 2000);
-			}
+			Alert.fire({
+				title: 'Guardado!',
+				text: response.msg,
+				icon: 'success',
+			}).then((result) => {
+				if (result.isConfirmed) {
+					setInterval(function () {
+						reload();
+					}, 2000);
+				}
+			})
 		},
 		error: function (ev) {
-			console.log(ev);
-			notificacion("No se guardo la información adecuadamente, por favor intente de nuevo o consulte con el administrador del sitio");
+			event.preventDefault();
+			Toast.fire({
+				icon: 'error',
+				text: ev.responseText
+			});
 		},
 	});
 }
 // Eliminar datos plataforma
 $(".eliminarDatosProgramas").click(function () {
-	data = {
-		id: $(this).attr("data-id"),
-	};
-	$.ajax({
-		url: baseURL + "panel/eliminarDatosProgramas",
-		type: "post",
-		dataType: "JSON",
-		data: data,
-		beforeSend: function () {
-			notificacion("Espere...", "success");
-		},
-		success: function (response) {
-			notificacion(response.msg, "success");
-			if(response.status == 1) {
-				setInterval(function () {
-					reload();
-				}, 2000);
-			}
-		},
-		error: function (ev) {
-			//Do nothing
-		},
+	Alert.fire({
+		title: 'Eliminar programa de acreditacion',
+		text: '¿Realmente desea eliminar este registro?',
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonText: 'Si',
+		cancelButtonText: 'No',
+	}).then((result) => {
+		if (result.isConfirmed) {
+			data = {
+				id: $(this).attr("data-id"),
+			};
+			$.ajax({
+				url: baseURL + "panel/eliminarDatosProgramas",
+				type: "post",
+				dataType: "JSON",
+				data: data,
+                beforeSend: function () {
+                    Toast.fire({
+                        icon: 'info',
+                        title: 'Eliminando'
+                    })
+                },
+                success: function (response) {
+                    Alert.fire({
+                        title: 'Registro eliminado!',
+                        text: response.msg,
+                        icon: 'success',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            setInterval(function () {
+                                reload();
+                            }, 2000);
+                        }
+                    })
+                },
+                error: function (ev) {
+                    event.preventDefault()
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Error en el controlador consulta al administrador'
+                    })
+                },
+			});
+		}
 	});
 });
 /**
@@ -1114,53 +1259,97 @@ $("#guardar_formulario_plataforma").click(function () {
 				dataType: "JSON",
 				data: data,
 				beforeSend: function () {
-					$(this).attr("disabled", true);
-					notificacion("Espere...", "success");
+					Toast.fire({
+						icon: 'info',
+						title: 'Guardando'
+					})
 				},
 				success: function (response) {
-					notificacion(response.msg, "success");
-					setInterval(function () {
-						reload();
-					}, 2000);
+					Alert.fire({
+						title: 'Guardado!',
+						text: response.msg,
+						icon: 'success',
+					}).then((result) => {
+						if (result.isConfirmed) {
+							setInterval(function () {
+								reload();
+							}, 2000);
+						}
+					})
 				},
 				error: function (ev) {
-					//Do nothing
+					event.preventDefault();
+					Toast.fire({
+						icon: 'error',
+						text: ev.responseText
+					});
 				},
 			});
 		}
 		else {
-			notificacion("Acepte modalidad virtual");
+			Toast.fire({
+				icon: 'info',
+				title: 'Acepte modalidad virtual'
+			})
 			event.preventDefault();
 		}
 	}
 	else {
-		notificacion("No se validaron campos");
+		Toast.fire({
+			icon: 'info',
+			title: 'Validar los campos'
+		})
 		event.preventDefault();
 	}
 });
 // Eliminar datos de plataforma
 $(".eliminarDatosPlataforma").click(function () {
-	$id_plataforma = $(this).attr("data-id-datosPlataforma");
-	data = {
-		id_plataforma: $id_plataforma,
-	};
-	$.ajax({
-		url: baseURL + "panel/eliminarDatosPlataforma",
-		type: "post",
-		dataType: "JSON",
-		data: data,
-		beforeSend: function () {
-			notificacion("Espere...", "success");
-		},
-		success: function (response) {
-			notificacion(response.msg, "success");
-			setInterval(function () {
-				reload();
-			}, 2000);
-		},
-		error: function (ev) {
-			//Do nothing
-		},
+	Alert.fire({
+		title: 'Eliminar datos modalidad virtual',
+		text: '¿Realmente desea eliminar este registro?',
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonText: 'Si',
+		cancelButtonText: 'No',
+	}).then((result) => {
+		if (result.isConfirmed) {
+			$id_plataforma = $(this).attr("data-id-datosPlataforma");
+			data = {
+				id_plataforma: $id_plataforma,
+			};
+			$.ajax({
+				url: baseURL + "panel/eliminarDatosPlataforma",
+				type: "post",
+				dataType: "JSON",
+				data: data,
+                beforeSend: function () {
+                    Toast.fire({
+                        icon: 'info',
+                        title: 'Eliminando'
+                    })
+                },
+                success: function (response) {
+                    Alert.fire({
+                        title: 'Registro eliminado!',
+                        text: response.msg,
+                        icon: 'success',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            setInterval(function () {
+                                reload();
+                            }, 2000);
+                        }
+                    })
+                },
+                error: function (ev) {
+                    event.preventDefault()
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Error en el controlador consulta al administrador'
+                    })
+                },
+			});
+		}
 	});
 });
 /**
@@ -1173,12 +1362,11 @@ $("#acepto_mod_en_linea").click(function () {
 });
 // Guardar formulario
 $("#guardar_formulario_modalidad_en_linea").click(function () {
-	//$(this).attr("disabled", true);
 	// Validar formulario
 	validFroms(8);
 	if ($("#formulario_modalidad_en_linea").valid()) {
+		event.preventDefault();
 		if ($("#acepta_mod_en_linea").prop("checked") == true) {
-			event.preventDefault();
 			// Capturar datos formulario
 			let form_data = new FormData();
 			form_data.append("tipoArchivo", $("#instructivoEnLinea").attr("data-val"));
@@ -1187,7 +1375,6 @@ $("#guardar_formulario_modalidad_en_linea").click(function () {
 			form_data.append("descripcionHerramienta", $("#descripcion_herramienta").val());
 			form_data.append("aceptacion", $("#acepta_mod_en_linea").val());
 			form_data.append("idSolicitud", $(this).attr('data-id'));
-
 			// Petición para guardar datos
 			$.ajax({
 				url: baseURL + "panel/guardar_formulario_modalidad_en_linea",
@@ -1197,30 +1384,47 @@ $("#guardar_formulario_modalidad_en_linea").click(function () {
 				type: "post",
 				dataType: "JSON",
 				data: form_data,
-				beforeSend: function () {
-					notificacion("Espere...", "success");
-				},
-				success: function (response) {
-					notificacion(response.msg, "success");
-					setInterval(function () {
-						reload();
-					}, 2000);
-				},
-				error: function (ev) {
-					event.preventDefault();
-					console.log(ev);
-					notificacion("Ocurrió un error y no se guardaron los datos");
-				},
+                beforeSend: function () {
+                    Toast.fire({
+                        icon: 'info',
+                        title: 'Guardando'
+                    })
+                },
+                success: function (response) {
+                    Alert.fire({
+                        title: 'Guardado!',
+                        text: response.msg,
+                        icon: 'success',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            setInterval(function () {
+                                reload();
+                            }, 2000);
+                        }
+                    })
+                },
+                error: function (ev) {
+                    event.preventDefault();
+                    Toast.fire({
+                        icon: 'error',
+                        text: ev.responseText
+                    });
+                },
 			});
 		}
 		else {
-			notificacion("Acepte modalidad en línea");
-			event.preventDefault();
+            Toast.fire({
+                icon: 'info',
+                title: 'Acepte modalidad en línea'
+            })
 		}
 	}
 	else {
-		notificacion("No se validaron campos");
-		event.preventDefault();
+        Toast.fire({
+            icon: 'info',
+            title: 'Validar los campos'
+        })
+        event.preventDefault();
 	}
 
 });
@@ -1242,26 +1446,51 @@ $(".verDocDatosEnlinea").click(function (){
 });
 // Eliminar datos en línea
 $(".eliminarDatosEnlinea").click(function () {
-	data = {
-		id: $(this).attr("data-id"),
-	};
-	$.ajax({
-		url: baseURL + "panel/eliminarDatosEnLinea",
-		type: "post",
-		dataType: "JSON",
-		data: data,
-		beforeSend: function () {
-			notificacion("Espere...", "success");
-		},
-		success: function (response) {
-			notificacion(response.msg, "success");
-			setInterval(function () {
-				reload();
-			}, 2000);
-		},
-		error: function (ev) {
-			//Do nothing
-		},
+	Alert.fire({
+		title: 'Eliminar datos programa en línea',
+		text: '¿Realmente desea eliminar este registro?',
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonText: 'Si',
+		cancelButtonText: 'No',
+	}).then((result) => {
+		if (result.isConfirmed) {
+			data = {
+				id: $(this).attr("data-id"),
+			};
+			$.ajax({
+				url: baseURL + "panel/eliminarDatosEnLinea",
+				type: "post",
+				dataType: "JSON",
+				data: data,
+                beforeSend: function () {
+                    Toast.fire({
+                        icon: 'info',
+                        title: 'Eliminando'
+                    })
+                },
+                success: function (response) {
+                    Alert.fire({
+                        title: 'Registro eliminado!',
+                        text: response.msg,
+                        icon: 'success',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            setInterval(function () {
+                                reload();
+                            }, 2000);
+                        }
+                    })
+                },
+                error: function (ev) {
+                    event.preventDefault()
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Error en el controlador consulta al administrador'
+                    })
+                },
+			});
+		}
 	});
 });
 /**
@@ -1269,32 +1498,45 @@ $(".eliminarDatosEnlinea").click(function () {
  *
  */
 $("#finalizar_si").click(function () {
-	$(this).attr("disabled", true);
-	let idSolicitud =  $(this).attr('data-id');
-	let	data = {
-		idSolicitud: idSolicitud,
-	};
-	$.ajax({
-		url: baseURL + "panel/finalizarProceso",
-		type: "post",
-		dataType: "JSON",
-		data: data,
-		success: function (response) {
-			Toast.fire({
-				icon: 'alert',
-				title: response.msg
+	Alert.fire({
+		title: 'Finalizar solicitud',
+		text: '¿Realmente desea enviar solicitud a la unidad solidaría?',
+		icon: 'info',
+		showCancelButton: true,
+		confirmButtonText: 'Si',
+		cancelButtonText: 'No',
+	}).then((result) => {
+		if (result.isConfirmed) {
+			let idSolicitud = $(this).attr('data-id');
+			let data = {
+				idSolicitud: idSolicitud,
+			};
+			$.ajax({
+				url: baseURL + "panel/finalizarProceso",
+				type: "post",
+				dataType: "JSON",
+				data: data,
+				success: function (response) {
+					Toast.fire({
+						icon: 'alert',
+						title: response.msg
+					});
+					if (response.estado == "0") {
+						$("#sidebar-menu>.menu_section>a").attr('data-id', idSolicitud);
+						$("#sidebar-menu>.menu_section>a").click();
+					} else {
+						redirect(baseURL + "panel/estadoSolicitud/" + idSolicitud);
+					}
+				},
+				error: function (ev) {
+					event.preventDefault();
+					Toast.fire({
+						icon: 'error',
+						text: ev.responseText
+					});
+				},
 			});
-			if (response.estado == "0") {
-				$(this).attr("disabled", false);
-				$("#sidebar-menu>.menu_section>a").attr('data-id', idSolicitud);
-				$("#sidebar-menu>.menu_section>a").click();
-			} else {
-				redirect(baseURL + "panel/estadoSolicitud/" + idSolicitud);
-			}
-		},
-		error: function (ev) {
-			//Do nothing
-		},
+		}
 	});
 });
 // Si no se validad todos los formularios

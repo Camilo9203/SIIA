@@ -48,7 +48,7 @@ class Archivos extends CI_Controller
 		$organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
 		// Inicializamos un contador para recorrer los archivos
 		$i = 0;
-		$errores = '';
+		$msg = '';
 		$files = $_FILES['file']['name'];
 		// Guardar archivo formulario 1 certificaciones
 		if ($tipoArchivo == "certificaciones") {
@@ -60,11 +60,10 @@ class Archivos extends CI_Controller
 				// Obtenemos la extensión
 				$extension[$i] = end($trozos[$i]);
 				$tipo_archivo = pathinfo($_FILES['file']['name'][$i], PATHINFO_EXTENSION);
-
 				if ($tipo_archivo == "pdf" && $this->ArchivosModel->checkExtensionPDF($extension[$i]) === TRUE):
 					$count ++;
 				else:
-					$errores .= "Extensión erronea en archivo: <span class='upper'>" . ($i+1)  . "</span>. <i class='fa fa-times spanRojo' aria-hidden='true'></i><br/>";
+					$msg .= "Extensión erronea en archivo: <span class='upper'>" . ($i+1)  . "</span>. <i class='fa fa-times spanRojo' aria-hidden='true'></i><br/>";
 				endif;
 				$i++;
 			endforeach;
@@ -113,21 +112,20 @@ class Archivos extends CI_Controller
 					if ($this->db->insert('archivos', $data_update)):
 						if (move_uploaded_file($_FILES['file']['tmp_name'][$i], $ruta . '/' . $append_name . "_" . $randomIni . $randomFinal . "_" . $_FILES['file']['name'][$i])):
 							// Se cargó el archivo correctamente
-							$errores .= "Se cargo el archivo : <span class='upper'>" . $_FILES['file']['name'][$i]  . "</span>. <i class='fa fa-times spanVerde' aria-hidden='true'></i><br/>";
 						else:
-							$errores .= "Archivo : <span class='upper'>" . $_FILES['file']['name'][$i]  . "</span>. <i class='fa fa-times spanRojo' aria-hidden='true'></i> no cargado<br/>";
+							$msg .= "Archivo : <span class='upper'>" . $_FILES['file']['name'][$i]  . "</span>. <i class='fa fa-times spanRojo' aria-hidden='true'></i> no cargado<br/>";
 						endif;
 					endif;
 				else:
-					$errores .= "Extensión erronea en archivo: <span class='upper'>" . $_FILES['file']['name'][$i]  . "</span>. <i class='fa fa-times spanRojo' aria-hidden='true'></i><br/>";
+					$msg .= "Extensión erronea en archivo: <span class='upper'>" . $_FILES['file']['name'][$i]  . "</span>. <i class='fa fa-times spanRojo' aria-hidden='true'></i><br/>";
 				endif;
 				$i++;
 			endforeach;
 		}
-		if ($errores == ''):
+		if ($msg == ''):
 			echo json_encode(array('icon' => 'success', 'msg' => 'Se cargaron correctamente los archivos'));
 		else:
-			echo json_encode(array('icon' => 'error', 'msg' => 'No se cargaron los archivos: <br/><strong><small><i>' . $errores . '</i></small></strong>'));
+			echo json_encode(array('icon' => 'error', 'msg' => 'No se cargaron los archivos: <br/><strong><small><i>' . $msg . '</i></small></strong>'));
 		endif;
 	}
 	/**

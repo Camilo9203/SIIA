@@ -15,6 +15,6 @@ class DatosAplicacionModel extends CI_Model
 		}
 		// Traer organizaciones por ID
 		$query = $this->db->get_where('datosAplicacion', array('idSolicitud' => $id));
-		return $query->row();
+		return $query->result();
 	}
 }

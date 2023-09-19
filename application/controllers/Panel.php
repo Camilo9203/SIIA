@@ -1098,21 +1098,13 @@ class Panel extends CI_Controller
 				'organizaciones_id_organizacion' => $id_organizacion,
 				'idSolicitud' => $this->input->post('idSolicitud')
 			);
-
-			/*if($datos_antecedentesAcademicos != NULL){
-    				$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-					$this->db->update('antecedentesAcademicos', $data_antecedentesAcademicos);
-					echo json_encode(array('url'=>"panel", 'msg'=>"Se actualizaron los Antecedentes Academicos."));
-					$this->logs_sia->session_log('Formulario Actualización Antecedentes Academicos');
-					$this->logs_sia->logQueries();
-    			}else{*/
 			$this->db->insert('antecedentesAcademicos', $data_antecedentesAcademicos);
-			echo json_encode(array('url' => "panel", 'msg' => "Se guardaron los Antecedentes Academicos."));
+			echo json_encode(array('msg' => "Se guardaron los Antecedentes Academicos."));
 			$this->logs_sia->session_log('Formulario Antecedentes Academicos');
 			$this->logs_sia->logQueries();
 			//}
 		} else {
-			echo json_encode(array('url' => "panel", 'msg' => "Verifique los datos ingresado, no son correctos."));
+			echo json_encode(array('msg' => "Verifique los datos ingresado, no son correctos."));
 		}
 		//}
 	}
@@ -1576,7 +1568,7 @@ class Panel extends CI_Controller
 			$this->notif_sia->notification('Finalizada', 'admin', $nombreOrganizacion);
 			$this->logs_sia->logQueries();
 		} else {
-			echo json_encode(array('url' => "panel", 'msg' => "Verifique los formularios.", 'estado' => "0"));
+			echo json_encode(array('msg' => "Verifique los formularios.", 'estado' => "0"));
 		}
 	}
 	public function guardarArchivoCarta()
