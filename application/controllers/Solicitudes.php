@@ -142,6 +142,117 @@ class Solicitudes extends CI_Controller
 		);
 		return $data;
 	}
+	// Crear solicitud
+	/** Guardar datos **/
+	// Tipo solicitud
+	public function crearSolicitud()
+	{
+		if ($this->input->post()) {
+			$usuario_id = $this->session->userdata('usuario_id');
+			$organizacion = $this->db->select('*')->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
+			$solicitudes = $this->SolicitudesModel->getSolicitudesOrganizacion($organizacion->id_organizacion);
+			$comprobarSolicitud = $this->comprobarSolicitud($solicitudes, $this->input->post('motivos_solicitud'), $this->input->post('modalidades_solicitud'));
+			if ($comprobarSolicitud == 'true'):
+				$idSolicitud = date('YmdHis') . $organizacion->nombreOrganizacion[3] . random(2);
+				$numeroSolicitudes = count($solicitudes);
+				// Comprobar y asignar estado a la solicitud
+				if($numeroSolicitudes > 0):
+					if($organizacion->estado == "Acreditado"):
+						$tipoSolicitud = "Renovación de Acreditación";
+					else:
+						$tipoSolicitud = 'Solicitud Nueva';
+					endif;
+				else:
+					$tipoSolicitud = 'Acreditación Primera vez';
+				endif;
+				// Datos para crear solicitud
+				$data_solicitud = array(
+					'numeroSolicitudes' => $numeroSolicitudes += 1,
+					'fecha' =>  date('Y/m/d H:i:s'),
+					'idSolicitud' => $idSolicitud,
+					'organizaciones_id_organizacion' => $organizacion->id_organizacion,
+				);
+				$data_tipoSolicitud = array(
+					'tipoSolicitud' =>$tipoSolicitud,
+					'motivoSolicitud' => $this->input->post('motivo_solicitud'),
+					'modalidadSolicitud' => $this->input->post('modalidad_solicitud'),
+					'idSolicitud' => $idSolicitud,
+					'organizaciones_id_organizacion' => $organizacion->id_organizacion,
+					'motivosSolicitud' => json_encode($this->input->post('motivos_solicitud')),
+					'modalidadesSolicitud' => json_encode($this->input->post('modalidades_solicitud'))
+				);
+				$data_estado = array(
+					'nombre' => "En Proceso",
+					'fecha' => date('Y/m/d H:i:s'),
+					'estadoAnterior' => $organizacion->estado,
+					'tipoSolicitudAcreditado' => $tipoSolicitud,
+					'motivoSolicitudAcreditado' => $this->input->post('motivo_solicitud'),
+					'modalidadSolicitudAcreditado' => $this->input->post('modalidad_solicitud'),
+					'idSolicitudAcreditado' => $idSolicitud,
+					'organizaciones_id_organizacion' => $organizacion->id_organizacion,
+					'idSolicitud' => $idSolicitud,
+
+				);
+				// Guardar datos iniciales de la solicitud
+				if($this->db->insert('solicitudes', $data_solicitud)):
+					if($this->db->insert('tipoSolicitud', $data_tipoSolicitud)):
+						if($this->db->insert('estadoOrganizaciones', $data_estado)):
+							$this->logs_sia->session_log('Formulario Motivo Solicitud - Tipo Solicitud: ' . '. Motivo Solicitud: ' . $this->input->post('motivo_solicitud') . '. Modalidad Solicitud: ' . $this->input->post('modalidad_solicitud') . '. ID: ' . $idSolicitud . '. Fecha: ' . date('Y/m/d') . '.');
+							$this->logs_sia->logQueries();
+							send_email_user($organizacion->direccionCorreoElectronicoOrganizacion, 'crearSolicitud', $organizacion, null, null, $idSolicitud);
+						endif;
+					endif;
+				endif;
+			else:
+				echo json_encode(array('status' => 'error', 'title' => 'Datos no guardados', 'msg' => "Conflictos en la creación de la solicitud: <br><br><ul class='list-popup'>" . $comprobarSolicitud . "</ul><br>Debes modificar la creación actual. Si cuentas con solicitudes en estado de <strong> Observaciones </strong> o <strong>Finalizado</strong> puedes consultar el estado y/o eliminar las solicitudes en conflicto para continuar"));
+			endif;
+		}
+	}
+	// Comprobar solicitud a crear
+	public function comprobarSolicitud($solicitudes, $motivosSolicitud, $modalidadesSolicitud)
+	{
+		$solicitudesFinalizadas = true;
+		$motivo = true;
+		$modalidad = true;
+		$return = '';
+        // Recorrer las solicitudes de la organización
+		foreach ($solicitudes as $solicitud):
+			// Comprobar si la solicitud se encuentra en estado de observaciones o finalizado
+            if ($solicitud->nombre == 'Finalizado' || $solicitud->nombre == 'En Observaciones'):
+				$solicitudesFinalizadas = false;
+				$return .= "<li>La solicitud con id: <strong>" . $solicitud->idSolicitud .  "</strong> se escuentra en estado " . $solicitud->nombre . " <i class='fa fa-times spanRojo' aria-hidden='true'></i></li><br><br>";
+			endif;
+            // Capturas mótivos y modalidades de la solicitud
+			$motivos = json_decode($solicitud->motivosSolicitud);
+			$modalidades = json_decode($solicitud->modalidadesSolicitud);
+            // Comprobar datos similares en la solicitud
+			$compararMotivo = array_merge(array_intersect($motivos, $motivosSolicitud));
+            $compararModalidad = array_merge(array_intersect($modalidades, $modalidadesSolicitud));
+			if (!empty($compararMotivo)):
+                $motivos = '';
+                for ($i = 0; $i < count($compararMotivo); $i++):
+                    $motivos .= $this->SolicitudesModel->getMotivo($compararMotivo[$i]) . ', ';
+                endfor;
+                $motivos = substr($motivos, 0, -2);
+				$motivo = false;
+                $return .= "<li>La solicitud con id: <strong> " . $solicitud->idSolicitud . " </strong>tiene los siguientes motivos identicos: " . $motivos ." <i class='fa fa-times spanRojo' aria-hidden='false'></i></li><br><br>";
+			endif;
+			if (!empty($compararModalidad)):
+                $modalidades = '';
+                for ($i = 0; $i < count($compararModalidad); $i++):
+                    $modalidades .= $this->SolicitudesModel->getModalidad($compararModalidad[$i]) . ', ';
+                endfor;
+                $modalidades = substr($modalidades, 0, -2);
+				$modalidad = false;
+                $return .= "<li>La solicitud con id: <strong>" . $solicitud->idSolicitud . " </strong>tiene las siguientes modalidades : " . $modalidades . " <i class='fa fa-times spanRojo' aria-hidden='false'></i></li><br>";
+			endif;
+		endforeach;
+		if ($solicitudesFinalizadas == true && $motivo == true && $modalidad == true):
+			return 'true';
+		else:
+			return $return;
+		endif;
+	}
 	// Solicitud
 	public function solicitud($idSolicitud)
 	{
@@ -409,6 +520,25 @@ class Solicitudes extends CI_Controller
     {
         $data_archivos = $this->db->select("*")->from("archivosDocente")->where('docentes_id_docente', $id)->get()->result();
         return $data_archivos;
+    }
+    // Eliminar Solicitud
+    public function eliminarSolicitud()
+    {
+        $this->db->where('idSolicitud', $this->input->post('idSolicitud'));
+        $tables = array(
+            'estadoOrganizaciones',
+            'solicitudes',
+            'tipoSolicitud',
+            'documentacion',
+            'certificadoExistencia',
+            'registroEducativoProgramas',
+            'jornadasActualizacion',
+            'datosProgramas',
+            'datosEnLinea',
+            'datosAplicacion');
+        $this->db->delete($tables);
+        $msg = 'Se elimino la solicitud: <strong>' . $this->input->post('idSolicitud') . '<strong>';
+        echo json_encode(array('status' => "success", 'msg' => $msg));
     }
 }
 function var_dump_pre($mixed = null) {

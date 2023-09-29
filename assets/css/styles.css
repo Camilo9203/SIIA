@@ -1449,6 +1449,17 @@ FIN CUSTOM
 	align-content: center;
 	justify-content: center;
 }
+.popup-swalert-list {
+	width: 600px;
+	height: max-content;
+	font-size: 14px;
+	align-content: center;
+	justify-content: center;
+}
+.list-popup{
+	justify-content: left;
+	text-align: left;
+}
 .button-swalert {
 	background-color: #07385d !important;
 	color: white !important;

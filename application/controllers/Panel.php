@@ -470,13 +470,6 @@ class Panel extends CI_Controller
 		$docentes = $this->db->select("*")->from("docentes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
 		return $docentes;
 	}
-	public function numeroSolicitudes()
-	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$solicitudes = $this->db->select("*")->from("solicitudes")->where("organizaciones_id_organizacion", $organizacion->id_organizacion)->get()->result();
-		return count($solicitudes);
-	}
 	public function numeroRevisiones($idSolicitud)
 	{
 		$revisiones = $this->db->select("numeroRevisiones")->from("solicitudes")->where("idSolicitud", $idSolicitud)->get()->row();
@@ -531,14 +524,7 @@ class Panel extends CI_Controller
 		$tiposCursoInformes = $this->db->select("*")->from("tiposCursoInformes")->get()->result();
 		return $tiposCursoInformes;
 	}
-	// Cargar estado solicitud
-	public function estadoOrganizacion()
-	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$estado = $organizacion->estado;
-		return $estado;
-	}
+
 	// Cargar estado solicitud
 	public function estadoOrganizaciones($idSolicitud)
 	{
@@ -766,70 +752,7 @@ class Panel extends CI_Controller
 		array_push($formularios, "0. Tenga en cuenta la siguiente lista de sus facilitadores y hacer lo correspondiente:<br/><strong><small><i>" . $strDocentes . "</i></small></strong>");
 		return $formularios;
 	}
-	/** Guardar datos **/
-	// Tipo solicitud
-	public function guardar_tipoSolicitud()
-	{
-		/* $this->form_validation->set_rules('tipo_solicitud','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('motivo_solicitud','','trim|required|min_length[3]|xss_clean'); */
-		if ($this->input->post()) {
-			$usuario_id = $this->session->userdata('usuario_id');
-			$organizacion = $this->db->select('*')->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-			$nombre_org =  $organizacion->nombreOrganizacion;
-			$estado = $this->estadoOrganizacion();
-			$numeroSolicitudes = $this->numeroSolicitudes();
-			$idSolicitud = date('YmdHis') . $nombre_org[3] . random(2);
-			$solicitudes = $this->cargarSolicitudes();
-			if(count($solicitudes) > 0) {
-				if($estado == "Acreditado") {
-					$tipoSolicitud = "Renovación de Acreditación";
-				}
-				else {
-					$tipoSolicitud = 'Solicitud Nueva';
-				}
-			}
-			else {
-				$tipoSolicitud = 'Acreditación Primera vez';
-			}
-			$data_solicitud = array(
-				'numeroSolicitudes' => $numeroSolicitudes += 1,
-				'fecha' =>  date('Y/m/d H:i:s'),
-				'idSolicitud' => $idSolicitud,
-				'organizaciones_id_organizacion' => $organizacion->id_organizacion,
-			);
-			$data_tipoSolicitud = array(
-				'tipoSolicitud' =>$tipoSolicitud,
-				'motivoSolicitud' => $this->input->post('motivo_solicitud'),
-				'modalidadSolicitud' => $this->input->post('modalidad_solicitud'),
-				'idSolicitud' => $idSolicitud,
-				'organizaciones_id_organizacion' => $organizacion->id_organizacion,
-				'motivosSolicitud' => json_encode($this->input->post('motivos_solicitud')),
-				'modalidadesSolicitud' => json_encode($this->input->post('modalidades_solicitud'))
-			);
-			$data_estado = array(
-				'nombre' => "En Proceso",
-				'fecha' => date('Y/m/d H:i:s'),
-				'estadoAnterior' => $estado,
-				'tipoSolicitudAcreditado' => $tipoSolicitud,
-				'motivoSolicitudAcreditado' => $this->input->post('motivo_solicitud'),
-				'modalidadSolicitudAcreditado' => $this->input->post('modalidad_solicitud'),
-				'idSolicitudAcreditado' => $idSolicitud,
-				'organizaciones_id_organizacion' => $organizacion->id_organizacion,
-				'idSolicitud' => $idSolicitud,
 
-			);
-			if($this->db->insert('solicitudes', $data_solicitud)) {
-				if($this->db->insert('tipoSolicitud', $data_tipoSolicitud)) {
-					if($this->db->insert('estadoOrganizaciones', $data_estado)) {
-						echo json_encode(array('url' => "panel", 'msg' => "Se créo nueva solicitud: <strong>" . $idSolicitud . "</strong> Será redireccionado a la página para diligenciar los formularios de esta solicitud.", "est" => $data_tipoSolicitud['idSolicitud']));
-						$this->envio_mailcontacto("inicia", 2);
-						$this->logs_sia->session_log('Formulario Motivo Solicitud - Tipo Solicitud: ' . '. Motivo Solicitud: ' . $this->input->post('motivo_solicitud') . '. Modalidad Solicitud: ' . $this->input->post('modalidad_solicitud') . '. ID: ' . $data_tipoSolicitud['idSolicitud'] . '. Fecha: ' . date('Y/m/d') . '.');
-						$this->logs_sia->logQueries();
-					}
-				}
-			}
-		}
-	}
 	// Verificar Solicitud
 	public function verificar_tipoSolicitud()
 	{
@@ -2054,25 +1977,6 @@ class Panel extends CI_Controller
 				break;
 			default:
 		}
-	}
-	// Eliminar Solicitud
-	public function eliminarSolicitud()
-	{
-		$this->db->where('idSolicitud', $this->input->post('idSolicitud'));
-		$tables = array(
-			'estadoOrganizaciones',
-			'solicitudes',
-			'tipoSolicitud',
-			'documentacion',
-			'certificadoExistencia',
-			'registroEducativoProgramas',
-			'jornadasActualizacion',
-			'datosProgramas',
-			'datosEnLinea',
-			'datosAplicacion');
-		$this->db->delete($tables);
-		$msg = 'Se elimino la solicitud: <strong>' . $this->input->post('idSolicitud') . '<strong>';
-		echo json_encode(array('url' => "panel", 'msg' => $msg));
 	}
 }
 

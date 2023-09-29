@@ -417,7 +417,7 @@
 	<script src="<?php echo base_url('assets/js/functions/resoluciones.js?v=1.4.1') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/nits.js?v=1.5.1') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/panel.js?v=1.0.1') . time() ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/functions/formularios.js?v=1.0.1') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/solicitud.js?v=1.0.0') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/docentes.js?v=1.61342') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/contacto.js?v=1.0.8.61') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/estadisticas.js?v=1.0.8.62') . time() ?>" type="text/javascript"></script>

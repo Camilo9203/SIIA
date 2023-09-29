@@ -85,7 +85,7 @@
 	<script src="<?php echo base_url('assets/js/functions/main.js?v=1.0.8.61219') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/observaciones.js?v=1.1.1') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/panel.js?v=1.0.1') . time() ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/functions/formularios.js?v=1.0.1') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/solicitud.js?v=1.0.1') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/contacto.js?v=1.0.8.61') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/estadisticas.js?v=1.0.8.62') . time() ?>" type="text/javascript"></script>
 	<!--<script src="<?php echo base_url('assets/js/script_o.min.js') ?>" type="text/javascript"></script>

@@ -35,7 +35,7 @@ function send_email_super($type, $administrador)
 	$CI->email->message($email_view);
 	/** Envió de correo */
 	if ($CI->email->send()):
-		$error = $CI->email->print_debugger();
+		$error = 'Enviado';
 		save_log_email($administrador->direccionCorreoElectronico, $subject, $message, $type, $error, $response);
 	else:
 		$error = $CI->email->print_debugger();
@@ -95,7 +95,7 @@ function send_email_admin($tipo, $prioridad = null, $to = null, $docente = null,
 	$CI->email->message($email_view);
 	/** Envió de correo */
 	if ($CI->email->send()):
-		$error = $CI->email->print_debugger();
+		$error = 'Enviado';
 		//Capturar datos para guardar en base de datos registro del correo enviado.
 		save_log_email($to, $subject, $message, $tipo, $error, $response);
 	else:
@@ -107,7 +107,7 @@ function send_email_admin($tipo, $prioridad = null, $to = null, $docente = null,
 /**
  * Enviar correo a usuarios
  */
-function send_email_user($to, $type, $organizacion, $usuario = null, $token = null){
+function send_email_user($to, $type, $organizacion, $usuario = null, $token = null, $idSolicitud = null){
 	$CI = & get_instance();
 	/** Asuntos y correos emails */
 	switch ($type):
@@ -126,7 +126,12 @@ function send_email_user($to, $type, $organizacion, $usuario = null, $token = nu
 						<p>' . $usuario . '</p>
 						<p>Organizaciones Solidarias le recuerda que es importante mantener la información básica de contacto de la entidad actualizada, para facilitar el desarrollo procesos derivados de la acreditación. Le recomendamos cada vez que se realice algún cambio sea reportado por medio del SIIA. En razón a la política de manejo de datos institucional y para verificar la identidad de la organización, es necesario activar su cuenta en el siguiente link:</p><br />
 						<a target="_blank" style="font-family: Arial, sans-serif; background: #0071b9; color:white; display: inline-block; text-decoration: none; line-height:40px; font-size: 18px; width:200px; box-shadow: 2px 3px #e2e2e2; font-weight: bold;" href='. base_url() . 'activate/?tk:' . $token . ':' . $usuario . '>Activar mi cuenta</a>';
-			$response = array('url' => "registro", 'msg' => "Se envío un correo a: " . $to . ", por favor verifíquelo para activar su cuenta.", "status" => 1);
+			$response = array('msg' => "Se envío un correo a: " . $to . ", por favor verifíquelo para activar su cuenta.");
+			break;
+		case 'crearSolicitud':
+			$subject = "Inicia el diligenciamiento de la solicitud";
+			$message = "Organización " . $organizacion->nombreOrganizacion . ": Organizaciones Solidarias le informa que ha iniciado el diligenciamiento de su solicitud de acreditación. Recuerde diligenciar todos los formularios, ingresando la información en los campos requeridos, los archivos adjuntos como imágenes y archivos con las extensiones en letra minúscula admitidas (archivo.jpg, archivo.png, archivo.pdf) y con un peso no mayor a 15 Mb cada archivo. Al final de cada formulario guarde la información con el botón 'Guardar'. Cuando concluya con el ingreso de información en todos los formularios y archivos adjuntos requeridos, favor enviar la solicitud para su evaluación dando FINALIZAR en el SIIA. Si esta actualizando información recuerde eliminar la solicitud al finalizar. Organizaciones Solidarias le recuerda que es importante mantener la  información básica de contacto de la entidad actualizada, para facilitar el desarrollo procesos derivados de la acreditación. Le recomendamos  cada vez que se realice algún cambio sea reportado por medio del SIIA.";
+			$response = array('status' => 'success', 'title' => 'Solicitud creada!', 'msg' => "Se créo nueva solicitud: <strong>" . $idSolicitud . "</strong> Será redireccionado a la página para diligenciar los formularios de esta solicitud.", 'id' => $idSolicitud);
 			break;
 		default:
 			$asunto = "";
@@ -143,7 +148,7 @@ function send_email_user($to, $type, $organizacion, $usuario = null, $token = nu
 	$CI->email->message($email_view);
 	/** Envió de correo */
 	if ($CI->email->send()):
-		$error = $CI->email->print_debugger();
+		$error = 'Enviado';
 		save_log_email($to, $subject, $message, $type, $error, $response);
 	else:
 		$error = $CI->email->print_debugger();
@@ -167,9 +172,13 @@ function save_log_email($to, $subject, $msg, $type, $error, $response = null) {
 		'error' => $error
 	);
 	if($CI->db->insert('correosregistro', $email_details)):
-		echo json_encode($response);
+		if($response != null):
+			echo json_encode($response);
+		endif;
 	else:
-		echo json_encode($response);
+		if($response != null):
+			echo json_encode($response);
+		endif;
 	endif;
 }
 

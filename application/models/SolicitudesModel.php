@@ -93,4 +93,47 @@ class SolicitudesModel extends CI_Model
 		$observaciones = $this->db->select('*')->from('observaciones')->where("organizaciones_id_organizacion", $idOrganizacion)->get()->result();
 		echo json_encode(array("informacionGeneral" => $informacionGeneral, "documentacion" => $documentacion, "registroEducativoProgramas" => $registroEducativoProgramas, "antecedentesAcademicos" => $antecedentesAcademicos, "jornadasActualizacion" => $jornadasActualizacion, "datosProgramas" => $datosProgramas, "docentes" => $docentes, "plataforma" => $plataforma, "enLinea" => $enLinea, "tipoSolicitud" => $tipoSolicitud, "solicitudes" => $solicitudes, "estadoOrganizaciones" => $estadoOrganizaciones, "organizaciones" => $organizaciones, "archivos" => $archivos, "resoluciones" => $resoluciones, "observaciones" => $observaciones, "certificadoExistencia" => $certificadoExistencia));
 	}
+    /**
+     * Traducir motivos
+     */
+    public function getMotivo($id)
+    {
+        switch ($id):
+            case '1':
+                return 'Acreditación Curso Básico de Economía Solidaria';
+                break;
+            case '2':
+                return 'Aval de Trabajo Asociado';
+                break;
+            case '3':
+                return 'Acreditación Curso Medio de Economía Solidaria';
+                break;
+            case '4':
+                return 'Acreditación Curso Avanzado de Economía Solidaria';
+                break;
+            case '5':
+                return 'Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria';
+                break;
+            default:
+                break;
+        endswitch;
+    }
+    /**
+     * Traducir motivos
+     */
+    public function getModalidad($id)
+    {
+        switch ($id):
+            case '1':
+                return 'Presencial';
+                break;
+            case '2':
+                return 'Virtual';
+                break;
+            case '3':
+                return 'En linea';
+                break;
+        endswitch;
+    }
+
 }
