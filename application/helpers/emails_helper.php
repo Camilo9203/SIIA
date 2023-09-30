@@ -109,6 +109,7 @@ function send_email_admin($tipo, $prioridad = null, $to = null, $docente = null,
  */
 function send_email_user($to, $type, $organizacion, $usuario = null, $token = null, $idSolicitud = null){
 	$CI = & get_instance();
+	$CI->load->model('SolicitudesModel');
 	/** Asuntos y correos emails */
 	switch ($type):
 		// Actualización de facilitadores
@@ -132,6 +133,16 @@ function send_email_user($to, $type, $organizacion, $usuario = null, $token = nu
 			$subject = "Inicia el diligenciamiento de la solicitud";
 			$message = "Organización " . $organizacion->nombreOrganizacion . ": Organizaciones Solidarias le informa que ha iniciado el diligenciamiento de su solicitud de acreditación. Recuerde diligenciar todos los formularios, ingresando la información en los campos requeridos, los archivos adjuntos como imágenes y archivos con las extensiones en letra minúscula admitidas (archivo.jpg, archivo.png, archivo.pdf) y con un peso no mayor a 15 Mb cada archivo. Al final de cada formulario guarde la información con el botón 'Guardar'. Cuando concluya con el ingreso de información en todos los formularios y archivos adjuntos requeridos, favor enviar la solicitud para su evaluación dando FINALIZAR en el SIIA. Si esta actualizando información recuerde eliminar la solicitud al finalizar. Organizaciones Solidarias le recuerda que es importante mantener la  información básica de contacto de la entidad actualizada, para facilitar el desarrollo procesos derivados de la acreditación. Le recomendamos  cada vez que se realice algún cambio sea reportado por medio del SIIA.";
 			$response = array('status' => 'success', 'title' => 'Solicitud creada!', 'msg' => "Se créo nueva solicitud: <strong>" . $idSolicitud . "</strong> Será redireccionado a la página para diligenciar los formularios de esta solicitud.", 'id' => $idSolicitud);
+			break;
+		case 'enviarSolicitd':
+			$subject = "Finaliza el diligenciamiento de la solicitud";
+			$message = "Organización " . $organizacion->nombreOrganizacion . ": Organizaciones Solidarias le informa que su solicitud de acreditación ha sido enviada por el SIIA para ser evaluada. En este momento no puede visualizarla en el aplicativo hasta que se realice la verificación de requisitos. De ser necesario, le será devuelta con las observaciones pertinentes, dentro de los siguientes diez (10) días hábiles. 
+					<br/><br/>
+					<label>Datos de recepción:</label> <br/>
+					Fecha de recepcion de solicitud: <strong>" . date("Y-m-d h:m:s") . "</strong>. <br/> 
+					Fecha de creación de solicitud: <strong>" . $CI->SolicitudesModel->getSolicitudesOrganizacion($idSolicitud)->fechaCreacion . "</strong>. <br/> 
+					Número ID de la solicitud: <strong>" . $idSolicitud . "</strong>. <br/>";
+			$response = array('status' => "success", 'title' => 'Solicitud enviada!' ,'msg' => "Solicitud: " . $idSolicitud . " enviada a la <strong>Unidad Solidaria</strong>, será dirigido a la página de estado de la solicitud. Se le asignará un <strong>evaluador</strong> a esta solicitud y una vez él cambie el estado y/o haga observaciones de esta, será notificado. <br><br> ¡Muchas Gracias!");
 			break;
 		default:
 			$asunto = "";

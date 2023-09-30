@@ -2,6 +2,7 @@
 /***
  * @var $data_organizacion
  * @var $data_solicitudes
+ * @var $informacionGeneral
  */
 ?>
 <script>
@@ -33,25 +34,25 @@
 			</div>
 		</div>
 	</div>
+	<?php if ($informacionGeneral): ?>
+		<!-- Botón Facilitadores -->
+		<div class="col-md-3">
+			<div class="panel panel-siia ver_docentes">
+				<div class="panel-heading">
+					<h3 class="panel-title">Grupo de facilitadores <i class="fa fa-users" aria-hidden="true"></i></h3>
+				</div>
+				<div class="panel-body">
+					<button class="btn btn-default btn-block ver_docentes" id="ver_docentes">Facilitadores </button>
+				</div>
+			</div>
+		</div>
+	<?php endif; ?>
 	<?php if($data_solicitudes): ?>
 		<?php
 			$estado = array();
 			foreach ($data_solicitudes as $solicitud):
 				array_push($estado, $solicitud->nombre);
 			endforeach; ?>
-        <?php if (in_array('Finalizado', $estado) || in_array('En observaciones', $estado)): ?>
-            <!-- Botón Facilitadores -->
-            <div class="col-md-3">
-                <div class="panel panel-siia ver_docentes">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Grupo de facilitadores <i class="fa fa-users" aria-hidden="true"></i></h3>
-                    </div>
-                    <div class="panel-body">
-                        <button class="btn btn-default btn-block ver_docentes" id="ver_docentes">Facilitadores </button>
-                    </div>
-                </div>
-            </div>
-        <?php endif; ?>
 		<?php if(in_array("Acreditado", $estado)): ?>
 			<!-- Botón Plan Mejoramiento -->
 			<div class="col-md-3">
@@ -180,7 +181,7 @@
 	<button id="guardar_formulario_tipoSolicitud" class="btn btn-siia btn-sm pull-right">Crear solicitud <i class="fa fa-check" aria-hidden="true"></i></button>
 	<button class="btn btn-danger btn-sm volverSolicitudes"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver a solicitudes</button>
 	<!-- Modal Ayuda Modalidad Virtual  -->
-	<div class="modal fade" id="ayudaModalidadVirtual" tabindex="-1" role="dialog" aria-labelledby="ayudaModalidadVirtual">
+	<div class="modal fade" id="ayudaModalidadVirtual" tabindex="-1" role="dialog" aria-labelledby="ayudaModalidadVirtual" data-backdrop="static" data-keyboard="false">
 		<div class="modal-dialog modal-xs" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -201,7 +202,7 @@
 		</div>
 	</div>
 	<!-- Modal Ayuda Modalidad En Línea  -->
-	<div class="modal fade" id="ayudaModalidadEnLinea" tabindex="-1" role="dialog" aria-labelledby="ayudaModalidadEnLinea">
+	<div class="modal fade" id="ayudaModalidadEnLinea" tabindex="-1" role="dialog" aria-labelledby="ayudaModalidadEnLinea" data-backdrop="static" data-keyboard="false">
 		<div class="modal-dialog modal-xs" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -243,29 +244,29 @@
 				</tr>
 				</thead>
 				<tbody id="tbody">
-				<?php foreach ($data_solicitudes as $solicitud) {
-					echo "<tr><td>" . $solicitud->idSolicitud . "</td>";
-					echo "<td>" . $solicitud->fecha . "</td>";
-					echo "<td>" . $solicitud->fechaUltimaRevision . "</td>";
-					echo "<td>" . $solicitud->nombre . "</td>";
-					echo "<td>" . $solicitud->motivoSolicitudAcreditado . "</td>";
-					echo "<td>" . $solicitud->modalidadSolicitudAcreditado . "</td>";
-					if ($solicitud->nombre == "En Proceso") {
-						echo "<td><div class='btn-group-vertical' role='group' aria-label='acciones'><button type='button' class='btn btn-siia btn-sm verSolicitud' data-id=" . $solicitud->idSolicitud . " title='Continuar Solicitud'>Continuar <i class='fa fa-check' aria-hidden='true'></i></button>";
-						echo "<button type='button' class='btn btn-danger btn-sm eliminarSolicitud' data-id='" . $solicitud->idSolicitud . "' title='Eliminar Solicitud'>Eliminar <i class='fa fa-trash' aria-hidden='true'></i></button></div></td></tr>";
+					<?php foreach ($data_solicitudes as $solicitud) {
+						echo "<tr><td>" . $solicitud->idSolicitud . "</td>";
+						echo "<td>" . $solicitud->fechaCreacion . "</td>";
+						echo "<td>" . $solicitud->fechaUltimaRevision . "</td>";
+						echo "<td>" . $solicitud->nombre . "</td>";
+						echo "<td>" . $solicitud->motivoSolicitudAcreditado . "</td>";
+						echo "<td>" . $solicitud->modalidadSolicitudAcreditado . "</td>";
+						if ($solicitud->nombre == "En Proceso") {
+							echo "<td><div class='btn-group-vertical' role='group' aria-label='acciones'><button type='button' class='btn btn-siia btn-sm verSolicitud' data-id=" . $solicitud->idSolicitud . " title='Continuar Solicitud'>Continuar <i class='fa fa-check' aria-hidden='true'></i></button>";
+							echo "<button type='button' class='btn btn-danger btn-sm eliminarSolicitud' data-id='" . $solicitud->idSolicitud . "' title='Eliminar Solicitud'>Eliminar <i class='fa fa-trash' aria-hidden='true'></i></button></div></td></tr>";
+						}
+						if ($solicitud->nombre == "Acreditado" || $solicitud->nombre == "Archivada" || $solicitud->nombre == "Negada" || $solicitud->nombre == "Revocada" ){
+							echo "<td><button class='btn btn-info btn-sm verDetalleSolicitud' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false' data-id=" . $solicitud->idSolicitud . " title='Ver Detalle'>Detalle <i class='fa fa-info' aria-hidden='true'></i></button></div></td></tr>";
+						}
+						if ($solicitud->nombre == "Finalizado"){
+							echo "<td><div class='btn-group-vertical' role='group' aria-label='acciones'><button class='btn btn-success btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Estado'>Estado<i class='fa fa-eye' aria-hidden='true'></i></button>";
+							echo "<button type='button' class='btn btn-danger btn-sm eliminarSolicitud' data-id='" . $solicitud->idSolicitud . "' title='Eliminar Solicitud'>Eliminar <i class='fa fa-trash' aria-hidden='true'></i></button></div></td></tr>";
+						}
+						if ($solicitud->nombre == "En Observaciones"){
+							echo "<td><button class='btn btn-warning btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Observaciones'>Observaciones<i class='fa fa-eye' aria-hidden='true'></i></button></td></tr>";
+						}
 					}
-					if ($solicitud->nombre == "Acreditado" || $solicitud->nombre == "Archivada" || $solicitud->nombre == "Negada" || $solicitud->nombre == "Revocada" ){
-						echo "<td><button class='btn btn-info btn-sm verDetalleSolicitud' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false' data-id=" . $solicitud->idSolicitud . " title='Ver Detalle'>Detalle <i class='fa fa-info' aria-hidden='true'></i></button></div></td></tr>";
-					}
-					if ($solicitud->nombre == "Finalizado"){
-						echo "<td><div class='btn-group-vertical' role='group' aria-label='acciones'><button class='btn btn-success btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Estado'>Estado<i class='fa fa-eye' aria-hidden='true'></i></button>";
-                        echo "<button type='button' class='btn btn-danger btn-sm eliminarSolicitud' data-id='" . $solicitud->idSolicitud . "' title='Eliminar Solicitud'>Eliminar <i class='fa fa-trash' aria-hidden='true'></i></button></div></td></tr>";
-					}
-					if ($solicitud->nombre == "En Observaciones"){
-						echo "<td><button class='btn btn-warning btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Observaciones'>Observaciones<i class='fa fa-eye' aria-hidden='true'></i></button></td></tr>";
-					}
-				}
-				?>
+					?>
 				</tbody>
 			</table>
 			<!-- Modal Detalle Solicitud -->

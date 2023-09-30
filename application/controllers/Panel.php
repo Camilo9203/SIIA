@@ -7,6 +7,7 @@ class Panel extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->helper(array('download', 'file', 'url', 'html', 'form'));
+		$this->load->model('InformacionGeneralModel');
 		verify_session();
 	}
 	// Vista index
@@ -18,7 +19,7 @@ class Panel extends CI_Controller
 		$usuario_id = $this->session->userdata('usuario_id');
 		$tipo_usuario = $this->session->userdata('type_user');
 
-		$usuario = $this->db->select('usuario')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
+		$usuario = $this->db->select('*')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
 		$data = array (
 			'title' => 'Panel Principal',
 			'logged_in' => $logged,
@@ -29,8 +30,9 @@ class Panel extends CI_Controller
 			'fecha' => date('Y/m/d'),
 			'departamentos' => $this->cargarDepartamentos(),
 			'data_organizacion' => $this->cargarDatosOrganizacion(),
-			'data_solicitudes' => $this->cargarSolicitudes()
-	);
+			'data_solicitudes' => $this->cargarSolicitudes(),
+			'informacionGeneral' => $this->InformacionGeneralModel->getInformacionGeneral($usuario->id_usuario)
+		);
 
 		//$data['estado'] = $this->estadoOrganizaciones();
 		//$data['data_informacion_general'] = $this->cargarDatos_formulario_informacion_general_entidad();
@@ -449,18 +451,6 @@ class Panel extends CI_Controller
 		$data_archivos = $this->db->select("*")->from("archivos")->where($where)->where("tipo !=", "observacionesPlataformaVirtual", FLASE)->get()->result();
 		echo json_encode($data_archivos);
 	}
-	public function cargarDatosArchivosDocente()
-	{
-		$id_docente = $this->input->post('id_docente');
-
-		$data_archivos = $this->db->select("*")->from("archivosDocente")->where('docentes_id_docente', $id_docente)->get()->result();
-		echo json_encode($data_archivos);
-	}
-	public function cargarDatosArchivosDocentes($id)
-	{
-		$data_archivos = $this->db->select("*")->from("archivosDocente")->where('docentes_id_docente', $id)->get()->result();
-		return $data_archivos;
-	}
 	public function cargar_docentes()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -553,204 +543,6 @@ class Panel extends CI_Controller
 				return 0;
 				break;
 		}*/
-	}
-	public function verificarFormularios($idSolicitud)
-	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-
-		$certificacionesForm = NULL;
-		$lugar = NULL;
-		$carta = NULL;
-		$jornada = NULL;
-		$materialProgBasicos = NULL;
-		$materialAvalEcon = NULL;
-		$formatosEval = NULL;
-		$materialProgEval = NULL;
-		$instructivo = NULL;
-		$icert = 0;
-		$datosBasicosProg = TRUE;
-		$datosAvalEcon = TRUE;
-
-		$tipoSolicitud = $this->db->select("*")->from("tipoSolicitud")->where("idSolicitud", $idSolicitud)->get()->row();
-		$motivoSolicitud = json_decode($tipoSolicitud->motivosSolicitud);
-		$modalidadSolicitud = $tipoSolicitud->modalidadSolicitud;
-
-		$archivosBD = $this->db->select("*")->from("archivos")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
-		/** Comprobar archivos en formularios */
-		foreach ($archivosBD as $archivo) {
-			$tipo = $archivo->tipo;
-			$formulario = $archivo->id_formulario;
-			switch ($formulario) {
-				case 1:
-					switch ($tipo) {
-						case 'certificaciones':
-							$icert += 1;
-							if ($icert >= 3) {
-								$certificacionesForm = TRUE;
-							}
-							break;
-						case 'lugar':
-							$lugar = TRUE;
-							break;
-						case 'carta':
-							$carta = TRUE;
-							break;
-						default:
-							$certificacionesForm = FALSE;
-							$lugar = FALSE;
-							$carta = FALSE;
-							break;
-					}
-					break;
-				case 5:
-					if ($tipo == "jornadaAct") {
-						$jornada = TRUE;
-					}
-					break;
-				case 6:
-					if ($tipo == "materialDidacticoProgBasicos") {
-						$materialProgBasicos = TRUE;
-					}
-					break;
-				case 7:
-					if ($tipo == "materialDidacticoAvalEconomia") {
-						$materialAvalEcon = TRUE;
-					}
-					break;
-				case 8:
-					if ($tipo == "formatosEvalProgAvalar") {
-						$formatosEval = TRUE;
-					}
-
-					if ($tipo == "materialDidacticoProgAvalar") {
-						$materialProgEval = TRUE;
-					}
-					break;
-				case 10:
-					if ($tipo == "instructivoPlataforma" || $tipo == "observacionesPlataformaVirtual") {
-						$instructivo = TRUE;
-					}
-					break;
-				default:
-					break;
-			}
-		}
-		/** Variables Formularios */
-		$informacionGeneral = $this->db->select("*")->from("informacionGeneral")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$documentacion = $this->db->select("*")->from("documentacion")->where("idSolicitud", $idSolicitud)->get()->row();
-		$registroEducativoProgramas = $this->db->select("*")->from("registroEducativoProgramas")->where("idSolicitud", $idSolicitud)->get()->row();
-		$antecedentesAcademicos = $this->db->select("*")->from("antecedentesAcademicos")->where("idSolicitud", $idSolicitud)->get()->row();
-		$jornadasActualizacion = $this->db->select("*")->from("jornadasActualizacion")->where("idSolicitud", $idSolicitud)->get()->row();
-		$datosProgramas = $this->db->select("*")->from("datosProgramas")->where("idSolicitud", $idSolicitud)->get()->row();
-		$aplicacion = $this->db->select("*")->from("datosAplicacion")->where("idSolicitud", $idSolicitud)->get()->row();
-		$datosEnLinea = $this->db->select("*")->from("datosEnLinea")->where("idSolicitud", $idSolicitud)->get()->row();
-		// Comprobación docentes
-		$docentes = $this->db->select("*")->from("docentes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
-		$numeroDocentes = $this->db->select("count(docentes.id_docente) as numeroDocentes")->from("docentes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row()->numeroDocentes;
-		$strDocentes = "";
-		foreach ($docentes as $docente) {
-			$hoja = false;
-			$titulo = false;
-			$certificacionesEco = false;
-			$certificaciones = false;
-			$hojas = 0;
-			$titulos = 0;
-			$certEcos = 0;
-			$certs = 0;
-
-			$id_docente = $docente->id_docente;
-			$nombre = $this->db->select("primerNombreDocente")->from("docentes")->where("id_docente", $id_docente)->get()->row()->primerNombreDocente;
-			$archivos = $this->cargarDatosArchivosDocentes($id_docente);
-
-			for ($i = 0; $i < count($archivos); $i++) {
-				$tipo = json_encode($archivos[$i]->tipo);
-
-				if ($tipo == '"docenteHojaVida"') {
-					$hojas += 1;
-					if ($hojas >= 1) {
-						$hoja = true;
-					}
-				}
-				if ($tipo == '"docenteTitulo"') {
-					$titulos += 1;
-					if ($titulos >= 1) {
-						$titulo = true;
-					}
-				}
-				if ($tipo == '"docenteCertificadosEconomia"') {
-					$certEcos += 1;
-					if ($certEcos >= 1) {
-						$certificacionesEco = true;
-					}
-				}
-				if ($tipo == '"docenteCertificados"') {
-					$certs += 1;
-					if ($certs >= 3) {
-						$certificaciones = true;
-					}
-				}
-			}
-
-			if ($hoja == true && $titulo == true && $certificacionesEco == true && $certificaciones && true) {
-				$strDocentes .= "El facilitador <span class='upper'>" . $nombre . "</span> esta correcto en los documentos mínimos requeridos. <i class='fa fa-check spanVerde' aria-hidden='true'></i><br/>";
-			} else {
-				$strDocentes .= "Verificar los documentos del facilitador <span class='upper'>" . $nombre . "</span>. <i class='fa fa-times spanRojo' aria-hidden='true'></i><br/>";
-			}
-		}
-
-		/** @var  $formularios
-		 	Comprobación Formularios
-		 */
-		$formularios = array();
-		// TODO: Comprobación de formulario 6 = numero de motivos
-		$solicitud = $this->db->select('*')->from('solicitudes')->where("idSolicitud", $idSolicitud)->get()->row();
-		$totalProgramas = $this->db->select('*')->from('datosProgramas')->where("idSolicitud", $idSolicitud)->get()->result();
-		// Contar programas seleccionados por medio de campo motivos
-		$cantProgramasSeleccionados = count(json_decode($tipoSolicitud->motivosSolicitud));
-		// Asignar variable para la cantidad de programas actualmente registrados en la solicitud
-		$cantProgramasAceptados = count($totalProgramas);
-		// Comparar si la cantidad de motivos seleccionados conincide con la cantidad de programas aceptados en la solicitud.
-		if ($cantProgramasSeleccionados == $cantProgramasAceptados) {
-			$datosProgramasAceptados = 'TRUE';
-		}
-		/** Comprobar todos los formularios */
-		if ($informacionGeneral == NULL || $certificacionesForm == NULL || $lugar == NULL || $carta == NULL) {
-			array_push($formularios, "1. Falta el formulario de Informacion General.");
-		}
-		if ($documentacion == NULL) {
-			array_push($formularios, "2. Falta el formulario de Documentacion Legal.");
-		}
-		if ($antecedentesAcademicos == NULL) {
-			array_push($formularios, "3. Falta el formulario de Antecedentes Academicos.");
-		}
-		if ($jornadasActualizacion == NULL || $jornada == NULL) {
-			array_push($formularios, "4. Falta el formulario de Jornadas Actualización.");
-		}
-		if ($datosProgramasAceptados == NULL) {
-			array_push($formularios, "5. Falta el formulario de Datos Basicos Programas.");
-		}
-		if ($docentes == NULL || $numeroDocentes < 3) {
-			array_push($formularios, "6. Faltan facilitadores y/o archivos, deben ser tres (3) con sus respectivos documentos.");
-		}
-		if (($modalidadSolicitud == "Virtual" || $modalidadSolicitud == "Presencial, Virtual" || $modalidadSolicitud == "Presencial, Virtual, En Linea"  || $modalidadSolicitud == "Virtual, En Linea") && $aplicacion == NULL) {
-			array_push($formularios, "7. Falta el formulario de Ingreso a la Plataforma Virtual.");
-		}
-		if (($modalidadSolicitud == "En Linea" || $modalidadSolicitud == "Presencial, En Linea" || $modalidadSolicitud == "Presencial, Virtual, En Linea"  || $modalidadSolicitud == "Virtual, En Linea") && $datosEnLinea == NULL) {
-			array_push($formularios, "8. Falta el formulario de datos modalidad en linea.");
-		}
-		// Actualizar Datos
-		else if ($motivoSolicitud == "Actualizar Datos") {
-			if ($informacionGeneral == NULL) {
-				array_push($formularios, "Llene los formularios que requieran actualizacion." && $aplicacion == NULL);
-			}
-			if ($modalidadSolicitud == "Virtual" || $modalidadSolicitud == "Virtual y Presencial" || $modalidadSolicitud == "Presencial") {
-				array_push($formularios, "10. Falta el formulario de Ingreso a la Plataforma Virtual." && $aplicacion == NULL || $instructivo == NULL);
-			}
-		}
-		array_push($formularios, "0. Tenga en cuenta la siguiente lista de sus facilitadores y hacer lo correspondiente:<br/><strong><small><i>" . $strDocentes . "</i></small></strong>");
-		return $formularios;
 	}
 
 	// Verificar Solicitud
@@ -1467,33 +1259,6 @@ class Panel extends CI_Controller
 			echo json_encode(array("estado" => "0"));
 		}
 	}
-	//TODO: Finalizar proceso
-	public function finalizarProceso()
-	{
-		$idSolicitud = $this->input->post('idSolicitud');
-		$formularios = $this->verificarFormularios($idSolicitud);
-		if (count($formularios) == 1) {
-			$usuario_id = $this->session->userdata('usuario_id');
-			$datos_organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-			$id_organizacion = $datos_organizacion->id_organizacion;
-			$nombreOrganizacion = $datos_organizacion->nombreOrganizacion;
-			$updateEstado = array(
-				'nombre' => "Finalizado",
-				'fecha' => date('Y/m/d H:i:s'),
-				'estadoAnterior' => "En Proceso",
-				'fechaFinalizado' => date('Y/m/d H:i:s'),
-			);
-			$this->db->where('idSolicitud', $idSolicitud);
-			$this->db->update('estadoOrganizaciones', $updateEstado);
-			echo json_encode(array('url' => "panel", 'msg' => "Solicitud Terminada, cambio de estado a Finalizado.", 'estado' => "1"));
-			$this->envio_mailcontacto("finaliza", 2);
-			$this->logs_sia->session_log('Finalizada la Solicitud');
-			$this->notif_sia->notification('Finalizada', 'admin', $nombreOrganizacion);
-			$this->logs_sia->logQueries();
-		} else {
-			echo json_encode(array('msg' => "Verifique los formularios.", 'estado' => "0"));
-		}
-	}
 	public function guardarArchivoCarta()
 	{
 		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
@@ -1845,66 +1610,7 @@ class Panel extends CI_Controller
 			echo json_encode(array("msg" => "Asistente actualizado, verifique la información."));
 		}
 	}
-	// TODO: Enviar Correos a contacto de la solicitud
-	function envio_mailcontacto($tipo, $prioridad)
-	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$to_correo = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $to_correo->id_organizacion;
-		$datosSolicitud = $this->db->select("*")->from("tipoSolicitud")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$idSolicitud = $datosSolicitud->idSolicitud;
-		$datosSolicitudes = $this->db->select("*")->from("solicitudes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$fechaSolicitud = $datosSolicitudes->fecha;
 
-		switch ($tipo) {
-			case 'finaliza':
-				$asunto = "Finaliza el diligenciamiento de la solicitud";
-				$mensaje = "Organización " . $to_correo->nombreOrganizacion . ": Organizaciones Solidarias le informa que su solicitud de acreditación ha sido enviada por el SIIA para ser evaluada. En este momento no puede visualizarla en el aplicativo hasta que se realice la verificación de requisitos. De ser necesario, le será devuelta con las observaciones pertinentes, dentro de los siguientes diez (10) días hábiles. 
-					<br/><br/>
-					<label>Datos de recepción:</label> <br/>
-					Fecha de recepcion de solicitud: <strong>" . date("Y-m-d h:m:s") . "</strong>. <br/> 
-					Fecha de creación de solicitud: <strong>" . $fechaSolicitud . "</strong>. <br/> 
-					Número ID de la solicitud: <strong>" . $idSolicitud . "</strong>. <br/>";
-				break;
-			case 'inicia':
-				$asunto = "Inicia el diligenciamiento de la solicitud";
-				$mensaje = "Organización " . $to_correo->nombreOrganizacion . ": Organizaciones Solidarias le informa que ha iniciado el diligenciamiento de su solicitud de acreditación. Recuerde diligenciar todos los formularios, ingresando la información en los campos requeridos, los archivos adjuntos como imágenes y archivos con las extensiones en letra minúscula admitidas (archivo.jpg, archivo.png, archivo.pdf) y con un peso no mayor a 15 Mb cada archivo. Al final de cada formulario guarde la información con el botón 'Guardar'. Cuando concluya con el ingreso de información en todos los formularios y archivos adjuntos requeridos, favor enviar la solicitud para su evaluación dando FINALIZAR en el SIIA. Si esta actualizando información recuerde eliminar la solicitud al finalizar. Organizaciones Solidarias le recuerda que es importante mantener la  información básica de contacto de la entidad actualizada, para facilitar el desarrollo procesos derivados de la acreditación. Le recomendamos  cada vez que se realice algún cambio sea reportado por medio del SIIA.";
-				break;
-			case 'docentes':
-				$asunto = "Docentes";
-				$mensaje = "Organización " . $to_correo->nombreOrganizacion . ": Organizaciones Solidarias le informa que  por medio del SIIA se recibió de su entidad una solicitud de revisión de hojas de vida para ampliar el equipo de facilitadores aprobados. En los próximos  diez (10) días hábiles será realizada la verificación de los requisitos establecidos en el numeral 6 del artículo 4 de la resolución 110 de 2016. Una vez realizada esta verificación, se procederá a  actualizar el listado de facilitadores de la entidad acreditada.";
-				break;
-			default:
-				$asunto = "";
-				$mensaje = "";
-				break;
-		}
-		/**
-		1 => '1 (Highest)',
-		2 => '2 (High)',
-		3 => '3 (Normal)',
-		4 => '4 (Low)',
-		5 => '5 (Lowest)'
-		 **/
-		$this->email->from(CORREO_SIA, "Acreditaciones");
-		$this->email->to($to_correo->direccionCorreoElectronicoOrganizacion);
-		$this->email->cc(CORREO_SIA);
-		$this->email->subject('SIIA - : ' . $asunto);
-		$this->email->set_priority($prioridad);
-
-		$data_msg['mensaje'] = $mensaje;
-
-		$email_view = $this->load->view('email/contacto', $data_msg, true);
-
-		$this->email->message($email_view);
-
-		if ($this->email->send()) {
-			// Do nothing.
-		} else {
-			$error = $this->email->print_debugger();
-			echo json_encode(array('error' => $error, 'msg' => "Lo sentimos, hubo un error y no se envio el correo."));
-		}
-	}
 	// TODO: Enviar Correos a Administrador
 	function envilo_mailadmin($type, $prioridad, $docente)
 	{

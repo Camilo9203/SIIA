@@ -46,7 +46,7 @@ $("#nuevaSolicitud").click(function () {
 	$("#tipoSolicitud").show();
 });
 /**
- * Guardar formulario tipo de solicitud
+ * Guardar solicitud
  * */
 $("#guardar_formulario_tipoSolicitud").click(function () {
 	Alert.fire({
@@ -181,7 +181,10 @@ $("#guardar_formulario_tipoSolicitud").click(function () {
 							}
 						},
 						error: function (ev) {
-							//Do nothing
+							Toast.fire({
+								icon: 'error',
+								text: ev.responseText
+							});
 						},
 					});
 				}

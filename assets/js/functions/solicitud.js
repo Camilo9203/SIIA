@@ -1342,24 +1342,38 @@ $("#finalizar_si").click(function () {
 				idSolicitud: idSolicitud,
 			};
 			$.ajax({
-				url: baseURL + "panel/finalizarProceso",
+				url: baseURL + "Solicitudes/enviarSolicitud",
 				type: "post",
 				dataType: "JSON",
 				data: data,
-				success: function (response) {
+				beforeSend: function () {
 					Toast.fire({
-						icon: 'alert',
-						title: response.msg
+						icon: 'info',
+						title: 'Enviando solicitud a unidad Solidaria.'
 					});
-					if (response.estado == "0") {
+				},
+				success: function (response) {
+					if(response.status == 'success'){
+						Alert.fire({
+							title: response.title,
+							html: response.msg,
+							text: response.msg,
+							icon: response.status,
+							allowOutsideClick: false,
+						}).then((result) => {
+							if (result.isConfirmed) {
+								setInterval(function () {
+									redirect(baseURL + "panel/estadoSolicitud/" + idSolicitud);
+								}, 2000);
+							}
+						})
+					}
+					else if (response.status == "error") {
 						$("#sidebar-menu>.menu_section>a").attr('data-id', idSolicitud);
 						$("#sidebar-menu>.menu_section>a").click();
-					} else {
-						redirect(baseURL + "panel/estadoSolicitud/" + idSolicitud);
 					}
 				},
 				error: function (ev) {
-					event.preventDefault();
 					Toast.fire({
 						icon: 'error',
 						text: ev.responseText
@@ -1729,7 +1743,6 @@ function verificarFormularios(solicitud) {
 		type: "post",
 		dataType: "JSON",
 		success: function (response) {
-			console.log(response)
 			for (let i = 0; i < response.formularios.length; i++) {
 				let step_sel = response.formularios[i].split(".");
 				if (i != step_sel[0]) {
@@ -1739,8 +1752,8 @@ function verificarFormularios(solicitud) {
 				$("#formulariosFaltantes").append("<p>" + response.formularios[i] + "</p>");
 			}
 			Alert.fire({
+				title: response.title,
 				html: response.msg + $("#formulariosFaltantes").html(),
-				title: 'Verifique su solicitud!',
 				text: response.msg + $("#formulariosFaltantes").html(),
 				icon: response.icon,
 				allowOutsideClick: false,

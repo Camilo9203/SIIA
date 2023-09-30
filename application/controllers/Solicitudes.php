@@ -143,8 +143,6 @@ class Solicitudes extends CI_Controller
 		return $data;
 	}
 	// Crear solicitud
-	/** Guardar datos **/
-	// Tipo solicitud
 	public function crearSolicitud()
 	{
 		if ($this->input->post()) {
@@ -168,7 +166,7 @@ class Solicitudes extends CI_Controller
 				// Datos para crear solicitud
 				$data_solicitud = array(
 					'numeroSolicitudes' => $numeroSolicitudes += 1,
-					'fecha' =>  date('Y/m/d H:i:s'),
+					'fechaCreacion' =>  date('Y/m/d H:i:s'),
 					'idSolicitud' => $idSolicitud,
 					'organizaciones_id_organizacion' => $organizacion->id_organizacion,
 				);
@@ -183,7 +181,7 @@ class Solicitudes extends CI_Controller
 				);
 				$data_estado = array(
 					'nombre' => "En Proceso",
-					'fecha' => date('Y/m/d H:i:s'),
+					'fechaUltimaActualizacion' => date('Y/m/d H:i:s'),
 					'estadoAnterior' => $organizacion->estado,
 					'tipoSolicitudAcreditado' => $tipoSolicitud,
 					'motivoSolicitudAcreditado' => $this->input->post('motivo_solicitud'),
@@ -274,10 +272,30 @@ class Solicitudes extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
+	// Enviar solicitud
+	public function enviarSolicitud()
+	{
+		$idSolicitud = $this->input->post('idSolicitud');
+		$formularios = $this->verificarFormularios($idSolicitud);
+		if (count($formularios) === 0) {
+			$usuario_id = $this->session->userdata('usuario_id');
+			$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
+			$updateEstado = array(
+				'nombre' => "Finalizado",
+				'fechaUltimaActualizacion' => date('Y/m/d H:i:s'),
+				'estadoAnterior' => "En Proceso",
+			);
+			$this->db->where('idSolicitud', $idSolicitud);
+			$this->db->update('estadoOrganizaciones', $updateEstado);
+			send_email_user($organizacion->direccionCorreoElectronicoOrganizacion, 'enviarSolicitd', $organizacion, null, null, $idSolicitud);
+			$this->logs_sia->session_log('Finalizada la Solicitud');
+			$this->notif_sia->notification('Finalizada', 'admin', $organizacion->nombreOrganizacion);
+			$this->logs_sia->logQueries();
+		}
+	}
 	//Cargar estado de la solicitud
 	public function cargarEstadoSolicitud()
 	{
-		// TODO: Estado solicitud terminar!
 		$idSolicitud = $this->input->post('solicitud');
 		$solicitud = $this->SolicitudesModel->solicitudes($idSolicitud);
 		$programas = $this->DatosProgramasModel->getDatosProgramas($idSolicitud);
@@ -286,14 +304,17 @@ class Solicitudes extends CI_Controller
 		switch ($solicitud->nombre) {
 			case "En Proceso":
                 if(count($formularios) === 0):
-                    $icon = 'success';
-                    $msg = '<p>Solicitud: <strong>' .  $idSolicitud. '</strong> cuenta con los formularios diligenciados</p>';
+                    $title = 'Solicitud verificada!';
+					$icon = 'success';
+                    $msg = '<p>Solicitud: <strong>' .  $idSolicitud. '</strong> cuenta con los formularios diligenciados. <br><br>Por favor de clic en <strong>Finaliza Proceso</strong> para enviar la solicitud a la Unidad Solidaria. <br>Gracias!</p>';
                 else:
+                    $title = 'Verifique su solicitud!';
                     $icon = 'info';
                     $msg = '<p>Continue diligenciando los formularios, Solicitud: <strong>' .  $idSolicitud. '</strong></p>';
                 endif;
                 echo json_encode(
                     array(
+						'title' => $title,
                         'icon' => $icon,
                         'msg' => $msg,
                         'formularios' => $formularios,
@@ -411,63 +432,56 @@ class Solicitudes extends CI_Controller
 		$datosEnLinea = $this->db->select("*")->from("datosEnLinea")->where("idSolicitud", $idSolicitud)->get()->row();
 		// Comprobación docentes
 		$docentes = $this->db->select("*")->from("docentes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
-		$numeroDocentes = $this->db->select("count(docentes.id_docente) as numeroDocentes")->from("docentes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row()->numeroDocentes;
 		$strDocentes = "";
-		foreach ($docentes as $docente) {
+		foreach ($docentes as $docente):
 			$hoja = false;
 			$titulo = false;
-			$certificacionesEco = false;
 			$certificaciones = false;
+			$certificacionesEco = false;
 			$hojas = 0;
 			$titulos = 0;
 			$certEcos = 0;
 			$certs = 0;
-
-			$id_docente = $docente->id_docente;
-			$nombre = $this->db->select("primerNombreDocente")->from("docentes")->where("id_docente", $id_docente)->get()->row()->primerNombreDocente;
-			$archivos = $this->cargarDatosArchivosDocentes($id_docente);
-
-			for ($i = 0; $i < count($archivos); $i++) {
+			$archivos = $this->cargarDatosArchivosDocentes($docente->id_docente);
+			for ($i = 0; $i < count($archivos); $i++):
 				$tipo = json_encode($archivos[$i]->tipo);
-
-				if ($tipo == '"docenteHojaVida"') {
+				if ($tipo == '"docenteHojaVida"'):
 					$hojas += 1;
-					if ($hojas >= 1) {
+					if ($hojas >= 1):
 						$hoja = true;
-					}
-				}
-				if ($tipo == '"docenteTitulo"') {
+					endif;
+				endif;
+				if ($tipo == '"docenteTitulo"'):
 					$titulos += 1;
-					if ($titulos >= 1) {
+					if ($titulos >= 1):
 						$titulo = true;
-					}
-				}
-				if ($tipo == '"docenteCertificadosEconomia"') {
+					endif;
+				endif;
+				if ($tipo == '"docenteCertificadosEconomia"'):
 					$certEcos += 1;
-					if ($certEcos >= 1) {
+					if ($certEcos >= 1):
 						$certificacionesEco = true;
-					}
-				}
-				if ($tipo == '"docenteCertificados"') {
+					endif;
+				endif;
+				if ($tipo == '"docenteCertificados"'):
 					$certs += 1;
-					if ($certs >= 3) {
+					if ($certs >= 3):
 						$certificaciones = true;
-					}
-				}
-			}
-
-			if ($hoja == true && $titulo == true && $certificacionesEco == true && $certificaciones && true) {
-				$strDocentes .= "El facilitador <span class='upper'>" . $nombre . "</span> esta correcto en los documentos mínimos requeridos. <i class='fa fa-check spanVerde' aria-hidden='true'></i><br/>";
-			} else {
-				$strDocentes .= "Verificar los documentos del facilitador <span class='upper'>" . $nombre . "</span>. <i class='fa fa-times spanRojo' aria-hidden='true'></i><br/>";
-			}
-		}
-
-		/** @var  $formularios
-		Comprobación Formularios
+					endif;
+				endif;
+			endfor;
+			if ($hoja == true && $titulo == true && $certificacionesEco == true && $certificaciones == true):
+			else:
+				// TODO: Mostrar que documentos faltan
+				$strDocentes .= "Falta hoja de vida para el facilitador con cedúla: <span class='upper'>" . $docente->numCedulaCiudadaniaDocente . "</span>. <i class='fa fa-times spanRojo' aria-hidden='true'></i><br/>";
+			endif;
+		endforeach;
+		/**
+		 * @var  $formularios
+		 * @var  $formularios
+		 * Comprobación Formularios
 		 */
 		$formularios = array();
-		// TODO: Comprobación de formulario 6 = numero de motivos
 		$solicitud = $this->db->select('*')->from('solicitudes')->where("idSolicitud", $idSolicitud)->get()->row();
 		$totalProgramas = $this->db->select('*')->from('datosProgramas')->where("idSolicitud", $idSolicitud)->get()->result();
 		// Contar programas seleccionados por medio de campo motivos
@@ -494,8 +508,11 @@ class Solicitudes extends CI_Controller
 		if ($datosProgramasAceptados == NULL) {
 			array_push($formularios, "5. Falta el formulario de Datos Basicos Programas.");
 		}
-		if ($docentes == NULL || $numeroDocentes < 3) {
+		if ($docentes == NULL || count($docentes) < 3) {
 			array_push($formularios, "6. Faltan facilitadores y/o archivos, deben ser tres (3) con sus respectivos documentos.");
+		}
+		if(!empty($strDocentes)) {
+			array_push($formularios, "6. Facilitadores - Realice las siguientes acciones:<br><br><strong><small><i>" . $strDocentes . "</i></small></strong>");
 		}
 		if (($modalidadSolicitud == "Virtual" || $modalidadSolicitud == "Presencial, Virtual" || $modalidadSolicitud == "Presencial, Virtual, En Linea"  || $modalidadSolicitud == "Virtual, En Linea") && $aplicacion == NULL) {
 			array_push($formularios, "7. Falta el formulario de Ingreso a la Plataforma Virtual.");
@@ -503,16 +520,6 @@ class Solicitudes extends CI_Controller
 		if (($modalidadSolicitud == "En Linea" || $modalidadSolicitud == "Presencial, En Linea" || $modalidadSolicitud == "Presencial, Virtual, En Linea"  || $modalidadSolicitud == "Virtual, En Linea") && $datosEnLinea == NULL) {
 			array_push($formularios, "8. Falta el formulario de datos modalidad en linea.");
 		}
-		// Actualizar Datos
-		else if ($motivoSolicitud == "Actualizar Datos") {
-			if ($informacionGeneral == NULL) {
-				array_push($formularios, "Llene los formularios que requieran actualizacion." && $aplicacion == NULL);
-			}
-			if ($modalidadSolicitud == "Virtual" || $modalidadSolicitud == "Virtual y Presencial" || $modalidadSolicitud == "Presencial") {
-				array_push($formularios, "10. Falta el formulario de Ingreso a la Plataforma Virtual." && $aplicacion == NULL || $instructivo == NULL);
-			}
-		}
-		array_push($formularios, "0. Tenga en cuenta la siguiente lista de sus facilitadores y hacer lo correspondiente:<br/><strong><small><i>" . $strDocentes . "</i></small></strong>");
 		return $formularios;
 	}
     // Cargar datos archivos docentes
