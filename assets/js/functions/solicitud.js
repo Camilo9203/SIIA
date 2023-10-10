@@ -1368,7 +1368,7 @@ $("#finalizar_si").click(function () {
 							}
 						})
 					}
-					else if (response.status == "error") {
+					else  {
 						$("#sidebar-menu>.menu_section>a").attr('data-id', idSolicitud);
 						$("#sidebar-menu>.menu_section>a").click();
 					}
@@ -1376,6 +1376,7 @@ $("#finalizar_si").click(function () {
 				error: function (ev) {
 					Toast.fire({
 						icon: 'error',
+						title: 'Error',
 						text: ev.responseText
 					});
 				},
@@ -1743,6 +1744,7 @@ function verificarFormularios(solicitud) {
 		type: "post",
 		dataType: "JSON",
 		success: function (response) {
+			console.log(response)
 			for (let i = 0; i < response.formularios.length; i++) {
 				let step_sel = response.formularios[i].split(".");
 				if (i != step_sel[0]) {

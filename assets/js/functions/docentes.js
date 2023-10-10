@@ -62,7 +62,6 @@ $("#añadirNuevoDocente").click(function () {
 				});
 			},
 			success: function (response) {
-				event.preventDefault();
 				Alert.fire({
 					title: 'Se creo docente!',
 					text: response.msg,
@@ -100,36 +99,37 @@ $(".verDocenteOrg").click(function () {
 		id_docente: id_docente,
 	};
 
-	$.ajax({
-		url: baseURL + "docentes/cargarInformacionDocente",
-		type: "post",
-		dataType: "JSON",
-		data: data,
-		success: function (response) {
-			$("#nombre_doc").html(nombre_docente);
-			$("#nombre_doc").attr("data-id", id_docente);
-			$("#siEliminarDocente").attr("data-id", id_docente);
-			$("#primer_nombre_doc").val(response.primerNombreDocente);
-			$("#segundo_nombre_doc").val(response.segundoNombreDocente);
-			$("#primer_apellido_doc").val(response.primerApellidoDocente);
-			$("#segundo_apellido_doc").val(response.segundoApellidoDocente);
-			$("#numero_cedula_doc").val(response.numCedulaCiudadaniaDocente);
-			$("#profesion_doc").val(response.profesion);
-			$("#horas_doc").val(response.horaCapacitacion);
-			if (response.valido == 1) {
-				$("#valido_doc").html("Sí");
-			} else {
-				$("#valido_doc").html("No");
-			}
-			$("#docente_arch_id	").remove();
-			$("body").append("<div data-docente-id='" + id_docente + "' id='docente_arch_id'></div>"
-			);
-			cargarArchivosDocente(id_docente);
-		},
-		error: function (ev) {
-			//Do nothing
-		},
-	});
+		$.ajax({
+			url: baseURL + "docentes/cargarInformacionDocente",
+			type: "post",
+			dataType: "JSON",
+			data: data,
+			success: function (response) {
+				$("#nombre_doc").html(nombre_docente);
+				$("#nombre_doc").attr("data-id", id_docente);
+				$("#siEliminarDocente").attr("data-id", id_docente);
+				$("#primer_nombre_doc").val(response.primerNombreDocente);
+				$("#segundo_nombre_doc").val(response.segundoNombreDocente);
+				$("#primer_apellido_doc").val(response.primerApellidoDocente);
+				$("#segundo_apellido_doc").val(response.segundoApellidoDocente);
+				$("#numero_cedula_doc").val(response.numCedulaCiudadaniaDocente);
+				$("#profesion_doc").val(response.profesion);
+				$("#horas_doc").val(response.horaCapacitacion);
+				if (response.valido == 1) {
+					$("#valido_doc").html("Sí");
+				} else {
+					$("#valido_doc").html("No");
+				}
+				$("#docente_arch_id	").remove();
+				$("body").append("<div data-docente-id='" + id_docente + "' id='docente_arch_id'></div>"
+				);
+				cargarArchivosDocente(id_docente);
+			},
+			error: function (ev) {
+				//Do nothing
+			},
+		});
+
 });
 /** Actualizar docente */
 $(".actualizar_docente").click(function () {
@@ -450,20 +450,19 @@ function cargarArchivosDocente(id) {
 		id_docente: id_docente,
 	};
 	$.ajax({
-		url: baseURL + "panel/cargarDatosArchivosDocente",
+		url: baseURL + "Docentes/cargarDatosArchivosDocente",
 		type: "post",
 		dataType: "JSON",
 		data: data,
 		success: function (response) {
-			console.log(response);
 			let url;
 			let carpeta;
 			if (response.length == 0) {
-				$("<tr>").appendTo(".tabla_form > tbody");
-				$("<td colspan='4'>Ningún dato</td>").appendTo(".tabla_form > tbody");
-				$(".tabla_form > tbody > tr.odd").remove();
+				$("#tabla_archivos_docentes").hide();
 			} else {
+				$("#tabla_archivos_docentes").show();
 				for (var i = 0; i < response.length; i++) {
+					// URLs archivos
 					if (response[i].tipo == "docenteHojaVida") {
 						carpeta = "docentes/hojasVida";
 						url = "../../uploads/" + carpeta + "/";
@@ -497,19 +496,18 @@ function cargarArchivosDocente(id) {
 							$tipo = "Certificado de experiencia";
 							break;
 					}
-					$("<td><small>" + nombre_r + "</small></td>").appendTo(".tabla_form > tbody");
 					$("<td>" + $tipo + "</td>").appendTo(".tabla_form > tbody");
 					$('<td><textarea class="form-control" rows="4" disabled>' + response[i].observacionArchivo + "</textarea></td>").appendTo(".tabla_form > tbody");
 					$('<td>' +
-						'<div class="btn-group">' +
-						'<a class="btn btn-success btn-sm" target="_blank" href="' + url + response[i].nombre + '"><i class="ti-eye" aria-hidden="true"></i> Ver</a>' +
-						'<button type="button"class="btn btn-danger btn-sm eliminar_archivo_docente" data-id-tipo="' + response[i].tipo +
-						'" data-nombre-ar="' + response[i].nombre +
-						'" data-id-archivoDocente="' + response[i].id_archivosDocente +
-						'" data-id-docente="' + response[i].docentes_id_docente +
-						'"><i class="ti-trash" aria-hidden="true"></i> Eliminar </button>' +
+						'<div class="btn-group-vertical">' +
+							'<a class="btn btn-success btn-sm" target="_blank" href="' + url + response[i].nombre + '"><i class="ti-eye" aria-hidden="true"></i> Ver</a>' +
+							'<button type="button"class="btn btn-danger btn-sm eliminar_archivo_docente" data-id-tipo="' + response[i].tipo +
+							'" data-nombre-ar="' + response[i].nombre +
+							'" data-id-archivoDocente="' + response[i].id_archivosDocente +
+							'" data-id-docente="' + response[i].docentes_id_docente +
+							'"><i class="ti-trash" aria-hidden="true"></i> Eliminar </button>' +
 						'</div>' +
-						'</td>'
+					'</td>'
 					).appendTo(".tabla_form > tbody");
 					$("</tr>").appendTo(".tabla_form > tbody");
 				}

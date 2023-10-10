@@ -215,34 +215,43 @@ class Solicitudes extends CI_Controller
 		$return = '';
         // Recorrer las solicitudes de la organización
 		foreach ($solicitudes as $solicitud):
-			// Comprobar si la solicitud se encuentra en estado de observaciones o finalizado
-            if ($solicitud->nombre == 'Finalizado' || $solicitud->nombre == 'En Observaciones'):
-				$solicitudesFinalizadas = false;
-				$return .= "<li>La solicitud con id: <strong>" . $solicitud->idSolicitud .  "</strong> se escuentra en estado " . $solicitud->nombre . " <i class='fa fa-times spanRojo' aria-hidden='true'></i></li><br><br>";
-			endif;
-            // Capturas mótivos y modalidades de la solicitud
-			$motivos = json_decode($solicitud->motivosSolicitud);
-			$modalidades = json_decode($solicitud->modalidadesSolicitud);
-            // Comprobar datos similares en la solicitud
-			$compararMotivo = array_merge(array_intersect($motivos, $motivosSolicitud));
-            $compararModalidad = array_merge(array_intersect($modalidades, $modalidadesSolicitud));
-			if (!empty($compararMotivo)):
-                $motivos = '';
-                for ($i = 0; $i < count($compararMotivo); $i++):
-                    $motivos .= $this->SolicitudesModel->getMotivo($compararMotivo[$i]) . ', ';
-                endfor;
-                $motivos = substr($motivos, 0, -2);
-				$motivo = false;
-                $return .= "<li>La solicitud con id: <strong> " . $solicitud->idSolicitud . " </strong>tiene los siguientes motivos identicos: " . $motivos ." <i class='fa fa-times spanRojo' aria-hidden='false'></i></li><br><br>";
-			endif;
-			if (!empty($compararModalidad)):
-                $modalidades = '';
-                for ($i = 0; $i < count($compararModalidad); $i++):
-                    $modalidades .= $this->SolicitudesModel->getModalidad($compararModalidad[$i]) . ', ';
-                endfor;
-                $modalidades = substr($modalidades, 0, -2);
-				$modalidad = false;
-                $return .= "<li>La solicitud con id: <strong>" . $solicitud->idSolicitud . " </strong>tiene las siguientes modalidades : " . $modalidades . " <i class='fa fa-times spanRojo' aria-hidden='false'></i></li><br>";
+			// Comprobar que la solicitud no se encuentré acreditada, negada o archívada.
+			if ($solicitud->nombre != 'Archivada'):
+				if ($solicitud->nombre != 'Acreditado'):
+					if ($solicitud->nombre != 'Negada'):
+						if ($solicitud->nombre != 'Revocada'):
+							// Comprobar si la solicitud se encuentra en estado de observaciones o finalizado
+							if ($solicitud->nombre == 'Finalizado' || $solicitud->nombre == 'En Observaciones'):
+								$solicitudesFinalizadas = false;
+								$return .= "<li>La solicitud con id: <strong>" . $solicitud->idSolicitud .  "</strong> se escuentra en estado " . $solicitud->nombre . " <i class='fa fa-times spanRojo' aria-hidden='true'></i></li><br><br>";
+							endif;
+							// Capturas mótivos y modalidades de la solicitud
+							$motivos = json_decode($solicitud->motivosSolicitud);
+							$modalidades = json_decode($solicitud->modalidadesSolicitud);
+							// Comprobar datos similares en la solicitud
+							$compararMotivo = array_merge(array_intersect($motivos, $motivosSolicitud));
+							$compararModalidad = array_merge(array_intersect($modalidades, $modalidadesSolicitud));
+							if (!empty($compararMotivo)):
+								$motivos = '';
+								for ($i = 0; $i < count($compararMotivo); $i++):
+									$motivos .= $this->SolicitudesModel->getMotivo($compararMotivo[$i]) . ', ';
+								endfor;
+								$motivos = substr($motivos, 0, -2);
+								$motivo = false;
+								$return .= "<li>La solicitud con id: <strong> " . $solicitud->idSolicitud . " </strong>tiene los siguientes motivos identicos: " . $motivos ." <i class='fa fa-times spanRojo' aria-hidden='false'></i></li><br><br>";
+							endif;
+							if (!empty($compararModalidad)):
+								$modalidades = '';
+								for ($i = 0; $i < count($compararModalidad); $i++):
+									$modalidades .= $this->SolicitudesModel->getModalidad($compararModalidad[$i]) . ', ';
+								endfor;
+								$modalidades = substr($modalidades, 0, -2);
+								$modalidad = false;
+								$return .= "<li>La solicitud con id: <strong>" . $solicitud->idSolicitud . " </strong>tiene las siguientes modalidades : " . $modalidades . " <i class='fa fa-times spanRojo' aria-hidden='false'></i></li><br>";
+							endif;
+						endif;
+					endif;
+				endif;
 			endif;
 		endforeach;
 		if ($solicitudesFinalizadas == true && $motivo == true && $modalidad == true):
@@ -291,6 +300,19 @@ class Solicitudes extends CI_Controller
 			$this->logs_sia->session_log('Finalizada la Solicitud');
 			$this->notif_sia->notification('Finalizada', 'admin', $organizacion->nombreOrganizacion);
 			$this->logs_sia->logQueries();
+		}
+		else {
+			echo json_encode(
+				array(
+					'title' => 'Verifique su solicitud!',
+					'status' => 'info',
+					'msg' => '<p>Continue diligenciando los formularios, Solicitud: <strong>' .  $idSolicitud. '</strong></p>',
+					'formularios' => $formularios,
+					'solicitud' => $this->SolicitudesModel->solicitudes($idSolicitud),
+					'motivos' => $this->cargarMotivosSolicitud($idSolicitud),
+					'programas' => $this->DatosProgramasModel->getDatosProgramas($idSolicitud)
+				)
+			);
 		}
 	}
 	//Cargar estado de la solicitud
@@ -511,14 +533,14 @@ class Solicitudes extends CI_Controller
 		if ($docentes == NULL || count($docentes) < 3) {
 			array_push($formularios, "6. Faltan facilitadores y/o archivos, deben ser tres (3) con sus respectivos documentos.");
 		}
-		if(!empty($strDocentes)) {
-			array_push($formularios, "6. Facilitadores - Realice las siguientes acciones:<br><br><strong><small><i>" . $strDocentes . "</i></small></strong>");
-		}
 		if (($modalidadSolicitud == "Virtual" || $modalidadSolicitud == "Presencial, Virtual" || $modalidadSolicitud == "Presencial, Virtual, En Linea"  || $modalidadSolicitud == "Virtual, En Linea") && $aplicacion == NULL) {
 			array_push($formularios, "7. Falta el formulario de Ingreso a la Plataforma Virtual.");
 		}
 		if (($modalidadSolicitud == "En Linea" || $modalidadSolicitud == "Presencial, En Linea" || $modalidadSolicitud == "Presencial, Virtual, En Linea"  || $modalidadSolicitud == "Virtual, En Linea") && $datosEnLinea == NULL) {
 			array_push($formularios, "8. Falta el formulario de datos modalidad en linea.");
+		}
+		if(!empty($strDocentes)) {
+			array_push($formularios, "6. <strong>Facilitadores:</strong> - Realice las siguientes acciones:<br><strong><small><i>" . $strDocentes . "</i></small></strong>");
 		}
 		return $formularios;
 	}
