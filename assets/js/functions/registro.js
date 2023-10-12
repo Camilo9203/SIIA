@@ -1,51 +1,46 @@
 ValidarFormRegistro();
-/** Verificación de usuario registrado */
+/**
+ * Verificación de usuario registrado
+ * */
 $("#nombre_usuario").change(function () {
 	usuario = {
 		nombre_usuario: $("#nombre_usuario").val(),
 	};
-	if($("#nombre_usuario").val().length <= 10) {
-		$.ajax({
-			url: baseURL + "registro/verificarUsuario",
-			type: "post",
-			dataType: "JSON",
-			data: usuario,
-			success: function (response) {
-				let className = $('#nombre_usuario').attr('class');
-				if (response.existe === 1) {
-					Toast.fire({
-						icon: 'error',
-						title: 'El nombre de usuario ya existe. Puede usar números.'
-					});
-					if (className = 'form-control valid') {
-						$('#nombre_usuario').removeClass('valid');
-						$('#nombre_usuario').toggleClass('invalid');
-					}
+	$.ajax({
+		url: baseURL + "registro/verificarUsuario",
+		type: "post",
+		dataType: "JSON",
+		data: usuario,
+		success: function (response) {
+			let className = $('#nombre_usuario').attr('class');
+			if (response.existe === 1) {
+				Toast.fire({
+					icon: 'error',
+					title: 'El nombre de usuario ya existe. Puede usar números.'
+				});
+				if (className = 'form-control valid') {
+					$('#nombre_usuario').removeClass('valid');
+					$('#nombre_usuario').toggleClass('invalid');
 				}
-				else {
-					Toast.fire({
-						icon: 'success',
-						title: 'Usuario valido'
-					})
-					if (className = 'form-control invalid valid') {
-						$('#nombre_usuario').removeClass('invalid');
-					}
+			}
+			else {
+				Toast.fire({
+					icon: 'success',
+					title: 'Usuario valido'
+				})
+				if (className = 'form-control invalid valid') {
+					$('#nombre_usuario').removeClass('invalid');
 				}
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	}
-	else {
-		Toast.fire({
-			icon: 'error',
-			title: 'El nombre no debe ser mayo a 10 caracteres'
-		})
-	}
-
+			}
+		},
+		error: function (ev) {
+			//Do nothing
+		},
+	});
 });
-/** Verificación de nit registrado */
+/**
+ * Verificación de nit registrado
+ * */
 $("#nit_digito").change(function () {
 	organizacion = {
 		nit: $("#nit").val() + "-" + $("#nit_digito").val(),
@@ -86,17 +81,23 @@ $("#nit_digito").change(function () {
 		},
 	});
 });
-/** Aceptar política */
+/**
+ * Aceptar política
+ * */
 $("#acepto_politica").click(function () {
 	$("#acepto_cond").prop("checked", true);
 	$("#politica_ventana").modal("toggle");
 });
-/** Declinar política */
+/**
+ * Declinar política
+ * */
 $("#declino_politica").click(function () {
 	$("#acepto_cond").prop("checked", false);
 	$("#politica_ventana").modal("toggle");
 });
-/** Aceptar formulario de registro */
+/**
+ * Aceptar formulario de registro
+ * */
 $("#aceptoComActo").change(function () {
 	if ($("#aceptoComActo").is(":checked")) {
 		$("#guardar_registro").removeAttr("disabled");
@@ -105,7 +106,9 @@ $("#aceptoComActo").change(function () {
 		$("#guardar_registro").attr("disabled", true);
 	}
 });
-/** Confirmar registro formulario de registro */
+/**
+ * Confirmar registro formulario de registro
+ * */
 $("#confirmaRegistro").click(function () {
 	$("#informacion_pre").slideDown();
 	$("#reenvio_pre").slideUp();
@@ -232,7 +235,9 @@ $("#confirmaRegistro").click(function () {
 		});
 	}
 });
-/** Guardar registro formulario de registro */
+/**
+ * Guardar registro formulario de registro
+ * */
 $("#guardar_registro").click(function () {
 	grecaptcha.ready(function() {
 		grecaptcha.execute('6LeTFnYnAAAAAKl5U_RbOYnUbGFGlhG4Ffn52Sef', {
@@ -323,11 +328,12 @@ $("#guardar_registro").click(function () {
 												$("#ayuda_registro").attr("data-backdrop", "static");
 												$("#ayuda_registro").attr("data-keyboard", "false");
 												/** Comprobar estado de envío y creación de cuenta */
-												if (response.status == 1) {
+												if (response.status == 'success') {
 													Alert.fire({
-														title: 'Organización creada!',
+														title: response.title,
 														text: response.msg,
-														icon: 'success',
+														html: response.msg,
+														icon: response.status,
 													})
 													/** Esconder confirmación y mostrar reenvío de email */
 													$("#informacion_previa").slideUp();
@@ -362,9 +368,10 @@ $("#guardar_registro").click(function () {
 			}
 		});
 	});
-
 });
-/** Reenviar correo registro */
+/**
+ * Reenviar correo registro
+ * */
 $('#btn-cerrar-reenvio').click(function () {
 	setInterval(function () {
 		redirect('login');
@@ -404,7 +411,9 @@ $("#btn-reenvio").click(function () {
 		},
 	});
 })
-/** Validar formulario registro */
+/**
+ * Validar formulario registro
+ * */
 function ValidarFormRegistro () {
 	$("form[id='formulario_registro']").validate({
 		rules: {
@@ -437,11 +446,14 @@ function ValidarFormRegistro () {
 				required: true,
 				minlength: 3,
 				email: true,
+				//Expresión regular para validar correo y dominio
+				regex: /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/
 			},
 			correo_electronico_rep_legal: {
 				required: true,
 				minlength: 3,
 				email: true,
+				regex: /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/
 			},
 			primer_nombre_persona: {
 				required: true,
@@ -454,19 +466,16 @@ function ValidarFormRegistro () {
 			nombre_usuario: {
 				required: true,
 				minlength: 3,
-				maxlength: 10,
 			},
 			password: {
 				required: true,
 				minlength: 8,
-				maxlength: 10,
-				regex: "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,10}$",
+				regex: "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?)(?=.*?[#?!@$%^&*-]).{8,10}$",
 			},
 			re_password: {
 				required: true,
 				minlength: 8,
-				maxlength: 10,
-				regex: "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,10}$",
+				regex: "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?)(?=.*?[#?!@$%^&*-]).{8,10}$",
 			},
 			aceptocond: {
 				required: true,
@@ -506,15 +515,17 @@ function ValidarFormRegistro () {
 			},
 			correo_electronico: {
 				required:
-					"Por favor, escriba un Correo Electrónico de la organizacion válido.",
-				minlength: "El Correo Electrónico debe tener mínimo 3 caracteres.",
-				email: "Por favor, escriba un Correo Electrónico valido.",
+					"Por favor, escriba un correo electrónico de la organización válido.",
+				minlength: "El correo electrónico debe tener mínimo 3 caracteres.",
+				email: "Por favor, escriba un correo electrónico valido.",
+				regex: 'No olvide el @ y el .dominio'
 			},
 			correo_electronico_rep_legal: {
 				required:
-					"Por favor, escriba un Correo Electrónico del representante legal válido.",
-				minlength: "El Correo Electrónico debe tener mínimo 3 caracteres.",
-				email: "Por favor, escriba un Correo Electrónico valido.",
+					"Por favor, escriba un correo electrónico del representante legal válido.",
+				minlength: "El correo electrónico debe tener mínimo 3 caracteres.",
+				email: "Por favor, escriba un correo electrónico valido.",
+				regex: 'No olvide el @ y el .dominio'
 			},
 			primer_nombre_persona: {
 				required: "Por favor, escriba su Primer Nombre.",
@@ -527,19 +538,16 @@ function ValidarFormRegistro () {
 			nombre_usuario: {
 				required: "Por favor, escriba el Nombre de Usuario.",
 				minlength: "El Nombre de Usuario debe tener mínimo 3 caracteres.",
-				maxlength: "El Nombre de Usuario debe tener máximo 10 caracteres.",
 			},
 			password: {
 				required: "Por favor, escriba la Contraseña.",
 				minlength: "La Contraseña debe tener mínimo 8 caracteres.",
-				maxlength: "La Contraseña debe tener máximo 10 caracteres.",
 				regex:
 					"Debe tener mínimo 8 y máximo 10 caracteres, al menos una mayúscula, una minúscula, un número, y un cáracter especial (#?!@$%^&*-).",
 			},
 			re_password: {
 				required: "Por favor, vuela a escribir la Contraseña.",
 				minlength: "La Contraseña debe tener mínimo 8 caracteres.",
-				maxlength: "La Contraseña debe tener máximo 10 caracteres.",
 				regex:
 					"Debe tener mínimo 8 y máximo 10 caracteres, al menos una mayúscula, una minúscula, un número, y un cáracter especial (#?!@$%^&*-).",
 			},
@@ -550,5 +558,3 @@ function ValidarFormRegistro () {
 		},
 	});
 }
-/** Guardar registro */
-;

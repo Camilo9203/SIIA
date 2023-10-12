@@ -515,7 +515,8 @@ class Solicitudes extends CI_Controller
 			$datosProgramasAceptados = 'TRUE';
 		}
 		/** Comprobar todos los formularios */
-		if ($informacionGeneral == NULL || $certificacionesForm == NULL || $lugar == NULL || $carta == NULL) {
+		//if ($informacionGeneral == NULL || $certificacionesForm == NULL || $lugar == NULL || $carta == NULL) {
+		if ($informacionGeneral == NULL || $certificacionesForm == NULL || $carta == NULL) {
 			array_push($formularios, "1. Falta el formulario de Informacion General.");
 		}
 		if ($documentacion == NULL) {

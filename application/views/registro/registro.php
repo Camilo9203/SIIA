@@ -8,7 +8,7 @@
 	<div class="col-md-6">
 		<h3>Información básica de la organización:</h3><small class="pull-right"><span class="spanRojo">*</span> Requerido</small>
 		<div class="form-group">
-			<label for="organizacion">Nombre de la organizacion: <span class="spanRojo">*</span></label>
+			<label for="organizacion">Nombre de la organización: <span class="spanRojo">*</span></label>
 			<input type="text" class="form-control" form="formulario_registro" name="organizacion" id="organizacion" placeholder="Nombre de la organización..." required="" autofocus onkeyup="mayus(this);" value="<?php echo  set_value('organizacion');  ?>">
 		</div>
 		<div class="form-group">
@@ -370,7 +370,7 @@
 				<button type="button" id="guardar_registro" name="registro" disabled="disabled" class="btn btn-success btn-sm submit" value="Registrarme">Sí, Registrarme <i class="fa fa-check"></i></button>
 				<button type="button" id="btn-cerrar-modal" class="btn btn-danger btn-sm pull-left" data-dismiss="modal">No, voy a verificar <i class="fa fa-times" aria-hidden="true"></i></button>
 				<button type="button" id="btn-reenvio" class="btn btn-info btn-sm submit" value="Volver a enviar">Volver a enviar el correo <i class="fa fa-paper-plane"></i></button>
-				<button type="button" id="btn-cerrar-reenvio" class="btn btn-danger pull-left">Cerrar e iniciar sesión <i class="fa fa-times"></i></button>
+				<button type="button" id="btn-cerrar-reenvio" class="btn btn-sm btn-danger pull-left">Cerrar e iniciar sesión <i class="fa fa-times"></i></button>
 			</div>
 		</div>
 	</div>

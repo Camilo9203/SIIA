@@ -225,93 +225,90 @@
 </div>
 <!-- Solicitudes Registradas -->
 <div id="solicitudesRegistradas" class="container center-block">
-	<div class="">
 	<!-- Tabla herramientas -->
 	<?php if($data_solicitudes): ?>
-			<table id="" width="100%" border=0 class="table table-striped table-bordered" id="">
-				<thead>
-				<tr>
-					<td colspan="8">Historial de solicitudes</td>
-				</tr>
-				<tr>
-					<td>IDSolicitud</td>
-					<td>Fecha de Inscripción</td>
-					<td>Fecha de Última Revisión</td>
-					<td>Estado Solicitud</td>
-					<td>Motivo</td>
-					<td>Modalidad</td>
-					<td>Acciones</td>
-				</tr>
-				</thead>
-				<tbody id="tbody">
-					<?php foreach ($data_solicitudes as $solicitud) {
-						echo "<tr><td>" . $solicitud->idSolicitud . "</td>";
-						echo "<td>" . $solicitud->fechaCreacion . "</td>";
-						echo "<td>" . $solicitud->fechaUltimaRevision . "</td>";
-						echo "<td>" . $solicitud->nombre . "</td>";
-						echo "<td>" . $solicitud->motivoSolicitudAcreditado . "</td>";
-						echo "<td>" . $solicitud->modalidadSolicitudAcreditado . "</td>";
-						if ($solicitud->nombre == "En Proceso") {
-							echo "<td><div class='btn-group-vertical' role='group' aria-label='acciones'><button type='button' class='btn btn-siia btn-sm verSolicitud' data-id=" . $solicitud->idSolicitud . " title='Continuar Solicitud'>Continuar <i class='fa fa-check' aria-hidden='true'></i></button>";
-							echo "<button type='button' class='btn btn-danger btn-sm eliminarSolicitud' data-id='" . $solicitud->idSolicitud . "' title='Eliminar Solicitud'>Eliminar <i class='fa fa-trash' aria-hidden='true'></i></button></div></td></tr>";
-						}
-						if ($solicitud->nombre == "Acreditado" || $solicitud->nombre == "Archivada" || $solicitud->nombre == "Negada" || $solicitud->nombre == "Revocada" ){
-							echo "<td><button class='btn btn-info btn-sm verDetalleSolicitud' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false' data-id=" . $solicitud->idSolicitud . " title='Ver Detalle'>Detalle <i class='fa fa-info' aria-hidden='true'></i></button></div></td></tr>";
-						}
-						if ($solicitud->nombre == "Finalizado"){
-							echo "<td><div class='btn-group-vertical' role='group' aria-label='acciones'><button class='btn btn-success btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Estado'>Estado<i class='fa fa-eye' aria-hidden='true'></i></button>";
-							echo "<button type='button' class='btn btn-danger btn-sm eliminarSolicitud' data-id='" . $solicitud->idSolicitud . "' title='Eliminar Solicitud'>Eliminar <i class='fa fa-trash' aria-hidden='true'></i></button></div></td></tr>";
-						}
-						if ($solicitud->nombre == "En Observaciones"){
-							echo "<td><button class='btn btn-warning btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Observaciones'>Observaciones<i class='fa fa-eye' aria-hidden='true'></i></button></td></tr>";
-						}
+		<table id="" width="100%" border=0 class="table table-striped table-bordered" id="">
+			<thead>
+			<tr>
+				<td colspan="8">Historial de solicitudes</td>
+			</tr>
+			<tr>
+				<td>IDSolicitud</td>
+				<td>Fecha de Inscripción</td>
+				<td>Fecha de Última Revisión</td>
+				<td>Estado Solicitud</td>
+				<td>Motivo</td>
+				<td>Modalidad</td>
+				<td>Acciones</td>
+			</tr>
+			</thead>
+			<tbody id="tbody">
+				<?php foreach ($data_solicitudes as $solicitud) {
+					echo "<tr><td>" . $solicitud->idSolicitud . "</td>";
+					echo "<td>" . $solicitud->fechaCreacion . "</td>";
+					echo "<td>" . $solicitud->fechaUltimaRevision . "</td>";
+					echo "<td>" . $solicitud->nombre . "</td>";
+					echo "<td>" . $solicitud->motivoSolicitudAcreditado . "</td>";
+					echo "<td>" . $solicitud->modalidadSolicitudAcreditado . "</td>";
+					if ($solicitud->nombre == "En Proceso") {
+						echo "<td><div class='btn-group-vertical' role='group' aria-label='acciones'><button type='button' class='btn btn-siia btn-sm verSolicitud' data-id=" . $solicitud->idSolicitud . " title='Continuar Solicitud'>Continuar <i class='fa fa-check' aria-hidden='true'></i></button>";
+						echo "<button type='button' class='btn btn-danger btn-sm eliminarSolicitud' data-id='" . $solicitud->idSolicitud . "' title='Eliminar Solicitud'>Eliminar <i class='fa fa-trash' aria-hidden='true'></i></button></div></td></tr>";
 					}
-					?>
-				</tbody>
-			</table>
-			<!-- Modal Detalle Solicitud -->
-			<div class="modal fade" id="modalVerDetalle" tabindex="-1" role="dialog" aria-labelledby="modalVerDetalle">
-				<div class="modal-dialog modal-lg" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<div class="row">
-								<div id="header_politicas" class="col-md-12">
-									<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="<?php echo base_url() ?>assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
-								</div>
-								<div class="clearfix"></div>
-								<hr />
-								<div class="col-md-12">
-									<h3>Detalles de la solicitud</h3>
-								</div>
+					if ($solicitud->nombre == "Acreditado" || $solicitud->nombre == "Archivada" || $solicitud->nombre == "Negada" || $solicitud->nombre == "Revocada" ){
+						echo "<td><button class='btn btn-info btn-sm verDetalleSolicitud' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false' data-id=" . $solicitud->idSolicitud . " title='Ver Detalle'>Detalle <i class='fa fa-info' aria-hidden='true'></i></button></div></td></tr>";
+					}
+					if ($solicitud->nombre == "Finalizado"){
+						echo "<td><div class='btn-group-vertical' role='group' aria-label='acciones'><button class='btn btn-success btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Estado'>Estado<i class='fa fa-eye' aria-hidden='true'></i></button>";
+						echo "<button type='button' class='btn btn-danger btn-sm eliminarSolicitud' data-id='" . $solicitud->idSolicitud . "' title='Eliminar Solicitud'>Eliminar <i class='fa fa-trash' aria-hidden='true'></i></button></div></td></tr>";
+					}
+					if ($solicitud->nombre == "En Observaciones"){
+						echo "<td><button class='btn btn-warning btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Observaciones'>Observaciones<i class='fa fa-eye' aria-hidden='true'></i></button></td></tr>";
+					}
+				}
+				?>
+			</tbody>
+		</table>
+		<!-- Modal Detalle Solicitud -->
+		<div class="modal fade" id="modalVerDetalle" tabindex="-1" role="dialog" aria-labelledby="modalVerDetalle">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<div class="row">
+							<div id="header_politicas" class="col-md-12">
+								<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="<?php echo base_url() ?>assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
 							</div>
-						</div>
-						<div class="modal-body">
-							<div class="card">
-								<div class="card-body">
-									<div class="container-fluid">
-										<div class="row">
-											<div class="col-lg-6" style="text-align: left;" id="informacionSolicitudBasico">
-											</div>
-											<div class="col-lg-6" style="text-align: left;" id="informacionSolicitudFechas">
-											</div>
-										</div>
-										<hr />
-										<div id="informacionSolicitudEstado"></div>
-									</div>
-
-								</div>
-							</div>
-
+							<div class="clearfix"></div>
 							<hr />
-							<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cerrar. <i class="fa fa-times" aria-hidden="true"></i></button>
-<!--							<button type="button" class="btn btn-siia btn-sm pull-right" id="">Sí, acepto. <i class="fa fa-check"></i></button>-->
+							<div class="col-md-12">
+								<h3>Detalles de la solicitud</h3>
+							</div>
 						</div>
+					</div>
+					<div class="modal-body">
+						<div class="card">
+							<div class="card-body">
+								<div class="container-fluid">
+									<div class="row">
+										<div class="col-lg-6" style="text-align: left;" id="informacionSolicitudBasico">
+										</div>
+										<div class="col-lg-6" style="text-align: left;" id="informacionSolicitudFechas">
+										</div>
+									</div>
+									<hr />
+									<div id="informacionSolicitudEstado"></div>
+								</div>
+
+							</div>
+						</div>
+
+						<hr />
+						<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cerrar. <i class="fa fa-times" aria-hidden="true"></i></button>
+<!--							<button type="button" class="btn btn-siia btn-sm pull-right" id="">Sí, acepto. <i class="fa fa-check"></i></button>-->
 					</div>
 				</div>
 			</div>
 		</div>
 	<?php endif	?>
-
 </div>
 <!-- Div cerrado de abajo Arregla que no exista footer cuando no hay solicitudes-->
 </div>

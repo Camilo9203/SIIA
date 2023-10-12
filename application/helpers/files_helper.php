@@ -25,7 +25,7 @@ function create_file($file, $metadata)
 	else if ($file['size'] > $size) {
 		return "El tamaño supera las 10 Mb, intente con otro archivo PDF.";
 	}
-	else if ($ext != "pdf") {
+	else if ($ext != "pdf" && $ext != "PDF") {
 		return "La extensión del archivo no es correcta, debe ser PDF. (archivo.pdf)";
 	}
 	// Guardo de metadatos archivo

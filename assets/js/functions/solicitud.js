@@ -324,8 +324,8 @@ $(".archivos_form_certificacion").on("click", function () {
 	}
 	else {
 		Alert.fire({
-			title: 'No se examinaron los 3 archivos!',
-			text: 'Debes cargar 3 archivos para continuar',
+			title: 'Faltan archivos!',
+			text: count + '/3 Debes cargar 3 archivos para continuar',
 			icon: 'warning',
 		})
 	}
@@ -968,7 +968,6 @@ function guardarDatosProgramas (curso,modal, check, idSolicitud){
 	$("#" + modal).modal("toggle");
 	$("#" + check).prop("checked", true);
 	$(this).attr("disabled", true);
-	event.preventDefault();
 	data = {
 		programa: curso,
 		organizacion:  $("#id_organizacion").val(),
@@ -1440,6 +1439,7 @@ function validFroms (form){
 						required: true,
 						minlength: 3,
 					},
+					/**
 					presentacion: {
 						required: true,
 						minlength: 20,
@@ -1448,14 +1448,18 @@ function validFroms (form){
 						required: true,
 						minlength: 20,
 					},
+						*/
 					mision: {
 						required: true,
-						minlength: 20,
+						minlength: 200,
+						maxlength: 800,
 					},
 					vision: {
 						required: true,
-						minlength: 20,
+						minlength: 200,
+						maxlength: 800,
 					},
+					/**
 					principios: {
 						required: true,
 						minlength: 20,
@@ -1464,9 +1468,11 @@ function validFroms (form){
 						required: true,
 						minlength: 20,
 					},
+						*/
 					portafolio: {
 						required: true,
-						minlength: 20,
+						minlength: 200,
+						maxlength: 1400,
 					}
 				},
 				messages: {
@@ -1507,11 +1513,13 @@ function validFroms (form){
 					},
 					mision: {
 						required: "Por favor, escriba la misión.",
-						minlength: "La misión debe tener mínimo 20 caracteres.",
+						minlength: "La misión debe tener mínimo 200 caracteres.",
+						maxlength: "La misión debe tener máximo 800 caracteres.",
 					},
 					vision: {
 						required: "Por favor, escriba la visión.",
 						minlength: "La visión debe tener mínimo 20 caracteres.",
+						maxlength: "La visión debe tener máximo 800 caracteres.",
 					},
 					principios: {
 						required: "Por favor, escriba los principios.",
@@ -1524,6 +1532,7 @@ function validFroms (form){
 					portafolio: {
 						required: "Por favor, escriba el portafolio.",
 						minlength: "El portafolio  debe tener mínimo 20 caracteres.",
+						maxlength: "El portafolio  debe tener máximo 1400 caracteres.",
 					}
 				},
 			});

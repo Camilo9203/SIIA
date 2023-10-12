@@ -1,6 +1,6 @@
-# SIIA (Sistema Integrado de Información de Acreditación) - Unidad Administrativa de Organizaciones Solidarias
+# SIIA (Sistema Integrado de Información de Acreditación) - Unidad Solidaria
 
-El SIIA es el sistema de acreditacion de Organizaciones Solidarias para que entidades/organizaciones como cooperativas en el “tramite” de solicitud de la Acreditación, la aplicación SIIA se creó desde cero para no solamente dar la parte del trámite sino poder obtener más información, como la de las organizaciones históricas, el informe de actividades, el módulo de docentes, reportes entre otros.
+El SIIA es el sistema de acreditación de Organizaciones Solidarias para que entidades/organizaciones como cooperativas en el “tramite” de solicitud de la Acreditación, la aplicación SIIA se creó desde cero para no solamente dar la parte del trámite sino poder obtener más información, como la de las organizaciones históricas, el informe de actividades, el módulo de docentes, reportes entre otros.
 
 ## Empezando
 

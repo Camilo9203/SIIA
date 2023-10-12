@@ -39,7 +39,27 @@ class Observaciones extends CI_Controller
 		);
 		return $data;
 	}
-
+	// Guardar observación
+	public function create()
+	{
+		$organizacion = $this->db->select('*')->from('organizaciones')->where('id_organizacion', $this->input->post('id'))->get()->row();
+		$solicitud = $this->db->select('*')->from('solicitudes')->where('idSolicitud', $this->input->post('idSolicitud'))->get()->row();
+		$tipoSolicitud = $this->db->select('*')->from('tipoSolicitud')->where('idSolicitud', $this->input->post('idSolicitud'))->get()->row();
+		$data_observacion = array(
+			'idForm' => $this->input->post('id_formulario'),
+			'keyForm' => $this->input->post('formulario'),
+			'valueForm' => $this->input->post('valueForm'),
+			'observacion' => $this->input->post('observacion'),
+			'fechaObservacion' => date('Y/m/d H:i:s'),
+			'numeroRevision' => $solicitud->numeroRevisiones += 1,
+			'idSolicitud' => $this->input->post('idSolicitud'),
+			'organizaciones_id_organizacion' => $this->input->post('id')
+		);
+		if ($this->db->insert('observaciones', $data_observacion)) {
+			echo json_encode(array('url' => "", 'msg' => "Se guardaron las observaciones. Formulario" . $data_observacion['idForm'] ));
+		}
+	}
+	// Cambiar estado de la solicitud
 	public function cambiarEstadoSolicitud()
 	{
 		$idOrganizacion = $this->input->post('id_organizacion');
@@ -85,7 +105,6 @@ class Observaciones extends CI_Controller
 			}
 		}
 	}
-
 	/**
 	Funcion para enviar un correo electronico.
 	$this->envio_mail("obs", $id_organizacion, 1);

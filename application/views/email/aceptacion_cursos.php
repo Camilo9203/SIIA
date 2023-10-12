@@ -139,7 +139,7 @@
 								<table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
 									<tr>
 										<td align="center" valign="top">
-											<h2>Aplicación SIIA de la Unidad Administrativa Especial Organizaciones Solidarias.</h2>
+											<h2>Aplicación SIIA de la Unidad Solidaria.</h2>
 											<strong><label>Nombre de la organización:</label></strong>
 											<p><?php echo $organizacion->nombreOrganizacion; ?></p>
 											<strong><label>Número NIT de la organización:</label></strong>
