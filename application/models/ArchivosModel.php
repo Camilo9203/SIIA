@@ -33,7 +33,7 @@ class ArchivosModel extends CI_Model
 	public function checkExtensionPDF($extension)
 	{
 		// Aquí podemos añadir las extensiones que deseemos permitir
-		$extensiones = array("pdf");
+		$extensiones = array("pdf", "PDF");
 		if (in_array(strtolower($extension), $extensiones)) {
 			return TRUE;
 		} else {

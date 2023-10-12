@@ -60,7 +60,7 @@ class Archivos extends CI_Controller
 				// Obtenemos la extensión
 				$extension[$i] = end($trozos[$i]);
 				$tipo_archivo = pathinfo($_FILES['file']['name'][$i], PATHINFO_EXTENSION);
-				if ($tipo_archivo == "pdf" && $this->ArchivosModel->checkExtensionPDF($extension[$i]) === TRUE):
+				if (($tipo_archivo == "pdf" || $tipo_archivo == "PDF") && $this->ArchivosModel->checkExtensionPDF($extension[$i]) === TRUE):
 					$count ++;
 				else:
 					$msg .= "Extensión erronea en archivo: <span class='upper'>" . ($i+1)  . "</span>. <i class='fa fa-times spanRojo' aria-hidden='true'></i><br/>";
