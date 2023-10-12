@@ -4,43 +4,81 @@
 $(".volverPanelPerfil").click(function () {
 	window.open(baseURL + "panel", '_self');
 });
-validarFormulariosPerfil();
 $('#configuracion').change(function () {
 	let configuracion = $('#configuracion').val();
 	switch (configuracion) {
 		case '1':
+			Toast.fire({
+				icon: 'success',
+				text: 'Actualizar información básica'
+			});
 			$("#datosSesion").slideUp();
 			$("#certificados").slideUp();
 			$("#firmaRepLegalPerfil").slideUp();
+			$("#actividad").slideUp();
 			$("#informacionBasicaPerfil").slideDown();
 			break;
 		case '2':
+			Toast.fire({
+				icon: 'success',
+				text: 'Actualizar firma representante legal'
+			});
 			$("#datosSesion").slideUp();
 			$("#certificados").slideUp();
 			$("#informacionBasicaPerfil").slideUp();
+			$("#actividad").slideUp();
 			$("#firmaRepLegalPerfil").slideDown();
 			break;
 		case '3':
+			Toast.fire({
+				icon: 'success',
+				text: 'Actualizar datos de inicio de sesión'
+			});
 			$("#certificados").slideUp();
 			$("#firmaRepLegalPerfil").slideUp();
 			$("#informacionBasicaPerfil").slideUp();
+			$("#actividad").slideUp();
 			$("#datosSesion").slideDown();
 			break
 		case '4':
+			Toast.fire({
+				icon: 'success',
+				text: 'Actualizar certificados'
+			});
 			$("#datosSesion").slideUp();
 			$("#firmaRepLegalPerfil").slideUp();
 			$("#informacionBasicaPerfil").slideUp();
+			$("#actividad").slideUp();
 			$("#certificados").slideDown();
 			break;
 		case '5':
+			Toast.fire({
+				icon: 'success',
+				text: 'Ver actividad en el sistema'
+			});
+			$("#datosSesion").slideUp();
+			$("#firmaRepLegalPerfil").slideUp();
+			$("#informacionBasicaPerfil").slideUp();
+			$("#certificados").slideUp();
+			$("#actividad").slideDown();
 			break;
 		default:
-			notificacion("Selecciona otra opción.");
+			Toast.fire({
+				icon: 'info',
+				text: 'Seleccione una opción valida'
+			});
+			$("#datosSesion").slideUp();
+			$("#firmaRepLegalPerfil").slideUp();
+			$("#informacionBasicaPerfil").slideUp();
+			$("#certificados").slideUp();
+			$("#actividad").slideUp();
+			break;
 	}
 
 });
 // Actualizar imagen perfil
 $("#actualizar_imagen").on("click", function () {
+	validarFormulariosPerfil();
 	if ($("#formulario_actualizar_logo").valid()) {
 		let file_data = $("#logoOrganizacion").prop("files")[0];
 		let form_data = new FormData();
@@ -82,106 +120,75 @@ $("#actualizar_imagen").on("click", function () {
 });
 // Actualizar información
 $("#actualizar_informacion").click(function () {
-	event.preventDefault();
+	validarFormulariosPerfil();
 	if ($("#formulario_actualizar").valid()) {
-		var organizacion = $("#organizacion").val();
-		var nit = $("#nit").val();
-		var sigla = $("#sigla").val();
-		var nombre = $("#nombre").val();
-		var nombre_s = $("#nombre_s").val();
-		var apellido = $("#apellido").val();
-		var apellido_s = $("#apellido_s").val();
-		var correo_electronico = $("#correo_electronico").val();
-		var correo_electronico_rep_legal = $(
-			"#correo_electronico_rep_legal"
-		).val();
-		var nombre_p = $("#nombre_p").val();
-		var apellido_p = $("#apellido_p").val();
-
-		//___
-
-		var tipo_organizacion = $("#tipo_organizacion").val();
-		var departamento = $("#departamentos").val();
-		var municipio = $("#municipios").val();
-		var direccion = $("#direccion").val();
-		var fax = $("#fax").val();
-
-		if ($("input:checkbox[name=extension_checkbox]:checked").val()) {
-			var extension = $("#extension").val();
-		} else {
-			var extension = "No Tiene";
-		}
-		if ($("#urlOrganizacion").val()) {
-			var urlOrganizacion = $("#urlOrganizacion").val();
-		} else {
-			var urlOrganizacion = "No Tiene";
-		}
-
-		var actuacion = $("#actuacion").val();
-		var educacion = $("#educacion").val();
-		var numCedulaCiudadaniaPersona = $("#numCedulaCiudadaniaPersona").val();
-
-		if (
-			organizacion.length > 0 &&
-			nit.length > 0 &&
-			nombre.length > 0 &&
-			apellido.length > 0 &&
-			correo_electronico.length > 0
-		) {
-			var data = {
-				organizacion: organizacion,
-				nit: nit,
-				sigla: sigla,
-				nombre: nombre,
-				nombre_s: nombre_s,
-				apellido: apellido,
-				apellido_s: apellido_s,
-				correo_electronico: correo_electronico,
-				correo_electronico_rep_legal: correo_electronico_rep_legal,
-				nombre_p: nombre_p,
-				apellido_p: apellido_p, //___
-				tipo_organizacion: tipo_organizacion,
-				departamento: departamento,
-				municipio: municipio,
-				direccion: direccion,
-				fax: fax,
-				extension: extension,
-				urlOrganizacion: urlOrganizacion,
-				actuacion: actuacion,
-				educacion: educacion,
-				numCedulaCiudadaniaPersona: numCedulaCiudadaniaPersona,
-			};
-
-			$.ajax({
-				url: baseURL + "update/update_info",
-				type: "post",
-				dataType: "JSON",
-				data: data,
-				beforeSend: function () {
-					Toast.fire({
-						icon: 'warning',
-						title: 'Espere... Guardando información...'
-					});
-				},
-				success: function (response) {
-					Toast.fire({
-						icon: 'success',
-						title: response.msg
-					});
-					setInterval(function () {
-						redirect("perfil");
-					}, 5000);
-				},
-				error: function (ev) {
-					//Do nothing
-				},
-			});
-		} else {
-			Toast.fire({
-				icon: 'error',
-				title: 'Escriba un correo electrónico válido.'
-			})
-		}
+		let data = {
+			organizacion: $("#organizacion").val(),
+			nit: $("#nit").val(),
+			sigla: $("#sigla").val(),
+			nombre: $("#nombre").val(),
+			nombre_s: $("#nombre_s").val(),
+			apellido: $("#apellido").val(),
+			apellido_s: $("#apellido_s").val(),
+			correo_electronico: $("#correo_electronico").val(),
+			correo_electronico_rep_legal: $("#correo_electronico_rep_legal").val(),
+			nombre_p: $("#nombre_p").val(),
+			apellido_p: $("#apellido_p").val(),
+			tipo_organizacion: $("#tipo_organizacion").val(),
+			departamento: $("#departamentos").val(),
+			municipio: $("#municipios").val(),
+			direccion: $("#direccion").val(),
+			fax: $("#fax").val(),
+			extension: $("#extension").val(),
+			urlOrganizacion: $("#urlOrganizacion").val(),
+			actuacion: $("#actuacion").val(),
+			educacion: $("#educacion").val(),
+			numCedulaCiudadaniaPersona: $("#numCedulaCiudadaniaPersona").val(),
+		};
+		// Petición ajax para actualizar info
+		$.ajax({
+			url: baseURL + "Perfil/actualizarInformacionPerfil",
+			type: "post",
+			dataType: "JSON",
+			data: data,
+			beforeSend: function () {
+				Toast.fire({
+					icon: 'info',
+					title: 'Espere... Guardando información...'
+				});
+			},
+			success: function (response) {
+				if(response.status == 'success') {
+					Alert.fire({
+						title: response.title,
+						text: response.msg,
+						icon: response.status,
+					}).then((result) => {
+						if (result.isConfirmed) {
+							setInterval(function () {
+								reload();
+							}, 1000);
+						}
+					})
+				}
+				else{
+					Alert.fire({
+						title: 'Error al guardar!',
+						text: response.msg,
+						icon: 'error',
+					})
+				}
+			},
+			error: function (ev) {
+				console.log(ev)
+				Alert.fire({
+					title: 'Error interno!',
+					text: ev.responseText,
+					html: ev.responseText,
+					icon: 'error',
+				});
+			},
+		});
 	}
 });
 $("#admin_ver_inscritas_tabla").click(function () {

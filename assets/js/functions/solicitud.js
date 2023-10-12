@@ -147,9 +147,10 @@ $("#guardar_formulario_informacion_general_entidad").click(function () {
 			},
 			error: function (ev) {
 				event.preventDefault();
-				Toast.fire({
+				Alert.fire({
+					title: 'Error al guardar!',
+					text: ev.responseText,
 					icon: 'error',
-					text: ev.responseText
 				});
 			},
 		});

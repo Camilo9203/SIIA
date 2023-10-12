@@ -73,7 +73,6 @@
 
 					<hr />
 					<button class="btn btn-siia btn-sm verHistObsUs pull-right" id="hist_org_obs" data-toggle='modal' data-id-org="<?php echo $solicitud->organizaciones_id_organizacion; ?>" data-target='#verHistObsUs'>Historial de observaciones <i class="fa fa-history" aria-hidden="true"></i></button>
-					<!--			<button class="btn btn-siia btn-sm pull-right" data-toggle="modal" data-target="#modalEliminarSolicitud" id="el_sol">Actualizar/Cambiar el tipo de solicitud actual <i class="fa fa-refresh" aria-hidden="true"></i></button>-->
 					<hr />
 				</div>
 				<div class="form-group">
@@ -86,29 +85,6 @@
 					<div id="formulariosFaltantes"></div>
 				</div>
 				<hr />
-			</div>
-			<!-- Modal - Inicio - Eliminar Solicitud -->
-			<div class="modal fade" id="modalEliminarSolicitud" tabindex="-1" role="dialog" aria-labelledby="eliminarSolicitudT">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="eliminarSolicitudT">Actualizar tipo de solicitud</h4>
-						</div>
-						<div class="modal-body">
-							<h4>Atención:</h4>
-							<ul>
-								<li>Se borrarán todos los datos de la solicitud actual.</li>
-								<li>Se borrara la solicitud actual.</li>
-								<li>Los datos y archivos de los formularios <strong>permanecen guardados en el sistema</strong>.</li>
-							</ul>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-danger btn-sm pull-left" data-dismiss="modal">No <i class="fa fa-times" aria-hidden="true"></i></button>
-							<button type="button" class="btn btn-siia btn-sm pull-right" id="eliminarSolicitud">Si y guardar información <i class="fa fa-check" aria-hidden="true"></i></button>
-						</div>
-					</div>
-				</div>
 			</div>
 			<!-- Formulario de información general de la entidad 1 -->
 			<div id="informacion_general_entidad" data-form="1" class=" formulario_panel">

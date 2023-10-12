@@ -144,6 +144,11 @@ function send_email_user($to, $type, $organizacion, $usuario = null, $token = nu
 					Número ID de la solicitud: <strong>" . $idSolicitud . "</strong>. <br/>";
 			$response = array('status' => "success", 'title' => 'Solicitud enviada!' ,'msg' => "Solicitud: " . $idSolicitud . " enviada a la <strong>Unidad Solidaria</strong>, será dirigido a la página de estado de la solicitud. Se le asignará un <strong>evaluador</strong> a esta solicitud y una vez él cambie el estado y/o haga observaciones de esta, será notificado. <br><br> ¡Muchas Gracias!");
 			break;
+		case 'actualizarPerfil':
+			$subject = "Actualización de perfil";
+			$message = "Organización " . $organizacion->nombreOrganizacion . ": Unidad Solidaria le informa que la información básica de contacto de la entidad se ha actualizado satisfactoriamente y será publicada en el listado de entidades acreditadas si está acreditada durante los primeros cinco días del siguiente mes. Lo invitamos a actualizar su información cada vez que lo sea necesario.";
+			$response = array('status' => "success", 'title' => 'Actualización de perfil correcta!' ,'msg' => "Su información de perfil ha sido actualizada con éxito");
+			break;
 		default:
 			$asunto = "";
 			$message = "";

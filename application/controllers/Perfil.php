@@ -35,8 +35,14 @@ class Perfil extends CI_Controller {
 		$usuario = $this->UsuariosModel->getUsuarios($data['usuario_id']);
 		$organizacion = $this->db->select('*')->from('organizaciones')->where('usuarios_id_usuario', $usuario->id_usuario)->get()->row();
 		$informacionGeneral = $this->InformacionGeneralModel->getInformacionGeneral($organizacion->id_organizacion);
+		$actividades = $this->UsuariosModel->getActividadUsuario($data['usuario_id']);
 		$this->load->view('include/header', $data);
-		$this->load->view('paneles/perfil', array('organizacion' => $organizacion, 'usuario' => $usuario, 'informacionGeneral' => $informacionGeneral));
+		$this->load->view('paneles/perfil', array(
+			'organizacion' => $organizacion,
+			'usuario' => $usuario,
+			'informacionGeneral' => $informacionGeneral,
+			'actividades' => $actividades
+		));
 		//$this->load->view('paneles/actividad', $data_actividad);
 		$this->load->view('include/footer');
 		$this->logs_sia->logs('PLACE_USER');
@@ -151,6 +157,87 @@ class Perfil extends CI_Controller {
 
 		}
 
+	}
+	// Actualizar datos de la organización
+	public function actualizarInformacionPerfil()
+	{
+		$this->form_validation->set_rules('organizacion','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('nit','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('sigla','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('nombre','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('nombre_s','','trim|xss_clean');
+		$this->form_validation->set_rules('apellido','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('apellido_s','','trim|xss_clean');
+		$this->form_validation->set_rules('correo_electronico','','trim|required|min_length[3]|valid_email|xss_clean');
+		$this->form_validation->set_rules('correo_electronico_rep_legal','','trim|required|min_length[3]|valid_email|xss_clean');
+		$this->form_validation->set_rules('nombre_p','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('apellido_p','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('tipo_organizacion','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('departamento','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('municipio','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('direccion','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('fax','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('extension','','trim|min_length[1]|xss_clean');
+		$this->form_validation->set_rules('urlOrganizacion','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('actuacion','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('educacion','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('numCedulaCiudadaniaPersona','','trim|required|min_length[3]|xss_clean');
+		if ($this->form_validation->run("formulario_actualizar") == FALSE):
+			$error = validation_errors();
+			echo json_encode(array('msg' => $error, 'status' => 'error'));
+		else:
+			$organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $this->session->userdata('usuario_id'))->get()->row();
+			$informacionGeneral = $this->db->select("*")->from("informacionGeneral")->where("organizaciones_id_organizacion", $organizacion->id_organizacion)->get()->row();
+			// Datos actualizar organización
+			$data_update = array(
+				'nombreOrganizacion' => $this->input->post('organizacion'),
+				'numNIT' => $this->input->post('nit'),
+				'sigla' => $this->input->post('sigla'),
+				'primerNombreRepLegal' => $this->input->post('nombre'),
+				'segundoNombreRepLegal' => $this->input->post('nombre_s'),
+				'primerApellidoRepLegal' => $this->input->post('apellido'),
+				'segundoApellidoRepLegal' => $this->input->post('apellido_s'),
+				'direccionCorreoElectronicoOrganizacion' => $this->input->post('correo_electronico'),
+				'direccionCorreoElectronicoRepLegal' => $this->input->post('correo_electronico_rep_legal'),
+				'primerNombrePersona' => $this->input->post('nombre_p'),
+				'primerApellidoPersona' => $this->input->post('apellido_p'),
+			);
+			// Datos actualizar información general
+			$data_informacion_general = array(
+				'tipoOrganizacion' => $this->input->post('tipo_organizacion'),
+				'direccionOrganizacion' => $this->input->post('direccion'),
+				'nomDepartamentoUbicacion' => $this->input->post('departamento'),
+				'nomMunicipioNacional' => $this->input->post('municipio'),
+				'fax' => $this->input->post('fax'),
+				'extension' => $this->input->post('extension'),
+				'urlOrganizacion' =>  $this->input->post('urlOrganizacion'),
+				'actuacionOrganizacion' => $this->input->post('actuacion'),
+				'tipoEducacion' =>  $this->input->post('educacion'),
+				'numCedulaCiudadaniaPersona' => $this->input->post('numCedulaCiudadaniaPersona'),
+				'fecha' => date('Y/m/d H:i:s'),
+				'organizaciones_id_organizacion' => $organizacion->id_organizacion
+			);
+			// Actualizar datos de la organización
+			$this->db->where('usuarios_id_usuario', $this->session->userdata('usuario_id'));
+			if($this->db->update('organizaciones', $data_update)):
+				// Comprobar si existen datos de información general
+				if($informacionGeneral == NULL || $informacionGeneral == ""):
+					// Crear datos si no existen
+					$this->db->insert('informacionGeneral', $data_informacion_general);
+				else:
+					// Actualizar datos si existen
+					$this->db->where('organizaciones_id_organizacion', $organizacion->id_organizacion);
+					$this->db->update('informacionGeneral', $data_informacion_general);
+				endif;
+				// Guardar logs y notificaciones.
+				$this->logs_sia->session_log('Actualización de datos básicos');
+				$this->logs_sia->logQueries();
+				$this->logs_sia->logs('URL_TYPE');
+				$this->notif_sia->notification('ACTUALIZAR_DATOS', 'admin', $this->input->post('organizacion'));
+				// Enviar email.
+				send_email_user($organizacion->direccionCorreoElectronicoOrganizacion, 'actualizarPerfil', $organizacion, null, null, null);
+			endif;
+		endif;
 	}
 	public function upload_firma()
 	{
