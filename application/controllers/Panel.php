@@ -923,7 +923,7 @@ class Panel extends CI_Controller
 				'error' => $this->email->print_debugger()
 			);
 			//Comprobar que se guardó o no el registro en la tabla correosRegistro
-			if($this->db->insert('correosRegistro', $correo_registro)){
+			if($this->db->insert('correosregistro', $correo_registro)){
 				echo json_encode(array('url' => "panel", 'msg' => "Se envío un correo a: " . $organizacion->direccionCorreoElectronicoOrganizacion . ", por favor verifíquelo", "status" => 1));
 			}
 			else {
@@ -945,7 +945,7 @@ class Panel extends CI_Controller
 				'error' => $this->email->print_debugger()
 			);
 			//Comprobar que se guardó o no el registro en la tabla correosRegistro
-			if($this->db->insert('correosRegistro', $correo_registro)){
+			if($this->db->insert('correosregistro', $correo_registro)){
 				echo json_encode(array('msg' => "Se han guardado tus datos registrados, pero no se logro enviar correo de activación, sin embargo se registro error en base de datos para verificación por parte del administrador"));
 			}
 		}

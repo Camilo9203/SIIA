@@ -31,7 +31,7 @@ class InformacionGeneral extends CI_Controller
         $this->form_validation->set_rules('portafolio', '', 'trim|min_length[1]|xss_clean');
         if ($this->form_validation->run("formulario_informacion_general_entidad") == FALSE) {
             $error = validation_errors();
-            echo json_encode(array('msg' => $error, 'status' => 0));
+            echo json_encode(array('msg' => $error, 'status' => 'error'));
         }
         else {
             if ($this->input->post()) {
@@ -48,14 +48,14 @@ class InformacionGeneral extends CI_Controller
                     'actuacionOrganizacion' => $this->input->post('actuacion'),
                     'tipoEducacion' => $this->input->post('educacion'),
                     'numCedulaCiudadaniaPersona' => $this->input->post('numCedulaCiudadaniaPersona'),
-                    'presentacionInstitucional' => $this->input->post('presentacion'),
-                    'objetoSocialEstatutos' => $this->input->post('objetoSocialEstatutos'),
+                    //'presentacionInstitucional' => $this->input->post('presentacion'),
+                    //'objetoSocialEstatutos' => $this->input->post('objetoSocialEstatutos'),
                     'mision' => $this->input->post('mision'),
                     'vision' => $this->input->post('vision'),
-                    'principios' => $this->input->post('principios'),
-                    'fines' => $this->input->post('fines'),
-                    'portafolio' => $this->input->post('portafolio'),
-                    'otros' => $this->input->post('otros'),
+                    //'principios' => $this->input->post('principios'),
+                    //'fines' => $this->input->post('fines'),
+                    //'portafolio' => $this->input->post('portafolio'),
+                    //'otros' => $this->input->post('otros'),
                     'fecha' => date('Y/m/d H:i:s'),
                     'organizaciones_id_organizacion' => $organizacion->id_organizacion,
                 );

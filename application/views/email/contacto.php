@@ -142,7 +142,7 @@
 								<table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
 									<tr>
 										<td align="center" valign="top">
-											<h2>Aplicación SIIA de la Unidad Administrativa Especial Organizaciones Solidarias.</h2>
+											<h2>Aplicación SIIA de la Unidad Solidaria.</h2>
 											<label>Correo de información:</label>
 											<p>&nbsp;</p>
 											<p><?php echo $mensaje; ?></p>
@@ -171,7 +171,7 @@
 												<br />
 												Atención al ciudadano <a target="_blank" href="mailto:<?php echo CORREO_ATENCION ?>"><?php echo CORREO_ATENCION ?></a>
 												<br />
-												Chat en página web <a target="_blank" href="<?php echo PAGINA_WEB ?>">Organizaciones Solidarias</a> martes y jueves de 9 am a 12 pm.
+												Chat en página web <a target="_blank" href="<?php echo PAGINA_WEB ?>">Unidad Solidaria</a> martes y jueves de 9 am a 12 pm.
 												<br />
 												Atención telefónica al <a target="_blank" href="tel:0313275252">3275252</a> Ext. 301 (Bogotá); línea gratuita nacional <a target="_blank" href="tel:018000122020">018000122020</a>
 												<br />

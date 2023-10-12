@@ -151,12 +151,12 @@ function validarFormLogin () {
 			usuario: {
 				required: true,
 				minlength: 3,
-				maxlength: 10,
+				//maxlength: 10,
 			},
 			password: {
 				required: true,
 				minlength: 8,
-				maxlength: 10,
+				//maxlength: 10,
 				regex:
 					"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,10}$",
 			},
@@ -165,12 +165,12 @@ function validarFormLogin () {
 			usuario: {
 				required: "Por favor, escriba el nombre de usuario.",
 				minlength: "El nombre de usuario debe tener mínimo 3 caracteres.",
-				maxlength: "El nombre de usuario debe tener máximo 10 caracteres."
+				//maxlength: "El nombre de usuario debe tener máximo 10 caracteres."
 			},
 			password: {
 				required: "Por favor, escriba la contraseña.",
 				minlength: "La Contraseña debe tener mínimo 8 caracteres.",
-				maxlength: "La Contraseña debe tener máximo 10 caracteres.",
+				//maxlength: "La Contraseña debe tener máximo 10 caracteres.",
 				regex:
 					"Debe tener mínimo 8 y máximo 10 caracteres, al menos una mayúscula, una minúscula, un número, y un cáracter especial (#?!@$%^&*-).",
 			},

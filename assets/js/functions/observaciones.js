@@ -788,8 +788,8 @@ $(".guardarObservacionesForm1").click(function (){
 		id: $("#id_org_ver_form").attr("data-id"),
 	}
 	guardarObservacion(data);
-	verObservaciones(1);
 	$("#observacionesForm1").val('');
+	verObservaciones(1);
 });
 /** Formulario 2*/
 $(".guardarObservacionesForm2").click(function (){
@@ -922,9 +922,8 @@ $(document).on("click", ".eliminarDataTabla", function () {
 	$(this).parent().parent().hide();
 });
 function guardarObservacion(data) {
-	event.preventDefault();
 	$.ajax({
-		url: baseURL + "admin/guardarObservacion",
+		url: baseURL + "Observaciones/create",
 		type: "post",
 		dataType: "JSON",
 		data: data,
@@ -933,13 +932,10 @@ function guardarObservacion(data) {
 			notificacion("Espere...", "success");
 		},
 		success: function (response) {
-			event.preventDefault();
 			notificacion(response.msg, "success");
 		},
 		error: function (ev) {
 			notificacion("Ocurrió un error no se guardo.");
-			console.log(ev);
-			event.preventDefault();
 		},
 	});
 }

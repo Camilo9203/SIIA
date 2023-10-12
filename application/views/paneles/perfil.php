@@ -9,10 +9,15 @@ die();*/
  * @var $informacionGeneral
  * @var $departamentos
  * @var $municipios
+ * @var $firma
+ * @var $firmaCert
+ * @var $personaCert
+ * @var $cargoCert
  *
  */
 ?>
 <div class="container">
+	<!-- Resumen -->
 	<div class="row">
 		<h4>Datos Básicos de la Organización:</h4>
 		<div class="col-12 card" id="datos_basicos" style="padding: 10px">
@@ -44,9 +49,9 @@ die();*/
 			<select id="configuracion" class="form-control show-tick" autocomplete="on">
 				<option value="default" selected>Selecciona para editar tu información</option>
 				<option value="1">Información básica</option>
-				<option value="2">Firma representante legal</option>
+				<!-- <option value="2">Firma representante legal</option> -->
 				<option value="3">Datos inicio de sesión</option>
-				<option value="4">Certificados</option>
+				<!-- <option value="4">Certificados</option> -->
 				<option value="5">Actividad</option>
 			</select>
 			<hr>
@@ -57,7 +62,7 @@ die();*/
 		<div class="col-12 card" id="informacionBasicaPerfil">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-10 m-3">
+					<div class="col-md-11 m-3">
 						<?php echo form_open_multipart('', array('id' => 'formulario_actualizar_logo')); ?>
 						<h4>Cambio de imagen / logo de la organización:</h4><small>La imagen tiene que ser de 240px x 95px (Ancho x Alto) para el certificado.</small>
 						<div class="form-group">
@@ -69,16 +74,16 @@ die();*/
 				</div>
 				<?php echo form_open('', array('id' => 'formulario_actualizar')); ?>
 				<div class="row">
-					<div class="col-md-5 m-3">
+					<div class="col-md-6 m-3">
 						<hr/>
 						<h4>Actualizar información básica:</h4>
 						<div class="form-group">
 							<label for="organizacion">Organización: <span class="spanRojo">*</span></label>
-							<input type="text" class="form-control" form="formulario_actualizar" name="organizacion" id="organizacion" placeholder="Nombre Organización" required="" value="<?php echo $organizacion->nombreOrganizacion; ?>">
+							<input type="text" class="form-control" form="formulario_actualizar" name="organizacion" id="organizacion" placeholder="Nombre Organización" value="<?php echo $organizacion->nombreOrganizacion; ?>"  onkeyup="mayus(this);" disabled>
 						</div>
 						<div class="form-group">
 							<label for="nit">NIT de la organización: <span class="spanRojo">*</span></label>
-							<input type="text" class="form-control" form="formulario_actualizar" name="nit" id="nit" placeholder="Numero NIT" required="" value="<?php echo $organizacion->numNIT; ?>">
+							<input type="text" class="form-control" form="formulario_actualizar" name="nit" id="nit" placeholder="Numero NIT" value="<?php echo $organizacion->numNIT; ?>" disabled>
 						</div>
 						<div class="form-group">
 							<label for="sigla">Sigla de la organización: <span class="spanRojo">*</span></label>
@@ -251,7 +256,7 @@ die();*/
 	<!-- Firma representante legal -->
 	<div class="col-12 card" id="firmaRepLegalPerfil">
 		<div class="container">
-			<div class="col-md-12 p-5">
+			<div class="col-md-11 m-3">
 				<div class="form-group">
 					<h4>Firma del representante legal.</h4>
 					<label>Contraseña de la firma: <span class="spanRojo">*</span></label><br>
@@ -263,7 +268,7 @@ die();*/
 				</div>
 				<hr/>
 				<?php echo form_open_multipart('', array('id' => 'formulario_actualizar_firma')); ?>
-					<h4>Cambio de firma del representante legal:</h4><small>La imagen actual se reemplazara con la nueva, asimismo la contraseña.</small>
+					<h4>Cambio de firma del representante legal:</h4><small>La imagen actual se reemplazará con la nueva, asimismo la contraseña.</small>
 					<div class="form-group">
 						<input type="file" class="form-control" form="formulario_actualizar_firma" name="firma" id="firma" required="" accept="image/jpeg, image/png">
 						<label>Contraseña de la firma: <span class="spanRojo">*</span></label>
@@ -281,7 +286,7 @@ die();*/
 	<!-- Datos inicio sesión -->
 	<div class="col-12 card" id="datosSesion">
 		<div class="container">
-			<div class="col-md-12 p-5">
+			<div class="col-md-11 m-3">
 				<hr/>
 				<!--<button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#ayuda_login">?</button>-->
 				<?php echo form_open('', array('id' => 'formulario_actualizar_contrasena')); ?>
@@ -324,7 +329,7 @@ die();*/
 			</div>
 		</div>
 	</div>
-	<!-- Centificados -->
+	<!-- Certificados -->
 	<div class="col-12 card" id="certificados">
 		<div class="container">
 			<div class="col-md-12 p-5">
@@ -354,5 +359,6 @@ die();*/
 		</div>
 	</div>
 	<br>
+	<button class="btn btn-danger btn-sm volverPanelPerfil"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 
 </div>

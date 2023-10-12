@@ -1,3 +1,9 @@
+/**
+ * Volver a panel
+ * */
+$(".volverPanelPerfil").click(function () {
+	window.open(baseURL + "panel", '_self');
+});
 validarFormulariosPerfil();
 $('#configuracion').change(function () {
 	let configuracion = $('#configuracion').val();
@@ -178,7 +184,6 @@ $("#actualizar_informacion").click(function () {
 		}
 	}
 });
-
 $("#admin_ver_inscritas_tabla").click(function () {
 	$("#solicitudesOrganizacion").hide();
 	$("#actividadOrganizacion").hide();
@@ -253,6 +258,10 @@ function validarFormulariosPerfil() {
 				required: true,
 				minlength: 3,
 			},
+			urlOrganizacion: {
+				required: true,
+				url: true
+			}
 		},
 		messages: {
 			organizacion: {
@@ -302,6 +311,10 @@ function validarFormulariosPerfil() {
 				required: "Por favor, escriba su Primer Apellido.",
 				minlength: "Su Primer Apellido debe tener mínimo 3 caracteres.",
 			},
+			urlOrganizacion: {
+				required: 'Registre su pagina web',
+				url: 'Requiere una url valida. Ej: http://www.ejemplo.com'
+			}
 		},
 	});
 }
