@@ -238,9 +238,9 @@ $(".eliminarSolicitud").click(function () {
 	let idSolicitud = $(this).attr("data-id");
 	let text = "¿Estás seguro de eliminar la solicitud: <strong>" +
 		idSolicitud +
-		"</strong>? <br><br> Esta acción no se puede revertir y eliminara el contenido de todos los formularios a excepción de los formularios: " +
+		"</strong>? <br><br> Esta acción no se puede revertir y eliminará el contenido de todos los formularios a excepción de los formularios: " +
 		"<br><br> <strong>1. Información General </strong>" +
-		"<br> <strong>6. Facilitadores.</strong>";
+		"<br> <strong>5. Facilitadores.</strong>";
 	Alert.fire({
 		title: 'Eliminar solicitud',
 		html: text,

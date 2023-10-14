@@ -23,7 +23,7 @@ class JornadasActualizacion extends CI_Controller
 		$metadata = array(
 			'tipo' => $this->input->post('tipoArchivo'),
 			'nombre' => $this->input->post('append_name') . "_" . random(10) . "_" . $file['name'],
-			'id_formulario' => 4,
+			'id_formulario' => 3,
 			'id_registro' => $this->input->post('idSolicitud'),
 			'organizaciones_id_organizacion' => $organizacion->id_organizacion
 		);
@@ -31,15 +31,11 @@ class JornadasActualizacion extends CI_Controller
 		$fileCreated = create_file($file, $metadata);
 		// Comprobar si el archivo se cargó correctamente
 		if ($fileCreated == "true"):
-			// Validar si existen datos en numero de personas y fecha
-			$numeroPersonas = empty($this->input->post('numeroPersonas')) ? 0 : $this->input->post('numeroPersonas');
-			$fechaAsistencia = empty($this->input->post('fechaAsistencia')) ? date('Y/m/d H:i:s') : $this->input->post('fechaAsistencia');
-			// Comprobar si se traen datos por post
+					// Comprobar si se traen datos por post
 			if ($this->input->post()) {
 				// Datos de creación de la jornada.
 				$datos = array(
-					'numeroPersonas' => $numeroPersonas,
-					'fechaAsistencia' => $fechaAsistencia,
+					'asistio' => $this->input->post('asistio'),
 					'organizaciones_id_organizacion' => $organizacion->id_organizacion,
 					'idSolicitud' => $this->input->post('idSolicitud')
 				);
@@ -64,6 +60,6 @@ class JornadasActualizacion extends CI_Controller
 		$id = $this->input->post('id_jornada');
 		$this->db->where('idSolicitud', $id);
 		if($this->db->delete('jornadasActualizacion'))
-			echo json_encode(array("msg" => "El registro ha sido eliminado."));
+			delete_file($this->input->post('tipo'), $this->input->post('nombre'), $this->input->post('id_archivo'), $this->input->post('id_formulario'));
 	}
 }

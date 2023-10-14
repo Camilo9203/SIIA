@@ -8,6 +8,7 @@
  * @var $documentacionLegal
  * @var $antecedentesAcademicos
  * @var $jornadasActualizacion
+ * @var $archivoJornada
  * @var $aplicacion
  * @var $datosEnLinea
  * @var $datosProgramas
@@ -32,12 +33,12 @@
 							<ul class="nav side-menu list-unstyled wizard_steps">
 								<li class="step-no"><a data-form="1" data-form-name="informacion_general"><span id="1" class="step_no menu-sel">1</span> Información General de la Entidad <i class="fa fa-home" aria-hidden="true"></i></a></li>
 								<li class="step-no"><a data-form="2" data-form-name="documentacion_legal"><span id="2" class="step_no menu-sel">2</span> Documentación Legal <i class="fa fa-book" aria-hidden="true"></i></a></li>
-								<li class="step-no"><a data-form="3" data-form-name="antecedentes_academicos"><span id="3" class="step_no menu-sel">3</span> Antecedentes Académicos <i class="fa fa-id-card" aria-hidden="true"></i></a></li>
-								<li class="step-no"><a data-form="4" data-form-name="jornadas_actualizacion"><span id="4" class="step_no menu-sel">4</span> Jornadas de Actualización <i class="fa fa-handshake-o" aria-hidden="true"></i></a></li>
-								<li class="step-no"><a data-form="5" data-form-name="programa_economia"><span id="5" class="step_no menu-sel">5</span> Programas de Educación en Economía Solidaria <i class="fa fa-server" aria-hidden="true"></i></a></li>
-								<li class="step-no"><a data-form="6" data-form-name="equipo_docente"><span id="6" class="step_no menu-sel">6</span> Equipo de Facilitadores <i class="fa fa-users" aria-hidden="true"></i></a></li>
-								<li class="step-no" id="itemPlataforma"><a data-form="7" data-form-name="plataforma"><span id="7" class="step_no menu-sel">7</span> Datos modalidad virtual <i class="fa fa-globe" aria-hidden="true"></i></a></li>
-								<li class="step-no" id="itemEnLinea"><a data-form="8" data-form-name="en_linea"><span id="8" class="step_no menu-sel">8</span> Datos modalidad en linéa<i class="fa fa-globe" aria-hidden="true"></i></a></li>
+<!--								<li class="step-no"><a data-form="3" data-form-name="antecedentes_academicos"><span id="3" class="step_no menu-sel">3</span> Antecedentes Académicos <i class="fa fa-id-card" aria-hidden="true"></i></a></li>-->
+								<li class="step-no"><a data-form="3" data-form-name="jornadas_actualizacion"><span id="3" class="step_no menu-sel">3</span> Jornadas de Actualización <i class="fa fa-handshake-o" aria-hidden="true"></i></a></li>
+								<li class="step-no"><a data-form="4" data-form-name="programa_economia"><span id="4" class="step_no menu-sel">4</span> Programas de Educación en Economía Solidaria <i class="fa fa-server" aria-hidden="true"></i></a></li>
+								<li class="step-no"><a data-form="5" data-form-name="equipo_docente"><span id="5" class="step_no menu-sel">5</span> Equipo de Facilitadores <i class="fa fa-users" aria-hidden="true"></i></a></li>
+								<li class="step-no" id="itemPlataforma"><a data-form="6" data-form-name="plataforma"><span id="6" class="step_no menu-sel">6</span> Datos modalidad virtual <i class="fa fa-globe" aria-hidden="true"></i></a></li>
+								<li class="step-no" id="itemEnLinea"><a data-form="7" data-form-name="en_linea"><span id="7" class="step_no menu-sel">7</span> Datos modalidad en linéa<i class="fa fa-globe" aria-hidden="true"></i></a></li>
 								<li id="act_datos_sol_org" class="step-no"><a data-form="0" data-form-name="finalizar_proceso"><span class="step_no"><i class="fa fa-check" aria-hidden="true"></i></span> Finalizar Proceso <i class="fa fa-check" aria-hidden="true"></i></a></li>
 							</ul>
 						</div>
@@ -657,8 +658,8 @@
 					<?php endif; ?>
 				<?php endif	?>
 			</div>
-			<!-- Formulario de antecedentes academicos 3 -->
-			<div id="antecedentes_academicos" data-form="3" class=" formulario_panel">
+			<!-- Formulario de antecedentes academicos 3 (Anterior) -->
+			<div id="antecedentes_academicos" data-form="10000" class=" formulario_panel">
 				<?php echo form_open('', array('id' => 'formulario_antecedentes_academicos')); ?>
 					<h3>3. Antecedentes Académicos <i class="fa fa-id-card" aria-hidden="true"></i></h3>
 					<p>Relacione la experiencia en materia educativa, formativa y pedagógica. Los Campos marcados con (*) son obligatorios</p>
@@ -726,33 +727,20 @@
 					</table>
 				<?php endif; ?>
 			</div>
-			<!-- Formulario de jornadas de actualización 4 -->
-			<div id="jornadas_de_actualizacion" data-form="4" class=" formulario_panel">
-				<h3>4. Jornada de actualización pedagógica <i class="fa fa-handshake-o" aria-hidden="true"></i></h3>
+			<!-- Formulario de jornadas de actualización 3 -->
+			<div id="jornadas_de_actualizacion" data-form="3" class=" formulario_panel">
+				<h3>3. Jornada de actualización pedagógica <i class="fa fa-handshake-o" aria-hidden="true"></i></h3>
 				<?php if (empty($jornadasActualizacion)): ?>
 					<p>Registre los datos de la última jornada de actualización, organizada por Unidad Solidaria, a la que asistió. Si selecciona 'No', adjunte por favor una carta de compromiso y de clic en guardar.</p>
 					<br>
 					<?php echo form_open_multipart('', array('id' => 'formulario_jornadas_actualizacion')); ?>
 						<!-- Participación en jornadas -->
 						<div class="form-group">
-							<label for="">4.1 Ha participado en jornadas de actualización organizadas por la Unidad Solidaria?</label>
+							<label for="">3.1 ¿Participó en la última jornada de actualización pedagógica, organizada por la Unidad Solidaria?</label>
 							<div class="checkbox">
 								<label for="jornaSelect">La entidad participo en la jornada de actualización pedagógica:</label>
-								<label><input type="radio" class="jornaSelect" name="jornaSelect" id="jornaSelect" value="Si">Si</label>
-								<label><input type="radio" class="jornaSelect" name="jornaSelect" id="" value="No" checked>No</label>
-							</div>
-						</div>
-						<br>
-						<!-- Si ha participado -->
-						<div id="divIngJor">
-							<div class="form-group">
-								<label for="jornadasNumeroPersonas">5.2 Número de personas que asistieron:</label>
-								<input class="form-control" type="text" name="jornadasNumeroPersonas" id="jornadasNumeroPersonas" placeholder="43">
-							</div>
-							<br>
-							<div class="form-group">
-								<label for="jornadasFechaAsistencia">5.3 Fecha de la última actualización a la que asistió:</label>
-								<input class="form-control" type="date" name="jornadasFechaAsistencia" id="jornadasFechaAsistencia">
+								<label><input type="radio" class="jornaSelect" name="jornaSelect" value="Si">Si</label>
+								<label><input type="radio" class="jornaSelect" name="jornaSelect" value="No" checked>No</label>
 							</div>
 						</div>
 						<br>
@@ -783,49 +771,35 @@
 						<table id="tabla_jornada_actualizacion" width="100%" border=0 class="table table-striped table-bordered">
 							<thead>
 								<tr>
-									<?php if($jornadasActualizacion->numeroPersonas != 0): ?>
-										<td class="col-md-4">Número personas</td>
-										<td class="col-md-4">Fecha asistencia</td>
-									<?php else: ?>
-										<td class="col-md-4">Jornada actualización</td>
-									<?php endif; ?>
-									<td class="col-md-4">Acción</td>
+									<td>Participó en Jornadas</td>
+									<td>Acciones</td>
 								</tr>
 							</thead>
 							<tbody id="tbody">
 								<?php
-									if ($jornadasActualizacion->numeroPersonas != 0):
-										echo "<tr><td>" . $jornadasActualizacion->numeroPersonas . "</td>";
-										echo "<td>" . $jornadasActualizacion->fechaAsistencia . "</td>";
-									else:
-										echo "<td> No registro jornada de actualización</td>";
-									endif;
-									echo "<td><button class='btn btn-danger btn-sm eliminarJornadaActualizacion' data-id-jornada=" . $jornadasActualizacion->idSolicitud . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+									echo "<tr><td>" . $jornadasActualizacion->asistio . "</td>";
+									echo "<td>
+											<button class='btn btn-danger btn-sm eliminarJornadaActualizacion' 
+												data-id-jornada=" . $jornadasActualizacion->idSolicitud . " 
+												data-id-formulario=" . $archivoJornada->id_formulario . "
+												data-id-archivo=" . $archivoJornada->id_archivo . "
+												data-id-tipo=" . $archivoJornada->tipo . "
+												data-nombre-ar=" . $archivoJornada->nombre . ">
+												Eliminar 
+												<i class='fa fa-trash-o' aria-hidden='true'></i>
+											</button>
+												<a target='_blank' href='". base_url() . "uploads/jornadas/" . $archivoJornada->nombre . "'<button class='btn btn-success btn-sm'>Ver documento </button><i class='fa fa-eye' aria-hidden='true'></i></a>
+											</td></tr>";
 								?>
 							</tbody>
 						</table>
-					<!-- Tabla archivos -->
-					<div class="table">
-						<hr />
-						<label>Archivos:</label><a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>
-						<table id="tabla_archivos_formulario" width="100%" border=0 class="table table-striped table-bordered tabla_form">
-							<thead>
-							<tr>
-								<td class="col-md-4">Nombre</td>
-								<td class="col-md-4">Tipo</td>
-								<td class="col-md-4">Acción</td>
-							</tr>
-							</thead>
-							<tbody id="tbody">
-							</tbody>
-						</table>
-					</div>
+
 				<?php endif; ?>
 			</div>
 			<!-- Formulario de programas de educación en economía solidaria 5 - INICIO -->
-			<div id="programa_basico_de_economia_solidaria" data-form="5" class=" formulario_panel">
+			<div id="programa_basico_de_economia_solidaria" data-form="4" class=" formulario_panel">
 				<?php // echo form_open('', array('id' => 'formulario_programa_basico')); ?>
-				<h3>5. Programas de educación en economía solidaria <i class="fa fa-server" aria-hidden="true"></i></h3>
+				<h3>4. Programas de educación en economía solidaria <i class="fa fa-server" aria-hidden="true"></i></h3>
 				<p>Le invitamos a dar clic en el enlace del curso o los cursos seleccionados a acreditar, seguido de la lectura del anexo técnico es importante dar clic en el botón inferior del cuadro emergente <strong>Si, Acepto</strong>. Esta aceptación compromete a su organización a desarrollar el programa de economía solidaria establecido en la resolución 152 de 2022, es importante que su organización cree y desarrolle las metodologías y materiales adecuados para el proceso de enseñanza y aprendizaje.</p>
 				<p>Recuerde que al aceptar el contenido de cada programa educativo se registrara automáticamente el compromiso y este quedara en nuestra base de datos.</p>
 				<hr />
@@ -915,17 +889,17 @@
 					</div>
 				<?php endif	?>
 			</div>
-			<!-- Formulario de docentes 6 -->
-			<div id="docentes" data-form="6" class=" formulario_panel mt-2">
-				<h3>6. Facilitadores <i class="fa fa-users" aria-hidden="true"></i></h3>
+			<!-- Formulario de docentes 5 -->
+			<div id="docentes" data-form="5" class=" formulario_panel mt-2">
+				<h3>5. Facilitadores <i class="fa fa-users" aria-hidden="true"></i></h3>
 				<div class="jumbotron">
 					<h3>Facilitadores</h3>
 					<p>Para crear facilitadores y actualizar o adjuntar archivos como hojas de vida, certificaciones, por favor, de <a href="" id="irDocentes">clic  aquí.</a></p>
 				</div>
 			</div>
 			<!-- Formulario Datos Plataforma 7 -->
-			<div id="datos_plataforma" data-form="7" class=" formulario_panel">
-				<h3>7. Datos modalidad virtual<i class="fa fa-globe" aria-hidden="true"></i></h3>
+			<div id="datos_plataforma" data-form="6" class=" formulario_panel">
+				<h3>6. Datos modalidad virtual<i class="fa fa-globe" aria-hidden="true"></i></h3>
 				<p>Relacione los datos para ingresar a la plataforma y verificar su funcionamiento.</p>
 				<?php echo form_open('', array('id' => 'formulario_modalidad_virtual')); ?>
 					<!-- URL Plataforma -->
@@ -1010,8 +984,8 @@
 				<?php endif; ?>
 			</div>
 			<!-- Formulario Datos En Lina 8 -->
-			<div id="datos_en_linea" data-form="8" class="formulario_panel">
-				<h3>8. Datos modalidad en línea<i class="fa fa-globe" aria-hidden="true"></i></h3>
+			<div id="datos_en_linea" data-form="7" class="formulario_panel">
+				<h3>7. Datos modalidad en línea<i class="fa fa-globe" aria-hidden="true"></i></h3>
 				<p>Ingrese los datos de las herramientas a utilizar en esta modalidad dentro del curso.</p>
 				<?php echo form_open('', array('id' => 'formulario_modalidad_en_linea')); ?>
                     <!-- Nombre de la herramienta-->

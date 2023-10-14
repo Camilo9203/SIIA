@@ -6058,14 +6058,6 @@ $(document).ready(function () {
 		$("#guardar_formulario_programas_aval").show();
 	});
 
-	$("input:radio[name=jornaSelect]").change(function () {
-		if ($("input:radio[name=jornaSelect]:checked").val() == "Si") {
-			$("#divIngJor").show();
-		} else {
-			$("#divIngJor").hide();
-		}
-	});
-
 	$("#docente_val_obs").change(function () {
 		$(".guardarValidoDocente").attr("disabled", false);
 	});

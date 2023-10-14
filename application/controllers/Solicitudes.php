@@ -14,6 +14,7 @@ class Solicitudes extends CI_Controller
 		$this->load->model('DocumentacionLegalModel');
 		$this->load->model('AntecedentesAcademicosModel');
 		$this->load->model('JornadasActualizacionModel');
+		$this->load->model('ArchivosModel');
 		$this->load->model('DatosAplicacionModel');
 		$this->load->model('DatosEnLineaModel');
 		$this->load->model('DatosProgramasModel');
@@ -273,6 +274,7 @@ class Solicitudes extends CI_Controller
 		$data['documentacionLegal'] = $this->DocumentacionLegalModel->getDocumentacionLegal($idSolicitud);
 		$data['antecedentesAcademicos'] = $this->AntecedentesAcademicosModel->getAntecedentesAcedemicos($idSolicitud);
 		$data['jornadasActualizacion'] = $this->JornadasActualizacionModel->getJornadasActualizacion($idSolicitud);
+		$data['archivoJornada'] = $this->ArchivosModel->getArchivos($idSolicitud, 3);
 		$data['aplicacion'] = $this->DatosAplicacionModel->getDatosAplicacion($idSolicitud);
 		$data['datosEnLinea'] = $this->DatosEnLineaModel->getDatosEnLinea($idSolicitud);
 		$data['datosProgramas'] = $this->DatosProgramasModel->getDatosProgramas($idSolicitud);
@@ -410,7 +412,7 @@ class Solicitudes extends CI_Controller
 							break;
 					}
 					break;
-				case 4:
+				case 3:
 					if ($tipo == "jornadaAct") {
 						$jornada = TRUE;
 					}
@@ -523,25 +525,25 @@ class Solicitudes extends CI_Controller
 			array_push($formularios, "2. Falta el formulario de Documentacion Legal.");
 		}
 		if ($antecedentesAcademicos == NULL) {
-			array_push($formularios, "3. Falta el formulario de Antecedentes Academicos.");
+			//array_push($formularios, "3. Falta el formulario de Antecedentes Academicos.");
 		}
 		if ($jornadasActualizacion == NULL || $jornada == NULL) {
-			array_push($formularios, "4. Falta el formulario de Jornadas Actualización.");
+			array_push($formularios, "3. Falta el formulario de Jornadas Actualización.");
 		}
 		if ($datosProgramasAceptados == NULL) {
-			array_push($formularios, "5. Falta el formulario de Datos Basicos Programas.");
+			array_push($formularios, "4. Falta el formulario de Datos Basicos Programas.");
 		}
 		if ($docentes == NULL || count($docentes) < 3) {
-			array_push($formularios, "6. Faltan facilitadores y/o archivos, deben ser tres (3) con sus respectivos documentos.");
+			array_push($formularios, "5. Faltan facilitadores y/o archivos, deben ser tres (3) con sus respectivos documentos.");
 		}
 		if (($modalidadSolicitud == "Virtual" || $modalidadSolicitud == "Presencial, Virtual" || $modalidadSolicitud == "Presencial, Virtual, En Linea"  || $modalidadSolicitud == "Virtual, En Linea") && $aplicacion == NULL) {
-			array_push($formularios, "7. Falta el formulario de Ingreso a la Plataforma Virtual.");
+			array_push($formularios, "6. Falta el formulario de Ingreso a la Plataforma Virtual.");
 		}
 		if (($modalidadSolicitud == "En Linea" || $modalidadSolicitud == "Presencial, En Linea" || $modalidadSolicitud == "Presencial, Virtual, En Linea"  || $modalidadSolicitud == "Virtual, En Linea") && $datosEnLinea == NULL) {
-			array_push($formularios, "8. Falta el formulario de datos modalidad en linea.");
+			array_push($formularios, "7. Falta el formulario de datos modalidad en linea.");
 		}
 		if(!empty($strDocentes)) {
-			array_push($formularios, "6. <strong>Facilitadores:</strong> - Realice las siguientes acciones:<br><strong><small><i>" . $strDocentes . "</i></small></strong>");
+			array_push($formularios, "5. <strong>Facilitadores:</strong> - Realice las siguientes acciones:<br><strong><small><i>" . $strDocentes . "</i></small></strong>");
 		}
 		return $formularios;
 	}
@@ -554,6 +556,7 @@ class Solicitudes extends CI_Controller
     // Eliminar Solicitud
     public function eliminarSolicitud()
     {
+		// TODO: Eliminar archivos de la solicitud
         $this->db->where('idSolicitud', $this->input->post('idSolicitud'));
         $tables = array(
             'estadoOrganizaciones',

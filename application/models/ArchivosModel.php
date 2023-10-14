@@ -5,7 +5,7 @@ class ArchivosModel extends CI_Model
 	{
 		$this->load->database();
 	}
-	public function getArchivos($id = FALSE)
+	public function getArchivos($id = FALSE, $form = FALSE)
 	{
 		if ($id === FALSE) {
 			// Consulta para traer administradores
@@ -13,7 +13,7 @@ class ArchivosModel extends CI_Model
 			return $query->result();
 		}
 		// Traer organizaciones por ID
-		$query = $this->db->get_where('archivos', array('id_archivo' => $id));
+		$query = $this->db->get_where('archivos', array('id_formulario' => $form, 'id_registro' => $id));
 		return $query->row();
 	}
 

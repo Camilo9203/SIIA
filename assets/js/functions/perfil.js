@@ -15,7 +15,7 @@ $('#configuracion').change(function () {
 			$("#datosSesion").slideUp();
 			$("#certificados").slideUp();
 			$("#firmaRepLegalPerfil").slideUp();
-			$("#actividad").slideUp();
+			$("#actividadUsuarioPerfil").slideUp();
 			$("#informacionBasicaPerfil").slideDown();
 			break;
 		case '2':
@@ -26,7 +26,7 @@ $('#configuracion').change(function () {
 			$("#datosSesion").slideUp();
 			$("#certificados").slideUp();
 			$("#informacionBasicaPerfil").slideUp();
-			$("#actividad").slideUp();
+			$("#actividadUsuarioPerfil").slideUp();
 			$("#firmaRepLegalPerfil").slideDown();
 			break;
 		case '3':
@@ -37,7 +37,7 @@ $('#configuracion').change(function () {
 			$("#certificados").slideUp();
 			$("#firmaRepLegalPerfil").slideUp();
 			$("#informacionBasicaPerfil").slideUp();
-			$("#actividad").slideUp();
+			$("#actividadUsuarioPerfil").slideUp();
 			$("#datosSesion").slideDown();
 			break
 		case '4':
@@ -48,7 +48,7 @@ $('#configuracion').change(function () {
 			$("#datosSesion").slideUp();
 			$("#firmaRepLegalPerfil").slideUp();
 			$("#informacionBasicaPerfil").slideUp();
-			$("#actividad").slideUp();
+			$("#actividadUsuarioPerfil").slideUp();
 			$("#certificados").slideDown();
 			break;
 		case '5':
@@ -60,7 +60,7 @@ $('#configuracion').change(function () {
 			$("#firmaRepLegalPerfil").slideUp();
 			$("#informacionBasicaPerfil").slideUp();
 			$("#certificados").slideUp();
-			$("#actividad").slideDown();
+			$("#actividadUsuarioPerfil").slideDown();
 			break;
 		default:
 			Toast.fire({
@@ -71,7 +71,7 @@ $('#configuracion').change(function () {
 			$("#firmaRepLegalPerfil").slideUp();
 			$("#informacionBasicaPerfil").slideUp();
 			$("#certificados").slideUp();
-			$("#actividad").slideUp();
+			$("#actividadUsuarioPerfil").slideUp();
 			break;
 	}
 

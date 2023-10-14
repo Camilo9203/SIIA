@@ -56,22 +56,22 @@ $("#sidebar-menu>.menu_section>#wizard_verticle>.side-menu>li>a").click(function
 			case "2":
 				$("#documentacion_legal").show();
 				break;
+			// case "3":
+			// 	$("#antecedentes_academicos").show();
+			// 	break;
 			case "3":
-				$("#antecedentes_academicos").show();
-				break;
-			case "4":
 				$("#jornadas_de_actualizacion").show();
 				break;
-			case "5":
+			case "4":
 				$("#programa_basico_de_economia_solidaria").show();
 				break;
-			case "6":
+			case "5":
 				$("#docentes").show();
 				break;
-			case "7":
+			case "6":
 				$("#datos_plataforma").show();
 				break;
-			case "8":
+			case "7":
 				$("#datos_en_linea").show();
 				break;
 			case "0":
@@ -712,7 +712,7 @@ function  eliminarFormularioDocumentacionLegal (data) {
 	});
 }
 /**
- * Formulario 3: Antecedentes Académicos
+ * Formulario 3: Antecedentes Académicos (Anterior)
  * */
 // Guardar formulario antecedentes académicos
 $("#guardar_formulario_antecedentes_academicos").click(function () {
@@ -820,7 +820,7 @@ $(".eliminarAntecedentes").click(function () {
 	});
 });
 /**
- * Formulario 4: Jornadas de actualización
+ * Formulario 3: Jornadas de actualización
  * */
 // Guardar formulario jórnada de actualización
 $(".guardar_formulario_jornadas_actualizacion").click(function () {
@@ -829,8 +829,7 @@ $(".guardar_formulario_jornadas_actualizacion").click(function () {
 	form_data.append('file', $('#fileJornadas').prop('files')[0]);
 	form_data.append('tipoArchivo', $(this).attr('data-name'));
 	form_data.append('append_name', $(this).attr('data-name'));
-	form_data.append('numeroPersonas', $('#jornadasNumeroPersonas').val());
-	form_data.append('fechaAsistencia', $('#jornadasFechaAsistencia').val());
+	form_data.append('asistio', $("input:radio[name=jornaSelect]:checked").val());
 	form_data.append('idSolicitud', $(this).attr('data-id'));
 	event.preventDefault();
 	$.ajax({
@@ -888,6 +887,10 @@ $(".eliminarJornadaActualizacion").click(function () {
 		if (result.isConfirmed) {
 			let data = {
 				id_jornada: $(this).attr("data-id-jornada"),
+				id_formulario: $(this).attr("data-id-formulario"),
+				id_archivo: $(this).attr("data-id-archivo"),
+				tipo: $(this).attr("data-id-tipo"),
+				nombre: $(this).attr("data-nombre-ar"),
 			};
 			$.ajax({
 				url: baseURL + "JornadasActualizacion/delete",
@@ -926,7 +929,7 @@ $(".eliminarJornadaActualizacion").click(function () {
 	});
 });
 /**
- * Formulario 5: Programas de Educación
+ * Formulario 4: Programas de Educación
  * */
 // Acciones de cada modal de aceptación
 $("#aceptar_curso_basico_es").click(function () {
@@ -1057,14 +1060,14 @@ $(".eliminarDatosProgramas").click(function () {
 	});
 });
 /**
- * Formulario 6: Llevar a modulo docentes
+ * Formulario 5: Llevar a modulo docentes
  * */
 $("#irDocentes").click(function () {
 	event.preventDefault();
 	window.open(baseURL + "panel/docentes/", '_blank');
 });
 /**
- * Formulario 7: Modalidad Virtual
+ * Formulario 6: Modalidad Virtual
  * */
 // Aceptar recomendaciones modalidad virtual
 $("#acepto_mod_virtual").click(function () {
@@ -1073,7 +1076,7 @@ $("#acepto_mod_virtual").click(function () {
 });
 // Guardar datos de plataforma
 $("#guardar_formulario_plataforma").click(function () {
-	validFroms(7);
+	validFroms(6);
 	if ($("#formulario_modalidad_virtual").valid()) {
 		if ($("#acepta_mod_en_virtual").prop("checked") == true) {
 			event.preventDefault();
@@ -1193,7 +1196,7 @@ $("#acepto_mod_en_linea").click(function () {
 // Guardar formulario
 $("#guardar_formulario_modalidad_en_linea").click(function () {
 	// Validar formulario
-	validFroms(8);
+	validFroms(7);
 	if ($("#formulario_modalidad_en_linea").valid()) {
 		event.preventDefault();
 		if ($("#acepta_mod_en_linea").prop("checked") == true) {
@@ -1677,12 +1680,13 @@ function validFroms (form){
 				},
 			});
 			break;
-		case 7:
+		case 6:
 			$("form[id='formulario_modalidad_virtual']").validate({
 				rules: {
 					datos_plataforma_url: {
 						required: true,
 						minlength: 10,
+						url: true
 					},
 					datos_plataforma_usuario: {
 						required: true,
@@ -1696,7 +1700,8 @@ function validFroms (form){
 				messages: {
 					datos_plataforma_url: {
 						required: "Por favor, ingrese la url de la plataforma virtual.",
-						minlength: "Mínimo 10 caracteres"
+						minlength: "Mínimo 10 caracteres",
+						url: 'Requiere una url valida. Ej: http://www.ejemplo.com'
 					},
 					datos_plataforma_usuario: {
 						required: "Por favor, ingrese usuario para ingresar a la plataforma.",
@@ -1710,7 +1715,7 @@ function validFroms (form){
 				},
 			});
 			break;
-		case 8:
+		case 7:
 			$("form[id='formulario_modalidad_en_linea']").validate({
 				rules: {
 					nombre_herramienta: {
