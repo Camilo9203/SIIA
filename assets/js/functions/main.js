@@ -7512,8 +7512,8 @@ function tablas() {
 					//rowReorder: true,
 					select: true,
 					fixedHeader: {
-						header: true,
-						footer: true,
+						header: false,
+						footer: false,
 					},
 				});
 			}

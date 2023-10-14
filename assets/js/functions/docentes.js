@@ -1,4 +1,7 @@
-/** Notificación Toast SweetAlert */
+/**
+ * Notificación Toast
+ * SweetAlert
+ * */
 const Toast = Swal.mixin({
 	toast: true,
 	position: 'top-end',
@@ -20,25 +23,12 @@ const Alert = Swal.mixin({
 		popup: 'popup-swalert'
 	},
 })
-
-$("#verDivAgregarDoc").click(function () {
-	$(".divAgregarDoc").slideDown();
-	$('html, body').animate({
-		scrollTop: $(".divAgregarDoc").offset().top
-	}, 2000);
-	$(this).hide();
-});
-$("#cancelarNuevoDocente").click(function () {
-	$("#verDivAgregarDoc").slideDown();
-	$('html, body').animate({
-		scrollTop: $("#verDivAgregarDoc").offset().top
-	}, 2000);
-	$("#divAgregarDoc").slideUp();
-});
-/** Añadir nuevo docente */
+/**
+ * Añadir nuevo docente
+ * */
 $("#añadirNuevoDocente").click(function () {
 	ValidarFormDocentes("docentes");
-	if ($("#formulario_docentes").valid()) {
+	if ($("#formulario_crear_docente").valid()) {
 		$(this).attr("disabled", true);
 		data = {
 			cedula: $("#docentes_cedula").val(),
@@ -91,7 +81,9 @@ $("#añadirNuevoDocente").click(function () {
 		});
 	}
 });
-/** Ver docente */
+/**
+ * Ver docente
+ * */
 $(".verDocenteOrg").click(function () {
 	let nombre_docente = $(this).attr("data-nombre");
 	let id_docente = $(this).attr("data-id");
@@ -131,9 +123,10 @@ $(".verDocenteOrg").click(function () {
 		});
 
 });
-/** Actualizar docente */
+/**
+ * Actualizar docente
+ * */
 $(".actualizar_docente").click(function () {
-
 	let data = {
 		id_docente: $("#nombre_doc").attr("data-id"),
 		primer_nombre_doc: $("#primer_nombre_doc").val(),
@@ -171,7 +164,9 @@ $(".actualizar_docente").click(function () {
 		},
 	});
 });
-/** Eliminar docente */
+/**
+ * Eliminar docente
+ * */
 $("#siEliminarDocente").click(function () {
 	$(this).attr("disabled", true);
 	data = {
@@ -202,7 +197,9 @@ $("#siEliminarDocente").click(function () {
 		},
 	});
 });
-/** Subir archivo HV docente  */
+/**
+ * Subir archivo HV docente
+ * */
 $(".archivos_form_hojaVidaDocente").on("click", function () {
 	$data_name = $(".archivos_form_hojaVidaDocente").attr("data-name");
 	$id_docente = $("#docente_arch_id").attr("data-docente-id");
@@ -303,60 +300,79 @@ $(".archivos_form_tituloDocente").on("click", function () {
 		},
 	});
 });
-/** Subir archivo certifica exp docente  */
+/**
+ * Subir archivo certifica exp docente
+ * */
 $(".archivos_form_certificadoDocente").on("click", function () {
-	$data_name = $(".archivos_form_certificadoDocente").attr("data-name");
-	$id_docente = $("#docente_arch_id").attr("data-docente-id");
-	var file_data = $("#" + $data_name).prop("files")[0];
+	data_name = $(".archivos_form_certificadoDocente").attr("data-name");
+	id_docente = $("#docente_arch_id").attr("data-docente-id");
 	var form_data = new FormData();
-	form_data.append("file", file_data);
-	form_data.append("tipoArchivo", $("#" + $data_name).attr("data-val"));
-	form_data.append("append_name", $data_name);
-	form_data.append("id_docente", $id_docente);
-	$.ajax({
-		url: baseURL + "docentes/guardarArchivoCertificadoDocente",
-		dataType: "text",
-		cache: false,
-		contentType: false,
-		processData: false,
-		data: form_data,
-		type: "post",
-		dataType: "JSON",
-		beforeSubmit: function () {
-			Toast.fire({
-				icon: 'info',
-				title: 'Guardando archivo'
-			});
-		},
-		success: function (response) {
-			if(response.status === 1) {
-				Alert.fire({
-					title: 'Se cargo archivo!',
-					text: response.msg,
-					icon: 'success',
-					confirmButtonText: 'Aceptar',
-				})
+	let count = 0;
+	$.each(
+		$("#formulario_archivo_docente_certificados input[type='file']"),
+		function (obj, v) {
+			var file = v.files[0];
+			if (file != undefined) {
+				form_data.append("file[" + obj + "]", file);
+				count ++;
 			}
-			else {
-				Alert.fire({
-					title: 'No se cargo archivo! ',
-					text: response.msg,
-					icon: 'warning',
-					confirmButtonText: 'Aceptar',
-				})
-			}
-			cargarArchivosDocente($id_docente);
-		},
-		error: function (ev) {
-			notificacion("Verifique los datos del formulario.", "success");
-		},
-	});
-});
-/** Subir archivo certifica ECS docente  */
-$(".archivos_form_certificadoEconomiaDocente").on("click", function () {
-	$data_name = $(".archivos_form_certificadoEconomiaDocente").attr(
-		"data-name"
+		}
 	);
+	if (count === 3) {
+		form_data.append("append_name", data_name);
+		form_data.append("tipoArchivo", $("#" + data_name + "1").attr("data-val"));
+		form_data.append("append_name", data_name);
+		form_data.append("id_docente", id_docente);
+		$.ajax({
+			url: baseURL + "archivos/uploadFiles",
+			dataType: "text",
+			cache: false,
+			contentType: false,
+			processData: false,
+			data: form_data,
+			type: "post",
+			dataType: "JSON",
+			beforeSubmit: function () {
+				Toast.fire({
+					icon: 'info',
+					title: 'Guardando archivo'
+				});
+			},
+			success: function (response) {
+				if (response.icon === 'success') {
+					Alert.fire({
+						title: 'Se cargo archivo!',
+						text: response.msg,
+						icon: response.icon,
+						confirmButtonText: 'Aceptar',
+					})
+				} else {
+					Alert.fire({
+						title: 'No se cargo archivo! ',
+						text: response.msg,
+						icon: response.icon,
+						confirmButtonText: 'Aceptar',
+					})
+				}
+				cargarArchivosDocente(id_docente);
+			},
+			error: function (ev) {
+				notificacion("Verifique los datos del formulario.", "success");
+			},
+		});
+	} else {
+		Alert.fire({
+			title: 'Faltan archivos!',
+			text: count + '/3 Debes cargar 3 archivos para continuar',
+			icon: 'warning',
+		})
+	}
+});
+/**
+ * Subir archivo certifica ECS docente
+ * */
+$(".archivos_form_certificadoEconomiaDocente").on("click", function () {
+	$data_name = $(".archivos_form_certificadoEconomiaDocente").attr("data-name");
 	$id_docente = $("#docente_arch_id").attr("data-docente-id");
 	$horasCertEcoSol = $("#horasCertEcoSol").val();
 	var file_data = $("#" + $data_name).prop("files")[0];
@@ -405,7 +421,9 @@ $(".archivos_form_certificadoEconomiaDocente").on("click", function () {
 		},
 	});
 });
-/** Eliminar archivo docente  */
+/**
+ * Eliminar archivo docente
+ * */
 $(document).on("click", ".eliminar_archivo_docente", function () {
 	let id_docente = $(this).attr("data-id-docente");
 	let data = {
@@ -442,7 +460,9 @@ $(document).on("click", ".eliminar_archivo_docente", function () {
 		},
 	});
 });
-/** Cargar Archivos Docentes */
+/**
+ * Cargar Archivos Docentes
+ * */
 function cargarArchivosDocente(id) {
 	$(".tabla_form > #tbody").empty();
 	let id_docente = id;
@@ -465,19 +485,19 @@ function cargarArchivosDocente(id) {
 					// URLs archivos
 					if (response[i].tipo == "docenteHojaVida") {
 						carpeta = "docentes/hojasVida";
-						url = "../../uploads/" + carpeta + "/";
+						url = "../uploads/" + carpeta + "/";
 					}
 					if (response[i].tipo == "docenteTitulo") {
 						carpeta = "docentes/titulos";
-						url = "../../uploads/" + carpeta + "/";
+						url = "../uploads/" + carpeta + "/";
 					}
 					if (response[i].tipo == "docenteCertificados") {
 						carpeta = "docentes/certificados";
-						url = "../../uploads/" + carpeta + "/";
+						url = "../uploads/" + carpeta + "/";
 					}
 					if (response[i].tipo == "docenteCertificadosEconomia") {
 						carpeta = "docentes/certificadosEconomia";
-						url = "../../uploads/" + carpeta + "/";
+						url = "../uploads/" + carpeta + "/";
 					}
 					$("<tr>").appendTo(".tabla_form > tbody");
 					var nombre_r = response[i].nombre.replace('"', "").replace('"', "");
@@ -518,13 +538,15 @@ function cargarArchivosDocente(id) {
 		},
 	});
 }
-/** Validar Formularios Modulo Perfil */
+/**
+ * Validar Formularios Modulo Perfil
+ * */
 function ValidarFormDocentes (form) {
 	// Formulario Actualizar Nombre de usuario.
 	switch (form) {
 		case "docentes":
 			// Fomulario Docentes
-			$("form[id='formulario_docentes']").validate({
+			$("form[id='formulario_crear_docente']").validate({
 				rules: {
 					docentes_cedula: {
 						required: true,

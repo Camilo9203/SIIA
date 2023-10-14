@@ -529,7 +529,7 @@ h4 {
 	z-index: 9;
 	cursor: pointer;
 	position: fixed;
-	bottom: 90px;
+	bottom: 100%;
 	right: 16px;
 	display: none;
 	color: #ffffff;
@@ -537,14 +537,15 @@ h4 {
 	border-color: #ffffff;
 }
 .hide-sidevar {
-	z-index: 9;
+	z-index: 10;
 	cursor: pointer;
-	position: fixed;
-	bottom: 25px;
-	left: 16px;
+	position: absolute;
+	width: 100px;
+	height: 40px;
 	color: #ffffff;
 	background-color: #0062ac;
 	border-color: #ffffff;
+	align-content: center;
 }
 .cuadro_ver_obs {
 	border: 1px solid #0062ac;

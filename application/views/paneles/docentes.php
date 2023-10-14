@@ -24,43 +24,9 @@
 					</div>
 				</div>
 			<?php else: ?>
-				<div class="divAgregarDoc col-md-6 center-block">
-					<h4>Nuevo facilitador:</h4>
-					<?php echo form_open('', array('id' => 'formulario_docentes')); ?>
-					<div class="form-group">
-						<label for="docentes_cedula">Número de cédula o NUIP: <span class="spanRojo">*</span></label>
-						<input type="text" class="form-control" name="docentes_cedula" id="docentes_cedula" placeholder="Cédula o NUIP...">
-					</div>
-					<div class="form-group">
-						<label for="docentes_primer_nombre">Primer nombre: <span class="spanRojo">*</span></label>
-						<input type="text" class="form-control" name="docentes_primer_nombre" id="docentes_primer_nombre" placeholder="Primer nombre...">
-					</div>
-					<div class="form-group">
-						<label for="docentes_segundo_nombre">Segundo nombre:</label>
-						<input type="text" class="form-control" name="docentes_segundo_nombre" id="docentes_segundo_nombre" placeholder="Segundo nombre...">
-					</div>
-					<div class="form-group">
-						<label for="docentes_primer_apellido">Primer apellido: <span class="spanRojo">*</span></label>
-						<input type="text" class="form-control" name="docentes_primer_apellido" id="docentes_primer_apellido" placeholder="Primer apellido...">
-					</div>
-					<div class="form-group">
-						<label for="docentes_segundo_apellido">Segundo apellido:</label>
-						<input type="text" class="form-control" name="docentes_segundo_apellido" id="docentes_segundo_apellido" placeholder="Segundo apellido...">
-					</div>
-					<div class="form-group">
-						<label for="docentes_profesion">Profesión: <span class="spanRojo">*</span></label>
-						<input type="text" class="form-control" name="docentes_profesion" id="docentes_profesion" placeholder="Profesión: Sociólogo, Licenciatura en Educación Infantil...">
-					</div>
-					<div class="form-group">
-						<label for="docentes_horas">Horas de capacitación del facilitador: <span class="spanRojo">*</span></label>
-						<input type="number" class="form-control" min="60" name="docentes_horas" id="docentes_horas" value="" placeholder="60">
-					</div>
-					<?php echo form_close(); ?>
-					<button  class="btn btn-siia btn-sm pull-right" name="añadirNuevoDocente" id="añadirNuevoDocente">Crear facilitador <i class="fa fa-check" aria-hidden="true"></i></button>
-				</div>
 				<button class="btn btn-danger btn-sm volver_al_panel" id="informe_volver"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 				<hr/>
-				<button class="btn btn-siia pull-right btn-sm" id="verDivAgregarDoc">Agregar nuevo facilitador <i class="fa fa-plus" aria-hidden="true"></i></button>
+				<button class="btn btn-siia pull-right btn-sm" data-toggle='modal' data-target='#crearDocenteOrg'>Agregar nuevo facilitador <i class="fa fa-plus" aria-hidden="true"></i></button>
 				<!-- Tabla facilitadores -->
 				<h4>Mis facilitadores</h4>
 				<table id="tabla_docentes" width="100%" border=0 class="table table-striped table-bordered">
@@ -98,7 +64,7 @@
 	</div>
 </div>
 <hr/>
-<!-- Modales docentes -->
+<!-- Modales ver docente -->
 <div class="modal fade" id="verDocenteOrg" tabindex="-1" role="dialog" aria-labelledby="verdocenteorg">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
@@ -131,7 +97,7 @@
 						</div>
 						<div class="form-group">
 							<label>Número de Cédula:<span class="spanRojo">*</span></label>
-							<input type="text" class="form-control" id="numero_cedula_doc">
+							<input type="number" class="form-control" id="numero_cedula_doc">
 						</div>
 						<div class="form-group">
 							<label>Profesión:<span class="spanRojo">*</span></label>
@@ -139,59 +105,58 @@
 						</div>
 						<div class="form-group">
 							<label>Horas de Capacitación:<span class="spanRojo">*</span></label>
-							<input type="text" class="form-control" id="horas_doc">
-						</div>
-						<div class="form-group">
-							<button type="button" class="btn btn-siia btn-sm actualizar_docente" value="No">Actualizar datos del facilitador <i class="fa fa-refresh" aria-hidden="true"></i></button>
+							<input type="number" class="form-control" id="horas_doc">
 						</div>
 					<?php echo form_close(); ?>
+				<hr/>
 				</div>
+				<br><br>
 				<h4>Documentos.</h4>
-				<div class="col-md-6">
+				<hr/>
+				<div class="col-md-6 p-3">
 					<?php echo form_open_multipart('', array('id' => 'formulario_archivo_docente_hojavida')); ?>
 						<div class="form-group">
-							<label>Hoja de vida (PDF):<span class="spanRojo">*</span></label>
+							<label>Hoja de vida (PDF):<span class="spanRojo">*</span></label><br>
 							<small>Solo adjuntar la hoja de vida <strong>sin soporte alguno</strong>.</small>
 							<input type="file" required accept="application/pdf" class="form-control" data-val="docenteHojaVida" name="docenteHojaVida" id="docenteHojaVida">
-							<input type="button" class="btn btn-siia btn-sm archivos_form_hojaVidaDocente fa-fa" data-name="docenteHojaVida" name="hojaVidaDocente" id="hojaVidaDocente" value="Guardar &#xf00c">
+							<input type="button" class="btn btn-siia btn-sm archivos_form_hojaVidaDocente fa-fa" style="width: 100%" data-name="docenteHojaVida" name="hojaVidaDocente" id="hojaVidaDocente" value="Guardar &#xf00c">
 						</div>
 					<?php echo form_close(); ?>
 					<?php echo form_open_multipart('', array('id' => 'formulario_archivo_docente_certificados')); ?>
 						<div class="form-group">
-							<label>Certificados de experiencia <span class="spanRojo">(3)</span>(PDF):<span class="spanRojo">*</span></label>
-							<br/>
-							<small>Solo adjuntar certificados como <strong>conferensista</strong>, <strong>docente</strong>, <strong>tallerista</strong>, <strong>instructor</strong>, entre otros, evitar relacionar como <strong>asesor</strong>, <strong>cargos directivos</strong>, entre otros.</small>
-							<br/>
-							<input type="file" required accept="application/pdf" class="form-control" data-val="docenteCertificados" name="docenteCertificados" id="docenteCertificados">
-							<input type="button" class="btn btn-siia btn-sm archivos_form_certificadoDocente fa-fa" data-name="docenteCertificados" name="certificadoDocente" id="certificadoDocente" value="Guardar &#xf00c">
+							<label>Certificados de experiencia <span class="spanRojo">(3)</span>(PDF):<span class="spanRojo">*</span></label><br>
+							<small>Solo adjuntar certificados como <strong>conferensista</strong>, <strong>docente</strong>, <strong>tallerista</strong>, <strong>instructor</strong>, entre otros, evitar relacionar como <strong>asesor</strong>, <strong>cargos directivos</strong>, entre otros.</small><br>
+							<input type="file" required accept="application/pdf" class="form-control" data-val="docenteCertificados" name="docenteCertificados[]" id="docenteCertificados1">
+							<input type="file" required accept="application/pdf" class="form-control" data-val="docenteCertificados" name="docenteCertificados[]" id="docenteCertificados2">
+							<input type="file" required accept="application/pdf" class="form-control" data-val="docenteCertificados" name="docenteCertificados[]" id="docenteCertificados3">
+							<input type="button" class="btn btn-siia btn-sm archivos_form_certificadoDocente fa-fa mt-3" style="width: 100%" data-name="docenteCertificados" name="certificadoDocente" id="certificadoDocente" value="Guardar &#xf00c">
 						</div>
 					<?php echo form_close(); ?>
+					<hr/>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6 p-3">
 					<?php echo form_open_multipart('', array('id' => 'formulario_archivo_docente_titulo')); ?>
 						<div class="form-group">
-							<label>Titulo Profesional (PDF):<span class="spanRojo">*</span></label>
-							<br/>
-							<small>Solo adjuntar el <strong>diploma ó acta de grado</strong>.</small>
-							<br/>
-								<input type="file" required accept="application/pdf" class="form-control" data-val="docenteTitulo" name="docenteTitulo" id="docenteTitulo">
-								<input type="button" class="btn btn-siia btn-sm archivos_form_tituloDocente fa-fa" data-name="docenteTitulo" name="tituloDocente" id="tituloDocente" value="Guardar &#xf00c">
+							<label>Titulo Profesional (PDF):<span class="spanRojo">*</span></label><br>
+							<small>Solo adjuntar el <strong>diploma ó acta de grado</strong>.</small><br>
+							<input type="file" required accept="application/pdf" class="form-control" data-val="docenteTitulo" name="docenteTitulo" id="docenteTitulo">
+							<input type="button" class="btn btn-siia btn-sm archivos_form_tituloDocente fa-fa" style="width: 100%" data-name="docenteTitulo" name="tituloDocente" id="tituloDocente" value="Guardar &#xf00c">
 						</div>
 					<?php echo form_close(); ?>
 					<?php echo form_open_multipart('', array('id' => 'formulario_archivo_docente_certificados')); ?>
 						<div class="form-group">
-							<label>Certificados de economia solidaria (PDF):<span class="spanRojo">*</span></label>
-							<br/>
-							<small>Solo adjuntar certificados de <strong>economía solidaria, verificando las horas</strong>.</small>
-							<br/>
-							<input type="file" required accept="application/pdf" class="form-control" data-val="docenteCertificadosEconomia" name="docenteCertificadosEconomia" id="docenteCertificadosEconomia">
-							<br/>
+							<label>Certificados de economia solidaria (PDF):<span class="spanRojo">*</span></label><br>
+							<small>Solo adjuntar certificados de <strong>economía solidaria, verificando las horas</strong>.</small><br><br>
+							<input type="file" required accept="application/pdf" class="form-control" data-val="docenteCertificadosEconomia" name="docenteCertificadosEconomia" id="docenteCertificadosEconomia"><br>
 							<label>¿Horas que tiene el certificado?:<span class="spanRojo">*</span></label><br>
-							<input type="number" id="horasCertEcoSol" class="form-control" name="" min="10" value="0">
-							<input type="button" class="btn btn-siia btn-sm archivos_form_certificadoEconomiaDocente fa-fa" data-name="docenteCertificadosEconomia" name="certificadoDocenteEconomia" id="certificadoDocenteEconomia" value="Guardar &#xf00c">
+							<input type="number" id="horasCertEcoSol" class="form-control" name="" min="40" placeholder="40">
+							<input type="button" class="btn btn-siia btn-sm archivos_form_certificadoEconomiaDocente fa-fa" style="width: 100%" data-name="docenteCertificadosEconomia" name="certificadoDocenteEconomia" id="certificadoDocenteEconomia" value="Guardar &#xf00c">
 						</div>
 					<?php echo form_close(); ?>
-				</div>
+					<hr/>
+				</div><br><br>
+				<button type="button" class="btn btn-siia btn-sm actualizar_docente" style="width: 100%" value="No">Actualizar datos del facilitador <i class="fa fa-refresh" aria-hidden="true"></i></button>
+				<br><br>
 				<!-- Tabla archivos -->
 				<div class="col-md-12" id="tabla_archivos_docentes">
 					<h4>Archivos adjuntos al docente:</h4>
@@ -208,13 +173,63 @@
 						</tbody>
 					</table>
 				</div>
+
+				<div class="modal-footer" style="align-content: center; align-items: center; justify-content: center ">
+					<div class="button-group">
+						<button type="button" class="btn btn-danger btn-sm" data-toggle='modal' data-target='#eliminarDocente'>Eliminar facilitador <i class="fa fa-trash-o" aria-hidden="true"></i></button>
+						<button type="button" class="btn btn-info btn-sm actualizar_docente" value="Si">Enviar actualización como solicitud <i class="fa fa-refresh" aria-hidden="true"></i></button>
+						<button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Cerrar <i class="fa fa-times" aria-hidden="true"></i></button>
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="modal-footer" style="align-content: center; align-items: center; justify-content: center ">
-			<div class="button-group">
-				<button type="button" class="btn btn-danger btn-sm" data-toggle='modal' data-target='#eliminarDocente'>Eliminar facilitador <i class="fa fa-trash-o" aria-hidden="true"></i></button>
-				<button type="button" class="btn btn-info btn-sm actualizar_docente" value="Si">Enviar actualización como solicitud <i class="fa fa-refresh" aria-hidden="true"></i></button>
-				<button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Cerrar <i class="fa fa-times" aria-hidden="true"></i></button>
+	</div>
+</div>
+<!-- Modales crear docentes -->
+<div class="modal fade" id="crearDocenteOrg" tabindex="-1" role="dialog" aria-labelledby="verdocenteorg">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h3 class="modal-title">Crear facilitador<label id="nombre_doc"></label>.</h3>
+			</div>
+			<div class="modal-body">
+				<div class="col-md-12">
+					<?php echo form_open_multipart('', array('id' => 'formulario_crear_docente')); ?>
+						<div class="form-group">
+							<label>Primer Nombre:<span class="spanRojo">*</span></label>
+							<input type="text" class="form-control" name="docentes_primer_nombre" id="docentes_primer_nombre" placeholder="Primer nombre...">
+						</div>
+						<div class="form-group">
+							<label>Segundo Nombre:</label>
+							<input type="text" class="form-control" name="docentes_segundo_nombre" id="docentes_segundo_nombre" placeholder="Segundo nombre...">
+						</div>
+						<div class="form-group">
+							<label>Primer Apellido:<span class="spanRojo">*</span></label>
+							<input type="text" class="form-control" name="docentes_primer_apellido" id="docentes_primer_apellido" placeholder="Primer apellido...">
+						</div>
+						<div class="form-group">
+							<label>Segundo Apellido:</label>
+							<input type="text" class="form-control" name="docentes_segundo_apellido" id="docentes_segundo_apellido" placeholder="Segundo apellido...">
+						</div>
+						<div class="form-group">
+							<label>Número de Cédula:<span class="spanRojo">*</span></label>
+							<input type="number" class="form-control"  name="docentes_cedula" id="docentes_cedula" placeholder="Cédula o NUIP...">
+						</div>
+						<div class="form-group">
+							<label>Profesión:<span class="spanRojo">*</span></label>
+							<input type="text" class="form-control" name="docentes_profesion" id="docentes_profesion" placeholder="Profesión: Sociólogo, Licenciatura en Educación Infantil...">
+						</div>
+						<div class="form-group">
+							<label>Horas de Capacitación:<span class="spanRojo">*</span></label>
+							<input type="number" class="form-control" min="60" name="docentes_horas" id="docentes_horas" value="" placeholder="60">
+						</div>
+					<?php echo form_close(); ?>
+					<hr/>
+				</div>
+				<br><br>
+				<button type="button" class="btn btn-siia btn-sm" id="añadirNuevoDocente" style="width: 100%">Crear facilitador <i class="fa fa-refresh" aria-hidden="true"></i></button>
+				<br><br>
 			</div>
 		</div>
 	</div>

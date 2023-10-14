@@ -126,7 +126,7 @@ $route['super/?'] = 'Super';
 $route['super/panel'] = 'Super/panel';
 // Activar cuenta con token
 $route['activate'] = 'Activate';
-// Actualizacion de datos
+// Actualización de datos
 $route['actualizacion'] = 'Update/update_info_user';
 //Recodar Contrasena
 $route['recordar'] = 'Recordar';
@@ -139,7 +139,7 @@ $route['Certificado'] = 'Certificaciones/crearCertificacion';
 // $route['panel/obtenerCertificado'] = 'Certificaciones/obtenerCertificado';
 $route['panel/estadoSolicitud'] = 'Panel/estadoSolicitud';
 $route['panel/informeActividades'] = 'Panel/informeActividades';
-$route['panel/docentes'] = 'Panel/docentes';
+$route['panel/docentes'] = 'Docentes/index';
 $route['panel/planMejora'] = 'Panel/planMejora';
 //Perfil Usuario
 $route['panel/perfil'] = 'Perfil';

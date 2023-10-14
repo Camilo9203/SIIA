@@ -37,9 +37,9 @@ class Docentes extends CI_Controller
 		$data['dataInformacionGeneral'] = $this->cargarDatos_informacion_general();
 		$data['title'] = 'Panel Principal - Facilitadores';
 		$data['activeLink'] = 'facilitadores';
-		$this->load->view('include/header/main', $data);
+		$this->load->view('include/header', $data);
 		$this->load->view('paneles/docentes', $data);
-		$this->load->view('include/footer/main', $data);
+		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
 	/** Añadir nuevo docente */
@@ -253,57 +253,6 @@ class Docentes extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-	/** Guardar archivo certificados docente */
-	public function guardarArchivoCertificadoDocente()
-	{
-		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
-		$tipoArchivo = $this->input->post('tipoArchivo');
-		$append_name = $this->input->post('append_name');
-		$id_docente = $this->input->post('id_docente');
-
-		$usuario_id = $this->session->userdata('usuario_id');
-		$name_random = random(10);
-		$size = 100000000;
-
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-
-		$archivos = $this->db->select('*')->from('archivos')->where('organizaciones_id_organizacion', $id_organizacion)->get()->row();
-
-
-		if ($tipoArchivo == "docenteCertificados") {
-			$ruta = 'uploads/docentes/certificados';
-			$mensaje = "Se guardo la " . $append_name;
-		}
-
-		$nombre_imagen =  $append_name . "_" . $name_random . "_" . $_FILES['file']['name'];
-		$tipo_archivo = pathinfo($nombre_imagen, PATHINFO_EXTENSION);
-
-		$data_update = array(
-			'tipo' => $tipoArchivo,
-			'nombre' => $nombre_imagen,
-			'docentes_id_docente' => $id_docente
-		);
-
-		if (0 < $_FILES['file']['error']) {
-			echo json_encode(array('url' => "", 'msg' => "Hubo un error al actualizar, intente de nuevo.", "status" => 0));
-		} else if ($_FILES['file']['size'] > $size) {
-			echo json_encode(array('url' => "", 'msg' => "El tamaño supera las 10 Mb, intente con otro archivo PDF.", "status" => 0));
-		} else if ($tipo_archivo != "pdf") {
-			echo json_encode(array('url' => "", 'msg' => "La extensión del archivo no es correcta, debe ser PDF. (archivo.pdf)", "status" => 0));
-		} else if ($this->db->insert('archivosDocente', $data_update)) {
-			if (move_uploaded_file($_FILES['file']['tmp_name'], $ruta . '/' . $nombre_imagen)) {
-				echo json_encode(array('url' => "", 'msg' => $mensaje, "status" => 1));
-				//$this->logs_sia->session_log('Actualizacion de Imagen / Logo');){
-			} else {
-				echo json_encode(array('url' => "", 'msg' => "No se guardo el archivo(s).", "status" => 0));
-			}
-		}
-
-		$this->logs_sia->logs('URL_TYPE');
-		$this->logs_sia->logQueries();
-	}
 	/** Guardar archivo certificado ES docente */
 	public function guardarArchivoCertificadoEconomiaDocente()
 	{
@@ -319,8 +268,8 @@ class Docentes extends CI_Controller
 		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
 		$id_organizacion = $datos_organizacion->id_organizacion;
 		$archivos = $this->db->select('*')->from('archivos')->where('organizaciones_id_organizacion', $id_organizacion)->get()->row();
-		if ($horas < 1) {
-			echo json_encode(array('url' => "", 'msg' => "El certificado debe tener mínimo 1 hora."));
+		if ($horas < 40) {
+			echo json_encode(array('url' => "", 'msg' => "El certificado debe tener mínimo 40 horas."));
 		} else {
 			if ($tipoArchivo == "docenteCertificadosEconomia") {
 				$ruta = 'uploads/docentes/certificadosEconomia';

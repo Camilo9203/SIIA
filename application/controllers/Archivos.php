@@ -51,9 +51,8 @@ class Archivos extends CI_Controller
 		$msg = '';
 		$files = $_FILES['file']['name'];
 		// Guardar archivo formulario 1 certificaciones
-		if ($tipoArchivo == "certificaciones") {
+		if ($tipoArchivo == 'certificaciones' || $tipoArchivo == 'docenteCertificados') {
 			$count = 0;
-			$ruta = 'uploads/certificaciones';
 			foreach ($files as $file):
 				// Separamos los trozos del archivo, nombre extension
 				$trozos[$i] = explode(".", $_FILES["file"]["name"][$i]);
@@ -73,17 +72,35 @@ class Archivos extends CI_Controller
 				foreach ($files as $file):
 					$randomIni = random(10);
 					$randomFinal = random(5);
-					$data_update = array(
-						'tipo' => $tipoArchivo,
-						'nombre' => $append_name . "_" . $randomIni . $randomFinal . "_" . $_FILES['file']['name'][$i],
-						'id_formulario' => 1,
-						'organizaciones_id_organizacion' => $organizacion->id_organizacion
-					);
-					if ($this->db->insert('archivos', $data_update)):
+					switch ($tipoArchivo):
+						case 'certificaciones':
+							$ruta = 'uploads/certificaciones';
+							$tabla = 'archivos';
+							$data_update = array(
+								'tipo' => $tipoArchivo,
+								'nombre' => $append_name . "_" . $randomIni . $randomFinal . "_" . $_FILES['file']['name'][$i],
+								'id_formulario' => 1,
+								'organizaciones_id_organizacion' => $organizacion->id_organizacion
+							);
+							break;
+						case 'docenteCertificados':
+							$tabla = 'archivosDocente';
+							$data_update = array(
+								'tipo' => $tipoArchivo,
+								'nombre' => $append_name . "_" . $randomIni . $randomFinal . "_" . $_FILES['file']['name'][$i],
+								'docentes_id_docente' => $this->input->post('id_docente')
+							);
+							$ruta = 'uploads/docentes/certificados';
+							break;
+						default:
+							break;
+					endswitch;
+
+					if ($this->db->insert($tabla, $data_update)):
 						if (move_uploaded_file($_FILES['file']['tmp_name'][$i], $ruta . '/' . $append_name . "_" . $randomIni . $randomFinal . "_" . $_FILES['file']['name'][$i])):
 							// Se cargó el archivo correctamente
 						else:
-							$errores .= "Archivo : <span class='upper'>" . ($i+1)  . "</span>. <i class='fa fa-times spanRojo' aria-hidden='true'></i> no cargado<br/>";
+							$msg .= "Archivo : <span class='upper'>" . ($i+1)  . "</span>. <i class='fa fa-times spanRojo' aria-hidden='true'></i> no cargado<br/>";
 						endif;
 					endif;
 					$i++;
