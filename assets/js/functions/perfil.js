@@ -266,7 +266,6 @@ function validarFormulariosPerfil() {
 				minlength: 3,
 			},
 			urlOrganizacion: {
-				required: true,
 				url: true
 			}
 		},
@@ -319,7 +318,6 @@ function validarFormulariosPerfil() {
 				minlength: "Su Primer Apellido debe tener mínimo 3 caracteres.",
 			},
 			urlOrganizacion: {
-				required: 'Registre su pagina web',
 				url: 'Requiere una url valida. Ej: http://www.ejemplo.com'
 			}
 		},

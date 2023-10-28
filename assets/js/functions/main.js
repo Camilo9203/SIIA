@@ -1703,44 +1703,6 @@ $(document).ready(function () {
 		}
 	});
 
-	$("#guardar_formulario_docentes").click(function () {
-		var cedula = $("#docentes_cedula").val();
-		var primer_nombre = $("#docentes_primer_nombre").val();
-		var segundo_nombre = $("#docentes_segundo_nombre").val();
-		var primer_apellido = $("#docentes_primer_apellido").val();
-		var segundo_apellido = $("#docentes_segundo_apellido").val();
-		var profesion = $("#docentes_profesion").val();
-		var horas = $("#docentes_horas").val();
-
-		data = {
-			cedula: cedula,
-			primer_nombre: primer_nombre,
-			segundo_nombre: segundo_nombre,
-			primer_apellido: primer_apellido,
-			segundo_apellido: segundo_apellido,
-			profesion: profesion,
-			horas: horas,
-			valido: 0,
-		};
-
-		$.ajax({
-			url: baseURL + "panel/guardar_formulario_docentes",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			beforeSend: function () {
-				notificacion("Espere...", "success");
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-				clearInputs("formulario_docentes");
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
-
 	$(document).on("click", ".archivos_form_obsPlataforma", function () {
 		$data_name = $(".archivos_form_obsPlataforma").attr("data-name");
 		$id_organizacion = $("#id_org_ver_form").attr("data-id");

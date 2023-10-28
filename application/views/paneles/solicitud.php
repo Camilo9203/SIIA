@@ -99,23 +99,23 @@
 						<!-- Nombre organización -->
                         <div class="form-group">
                             <label class="" for="nombre_organizacion">Nombre de la Organización:<span class="spanRojo">*</span></label>
-                            <input type="text" name="nombre_organizacion" id="nombre_organizacion" placeholder="Nombre de la Organización" class="form-control" value="<?php echo $organizacion->nombreOrganizacion; ?>" disabled>
+                            <input type="text" class="form-control" value="<?php echo $organizacion->nombreOrganizacion; ?>" disabled>
                         </div>
 						<!-- Sigla -->
                         <div class="form-group">
                             <label for="sigla">Sigla:<span class="spanRojo">*</span></label>
-                            <input type="text" class="form-control" name="sigla" id="sigla" placeholder="Sigla" value="<?php echo $organizacion->sigla; ?>" disabled>
+                            <input type="text" class="form-control" value="<?php echo $organizacion->sigla; ?>" disabled>
                         </div>
 						<!-- NIT organización -->
                         <div class="form-group">
-                            <label>NIT de la Organizacion:<span class="spanRojo">*</span></label>
-                            <input type="text" name="" id="" class="form-control" placeholder="NIT de la Organizacion" value="<?php echo $organizacion->numNIT; ?>" disabled>
+                            <label>NIT organización:<span class="spanRojo">*</span></label>
+                            <input type="text" class="form-control" disabled value="<?php echo $organizacion->numNIT; ?>">
                         </div>
 						<!-- Tipo organización -->
                         <div class="form-group">
                             <label for="tipo_organizacion">Tipo de Organización:<span class="spanRojo">*</span></label>
                             <br>
-                            <select name="tipo_organizacion" id="tipo_organizacion" class="selectpicker form-control show-tick" required="">
+                            <select name="tipo_organizacion" id="tipo_organizacion" class="selectpicker form-control show-tick" required>
                                 <optgroup label="Actual">
                                     <option id="0" value="<?php echo $informacionGeneral->tipoOrganizacion; ?>" selected><?php echo $informacionGeneral->tipoOrganizacion; ?></option>
                                 </optgroup>
@@ -166,18 +166,14 @@
                             <div id="div_municipios">
                                 <label for="municipios">Municipio:<span class="spanRojo">*</span></label>
                                 <br>
-                                <select name="municipios" id="municipios" class="selectpicker form-control show-tick municipios" required="">
+                                <select name="municipios" id="municipios" class="selectpicker form-control show-tick municipios" required>
                                     <optgroup label="Actual">
                                         <option id="0" value="<?php echo $informacionGeneral->nomMunicipioNacional; ?>" selected><?php echo $informacionGeneral->nomMunicipioNacional; ?></option>
                                     </optgroup>
                                     <optgroup label="Actualizar">
-                                        <?php
-                                        foreach ($municipios as $municipio) {
-                                            ?>
+                                        <?php foreach ($municipios as $municipio) {?>
                                             <option id="<?php echo $municipio->id_municipio; ?>" value="<?php echo $municipio->nombre; ?>"><?php echo $municipio->nombre; ?></option>
-                                            <?php
-                                        }
-                                        ?>
+										<?php } ?>
                                     </optgroup>
                                 </select>
                             </div>
@@ -194,7 +190,7 @@
                         </div>
 						<!-- Extensión teléfono organización -->
                         <div class="checkbox">
-                            <label for="extension_checkbox"><input type="checkbox" name="extension_checkbox" id="extension_checkbox" class=""> ¿Tiene Extensión?</label>
+                            <label for="extension_checkbox"><input type="checkbox" name="extension_checkbox" id="extension_checkbox"> ¿Tiene Extensión?</label>
                         </div>
                         <div class="form-group">
                             <div id="div_extension">
@@ -202,17 +198,20 @@
                                 <input type="number" name="extension" id="extension" class="form-control" placeholder="Extensión" value="<?php echo $informacionGeneral->extension; ?>">
                             </div>
                         </div>
+						<!-- Correo electrónico organización -->
                         <div class="form-group">
-                            <label>Correo Electrónico de la Organizacion:<span class="spanRojo">*</span></label>
-                            <input type="text" name="" id="" class="form-control" placeholder="Correo Electrónico de la Organizacion" value="<?php echo $organizacion->direccionCorreoElectronicoOrganizacion; ?>">
+                            <label>Correo electrónico de la organización:<span class="spanRojo">*</span></label>
+                            <input type="text" name="correoElectronicoOrganizacion" id="correoElectronicoOrganizacion" class="form-control" placeholder="Correo electrónico de la organización" value="<?php echo $organizacion->direccionCorreoElectronicoOrganizacion; ?>">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <hr />
+						<!-- URL organización -->
                         <div class="form-group">
                             <label>Dirección Web:</label>
                             <input type="text" name="urlOrganizacion" id="urlOrganizacion" placeholder="www.orgsolidarias.gov.co" class="form-control" value="<?php echo $informacionGeneral->urlOrganizacion; ?>">
                         </div>
+						<!-- Actuación organización -->
                         <div class="form-group">
                             <label for="actuacion">Ámbito de Actuación de la Entidad:<span class="spanRojo">*</span></label>
                             <br>
@@ -228,6 +227,7 @@
                                 </optgroup>
                             </select>
                         </div>
+						<!-- Educación organización -->
                         <div class="form-group">
                             <label for="educacion">Tipo de Educación:<span class="spanRojo">*</span></label>
                             <br>
@@ -244,29 +244,35 @@
                         </div>
                         <hr />
                         <label>Información Representante Legal:</label>
+						<!-- Primer nombre representante legal -->
                         <div class="form-group">
                             <label for="primerNombreRepLegal">Primer Nombre:<span class="spanRojo">*</span></label>
                             <input type="text" name="primerNombreRepLegal" id="primerNombreRepLegal" class="form-control" value="<?php echo $organizacion->primerNombreRepLegal; ?>">
                         </div>
+						<!-- Segundo nombre representante legal -->
                         <div class="form-group">
                             <label for="segundoNombreRepLegal">Segundo Nombre:</label>
                             <input type="text" name="segundoNombreRepLegal" id="segundoNombreRepLegal" class="form-control" value="<?php echo $organizacion->segundoNombreRepLegal; ?>">
                         </div>
+						<!-- Primer apellido representante legal -->
                         <div class="form-group">
                             <label for="primerApellidoRepLegal">Primer Apellido:<span class="spanRojo">*</span></label>
                             <input type="text" name="primerApellidoRepLegal" id="primerApellidoRepLegal" class="form-control" value="<?php echo $organizacion->primerApellidoRepLegal; ?>">
                         </div>
+						<!-- Segundo apellido representante legal -->
                         <div class="form-group">
                             <label for="segundoApellidoRepLegal">Segundo Apellido:</label>
                             <input type="text" name="segundoApellidoRepLegal" id="segundoApellidoRepLegal" class="form-control" value="<?php echo $organizacion->segundoApellidoRepLegal; ?>">
                         </div>
+						<!-- Correo Electrónico del representante legal -->
                         <div class="form-group">
                             <label>Correo Electrónico del Representante Legal:<span class="spanRojo">*</span></label>
-                            <input type="text" name="" id="" class="form-control" value="<?php echo $organizacion->direccionCorreoElectronicoRepLegal; ?>">
+                            <input type="text" name="correoElectronicoRepLegal" id="correoElectronicoRepLegal" class="form-control" value="<?php echo $organizacion->direccionCorreoElectronicoRepLegal; ?>">
                         </div>
+						<!-- Cédula del representante legal -->
                         <div class="form-group">
                             <label for="numCedulaCiudadaniaPersona">Numero de Cédula:<span class="spanRojo">*</span></label>
-                            <input type="text" name="numCedulaCiudadaniaPersona" id="numCedulaCiudadaniaPersona" class="form-control" required="" value="<?php echo $informacionGeneral->numCedulaCiudadaniaPersona; ?>">
+                            <input type="number" name="numCedulaCiudadaniaPersona" id="numCedulaCiudadaniaPersona" class="form-control" required="" value="<?php echo $informacionGeneral->numCedulaCiudadaniaPersona; ?>">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -385,7 +391,7 @@
 				<small>Si no tiene el registro educativo, seleccione la opción "No", y de clic  en guardar.</small>
 				<!-- Camara de comercio -->
 				<div class="col-md-12">
-					<hr />
+					<hr/>
 					<label>2.1. Certificado de Camara de Comercio.</label>
 					<div class="checkbox">
 						<label for="camaraComercio">La entidad cuenta con Certificado de Camara de Comercio:</label>
@@ -399,14 +405,13 @@
 					</div>
 					<div id="div_camara_comercio" hidden>
 						<?php echo form_open('', array('id' => 'formulario_certificado_existencia')); ?>
-						<p>En caso de que el Certificado de Existencia y Representación Legal sea emitido por Cámara de Comercio, la Unidad Administrativa realizará la verificación de este requisito por medio de consulta directa a la base de datos del Registro Único Empresarial Y Social RUES. Por tal motivo no es necesario anexar el certificado. Es responsabilidad de la entidad mantener renovado el registro mercantil en el certificado. Los Campos marcados con (*) son obligatorios.</p>
-						<button name="guardar_formulario_camara_comercio" id="guardar_formulario_camara_comercio" class="btn btn-siia btn-sm pull-right" data-id="<?php echo $solicitud->idSolicitud;?>" data-idOrg="<?php echo $organizacion->id_organizacion;?>">
+						<hr/><p>En caso de que el Certificado de Existencia y Representación Legal sea emitido por Cámara de Comercio, la Unidad Administrativa realizará la verificación de este requisito por medio de consulta directa a la base de datos del Registro Único Empresarial Y Social RUES. Por tal motivo no es necesario anexar el certificado. Es responsabilidad de la entidad mantener renovado el registro mercantil en el certificado. Los Campos marcados con (*) son obligatorios.</p></hr>
+						<button name="guardar_formulario_camara_comercio" id="guardar_formulario_camara_comercio" class="btn btn-siia btn-md" style="width: 100%" data-id="<?php echo $solicitud->idSolicitud;?>" data-idOrg="<?php echo $organizacion->id_organizacion;?>">
 							Guardar datos <i class="fa fa-check" aria-hidden="true"></i>
-						</button>
-						</form>
+						</button><hr/>	<br>
+						<?php echo form_close(); ?>
 					</div>
 				</div>
-				<hr />
 				<!-- Certificado de existencia y representación legal -->
 				<div class="col-md-12">
 					<label>2.2. Certificado de Existencia y Representación Legal.</label>
@@ -426,8 +431,7 @@
 						<?php echo form_open_multipart('', array('id' => 'formulario_certificado_existencia_legal')); ?>
 						<!-- Entidad -->
 						<div class="form-group">
-							<label for="entidadCertificadoExistencia">Entidad que expide certificado existencia:<span class="spanRojo">*</span></label>
-							<br>
+							<hr/><label for="entidadCertificadoExistencia">Entidad que expide certificado éxistencia:<span class="spanRojo">*</span></label>
 							<input class="form-control" type="text" name="entidadCertificadoExistencia" id="entidadCertificadoExistencia" placeholder="Entidad que expide certificado existencia" required>
 						</div>
 						<!-- Fecha de expedición-->
@@ -467,13 +471,13 @@
 							</br></br>
 						</div>
 						<!-- Botón guardar -->
-						<button name="guardar_formulario_certificado_existencia" id="guardar_formulario_certificado_existencia" class="btn btn-siia btn-sm pull-right" data-id="<?php  echo $solicitud->idSolicitud;?>">
+						<button name="guardar_formulario_certificado_existencia" id="guardar_formulario_certificado_existencia" class="btn btn-siia btn-md" style="width: 100%" data-id="<?php  echo $solicitud->idSolicitud;?>">
 							Guardar datos <i class="fa fa-check" aria-hidden="true"></i>
 						</button>
-						</form>
+						<br><hr/>
+						<?php echo form_close(); ?>
 					</div>
 				</div>
-				<hr />
 				<!-- Registro educativo -->
 				<div class="col-md-12">
 					<label>2.3. Registro Educativo.</label>
@@ -493,7 +497,7 @@
 					<div id="div_registro_educativo">
 						<?php echo form_open_multipart('', array('id' => 'formulario_registro_educativo')); ?>
 						<!-- Entidad -->
-						<div class="form-group">
+						<hr/><div class="form-group">
 							<label for="tipoEducacion">Tipo de educación:<span class="spanRojo">*</span></label>
 							<br>
 							<select name="tipoEducacion" id="tipoEducacion" class="selectpicker form-control show-tick">
@@ -502,6 +506,7 @@
 								<option id="3" value="Informal">Informal</option>
 							</select>
 						</div>
+						<br>
 						<div class="form-group">
 							<label for="fechaResolucionProgramas">Fecha de resolución:<span class="spanRojo">*</span></label>
 							<input class="form-control" type="date" name="fechaResolucionProgramas" id="fechaResolucionProgramas">
@@ -529,55 +534,25 @@
 						</div>
 						<!-- Archivo adjunto -->
 						<div class="form-group">
-							</br><label>Registro Educativo (PDF):<span class="spanRojo"> *</span></label>
-							</br>
+							<br><label>Registro Educativo (PDF):<span class="spanRojo"> *</span></label>
+							<br>
 							<div class="col-md-4">
 								<input type="file" required accept="application/pdf" class="form-control"name="archivoRegistroEdu" id="archivoRegistroEdu">
 							</div>
-							</br></br>
+							<br><br>
 						</div>
-						<button name="guardar_formulario_registro_educativo" id="guardar_formulario_registro_educativo" class="btn btn-siia btn-sm pull-right " data-id="<?php  echo $solicitud->idSolicitud;?>">
+						<button name="guardar_formulario_registro_educativo" id="guardar_formulario_registro_educativo" class="btn btn-siia btn-md" style="width: 100%" data-id="<?php  echo $solicitud->idSolicitud;?>">
 							Guardar datos <i class="fa fa-check" aria-hidden="true"></i>
 						</button>
-						<?php echo form_close() ?>
-						<hr />
-						<!-- Tabla herramientas -->
-						<?php if($datosEnLinea): ?>
-							<div class="">
-								<label>Datos de herramientas:</label>
-								<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-								<table id="" width="100%" border=0 class="table table-striped table-bordered">
-									<thead>
-									<tr>
-										<td>Herramienta</td>
-										<td>Descripción</td>
-										<td>Fecha de registro</td>
-										<td>Fecha de registro</td>
-										<td>Acción</td>
-									</tr>
-									</thead>
-									<tbody id="tbody">
-									<?php
-									foreach ($datosEnLinea as $data) {
-										echo "<tr><td>" . $data->nombreHerramienta . "</td>";
-										echo "<td>" . $data->descripcionHerramienta . "</td>";
-										echo "<td>" . $data->fecha . "</td>";
-										echo "<td><button class='btn btn-primary btn-sm verDocDatosEnlinea' data-id=" . $data->id . ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
-										echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosEnlinea' data-id=" . $data->id . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
-									}
-									?>
-									</tbody>
-								</table>
-							</div>
-						<?php endif	?>
+						<hr/>
+						<?php echo form_close(); ?>
 					</div>
 				</div>
-				<div class="clearfix"></div>
-				<br><br>
 				<!-- Tabla Documentación Legal -->
 				<?php if($documentacionLegal): ?>
 					<?php if($documentacionLegal->entidad): ?>
-						<div class="">
+						<div class="col-md-12">
+							<hr/>
 							<label>Datos Certificado existencia:</label>
 							<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
 							<table id="" width="100%" border=0 class="table table-striped table-bordered">
@@ -605,7 +580,8 @@
 						</div>
 					<?php endif; ?>
 					<?php if($documentacionLegal->numeroResolucion): ?>
-						<div class="">
+						<div class="col-md-12">
+							<hr/>
 							<label>Datos Registro Educativo:</label>
 							<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
 							<table id="" width="100%" border=0 class="table table-striped table-bordered">
@@ -627,7 +603,7 @@
 								echo "<td>" . $documentacionLegal->fechaResolucion . "</td>";
 								echo "<td>" . $documentacionLegal->numeroResolucion . "</td>";
 								echo "<td>" . $documentacionLegal->nombrePrograma . "</td>";
-								echo "<td>" . $documentacionLegal->objetoResolucion . "</td>";
+								echo "<td><textarea style='width: 282px; height: 110px; resize: none' readonly>" . $documentacionLegal->objetoResolucion . "</textarea></td>";
 								echo "<td>" . $documentacionLegal->entidadResolucion . "</td>";
 								echo "<td><button class='btn btn-primary btn-sm verDocRegistro' data-id=" . $documentacionLegal->id_registroEducativoPro . ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
 								echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosRegistro' data-id=" . $documentacionLegal->id_registroEducativoPro . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
@@ -637,21 +613,22 @@
 						</div>
 					<?php endif; ?>
 					<?php if($documentacionLegal->id_tipoDocumentacion): ?>
-						<div class="">
+						<div class="col-md-12">
+							<hr/>
 							<label>Registraste Camara de Comercio:</label>
 							<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
 							<table id="" width="100%" border=0 class="table table-striped table-bordered">
 								<thead>
-								<tr>
-									<td>Documento</td>
-									<td>Acción</td>
-								</tr>
+									<tr>
+										<td>Documento</td>
+										<td>Acción</td>
+									</tr>
 								</thead>
 								<tbody id="tbody">
-								<?php
-								echo "<tr><td>Camara de comercio </td>";
-								echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosCamaraComercio' data-id=" . $documentacionLegal->id_tipoDocumentacion . ">Deshacer <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
-								?>
+									<?php
+									echo "<tr><td>Camara de comercio </td>";
+									echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosCamaraComercio' data-id=" . $documentacionLegal->id_tipoDocumentacion . ">Deshacer <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+									?>
 								</tbody>
 							</table>
 						</div>

@@ -89,19 +89,24 @@ $("#sidebar-menu>.menu_section>#wizard_verticle>.side-menu>li>a").click(function
 // Guardar formulario 1
 $("#guardar_formulario_informacion_general_entidad").click(function () {
 	validFroms(1);
-	event.preventDefault();
 	if ($("#formulario_informacion_general_entidad").valid()) {
 		$(this).attr("disabled", true);
-		data = {
+		let data = {
 			tipo_organizacion: $("#tipo_organizacion").val(),
 			departamento: $("#departamentos").val(),
 			municipio: $("#municipios").val(),
 			direccion: $("#direccion").val(),
 			fax: $("#fax").val(),
 			extension:  $("#extension").val(),
+			correoElectronicoOrganizacion:  $("#correoElectronicoOrganizacion").val(),
 			urlOrganizacion: $("#urlOrganizacion").val(),
 			actuacion: $("#actuacion").val(),
 			educacion: $("#educacion").val(),
+			primerNombreRepLegal: $("#primerNombreRepLegal").val(),
+			segundoNombreRepLegal: $("#segundoNombreRepLegal").val(),
+			primerApellidoRepLegal: $("#primerApellidoRepLegal").val(),
+			segundoApellidoRepLegal: $("#segundoApellidoRepLegal").val(),
+			correoElectronicoRepLegal: $("#correoElectronicoRepLegal").val(),
 			numCedulaCiudadaniaPersona: $("#numCedulaCiudadaniaPersona").val(),
 			presentacion: $("#presentacion").val(),
 			objetoSocialEstatutos: $("#objetoSocialEstatutos").val(),
@@ -118,42 +123,23 @@ $("#guardar_formulario_informacion_general_entidad").click(function () {
 			dataType: "JSON",
 			data: data,
 			beforeSend: function () {
-				Toast.fire({
-					icon: 'info',
-					text: 'Guardando'
-				});
+				guardando();
 			},
 			success: function (response) {
-				if(response.status == 1) {
-					Alert.fire({
-						title: 'Guardado!',
-						text: response.msg,
-						icon: 'success',
-					}).then((result) => {
-						if (result.isConfirmed) {
-							setInterval(function () {
-								reload();
-							}, 2000);
-						}
-					})
+				if(response.status == 'success') {
+					alertaGuardado(response.msg, response.status);
 				}
-				else{
-					Alert.fire({
-						title: 'Error al guardar!',
-						text: response.msg,
-						icon: 'error',
-					})
+				else {
+					alertaErrorGuardado(response.msg, response.status);
 				}
 			},
 			error: function (ev) {
-				event.preventDefault();
-				Alert.fire({
-					title: 'Error al guardar!',
-					text: ev.responseText,
-					icon: 'error',
-				});
+				alertaErrorGuardado(ev.responseText, 'error');
 			},
 		});
+	}
+	else {
+		errorValidacionFormulario();
 	}
 });
 // Eliminar archivos
@@ -401,7 +387,7 @@ $(".archivos_form_lugar").on("click", function () {
 /**
  * Formulario 2: Formularios documentación legal
  * */
-// Camara de comercio
+// Acciones check
 $(".camaraComercio").click(function () {
 	if ($("input:radio[name=camaraComercio]:checked").val() == "Si") {
 		$("#div_camara_comercio").show();
@@ -419,7 +405,6 @@ $(".camaraComercio").click(function () {
 		$("#reg_doc_cond").hide();
 	}
 });
-// Certificado de existencia
 $(".certificadoExistencia").click(function () {
 	if ($("input:radio[name=certificadoExistencia]:checked").val() == "Si") {
 		$("#div_certificado_existencia").show();
@@ -437,7 +422,6 @@ $(".certificadoExistencia").click(function () {
 		$("#reg_doc_cond").hide();
 	}
 });
-// Registro educativo
 $(".registroEducativo").click(function () {
 	if ($("input:radio[name=registroEducativo]:checked").val() == "Si") {
 		$("#div_registro_educativo").show();
@@ -457,44 +441,32 @@ $(".registroEducativo").click(function () {
 });
 // Guardar formulario certificado camara de comercio
 $("#guardar_formulario_camara_comercio").click(function () {
-	event.preventDefault();
 	// Capturar datos formulario
 	let data = {
 		tipo: 1,
 		idSolicitud: $(this).attr('data-id'),
 		id_organizacion: $(this).attr('data-idOrg')
 	};
+	event.preventDefault();
 	// Petición para guardar datos
 	$.ajax({
-		url: baseURL + "panel/guardar_formulario_documentacion_legal",
+		url: baseURL + "DocumentacionLegal/create",
 		type: "post",
 		dataType: "JSON",
 		data: data,
 		beforeSend: function () {
-			Toast.fire({
-				icon: 'info',
-				title: 'Guardando'
-			})
+			guardando();
 		},
 		success: function (response) {
-			Alert.fire({
-				title: 'Guardado!',
-				text: response.msg,
-				icon: 'success',
-			}).then((result) => {
-				if (result.isConfirmed) {
-					setInterval(function () {
-						reload();
-					}, 2000);
-				}
-			})
+			if(response.status == 'success') {
+				alertaGuardado(response.msg, response.status);
+			}
+			else {
+				alertaErrorGuardado(response.msg, response.status);
+			}
 		},
 		error: function (ev) {
-			event.preventDefault();
-			Toast.fire({
-				icon: 'error',
-				text: ev.responseText
-			});
+			alertaErrorGuardado(ev.responseText, 'error');
 		},
 	});
 
@@ -511,7 +483,6 @@ $(".eliminarDatosCamaraComercio").click(function () {
 // Guardar certificado de existencia
 $("#guardar_formulario_certificado_existencia").click(function () {
 	//$(this).attr("disabled", true);
-	event.preventDefault();
 	validFroms (2.1);
 	if($("#formulario_certificado_existencia_legal").valid()) {
 		let formData = new FormData();
@@ -523,10 +494,11 @@ $("#guardar_formulario_certificado_existencia").click(function () {
 		formData.append("municipioCertificado", $('#municipios2').val());
 		formData.append("tipo", 2);
 		formData.append("idSolicitud", $(this).attr('data-id'));
+		event.preventDefault();
 		console.log(formData);
 		// Petición para guardar datos
 		$.ajax({
-			url: baseURL + "panel/guardar_formulario_documentacion_legal",
+			url: baseURL + "DocumentacionLegal/create",
 			cache: false,
 			contentType: false,
 			processData: false,
@@ -553,13 +525,15 @@ $("#guardar_formulario_certificado_existencia").click(function () {
 				})
 			},
 			error: function (ev) {
-				event.preventDefault();
 				Toast.fire({
 					icon: 'error',
 					text: ev.responseText
 				});
 			},
 		});
+	}
+	else {
+		errorValidacionFormulario();
 	}
 });
 // Ver Documento Certificado Existencia
@@ -582,7 +556,6 @@ $(".eliminarDatosCertificadoExistencia").click(function () {
 // Guardar registro educativo
 $("#guardar_formulario_registro_educativo").click(function (){
 	//$(this).attr("disabled", true);
-	event.preventDefault();
 	validFroms (2.2);
 	if($("#formulario_registro_educativo").valid()) {
 		let formData = new FormData();
@@ -596,9 +569,10 @@ $("#guardar_formulario_registro_educativo").click(function (){
 		formData.append("append_name", "registroEdu");
 		formData.append("tipo", 3);
 		formData.append("idSolicitud", $(this).attr('data-id'));
+		event.preventDefault();
 		// Petición para guardar datos
 		$.ajax({
-			url: baseURL + "panel/guardar_formulario_documentacion_legal",
+			url: baseURL + "documentacionlegal/create",
 			cache: false,
 			contentType: false,
 			processData: false,
@@ -606,32 +580,24 @@ $("#guardar_formulario_registro_educativo").click(function (){
 			dataType: "JSON",
 			data: formData,
 			beforeSend: function () {
-				Toast.fire({
-					icon: 'info',
-					title: 'Guardando'
-				})
+				guardando();
 			},
 			success: function (response) {
-				Alert.fire({
-					title: 'Guardado!',
-					text: response.msg,
-					icon: 'success',
-				}).then((result) => {
-					if (result.isConfirmed) {
-						setInterval(function () {
-							reload();
-						}, 2000);
-					}
-				})
+				console.log(response)
+				if(response.status == 'success') {
+					alertaGuardado(response.msg, response.status);
+				}
+				else {
+					alertaErrorGuardado(response.msg, response.status);
+				}
 			},
 			error: function (ev) {
-				event.preventDefault();
-				Toast.fire({
-					icon: 'error',
-					text: ev.responseText
-				});
+				alertaErrorGuardado(ev.responseText, 'error');
 			},
 		});
+	}
+	else {
+		errorValidacionFormulario();
 	}
 });
 // Ver Documento Registro Educativo
@@ -735,39 +701,19 @@ $("#guardar_formulario_antecedentes_academicos").click(function () {
 			dataType: "JSON",
 			data: data,
 			beforeSend: function () {
-				$(this).attr("disabled", true);
-				Toast.fire({
-					icon: 'info',
-					title: 'Guardando'
-				})
+				guardando();
 			},
 			success: function (response) {
-				Alert.fire({
-					title: 'Guardado!',
-					text: response.msg,
-					icon: 'success',
-				}).then((result) => {
-					if (result.isConfirmed) {
-						setInterval(function () {
-							reload();
-						}, 2000);
-					}
-				})
+				alertaGuardado(response.msg, 'success')
 			},
 			error: function (ev) {
+				alertaErrorGuardado(ev.responseText, 'success')
 				event.preventDefault();
-				Toast.fire({
-					icon: 'error',
-					text: ev.responseText
-				});
 			},
 		});
 	}
 	else {
-		Toast.fire({
-			icon: 'info',
-			title: 'Validar campos'
-		})
+		errorValidacionFormulario();
 	}
 });
 // Eliminar antecedentes académicos
@@ -841,36 +787,19 @@ $(".guardar_formulario_jornadas_actualizacion").click(function () {
 		data: form_data,
 		type: "POST",
 		beforeSend: function () {
-			Toast.fire({
-				icon: 'info',
-				title: 'Guardando'
-			})
+			guardando();
 		},
 		success: function (response) {
 			response = JSON.parse(response);
-			if (response.icon == "success") {
-				Alert.fire({
-					title: 'Guardado!',
-					text: response.msg,
-					icon: response.icon,
-				}).then((result) => {
-					if (result.isConfirmed) {
-						setInterval(function () {
-							reload();
-						}, 2000);
-					}
-				})
+			if(response.status == 'success') {
+				alertaGuardado(response.msg, response.status);
 			}
-			else if (response.icon == "error") {
-				Alert.fire({
-					title: 'Error al guardar!',
-					text: response.msg,
-					icon: response.icon,
-				})
+			else {
+				alertaErrorGuardado(response.msg, response.status);
 			}
 		},
 		error: function (ev) {
-			console.log(ev);
+			alertaErrorGuardado(ev.responseText, 'error');
 		},
 	});
 });
@@ -978,35 +907,23 @@ function guardarDatosProgramas (curso,modal, check, idSolicitud){
 		idSolicitud: idSolicitud
 	};
 	$.ajax({
-		url: baseURL + "panel/guardar_formulario_datos_programas",
+		url: baseURL + "DatosProgramas/create",
 		type: "post",
 		dataType: "JSON",
 		data: data,
 		beforeSend: function () {
-			Toast.fire({
-				icon: 'info',
-				title: 'Guardando'
-			})
+			guardando();
 		},
 		success: function (response) {
-			Alert.fire({
-				title: 'Guardado!',
-				text: response.msg,
-				icon: 'success',
-			}).then((result) => {
-				if (result.isConfirmed) {
-					setInterval(function () {
-						reload();
-					}, 2000);
-				}
-			})
+			if(response.status == 'success') {
+				alertaGuardado(response.msg, response.status);
+			}
+			else {
+				alertaErrorGuardado(response.msg, response.status);
+			}
 		},
 		error: function (ev) {
-			event.preventDefault();
-			Toast.fire({
-				icon: 'error',
-				text: ev.responseText
-			});
+			alertaErrorGuardado(ev.responseText, 'error');
 		},
 	});
 }
@@ -1079,43 +996,31 @@ $("#guardar_formulario_plataforma").click(function () {
 	validFroms(6);
 	if ($("#formulario_modalidad_virtual").valid()) {
 		if ($("#acepta_mod_en_virtual").prop("checked") == true) {
-			event.preventDefault();
 			let data = {
 				datos_plataforma_url: $("#datos_plataforma_url").val(),
 				datos_plataforma_usuario: $("#datos_plataforma_usuario").val(),
 				datos_plataforma_contrasena: $("#datos_plataforma_contrasena").val(),
 				idSolicitud: $(this).attr('data-id')
 			};
+			event.preventDefault();
 			$.ajax({
-				url: baseURL + "panel/guardar_formulario_aplicacion",
+				url: baseURL + "DatosAplicacion/create",
 				type: "post",
 				dataType: "JSON",
 				data: data,
 				beforeSend: function () {
-					Toast.fire({
-						icon: 'info',
-						title: 'Guardando'
-					})
+					guardando();
 				},
 				success: function (response) {
-					Alert.fire({
-						title: 'Guardado!',
-						text: response.msg,
-						icon: 'success',
-					}).then((result) => {
-						if (result.isConfirmed) {
-							setInterval(function () {
-								reload();
-							}, 2000);
-						}
-					})
+					if(response.status == 'success') {
+						alertaGuardado(response.msg, response.status);
+					}
+					else {
+						alertaErrorGuardado(response.msg, response.status);
+					}
 				},
 				error: function (ev) {
-					event.preventDefault();
-					Toast.fire({
-						icon: 'error',
-						text: ev.responseText
-					});
+					alertaErrorGuardado(ev.responseText, 'error');
 				},
 			});
 		}
@@ -1128,11 +1033,7 @@ $("#guardar_formulario_plataforma").click(function () {
 		}
 	}
 	else {
-		Toast.fire({
-			icon: 'info',
-			title: 'Validar los campos'
-		})
-		event.preventDefault();
+		errorValidacionFormulario();
 	}
 });
 // Eliminar datos de plataforma
@@ -1186,7 +1087,7 @@ $(".eliminarDatosPlataforma").click(function () {
 	});
 });
 /**
- * Formulario 8: Modalidad En Línea
+ * Formulario 7: Modalidad En Línea
  * */
 // Aceptar recomendaciones modalidad en línea
 $("#acepto_mod_en_linea").click(function () {
@@ -1210,39 +1111,27 @@ $("#guardar_formulario_modalidad_en_linea").click(function () {
 			form_data.append("idSolicitud", $(this).attr('data-id'));
 			// Petición para guardar datos
 			$.ajax({
-				url: baseURL + "panel/guardar_formulario_modalidad_en_linea",
+				url: baseURL + "DatosEnLinea/create",
 				cache: false,
 				contentType: false,
 				processData: false,
 				type: "post",
 				dataType: "JSON",
 				data: form_data,
-                beforeSend: function () {
-                    Toast.fire({
-                        icon: 'info',
-                        title: 'Guardando'
-                    })
-                },
-                success: function (response) {
-                    Alert.fire({
-                        title: 'Guardado!',
-                        text: response.msg,
-                        icon: 'success',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            setInterval(function () {
-                                reload();
-                            }, 2000);
-                        }
-                    })
-                },
-                error: function (ev) {
-                    event.preventDefault();
-                    Toast.fire({
-                        icon: 'error',
-                        text: ev.responseText
-                    });
-                },
+				beforeSend: function () {
+					guardando();
+				},
+				success: function (response) {
+					if(response.status == 'success') {
+						alertaGuardado(response.msg, response.status);
+					}
+					else {
+						alertaErrorGuardado(response.msg, response.status);
+					}
+				},
+				error: function (ev) {
+					alertaErrorGuardado(ev.responseText, 'error');
+				},
 			});
 		}
 		else {
@@ -1253,11 +1142,7 @@ $("#guardar_formulario_modalidad_en_linea").click(function () {
 		}
 	}
 	else {
-        Toast.fire({
-            icon: 'info',
-            title: 'Validar los campos'
-        })
-        event.preventDefault();
+        errorValidacionFormulario();
 	}
 
 });
@@ -1433,10 +1318,26 @@ function validFroms (form){
 						required: true,
 						minlength: 3,
 					},
+					correoElectronicoOrganizacion: {
+						required: true,
+						email: true,
+					},
+					urlOrganizacion: {
+						url: true,
+					},
 					actuacion: {
 						required: true,
 					},
 					educacion: {
+						required: true,
+					},
+					primerNombreRepLegal: {
+						required: true,
+					},
+					primerApellidoRepLegal: {
+						required: true,
+					},
+					correoElectronicoRepLegal: {
 						required: true,
 					},
 					numCedulaCiudadaniaPersona: {
@@ -1497,11 +1398,27 @@ function validFroms (form){
 						required: "Por favor, escriba el fax/numero.",
 						minlength: "El numero debe tener mínimo 3 caracteres.",
 					},
+					correoElectronicoOrganizacion: {
+						required: "Por favor, escriba un correo electrónico.",
+						email: "Ingrese un correo electrónico valido.",
+					},
+					urlOrganizacion: {
+						url: 'Requiere una url valida. Ej: http://www.ejemplo.com'
+					},
 					actuacion: {
 						required: "Por favor, seleccione una actuación de la lista.",
 					},
 					educacion: {
 						required: "Por favor, seleccione un tipo de la lista.",
+					},
+					primerNombreRepLegal: {
+						required: "Por favor, ingrese primero nombre.",
+					},
+					primerApellidoRepLegal: {
+						required: "Por favor, ingrese primer apellido.",
+					},
+					correoElectronicoRepLegal: {
+						required: "Por favor, ingrese correo electrónico representante legal.",
 					},
 					numCedulaCiudadaniaPersona: {
 						required: "Por favor, escriba la cédula del Representante Legal.",
@@ -1982,3 +1899,44 @@ function cargarArchivos() {
 		},
 	});
 }
+// Error de validación
+function errorValidacionFormulario() {
+	$("html, body").animate({
+		scrollTop: 300
+	}, 3000);
+	Toast.fire({
+		icon: 'warning',
+		text: 'Registra correctamente los campos obligatorios'
+	});
+}
+// Alerta de formulario guardado
+function alertaGuardado(msg, status){
+	Alert.fire({
+		title: 'Guardado!',
+		text: msg,
+		icon: status,
+	}).then((result) => {
+		if (result.isConfirmed) {
+			setInterval(function () {
+				reload();
+			}, 2000);
+		}
+	})
+}
+// Alerta error guardar formulario
+function alertaErrorGuardado(msg, status){
+	Alert.fire({
+		title: 'Error al guardar!',
+		text: msg,
+		icon: status,
+	})
+}
+// Toast Guardando
+function guardando(){
+	Toast.fire({
+		icon: 'info',
+		text: 'Guardando'
+	});
+}
+
+

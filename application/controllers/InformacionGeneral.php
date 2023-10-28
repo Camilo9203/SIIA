@@ -48,33 +48,44 @@ class InformacionGeneral extends CI_Controller
                     'actuacionOrganizacion' => $this->input->post('actuacion'),
                     'tipoEducacion' => $this->input->post('educacion'),
                     'numCedulaCiudadaniaPersona' => $this->input->post('numCedulaCiudadaniaPersona'),
-                    //'presentacionInstitucional' => $this->input->post('presentacion'),
-                    //'objetoSocialEstatutos' => $this->input->post('objetoSocialEstatutos'),
                     'mision' => $this->input->post('mision'),
                     'vision' => $this->input->post('vision'),
-                    //'principios' => $this->input->post('principios'),
-                    //'fines' => $this->input->post('fines'),
-                    //'portafolio' => $this->input->post('portafolio'),
-                    //'otros' => $this->input->post('otros'),
+                    'portafolio' => $this->input->post('portafolio'),
                     'fecha' => date('Y/m/d H:i:s'),
                     'organizaciones_id_organizacion' => $organizacion->id_organizacion,
+                    //'objetoSocialEstatutos' => $this->input->post('objetoSocialEstatutos'),
+                    //'objetoSocialEstatutos' => $this->input->post('objetoSocialEstatutos'),
+                    //'presentacionInstitucional' => $this->input->post('presentacion'),
+                    //'principios' => $this->input->post('principios'),
+                    //'fines' => $this->input->post('fines'),
+                    //'otros' => $this->input->post('otros'),
                 );
+				$data_organizacion = array(
+					'direccionCorreoElectronicoOrganizacion' => $this->input->post('correoElectronicoOrganizacion'),
+					'primerNombreRepLegal' => $this->input->post('primerNombreRepLegal'),
+					'segundoNombreRepLegal' => $this->input->post('segundoNombreRepLegal'),
+					'primerApellidoRepLegal' => $this->input->post('primerApellidoRepLegal'),
+					'segundoApellidoRepLegal' => $this->input->post('segundoApellidoRepLegal'),
+					'direccionCorreoElectronicoRepLegal' => $this->input->post('correoElectronicoRepLegal'),
+				);
                 if ($datos_informacion_general != NULL) {
                     $this->db->where('organizaciones_id_organizacion', $organizacion->id_organizacion);
                     $this->db->update('informacionGeneral', $data_informacion_general);
-                    echo json_encode(array('msg' => "Se actualizó la Información General.", 'status' => 1));
+                    $this->db->update('organizaciones', $data_organizacion);
+                    echo json_encode(array('msg' => "Se actualizó la Información General.", 'status' => 'success'));
                     $this->logs_sia->session_log('Formulario Actualización Información General');
                     $this->logs_sia->logQueries();
                 }
                 else {
                     $this->db->insert('informacionGeneral', $data_informacion_general);
-                    echo json_encode(array('msg' => "Se guardo la Información General.", 'status' => 1));
-                    $this->logs_sia->session_log('Formulario Información General');
+                    $this->db->update('organizaciones', $data_organizacion);
+                    echo json_encode(array('msg' => "Se guardo la Información General.", 'status' => 'success'));
+                    $this->logs_sia->session_log('Formulario Creación Información General');
                     $this->logs_sia->logQueries();
                 }
             }
             else {
-                echo json_encode(array('msg' => "Verifique los datos ingresado, no son correctos.", 'status' => 1));
+                echo json_encode(array('msg' => "Verifique los datos ingresado, no son correctos.", 'status' => 'error'));
             }
         }
     }

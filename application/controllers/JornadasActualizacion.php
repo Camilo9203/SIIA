@@ -40,17 +40,17 @@ class JornadasActualizacion extends CI_Controller
 					'idSolicitud' => $this->input->post('idSolicitud')
 				);
 				if ($this->db->insert('jornadasActualizacion', $datos)):
-					echo json_encode(array("icon" => "success", "msg" => "Se guardo formulario 4: Jornada de actualización."));
+					echo json_encode(array("msg" => "Se guardo formulario 4: Jornada de actualización.", "status" => "success"));
 				else:
-					echo json_encode(array("icon" => "error", "msg" => "No se guardo la Jornada de actualización."));
+					echo json_encode(array("msg" => "No se guardo la Jornada de actualización.", "status" => "error"));
 				endif;
 				$this->logs_sia->session_log("Formulario Jornadas Actualización");
 				$this->logs_sia->logQueries();
 			} else {
-				echo json_encode(array("icon" => "error", "msg" => "Verifique los datos ingresado, no son correctos."));
+				echo json_encode(array("msg" => "Verifique los datos ingresado, no son correctos.", "status" => "error"));
 			}
 		else:
-			echo json_encode(array("icon" => "error", "msg" => $fileCreated));
+			echo json_encode(array("msg" => $fileCreated, "status" => "error",));
 		endif;
 	}
 	/**
