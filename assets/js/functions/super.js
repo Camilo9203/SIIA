@@ -59,6 +59,7 @@ if (funcion == "super" && funcion_ != "panel") {
 /**
  * Acciones de menú
  */
+// Ver administradores
 $('#super-ver-admins').click(function () {
 	if ($('#super-view-admins').css('display') == 'none'){
 		$('#super-view-admins').show('swing');
@@ -67,6 +68,17 @@ $('#super-ver-admins').click(function () {
 	else {
 		$('#super-view-admins').hide('linear');
 		$('#super-ver-admins').val('Ver admministradores');
+	}
+});
+// Ver usuarios
+$('#super-ver-users').click(function () {
+	if ($('#super-view-users').css('display') == 'none'){
+		$('#super-view-users').show('swing');
+		$('#super-ver-users').val('Ocultar usuarios');
+	}
+	else {
+		$('#super-view-users').hide('linear');
+		$('#super-ver-users').val('Ver usuarios');
 	}
 });
 /**
@@ -374,6 +386,187 @@ $("#super_desconectar_admin").click(function () {
 	});
 });
 /**
+ * Modal actions users
+ */
+$(".admin-usuario").click(function () {
+	$('#super_nuevo_admin').hide();
+	$('#super_eliminar_admin').show();
+	$('#super_desconectar_admin').show();
+	$('#super_actualizar_admin').show();
+	data = {
+		id: $(this).attr("data-id"),
+	};
+	$.ajax({
+		url: baseURL + "usuarios/cargarDatosUsuario",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		success: function (response) {
+			console.log(response);
+			$("#super_usuario_modal").html("");
+			$("#super_status_usr").html("");
+			$("#super_status_usr").css("color", "white");
+			$("#super_status_usr").css("padding", "5px");
+			$("#super_usuario_modal").html(response.usuario.usuario);
+			$("#super_id_user").val(response.usuario.id_usuario);
+			$("#nombre_organizacion").val(response.usuario.nombreOrganizacion);
+			$("#nit_organizacion").val(response.usuario.numNIT);
+			$("#correo_electronico_usuario").val(response.usuario.direccionCorreoElectronicoOrganizacion);
+			$("#username").val(response.usuario.usuario);
+			$("#password").val(response.password);
+			$("#estado_usuario option[value='" + response.usuario.verificado + "']").prop("selected", true);
+			// Comprobar conexión de usuario
+			if (response.usuario.logged_in == 1) {
+				$("#super_status_usr").css("background-color", "#398439");
+				$("#super_status_usr").html("Estado: En linea");
+				$("#username").prop("disabled", true);
+				$("#password").prop("disabled", true);
+				$("#estado_usuario").prop("disabled", true);
+				$("#super_actualizar_user").prop("disabled", true);
+				$("#super_desconectar_user").prop("disabled", false);
+			} else {
+				$("#super_status_usr").css("background-color", "#c61f1b");
+				$("#super_status_usr").html("Estado: No conectado");
+				$("#username").prop("disabled", false);
+				$("#password").prop("disabled", false);
+				$("#estado_usuario").prop("disabled", false);
+				$("#super_actualizar_user").prop("disabled", false);
+				$("#super_desconectar_user").prop("disabled", true);
+			}
+		},
+		error: function (ev) {
+			//Do nothing
+		},
+	});
+});
+/**
+ * Actualizar usuario
+ */
+$("#super_actualizar_user").click(function () {
+	if ($("#formulario_super_usuario").valid()) {
+		usuario = {
+			id: $("#super_id_user").val(),
+			nombre_usuario: $("#username").val(),
+		};
+		$.ajax({
+			url: baseURL + "registro/verificarUsuario",
+			type: "post",
+			dataType: "JSON",
+			data: usuario,
+			success: function (response) {
+				let className = $('#username').attr('class');
+				if (response.existe === 1) {
+					Toast.fire({
+						icon: 'error',
+						title: 'El nombre de usuario ya existe. Puede usar números.'
+					});
+					if (className = 'form-control valid') {
+						$('#username').removeClass('valid');
+						$('#username').toggleClass('invalid');
+					}
+				}
+				else {
+					if (className = 'form-control invalid valid') {
+						$('#username').removeClass('invalid');
+					}
+					let data = {
+						id: $("#super_id_user").val(),
+						correo_electronico_usuario: $("#correo_electronico_usuario").val(),
+						username: $("#username").val(),
+						password: $("#password").val(),
+						estado_usuario: $("#estado_usuario").val(),
+					};
+					$.ajax({
+						url: baseURL + "usuarios/update",
+						type: "post",
+						dataType: "JSON",
+						data: data,
+						beforeSend: function () {
+							Toast.fire({
+								icon: 'info',
+								title: 'Actualizando datos'
+							});
+						},
+						success: function (response) {
+							Alert.fire({
+								title: response.msg,
+								text: '¿Desea enviar datos de usuario a la organización?',
+								icon: response.status,
+								confirmButtonText: 'Enviar datos',
+								showCancelButton: true,
+								cancelButtonText: 'Solo actualizar',
+							}).then((result) => {
+								if (result.isConfirmed) {
+									EnviarInformacionOrganizacion(data);
+								}
+							})
+						},
+						error: function (ev) {
+							//Do nothing
+						},
+					});
+				}
+			},
+			error: function (ev) {
+				//Do nothing
+			},
+		});
+	}
+	else {
+		Toast.fire({
+			icon: 'warning',
+			title: 'Por favor, llene los datos requeridos.'
+		});
+	}
+});
+/**
+ * Botón enviar datos
+ */
+$("#super_enviar_info_usuer").click(function () {
+	let data = {
+		id: $("#super_id_user").val(),
+	};
+	EnviarInformacionOrganizacion(data);
+});
+/**
+ * Desconectar usuario
+ */
+$("#super_desconectar_user").click(function () {
+	data = {
+		id: $("#super_id_user").val(),
+	};
+	$.ajax({
+		url: baseURL + "usuarios/disconnect",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		success: function (response) {
+			if(response.status === "success") {
+				Alert.fire({
+					title: 'Usuario desconectado!',
+					text: response.msg,
+					icon: response.status,
+					confirmButtonText: 'Aceptar',
+				}).then((result) => {
+					if (result.isConfirmed) {
+						reload();
+					}
+				})
+			}
+			else {
+				Toast.fire({
+					icon: response.status,
+					title: response.msg
+				})
+			}
+
+		},
+		error: function (ev) {
+			//Do nothing
+		},
+	});
+});
+/**
  * Cerrar sesión súper administrador
  */
 $("#super_cerrar_sesion").click(function () {
@@ -404,6 +597,32 @@ $("#super_cerrar_sesion").click(function () {
 	})
 
 });
+/**
+ * Enviar Datos Organización
+ * @param data
+ * @constructor
+ */
+function EnviarInformacionOrganizacion(data) {
+	$.ajax({
+		url: baseURL + "super/enviarDatosUsuario",
+		type: 'post',
+		dataType: 'JSON',
+		data: data,
+		beforeSend: function () {
+			Toast.fire({
+				icon: 'info',
+				title: 'Enviando información a la organización'
+			})
+		},
+		success: function (response) {
+			Alert.fire({
+				title: response.title,
+				text: response.msg,
+				icon: response.status,
+			})
+		}
+	})
+}
 /**
  * Validar formulario registro
  */
@@ -463,6 +682,51 @@ function ValidarFormularioAdministradores () {
 			},
 			super_acceso_nvl: {
 				required: "Seleccione un nivel de la lista.",
+			},
+		},
+	});
+	$("form[id='formulario_super_usuario']").validate({
+		rules: {
+			correo_electronico_usuario: {
+				required: true,
+				minlength: 3,
+				email: true,
+				regex: /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/
+			},
+			username: {
+				required: true,
+				minlength: 3,
+			},
+			password: {
+				required: true,
+				minlength: 8,
+				regex: "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?)(?=.*?[#?!@$%^&*-]).{8,10}$",
+			},
+			estado_usuario: {
+				required: true,
+			},
+
+		},
+		messages: {
+			correo_electronico_usuario: {
+				required:
+					"Por favor, escriba un correo electrónico del representante legal válido.",
+				minlength: "El correo electrónico debe tener mínimo 3 caracteres.",
+				email: "Por favor, escriba un correo electrónico valido.",
+				regex: 'No olvide el @ y el .dominio'
+			},
+			username: {
+				required: "Por favor, escriba el Nombre de Usuario.",
+				minlength: "El Nombre de Usuario debe tener mínimo 3 caracteres.",
+			},
+			password: {
+				required: "Por favor, escriba la Contraseña.",
+				minlength: "La Contraseña debe tener mínimo 8 caracteres.",
+				regex:
+					"Debe tener mínimo 8 y máximo 10 caracteres, al menos una mayúscula, una minúscula, un número, y un cáracter especial (#?!@$%^&*-).",
+			},
+			estado_usuario: {
+				required: "Ingrese estado.",
 			},
 		},
 	});

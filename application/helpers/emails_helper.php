@@ -110,6 +110,7 @@ function send_email_admin($tipo, $prioridad = null, $to = null, $docente = null,
 function send_email_user($to, $type, $organizacion, $usuario = null, $token = null, $idSolicitud = null){
 	$CI = & get_instance();
 	$CI->load->model('SolicitudesModel');
+	$CI->load->model('UsuariosModel');
 	/** Asuntos y correos emails */
 	switch ($type):
 		// Actualización de facilitadores
@@ -148,6 +149,14 @@ function send_email_user($to, $type, $organizacion, $usuario = null, $token = nu
 			$subject = "Actualización de perfil";
 			$message = "Organización " . $organizacion->nombreOrganizacion . ": Unidad Solidaria le informa que la información básica de contacto de la entidad se ha actualizado satisfactoriamente y será publicada en el listado de entidades acreditadas si está acreditada durante los primeros cinco días del siguiente mes. Lo invitamos a actualizar su información cada vez que lo sea necesario.";
 			$response = array('status' => "success", 'title' => 'Actualización de perfil correcta!' ,'msg' => "Su información de perfil ha sido actualizada con éxito");
+			break;
+		case 'EnviarDatosUsuario':
+			$subject = "Información de usuario SIIA";
+			$message = "Buen día, <strong>" . $organizacion->nombreOrganizacion . " </strong><br>A continuación se relacionan los datos de usuario para inicio de sesión en el sistema integrado de acreditación SIIA:
+			<br><br><h3>Datos de usuario </h3><br>
+			<strong>Usuario: </strong>" . $usuario->usuario . "<br><br>
+			<strong>Contraseña: </strong>" . $CI->UsuariosModel->getPassword($usuario->contrasena_rdel);
+			$response = array('status' => "success", 'title' => "Información enviada",'msg' =>  "Correo enviado a " . $organizacion->direccionCorreoElectronicoOrganizacion . " correctamente!");
 			break;
 		default:
 			$asunto = "";

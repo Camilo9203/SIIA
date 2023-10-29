@@ -19,6 +19,9 @@ class Super extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->model('AdministradoresModel');
+		$this->load->model('OrganizacionesModel');
+		$this->load->model('TokenModel');
+		$this->load->model('UsuariosModel');
 	}
 	public function index()
 	{
@@ -71,7 +74,8 @@ class Super extends CI_Controller {
 			'hora' => date("H:i", time()),
 			'fecha' => date('Y/m/d'),
 			'activeLink' => 'super',
-			'administradores' => $this->AdministradoresModel->getAdministradores()
+			'administradores' => $this->AdministradoresModel->getAdministradores(),
+			'usuarios' => $this->UsuariosModel->getUsuariosSuperAdmin()
 		);
 		return $data;
 	}
@@ -88,6 +92,16 @@ class Super extends CI_Controller {
 			$this->load->view('include/footer');
 			$this->logs_sia->logs('PLACE_USER');
 		endif;
+	}
+	/**
+	 * Enviar datos usuario
+	 */
+	public function enviarDatosUsuario(){
+		$usuario = $this->UsuariosModel->getUsuarios($this->input->post('id'));
+		$token = $this->TokenModel->getTokenUsuario($usuario->usuario);
+		$organizacion = $this->OrganizacionesModel->getOrganizacionUsuario($usuario->id_usuario);
+		$type = 'EnviarDatosUsuario';
+		send_email_user($organizacion->direccionCorreoElectronicoOrganizacion, $type, $organizacion, $usuario, $token);
 	}
 	/**
 	 * Cerrar sesión

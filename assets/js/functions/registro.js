@@ -544,7 +544,7 @@ function ValidarFormRegistro () {
 				required: "Por favor, escriba la Contraseña.",
 				minlength: "La Contraseña debe tener mínimo 8 caracteres.",
 				regex:
-					"Debe tener mínimo 8 y máximo 10 caracteres, al menos una mayúscula, una minúscula, un número, y un cáracter especial (#?!@$%^&*-).",
+					"Debe tener mínimo 8, al menos una mayúscula, una minúscula, un número, y un cáracter especial (#?!@$%^&*-).",
 			},
 			re_password: {
 				required: "Por favor, vuela a escribir la Contraseña.",

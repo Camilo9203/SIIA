@@ -28,6 +28,15 @@ class Registro extends CI_Controller
 	public function verificarUsuario()
 	{
 		// Comprobar que el nombre de usuario no se encuentre en la base de datos.
+		if($this->input->post('id')) {
+			$usuario = $this->UsuariosModel->getUsuarios($this->input->post('id'));
+			if(!empty($usuario)){
+				if($usuario->usuario === $this->input->post('nombre_usuario')) {
+					echo json_encode(array('existe' => 0));
+					exit();
+				}
+			}
+		}
 		$nombreUsuario = $this->db->select("usuario")->from("usuarios")->where("usuario", $this->input->post('nombre_usuario'))->get()->row()->usuario;
 		if ($nombreUsuario != NULL || $nombreUsuario != "") {
 			echo json_encode(array("existe" => 1));
