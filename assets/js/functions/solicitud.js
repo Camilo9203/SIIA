@@ -580,7 +580,7 @@ $("#guardar_formulario_registro_educativo").click(function (){
 		event.preventDefault();
 		// Petición para guardar datos
 		$.ajax({
-			url: baseURL + "documentacionlegal/create",
+			url: baseURL + "DocumentacionLegal/create",
 			cache: false,
 			contentType: false,
 			processData: false,

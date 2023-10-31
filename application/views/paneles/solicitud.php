@@ -513,7 +513,7 @@
 						</div>
 						<div class="form-group">
 							<label for="numeroResolucionProgramas">Número de Resolución:<span class="spanRojo">*</span></label>
-							<input class="form-control" type="text" name="numeroResolucionProgramas" id="numeroResolucionProgramas" placeholder="Número de Resolución...">
+							<input class="form-control" type="number" name="numeroResolucionProgramas" id="numeroResolucionProgramas" placeholder="Número de Resolución...">
 						</div>
 						<div class="form-group">
 							<label for="nombrePrograma">Nombre del Programa:<span class="spanRojo">*</span></label>

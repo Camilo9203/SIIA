@@ -71,7 +71,7 @@ class DocumentacionLegal extends CI_Controller
 								echo json_encode(array('status' => "error", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
 							} else if ($_FILES['file']['size'] > $size) {
 								echo json_encode(array('status' => "error", 'msg' => "El tamaño supera las 10 Mb, intente con otro archivo PDF."));
-							} else if ($extension != "pdf") {
+							} else if ($extension != "pdf" && $extension != "PDF") {
 								echo json_encode(array('status' => "error", 'msg' => "La extensión del archivo no es correcta, debe ser PDF. (archivo.pdf)"));
 							} else if ($this->db->insert('archivos', $dataArchivo)) {
 								if (move_uploaded_file($_FILES['file']['tmp_name'], $ruta . '/' . $nombreArchivo)) {
