@@ -75,6 +75,7 @@ class Solicitudes extends CI_Controller
 		if ($this->db->update('solicitudes', $data_asignar)) {
 			$this->logs_sia->session_log('Se asigno ' . $organizacion->nombreOrganizacion . ' a ' . $nombreEvaluador . ' en la fecha ' . date("Y/m/d H:m:s") . '.');
 			send_email_admin('asignarSolicitud','2', $evaluador->direccionCorreoElectronico, null, $organizacion, $this->input->post('idSolicitud'));
+			send_email_user($organizacion->direccionCorreoElectronicoOrganizacion,'asignarEvaluador', $organizacion, $evaluador, null, $this->input->post('idSolicitud'));
 		}
 	}
 	// Solicitudes finalizadas

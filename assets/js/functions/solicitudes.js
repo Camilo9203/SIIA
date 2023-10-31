@@ -16,27 +16,37 @@ $(document).on("click", "#verModalAsignar", function () {
 // Asignar evaluador a solicitud
 $("#asignarOrganizacionEvaluador").click(function () {
 
-	data = {
+	let data = {
 		id_organizacion: $("#idAsigOrg").html(),
 		idSolicitud: $("#idSolicitud").html(),
 		evaluadorAsignar: $("#evaluadorAsignar").val(),
 	};
-
 	$.ajax({
 		url: baseURL + "solicitudes/asignarEvaluadorSolicitud",
 		type: "post",
 		dataType: "JSON",
 		data: data,
 		beforeSend: function () {
-			notificacion("Espere, asignando...", "success");
+			Toast.fire({
+				icon: 'info',
+				title: 'Asignando'
+			})
 			$("#asignarOrganizacionEvaluador").attr("disabled", true);
 		},
 		success: function (response) {
-			notificacion(response.msg, "success");
-			setInterval(function () {
-				redirect(baseURL + response.url);
-			}, 3500);
 			$("#asignarOrganizacion").toggle();
+			Alert.fire({
+				title: response.title,
+				html: response.msg,
+				text: response.msg,
+				icon: response.status,
+			}).then((result) => {
+				if (result.isConfirmed) {
+					setInterval(function () {
+						reload();
+					}, 2000);
+				}
+			})
 		},
 		error: function (ev) {
 			//Do nothing

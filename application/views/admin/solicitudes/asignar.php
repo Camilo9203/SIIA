@@ -1,3 +1,14 @@
+<?php
+/***
+ * @var $solicitudesSinAsignar
+ * @var $solicitudesAsignadas
+ * @var $administradores
+ */
+/** echo '<pre>';
+var_dump($aplicacion);
+echo '</pre>';
+return null; */
+?>
 <div class="col-md-12" id="admin_ver_finalizadas">
 	<div class="clearfix"></div>
 	<hr/>

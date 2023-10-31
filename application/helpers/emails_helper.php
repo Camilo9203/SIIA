@@ -70,7 +70,7 @@ function send_email_admin($tipo, $prioridad = null, $to = null, $docente = null,
 		case 'asignarSolicitud':
 			$subject = 'Asignación de organización';
 			$message = 'Se le ha asignado la solicitud: <strong>' . $solicitud . '</strong> de la organización <strong>' . $organizacion->nombreOrganizacion . '</strong> para que pueda ver la solicitud y la información, este correo es informativo y debe ingresar a la aplicación SIIA, en organizaciones y luego en evaluación para poder ver la solicitud.';
-			$response = array('url' => 'panelAdmin/solicitudes/asignar', 'msg' => 'Se asigno la solicitud: ' . $solicitud . ' de la organización: ' . $organizacion->nombreOrganizacion .   ' correctamente en la fecha ' . date("Y-m-d H:i:s") . '.');
+			//$response = array('url' => 'panelAdmin/solicitudes/asignar', 'msg' => 'Se asigno la solicitud: ' . $solicitud . ' de la organización: ' . $organizacion->nombreOrganizacion .   ' correctamente en la fecha ' . date("Y-m-d H:i:s") . '.');
 			break;
 		case 'solicitarCamara':
 			$subject = "Solicitud cámara de comercio: " . $organizacion->sigla;
@@ -157,6 +157,15 @@ function send_email_user($to, $type, $organizacion, $usuario = null, $token = nu
 			<strong>Usuario: </strong>" . $usuario->usuario . "<br><br>
 			<strong>Contraseña: </strong>" . $CI->UsuariosModel->getPassword($usuario->contrasena_rdel);
 			$response = array('status' => "success", 'title' => "Información enviada",'msg' =>  "Correo enviado a " . $organizacion->direccionCorreoElectronicoOrganizacion . " correctamente!");
+			break;
+		case 'asignarEvaluador':
+			$subject = "Asignación de evaluador a su solicitud";
+			$message = "Buen día, <strong>" . $organizacion->nombreOrganizacion . " </strong><br> A continuación se relacionan los datos del evaluador que está a cargo de su solicitud: <strong>" . $idSolicitud .
+			"</strong><br><br><h3>Datos de evaluador </h3><br>
+			<strong>Evaluador: </strong>" . $usuario->primerNombreAdministrador . " " . $usuario->primerApellidoAdministrador . "<br><br>
+			<strong>Celular: </strong>" . $usuario->celular . "<br><br>
+			<strong>Correo electronico: </strong>" . $usuario->direccionCorreoElectronico;
+			$response = array('status' => "success", 'title' => "Solicitud asignada correctamente",'msg' =>  "Se a notificado a <strong> " . $organizacion->direccionCorreoElectronicoOrganizacion . "</strong> y a <strong>" . $usuario->direccionCorreoElectronico . "</strong>");
 			break;
 		default:
 			$asunto = "";
