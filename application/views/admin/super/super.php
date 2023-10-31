@@ -180,6 +180,10 @@ $CI->load->model("TokenModel");
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
+									<label>Celular de contacto:</label>
+									<input type="number" id="super_celular_admin" name="super_celular_admin" class="form-control">
+								</div>
+								<div class="form-group">
 									<label>Nivel de acceso:</label><br/>
 									<select class="custom-select show-tick" name="super_acceso_nvl" id="super_acceso_nvl" required>
 										<option value="0">Total 0</option>
@@ -200,14 +204,13 @@ $CI->load->model("TokenModel");
 									<input type="text" id="super_contrasena_admin" name="super_contrasena_admin" class="form-control" name="" value="">
 								</div>
 								<div class="form-group">
-									<label>Direccion correo electronico:</label>
+									<label>Dirección correo eléctronico:</label>
 									<input type="text" id="super_correo_electronico_admin" name="super_correo_electronico_admin" class="form-control" name="" value="">
 								</div>
 							</div>
 						<?php echo form_close(); ?>
 					</div>
 				</div>
-
 			</div>
 			<div class="modal-footer">
 				<div class="btn-group" role='group' aria-label='acciones'>
@@ -269,7 +272,6 @@ $CI->load->model("TokenModel");
 							<?php echo form_close(); ?>
 						</div>
 					</div>
-
 				</div>
 				<div class="modal-footer">
 					<div class="btn-group" role='group' aria-label='acciones'>

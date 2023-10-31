@@ -103,6 +103,7 @@ $(".admin-modal").click(function () {
 		$("#super_primerapellido_admin").val('');
 		$("#super_segundoapellido_admin").val('');
 		$("#super_numerocedula_admin").val('');
+		$("#super_celular_admin").val('');
 		$("#super_nombre_admin").val('');
 		$("#super_correo_electronico_admin").val('');
 		$("#super_contrasena_admin").val('');
@@ -145,6 +146,7 @@ $(".admin-modal").click(function () {
 				$("#super_primerapellido_admin").val(response.administrador.primerApellidoAdministrador);
 				$("#super_segundoapellido_admin").val(response.administrador.segundoApellidoAdministrador);
 				$("#super_numerocedula_admin").val(response.administrador.numCedulaCiudadaniaAdministrador);
+				$("#super_celular_admin").val(response.administrador.celular);
 				$("#super_nombre_admin").val(response.administrador.usuario);
 				$("#super_correo_electronico_admin").val(response.administrador.direccionCorreoElectronico);
 				$("#super_acceso_nvl option[value='" + response.administrador.nivel + "']").prop("selected", true);
@@ -201,6 +203,7 @@ $("#super_nuevo_admin").click(function () {
 			super_primerapellido_admin: $("#super_primerapellido_admin").val(),
 			super_segundoapellido_admin: $("#super_segundoapellido_admin").val(),
 			super_numerocedula_admin: $("#super_numerocedula_admin").val(),
+			super_celular_admin: $("#super_celular_admin").val(),
 			super_correo_electronico_admin: $("#super_correo_electronico_admin").val(),
 			super_nombre_admin: $("#super_nombre_admin").val(),
 			super_contrasena_admin: $("#super_contrasena_admin").val(),
@@ -264,6 +267,7 @@ $("#super_actualizar_admin").click(function () {
 			super_primerapellido_admin: $("#super_primerapellido_admin").val(),
 			super_segundoapellido_admin: $("#super_segundoapellido_admin").val(),
 			super_numerocedula_admin: $("#super_numerocedula_admin").val(),
+			super_celular_admin: $("#super_celular_admin").val(),
 			super_correo_electronico_admin: $("#super_correo_electronico_admin").val(),
 			super_nombre_admin: $("#super_nombre_admin").val(),
 			super_contrasena_admin: $("#super_contrasena_admin").val(),
@@ -639,13 +643,14 @@ function ValidarFormularioAdministradores () {
 			super_primerapellido_admin: {
 				required: true,
 			},
-			super_segundoapellido_admin: {
-				required: true,
-			},
 			super_numerocedula_admin: {
 				required: true,
 				minlength: 4,
 				maxlength: 10,
+			},
+			super_celular_admin: {
+				minlength: 7,
+				maxlength: 12,
 			},
 			super_correo_electronico_admin: {
 				required: true,
@@ -667,13 +672,14 @@ function ValidarFormularioAdministradores () {
 			super_primerapellido_admin: {
 				required: "Digite primer apellido del administrador.",
 			},
-			super_segundoapellido_admin: {
-				required: "Digite segundo apellido del administrador.",
-			},
 			super_numerocedula_admin: {
 				required: "Digite numero de cédula.",
 				minlength: "El numero cédula debe tener mínimo 3 caracteres.",
 				maxlength: "El numero cédula debe tener máximo 10 caracteres.",
+			},
+			super_numerocedula_admin: {
+				minlength: "El numero cédula debe tener mínimo 7 caracteres.",
+				maxlength: "El numero cédula debe tener máximo 12 caracteres.",
 			},
 			super_correo_electronico_admin: {
 				required: "Digite correo electrónico.",
