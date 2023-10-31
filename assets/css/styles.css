@@ -697,6 +697,7 @@ table > tbody > tr > td {
 #div_certificado_existencia,
 #contacto_copia,
 #super-view-admins,
+#super-view-users,
 #contacto_copia_admin {
 	display: none;
 }

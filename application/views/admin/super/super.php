@@ -26,7 +26,7 @@ $CI->load->model("TokenModel");
 	<!-- Menu super administrador -->
 	<div class="container" id="menu-super-admin">
 		<hr>
-		<h3 class="title">Acciones súper administrativas</h3>
+		<h3 class="title">Menu súper administrador</h3>
 		<hr>
 		<div class="row">
 			<div class="col-md-12">
@@ -38,17 +38,6 @@ $CI->load->model("TokenModel");
 						</div>
 						<div class="panel-body">
 							<input type="button" class="btn btn-default btn-block" data-toggle="modal" id="super-ver-admins" value="Ver administradores">
-						</div>
-					</div>
-				</div>
-				<!-- Botón crear administradores -->
-				<div class="col-md-3">
-					<div class="panel panel-siia">
-						<div class="panel-heading">
-							<h3 class="panel-title">Crear administradores <i class="fa fa-users" aria-hidden="true"></i></h3>
-						</div>
-						<div class="panel-body">
-							<input type="button" class="btn btn-default btn-block admin-modal" data-funct="crear" data-toggle="modal" data-target="#modal-admin" value="Crear administrador">
 						</div>
 					</div>
 				</div>
@@ -83,6 +72,7 @@ $CI->load->model("TokenModel");
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
+					<input type="button" class="btn btn-siia admin-modal pull-right" data-funct="crear" data-toggle="modal" data-target="#modal-admin" value="Crear administrador">
 					<h3 class="title">Administradores</h3>
 					<table id="tabla_super_admins" width="100%" border=0 class="table table-striped table-bordered tabla_form">
 						<thead>

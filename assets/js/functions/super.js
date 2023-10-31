@@ -63,7 +63,9 @@ if (funcion == "super" && funcion_ != "panel") {
 $('#super-ver-admins').click(function () {
 	if ($('#super-view-admins').css('display') == 'none'){
 		$('#super-view-admins').show('swing');
+		$('#super-view-users').hide('linear');
 		$('#super-ver-admins').val('Ocultar admministradores');
+		$('#super-ver-users').val('Ver usuarios');
 	}
 	else {
 		$('#super-view-admins').hide('linear');
@@ -74,7 +76,9 @@ $('#super-ver-admins').click(function () {
 $('#super-ver-users').click(function () {
 	if ($('#super-view-users').css('display') == 'none'){
 		$('#super-view-users').show('swing');
+		$('#super-view-admins').hide('linear');
 		$('#super-ver-users').val('Ocultar usuarios');
+		$('#super-ver-admins').val('Ver admministradores');
 	}
 	else {
 		$('#super-view-users').hide('linear');
