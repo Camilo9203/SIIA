@@ -122,7 +122,6 @@ class Solicitudes extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
 	/**
 	 * Funciones Usuario
 	 */

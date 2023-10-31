@@ -512,17 +512,25 @@ $("#guardar_formulario_certificado_existencia").click(function () {
 				})
 			},
 			success: function (response) {
-				Alert.fire({
-					title: 'Guardado!',
-					text: response.msg,
-					icon: 'success',
-				}).then((result) => {
-					if (result.isConfirmed) {
-						setInterval(function () {
-							reload();
-						}, 2000);
-					}
-				})
+				if (response.status === 'success') {
+					Alert.fire({
+						title: 'Guardado!',
+						text: response.msg,
+						icon: response.status,
+					}).then((result) => {
+						if (result.isConfirmed) {
+							setInterval(function () {
+								reload();
+							}, 2000);
+						}
+					})
+				} else {
+					Alert.fire({
+						title: 'Error al guardar!',
+						text: response.msg,
+						icon: response.status,
+					})
+				}
 			},
 			error: function (ev) {
 				Toast.fire({
