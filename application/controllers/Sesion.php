@@ -83,7 +83,7 @@ class Sesion extends CI_Controller {
 								}
 							}else{
 								if($datos_token->verificado == 2){
-									echo json_encode(array('url'=>"login", 'msg'=>"Su cuenta esta bloqueada, este pendiente cuando sea activada de nuevo en la fecha ".$datos_token->fechaActivacion."."));
+									echo json_encode(array('url'=>"login", 'msg'=>"Su cuenta esta bloqueada, por favor contacte con la unidad solidaria para la activación de la cuenta"));
 									$this->logs_sia->logs('URL_TYPE');
 								}else{
 									echo json_encode(array('url'=>"login", 'msg'=>"Verifique su cuenta."));

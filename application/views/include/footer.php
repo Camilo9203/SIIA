@@ -297,10 +297,10 @@
 						<p id="text-footer">Unidad Administrativa Especial de Organizaciones Solidarias</p>
 					</div>
 					<div class="pull-right col-md-4" id="icons-redes">
-						<a target="_blank" class="icon-fb-footer" title="Facebook" href="https://es-la.facebook.com/organizacionessolidarias/"></a>
+						<a target="_blank" class="icon-fb-footer" title="Facebook" href="https://www.facebook.com/USolidariaCo/?ref=page_internal"></a>
 						<a target="_blank" class="icon-flickr-footer" title="Flickr" href="https://www.flickr.com/photos/orgsolidarias"></a>
-						<a target="_blank" class="icon-twitter-footer" title="Twitter" href="https://twitter.com/orgsolidarias"></a>
-						<a target="_blank" class="icon-youtube-footer" title="Youtube" href="https://www.youtube.com/orgsolidariastv/"></a>
+						<a target="_blank" class="icon-twitter-footer" title="Twitter" href="https://twitter.com/USolidariaCo?s=20"></a>
+						<a target="_blank" class="icon-youtube-footer" title="Youtube" href="https://www.youtube.com/user/Orgsolidariastv"></a>
 						<a target="_blank" class="icon-rss-footer" title="Fuente RSS" href="<?php echo PAGINA_WEB ?>RSS"></a>
 					</div>
 				</div>
