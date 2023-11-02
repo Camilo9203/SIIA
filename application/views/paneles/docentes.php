@@ -1,3 +1,13 @@
+<?php
+/***
+ * @var $dataInformacionGeneral
+ * @var $docentes
+ */
+/** echo '<pre>';
+var_dump($aplicacion);
+echo '</pre>';
+return null; */
+?>
 <hr/>
 <div class="container">
 	<div class="row">
@@ -53,7 +63,7 @@
 							echo "<td>$docente->numCedulaCiudadaniaDocente</td>";
 							echo "<td>$docente->profesion</td>";
 							echo "<td>$docente->horaCapacitacion</td>";
-							if($docente->valido == '0'){ echo "<td>Pendiente por cumplimiento de requisitos</td>"; }else if($docente->valido == '1'){ echo "<td>Si</td>"; }
+							if($docente->valido == '0'){ echo "<td>Facilitador enviado para evaluación </td>"; }else if($docente->valido == '1'){ echo "<td>Si</td>"; }
 							echo "<td>$docente->observacion</td>";
 							echo "<td><button class='btn btn-siia btn-sm verDocenteOrg' data-toggle='modal' data-nombre='$docente->primerNombreDocente $docente->primerApellidoDocente' data-id='$docente->id_docente' data-target='#verDocenteOrg'>Ver <i class='fa fa-eye' aria-hidden='true'></i> / Adjuntar <i class='fa fa-plus' aria-hidden='true'></i></button></td></tr>";
 						endforeach; ?>
@@ -74,7 +84,7 @@
 				<h4>¿Aprobado?: <label id="valido_doc"></label></h4>
 				<small>Los archivos y campos marcados con asterisco (<span class="spanRojo">*</span>) son <strong>requeridos</strong> en la solicitud.</small><br/>
 				<small>Los archivos deben estar en <strong>formato/extensión</strong> (<span class="spanRojo">pdf</span>) en <strong>minúscula</strong>.</small><br/>
-				<small>Los archivos deben tener un <strong>tamaño maximo</strong> de (<span class="spanRojo">10</span>) Mb (megabytes).</small><br/>
+				<small>Los archivos deben tener un <strong>tamaño máximo</strong> de (<span class="spanRojo">10</span>) MB (megabytes).</small><br/>
 			</div>
 			<div class="modal-body">
 				<div class="col-md-12" id="formulario_docentes">
@@ -173,11 +183,10 @@
 						</tbody>
 					</table>
 				</div>
-
 				<div class="modal-footer" style="align-content: center; align-items: center; justify-content: center ">
 					<div class="button-group">
 						<button type="button" class="btn btn-danger btn-sm" data-toggle='modal' data-target='#eliminarDocente'>Eliminar facilitador <i class="fa fa-trash-o" aria-hidden="true"></i></button>
-						<button type="button" class="btn btn-info btn-sm actualizar_docente" value="Si">Enviar actualización como solicitud <i class="fa fa-refresh" aria-hidden="true"></i></button>
+						<button type="button" class="btn btn-info btn-sm actualizar_docente" value="Si">ENVIAR A EVALUACIÓN DE FACILITADOR <i class="fa fa-refresh" aria-hidden="true"></i></button>
 						<button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Cerrar <i class="fa fa-times" aria-hidden="true"></i></button>
 					</div>
 				</div>

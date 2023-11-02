@@ -485,19 +485,19 @@ function cargarArchivosDocente(id) {
 					// URLs archivos
 					if (response[i].tipo == "docenteHojaVida") {
 						carpeta = "docentes/hojasVida";
-						url = "../uploads/" + carpeta + "/";
+						url = "uploads/" + carpeta + "/";
 					}
 					if (response[i].tipo == "docenteTitulo") {
 						carpeta = "docentes/titulos";
-						url = "../uploads/" + carpeta + "/";
+						url = "uploads/" + carpeta + "/";
 					}
 					if (response[i].tipo == "docenteCertificados") {
 						carpeta = "docentes/certificados";
-						url = "../uploads/" + carpeta + "/";
+						url = "uploads/" + carpeta + "/";
 					}
 					if (response[i].tipo == "docenteCertificadosEconomia") {
 						carpeta = "docentes/certificadosEconomia";
-						url = "../uploads/" + carpeta + "/";
+						url = "uploads/" + carpeta + "/";
 					}
 					$("<tr>").appendTo(".tabla_form > tbody");
 					var nombre_r = response[i].nombre.replace('"', "").replace('"', "");
@@ -520,7 +520,7 @@ function cargarArchivosDocente(id) {
 					$('<td><textarea class="form-control" rows="4" disabled>' + response[i].observacionArchivo + "</textarea></td>").appendTo(".tabla_form > tbody");
 					$('<td>' +
 						'<div class="btn-group-vertical">' +
-							'<a class="btn btn-success btn-sm" target="_blank" href="' + url + response[i].nombre + '"><i class="ti-eye" aria-hidden="true"></i> Ver</a>' +
+							'<a class="btn btn-success btn-sm" target="_blank" href="' + baseURL + url + response[i].nombre + '"><i class="ti-eye" aria-hidden="true"></i> Ver</a>' +
 							'<button type="button"class="btn btn-danger btn-sm eliminar_archivo_docente" data-id-tipo="' + response[i].tipo +
 							'" data-nombre-ar="' + response[i].nombre +
 							'" data-id-archivoDocente="' + response[i].id_archivosDocente +
