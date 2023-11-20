@@ -137,13 +137,17 @@ function send_email_user($to, $type, $organizacion, $usuario = null, $token = nu
 			break;
 		case 'enviarSolicitd':
 			$subject = "Finaliza el diligenciamiento de la solicitud";
-			$message = "Organización " . $organizacion->nombreOrganizacion . ": Unidad Solidaria le informa que su solicitud de acreditación ha sido enviada por el SIIA para ser evaluada. En este momento no puede visualizarla en el aplicativo hasta que se realice la verificación de requisitos. De ser necesario, le será devuelta con las observaciones pertinentes, dentro de los siguientes diez (10) días hábiles. 
+			$message = "<p>Buen día, <strong>" . $organizacion->nombreOrganizacion . "</strong>
+ 					<br><br>La unidad Solidaria le informa que su solicitud de acreditación ha sido enviada para ser evaluada.
+					<br>En este momento no puede visualizarla en el aplicativo hasta que se realice la verificación de requisitos. 
+					<br><br>Una vez sea recepcionada la solicitud por el coordinador de areá, él asignará un <strong>evaluador</strong> a esta solicitud y se notificará por correo eléctronico.
+					<br>De ser necesario, el <strong>evaluador</strong> le devolverá la solicitud con las observaciones pertinentes, dentro de los siguientes <strong>(10) días hábiles</strong>.</p> 
 					<br/><br/>
-					<label>Datos de recepción:</label> <br/>
-					Fecha de recepcion de solicitud: <strong>" . date("Y-m-d h:m:s") . "</strong>. <br/> 
-					Fecha de creación de solicitud: <strong>" . $CI->SolicitudesModel->getSolicitudesOrganizacion($idSolicitud)->fechaCreacion . "</strong>. <br/> 
-					Número ID de la solicitud: <strong>" . $idSolicitud . "</strong>. <br/>";
-			$response = array('status' => "success", 'title' => 'Solicitud enviada!' ,'msg' => "Solicitud: " . $idSolicitud . " enviada a la <strong>Unidad Solidaria</strong>, será dirigido a la página de estado de la solicitud. Se le asignará un <strong>evaluador</strong> a esta solicitud y una vez él cambie el estado y/o haga observaciones de esta, será notificado. <br><br> ¡Muchas Gracias!");
+					<label>Datos de recepción:</label> <br/><br/>
+					Fecha de envío solicitud: <strong>" . date("Y-m-d h:m:s") . "</strong>. <br/> 
+					Fecha de creación de solicitud: <strong>" . $CI->SolicitudesModel->solicitudes($idSolicitud)->fechaCreacion . "</strong>. <br/> 
+					Número ID de la solicitud: <strong>" . $idSolicitud . "</strong><br><br> ¡Muchas Gracias!";
+			$response = array('status' => "success", 'title' => 'Solicitud enviada!' ,'msg' => $message);
 			break;
 		case 'actualizarPerfil':
 			$subject = "Actualización de perfil";

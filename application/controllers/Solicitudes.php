@@ -18,6 +18,7 @@ class Solicitudes extends CI_Controller
 		$this->load->model('DatosAplicacionModel');
 		$this->load->model('DatosEnLineaModel');
 		$this->load->model('DatosProgramasModel');
+		$this->load->model('ObservacionesModel');
 	}
 	/**
 	 * Funciones Administrador
@@ -289,12 +290,12 @@ class Solicitudes extends CI_Controller
 		$idSolicitud = $this->input->post('idSolicitud');
 		$formularios = $this->verificarFormularios($idSolicitud);
 		if (count($formularios) === 0) {
-			$usuario_id = $this->session->userdata('usuario_id');
-			$organizacion = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
+			$organizacion = $this->OrganizacionesModel->getOrganizacionUsuario($this->session->userdata('usuario_id'));
+			$solicitud = $this->SolicitudesModel->solicitudes($idSolicitud);
 			$updateEstado = array(
 				'nombre' => "Finalizado",
 				'fechaUltimaActualizacion' => date('Y/m/d H:i:s'),
-				'estadoAnterior' => "En Proceso",
+				'estadoAnterior' => $solicitud->nombre,
 			);
 			$this->db->where('idSolicitud', $idSolicitud);
 			$this->db->update('estadoOrganizaciones', $updateEstado);
@@ -325,6 +326,7 @@ class Solicitudes extends CI_Controller
 		$programas = $this->DatosProgramasModel->getDatosProgramas($idSolicitud);
         $motivos = $this->cargarMotivosSolicitud($idSolicitud);
         $formularios = $this->verificarFormularios($idSolicitud);
+		$observaciones = $this->getObservaciones($idSolicitud);
 		switch ($solicitud->nombre) {
 			case "En Proceso":
                 if(count($formularios) === 0):
@@ -349,7 +351,27 @@ class Solicitudes extends CI_Controller
                 );
 				break;
 			case "En Observaciones":
-
+				if(count($formularios) === 0):
+					$title = 'Solicitud verificada!';
+					$icon = 'success';
+					$msg = '<p>Solicitud: <strong>' .  $idSolicitud . '</strong> cuenta con los formularios diligenciados. <br><br>Por favor de clic en <strong>Finaliza Proceso</strong> para enviar la solicitud a la Unidad Solidaria. <br>¡Gracias!</p>';
+				else:
+					$title = 'Verifique su solicitud!';
+					$icon = 'info';
+					$msg = '<p>Continue diligenciando los formularios, Solicitud: <strong>' .  $idSolicitud. '</strong></p>';
+				endif;
+				echo json_encode(
+					array(
+						'title' => $title,
+						'icon' => $icon,
+						'msg' => $msg,
+						'formularios' => $formularios,
+						'solicitud' => $solicitud,
+						'motivos' => $motivos,
+						'programas' => $programas
+					)
+				);
+				break;
                 break;
 			default:
 				break;

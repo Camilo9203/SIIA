@@ -320,8 +320,6 @@
 						<i class="fa fa-phone icon-footer" aria-hidden="true"></i>
 					</div>
 					<div class="col-md-10 text-footer-l-i">
-						<label>Linea gratuita:</label>
-						<p> 01 8000 12 2020</p>
 						<label>PBX:</label>
 						<p> 57+1 3275252</p>
 						<label>Fax:</label>

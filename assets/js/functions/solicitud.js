@@ -1256,6 +1256,10 @@ $("#finalizar_si").click(function () {
 							text: response.msg,
 							icon: response.status,
 							allowOutsideClick: false,
+							customClass: {
+								popup: 'popup-swalert-lg',
+								confirmButton: 'button-swalert',
+							},
 						}).then((result) => {
 							if (result.isConfirmed) {
 								setInterval(function () {
