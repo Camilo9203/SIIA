@@ -56,7 +56,7 @@ class Observaciones extends CI_Controller
 			'organizaciones_id_organizacion' => $this->input->post('id')
 		);
 		if ($this->db->insert('observaciones', $data_observacion)) {
-			echo json_encode(array('url' => "", 'msg' => "Se guardaron las observaciones. Formulario" . $data_observacion['idForm'] ));
+			echo json_encode(array('status' => "success", 'msg' => "Se guardaron las observaciones. Formulario" . $data_observacion['idForm'] ));
 		}
 	}
 	// Cambiar estado de la solicitud
@@ -201,7 +201,7 @@ class Observaciones extends CI_Controller
 	{
 		$this->db->where('id_observacion', $this->input->post('idObservacion'));
 		$this->db->delete('observaciones');
-		echo json_encode(array('url' => "panelAdmin", 'msg' => "Se elimino la observación."));
+		echo json_encode(array('status' => "success", 'msg' => "Se elimino la observación."));
 	}
 }
 function var_dump_pre($mixed = null) {

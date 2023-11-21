@@ -61,7 +61,7 @@ function send_email_admin($tipo, $prioridad = null, $to = null, $docente = null,
 		// Actualización de facilitadores
 		case 'solicitudDocente':
 			$subject = 'Actualización Docente';
-			$message = 'La organización <strong>' . $organizacion->nombreOrganizacion . '</strong>: Realizo una solicitud para actualización del facilitador <strong>' . $docente->primerNombreDocente . ' ' . $docente->primerApellidoDocente . '</strong>, por favor ingrese al sistema para asignar dicha solicitud, gracias. 
+			$message = 'La organización <strong>' . $organizacion->nombreOrganizacion . '</strong> Realizo una solicitud para actualización del facilitador <strong>' . $docente->primerNombreDocente . ' ' . $docente->primerApellidoDocente . '</strong>, por favor ingrese al sistema para asignar dicha solicitud, gracias. 
 					<br/><br/>
 					<label>Datos de recepción:</label> <br/>
 					Fecha de recepcion de solicitud: <strong>' . date("Y-m-d H:i:s") . '</strong>. <br/>';

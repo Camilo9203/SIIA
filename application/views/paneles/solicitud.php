@@ -1034,7 +1034,7 @@
 						<tbody id="tbody">
 						<?php for($i = 0; $i < count($datosEnLinea); $i ++):
 								echo "<tr><td>" . $datosEnLinea[0]->nombreHerramienta . "</td>";
-								echo "<td> <textarea style='width: 282px; height: 110px; resize: none' readonly> " . $datosEnLinea[0]->descripcionHerramienta . "</textarea></td>";
+								echo "<td> <textarea style='width: 282px; height: 110px; resize: none; border: hidden' ' readonly> " . $datosEnLinea[0]->descripcionHerramienta . "</textarea></td>";
 								echo "<td>" . $datosEnLinea[0]->fecha . "</td>";
 								echo "<td><button class='btn btn-danger btn-sm eliminarDatosEnlinea' data-id=" . $datosEnLinea[0]->id . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
 							endfor; ?>

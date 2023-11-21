@@ -325,8 +325,8 @@ class Solicitudes extends CI_Controller
 		$solicitud = $this->SolicitudesModel->solicitudes($idSolicitud);
 		$programas = $this->DatosProgramasModel->getDatosProgramas($idSolicitud);
         $motivos = $this->cargarMotivosSolicitud($idSolicitud);
+		$observaciones = $this->ObservacionesModel->getObservaciones($idSolicitud);
         $formularios = $this->verificarFormularios($idSolicitud);
-		$observaciones = $this->getObservaciones($idSolicitud);
 		switch ($solicitud->nombre) {
 			case "En Proceso":
                 if(count($formularios) === 0):
@@ -354,7 +354,7 @@ class Solicitudes extends CI_Controller
 				if(count($formularios) === 0):
 					$title = 'Solicitud verificada!';
 					$icon = 'success';
-					$msg = '<p>Solicitud: <strong>' .  $idSolicitud . '</strong> cuenta con los formularios diligenciados. <br><br>Por favor de clic en <strong>Finaliza Proceso</strong> para enviar la solicitud a la Unidad Solidaria. <br>¡Gracias!</p>';
+					$msg = '<p>Solicitud: <strong>' .  $idSolicitud . '</strong> cuenta con los formularios diligenciados. <br><br>Por favor de clic en <strong>Finaliza Proceso</strong> para enviar la solicitud a la Unidad Solidaria. <br><br>¡Gracias!</p>';
 				else:
 					$title = 'Verifique su solicitud!';
 					$icon = 'info';
@@ -519,7 +519,7 @@ class Solicitudes extends CI_Controller
 			if ($hoja == true && $titulo == true && $certificacionesEco == true && $certificaciones == true):
 			else:
 				// TODO: Mostrar que documentos faltan
-				$strDocentes .= "Falta hoja de vida para el facilitador con cedúla: <span class='upper'>" . $docente->numCedulaCiudadaniaDocente . "</span>. <i class='fa fa-times spanRojo' aria-hidden='true'></i><br/>";
+				$strDocentes .= "Verificar la documentación para el docente: <span class='upper'>" . $docente->primerNombreDocente . " " . $docente->primerApellidoDocente. "</span>. <i class='fa fa-times spanRojo' aria-hidden='true'></i><br/>";
 			endif;
 		endforeach;
 		/**
@@ -565,7 +565,7 @@ class Solicitudes extends CI_Controller
 			array_push($formularios, "7. Falta el formulario de datos modalidad en linea.");
 		}
 		if(!empty($strDocentes)) {
-			array_push($formularios, "5. <strong>Facilitadores:</strong> - Realice las siguientes acciones:<br><strong><small><i>" . $strDocentes . "</i></small></strong>");
+			array_push($formularios, "5. <strong>Facilitadores:</strong> - Realice las siguientes acciones:<br><br><strong><small><i>" . $strDocentes . "</i></small></strong>");
 		}
 		return $formularios;
 	}

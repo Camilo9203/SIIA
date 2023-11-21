@@ -60,7 +60,7 @@ class Administradores extends CI_Controller
 				'primerApellidoAdministrador' => $this->input->post('super_primerapellido_admin'),
 				'segundoApellidoAdministrador' => $this->input->post('super_segundoapellido_admin'),
 				'numCedulaCiudadaniaAdministrador' => $this->input->post('super_numerocedula_admin'),
-				'celular' =>  $this->input->post('super_celular_admin'),
+				'ext' =>  $this->input->post('super_ext_admin'),
 				'direccionCorreoElectronico' => $this->input->post('super_correo_electronico_admin'),
 				'usuario' => $this->input->post('super_nombre_admin'),
 				'nivel' => $this->input->post('super_acceso_nvl'),
@@ -75,7 +75,7 @@ class Administradores extends CI_Controller
 					send_email_super($type, $administrador);
 			}
 			else{
-				echo json_encode(array("status" => 0,"title" => "Administrador no creado!", "icon" => "error","msg" => "Administador no agregado. Error en base de datos"));
+				echo json_encode(array("status" => 0,"title" => "Administrador no creado!", "icon" => "error","msg" => "Administrador no agregado. Error en base de datos"));
 			}
 		}else{
 			echo json_encode(array("status" => 0, "title" => "Administrador no creado!", "icon" => "error","msg" => "El nombre de usuario ya esta en uso."
@@ -100,7 +100,7 @@ class Administradores extends CI_Controller
 				'primerApellidoAdministrador' => $this->input->post('super_primerapellido_admin'),
 				'segundoApellidoAdministrador' => $this->input->post('super_segundoapellido_admin'),
 				'numCedulaCiudadaniaAdministrador' =>  $this->input->post('super_numerocedula_admin'),
-				'celular' =>  $this->input->post('super_celular_admin'),
+				'ext' =>  $this->input->post('super_ext_admin'),
 				'direccionCorreoElectronico' => $this->input->post('super_correo_electronico_admin'),
 				'usuario' => $this->input->post('super_nombre_admin'),
 				'contrasena' => $password_hash,

@@ -1,7 +1,9 @@
 let html = "";
 let obsForm = 0;
 let data_orgFinalizada = [];
-/** Acciones Menú Observaciones */
+/**
+ * Acciones Menú Observaciones
+ * */
 $("#verInfGenMenuAdmin").click(function () {
 	$("#informacion").show();
 	$("#documentacion").hide();
@@ -93,7 +95,9 @@ $("#verDocLegalMenuAdmin").click(function () {
 		}
 	});
 })
-/** Todo: Funciones Formulario 2 */
+/**
+ * Funciones Formulario 2
+ * */
 // Ver Documento
 $(document).on("click", ".verDocumentoLegal", function () {
 	let data = {
@@ -384,7 +388,7 @@ function verObservaciones(idForm) {
 					if (response.observaciones[i]['idForm'] == idForm) {
 						html += "<tr><td>" + response.observaciones[i]['fechaObservacion'] + "</td>";
 						html += "<td>" + response.observaciones[i]['numeroRevision'] + "</td>";
-						html += "<td>" + response.observaciones[i]['observacion'] + "</td>";
+						html += "<td><textarea style='width: 800px; height: 155px; resize: none; border: hidden' readonly>" + response.observaciones[i]['observacion'] + "</textarea></td>";
 						html += "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarObservacionForm eliminarDataTabla' data-id=" + response.observaciones[i]['id_observacion'] + ">Eliminar <i class='fa fa-file-o' aria-hidden='true'></i></button></td></tr>";
 					}
 				}
@@ -419,7 +423,9 @@ function verObservaciones(idForm) {
 		}
 	});
 }
-/** Ver Información Organizaciones Finalizadas */
+/**
+ * Ver Información Organizaciones Finalizadas
+ * */
 $(document).on("click", ".ver_organizacion_finalizada", function () {
 	let $id_org = $(this).attr("data-organizacion");
 	let $idSolicitud = $(this).attr("data-solicitud");
@@ -576,7 +582,9 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 		},
 	});
 });
-/** Consultar Información Completa de la Solicitud */
+/**
+ * Consultar Información Completa de la Solicitud
+ * */
 if ($("#idSolicitudInfo").html() != undefined) {
 	if ($("#idSolicitudInfo").html() != "") {
 		let $id_org = $('#idOrganizacion').html();
@@ -734,7 +742,9 @@ if ($("#idSolicitudInfo").html() != undefined) {
 		redirect(baseURL + "panelAdmin/organizaciones/inscritas");
 	}
 }
-/** Terminar proceso de observación */
+/**
+ * Terminar proceso de observación
+ * */
 $(document).on("click", "#terminar_proceso_observacion", function () {
 	let data = {
 		id_organizacion: data_orgFinalizada["0"].organizaciones['id_organizacion'],
@@ -776,8 +786,11 @@ $(document).on("click", "#verDocHerrramientasAdmin", function (){
 		}
 	});
 });
-/** Observaciones Formularios */
-/** Formulario 1*/
+/**
+ * Observaciones Formularios
+ *
+ * Formulario 1
+ * */
 $(".guardarObservacionesForm1").click(function (){
 	let data = {
 		observacion: $("#observacionesForm1").val(),
@@ -789,7 +802,7 @@ $(".guardarObservacionesForm1").click(function (){
 	}
 	guardarObservacion(data);
 	$("#observacionesForm1").val('');
-	verObservaciones(1);
+
 });
 /** Formulario 2*/
 $(".guardarObservacionesForm2").click(function (){
@@ -905,11 +918,10 @@ function eliminarObservacion(data){
 		data: data,
 		beforeSend: function () {
 			$(this).attr("disabled", true);
-			notificacion("Espere...", "success");
+			procesando('warning', 'Eliminando')
 		},
 		success: function (response) {
-			event.preventDefault();
-			notificacion(response.msg, "success");
+			alertaGuardarObservacionFormulario(response.msg, response.status)
 		},
 		error: function (ev) {
 			notificacion("Ocurrió un error no se eliminio.");
@@ -928,11 +940,10 @@ function guardarObservacion(data) {
 		dataType: "JSON",
 		data: data,
 		beforeSend: function () {
-			$(this).attr("disabled", true);
-			notificacion("Espere...", "success");
+			procesando('info', 'Guardando');
 		},
 		success: function (response) {
-			notificacion(response.msg, "success");
+			alertaGuardarObservacionFormulario(response.msg, response.status)
 		},
 		error: function (ev) {
 			notificacion("Ocurrió un error no se guardo.");
@@ -1136,4 +1147,16 @@ $("#actualizar_solicitud").click(function () {
 	let idSolicitud = $(this).attr("data-solicitud");
 	window.open(baseURL + "panel/solicitud/" + idSolicitud, '_self');
 });
-
+function alertaGuardarObservacionFormulario(msg, status){
+	Toast.fire({
+		icon: status,
+		text: msg
+	});
+	verObservaciones(1);
+}
+function procesando(status, msg){
+	Toast.fire({
+		icon: status,
+		text: msg
+	});
+}

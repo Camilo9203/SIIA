@@ -13,12 +13,7 @@
 			<input type="password" name="password" class="form-control" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required="" size="10" autocomplete="off">
 		</div>
 		<hr />
-		<a data-toggle="modal" data-target="#recordar_contrasena" id="recordar_contraseña">¿Recordar Contraseña?</a>
-		<div class="form-group">
-			<form>
-				<div class="g-recaptcha" id="g-recaptcha" data-sitekey="6LfCESEUAAAAAOemaQmmGTGJeiKvLmPkY7as9zPj"></div>
-			</form>
-		</div>
+		<!-- <a data-toggle="modal" data-target="#recordar_contrasena" id="recordar_contraseña">¿Recordar Contraseña?</a> -->
 		<div class="form-group">
 			<button type="button" name="inicioSesion" id="inicio_sesion_admin" class="btn btn-siia btn-sm submit">Iniciar Sesión <i class="fa fa-sign-in" aria-hidden="true"></i></button>
 		</div>

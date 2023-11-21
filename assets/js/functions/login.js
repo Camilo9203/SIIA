@@ -119,19 +119,28 @@ $("#inicio_sesion_admin").click(function () {
 						data: data,
 						beforeSend: function () {
 							$("#loading").show();
-							$(this).attr("disabled", true);
+							ingresando();
 						},
 						success: function (response) {
-							if (response.url == "admin") {
-								mensaje(response.msg, "alert-warning");
-								clearInputs("formulario_login_admin");
+							console.log(response);
+							if (response.status === "success") {
+								Alert.fire({
+									title: 'Bienvenido!',
+									text: response.msg,
+									icon: 'success',
+									confirmButtonText: 'Aceptar',
+								}).then((result) => {
+									if (result.isConfirmed) {
+										setInterval(function () {
+											redirect(baseURL + "panelAdmin");
+										}, 1000);
+									}
+								})
 							}
-							if (response.url == "panel_admin") {
-								redirect("panelAdmin");
+							else {
+								$("#loading").toggle();
+								alertaValidarFomulario(response.msg, response.status);
 							}
-							$("#loading").toggle();
-							// grecaptcha.reset();
-							notificacion(response.msg, "success");
 						},
 						error: function (ev) {
 							//Do nothing
@@ -199,4 +208,23 @@ function validarFormLogin () {
 			},
 		},
 	});
+}
+function ingresando(){
+	Toast.fire({
+		icon: 'info',
+		text: 'Ingresando'
+	});
+}
+function alertaValidarFomulario(msg, status){
+	Toast.fire({
+		icon: status,
+		text: msg
+	});
+}
+function alertaErrorIngresar(msg, status){
+	Alert.fire({
+		title: '!',
+		text: msg,
+		icon: status,
+	})
 }

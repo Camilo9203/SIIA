@@ -103,7 +103,7 @@ $(".admin-modal").click(function () {
 		$("#super_primerapellido_admin").val('');
 		$("#super_segundoapellido_admin").val('');
 		$("#super_numerocedula_admin").val('');
-		$("#super_celular_admin").val('');
+		$("#super_ext_admin").val('');
 		$("#super_nombre_admin").val('');
 		$("#super_correo_electronico_admin").val('');
 		$("#super_contrasena_admin").val('');
@@ -146,7 +146,7 @@ $(".admin-modal").click(function () {
 				$("#super_primerapellido_admin").val(response.administrador.primerApellidoAdministrador);
 				$("#super_segundoapellido_admin").val(response.administrador.segundoApellidoAdministrador);
 				$("#super_numerocedula_admin").val(response.administrador.numCedulaCiudadaniaAdministrador);
-				$("#super_celular_admin").val(response.administrador.celular);
+				$("#super_ext_admin").val(response.administrador.ext);
 				$("#super_nombre_admin").val(response.administrador.usuario);
 				$("#super_correo_electronico_admin").val(response.administrador.direccionCorreoElectronico);
 				$("#super_acceso_nvl option[value='" + response.administrador.nivel + "']").prop("selected", true);
@@ -203,7 +203,7 @@ $("#super_nuevo_admin").click(function () {
 			super_primerapellido_admin: $("#super_primerapellido_admin").val(),
 			super_segundoapellido_admin: $("#super_segundoapellido_admin").val(),
 			super_numerocedula_admin: $("#super_numerocedula_admin").val(),
-			super_celular_admin: $("#super_celular_admin").val(),
+			super_ext_admin: $("#super_ext_admin").val(),
 			super_correo_electronico_admin: $("#super_correo_electronico_admin").val(),
 			super_nombre_admin: $("#super_nombre_admin").val(),
 			super_contrasena_admin: $("#super_contrasena_admin").val(),
@@ -267,7 +267,7 @@ $("#super_actualizar_admin").click(function () {
 			super_primerapellido_admin: $("#super_primerapellido_admin").val(),
 			super_segundoapellido_admin: $("#super_segundoapellido_admin").val(),
 			super_numerocedula_admin: $("#super_numerocedula_admin").val(),
-			super_celular_admin: $("#super_celular_admin").val(),
+			super_ext_admin: $("#super_ext_admin").val(),
 			super_correo_electronico_admin: $("#super_correo_electronico_admin").val(),
 			super_nombre_admin: $("#super_nombre_admin").val(),
 			super_contrasena_admin: $("#super_contrasena_admin").val(),
@@ -648,9 +648,9 @@ function ValidarFormularioAdministradores () {
 				minlength: 4,
 				maxlength: 10,
 			},
-			super_celular_admin: {
-				minlength: 7,
-				maxlength: 12,
+			super_ext_admin: {
+				minlength: 1,
+				maxlength: 5,
 			},
 			super_correo_electronico_admin: {
 				required: true,

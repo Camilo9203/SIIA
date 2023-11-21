@@ -180,8 +180,8 @@ $CI->load->model("TokenModel");
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>Celular de contacto:</label>
-									<input type="number" id="super_celular_admin" name="super_celular_admin" class="form-control">
+									<label>Extensión:</label>
+									<input type="number" id="super_ext_admin" name="super_ext_admin" class="form-control">
 								</div>
 								<div class="form-group">
 									<label>Nivel de acceso:</label><br/>

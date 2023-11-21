@@ -121,7 +121,7 @@ class Sesion extends CI_Controller {
 			$this->form_validation->set_rules('password','Password','trim|required|min_length[3]|xss_clean');
 			if ($this->form_validation->run("formulario_login_admin") == FALSE)
 			{
-				echo json_encode(array('url'=>"login", 'msg'=>"Verifique los datos, no son validos, si tiene dudas presione ?."));
+				echo json_encode(array('status'=>"error", 'msg'=>"Verifique los datos, no son validos, si tiene dudas presione ?."));
 			}
 			else
 			{
@@ -141,46 +141,41 @@ class Sesion extends CI_Controller {
 				}
 				if($user_exist == true){
 					if(verify_login_admin($nombre_usuario, $password)){
-						if($datos_usuario ->logged_in == 0){
+						if($datos_usuario->logged_in == 0){
 							$datos_sesion = array(
-							'usuario_id'     => $datos_usuario->id_administrador,
-							'nombre_usuario'  => $datos_usuario ->usuario,
-							'type_user' => 'admin',
-							'nivel' => $datos_usuario->nivel,
-							'logged_in' => TRUE,
-							'usuario_ip' => $usuario_ip,
-							'usuario_ip_proxy' => $usuario_ip,
-							'user_agent' => $_SERVER['HTTP_USER_AGENT']
+								'usuario_id'     => $datos_usuario->id_administrador,
+								'nombre_usuario'  => $datos_usuario ->usuario,
+								'type_user' => 'admin',
+								'nivel' => $datos_usuario->nivel,
+								'logged_in' => TRUE,
+								'usuario_ip' => $usuario_ip,
+								'usuario_ip_proxy' => $usuario_ip,
+								'user_agent' => $_SERVER['HTTP_USER_AGENT']
 							);
 							$this->session->set_userdata($datos_sesion);
 							$nombre_usuario = $this->session->userdata('nombre_usuario');
 							$usuario_id = $this->session->userdata('usuario_id');
-							echo json_encode(array('url'=>"panel_admin", 'msg'=>""));
+							echo json_encode(array('status'=>"success", 'msg'=> $datos_usuario->primerNombreAdministrador . " " . $datos_usuario->primerApellidoAdministrador . ' Ha iniciado sesión.'));
 							$this->logs_sia->session_log('Login Administrador');
-							$data_update = array(
-										'logged_in' => "1"
-							);
+							$data_update = array('logged_in' => "1");
 							$this->db->where('id_administrador', $usuario_id);
 							$this->db->update('administradores', $data_update);
 							$this->logs_sia->logs('LOGIN_TYPE');
 							$this->logs_sia->logs('URL_TYPE');
 							$this->logs_sia->logQueries();
-						}else{
-							echo json_encode(array('url'=>"login", 'msg'=>"Su sesión se ha cerrado, intente otra vez."));
+						} else{
+							echo json_encode(array('status'=>"info", 'msg'=>"Su sesión se ha cerrado, intente otra vez."));
 							$this->logs_sia->logs('URL_TYPE');
-
-							$data_update = array(
-										'logged_in' => "0"
-							);
+							$data_update = array('logged_in' => "0");
 							$this->db->where('usuario', $nombre_usuario);
 							$this->db->update('administradores', $data_update);
 						}
 					}else{
-						echo json_encode(array('url'=>"login", 'msg'=>"Verifique el usuario y la contraseña."));
+						echo json_encode(array('status'=>"warning", 'msg'=>"Verifique el usuario y la contraseña."));
 						$this->logs_sia->logs('URL_TYPE');
 					}
 				}else{
-					echo json_encode(array('url'=>"login", 'msg'=>"No existe el usuario."));
+					echo json_encode(array('status'=>"warning", 'msg'=>"No existe el usuario."));
 					$this->logs_sia->logs('URL_TYPE');
 				}
 			}
