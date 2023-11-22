@@ -147,6 +147,7 @@ class Solicitudes extends CI_Controller
 	// Crear solicitud
 	public function crearSolicitud()
 	{
+		$this->datosSesionUsuario();
 		if ($this->input->post()) {
 			$usuario_id = $this->session->userdata('usuario_id');
 			$organizacion = $this->db->select('*')->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
@@ -287,16 +288,26 @@ class Solicitudes extends CI_Controller
 	// Enviar solicitud
 	public function enviarSolicitud()
 	{
+		$this->datosSesionUsuario();
 		$idSolicitud = $this->input->post('idSolicitud');
 		$formularios = $this->verificarFormularios($idSolicitud);
 		if (count($formularios) === 0) {
 			$organizacion = $this->OrganizacionesModel->getOrganizacionUsuario($this->session->userdata('usuario_id'));
 			$solicitud = $this->SolicitudesModel->solicitudes($idSolicitud);
-			$updateEstado = array(
-				'nombre' => "Finalizado",
-				'fechaUltimaActualizacion' => date('Y/m/d H:i:s'),
-				'estadoAnterior' => $solicitud->nombre,
-			);
+			if($solicitud->nombre  != 'Finalizado'):
+				$updateEstado = array(
+					'nombre' => "Finalizado",
+					'fechaUltimaActualizacion' => date('Y/m/d H:i:s'),
+					'estadoAnterior' => $solicitud->nombre,
+					'fechaFinalizado' => date('Y/m/d H:i:s')
+				);
+			endif;
+			if($solicitud->nombre == 'En Observaciones'):
+				$updateEstado = array(
+					'fechaUltimaActualizacion' => date('Y/m/d H:i:s'),
+					'estadoAnterior' => $solicitud->nombre
+				);
+			endif;
 			$this->db->where('idSolicitud', $idSolicitud);
 			$this->db->update('estadoOrganizaciones', $updateEstado);
 			send_email_user($organizacion->direccionCorreoElectronicoOrganizacion, 'enviarSolicitd', $organizacion, null, null, $idSolicitud);

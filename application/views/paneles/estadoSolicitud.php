@@ -1,6 +1,9 @@
 <?php
 /***
  * @var $solicitud
+ * @var $data_organizacion
+ * @var $observaciones
+ *
  */
 ?>
 <div class="container">
@@ -15,7 +18,10 @@
 			<hr/>
 			<div class="col-md-6">
 				<div class="form-group">
-					<h4>Fecha creación:</h4><label><?php echo $solicitud->fecha; ?></label>
+					<h4>Fecha creación:</h4><label><?php echo $solicitud->fechaCreacion; ?></label>
+				</div>
+				<div class="form-group">
+					<h4>Fecha finalización:</h4><label><?php echo $solicitud->fechaFinalizado; ?></label>
 				</div>
 				<div class="form-group">
 					<h4>Estado de la organización:</h4><label><?php echo $solicitud->nombre; ?></label>
@@ -40,7 +46,12 @@
 				</div>
 				<div class="form-group">
 					<h4>Número de revisiones:</h4><label><?php echo  $solicitud->numeroRevisiones; ?></label>
+				</div>
+				<div class="form-group">
 					<h4>Fecha de la última revision:</h4><label><?php echo $solicitud->fechaUltimaRevision; ?></label>
+				</div>
+				<div class="form-group">
+					<h4>Asignada al evaluador:</h4><label><?php echo $solicitud->asignada; ?></label>
 				</div>
 				<?php if($solicitud->nombre == "En Observaciones"){ ?>
 					<button class="btn btn-success btn-lg btn-block" id="actualizar_solicitud" data-solicitud="<?php echo $solicitud->idSolicitud ?>">Actualizar la solicitud <i class="fa fa-repeat" aria-hidden="true"></i></button>

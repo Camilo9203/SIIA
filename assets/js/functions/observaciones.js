@@ -388,7 +388,7 @@ function verObservaciones(idForm) {
 					if (response.observaciones[i]['idForm'] == idForm) {
 						html += "<tr><td>" + response.observaciones[i]['fechaObservacion'] + "</td>";
 						html += "<td>" + response.observaciones[i]['numeroRevision'] + "</td>";
-						html += "<td><textarea style='width: 800px; height: 155px; resize: none; border: hidden' readonly>" + response.observaciones[i]['observacion'] + "</textarea></td>";
+						html += "<td><textarea style='width: 700px; height: 140px; resize: none; border: hidden' readonly>" + response.observaciones[i]['observacion'] + "</textarea></td>";
 						html += "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarObservacionForm eliminarDataTabla' data-id=" + response.observaciones[i]['id_observacion'] + ">Eliminar <i class='fa fa-file-o' aria-hidden='true'></i></button></td></tr>";
 					}
 				}
@@ -480,16 +480,16 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 			$("#direccionOrganizacion").html(response.informacionGeneral.direccionOrganizacion);
 			$("#extension").html(response.informacionGeneral.extension);
 			$("#fax").html(response.informacionGeneral.fax);
-			$("#fines").html(response.informacionGeneral.fines);
+			//$("#fines").html(response.informacionGeneral.fines);
 			$("#mision").html(response.informacionGeneral.mision);
 			$("#nomDepartamentoUbicacion").html(response.informacionGeneral.nomDepartamentoUbicacion);
 			$("#nomMunicipioNacional").html(response.informacionGeneral.nomMunicipioNacional);
 			$("#numCedulaCiudadaniaPersona").html(response.informacionGeneral.numCedulaCiudadaniaPersona);
-			$("#objetoSocialEstatutos").html(response.informacionGeneral.objetoSocialEstatutos);
-			$("#otros").html(response.informacionGeneral.otros);
+			//$("#objetoSocialEstatutos").html(response.informacionGeneral.objetoSocialEstatutos);
+			//$("#otros").html(response.informacionGeneral.otros);
 			$("#portafolio").html(response.informacionGeneral.portafolio);
-			$("#presentacionInstitucional").html(response.informacionGeneral.presentacionInstitucional);
-			$("#principios").html(response.informacionGeneral.principios);
+			//$("#presentacionInstitucional").html(response.informacionGeneral.presentacionInstitucional);
+			//$("#principios").html(response.informacionGeneral.principios);
 			$("#tipoEducacion").html(response.informacionGeneral.tipoEducacion);
 			$("#tipoOrganizacion").html(response.informacionGeneral.tipoOrganizacion);
 			$("#urlOrganizacion").html(response.informacionGeneral.urlOrganizacion);
@@ -815,7 +815,6 @@ $(".guardarObservacionesForm2").click(function (){
 		id: $("#id_org_ver_form").attr("data-id"),
 	}
 	guardarObservacion(data);
-	verObservaciones(2);
 	$("#observacionesForm2").val('');
 });
 /** Formulario 3*/
@@ -829,7 +828,6 @@ $(".guardarObservacionesForm3").click(function (){
 		id: $("#id_org_ver_form").attr("data-id"),
 	}
 	guardarObservacion(data);
-	verObservaciones(3);
 	$("#observacionesForm3").val('');
 });
 /** Formulario 4*/
@@ -843,7 +841,6 @@ $(".guardarObservacionesForm4").click(function (){
 		id: $("#id_org_ver_form").attr("data-id"),
 	}
 	guardarObservacion(data);
-	verObservaciones(4);
 	$("#observacionesForm4").val('');
 });
 /** Formulario 5*/
@@ -857,7 +854,6 @@ $(".guardarObservacionesForm5").click(function (){
 		id: $("#id_org_ver_form").attr("data-id"),
 	}
 	guardarObservacion(data);
-	verObservaciones(5);
 	$("#observacionesForm5").val('');
 });
 /** Formulario 6*/
@@ -871,7 +867,6 @@ $(".guardarObservacionesForm6").click(function (){
 		id: $("#id_org_ver_form").attr("data-id"),
 	}
 	guardarObservacion(data);
-	verObservaciones(6);
 	$("#observacionesForm6").val('');
 });
 /** Formulario 7*/
@@ -885,7 +880,6 @@ $(".guardarObservacionesForm7").click(function (){
 		id: $("#id_org_ver_form").attr("data-id"),
 	}
 	guardarObservacion(data);
-	verObservaciones(7);
 	$("#observacionesForm7").val('');
 });
 /** Formulario 8*/
@@ -899,10 +893,8 @@ $(".guardarObservacionesForm8").click(function (){
 		id: $("#id_org_ver_form").attr("data-id"),
 	}
 	guardarObservacion(data);
-	verObservaciones(8);
 	$("#observacionesForm8").val('');
 });
-
 $(document).on("click", ".eliminarObservacionForm", function () {
 	let data = {
 		idObservacion: $(this).attr("data-id")
@@ -943,7 +935,7 @@ function guardarObservacion(data) {
 			procesando('info', 'Guardando');
 		},
 		success: function (response) {
-			alertaGuardarObservacionFormulario(response.msg, response.status)
+			alertaGuardarObservacionFormulario(response.msg, response.status, data.id_formulario)
 		},
 		error: function (ev) {
 			notificacion("Ocurrió un error no se guardo.");
@@ -1147,12 +1139,12 @@ $("#actualizar_solicitud").click(function () {
 	let idSolicitud = $(this).attr("data-solicitud");
 	window.open(baseURL + "panel/solicitud/" + idSolicitud, '_self');
 });
-function alertaGuardarObservacionFormulario(msg, status){
+function alertaGuardarObservacionFormulario(msg, status, form){
 	Toast.fire({
 		icon: status,
 		text: msg
 	});
-	verObservaciones(1);
+	verObservaciones(form);
 }
 function procesando(status, msg){
 	Toast.fire({

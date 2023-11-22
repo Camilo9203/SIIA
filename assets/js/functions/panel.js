@@ -181,10 +181,17 @@ $("#guardar_formulario_tipoSolicitud").click(function () {
 							}
 						},
 						error: function (ev) {
-							Toast.fire({
+							Alert.fire({
+								title: ev.statusText,
+								html: ev.responseText,
+								text: ev.responseText,
 								icon: 'error',
-								text: ev.responseText
-							});
+								allowOutsideClick: false,
+								customClass: {
+									popup: 'popup-swalert-list',
+									confirmButton: 'button-swalert',
+								},
+							})
 						},
 					});
 				}

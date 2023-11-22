@@ -11,7 +11,7 @@
 	<div class="clearfix"></div>
 	<hr />
 	<h3>Solicitudes en evaluación:</h3>
-	<br />
+	<br>
 	<!-- Tabla de solicitudes en evaluación	-->
 	<div class="table">
 		<table id="tabla_enProceso_organizacion" width="100%" border=0 class="table table-striped table-bordered tabla_form">
@@ -157,22 +157,22 @@
 					<div class="col-lg-6">
 						<!-- Cédula Representante Legal -->
 						<h5>Cédula del representante Legal: </h5><p class="tipoLeer" id='numCedulaCiudadaniaPersona'></p>
-						<!-- Presentación Institucional -->
-						<h5>Presentación institucional: </h5><p class="tipoLeer" id='presentacionInstitucional'></p>
-						<!-- Objeto Social -->
-						<h5>Objeto social: </h5><p class="tipoLeer" id='objetoSocialEstatutos'></p>
+						<!-- Presentación Institucional
+						<h5>Presentación institucional: </h5><p class="tipoLeer" id='presentacionInstitucional'></p>-->
+						<!-- Objeto Social
+						<h5>Objeto social: </h5><p class="tipoLeer" id='objetoSocialEstatutos'></p>-->
 						<!-- Misión -->
 						<h5>Misión: </h5><p class="tipoLeer" id='mision'></p>
 						<!-- Visión -->
 						<h5>Visión: </h5><p class="tipoLeer" id='vision'></p>
-						<!-- Principios -->
-						<h5>Principios: </h5><p class="tipoLeer" id='principios'></p>
-						<!-- Fines -->
-						<h5>Fines: </h5><p class="tipoLeer" id='fines'></p>
+						<!-- Principios
+						<h5>Principios: </h5><p class="tipoLeer" id='principios'></p>-->
+						<!-- Fines
+						<h5>Fines: </h5><p class="tipoLeer" id='fines'></p>-->
 						<!-- Portafolio -->
 						<h5>Portafolio: </h5><p class="tipoLeer" id='portafolio'></p>
-						<!-- Otros -->
-						<h5>Otros: </h5><p class="tipoLeer" id='otros'></p>
+						<!-- Otros
+						<h5>Otros: </h5><p class="tipoLeer" id='otros'></p>-->
 					</div>
 				</div>
 			</div>
@@ -307,7 +307,7 @@
 			</div>
 		</div>
 		<div class="col-md-12" id="jornadasActualizacion">
-			<h3>4. Jornadas de Actualización</h3>
+			<h3>3. Jornadas de Actualización</h3>
 			<!-- Tabla Jornadas de Actualización -->
 			<div class="">
 				<label>Datos de Jornadas de Actualización:</label>
@@ -354,7 +354,7 @@
 			</div>
 		</div>
 		<div class="col-md-12" id="datosBasicosProgramas">
-			<h3>5. Datos Básicos de Programas</h3><br>
+			<h3>4. Datos Básicos de Programas</h3><br>
 			<p>A continuación se relaciona el motivo de la solicitud registrado por la organización.</p><br><br>
 			<div class="container">
 				<div class="row">
@@ -458,7 +458,7 @@
 			<hr />
 		</div>
 		<div class="col-md-12" id="docentes">
-			<h3>6. Docentes</h3>
+			<h3>5. Docentes</h3>
 			<button id="verFrameDocentes" class="btn btn-siia btn-sm pull-left">Ver docentes aquí <i class="fa fa-eye" aria-hidden="true"></i></button>
 			<div class="clearfix"></div>
 			<hr />
@@ -497,7 +497,7 @@
 			</div>
 		</div>
 		<div class="col-md-12" id="plataforma">
-			<h3>7. Datos modalidad virtual</h3>
+			<h3>6. Datos modalidad virtual</h3>
 			<div class="">
 				<label>Datos de herramientas:</label>
 				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
@@ -542,7 +542,7 @@
 			</div>
 		</div>
 		<div class="col-md-12" id="enLinea">
-			<h3>8. Datos modalidad en línea</h3>
+			<h3>7. Datos modalidad en línea</h3>
 			<!-- Tabla herramientas -->
 			<div class="">
 				<label>Datos de herramientas:</label>
@@ -603,14 +603,14 @@
 			<a class="toAncla" id="verInfGenMenuAdmin">1. Información General de la Entidad <i class="fa fa-home" aria-hidden="true"></i></a><br />
 			<a class="toAncla" id="verDocLegalMenuAdmin">2. Documentación Legal <i class="fa fa-book" aria-hidden="true"></i></a><br />
 <!--			<a class="toAncla" id="verRegAcaMenuAdmin">3. Registros educativos de Programas <i class="fa fa-newspaper-o" aria-hidden="true"></i></a><br />-->
-			<a class="toAncla" id="verAntAcaMenuAdmin">3. Antecedentes Académicos <i class="fa fa-id-card" aria-hidden="true"></i></a><br />
-			<a class="toAncla" id="verJorActMenuAdmin">4. Jornadas de actualización <i class="fa fa-handshake-o" aria-hidden="true"></i></a><br />
-			<a class="toAncla" id="verProgBasMenuAdmin">5. Programa básico de economía solidaria <i class="fa fa-server" aria-hidden="true"></i></a><br />
+			<!-- <a class="toAncla" id="verAntAcaMenuAdmin">3. Antecedentes Académicos <i class="fa fa-id-card" aria-hidden="true"></i></a><br /> -->
+			<a class="toAncla" id="verJorActMenuAdmin">3. Jornadas de actualización <i class="fa fa-handshake-o" aria-hidden="true"></i></a><br />
+			<a class="toAncla" id="verProgBasMenuAdmin">4. Programa básico de economía solidaria <i class="fa fa-server" aria-hidden="true"></i></a><br />
 <!--			<a class="toAncla" id="verProgAvaMenuAdmin">7. <small>Prog. de Economía Solidaria con Énfasis en Trabajo Asociado</small> <i class="fa fa-sitemap" aria-hidden="true"></i></a><br />-->
 <!--			<a class="toAncla" id="verProgsMenuAdmin">8. Programas <i class="fa fa-signal" aria-hidden="true"></i></a><br />-->
-			<a class="toAncla" id="verFaciliMenuAdmin">6. Facilitadores <i class="fa fa-users" aria-hidden="true"></i></a><br />
-			<a class="toAncla" id="verDatPlatMenuAdmin">7. Datos Plataforma Virtual <i class="fa fa-globe" aria-hidden="true"></i></a><br />
-			<a class="toAncla" id="verDataEnLinea">8. Datos Plataforma En Linea <i class="fa fa-globe" aria-hidden="true"></i></a><br />
+			<a class="toAncla" id="verFaciliMenuAdmin">5. Facilitadores <i class="fa fa-users" aria-hidden="true"></i></a><br />
+			<a class="toAncla" id="verDatPlatMenuAdmin">6. Datos Plataforma Virtual <i class="fa fa-globe" aria-hidden="true"></i></a><br />
+			<a class="toAncla" id="verDataEnLinea">7. Datos Plataforma En Linéa <i class="fa fa-globe" aria-hidden="true"></i></a><br />
 			<hr />
 			<button class="btn btn-siia btn-sm btn-block" data-toggle="modal" id="verModTermObs" data-target="#terminarProcObs">Terminar proceso de observaciones <i class="fa fa-check" aria-hidden="true"></i></button>
 		</div>
@@ -652,7 +652,7 @@
 									<td class="col-md-1">Campo de formulario</td>
 									<td class="col-md-6">Observación del campo</td>
 									<!--<td class="col-md-2">Valor del usuario</td>-->
-									<td class="col-md-1">Fecha de Observacion</td>
+									<td class="col-md-1">Fecha de Observación</td>
 									<td class="col-md-1">Número de Revision</td>
 									<!--<td class="col-md-1">Id de Solicitud</td>-->
 								</tr>
