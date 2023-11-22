@@ -307,6 +307,7 @@ class Solicitudes extends CI_Controller
 					'fechaUltimaActualizacion' => date('Y/m/d H:i:s'),
 					'estadoAnterior' => $solicitud->nombre
 				);
+				send_email_admin('actualizacionSolicitud', 1, $this->AdministradoresModel->getEmail($solicitud->asignada), null, $organizacion, $solicitud->idSolicitud);
 			endif;
 			$this->db->where('idSolicitud', $idSolicitud);
 			$this->db->update('estadoOrganizaciones', $updateEstado);
@@ -363,9 +364,40 @@ class Solicitudes extends CI_Controller
 				break;
 			case "En Observaciones":
 				if(count($formularios) === 0):
-					$title = 'Solicitud verificada!';
-					$icon = 'success';
-					$msg = '<p>Solicitud: <strong>' .  $idSolicitud . '</strong> cuenta con los formularios diligenciados. <br><br>Por favor de clic en <strong>Finaliza Proceso</strong> para enviar la solicitud a la Unidad Solidaria. <br><br>¡Gracias!</p>';
+					$listaFormularios = '';
+					if($observaciones['formulario1'])
+						$listaFormularios .= '<li>Formulario 1 información general.</li>';
+					if($observaciones['formulario2'])
+						$listaFormularios .= '<li>Formulario 2 documentación legal.</li>';
+					if($observaciones['formulario3'])
+						$listaFormularios .= '<li>Formulario 3 Jornadas de actualización.</li>';
+					if($observaciones['formulario4'])
+						$listaFormularios .= '<li>Formulario 4 datos básicos programas.</li>';
+					if($observaciones['formulario5'])
+						$listaFormularios .= '<li>Formulario 5 docentes.</li>';
+					if($observaciones['formulario6'])
+						$listaFormularios .= '<li>Formulario 6 plataforma virtual.</li>';
+					if($observaciones['formulario7'])
+						$listaFormularios .= '<li>Formulario 7 modalidad en línea.</li>';
+					if ($listaFormularios != ''):
+						$title = 'Solicitud verificada!';
+						$icon = 'info';
+						$msg = '<p>Solicitud: <strong>' .  $idSolicitud . '</strong> cuenta con los formularios diligenciados. 
+								<br><br>No obstante el evaluador realizo observaciones para los formularios: <br><br>
+								<ul>' . $listaFormularios .'</ul>
+								<br>Por favor, revise las observaciones y de clic en<strong> Actualizar la solicitud.</strong>  
+								<br><strong>Finalice el proceso</strong> con los cambios solicitados y le será enviada una notificación.
+								<br><br>Si ya realizo los cambios y recibio un correo de finalización, <br>por favor cierra esta cuadro y espera a que te sea enviada la confirmación 
+								<br><br>¡Gracias!</p>';
+					else:
+						$title = 'Solicitud verificada!';
+						$icon = 'success';
+						$msg = '<p>Solicitud: <strong>' .  $idSolicitud . '</strong> cuenta con los formularios diligenciados. 
+								<br><br>El evaluador ya verificó los datos registrados en la solicitud
+								<br><br>No se encontraron observaciones.
+								<br>En los proximos se le informará cuando se expida la resolución de acreditación
+								<br><br>¡Gracias!</p>';
+					endif;
 				else:
 					$title = 'Verifique su solicitud!';
 					$icon = 'info';
@@ -606,6 +638,20 @@ class Solicitudes extends CI_Controller
         $msg = 'Se elimino la solicitud: <strong>' . $this->input->post('idSolicitud') . '<strong>';
         echo json_encode(array('status' => "success", 'msg' => $msg));
     }
+	// Estado de la solicitud
+	public function estadoSolicitud($idSolicitud)
+	{
+		$data = $this->datosSesionUsuario();
+		$data['title'] = 'Panel Principal - Estado de la Solicitud';
+		$data['organizacion'] = $this->OrganizacionesModel->getOrganizacion($data['usuario_id']);
+		$data['observaciones'] = $this->ObservacionesModel->getObservaciones($idSolicitud);
+		$data['solicitud'] = $this->SolicitudesModel->solicitudes($idSolicitud);
+		$this->load->view('include/header', $data);
+		$this->load->view('paneles/estadoSolicitud', $data);
+		$this->load->view('include/footer', $data);
+		$this->logs_sia->logs('PLACE_USER');
+	}
+
 }
 function var_dump_pre($mixed = null) {
 	echo '<pre>';

@@ -79,7 +79,7 @@ $route['clean_socrata'] = 'Admin/clean_socrata';
 $route['get_socrata'] = 'Admin/get_socrata';
 $route['llamadas'] = 'Admin/llamadas';
 $route['panelAdmin/socrata'] = 'Admin/socrataPanel';
-$route['panelAdmin'] = 'Admin/panel_admin';
+$route['panelAdmin'] = 'Admin/panel';
 $route['panelAdmin/reportes'] = 'Admin/panel_reportes';
 /** Administrador Organizaciones */
 $route['panelAdmin/organizaciones'] = 'Organizaciones';
@@ -137,7 +137,7 @@ $route['panel/contacto/ayuda'] = 'Contacto/ayuda';
 $route['panel/solicitud/(:idSolicitud)'] = 'Solicitudes/solicitud/$idSolicitud';
 $route['Certificado'] = 'Certificaciones/crearCertificacion';
 // $route['panel/obtenerCertificado'] = 'Certificaciones/obtenerCertificado';
-$route['panel/estadoSolicitud'] = 'Panel/estadoSolicitud';
+$route['panel/estadoSolicitud/(:idSolicitud)'] = 'Solicitudes/estadoSolicitud/$idSolicitud';
 $route['panel/informeActividades'] = 'Panel/informeActividades';
 $route['panel/docentes'] = 'Docentes/index';
 $route['panel/planMejora'] = 'Panel/planMejora';

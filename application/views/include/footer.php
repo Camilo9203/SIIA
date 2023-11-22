@@ -37,21 +37,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- Modal para guardar observaciones -->
-	<div class="modal fade in" id="guardarOBSSI" tabindex="-1" role="dialog" aria-labelledby="guardarOBSSI">
-		<div class="modal-dialog modal-xs" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="guardarOBSSIs">¿Guardar observaciones del formulario?</h4>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-danger btn-sm pull-left" data-dismiss="modal">Cerrar <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button type="button" class="btn btn-siia btn-sm" id="guardarSiObs">Si, guardar <i class="fa fa-check" aria-hidden="true"></i></button>
-				</div>
-			</div>
-		</div>
-	</div>
 	<!-- Modal para bateria de observaciones -->
 	<div class="modal fade in" id="modalBateriaObservaciones" tabindex="-1" role="dialog" aria-labelledby="modalBateriaObservaciones">
 		<div class="modal-dialog modal-lg" role="document">

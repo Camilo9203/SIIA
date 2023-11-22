@@ -18,11 +18,13 @@ const Toast = Swal.mixin({
 })
 const Alert = Swal.mixin({
 	confirmButtonText: 'Aceptar',
+	allowOutsideClick: false,
 	customClass: {
 		confirmButton: 'button-swalert',
 		popup: 'popup-swalert'
 	},
 })
+
 /**
  * Añadir nuevo docente
  * */
@@ -597,4 +599,84 @@ function ValidarFormDocentes (form) {
 		default:
 	}
 
+}
+
+/**
+ * Funciones administrador
+ */
+$("#verFrameDocentes").click(function () {
+	$("#frameDocDiv").slideDown();
+	document.getElementById("frameDocentes").contentDocument.location.reload(true);
+});
+/**
+ * Guardar aprobación docente
+ */
+$(".guardarValidoDocente").click(function () {
+	$(".guardarObsArchivoDoc").each(function () {
+		$(this).click();
+	});
+	let data = {
+		id_docente: $(this).attr("data-id"),
+		valido: $("input:radio[name=validoDocente]:checked").val(),
+		docente_val_obs: $("#docente_val_obs").val(),
+	};
+
+	$.ajax({
+		url: baseURL + "admin/validarDocentes",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		beforeSend: function () {
+			procesando('info', 'Cambiando estado docente')
+		},
+		success: function (response) {
+			procesando(response.msg, "success");
+			$("#verFrameDocentes").click();
+		},
+		error: function (ev) {
+			//Do nothing
+		},
+	});
+});
+/**
+ * Guardar observación en archivos docentes.
+ */
+$(document).on("click", ".guardarObsArchivoDoc", function () {
+	$id_archivoDocente = $(this).attr("data-id");
+	$observacionArchivo = $(this)
+		.parent("td")
+		.siblings("td")
+		.children("textarea#archivoDoc" + $id_archivoDocente)
+		.val();
+	console.log($id_archivoDocente);
+	console.log($observacionArchivo);
+	data = {
+		id_archivoDocente: $id_archivoDocente,
+		observacionArchivo: $observacionArchivo,
+	};
+
+	$.ajax({
+		url: baseURL + "admin/actualizarArchivoDocente",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		success: function (response) {
+			notificacion(response.msg, "success");
+		},
+		error: function (ev) {
+			//Do nothing
+		},
+	});
+});
+
+/**
+ * Alertas
+ * @param status
+ * @param msg
+ */
+function procesando(status, msg){
+	Toast.fire({
+		icon: status,
+		text: msg
+	});
 }

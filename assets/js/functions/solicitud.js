@@ -1263,7 +1263,7 @@ $("#finalizar_si").click(function () {
 						}).then((result) => {
 							if (result.isConfirmed) {
 								setInterval(function () {
-									redirect(baseURL + "panel/estadoSolicitud/" + idSolicitud);
+									redirect(baseURL + "solicitudes/estadoSolicitud/" + idSolicitud);
 								}, 2000);
 							}
 						})
@@ -1697,17 +1697,34 @@ function verificarFormularios(solicitud) {
 				}
 				$("#formulariosFaltantes").append("<p>" + response.formularios[i] + "</p>");
 			}
-			Alert.fire({
-				title: response.title,
-				html: response.msg + $("#formulariosFaltantes").html(),
-				text: response.msg + $("#formulariosFaltantes").html(),
-				icon: response.icon,
-				allowOutsideClick: false,
-				customClass: {
-					popup: 'popup-swalert-lg',
-					confirmButton: 'button-swalert',
-				},
-			})
+			if (response.solicitud.nombre == 'En Observaciones') {
+				if (response.icon == 'success') {
+					$('#actualizar_solicitud').hide();
+				}
+				Alert.fire({
+					title: response.title,
+					html: response.msg,
+					text: response.msg,
+					icon: response.icon,
+					allowOutsideClick: false,
+					customClass: {
+						popup: 'popup-swalert-lg',
+						confirmButton: 'button-swalert',
+					},
+				})
+			} else {
+				Alert.fire({
+					title: response.title,
+					html: response.msg + $("#formulariosFaltantes").html(),
+					text: response.msg + $("#formulariosFaltantes").html(),
+					icon: response.icon,
+					allowOutsideClick: false,
+					customClass: {
+						popup: 'popup-swalert-lg',
+						confirmButton: 'button-swalert',
+					},
+				})
+			}
 			$("li.step-no>a>span.step_no.menu-sel").parent().css("background", "#008000");
 			$("li.step-no>a>span.step_no.menu-sel").parent().css("color", "white");
 			$("li.step-no>a>span.step_no.menu-sel").parent().css("border-radius", "10px");

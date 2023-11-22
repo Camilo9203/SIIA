@@ -120,7 +120,7 @@
 		</div>
 		<div class="clearfix"></div>
 		<hr />
-		<button class="btn btn-danger btn-sm pull-left" id="admin_ver_observaciones_volver"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
+		<button class="btn btn-danger btn-sm pull-left" id="admin_ver_finalizadas_volver"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 		<button class="btn btn-sm btn-warning pull-right" id="verRelacionCambios" data-toggle='modal' data-target='#modalRelacionCambios'>Ver relacion de cambios <i class="fa fa-eye" aria-hidden="true"></i></button>
 		<button class="btn btn-sm btn-info pull-right" data-toggle='modal' data-target='#modalPedirCamara'>Pedir cámara de comercio <i class="fa fa-refresh" aria-hidden="true"></i></button>
 		<button class="btn btn-siia btn-sm pull-right verHistObs" id="hist_org_obs" data-backdrop="false" data-toggle='modal' data-target='#verHistObs'>Historial de observaciones <i class="fa fa-history" aria-hidden="true"></i></button>
@@ -133,7 +133,7 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-6">
-						<!-- Tipo Organizacion -->
+						<!-- Tipo Organización -->
 						<h5>Tip Organización: </h5><p class="tipoLeer" id='tipoOrganizacion'></p>
 						<!-- Departamento -->
 						<h5>Departamento: </h5><p class="tipoLeer" id='nomDepartamentoUbicacion'></p>
@@ -155,22 +155,22 @@
 					<div class="col-lg-6">
 						<!-- Cédula Representante Legal -->
 						<h5>Cédula del representante Legal: </h5><p class="tipoLeer" id='numCedulaCiudadaniaPersona'></p>
-						<!-- Presentación Institucional -->
-						<h5>Presentación institucional: </h5><p class="tipoLeer" id='presentacionInstitucional'></p>
-						<!-- Objeto Social -->
-						<h5>Objeto social: </h5><p class="tipoLeer" id='objetoSocialEstatutos'></p>
+						<!-- Presentación Institucional
+						<h5>Presentación institucional: </h5><p class="tipoLeer" id='presentacionInstitucional'></p>-->
+						<!-- Objeto Social
+						<h5>Objeto social: </h5><p class="tipoLeer" id='objetoSocialEstatutos'></p>-->
 						<!-- Misión -->
 						<h5>Misión: </h5><p class="tipoLeer" id='mision'></p>
 						<!-- Visión -->
 						<h5>Visión: </h5><p class="tipoLeer" id='vision'></p>
-						<!-- Principios -->
-						<h5>Principios: </h5><p class="tipoLeer" id='principios'></p>
-						<!-- Fines -->
-						<h5>Fines: </h5><p class="tipoLeer" id='fines'></p>
+						<!-- Principios
+						<h5>Principios: </h5><p class="tipoLeer" id='principios'></p>-->
+						<!-- Fines
+						<h5>Fines: </h5><p class="tipoLeer" id='fines'></p>-->
 						<!-- Portafolio -->
 						<h5>Portafolio: </h5><p class="tipoLeer" id='portafolio'></p>
-						<!-- Otros -->
-						<h5>Otros: </h5><p class="tipoLeer" id='otros'></p>
+						<!-- Otros
+						<h5>Otros: </h5><p class="tipoLeer" id='otros'></p>-->
 					</div>
 				</div>
 			</div>
@@ -194,21 +194,8 @@
 				<?php echo form_close(); ?>
 			</div>
 			<hr />
-			<div class="">
-				<label>Observaciones Realizadas</label>
-				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-				<table width="100%" border=0 class="table table-striped table-bordered" id="tabla_observaciones_form1">
-					<thead>
-					<tr>
-						<td>Fecha Observación</td>
-						<td># Revisión</td>
-						<td>Observación</td>
-						<td>Acción</td>
-					</tr>
-					</thead>
-					<tbody id="tbody" class="tabla_observaciones_form1"></tbody>
-				</table>
-			</div>
+			<label>Observaciones Realizadas</label>
+			<div class="observaciones_realizadas_form1"></div>
 		</div>
 		<div class="col-md-12" id="documentacion">
 			<h3>2. Documentación Legal</h3>
@@ -237,49 +224,30 @@
 				<?php echo form_close(); ?>
 			</div>
 			<hr />
-			<div class="">
-				<label>Observaciones Realizadas</label>
-				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-				<table width="100%" border=0 class="table table-striped table-bordered" id="tabla_observaciones_form2">
-					<thead>
-					<tr>
-						<td>Fecha Observación</td>
-						<td># Revisión</td>
-						<td>Observación</td>
-						<td>Acción</td>
-					</tr>
-					</thead>
-					<tbody id="tbody" class="tabla_observaciones_form2"></tbody>
-				</table>
-			</div>
+			<label>Observaciones Realizadas</label>
+			<div class="observaciones_realizadas_form2"></div>
 		</div>
-		<div class="col-md-12" id="antecedentesAcademicos">
-			<h3>3. Antecedentes Académicos</h3>
-			<!-- Tabla Antecedentes Académicos -->
-			<div class="">
-				<label>Datos de Atecedentes Académicos:</label>
-				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-				<table id="" width="100%" border=0 class="table table-striped table-bordered">
-					<thead>
-					<tr>
-						<td>Descripción Proceso</td>
-						<td>justificación</td>
-						<td>Objetivos</td>
-						<td>Metodología</td>
-						<td>Material Didáctico</td>
-						<td>Bibliografía</td>
-						<td>Duración Curso</td>
-					</tr>
-					</thead>
-					<tbody id="tbody" class="tabla_datos_antecedentes"></tbody>
-				</table>
-			</div>
+		<div class="col-md-12" id="jornadasActualizacion">
+			<h3>3. Jornadas de Actualización</h3>
+			<!-- Tabla Jornadas de Actualización -->
+			<label>Datos de Jornadas de Actualización:</label>
+			<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+			<table id="" width="100%" border=0 class="table table-striped table-bordered">
+				<thead>
+				<tr>
+					<td>Cantidad Personas</td>
+					<td>Fecha Asistencia</td>
+				</tr>
+				</thead>
+				<tbody id="tbody" class="tabla_datos_jornadas"></tbody>
+			</table>
+			<div id="archivosJornadasActualizacion"></div>
 			<hr />
 			<!-- Formulario Observación form3 -->
 			<div class="col-12">
 				<?php echo form_open('', array('id' => 'formulario_observacion_form3')); ?>
 				<div class="form-group">
-					<label for="observacionesForm3">Observaciones Antecedentes Academicos</label>
+					<label for="observacionesForm3">Observaciones Jornadas de Actualización</label>
 					<textarea class="form-control obs_admin_" name="observacionesForm3" id="observacionesForm3" cols="30" rows="5" required></textarea>
 				</div>
 				<div class="form-group">
@@ -288,71 +256,11 @@
 				<?php echo form_close(); ?>
 			</div>
 			<hr />
-			<div class="">
-				<label>Observaciones Realizadas</label>
-				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-				<table width="100%" border=0 class="table table-striped table-bordered" id="tabla_observaciones_form3">
-					<thead>
-					<tr>
-						<td>Fecha Observación</td>
-						<td># Revisión</td>
-						<td>Observación</td>
-						<td>Acción</td>
-					</tr>
-					</thead>
-					<tbody id="tbody" class="tabla_observaciones_form3"></tbody>
-				</table>
-			</div>
-		</div>
-		<div class="col-md-12" id="jornadasActualizacion">
-			<h3>4. Jornadas de Actualización</h3>
-			<!-- Tabla Jornadas de Actualización -->
-			<div class="">
-				<label>Datos de Atecedentes Academicos:</label>
-				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-				<table id="" width="100%" border=0 class="table table-striped table-bordered">
-					<thead>
-					<tr>
-						<td>Cantidad Personas</td>
-						<td>Fecha Asistencia</td>
-					</tr>
-					</thead>
-					<tbody id="tbody" class="tabla_datos_jornadas"></tbody>
-				</table>
-			</div>
-			<div id="archivosJornadasActualizacion"></div>
-			<hr />
-			<!-- Formulario Observación form3 -->
-			<div class="col-12">
-				<?php echo form_open('', array('id' => 'formulario_observacion_form4')); ?>
-				<div class="form-group">
-					<label for="observacionesForm4">Observaciones Jornadas de Actualización</label>
-					<textarea class="form-control obs_admin_" name="observacionesForm4" id="observacionesForm4" cols="30" rows="5" required></textarea>
-				</div>
-				<div class="form-group">
-					<button class="btn btn-siia guardarObservacionesForm4" id="sigInf">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
-				</div>
-				<?php echo form_close(); ?>
-			</div>
-			<hr />
-			<div class="">
-				<label>Observaciones Realizadas</label>
-				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-				<table width="100%" border=0 class="table table-striped table-bordered" id="tabla_observaciones_form4">
-					<thead>
-					<tr>
-						<td>Fecha Observación</td>
-						<td># Revisión</td>
-						<td>Observación</td>
-						<td>Acción</td>
-					</tr>
-					</thead>
-					<tbody id="tbody" class="tabla_observaciones_form4"></tbody>
-				</table>
-			</div>
+			<label>Observaciones Realizadas</label>
+			<div class="observaciones_realizadas_form3"></div>
 		</div>
 		<div class="col-md-12" id="datosBasicosProgramas">
-			<h3>5. Datos Básicos de Programas</h3><br>
+			<h3>4. Datos Básicos de Programas</h3><br>
 			<p>A continuación se relaciona el motivo de la solicitud registrado por la organización.</p><br><br>
 			<div class="container">
 				<div class="row">
@@ -408,57 +316,41 @@
 						<br>
 					</div>
 					<hr />
-					<div class="">
-						<label>Registro de programas aceptados</label>
-						<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-						<table width="100%" border=0 class="table table-striped table-bordered" id="tabla_registro_programas">
-							<thead>
-							<tr>
-								<td>Organización</td>
-								<td>Numero NIT</td>
-								<td>Nombre Programa</td>
-								<td>Acepta</td>
-								<td>fecha</td>
-							</tr>
-							</thead>
-							<tbody id="tbody" class="tabla_registro_programas"></tbody>
-						</table>
-					</div>
+					<label>Registro de programas aceptados</label>
+					<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+					<table width="100%" border=0 class="table table-striped table-bordered" id="tabla_registro_programas">
+						<thead>
+						<tr>
+							<td>Organización</td>
+							<td>Numero NIT</td>
+							<td>Nombre Programa</td>
+							<td>Acepta</td>
+							<td>fecha</td>
+						</tr>
+						</thead>
+						<tbody id="tbody" class="tabla_registro_programas"></tbody>
+					</table>
 					<div class="col-12">
-						<?php echo form_open('', array('id' => 'formulario_observacion_form6')); ?>
+						<?php echo form_open('', array('id' => 'formulario_observacion_form4')); ?>
 						<div class="form-group">
-							<label for="observacionesForm5">Observaciones Datos Básicos de Programas</label>
-							<textarea class="form-control obs_admin_" name="observacionesForm5" id="observacionesForm5" cols="30" rows="5" required></textarea>
+							<label for="observacionesForm4">Observaciones Datos Básicos de Programas</label>
+							<textarea class="form-control obs_admin_" name="observacionesForm4" id="observacionesForm4" cols="30" rows="5" required></textarea>
 						</div>
 						<div class="form-group">
-							<button class="btn btn-siia guardarObservacionesForm5">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+							<button class="btn btn-siia guardarObservacionesForm4">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
 						</div>
 						<?php echo form_close(); ?>
 					</div>
 					<hr />
-					<div class="">
-						<label>Observaciones Realizadas</label>
-						<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-						<table width="100%" border=0 class="table table-striped table-bordered" id="tabla_observaciones_form5">
-							<thead>
-							<tr>
-								<td>Fecha Observación</td>
-								<td># Revisión</td>
-								<td>Observación</td>
-								<td>Acción</td>
-							</tr>
-							</thead>
-							<tbody id="tbody" class="tabla_observaciones_form5"></tbody>
-						</table>
-					</div>
+					<label>Observaciones Realizadas</label>
+					<div class="observaciones_realizadas_form4"></div>
 				</div>
 			</div>
 			<hr />
 		</div>
 		<div class="col-md-12" id="docentes">
-			<h3>6. Docentes</h3>
+			<h3>5. Docentes</h3>
 			<button id="verFrameDocentes" class="btn btn-siia btn-sm pull-left">Ver docentes aquí <i class="fa fa-eye" aria-hidden="true"></i></button>
-			<div class="clearfix"></div>
 			<hr />
 			<div class="txtOrgDocen"></div>
 			<div id="frameDocDiv" class="embed-responsive embed-responsive-16by9">
@@ -466,28 +358,71 @@
 			</div>
 			<div class="clearfix"></div>
 			<hr />
+			<div class="col-12">
+				<?php echo form_open('', array('id' => 'formulario_observacion_form5')); ?>
+				<div class="form-group">
+					<label for="observacionesForm5">Observaciones Generales Facilitadores</label>
+					<textarea class="form-control obs_admin_" name="observacionesForm5" id="observacionesForm5" cols="30" rows="5" required></textarea>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-siia guardarObservacionesForm5">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+				</div>
+				<?php echo form_close(); ?>
+			</div>
+			<hr />
+			<label>Observaciones Realizadas</label>
+			<div class="observaciones_realizadas_form5"></div>
 		</div>
 		<div class="col-md-12" id="plataforma">
-			<h3>7. Datos modalidad virtual</h3>
-			<div class="">
-				<label>Datos de herramientas:</label>
-				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-				<table id="tabla_datos_plataforma" width="100%" border=0 class="table table-striped table-bordered">
-					<thead>
-					<tr>
-						<td>UrlAplicación</td>
-						<td>Usuario</td>
-						<td>Contraseña</td>
-					</tr>
-					</thead>
-					<tbody id="tbody" class="tabla_datos_plataforma"></tbody>
-				</table>
+			<h3>6. Datos modalidad virtual</h3>
+			<label>Datos de herramientas:</label>
+			<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+			<table id="tabla_datos_plataforma" width="100%" border=0 class="table table-striped table-bordered">
+				<thead>
+				<tr>
+					<td>UrlAplicación</td>
+					<td>Usuario</td>
+					<td>Contraseña</td>
+				</tr>
+				</thead>
+				<tbody id="tbody" class="tabla_datos_plataforma"></tbody>
+			</table>
+			<hr />
+			<div class="col-12">
+				<?php echo form_open('', array('id' => 'formulario_observacion_form6')); ?>
+				<div class="form-group">
+					<label for="observacionesForm6">Observaciones modalidad virtual</label>
+					<textarea class="form-control obs_admin_" name="observacionesForm6" id="observacionesForm6" cols="30" rows="5" required></textarea>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-siia guardarObservacionesForm6">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+				</div>
+				<?php echo form_close(); ?>
 			</div>
+			<hr />
+			<label>Observaciones Realizadas</label>
+			<div class="observaciones_realizadas_form6"></div>
+		</div>
+		<div class="col-md-12" id="enLinea">
+			<h3>7. Datos modalidad en línea</h3>
+			<!-- Tabla herramientas -->
+			<label>Datos de herramientas:</label>
+			<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+			<table id="" width="100%" border=0 class="table table-striped table-bordered">
+				<thead>
+				<tr>
+					<td>Herramienta</td>
+					<td>Descripción</td>
+					<td>Fecha de registro</td>
+				</tr>
+				</thead>
+				<tbody id="tbody" class="datos_herramientas"></tbody>
+			</table>
 			<hr />
 			<div class="col-12">
 				<?php echo form_open('', array('id' => 'formulario_observacion_form7')); ?>
 				<div class="form-group">
-					<label for="observacionesForm7">Observaciones modalidad virtual</label>
+					<label for="observacionesForm7">Observaciones modalidad en Línea</label>
 					<textarea class="form-control obs_admin_" name="observacionesForm7" id="observacionesForm7" cols="30" rows="5" required></textarea>
 				</div>
 				<div class="form-group">
@@ -496,67 +431,8 @@
 				<?php echo form_close(); ?>
 			</div>
 			<hr />
-			<div class="">
-				<label>Observaciones Realizadas</label>
-				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-				<table width="100%" border=0 class="table table-striped table-bordered" id="tabla_observaciones_form7">
-					<thead>
-					<tr>
-						<td>Fecha Observación</td>
-						<td># Revisión</td>
-						<td>Observación</td>
-						<td>Acción</td>
-					</tr>
-					</thead>
-					<tbody id="tbody" class="tabla_observaciones_form7"></tbody>
-				</table>
-			</div>
-		</div>
-		<div class="col-md-12" id="enLinea">
-			<h3>8. Datos modalidad en línea</h3>
-			<!-- Tabla herramientas -->
-			<div class="">
-				<label>Datos de herramientas:</label>
-				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-				<table id="" width="100%" border=0 class="table table-striped table-bordered">
-					<thead>
-					<tr>
-						<td>Herramienta</td>
-						<td>Descripción</td>
-						<td>Fecha de registro</td>
-					</tr>
-					</thead>
-					<tbody id="tbody" class="datos_herramientas"></tbody>
-				</table>
-			</div>
-			<hr />
-			<div class="col-12">
-				<?php echo form_open('', array('id' => 'formulario_observacion_form8')); ?>
-				<div class="form-group">
-					<label for="observacionesForm8">Observaciones modalidad en Línea</label>
-					<textarea class="form-control obs_admin_" name="observacionesForm8" id="observacionesForm8" cols="30" rows="5" required></textarea>
-				</div>
-				<div class="form-group">
-					<button class="btn btn-siia guardarObservacionesForm8">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
-				</div>
-				<?php echo form_close(); ?>
-			</div>
-			<hr />
-			<div class="">
-				<label>Observaciones Realizadas</label>
-				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-				<table width="100%" border=0 class="table table-striped table-bordered" id="tabla_observaciones_form8">
-					<thead>
-					<tr>
-						<td>Fecha Observación</td>
-						<td># Revisión</td>
-						<td>Observación</td>
-						<td>Acción</td>
-					</tr>
-					</thead>
-					<tbody id="tbody" class="datos_observacion_form8"></tbody>
-				</table>
-			</div>
+			<label>Observaciones Realizadas</label>
+			<div class="observaciones_realizadas_form7"></div>
 		</div>
 	</div>
 </div>
@@ -574,16 +450,16 @@
 			<a class="toAncla" id="verInfGenMenuAdmin">1. Información General de la Entidad <i class="fa fa-home" aria-hidden="true"></i></a><br />
 			<a class="toAncla" id="verDocLegalMenuAdmin">2. Documentación Legal <i class="fa fa-book" aria-hidden="true"></i></a><br />
 			<!--			<a class="toAncla" id="verRegAcaMenuAdmin">3. Registros educativos de Programas <i class="fa fa-newspaper-o" aria-hidden="true"></i></a><br />-->
-			<a class="toAncla" id="verAntAcaMenuAdmin">3. Antecedentes Académicos <i class="fa fa-id-card" aria-hidden="true"></i></a><br />
-			<a class="toAncla" id="verJorActMenuAdmin">4. Jornadas de actualización <i class="fa fa-handshake-o" aria-hidden="true"></i></a><br />
-			<a class="toAncla" id="verProgBasMenuAdmin">5. Programa básico de economía solidaria <i class="fa fa-server" aria-hidden="true"></i></a><br />
+			<!-- <a class="toAncla" id="verAntAcaMenuAdmin">3. Antecedentes Académicos <i class="fa fa-id-card" aria-hidden="true"></i></a><br /> -->
+			<a class="toAncla" id="verJorActMenuAdmin">3. Jornadas de actualización <i class="fa fa-handshake-o" aria-hidden="true"></i></a><br />
+			<a class="toAncla" id="verProgBasMenuAdmin">4. Programa básico de economía solidaria <i class="fa fa-server" aria-hidden="true"></i></a><br />
 			<!--			<a class="toAncla" id="verProgAvaMenuAdmin">7. <small>Prog. de Economía Solidaria con Énfasis en Trabajo Asociado</small> <i class="fa fa-sitemap" aria-hidden="true"></i></a><br />-->
 			<!--			<a class="toAncla" id="verProgsMenuAdmin">8. Programas <i class="fa fa-signal" aria-hidden="true"></i></a><br />-->
-			<a class="toAncla" id="verFaciliMenuAdmin">6. Facilitadores <i class="fa fa-users" aria-hidden="true"></i></a><br />
-			<a class="toAncla" id="verDatPlatMenuAdmin">7. Datos Plataforma Virtual <i class="fa fa-globe" aria-hidden="true"></i></a><br />
-			<a class="toAncla" id="verDataEnLinea">8. Datos Plataforma En Linea <i class="fa fa-globe" aria-hidden="true"></i></a><br />
+			<a class="toAncla" id="verFaciliMenuAdmin">5. Facilitadores <i class="fa fa-users" aria-hidden="true"></i></a><br />
+			<a class="toAncla" id="verDatPlatMenuAdmin">6. Datos Plataforma Virtual <i class="fa fa-globe" aria-hidden="true"></i></a><br />
+			<a class="toAncla" id="verDataEnLinea">7. Datos Plataforma En Linéa <i class="fa fa-globe" aria-hidden="true"></i></a><br />
 			<hr />
-			<button class="btn btn-siia btn-sm btn-block" data-toggle="modal" id="verModTermObs" data-target="#terminarProcObs">Terminar proceso de observaciones <i class="fa fa-check" aria-hidden="true"></i></button>
+			<button class="btn btn-siia btn-sm btn-block" data-toggle="modal" id="terminar_proceso_observacion">Terminar proceso de observaciones <i class="fa fa-check" aria-hidden="true"></i></button>
 		</div>
 	</div>
 </div>
@@ -623,7 +499,7 @@
 								<td class="col-md-1">Campo de formulario</td>
 								<td class="col-md-6">Observación del campo</td>
 								<!--<td class="col-md-2">Valor del usuario</td>-->
-								<td class="col-md-1">Fecha de Observacion</td>
+								<td class="col-md-1">Fecha de Observación</td>
 								<td class="col-md-1">Número de Revision</td>
 								<!--<td class="col-md-1">Id de Solicitud</td>-->
 							</tr>
@@ -636,21 +512,6 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-danger btn-sm pull-left" id="crr_hist_obs" data-dismiss="modal">Cerrar <i class="fa fa-times" aria-hidden="true"></i></button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Modal terminar proceso de observaciones -->
-<div class="modal fade" id="terminarProcObs" tabindex="-1" role="dialog" aria-labelledby="termprocobs">
-	<div class="modal-dialog modal-md" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
-				<label class="modal-title" id="termprocobs">¿Terminar proceso de observaciones?</label>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-danger btn-sm pull-left" data-dismiss="modal">No, voy a verificar <i class="fa fa-times" aria-hidden="true"></i></button>
-				<button type="button" class="btn btn-siia btn-sm" id="terminar_proceso_observacion">Si, terminar <i class="fa fa-check" aria-hidden="true"></i></button>
 			</div>
 		</div>
 	</div>

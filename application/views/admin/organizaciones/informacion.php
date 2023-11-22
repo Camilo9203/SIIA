@@ -9,7 +9,7 @@
 <div id="idSolicitudInfo" style="display: none"><?php echo $idSolicitud; ?></div>
 <div id="idOrganizacion" style="display: none"><?php echo $idOrganizacion; ?></div>
 <!-- Registro de observaciones por formulario -->
-<div class="container">
+<div class="container" id="">
 	<div class="panel-group" id="datos_org_final">
 		<hr />
 		<button id="desplInfoOrg" class="btn btn-sm btn-success btn-block">Desplegar información de la organización <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></button>
@@ -68,13 +68,17 @@
 				<div class="form-group">
 					<p>Estado de la organización:</p><label class="tipoLeer" id='estOrg'></label>
 				</div>
+				<div class="form-group">
+					<p>Cámara de comercio: <a href="" id="camaraComercio_org" target="_blank">Clic aquí para ver la cámara de comercio</a></p>
+				</div>
 				<div class="clearfix"></div>
 			</div>
 		</div>
 		<div class="clearfix"></div>
 		<hr />
-		<button class="btn btn-danger btn-sm pull-left" id="admin_ver_inscritas_volver"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
+		<button class="btn btn-danger btn-sm pull-left" id="admin_ver_finalizadas_volver"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 		<button class="btn btn-sm btn-warning pull-right" id="verRelacionCambios" data-toggle='modal' data-target='#modalRelacionCambios'>Ver relacion de cambios <i class="fa fa-eye" aria-hidden="true"></i></button>
+		<button class="btn btn-sm btn-info pull-right" data-toggle='modal' data-target='#modalPedirCamara'>Pedir cámara de comercio <i class="fa fa-refresh" aria-hidden="true"></i></button>
 		<button class="btn btn-siia btn-sm pull-right verHistObs" id="hist_org_obs" data-backdrop="false" data-toggle='modal' data-target='#verHistObs'>Historial de observaciones <i class="fa fa-history" aria-hidden="true"></i></button>
 		<div class="clearfix"></div>
 		<hr />
@@ -107,22 +111,22 @@
 					<div class="col-lg-6">
 						<!-- Cédula Representante Legal -->
 						<h5>Cédula del representante Legal: </h5><p class="tipoLeer" id='numCedulaCiudadaniaPersona'></p>
-						<!-- Presentación Institucional -->
-						<h5>Presentación institucional: </h5><p class="tipoLeer" id='presentacionInstitucional'></p>
-						<!-- Objeto Social -->
-						<h5>Objeto social: </h5><p class="tipoLeer" id='objetoSocialEstatutos'></p>
+						<!-- Presentación Institucional
+						<h5>Presentación institucional: </h5><p class="tipoLeer" id='presentacionInstitucional'></p>-->
+						<!-- Objeto Social
+						<h5>Objeto social: </h5><p class="tipoLeer" id='objetoSocialEstatutos'></p>-->
 						<!-- Misión -->
 						<h5>Misión: </h5><p class="tipoLeer" id='mision'></p>
 						<!-- Visión -->
 						<h5>Visión: </h5><p class="tipoLeer" id='vision'></p>
-						<!-- Principios -->
-						<h5>Principios: </h5><p class="tipoLeer" id='principios'></p>
-						<!-- Fines -->
-						<h5>Fines: </h5><p class="tipoLeer" id='fines'></p>
+						<!-- Principios
+						<h5>Principios: </h5><p class="tipoLeer" id='principios'></p>-->
+						<!-- Fines
+						<h5>Fines: </h5><p class="tipoLeer" id='fines'></p>-->
 						<!-- Portafolio -->
 						<h5>Portafolio: </h5><p class="tipoLeer" id='portafolio'></p>
-						<!-- Otros -->
-						<h5>Otros: </h5><p class="tipoLeer" id='otros'></p>
+						<!-- Otros
+						<h5>Otros: </h5><p class="tipoLeer" id='otros'></p>-->
 					</div>
 				</div>
 			</div>
@@ -146,51 +150,49 @@
 				</table>
 			</div>
 			<hr />
+			<div class="clearfix"></div>
+			<hr />
 		</div>
 		<div class="col-md-12" id="antecedentesAcademicos">
 			<h3>3. Antecedentes Académicos</h3>
 			<!-- Tabla Antecedentes Académicos -->
-			<div class="">
-				<label>Datos de Antecedentes Educativos y Académicos:</label>
-				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-				<table id="" width="100%" border=0 class="table table-striped table-bordered">
-					<thead>
-					<tr>
-						<td>Descripción Proceso</td>
-						<td>justificación</td>
-						<td>Objetivos</td>
-						<td>Metodología</td>
-						<td>Material Didáctico</td>
-						<td>Bibliografía</td>
-						<td>Duración Curso</td>
-					</tr>
-					</thead>
-					<tbody id="tbody" class="tabla_datos_antecedentes"></tbody>
-				</table>
-			</div>
+			<label>Datos de Antecedentes Educativos y Académicos:</label>
+			<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+			<table id="" width="100%" border=0 class="table table-striped table-bordered">
+				<thead>
+				<tr>
+					<td>Descripción Proceso</td>
+					<td>justificación</td>
+					<td>Objetivos</td>
+					<td>Metodología</td>
+					<td>Material Didáctico</td>
+					<td>Bibliografía</td>
+					<td>Duración Curso</td>
+				</tr>
+				</thead>
+				<tbody id="tbody" class="tabla_datos_antecedentes"></tbody>
+			</table>
 			<hr />
 		</div>
 		<div class="col-md-12" id="jornadasActualizacion">
-			<h3>4. Jornadas de Actualización</h3>
+			<h3>3. Jornadas de Actualización</h3>
 			<!-- Tabla Jornadas de Actualización -->
-			<div class="">
-				<label>Datos de Jornadas de Actualización:</label>
-				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-				<table id="" width="100%" border=0 class="table table-striped table-bordered">
-					<thead>
-					<tr>
-						<td>Cantidad Personas</td>
-						<td>Fecha Asistencia</td>
-					</tr>
-					</thead>
-					<tbody id="tbody" class="tabla_datos_jornadas"></tbody>
-				</table>
-			</div>
+			<label>Datos de Jornadas de Actualización:</label>
+			<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+			<table id="" width="100%" border=0 class="table table-striped table-bordered">
+				<thead>
+				<tr>
+					<td>Cantidad Personas</td>
+					<td>Fecha Asistencia</td>
+				</tr>
+				</thead>
+				<tbody id="tbody" class="tabla_datos_jornadas"></tbody>
+			</table>
 			<div id="archivosJornadasActualizacion"></div>
 			<hr />
 		</div>
 		<div class="col-md-12" id="datosBasicosProgramas">
-			<h3>5. Datos Básicos de Programas</h3><br>
+			<h3>4. Datos Básicos de Programas</h3><br>
 			<p>A continuación se relaciona el motivo de la solicitud registrado por la organización.</p><br><br>
 			<div class="container">
 				<div class="row">
@@ -246,73 +248,65 @@
 						<br>
 					</div>
 					<hr />
-					<div class="col-12">
-						<label>Registro de programas aceptados</label>
-						<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-						<table width="100%" border=0 class="table table-striped table-bordered" id="tabla_registro_programas">
-							<thead>
-							<tr>
-								<td>Organización</td>
-								<td>Numero NIT</td>
-								<td>Nombre Programa</td>
-								<td>Acepta</td>
-								<td>fecha</td>
-							</tr>
-							</thead>
-							<tbody id="tbody" class="tabla_registro_programas"></tbody>
-						</table>
-					</div>
+					<label>Registro de programas aceptados</label>
+					<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+					<table width="100%" border=0 class="table table-striped table-bordered" id="tabla_registro_programas">
+						<thead>
+						<tr>
+							<td>Organización</td>
+							<td>Numero NIT</td>
+							<td>Nombre Programa</td>
+							<td>Acepta</td>
+							<td>fecha</td>
+						</tr>
+						</thead>
+						<tbody id="tbody" class="tabla_registro_programas"></tbody>
+					</table>
 				</div>
 			</div>
 			<hr />
 		</div>
 		<div class="col-md-12" id="docentes">
-			<h3>6. Docentes</h3>
+			<h3>5. Docentes</h3>
 			<button id="verFrameDocentes" class="btn btn-siia btn-sm pull-left">Ver docentes aquí <i class="fa fa-eye" aria-hidden="true"></i></button>
-			<div class="clearfix"></div>
 			<hr />
 			<div class="txtOrgDocen"></div>
 			<div id="frameDocDiv" class="embed-responsive embed-responsive-16by9">
 				<iframe class="embed-responsive-item" id="frameDocentes" frameborder="0" allowfullscreen></iframe>
 			</div>
-			<div class="clearfix"></div>
-			<hr />
 		</div>
 		<div class="col-md-12" id="plataforma">
-			<h3>7. Datos modalidad virtual</h3>
-			<div class="">
-				<label>Datos de herramientas:</label>
-				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-				<table id="tabla_datos_plataforma" width="100%" border=0 class="table table-striped table-bordered">
-					<thead>
-					<tr>
-						<td>UrlAplicación</td>
-						<td>Usuario</td>
-						<td>Contraseña</td>
-					</tr>
-					</thead>
-					<tbody id="tbody" class="tabla_datos_plataforma"></tbody>
-				</table>
-			</div>
+			<h3>6. Datos modalidad virtual</h3>
+			<label>Datos de herramientas:</label>
+			<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+			<table id="tabla_datos_plataforma" width="100%" border=0 class="table table-striped table-bordered">
+				<thead>
+				<tr>
+					<td>UrlAplicación</td>
+					<td>Usuario</td>
+					<td>Contraseña</td>
+				</tr>
+				</thead>
+				<tbody id="tbody" class="tabla_datos_plataforma"></tbody>
+			</table>
 			<hr />
 		</div>
 		<div class="col-md-12" id="enLinea">
-			<h3>8. Datos modalidad en línea</h3>
+			<h3>7. Datos modalidad en línea</h3>
 			<!-- Tabla herramientas -->
-			<div class="">
-				<label>Datos de herramientas:</label>
-				<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-				<table id="" width="100%" border=0 class="table table-striped table-bordered">
-					<thead>
-					<tr>
-						<td>Herramienta</td>
-						<td>Descripción</td>
-						<td>Fecha de registro</td>
-					</tr>
-					</thead>
-					<tbody id="tbody" class="datos_herramientas"></tbody>
-				</table>
-			</div>
+			<label>Datos de herramientas:</label>
+			<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+			<table id="" width="100%" border=0 class="table table-striped table-bordered">
+				<thead>
+				<tr>
+					<td>Herramienta</td>
+					<td>Descripción</td>
+					<td>Fecha de registro</td>
+				</tr>
+				</thead>
+				<tbody id="tbody" class="datos_herramientas"></tbody>
+			</table>
+			<hr />
 		</div>
 	</div>
 </div>
@@ -330,14 +324,14 @@
 			<a class="toAncla" id="verInfGenMenuAdmin">1. Información General de la Entidad <i class="fa fa-home" aria-hidden="true"></i></a><br />
 			<a class="toAncla" id="verDocLegalMenuAdmin">2. Documentación Legal <i class="fa fa-book" aria-hidden="true"></i></a><br />
 			<!--			<a class="toAncla" id="verRegAcaMenuAdmin">3. Registros educativos de Programas <i class="fa fa-newspaper-o" aria-hidden="true"></i></a><br />-->
-			<a class="toAncla" id="verAntAcaMenuAdmin">3. Antecedentes Académicos <i class="fa fa-id-card" aria-hidden="true"></i></a><br />
-			<a class="toAncla" id="verJorActMenuAdmin">4. Jornadas de actualización <i class="fa fa-handshake-o" aria-hidden="true"></i></a><br />
-			<a class="toAncla" id="verProgBasMenuAdmin">5. Programa básico de economía solidaria <i class="fa fa-server" aria-hidden="true"></i></a><br />
+			<!-- <a class="toAncla" id="verAntAcaMenuAdmin">3. Antecedentes Académicos <i class="fa fa-id-card" aria-hidden="true"></i></a><br /> -->
+			<a class="toAncla" id="verJorActMenuAdmin">3. Jornadas de actualización <i class="fa fa-handshake-o" aria-hidden="true"></i></a><br />
+			<a class="toAncla" id="verProgBasMenuAdmin">4. Programa básico de economía solidaria <i class="fa fa-server" aria-hidden="true"></i></a><br />
 			<!--			<a class="toAncla" id="verProgAvaMenuAdmin">7. <small>Prog. de Economía Solidaria con Énfasis en Trabajo Asociado</small> <i class="fa fa-sitemap" aria-hidden="true"></i></a><br />-->
 			<!--			<a class="toAncla" id="verProgsMenuAdmin">8. Programas <i class="fa fa-signal" aria-hidden="true"></i></a><br />-->
-			<a class="toAncla" id="verFaciliMenuAdmin">6. Facilitadores <i class="fa fa-users" aria-hidden="true"></i></a><br />
-			<a class="toAncla" id="verDatPlatMenuAdmin">7. Datos Plataforma Virtual <i class="fa fa-globe" aria-hidden="true"></i></a><br />
-			<a class="toAncla" id="verDataEnLinea">8. Datos Plataforma En Linea <i class="fa fa-globe" aria-hidden="true"></i></a><br />
+			<a class="toAncla" id="verFaciliMenuAdmin">5. Facilitadores <i class="fa fa-users" aria-hidden="true"></i></a><br />
+			<a class="toAncla" id="verDatPlatMenuAdmin">6. Datos Plataforma Virtual <i class="fa fa-globe" aria-hidden="true"></i></a><br />
+			<a class="toAncla" id="verDataEnLinea">7. Datos Plataforma En Linéa <i class="fa fa-globe" aria-hidden="true"></i></a><br />
 			<hr />
 		</div>
 	</div>

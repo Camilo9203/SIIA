@@ -9,8 +9,9 @@ class Admin extends CI_Controller
 		parent::__construct();
 		verify_session_admin();
 		$this->load->model('DocentesModel');
+		$this->load->model('DepartamentosModel');
 	}
-	// Descripción para recuperación de contraseña
+	// Funciones de actualización contraseñas
 	private function mcdec()
 	{
 		$password = "J/lsnBNyPMAE5VLpxc7qOMHOAjOgRuRSurWRQXupW8bZU3PbhnFe/NZ6+dMPNzFAfOQaYThGKzNUsmklfWSuobOJCJ5jWUMSvxuIMEuUyIXQ1Cj1S4FLqJ+/5PJMUO5I|z6VTI1mY2JKEmK+wwX7z9u52OEIloIM7tLj4h3qhDk4=";
@@ -28,6 +29,28 @@ class Admin extends CI_Controller
 		$password = "Clave*21";
 		$passwor2 = generate_hash($password);
 		echo json_encode($passwor2);
+	}
+
+	/**
+	 * @return $data
+	 * Datos de sesión administrador.
+	 */
+	public function datosSesionAdmin()
+	{
+		verify_session_admin();
+		date_default_timezone_set("America/Bogota");
+		$data = array(
+			'logged_in' => $this->session->userdata('logged_in'),
+			'nombre_usuario' => $this->session->userdata('nombre_usuario'),
+			'usuario_id' => $this->session->userdata('usuario_id'),
+			'tipo_usuario' => $this->session->userdata('type_user'),
+			'nivel' => $this->session->userdata('nivel'),
+			'hora' => date("H:i", time()),
+			'fecha' => date('Y/m/d'),
+			'activeLink' => 'solicitudes',
+			'departamentos' => $this->DepartamentosModel->getDepartamentos(),
+		);
+		return $data;
 	}
 	// Socrata
 	public function socrata()
@@ -209,27 +232,10 @@ class Admin extends CI_Controller
 		$this->logs_sia->logs('PLACE_USER');
 	}
 	// Panel Admin 
-	public function panel_admin()
+	public function panel()
 	{
-		date_default_timezone_set("America/Bogota");
-		$logged = $this->session->userdata('logged_in');
-		$nombre_usuario = $this->session->userdata('nombre_usuario');
-		$usuario_id = $this->session->userdata('usuario_id');
-		$tipo_usuario = $this->session->userdata('type_user');
-		$nivel = $this->session->userdata('nivel');
-		$hora = date("H:i", time());
-		$fecha = date('Y/m/d');
-
-		$data['title'] = 'Panel Principal / Administrador';
-		$data['logged_in'] = $logged;
-		$data['nombre_usuario'] = $nombre_usuario;
-		$data['usuario_id'] = $usuario_id;
-		$data['tipo_usuario'] = $tipo_usuario;
-		$data['nivel'] = $nivel;
-		$data['hora'] = $hora;
-		$data['fecha'] = $fecha;
-		$data['departamentos'] = $this->cargarDepartamentos();
-
+		$data = $this->datosSesionAdmin();
+		$data['title'] = 'Panel Principal / Organizaciones / En evaluación';
 		$this->load->view('include/header', $data);
 		$this->load->view('admin/paneles/panel', $data);
 		$this->load->view('include/footer', $data);
@@ -238,27 +244,10 @@ class Admin extends CI_Controller
 	// Contacto
 	public function contacto()
 	{
-		date_default_timezone_set("America/Bogota");
-		$logged = $this->session->userdata('logged_in');
-		$nombre_usuario = $this->session->userdata('nombre_usuario');
-		$usuario_id = $this->session->userdata('usuario_id');
-		$tipo_usuario = $this->session->userdata('type_user');
-		$nivel = $this->session->userdata('nivel');
-		$hora = date("H:i", time());
-		$fecha = date('Y/m/d');
-
+		$data = $this->datosSesionAdmin();
 		$data['title'] = 'Panel Principal / Administrador / Contacto';
-		$data['logged_in'] = $logged;
-		$data['nombre_usuario'] = $nombre_usuario;
-		$data['usuario_id'] = $usuario_id;
-		$data['tipo_usuario'] = $tipo_usuario;
-		$data['nivel'] = $nivel;
-		$data['hora'] = $hora;
-		$data['fecha'] = $fecha;
-		$data['departamentos'] = $this->cargarDepartamentos();
 		$data['usuarios'] = $this->verUsuarios();
 		$data['emails'] = $this->db->select("*")->from("organizaciones")->get()->result();
-
 		$this->load->view('include/header', $data);
 		$this->load->view('admin/contacto/contacto', $data);
 		$this->load->view('include/footer', $data);
@@ -987,13 +976,11 @@ class Admin extends CI_Controller
 
 		return $organizaciones;
 	}
-	// TODO: Organizaciones acreditadas
 	public function organizacionesInscritas()
 	{
 		$organizaciones = $this->db->select("*")->from("organizaciones")->get()->result();
 		return $organizaciones;
 	}
-
 	public function modalInformacion()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -1060,7 +1047,6 @@ class Admin extends CI_Controller
 		return $solicitudesRegistradas;
 		// echo json_encode($organizaciones);
 	}
-	// TODO: Cargar docentes 
 	public function cargar_docentesDeshabilitados()
 	{
 		// $docentes = $this->db->select("*")->from("docentes")->where("valido", 0)->where("asignado !=", "")->get()->result();
@@ -1158,7 +1144,6 @@ class Admin extends CI_Controller
 		$id_docente = $this->input->post('id_docente');
 		$valido = $this->input->post('valido');
 		$docente_val_obs = $this->input->post('docente_val_obs');
-
 		if ($valido == 1) {
 			$data_update = array(
 				'id_docente' => $id_docente,
@@ -1168,7 +1153,6 @@ class Admin extends CI_Controller
 			);
 		} else {
 			$informacionDocente = $this->db->select("*")->from("docentes")->where("id_docente", $id_docente)->get()->row();
-
 			$data_update = array(
 				'id_docente' => $id_docente,
 				'valido' => $valido,
@@ -1177,7 +1161,6 @@ class Admin extends CI_Controller
 				'asignado' => $informacionDocente->asignado,
 			);
 		}
-
 		$this->db->where('id_docente', $id_docente);
 		if ($this->db->update('docentes', $data_update)) {
 			if ($valido == 1) {
@@ -1194,7 +1177,6 @@ class Admin extends CI_Controller
 		$this->notif_sia->notification('Docente', $nombre_usuario, "");
 		//$this->envio_mail("docentes", $id_organizacion, 2, "");
 	}
-	// TODO: Asignar evaluador a docente a evaluar
 	public function asignarDocenteEvaluador()
 	{
 		$id_docente = $this->input->post('id_docente');
@@ -1914,34 +1896,6 @@ class Admin extends CI_Controller
 		$notificaciones = $this->db->select("*")->from("notificaciones")->where("quienRecibe", "admin")->get()->result();
 		return $notificaciones;
 	}
-
-	public function guardar_observacion()
-	{
-		$datavalue = $this->input->post('type');
-		$dataKey = $this->input->post('title');
-		$observacion = $this->input->post('text');
-		$formularioId = $this->input->post('valor');
-		$numRevision = $this->input->post('numero_rev');
-		$numSol = $this->input->post('numSol');
-		$id_solicitud = $this->input->post('id_solicitud');
-		$id_organizacion = $this->input->post('id_organizacion');
-
-		$data_observacion = array(
-			'idForm' => $formularioId,
-			'keyForm' => $dataKey,
-			'valueForm' => $datavalue,
-			'observacion' => $observacion,
-			'fechaObservacion' => date('Y/m/d H:i:s'),
-			'numeroRevision' => $numRevision,
-			'idSolicitud' => $id_solicitud,
-			'organizaciones_id_organizacion' => $id_organizacion
-		);
-
-
-		if ($this->db->insert('observaciones', $data_observacion)) {
-			echo json_encode(array('url' => "", 'msg' => "Se guardaron las observaciones."));
-		}
-	}
 	public function guardarContrasenaAdmin()
 	{
 		$id_usuario = $this->session->userdata('usuario_id');
@@ -2260,7 +2214,7 @@ class Admin extends CI_Controller
 			echo json_encode(array('msg' => "Nombre de la aplicación actualizado"));
 		}
 	}
-	public function guardarArchivoObsPlataforma() //TODO: Guardar Archivos
+	public function guardarArchivoObsPlataforma()
 	{
 		//$this->form_validation->set_rules('tipoArchivo','','trim|required|min_length[3]|xss_clean');
 		$tipoArchivo = $this->input->post('tipoArchivo');
@@ -2502,7 +2456,6 @@ class Admin extends CI_Controller
 			echo json_encode(array('url' => "login", 'msg' => "Lo sentimos, hubo un error y no se envio el correo."));
 		}
 	}
-	// TODO: Enviar Email a Administradores
 	function envio_mail_admin($tipo, $correoAdmin, $prioridad, $docente)
 	{
 		$fromSIA = "Unidad Solidarias - Aplicación SIIA.";
@@ -2575,7 +2528,6 @@ class Admin extends CI_Controller
 		$informacionModal = $this->db->select("valor")->from("opciones")->where("nombre", "informacionModal")->get()->row()->valor;
 		return $informacionModal;
 	}
-	// TODO: Ver Documentos
 	public function verDocumento (){
 		$archivo = $this->db->select('*')->from('archivos')->where('id_registro', $this->input->post('id'))->get()->row();
 		switch($this->input->post('formulario')){

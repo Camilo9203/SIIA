@@ -51,36 +51,7 @@ class Panel extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-	public function estadoSolicitud($idSolicitud)
-	{
-		date_default_timezone_set("America/Bogota");
-		$logged = $this->session->userdata('logged_in');
-		$nombre_usuario = $this->session->userdata('nombre_usuario');
-		$usuario_id = $this->session->userdata('usuario_id');
-		$tipo_usuario = $this->session->userdata('type_user');
-		$hora = date("H:i", time());
-		$fecha = date('Y/m/d');
 
-		$data['title'] = 'Panel Principal - Estado de la Solicitud';
-		$data['logged_in'] = $logged;
-		$datos_usuario = $this->db->select('usuario')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
-		$data['nombre_usuario'] = $datos_usuario->usuario;
-		$data['usuario_id'] = $usuario_id;
-		$data['tipo_usuario'] = $tipo_usuario;
-		$data['hora'] = $hora;
-		$data['fecha'] = $fecha;
-		$data['organizacion'] = $this->db->select("*")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$data['observaciones'] = $this->cargarObservaciones($idSolicitud);
-		$data['observacionesDocentes'] = $this->cargarObservaciones($data['organizacion']->id_organizacion);
-		$data['solicitud'] = $this->cargarSolicitud($idSolicitud);
-		//$data['idSolicitud'] = $this->idSolicitud();
-		//$data['archivosPlataforma'] = $this->cargarObservacionesPlataforma();
-
-		$this->load->view('include/header', $data);
-		$this->load->view('paneles/estadoSolicitud', $data);
-		$this->load->view('include/footer', $data);
-		$this->logs_sia->logs('PLACE_USER');
-	}
 	public function informeActividades()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -394,12 +365,6 @@ class Panel extends CI_Controller
 			echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los datos de aceptación del programa: " . $programa->nombrePrograma, 'status' => 2));
 		}
 
-	}
-
-	public function cargarObservaciones($idSolicitud)
-	{
-		$observaciones = $this->db->select("*")->from("observaciones")->where("idSolicitud", $idSolicitud)->order_by("valueForm", "asc")->get()->result();
-		return $observaciones;
 	}
 	public function cargarObservacionesPlataforma()
 	{

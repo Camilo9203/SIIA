@@ -347,7 +347,7 @@ $(".verDetalleSolicitud").click(function () {
  * */
 $(".verObservaciones").click(function () {
 	let idSolicitud = $(this).attr("data-id");
-	window.open(baseURL + "panel/estadoSolicitud/" + idSolicitud, '_self');
+	window.open(baseURL + "solicitudes/estadoSolicitud/" + idSolicitud, '_self');
 });
 function irSolicitud (data) {
 	event.preventDefault();

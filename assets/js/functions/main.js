@@ -988,22 +988,10 @@ $(document).ready(function () {
 		});
 		//}
 	});
-
-
-
 	var data_orgFinalizada = [];
-
 	// $(document).on("click", ".verUnaObs", functions (){
-
 	// });
-
 	// $(".obs_admin_").parent().append('<button class="verUnaObs btn btn-siia fa fa-angle-left"></button>');
-
-	$("#verFrameDocentes").click(function () {
-		$("#frameDocDiv").slideDown();
-		document.getElementById("frameDocentes").contentDocument.location.reload(true);
-	});
-
 	$(".actualizar_tipocurso").click(function () {
 		$numero_cursos = $("#numero_tiposCurso").attr("data-num-cursos");
 		for ($i = 1; $i <= $numero_cursos; $i++) {
@@ -3546,14 +3534,11 @@ $(document).ready(function () {
 			},
 		});
 	});
-
 	$(document).on("click", ".editarAsistente", function () {
 		$id_asistente = $(this).attr("data-id-ass");
-
 		data = {
 			id_asistente: $id_asistente,
 		};
-
 		$.ajax({
 			url: baseURL + "panel/cargar_informacionAsistente",
 			type: "post",
@@ -3591,7 +3576,6 @@ $(document).ready(function () {
 			},
 		});
 	});
-
 	$("#actualizarAsistente").click(function () {
 		$id_asistente = $("#EdasisID").html();
 		$editarAsisPN = $("#editarAsisPN").val();
@@ -3627,11 +3611,9 @@ $(document).ready(function () {
 			},
 		});
 	});
-
 	$(".informe_restaurar").click(function () {
 		reload();
 	});
-
 	var $dataAsistentes = [];
 	$(".adminVerInforme").click(function () {
 		$id_curso = $(this).attr("data-id");
@@ -3679,7 +3661,6 @@ $(document).ready(function () {
 			},
 		});
 	});
-
 	$(".adminVerAsistentes").click(function () {
 		$num_asis = 0;
 		$("#informacionInforme").removeClass("col-md-12");
@@ -3775,7 +3756,6 @@ $(document).ready(function () {
 			$dataAsistentes["0"].data[$num_asis].privadoLibertad
 		);
 	});
-
 	$("#anteriorAsistente").click(function () {
 		$num_asis = $("#id_asistente_curso").html();
 		$num_asis = parseFloat($num_asis) - 2;
@@ -3874,7 +3854,6 @@ $(document).ready(function () {
 			$("#siguienteAsistente").prop("disabled", true);
 		}
 	});
-
 	$("#siguienteAsistente").click(function () {
 		$num_asis = $("#id_asistente_curso").html();
 		$("#id_asistente_curso").html(parseFloat($num_asis) + 1);
@@ -4329,7 +4308,6 @@ $(document).ready(function () {
 			},
 		});
 	});
-
 	$("#anteriorDocente").click(function () {
 		$num_doc = $("#id_docente").html();
 		$num_doc = parseFloat($num_doc) - 2;
@@ -4447,7 +4425,6 @@ $(document).ready(function () {
 			//$("#documentos_docente").append("<a class='docVistoArch' href='"+$carpeta+$dataArchivos['0'].data_archivos[$num_doc][$j].nombre+"' target='_blank'>"+$dataArchivos['0'].data_archivos[$num_doc][$j].nombre+"</a><br>");
 		}
 	});
-
 	$("#siguienteDocente").click(function () {
 		$num_doc = $("#id_docente").html();
 		$("#id_docente").html(parseFloat($num_doc) + 1);
@@ -4563,78 +4540,10 @@ $(document).ready(function () {
 			//$("#documentos_docente").append("<a class='docVistoArch' href='"+$carpeta+$dataArchivos['0'].data_archivos[$num_doc][$j].nombre+"' target='_blank'>"+$dataArchivos['0'].data_archivos[$num_doc][$j].nombre+"</a><br>");
 		}
 	});
-
-	$(document).on("click", ".guardarObsArchivoDoc", function () {
-		$id_archivoDocente = $(this).attr("data-id");
-		$observacionArchivo = $(this)
-			.parent("td")
-			.siblings("td")
-			.children("textarea#archivoDoc" + $id_archivoDocente)
-			.val();
-
-		console.log($id_archivoDocente);
-		console.log($observacionArchivo);
-
-		data = {
-			id_archivoDocente: $id_archivoDocente,
-			observacionArchivo: $observacionArchivo,
-		};
-
-		$.ajax({
-			url: baseURL + "admin/actualizarArchivoDocente",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			success: function (response) {
-				notificacion(response.msg, "success");
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
-
 	$("#crr_hist_obs").click(function () {
 		$("#tbody_hist_obs").empty();
 		$("#tbody_hist_obs").html("");
 	});
-
-	// TODO: Validar docente
-	$(".guardarValidoDocente").click(function () {
-		$(".guardarObsArchivoDoc").each(function () {
-			$(this).click();
-		});
-		$id_docente = $(this).attr("data-id");
-		$valido = $("input:radio[name=validoDocente]:checked").val();
-		$docente_val_obs = $("#docente_val_obs").val();
-
-		console.log($id_docente);
-		console.log($valido);
-
-		data = {
-			id_docente: $id_docente,
-			valido: $valido,
-			docente_val_obs: $docente_val_obs,
-		};
-
-		$.ajax({
-			url: baseURL + "admin/validarDocentes",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			beforeSend: function () {
-				notificacion("Cargando...", "success");
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-				$("#docente_val_obs").val("");
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
-
 	$("#llenar_asistente").modal({
 		show: false,
 		backdrop: "static",
@@ -4645,7 +4554,6 @@ $(document).ready(function () {
 		backdrop: "static",
 		keyboard: false,
 	});
-
 	$("#adminCrearSeguimiento").click(function () {
 		$nombreOrganizacion = $("#organizacionSeguimiento").val();
 		$id_organizacion = $("option:selected", "#organizacionSeguimiento").attr(
@@ -4675,7 +4583,6 @@ $(document).ready(function () {
 			},
 		});
 	});
-
 	$(".adminVerllamada").click(function () {
 		$idLlamada = $(this).attr("data-id");
 
@@ -4747,7 +4654,6 @@ $(document).ready(function () {
 			},
 		});
 	});
-
 	$("#actualizarLlamada").click(function () {
 		$idLlamada = $("#llamadaID").html();
 		$telefonicoNombre = $("#telefonicoNombreModal").val();
@@ -4812,7 +4718,6 @@ $(document).ready(function () {
 			},
 		});
 	});
-
 	$(".respuestaAseguimiento").click(function () {
 		$("#modalDescDarRespuesta").html("");
 		$("#id_segModal").html("");
@@ -4823,7 +4728,6 @@ $(document).ready(function () {
 		$("#id_segModal").html($id_seguimiento);
 		$("#modalDescDarRespuesta").html($descripcion);
 	});
-
 	$(".adminrespuestaAseguimiento").click(function () {
 		$("#modalDescDarRespuesta").html("");
 		$("#id_segModal").html("");
@@ -4834,7 +4738,6 @@ $(document).ready(function () {
 		$("#id_segModal").html($id_seguimiento);
 		$("#modalDescDarRespuesta").html($respuesta);
 	});
-
 	$("#darRespuestaSeguimiento").click(function () {
 		$id_seguimiento = $("#id_segModal").html();
 		$respuestaSeguimiento = $("#respuestaSeguimiento").val();
@@ -4862,7 +4765,6 @@ $(document).ready(function () {
 			},
 		});
 	});
-
 	$("#darRespuestaSeguimientoAdmin").click(function () {
 		$id_seguimiento = $("#id_segModal").html();
 		$preguntaSeguimiento = $("#preguntaSeguimiento").val();
@@ -4891,7 +4793,6 @@ $(document).ready(function () {
 			},
 		});
 	});
-
 	$("#adminCrearVisita").click(function () {
 		$nombreOrganizacion = $("#organizacionVisita").val();
 		$id_organizacion = $("option:selected", "#organizacionVisita").attr(
@@ -4927,7 +4828,6 @@ $(document).ready(function () {
 			},
 		});
 	});
-
 	$(".adminVerVisita").click(function () {
 		$id_visita = $(this).attr("data-id");
 		$fecha = $(this).attr("data-fecha");
@@ -5486,7 +5386,6 @@ $(document).ready(function () {
 			},
 		});
 	});
-
 	$(document).on("click", ".actualizarPlanMejora", function () {
 		$id_actualizar = $(this).attr("id");
 		console.log($id_actualizar);
@@ -5521,12 +5420,10 @@ $(document).ready(function () {
 			}
 		}
 	});
-
 	$(document).on("click", "#getCert", function () {
 		$id_asistente = $(this).attr("data-id-ass");
 		window.open(baseURL + "Certificado/?id:" + $id_asistente, "_blank");
 	});
-
 	$("#comenzarEval").click(function () {
 		$id_organizacion = $(this).attr("data-id");
 		$id_visita = $(this).attr("data-id-visita");
@@ -5536,12 +5433,10 @@ $(document).ready(function () {
 			"_blank"
 		);
 	});
-
 	$("#volverEst_org").click(function () {
 		$("#admin_ver_finalizadas").slideDown();
 		$("#v_estado_org").slideUp();
 	});
-
 	$("#crearBateriaObservacion").click(function () {
 		$tipoBateriaObservacion = $("#tipoBateriaObservacion").val();
 		$tituloBateriaObservacion = $("#tituloBateriaObservacion").val();
@@ -5744,7 +5639,6 @@ $(document).ready(function () {
 		var sel = $(this).data("title");
 		var tog = $(this).data("toggle");
 		$("#" + tog).prop("value", sel);
-
 		$('a[data-toggle="' + tog + '"]')
 			.not('[data-title="' + sel + '"]')
 			.removeClass("active")
@@ -6859,7 +6753,6 @@ $(document).ready(function () {
 /**
 	Comienza Funciones del archivo.
 **/
-
 /**
 	Funcion para redireccionar URL's usando Jquery, no funciono redirect MVC :c.
 	@param response = string url con comillas
@@ -6868,7 +6761,6 @@ function redirect(response) {
 	$url = response.replace('"', "").replace('"', "");
 	$(window).attr("location", $url);
 }
-
 function copyTextToClipboard($texto) {
 	var copiarDesde = $("<textarea/>");
 	copiarDesde.text($texto);
@@ -6881,18 +6773,15 @@ function copyTextToClipboard($texto) {
 		"success"
 	);
 }
-
 /**
 	Recargar la pagina, en false para cache, en true para cargar desde 0.
 **/
 function reload() {
 	location.reload(false);
 }
-
 function reloadH() {
 	location.reload(true);
 }
-
 /**
 	@param response = string json
 	Limpia si la cadena JSON encode de php que tiene doble comilla.
@@ -7039,7 +6928,6 @@ function mensaje(mensaje, clase) {
 		);
 	});
 }
-
 /**
 	@param id = id del div a resetear inputs
 	Limpia los inputs de un DIV en el DOM.
@@ -7049,7 +6937,6 @@ function clearInputs(id) {
 		$(this).val("");
 	});
 }
-
 /**
 	Funcion de notificaciones.
 	@param msg = Mensaje a mostrar.
@@ -7070,7 +6957,6 @@ function notificacion($msg, $type) {
 		opacity: 1,
 	});
 }
-
 /**
 	Boton para volver al inicio.
 **/
@@ -7096,7 +6982,6 @@ function back_to_top() {
 
 	$("#back-to-top").tooltip("show");
 }
-
 function sleep(milliseconds) {
 	var start = new Date().getTime();
 	for (var i = 0; i < 1e7; i++) {
@@ -7105,7 +6990,6 @@ function sleep(milliseconds) {
 		}
 	}
 }
-
 /**
 	TODO: Validaciones para los formularios.
 **/
@@ -7316,12 +7200,10 @@ function validaciones() {
 	    }
 	});*/
 }
-
 function paging(tabla) {
 	$("#" + tabla + "tbody").empty();
 	$("#" + tabla).paging({ limit: 10 });
 }
-
 /**
 	TODO: Tablas a iniciarlizar con Data Table, si se van añadir mas tablas a inicializar escribir el id sin el # en el array "tablas".
 **/
@@ -7354,7 +7236,6 @@ function tablas() {
 		"tabla_observaciones_form5",
 		"tabla_observaciones_form6",
 		"tabla_observaciones_form7",
-		"tabla_observaciones_form8",
 		"tabla_registro_programas",
 		"tabla_organizaciones_inscritas",
 	];
@@ -7496,7 +7377,6 @@ function tablas() {
 	paging("tabla_encuestas");
 	$(".selectpicker").selectpicker("refresh");
 }
-
 /**
 	Parametros de los selects options.
 	@URL: https://silviomoreto.github.io/bootstrap-select/
@@ -7512,7 +7392,6 @@ function selects() {
 		liveSearchPlaceholder: "Buscar...",
 	});
 }
-
 function submenu() {
 	$(".submenu").hide();
 	$(".contenedor--menu").hide();
@@ -7533,7 +7412,6 @@ function submenu() {
 		}
 	});
 }
-
 /**
 	Muestra mensaje en consola :#.
 **/
@@ -7547,7 +7425,6 @@ function initJS() {
 	tablas();
 	back_to_top();
 }
-
 function dragElemento(elmnt) {
 	var pos1 = 0,
 		pos2 = 0,
@@ -7591,7 +7468,6 @@ function dragElemento(elmnt) {
 		document.onmousemove = null;
 	}
 }
-
 function dragDivForm(div) {
 	$("." + div).draggable({
 		start: function (event, ui) {
@@ -7630,7 +7506,6 @@ function dragDivForm(div) {
 			}
 		});
 }
-
 function dragDivFormById(div) {
 	$("#" + div).draggable({
 		start: function (event, ui) {
@@ -7669,7 +7544,6 @@ function dragDivFormById(div) {
 			}
 		});
 }
-
 function mayus(e) {
 	e.value = e.value.toUpperCase();
 }

@@ -60,4 +60,24 @@ class AdministradoresModel extends CI_Model
 		$password = mc_decrypt($pass, KEY_RDEL);
 		return $password;
 	}
+
+	/**
+	 * Get name complete
+	 * @param $user
+	 * @return void
+	 */
+	public function getNameComplete($user){
+		$user = $this->db->select('*')->from('administradores')->where('usuario', $user)->get()->row();
+		$name = $user->primerNombreAdministrador . ' ' . $user->primerApellidoAdministrador;
+		return $name;
+	}
+	/**
+	 * Get email administrador
+	 * @param $user
+	 * @return void
+	 */
+	public function getEmail($user){
+		$user = $this->db->select('*')->from('administradores')->where('usuario', $user)->get()->row();
+		return $user->direccionCorreoElectronico;
+	}
 }

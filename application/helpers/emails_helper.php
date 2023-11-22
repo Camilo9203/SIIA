@@ -72,6 +72,10 @@ function send_email_admin($tipo, $prioridad = null, $to = null, $docente = null,
 			$message = 'Se le ha asignado la solicitud: <strong>' . $solicitud . '</strong> de la organización <strong>' . $organizacion->nombreOrganizacion . '</strong> para que pueda ver la solicitud y la información, este correo es informativo y debe ingresar a la aplicación SIIA, en organizaciones y luego en evaluación para poder ver la solicitud.';
 			//$response = array('url' => 'panelAdmin/solicitudes/asignar', 'msg' => 'Se asigno la solicitud: ' . $solicitud . ' de la organización: ' . $organizacion->nombreOrganizacion .   ' correctamente en la fecha ' . date("Y-m-d H:i:s") . '.');
 			break;
+		case 'actualizacionSolicitud':
+			$subject = 'Actualización de la solicitud - ' . $solicitud;
+			$message = 'La organización: <strong>' . $organizacion->nombreOrganizacion . '</strong> ha realizado los ajustes requeridos para la solicitud: <strong>' . $solicitud . '</strong>, por favor ingresar a la aplicación SIIA, en organizaciones y luego en complementaria para poder ver la solicitud.';
+			break;
 		case 'solicitarCamara':
 			$subject = "Solicitud cámara de comercio: " . $organizacion->sigla;
 			$head = "Buen día, esta es una notificación del sistema:, <br><br>Se ha enviado una solicitud para cargar la camara de comercio de la siguiente organización:<br><br>";
@@ -167,9 +171,22 @@ function send_email_user($to, $type, $organizacion, $usuario = null, $token = nu
 			$message = "Buen día, <strong>" . $organizacion->nombreOrganizacion . " </strong><br> A continuación se relacionan los datos del evaluador que está a cargo de su solicitud: <strong>" . $idSolicitud .
 			"</strong><br><br><h3>Datos de evaluador </h3><br>
 			<strong>Evaluador: </strong>" . $usuario->primerNombreAdministrador . " " . $usuario->primerApellidoAdministrador . "<br><br>
-			<strong>Celular: </strong>" . $usuario->celular . "<br><br>
+			<strong>PBX: </strong>57+1 3275252 ext " . $usuario->ext . "<br><br>
 			<strong>Correo electronico: </strong>" . $usuario->direccionCorreoElectronico;
 			$response = array('status' => "success", 'title' => "Solicitud asignada correctamente",'msg' =>  "Se a notificado a <strong> " . $organizacion->direccionCorreoElectronicoOrganizacion . "</strong> y a <strong>" . $usuario->direccionCorreoElectronico . "</strong>");
+			break;
+		case 'enviarObservaciones':
+			if ($CI->SolicitudesModel->solicitudes($idSolicitud)->numeroRevisiones > 1):
+				$subject = "Observaciones actualizadas";
+			else:
+				$subject = "Observaciones realizadas";
+			endif;
+			$message = "<p>Buen día, <strong>" . $organizacion->nombreOrganizacion . " </strong><br> Organizaciones Solidarias le informa que se realizó la revisión de su solicitud de acreditación: <strong>" . $idSolicitud .
+			"<br><br></strong>Para verificar la totalidad de los requisitos establecidos en la normatividad vigente es necesario complementar la información presentada.
+			<br>Le invitamos a ingresar al aplicativo SIIA, donde encontrará las observaciones respectivas en cada parte del formulario y desarrollar lo indicado en cada una de ellas.
+			<br>Tenga presente que usted cuenta con un plazo máximo de cinco (5) días hábiles para realizar los ajustes sugeridos y enviar nuevamente la información. 
+			<br>De lo contrario su solicitud será archivada aplicando lo establecido en el numeral 4 del artículo 5 de la Resolución 110 de 2016";
+			$response = array('status' => "success", 'title' => $subject,'msg' =>  "Se han enviado las observaciones a <strong>" . $organizacion->nombreOrganizacion . "</strong>. Se envío notificación al correo  <strong>" . $organizacion->direccionCorreoElectronicoOrganizacion . "</strong>");
 			break;
 		default:
 			$asunto = "";

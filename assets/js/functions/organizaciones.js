@@ -159,7 +159,7 @@ $(".ver_organizacion_inscrita").click(function () {
 					$("#tbody_solicitudes").append("<tr id=" + i + ">");
 					$("#tbody_solicitudes>tr#" + i + "").append("<td>" + response.solicitudes[i].idSolicitud + "</td>");
 					$("#tbody_solicitudes>tr#" + i + "").append("<td>" + response.solicitudes[i].nombre + "</td>");
-					$("#tbody_solicitudes>tr#" + i + "").append("<td>" + response.solicitudes[i].fecha + "</td>");
+					$("#tbody_solicitudes>tr#" + i + "").append("<td>" + response.solicitudes[i].fechaCreacion + "</td>");
 					$("#tbody_solicitudes>tr#" + i + "").append("<td>" + response.solicitudes[i].asignada + "</td>");
 					$("#tbody_solicitudes>tr#" + i + "").append("<td>" + response.solicitudes[i].modalidadSolicitud + "</td>");
 					$("#tbody_solicitudes>tr#" + i + "").append("<td>" + response.solicitudes[i].motivoSolicitud + "</td>");

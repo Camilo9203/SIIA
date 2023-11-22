@@ -197,9 +197,7 @@ $("#verJorActMenuAdmin").click(function () {
 				}
 			}
 			$(".tabla_datos_jornadas").html(html);
-			verObservaciones(4);
-
-
+			verObservaciones(3);
 		}
 	});
 });
@@ -260,7 +258,7 @@ $("#verProgBasMenuAdmin").click(function () {
 				}
 			}
 			$(".tabla_registro_programas").html(html);
-			verObservaciones(5);
+			verObservaciones(4);
 
 		}
 	});
@@ -275,7 +273,7 @@ $("#verFaciliMenuAdmin").click(function () {
 	$("#docentes").show();
 	$("#plataforma").hide();
 	$("#enLinea").hide();
-	verObservaciones(6);
+	verObservaciones(5);
 });
 $("#verDatPlatMenuAdmin").click(function () {
 	$("#informacion").hide();
@@ -315,7 +313,7 @@ $("#verDatPlatMenuAdmin").click(function () {
 			}
 			console.log(response.observaciones);
 			$(".tabla_datos_plataforma").html(html);
-			verObservaciones(7);
+			verObservaciones(5);
 		}
 	});
 });
@@ -356,7 +354,7 @@ $("#verDataEnLinea").click(function () {
 				}
 			}
 			$(".datos_herramientas").html(html);
-			verObservaciones(8);
+			verObservaciones(7);
 		}
 	});
 });
@@ -380,46 +378,68 @@ function verObservaciones(idForm) {
 					obsForm += 1;
 				}
 			}
-			if(obsForm == 0){
-				html += "<td colspan='4'>No hay datos </td></tr>";
-			}
-			else {
+			if(obsForm != 0){
+				$("#tabla_observaciones_form" + idForm).DataTable().destroy();
+				html += "<table width='100%' border=0 class='table table-striped table-bordered tabla_observaciones_form"+ idForm +"' id='tabla_observaciones_form" + idForm + "'>";
+				html += "<thead><tr>";
+				html += "<td>Fecha Observación</td>";
+				html += "<td>Revisión</td>";
+				html += "<td>Observación</td>";
+				html += "<td>Verificada</td>";
+				html += "<td>Acción</td>";
+				html += "</tr></thead>";
+				html += "<tbody id='tbody'>";
 				for (let i = 0; i < response.observaciones.length; i++) {
 					if (response.observaciones[i]['idForm'] == idForm) {
 						html += "<tr><td>" + response.observaciones[i]['fechaObservacion'] + "</td>";
 						html += "<td>" + response.observaciones[i]['numeroRevision'] + "</td>";
-						html += "<td><textarea style='width: 700px; height: 140px; resize: none; border: hidden' readonly>" + response.observaciones[i]['observacion'] + "</textarea></td>";
+						html += "<td><textarea style='width: 600px; height: 140px; resize: none; border: hidden' readonly>" + response.observaciones[i]['observacion'] + "</textarea></td>";
+						if (response.observaciones[i]['valida'] == 1) {
+							html += "<td><input type='checkbox' class='validarObservacion' data-idform='" + idForm + "' data-id='" + response.observaciones[i]['id_observacion'] + "' checked></td>";
+						}
+						else {
+							html += "<td><input type='checkbox' class='validarObservacion' data-idform='" + idForm + "' data-id='" + response.observaciones[i]['id_observacion'] + "'></td>";
+						}
 						html += "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarObservacionForm eliminarDataTabla' data-id=" + response.observaciones[i]['id_observacion'] + ">Eliminar <i class='fa fa-file-o' aria-hidden='true'></i></button></td></tr>";
 					}
 				}
+				html += "</tbody>";
+				html += "</table>";
 			}
 			switch (idForm) {
 				case 1:
-					$(".tabla_observaciones_form1").html(html);
+					$(".observaciones_realizadas_form1").html(html);
 					break;
 				case 2:
-					$(".tabla_observaciones_form2").html(html);
+					$(".observaciones_realizadas_form2").html(html);
 					break;
 				case 3:
-					$(".tabla_observaciones_form3").html(html);
+					$(".observaciones_realizadas_form3").html(html);
 					break;
 				case 4:
-					$(".tabla_observaciones_form4").html(html);
+					$(".observaciones_realizadas_form4").html(html);
 					break;
 				case 5:
-					$(".tabla_observaciones_form5").html(html);
+					$(".observaciones_realizadas_form5").html(html);
 					break;
 				case 6:
-					$(".tabla_observaciones_form6").html(html);
+					$(".observaciones_realizadas_form6").html(html);
 					break;
 				case 7:
-					$(".tabla_observaciones_form7").html(html);
-					break;
-				case 8:
-					$(".tabla_observaciones_form8").html(html);
+					$(".observaciones_realizadas_form7").html(html);
 					break;
 			}
-
+			$("#tabla_observaciones_form" + idForm).DataTable({
+				dom: 'ftipr',
+				language: {
+					url: "//cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json",
+				},
+				responsive: true,
+				fixedHeader: {
+					header: false,
+					footer: false,
+				},
+			});
 		}
 	});
 }
@@ -746,29 +766,57 @@ if ($("#idSolicitudInfo").html() != undefined) {
  * Terminar proceso de observación
  * */
 $(document).on("click", "#terminar_proceso_observacion", function () {
-	let data = {
-		id_organizacion: data_orgFinalizada["0"].organizaciones['id_organizacion'],
-		idSolicitud: data_orgFinalizada["0"].tipoSolicitud['0']['idSolicitud'],
-	}
-	$("#terminar_proceso_observacion").attr("disabled", true);
-	$.ajax({
-		url: baseURL + "observaciones/cambiarEstadoSolicitud",
-		type: "post",
-		dataType: "JSON",
-		data: data,
-		beforeSend: function () {
-			notificacion("Espere...", "success");
+	let msg = '¿Está seguro de terminar y enviar las observaciones de la solicitud <strong>' + data_orgFinalizada["0"].tipoSolicitud['0']['idSolicitud'] + '</strong>?. ' +
+			'<br><br>Esto cambiará el estado de la solicitud y ahora tendrá que ser revisada desde el modúlo <strong>complementaria</strong>.' +
+			'<br><br>Si no tiene ninguna observación sobre esta solicitud, por favor de clic en <strong>no</strong> y cambie el estado de solucitud en el modúlo <strong>estado</strong>';
+	Alert.fire({
+		title: 'Enviar observaciones',
+		html: msg,
+		text: msg,
+		icon: 'info',
+		showCancelButton: true,
+		confirmButtonText: 'Si',
+		cancelButtonText: 'No',
+		allowOutsideClick: false,
+		customClass: {
+			popup: 'popup-swalert-list',
+			confirmButton: 'button-swalert',
 		},
-		success: function (response) {
-			notificacion("Proceso terminado, espere 5 segundos...", "success");
-			setInterval(function () {
-				redirect("finalizadas");
-			}, 5000);
-		},
-		error: function (ev) {
-			//Do nothing
-		},
-	});
+	}).then((result) => {
+		if (result.isConfirmed) {
+			let data = {
+				id_organizacion: data_orgFinalizada["0"].organizaciones['id_organizacion'],
+				idSolicitud: data_orgFinalizada["0"].tipoSolicitud['0']['idSolicitud'],
+			}
+			$("#terminar_proceso_observacion").attr("disabled", true);
+			$.ajax({
+				url: baseURL + "observaciones/cambiarEstadoSolicitud",
+				type: "post",
+				dataType: "JSON",
+				data: data,
+				beforeSend: function () {
+					procesando('info', 'Enviando observaciones');
+				},
+				success: function (response) {
+					Alert.fire({
+						title: response.title,
+						html: response.msg,
+						text: response.msg,
+						icon: response.status,
+					}).then((result) => {
+						if (result.isConfirmed) {
+							setInterval(function () {
+								reload();
+							}, 2000);
+						}
+					});
+				},
+				error: function (ev) {
+					//Do nothing
+				},
+			});
+		}
+	})
 });
 // Ver Documento
 $(document).on("click", "#verDocHerrramientasAdmin", function (){
@@ -788,9 +836,9 @@ $(document).on("click", "#verDocHerrramientasAdmin", function (){
 });
 /**
  * Observaciones Formularios
- *
- * Formulario 1
- * */
+ */
+ /**
+  * Formulario 1*/
 $(".guardarObservacionesForm1").click(function (){
 	let data = {
 		observacion: $("#observacionesForm1").val(),
@@ -804,7 +852,8 @@ $(".guardarObservacionesForm1").click(function (){
 	$("#observacionesForm1").val('');
 
 });
-/** Formulario 2*/
+/**
+ * Formulario 2*/
 $(".guardarObservacionesForm2").click(function (){
 	let data = {
 		observacion: $("#observacionesForm2").val(),
@@ -817,7 +866,7 @@ $(".guardarObservacionesForm2").click(function (){
 	guardarObservacion(data);
 	$("#observacionesForm2").val('');
 });
-/** Formulario 3*/
+/** Formulario 3
 $(".guardarObservacionesForm3").click(function (){
 	let data = {
 		observacion: $("#observacionesForm3").val(),
@@ -830,71 +879,131 @@ $(".guardarObservacionesForm3").click(function (){
 	guardarObservacion(data);
 	$("#observacionesForm3").val('');
 });
-/** Formulario 4*/
-$(".guardarObservacionesForm4").click(function (){
+ */
+/**
+ * Formulario 3*/
+$(".guardarObservacionesForm3").click(function (){
 	let data = {
-		observacion: $("#observacionesForm4").val(),
-		id_formulario: 4,
+		observacion: $("#observacionesForm3").val(),
+		id_formulario: 3,
 		formulario: "Jornadas de Actualización",
 		valueForm: "datosJornadasActualizacion",
 		idSolicitud:  $("#id_org_ver_form").attr("data-solicitud"),
 		id: $("#id_org_ver_form").attr("data-id"),
 	}
 	guardarObservacion(data);
-	$("#observacionesForm4").val('');
+	$("#observacionesForm3").val('');
 });
-/** Formulario 5*/
-$(".guardarObservacionesForm5").click(function (){
+/**
+ * Formulario 4*/
+$(".guardarObservacionesForm4").click(function (){
 	let data = {
-		observacion: $("#observacionesForm5").val(),
-		id_formulario: 5,
+		observacion: $("#observacionesForm4").val(),
+		id_formulario: 4,
 		formulario: "Observaciones Programas Básicos",
 		valueForm: "datosProgramasBasicos",
 		idSolicitud:  $("#id_org_ver_form").attr("data-solicitud"),
 		id: $("#id_org_ver_form").attr("data-id"),
 	}
 	guardarObservacion(data);
-	$("#observacionesForm5").val('');
+	$("#observacionesForm4").val('');
 });
-/** Formulario 6*/
-$(".guardarObservacionesForm6").click(function (){
+/**
+ * Formulario 5*/
+$(".guardarObservacionesForm5").click(function (){
 	let data = {
-		observacion: $("#observacionesForm6").val(),
-		id_formulario: 6,
+		observacion: $("#observacionesForm5").val(),
+		id_formulario: 5,
 		formulario: "Observaciones Generales Facilitadores",
 		valueForm: "docentes",
 		idSolicitud:  $("#id_org_ver_form").attr("data-solicitud"),
 		id: $("#id_org_ver_form").attr("data-id"),
 	}
 	guardarObservacion(data);
-	$("#observacionesForm6").val('');
+	$("#observacionesForm5").val('');
 });
-/** Formulario 7*/
-$(".guardarObservacionesForm7").click(function (){
+/**
+ * Formulario 6*/
+$(".guardarObservacionesForm6").click(function (){
 	let data = {
-		observacion: $("#observacionesForm7").val(),
-		id_formulario: 7,
+		observacion: $("#observacionesForm6").val(),
+		id_formulario: 6,
 		formulario: "Observaciones Plataforma Virtual",
 		valueForm: "datosPlataformaVirtual",
 		idSolicitud:  $("#id_org_ver_form").attr("data-solicitud"),
 		id: $("#id_org_ver_form").attr("data-id"),
 	}
 	guardarObservacion(data);
-	$("#observacionesForm7").val('');
+	$("#observacionesForm6").val('');
 });
-/** Formulario 8*/
-$(".guardarObservacionesForm8").click(function (){
+/**
+ * Formulario 7*/
+$(".guardarObservacionesForm7").click(function (){
 	let data = {
-		observacion: $("#observacionesForm8").val(),
-		id_formulario: 8,
+		observacion: $("#observacionesForm7").val(),
+		id_formulario: 7,
 		formulario: "Observaciones Modalidad En Linea",
 		valueForm: "datosEnLinea",
 		idSolicitud:  $("#id_org_ver_form").attr("data-solicitud"),
 		id: $("#id_org_ver_form").attr("data-id"),
 	}
 	guardarObservacion(data);
-	$("#observacionesForm8").val('');
+	$("#observacionesForm7").val('');
 });
+// Acción validar observación
+$(document).on('click', '.validarObservacion', function (){
+	if($(this).is(':checked')) {
+		let data = {
+			idObservacion: $(this).attr("data-id"),
+			idForm: $(this).attr("data-idform"),
+			valida: 1
+		};
+		Alert.fire({
+			title: 'Aprobar Observación',
+			text: '¿Desea aprobar la observación? Si esta casilla esta marcada la observación no se visualizara para la organización',
+			icon: 'info',
+			showCancelButton: true,
+			confirmButtonText: 'Si',
+			cancelButtonText: 'No',
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.ajax({
+					url: baseURL + "Observaciones/validarObservacion",
+					type: "post",
+					dataType: "JSON",
+					data: data,
+					beforeSend: function () {
+						procesando('info', 'validando');
+					},
+					success: function (response) {
+						procesando(response.status, response.msg)
+						verObservaciones(data['idForm']);
+					},
+					error: function (ev) {
+						procesando("error", "Ocurrió un error no se guardo.");
+					},
+				});
+			}
+		});
+	}
+	else {
+		let data = {
+			idObservacion: $(this).attr("data-id"),
+			idForm: $(this).attr("data-idform"),
+			valida: 0
+		};
+		$.ajax({
+			url: baseURL + "Observaciones/validarObservacion",
+			type: "post",
+			dataType: "JSON",
+			data: data,
+		});
+	}
+})
+/**
+ * Eliminar observación
+ * @param data
+ */
 $(document).on("click", ".eliminarObservacionForm", function () {
 	let data = {
 		idObservacion: $(this).attr("data-id")
@@ -922,9 +1031,16 @@ function eliminarObservacion(data){
 		},
 	});
 }
+/**
+ * Eliminar datos tabla
+ */
 $(document).on("click", ".eliminarDataTabla", function () {
 	$(this).parent().parent().hide();
 });
+/**
+ * Guardar observación
+ * @param data
+ */
 function guardarObservacion(data) {
 	$.ajax({
 		url: baseURL + "Observaciones/create",
@@ -942,58 +1058,8 @@ function guardarObservacion(data) {
 		},
 	});
 }
-$("#guardarSiObs").click(function () {
-	$id_org = $("#id_org_ver_form").attr("data-id");
-	data_org = {
-		id_organizacion: $id_org,
-	};
-	$observaciones_adm = [];
-	for ($i = 0; $i < $("#datos_org_final textarea.obs_admin_").length; $i++) {
-		$type = $("#datos_org_final textarea.obs_admin_").eq($i).attr("data-type");
-		$title = $("#datos_org_final textarea.obs_admin_").eq($i).attr("data-title");
-		$texto = $("#datos_org_final textarea.obs_admin_").eq($i).attr("data-text");
-		$valor = $("#datos_org_final textarea.obs_admin_").eq($i).val();
-		$rev = $("#revSol").html();
-		$id_solicitud = $("#idSol").html();
-		$numero_rev = parseFloat($rev) + 1;
-
-		data = {
-			type: $type,
-			title: $title,
-			text: $texto,
-			valor: $valor,
-			numero_rev: $numero_rev,
-			id_solicitud: $id_solicitud,
-			id_organizacion: $id_org,
-		};
-		$observaciones_adm.push(data);
-	}
-
-	for ($j = 0; $j < $observaciones_adm.length; $j++) {
-		if ($observaciones_adm[$j].valor == "") {
-			$("#guardarOBSSI").modal("hide");
-			notificacion("No hay observaciones que guardar...", "success");
-		} else {
-			$.ajax({
-				url: baseURL + "admin/guardar_observacion",
-				type: "post",
-				dataType: "JSON",
-				data: $observaciones_adm[$j],
-				success: function (response) {
-					notificacion(response.msg, "success");
-					$("#guardarOBSSI").modal("hide");
-					for ($i = 0; $i < $("#datos_org_final textarea.obs_admin_").length; $i++) {
-						$(".obs_admin_").eq($i).val("");
-					}
-				},
-				error: function (ev) {
-					//Do nothing
-				},
-			});
-		}
-	}
-});
-/** Ver Observaciones */
+/**
+ * Ver Observaciones */
 // Ver historial evaluador
 $(".verHistObs").click(function () {
 	$id_organizacion = $(this).attr("data-id-org");
@@ -1134,10 +1200,11 @@ $(".verHistObsUs").click(function () {
 		},
 	});
 });
-/** Actualizar Solicitud */
+/**
+ * Actualizar Solicitud */
 $("#actualizar_solicitud").click(function () {
 	let idSolicitud = $(this).attr("data-solicitud");
-	window.open(baseURL + "panel/solicitud/" + idSolicitud, '_self');
+	window.open(baseURL + "solicitudes/solicitud/" + idSolicitud, '_self');
 });
 function alertaGuardarObservacionFormulario(msg, status, form){
 	Toast.fire({
