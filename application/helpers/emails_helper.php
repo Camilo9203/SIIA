@@ -185,8 +185,17 @@ function send_email_user($to, $type, $organizacion, $usuario = null, $token = nu
 			"<br><br></strong>Para verificar la totalidad de los requisitos establecidos en la normatividad vigente es necesario complementar la información presentada.
 			<br>Le invitamos a ingresar al aplicativo SIIA, donde encontrará las observaciones respectivas en cada parte del formulario y desarrollar lo indicado en cada una de ellas.
 			<br>Tenga presente que usted cuenta con un plazo máximo de cinco (5) días hábiles para realizar los ajustes sugeridos y enviar nuevamente la información. 
-			<br>De lo contrario su solicitud será archivada aplicando lo establecido en el numeral 4 del artículo 5 de la Resolución 110 de 2016";
+			<br>De lo contrario su solicitud será archivada aplicando lo establecido en el numeral 4 del artículo 5 de la Resolución 110 de 2016</p>";
 			$response = array('status' => "success", 'title' => $subject,'msg' =>  "Se han enviado las observaciones a <strong>" . $organizacion->nombreOrganizacion . "</strong>. Se envío notificación al correo  <strong>" . $organizacion->direccionCorreoElectronicoOrganizacion . "</strong>");
+			break;
+		case 'cambioEstadoSolicitud':
+			$subject = "Cambio de estado solicitud - " . $idSolicitud;
+			if ($CI->SolicitudesModel->solicitudes($idSolicitud)->nombre == "Acreditado"):
+				$message = "Buen día. <br> " . $organizacion->nombreOrganizacion . "<br><br> La Unidad Solidaria le informa que se realizó la revisión de su solicitud de acreditación y se pudo constatar el cumplimiento de los establecidos en la normatividad vigente. Se procederá a emitir el respectivo acto resolutorio en los próximos 10 días hábiles. Una vez se cuente con la resolución donde se otorga la acreditación se le informará para realizar el respectivo procedimiento de notificación. Organizaciones Solidarias le recuerda la entidad se acreditó presentando la documentación en el Sistema de Información de Acreditación SIA. Es necesario que se realice la migración de la información al SIIA para facilitar el trámite de renovación de la acreditación. ";
+			else:
+				$message = "Buen día. <br> " . $organizacion->nombreOrganizacion . "<br><br> La Unidad Solidaria le informa que la entidad solicitante no cumple con la totalidad de los requisitos establecidos en el artículo 1 de la Resolución 332 de 2017. Por lo anterior, la revisión de la solicitud de acreditación presentada no es procedente de evaluación por parte de la Unidad. De mantenerse el interés por la acreditación es necesario que se reúna la documentación requerida en el artículo 4 de la Resolución 110 de 2016 y se presente una nueva solicitud de acreditación.";
+			endif;
+			$response = array('status' => "success", 'title' => $subject, 'msg' =>  "Se ha enviado una notificación a <strong>" . $organizacion->nombreOrganizacion . "</strong>. Se envío notificación al correo  <strong>" . $organizacion->direccionCorreoElectronicoOrganizacion . "</strong>");
 			break;
 		default:
 			$asunto = "";

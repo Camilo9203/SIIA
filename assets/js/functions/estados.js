@@ -44,6 +44,9 @@ $("#consultarEstadoID").click(function () {
 	}
 
 });
+/**
+ * Actualizar estado de la solicitud
+ */
 $("#actualizarEstadoOrganizacion").click(function () {
 	let data = {
 		idOrganizacion: $(this).attr("data-id-organizacion"),
@@ -51,25 +54,24 @@ $("#actualizarEstadoOrganizacion").click(function () {
 		estadoSolicitud: $("#estadoSolicitud").val()
 	};
 	$.ajax({
-		url: baseURL + "admin/actualizarEstadoOrganizacion",
+		url: baseURL + "Solicitudes/actualizarEstadoSolicitud",
 		type: "post",
 		dataType: "JSON",
 		data: data,
 		beforeSend: function () {
-			notificacion("Cargando...", "success");
+			procesando('info', 'Cambiando estado')
 		},
 		success: function (response) {
-			notificacion(response.msg, "success");
-			if(response.estado == 1) {
-				setInterval(function () {
-					redirect(baseURL + "panelAdmin/organizaciones/estadoOrganizaciones");;
-				}, 2000);
-			}else {
-				event.preventDefault();
+			if(response.status == 'success') {
+				alertaGuardarEstado(response.title, response.msg, response.status)
+			}
+			else {
+				procesando(response.status, response.msg)
 			}
 		},
 		error: function (ev) {
-			//Do nothing
+			console.log(ev);
+			procesando('error', ev.evenText);
 		},
 	});
 });
@@ -105,7 +107,6 @@ $("#tabla_enProceso_organizacion tbody").on("click", '.ver_estado_org', function
 		},
 	});
 });
-
 /** Validar formularios */
 function validarFormEstado () {
 	// Formulario Login.
@@ -123,4 +124,24 @@ function validarFormEstado () {
 			},
 		},
 	});
+}
+function procesando(status, msg){
+	Toast.fire({
+		icon: status,
+		text: msg
+	});
+}
+function alertaGuardarEstado(title, msg, status){
+	Alert.fire({
+		title: title,
+		html: msg,
+		text: msg,
+		icon: status,
+	}).then((result) => {
+		if (result.isConfirmed) {
+			setInterval(function () {
+				reload();
+			}, 2000);
+		}
+	})
 }

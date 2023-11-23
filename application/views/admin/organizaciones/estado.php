@@ -1,3 +1,10 @@
+<?php
+/***
+ * @var $solicitudes
+ */
+$CI = &get_instance();
+$CI->load->model("SolicitudesModel");
+?>
 <!-- Tabla de solicitudes -->
 <div class="col-md-12" id="admin_ver_finalizadas">
 <div class="clearfix"></div>

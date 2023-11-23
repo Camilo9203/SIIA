@@ -651,6 +651,36 @@ class Solicitudes extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
+	public function actualizarEstadoSolicitud()
+	{
+		$organizacion = $this->OrganizacionesModel->getOrganizacion($this->input->post('idOrganizacion'));
+		$estadoSolicitud = $this->input->post('estadoSolicitud');
+		$idSolicitud = $this->input->post('idSolicitud');
+		$solicitud = $this->SolicitudesModel->solicitudes($idSolicitud);
+		$dataEstado = array(
+			'nombre' => $estadoSolicitud,
+			'fechaUltimaActualizacion' => date('Y/m/d H:i:s'),
+			'estadoAnterior' => $solicitud->nombre,
+			'idSolicitudAcreditado' => $idSolicitud,
+		);
+		if($estadoSolicitud == $solicitud->nombre):
+			echo json_encode(array('status' => 'warning', 'msg' => "Seleccione un estado diferente al actual."));
+		elseif($estadoSolicitud == "Acreditado"):
+			$this->db->where('idSolicitud', $idSolicitud);
+			if ($this->db->update('estadoOrganizaciones', $dataEstado)):
+				$dataOrganizacion = array('estado' => $estadoSolicitud,);
+				$this->db->where('id_organizacion', $organizacion->id_organizacion);
+				if ($this->db->update('organizaciones', $dataOrganizacion))
+					$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' actualizó el estado de la organización con id: ' . $organizacion->id_organizacion . ' y el estado: ' . $estadoSolicitud . '.');
+			endif;
+			send_email_user($organizacion->direccionCorreoElectronicoOrganizacion, 'cambioEstadoSolicitud', $organizacion, null, null, $idSolicitud);
+		else:
+			$this->db->where('idSolicitud', $idSolicitud);
+			if ($this->db->update('estadoOrganizaciones', $dataEstado))
+				$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' actualizó el estado de la organización con id: ' . $organizacion->id_organizacion . ' y el estado: ' . $estadoSolicitud . '.');
+			send_email_user($organizacion->direccionCorreoElectronicoOrganizacion, 'cambioEstadoSolicitud', $organizacion, null, null, $idSolicitud);
+		endif;
+	}
 
 }
 function var_dump_pre($mixed = null) {
