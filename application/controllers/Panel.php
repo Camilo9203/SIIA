@@ -81,32 +81,6 @@ class Panel extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-	public function docentes()
-	{
-		date_default_timezone_set("America/Bogota");
-		$logged = $this->session->userdata('logged_in');
-		$nombre_usuario = $this->session->userdata('nombre_usuario');
-		$usuario_id = $this->session->userdata('usuario_id');
-		$tipo_usuario = $this->session->userdata('type_user');
-		$hora = date("H:i", time());
-		$fecha = date('Y/m/d');
-
-		$data['title'] = 'Panel Principal - Facilitadores';
-		$data['logged_in'] = $logged;
-		$datos_usuario = $this->db->select('usuario')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
-		$data['nombre_usuario'] = $datos_usuario->usuario;
-		$data['usuario_id'] = $usuario_id;
-		$data['tipo_usuario'] = $tipo_usuario;
-		$data['hora'] = $hora;
-		$data['fecha'] = $fecha;
-		$data['dataInformacionGeneral'] = $this->cargarDatos_formulario_informacion_general_entidad();
-		$data['docentes'] = $this->cargar_docentes();
-
-		$this->load->view('include/header', $data);
-		$this->load->view('paneles/docentes', $data);
-		$this->load->view('include/footer', $data);
-		$this->logs_sia->logs('PLACE_USER');
-	}
 	public function planMejora()
 	{
 		date_default_timezone_set("America/Bogota");

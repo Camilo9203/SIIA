@@ -5,14 +5,31 @@ class DocentesModel extends CI_Model
 	{
 		$this->load->database();
 	}
-	/** Cargar Docentes Sin Asignar */
+	/**
+	 * Cargar docentes por organización
+	 */
+	public function getDocentes($id = FALSE) {
+		if ($id === FALSE) {
+			// Consulta para traer docentes
+			$query = $this->db->select("*")->from("docentes")->get();
+			return $query->result();
+		}
+		// Traer docentes por ID
+		$query = $this->db->get_where('docentes', array('organizaciones_id_organizacion' => $id));
+		return $query->row();
+	}
+	/**
+	 * Cargar Docentes Sin Asignar
+	 */
 	public function docentesSinAsignar()
 	{
 		$docentes = $this->db->select("*")->from("organizaciones")->join("docentes", "docentes.organizaciones_id_organizacion = organizaciones.id_organizacion")->where("docentes.valido", 0)->get()->result();
 		// echo json_encode($docentes);
 		return $docentes;
 	}
-	/** Cargar Docentes Habilitados */
+	/**
+	 * Cargar Docentes Habilitados
+	 */
 	public function getDocentesHabilitados()
 	{
 		$docentes = $this->db->select("*")->from("docentes")->where("valido", 1)->get()->result();

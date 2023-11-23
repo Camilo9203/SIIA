@@ -295,12 +295,12 @@
 										</div>
 									</div>
 									<hr />
-									<div id="informacionSolicitudEstado"></div>
+									<div class="row">
+										<div id="informacionSolicitudEstado"></div>
+									</div>
 								</div>
-
 							</div>
 						</div>
-
 						<hr />
 						<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cerrar. <i class="fa fa-times" aria-hidden="true"></i></button>
 <!--							<button type="button" class="btn btn-siia btn-sm pull-right" id="">Sí, acepto. <i class="fa fa-check"></i></button>-->

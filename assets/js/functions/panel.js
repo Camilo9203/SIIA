@@ -308,7 +308,8 @@ $(".eliminarSolicitud").click(function () {
  * Ver Solicitud
  * */
 $(".verDetalleSolicitud").click(function () {
-	let html = ''
+	let html = '';
+	let estado = 'badge-danger';
 	let data = {
 		idSolicitud: $(this).attr('data-id')
 	}
@@ -325,13 +326,15 @@ $(".verDetalleSolicitud").click(function () {
 			html += "<p><label class='font-weight-bold'>Modalidad: </label> " + response.solicitud['modalidadSolicitud'] + "</p>";
 			$("#informacionSolicitudBasico").html(html);
 			html = ""
-			html += "<p><label class='font-weight-bold'>Fecha de Creación: </label> " + response.solicitud['fecha'] + "</p>";
+			html += "<p><label class='font-weight-bold'>Fecha de Creación: </label> " + response.solicitud['fechaCreacion'] + "</p>";
 			html += "<p><label class='font-weight-bold'>Fecha de Finalización: </label> " + response.solicitud['fechaFinalizado'] + "</p>";
 			html += "<p><label class='font-weight-bold'>Fecha Ultima Revisión: </label> " +  response.solicitud['fechaUltimaRevision'] + "</p>";
+			html += "<p><label class='font-weight-bold'>Estado Anterior: </label> " + response.solicitud['estadoAnterior'] + "</p>";
 			$("#informacionSolicitudFechas").html(html);
 			html = ""
-			html += "<p><label class='font-weight-bold'>Estado: </label> <code>" +  response.solicitud['nombre'] + "</code></p>";
-			html += "<p><label class='font-weight-bold'>Estado Anterior: </label> " + response.solicitud['estadoAnterior'] + "</p>";
+			if(response.solicitud['nombre'] == 'Acreditado')
+				estado = "badge-success"
+			html += "<p><label class='font-weight-bold'>Estado:</label><span class='badge " + estado + "'>" +  response.solicitud['nombre'] + "</span></p>";
 			html += "<p><label class='font-weight-bold'>Asignada: </label> " +  response.solicitud['asignada'] + "</p>";
 			html += "<p><label class='font-weight-bold'>Revisiones: </label> " +  response.solicitud['numeroRevisiones'] + "</p>";
 			html += "<p><label class='font-weight-bold'>Solicitud: </label> " +  response.solicitud['numeroSolicitudes'] + "</p>";

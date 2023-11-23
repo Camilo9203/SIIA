@@ -10,6 +10,7 @@ class Docentes extends CI_Controller
 		$this->load->model('DocentesModel');
 		$this->load->model('OrganizacionesModel');
 		$this->load->model('AdministradoresModel');
+		$this->load->model('InformacionGeneralModel');
 	}
 	/** Datos Iniciales */
 	public function datosSession()
@@ -35,7 +36,7 @@ class Docentes extends CI_Controller
 	public function index()
 	{
 		$data = $this->datosSession();
-		$data['dataInformacionGeneral'] = $this->cargarDatos_informacion_general();
+		$data['dataInformacionGeneral'] = $this->InformacionGeneralModel->getInformacionGeneral();
 		$data['title'] = 'Panel Principal - Facilitadores';
 		$data['activeLink'] = 'facilitadores';
 		$this->load->view('include/header', $data);
@@ -62,7 +63,7 @@ class Docentes extends CI_Controller
 			echo json_encode(array('url' => "panel", 'msg' => "Información de docente guardada exitosamente."));
 		};
 	}
-	/** Actializar docente */
+	/** Actualizar docente */
 	public function actualizarDocente()
 	{
 		// Traer datos organanzación, se captura usuario id y se trae organización que pertenece al id del usuario.
@@ -333,8 +334,8 @@ class Docentes extends CI_Controller
 	/** Cargar Información Docente Organización */
 	public function cargar_docentes()
 	{
-		$organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $this->session->userdata('usuario_id'))->get()->row();
-		$docentes = $this->db->select("*")->from("docentes")->where("organizaciones_id_organizacion", $organizacion->id_organizacion)->get()->result();
+		$organizacion = $this->OrganizacionesModel->getOrganizacionUsuario($this->session->userdata('usuario_id'));
+		$docentes = $this->DocentesModel->getDocentes($organizacion->id_organizacion);
 		return $docentes;
 	}
 	/** Cargar archivos Docente Organización */
