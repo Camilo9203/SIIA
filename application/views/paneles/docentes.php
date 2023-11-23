@@ -2,6 +2,7 @@
 /***
  * @var $dataInformacionGeneral
  * @var $docentes
+ * @var $organizacion
  */
 /** echo '<pre>';
 var_dump($aplicacion);
@@ -186,7 +187,9 @@ return null; */
 				<div class="modal-footer" style="align-content: center; align-items: center; justify-content: center ">
 					<div class="button-group">
 						<button type="button" class="btn btn-danger btn-sm" data-toggle='modal' data-target='#eliminarDocente'>Eliminar facilitador <i class="fa fa-trash-o" aria-hidden="true"></i></button>
+						<?php if($organizacion->estado == 'Acreditado'): ?>
 						<button type="button" class="btn btn-info btn-sm actualizar_docente" value="Si">ENVIAR A EVALUACIÓN DE FACILITADOR <i class="fa fa-refresh" aria-hidden="true"></i></button>
+						<?php endif; ?>
 						<button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Cerrar <i class="fa fa-times" aria-hidden="true"></i></button>
 					</div>
 				</div>

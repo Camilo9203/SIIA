@@ -10,6 +10,9 @@ class Admin extends CI_Controller
 		verify_session_admin();
 		$this->load->model('DocentesModel');
 		$this->load->model('DepartamentosModel');
+		$this->load->model('SolicitudesModel');
+		$this->load->model('OrganizacionesModel');
+		//$this->load->model('ResolucionesModel');
 	}
 	// Funciones de actualización contraseñas
 	private function mcdec()
@@ -325,26 +328,8 @@ class Admin extends CI_Controller
 	// Resoluciones
 	public function resoluciones()
 	{
-		date_default_timezone_set("America/Bogota");
-		$logged = $this->session->userdata('logged_in');
-		$nombre_usuario = $this->session->userdata('nombre_usuario');
-		$usuario_id = $this->session->userdata('usuario_id');
-		$tipo_usuario = $this->session->userdata('type_user');
-		$nivel = $this->session->userdata('nivel');
-		$hora = date("H:i", time());
-		$fecha = date('Y/m/d');
-
-		$data['title'] = 'Panel Principal / Administrador / Resoluciones';
-		$data['logged_in'] = $logged;
-		$data['nombre_usuario'] = $nombre_usuario;
-		$data['usuario_id'] = $usuario_id;
-		$data['tipo_usuario'] = $tipo_usuario;
-		$data['nivel'] = $nivel;
-		$data['hora'] = $hora;
-		$data['fecha'] = $fecha;
-		$data['departamentos'] = $this->cargarDepartamentos();
+		$data = $this->datosSesionAdmin();
 		$data['organizaciones_en_proceso'] = $this->organizacionesInscritas();
-
 		$this->load->view('include/header', $data);
 		$this->load->view('admin/organizaciones/resoluciones', $data);
 		$this->load->view('include/footer', $data);
@@ -805,44 +790,6 @@ class Admin extends CI_Controller
 		$datos_plan = $this->db->select("*")->from("planMejoramiento")->where("visitas_id_visitas", $id_visita)->get()->result();
 
 		echo json_encode(array("informacion" => $informacion, "visita" => $datos_visita, "seguimiento" => $datos_seguimiento, "plan" => $datos_plan));
-	}
-	/** TODO: ESTADO - Actualizar estado de las solicitudes */
-	public function actualizarEstadoOrganizacion()
-	{
-		$idOrganizacion = $this->input->post('idOrganizacion');
-		$estadoSolicitud = $this->input->post('estadoSolicitud');
-		$idSolicitud = $this->input->post('idSolicitud');
-		$estadoActualSolicitud = $this->db->select("nombre")->from("estadoOrganizaciones")->where("idSolicitud", $idSolicitud)->get()->row()->nombre;
-		$dataEstado = array(
-			'nombre' => $estadoSolicitud,
-			'fecha' => date('Y/m/d H:i:s'),
-			'estadoAnterior' => $estadoActualSolicitud,
-			'idSolicitudAcreditado' => $idSolicitud,
-		);
-		if($estadoSolicitud == $estadoActualSolicitud) {
-			echo json_encode(array('estado' => 0, 'msg' => "Seleccione un estado diferente al actual."));
-		}
-		elseif($estadoSolicitud == "Acreditado") {
-			$this->db->where('idSolicitud', $idSolicitud);
-			if ($this->db->update('estadoOrganizaciones', $dataEstado)) {
-				$dataOrganizacion = array(
-					'estado' => $estadoSolicitud,
-				);
-				$this->db->where('id_organizacion', $idOrganizacion);
-				if ($this->db->update('organizaciones', $dataOrganizacion)) {
-					$this->envio_mail("estado", $idOrganizacion, 1, "");
-					$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' actualizó el estado de la organización con id: ' . $idOrganizacion . ' y el estado: ' . $estadoSolicitud . '.');
-					echo json_encode(array('estado' => 1, 'msg' => "Se cambio de estado la organización."));
-				}
-			}
-		}
-		else {
-			$this->db->where('idSolicitud', $idSolicitud);
-			if ($this->db->update('estadoOrganizaciones', $dataEstado)) {
-				$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' actualizó el estado de la organización con id: ' . $idOrganizacion . ' y el estado: ' . $estadoSolicitud . '.');
-				echo json_encode(array('estado' => 1, 'msg' => "Se cambio de estado la organización."));
-			}
-		}
 	}
 	public function cargarDepartamentos()
 	{
@@ -2378,10 +2325,6 @@ class Admin extends CI_Controller
 		$est = $estadoOrganizaciones->nombre;
 
 		switch ($type) {
-			case 'obs':
-				$asunto = "Observaciones";
-				$mensaje = "Organización " . $to_correo->nombreOrganizacion . ": Organizaciones Solidarias le informa que se realizó la revisión de su solicitud de acreditación. Para verificar la totalidad de los requisitos establecidos en la normatividad vigente es necesario complementar la información presentada. Le invitamos a ingresar al aplicativo SIIA, donde encontrará las observaciones respectivas en cada parte del formulario y desarrollar lo indicado en cada una de ellas. Tenga presente que usted cuenta con un plazo máximo de cinco (5) días hábiles para realizar los ajustes sugeridos y enviar nuevamente la información. De lo contrario su solicitud será archivada aplicando lo establecido en el numeral 4 del artículo 5 de la Resolución 110 de 2016.";
-				break;
 			case 'plan':
 				$asunto = "Plan de mejoramiento";
 				$mensaje = "Organización " . $to_correo->nombreOrganizacion . ", se le creo un plan de mejora el cual debe completar según las fechas acordadas por la persona que le hizo la evaluación.";
@@ -2390,14 +2333,7 @@ class Admin extends CI_Controller
 				$asunto = "Docentes";
 				$mensaje = "Organización " . $to_correo->nombreOrganizacion . ": Organizaciones Solidarias le informa que se ha realizado la revisión de las hojas de vida presentadas, verificando los requisitos establecidos en el numeral 6 del artículo 4 de la resolución 110 de 2016 y se  actualizó la relación de facilitadores de la entidad acreditada. Le recomendamos revisar este listado donde podrá identificar las hojas de vida aprobadas y aquellas que están pendientes por aprobación dado que no cumplen con algún requisito. Favor verificar en el aplicativo las observaciones  e ingresar la información solicitada en cada caso para proceder a aprobarlas.";
 				break;
-			case 'estado':
-				$asunto = "Cambio de estado en el SIIA";
-				if ($est == "Acreditado") {
-					$mensaje = "Organización " . $to_correo->nombreOrganizacion . ": Organizaciones Solidarias le informa que se realizó la revisión de su solicitud de acreditación y se pudo constatar el cumplimiento de los establecidos en la normatividad vigente. Se procederá a emitir el respectivo acto resolutorio en los próximos 10 días hábiles. Una vez se cuente con la resolución donde se otorga la acreditación se le informará para realizar el respectivo procedimiento de notificación. Organizaciones Solidarias le recuerda la entidad se acreditó presentando la documentación en el Sistema de Información de Acreditación SIA. Es necesario que se realice la migración de la información al SIIA para facilitar el trámite de renovación de la acreditación. ";
-				} else if ($est == "Negada") {
-					$mensaje = "Organización " . $to_correo->nombreOrganizacion . ": Organizaciones Solidarias le informa que la entidad solicitante  no   cumple con la totalidad de los requisitos establecidos en el artículo 1 de la Resolución 332 de 2017. Por lo anterior, la revisión de la  solicitud de acreditación presentada no es procedente de evaluación por parte de la Unidad. De mantenerse el  interés por la acreditación es necesario que se reúna la documentación requerida en el artículo 4 de la Resolución 110 de 2016  y se presente una nueva solicitud de acreditación.";
-				}
-				break;
+
 			case 'resolucion':
 				$asunto = "Resolución";
 				$mensaje = "Organización " . $to_correo->nombreOrganizacion . ": Teniendo en cuenta lo establecido en el código de procedimiento administrativo en su artículo 56, referente a la  'Notificación Electrónica', que  prescribe: 'Las autoridades podrán notificar sus actos administrativos a través de medios electrónicos, siempre que el administrado haya aceptado este medio de notificación…' (…) 'La notificación quedará surtida a partir de la fecha y hora en que el administrado accede al acto administrativo, fecha y hora que deberá certificar la administración'. La notificación queda surtida a partir del momento en que usted, envié respuesta aceptando los términos de la resolución. En caso de ser necesario usted tiene 10 días hábiles para presentar recursos de reposición ante la Unidad Administrativa. Para que la diligencia de notificación concluya plenamente es necesario contar con una respuesta a este mensaje. puede dar click aquí <a href='" . base_url() . "uploads/resoluciones/" . $adj . "' target='_blank'>Ver resolución</a>. Organizaciones Solidarias le recuerda la entidad se acreditó presentando la documentación en el Sistema de Información de Acreditación SIA. Es necesario que se realice la migración de la información al SIIA para facilitar el trámite de renovación de la acreditación. ";

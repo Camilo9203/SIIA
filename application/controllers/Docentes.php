@@ -8,7 +8,8 @@ class Docentes extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('DocentesModel');
-		$this->load->model('AdminModel');
+		$this->load->model('OrganizacionesModel');
+		$this->load->model('AdministradoresModel');
 	}
 	/** Datos Iniciales */
 	public function datosSession()
@@ -24,8 +25,8 @@ class Docentes extends CI_Controller
 			'nivel' => $this->session->userdata('nivel'),
 			'hora' => date("H:i", time()),
 			'fecha' => date('Y/m/d'),
-			'administradores' => $this->AdminModel->cargarAdministradores(),
-			'data_organizacion' => $this->db->select('*')->from('organizaciones')->where('usuarios_id_usuario', $this->session->userdata('usuario_id'))->get()->row(),
+			'administradores' => $this->AdministradoresModel->getAdministradores(),
+			'organizacion' => $this->OrganizacionesModel->getOrganizacionUsuario($this->session->userdata('usuario_id')),
 			'docentes' => $this->cargar_docentes(),
 		);
 		return $data;
