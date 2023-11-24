@@ -54,7 +54,7 @@ class Organizaciones extends CI_Controller
 	// Cargar información organización inscrita
 	public function datosOrganzacion()
 	{
-		$organizacion = $this->OrganizacionesModel->getOrganizaciones($this->input->post('id_organizacion'));
+		$organizacion = $this->OrganizacionesModel->getOrganizacion($this->input->post('id_organizacion'));
 		$usuario = $this->UsuariosModel->getUsuarios($organizacion->usuarios_id_usuario);
 		$actividad = $this->UsuariosModel->getActividadUsuario($organizacion->usuarios_id_usuario);
 		$solicitudes = $this->SolicitudesModel->getSolicitudesOrganizacion($organizacion->id_organizacion);

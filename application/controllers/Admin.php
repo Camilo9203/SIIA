@@ -325,16 +325,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-	// Resoluciones
-	public function resoluciones()
-	{
-		$data = $this->datosSesionAdmin();
-		$data['organizaciones_en_proceso'] = $this->organizacionesInscritas();
-		$this->load->view('include/header', $data);
-		$this->load->view('admin/organizaciones/resoluciones', $data);
-		$this->load->view('include/footer', $data);
-		$this->logs_sia->logs('PLACE_USER');
-	}
 	public function estadoOrg()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -921,11 +911,6 @@ class Admin extends CI_Controller
 			array_push($organizaciones, $data_organizaciones);
 		}
 
-		return $organizaciones;
-	}
-	public function organizacionesInscritas()
-	{
-		$organizaciones = $this->db->select("*")->from("organizaciones")->get()->result();
 		return $organizaciones;
 	}
 	public function modalInformacion()
@@ -1869,109 +1854,6 @@ class Admin extends CI_Controller
 
 		echo json_encode($observacion);
 	}
-	public function upload_resolucion()
-	{
-		$fechaResolucionInicial = $this->input->post('fechaResolucionInicial');
-		$fechaResolucionFinal = $this->input->post('fechaResolucionFinal');
-		$anosResolucion = $this->input->post('anosResolucion');
-		$numeroResolucion = $this->input->post('numeroResolucion');
-		$tipoResolucion = $this->input->post('tipoResolucion');
-		$cursoAprobado = $this->input->post('cursoAprobado');
-		$modalidadAprobada = $this->input->post('modalidadAprobada');
-		$id_organizacion = $this->input->post('id_organizacion');
-		$name_random = random(10);
-		$size = 100000000;
-
-		/*$imagen_db = $this->db->select('*')->from('resoluciones')->where('organizaciones_id_organizacion', $id_organizacion)->get()->row();
-		$imagen_db_nombre = $imagen_db ->resolucion;
-		$fechaResolucionFinal_db = $imagen_db ->fechaResolucionFinal;
-
-		if($imagen_db_nombre != NULL || $fechaResolucionFinal_db != NULL){
-			$nombre_imagen =  "resolucion_".$name_random.$_FILES['file']['name'];
-			$tipo_imagen = pathinfo($nombre_imagen,PATHINFO_EXTENSION);
-
-			if(0 < $_FILES['file']['error']) {
-			    echo json_encode(array('url'=>"admin", 'msg'=>"Hubo un error al actualizar, intente de nuevo."));
-			}else if($_FILES['file']['size'] > $size){
-				echo json_encode(array('url'=>"admin", 'msg'=>"El tamaño supera 10 MB, intente con otro pdf."));
-			}else if($tipo_imagen != "pdf"){
-				echo json_encode(array('url'=>"admin", 'msg'=>"La extensión de la resolución no es correcta, debe ser PDF (archivo.pdf)"));
-			}else if(move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/resoluciones/'.$nombre_imagen)){
-				unlink('uploads/resoluciones/'.$imagen_db_nombre);
-				$data_update = array(
-					'fechaResolucionInicial' => $fechaResolucionInicial,
-					'fechaResolucionFinal' => $fechaResolucionFinal,
-					'añosResolucion' => $anosResolucion,
-					'resolucion' => $nombre_imagen,
-					'numeroResolucion' => $numeroResolucion,
-					'organizaciones_id_organizacion' => $id_organizacion
-				);
-
-				$this->db->where('organizaciones_id_organizacion', $id_organizacion);
-				$this->db->update('resoluciones', $data_update);
-
-				echo json_encode(array('url'=>"admin", 'msg'=>"Se actualizó la resolución."));
-				$this->logs_sia->session_log('Resolución Adjuntada');
-				if($tipoResolucion == "vieja"){
-					//$this->envio_mail("resolucionVieja", $id_organizacion, 1, $nombre_imagen);
-				}else if($tipoResolucion == "nueva"){
-					//$this->envio_mail("resolucion", $id_organizacion, 1, $nombre_imagen);
-				}
-				$this->logs_sia->session_log('Administrador:'.$this->session->userdata('nombre_usuario').' actualizó la resolucion de la organizacion id: '.$id_organizacion.'.');
-			}
-		}else{*/
-		$nombre_imagen =  "resolucion_" . $name_random . $_FILES['file']['name'];
-		$tipo_imagen = pathinfo($nombre_imagen, PATHINFO_EXTENSION);
-
-		if (0 < $_FILES['file']['error']) {
-			echo json_encode(array('url' => "admin", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
-		} else if ($_FILES['file']['size'] > $size) {
-			echo json_encode(array('url' => "admin", 'msg' => "El tamaño supera 10 MB, intente con otro pdf."));
-		} else if ($tipo_imagen != "pdf") {
-			echo json_encode(array('url' => "admin", 'msg' => "La extensión de la resolución no es correcta, debe ser PDF (archivo.pdf)"));
-		} else if (move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/resoluciones/' . $nombre_imagen)) {
-			$data_update = array(
-				'fechaResolucionInicial' => $fechaResolucionInicial,
-				'fechaResolucionFinal' => $fechaResolucionFinal,
-				'anosResolucion' => $anosResolucion,
-				'resolucion' => $nombre_imagen,
-				'numeroResolucion' => $numeroResolucion,
-				'cursoAprobado' => $cursoAprobado,
-				'modalidadAprobada' => $modalidadAprobada,
-				'organizaciones_id_organizacion' => $id_organizacion
-			);
-			$this->db->insert('resoluciones', $data_update);
-			echo json_encode(array('url' => "admin", 'msg' => "Se ingreso la resolución."));
-			$this->logs_sia->session_log('Resolución Adjuntada');
-			if ($tipoResolucion == "vieja") {
-				//$this->envio_mail("resolucionVieja", $id_organizacion, 1, $nombre_imagen);
-			} else if ($tipoResolucion == "nueva") {
-				//$this->envio_mail("resolucion", $id_organizacion, 1, $nombre_imagen);
-			}
-			$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' actualizó la resolucion de la organizacion id: ' . $id_organizacion . '.');
-		}
-		//}
-		$this->logs_sia->logs('URL_TYPE');
-		$this->logs_sia->logQueries();
-	}
-	public function eliminarResolucion()
-	{
-		$id_resolucion = $this->input->post('id_resolucion');
-
-		$imagen_db = $this->db->select('*')->from('resoluciones')->where('id_resoluciones', $id_resolucion)->get()->row();
-		$imagen_db_nombre = $imagen_db->resolucion;
-
-		unlink('uploads/resoluciones/' . $imagen_db_nombre);
-
-		$this->db->where('id_resoluciones', $id_resolucion);
-		if ($this->db->delete("resoluciones")) {
-			echo json_encode(array('url' => "admin", 'msg' => "Se elimino la resolución."));
-			$this->logs_sia->session_log('Resolución eliminada');
-			$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' elimino la resolucion de la organizacion id: ' . $id_organizacion . '.');
-		}
-		$this->logs_sia->logs('URL_TYPE');
-		$this->logs_sia->logQueries();
-	}
 	public function editarResolucion()
 	{
 		$id_resolucion = $this->input->post('id_resolucion');
@@ -2332,17 +2214,6 @@ class Admin extends CI_Controller
 			case 'docentes':
 				$asunto = "Docentes";
 				$mensaje = "Organización " . $to_correo->nombreOrganizacion . ": Organizaciones Solidarias le informa que se ha realizado la revisión de las hojas de vida presentadas, verificando los requisitos establecidos en el numeral 6 del artículo 4 de la resolución 110 de 2016 y se  actualizó la relación de facilitadores de la entidad acreditada. Le recomendamos revisar este listado donde podrá identificar las hojas de vida aprobadas y aquellas que están pendientes por aprobación dado que no cumplen con algún requisito. Favor verificar en el aplicativo las observaciones  e ingresar la información solicitada en cada caso para proceder a aprobarlas.";
-				break;
-
-			case 'resolucion':
-				$asunto = "Resolución";
-				$mensaje = "Organización " . $to_correo->nombreOrganizacion . ": Teniendo en cuenta lo establecido en el código de procedimiento administrativo en su artículo 56, referente a la  'Notificación Electrónica', que  prescribe: 'Las autoridades podrán notificar sus actos administrativos a través de medios electrónicos, siempre que el administrado haya aceptado este medio de notificación…' (…) 'La notificación quedará surtida a partir de la fecha y hora en que el administrado accede al acto administrativo, fecha y hora que deberá certificar la administración'. La notificación queda surtida a partir del momento en que usted, envié respuesta aceptando los términos de la resolución. En caso de ser necesario usted tiene 10 días hábiles para presentar recursos de reposición ante la Unidad Administrativa. Para que la diligencia de notificación concluya plenamente es necesario contar con una respuesta a este mensaje. puede dar click aquí <a href='" . base_url() . "uploads/resoluciones/" . $adj . "' target='_blank'>Ver resolución</a>. Organizaciones Solidarias le recuerda la entidad se acreditó presentando la documentación en el Sistema de Información de Acreditación SIA. Es necesario que se realice la migración de la información al SIIA para facilitar el trámite de renovación de la acreditación. ";
-				$this->email->cc('jcuy@orgsolidarias.gov.co');
-				break;
-			case 'resolucionVieja':
-				$asunto = "Resolución";
-				$mensaje = "Organización " . $to_correo->nombreOrganizacion . ": Nos encontramos adelantado la actualización del listado de entidades acreditadas por medio del Sistema de Información de Acreditación SIIA. En este proceso ubicamos la resolución de acreditación vigente para su entidad la cual se ingresó al SIIA, para facilitar el acceso a esta documentación. Si desea consultar la resolución de click aquí <a href='" . base_url() . "uploads/resoluciones/" . $adj . "' target='_blank'>Ver resolución</a>. \n Por otra parte le recordamos dar cumplimiento a lo establecido en la circular 001 de 2018, en lo relacionado con la actualización de información de contacto de la entidad (Formulario 1) para poder ingresarla a este listado. Lo anterior se realiza ingresando al SIIA con su usuario y contraseña. Presionando el botón 'Crear, Actualizar solicitud'.";
-				$this->email->cc('jcuy@orgsolidarias.gov.co');
 				break;
 			case 'camara':
 				$asunto = "Cámara de comercio";

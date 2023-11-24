@@ -459,7 +459,7 @@
 												<hr />
 												<li><a href="<?php echo base_url('panelAdmin/organizaciones/docentes'); ?>">Facilitadores</a></li>
 												<li><a href="<?php echo base_url('panelAdmin/organizaciones/estadoOrganizaciones'); ?>">Estado organizaciones</a></li>
-												<li><a href="<?php echo base_url('panelAdmin/organizaciones/resoluciones'); ?>">Resoluciones</a></li>
+												<li><a href="<?php echo base_url('panelAdmin/organizaciones/inscritas'); ?>">Resoluciones</a></li>
 												<li><a href="<?php echo base_url('panelAdmin/organizaciones/camaraComercio'); ?>">Camara de comercio</a></li>
 											</ul>
 											<li><a href="<?php echo base_url('panelAdmin/historico'); ?>">Histórico</a></li>

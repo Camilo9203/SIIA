@@ -197,6 +197,16 @@ function send_email_user($to, $type, $organizacion, $usuario = null, $token = nu
 			endif;
 			$response = array('status' => "success", 'title' => $subject, 'msg' =>  "Se ha enviado una notificación a <strong>" . $organizacion->nombreOrganizacion . "</strong>. Se envío notificación al correo  <strong>" . $organizacion->direccionCorreoElectronicoOrganizacion . "</strong>");
 			break;
+		case 'resolucionCargada':
+			if ($token == 'vieja'):
+				$subject = "Resolución antigua cargada a la solicitud - " . $idSolicitud;
+				$message = "<p>Buen día. <br><strong> " . $organizacion->nombreOrganizacion . "</strong><br><br> La Unidad Solidaria le informa que nos encontramos adelantado la actualización del listado de entidades acreditadas por medio del Sistema de Información de Acreditación SIIA. En este proceso ubicamos la resolución de acreditación vigente para su entidad la cual se ingresó al SIIA, para facilitar el acceso a esta documentación. Si desea consultar la resolución de clic aquí <a href='" . base_url() . "uploads/resoluciones/" . $usuario . "' target='_blank'>Ver resolución</a>. \n Por otra parte le recordamos dar cumplimiento a lo establecido en la circular 001 de 2018, en lo relacionado con la actualización de información de contacto de la entidad (Formulario 1) para poder ingresarla a este listado. Lo anterior se realiza ingresando al SIIA con su usuario y contraseña. Presionando el botón 'Crear, Actualizar solicitud'.</p>";
+			else:
+				$subject = "Resolución cargada a la solicitud - " . $idSolicitud;
+				$message = "<p>Buen día. <br><strong> " . $organizacion->nombreOrganizacion . "</strong><br><br> La Unidad Solidaria teniendo en cuenta lo establecido en el código de procedimiento administrativo en su artículo 56, referente a la 'Notificación Electrónica', que prescribe: 'Las autoridades podrán notificar sus actos administrativos a través de medios electrónicos, siempre que el administrado haya aceptado este medio de notificación…' (…) 'La notificación quedará surtida a partir de la fecha y hora en que el administrado accede al acto administrativo, fecha y hora que deberá certificar la administración'. La notificación queda surtida a partir del momento en que usted, envié respuesta aceptando los términos de la resolución. En caso de ser necesario usted tiene 10 días hábiles para presentar recursos de reposición ante la Unidad Administrativa. Para que la diligencia de notificación concluya plenamente es necesario contar con una respuesta a este mensaje. Puede dar clic aquí <a href='" . base_url() . "uploads/resoluciones/" . $usuario . "' target='_blank'>Ver resolución</a>. Organizaciones Solidarias le recuerda la entidad se acreditó presentando la documentación en el Sistema de Información de Acreditación SIA. Es necesario que se realice la migración de la información al SIIA para facilitar el trámite de renovación de la acreditación. </p>";
+			endif;
+			$response = array('status' => "success", 'title' => $subject, 'msg' =>  "Se ha enviado una notificación a <strong>" . $organizacion->nombreOrganizacion . "</strong>. Se envío notificación al correo  <strong>" . $organizacion->direccionCorreoElectronicoOrganizacion . "</strong>");
+			break;
 		default:
 			$asunto = "";
 			$message = "";

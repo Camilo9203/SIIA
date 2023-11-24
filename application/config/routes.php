@@ -115,7 +115,7 @@ $route['panelAdmin/reportes/docentesHabilitados'] = 'Reportes/docentesHabilitado
 $route['panelAdmin/reportes/registroTelefonico'] = 'Reportes/registroTelefonico';
 $route['panelAdmin/organizaciones/solodocentes'] = 'Admin/solodocentes';
 $route['panelAdmin/organizaciones/camaraComercio'] = 'Organizaciones/camara';
-$route['panelAdmin/organizaciones/resoluciones'] = 'Admin/resoluciones';
+$route['panelAdmin/organizaciones/resoluciones/(:idOrganizacion)'] = 'Resoluciones/organizacion/$idOrganizacion';
 $route['panelAdmin/organizaciones/estadoOrganizaciones'] = 'Admin/estadoOrg';
 $route['panelAdmin/seguimiento'] = 'Admin/seguimiento';
 // Estadísticas

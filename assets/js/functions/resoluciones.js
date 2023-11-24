@@ -1,209 +1,175 @@
-function tablaResoluciones (response, $id_org) {
-	event.preventDefault();
-	if (response.resoluciones.length) {
-		for (var i = 0; i < response.resoluciones.length; i++) {
-			$("#tbodyResoluciones").append("<tr id=" + i + ">");
-			$("#tbodyResoluciones>tr#" + i + "").append("<td>" + response.resoluciones[i].fechaResolucionInicial + "</td>");
-			$("#tbodyResoluciones>tr#" + i + "").append("<td>" + response.resoluciones[i].fechaResolucionFinal + "</td>");
-			$("#tbodyResoluciones>tr#" + i + "").append("<td>" + response.resoluciones[i].anosResolucion + "</td>");
-			$("#tbodyResoluciones>tr#" + i + "").append("<td><a href='" + baseURL + "uploads/resoluciones/" + response.resoluciones[i].resolucion + "' target='_blank'>Ver resolución</a></td>");
-			$("#tbodyResoluciones>tr#" + i + "").append("<td>" + response.resoluciones[i].numeroResolucion + "</td>");
-			$("#tbodyResoluciones>tr#" + i + "").append("<td>" + response.resoluciones[i].cursoAprobado + "</td>");
-			$("#tbodyResoluciones>tr#" + i + "").append("<td>" + response.resoluciones[i].modalidadAprobada + "</td>");
-			$("#tbodyResoluciones>tr#" + i + "").append(
-				"<td><div class='btn-group-vertical' role='group' aria-label='acciones'><button class='btn btn-siia btn-sm editarResolucion' data-id-org='" + $id_org + "' data-id-res='" + response.resoluciones[i].id_resoluciones + "'>Editar <i class='fa fa-pencil' aria-hidden='true'></i></button>" +
-				"<button class='btn btn-danger btn-sm eliminarResolucion' data-id-org='" + $id_org + "' data-id-res='" + response.resoluciones[i].id_resoluciones + "'>Eliminar <i class='fa fa-times' aria-hidden='true'></i></button></div></td>"
-			);
-			$("#tbodyResoluciones").append("</tr>");
-		}
-		paging("tabla_resoluciones");
-	}else {
-		$("#tbodyResoluciones").append("<tr id=" + i + ">");
-		$("#tbodyResoluciones>tr#" + i + "").append("<td colspan='8'>No hay datos</td>");
-		$("#tbodyResoluciones").append("</tr>");
+/**
+ * Ver resoluciones
+ *  */
+$(".ver_resolucion_org").click(function () {
+	let idOrganizacion = $(this).attr("data-organizacion");
+	window.open(baseURL + "resoluciones/organizacion/" + idOrganizacion, '_self');
+});
+/**
+ * Acciones de menú
+ */
+// Ver administradores
+$('#verResolucionesRegistradas').click(function () {
+	if ($('#tabla_resoluciones_organizacion').css('display') === 'none'){
+		$('#tabla_resoluciones_organizacion').show('swing');
+		$('#formulario_resolucion_organizacion').hide('linear');
 	}
-}
-
-$("#tabla_enProceso_organizacion tbody").on("click", '.ver_resolucion_org', function () {
-	let $id_org = $(this).attr("data-organizacion");
-	$("#id_org_ver_form").remove();
-	$("body").append("<div id='id_org_ver_form' class='hidden' data-id='" + $id_org + "'>");
-	let data = {
-		id_organizacion: $id_org,
-		idSolicitud: $(this).attr("data-solicitud")
-	};
-	$.ajax({
-		url: baseURL + "solicitudes/cargarInformacionCompletaSolicitud",
-		type: "post",
-		dataType: "JSON",
-		data: data,
-		success: function (response) {
-			console.log(response);
-			$("#admin_ver_finalizadas").slideUp();
-			$("#datos_org_resolucion").slideDown();
-			$("#adjuntar_resolucion").attr("data-id-org", $id_org);
-			$("#resolucion").attr("data-id-org", $id_org);
-			$("#resolucion_nombre_org").html(response.organizaciones.nombreOrganizacion);
-			$("#resolucion_nit_org").html(response.organizaciones.numNIT);
-			$("#resolucion_nombreRep_org").html(response.organizaciones.primerNombreRepLegal + " " + response.organizaciones.segundoNombreRepLegal + " " + response.organizaciones.primerApellidoRepLegal + " " + response.organizaciones.segundoApellidoRepLegal);
-			$("#tbodyResoluciones").empty();
-			$("#tbodyResoluciones>.odd").remove();
-			tablaResoluciones(response, $id_org);
-		},
-		error: function (ev) {
-			//Do nothing
-		},
-	});
+	else {
+		$('#tabla_resoluciones_organizacion').hide('linear');
+	}
 });
-/** Habilitar Input Años */
-$("#res_fech_inicio").change( function (){
-	$("#res_anos").attr('disabled', false);
+// Ver usuarios
+$('#verFormularioResolucion').click(function () {
+	if ($('#formulario_resolucion_organizacion').css('display') == 'none'){
+		$('#formulario_resolucion_organizacion').show('swing');
+		$('#tabla_resoluciones_organizacion').hide('linear');
+	}
+	else {
+		$('#formulario_resolucion_organizacion').hide('linear');
+	}
 });
-/** Años de resolución automaticos */
-$("#res_anos").change( function (){
-	let years = $("#res_anos").val();
-	let fechaFin = moment($("#res_fech_inicio").val())
+// Habilitar Input Años
+$("#fechaResolucionInicial").change( function (){
+	$("#anosResolucion").attr('disabled', false);
+});
+// Años de resolución automaticos
+$("#anosResolucion").change( function (){
+	let years = $("#anosResolucion").val();
+	let fechaFin = moment($("#fechaResolucionInicial").val())
 	fechaFin = fechaFin.add(years, 'year')
 	fechaFin = fechaFin.format('YYYY-MM-DD');
-	$("#res_fech_fin").attr('disabled', false);
-	$("#res_fech_fin").val(fechaFin);
-	$("#num_res_org").attr('disabled', false);
+	$("#fechaResolucionFinal").val(fechaFin);
+	$("#numeroResolucion").attr('disabled', false);
 });
-/** Adjuntar Resolución */
-$("#adjuntar_resolucion").on("click", function () {
-	event.preventDefault();
-	//if($("#formulario_actualizar_imagen").valid()){
-	let cursos_aprobados = '';
-	let modalidades = '';
-	// Recorrer motivos de la solicitud y guardar variables
-	$("#formulario_resoluciones input[name=motivos]").each(function (){
-		if (this.checked){
-			switch ($(this).val()) {
-				case '1':
-					cursos_aprobados += 'Acreditación Curso Básico de Economía Solidaria' + ', ';
-					break;
-				case '2':
-					cursos_aprobados += 'Aval de Trabajo Asociado' + ', ';
-					break;
-				case '3':
-					cursos_aprobados += 'Acreditación Curso Medio de Economía Solidaria' + ', ';
-					break;
-				case '4':
-					cursos_aprobados += 'Acreditación Curso Avanzado de Economía Solidaria' + ', ';
-					break;
-				case '5':
-					cursos_aprobados += 'Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria' + ', ';
-					break;
-				default:
-			}
-		}
-	});
-	// Recorrer motivos de la solicitud y guardar variables
-	$("#formulario_resoluciones input[name=modalidades]").each(function (){
-		if (this.checked){
-			switch ($(this).val()) {
-				case '1':
-					modalidades += 'Presencial' + ', ';
-					break;
-				case '2':
-					modalidades += 'Virtual' + ', ';
-					break;
-				case '3':
-					modalidades += 'En Linea' + ', ';
-					break;
-				default:
-			}
-		}
-	});
-	var file_data = $("#resolucion").prop("files")[0];
-	var form_data = new FormData();
-	form_data.append("file", file_data);
-	form_data.append("fechaResolucionInicial", $("#res_fech_inicio").val());
-	form_data.append("fechaResolucionFinal", $("#res_fech_fin").val());
-	form_data.append("cursoAprobado", cursos_aprobados.substring(0, cursos_aprobados.length -2));
-	form_data.append("modalidadAprobada", modalidades.substring(0, modalidades.length -2));
-	form_data.append("anosResolucion",$("#res_anos").val());
-	form_data.append("numeroResolucion", $("#num_res_org").val());
-	form_data.append("tipoResolucion", $("input:radio[name=tipoResolucion]:checked").val());
-	form_data.append("id_organizacion",$(this).attr("data-id-org"));
-	$.ajax({
-		url: baseURL + "admin/upload_resolucion",
-		dataType: "text",
-		cache: false,
-		contentType: false,
-		processData: false,
-		data: form_data,
-		type: "post",
-		dataType: "JSON",
-		beforeSend: function () {
-			notificacion("Espere...", "success");
-		},
-		success: function (response) {
-			notificacion(response.msg, "success");
-			//setInterval(functions(){ redirect('resoluciones') }, 2000);
-			$.ajax({
-				url: baseURL + "solicitudes/cargarInformacionCompletaSolicitud",
-				dataType: "text",
-				cache: false,
-				contentType: false,
-				processData: false,
-				type: "post",
-				dataType: "JSON",
-				data: form_data,
-				success: function (response) {
-					console.log(response);
-					$("#tbodyResoluciones").empty();
-					$("#tbodyResoluciones>.odd").remove();
-					tablaResoluciones(response, $(this).attr("data-id-org"));
-				},
-				error: function (ev) {
-					//Do nothing
-				},
+// Acciones si es resolución vieja o vigente
+$("input[name=tipoResolucion]").change(function () {
+	if($(this).val() == 'vieja') {
+		$('#resolucionVieja').show('swing');
+		$('#resolucionVigente').hide('linear');
+	}
+	else {
+		$('#resolucionVigente').show('swing');
+		$('#resolucionVieja').hide('linear');
+	}
+})
+/**
+ * Adjuntar Resolución
+ * */
+$("#cargarResolucion").on("click", function () {
+	validarFormularios();
+	//if($("#formulario_resolucion_organizacion").valid()){
+		var file = $("#resolucion").prop("files")[0];
+		var formData = new FormData();
+		// Si es resolución antigua
+		if($("input:radio[name=tipoResolucion]:checked").val() == 'vieja') {
+			let cursos_aprobados = '';
+			let modalidades = '';
+			// Recorrer motivos de la solicitud y guardar variables
+			$("#formulario_resoluciones_organizacion input[name=motivos]").each(function (){
+				if (this.checked){
+					switch ($(this).val()) {
+						case '1':
+							cursos_aprobados += 'Acreditación Curso Básico de Economía Solidaria' + ', ';
+							break;
+						case '2':
+							cursos_aprobados += 'Aval de Trabajo Asociado' + ', ';
+							break;
+						case '3':
+							cursos_aprobados += 'Acreditación Curso Medio de Economía Solidaria' + ', ';
+							break;
+						case '4':
+							cursos_aprobados += 'Acreditación Curso Avanzado de Economía Solidaria' + ', ';
+							break;
+						case '5':
+							cursos_aprobados += 'Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria' + ', ';
+							break;
+						default:
+					}
+				}
 			});
-		},
-		error: function (ev) {
-			//Do nothing
-		},
-	});
+			// Recorrer motivos de la solicitud y guardar variables
+			$("#formulario_resoluciones_organizacion input[name=modalidades]").each(function (){
+				if (this.checked){
+					switch ($(this).val()) {
+						case '1':
+							modalidades += 'Presencial' + ', ';
+							break;
+						case '2':
+							modalidades += 'Virtual' + ', ';
+							break;
+						case '3':
+							modalidades += 'En Linea' + ', ';
+							break;
+						default:
+					}
+				}
+			});
+			formData.append("cursoAprobado", cursos_aprobados.substring(0, cursos_aprobados.length -2));
+			formData.append("modalidadAprobada", modalidades.substring(0, modalidades.length -2));
+		}
+		formData.append("file", file);
+		formData.append("fechaResolucionInicial", $("#fechaResolucionInicial").val());
+		formData.append("fechaResolucionFinal", $("#fechaResolucionFinal").val());
+		formData.append("anosResolucion",$("#anosResolucion").val());
+		formData.append("numeroResolucion", $("#numeroResolucion").val());
+		formData.append("tipoResolucion", $("input:radio[name=tipoResolucion]:checked").val());
+		formData.append("id_organizacion", $(this).attr("data-id-org"));
+		formData.append("idSolicitud", $("#idSolicitud").val());
+		$.ajax({
+			url: baseURL + "resoluciones/cargarResolucionOrganizacion",
+			cache: false,
+			contentType: false,
+			processData: false,
+			data: formData,
+			type: "post",
+			dataType: "html",
+			beforeSend: function () {
+				procesando("info", "Espere...");
+			},
+			success: function (response) {
+				response = JSON.parse(response);
+				if(response.status == 'success') {
+					alertaResolucion(response.title, response.msg, response.status);
+				}
+				else {
+					procesando(response.status, response.msg)
+				}
+			},
+			error: function (ev) {
+				//Do nothing
+			},
+		});
 	//}
 });
-
+/**
+ * Eliminar resolución
+ */
 $(document).on("click", ".eliminarResolucion", function () {
-	var $id_resolucion = $(this).attr("data-id-res");
-	var $id_organizacion = $(this).attr("data-id-org");
+	var idResolucion = $(this).attr("data-id-res");
+	var idOrganizacion = $(this).attr("data-id-org");
 	var data = {
-		id_resolucion: $id_resolucion,
-		id_organizacion: $id_organizacion,
+		id_resolucion: idResolucion,
+		id_organizacion: idOrganizacion,
 	};
-
 	$.ajax({
-		url: baseURL + "admin/eliminarResolucion",
+		url: baseURL + "resoluciones/eliminarResolucion",
 		type: "post",
 		dataType: "JSON",
 		data: data,
+		beforeSend: function () {
+			procesando('info', 'Espere...');
+		},
 		success: function (response) {
-			notificacion(response.msg, "success");
-			$.ajax({
-				url: baseURL + "solicitudes/cargarInformacionCompletaSolicitud",
-				type: "post",
-				dataType: "JSON",
-				data: data,
-				success: function (response) {
-					$("#tbodyResoluciones").empty();
-					$("#tbodyResoluciones>.odd").remove();
-					tablaResoluciones(response, $id_organizacion);
-				},
-				error: function (ev) {
-					//Do nothing
-				},
-			});
+			alertaResolucion(response.title, response.msg, response.status);
 		},
 		error: function (ev) {
 			//Do nothing
 		},
 	});
 });
-
+/**
+ * Editar resolución
+ */
 $(document).on("click", ".editarResolucion", function () {
 	var $id_resolucion = $(this).attr("data-id-res");
 	var $id_organizacion = $(this).attr("data-id-org");
@@ -240,7 +206,9 @@ $(document).on("click", ".editarResolucion", function () {
 		},
 	});
 });
-
+/**
+ * Actualizar datos de la resolución
+ */
 $(document).on("click", "#actualizarDatosResolucion", function () {
 	$id_res = $(this).attr("id-res");
 	$id_org = $(this).attr("id-org");
@@ -269,23 +237,71 @@ $(document).on("click", "#actualizarDatosResolucion", function () {
 		data: data,
 		success: function (response) {
 			notificacion(response.msg, "success");
-			$.ajax({
-				url: baseURL + "solicitudes/cargarInformacionCompletaSolicitud",
-				type: "post",
-				dataType: "JSON",
-				data: data,
-				success: function (response) {
-					$("#tbodyResoluciones").empty();
-					$("#tbodyResoluciones>.odd").remove();
-					tablaResoluciones(response, $(this).attr("id-org"));
-				},
-				error: function (ev) {
-					//Do nothing
-				},
-			});
 		},
 		error: function (ev) {
 			//Do nothing
 		},
 	});
 });
+/**
+ * Validar formularios
+ */
+function validarFormularios(){
+	$("form[id='formulario_resolucion_organizacion']").validate({
+		rules: {
+			fechaResolucionInicial: {
+				required: true,
+			},
+			anosResolucion: {
+				required: true,
+			},
+			numeroResolucion: {
+				required: true,
+			},
+			resolucion: {
+				required: true,
+			},
+		},
+		messages: {
+			fechaResolucionInicial: {
+				required: "Por favor, ingrese una fecha de inicio.",
+			},
+			anosResolucion: {
+				required: "Por favor, ingrese cantidad de años.",
+			},
+			numeroResolucion: {
+				required: "Por favor, ingrese un numero de resolución",
+			},
+			resolucion: {
+				required: "Por favor, cargar archivo",
+			},
+		},
+	});
+}
+// Toast procesando
+function procesando(status, msg){
+	Toast.fire({
+		icon: status,
+		text: 'msg'
+	});
+}
+// Alerta de formulario guardado
+function alertaResolucion(title, msg, status){
+	Alert.fire({
+		title: title,
+		html: msg,
+		text: msg,
+		icon: status,
+		allowOutsideClick: false,
+		customClass: {
+			popup: 'popup-swalert-list',
+			confirmButton: 'button-swalert',
+		},
+	}).then((result) => {
+		if (result.isConfirmed) {
+			setInterval(function () {
+				reload();
+			}, 2000);
+		}
+	})
+}

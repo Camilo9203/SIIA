@@ -23,6 +23,12 @@ class SolicitudesModel extends CI_Model
 		$solicitudes = $this->db->select("*")->from("solicitudes")->join('tipoSolicitud', "tipoSolicitud.idSolicitud = solicitudes.idSolicitud")->join('estadoOrganizaciones', "estadoOrganizaciones.idSolicitud = solicitudes.idSolicitud")->where('solicitudes.organizaciones_id_organizacion', $id)->get()->result();
 		return $solicitudes;
 	}
+	/** Cargar solicitudes acreditadas por organización */
+	public function getSolicitudesAcreditadasOrganizacion($id = FALSE)
+	{
+		$solicitudes = $this->db->select("*")->from("solicitudes")->join('tipoSolicitud', "tipoSolicitud.idSolicitud = solicitudes.idSolicitud")->join('estadoOrganizaciones', "estadoOrganizaciones.idSolicitud = solicitudes.idSolicitud")->where('solicitudes.organizaciones_id_organizacion', $id)->where('estadoOrganizaciones.nombre', 'Acreditado')->get()->result();
+		return $solicitudes;
+	}
 	/** Cargar Solicitudes Finalizadas Histórico */
 	public function getSolicitudesFinalizadas()
 	{
@@ -93,9 +99,7 @@ class SolicitudesModel extends CI_Model
 		$observaciones = $this->db->select('*')->from('observaciones')->where("organizaciones_id_organizacion", $idOrganizacion)->get()->result();
 		echo json_encode(array("informacionGeneral" => $informacionGeneral, "documentacion" => $documentacion, "registroEducativoProgramas" => $registroEducativoProgramas, "antecedentesAcademicos" => $antecedentesAcademicos, "jornadasActualizacion" => $jornadasActualizacion, "datosProgramas" => $datosProgramas, "docentes" => $docentes, "plataforma" => $plataforma, "enLinea" => $enLinea, "tipoSolicitud" => $tipoSolicitud, "solicitudes" => $solicitudes, "estadoOrganizaciones" => $estadoOrganizaciones, "organizaciones" => $organizaciones, "archivos" => $archivos, "resoluciones" => $resoluciones, "observaciones" => $observaciones, "certificadoExistencia" => $certificadoExistencia));
 	}
-    /**
-     * Traducir motivos
-     */
+    /** Traducir motivos */
     public function getMotivo($id)
     {
         switch ($id):
@@ -118,9 +122,7 @@ class SolicitudesModel extends CI_Model
                 break;
         endswitch;
     }
-    /**
-     * Traducir motivos
-     */
+    /** Traducir motivos */
     public function getModalidad($id)
     {
         switch ($id):

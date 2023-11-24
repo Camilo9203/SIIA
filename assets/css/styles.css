@@ -370,7 +370,7 @@ table.table td {
 	text-align: center;
 }
 table.table a {
-	color: #0275d8 !important;
+	color: #0275d8;
 }
 table.table #tbodyArchivosDocen a {
 	color: white !important;
@@ -651,7 +651,6 @@ table > tbody > tr > td {
 #divSiguienteProgBasiES1,
 #v_estado_org,
 #datos_org_camara,
-#datos_org_resolucion,
 #divSiguienteProgBasiES2,
 #divSiguienteProgBasiES3,
 #divSiguienteProgBasiES4,
@@ -698,6 +697,9 @@ table > tbody > tr > td {
 #contacto_copia,
 #super-view-admins,
 #super-view-users,
+#resolucionVieja,
+#formulario_resolucion_organizacion,
+#tabla_resoluciones_organizacion,
 #contacto_copia_admin {
 	display: none;
 }

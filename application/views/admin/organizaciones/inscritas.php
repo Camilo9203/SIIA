@@ -23,19 +23,26 @@
 			</tr>
 		</thead>
 		<tbody id="tbody">
-		<?php
-			foreach ($organizaciones as $organizacion) {
-				echo "<tr>";
-				echo "<td>" . $organizacion->numNIT . "</td>";
-				echo "<td>" . $organizacion->nombreOrganizacion . "</td>";
-				echo "<td>" . $organizacion->primerNombreRepLegal . " " . $organizacion->segundoNombreRepLegal . " " . $organizacion->primerApellidoRepLegal . " " . $organizacion->segundoApellidoRepLegal . "</td>";
-				echo "<td>" . $organizacion->direccionCorreoElectronicoOrganizacion . "</td>";
-				echo "<td>" . $organizacion->direccionCorreoElectronicoRepLegal."</td>";
-				echo "<td>" . $organizacion->estado . "</td>";
-				echo "<td><button class='btn btn-siia btn-sm ver_organizacion_inscrita' id='' data-organizacion='" . $organizacion->numNIT ."'>Ver organizacion <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
-				echo "</tr>";
-			}
-		?>
+			<?php foreach ($organizaciones as $organizacion): ?>
+			<tr>
+				<td><?php echo $organizacion->numNIT ?></td>
+				<td><?php echo $organizacion->nombreOrganizacion ?></td>
+				<td><?php echo $organizacion->primerNombreRepLegal . " " . $organizacion->primerApellidoRepLegal?></td>
+				<td><?php echo $organizacion->direccionCorreoElectronicoOrganizacion ?></td>
+				<td><?php echo $organizacion->direccionCorreoElectronicoRepLegal ?></td>
+				<td><?php echo $organizacion->estado ?></td>
+				<td>
+					<div class='btn-group-vertical' role='group' aria-label='acciones'>
+						<button class='btn btn-siia btn-sm ver_organizacion_inscrita' data-organizacion='<?php echo $organizacion->id_organizacion; ?>' data-solicitud='<?php echo $organizacion->idSolicitudAcreditado; ?>'>
+							Ver Organización <i class='fa fa-eye' aria-hidden='true'></i>
+						</button>
+						<button class='btn btn-primary btn-sm ver_resolucion_org' data-organizacion='<?php echo $organizacion->id_organizacion; ?>' data-solicitud='<?php echo $organizacion->idSolicitudAcreditado; ?>'>
+							Ver Resoluciones <i class='fa fa-eye' aria-hidden='true'></i>
+						</button>
+					</div>
+				</td>
+			</tr>
+			<?php endforeach; ?>
 		</tbody>
 	</table>
 		<button class="btn btn-danger btn-sm pull-left" id="admin_panel_org_inscritas_volver btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver al panel principal</button>

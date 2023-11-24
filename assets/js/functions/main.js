@@ -753,7 +753,7 @@ $(document).ready(function () {
 		redirect(baseURL + "panelAdmin/organizaciones/camaraComercio");
 	});
 	$("#admin_resoluciones").click(function () {
-		redirect(baseURL + "panelAdmin/organizaciones/resoluciones");
+		redirect(baseURL + "panelAdmin/organizaciones/inscritas");
 	});
 	$("#admin_estadoorg").click(function () {
 		redirect(baseURL + "panelAdmin/organizaciones/estadoOrganizaciones");
@@ -7238,6 +7238,7 @@ function tablas() {
 		"tabla_observaciones_form7",
 		"tabla_registro_programas",
 		"tabla_organizaciones_inscritas",
+		"tabla_organizaciones_resolucion"
 	];
 
 	for (i = 0; i < tablas.length; i++) {
