@@ -28,4 +28,13 @@ class ResolucionesModel extends CI_Model
 		$query = $this->db->get_where('resoluciones', array('id_resoluciones' => $id));
 		return $query->row();
 	}
+	/**
+	 * Cargar resolución por id de solicitud
+	 */
+	public function getResolucionSolicitud($id = FALSE)
+	{
+		// Traer organizaciones por ID
+		$query = $this->db->get_where('resoluciones', array('idSolicitud' => $id));
+		return $query->row();
+	}
 }

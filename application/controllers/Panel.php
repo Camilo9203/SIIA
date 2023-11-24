@@ -8,6 +8,8 @@ class Panel extends CI_Controller
 		parent::__construct();
 		$this->load->helper(array('download', 'file', 'url', 'html', 'form'));
 		$this->load->model('InformacionGeneralModel');
+		$this->load->model('OrganizacionesModel');
+		$this->load->model('ResolucionesModel');
 		verify_session();
 	}
 	// Vista index
@@ -31,19 +33,8 @@ class Panel extends CI_Controller
 			'departamentos' => $this->cargarDepartamentos(),
 			'data_organizacion' => $this->cargarDatosOrganizacion(),
 			'data_solicitudes' => $this->cargarSolicitudes(),
-			'informacionGeneral' => $this->InformacionGeneralModel->getInformacionGeneral($usuario->id_usuario)
+			'informacionGeneral' => $this->InformacionGeneralModel->getInformacionGeneral($usuario->id_usuario),
 		);
-
-		//$data['estado'] = $this->estadoOrganizaciones();
-		//$data['data_informacion_general'] = $this->cargarDatos_formulario_informacion_general_entidad();
-		//$data['data_documentacion_legal'] = $this->cargarDatos_formulario_documentacion_legal();
-		//$data['data_registro_educativo'] = $this->cargarDatos_formulario_registro_educativo();
-		//$data['data_antecedentes_academicos'] = $this->cargarDatos_formulario_antecedentes_academicos();
-		//$data['data_jornadas_actualizacion'] = $this->cargarDatos_formulario_jornadas_actualizacion();
-		//$data['data_basicos_programas'] = $this->cargarDatos_formulario_basicos_programas();
-		//$data['data_plataforma'] = $this->cargarDatos_formulario_datos_plataforma();
-		//$data['data_modalidad_en_linea'] = $this->cargarDatos_modalidad_en_linea();
-		//$data['data_programas'] = $this->cargarDatos_programas();
 		$data["camara"] = $this->cargarCamaraComercio();
 		$data['informacionModal'] = $this->cargar_informacionModal();
 		$this->load->view('include/header', $data);

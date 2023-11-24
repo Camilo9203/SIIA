@@ -4,6 +4,8 @@
  * @var $data_solicitudes
  * @var $informacionGeneral
  */
+$CI = &get_instance();
+$CI->load->model("ResolucionesModel");
 ?>
 <script>
 	var organizacion = '<?= $data_organizacion->numNIT ?>';
@@ -236,36 +238,76 @@
 				<td>IDSolicitud</td>
 				<td>Fecha de Inscripción</td>
 				<td>Fecha de Última Revisión</td>
-				<td>Estado Solicitud</td>
+				<td>Estado solicitud</td>
 				<td>Motivo</td>
 				<td>Modalidad</td>
 				<td>Acciones</td>
 			</tr>
 			</thead>
 			<tbody id="tbody">
-				<?php foreach ($data_solicitudes as $solicitud) {
-					echo "<tr><td>" . $solicitud->idSolicitud . "</td>";
-					echo "<td>" . $solicitud->fechaCreacion . "</td>";
-					echo "<td>" . $solicitud->fechaUltimaRevision . "</td>";
-					echo "<td>" . $solicitud->nombre . "</td>";
-					echo "<td>" . $solicitud->motivoSolicitudAcreditado . "</td>";
-					echo "<td>" . $solicitud->modalidadSolicitudAcreditado . "</td>";
-					if ($solicitud->nombre == "En Proceso") {
-						echo "<td><div class='btn-group-vertical' role='group' aria-label='acciones'><button type='button' class='btn btn-siia btn-sm verSolicitud' data-id=" . $solicitud->idSolicitud . " title='Continuar Solicitud'>Continuar <i class='fa fa-check' aria-hidden='true'></i></button>";
-						echo "<button type='button' class='btn btn-danger btn-sm eliminarSolicitud' data-id='" . $solicitud->idSolicitud . "' title='Eliminar Solicitud'>Eliminar <i class='fa fa-trash' aria-hidden='true'></i></button></div></td></tr>";
-					}
-					if ($solicitud->nombre == "Acreditado" || $solicitud->nombre == "Archivada" || $solicitud->nombre == "Negada" || $solicitud->nombre == "Revocada" ){
-						echo "<td><button class='btn btn-info btn-sm verDetalleSolicitud' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false' data-id=" . $solicitud->idSolicitud . " title='Ver Detalle'>Detalle <i class='fa fa-info' aria-hidden='true'></i></button></div></td></tr>";
-					}
-					if ($solicitud->nombre == "Finalizado"){
-						echo "<td><div class='btn-group-vertical' role='group' aria-label='acciones'><button class='btn btn-success btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Estado'>Estado<i class='fa fa-eye' aria-hidden='true'></i></button>";
-						echo "<button type='button' class='btn btn-danger btn-sm eliminarSolicitud' data-id='" . $solicitud->idSolicitud . "' title='Eliminar Solicitud'>Eliminar <i class='fa fa-trash' aria-hidden='true'></i></button></div></td></tr>";
-					}
-					if ($solicitud->nombre == "En Observaciones"){
-						echo "<td><button class='btn btn-warning btn-sm verObservaciones' data-id=" . $solicitud->idSolicitud . " title='Ver Observaciones'>Observaciones<i class='fa fa-eye' aria-hidden='true'></i></button></td></tr>";
-					}
-				}
-				?>
+				<?php foreach ($data_solicitudes as $solicitud): ?>
+					<tr>
+						<td><?= $solicitud->idSolicitud ?></td>
+						<td><?= $solicitud->fechaCreacion ?></td>
+						<td><?= $solicitud->fechaUltimaRevision ?></td>
+						<td><?= $solicitud->fechaUltimaRevision ?></td>
+						<td><?= $solicitud->nombre ?></td>
+						<td><?= $solicitud->motivoSolicitudAcreditado ?></td>
+						<td><?= $solicitud->modalidadSolicitudAcreditado ?></td>
+						<?php if($solicitud->nombre == "En Proceso"): ?>
+						<td>
+							<div class='btn-group-vertical' role='group' aria-label='acciones'>
+								<button type='button' class='btn btn-siia btn-sm verSolicitud' data-id="<?= $solicitud->idSolicitud ?>" title='Continuar Solicitud'>
+									Continuar <i class='fa fa-check' aria-hidden='true'></i>
+								</button>
+								<button type='button' class='btn btn-danger btn-sm eliminarSolicitud' data-id='<?= $solicitud->idSolicitud ?>' title='Eliminar Solicitud'>
+									Eliminar <i class='fa fa-trash' aria-hidden='true'></i>
+								</button>
+							</div>
+						</td>
+						<?php endif; ?>
+						<?php if($solicitud->nombre == "Acreditado" || $solicitud->nombre == "Archivada" || $solicitud->nombre == "Negada" || $solicitud->nombre == "Revocada" ): ?>
+						<td>
+							<div class='btn-group-vertical' role='group' aria-label='acciones'>
+								<?php $resolucion = $CI->ResolucionesModel->getResolucionSolicitud($solicitud->idSolicitud) ?>
+								<?php if($resolucion): ?>
+								<a class="btn btn-sm btn-siia" style="text-decoration: none; color: #951919;" href="<?= base_url() . 'uploads/resoluciones/' . $resolucion->resolucion; ?>" target='_blank'>
+									Resolución <i class='fa fa-eye' aria-hidden='true'></i>
+								</a>
+								<?php // TODO: Terminar
+									//if(date($resolucion->fechaResolucionFinal) > date('Y:m:d')): ?>
+								<button type='button' class='btn btn-success btn-sm ' data-id='<?= $solicitud->idSolicitud ?>' title='Continuar Solicitud'>
+									Renovar<i class='fa fa-check' aria-hidden='true'></i>
+								</button>
+									<?php //endif; ?>
+								<?php endif; ?>
+								<button class='btn btn-info btn-sm verDetalleSolicitud' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false' data-id='<?= $solicitud->idSolicitud ?>' title='Ver Detalle'>
+									Detalle <i class='fa fa-info' aria-hidden='true'></i>
+								</button>
+							</div>
+						</td>
+						<?php endif; ?>
+						<?php if($solicitud->nombre == "Finalizado"): ?>
+						<td>
+							<div class='btn-group-vertical' role='group' aria-label='acciones'>
+								<button class='btn btn-success btn-sm verObservaciones' data-id="<?= $solicitud->idSolicitud ?>" title='Ver Estado'>
+									Estado<i class='fa fa-eye' aria-hidden='true'></i>
+								</button>
+								<button type='button' class='btn btn-danger btn-sm eliminarSolicitud' data-id='<?= $solicitud->idSolicitud ?>' title='Eliminar Solicitud'>
+									Eliminar <i class='fa fa-trash' aria-hidden='true'></i>
+								</button>
+							</div>
+						</td>
+						<?php endif; ?>
+						<?php if($solicitud->nombre == "En Observaciones"): ?>
+						<td>
+							<button class='btn btn-warning btn-sm verObservaciones' data-id="<?= $solicitud->idSolicitud ?>" title='Ver Observaciones'>
+								Observaciones<i class='fa fa-eye' aria-hidden='true'></i>
+							</button>
+						</td>
+						<?php endif; ?>
+					</tr>
+				<?php endforeach; ?>
 			</tbody>
 		</table>
 		<!-- Modal Detalle Solicitud -->
