@@ -16,7 +16,7 @@ class DocentesModel extends CI_Model
 		}
 		// Traer docentes por ID
 		$query = $this->db->get_where('docentes', array('organizaciones_id_organizacion' => $id));
-		return $query->row();
+		return $query->result();
 	}
 	/**
 	 * Cargar Docentes Sin Asignar

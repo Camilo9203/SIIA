@@ -71,6 +71,7 @@ class InformacionGeneral extends CI_Controller
                 if ($datos_informacion_general != NULL) {
                     $this->db->where('organizaciones_id_organizacion', $organizacion->id_organizacion);
                     $this->db->update('informacionGeneral', $data_informacion_general);
+                    $this->db->where('id_organizacion', $organizacion->id_organizacion);
                     $this->db->update('organizaciones', $data_organizacion);
                     echo json_encode(array('msg' => "Se actualizó la Información General.", 'status' => 'success'));
                     $this->logs_sia->session_log('Formulario Actualización Información General');

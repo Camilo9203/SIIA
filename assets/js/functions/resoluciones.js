@@ -6,6 +6,12 @@ $(".ver_resolucion_org").click(function () {
 	window.open(baseURL + "resoluciones/organizacion/" + idOrganizacion, '_self');
 });
 /**
+ * Volver a organizaciones inscritas
+ */
+$("#volver_inscritas").click(function () {
+	redirect(baseURL + "panelAdmin/organizaciones/inscritas");
+});
+/**
  * Acciones de menú
  */
 // Ver administradores

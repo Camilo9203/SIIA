@@ -196,8 +196,6 @@ $CI->load->model("ResolucionesModel");
 				<?php endif; ?>
 			</div>
 		</div>
-
+		<button class="btn btn-danger pull-left btn-sm" id="volver_inscritas"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 	</div>
 </div>
-
-

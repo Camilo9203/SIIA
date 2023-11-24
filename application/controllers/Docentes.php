@@ -47,7 +47,7 @@ class Docentes extends CI_Controller
 	/** Añadir nuevo docente */
 	public function anadirNuevoDocente()
 	{
-		$organizacion = $this->datosSession()['data_organizacion'];
+		$organizacion = $this->OrganizacionesModel->getOrganizacionUsuario($this->session->userdata('usuario_id'));
 		$data_docentes = array(
 			'primerNombreDocente' => $this->input->post("primer_nombre"),
 			'segundoNombreDocente' => $this->input->post("segundo_nombre"),
@@ -60,7 +60,7 @@ class Docentes extends CI_Controller
 			'organizaciones_id_organizacion' => $organizacion->id_organizacion
 		);
 		if($this->db->insert('docentes', $data_docentes)) {
-			echo json_encode(array('url' => "panel", 'msg' => "Información de docente guardada exitosamente."));
+			echo json_encode(array('status' => "success", 'msg' => "Información de docente guardada exitosamente."));
 		};
 	}
 	/** Actualizar docente */
