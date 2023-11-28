@@ -80,4 +80,11 @@ class AdministradoresModel extends CI_Model
 		$user = $this->db->select('*')->from('administradores')->where('usuario', $user)->get()->row();
 		return $user->direccionCorreoElectronico;
 	}
+	/**
+	 * Get email coordinador
+	 */
+	public function getCoordinador(){
+		$user = $this->db->select('*')->from('administradores')->where('nivel', 6)->get()->row();
+		return $user->direccionCorreoElectronico;
+	}
 }
