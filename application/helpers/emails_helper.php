@@ -72,6 +72,11 @@ function send_email_admin($tipo, $prioridad = null, $to = null, $docente = null,
 			$message = 'Se le ha asignado la solicitud: <strong>' . $solicitud . '</strong> de la organización <strong>' . $organizacion->nombreOrganizacion . '</strong> para que pueda ver la solicitud y la información, este correo es informativo y debe ingresar a la aplicación SIIA, en organizaciones y luego en evaluación para poder ver la solicitud.';
 			//$response = array('url' => 'panelAdmin/solicitudes/asignar', 'msg' => 'Se asigno la solicitud: ' . $solicitud . ' de la organización: ' . $organizacion->nombreOrganizacion .   ' correctamente en la fecha ' . date("Y-m-d H:i:s") . '.');
 			break;
+		// Llegada de solicitudes para asignar evaluadores
+		case 'enviarSolicitd':
+			$subject = 'Finalización de solicitud';
+			$message = 'La organización <strong>' . $organizacion->nombreOrganizacion . '</strong> ha finalizado la solicitud: <strong>' . $solicitud . '</strong>. Para que pueda asignar la solicitud y/o ver la información, debe ingresar a la aplicación <a href='. base_url() . '>. Ir a organizaciones y dar clic en botón <strong>ASIGNAR</strong>.';
+			break;
 		case 'actualizacionSolicitud':
 			$subject = 'Actualización de la solicitud - ' . $solicitud;
 			$message = 'La organización: <strong>' . $organizacion->nombreOrganizacion . '</strong> ha realizado los ajustes requeridos para la solicitud: <strong>' . $solicitud . '</strong>, por favor ingresar a la aplicación SIIA, en organizaciones y luego en complementaria para poder ver la solicitud.';
@@ -136,7 +141,13 @@ function send_email_user($to, $type, $organizacion, $usuario = null, $token = nu
 			break;
 		case 'crearSolicitud':
 			$subject = "Inicia el diligenciamiento de la solicitud";
-			$message = "Organización " . $organizacion->nombreOrganizacion . ": Unidad Solidaria le informa que ha iniciado el diligenciamiento de su solicitud de acreditación. Recuerde diligenciar todos los formularios, ingresando la información en los campos requeridos, los archivos adjuntos como imágenes y archivos con las extensiones en letra minúscula admitidas (archivo.jpg, archivo.png, archivo.pdf) y con un peso no mayor a 15 Mb cada archivo. Al final de cada formulario guarde la información con el botón 'Guardar'. Cuando concluya con el ingreso de información en todos los formularios y archivos adjuntos requeridos, favor enviar la solicitud para su evaluación dando FINALIZAR en el SIIA. Si esta actualizando información recuerde eliminar la solicitud al finalizar. Unidad Solidaria le recuerda que es importante mantener la  información básica de contacto de la entidad actualizada, para facilitar el desarrollo procesos derivados de la acreditación. Le recomendamos  cada vez que se realice algún cambio sea reportado por medio del SIIA.";
+			$message = "Organización " . $organizacion->nombreOrganizacion . ": Unidad Solidaria le informa que ha iniciado el diligenciamiento de su solicitud de acreditación con ID: " . $idSolicitud . "
+			 <br><br>Recuerde diligenciar todos los formularios, ingresando la información en los campos requeridos, los archivos adjuntos deben ser PDF con las extensiones admitidas (archivo.pdf, archivo.PDF) y con un peso no mayor a 15 MB cada archivo. 
+			 <br><br>Al final de cada formulario guardé la información dando clic en el botón 'Guardar' <strong>(Es importante que valide si el formulario queda en color verde)</strong> 
+			 <br><br>Cuando concluya con el ingreso de información en todos los formularios y archivos adjuntos requeridos <strong>(Todos los formularios deben estar en verde)</strong>, favor enviar la solicitud para su evaluación dando clic en el botón <strong>FINALIZAR</strong>.
+			 <br><br>Si está en proceso de renovación recuerde que es importante mantener actualizada la información básica de contacto, así como documentos, docentes, entre otros, esto con el fin de facilitar el desarrollo procesos de acreditación. 
+			 <br><br>Le recomendamos cada vez que se realice algún cambio sea reportado por medio del SIIA.
+			 <br><br>Gracias!.";
 			$response = array('status' => 'success', 'title' => 'Solicitud creada!', 'msg' => "Se créo nueva solicitud: <strong>" . $idSolicitud . "</strong> Será redireccionado a la página para diligenciar los formularios de esta solicitud.", 'id' => $idSolicitud);
 			break;
 		case 'enviarSolicitd':

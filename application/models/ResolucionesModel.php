@@ -29,7 +29,7 @@ class ResolucionesModel extends CI_Model
 		return $query->row();
 	}
 	/**
-	 * Cargar resolución por id de solicitud
+	 * Cargar resolución por ID de solicitud
 	 */
 	public function getResolucionSolicitud($id = FALSE)
 	{

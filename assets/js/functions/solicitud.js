@@ -317,6 +317,60 @@ $(".archivos_form_certificacion").on("click", function () {
 		})
 	}
 });
+// Guardar autoevaluacion
+$(".archivos_form_autoevaluacion").on("click", function () {
+	let data_name = $(".archivos_form_autoevaluacion").attr("data-name");
+	let form_data = new FormData();
+	form_data.append("file", $("#" + data_name).prop("files")[0]);
+	form_data.append("tipoArchivo", $("#" + data_name).attr("data-val"));
+	form_data.append("append_name", data_name);
+	form_data.append("id_form", $(".archivos_form_autoevaluacion").attr("data-form"));
+	form_data.append("idSolicitud", $(".archivos_form_autoevaluacion").attr("data-solicitud"));
+	$.ajax({
+		url: baseURL + "Archivos/create",
+		dataType: "text",
+		cache: false,
+		contentType: false,
+		processData: false,
+		data: form_data,
+		type: "post",
+		dataType: "JSON",
+		beforeSubmit: function () {
+			Toast.fire({
+				icon: 'info',
+				text: 'Guardando'
+			})
+		},
+		success: function (response) {
+			console.log(response);
+			if (response.icon == "success") {
+				Alert.fire({
+					title: 'Archivo guardado!',
+					text: response.msg,
+					icon: response.icon,
+					confirmButtonText: 'Aceptar',
+				})
+			}
+			else if (response.icon == "error") {
+				Alert.fire({
+					title: 'Error al guardar!',
+					text: response.msg,
+					icon: response.icon,
+					confirmButtonText: 'Aceptar',
+				})
+			}
+			clearInputs('formulario_carta');
+			cargarArchivos();
+		},
+		error: function (ev) {
+			event.preventDefault();
+			Toast.fire({
+				icon: 'error',
+				text: ev.responseText
+			});
+		},
+	});
+});
 // Guardar imágenes del lugar
 $(".archivos_form_lugar").on("click", function () {
 	$data_name = $(".archivos_form_lugar").attr("data-name");

@@ -302,7 +302,6 @@ $(".eliminarSolicitud").click(function () {
 	})
 	$('#eliminarSolicitud').attr('data-id', idSolicitud);
 	$('#solicitudAEliminar').html();
-
 });
 /**
  * Ver Solicitud
@@ -334,11 +333,30 @@ $(".verDetalleSolicitud").click(function () {
 			html = ""
 			if(response.solicitud['nombre'] == 'Acreditado')
 				estado = "badge-success"
+			if(response.solicitud['nombre'] == 'En Proceso' || response.solicitud['nombre'] == 'Finalizado')
+				estado = "badge-info"
+			if(response.solicitud['nombre'] == 'En Observaciones')
+				estado = "badge-warning"
 			html += "<p><label class='font-weight-bold'>Estado:</label><span class='badge " + estado + "'>" +  response.solicitud['nombre'] + "</span></p>";
 			html += "<p><label class='font-weight-bold'>Asignada: </label> " +  response.solicitud['asignada'] + "</p>";
 			html += "<p><label class='font-weight-bold'>Revisiones: </label> " +  response.solicitud['numeroRevisiones'] + "</p>";
 			html += "<p><label class='font-weight-bold'>Solicitud: </label> " +  response.solicitud['numeroSolicitudes'] + "</p>";
 			$("#informacionSolicitudEstado").html(html);
+			console.log(response.resolucion)
+			if(response.resolucion) {
+				$("#informacionSolicitudEstado").removeClass('col-lg-12');
+				$("#informacionSolicitudEstado").addClass('col-lg-6');
+				$("#informacionResolucion").show();
+				html = "";
+				html += "<p><label class='font-weight-bold'>Fecha Inicial Resolución:</label>" +  response.resolucion['fechaResolucionInicial'] + "</p>";
+				html += "<p><label class='font-weight-bold'>Fecha Final Resolución: </label> " +  response.resolucion['fechaResolucionFinal'] + "</p>";
+				html += "<p><label class='font-weight-bold'>Años Resolución: </label> " +  response.resolucion['anosResolucion'] + "</p>";
+				html += "<p><label class='font-weight-bold'>Resolución: </label><a href='" + baseURL + 'uploads/resoluciones/' + response.resolucion['resolucion'] + "' target='_blank'> " +  response.resolucion['numeroResolucion'] + "</p>";
+				$("#informacionResolucion").html(html);
+			}
+			else {
+				$("#informacionResolucion").hide();
+			}
 		},
 		error: function (ev) {
 			console.log(ev);
@@ -352,15 +370,97 @@ $(".verObservaciones").click(function () {
 	let idSolicitud = $(this).attr("data-id");
 	window.open(baseURL + "solicitudes/estadoSolicitud/" + idSolicitud, '_self');
 });
-function irSolicitud (data) {
-	event.preventDefault();
-	$.ajax({
-		url: baseURL + "panel/verDocumento",
-		type: "post",
-		dataType: "JSON",
-		data: data,
-		success: function (response){
-			window.open(response.file, '_self');
+/**
+ * Renovar solicitud
+ * */
+$(".renovarSolicitud").click(function () {
+	let text = "Esto creará una nueva solicitud a partir de esta, cambiará el estado de la solicitud actual y solo se conservará la información de los formularios: " +
+		"<br><br> <strong>1. Información General </strong>" +
+		"<br> <strong>5. Facilitadores.</strong>" +
+		"<br><br>Debe actualizar estos formularios con los datos actuales e ingresar la información de los demás formularios según su motivo y modalidad";
+	Alert.fire({
+		title: '¿Está seguro de renovar la solicitud: ' + $(this).attr("data-id") +'?',
+		text:	text,
+		html: text,
+		icon: 'question',
+		showCancelButton: true,
+		confirmButtonText: 'Si',
+		cancelButtonText: 'No',
+		customClass: {
+			popup: 'popup-swalert-list',
+			confirmButton: 'button-swalert',
+		},
+	}).then((result) => {
+		if (result.isConfirmed) {
+			let data= {
+				idSolicitud: $(this).attr("data-id"),
+			}
+			$.ajax({
+				url: baseURL + "Solicitudes/renovarSolicitud",
+				type: "post",
+				dataType: "JSON",
+				data: data,
+				beforeSend: function () {
+					procesando('info', 'Copiando Información')
+				},
+				success: function (response) {
+					console.log(response)
+					if(response.status == 'success'){
+						Alert.fire({
+							title: response.title,
+							html: response.msg,
+							text: response.msg,
+							icon: response.status,
+							allowOutsideClick: false,
+						}).then((result) => {
+							if (result.isConfirmed) {
+								setInterval(function () {
+									redirect(baseURL + "solicitudes/solicitud/" + response.id);
+								}, 2000);
+							}
+						})
+					}
+					else if(response.status = 'error'){
+						Alert.fire({
+							title: response.title,
+							html: response.msg,
+							text: response.msg,
+							icon: response.status,
+							allowOutsideClick: false,
+							customClass: {
+								popup: 'popup-swalert-list',
+								confirmButton: 'button-swalert',
+							},
+						})
+					}
+				},
+				error: function (ev) {
+					errorControlador(ev);
+				},
+			});
 		}
 	});
+});
+/**
+ * Alertas
+ */
+function procesando(status, msg){
+	Toast.fire({
+		icon: status,
+		text: msg
+	});
+}
+// Error 505
+function errorControlador(ev){
+	Alert.fire({
+		title: ev.statusText,
+		html: ev.responseText,
+		text: ev.responseText,
+		icon: 'error',
+		allowOutsideClick: false,
+		customClass: {
+			popup: 'popup-swalert-list',
+			confirmButton: 'button-swalert',
+		},
+	})
 }

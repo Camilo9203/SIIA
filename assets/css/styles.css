@@ -269,6 +269,8 @@ thead > tr > td {
 }
 #imagen_header_politicas {
 	margin: 0 auto;
+	height: 100px;
+	width: 350px;
 }
 label.error {
 	color: #e62e31;

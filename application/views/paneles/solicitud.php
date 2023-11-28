@@ -351,6 +351,18 @@
 							</a>
 						<?php echo form_close(); ?>
 					</div>
+					<?php if($solicitud->nombre == 'En Renovación'): ?>
+					<!-- Carta de solicitud -->
+					<div class="form-group col-md-12">
+						<?php echo form_open_multipart('', array('id' => 'formulario_autoevaluacion')); ?>
+						<h4>Adjunte documento de Autoevaluación cualitativa del desarrollo del curso para el que solicita renovación <small>PDF (1)</small></h4>
+						<input type="file" required accept="application/pdf" class="form-control" data-val="carta" name="auotevaluacion" id="auotevaluacion">
+						<a type="submit" class="btn btn-siia btn-sm archivos_form_autoevaluacion fa-fa center-block" data-name="auotevaluacion" data-form="1" data-solicitud="<?php echo $solicitud->idSolicitud ?>" name="auotevaluacion" id="auotevaluacion" value="Guardar archivo(s) &#xf0c7">
+							Guardar archivo(s) &#xf0c7
+						</a>
+						<?php echo form_close(); ?>
+					</div>
+					<?php endif; ?>
 					<!-- Imagenes
 					<div class="form-group div_imagenes_lugar col-md-4">
 						<h4>Imagenes <small>PNG, JPG (Max:10)</small> <a id="mas_files_imagenes"><i class="fa fa-plus" aria-hidden="true"></i></a><a id="menos_files_imagenes"> <i class="fa fa-minus" aria-hidden="true"></i></a></h4>

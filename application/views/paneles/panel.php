@@ -232,13 +232,12 @@ $CI->load->model("ResolucionesModel");
 		<table id="" width="100%" border=0 class="table table-striped table-bordered" id="">
 			<thead>
 			<tr>
-				<td colspan="8">Historial de solicitudes</td>
+				<td colspan="8"><h4 style="text-align: center">SOLICITUDES</h4></td>
 			</tr>
 			<tr>
 				<td>IDSolicitud</td>
-				<td>Fecha de Inscripción</td>
-				<td>Fecha de Última Revisión</td>
-				<td>Estado solicitud</td>
+				<td>Creada</td>
+				<td>Estado</td>
 				<td>Motivo</td>
 				<td>Modalidad</td>
 				<td>Acciones</td>
@@ -249,8 +248,6 @@ $CI->load->model("ResolucionesModel");
 					<tr>
 						<td><?= $solicitud->idSolicitud ?></td>
 						<td><?= $solicitud->fechaCreacion ?></td>
-						<td><?= $solicitud->fechaUltimaRevision ?></td>
-						<td><?= $solicitud->fechaUltimaRevision ?></td>
 						<td><?= $solicitud->nombre ?></td>
 						<td><?= $solicitud->motivoSolicitudAcreditado ?></td>
 						<td><?= $solicitud->modalidadSolicitudAcreditado ?></td>
@@ -263,6 +260,9 @@ $CI->load->model("ResolucionesModel");
 								<button type='button' class='btn btn-danger btn-sm eliminarSolicitud' data-id='<?= $solicitud->idSolicitud ?>' title='Eliminar Solicitud'>
 									Eliminar <i class='fa fa-trash' aria-hidden='true'></i>
 								</button>
+								<button class='btn btn-info btn-sm verDetalleSolicitud' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false' data-id='<?= $solicitud->idSolicitud ?>' title='Ver Detalle'>
+									Detalle <i class='fa fa-info' aria-hidden='true'></i>
+								</button>
 							</div>
 						</td>
 						<?php endif; ?>
@@ -274,12 +274,11 @@ $CI->load->model("ResolucionesModel");
 								<a class="btn btn-sm btn-siia" style="text-decoration: none; color: #951919;" href="<?= base_url() . 'uploads/resoluciones/' . $resolucion->resolucion; ?>" target='_blank'>
 									Resolución <i class='fa fa-eye' aria-hidden='true'></i>
 								</a>
-								<?php // TODO: Terminar
-									//if(date($resolucion->fechaResolucionFinal) > date('Y:m:d')): ?>
-								<button type='button' class='btn btn-success btn-sm ' data-id='<?= $solicitud->idSolicitud ?>' title='Continuar Solicitud'>
-									Renovar<i class='fa fa-check' aria-hidden='true'></i>
+								<?php if(date_create($resolucion->fechaResolucionFinal) < date_create(date('Y-m-d'))): ?>
+								<button type='button' class='btn btn-success btn-sm renovarSolicitud' data-id='<?= $solicitud->idSolicitud ?>' title='Continuar Solicitud'>
+									Renovar <i class='fa fa-check' aria-hidden='true'></i>
 								</button>
-									<?php //endif; ?>
+								<?php endif; ?>
 								<?php endif; ?>
 								<button class='btn btn-info btn-sm verDetalleSolicitud' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false' data-id='<?= $solicitud->idSolicitud ?>' title='Ver Detalle'>
 									Detalle <i class='fa fa-info' aria-hidden='true'></i>
@@ -290,20 +289,28 @@ $CI->load->model("ResolucionesModel");
 						<?php if($solicitud->nombre == "Finalizado"): ?>
 						<td>
 							<div class='btn-group-vertical' role='group' aria-label='acciones'>
-								<button class='btn btn-success btn-sm verObservaciones' data-id="<?= $solicitud->idSolicitud ?>" title='Ver Estado'>
-									Estado<i class='fa fa-eye' aria-hidden='true'></i>
+								<button class='btn btn-siia btn-sm verObservaciones' data-id="<?= $solicitud->idSolicitud ?>" title='Ver Estado'>
+									Estado <i class='fa fa-eye' aria-hidden='true'></i>
 								</button>
 								<button type='button' class='btn btn-danger btn-sm eliminarSolicitud' data-id='<?= $solicitud->idSolicitud ?>' title='Eliminar Solicitud'>
 									Eliminar <i class='fa fa-trash' aria-hidden='true'></i>
+								</button>
+								<button class='btn btn-info btn-sm verDetalleSolicitud' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false' data-id='<?= $solicitud->idSolicitud ?>' title='Ver Detalle'>
+									Detalle <i class='fa fa-info' aria-hidden='true'></i>
 								</button>
 							</div>
 						</td>
 						<?php endif; ?>
 						<?php if($solicitud->nombre == "En Observaciones"): ?>
 						<td>
-							<button class='btn btn-warning btn-sm verObservaciones' data-id="<?= $solicitud->idSolicitud ?>" title='Ver Observaciones'>
-								Observaciones<i class='fa fa-eye' aria-hidden='true'></i>
-							</button>
+							<div class='btn-group-vertical' role='group' aria-label='acciones'>
+								<button class='btn btn-warning btn-sm verObservaciones' data-id="<?= $solicitud->idSolicitud ?>" title='Ver Observaciones'>
+									Observaciones <i class='fa fa-eye' aria-hidden='true'></i>
+								</button>
+								<button class='btn btn-info btn-sm verDetalleSolicitud' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false' data-id='<?= $solicitud->idSolicitud ?>' title='Ver Detalle'>
+									Detalle <i class='fa fa-info' aria-hidden='true'></i>
+								</button>
+							</div>
 						</td>
 						<?php endif; ?>
 					</tr>
@@ -317,12 +324,12 @@ $CI->load->model("ResolucionesModel");
 					<div class="modal-header">
 						<div class="row">
 							<div id="header_politicas" class="col-md-12">
-								<img alt="logo" id="imagen_header_politicas" class="img-responsive" src="<?php echo base_url() ?>assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
+								<img alt="logo" id="imagen_header_politicas" height="" class="img-responsive" src="<?php echo base_url() ?>assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png">
 							</div>
 							<div class="clearfix"></div>
 							<hr />
 							<div class="col-md-12">
-								<h3>Detalles de la solicitud</h3>
+								<h4>Detalles de la solicitud</h4>
 							</div>
 						</div>
 					</div>
@@ -338,7 +345,8 @@ $CI->load->model("ResolucionesModel");
 									</div>
 									<hr />
 									<div class="row">
-										<div id="informacionSolicitudEstado"></div>
+										<div class="col-lg-12" style="text-align: left;" id="informacionSolicitudEstado"></div>
+										<div class="col-lg-6" style="text-align: left;" id="informacionResolucion"></div>
 									</div>
 								</div>
 							</div>

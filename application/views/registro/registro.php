@@ -97,7 +97,7 @@
 				<div class="row">
 					<div id="header_politicas" class="col-md-12">
 						<img alt="logo" id="imagen_header_politicas" class="img-responsive">
-						<h2>POLÍTICA DE PROTECCIÓN DE DATOS PERSONALES DE LA UNIDAD ADMINISTRATIVA ESPECIAL DE ORGANIZACIONES SOLIDARIAS</h2>
+						<h3 style="text-align: center">POLÍTICA DE PROTECCIÓN DE DATOS PERSONALES DE LA UNIDAD ADMINISTRATIVA ESPECIAL DE ORGANIZACIONES SOLIDARIAS</h3>
 					</div>
 					<div class="clearfix"></div>
 					<hr />

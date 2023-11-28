@@ -64,7 +64,7 @@ return null; */
 							echo "<td>$docente->numCedulaCiudadaniaDocente</td>";
 							echo "<td>$docente->profesion</td>";
 							echo "<td>$docente->horaCapacitacion</td>";
-							if($docente->valido == '0'){ echo "<td>Facilitador enviado para evaluación </td>"; }else if($docente->valido == '1'){ echo "<td>Si</td>"; }
+							if($docente->valido == '0'){ echo "<td>En proceso de evaluación </td>"; }else if($docente->valido == '1'){ echo "<td>Si</td>"; }
 							echo "<td>$docente->observacion</td>";
 							echo "<td><button class='btn btn-siia btn-sm verDocenteOrg' data-toggle='modal' data-nombre='$docente->primerNombreDocente $docente->primerApellidoDocente' data-id='$docente->id_docente' data-target='#verDocenteOrg'>Ver <i class='fa fa-eye' aria-hidden='true'></i> / Adjuntar <i class='fa fa-plus' aria-hidden='true'></i></button></td></tr>";
 						endforeach; ?>
