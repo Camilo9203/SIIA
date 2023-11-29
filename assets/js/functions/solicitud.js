@@ -84,7 +84,7 @@ $("#sidebar-menu>.menu_section>#wizard_verticle>.side-menu>li>a").click(function
 	}
 );
 /**
- * Formulario 1: formularios información general
+ * Formulario 1: formulario información general
  * */
 // Guardar formulario 1
 $("#guardar_formulario_informacion_general_entidad").click(function () {

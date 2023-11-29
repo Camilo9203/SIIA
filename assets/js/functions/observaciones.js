@@ -276,7 +276,6 @@ $("#verFaciliMenuAdmin").click(function () {
 	$("#docentes").show();
 	$("#plataforma").hide();
 	$("#enLinea").hide();
-	verObservaciones(5);
 });
 $("#verDatPlatMenuAdmin").click(function () {
 	$("#informacion").hide();
@@ -571,15 +570,16 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 			for (var i = 0; i < response.docentes.length; i++) {
 				if (i == 0) {
 					$(".txtOrgDocen").append(
-						"<p>Para ver los documentos de los facilitadores haga click <a href='" +
+						"<p>Para ver y evaluar los documentos de los facilitadores haga clic <a href='" +
 						baseURL +
 						"panelAdmin/organizaciones/docentes#organizacion:" +
 						response.organizaciones.numNIT +
-						"' target='_blank'>aquí.</a> Tambien puede ingresar al módulo de facilitadores y seleccione la organización con el número NIT: <label>" +
+						"' target='_blank'>aquí.</a> También puede ingresar al módulo de facilitadores y seleccioné la organización con el número NIT: <label>" +
 						response.organizaciones.numNIT +
 						"</label>.</label>"
 					);
 					$(".txtOrgDocen").append("<p id='cantidadDocentesOrg'>Número de facilitadores: " + response.docentes.length + "</p>");
+					$("#irAEvaluarDocente").attr('href', baseURL + "panelAdmin/organizaciones/docentes#organizacion:" + response.organizaciones.numNIT )
 					console.log(response.organizaciones.numNIT);
 					$("#frameDocentes").attr("src", baseURL + "panelAdmin/organizaciones/solodocentes#organizacion:" + response.organizaciones.numNIT);
 					setTimeout(function () {
@@ -902,20 +902,6 @@ $(".guardarObservacionesForm4").click(function (){
 	}
 	guardarObservacion(data);
 	$("#observacionesForm4").val('');
-});
-/**
- * Formulario 5*/
-$(".guardarObservacionesForm5").click(function (){
-	let data = {
-		observacion: $("#observacionesForm5").val(),
-		id_formulario: 5,
-		formulario: "Observaciones Generales Facilitadores",
-		valueForm: "docentes",
-		idSolicitud:  $("#id_org_ver_form").attr("data-solicitud"),
-		id: $("#id_org_ver_form").attr("data-id"),
-	}
-	guardarObservacion(data);
-	$("#observacionesForm5").val('');
 });
 /**
  * Formulario 6*/

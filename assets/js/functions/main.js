@@ -5918,10 +5918,6 @@ $(document).ready(function () {
 		$(".guardarValidoDocente").attr("disabled", false);
 	});
 
-	$(".validoDocente").change(function () {
-		$(".guardarValidoDocente").attr("disabled", false);
-	});
-
 	$("#verRelacionCambios").click(function () {
 		$id_organizacion = $("#id_org_ver_form").attr("data-id");
 		console.log($id_organizacion);

@@ -605,8 +605,20 @@ function ValidarFormDocentes (form) {
  * Funciones administrador
  */
 $("#verFrameDocentes").click(function () {
-	$("#frameDocDiv").slideDown();
-	document.getElementById("frameDocentes").contentDocument.location.reload(true);
+	//$("#frameDocDiv").slideDown();
+	//document.getElementById("frameDocentes").contentDocument.location.reload(true);
+});
+$(".validoDocente").change(function () {
+	if($(this).val() == '0') {
+		$('#observacionDocente').slideDown();
+		$("#divValidoDocente").removeClass("col-md-12");
+		$("#divValidoDocente").addClass("col-md-4");
+	}
+	else {
+		$('#observacionDocente').slideUp();
+		$("#divValidoDocente").removeClass("col-md-4");
+		$("#divValidoDocente").addClass("col-md-12");
+	}
 });
 /**
  * Guardar aprobación docente
@@ -620,21 +632,19 @@ $(".guardarValidoDocente").click(function () {
 		valido: $("input:radio[name=validoDocente]:checked").val(),
 		docente_val_obs: $("#docente_val_obs").val(),
 	};
-
 	$.ajax({
 		url: baseURL + "admin/validarDocentes",
 		type: "post",
 		dataType: "JSON",
 		data: data,
 		beforeSend: function () {
-			procesando('info', 'Cambiando estado docente')
+			procesando('info', 'Cambiando estado docente');
 		},
 		success: function (response) {
-			procesando(response.msg, "success");
-			$("#verFrameDocentes").click();
+			alertaGuardado(response.msg, 'success');
 		},
 		error: function (ev) {
-			//Do nothing
+			errorControlador(ev);
 		},
 	});
 });
@@ -648,23 +658,20 @@ $(document).on("click", ".guardarObsArchivoDoc", function () {
 		.siblings("td")
 		.children("textarea#archivoDoc" + $id_archivoDocente)
 		.val();
-	console.log($id_archivoDocente);
-	console.log($observacionArchivo);
 	data = {
 		id_archivoDocente: $id_archivoDocente,
 		observacionArchivo: $observacionArchivo,
 	};
-
 	$.ajax({
 		url: baseURL + "admin/actualizarArchivoDocente",
 		type: "post",
 		dataType: "JSON",
 		data: data,
 		success: function (response) {
-			notificacion(response.msg, "success");
+			procesando('success', response.msg);
 		},
 		error: function (ev) {
-			//Do nothing
+			errorControlador(ev)
 		},
 	});
 });
@@ -679,4 +686,32 @@ function procesando(status, msg){
 		icon: status,
 		text: msg
 	});
+}
+// Alerta de formulario guardado
+function alertaGuardado(msg, status){
+	Alert.fire({
+		title: 'Docente actualizado!',
+		text: msg,
+		icon: status,
+	}).then((result) => {
+		if (result.isConfirmed) {
+			setInterval(function () {
+				reload();
+			}, 2000);
+		}
+	})
+}
+// Error 505
+function errorControlador(ev){
+	Alert.fire({
+		title: ev.statusText,
+		html: ev.responseText,
+		text: ev.responseText,
+		icon: 'error',
+		allowOutsideClick: false,
+		customClass: {
+			popup: 'popup-swalert-list',
+			confirmButton: 'button-swalert',
+		},
+	})
 }

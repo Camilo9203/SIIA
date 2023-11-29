@@ -351,28 +351,17 @@
 		</div>
 		<div class="col-md-12" id="docentes">
 			<h3>5. Docentes</h3>
-			<button id="verFrameDocentes" class="btn btn-siia btn-sm pull-left">Ver docentes aquí <i class="fa fa-eye" aria-hidden="true"></i></button>
+			<!-- <button id="verFrameDocentes" class="btn btn-siia btn-sm pull-left">Ver docentes aquí <i class="fa fa-eye" aria-hidden="true"></i></button> -->
 			<hr />
 			<div class="txtOrgDocen"></div>
-			<div id="frameDocDiv" class="embed-responsive embed-responsive-16by9">
+			<!-- <div id="frameDocDiv" class="embed-responsive embed-responsive-16by9">
 				<iframe class="embed-responsive-item" id="frameDocentes" frameborder="0" allowfullscreen></iframe>
-			</div>
+			</div>-->
 			<div class="clearfix"></div>
 			<hr />
-			<div class="col-12">
-				<?php echo form_open('', array('id' => 'formulario_observacion_form5')); ?>
-					<div class="form-group">
-						<label for="observacionesForm5">Observaciones Generales Facilitadores</label>
-						<textarea class="form-control obs_admin_" name="observacionesForm5" id="observacionesForm5" cols="30" rows="5" required></textarea>
-					</div>
-					<div class="form-group">
-						<button class="btn btn-siia guardarObservacionesForm5">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
-					</div>
-				<?php echo form_close(); ?>
-			</div>
+			<a href="" target="_blank" id="irAEvaluarDocente" class="btn btn-siia">Evaluar docentes <i class="fa fa-eye" aria-hidden="true"></i></a>
+			<div class="clearfix"></div>
 			<hr />
-			<label>Observaciones Realizadas</label>
-			<div class="observaciones_realizadas_form5"></div>
 		</div>
 		<div class="col-md-12" id="plataforma">
 			<h3>6. Datos modalidad virtual</h3>
