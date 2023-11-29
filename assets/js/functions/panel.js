@@ -372,15 +372,15 @@ $(".verObservaciones").click(function () {
  * Renovar solicitud
  * */
 $(".renovarSolicitud").click(function () {
-	let text = "Esto creará una nueva solicitud a partir de esta, cambiará el estado de la solicitud actual y solo se conservará la información de los formularios: " +
+	let text = "<p>Al continuar: <br>  Se creará una nueva solicitud, que conservará la información registrada anteriormente en los formularios:" +
 		"<br><br> <strong>1. Información General </strong>" +
 		"<br> <strong>5. Facilitadores.</strong>" +
-		"<br><br>Debe actualizar estos formularios con los datos actuales e ingresar la información de los demás formularios según su motivo y modalidad";
+		"<br><br>Debe revisar que los datos allí almacenados sean correctos y actualizar e ingresar la información de los demás formularios según el programa educativo y modalidad a renovar</p>";
 	Alert.fire({
-		title: '¿Está seguro de renovar la solicitud: ' + $(this).attr("data-id") +'?',
+		title: 'Recuerde que esta opción sólo aplica para RENOVACIÓN de la acreditación',
 		text:	text,
 		html: text,
-		icon: 'question',
+		icon: 'warning',
 		showCancelButton: true,
 		confirmButtonText: 'Si',
 		cancelButtonText: 'No',

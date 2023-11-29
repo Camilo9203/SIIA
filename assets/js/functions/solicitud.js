@@ -1760,7 +1760,7 @@ function verificarFormularios(solicitud) {
 					icon: response.icon,
 					allowOutsideClick: false,
 					customClass: {
-						popup: 'popup-swalert-lg',
+						popup: 'popup-swalert-list',
 						confirmButton: 'button-swalert',
 					},
 				})

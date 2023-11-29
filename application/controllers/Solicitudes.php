@@ -391,22 +391,21 @@ class Solicitudes extends CI_Controller
 					if($observaciones['formulario7'])
 						$listaFormularios .= '<li>Formulario 7 modalidad en línea.</li>';
 					if ($listaFormularios != ''):
-						$title = 'Solicitud verificada!';
+						$title = '¡Tramite verificado!';
 						$icon = 'info';
-						$msg = '<p>Solicitud: <strong>' .  $idSolicitud . '</strong> cuenta con los formularios diligenciados. 
-								<br><br>No obstante el evaluador realizo observaciones para los formularios: <br><br>
+						$msg = '<p>Solicitud: <strong>' .  $idSolicitud . '</strong> 
+								<br><br>El evaluador realizó observaciones para los formularios: <br><br>
 								<ul>' . $listaFormularios .'</ul>
-								<br>Por favor, revise las observaciones y de clic en<strong> Actualizar la solicitud.</strong>  
-								<br><strong>Finalice el proceso</strong> con los cambios solicitados y le será enviada una notificación.
-								<br><br>Si ya realizo los cambios y recibio un correo de finalización, <br>por favor cierra esta cuadro y espera a que te sea enviada la confirmación 
+								<br><br>Por favor, revise las observaciones y de clic en <strong>Actualizar</strong> la solicitud una vez realizados los ajustes y <strong>Finalice el proceso</strong>  <br><br>
+								<br><br>Volverá a llegarle un mensaje con la finalización de la solicitud ajustada.
+								<br><br>Si ya realizó los cambios y recibió un correo de finalización, por favor cierre este cuadro y espere una nueva confirmación
 								<br><br>¡Gracias!</p>';
 					else:
-						$title = 'Solicitud verificada!';
+						$title = '¡Tramite verificado!';
 						$icon = 'success';
-						$msg = '<p>Solicitud: <strong>' .  $idSolicitud . '</strong> cuenta con los formularios diligenciados. 
-								<br><br>El evaluador ya verificó los datos registrados en la solicitud
-								<br><br>No se encontraron observaciones.
-								<br>En los proximos se le informará cuando se expida la resolución de acreditación
+						$msg = '<p>Solicitud: <strong>' .  $idSolicitud . '</strong>. 
+								<br><br>El evaluador verificó los datos registrados en la solicitud y se cumplen los requisitos establecidos en el marco normativo del trámite.
+								<br><br>Su trámite pasa a revisión por parte del área jurídica para emitir acto administrativo.
 								<br><br>¡Gracias!</p>';
 					endif;
 				else:

@@ -153,10 +153,10 @@ function send_email_user($to, $type, $organizacion, $usuario = null, $token = nu
 		case 'enviarSolicitd':
 			$subject = "Finaliza el diligenciamiento de la solicitud";
 			$message = "<p>Buen día, <strong>" . $organizacion->nombreOrganizacion . "</strong>
- 					<br><br>La unidad Solidaria le informa que su solicitud de acreditación ha sido enviada para ser evaluada.
-					<br>En este momento no puede visualizarla en el aplicativo hasta que se realice la verificación de requisitos. 
-					<br><br>Una vez sea recepcionada la solicitud por el coordinador de areá, él asignará un <strong>evaluador</strong> a esta solicitud y se notificará por correo eléctronico.
-					<br>De ser necesario, el <strong>evaluador</strong> le devolverá la solicitud con las observaciones pertinentes, dentro de los siguientes <strong>(10) días hábiles</strong>.</p> 
+ 					<br><br>La Unidad Solidaria le informa que su solicitud de acreditación ha sido recibida.
+					<br><br>En este momento no puede visualizarla en el aplicativo SIIA hasta que se realice la verificación de requisitos, por parte de profesional evaluador de la Unidad Solidaria.
+					<br><br>Recibirá correo electrónico donde se informará el profesional designado para la evaluación de su solicitud.
+					<br><br>De ser necesario, el evaluador le devolverá la solicitud con las observaciones pertinentes, dentro de los siguientes cinco (5) días hábiles.</p> 
 					<br/><br/>
 					<label>Datos de recepción:</label> <br/><br/>
 					Fecha de envío solicitud: <strong>" . date("Y-m-d h:m:s") . "</strong>. <br/> 
@@ -202,7 +202,7 @@ function send_email_user($to, $type, $organizacion, $usuario = null, $token = nu
 		case 'cambioEstadoSolicitud':
 			$subject = "Cambio de estado solicitud - " . $idSolicitud;
 			if ($CI->SolicitudesModel->solicitudes($idSolicitud)->nombre == "Acreditado"):
-				$message = "Buen día. <br> " . $organizacion->nombreOrganizacion . "<br><br> La Unidad Solidaria le informa que se realizó la revisión de su solicitud de acreditación y se pudo constatar el cumplimiento de los establecidos en la normatividad vigente. Se procederá a emitir el respectivo acto resolutorio en los próximos 10 días hábiles. Una vez se cuente con la resolución donde se otorga la acreditación se le informará para realizar el respectivo procedimiento de notificación. Organizaciones Solidarias le recuerda la entidad se acreditó presentando la documentación en el Sistema de Información de Acreditación SIA. Es necesario que se realice la migración de la información al SIIA para facilitar el trámite de renovación de la acreditación. ";
+				$message = "Buen día. <br> " . $organizacion->nombreOrganizacion . "<br><br> La Unidad Solidaria le informa que su solicitud ya cuenta con acto administrativo firmado por la dirección nacional. <br>Estamos en proceso de actualización de la nueva resolución en el SIIA, en próximos días le será enviado correo electrónico de notificación, junto con la resolución.";
 			else:
 				$message = "Buen día. <br> " . $organizacion->nombreOrganizacion . "<br><br> La Unidad Solidaria le informa que la entidad solicitante no cumple con la totalidad de los requisitos establecidos en el artículo 1 de la Resolución 332 de 2017. Por lo anterior, la revisión de la solicitud de acreditación presentada no es procedente de evaluación por parte de la Unidad. De mantenerse el interés por la acreditación es necesario que se reúna la documentación requerida en el artículo 4 de la Resolución 110 de 2016 y se presente una nueva solicitud de acreditación.";
 			endif;
@@ -211,10 +211,10 @@ function send_email_user($to, $type, $organizacion, $usuario = null, $token = nu
 		case 'resolucionCargada':
 			if ($token == 'vieja'):
 				$subject = "Resolución antigua cargada a la solicitud - " . $idSolicitud;
-				$message = "<p>Buen día. <br><strong> " . $organizacion->nombreOrganizacion . "</strong><br><br> La Unidad Solidaria le informa que nos encontramos adelantado la actualización del listado de entidades acreditadas por medio del Sistema de Información de Acreditación SIIA. En este proceso ubicamos la resolución de acreditación vigente para su entidad la cual se ingresó al SIIA, para facilitar el acceso a esta documentación. Si desea consultar la resolución de clic aquí <a href='" . base_url() . "uploads/resoluciones/" . $usuario . "' target='_blank'>Ver resolución</a>. \n Por otra parte le recordamos dar cumplimiento a lo establecido en la circular 001 de 2018, en lo relacionado con la actualización de información de contacto de la entidad (Formulario 1) para poder ingresarla a este listado. Lo anterior se realiza ingresando al SIIA con su usuario y contraseña. Presionando el botón 'Crear, Actualizar solicitud'.</p>";
+				$message = "<p>Buen día. <br><strong> " . $organizacion->nombreOrganizacion . "</strong><br><br> La Unidad Solidaria le informa que se ha vinculado una resolución de acreditación en el SIIA de años anterioes, la cual podrá ver ingresando con su usuario y contraseña a la plataforma SIIA.</p>";
 			else:
 				$subject = "Resolución cargada a la solicitud - " . $idSolicitud;
-				$message = "<p>Buen día. <br><strong> " . $organizacion->nombreOrganizacion . "</strong><br><br> La Unidad Solidaria teniendo en cuenta lo establecido en el código de procedimiento administrativo en su artículo 56, referente a la 'Notificación Electrónica', que prescribe: 'Las autoridades podrán notificar sus actos administrativos a través de medios electrónicos, siempre que el administrado haya aceptado este medio de notificación…' (…) 'La notificación quedará surtida a partir de la fecha y hora en que el administrado accede al acto administrativo, fecha y hora que deberá certificar la administración'. La notificación queda surtida a partir del momento en que usted, envié respuesta aceptando los términos de la resolución. En caso de ser necesario usted tiene 10 días hábiles para presentar recursos de reposición ante la Unidad Administrativa. Para que la diligencia de notificación concluya plenamente es necesario contar con una respuesta a este mensaje. Puede dar clic aquí <a href='" . base_url() . "uploads/resoluciones/" . $usuario . "' target='_blank'>Ver resolución</a>. Organizaciones Solidarias le recuerda la entidad se acreditó presentando la documentación en el Sistema de Información de Acreditación SIA. Es necesario que se realice la migración de la información al SIIA para facilitar el trámite de renovación de la acreditación. </p>";
+				$message = "<p>Buen día. <br><strong> " . $organizacion->nombreOrganizacion . "</strong><br><br> La Unidad Solidaria le informa que se ha vinculado la nueva resolución de acreditación en el SIIA, la cual podrá ver ingresando con su usuario y contraseña a la plataforma SIIA. <br><br> En próximos días le será enviado correo electrónico de notificación.</p>";
 			endif;
 			$response = array('status' => "success", 'title' => $subject, 'msg' =>  "Se ha enviado una notificación a <strong>" . $organizacion->nombreOrganizacion . "</strong>. Se envío notificación al correo  <strong>" . $organizacion->direccionCorreoElectronicoOrganizacion . "</strong>");
 			break;
