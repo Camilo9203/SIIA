@@ -388,7 +388,7 @@ function verObservaciones(idForm) {
 				html += "<td>Fecha Observación</td>";
 				html += "<td>Revisión</td>";
 				html += "<td>Observación</td>";
-				if(response.solicitudes['numeroRevisiones'] > 0)
+				if(response.solicitudes['numeroRevisiones'] > 0 && response.estadoOrganizaciones['nombre'] == 'Finalizado')
 					html += "<td>Verificada</td>";
 				if(response.estadoOrganizaciones['nombre'] === 'Finalizado')
 					html += "<td>Acción</td>";
@@ -399,7 +399,7 @@ function verObservaciones(idForm) {
 						html += "<tr><td>" + response.observaciones[i]['fechaObservacion'] + "</td>";
 						html += "<td>" + response.observaciones[i]['numeroRevision'] + "</td>";
 						html += "<td><textarea style='width: 600px; height: 140px; resize: none; border: hidden' readonly>" + response.observaciones[i]['observacion'] + "</textarea></td>";
-						if(response.solicitudes['numeroRevisiones'] > 0) {
+						if(response.solicitudes['numeroRevisiones'] > 0 && response.estadoOrganizaciones['nombre'] == 'Finalizado') {
 							if (response.observaciones[i]['valida'] == 1) {
 								html += "<td><input type='checkbox' class='validarObservacion' data-idform='" + idForm + "' data-id='" + response.observaciones[i]['id_observacion'] + "' checked></td>";
 							}
@@ -407,7 +407,7 @@ function verObservaciones(idForm) {
 								html += "<td><input type='checkbox' class='validarObservacion' data-idform='" + idForm + "' data-id='" + response.observaciones[i]['id_observacion'] + "'></td>";
 							}
 						}
-						if(response.estadoOrganizaciones['nombre'] === 'Finalizado')
+						if(response.estadoOrganizaciones['nombre'] == 'Finalizado')
 							html += "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarObservacionForm eliminarDataTabla' data-id=" + response.observaciones[i]['id_observacion'] + ">Eliminar <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
 						html += "</tr>";
 					}

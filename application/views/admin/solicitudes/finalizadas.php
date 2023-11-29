@@ -7,30 +7,32 @@
  */
 ?>
 <!-- Solicitudes a evaluar-->
-<div class="col-md-12" id="admin_ver_finalizadas">
-	<div class="clearfix"></div>
-	<hr />
-	<h3>Solicitudes en evaluación:</h3>
-	<br>
-	<!-- Tabla de solicitudes en evaluación	-->
-	<div class="table">
-		<table id="tabla_enProceso_organizacion" width="100%" border=0 class="table table-striped table-bordered tabla_form">
-			<thead>
-				<tr>
-					<td class="col-md-2">Nombre</td>
-					<td class="col-md-2">NIT</td>
-					<td class="col-md-2">ID Solicitud</td>
-					<td class="col-md-2">Tipo</td>
-					<td class="col-md-2">Motivo</td>
-					<td class="col-md-2">Modalidad</td>
-					<td class="col-md-2">Fecha de finalización</td>
-					<td class="col-md-2">Fecha última revisión</td>
-					<td class="col-md-2">Asignada a</td>
-					<td class="col-md-2">Acción</td>
-				</tr>
-			</thead>
-			<tbody id="tbody">
-				<?php
+<div class="container">
+	<div class="row">
+		<div class="col-md-12" id="admin_ver_finalizadas">
+			<div class="clearfix"></div>
+			<hr />
+			<h3>Solicitudes en evaluación:</h3>
+			<br>
+			<!-- Tabla de solicitudes en evaluación	-->
+			<div class="table">
+				<table id="tabla_enProceso_organizacion" width="100%" border=0 class="table table-striped table-bordered tabla_form">
+					<thead>
+					<tr>
+						<td class="col-md-2">Nombre</td>
+						<td class="col-md-2">NIT</td>
+						<td class="col-md-2">ID Solicitud</td>
+						<td class="col-md-2">Tipo</td>
+						<td class="col-md-2">Motivo</td>
+						<td class="col-md-2">Modalidad</td>
+						<td class="col-md-2">Fecha de finalización</td>
+						<td class="col-md-2">Fecha última revisión</td>
+						<td class="col-md-2">Asignada a</td>
+						<td class="col-md-2">Acción</td>
+					</tr>
+					</thead>
+					<tbody id="tbody">
+					<?php
 					foreach ($solicitudesAsignadas as $solicitud) :
 						if (($solicitud->asignada == $nombre_usuario && $nivel == 1) || ($nivel == 0 || $nivel == 6) ):
 							echo "<tr>";
@@ -47,12 +49,15 @@
 							echo "</tr>";
 						endif;
 					endforeach;
-				?>
-			</tbody>
-		</table>
-		<button class="btn btn-danger btn-sm pull-left" id="admin_ver_org_volver"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
+					?>
+					</tbody>
+				</table>
+				<button class="btn btn-danger btn-sm pull-left" id="admin_ver_org_volver"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
+			</div>
+		</div>
 	</div>
 </div>
+
 <div class="clearfix"></div>
 <!-- Registro de observaciones por formulario -->
 <div class="container" id="admin_panel_ver_finalizada">

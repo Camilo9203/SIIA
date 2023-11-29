@@ -4,48 +4,52 @@
  *
  */
 ?>
-<div class="col-md-12" id="admin_panel_org_inscritas">
-<div class="clearfix"></div>
-<hr/>
-	<h4>Organizaciones Inscritas:</h4>
-	<br/>
-	<div class="table">
-	<table id="tabla_organizaciones_inscritas" width="100%" border=0 class="table table-striped table-bordered tabla_form">
-		<thead>
-			<tr>
-				<td>NIT</td>
-				<td>Nombre</td>
-				<td>Representante Legal</td>
-				<td>Dirección E-Mail Org</td>
-				<td>Dirección E-Mail Rep</td>
-				<td>Estado actual</td>
-				<td>Acciones</td>
-			</tr>
-		</thead>
-		<tbody id="tbody">
-			<?php foreach ($organizaciones as $organizacion): ?>
-			<tr>
-				<td><?php echo $organizacion->numNIT ?></td>
-				<td><?php echo $organizacion->nombreOrganizacion ?></td>
-				<td><?php echo $organizacion->primerNombreRepLegal . " " . $organizacion->primerApellidoRepLegal?></td>
-				<td><?php echo $organizacion->direccionCorreoElectronicoOrganizacion ?></td>
-				<td><?php echo $organizacion->direccionCorreoElectronicoRepLegal ?></td>
-				<td><?php echo $organizacion->estado ?></td>
-				<td>
-					<div class='btn-group-vertical' role='group' aria-label='acciones'>
-						<button class='btn btn-siia btn-sm ver_organizacion_inscrita' data-organizacion='<?php echo $organizacion->id_organizacion; ?>' data-solicitud='<?php echo $organizacion->idSolicitudAcreditado; ?>'>
-							Ver Organización <i class='fa fa-eye' aria-hidden='true'></i>
-						</button>
-						<button class='btn btn-primary btn-sm ver_resolucion_org' data-organizacion='<?php echo $organizacion->id_organizacion; ?>' data-solicitud='<?php echo $organizacion->idSolicitudAcreditado; ?>'>
-							Ver Resoluciones <i class='fa fa-eye' aria-hidden='true'></i>
-						</button>
-					</div>
-				</td>
-			</tr>
-			<?php endforeach; ?>
-		</tbody>
-	</table>
-		<button class="btn btn-danger btn-sm pull-left" id="admin_panel_org_inscritas_volver btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver al panel principal</button>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12" id="admin_panel_org_inscritas">
+			<div class="clearfix"></div>
+			<hr/>
+			<h4>Organizaciones Inscritas:</h4>
+			<br/>
+			<div class="table">
+				<table id="tabla_organizaciones_inscritas" width="100%" border=0 class="table table-striped table-bordered tabla_form">
+					<thead>
+					<tr>
+						<td>NIT</td>
+						<td>Nombre</td>
+						<td>Representante Legal</td>
+						<td>Dirección E-Mail Org</td>
+						<td>Dirección E-Mail Rep</td>
+						<td>Estado actual</td>
+						<td>Acciones</td>
+					</tr>
+					</thead>
+					<tbody id="tbody">
+					<?php foreach ($organizaciones as $organizacion): ?>
+						<tr>
+							<td><?php echo $organizacion->numNIT ?></td>
+							<td><?php echo $organizacion->nombreOrganizacion ?></td>
+							<td><?php echo $organizacion->primerNombreRepLegal . " " . $organizacion->primerApellidoRepLegal?></td>
+							<td><?php echo $organizacion->direccionCorreoElectronicoOrganizacion ?></td>
+							<td><?php echo $organizacion->direccionCorreoElectronicoRepLegal ?></td>
+							<td><?php echo $organizacion->estado ?></td>
+							<td>
+								<div class='btn-group-vertical' role='group' aria-label='acciones'>
+									<button class='btn btn-siia btn-sm ver_organizacion_inscrita' data-organizacion='<?php echo $organizacion->id_organizacion; ?>' data-solicitud='<?php echo $organizacion->idSolicitudAcreditado; ?>'>
+										Ver Organización <i class='fa fa-eye' aria-hidden='true'></i>
+									</button>
+									<button class='btn btn-primary btn-sm ver_resolucion_org' data-organizacion='<?php echo $organizacion->id_organizacion; ?>' data-solicitud='<?php echo $organizacion->idSolicitudAcreditado; ?>'>
+										Ver Resoluciones <i class='fa fa-eye' aria-hidden='true'></i>
+									</button>
+								</div>
+							</td>
+						</tr>
+					<?php endforeach; ?>
+					</tbody>
+				</table>
+				<button class="btn btn-danger btn-sm pull-left" id="admin_panel_org_inscritas_volver btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i>Volver al panel principal</button>
+			</div>
+		</div>
 	</div>
 </div>
 <div class="container">

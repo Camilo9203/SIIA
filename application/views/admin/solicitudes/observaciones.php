@@ -6,52 +6,56 @@
  * @var $nivel
  */
 ?>
-<div class="col-md-12" id="admin_ver_finalizadas">
-	<div class="clearfix"></div>
-	<hr />
-	<h3>Solicitudes en evaluación:</h3>
-	<br />
-	<div class="table">
-		<table id="tabla_enProceso_organizacion" width="100%" border=0 class="table table-striped table-bordered tabla_form">
-			<thead>
-				<tr>
-					<td class="col-md-2">Nombre</td>
-					<td class="col-md-2">NIT</td>
-					<td class="col-md-2">ID Solicitud</td>
-					<td class="col-md-2">Tipo</td>
-					<td class="col-md-2">Motivo</td>
-					<td class="col-md-2">Modalidad</td>
-					<td class="col-md-2">Fecha de finalización</td>
-					<td class="col-md-2">Fecha última revisión</td>
-					<td class="col-md-2">Asignada a</td>
-					<td class="col-md-2">Acción</td>
-				</tr>
-			</thead>
-			<tbody id="tbody">
-				<?php
-					foreach ($solicitudesEnObservaciones as $solicitud) :
-						if (($solicitud->asignada == $nombre_usuario && $nivel == 1) || ($nivel == 0 || $nivel == 6) ):
-							echo "<tr>";
-							echo "<td>" . $solicitud->nombreOrganizacion . "</td>";
-							echo "<td>" . $solicitud->numNIT . "</td>";
-							echo "<td>" . $solicitud->idSolicitud . "</td>";
-							echo "<td>" . $solicitud->tipoSolicitud . "</td>";
-							echo "<td>" . $solicitud->motivoSolicitud . "</td>";
-							echo "<td>" . $solicitud->modalidadSolicitud . "</td>";
-							echo "<td>" . $solicitud->fechaFinalizado . "</td>";
-							echo "<td>" . $solicitud->fechaUltimaRevision . "</td>";
-							echo "<td>" . $solicitud->asignada . "</td>";
-							echo "<td class='verFinOrgInf'><button class='btn btn-siia btn-sm ver_organizacion_finalizada' id='' data-organizacion='" . $solicitud->id_organizacion . "' data-solicitud='" . $solicitud->idSolicitud . "'>Ver información <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
-							echo "</tr>";
-						endif;
-					endforeach;
-				?>
-			</tbody>
-		</table>
-		<button class="btn btn-danger btn-sm pull-left" id="admin_ver_org_volver"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12" id="admin_ver_finalizadas">
+			<div class="clearfix"></div>
+			<hr />
+			<h3>Solicitudes en evaluación:</h3>
+			<br />
+			<div class="table">
+				<table id="tabla_enProceso_organizacion" width="100%" border=0 class="table table-striped table-bordered tabla_form">
+					<thead>
+						<tr>
+							<td class="col-md-2">Nombre</td>
+							<td class="col-md-2">NIT</td>
+							<td class="col-md-2">ID Solicitud</td>
+							<td class="col-md-2">Tipo</td>
+							<td class="col-md-2">Motivo</td>
+							<td class="col-md-2">Modalidad</td>
+							<td class="col-md-2">Fecha de finalización</td>
+							<td class="col-md-2">Fecha última revisión</td>
+							<td class="col-md-2">Asignada a</td>
+							<td class="col-md-2">Acción</td>
+						</tr>
+					</thead>
+					<tbody id="tbody">
+						<?php
+							foreach ($solicitudesEnObservaciones as $solicitud) :
+								if (($solicitud->asignada == $nombre_usuario && $nivel == 1) || ($nivel == 0 || $nivel == 6) ):
+									echo "<tr>";
+									echo "<td>" . $solicitud->nombreOrganizacion . "</td>";
+									echo "<td>" . $solicitud->numNIT . "</td>";
+									echo "<td>" . $solicitud->idSolicitud . "</td>";
+									echo "<td>" . $solicitud->tipoSolicitud . "</td>";
+									echo "<td>" . $solicitud->motivoSolicitud . "</td>";
+									echo "<td>" . $solicitud->modalidadSolicitud . "</td>";
+									echo "<td>" . $solicitud->fechaFinalizado . "</td>";
+									echo "<td>" . $solicitud->fechaUltimaRevision . "</td>";
+									echo "<td>" . $solicitud->asignada . "</td>";
+									echo "<td class='verFinOrgInf'><button class='btn btn-siia btn-sm ver_organizacion_finalizada' id='' data-organizacion='" . $solicitud->id_organizacion . "' data-solicitud='" . $solicitud->idSolicitud . "'>Ver información <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
+									echo "</tr>";
+								endif;
+							endforeach;
+						?>
+					</tbody>
+				</table>
+				<button class="btn btn-danger btn-sm pull-left" id="admin_ver_org_volver"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
+			</div>
+		</div>
+		<div class="clearfix"></div>
 	</div>
 </div>
-<div class="clearfix"></div>
 <!-- Registro de observaciones por formulario -->
 <div class="container" id="admin_panel_ver_finalizada">
 	<div class="panel-group" id="datos_org_final">
@@ -211,131 +215,52 @@
 			<table id="" width="100%" border=0 class="table table-striped table-bordered">
 				<thead>
 				<tr>
-					<td>Cantidad Personas</td>
-					<td>Fecha Asistencia</td>
+					<td>Participó en jornadas</td>
+					<td>Acciones</td>
 				</tr>
 				</thead>
 				<tbody id="tbody" class="tabla_datos_jornadas"></tbody>
 			</table>
-			<div id="archivosJornadasActualizacion"></div>
 			<hr />
 			<!-- Observaciones form3 -->
+			<hr />
 			<label>Observaciones Realizadas</label>
 			<div class="observaciones_realizadas_form3"></div>
 		</div>
 		<div class="col-md-12" id="datosBasicosProgramas">
 			<h3>4. Datos Básicos de Programas</h3><br>
 			<p>A continuación se relaciona el motivo de la solicitud registrado por la organización.</p><br><br>
-			<div class="container">
-				<div class="row">
-					<div class="col-12">
-						<div class="form-group" id="curso_basico_es" style="display: none;" >
-							<label class="underlined">
-								<input type="checkbox" id="programa" form="formulario_programas" name="curso_basico_es" value="* Acreditación Curso Básico de Economía Solidaria" disabled required checked>
-								<label for="modalCursoBasico">&nbsp;</label>
-								<a data-toggle="modal" data-target="#modalCursoBasico" data-backdrop="static" data-keyboard="false">
-									<span class="spanRojo">*</span> Acreditación Curso Básico de Economía Solidaria
-								</a>
-							</label>
-						</div>
-						<br>
-						<div class="form-group" id="curso_basico_aval" style="display: none;" >
-							<label class="underlined">
-								<input type="checkbox" id="curso_basico_aval" form="formulario_programas" name="curso_basico_aval" value="* Acreditación, Aval de Trabajo Asociado" disabled required checked>
-								<label for="modalAval">&nbsp;</label>
-								<a data-toggle="modal" data-target="#modalAval" data-backdrop="static" data-keyboard="false">
-									<span class="spanRojo">*</span> Acreditación, Aval de Trabajo Asociado
-								</a>
-							</label>
-						</div>
-						<br>
-						<div class="form-group" id="curso_medio_es" style="display: none;" >
-							<label class="underlined">
-								<input type="checkbox" id="curso_basico_aval" form="formulario_programas" name="curso_basico" value="* Acreditación Curso Medio de Economía Solidaria" disabled required checked>
-								<label for="modalCursoMedio">&nbsp;</label>
-								<a data-toggle="modal" data-target="#modalCursoMedio" data-backdrop="static" data-keyboard="false">
-									<span class="spanRojo">*</span> Acreditación Curso Medio de Economía Solidaria
-								</a>
-							</label>
-						</div>
-						<br>
-						<div class="form-group" id="curso_avanzado_es" style="display: none;" >
-							<label class="underlined">
-								<input type="checkbox" id="curso_avanzado_es" form="formulario_programas" name="curso_avanzado_es" value="* Acreditación Curso Avanzado de Economía Solidaria" disabled required checked>
-								<label for="modalCursoAvanzado">&nbsp;</label>
-								<a data-toggle="modal" data-target="#modalCursoAvanzado" data-backdrop="static" data-keyboard="false">
-									<span class="spanRojo">*</span> Acreditación Curso Avanzado de Economía Solidaria
-								</a>
-							</label>
-						</div>
-						<br>
-						<div class="form-group" id="curso_economia_financiera" style="display: none;" >
-							<label class="underlined">
-								<input type="checkbox" id="curso_economia_financiera" form="formulario_programas" name="curso_economia_financiera" value="* Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria" disabled required checked>
-								<label for="modalCursoFinanciera">&nbsp;</label>
-								<a data-toggle="modal" data-target="#modalCursoFinanciera" data-backdrop="static" data-keyboard="false" data-programa="Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria">
-									<span class="spanRojo">*</span> Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria
-								</a>
-						</div>
-						<br>
-					</div>
-					<hr />
-					<label>Registro de programas aceptados</label>
-					<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
-					<table width="100%" border=0 class="table table-striped table-bordered" id="tabla_registro_programas">
-						<thead>
-						<tr>
-							<td>Organización</td>
-							<td>Numero NIT</td>
-							<td>Nombre Programa</td>
-							<td>Acepta</td>
-							<td>fecha</td>
-						</tr>
-						</thead>
-						<tbody id="tbody" class="tabla_registro_programas"></tbody>
-					</table>
-					<div class="col-12">
-						<?php echo form_open('', array('id' => 'formulario_observacion_form4')); ?>
-						<div class="form-group">
-							<label for="observacionesForm4">Observaciones Datos Básicos de Programas</label>
-							<textarea class="form-control obs_admin_" name="observacionesForm4" id="observacionesForm4" cols="30" rows="5" required></textarea>
-						</div>
-						<div class="form-group">
-							<button class="btn btn-siia guardarObservacionesForm4">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
-						</div>
-						<?php echo form_close(); ?>
-					</div>
-					<hr />
-					<label>Observaciones Realizadas</label>
-					<div class="observaciones_realizadas_form4"></div>
-				</div>
-			</div>
+			<label>Registro de programas aceptados</label>
+			<!--<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>-->
+			<table width="100%" border=0 class="table table-striped table-bordered" id="tabla_registro_programas">
+				<thead>
+				<tr>
+					<td>Organización</td>
+					<td>Numero NIT</td>
+					<td>Nombre Programa</td>
+					<td>Acepta</td>
+					<td>fecha</td>
+				</tr>
+				</thead>
+				<tbody id="tbody" class="tabla_registro_programas"></tbody>
+			</table>
 			<hr />
+			<label>Observaciones Realizadas</label>
+			<div class="observaciones_realizadas_form4"></div>
 		</div>
 		<div class="col-md-12" id="docentes">
 			<h3>5. Docentes</h3>
-			<button id="verFrameDocentes" class="btn btn-siia btn-sm pull-left">Ver docentes aquí <i class="fa fa-eye" aria-hidden="true"></i></button>
+			<!-- <button id="verFrameDocentes" class="btn btn-siia btn-sm pull-left">Ver docentes aquí <i class="fa fa-eye" aria-hidden="true"></i></button> -->
 			<hr />
 			<div class="txtOrgDocen"></div>
-			<div id="frameDocDiv" class="embed-responsive embed-responsive-16by9">
+			<!-- <div id="frameDocDiv" class="embed-responsive embed-responsive-16by9">
 				<iframe class="embed-responsive-item" id="frameDocentes" frameborder="0" allowfullscreen></iframe>
-			</div>
+			</div>-->
 			<div class="clearfix"></div>
 			<hr />
-			<div class="col-12">
-				<?php echo form_open('', array('id' => 'formulario_observacion_form5')); ?>
-				<div class="form-group">
-					<label for="observacionesForm5">Observaciones Generales Facilitadores</label>
-					<textarea class="form-control obs_admin_" name="observacionesForm5" id="observacionesForm5" cols="30" rows="5" required></textarea>
-				</div>
-				<div class="form-group">
-					<button class="btn btn-siia guardarObservacionesForm5">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
-				</div>
-				<?php echo form_close(); ?>
-			</div>
+			<a href="" target="_blank" id="irAEvaluarDocente" class="btn btn-siia">Evaluar docentes <i class="fa fa-eye" aria-hidden="true"></i></a>
+			<div class="clearfix"></div>
 			<hr />
-			<label>Observaciones Realizadas</label>
-			<div class="observaciones_realizadas_form5"></div>
 		</div>
 		<div class="col-md-12" id="plataforma">
 			<h3>6. Datos modalidad virtual</h3>
@@ -351,18 +276,6 @@
 				</thead>
 				<tbody id="tbody" class="tabla_datos_plataforma"></tbody>
 			</table>
-			<hr />
-			<div class="col-12">
-				<?php echo form_open('', array('id' => 'formulario_observacion_form6')); ?>
-				<div class="form-group">
-					<label for="observacionesForm6">Observaciones modalidad virtual</label>
-					<textarea class="form-control obs_admin_" name="observacionesForm6" id="observacionesForm6" cols="30" rows="5" required></textarea>
-				</div>
-				<div class="form-group">
-					<button class="btn btn-siia guardarObservacionesForm6">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
-				</div>
-				<?php echo form_close(); ?>
-			</div>
 			<hr />
 			<label>Observaciones Realizadas</label>
 			<div class="observaciones_realizadas_form6"></div>
@@ -382,18 +295,6 @@
 				</thead>
 				<tbody id="tbody" class="datos_herramientas"></tbody>
 			</table>
-			<hr />
-			<div class="col-12">
-				<?php echo form_open('', array('id' => 'formulario_observacion_form7')); ?>
-				<div class="form-group">
-					<label for="observacionesForm7">Observaciones modalidad en Línea</label>
-					<textarea class="form-control obs_admin_" name="observacionesForm7" id="observacionesForm7" cols="30" rows="5" required></textarea>
-				</div>
-				<div class="form-group">
-					<button class="btn btn-siia guardarObservacionesForm7">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
-				</div>
-				<?php echo form_close(); ?>
-			</div>
 			<hr />
 			<label>Observaciones Realizadas</label>
 			<div class="observaciones_realizadas_form7"></div>
