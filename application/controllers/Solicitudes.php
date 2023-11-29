@@ -73,7 +73,11 @@ class Solicitudes extends CI_Controller
 		$organizacion = $this->db->select("*")->from("organizaciones")->where("id_organizacion", $this->input->post('id_organizacion'))->get()->row();
 		$evaluador = $this->db->select("*")->from("administradores")->where("usuario", $this->input->post('evaluadorAsignar'))->get()->row();
 		$nombreEvaluador = $evaluador->primerNombreAdministrador . " " .  $evaluador->primerApellidoAdministrador;
-		$data_asignar = array('asignada' => $this->input->post('evaluadorAsignar'));
+		$data_asignar = array(
+			'asignada' => $this->input->post('evaluadorAsignar'),
+			'fechaAsignacion' => date('Y/m/d H:i:s'),
+			'asignada_por' => $this->session->userdata('nombre_usuario'),
+		);
 		$this->db->where('idSolicitud', $this->input->post('idSolicitud'));
 		if ($this->db->update('solicitudes', $data_asignar)) {
 			$this->logs_sia->session_log('Se asigno ' . $organizacion->nombreOrganizacion . ' a ' . $nombreEvaluador . ' en la fecha ' . date("Y/m/d H:m:s") . '.');

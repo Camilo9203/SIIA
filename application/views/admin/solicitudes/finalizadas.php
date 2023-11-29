@@ -7,54 +7,53 @@
  */
 ?>
 <!-- Solicitudes a evaluar-->
-<div class="container">
-	<div class="row">
-		<div class="col-md-12" id="admin_ver_finalizadas">
-			<div class="clearfix"></div>
-			<hr />
-			<h3>Solicitudes en evaluación:</h3>
-			<br>
-			<!-- Tabla de solicitudes en evaluación	-->
-			<div class="table">
-				<table id="tabla_enProceso_organizacion" width="100%" border=0 class="table table-striped table-bordered tabla_form">
-					<thead>
-					<tr>
-						<td class="col-md-2">Nombre</td>
-						<td class="col-md-2">NIT</td>
-						<td class="col-md-2">ID Solicitud</td>
-						<td class="col-md-2">Tipo</td>
-						<td class="col-md-2">Motivo</td>
-						<td class="col-md-2">Modalidad</td>
-						<td class="col-md-2">Fecha de finalización</td>
-						<td class="col-md-2">Fecha última revisión</td>
-						<td class="col-md-2">Asignada a</td>
-						<td class="col-md-2">Acción</td>
-					</tr>
-					</thead>
-					<tbody id="tbody">
-					<?php
-					foreach ($solicitudesAsignadas as $solicitud) :
-						if (($solicitud->asignada == $nombre_usuario && $nivel == 1) || ($nivel == 0 || $nivel == 6) ):
-							echo "<tr>";
-							echo "<td>" . $solicitud->nombreOrganizacion . "</td>";
-							echo "<td>" . $solicitud->numNIT . "</td>";
-							echo "<td>" . $solicitud->idSolicitud . "</td>";
-							echo "<td>" . $solicitud->tipoSolicitud . "</td>";
-							echo "<td>" . $solicitud->motivoSolicitud . "</td>";
-							echo "<td>" . $solicitud->modalidadSolicitud . "</td>";
-							echo "<td>" . $solicitud->fechaFinalizado . "</td>";
-							echo "<td>" . $solicitud->fechaUltimaRevision . "</td>";
-							echo "<td>" . $solicitud->asignada . "</td>";
-							echo "<td class='verFinOrgInf'><button class='btn btn-siia btn-sm ver_organizacion_finalizada' id='' data-organizacion='" . $solicitud->id_organizacion . "' data-solicitud='" . $solicitud->idSolicitud . "'>Ver información <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
-							echo "</tr>";
-						endif;
-					endforeach;
-					?>
-					</tbody>
-				</table>
-				<button class="btn btn-danger btn-sm pull-left" id="admin_ver_org_volver"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
-			</div>
-		</div>
+
+<div class="col-md-12" id="admin_ver_finalizadas">
+	<div class="clearfix"></div>
+	<hr />
+	<h3>Solicitudes en evaluación:</h3>
+	<br>
+	<!-- Tabla de solicitudes en evaluación	-->
+	<div class="table">
+		<table id="tabla_enProceso_organizacion" width="100%" border=0 class="table table-striped table-bordered tabla_form">
+			<thead>
+			<tr>
+				<td class="col-md-2">Nombre</td>
+				<td class="col-md-2">NIT</td>
+				<td class="col-md-2">ID Solicitud</td>
+				<td class="col-md-2">Tipo</td>
+				<td class="col-md-2">Motivo</td>
+				<td class="col-md-2">Modalidad</td>
+				<td class="col-md-2">Fecha de finalización</td>
+				<td class="col-md-2">Asignada a</td>
+				<td class="col-md-2">Fecha de asignación</td>
+				<td class="col-md-2">Asignada Por:</td>
+				<td class="col-md-2">Acción</td>
+			</tr>
+			</thead>
+			<tbody id="tbody">
+			<?php
+			foreach ($solicitudesAsignadas as $solicitud) :
+				if (($solicitud->asignada == $nombre_usuario && $nivel == 1) || ($nivel == 0 || $nivel == 6) ):
+					echo "<tr>";
+					echo "<td>" . $solicitud->nombreOrganizacion . "</td>";
+					echo "<td>" . $solicitud->numNIT . "</td>";
+					echo "<td>" . $solicitud->idSolicitud . "</td>";
+					echo "<td>" . $solicitud->tipoSolicitud . "</td>";
+					echo "<td><textarea style='border: none; width: 282px; height: 110px; resize: none' readonly>" . $solicitud->motivoSolicitud . "</textarea></td>";
+					echo "<td>" . $solicitud->modalidadSolicitud . "</td>";
+					echo "<td>" . $solicitud->fechaFinalizado . "</td>";
+					echo "<td>" . $solicitud->asignada . "</td>";
+					echo "<td>" . $solicitud->fechaAsignacion . "</td>";
+					echo "<td>" . $solicitud->asignada_por . "</td>";
+					echo "<td class='verFinOrgInf'><button class='btn btn-siia btn-sm ver_organizacion_finalizada' id='' data-organizacion='" . $solicitud->id_organizacion . "' data-solicitud='" . $solicitud->idSolicitud . "'>Ver información <i class='fa fa-eye' aria-hidden='true'></i></a></td>";
+					echo "</tr>";
+				endif;
+			endforeach;
+			?>
+			</tbody>
+		</table>
+		<button class="btn btn-danger btn-sm pull-left" id="admin_ver_org_volver"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 	</div>
 </div>
 
@@ -63,8 +62,8 @@
 <div class="container" id="admin_panel_ver_finalizada">
 	<div class="panel-group" id="datos_org_final">
 		<hr />
-		<button id="desplInfoOrg" class="btn btn-sm btn-success btn-block">Desplegar información de la organización <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></button>
-		<button id="plegInfoOrg" class="btn btn-sm btn-danger btn-block">Plegar información de la organización <i class="fa fa-chevron-circle-up" aria-hidden="true"></i></button>
+		<button id="desplInfoOrg" class="btn btn-sm btn-success btn-block">Desplegar información de la solicitud <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></button>
+		<button id="plegInfoOrg" class="btn btn-sm btn-danger btn-block">Plegar información de la solicitud <i class="fa fa-chevron-circle-up" aria-hidden="true"></i></button>
 		<div id="verInfoOrg">
 			<hr />
 			<div class="col-md-4">
@@ -87,7 +86,7 @@
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					<p>Fecha de creación de la cuenta:</p><label class="tipoLeer" id='fechaSol'></label>
+					<p>Fecha de creación:</p><label class="tipoLeer" id='fechaSol'></label>
 				</div>
 				<div class="form-group">
 					<p>ID de la solicitud:</p><label class="tipoLeer" id='idSol'></label>
@@ -99,16 +98,16 @@
 					<p>Modalidad de la solicitud:</p><label class="tipoLeer" id='modSol'></label>
 				</div>
 				<div class="form-group">
-					<p>Motivo de la solicitud:</p><label class="tipoLeer" id='motSol'></label>
+					<p>Motivo de la solicitud:</p><textarea style="height: 182px; width: 284px; resize: none;" class="tipoLeer" id='motSol' readonly></textarea>
 				</div>
 				<div class="clearfix"></div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					<p>Fecha de finalización de la solicitud:</p><label class="tipoLeer" id='revFechaFin'></label>
+					<p>Fecha de finalización:</p><label class="tipoLeer" id='revFechaFin'></label>
 				</div>
 				<div class="form-group">
-					<p>Numero de solicitudes:</p><label class="tipoLeer" id='numeroSol'></label>
+					<p>Número de solicitud:</p><label class="tipoLeer" id='numeroSol'></label>
 				</div>
 				<div class="form-group">
 					<p>Revisión #:</p><label class="tipoLeer" id='revSol'></label>
@@ -120,9 +119,16 @@
 					<p>Estado de la organización:</p><label class="tipoLeer" id='estOrg'></label>
 				</div>
 				<div class="form-group">
+					<p>Asignada por :</p><label class="tipoLeer" id='asignada_por'></label>
+				</div>
+				<div class="form-group">
+					<p>Fecha de asignación:</p><label class="tipoLeer" id='fechaAsignacion'></label>
+				</div>
+				<hr>
+				<div class="clearfix"></div>
+				<div class="form-group">
 					<p>Cámara de comercio: <a href="" id="camaraComercio_org" target="_blank">Clic aquí para ver la cámara de comercio</a></p>
 				</div>
-				<div class="clearfix"></div>
 			</div>
 		</div>
 		<div class="clearfix"></div>
