@@ -181,19 +181,7 @@
 			</div>
 			<div class="clearfix"></div>
 			<hr />
-			<!-- Formulario Observación form1 -->
-			<div class="col-12">
-				<?php echo form_open('', array('id' => 'formulario_observacion_form1')); ?>
-				<div class="form-group">
-					<label for="observacionesForm1">Observaciones Información General</label>
-					<textarea class="form-control obs_admin_" name="observacionesForm1" id="observacionesForm1" cols="30" rows="5" required></textarea>
-				</div>
-				<div class="form-group">
-					<button class="btn btn-siia guardarObservacionesForm1">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
-				</div>
-				<?php echo form_close(); ?>
-			</div>
-			<hr />
+			<!-- Observaciones form1 -->
 			<label>Observaciones Realizadas</label>
 			<div class="observaciones_realizadas_form1"></div>
 		</div>
@@ -211,19 +199,7 @@
 			<hr />
 			<div class="clearfix"></div>
 			<hr />
-			<!-- Formulario Observación form2 -->
-			<div class="col-12">
-				<?php echo form_open('', array('id' => 'formulario_observacion_form2')); ?>
-				<div class="form-group">
-					<label for="observacionesForm2">Observaciones Documentación Legal</label>
-					<textarea class="form-control obs_admin_" name="observacionesForm2" id="observacionesForm2" cols="30" rows="5" required></textarea>
-				</div>
-				<div class="form-group">
-					<button class="btn btn-siia guardarObservacionesForm2" id="sigInf">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
-				</div>
-				<?php echo form_close(); ?>
-			</div>
-			<hr />
+			<!-- Observaciones form2 -->
 			<label>Observaciones Realizadas</label>
 			<div class="observaciones_realizadas_form2"></div>
 		</div>
@@ -243,19 +219,7 @@
 			</table>
 			<div id="archivosJornadasActualizacion"></div>
 			<hr />
-			<!-- Formulario Observación form3 -->
-			<div class="col-12">
-				<?php echo form_open('', array('id' => 'formulario_observacion_form3')); ?>
-				<div class="form-group">
-					<label for="observacionesForm3">Observaciones Jornadas de Actualización</label>
-					<textarea class="form-control obs_admin_" name="observacionesForm3" id="observacionesForm3" cols="30" rows="5" required></textarea>
-				</div>
-				<div class="form-group">
-					<button class="btn btn-siia guardarObservacionesForm3" id="sigInf">Guardar Observación <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
-				</div>
-				<?php echo form_close(); ?>
-			</div>
-			<hr />
+			<!-- Observaciones form3 -->
 			<label>Observaciones Realizadas</label>
 			<div class="observaciones_realizadas_form3"></div>
 		</div>
@@ -459,7 +423,7 @@
 			<a class="toAncla" id="verDatPlatMenuAdmin">6. Datos Plataforma Virtual <i class="fa fa-globe" aria-hidden="true"></i></a><br />
 			<a class="toAncla" id="verDataEnLinea">7. Datos Plataforma En Linéa <i class="fa fa-globe" aria-hidden="true"></i></a><br />
 			<hr />
-			<button class="btn btn-siia btn-sm btn-block" data-toggle="modal" id="terminar_proceso_observacion">Terminar proceso de observaciones <i class="fa fa-check" aria-hidden="true"></i></button>
+			<!-- <button class="btn btn-siia btn-sm btn-block" data-toggle="modal" id="terminar_proceso_observacion">Terminar proceso de observaciones <i class="fa fa-check" aria-hidden="true"></i></button> -->
 		</div>
 	</div>
 </div>

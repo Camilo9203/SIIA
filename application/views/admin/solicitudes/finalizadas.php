@@ -237,13 +237,12 @@
 			<table id="" width="100%" border=0 class="table table-striped table-bordered">
 				<thead>
 				<tr>
-					<td>Cantidad Personas</td>
-					<td>Fecha Asistencia</td>
+					<td>Participó en jornadas</td>
+					<td>Acciones</td>
 				</tr>
 				</thead>
 				<tbody id="tbody" class="tabla_datos_jornadas"></tbody>
 			</table>
-			<div id="archivosJornadasActualizacion"></div>
 			<hr />
 			<!-- Formulario Observación form3 -->
 			<div class="col-12">

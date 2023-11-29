@@ -191,10 +191,13 @@ $("#verJorActMenuAdmin").click(function () {
 				html += "<td colspan='4'>No hay datos </td></tr>";
 			}
 			else {
-				for (let i = 0; i < response.jornadasActualizacion.length; i++) {
-					html += "<tr><td>" + response.jornadasActualizacion[i]['numeroPersonas'] + "</td>";
-					html += "<td>" + response.jornadasActualizacion[i]['fechaAsistencia'] + "</td>";
+				html += "<tr><td>" + response.jornadasActualizacion['asistio'] + "</td>";
+				for ($i = 0; $i < response.archivos.length; $i++) {
+					if (response.archivos[$i].id_formulario == "3") {
+						html += "<td><a class='btn btn-sm btn-siia' href='" + baseURL + 'uploads/jornadas/' + response.archivos[$i]['nombre'] + "' target='_blank'> Ver documento </td></tr>";
+					}
 				}
+
 			}
 			$(".tabla_datos_jornadas").html(html);
 			verObservaciones(3);
@@ -372,6 +375,7 @@ function verObservaciones(idForm) {
 		dataType: "JSON",
 		data: data,
 		success: function (response) {
+			console.log(response)
 			// Llenar tabla de datos en línea registrados
 			for (let i = 0; i < response.observaciones.length; i++) {
 				if (response.observaciones[i]['idForm'] == idForm) {
@@ -385,8 +389,10 @@ function verObservaciones(idForm) {
 				html += "<td>Fecha Observación</td>";
 				html += "<td>Revisión</td>";
 				html += "<td>Observación</td>";
-				html += "<td>Verificada</td>";
-				html += "<td>Acción</td>";
+				if(response.solicitudes['numeroRevisiones'] > 0)
+					html += "<td>Verificada</td>";
+				if(response.estadoOrganizaciones['nombre'] === 'Finalizado')
+					html += "<td>Acción</td>";
 				html += "</tr></thead>";
 				html += "<tbody id='tbody'>";
 				for (let i = 0; i < response.observaciones.length; i++) {
@@ -394,13 +400,17 @@ function verObservaciones(idForm) {
 						html += "<tr><td>" + response.observaciones[i]['fechaObservacion'] + "</td>";
 						html += "<td>" + response.observaciones[i]['numeroRevision'] + "</td>";
 						html += "<td><textarea style='width: 600px; height: 140px; resize: none; border: hidden' readonly>" + response.observaciones[i]['observacion'] + "</textarea></td>";
-						if (response.observaciones[i]['valida'] == 1) {
-							html += "<td><input type='checkbox' class='validarObservacion' data-idform='" + idForm + "' data-id='" + response.observaciones[i]['id_observacion'] + "' checked></td>";
+						if(response.solicitudes['numeroRevisiones'] > 0) {
+							if (response.observaciones[i]['valida'] == 1) {
+								html += "<td><input type='checkbox' class='validarObservacion' data-idform='" + idForm + "' data-id='" + response.observaciones[i]['id_observacion'] + "' checked></td>";
+							}
+							else {
+								html += "<td><input type='checkbox' class='validarObservacion' data-idform='" + idForm + "' data-id='" + response.observaciones[i]['id_observacion'] + "'></td>";
+							}
 						}
-						else {
-							html += "<td><input type='checkbox' class='validarObservacion' data-idform='" + idForm + "' data-id='" + response.observaciones[i]['id_observacion'] + "'></td>";
-						}
-						html += "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarObservacionForm eliminarDataTabla' data-id=" + response.observaciones[i]['id_observacion'] + ">Eliminar <i class='fa fa-file-o' aria-hidden='true'></i></button></td></tr>";
+						if(response.estadoOrganizaciones['nombre'] === 'Finalizado')
+							html += "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarObservacionForm eliminarDataTabla' data-id=" + response.observaciones[i]['id_observacion'] + ">Eliminar <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
+						html += "</tr>";
 					}
 				}
 				html += "</tbody>";
@@ -479,7 +489,7 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 			$("#admin_ver_finalizadas").slideUp();
 			$("#admin_panel_ver_finalizada").slideDown();
 			/** Solicitud **/
-			$("#fechaSol").html(response.solicitudes.fecha);
+			$("#fechaSol").html(response.solicitudes.fechaCreacion);
 			$("#idSol").html(response.solicitudes.idSolicitud);
 			$("#tipoSol").html(response.estadoOrganizaciones.tipoSolicitudAcreditado);
 			$("#modSol").html(response.estadoOrganizaciones.modalidadSolicitudAcreditado);
@@ -535,15 +545,14 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 			// Archivos formulario 1.
 			for ($a = 0; $a < data_orgFinalizada["0"].archivos.length; $a++) {
 				if (data_orgFinalizada["0"].archivos[$a].id_formulario == "1") {
-					if (data_orgFinalizada["0"].archivos[$a].tipo == "carta") {
+					if (data_orgFinalizada["0"].archivos[$a].tipo == "carta")
 						$carpeta = baseURL + "uploads/cartaRep/";
-					} else if (
-						data_orgFinalizada["0"].archivos[$a].tipo == "certificaciones"
-					) {
+					if (data_orgFinalizada["0"].archivos[$a].tipo == "certificaciones")
 						$carpeta = baseURL + "uploads/certificaciones/";
-					} else if (data_orgFinalizada["0"].archivos[$a].tipo == "lugar") {
+					if (data_orgFinalizada["0"].archivos[$a].tipo == "lugar")
 						$carpeta = baseURL + "uploads/lugarAtencion/";
-					}
+					if (data_orgFinalizada["0"].archivos[$a].tipo == "autoevaluacion")
+						$carpeta = baseURL + "uploads/autoevaluaciones/";
 
 					$("#archivos_informacionGeneral").append(
 						"<li class='listaArchivos'><a href='" +
@@ -558,20 +567,6 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 			$("#archivos_informacionGeneral").append('<div class="form-group" id="documentacionLegal-observacionesGeneral' + i + '">');
 			// Observaciones formulario 1
 			verObservaciones(1);
-			/** Formulario 4 Archivos **/
-			$("#archivosJornadasActualizacion").append('<div class="col-md-12" id="archivos_jornadasActualizacion">');
-			$("#archivosJornadasActualizacion>#archivos_jornadasActualizacion").append("<p>Archivos:</p>");
-			for ($a = 0; $a < data_orgFinalizada["0"].archivos.length; $a++) {
-				if (data_orgFinalizada["0"].archivos[$a].id_formulario == "5") {
-					if (data_orgFinalizada["0"].archivos[$a].tipo == "jornadaAct") {
-						$carpeta = baseURL + "uploads/jornadas/";
-					}
-					$("#archivosJornadasActualizacion>#archivos_jornadasActualizacion").append(
-						"<li class='listaArchivos'><a href='" + $carpeta + data_orgFinalizada["0"].archivos[$a].nombre + "' target='_blank'>" + data_orgFinalizada["0"].archivos[$a].nombre + "</a></li><br>"
-					);
-				}
-			}
-			$("#archivosJornadasActualizacion").append('</div>');
 			/** Formulario 6 Docentes **/
 			for (var i = 0; i < response.docentes.length; i++) {
 				if (i == 0) {
@@ -980,9 +975,12 @@ $(document).on('click', '.validarObservacion', function (){
 						verObservaciones(data['idForm']);
 					},
 					error: function (ev) {
-						procesando("error", "Ocurrió un error no se guardo.");
+						errorControlador(ev);
 					},
 				});
+			}
+			else{
+				$(this).prop('checked', false);
 			}
 		});
 	}
@@ -1218,4 +1216,18 @@ function procesando(status, msg){
 		icon: status,
 		text: msg
 	});
+}
+// Error 505
+function errorControlador(ev){
+	Alert.fire({
+		title: ev.statusText,
+		html: ev.responseText,
+		text: ev.responseText,
+		icon: 'error',
+		allowOutsideClick: false,
+		customClass: {
+			popup: 'popup-swalert-list',
+			confirmButton: 'button-swalert',
+		},
+	})
 }
