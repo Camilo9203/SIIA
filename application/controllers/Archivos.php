@@ -80,6 +80,7 @@ class Archivos extends CI_Controller
 								'tipo' => $tipoArchivo,
 								'nombre' => $append_name . "_" . $randomIni . $randomFinal . "_" . $_FILES['file']['name'][$i],
 								'id_formulario' => 1,
+								'id_registro' => $this->input->post('idSolicitud'),
 								'organizaciones_id_organizacion' => $organizacion->id_organizacion
 							);
 							break;

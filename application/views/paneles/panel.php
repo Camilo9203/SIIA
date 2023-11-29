@@ -251,7 +251,7 @@ $CI->load->model("ResolucionesModel");
 						<td><?= $solicitud->nombre ?></td>
 						<td><?= $solicitud->motivoSolicitudAcreditado ?></td>
 						<td><?= $solicitud->modalidadSolicitudAcreditado ?></td>
-						<?php if($solicitud->nombre == "En Proceso"): ?>
+						<?php if($solicitud->nombre == "En Proceso" || $solicitud->nombre == "En Renovación"): ?>
 						<td>
 							<div class='btn-group-vertical' role='group' aria-label='acciones'>
 								<button type='button' class='btn btn-siia btn-sm verSolicitud' data-id="<?= $solicitud->idSolicitud ?>" title='Continuar Solicitud'>
@@ -266,7 +266,7 @@ $CI->load->model("ResolucionesModel");
 							</div>
 						</td>
 						<?php endif; ?>
-						<?php if($solicitud->nombre == "Acreditado" || $solicitud->nombre == "Archivada" || $solicitud->nombre == "Negada" || $solicitud->nombre == "Revocada" ): ?>
+						<?php if($solicitud->nombre == "Acreditado" || $solicitud->nombre == "Archivada" || $solicitud->nombre == "Negada" || $solicitud->nombre == "Revocada" || $solicitud->nombre == "Vencida" ): ?>
 						<td>
 							<div class='btn-group-vertical' role='group' aria-label='acciones'>
 								<?php $resolucion = $CI->ResolucionesModel->getResolucionSolicitud($solicitud->idSolicitud) ?>
@@ -274,7 +274,8 @@ $CI->load->model("ResolucionesModel");
 								<a class="btn btn-sm btn-siia" style="text-decoration: none; color: #951919;" href="<?= base_url() . 'uploads/resoluciones/' . $resolucion->resolucion; ?>" target='_blank'>
 									Resolución <i class='fa fa-eye' aria-hidden='true'></i>
 								</a>
-								<?php if(date_create($resolucion->fechaResolucionFinal) < date_create(date('Y-m-d'))): ?>
+								<!-- TODO: Terminar, agregar dos mes a la fecha final y no permitir renovar si se pasa de esa fecha -->
+								<?php if(date_create($resolucion->fechaResolucionFinal) < date_create(date('Y-m-d')) && $solicitud->nombre == 'Acreditado'): ?>
 								<button type='button' class='btn btn-success btn-sm renovarSolicitud' data-id='<?= $solicitud->idSolicitud ?>' title='Continuar Solicitud'>
 									Renovar <i class='fa fa-check' aria-hidden='true'></i>
 								</button>

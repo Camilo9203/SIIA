@@ -309,6 +309,7 @@ class Solicitudes extends CI_Controller
 			endif;
 			if($solicitud->nombre == 'En Observaciones'):
 				$updateEstado = array(
+					'nombre' => "Finalizado",
 					'fechaUltimaActualizacion' => date('Y/m/d H:i:s'),
 					'estadoAnterior' => $solicitud->nombre
 				);
@@ -463,7 +464,7 @@ class Solicitudes extends CI_Controller
 
 		$certificacionesForm = NULL;
 		$lugar = NULL;
-		$auotevaluacion = NULL;
+		$autoevaluacion = NULL;
 		$carta = NULL;
 		$jornada = NULL;
 		$materialProgBasicos = NULL;
@@ -480,6 +481,7 @@ class Solicitudes extends CI_Controller
 		$modalidadSolicitud = $tipoSolicitud->modalidadSolicitud;
 
 		$archivosBD = $this->db->select("*")->from("archivos")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
+		$strFormulario1 = '';
 		/** Comprobar archivos en formularios */
 		foreach ($archivosBD as $archivo) {
 			$tipo = $archivo->tipo;
@@ -489,12 +491,14 @@ class Solicitudes extends CI_Controller
 					switch ($tipo) {
 						case 'certificaciones':
 							$icert += 1;
-							if ($icert >= 3) {
+							if ($icert >= 3)
 								$certificacionesForm = TRUE;
-							}
 							break;
 						case 'lugar':
 							$lugar = TRUE;
+							break;
+						case 'autoevaluacion':
+							$autoevaluacion = TRUE;
 							break;
 						case 'carta':
 							$carta = TRUE;
@@ -503,43 +507,42 @@ class Solicitudes extends CI_Controller
 							$certificacionesForm = FALSE;
 							$lugar = FALSE;
 							$carta = FALSE;
-							$auotevaluacion = FALSE;
+							$autoevaluacion = FALSE;
 							break;
 					}
 					break;
 				case 3:
-					if ($tipo == "jornadaAct") {
+					if ($tipo == "jornadaAct")
 						$jornada = TRUE;
-					}
 					break;
 				case 6:
-					if ($tipo == "materialDidacticoProgBasicos") {
+					if ($tipo == "materialDidacticoProgBasicos")
 						$materialProgBasicos = TRUE;
-					}
 					break;
 				case 7:
-					if ($tipo == "materialDidacticoAvalEconomia") {
+					if ($tipo == "materialDidacticoAvalEconomia")
 						$materialAvalEcon = TRUE;
-					}
 					break;
 				case 8:
-					if ($tipo == "formatosEvalProgAvalar") {
+					if ($tipo == "formatosEvalProgAvalar")
 						$formatosEval = TRUE;
-					}
-
-					if ($tipo == "materialDidacticoProgAvalar") {
+					if ($tipo == "materialDidacticoProgAvalar")
 						$materialProgEval = TRUE;
-					}
 					break;
 				case 10:
-					if ($tipo == "instructivoPlataforma" || $tipo == "observacionesPlataformaVirtual") {
+					if ($tipo == "instructivoPlataforma" || $tipo == "observacionesPlataformaVirtual")
 						$instructivo = TRUE;
-					}
 					break;
 				default:
 					break;
 			}
 		}
+		if($certificacionesForm == FALSE)
+			$strFormulario1 .= "<span class='upper'>Certificaciones </span><i class='fa fa-times spanRojo' aria-hidden='true'></i><br/>";
+		if($carta == FALSE)
+			$strFormulario1 .= "<span class='upper'>Carta de solicitud </span><i class='fa fa-times spanRojo' aria-hidden='true'></i><br/>";
+		if($autoevaluacion == FALSE)
+			$strFormulario1 .= "<span class='upper'>Autoevaluación </span><i class='fa fa-times spanRojo' aria-hidden='true'></i><br/>";
 		/** Variables Formularios */
 		$informacionGeneral = $this->db->select("*")->from("informacionGeneral")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
 		$documentacion = $this->db->select("*")->from("documentacion")->where("idSolicitud", $idSolicitud)->get()->row();
@@ -596,9 +599,8 @@ class Solicitudes extends CI_Controller
 			endif;
 		endforeach;
 		/**
-		 * @var  $formularios
-		 * @var  $formularios
 		 * Comprobación Formularios
+		 * @var  $formularios
 		 */
 		$formularios = array();
 		$solicitud = $this->db->select('*')->from('solicitudes')->where("idSolicitud", $idSolicitud)->get()->row();
@@ -611,11 +613,15 @@ class Solicitudes extends CI_Controller
 		if ($cantProgramasSeleccionados == $cantProgramasAceptados) {
 			$datosProgramasAceptados = 'TRUE';
 		}
-		/** Comprobar todos los formularios */
+		/**
+		 * Comprobar todos los formularios
+		 */
 		//if ($informacionGeneral == NULL || $certificacionesForm == NULL || $lugar == NULL || $carta == NULL) {
-		//TODO: Terminar!!!
-		if ($informacionGeneral == NULL || $certificacionesForm == NULL || $carta == NULL) {
+		if ($informacionGeneral == NULL || $certificacionesForm == NULL || $carta == NULL|| $autoevaluacion == NULL) {
 			array_push($formularios, "1. Falta el formulario de Informacion General.");
+		}
+		if(!empty($strFormulario1)) {
+			array_push($formularios, "1. Documentos por cargar: <br><br><strong><small><i>" . $strFormulario1 . "</i></small></strong>");
 		}
 		if ($documentacion == NULL) {
 			array_push($formularios, "2. Falta el formulario de Documentacion Legal.");

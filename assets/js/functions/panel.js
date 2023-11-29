@@ -293,9 +293,7 @@ $(".eliminarSolicitud").click(function () {
 					})
 				},
 				error: function (ev) {
-					event.preventDefault();
-					console.log(ev);
-					notificacion("Ocurrió un error y no se elimino solicitud");
+					errorControlador(ev)
 				},
 			});
 		}
@@ -359,7 +357,7 @@ $(".verDetalleSolicitud").click(function () {
 			}
 		},
 		error: function (ev) {
-			console.log(ev);
+			errorControlador(ev);
 		},
 	})
 });

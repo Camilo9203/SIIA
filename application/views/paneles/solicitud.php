@@ -346,18 +346,18 @@
                             <input type="file" required accept="application/pdf" class="form-control" data-val="certificaciones" name="certificaciones[]" id="certificaciones1">
                             <input type="file" required accept="application/pdf" class="form-control" data-val="certificaciones" name="certificaciones[]" id="certificaciones2">
                             <input type="file" required accept="application/pdf" class="form-control" data-val="certificaciones" name="certificaciones[]" id="certificaciones3">
-                            <a type="submit" class="btn btn-siia btn-sm archivos_form_certificacion fa-fa center-block" data-name="certificaciones" name="certificaciones_organizacion" id="certificaciones_organizacion">
+                            <a type="submit" class="btn btn-siia btn-sm archivos_form_certificacion fa-fa center-block" data-name="certificaciones" data-solicitud="<?= $solicitud->idSolicitud ?>" name="certificaciones_organizacion" id="certificaciones_organizacion">
 								Guardar archivo(s) &#xf0c7
 							</a>
 						<?php echo form_close(); ?>
 					</div>
 					<?php if($solicitud->nombre == 'En Renovación'): ?>
-					<!-- Carta de solicitud -->
+					<!-- Carta de autoevaluación -->
 					<div class="form-group col-md-12">
 						<?php echo form_open_multipart('', array('id' => 'formulario_autoevaluacion')); ?>
-						<h4>Adjunte documento de Autoevaluación cualitativa del desarrollo del curso para el que solicita renovación <small>PDF (1)</small></h4>
-						<input type="file" required accept="application/pdf" class="form-control" data-val="carta" name="auotevaluacion" id="auotevaluacion">
-						<a type="submit" class="btn btn-siia btn-sm archivos_form_autoevaluacion fa-fa center-block" data-name="auotevaluacion" data-form="1" data-solicitud="<?php echo $solicitud->idSolicitud ?>" name="auotevaluacion" id="auotevaluacion" value="Guardar archivo(s) &#xf0c7">
+						<h4>Adjunte documento de autoevaluación cualitativa del desarrollo del curso para el que solicita renovación <small>PDF (1)</small></h4>
+						<input type="file" required accept="application/pdf" class="form-control" data-val="autoevaluacion" name="autoevaluacion" id="autoevaluacion">
+						<a type="submit" class="btn btn-siia btn-sm archivos_form_autoevaluacion fa-fa center-block" data-name="autoevaluacion" data-form="1" data-solicitud="<?php echo $solicitud->idSolicitud ?>" name="autoevaluacion" id="autoevaluacion" value="Guardar archivo(s) &#xf0c7">
 							Guardar archivo(s) &#xf0c7
 						</a>
 						<?php echo form_close(); ?>

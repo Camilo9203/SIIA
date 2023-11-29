@@ -13,6 +13,9 @@ function create_file($file, $metadata)
 		case 'carta':
 			$ruta = 'uploads/cartaRep/' . $metadata['nombre'];
 			break;
+		case 'autoevaluacion':
+			$ruta = 'uploads/autoevaluaciones/' . $metadata['nombre'];
+			break;
 		default:
 			break;
 	endswitch;
@@ -50,6 +53,7 @@ function delete_file($tipo, $nombre, $id_archivo, $id_formulario) {
 	if ($tipo == "carta") {unlink('uploads/cartaRep/' . $nombre);}
 	if ($tipo == "certificaciones") {unlink('uploads/certificaciones/' . $nombre);}
 	if ($tipo == "lugar") {unlink('uploads/lugarAtencion/' . $nombre);}
+	if ($tipo == "autoevaluacion") {unlink('uploads/autoevaluaciones/' . $nombre);}
 	if ($tipo == "registroEdu") {unlink('uploads/registrosEducativos/' . $nombre);}
 	if ($tipo == "jornadaAct") {unlink('uploads/jornadas/' . $nombre);}
 	if ($tipo == "materialDidacticoProgBasicos") {unlink('uploads/materialDidacticoProgBasicos/' . $nombre);}

@@ -248,7 +248,7 @@ $(".archivos_form_carta").on("click", function () {
 });
 // Guardar archivos tipo certificaciones
 $(".archivos_form_certificacion").on("click", function () {
-	let data_name = $(".archivos_form_certificacion").attr("data-name");
+	let data_name = $(this).attr("data-name");
 	var form_data = new FormData();
 	let count = 0;
 	$.each(
@@ -264,6 +264,7 @@ $(".archivos_form_certificacion").on("click", function () {
 	if (count === 3) {
 		form_data.append("tipoArchivo", $("#" + data_name + "1").attr("data-val"));
 		form_data.append("append_name", data_name);
+		form_data.append("idSolicitud", $(this).attr("data-solicitud"));
 		$.ajax({
 			url: baseURL + "archivos/uploadFiles",
 			cache: false,
@@ -336,10 +337,7 @@ $(".archivos_form_autoevaluacion").on("click", function () {
 		type: "post",
 		dataType: "JSON",
 		beforeSubmit: function () {
-			Toast.fire({
-				icon: 'info',
-				text: 'Guardando'
-			})
+			guardando();
 		},
 		success: function (response) {
 			console.log(response);
@@ -359,7 +357,7 @@ $(".archivos_form_autoevaluacion").on("click", function () {
 					confirmButtonText: 'Aceptar',
 				})
 			}
-			clearInputs('formulario_carta');
+			clearInputs('formulario_autoevaluacion');
 			cargarArchivos();
 		},
 		error: function (ev) {
@@ -1892,6 +1890,10 @@ function cargarArchivos() {
 						carpeta = "lugarAtencion";
 						url = baseURL + "uploads/" + carpeta + "/";
 					}
+					if (response[i].tipo == "autoevaluacion") {
+						carpeta = "autoevaluaciones";
+						url = baseURL + "uploads/" + carpeta + "/";
+					}
 					if (response[i].tipo == "registroEdu") {
 						carpeta = "registrosEducativos";
 						url = baseURL + "uploads/" + carpeta + "/";
@@ -1933,6 +1935,9 @@ function cargarArchivos() {
 							break;
 						case "lugar":
 							$tipo = "Lugar de atención";
+							break;
+						case "autoevaluacion":
+							$tipo = "Autoevaluación para renovación";
 							break;
 						case "registroEdu":
 							$tipo = "Registro educativo";
