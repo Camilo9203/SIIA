@@ -175,9 +175,6 @@ $CI->load->model("ResolucionesModel");
 										<a class="btn btn-sm btn-info" style="text-decoration: none; color: #951919;" href="<?= base_url() . 'uploads/resoluciones/' . $resolucion->resolucion; ?>" target='_blank'>
 											Ver resolución <i class='fa fa-eye' aria-hidden='true'></i>
 										</a>
-										<button class="btn btn-sm btn-siia editarResolucion" data-id-org="<?= $organizacion->id_organizacion ?>" data-id-res="<?= $resolucion->id_resoluciones ?>">
-											Editar <i class='fa fa-pencil' aria-hidden='true'></i>
-										</button>
 										<button class="btn btn-sm btn-danger eliminarResolucion" data-id-org="<?= $organizacion->id_organizacion ?>" data-id-res="<?= $resolucion->id_resoluciones ?>">
 											Eliminar <i class='fa fa-times' aria-hidden='true'></i>
 										</button>
