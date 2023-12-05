@@ -65,6 +65,11 @@ class ObservacionesModel extends CI_Model
 		);
 		return $observaciones;
 	}
+	public function getObservacionesInvalidas($idSolicitud)
+	{
+		$observaciones = $this->db->get_where("observaciones", array("idSolicitud" => $idSolicitud, "valida" => 0))->result();
+		return $observaciones;
+	}
 	public function cargarObservaciones($idSolicitud)
 	{
 		$observaciones = $this->db->select("*")->from("observaciones")->where("idSolicitud", $idSolicitud)->order_by("valueForm", "asc")->get()->result();

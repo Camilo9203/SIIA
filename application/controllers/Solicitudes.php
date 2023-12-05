@@ -285,7 +285,7 @@ class Solicitudes extends CI_Controller
 		$data['documentacionLegal'] = $this->DocumentacionLegalModel->getDocumentacionLegal($idSolicitud);
 		$data['antecedentesAcademicos'] = $this->AntecedentesAcademicosModel->getAntecedentesAcedemicos($idSolicitud);
 		$data['jornadasActualizacion'] = $this->JornadasActualizacionModel->getJornadasActualizacion($idSolicitud);
-		$data['archivoJornada'] = $this->ArchivosModel->getArchivos($idSolicitud, 3);
+		$data['archivoJornada'] = $this->ArchivosModel->getArchivos($organizacion->id_organizacion, 3);
 		$data['aplicacion'] = $this->DatosAplicacionModel->getDatosAplicacion($idSolicitud);
 		$data['datosEnLinea'] = $this->DatosEnLineaModel->getDatosEnLinea($idSolicitud);
 		$data['datosProgramas'] = $this->DatosProgramasModel->getDatosProgramas($idSolicitud);
@@ -321,7 +321,8 @@ class Solicitudes extends CI_Controller
 			endif;
 			$this->db->where('idSolicitud', $idSolicitud);
 			$this->db->update('estadoOrganizaciones', $updateEstado);
-			send_email_admin('enviarSolicitd', 1, CORREO_COORDINADOR, null, $organizacion, $idSolicitud);
+			if ($solicitud->asignada == "SIN ASIGNAR")
+				send_email_admin('enviarSolicitd', 1, CORREO_COORDINADOR, null, $organizacion, $idSolicitud);
 			send_email_user($organizacion->direccionCorreoElectronicoOrganizacion, 'enviarSolicitd', $organizacion, null, null, $idSolicitud);
 			$this->logs_sia->session_log('Finalizada la Solicitud ' . $idSolicitud);
 			$this->notif_sia->notification('Finalizada', 'admin', $organizacion->nombreOrganizacion);

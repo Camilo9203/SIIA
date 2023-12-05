@@ -369,18 +369,6 @@ class Panel extends CI_Controller
 		$informacionDocente = $this->db->select("*")->from("docentes")->where("id_docente", $id_docente)->get()->row();
 		echo json_encode($informacionDocente);
 	}
-	public function cargarDatosArchivos()
-	{
-		$id_form = $this->input->post('id_form');
-
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-
-		$where = array('organizaciones_id_organizacion =' => $id_organizacion, 'id_formulario =' => $id_form);
-		$data_archivos = $this->db->select("*")->from("archivos")->where($where)->where("tipo !=", "observacionesPlataformaVirtual", FLASE)->get()->result();
-		echo json_encode($data_archivos);
-	}
 	public function cargar_docentes()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');

@@ -4,6 +4,7 @@ class SolicitudesModel extends CI_Model
 	public function __construct()
 	{
 		$this->load->database();
+		$this->load->model('ArchivosModel');
 	}
 	/** Solicitudes */
 	public function solicitudes($id = FALSE)
@@ -95,7 +96,7 @@ class SolicitudesModel extends CI_Model
 		$estadoOrganizaciones = $this->db->select("*")->from("estadoOrganizaciones")->where("idSolicitud", $idSolicitud)->get()->row();
 		$organizaciones = $this->db->select("*")->from("organizaciones")->where("id_organizacion", $idOrganizacion)->get()->row();
 		$resoluciones = $this->db->select("*")->from("resoluciones")->where("organizaciones_id_organizacion", $idOrganizacion)->get()->result();
-		$archivos = $this->db->select("*")->from("archivos")->where("organizaciones_id_organizacion", $idOrganizacion)->where('id_registro', $idSolicitud)->get()->result();
+		$archivos = $this->ArchivosModel->getArchivosOrganizacion($idOrganizacion);
 		$observaciones = $this->db->select('*')->from('observaciones')->where("organizaciones_id_organizacion", $idOrganizacion)->where('idSolicitud', $idSolicitud)->get()->result();
 		echo json_encode(array("informacionGeneral" => $informacionGeneral, "documentacion" => $documentacion, "registroEducativoProgramas" => $registroEducativoProgramas, "antecedentesAcademicos" => $antecedentesAcademicos, "jornadasActualizacion" => $jornadasActualizacion, "datosProgramas" => $datosProgramas, "docentes" => $docentes, "plataforma" => $plataforma, "enLinea" => $enLinea, "tipoSolicitud" => $tipoSolicitud, "solicitudes" => $solicitudes, "estadoOrganizaciones" => $estadoOrganizaciones, "organizaciones" => $organizaciones, "archivos" => $archivos, "resoluciones" => $resoluciones, "observaciones" => $observaciones, "certificadoExistencia" => $certificadoExistencia));
 	}

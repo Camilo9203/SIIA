@@ -120,6 +120,7 @@ function send_email_user($to, $type, $organizacion, $usuario = null, $token = nu
 	$CI = & get_instance();
 	$CI->load->model('SolicitudesModel');
 	$CI->load->model('UsuariosModel');
+	$CI->load->model('ObservacionesModel');
 	/** Asuntos y correos emails */
 	switch ($type):
 		// Actualización de facilitadores
@@ -187,16 +188,25 @@ function send_email_user($to, $type, $organizacion, $usuario = null, $token = nu
 			$response = array('status' => "success", 'title' => "Solicitud asignada correctamente",'msg' =>  "Se a notificado a <strong> " . $organizacion->direccionCorreoElectronicoOrganizacion . "</strong> y a <strong>" . $usuario->direccionCorreoElectronico . "</strong>");
 			break;
 		case 'enviarObservaciones':
-			if ($CI->SolicitudesModel->solicitudes($idSolicitud)->numeroRevisiones > 1):
-				$subject = "Observaciones actualizadas";
+			$observaciones = $CI->ObservacionesModel->getObservacionesInvalidas($idSolicitud);
+			if (!empty($observaciones)):
+				if ($CI->SolicitudesModel->solicitudes($idSolicitud)->numeroRevisiones > 1):
+					$subject = "Observaciones actualizadas";
+				else:
+					$subject = "Observaciones realizadas";
+				endif;
+				$message = "<p>Buen día, <strong>" . $organizacion->nombreOrganizacion . " </strong><br><br> Organizaciones Solidarias le informa que se realizó la revisión de su solicitud de acreditación:
+						<br><br>Por favor, revise las observaciones y de clic en <strong>Actualizar</strong> la solicitud una vez realizados los ajustes y <strong>Finalice el proceso</strong>  <br><br>
+						<br><br>Volverá a llegarle un mensaje con la finalización de la solicitud ajustada.
+						<br><br>Si ya realizó los cambios y recibió un correo de finalización, por favor cierre este cuadro y espere una nueva confirmación
+						<br><br>¡Gracias!</p>";
 			else:
-				$subject = "Observaciones realizadas";
+				$subject = "¡Tramite Verificado!";
+				$message = "<p>Buen día, <strong>" . $organizacion->nombreOrganizacion . " </strong><br> Organizaciones Solidarias le informa que se realizó la revisión de su solicitud de acreditación:
+							<br><br>El evaluador verificó los datos registrados en la solicitud y se cumplen los requisitos establecidos en el marco normativo del trámite.
+							<br><br>Su trámite pasa a revisión por parte del área jurídica para emitir acto administrativo.
+							<br><br>¡Gracias!</p>";
 			endif;
-			$message = "<p>Buen día, <strong>" . $organizacion->nombreOrganizacion . " </strong><br> Organizaciones Solidarias le informa que se realizó la revisión de su solicitud de acreditación: <strong>" . $idSolicitud .
-			"<br><br></strong>Para verificar la totalidad de los requisitos establecidos en la normatividad vigente es necesario complementar la información presentada.
-			<br>Le invitamos a ingresar al aplicativo SIIA, donde encontrará las observaciones respectivas en cada parte del formulario y desarrollar lo indicado en cada una de ellas.
-			<br>Tenga presente que usted cuenta con un plazo máximo de cinco (5) días hábiles para realizar los ajustes sugeridos y enviar nuevamente la información. 
-			<br>De lo contrario su solicitud será archivada aplicando lo establecido en el numeral 4 del artículo 5 de la Resolución 110 de 2016</p>";
 			$response = array('status' => "success", 'title' => $subject,'msg' =>  "Se han enviado las observaciones a <strong>" . $organizacion->nombreOrganizacion . "</strong>. Se envío notificación al correo  <strong>" . $organizacion->direccionCorreoElectronicoOrganizacion . "</strong>");
 			break;
 		case 'cambioEstadoSolicitud':

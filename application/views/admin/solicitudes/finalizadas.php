@@ -7,7 +7,6 @@
  */
 ?>
 <!-- Solicitudes a evaluar-->
-
 <div class="col-md-12" id="admin_ver_finalizadas">
 	<div class="clearfix"></div>
 	<hr />
@@ -56,7 +55,6 @@
 		<button class="btn btn-danger btn-sm pull-left" id="admin_ver_org_volver"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
 	</div>
 </div>
-
 <div class="clearfix"></div>
 <!-- Registro de observaciones por formulario -->
 <div class="container" id="admin_panel_ver_finalizada">

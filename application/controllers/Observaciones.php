@@ -68,6 +68,7 @@ class Observaciones extends CI_Controller
 	{
 		$this->datosSession();
 		$idSolicitud = $this->input->post('idSolicitud');
+		$observaciones = $this->ObservacionesModel->getObservacionesInvalidas($idSolicitud);
 		$solicitud = $this->SolicitudesModel->solicitudes($idSolicitud);
 		$organizacion = $this->OrganizacionesModel->getOrganizacion($this->input->post('id_organizacion'));
 		$usuario = $this->UsuariosModel->getUsuarios($organizacion->usuarios_id_usuario);

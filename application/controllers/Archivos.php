@@ -10,9 +10,10 @@ class Archivos extends CI_Controller
 		parent::__construct();
 		verify_session();
 		$this->load->model('ArchivosModel');
+		$this->load->model('OrganizacionesModel');
 	}
     /**
-     * Crear archivos
+     * Crear archivo
      */
     public function create () {
         // Traer datos organizaciones
@@ -25,7 +26,9 @@ class Archivos extends CI_Controller
             'nombre' => $this->input->post('append_name') . "_" . random(10) . "_" . $file['name'],
             'id_formulario' => $this->input->post('id_form'),
             'id_registro' => $this->input->post('idSolicitud'),
-            'organizaciones_id_organizacion' => $organizacion->id_organizacion
+            'organizaciones_id_organizacion' => $organizacion->id_organizacion,
+            'fechaCreacion' => date('Y/m/d H:i:s'),
+            'activo' => 1
         );
         // Crear y cargar archivo
         $fileCreated = create_file($file, $metadata);
@@ -81,7 +84,9 @@ class Archivos extends CI_Controller
 								'nombre' => $append_name . "_" . $randomIni . $randomFinal . "_" . $_FILES['file']['name'][$i],
 								'id_formulario' => 1,
 								'id_registro' => $this->input->post('idSolicitud'),
-								'organizaciones_id_organizacion' => $organizacion->id_organizacion
+								'organizaciones_id_organizacion' => $organizacion->id_organizacion,
+								'fechaCreacion' => date('Y/m/d H:i:s'),
+								'activo' => 1
 							);
 							break;
 						case 'docenteCertificados':
@@ -125,7 +130,9 @@ class Archivos extends CI_Controller
 						'tipo' => $tipoArchivo,
 						'nombre' => $append_name . "_" . $randomIni . $randomFinal . "_" . $_FILES['file']['name'][$i],
 						'id_formulario' => 1,
-						'organizaciones_id_organizacion' => $organizacion->id_organizacion
+						'organizaciones_id_organizacion' => $organizacion->id_organizacion,
+						'fechaCreacion' => date('Y/m/d H:i:s'),
+						'activo' => 1
 					);
 					if ($this->db->insert('archivos', $data_update)):
 						if (move_uploaded_file($_FILES['file']['tmp_name'][$i], $ruta . '/' . $append_name . "_" . $randomIni . $randomFinal . "_" . $_FILES['file']['name'][$i])):
@@ -145,6 +152,23 @@ class Archivos extends CI_Controller
 		else:
 			echo json_encode(array('icon' => 'error', 'msg' => 'No se cargaron los archivos: <br/><strong><small><i>' . $msg . '</i></small></strong>'));
 		endif;
+	}
+	// Cargar archivos
+	public function cargarDatosArchivos()
+	{
+		$form = $this->input->post('id_form');
+		$organizacion = $this->OrganizacionesModel->getOrganizacionUsuario($this->session->userdata('usuario_id'));
+		$archivos = $this->ArchivosModel->getArchivos($organizacion->id_organizacion, $form);
+		echo json_encode($archivos);
+	}
+	// Revisar archivo
+	public function revisarArchivo(){
+		$data = array(
+			'activo' => $this->input->post('activo')
+		);
+		$this->db->where('id_archivo', $this->input->post('idArchivo'));
+		$this->db->update('archivos', $data);
+		echo json_encode(array('status' => "success", 'msg' => "Se cambio el estado al archivo."));
 	}
 	/**
 	 * Eliminar archivos

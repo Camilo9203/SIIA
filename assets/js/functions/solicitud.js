@@ -1863,7 +1863,7 @@ function cargarArchivos() {
 		id_form: $("#idDataForm").attr("data-form"),
 	};
 	$.ajax({
-		url: baseURL + "panel/cargarDatosArchivos",
+		url: baseURL + "Archivos/cargarDatosArchivos",
 		type: "post",
 		dataType: "JSON",
 		data: data,
@@ -1963,11 +1963,13 @@ function cargarArchivos() {
 					}
 					$("<td><small>" + nombre_r + "</small></td>").appendTo(".tabla_form > tbody");
 					$("<td>" + $tipo + "</td>").appendTo(".tabla_form > tbody");
-					$(
-						'<td><a target="_blank" href="' +
-						url +
-						response[i].nombre +
-						'"><button class="btn btn-success btn-sm">Ver <i class="fa fa-eye" aria-hidden="true"></i></button></a> - <button class="btn btn-danger btn-sm eliminar_archivo" data-id-tipo="' +
+					let archivoActivo = '';
+					if (response[i].activo == 0)
+						archivoActivo = "disabled"
+					$('<td>' +
+						'<div class="btn-group" role="group" aria-label="acciones">' +
+						'<a class="btn btn-success btn-sm" target="_blank" href="' + url + response[i].nombre + '">Ver <i class="fa fa-eye" aria-hidden="true"></i></a>' +
+						'<button class="btn btn-danger btn-sm eliminar_archivo" data-id-tipo="' +
 						response[i].tipo +
 						'" data-nombre-ar="' +
 						response[i].nombre +
@@ -1975,7 +1977,7 @@ function cargarArchivos() {
 						response[i].id_formulario +
 						'" data-id-archivo="' +
 						response[i].id_archivo +
-						'">Eliminar <i class="fa fa-trash-o" aria-hidden="true"></i></button></td>'
+						'" ' + archivoActivo + '>Eliminar <i class="fa fa-trash-o" aria-hidden="true"></i></button></div></td>'
 					).appendTo(".tabla_form > tbody");
 					$("</tr>").appendTo(".tabla_form > tbody");
 				}

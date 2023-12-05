@@ -554,15 +554,15 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 						$carpeta = baseURL + "uploads/lugarAtencion/";
 					if (data_orgFinalizada["0"].archivos[$a].tipo == "autoevaluacion")
 						$carpeta = baseURL + "uploads/autoevaluaciones/";
-
+					let fileActive = '';
+					if(data_orgFinalizada["0"].archivos[$a].activo == 0)
+						fileActive = 'checked disabled';
 					$("#archivos_informacionGeneral").append(
-						"<li class='listaArchivos'><a href='" +
-						$carpeta +
-						data_orgFinalizada["0"].archivos[$a].nombre +
-						"' target='_blank'>" +
-						data_orgFinalizada["0"].archivos[$a].nombre +
-						"</a></li>"
-					);
+						"<ul><li class='listaArchivos'>" +
+						"<a href='" + $carpeta + data_orgFinalizada["0"].archivos[$a].nombre + "' target='_blank'>" +
+							data_orgFinalizada["0"].archivos[$a].nombre +
+						"</a>" +
+						" | Revisado <input class='revisarArchivo pull-right' type='checkbox' name='revisarArchivo'" + fileActive +  " data-id='" + data_orgFinalizada["0"].archivos[$a].id_archivo +"'> </li></ul>");
 				}
 			}
 			$("#archivos_informacionGeneral").append('<div class="form-group" id="documentacionLegal-observacionesGeneral' + i + '">');
@@ -728,11 +728,11 @@ if ($("#idSolicitudInfo").html() != undefined) {
 				for (var i = 0; i < response.docentes.length; i++) {
 					if (i == 0) {
 						$(".txtOrgDocen").append(
-							"<p>Para ver los documentos de los facilitadores haga click <a href='" +
+							"<p>Para ver los documentos de los facilitadores haga clic <a href='" +
 							baseURL +
 							"panelAdmin/organizaciones/docentes#organizacion:" +
 							response.organizaciones.numNIT +
-							"' target='_blank'>aquí.</a> Tambien puede ingresar al módulo de facilitadores y seleccione la organización con el número NIT: <label>" +
+							"' target='_blank'>aquí.</a> También puede ingresar al módulo de facilitadores y seleccioné la organización con el número NIT: <label>" +
 							response.organizaciones.numNIT +
 							"</label>.</label>"
 						);
@@ -933,6 +933,60 @@ $(".guardarObservacionesForm7").click(function (){
 	guardarObservacion(data);
 	$("#observacionesForm7").val('');
 });
+// Acción validar archivo
+// Acción validar observación
+$(document).on('click', '.revisarArchivo', function (){
+	if($(this).is(':checked')) {
+		let data = {
+			idArchivo: $(this).attr("data-id"),
+			activo: 0
+		};
+		let text = "¿Desea marcar como revisado el documento? <br><br> Una vez se recargue la pagína y/o se finalice el proceso de observaciones, esta acción no podrá ser revertida y el documento no podrá ser modificado ni eliminado del sistema."
+		Alert.fire({
+			title: 'Revisar documento',
+			text: text,
+			html: text,
+			icon: 'question',
+			showCancelButton: true,
+			confirmButtonText: 'Si',
+			cancelButtonText: 'No',
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.ajax({
+					url: baseURL + "Archivos/revisarArchivo",
+					type: "post",
+					dataType: "JSON",
+					data: data,
+					beforeSend: function () {
+						procesando('info', 'Cambiando estado al archivo');
+					},
+					success: function (response) {
+						procesando(response.status, response.msg)
+					},
+					error: function (ev) {
+						errorControlador(ev);
+						$(this).prop('checked', false);
+					},
+				});
+			}
+			else{
+				$(this).prop('checked', false);
+			}
+		});
+	}
+	else {
+		let data = {
+			idArchivo: $(this).attr("data-id"),
+			activo: 1
+		};
+		$.ajax({
+			url: baseURL + "Archivos/revisarArchivo",
+			type: "post",
+			dataType: "JSON",
+			data: data,
+		});
+	}
+})
 // Acción validar observación
 $(document).on('click', '.validarObservacion', function (){
 	if($(this).is(':checked')) {
@@ -944,7 +998,7 @@ $(document).on('click', '.validarObservacion', function (){
 		Alert.fire({
 			title: 'Aprobar Observación',
 			text: '¿Desea aprobar la observación? Si esta casilla esta marcada la observación no se visualizara para la organización',
-			icon: 'info',
+			icon: 'question',
 			showCancelButton: true,
 			confirmButtonText: 'Si',
 			cancelButtonText: 'No',

@@ -13,10 +13,22 @@ class ArchivosModel extends CI_Model
 			return $query->result();
 		}
 		// Traer organizaciones por ID
-		$query = $this->db->get_where('archivos', array('id_formulario' => $form, 'id_registro' => $id));
-		return $query->row();
+		//$query = $this->db->get_where('archivos', array('id_formulario' => $form, 'id_registro' => $id));
+		$query = $this->db->get_where('archivos', array('organizaciones_id_organizacion' => $id,'id_formulario' => $form));
+		return $query->result();
 	}
+	/**
+	 * Cargar archivos por organización
+	 */
+	public function getArchivosOrganizacion($id) {
 
+		if ($id === FALSE) {
+			$query = $this->db->select('*')->from('archivos')->get();
+			return $query->result();
+		}
+		$query = $this->db->get_where('archivos', array('organizaciones_id_organizacion' => $id));
+		return $query->result();
+	}
 	/**
 	 *  Comprobar extensiones de archivos
 	 */

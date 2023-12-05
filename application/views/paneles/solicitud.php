@@ -770,14 +770,14 @@
 									echo "<td>
 											<button class='btn btn-danger btn-sm eliminarJornadaActualizacion' 
 												data-id-jornada=" . $jornadasActualizacion->idSolicitud . " 
-												data-id-formulario=" . $archivoJornada->id_formulario . "
-												data-id-archivo=" . $archivoJornada->id_archivo . "
-												data-id-tipo=" . $archivoJornada->tipo . "
-												data-nombre-ar=" . $archivoJornada->nombre . ">
+												data-id-formulario=" . $archivoJornada[0]->id_formulario . "
+												data-id-archivo=" . $archivoJornada[0]->id_archivo . "
+												data-id-tipo=" . $archivoJornada[0]->tipo . "
+												data-nombre-ar=" . $archivoJornada[0]->nombre . ">
 												Eliminar 
 												<i class='fa fa-trash-o' aria-hidden='true'></i>
 											</button>
-												<a target='_blank' href='". base_url() . "uploads/jornadas/" . $archivoJornada->nombre . "'<button class='btn btn-success btn-sm'>Ver documento </button><i class='fa fa-eye' aria-hidden='true'></i></a>
+												<a target='_blank' href='". base_url() . "uploads/jornadas/" . $archivoJornada[0]->nombre . "'<button class='btn btn-success btn-sm'>Ver documento </button><i class='fa fa-eye' aria-hidden='true'></i></a>
 											</td></tr>";
 								?>
 							</tbody>
