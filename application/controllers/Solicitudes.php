@@ -545,8 +545,13 @@ class Solicitudes extends CI_Controller
 			$strFormulario1 .= "<span class='upper'>Certificaciones </span><i class='fa fa-times spanRojo' aria-hidden='true'></i><br/>";
 		if($carta == FALSE)
 			$strFormulario1 .= "<span class='upper'>Carta de solicitud </span><i class='fa fa-times spanRojo' aria-hidden='true'></i><br/>";
-		if($autoevaluacion == FALSE)
-			$strFormulario1 .= "<span class='upper'>Autoevaluación </span><i class='fa fa-times spanRojo' aria-hidden='true'></i><br/>";
+		if($this->SolicitudesModel->solicitudes($idSolicitud)->nombre == 'En Renovación'){
+			if($autoevaluacion == FALSE)
+				$strFormulario1 .= "<span class='upper'>Autoevaluación </span><i class='fa fa-times spanRojo' aria-hidden='true'></i><br/>";
+		}
+		else {
+			$autoevaluacion = TRUE;
+		}
 		/** Variables Formularios */
 		$informacionGeneral = $this->db->select("*")->from("informacionGeneral")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
 		$documentacion = $this->db->select("*")->from("documentacion")->where("idSolicitud", $idSolicitud)->get()->row();
@@ -621,11 +626,8 @@ class Solicitudes extends CI_Controller
 		 * Comprobar todos los formularios
 		 */
 		//if ($informacionGeneral == NULL || $certificacionesForm == NULL || $lugar == NULL || $carta == NULL) {
-		if ($informacionGeneral == NULL || $certificacionesForm == NULL || $carta == NULL|| $autoevaluacion == NULL) {
+		if ($informacionGeneral == NULL || $certificacionesForm == NULL || $carta == NULL || $autoevaluacion == NULL) {
 			array_push($formularios, "1. Falta el formulario de Informacion General.");
-		}
-		if(!empty($strFormulario1)) {
-			array_push($formularios, "1. Documentos por cargar: <br><br><strong><small><i>" . $strFormulario1 . "</i></small></strong>");
 		}
 		if ($documentacion == NULL) {
 			array_push($formularios, "2. Falta el formulario de Documentacion Legal.");
@@ -640,16 +642,19 @@ class Solicitudes extends CI_Controller
 			array_push($formularios, "4. Falta el formulario de Datos Basicos Programas.");
 		}
 		if ($docentes == NULL || count($docentes) < 3) {
-			array_push($formularios, "5. Faltan facilitadores y/o archivos, deben ser tres (3) con sus respectivos documentos.");
+			array_push($formularios, "5. Faltan facilitadores y/o archivos, deben ser tres (3) con sus respectivos documentos. <hr>");
 		}
 		if (($modalidadSolicitud == "Virtual" || $modalidadSolicitud == "Presencial, Virtual" || $modalidadSolicitud == "Presencial, Virtual, En Linea"  || $modalidadSolicitud == "Virtual, En Linea") && $aplicacion == NULL) {
 			array_push($formularios, "6. Falta el formulario de Ingreso a la Plataforma Virtual.");
 		}
 		if (($modalidadSolicitud == "En Linea" || $modalidadSolicitud == "Presencial, En Linea" || $modalidadSolicitud == "Presencial, Virtual, En Linea"  || $modalidadSolicitud == "Virtual, En Linea") && $datosEnLinea == NULL) {
-			array_push($formularios, "7. Falta el formulario de datos modalidad en linea.");
+			array_push($formularios, "7. Falta el formulario de datos modalidad en linea.<hr>");
+		}
+		if(!empty($strFormulario1)) {
+			array_push($formularios, "1. Formulario <strong>Información General</strong> | Documentos por cargar: <br><br><strong><small><i>" . $strFormulario1 . "</i></small></strong>");
 		}
 		if(!empty($strDocentes)) {
-			array_push($formularios, "5. <strong>Facilitadores:</strong> - Realice las siguientes acciones:<br><br><strong><small><i>" . $strDocentes . "</i></small></strong>");
+			array_push($formularios, "5. <strong>Facilitadores</strong> | Realice las siguientes acciones:<br><br><strong><small><i>" . $strDocentes . "</i></small></strong>");
 		}
 		return $formularios;
 	}
