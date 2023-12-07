@@ -315,7 +315,7 @@ $("#verDatPlatMenuAdmin").click(function () {
 			}
 			console.log(response.observaciones);
 			$(".tabla_datos_plataforma").html(html);
-			verObservaciones(5);
+			verObservaciones(6);
 		}
 	});
 });
@@ -763,9 +763,9 @@ if ($("#idSolicitudInfo").html() != undefined) {
  * Terminar proceso de observación
  * */
 $(document).on("click", "#terminar_proceso_observacion", function () {
-	let msg = '¿Está seguro de terminar y enviar las observaciones de la solicitud <strong>' + data_orgFinalizada["0"].tipoSolicitud['0']['idSolicitud'] + '</strong>?. ' +
-			'<br><br>Esto cambiará el estado de la solicitud y ahora tendrá que ser revisada desde el modúlo <strong>complementaria</strong>.' +
-			'<br><br>Si no tiene ninguna observación sobre esta solicitud, por favor de clic en <strong>no</strong> y cambie el estado de solucitud en el modúlo <strong>estado</strong>';
+	let msg = '¿Está seguro de terminar el proceso de observación de la solicitud <strong>' + data_orgFinalizada["0"].tipoSolicitud['0']['idSolicitud'] + '</strong>?. ' +
+			'<br><br>Esto cambiará el estado de la solicitud y ahora pasará a la bandeja de <strong>complementaria</strong>.' +
+			'<br><br>Se enviará un correo a la organización.';
 	Alert.fire({
 		title: 'Enviar observaciones',
 		html: msg,
