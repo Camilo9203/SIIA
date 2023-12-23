@@ -1,4 +1,5 @@
 validarFormLogin();
+
 /** Inicio de sesión usuario. */
 $("#inicio_sesion").click(function () {
 	grecaptcha.ready(function() {
@@ -47,52 +48,44 @@ $("#inicio_sesion").click(function () {
 	});
 });
 /** Recordar contraseña usuario*/
-$("#recordar_contrasena").click(function () {
-	if ($("#formulario_recordar").valid()) {
-		var usuario = $("#nombre_usuario_rec").val();
-		var correo_electronico = $("#correo_electronico_rec").val();
-		var check = $("#acepto_cond_rec").prop("checked");
-		var response_captcha = grecaptcha.getResponse();
-
-		if (usuario.length > 0 && correo_electronico.length > 0) {
-			if (check == true) {
-				if (response_captcha != 0) {
-					var data = {
-						usuario: usuario,
-						correo_electronico: correo_electronico,
-					};
-					$.ajax({
-						url: baseURL + "recordar/recordar",
-						type: "post",
-						dataType: "JSON",
-						data: data,
-						beforeSend: function () {
-							$("#loading").show();
-							$(this).attr("disabled", true);
-						},
-						success: function (response) {
-							mensaje(response.msg, "alert-success");
-							$("#loading").toggle();
-							clearInputs("formulario_recordar");
-							grecaptcha.reset();
-						},
-						error: function (ev) {
-							//Do nothing
-						},
-					});
-				} else {
-					mensaje(texto_validacaptcha, alert_danger);
-				}
-			} else {
-				mensaje(
-					"Aceptas que eres el usuario del correo electronico?",
-					alert_warning
-				);
-			}
-		} else {
-			mensaje("No hay valores.", alert_danger);
+$("#recordar_contrasena_login").click(function () {
+	const {value: email } = Alert.fire({
+		title: "Recordar contraseña",
+		icon: "info",
+		input: "email",
+		inputLabel: "Correo electrónico organización",
+		inputPlaceholder: "Ingresa correo electrónico de la organización",
+		focusConfirm: false,
+		showCancelButton: true,
+		confirmButtonText: `Enviar &nbsp;<i class=\"fa fa-arrow-right\"></i>`,
+		allowOutsideClick: false,
+		customClass: {
+			confirmButton: 'button-swalert',
+			popup: 'popup-swalert',
+			input: 'input-swalert'
+		},
+	}).then((result) => {
+		if (result.isConfirmed) {
+			let data = {
+				correo_electronico: result.value,
+			};
+			$.ajax({
+				url: baseURL + "recordar/recordar",
+				type: "post",
+				dataType: "JSON",
+				data: data,
+				beforeSend: function () {
+					procesando("info", 'Enviando datos')
+				},
+				success: function (response) {
+					alertaProceso(response.title, response.msg, response.status)
+				},
+				error: function (ev) {
+					errorControlador(ev);
+				},
+			});
 		}
-	}
+	});
 });
 /** Inicio de sesión administrador. */
 $("#inicio_sesion_admin").click(function () {
@@ -226,5 +219,34 @@ function alertaErrorIngresar(msg, status){
 		title: '!',
 		text: msg,
 		icon: status,
+	})
+}
+function procesando(status, msg){
+	Toast.fire({
+		icon: status,
+		text: msg
+	});
+}
+// Alerta de formulario guardado
+function alertaProceso(title, msg, status){
+	Alert.fire({
+		title: title,
+		html: msg,
+		text: msg,
+		icon: status,
+	})
+}
+// Error 505
+function errorControlador(ev){
+	Alert.fire({
+		title: ev.statusText,
+		html: ev.responseText,
+		text: ev.responseText,
+		icon: 'error',
+		allowOutsideClick: false,
+		customClass: {
+			popup: 'popup-swalert-list',
+			confirmButton: 'button-swalert',
+		},
 	})
 }

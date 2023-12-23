@@ -140,6 +140,23 @@ function send_email_user($to, $type, $organizacion, $usuario = null, $token = nu
 						<a target="_blank" style="font-family: Arial, sans-serif; background: #0071b9; color:white; display: inline-block; text-decoration: none; line-height:40px; font-size: 18px; width:200px; box-shadow: 2px 3px #e2e2e2; font-weight: bold;" href='. base_url() . 'activate/?tk:' . $token . ':' . $usuario . '>Activar mi cuenta</a>';
 			$response = array('status' => 'success', 'title' => 'Cuenta registrada', 'msg' => "Se envío un correo a: <strong> " . $to . "</strong>, por favor verifíquelo para activar su cuenta.");
 			break;
+		case 'RecordarContraseña':
+			$subject = 'Datos de la Cuenta';
+			$message = '<table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
+						<tr><td align="center" valign="top">
+						<strong><label>Correo de contacto:</label></strong>
+						<p>' . $to . '</p>
+						<strong><label>Nombre de usuario:</label></strong>
+						<p>' . $usuario->usuario . '</p>
+						<strong><label>Contraseña:</label></strong>
+						<p>' . $token . '</p>
+						<p>&nbsp;</p
+						<small>Por favor, tenga en cuenta que su usuario y contraseña son <strong>privados</strong> no comparta esta información.</small>
+						</td>
+						</tr>
+						</table>';
+			$response = array('status' => 'success', 'title' => 'Correo enviado', 'msg' => "Se envío un correo a: <strong> " . $to . "</strong>, con los datos de inicio de sesión.");
+			break;
 		case 'crearSolicitud':
 			$subject = "Inicia el diligenciamiento de la solicitud";
 			$message = "Organización " . $organizacion->nombreOrganizacion . ": Unidad Solidaria le informa que ha iniciado el diligenciamiento de su solicitud de acreditación con ID: " . $idSolicitud . "
@@ -276,7 +293,6 @@ function save_log_email($to, $subject, $msg, $type, $error, $response = null) {
 		endif;
 	endif;
 }
-
 ?>
 
 

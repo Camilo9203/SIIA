@@ -5,6 +5,8 @@ class Recordar extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
+		$this->load->model('OrganizacionesModel');
+		$this->load->model('UsuariosModel');
 		date_default_timezone_set("America/Bogota");
 	}
 
@@ -22,71 +24,27 @@ class Recordar extends CI_Controller {
 	**/
 	public function recordar()
 	{
-		$this->form_validation->set_rules('usuario','','trim|required|min_length[3]|xss_clean');
-    	$this->form_validation->set_rules('correo_electronico','','trim|required|min_length[3]|valid_email|xss_clean');
+		$fromSIA = "Unidad Solidaria - Aplicación SIIA.";
+		$organizacion = $this->OrganizacionesModel->getOrganizacionEmail($this->input->post('correo_electronico'));
+		$usuario = $this->UsuariosModel->getUsuarios($organizacion->usuarios_id_usuario);
+		$this->logs_sia->logQueries();
 
-    	if ($this->form_validation->run("formulario_registro") == FALSE)
-		{
-			echo json_encode(array('url'=>"login", 'msg'=>"Verifique los datos, no son validos."));
-		}
-		else
-		{
-			$fromSIA = "Unidad Solidaria - Aplicación SIIA.";
-			$usuario = $this->input->post('usuario');
-			$correo_electronico =  $this->input->post('correo_electronico');
-
-			$datos_usuario = $this->db->select('*')->from('usuarios')->where('usuario', $usuario)->get()->row();
-			$datos_registro = $this->db->select('*')->from('organizaciones')->where('direccionCorreoElectronicoOrganizacion', $correo_electronico)->get()->row();
-			$this->logs_sia->logQueries();
-
-			if($datos_usuario == "NULL" || $datos_usuario == NULL || $datos_usuario == null && $datos_registro == "NULL" || $datos_registro == NULL || $datos_registro == null){
-				$user_exist = false;
-			}else{
-				$user_exist = true;
-			}
-
-			if($user_exist == true){
-				$contrasena_rdel = $datos_usuario ->contrasena_rdel;
-				$correo_electronico = $datos_registro ->direccionCorreoElectronicoOrganizacion;
-				$nombre_usuario = $datos_usuario ->usuario;
-				$password = mc_decrypt($contrasena_rdel, KEY_RDEL);
-				$this->enviomail_recodar(CORREO_SIA, "$fromSIA", "$correo_electronico", "$password", "$nombre_usuario");
-				$this->logs_sia->logs('REMEMBER_PASSWORD');
-				$this->logs_sia->logs('URL_TYPE');
-			}else{
-				echo json_encode(array('url'=>"login", 'msg'=>"No existe el usuario."));
-				$this->logs_sia->logs('URL_TYPE');
-			}
-		}
-	}
-
-	/**
-		Funcion para enviar un correo electronico.
-		@param from = De quien lo envia.
-		@param from_name = Para quien se envia.
-		@param to = A que correo se envia.
-		@param contrasena = Constraseña del usuario descencriptada.
-		@param nombre_usuario = Nombre de usuario del usuario.
-	**/
-	function enviomail_recodar($from, $from_name, $to, $contrasena, $nombre_usuario){
-		$this->email->from($from, "Acreditaciones");
-		$this->email->to($to);
-		$this->email->subject('SIIA - Recordar Contraseña.');
-
-		$data_msg['to'] = $to;
-		$data_msg['nombre_usuario'] = $nombre_usuario;
-		$data_msg['contrasena'] = $contrasena;
-
-		$email_view = $this->load->view('email/recordar_contrasena', $data_msg, true);
-
-		$this->email->message($email_view);
-
-		if($this->email->send()){
-			echo json_encode(array('url'=>"", 'msg'=>"Se envio un correo, por favor verifiquelo."));
+		if($usuario == "NULL" || $usuario == NULL || $usuario == null && $organizacion == "NULL" || $organizacion == NULL || $organizacion == null){
+			$user_exist = false;
 		}else{
-			$error = $this->email->print_debugger();
-			echo json_encode(array('url'=>"login", 'msg'=>"Lo sentimos, hubo un error y no se envio el correo." . $error));
+			$user_exist = true;
 		}
+		if($user_exist == true){
+			$contrasena_rdel = $usuario ->contrasena_rdel;
+			$password = mc_decrypt($contrasena_rdel, KEY_RDEL);
+			send_email_user($organizacion->direccionCorreoElectronicoOrganizacion, 'RecordarContraseña', $organizacion, $usuario, $password, null);
+			$this->logs_sia->logs('REMEMBER_PASSWORD');
+			$this->logs_sia->logs('URL_TYPE');
+		}else{
+			echo json_encode(array('url'=>"login", 'msg'=>"No existe el usuario."));
+			$this->logs_sia->logs('URL_TYPE');
+		}
+
 	}
 
 	public function recordarToUser(){
