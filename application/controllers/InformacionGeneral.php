@@ -79,6 +79,7 @@ class InformacionGeneral extends CI_Controller
                 }
                 else {
                     $this->db->insert('informacionGeneral', $data_informacion_general);
+                    $this->db->where('id_organizacion', $organizacion->id_organizacion);
                     $this->db->update('organizaciones', $data_organizacion);
                     echo json_encode(array('msg' => "Se guardo la Información General.", 'status' => 'success'));
                     $this->logs_sia->session_log('Formulario Creación Información General');
