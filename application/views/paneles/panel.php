@@ -275,7 +275,13 @@ $CI->load->model("ResolucionesModel");
 									Resolución <i class='fa fa-eye' aria-hidden='true'></i>
 								</a>
 								<!-- TODO: Terminar, agregar dos mes a la fecha final y no permitir renovar si se pasa de esa fecha -->
-								<?php if(date_create($resolucion->fechaResolucionFinal) < date_create(date('Y-m-d')) && $solicitud->nombre == 'Acreditado'): ?>
+								<?php
+									$fechaActual = new DateTime();
+									$fechaFinResolucion = new DateTime($resolucion->fechaResolucionFinal);
+									$diferencia = $fechaFinResolucion->diff($fechaActual)->days;
+									//$date =	strtotime('-1 month', strtotime($resolucion->fechaResolucionFinal));
+									//$date = date('Y-m-d', $date);
+									if($diferencia <= 30 && $solicitud->nombre == 'Acreditado'): ?>
 								<button type='button' class='btn btn-success btn-sm renovarSolicitud' data-id='<?= $solicitud->idSolicitud ?>' title='Continuar Solicitud'>
 									Renovar <i class='fa fa-check' aria-hidden='true'></i>
 								</button>
