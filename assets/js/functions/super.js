@@ -709,8 +709,7 @@ function ValidarFormularioAdministradores () {
 			},
 			password: {
 				required: true,
-				minlength: 8,
-				regex: "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?)(?=.*?[#?!@$%^&*-]).{8,10}$",
+				regex: "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?)(?=.*?[#?!@$%^&*-]).{8,}$",
 			},
 			estado_usuario: {
 				required: true,
@@ -731,9 +730,15 @@ function ValidarFormularioAdministradores () {
 			},
 			password: {
 				required: "Por favor, escriba la Contraseña.",
-				minlength: "La Contraseña debe tener mínimo 8 caracteres.",
 				regex:
-					"Debe tener mínimo 8 y máximo 10 caracteres, al menos una mayúscula, una minúscula, un número, y un cáracter especial (#?!@$%^&*-).",
+					"La contraseña debe cumplir con los siguientes requisitos: <br><br>" +
+					"<ul>" +
+					"<li>Al menos <strong>un número</strong>.</li>" +
+					"<li>Al menos <strong>una mayúscula</strong>.</li>" +
+					"<li>Al menos <strong>letras minúsculas</strong>.</li>" +
+					"<li>Al menos <strong>un cáracter especial (#?!@$%^&*-)</strong>.</li>" +
+					"<li>Una longitud mínima de <strong>8 caracteres</strong> sin límite máximo.</li>" +
+					"</ul>",
 			},
 			estado_usuario: {
 				required: "Ingrese estado.",

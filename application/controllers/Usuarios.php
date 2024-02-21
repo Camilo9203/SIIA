@@ -74,7 +74,7 @@ class Usuarios extends CI_Controller
 		}
 	}
 	/**
-	 * Actualizar datos administrador
+	 * Actualizar datos usuarios
 	 */
 	public function update(){
 		$id = $this->input->post('id');

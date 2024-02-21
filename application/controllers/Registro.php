@@ -103,8 +103,6 @@ class Registro extends CI_Controller
 				/** Capturar Data Tabla Usuario */
 				$data_registro_user = array(
 					'usuario' => $this->input->post('nombre_usuario'),
-					'contrasena' => $this->input->post('password'),
-					'contrasena_rdel'=> $this->input->post('password'),
 					'contrasena' => generate_hash($this->input->post('password')),
 					'contrasena_rdel' => mc_encrypt($this->input->post('password'), KEY_RDEL),
 					'logged_in' => 0,
