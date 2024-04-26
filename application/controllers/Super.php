@@ -71,10 +71,12 @@ class Super extends CI_Controller {
 			'logged_in' => $this->session->userdata('logged_in'),
 			'title' => 'SUPER',
 			'tipo_usuario' => $this->session->userdata('type_user'),
+			'usuario_id' => 666,
 			'hora' => date("H:i", time()),
 			'fecha' => date('Y/m/d'),
 			'activeLink' => 'super',
 			'administradores' => $this->AdministradoresModel->getAdministradores(),
+			'organizaciones' => $this->OrganizacionesModel->getOrganizaciones(),
 			'usuarios' => $this->UsuariosModel->getUsuariosSuperAdmin()
 		);
 		return $data;

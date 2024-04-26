@@ -606,6 +606,149 @@ $("#super_cerrar_sesion").click(function () {
 
 });
 /**
+ * Crear solicitud de acreditación
+ */
+$("#btn_crear_solicitud_sp").click(function () {
+	if ($("#crear_solicitud_sp").valid()) {
+		// Declaración de variables
+		let motivos_solicitud = [];
+		let motivo_solicitud = '';
+		let modalidad_solicitud = '';
+		let modalidades_solicitud = [];
+		let seleccionModalidad = 0;
+		let seleccionMotivo = 0;
+		// Recorrer motivos de la solicitud y guardar variables
+		$("#crear_solicitud_sp input[name=motivos]").each(function (){
+			if (this.checked){
+				switch ($(this).val()) {
+					case '1':
+						motivo_solicitud += 'Acreditación Curso Básico de Economía Solidaria' + ', ';
+						break;
+					case '2':
+						motivo_solicitud += 'Aval de Trabajo Asociado' + ', ';
+						break;
+					case '3':
+						motivo_solicitud += 'Acreditación Curso Medio de Economía Solidaria' + ', ';
+						break;
+					case '4':
+						motivo_solicitud += 'Acreditación Curso Avanzado de Economía Solidaria' + ', ';
+						break;
+					case '5':
+						motivo_solicitud += 'Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria' + ', ';
+						break;
+					default:
+				}
+				motivos_solicitud.push($(this).val());
+			}
+		});
+		// Recorrer motivos de la solicitud y guardar variables
+		$("#crear_solicitud_sp input[name=modalidades]").each(function (){
+			if (this.checked){
+				switch ($(this).val()) {
+					case '1':
+						modalidad_solicitud += 'Presencial' + ', ';
+						break;
+					case '2':
+						modalidad_solicitud += 'Virtual' + ', ';
+						break;
+					case '3':
+						modalidad_solicitud += 'En Linea' + ', ';
+						break;
+					default:
+				}
+				modalidades_solicitud.push($(this).val());
+			}
+		});
+		// Contar la cantidad de motivos y solicitudes
+		$('input[name=modalidades]:checked').each(function() {
+			seleccionModalidad += 1;
+		});
+		$('input[name=motivos]:checked').each(function() {
+			seleccionMotivo += 1;
+		});
+		// Comprobar que si se seleccione algún motivo y/o modalidad
+		if (seleccionMotivo == '') {
+			Toast.fire({
+				icon: 'error',
+				title: 'Seleccione al menos un motivo'
+			});
+		}
+		else if (seleccionModalidad == 0){
+			Toast.fire({
+				icon: 'error',
+				title: 'Seleccione al menos una modalidad'
+			});
+		}
+		else {
+			// Datos a enviar
+			let data = {
+				nit_organizacion: $("#nit-organizacion").val(),
+				tipo_solicitud: $("input:radio[name=tipos]:checked").val(),
+				motivo_solicitud: motivo_solicitud.substring(0, motivo_solicitud.length -2),
+				modalidad_solicitud: modalidad_solicitud.substring(0, modalidad_solicitud.length -2),
+				motivos_solicitud: motivos_solicitud,
+				modalidades_solicitud: modalidades_solicitud
+			};
+			//Si la data es validada se envía al controlador para guardar con ajax
+			$.ajax({
+				url: baseURL + "Solicitudes/crearSolicitud",
+				type: "post",
+				dataType: "JSON",
+				data: data,
+				beforeSend: function () {
+					Toast.fire({
+						icon: 'info',
+						title: 'Guardando Información'
+					});
+				},
+				success: function (response) {
+					console.log(response)
+					if(response.status == 'success'){
+						Alert.fire({
+							title: response.title,
+							html: "Se créo nueva solicitud:<strong>" + response.id + "</strong>",
+							icon: response.status,
+							allowOutsideClick: false,
+						}).then((result) => {
+							if (result.isConfirmed) {
+								setInterval(function () {
+									reload();
+								}, 1000);
+							}
+						})
+					}
+					else if(response.status = 'error'){
+						Alert.fire({
+							title: response.title,
+							html: response.msg,
+							text: response.msg,
+							icon: response.status,
+							allowOutsideClick: false,
+							customClass: {
+								popup: 'popup-swalert-list',
+								confirmButton: 'button-swalert',
+							},
+						})
+					}
+				},
+				error: function (ev) {
+					Alert.fire({
+						title: ev.statusText,
+						html: ev.responseText,
+						text: ev.responseText,
+						icon: 'error',
+						allowOutsideClick: false,
+						customClass: {
+							popup: 'popup-swalert-list',
+							confirmButton: 'button-swalert',
+						},
+					})
+				},
+			});
+		}
+	}
+});
+/**
  * Enviar Datos Organización
  * @param data
  * @constructor

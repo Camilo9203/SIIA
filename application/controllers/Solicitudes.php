@@ -156,23 +156,37 @@ class Solicitudes extends CI_Controller
 		$this->datosSesionUsuario();
 		if ($this->input->post()) {
 			$estado = 'En Proceso';
-			$usuario_id = $this->session->userdata('usuario_id');
-			$organizacion = $this->OrganizacionesModel->getOrganizacionUsuario($this->session->userdata('usuario_id'));
+			// Comprobar si la solicitud se crea desde el super administrador o desde el usuario
+			if($this->input->post('nit_organizacion')):
+				$organizacion = $this->OrganizacionesModel->getOrganizaciones($this->input->post('nit_organizacion'));
+			else:
+				$organizacion = $this->OrganizacionesModel->getOrganizacionUsuario($this->session->userdata('usuario_id'));
+			endif;
 			$solicitudes = $this->SolicitudesModel->getSolicitudesOrganizacion($organizacion->id_organizacion);
-			$comprobarSolicitud = $this->comprobarSolicitud($solicitudes, $this->input->post('motivos_solicitud'), $this->input->post('modalidades_solicitud'));
+			// Comprobar si la solicitud se crea desde el super administrador o desde el usuario
+			if($this->input->post('nit_organizacion')):
+				$comprobarSolicitud = 'true';
+			else:
+				$comprobarSolicitud = $this->comprobarSolicitud($solicitudes, $this->input->post('motivos_solicitud'), $this->input->post('modalidades_solicitud'));
+			endif;
 			if ($comprobarSolicitud == 'true'):
 				$idSolicitud = date('YmdHis') . $organizacion->nombreOrganizacion[3] . random(2);
 				$numeroSolicitudes = count($solicitudes);
-				// Comprobar y asignar estado a la solicitud
-				if($numeroSolicitudes > 0):
-					if($organizacion->estado == "Acreditado"):
-						$estado = 'En Renovación';
-						$tipoSolicitud = "Renovación de Acreditación";
-					else:
-						$tipoSolicitud = 'Solicitud Nueva';
-					endif;
+				// Comprobar si la solicitud se crea desde el super administrador o desde el usuario
+				if($this->input->post('tipo_solicitud')):
+					$tipoSolicitud = $this->input->post('tipo_solicitud');
 				else:
-					$tipoSolicitud = 'Acreditación Primera vez';
+					// Comprobar y asignar estado a la solicitud
+					if($numeroSolicitudes > 0):
+						if($organizacion->estado == "Acreditado"):
+							$estado = 'En Renovación';
+							$tipoSolicitud = "Renovación de Acreditación";
+						else:
+							$tipoSolicitud = 'Solicitud Nueva';
+						endif;
+					else:
+						$tipoSolicitud = 'Acreditación Primera vez';
+					endif;
 				endif;
 				// Datos para crear solicitud
 				$data_solicitud = array(
@@ -206,7 +220,9 @@ class Solicitudes extends CI_Controller
 				if($this->db->insert('solicitudes', $data_solicitud)):
 					if($this->db->insert('tipoSolicitud', $data_tipoSolicitud)):
 						if($this->db->insert('estadoOrganizaciones', $data_estado)):
-							$this->logs_sia->session_log('Formulario Motivo Solicitud - Tipo Solicitud: ' . '. Motivo Solicitud: ' . $this->input->post('motivo_solicitud') . '. Modalidad Solicitud: ' . $this->input->post('modalidad_solicitud') . '. ID: ' . $idSolicitud . '. Fecha: ' . date('Y/m/d') . '.');
+							// Comprobar si lo hace el super
+							if(!$this->input->post('nit_organizacion'))
+								$this->logs_sia->session_log('Formulario Motivo Solicitud - Tipo Solicitud: ' . '. Motivo Solicitud: ' . $this->input->post('motivo_solicitud') . '. Modalidad Solicitud: ' . $this->input->post('modalidad_solicitud') . '. ID: ' . $idSolicitud . '. Fecha: ' . date('Y/m/d') . '.');
 							$this->logs_sia->logQueries();
 							send_email_user($organizacion->direccionCorreoElectronicoOrganizacion, 'crearSolicitud', $organizacion, null, null, $idSolicitud);
 						endif;

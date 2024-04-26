@@ -14,6 +14,17 @@ class Admin extends CI_Controller
 		$this->load->model('OrganizacionesModel');
 		//$this->load->model('ResolucionesModel');
 	}
+	// Función para la creación de idSolicitud
+	private function createIDSolicitud($nit)
+	{
+		$organizacion = $this->OrganizacionesModel->getOrganizaciones($nit);
+		if($organizacion != null):
+			$idSolicitud = date('YmdHis') . $organizacion->nombreOrganizacion[3] . random(2);
+			echo $idSolicitud;
+		else:
+			echo 'La organización no esta registrada, por favor verificar el NIT';
+		endif;
+	}
 	// Funciones de actualización contraseñas
 	private function mcdec()
 	{
