@@ -167,7 +167,7 @@ $CI->load->model("TokenModel");
 			<div class="modal-body">
 				<div class="container-fluid">
 					<div class="row">
-						<?php echo form_open('', array('id' => 'formulario_super_administradores')); ?>
+						<?= form_open('', array('id' => 'formulario_super_administradores')); ?>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Primer Nombre:</label>
@@ -205,6 +205,7 @@ $CI->load->model("TokenModel");
 										<option value="4">Histórico 4</option>
 										<option value="5">Seguimientos 5</option>
 										<option value="6">Asignación 6</option>
+										<option value="7">Atención al ciudadano 7</option>
 									</select>
 								</div>
 								<div class="form-group">
@@ -220,7 +221,7 @@ $CI->load->model("TokenModel");
 									<input type="text" id="super_correo_electronico_admin" name="super_correo_electronico_admin" class="form-control" name="" value="">
 								</div>
 							</div>
-						<?php echo form_close(); ?>
+						<?= form_close(); ?>
 					</div>
 				</div>
 			</div>

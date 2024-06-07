@@ -193,103 +193,121 @@ $(document).ready(function () {
 		// 0 tot - 1 ev - 2 rep - 3 cam - 4 hist - 5 seg - 6 asignar
 		$nivel = $("#data_logg").attr("nvl");
 		console.log($("#data_logg").attr("nvl"));
-		if ($nivel == 0) {
-			/** No hay nada que hacer aquí. **/
-		} else if ($nivel == 1) {
-			$("#adjCamara").remove();
-			$(".cambiar_img_hd").remove();
-			$("#asigOrg").remove();
-			// Docentes
-			$("#asigDocentes").remove();
-		} else if ($nivel == 2) {
-			$(".admin_informeActividades").remove();
-			$(".admin_historico").remove();
-			$(".admin_seguimiento").remove();
-			$(".datos_abiertos").remove();
-			$(".admin_contacto").remove();
-			$(".admin_opciones_sis").remove();
-			//Organizaciones
-			$("#adjResolucion").remove();
-			$("#camEstOrg").remove();
-			$("#verOrgObs").remove();
-			$("#adjCamara").remove();
-			$(".cambiar_img_hd").remove();
-			$(".guardarValidoDocente").remove();
-			$("#verModTermObs").remove();
-			$("#asigOrg").remove();
-			// Docentes
-			$("#asigDocentes").remove();
-		} else if ($nivel == 3) {
-			//Principal
-			$(".admin_informeActividades").remove();
-			$(".admin_historico").remove();
-			$(".admin_seguimiento").remove();
-			$(".datos_abiertos").remove();
-			$(".admin_contacto").remove();
-			$(".admin_opciones_sis").remove();
-			//Organizaciones
-			$("#adjResolucion").remove();
-			$("#camEstOrg").remove();
-			$("#verFacili").remove();
-			$(".admin_verorganizaciones_docentes").remove();
-			$("#verOrgObs").remove();
-			$(".admin_organizaciones_enproceso").remove();
-			$(".admin_organizaciones_inscritas").remove();
-			$(".cambiar_img_hd").remove();
-			$("#asigOrg").remove();
-			// Docentes
-			$("#asigDocentes").remove();
-		} else if ($nivel == 4) {
-			//Principal
-			$(".admin_informeActividades").remove();
-			$(".admin_seguimiento").remove();
-			$(".datos_abiertos").remove();
-			$(".admin_contacto").remove();
-			$(".admin_opciones_sis").remove();
-			//Organizaciones
-			$("#adjResolucion").remove();
-			$("#camEstOrg").remove();
-			$("#verOrgObs").remove();
-			$("#verFacili").remove();
-			$("#adjCamara").remove();
-			$(".cambiar_img_hd").remove();
-			$(".guardarValidoDocente").remove();
-			$("#verModTermObs").remove();
-			$("#asigOrg").remove();
-			// Docentes
-			$("#asigDocentes").remove();
-		} else if ($nivel == 5) {
-			//Principal
-			$(".admin_informeActividades").remove();
-			$(".datos_abiertos").remove();
-			//$(".admin_historico").remove();
-			$(".admin_contacto").remove();
-			$(".admin_opciones_sis").remove();
-			//Organizaciones
-			$("#adjResolucion").remove();
-			$("#camEstOrg").remove();
-			$(".admin_verorganizaciones_docentes").remove();
-			$(".admin_organizaciones_finalizadas").remove();
-			$(".admin_organizaciones_enproceso").remove();
-			$(".admin_organizaciones_inscritas").remove();
-			$(".admin_camaracomercio").remove();
-			$(".cambiar_img_hd").remove();
-			$("#asigOrg").remove();
-			// Docentes
-			$("#asigDocentes").remove();
-		} else if ($nivel == 6) {
-			/** No hay nada que hacer aquí. **/
-		} else {
-			/** No hay nada que hacer aquí. **/
-		}
-	} else {
-		/** No hay nada que hacer aquí. **/
-	}
+		switch ($nivel) {
+			case "0": // Total
+				/** No hay nada que hacer aquí. **/
+				break;
+			case "1": // Evaluador
+				$("#adjCamara").remove();
+				$(".cambiar_img_hd").remove();
+				$("#asigOrg").remove();
+				// Docentes
+				$("#asigDocentes").remove();
+				break;
+			case "2": // Reportes
+				$(".admin_informeActividades").remove();
+				$(".admin_historico").remove();
+				$(".admin_seguimiento").remove();
+				$(".datos_abiertos").remove();
+				$(".admin_contacto").remove();
+				$(".admin_opciones_sis").remove();
+				//Organizaciones
+				$("#adjResolucion").remove();
+				$("#camEstOrg").remove();
+				$("#verOrgObs").remove();
+				$("#adjCamara").remove();
+				$(".cambiar_img_hd").remove();
+				$(".guardarValidoDocente").remove();
+				$("#verModTermObs").remove();
+				$("#asigOrg").remove();
+				// Docentes
+				$("#asigDocentes").remove();
+				break;
+			case "3": // Cámaras
+				//Principal
+				$(".admin_informeActividades").remove();
+				$(".admin_historico").remove();
+				$(".admin_seguimiento").remove();
+				$(".datos_abiertos").remove();
+				$(".admin_contacto").remove();
+				$(".admin_opciones_sis").remove();
+				//Organizaciones
+				$("#adjResolucion").remove();
+				$("#camEstOrg").remove();
+				$("#verFacili").remove();
+				$(".admin_verorganizaciones_docentes").remove();
+				$("#verOrgObs").remove();
+				$(".admin_organizaciones_enproceso").remove();
+				$(".admin_organizaciones_inscritas").remove();
+				$(".cambiar_img_hd").remove();
+				$("#asigOrg").remove();
+				// Docentes
+				$("#asigDocentes").remove();
+				break;
+			case "4": // Histórico
+				//Principal
+				$(".admin_informeActividades").remove();
+				$(".admin_seguimiento").remove();
+				$(".datos_abiertos").remove();
+				$(".admin_contacto").remove();
+				$(".admin_opciones_sis").remove();
+				//Organizaciones
+				$("#adjResolucion").remove();
+				$("#camEstOrg").remove();
+				$("#verOrgObs").remove();
+				$("#verFacili").remove();
+				$("#adjCamara").remove();
+				$(".cambiar_img_hd").remove();
+				$(".guardarValidoDocente").remove();
+				$("#verModTermObs").remove();
+				$("#asigOrg").remove();
+				// Docentes
+				$("#asigDocentes").remove();
+				break;
+			case "5": // Seguimientos
+				//Principal
+				$(".admin_informeActividades").remove();
+				$(".datos_abiertos").remove();
+				//$(".admin_historico").remove();
+				$(".admin_contacto").remove();
+				$(".admin_opciones_sis").remove();
+				//Organizaciones
+				$("#adjResolucion").remove();
+				$("#camEstOrg").remove();
+				$(".admin_verorganizaciones_docentes").remove();
+				$(".admin_organizaciones_finalizadas").remove();
+				$(".admin_organizaciones_enproceso").remove();
+				$(".admin_organizaciones_inscritas").remove();
+				$(".admin_camaracomercio").remove();
+				$(".cambiar_img_hd").remove();
+				$("#asigOrg").remove();
+				// Docentes
+				$("#asigDocentes").remove();
+				break;
+			case "6": // Asignar
+				break;
+			case "7": // Atención al ciudadano
+				// Panel admin
+				$(".admin_informeActividades").remove();
+				$(".admin_historico").remove();
+				$(".admin_seguimiento").remove();
+				$(".datos_abiertos").remove();
+				$(".admin_contacto").remove();
+				$(".admin_opciones_sis").remove();
+				$(".estadisticas").remove();
+				// Organizaciones
+				$("#operaciones_menu").remove();
+				$("#docentesEvaluar").remove();
+				$("#asigDocentes").remove();
+				$("#solicitudes_menu").remove();
+				$("#verOrgPro").remove();
+				break;
+			default:
 
-	if (
-		funcion == "panelAdmin" &&
-		(funcion_ == "contacto" || funcion_ == "modalInformacion")
-	) {
+				break;
+		}
+	}
+	if (funcion == "panelAdmin" && (funcion_ == "contacto" || funcion_ == "modalInformacion")) {
 		initCK();
 	} else {
 		/** No hay nada que hacer aquí. **/

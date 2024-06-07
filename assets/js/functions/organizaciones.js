@@ -162,7 +162,7 @@ $(".ver_organizacion_inscrita").click(function () {
 					$("#tbody_solicitudes>tr#" + i + "").append("<td>" + response.solicitudes[i].fechaCreacion + "</td>");
 					$("#tbody_solicitudes>tr#" + i + "").append("<td>" + response.solicitudes[i].asignada + "</td>");
 					$("#tbody_solicitudes>tr#" + i + "").append("<td>" + response.solicitudes[i].modalidadSolicitud + "</td>");
-					$("#tbody_solicitudes>tr#" + i + "").append("<td>" + response.solicitudes[i].motivoSolicitud + "</td>");
+					$("#tbody_solicitudes>tr#" + i + "").append("<td><textarea style='width: 300px; height: 140px; resize: none; border: hidden' readonly>" + response.solicitudes[i].motivoSolicitud + "</textarea></td>");
 					$("#tbody_solicitudes>tr#" + i + "").append("<td>" + response.solicitudes[i].tipoSolicitud + "</td>");
 					$("#tbody_solicitudes>tr#" + i + "").append("<td> <button class='btn btn-success btn-sm verSolicitudAdmin' data-id='"
 						+ response.solicitudes[i].idSolicitud

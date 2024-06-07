@@ -4,6 +4,7 @@
  * @var $municipios
  * @var $departamentos
  * @var $solicitud
+ * @var $nivel
  * @var $informacionGeneral
  * @var $documentacionLegal
  * @var $antecedentesAcademicos
@@ -13,7 +14,6 @@
  * @var $datosEnLinea
  * @var $datosProgramas
  */
-
 	/** echo '<pre>';
 	var_dump($aplicacion);
 	echo '</pre>';
@@ -39,7 +39,14 @@
 								<li class="step-no"><a data-form="5" data-form-name="equipo_docente"><span id="5" class="step_no menu-sel">5</span> Equipo de Facilitadores <i class="fa fa-users" aria-hidden="true"></i></a></li>
 								<li class="step-no" id="itemPlataforma"><a data-form="6" data-form-name="plataforma"><span id="6" class="step_no menu-sel">6</span> Datos modalidad virtual <i class="fa fa-globe" aria-hidden="true"></i></a></li>
 								<li class="step-no" id="itemEnLinea"><a data-form="7" data-form-name="en_linea"><span id="7" class="step_no menu-sel">7</span> Datos modalidad en linéa<i class="fa fa-globe" aria-hidden="true"></i></a></li>
-								<li id="act_datos_sol_org" class="step-no"><a data-form="0" data-form-name="finalizar_proceso"><span class="step_no"><i class="fa fa-check" aria-hidden="true"></i></span> Finalizar Proceso <i class="fa fa-check" aria-hidden="true"></i></a></li>
+								<?php if($nivel != '7'): ?>
+									<li id="act_datos_sol_org" class="step-no">
+										<a data-form="0" data-form-name="finalizar_proceso">
+											<span class="step_no"><i class="fa fa-check" aria-hidden="true"></i></span>
+											Finalizar Proceso <i class="fa fa-check" aria-hidden="true"></i>
+										</a>
+									</li>
+								<?php endif; ?>
 							</ul>
 						</div>
 					</div>
@@ -325,59 +332,64 @@
 						-->
                     </div>
 				<?php echo  form_close(); ?>
-				<div class="col-md-12">
-					<hr />
-					<label>Anexar Solicitud de representante legal, fotografías de lugar de atención al público y 3 certificaciones de procesos educativos realizados por la entidad solicitante.* (Solamente se admiten formatos PDF, PNG, JPG)</label>
-					<p>Anexar las certificaciones emitidas a nombre de la entidad solicitante, para verificar el requisito de experiencia y adjuntar fotografías del espacio físico de operación y atención al público.</p>
-					<!-- Carta de solicitud -->
-					<div class="form-group col-md-6">
-						<?php echo form_open_multipart('', array('id' => 'formulario_carta')); ?>
-                            <h4>Carta de solicitud firmada por el representante legal <small>PDF (1)</small></h4>
-                            <input type="file" required accept="application/pdf" class="form-control" data-val="carta" name="carta" id="carta">
-                            <a type="submit" class="btn btn-siia btn-sm archivos_form_carta fa-fa center-block" data-name="carta" data-form="1" data-solicitud="<?php echo $solicitud->idSolicitud ?>" name="cartaRep" id="cartaRep" value="Guardar archivo(s) &#xf0c7">
+				<?php if($nivel != '7'): ?>
+					<div class="col-md-12">
+						<hr />
+						<label>Anexar Solicitud de representante legal, fotografías de lugar de atención al público y 3 certificaciones de procesos educativos realizados por la entidad solicitante.* (Solamente se admiten formatos PDF, PNG, JPG)</label>
+						<p>Anexar las certificaciones emitidas a nombre de la entidad solicitante, para verificar el requisito de experiencia y adjuntar fotografías del espacio físico de operación y atención al público.</p>
+						<!-- Carta de solicitud -->
+						<div class="form-group col-md-6">
+							<?php echo form_open_multipart('', array('id' => 'formulario_carta')); ?>
+								<h4>Carta de solicitud firmada por el representante legal <small>PDF (1)</small></h4>
+								<input type="file" required accept="application/pdf" class="form-control" data-val="carta" name="carta" id="carta">
+								<a type="submit" class="btn btn-siia btn-sm archivos_form_carta fa-fa center-block" data-name="carta" data-form="1" data-solicitud="<?php echo $solicitud->idSolicitud ?>" name="cartaRep" id="cartaRep" value="Guardar archivo(s) &#xf0c7">
+									Guardar archivo(s) &#xf0c7
+								</a>
+							<?php echo form_close(); ?>
+						</div>
+						<!-- Certificaciones -->
+						<div class="form-group div_certificaciones col-md-6">
+							<?php echo form_open_multipart('', array('id' => 'formulario_certificaciones')); ?>
+								<h4>Certificaciones <small>PDF (3)</small></h4>
+								<input type="file" required accept="application/pdf" class="form-control" data-val="certificaciones" name="certificaciones[]" id="certificaciones1">
+								<input type="file" required accept="application/pdf" class="form-control" data-val="certificaciones" name="certificaciones[]" id="certificaciones2">
+								<input type="file" required accept="application/pdf" class="form-control" data-val="certificaciones" name="certificaciones[]" id="certificaciones3">
+								<a type="submit" class="btn btn-siia btn-sm archivos_form_certificacion fa-fa center-block" data-name="certificaciones" data-solicitud="<?= $solicitud->idSolicitud ?>" name="certificaciones_organizacion" id="certificaciones_organizacion">
+									Guardar archivo(s) &#xf0c7
+								</a>
+							<?php echo form_close(); ?>
+						</div>
+						<?php if($solicitud->nombre == 'En Renovación'): ?>
+						<!-- Carta de autoevaluación -->
+						<div class="form-group col-md-12">
+							<?php echo form_open_multipart('', array('id' => 'formulario_autoevaluacion')); ?>
+							<h4>Adjunte documento de autoevaluación cualitativa del desarrollo del curso para el que solicita renovación <small>PDF (1)</small></h4>
+							<input type="file" required accept="application/pdf" class="form-control" data-val="autoevaluacion" name="autoevaluacion" id="autoevaluacion">
+							<a type="submit" class="btn btn-siia btn-sm archivos_form_autoevaluacion fa-fa center-block" data-name="autoevaluacion" data-form="1" data-solicitud="<?php echo $solicitud->idSolicitud ?>" name="autoevaluacion" id="autoevaluacion" value="Guardar archivo(s) &#xf0c7">
 								Guardar archivo(s) &#xf0c7
 							</a>
-						<?php echo form_close(); ?>
+							<?php echo form_close(); ?>
+						</div>
+						<?php endif; ?>
+						<!-- Imagenes
+						<div class="form-group div_imagenes_lugar col-md-4">
+							<h4>Imagenes <small>PNG, JPG (Max:10)</small> <a id="mas_files_imagenes"><i class="fa fa-plus" aria-hidden="true"></i></a><a id="menos_files_imagenes"> <i class="fa fa-minus" aria-hidden="true"></i></a></h4>
+							<?php echo form_open_multipart('', array('id' => 'formulario_lugar')); ?>
+								<div id="div_imagenes">
+									<input type="file" required accept="image/jpeg, image/png" class="form-control" data-val="lugar" name="lugar[]" id="lugar1">
+								</div>
+								<a type="submit" class="btn btn-siia btn-sm fa-fa center-block archivos_form_lugar" data-name="lugar" name="lugar_organizacion" id="lugar_organizacion">
+									Guardar archivo(s) &#xf0c7
+								</a>
+							<?php echo form_close(); ?>
+						</div> -->
+						<div class="clearfix"></div>
+						<hr />
 					</div>
-					<!-- Certificaciones -->
-					<div class="form-group div_certificaciones col-md-6">
-						<?php echo form_open_multipart('', array('id' => 'formulario_certificaciones')); ?>
-                            <h4>Certificaciones <small>PDF (3)</small></h4>
-                            <input type="file" required accept="application/pdf" class="form-control" data-val="certificaciones" name="certificaciones[]" id="certificaciones1">
-                            <input type="file" required accept="application/pdf" class="form-control" data-val="certificaciones" name="certificaciones[]" id="certificaciones2">
-                            <input type="file" required accept="application/pdf" class="form-control" data-val="certificaciones" name="certificaciones[]" id="certificaciones3">
-                            <a type="submit" class="btn btn-siia btn-sm archivos_form_certificacion fa-fa center-block" data-name="certificaciones" data-solicitud="<?= $solicitud->idSolicitud ?>" name="certificaciones_organizacion" id="certificaciones_organizacion">
-								Guardar archivo(s) &#xf0c7
-							</a>
-						<?php echo form_close(); ?>
-					</div>
-					<?php if($solicitud->nombre == 'En Renovación'): ?>
-					<!-- Carta de autoevaluación -->
-					<div class="form-group col-md-12">
-						<?php echo form_open_multipart('', array('id' => 'formulario_autoevaluacion')); ?>
-						<h4>Adjunte documento de autoevaluación cualitativa del desarrollo del curso para el que solicita renovación <small>PDF (1)</small></h4>
-						<input type="file" required accept="application/pdf" class="form-control" data-val="autoevaluacion" name="autoevaluacion" id="autoevaluacion">
-						<a type="submit" class="btn btn-siia btn-sm archivos_form_autoevaluacion fa-fa center-block" data-name="autoevaluacion" data-form="1" data-solicitud="<?php echo $solicitud->idSolicitud ?>" name="autoevaluacion" id="autoevaluacion" value="Guardar archivo(s) &#xf0c7">
-							Guardar archivo(s) &#xf0c7
-						</a>
-						<?php echo form_close(); ?>
-					</div>
-					<?php endif; ?>
-					<!-- Imagenes
-					<div class="form-group div_imagenes_lugar col-md-4">
-						<h4>Imagenes <small>PNG, JPG (Max:10)</small> <a id="mas_files_imagenes"><i class="fa fa-plus" aria-hidden="true"></i></a><a id="menos_files_imagenes"> <i class="fa fa-minus" aria-hidden="true"></i></a></h4>
-						<?php echo form_open_multipart('', array('id' => 'formulario_lugar')); ?>
-                            <div id="div_imagenes">
-                                <input type="file" required accept="image/jpeg, image/png" class="form-control" data-val="lugar" name="lugar[]" id="lugar1">
-                            </div>
-                            <a type="submit" class="btn btn-siia btn-sm fa-fa center-block archivos_form_lugar" data-name="lugar" name="lugar_organizacion" id="lugar_organizacion">
-								Guardar archivo(s) &#xf0c7
-							</a>
-						<?php echo form_close(); ?>
-					</div> -->
-					<div class="clearfix"></div>
-					<hr />
-					<div class="table">
+					<a type="submit" class="btn btn-siia btn-md" style="width: 100%" name="guardar_formulario_informacion_general_entidad" id="guardar_formulario_informacion_general_entidad">Guardar/Actualizar/Verificar Formulario 1.<i class="fa fa-check" aria-hidden="true"></i></a>
+				<?php endif; ?>
+					<div class="table col-md-12">
+						<hr />
 						<label>Archivos:</label>
 						<a class="dataReload">Recargar <i class="fa fa-refresh" aria-hidden="true"></i></a>
 						<table id="tabla_archivos_formulario" width="100%" border=0 class="table table-striped table-bordered tabla_form">
@@ -393,8 +405,6 @@
 						</table>
 					</div>
 					<hr />
-				</div>
-				<a type="submit" class="btn btn-siia btn-md" style="width: 100%" name="guardar_formulario_informacion_general_entidad" id="guardar_formulario_informacion_general_entidad">Guardar/Actualizar/Verificar Formulario 1.<i class="fa fa-check" aria-hidden="true"></i></a>
 			</div>
 			<!-- Formulario de documentación legal 2 -->
 			<div id="documentacion_legal" data-form="2" class=" formulario_panel">
@@ -585,7 +595,10 @@
 								echo "<td>" . $documentacionLegal->departamento . "</td>";
 								echo "<td>" . $documentacionLegal->municipio . "</td>";
 								echo "<td><button class='btn btn-primary btn-sm verDocCertificadoExistencia' data-id=" . $documentacionLegal->id_certificadoExistencia . ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
-								echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosCertificadoExistencia' data-id=" . $documentacionLegal->id_certificadoExistencia . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+								if($nivel =! '7'):
+									echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosCertificadoExistencia' data-id=" . $documentacionLegal->id_certificadoExistencia . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td>";
+								endif;
+								echo '</tr>';
 								?>
 								</tbody>
 							</table>
@@ -618,7 +631,10 @@
 								echo "<td><textarea style='width: 282px; height: 110px; resize: none' readonly>" . $documentacionLegal->objetoResolucion . "</textarea></td>";
 								echo "<td>" . $documentacionLegal->entidadResolucion . "</td>";
 								echo "<td><button class='btn btn-primary btn-sm verDocRegistro' data-id=" . $documentacionLegal->id_registroEducativoPro . ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
-								echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosRegistro' data-id=" . $documentacionLegal->id_registroEducativoPro . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+								if ($nivel = !'7'):
+									echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosRegistro' data-id=" . $documentacionLegal->id_registroEducativoPro . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td>";
+								endif;
+								echo '</tr>';
 								?>
 								</tbody>
 							</table>
@@ -639,7 +655,10 @@
 								<tbody id="tbody">
 									<?php
 									echo "<tr><td>Camara de comercio </td>";
-									echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosCamaraComercio' data-id=" . $documentacionLegal->id_tipoDocumentacion . ">Deshacer <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+									if ($nivel = !'7'):
+										echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosCamaraComercio' data-id=" . $documentacionLegal->id_tipoDocumentacion . ">Deshacer <i class='fa fa-trash-o' aria-hidden='true'></i></button></td>";
+									endif;
+									echo '</tr>';
 									?>
 								</tbody>
 							</table>
@@ -767,6 +786,7 @@
 							<tbody id="tbody">
 								<?php
 									echo "<tr><td>" . $jornadasActualizacion->asistio . "</td>";
+									if ($nivel = !'7'):
 									echo "<td>
 											<button class='btn btn-danger btn-sm eliminarJornadaActualizacion' 
 												data-id-jornada=" . $jornadasActualizacion->idSolicitud . " 
@@ -778,11 +798,12 @@
 												<i class='fa fa-trash-o' aria-hidden='true'></i>
 											</button>
 												<a target='_blank' href='". base_url() . "uploads/jornadas/" . $archivoJornada[0]->nombre . "'<button class='btn btn-success btn-sm'>Ver documento </button><i class='fa fa-eye' aria-hidden='true'></i></a>
-											</td></tr>";
+											</td>";
+									endif;
+									echo '</tr>';
 								?>
 							</tbody>
 						</table>
-
 				<?php endif; ?>
 			</div>
 			<!-- Formulario de programas de educación en economía solidaria 5 - INICIO -->
@@ -870,7 +891,10 @@
 										echo "<tr><td>" . $data->nombrePrograma . "</td>";
 										echo "<td>" . $data->aceptarPrograma . "</td>";
 										echo "<td>" . $data->fecha . "</td>";
-										echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosProgramas' data-id=" . $data->id . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+										if ($nivel = !'7'):
+											echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosProgramas' data-id=" . $data->id . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td>";
+										endif;
+										echo "</tr>";
 									}
 								?>
 							</tbody>
@@ -965,7 +989,10 @@
 								echo "<tr><td>" . $aplicacion[$i]->urlAplicacion . "</td>";
 								echo "<td>" . $aplicacion[$i]->usuarioAplicacion . "</td>";
 								echo "<td>" . $aplicacion[$i]->contrasenaAplicacion . "</td>";
-								echo "<td><button class='btn btn-danger btn-sm eliminarDatosPlataforma' data-id-datosPlataforma=" . $aplicacion[$i]->id_datosAplicacion . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+								if($nivel != '7'):
+									echo "<td><button class='btn btn-danger btn-sm eliminarDatosPlataforma' data-id-datosPlataforma=" . $aplicacion[$i]->id_datosAplicacion . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td>";
+								endif;
+								echo "</tr>";
 							endfor;
 						?>
 						</tbody>
@@ -1048,7 +1075,10 @@
 								echo "<tr><td>" . $datosEnLinea[0]->nombreHerramienta . "</td>";
 								echo "<td> <textarea style='width: 282px; height: 110px; resize: none; border: hidden' ' readonly> " . $datosEnLinea[0]->descripcionHerramienta . "</textarea></td>";
 								echo "<td>" . $datosEnLinea[0]->fecha . "</td>";
-								echo "<td><button class='btn btn-danger btn-sm eliminarDatosEnlinea' data-id=" . $datosEnLinea[0]->id . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td></tr>";
+								if($nivel != '7'):
+									echo "<td><button class='btn btn-danger btn-sm eliminarDatosEnlinea' data-id=" . $datosEnLinea[0]->id . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td>";
+								endif;
+								echo '</tr>';
 							endfor; ?>
 						</tbody>
 					</table>

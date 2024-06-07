@@ -408,7 +408,7 @@ function verObservaciones(idForm) {
 							}
 						}
 						if(response.estadoOrganizaciones['nombre'] == 'Finalizado')
-							html += "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarObservacionForm eliminarDataTabla' data-id=" + response.observaciones[i]['id_observacion'] + ">Eliminar <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
+							html += "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarObservacionForm' data-id=" + response.observaciones[i]['id_observacion'] + ">Eliminar <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
 						html += "</tr>";
 					}
 				}
