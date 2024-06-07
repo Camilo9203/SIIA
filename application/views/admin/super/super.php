@@ -3,6 +3,7 @@
  * @var $administradores
  * @var $organizaciones
  * @var $usuarios
+ * @var $correos
  * @var $logged_in
  * @var $tipo_usuario
  */
@@ -10,6 +11,7 @@ $CI = &get_instance();
 $CI->load->model("AdministradoresModel");
 $CI->load->model("UsuariosModel");
 $CI->load->model("OrganizacionesModel");
+$CI->load->model("CorreosRegistroModel");
 $CI->load->model("TokenModel");
 ?>
 <?php if($logged_in == FALSE && $tipo_usuario == "none"): ?>
@@ -50,6 +52,17 @@ $CI->load->model("TokenModel");
 						</div>
 						<div class="panel-body">
 							<input type="button" class="btn btn-default btn-block" data-toggle="modal" id="super-ver-users" value="Ver Usuarios">
+						</div>
+					</div>
+				</div>
+				<!-- Botón ver log correos -->
+				<div class="col-md-3">
+					<div class="panel panel-siia">
+						<div class="panel-heading">
+							<h3 class="panel-title">Ver Log correos <i class="fa fa-send" aria-hidden="true"></i></h3>
+						</div>
+						<div class="panel-body">
+							<input type="button" class="btn btn-default btn-block" data-toggle="modal" id="super-ver-correos" value="Ver Correos">
 						</div>
 					</div>
 				</div>
@@ -149,6 +162,47 @@ $CI->load->model("TokenModel");
 							echo "<td>"; echo $CI->UsuariosModel->getConnection($usuario->logged_in); echo "</td>";
 							echo "</td>";
 							echo "<td><button class='btn btn-siia admin-usuario' data-toggle='modal' data-id='$usuario->id_usuario' data-target='#modal-user'>Ver</button></td></tr>";
+						endforeach; ?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Tabla Correos Logs -->
+	<div class="container display-4" id="super-view-correos-log">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h3 class="title">Correos Registro</h3>
+					<table id="tabla_correos_logs" width="100%" border=0 class="table table-striped table-bordered tabla_form">
+						<thead>
+						<tr>
+							<td>Fecha de envío</td>
+							<td>De</td>
+							<td>Para</td>
+							<td>Asunto</td>
+							<td>Tipo</td>
+							<td>Estado</td>
+							<td>Acciones</td>
+						</tr>
+						</thead>
+						<tbody id="tbody">
+						<?php
+						foreach ($correos as $correo):
+							echo "<td> $correo->fecha </td>";
+							echo "<td>$correo->de</td>";
+							echo "<td>$correo->para</td>";
+							echo "<td>$correo->asunto</td>";
+							echo "<td>$correo->tipo</td>";
+							if ($correo->error != "Enviado"):
+								echo "<td><span class='spanRojo'> Error de envío </span></td>";
+								echo "<td><button class='btn btn-siia ver-error-envio' data-error='$correo->error'>Ver error</button></td>";
+							else:
+								echo "<td><span class='spanVerde'> $correo->error </span></td>";
+								echo "<td><button class='btn btn-siia disabled' data-error='$correo->error'>Ver error</button></td>";
+							endif;
+							echo '</tr>';
 						endforeach; ?>
 						</tbody>
 					</table>

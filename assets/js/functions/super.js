@@ -64,8 +64,10 @@ $('#super-ver-admins').click(function () {
 	if ($('#super-view-admins').css('display') == 'none'){
 		$('#super-view-admins').show('swing');
 		$('#super-view-users').hide('linear');
+		$('#super-view-correos-log').hide('linear');
 		$('#super-ver-admins').val('Ocultar admministradores');
 		$('#super-ver-users').val('Ver usuarios');
+		$('#super-ver-correos').val('Ver correos');
 	}
 	else {
 		$('#super-view-admins').hide('linear');
@@ -77,12 +79,29 @@ $('#super-ver-users').click(function () {
 	if ($('#super-view-users').css('display') == 'none'){
 		$('#super-view-users').show('swing');
 		$('#super-view-admins').hide('linear');
+		$('#super-view-correos-log').hide('linear');
 		$('#super-ver-users').val('Ocultar usuarios');
 		$('#super-ver-admins').val('Ver admministradores');
+		$('#super-ver-correos').val('Ver correos');
 	}
 	else {
 		$('#super-view-users').hide('linear');
 		$('#super-ver-users').val('Ver usuarios');
+	}
+});
+// Ver correos logs
+$('#super-ver-correos').click(function () {
+	if ($('#super-view-correos-log').css('display') == 'none'){
+		$('#super-view-correos-log').show('swing');
+		$('#super-view-admins').hide('linear');
+		$('#super-view-users').hide('linear');
+		$('#super-ver-correos').val('Ocultar correos');
+		$('#super-ver-admins').val('Ver admministradores');
+		$('#super-ver-users').val('Ver usuarios');
+	}
+	else {
+		$('#super-view-correos-log').hide('linear');
+		$('#super-ver-correos').val('Ver correos');
 	}
 });
 /**
@@ -747,6 +766,22 @@ $("#btn_crear_solicitud_sp").click(function () {
 			});
 		}
 	}
+});
+/**
+ * Ver detalle error
+ */
+$('.ver-error-envio').click(function () {
+	let msg = $(this).attr('data-error');
+	Alert.fire({
+		title: 'Error de envío',
+		html: msg,
+		icon:'error',
+		allowOutsideClick: false,
+		customClass: {
+			confirmButton: 'button-swalert',
+			popup: 'popup-swalert-list'
+		},
+	})
 });
 /**
  * Enviar Datos Organización

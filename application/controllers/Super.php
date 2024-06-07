@@ -20,6 +20,7 @@ class Super extends CI_Controller {
 		parent::__construct();
 		$this->load->model('AdministradoresModel');
 		$this->load->model('OrganizacionesModel');
+		$this->load->model('CorreosRegistroModel');
 		$this->load->model('TokenModel');
 		$this->load->model('UsuariosModel');
 	}
@@ -77,6 +78,7 @@ class Super extends CI_Controller {
 			'activeLink' => 'super',
 			'administradores' => $this->AdministradoresModel->getAdministradores(),
 			'organizaciones' => $this->OrganizacionesModel->getOrganizaciones(),
+			'correos' => $this->CorreosRegistroModel->getCorreosRegistro(),
 			'usuarios' => $this->UsuariosModel->getUsuariosSuperAdmin()
 		);
 		return $data;

@@ -7236,6 +7236,7 @@ function tablas() {
 		"tabla_actividad_admin",
 		"tabla_super_admins",
 		"tabla_super_usuarios",
+		"tabla_correos_logs",
 		"tabla_verdocentes",
 		"tabla_docentes",
 		"tabla_docentes_no_asignados",
