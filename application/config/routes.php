@@ -61,6 +61,9 @@ if ($this->config->item('mantenimiento') == TRUE) {
 // HOME
 $route['estado'] = 'Home/estadoSolicitud';
 $route['facilitadores'] = 'Home/facilitadores';
+// Super
+$route['super/?'] = 'Super';
+$route['super/panel'] = 'Super/panel';
 
 /** Usuarios */
 $route['login'] = 'Sesion';
@@ -121,9 +124,6 @@ $route['panelAdmin/seguimiento'] = 'Admin/seguimiento';
 // Estadísticas
 $route['panelAdmin/estadisticas'] = 'Estadisticas/panel';
 $route['panelAdmin/estadisticas/acreditacion'] = 'Estadisticas/acreditacion';
-// Super
-$route['super/?'] = 'Super';
-$route['super/panel'] = 'Super/panel';
 // Activar cuenta con token
 $route['activate'] = 'Activate';
 // Actualización de datos

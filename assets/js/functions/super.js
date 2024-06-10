@@ -461,9 +461,6 @@ $(".admin-usuario").click(function () {
 				$("#super_desconectar_user").prop("disabled", true);
 			}
 			console.log(response.usuario.verificado);
-			if (response.usuario.verificado != 1) {
-				$("#super_enviar_activacion_cuenta").prop("disabled", true);
-			}
 		},
 		error: function (ev) {
 			//Do nothing
@@ -556,6 +553,17 @@ $("#super_actualizar_user").click(function () {
 $("#super_enviar_info_usuer").click(function () {
 	let data = {
 		id: $("#super_id_user").val(),
+		type: 'EnviarDatosUsuario'
+	};
+	EnviarInformacionOrganizacion(data);
+});
+/**
+ * Botón enviar correo activación
+ */
+$("#super_enviar_activacion_cuenta").click(function () {
+	let data = {
+		id: $("#super_id_user").val(),
+		type: 'registroUsuario'
 	};
 	EnviarInformacionOrganizacion(data);
 });
@@ -794,7 +802,7 @@ $('.ver-error-envio').click(function () {
  */
 function EnviarInformacionOrganizacion(data) {
 	$.ajax({
-		url: baseURL + "super/enviarDatosUsuario",
+		url: baseURL + 'super/enviarDatosUsuario',
 		type: 'post',
 		dataType: 'JSON',
 		data: data,

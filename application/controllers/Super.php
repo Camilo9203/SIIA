@@ -104,8 +104,7 @@ class Super extends CI_Controller {
 		$usuario = $this->UsuariosModel->getUsuarios($this->input->post('id'));
 		$token = $this->TokenModel->getTokenUsuario($usuario->usuario);
 		$organizacion = $this->OrganizacionesModel->getOrganizacionUsuario($usuario->id_usuario);
-		$type = 'EnviarDatosUsuario';
-		send_email_user($organizacion->direccionCorreoElectronicoOrganizacion, $type, $organizacion, $usuario, $token);
+		send_email_user($organizacion->direccionCorreoElectronicoOrganizacion, $this->input->post('type'), $organizacion, $usuario, $token);
 	}
 	/**
 	 * Cerrar sesión

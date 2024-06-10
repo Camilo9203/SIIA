@@ -10,6 +10,7 @@
 ##service cron start
 ## ALTER TABLE administradores AUTO_INCREMENT = 99999999;
 ## SET GLOBAL FOREIGN_KEY_CHECKS=0;
+mkdir -p uploads
 cd uploads
 mkdir asistentes camaraComercio observacionesPlataforma resoluciones docentes jornadas materialDidacticoProgBasicos materialDidacticoAvalEconomia materialDidacticoProgAvalar formatosEvalProgAvalar registrosEducativos instructivosPlataforma lugarAtencion cartaRep certificaciones logosOrganizaciones certifcadoExistencia instructivoEnLinea autoevaluaciones
 cd logosOrganizaciones
