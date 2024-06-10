@@ -460,6 +460,10 @@ $(".admin-usuario").click(function () {
 				$("#super_actualizar_user").prop("disabled", false);
 				$("#super_desconectar_user").prop("disabled", true);
 			}
+			console.log(response.usuario.verificado);
+			if (response.usuario.verificado != 1) {
+				$("#super_enviar_activacion_cuenta").prop("disabled", true);
+			}
 		},
 		error: function (ev) {
 			//Do nothing

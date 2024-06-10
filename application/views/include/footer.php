@@ -269,7 +269,6 @@
 <!-- Modal - FIN -->
 <!-- //TODO: Botón de ir arriba -->
 <a id="back-to-top" class="btn btn-siia back-to-top" role="button" title="Volver arriba" data-toggle="tooltip" data-placement="left"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
-</body>
 <!-- Footer Content -->
 <footer>
 	<div class="clearfix"></div>
@@ -415,5 +414,4 @@
 	<!--<script type="text/javascript" async="async" defer="defer" data-cfasync="false" src="https://mylivechat.com/chatinline.aspx?hccid=49054954"></script>-->
 </div>
 </body>
-
 </html>

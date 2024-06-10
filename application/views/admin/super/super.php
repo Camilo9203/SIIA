@@ -344,6 +344,7 @@ $CI->load->model("TokenModel");
 					<div class="btn-group" role='group' aria-label='acciones'>
 						<button type="button" class="btn btn-danger" id="super_desconectar_user">Desconectar</button>
 						<!-- <button type="button" class="btn btn-danger" id="super_eliminar_admin">Eliminar</button> -->
+						<button type="button" class="btn btn-success" id="super_enviar_activacion_cuenta">Enviar Activación</button>
 						<button type="button" class="btn btn-siia" id="super_actualizar_user">Actualizar</button>
 						<button type="button" class="btn btn-info" id="super_enviar_info_usuer">Enviar Información</button>
 						<!-- <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button> -->

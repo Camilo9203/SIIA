@@ -1,6 +1,23 @@
+<?php
+/***
+ * @var $title
+ * @var $logged_in
+ * @var $tipo_usuario
+ * @var $usuario_id
+ * @var $nombre_usuario
+ * @var $hora
+ * @var $fecha
+ * @var $nivel
+ * @var $municipios
+ * @var $departamentos
+ */
+/** echo '<pre>';
+var_dump($aplicacion);
+echo '</pre>';
+return null; */
+?>
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
@@ -13,95 +30,30 @@
 	<meta name="author" content="Unidad Solidaria" />
 	<meta name="revisit-after" content="30 days" />
 	<meta name="distribution" content="web" />
-	<META NAME="ROBOTS" CONTENT="INDEX, FOLLOW" />
+	<meta NAME="ROBOTS" CONTENT="INDEX, FOLLOW" />
 	<!-- Styles -->
-	<link href="<?php echo base_url('assets/css/font-awesome.min.css') ?>" rel="stylesheet" type="text/css" />
-	<link href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css" />
+	<link href="<?= base_url('assets/css/font-awesome.min.css') ?>" rel="stylesheet" type="text/css" />
+	<link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet" type="text/css" />
 	<!-- Custom CSS -->
-	<link href="<?php echo base_url('assets/css/styles.css?v=1.0.8.1919') ?>" rel="stylesheet" type="text/css" />
-	<link href="<?php echo base_url('assets/img/favicon16.png') ?>" type="image/png" sizes="16x16" rel="icon" />
-	<link href="<?php echo base_url('assets/img/favicon32.png') ?>" type="image/png" sizes="32x32" rel="icon" />
-	<link href="<?php echo base_url('assets/img/favicon64.png') ?>" type="image/png" sizes="64x64" rel="icon" />
-	<link href="<?php echo base_url('assets/img/favicon128.png') ?>" type="image/png" sizes="128x128" rel="shortcut icon" />
+	<link href="<?= base_url('assets/css/styles.css?v=1.0.8.1919') ?>" rel="stylesheet" type="text/css" />
+	<link href="<?= base_url('assets/img/favicon16.png') ?>" type="image/png" sizes="16x16" rel="icon" />
+	<link href="<?= base_url('assets/img/favicon32.png') ?>" type="image/png" sizes="32x32" rel="icon" />
+	<link href="<?= base_url('assets/img/favicon64.png') ?>" type="image/png" sizes="64x64" rel="icon" />
+	<link href="<?= base_url('assets/img/favicon128.png') ?>" type="image/png" sizes="128x128" rel="shortcut icon" />
 	<link href="https://fonts.googleapis.com/css?family=Dosis&display=swap" rel="stylesheet">
-	<!-- Graficas //TODO: Charts Graficas para las estadisticas -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.js" integrity="sha512-XcsV/45eM/syxTudkE8AoKK1OfxTrlFpOltc9NmHXh3HF+0ZA917G9iG6Fm7B6AzP+UeEzV8pLwnbRNPxdUpfA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
 	<meta name="theme-color" content="#09476E" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="white-translucent" />
 	<meta name="google-site-verification" content="DloHloB2_mQ9o7BPTd9xXEYHUeXrnWQqKGGKeuGrkLk" />
 	<!-- Google -->
 	<script src="https://www.google.com/recaptcha/api.js?render=6LeTFnYnAAAAAKl5U_RbOYnUbGFGlhG4Ffn52Sef"></script>
-	<!-- Google Tag Manager -->
-	<script>
-		(function(w, d, s, l, i) {
-			w[l] = w[l] || [];
-			w[l].push({
-				'gtm.start': new Date().getTime(),
-				event: 'gtm.js'
-			});
-			var f = d.getElementsByTagName(s)[0],
-				j = d.createElement(s),
-				dl = l != 'dataLayer' ? '&l=' + l : '';
-			j.async = true;
-			j.src =
-				'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-			f.parentNode.insertBefore(j, f);
-		})(window, document, 'script', 'dataLayer', 'GTM-WHVM3FM');
-	</script>
-	<!-- Google Optimize -->
-	<style>
-		.async-hide {
-			opacity: 0 !important
-		}
-	</style>
-	<script>
-		(function(a, s, y, n, c, h, i, d, e) {
-			s.className += ' ' + y;
-			h.start = 1 * new Date;
-			h.end = i = function() {
-				s.className = s.className.replace(RegExp(' ?' + y), '')
-			};
-			(a[n] = a[n] || []).hide = h;
-			setTimeout(function() {
-				i();
-				h.end = null
-			}, c);
-			h.timeout = c;
-		})(window, document.documentElement, 'async-hide', 'dataLayer', 4000, {
-			'GTM-MX4WGRN': true
-		});
-	</script>
-	<!-- End Google Tag Manager -->
-	<script>
-		(function(i, s, o, g, r, a, m) {
-			i['GoogleAnalyticsObject'] = r;
-			i[r] = i[r] || function() {
-				(i[r].q = i[r].q || []).push(arguments)
-			}, i[r].l = 1 * new Date();
-			a = s.createElement(o),
-				m = s.getElementsByTagName(o)[0];
-			a.async = 1;
-			a.src = g;
-			m.parentNode.insertBefore(a, m)
-		})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-		ga('create', 'UA-99079478-1', 'auto');
-		ga('require', 'GTM-MX4WGRN');
-		ga('send', 'pageview');
-	</script>
 	<!-- Title -->
-	<title>Sistema Integrado de Información de Acreditación | <?php echo $title; ?></title>
+	<title> Sistema Integrado de Información de Acreditación | <?= $title; ?></title>
 </head>
-
 <body class="nav-md">
 	<div class="se-pre-con"></div>
 	<!-- Cabecera y Navbar -->
 	<header>
-		<!-- Google Tag Manager (noscript) -->
-		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WHVM3FM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-		<!-- End Google Tag Manager (noscript) -->
 		<section class="top-nav">
 			<div class="container">
 				<!-- <div class="row">
@@ -109,20 +61,19 @@
                     <h3 id="titulo_sistema"></h3>
                 </div> -->
 				<div class="col-md-12">
-					<a href="https://www.gov.co/home/" target="_blank"><img src="<?php echo base_url(); ?>assets/img/govco.png" class="img-responsive" style="width: 1903px;margin-bottom: 2%;"></a>
+					<a href="https://www.gov.co/home/" target="_blank"><img src="<?= base_url(); ?>assets/img/govco.png" class="img-responsive" style="width: 1903px;margin-bottom: 2%;"></a>
 				</div>
 				<div class="col-md-6">
-					<a href="<?php echo PAGINA_WEB ?>"><img alt="Unidad Solidaria" id="imagen_header" height="170px" width="350px" class="pull-left img-responsive" src="<?php echo base_url(); ?>assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png"></a>
+					<a href="<?= PAGINA_WEB ?>"><img alt="Unidad Solidaria" id="imagen_header" height="170px" width="350px" class="pull-left img-responsive" src="<?= base_url(); ?>assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png"></a>
 				</div>
 				<div class="col-md-6">
-					<a href="<?php echo base_url(); ?>"><img alt="SIIA" id="imagen_header_sia" class="pull-right img-responsive" src="<?php echo base_url(); ?>assets/img/siia_logo.png"></a>
+					<a href="<?= base_url(); ?>"><img alt="SIIA" id="imagen_header_sia" class="pull-right img-responsive" src="<?= base_url(); ?>assets/img/siia_logo.png"></a>
 				</div>
 			</div>
 		</section>
-		<div id="tPg" titulo="<?php echo $title; ?>"></div>
+		<div id="tPg" titulo="<?= $title; ?>"></div>
 		<!-- Navbar Usuario no registrado //TODO: Navbar de usuario no registrado -->
-		<?php
-		if (!$logged_in && $tipo_usuario == "none") {
+		<?php if (!$logged_in && $tipo_usuario == "none") {
 			echo "<div class='hidden' id='data_logg' data-log='$logged_in'></div>";
 		?>
 			<nav class="navbar navbar-dark">
@@ -139,21 +90,19 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
-							<li><a class="active" href="<?php echo base_url('home'); ?>">Home <i class="fa fa-home" aria-hidden="true"></i></a></li>
-							<li><a href="<?php echo base_url('estado'); ?>">Estado de la solicitud <i class="fa fa-eye" aria-hidden="true"></i></a></li>
-							<li><a href="<?php echo base_url('facilitadores'); ?>">Facilitadores válidos <i class="fa fa-users" aria-hidden="true"></i></a></li>
+							<li><a class="active" href="<?= base_url('home'); ?>">Home <i class="fa fa-home" aria-hidden="true"></i></a></li>
+							<li><a href="<?= base_url('estado'); ?>">Estado de la solicitud <i class="fa fa-eye" aria-hidden="true"></i></a></li>
+							<li><a href="<?= base_url('facilitadores'); ?>">Facilitadores válidos <i class="fa fa-users" aria-hidden="true"></i></a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
-							<li><a href="<?php echo base_url('login'); ?>">Iniciar sesión <i class="fa fa-sign-in" aria-hidden="true"></i></a></li>
-							<li><a href="<?php echo base_url('registro'); ?>">Registrarme <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+							<li><a href="<?= base_url('login'); ?>">Iniciar sesión <i class="fa fa-sign-in" aria-hidden="true"></i></a></li>
+							<li><a href="<?= base_url('registro'); ?>">Registrarme <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
 						</ul>
 					</div><!-- /.navbar-collapse -->
 				</div><!-- /.container-fluid -->
 			</nav>
 		<?php
-		}
-		?>
-		<!-- Cuerpo -->
+		} ?>
 		<div class="body">
 			<div class="main_container" role="main">
 				<!-- Navar Bar Usuario //TODO: Navbar usuario (Orgaizaciones) -->
@@ -167,25 +116,25 @@
 					<!-- Navabar Contenido -->
 					<div class="top_nav container">
 						<div class="nav_menu">
-							<h3 class="text-center col-md-7"><?php echo $title; ?></h3>
+							<h3 class="text-center col-md-7"><?= $title; ?></h3>
 							<nav>
 								<ul class="nav navbar-nav col-md-4 text-center nav-sia-panel">
 									<!-- Fecha -->
-									<li class="noSpaceLi"><a>| Fecha: <?php echo $fecha . " " . $hora; ?> |</a></li>
+									<li class="noSpaceLi"><a>| Fecha: <?= $fecha . " " . $hora; ?> |</a></li>
 									<!-- Menu -->
 									<li class="noSpaceLi">
-										<a class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">| <?php echo $nombre_usuario; ?> <span class=" fa fa-angle-down"></span> |</a>
+										<a class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">| <?= $nombre_usuario; ?> <span class=" fa fa-angle-down"></span> |</a>
 										<ul class="dropdown-menu dropdown-usermenu pull-right">
 											<br>
-											<li><a>Soporte ID: <strong><?php echo $usuario_id; ?></strong><br /> Nombre Usuario: <strong><?php echo $nombre_usuario; ?></strong></a></li>
+											<li><a>Soporte ID: <strong><?= $usuario_id; ?></strong><br /> Nombre Usuario: <strong><?= $nombre_usuario; ?></strong></a></li>
 											<hr />
 											<caption> Menú:</caption>
-											<li><a href="<?php echo base_url('panel'); ?>">Panel Principal <i class="fa fa-header" aria-hidden="true"></i></a></li>
-											<li><a href="<?php echo base_url('panel/perfil'); ?>">Perfil <i class="fa fa-address-book-o" aria-hidden="true"></i></a></li>
-											<li><a href="<?php echo base_url('panel/docentes'); ?>">Facilitadores <i class="fa fa-graduation-cap" aria-hidden="true"></i></a></li>
+											<li><a href="<?= base_url('panel'); ?>">Panel Principal <i class="fa fa-header" aria-hidden="true"></i></a></li>
+											<li><a href="<?= base_url('panel/perfil'); ?>">Perfil <i class="fa fa-address-book-o" aria-hidden="true"></i></a></li>
+											<li><a href="<?= base_url('panel/docentes'); ?>">Facilitadores <i class="fa fa-graduation-cap" aria-hidden="true"></i></a></li>
 											<!-- <li><a href="javascript:;">Plan de Mejoramiento</a></li>
 										<li><a href="javascript:;">Informe de Actividades</a></li> -->
-											<li><a href="<?php echo base_url('panel/contacto/ayuda'); ?>">Ayuda <i class="fa fa-info" aria-hidden="true"></i></a></li>
+											<li><a href="<?= base_url('panel/contacto/ayuda'); ?>">Ayuda <i class="fa fa-info" aria-hidden="true"></i></a></li>
 											<hr />
 											<li><a class='center-block' data-toggle='modal' data-target='#cerrar_sesion'>Cerrar Sesión <i class="fa fa-sign-out pull-right"></i></a></li>
 											<br>
@@ -257,7 +206,7 @@
 						<h3>Registro telefónico: <a class="icono2 desOptSiia pull-right" role="button" title="Registro telefonico"><i class="fa fa-times" aria-hidden="true"></i></a></h3>
 						<br>
 						<ul>
-							<li><small><a class="underlined" target="_blank" href="<?php echo base_url("llamadas"); ?>">Editar llamadas <i class="fa fa-phone" aria-hidden="true"></i></a></small></li>
+							<li><small><a class="underlined" target="_blank" href="<?= base_url("llamadas"); ?>">Editar llamadas <i class="fa fa-phone" aria-hidden="true"></i></a></small></li>
 						</ul>
 						<!-- <div class="radio">
 							<label><input type="radio" name="registradoSistema" checked>No registrado en el sistema</label>
@@ -305,7 +254,7 @@
 									<?php
 									foreach ($departamentos as $departamento) {
 									?>
-										<option id="<?php echo $departamento->id_departamento; ?>" value="<?php echo $departamento->nombre; ?>"><?php echo $departamento->nombre; ?></option>
+										<option id="<?= $departamento->id_departamento; ?>" value="<?= $departamento->nombre; ?>"><?= $departamento->nombre; ?></option>
 									<?php
 									}
 									?>
@@ -319,7 +268,7 @@
 										<?php
 										foreach ($municipios as $municipio) {
 										?>
-											<option id="<?php echo $municipio->id_municipio; ?>" value="<?php echo $municipio->nombre; ?>"><?php echo $municipio->nombre; ?></option>
+											<option id="<?= $municipio->id_municipio; ?>" value="<?= $municipio->nombre; ?>"><?= $municipio->nombre; ?></option>
 										<?php
 										}
 										?>
@@ -391,7 +340,7 @@
 							</div>
 							<div class="form-group">
 								<label>Fecha:</label>
-								<input type="date" class="form-control" name="telefonicoFecha" id="telefonicoFecha" value="<?php echo date('Y-m-d'); ?>">
+								<input type="date" class="form-control" name="telefonicoFecha" id="telefonicoFecha" value="<?= date('Y-m-d'); ?>">
 							</div>
 							<div class="form-group">
 								<label>Duración (05 45):</label>
@@ -436,37 +385,37 @@
 					<div class="top_nav container">
 						<div class="nav_menu">
 							<!-- Titulo -->
-							<h3 class="text-center col-md-7"><?php echo $title; ?></h3>
+							<h3 class="text-center col-md-7"><?= $title; ?></h3>
 							<nav>
 								<ul class="nav navbar-nav col-md-4 text-center nav-sia-panel">
 									<!-- Fecha -->
-									<li class="noSpaceLi"><a>| Fecha: <?php echo $fecha . " " . $hora; ?> |</a></li>
+									<li class="noSpaceLi"><a>| Fecha: <?= $fecha . " " . $hora; ?> |</a></li>
 									<!-- Menu -->
 									<li class="noSpaceLi">
-										<a class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">| <?php echo $nombre_usuario; ?> <span class=" fa fa-angle-down"></span> |</a>
+										<a class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">| <?= $nombre_usuario; ?> <span class=" fa fa-angle-down"></span> |</a>
 										<ul class="dropdown-menu dropdown-usermenu pull-right">
 											<br>
-											<li><a>Soporte ID: <strong><?php echo $usuario_id; ?></strong> <br /> Nombre Usuario: <strong><?php echo $nombre_usuario; ?></strong></a></li>
+											<li><a>Soporte ID: <strong><?= $usuario_id; ?></strong> <br /> Nombre Usuario: <strong><?= $nombre_usuario; ?></strong></a></li>
 											<hr />
 											<caption> Menú:</caption>
-											<li><a href="<?php echo base_url('panelAdmin'); ?>">Panel principal</a></li>
-											<li><a href="<?php echo base_url('panelAdmin/reportes'); ?>">Reportes</a></li>
-											<li><a href="<?php echo base_url('panelAdmin/organizaciones'); ?>">Organizaciones</a></li>
+											<li><a href="<?= base_url('panelAdmin'); ?>">Panel principal</a></li>
+											<li><a href="<?= base_url('panelAdmin/reportes'); ?>">Reportes</a></li>
+											<li><a href="<?= base_url('panelAdmin/organizaciones'); ?>">Organizaciones</a></li>
 											<ul>
-												<li><a href="<?php echo base_url('panelAdmin/organizaciones/inscritas'); ?>">Organizaciones inscritas</a></li>
-												<li><a href="<?php echo base_url('panelAdmin/organizaciones/solicitudes/finalizadas'); ?>">Organizaciones en evaluación</a></li>
-												<li><a href="<?php echo base_url('panelAdmin/organizaciones/solicitudes/observaciones'); ?>">Organizaciones en complementaria</a></li>
+												<li><a href="<?= base_url('panelAdmin/organizaciones/inscritas'); ?>">Organizaciones inscritas</a></li>
+												<li><a href="<?= base_url('panelAdmin/organizaciones/solicitudes/finalizadas'); ?>">Organizaciones en evaluación</a></li>
+												<li><a href="<?= base_url('panelAdmin/organizaciones/solicitudes/observaciones'); ?>">Organizaciones en complementaria</a></li>
 												<hr />
-												<li><a href="<?php echo base_url('panelAdmin/organizaciones/docentes'); ?>">Facilitadores</a></li>
-												<li><a href="<?php echo base_url('panelAdmin/organizaciones/estadoOrganizaciones'); ?>">Estado organizaciones</a></li>
-												<li><a href="<?php echo base_url('panelAdmin/organizaciones/inscritas'); ?>">Resoluciones</a></li>
-												<li><a href="<?php echo base_url('panelAdmin/organizaciones/camaraComercio'); ?>">Camara de comercio</a></li>
+												<li><a href="<?= base_url('panelAdmin/organizaciones/docentes'); ?>">Facilitadores</a></li>
+												<li><a href="<?= base_url('panelAdmin/organizaciones/estadoOrganizaciones'); ?>">Estado organizaciones</a></li>
+												<li><a href="<?= base_url('panelAdmin/organizaciones/inscritas'); ?>">Resoluciones</a></li>
+												<li><a href="<?= base_url('panelAdmin/organizaciones/camaraComercio'); ?>">Camara de comercio</a></li>
 											</ul>
-											<li><a href="<?php echo base_url('panelAdmin/historico'); ?>">Histórico</a></li>
-											<li><a href="<?php echo base_url('panelAdmin/seguimiento'); ?>">Seguimientos</a></li>
-											<li><a href="<?php echo base_url('panelAdmin/opciones'); ?>">Operaciones</a></li>
-											<li><a href="<?php echo base_url('panelAdmin/socrata'); ?>">Datos abiertos</a></li>
-											<li><a href="<?php echo base_url('panelAdmin/contacto'); ?>">Contacto</a></li>
+											<li><a href="<?= base_url('panelAdmin/historico'); ?>">Histórico</a></li>
+											<li><a href="<?= base_url('panelAdmin/seguimiento'); ?>">Seguimientos</a></li>
+											<li><a href="<?= base_url('panelAdmin/opciones'); ?>">Operaciones</a></li>
+											<li><a href="<?= base_url('panelAdmin/socrata'); ?>">Datos abiertos</a></li>
+											<li><a href="<?= base_url('panelAdmin/contacto'); ?>">Contacto</a></li>
 											<hr />
 											<li><a class='center-block' data-toggle='modal' data-target='#cerrar_sesion_admin'>Cerrar Sesión <i class="fa fa-sign-out pull-right"></i></a></li>
 											<br>
