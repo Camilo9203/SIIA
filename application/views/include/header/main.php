@@ -47,17 +47,19 @@
 	<link rel="stylesheet" href="<?= base_url('assets/js/dashboard/vendors/mdi/css/materialdesignicons.min.css') ?>">
 	<link rel="stylesheet" href="<?= base_url('assets/js/dashboard/vendors/select2-bootstrap-theme/select2-bootstrap.min.css') ?>">
 	<!--Start of Tawk.to Script-->
-	<script type="text/javascript">
-		var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-		(function(){
-			var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-			s1.async=true;
-			s1.src='https://embed.tawk.to/624281002abe5b455fc21567/1fv9sfqn8';
-			s1.charset='UTF-8';
-			s1.setAttribute('crossorigin','*');
-			s0.parentNode.insertBefore(s1,s0);
-		})();
-	</script>
+	<?php if ($logged_in == FALSE && $tipo_usuario == "none"): ?>
+		<script type="text/javascript">
+			var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+			(function(){
+				var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+				s1.async=true;
+				s1.src='https://embed.tawk.to/624281002abe5b455fc21567/1fv9sfqn8';
+				s1.charset='UTF-8';
+				s1.setAttribute('crossorigin','*');
+				s0.parentNode.insertBefore(s1,s0);
+			})();
+		</script>
+	<?php endif; ?>
 	<!--End of Tawk.to Script-->
 	<!-- Title -->
 	<title>Sistema Integrado de Información de Acreditación | <?= $title; ?></title>
