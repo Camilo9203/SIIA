@@ -1480,3 +1480,10 @@ FIN CUSTOM
 	border: 1px solid #d9d9d9 !important;
 	font-size: 1.125em !important;
 }
+
+.auth .brand-logo img {
+	width: 300px !important;
+}
+.auth .brand-logo {
+	text-align: center !important;
+}

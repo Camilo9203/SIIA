@@ -26,12 +26,12 @@ class Super extends CI_Controller {
 	}
 	public function index()
 	{
-		$data['title'] = 'SUP';
+		$data['title'] = 'Super | Inició de Sesión';
 		$data['tipo_usuario'] = "none";
 		$data['logged_in'] = FALSE;
-		$this->load->view('include/header', $data);
-		$this->load->view('admin/super/super');
-		$this->load->view('include/footer');
+		$this->load->view('include/header/main', $data);
+		$this->load->view('super/index');
+		$this->load->view('include/footer/main');
 		$this->logs_sia->logs('PLACE_USER');
 	}
 	/**
@@ -91,9 +91,9 @@ class Super extends CI_Controller {
 		$is = $this->db->select("valor")->from("opciones")->where("nombre","super")->get()->row()->valor;
 		if($is == "TRUE"):
 			$data = $this->dataSessionSuper();
-			$this->load->view('include/header', $data);
-			$this->load->view('admin/super/super', $data);
-			$this->load->view('include/footer');
+			$this->load->view('include/header/main', $data);
+			$this->load->view('super/panel', $data);
+			$this->load->view('include/footer/main');
 			$this->logs_sia->logs('PLACE_USER');
 		endif;
 	}
@@ -113,8 +113,8 @@ class Super extends CI_Controller {
 		$data_update = array('valor' => 'FALSE');
 		$this->db->where('nombre', 'super');
 		if($this->db->update('opciones', $data_update)){
-			echo json_encode("salir");
-			delete_cookie('sia_session');
+			echo json_encode(array('status' => 'ok'));
+			delete_cookie('siia_session');
 			$this->session->sess_destroy();
 		}
 	}

@@ -2,9 +2,10 @@
   "name": "siia",
   "version": "1.0.0",
   "description": "El SIIA es el sistema de acreditación de Organizaciones Solidarias para que entidades/organizaciones como cooperativas en el “tramite” de solicitud de la Acreditación, la aplicación SIIA se creó desde cero para no solamente dar la parte del trámite sino poder obtener más información, como la de las organizaciones históricas, el informe de actividades, el módulo de docentes, reportes entre otros.",
-  "main": "index.js",
+  "main": "assets/js/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node assets/js/index.js",
+    "dev": "nodemon assets/js/index.js"
   },
   "keywords": [
     "siia"
@@ -12,6 +13,8 @@
   "author": "camilo_rios",
   "license": "ISC",
   "dependencies": {
-    "@formkit/tempo": "^0.1.1"
+    "@formkit/tempo": "^0.1.1",
+    "datatables": "^1.10.18",
+    "nodemon": "^3.1.3"
   }
 }

@@ -609,31 +609,20 @@ $("#super_desconectar_user").click(function () {
  * Cerrar sesión súper administrador
  */
 $("#super_cerrar_sesion").click(function () {
-	Alert.fire({
-		title: 'Esta seguro de cerrar sesión ? ',
-		icon: 'info',
-		showCancelButton: true,
-		confirmButtonText: 'Si',
-		cancelButtonText: 'No',
-	}).then((result) => {
-		if (result.isConfirmed) {
-			$.ajax({
-				url: baseURL + "super/logout",
-				type: "post",
-				dataType: "JSON",
-				data: data,
-				success: function (response) {
-					if (response == "salir") {
-						redirect(baseURL);
-					}
-				},
-				error: function (ev) {
-					//Do nothing
-				},
-			});
-			redirect(baseURL + 'super?');
-		}
-	})
+	$.ajax({
+		url: baseURL + "super/logout",
+		type: "post",
+		dataType: "JSON",
+		data: data,
+		success: function (response) {
+			if (response.status == "ok") {
+				redirect(baseURL + 'super?');
+			}
+		},
+		error: function (ev) {
+			//Do nothing
+		},
+	});
 
 });
 /**
