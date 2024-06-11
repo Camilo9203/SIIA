@@ -61,9 +61,12 @@ if ($this->config->item('mantenimiento') == TRUE) {
 // HOME
 $route['estado'] = 'Home/estadoSolicitud';
 $route['facilitadores'] = 'Home/facilitadores';
-// Super
+// Super Administrador
 $route['super/?'] = 'Super';
 $route['super/panel'] = 'Super/panel';
+$route['super/administradores'] = 'Super/administradores';
+$route['super/usuarios'] = 'Super/usuarios';
+$route['super/correos'] = 'Super/correos';
 
 /** Usuarios */
 $route['login'] = 'Sesion';

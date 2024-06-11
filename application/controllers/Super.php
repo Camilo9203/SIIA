@@ -75,7 +75,6 @@ class Super extends CI_Controller {
 			'usuario_id' => 666,
 			'hora' => date("H:i", time()),
 			'fecha' => date('Y/m/d'),
-			'activeLink' => 'dashboard',
 			'administradores' => $this->AdministradoresModel->getAdministradores(),
 			'organizaciones' => $this->OrganizacionesModel->getOrganizaciones(),
 			'correos' => $this->CorreosRegistroModel->getCorreosRegistro(),
@@ -92,7 +91,35 @@ class Super extends CI_Controller {
 		if($is == "TRUE"):
 			$data = $this->dataSessionSuper();
 			$this->load->view('include/header/main', $data);
-			$this->load->view('super/panel', $data);
+			$this->load->view('super/pages/dashboard', $data);
+			$this->load->view('include/footer/main');
+			$this->logs_sia->logs('PLACE_USER');
+		endif;
+	}
+	/**
+	 * Administradores
+	 */
+	public function administradores(){
+		verify_session_admin();
+		$is = $this->db->select("valor")->from("opciones")->where("nombre","super")->get()->row()->valor;
+		if($is == "TRUE"):
+			$data = $this->dataSessionSuper();
+			$this->load->view('include/header/main', $data);
+			$this->load->view('super/pages/administrators', $data);
+			$this->load->view('include/footer/main');
+			$this->logs_sia->logs('PLACE_USER');
+		endif;
+	}
+	/**
+	 * Usuarios
+	 */
+	public function Usuarios(){
+		verify_session_admin();
+		$is = $this->db->select("valor")->from("opciones")->where("nombre","super")->get()->row()->valor;
+		if($is == "TRUE"):
+			$data = $this->dataSessionSuper();
+			$this->load->view('include/header/main', $data);
+			$this->load->view('super/pages/users', $data);
 			$this->load->view('include/footer/main');
 			$this->logs_sia->logs('PLACE_USER');
 		endif;
