@@ -13,7 +13,7 @@ if($logged_in == FALSE && $tipo_usuario == "none"): ?>
 							<div class="brand-logo">
 								<img src="<?= base_url('assets/img/siia_logo.png') ?>" alt="logo">
 							</div>
-							<h4>Bienvenido | Módulo super administrador </h4>
+							<h4>Módulo super administrador </h4>
 							<h6 class="font-weight-light">Inicia sesión para continuar.</h6>
 							<form class="pt-3">
 								<div class="form-group">

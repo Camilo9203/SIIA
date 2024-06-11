@@ -70,12 +70,12 @@ class Super extends CI_Controller {
 	public function dataSessionSuper() {
 		$data = array(
 			'logged_in' => $this->session->userdata('logged_in'),
-			'title' => 'SUPER',
+			'title' => 'Super | Panel de Control',
 			'tipo_usuario' => $this->session->userdata('type_user'),
 			'usuario_id' => 666,
 			'hora' => date("H:i", time()),
 			'fecha' => date('Y/m/d'),
-			'activeLink' => 'super',
+			'activeLink' => 'dashboard',
 			'administradores' => $this->AdministradoresModel->getAdministradores(),
 			'organizaciones' => $this->OrganizacionesModel->getOrganizaciones(),
 			'correos' => $this->CorreosRegistroModel->getCorreosRegistro(),

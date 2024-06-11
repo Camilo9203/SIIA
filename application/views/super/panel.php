@@ -3,6 +3,9 @@
  * @var $logged_in
  * @var $tipo_usuario
  * @var $administradores
+ * @var $usuarios
+ * @var $organizaciones
+ * @var $correos
  */
 $CI = &get_instance();
 $CI->load->model("AdministradoresModel");
@@ -13,178 +16,331 @@ $CI->load->model("TokenModel");
 
 if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 <!-- partial -->
+<!-- partial -->
 <div class="main-panel">
 	<div class="content-wrapper">
-		<!-- Formulario registro administrador -->
 		<div class="row">
-			<div class="col-md-12 grid-margin stretch-card">
-				<div class="card position-relative">
-					<div class="card-body">
-						<div class="container">
-							<div class="col-md-12">
-								<p class="card-title">Nuevo Administrador</p>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>Primer Nombre:</label>
-										<input type="text" id="super_primernombre_admin" class="form-control" placeholder="Primer nombre...">
-									</div>
-									<div class="form-group">
-										<label>Segundo Nombre:</label>
-										<input type="text" id="super_segundonombre_admin" class="form-control" placeholder="Segundo nombre...">
-									</div>
-									<div class="form-group">
-										<label>Primer Apellido:</label>
-										<input type="text" id="super_primerapellido_admin" class="form-control" placeholder="Primer apellido...">
-									</div>
-									<div class="form-group">
-										<label>Segundo Apellido:</label>
-										<input type="text" id="super_segundoapellido_admin" class="form-control" placeholder="Segundo apellido...">
-									</div>
-									<div class="form-group">
-										<label>Numero de Cedula:</label>
-										<input type="text" id="super_numerocedula_admin" class="form-control" placeholder="Numero de cedula...">
-									</div>
+			<div class="col-md-12 grid-margin">
+				<div class="row">
+					<div class="col-12 col-xl-8 mb-4 mb-xl-0">
+						<h3 class="font-weight-bold">Bienvenido <?= $tipo_usuario ?></h3>
+						<h6 class="font-weight-normal mb-0">¡Sistema Integrado de Información de Acreditación! <span class="text-primary">3 alertas sin leer!</span></h6>
+					</div>
+					<div class="col-12 col-xl-4">
+						<!-- Calendario
+						<div class="justify-content-end d-flex">
+							<div class="dropdown flex-md-grow-1 flex-xl-grow-0">
+								<button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button" id="dropdownMenuDate2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+									<i class="mdi mdi-calendar"></i> Hoy (27 May 2022)
+								</button>
+								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
+									<a class="dropdown-item" href="#">Enero - Marzo</a>
+									<a class="dropdown-item" href="#">Marzo - Junio</a>
+									<a class="dropdown-item" href="#">Junio - Agosto</a>
+									<a class="dropdown-item" href="#">Agosto - Noviembre</a>
 								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>Direccion correo electronico:</label>
-										<input type="text" id="super_correo_electronico_admin" class="form-control" placeholder="Direccion correo electronico...">
-									</div>
-									<div class="form-group">
-										<label>Nombre usuario:</label>
-										<input type="text" id="super_nombre_admin" class="form-control" placeholder="Nombre usuario...">
-									</div>
-									<div class="form-group">
-										<label>Contraseña:</label>
-										<input type="text" id="super_contrasena_admin" class="form-control" placeholder="Contraseña...">
-									</div>
-									<div class="form-group">
-										<label ofr="super_acceso_nvl">Nivel de acceso:</label><br/>
-										<select name="super_acceso_nvl" id="super_acceso_nvl" class="selectpicker form-control show-tick" required="">
-											<option id="1" value="0">Total 0</option>
-											<option id="2" value="1">Evaluador 1</option>
-											<option id="3" value="2">Reportes 2</option>
-											<option id="4" value="3">Cámaras 3</option>
-											<option id="5" value="4">Historico 4</option>
-											<option id="6" value="5">Seguimientos 5</option>
-										</select>
-									</div>
-									<input type="button" class="btn btn-primary" id="super_nuevo_admin" value="Ingresar Nuevo Administrador">
+							</div>
+						</div>
+						-->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6 grid-margin stretch-card">
+				<div class="card tale-bg">
+					<div class="card-people mt-auto">
+						<img src="<?= base_url('assets/img/images/dashboard/people.svg') ?>" alt="people">
+						<div class="weather-info">
+							<div class="d-flex">
+								<div>
+									<!-- Clima -->
+									<!-- <h2 class="mb-0 font-weight-normal"><i class="icon-sun mr-2"></i>24<sup>C</sup></h2> -->
+								</div>
+								<div class="ml-2">
+									<h4 class="location font-weight-normal">Bogota D.C</h4>
+									<h6 class="font-weight-normal">Colombia</h6>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			<div class="col-md-6 grid-margin transparent">
+				<div class="row">
+					<div class="col-md-6 mb-4 stretch-card transparent">
+						<div class="card card-tale">
+							<a style="text-decoration: none; color: white" href="<?=  base_url('super/administradores') ?>">
+							<div class="card-body">
+								<p class="mb-4">Administradores Registrados</p>
+								<p class="fs-30 mb-2"><?= count($administradores)?></p>
+								<p><?= date('Y-m-d') ?></p>
+							</div>
+							</a>
+						</div>
+					</div>
+					<div class="col-md-6 mb-4 stretch-card transparent">
+						<div class="card card-dark-blue">
+							<a style="text-decoration: none; color: white" href="<?=  base_url('super/usuarios') ?>">
+							<div class="card-body">
+								<p class="mb-4">Usuarios Registrados</p>
+								<p class="fs-30 mb-2"><?= count($usuarios)?></p>
+								<p><?= date('Y-m-d') ?></p>
+							</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
+						<div class="card card-light-blue">
+							<a style="text-decoration: none; color: white" href="<?=  base_url('super/organizaciones') ?>">
+							<div class="card-body">
+								<p class="mb-4">Organizaciones Registradas</p>
+								<p class="fs-30 mb-2"><?= count($organizaciones) ?></p>
+								<p><?= date('Y-m-d') ?></p>
+							</div>
+							</a>
+						</div>
+					</div>
+					<div class="col-md-6 stretch-card transparent">
+						<div class="card card-light-danger">
+							<a style="text-decoration: none; color: white" href="<?=  base_url('super/correos') ?>">
+							<div class="card-body">
+								<p class="mb-4">Registro de correos</p>
+								<p class="fs-30 mb-2"><?= count($correos) ?></p>
+								<p><?= date('Y-m-d') ?></p>
+							</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<!-- Tabla de administradores -->
-		<div class="row">
-			<div class="col-md-12 grid-margin stretch-card">
-				<div class="card">
-					<div class="card-body">
-						<p class="card-title">Administradores registrados</p>
-						<div class="row">
-							<div class="col-12">
+		<!--		<div class="row">-->
+		<!--			<div class="col-md-6 grid-margin stretch-card">-->
+		<!--				<div class="card">-->
+		<!--					<div class="card-body">-->
+		<!--						<p class="card-title">Order Details</p>-->
+		<!--						<p class="font-weight-500">The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc</p>-->
+		<!--						<div class="d-flex flex-wrap mb-5">-->
+		<!--							<div class="mr-5 mt-3">-->
+		<!--								<p class="text-muted">Order value</p>-->
+		<!--								<h3 class="text-primary fs-30 font-weight-medium">12.3k</h3>-->
+		<!--							</div>-->
+		<!--							<div class="mr-5 mt-3">-->
+		<!--								<p class="text-muted">Orders</p>-->
+		<!--								<h3 class="text-primary fs-30 font-weight-medium">14k</h3>-->
+		<!--							</div>-->
+		<!--							<div class="mr-5 mt-3">-->
+		<!--								<p class="text-muted">Users</p>-->
+		<!--								<h3 class="text-primary fs-30 font-weight-medium">71.56%</h3>-->
+		<!--							</div>-->
+		<!--							<div class="mt-3">-->
+		<!--								<p class="text-muted">Downloads</p>-->
+		<!--								<h3 class="text-primary fs-30 font-weight-medium">34040</h3>-->
+		<!--							</div>-->
+		<!--						</div>-->
+		<!--						<canvas id="order-chart"></canvas>-->
+		<!--					</div>-->
+		<!--				</div>-->
+		<!--			</div>-->
+		<!--			<div class="col-md-6 grid-margin stretch-card">-->
+		<!--				<div class="card">-->
+		<!--					<div class="card-body">-->
+		<!--						<div class="d-flex justify-content-between">-->
+		<!--							<p class="card-title">Sales Report</p>-->
+		<!--							<a href="#" class="text-info">View all</a>-->
+		<!--						</div>-->
+		<!--						<p class="font-weight-500">The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc</p>-->
+		<!--						<div id="sales-legend" class="chartjs-legend mt-4 mb-2"></div>-->
+		<!--						<canvas id="sales-chart"></canvas>-->
+		<!--					</div>-->
+		<!--				</div>-->
+		<!--			</div>-->
+		<!--		</div>-->
+		<!--		<div class="row">-->
+		<!--			<div class="col-md-12 grid-margin stretch-card">-->
+		<!--				<div class="card position-relative">-->
+		<!--					<div class="card-body">-->
+		<!--						<div id="detailedReports" class="carousel slide detailed-report-carousel position-static pt-2" data-ride="carousel">-->
+		<!--							<div class="carousel-inner">-->
+		<!--								<div class="carousel-item active">-->
+		<!--									<div class="row">-->
+		<!--										<div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">-->
+		<!--											<div class="ml-xl-4 mt-3">-->
+		<!--												<p class="card-title">Detailed Reports</p>-->
+		<!--												<h1 class="text-primary">$34040</h1>-->
+		<!--												<h3 class="font-weight-500 mb-xl-4 text-primary">North America</h3>-->
+		<!--												<p class="mb-2 mb-xl-0">The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc</p>-->
+		<!--											</div>-->
+		<!--										</div>-->
+		<!--										<div class="col-md-12 col-xl-9">-->
+		<!--											<div class="row">-->
+		<!--												<div class="col-md-6 border-right">-->
+		<!--													<div class="table-responsive mb-3 mb-md-0 mt-3">-->
+		<!--														<table class="table table-borderless report-table">-->
+		<!--															<tr>-->
+		<!--																<td class="text-muted">Illinois</td>-->
+		<!--																<td class="w-100 px-0">-->
+		<!--																	<div class="progress progress-md mx-4">-->
+		<!--																		<div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>-->
+		<!--																	</div>-->
+		<!--																</td>-->
+		<!--																<td><h5 class="font-weight-bold mb-0">713</h5></td>-->
+		<!--															</tr>-->
+		<!--															<tr>-->
+		<!--																<td class="text-muted">Washington</td>-->
+		<!--																<td class="w-100 px-0">-->
+		<!--																	<div class="progress progress-md mx-4">-->
+		<!--																		<div class="progress-bar bg-warning" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>-->
+		<!--																	</div>-->
+		<!--																</td>-->
+		<!--																<td><h5 class="font-weight-bold mb-0">583</h5></td>-->
+		<!--															</tr>-->
+		<!--															<tr>-->
+		<!--																<td class="text-muted">Mississippi</td>-->
+		<!--																<td class="w-100 px-0">-->
+		<!--																	<div class="progress progress-md mx-4">-->
+		<!--																		<div class="progress-bar bg-danger" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>-->
+		<!--																	</div>-->
+		<!--																</td>-->
+		<!--																<td><h5 class="font-weight-bold mb-0">924</h5></td>-->
+		<!--															</tr>-->
+		<!--															<tr>-->
+		<!--																<td class="text-muted">California</td>-->
+		<!--																<td class="w-100 px-0">-->
+		<!--																	<div class="progress progress-md mx-4">-->
+		<!--																		<div class="progress-bar bg-info" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>-->
+		<!--																	</div>-->
+		<!--																</td>-->
+		<!--																<td><h5 class="font-weight-bold mb-0">664</h5></td>-->
+		<!--															</tr>-->
+		<!--															<tr>-->
+		<!--																<td class="text-muted">Maryland</td>-->
+		<!--																<td class="w-100 px-0">-->
+		<!--																	<div class="progress progress-md mx-4">-->
+		<!--																		<div class="progress-bar bg-primary" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>-->
+		<!--																	</div>-->
+		<!--																</td>-->
+		<!--																<td><h5 class="font-weight-bold mb-0">560</h5></td>-->
+		<!--															</tr>-->
+		<!--															<tr>-->
+		<!--																<td class="text-muted">Alaska</td>-->
+		<!--																<td class="w-100 px-0">-->
+		<!--																	<div class="progress progress-md mx-4">-->
+		<!--																		<div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>-->
+		<!--																	</div>-->
+		<!--																</td>-->
+		<!--																<td><h5 class="font-weight-bold mb-0">793</h5></td>-->
+		<!--															</tr>-->
+		<!--														</table>-->
+		<!--													</div>-->
+		<!--												</div>-->
+		<!--												<div class="col-md-6 mt-3">-->
+		<!--													<canvas id="north-america-chart"></canvas>-->
+		<!--													<div id="north-america-legend"></div>-->
+		<!--												</div>-->
+		<!--											</div>-->
+		<!--										</div>-->
+		<!--									</div>-->
+		<!--								</div>-->
+		<!--								<div class="carousel-item">-->
+		<!--									<div class="row">-->
+		<!--										<div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">-->
+		<!--											<div class="ml-xl-4 mt-3">-->
+		<!--												<p class="card-title">Detailed Reports</p>-->
+		<!--												<h1 class="text-primary">$34040</h1>-->
+		<!--												<h3 class="font-weight-500 mb-xl-4 text-primary">North America</h3>-->
+		<!--												<p class="mb-2 mb-xl-0">The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc</p>-->
+		<!--											</div>-->
+		<!--										</div>-->
+		<!--										<div class="col-md-12 col-xl-9">-->
+		<!--											<div class="row">-->
+		<!--												<div class="col-md-6 border-right">-->
+		<!--													<div class="table-responsive mb-3 mb-md-0 mt-3">-->
+		<!--														<table class="table table-borderless report-table">-->
+		<!--															<tr>-->
+		<!--																<td class="text-muted">Illinois</td>-->
+		<!--																<td class="w-100 px-0">-->
+		<!--																	<div class="progress progress-md mx-4">-->
+		<!--																		<div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>-->
+		<!--																	</div>-->
+		<!--																</td>-->
+		<!--																<td><h5 class="font-weight-bold mb-0">713</h5></td>-->
+		<!--															</tr>-->
+		<!--															<tr>-->
+		<!--																<td class="text-muted">Washington</td>-->
+		<!--																<td class="w-100 px-0">-->
+		<!--																	<div class="progress progress-md mx-4">-->
+		<!--																		<div class="progress-bar bg-warning" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>-->
+		<!--																	</div>-->
+		<!--																</td>-->
+		<!--																<td><h5 class="font-weight-bold mb-0">583</h5></td>-->
+		<!--															</tr>-->
+		<!--															<tr>-->
+		<!--																<td class="text-muted">Mississippi</td>-->
+		<!--																<td class="w-100 px-0">-->
+		<!--																	<div class="progress progress-md mx-4">-->
+		<!--																		<div class="progress-bar bg-danger" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>-->
+		<!--																	</div>-->
+		<!--																</td>-->
+		<!--																<td><h5 class="font-weight-bold mb-0">924</h5></td>-->
+		<!--															</tr>-->
+		<!--															<tr>-->
+		<!--																<td class="text-muted">California</td>-->
+		<!--																<td class="w-100 px-0">-->
+		<!--																	<div class="progress progress-md mx-4">-->
+		<!--																		<div class="progress-bar bg-info" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>-->
+		<!--																	</div>-->
+		<!--																</td>-->
+		<!--																<td><h5 class="font-weight-bold mb-0">664</h5></td>-->
+		<!--															</tr>-->
+		<!--															<tr>-->
+		<!--																<td class="text-muted">Maryland</td>-->
+		<!--																<td class="w-100 px-0">-->
+		<!--																	<div class="progress progress-md mx-4">-->
+		<!--																		<div class="progress-bar bg-primary" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>-->
+		<!--																	</div>-->
+		<!--																</td>-->
+		<!--																<td><h5 class="font-weight-bold mb-0">560</h5></td>-->
+		<!--															</tr>-->
+		<!--															<tr>-->
+		<!--																<td class="text-muted">Alaska</td>-->
+		<!--																<td class="w-100 px-0">-->
+		<!--																	<div class="progress progress-md mx-4">-->
+		<!--																		<div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>-->
+		<!--																	</div>-->
+		<!--																</td>-->
+		<!--																<td><h5 class="font-weight-bold mb-0">793</h5></td>-->
+		<!--															</tr>-->
+		<!--														</table>-->
+		<!--													</div>-->
+		<!--												</div>-->
+		<!--												<div class="col-md-6 mt-3">-->
+		<!--													<canvas id="south-america-chart"></canvas>-->
+		<!--													<div id="south-america-legend"></div>-->
+		<!--												</div>-->
+		<!--											</div>-->
+		<!--										</div>-->
+		<!--									</div>-->
+		<!--								</div>-->
+		<!--							</div>-->
+		<!--							<a class="carousel-control-prev" href="#detailedReports" role="button" data-slide="prev">-->
+		<!--								<span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+		<!--								<span class="sr-only">Previous</span>-->
+		<!--							</a>-->
+		<!--							<a class="carousel-control-next" href="#detailedReports" role="button" data-slide="next">-->
+		<!--								<span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+		<!--								<span class="sr-only">Next</span>-->
+		<!--							</a>-->
+		<!--						</div>-->
+		<!--					</div>-->
+		<!--				</div>-->
+		<!--			</div>-->
+		<!--		</div>-->
 
-									<div class="container">
-										<div class="clearfix"></div>
-										<hr/>
-										<div class="table-responsive">
-											<table id="tabla_super_admins" width="100%" border=0 class="table table-striped table-bordered tabla_form display expandable-table">
-												<thead>
-												<tr>
-													<th>Nombre</th>
-													<th>Nombre Usuario</th>
-													<th>Email</th>
-													<th>Nivel</th>
-													<th>Acción</th>
-												</tr>
-												</thead>
-												<tbody id="tbody">
-													<?php foreach ($administradores as $administrador):
-														echo "<td>$administrador->primerNombreAdministrador" . " " . "$administrador->primerApellidoAdministrador</td>";
-														echo "<td>$administrador->usuario</td>";
-														echo "<td>$administrador->direccionCorreoElectronico</td>";
-														echo "<td>$administrador->nivel</td>";
-														echo "<td><button class='btn btn-primary super_ver_admin_modal' data-toggle='modal' data-id='$administrador->id_administrador' data-target='#super_ver_admin'>Ver</button></td></tr>";
-													endforeach; ?>
-												</tbody>
-											</table>
-										</div>
-									</div>
-									<div class="modal fade" id="super_ver_admin" tabindex="-1" role="dialog" aria-labelledby="verAdmin">
-										<div class="modal-dialog" role="document">
-											<div class="modal-content">
-												<div class="modal-header">
-													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-													<h4 class="modal-title" id="verAdmin">Administrador <label id="super_id_admin_modal"></label> <span id="super_status_adm"></span></h4>
-												</div>
-												<div class="modal-body">
-													<div class="form-group">
-														<label>Primer Nombre:</label>
-														<input type="text" id="super_primernombre_admin_modal" class="form-control" name="" value="">
-													</div>
-													<div class="form-group">
-														<label>Segundo Nombre:</label>
-														<input type="text" id="super_segundonombre_admin_modal" class="form-control" name="" value="">
-													</div>
-													<div class="form-group">
-														<label>Primer Apellido:</label>
-														<input type="text" id="super_primerapellido_admin_modal" class="form-control" name="" value="">
-													</div>
-													<div class="form-group">
-														<label>Segundo Apellido:</label>
-														<input type="text" id="super_segundoapellido_admin_modal" class="form-control" name="" value="">
-													</div>
-													<div class="form-group">
-														<label>Numero de Cedula:</label>
-														<input type="text" id="super_numerocedula_admin_modal" class="form-control" name="" value="">
-													</div>
-													<div class="form-group">
-														<label>Nivel de acceso:</label><br/>
-														<select name="super_acceso_nvl_modal" id="super_acceso_nvl_modal" class="selectpicker form-control show-tick" required="">
-															<option id="1" value="0">Total 0</option>
-															<option id="2" value="1">Evaluador 1</option>
-															<option id="3" value="2">Reportes 2</option>
-															<option id="4" value="3">Cámaras 3</option>
-															<option id="5" value="4">Historico 4</option>
-															<option id="6" value="5">Seguimientos 5</option>
-															<option id="7" value="6">Asignación 6</option>
-														</select>
-													</div>
-													<div class="form-group">
-														<label>Nombre usuario:</label>
-														<input type="text" id="super_nombre_admin_modal" class="form-control" name="" value="">
-													</div>
-													<div class="form-group">
-														<label>Contraseña:</label>
-														<input type="text" id="super_contrasena_admin_modal" class="form-control" name="" value="">
-													</div>
-													<div class="form-group">
-														<label>Dirección correo electrónico:</label>
-														<input type="text" id="super_correo_electronico_admin_modal" class="form-control" name="" value="">
-													</div>
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-warning" id="super_eliminar_admin">Eliminar</button>
-													<button type="button" class="btn btn-primary" id="super_actualizar_admin">Actualizar</button>
-													<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-												</div>
-											</div>
-										</div>
-									</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
-<?php endif; ?>
-
 	<!-- content-wrapper ends -->
 
-
-
-
-
+<?php endif; ?>

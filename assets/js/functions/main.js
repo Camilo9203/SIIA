@@ -6881,10 +6881,10 @@ function notificaciones(baseURL) {
 				$("li.notificaciones").append("</ul>");
 			},
 			error: function (ev) {
-				notificacion(
+				/** notificacion(
 					"Hubo un error al cargar las notificaciones, por favor, vuelva a iniciar sesión.",
 					"success"
-				);
+				);**/
 			},
 		});
 		/*interval_notificacion = setInterval(functions() {

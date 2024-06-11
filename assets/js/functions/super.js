@@ -33,7 +33,7 @@ if (funcion == "super" && funcion_ != "panel") {
 					confirmButtonText: 'Aceptar',
 				}).then((result) => {
 					if (result.isConfirmed) {
-						redirect(baseURL + '/super?');
+						redirect(baseURL + 'super?');
 					}
 				})
 			} else {
