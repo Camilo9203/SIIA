@@ -22,6 +22,7 @@
 		<!-- scripts -->
 		<div class="hidden" id="scripts-siia">
 			<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
 			<!-- plugins:js -->
 			<script src="<?= base_url('assets/js/dashboard/vendors/js/vendor.bundle.base.js') ?>"></script>
 			<!-- endinject -->
@@ -45,10 +46,11 @@
 			<!-- Custom js for this page-->
 			<script src="<?= base_url('assets/js/dashboard/js/chart.js') ?>"></script>
 			<!-- End custom js for this page-->
+			<!-- Datatable:js -->
+			<script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
 			<!-- Sweet Alert -->
 			<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 			<!-- Scripts -->
-			<script src="<?= base_url('assets/js/notifIt.js') ?>" type="text/javascript"></script>
 			<script src="<?= base_url('assets/js/jquery.validate.js') ?>" type="text/javascript"></script>
 			<!-- Script propio -->
 			<script src="<?= base_url('assets/js/functions/main.js?v=1.0.8.61219') . time() ?>" type="text/javascript"></script>
@@ -66,7 +68,6 @@
 			<script src="<?= base_url('assets/js/functions/resoluciones.js?v=1.4.1') . time() ?>" type="text/javascript"></script>
 			<script src="<?= base_url('assets/js/functions/nits.js?v=1.5.1') . time() ?>" type="text/javascript"></script>
 			<script src="<?= base_url('assets/js/functions/panel.js?v=1.0.1') . time() ?>" type="text/javascript"></script>
-			<script src="<?= base_url('assets/js/functions/formularios.js?v=1.0.1') . time() ?>" type="text/javascript"></script>
 			<script type="text/javascript">
 				$(window).on('load', function() {
 					$(".se-pre-con").fadeOut("slow");

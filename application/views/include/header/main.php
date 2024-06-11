@@ -35,6 +35,8 @@
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="white-translucent" />
 	<meta name="google-site-verification" content="DloHloB2_mQ9o7BPTd9xXEYHUeXrnWQqKGGKeuGrkLk" />
+	<!-- DataTables	-->
+	<link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
 	<!-- Dashboard	-->
 	<link rel="stylesheet" href="<?= base_url('assets/js/dashboard/vendors/feather/feather.css') ?>">
 	<link rel="stylesheet" href="<?= base_url('assets/js/dashboard/vendors/ti-icons/css/themify-icons.css') ?>">
@@ -65,12 +67,11 @@
 		<?= "<div class='hidden' id='data_logg' data-log='$logged_in'></div>" ?>
 		<!-- Navbar Usuario no registrado -->
 		<?php
-		// Datos enviados a menu y navbar
+			// Datos enviados a menu y navbar
 			$data = array('tipo_usuario' => $tipo_usuario, 'logged_in' => $logged_in, 'activeLink' => $activeLink, 'organizacion', $data_organizacion);
-
+			// Comprobar si esta iniciada la sesión
 			if ($logged_in != FALSE && $tipo_usuario != "none"):
-				$this->load->view('include/partial/_navbar', $data);
-		?>
+				$this->load->view('include/partial/_navbar', $data); ?>
 			<!-- partial ajustes visuales-->
 			<div class="container-fluid page-body-wrapper">
 				<!-- partial:../../partials/_settings-panel.html -->
@@ -188,7 +189,7 @@
 							</div>
 							<ul class="chat-list">
 								<li class="list active">
-									<div class="profile"><img src="../../images/faces/face1.jpg" alt="image"><span class="online"></span></div>
+									<div class="profile"><img src="<?= base_url('assets/img/images/faces/face1.jpg')?>" alt="image"><span class="online"></span></div>
 									<div class="info">
 										<p>Thomas Douglas</p>
 										<p>Available</p>
@@ -196,7 +197,7 @@
 									<small class="text-muted my-auto">19 min</small>
 								</li>
 								<li class="list">
-									<div class="profile"><img src="../../images/faces/face2.jpg" alt="image"><span class="offline"></span></div>
+									<div class="profile"><img src="<?= base_url('assets/img/images/faces/face2.jpg')?>" alt="image"><span class="offline"></span></div>
 									<div class="info">
 										<div class="wrapper d-flex">
 											<p>Catherine</p>
@@ -207,7 +208,7 @@
 									<small class="text-muted my-auto">23 min</small>
 								</li>
 								<li class="list">
-									<div class="profile"><img src="../../images/faces/face3.jpg" alt="image"><span class="online"></span></div>
+									<div class="profile"><img src="<?= base_url('assets/img/images/faces/face3.jpg')?>" alt="image"><span class="online"></span></div>
 									<div class="info">
 										<p>Daniel Russell</p>
 										<p>Available</p>
@@ -215,7 +216,7 @@
 									<small class="text-muted my-auto">14 min</small>
 								</li>
 								<li class="list">
-									<div class="profile"><img src="../../images/faces/face4.jpg" alt="image"><span class="offline"></span></div>
+									<div class="profile"><img src="<?= base_url('assets/img/images/faces/face4.jpg')?>" alt="image"><span class="offline"></span></div>
 									<div class="info">
 										<p>James Richardson</p>
 										<p>Away</p>
@@ -223,7 +224,7 @@
 									<small class="text-muted my-auto">2 min</small>
 								</li>
 								<li class="list">
-									<div class="profile"><img src="../../images/faces/face5.jpg" alt="image"><span class="online"></span></div>
+									<div class="profile"><img src="<?= base_url('assets/img/images/faces/face5.jpg')?>" alt="image"><span class="online"></span></div>
 									<div class="info">
 										<p>Madeline Kennedy</p>
 										<p>Available</p>
@@ -231,7 +232,7 @@
 									<small class="text-muted my-auto">5 min</small>
 								</li>
 								<li class="list">
-									<div class="profile"><img src="../../images/faces/face6.jpg" alt="image"><span class="online"></span></div>
+									<div class="profile"><img src="<?= base_url('assets/img/images/faces/face6.jpg')?>" alt="image"><span class="online"></span></div>
 									<div class="info">
 										<p>Sarah Graves</p>
 										<p>Available</p>
@@ -247,7 +248,5 @@
 				<!-- partial:../../partials/_sidebar.html -->
 		<?php
 				$this->load->view('include/partial/_sidebar', $data);
-			endif;
-		?>
-
+			endif; ?>
 

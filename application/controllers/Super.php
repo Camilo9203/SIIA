@@ -85,7 +85,7 @@ class Super extends CI_Controller {
 	/**
 	 * Panel súper administrador
 	 */
-	public function panel(){
+	public function Panel(){
 		verify_session_admin();
 		$is = $this->db->select("valor")->from("opciones")->where("nombre","super")->get()->row()->valor;
 		if($is == "TRUE"):
@@ -99,7 +99,7 @@ class Super extends CI_Controller {
 	/**
 	 * Administradores
 	 */
-	public function administradores(){
+	public function Administradores(){
 		verify_session_admin();
 		$is = $this->db->select("valor")->from("opciones")->where("nombre","super")->get()->row()->valor;
 		if($is == "TRUE"):
@@ -120,6 +120,20 @@ class Super extends CI_Controller {
 			$data = $this->dataSessionSuper();
 			$this->load->view('include/header/main', $data);
 			$this->load->view('super/pages/users', $data);
+			$this->load->view('include/footer/main');
+			$this->logs_sia->logs('PLACE_USER');
+		endif;
+	}
+	/**
+	 * Correos
+	 */
+	public function Correos(){
+		verify_session_admin();
+		$is = $this->db->select("valor")->from("opciones")->where("nombre","super")->get()->row()->valor;
+		if($is == "TRUE"):
+			$data = $this->dataSessionSuper();
+			$this->load->view('include/header/main', $data);
+			$this->load->view('super/pages/emails', $data);
 			$this->load->view('include/footer/main');
 			$this->logs_sia->logs('PLACE_USER');
 		endif;

@@ -7291,8 +7291,7 @@ function tablas() {
 						footer: "Unidad Administrativa especial de organizaciones Solidarias",*/
 							//messageBottom: "Unidad Administrativa Especial de Organizaciones Solidarias | SIIA",
 							messageTop:
-								"Registro de ____________________________ por la Unidad Administrativa Especial de Organizaciones Solidarias | SIIA " +
-								$.datepicker.formatDate("dd/mm/yy", new Date()),
+								"Registro de ____________________________ por la Unidad Administrativa Especial de Organizaciones Solidarias | SIIA ",
 							sheetName: "Datos SIIA",
 							//title: "Datos",
 							filename: document.title,
@@ -7358,7 +7357,7 @@ function tablas() {
 						["10 filas - ", "25 filas - ", "50 filas -", "Mostrar todo"],
 					],
 					language: {
-						url: "//cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json",
+						url: "https://cdn.datatables.net/plug-ins/2.0.8/i18n/es-ES.json",
 					},
 					order: [[0, "asc"]],
 					rowGroup: {
