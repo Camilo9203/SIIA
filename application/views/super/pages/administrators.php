@@ -14,49 +14,50 @@ $CI->load->model("TokenModel");
 if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 	<!-- partial -->
 	<div class="main-panel">
-	<div class="content-wrapper">
-		<!-- Tabla de usuarios -->
-		<div class="row">
-			<div class="col-md-12 grid-margin stretch-card">
-				<div class="card">
-					<div class="card-body">
-						<input type="button" class="btn btn-primary admin-modal float-right" data-funct="crear" data-toggle="modal" data-target="#modal-admin" value="Crear administrador">
-						<br>
-						<p class="card-title">Administradores registrados</p>
-						<div class="row">
-							<div class="col-12">
-								<div class="container">
-									<div class="clearfix"></div>
-									<hr/>
-									<div class="table-responsive">
-										<table id="tabla_super_admins" width="100%" border=0 class="table table-striped table-bordered tabla_form display expandable-table">
-											<thead>
-												<tr>
-													<th>Nombre</th>
-													<th>Número de cédula</th>
-													<th>Correo electrónico</th>
-													<th>Rol</th>
-													<th>Estado</th>
-													<th>Acción</th>
-												</tr>
-											</thead>
-											<tbody id="tbody">
-											<?php foreach ($administradores as $administrador):
-												echo "<tr><td>$administrador->primerNombreAdministrador" . " " . $administrador->primerApellidoAdministrador . "</td>";
-												echo "<td>$administrador->numCedulaCiudadaniaAdministrador</td>";
-												echo "<td>$administrador->direccionCorreoElectronico</td>";
-												echo "<td>"; echo $CI->AdministradoresModel->getNivel($administrador->nivel); echo "</td>";
-												echo "<td>";
-												if($administrador->logged_in == 1):
-													echo 'Conectado';
-												else:
-													echo" Desconectado";
-												endif;
-												echo "</td>";
-												echo "<td><button class='btn btn-primary btn-sm admin-modal' data-funct='actualizar' data-toggle='modal' data-id='$administrador->id_administrador' data-target='#modal-admin'>Ver</button></td></tr>";
-											endforeach; ?>
-											</tbody>
-										</table>
+		<div class="content-wrapper">
+			<!-- Tabla de usuarios -->
+			<div class="row">
+				<div class="col-md-12 grid-margin stretch-card">
+					<div class="card">
+						<div class="card-body">
+							<input type="button" class="btn btn-primary admin-modal float-right" data-funct="crear" data-toggle="modal" data-target="#modal-admin" value="Crear administrador">
+							<br>
+							<p class="card-title">Administradores registrados</p>
+							<div class="row">
+								<div class="col-12">
+									<div class="container">
+										<div class="clearfix"></div>
+										<hr/>
+										<div class="table-responsive">
+											<table id="tabla_super_admins" width="100%" border=0 class="table table-striped table-bordered tabla_form display expandable-table">
+												<thead>
+													<tr>
+														<th>Nombre</th>
+														<th>Número de cédula</th>
+														<th>Correo electrónico</th>
+														<th>Rol</th>
+														<th>Estado</th>
+														<th>Acción</th>
+													</tr>
+												</thead>
+												<tbody id="tbody">
+												<?php foreach ($administradores as $administrador):
+													echo "<tr><td>$administrador->primerNombreAdministrador" . " " . $administrador->primerApellidoAdministrador . "</td>";
+													echo "<td>$administrador->numCedulaCiudadaniaAdministrador</td>";
+													echo "<td>$administrador->direccionCorreoElectronico</td>";
+													echo "<td>"; echo $CI->AdministradoresModel->getNivel($administrador->nivel); echo "</td>";
+													echo "<td>";
+													if($administrador->logged_in == 1):
+														echo 'Conectado';
+													else:
+														echo" Desconectado";
+													endif;
+													echo "</td>";
+													echo "<td><button class='btn btn-primary btn-sm admin-modal' data-funct='actualizar' data-toggle='modal' data-id='$administrador->id_administrador' data-target='#modal-admin'>Ver</button></td></tr>";
+												endforeach; ?>
+												</tbody>
+											</table>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -65,10 +66,9 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- Modal formulario administradores -->
-	<div class="modal fade" id="modal-admin" tabindex="-1" role="dialog" aria-labelledby="verAdmin">
-		<div class="modal-dialog modal-lg" role="document">
+		<!-- Modal formulario administradores -->
+		<div class="modal fade" id="modal-admin" tabindex="-1" role="dialog" aria-labelledby="verAdmin">
+			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h4 class="modal-title" id="verAdmin">Administrador <label id="super_id_admin_modal"></label> <span id="super_status_adm"></span></h4>
@@ -178,17 +178,18 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 							</div>
 							<?= form_close(); ?>
 						</div>
-					<div class="modal-footer">
-						<div class="btn-group" role='group' aria-label='acciones' id="actions-admins">
-							<button type="button" class="btn btn-danger" id="super_eliminar_admin">Eliminar</button>
-							<button type="button" class="btn btn-info" id="super_desconectar_admin">Desconectar</button>
-							<button type="button" class="btn btn-primary" id="super_actualizar_admin">Actualizar</button>
+						<div class="modal-footer">
+							<div class="btn-group" role='group' aria-label='acciones' id="actions-admins">
+								<button type="button" class="btn btn-danger" id="super_eliminar_admin">Eliminar</button>
+								<button type="button" class="btn btn-info" id="super_desconectar_admin">Desconectar</button>
+								<button type="button" class="btn btn-primary" id="super_actualizar_admin">Actualizar</button>
+							</div>
+							<button type="button" class="btn btn-success" id="super_nuevo_admin">Crear</button>
 						</div>
-						<button type="button" class="btn btn-success" id="super_nuevo_admin">Crear</button>
-					</div>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 <?php endif; ?>
 </div>

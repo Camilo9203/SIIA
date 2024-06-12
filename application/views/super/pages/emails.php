@@ -20,7 +20,7 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 			<div class="col-md-12 grid-margin stretch-card">
 				<div class="card">
 					<div class="card-body">
-						<p class="card-title">Usuarios registrados</p>
+						<p class="card-title">Registro correos</p>
 						<div class="row">
 							<div class="col-12">
 								<div class="container">

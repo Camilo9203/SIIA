@@ -1,5 +1,10 @@
 /* Your custom styles */
-
+.spanRojo {
+	color: red;
+}
+.spanVerde {
+	color: green;
+}
 .popup-toast {
 	height: 80px;
 	width: 100px;
