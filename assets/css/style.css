@@ -1,4 +1,5 @@
 /* Your custom styles */
+
 .popup-toast {
 	height: 80px;
 	width: 100px;
@@ -50,4 +51,8 @@
 }
 .auth .brand-logo {
 	text-align: center !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	border-radius: 50% !important;
+	padding: 0.5em 0.9em !important;
 }

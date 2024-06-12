@@ -30,13 +30,13 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 										<table id="tabla_super_usuarios" width="100%" border=0 class="table table-striped table-bordered tabla_form display expandable-table">
 											<thead>
 											<tr>
-												<td>Organización</td>
-												<td>NIT</td>
-												<td>Usuario</td>
-												<td>Contraseña</td>
-												<td>Estado</td>
-												<td>Conectado</td>
-												<td>Acciones</td>
+												<th>Organización</th>
+												<th>NIT</th>
+												<th>Usuario</th>
+												<th>Contraseña</th>
+												<th>Estado</th>
+												<th>Conectado</th>
+												<th>Acciones</th>
 											</tr>
 											</thead>
 											<tbody id="tbody">
@@ -48,7 +48,7 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 												echo "<td>"; echo $CI->UsuariosModel->getPassword($usuario->contrasena_rdel); echo "</td>";
 												echo "<td>"; echo $CI->TokenModel->getState($usuario->verificado); echo "</td>";
 												echo "<td>"; echo $CI->UsuariosModel->getConnection($usuario->logged_in); echo "</td>";
-												echo "<td><button class='btn btn-primary admin-usuario' data-toggle='modal' data-id='$usuario->id_usuario' data-target='#modal-user'>Ver</button></td></tr>";
+												echo "<td><button class='btn btn-primary btn-sm admin-usuario' data-toggle='modal' data-id='$usuario->id_usuario' data-target='#modal-user'>Ver</button></td></tr>";
 											endforeach; ?>
 											</tbody>
 										</table>
@@ -59,9 +59,9 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 									<div class="modal-dialog" role="document">
 										<div class="modal-content">
 											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 												<h4 class="modal-title" id="verUser">Usuario: <label id="super_usuario_modal"></label> <span id="super_status_usr"></span></h4>
 												<input type="hidden" id="super_id_user">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 											</div>
 											<div class="modal-body">
 												<div class="container-fluid">

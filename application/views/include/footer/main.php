@@ -3,8 +3,8 @@
  * @var $logged_in
  * @var $tipo_usuario
  */
-?>					<!-- Modals -->
-					<?php $this->load->view('include/footer/modals'); ?>
+?>			<!-- Modals -->
+			<?php $this->load->view('include/footer/modals'); ?>
 			<?php if ($logged_in != FALSE && $tipo_usuario != "none"): ?>
 					<footer class="footer">
 						<div class="d-sm-flex justify-content-center justify-content-sm-between">
@@ -22,7 +22,6 @@
 		<!-- scripts -->
 		<div class="hidden" id="scripts-siia">
 			<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
 			<!-- plugins:js -->
 			<script src="<?= base_url('assets/js/dashboard/vendors/js/vendor.bundle.base.js') ?>"></script>
 			<!-- endinject -->

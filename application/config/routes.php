@@ -67,6 +67,7 @@ $route['super/panel'] = 'Super/panel';
 $route['super/administradores'] = 'Super/administradores';
 $route['super/usuarios'] = 'Super/usuarios';
 $route['super/correos'] = 'Super/correos';
+$route['super/correos'] = 'Super/solicitudes';
 
 /** Usuarios */
 $route['login'] = 'Sesion';

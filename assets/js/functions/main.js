@@ -2132,24 +2132,9 @@ $(document).ready(function () {
 		$("#verLineaTiempo").slideDown();
 	});
 
-	/*$("#verHistObs").draggable({
-		handle: ".modal-dialog"
-	});*/
-
-	dragDivFormById("verHistObs");
-
-	$("#verHistObs").on("shown.bs.modal", function () {
-		$(document).off("focusin.modal");
-	});
-
-	$("#verHistObs>div>div>.modal-body").resizable({ alsoResize: "#verHistObs" });
-
 	/**
 		Termina Eventos Cliks
 	**/
-	// ____________________________________________________________________________________________________________
-	// ____________________________________________________________________________________________________________
-
 	/**
 		Se añade a JqueryValdate el metodo para aceptar regex en rules.
 	**/
@@ -6751,8 +6736,6 @@ $(document).ready(function () {
 		alert('Your search string contains illegal characters.');
 	} */
 
-	dragDivForm("contenedor--menu2");
-	//dragDivForm("contenedor--menu");
 
 	$("#verDivAgregarOrgHist").click(function () {
 		$(".divAgregarOrgHist").slideDown();
@@ -7225,7 +7208,7 @@ function tablas() {
 	if (typeof $.fn.DataTable === "undefined") {
 		return;
 	}
-
+	// Tablas inicializadas
 	var tablas = [
 		"tabla_asginadas",
 		"tabla_sinasignar",
@@ -7255,7 +7238,7 @@ function tablas() {
 		"tabla_organizaciones_inscritas",
 		"tabla_organizaciones_resolucion"
 	];
-
+	// Iniciar tablas
 	for (i = 0; i < tablas.length; i++) {
 		var handleDataTableButtons = function () {
 			if ($("#" + tablas[i] + "").length) {
@@ -7387,10 +7370,7 @@ function tablas() {
 		})();
 		TableManageButtons.init();
 	}
-	mensajeConsola();
-	selects();
-	paging("tabla_encuestas");
-	$(".selectpicker").selectpicker("refresh");
+
 }
 /**
 	Parametros de los selects options.
@@ -7427,13 +7407,7 @@ function submenu() {
 		}
 	});
 }
-/**
-	Muestra mensaje en consola :#.
-**/
-function mensajeConsola() {
-	//console.clear();
-	//console.log("%cATENCIÓN:\n*Esta consola es solo para desarrolladores.\n*Si tiene algún inconveniente comuníquese con nosotros.\n*Si tiene instalado algún AdBlock por favor deshabilitelo para esta aplicación.\nUnidad Administrativa Especial de Organizaciones Solidarias (U.A.E.O.S).\nLinea gratuita:01 8000 12 2020\nPBX:57+1 3275252\nFax:3275248\nCorreo:atencionalciudadano@orgsolidarias.gov.co", "font: 2em consolas; color: #c61f1b; background-color: #EEF3FB;");
-}
+
 /** Inicializa funciones principales **/
 function initJS() {
 	validaciones();
@@ -7482,82 +7456,6 @@ function dragElemento(elmnt) {
 		document.onmouseup = null;
 		document.onmousemove = null;
 	}
-}
-function dragDivForm(div) {
-	$("." + div).draggable({
-		start: function (event, ui) {
-			$(this).data("preventBehaviour", true);
-		},
-	});
-	$("." + div + " :input")
-		.on("mousedown", function (e) {
-			var mdown = document.createEvent("MouseEvents");
-			mdown.initMouseEvent(
-				"mousedown",
-				false,
-				true,
-				window,
-				0,
-				e.screenX,
-				e.screenY,
-				e.clientX,
-				e.clientY,
-				true,
-				false,
-				false,
-				true,
-				0,
-				null
-			);
-			$(this)
-				.closest("." + div)[0]
-				.dispatchEvent(mdown);
-		})
-		.on("click", function (e) {
-			var $draggable = $(this).closest("." + div);
-			if ($draggable.data("preventBehaviour")) {
-				e.preventDefault();
-				$draggable.data("preventBehaviour", false);
-			}
-		});
-}
-function dragDivFormById(div) {
-	$("#" + div).draggable({
-		start: function (event, ui) {
-			$(this).data("preventBehaviour", true);
-		},
-	});
-	$("#" + div + " :input")
-		.on("mousedown", function (e) {
-			var mdown = document.createEvent("MouseEvents");
-			mdown.initMouseEvent(
-				"mousedown",
-				false,
-				true,
-				window,
-				0,
-				e.screenX,
-				e.screenY,
-				e.clientX,
-				e.clientY,
-				true,
-				false,
-				false,
-				true,
-				0,
-				null
-			);
-			$(this)
-				.closest("#" + div)[0]
-				.dispatchEvent(mdown);
-		})
-		.on("click", function (e) {
-			var $draggable = $(this).closest("." + div);
-			if ($draggable.data("preventBehaviour")) {
-				e.preventDefault();
-				$draggable.data("preventBehaviour", false);
-			}
-		});
 }
 function mayus(e) {
 	e.value = e.value.toUpperCase();

@@ -31,3 +31,10 @@
 		<span class="menu-title">Registro de correos</span>
 	</a>
 </li>
+<!-- Solicitudes -->
+<li class="nav-item <?php if ($activeLink == 'solicitudes') {echo 'active';} ?>">
+	<a class="nav-link" href="<?= base_url('super/solicitudes')?>">
+		<i class="icon-book menu-icon"></i>
+		<span class="menu-title">Solicitudes</span>
+	</a>
+</li>

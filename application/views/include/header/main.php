@@ -13,7 +13,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset=utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 	<meta http-equiv="refresh" content="7200" />
 	<meta name="application-name" content="Sistema Integrado de Información de Acreditación - SIIA" />

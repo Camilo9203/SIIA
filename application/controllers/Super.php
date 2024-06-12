@@ -20,6 +20,7 @@ class Super extends CI_Controller {
 		parent::__construct();
 		$this->load->model('AdministradoresModel');
 		$this->load->model('OrganizacionesModel');
+		$this->load->model('SolicitudesModel');
 		$this->load->model('CorreosRegistroModel');
 		$this->load->model('TokenModel');
 		$this->load->model('UsuariosModel');
@@ -78,7 +79,8 @@ class Super extends CI_Controller {
 			'administradores' => $this->AdministradoresModel->getAdministradores(),
 			'organizaciones' => $this->OrganizacionesModel->getOrganizaciones(),
 			'correos' => $this->CorreosRegistroModel->getCorreosRegistro(),
-			'usuarios' => $this->UsuariosModel->getUsuariosSuperAdmin()
+			'usuarios' => $this->UsuariosModel->getUsuariosSuperAdmin(),
+			'solicitudes' => $this->SolicitudesModel->solicitudes()
 		);
 		return $data;
 	}
@@ -134,6 +136,20 @@ class Super extends CI_Controller {
 			$data = $this->dataSessionSuper();
 			$this->load->view('include/header/main', $data);
 			$this->load->view('super/pages/emails', $data);
+			$this->load->view('include/footer/main');
+			$this->logs_sia->logs('PLACE_USER');
+		endif;
+	}
+	/**
+	 * Solicitudes
+	 */
+	public function Solicitudes(){
+		verify_session_admin();
+		$is = $this->db->select("valor")->from("opciones")->where("nombre","super")->get()->row()->valor;
+		if($is == "TRUE"):
+			$data = $this->dataSessionSuper();
+			$this->load->view('include/header/main', $data);
+			$this->load->view('super/pages/requests', $data);
 			$this->load->view('include/footer/main');
 			$this->logs_sia->logs('PLACE_USER');
 		endif;

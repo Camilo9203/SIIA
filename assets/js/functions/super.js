@@ -12,49 +12,52 @@ $("#init_sp").click(function () {
 	$(window).attr("location", baseURL + "super/?sp:" + $ps_sp);
 });
 if (funcion == "super" && funcion_ != "panel") {
-	var $sp = url.split("?");
-	$sp = $sp[1];
-	var $spF = $sp.split(":");
-	var data = {
-		sp: $spF[1],
-	};
-	// Inicio de sesión súper administrador
-	$.ajax({
-		url: baseURL + "super/verify",
-		type: "post",
-		dataType: "JSON",
-		data: data,
-		success: function (response) {
-			if (response.error === 1) {
-				Alert.fire({
-					title: 'Contraseña invalida!',
-					text: response.msg,
-					icon: 'error',
-					confirmButtonText: 'Aceptar',
-				}).then((result) => {
-					if (result.isConfirmed) {
-						redirect(baseURL + 'super?');
-					}
-				})
-			} else {
-				Alert.fire({
-					title: 'Bienvenido!',
-					text: response.msg,
-					icon: 'success',
-					confirmButtonText: 'Aceptar',
-				}).then((result) => {
-					if (result.isConfirmed) {
-						setInterval(function () {
-							redirect(response.url);
-						}, 1000);
-					}
-				})
-			}
-		},
-		error: function (ev) {
-			console.log(ev)
-		},
-	});
+	// Capturar contraseña super
+	var sp = url.split("?");
+	sp = sp[1];
+	// Si esta definida se comprueba
+	if(sp != undefined) {
+		console.log(sp)
+		var spF = sp.split(":");
+		var data = {
+			sp: spF[1],
+		};
+		// Inicio de sesión súper administrador
+		$.ajax({
+			url: baseURL + "super/verify",
+			type: "post",
+			dataType: "JSON",
+			data: data,
+			success: function (response) {
+				if (response.error === 1) {
+					Alert.fire({
+						title: 'Contraseña invalida!',
+						text: response.msg,
+						icon: 'error',
+					}).then((result) => {
+						if (result.isConfirmed) {
+							redirect(baseURL + 'super?');
+						}
+					})
+				} else {
+					Alert.fire({
+						title: 'Bienvenido!',
+						text: response.msg,
+						icon: 'success',
+					}).then((result) => {
+						if (result.isConfirmed) {
+							setInterval(function () {
+								redirect(response.url);
+							}, 1000);
+						}
+					})
+				}
+			},
+			error: function (ev) {
+				console.log(ev)
+			},
+		});
+	}
 }
 /**
  * Acciones de menú

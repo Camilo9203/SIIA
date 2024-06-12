@@ -6,7 +6,7 @@ $.ajax({
 	type: "GET",
 	dataType: 'json',
 	success: function (response) {
-		correos = JSON.parse(response);
+		//correos = JSON.parse(response);
 	},
 });
 $.ajax({
@@ -14,7 +14,7 @@ $.ajax({
 	type: "GET",
 	dataType: 'json',
 	success: function (response) {
-		correosAcreditadas = JSON.parse(response);
+		//correosAcreditadas = JSON.parse(response);
 	},
 });
 

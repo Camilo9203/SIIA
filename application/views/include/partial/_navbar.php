@@ -33,7 +33,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="cerrar_sesion">¿Está seguro de cerrar sesión <label class="user-profile">super administrador</label>?</h5>
+				<h3 class="modal-title" id="cerrar_sesion">¿Está seguro de cerrar sesión?</h3>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">×</span>
 				</button>
