@@ -6,7 +6,6 @@
  */
 $CI = &get_instance();
 $CI->load->model("SolicitudesModel");
-
 if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 	<!-- partial -->
 	<div class="main-panel">
@@ -31,8 +30,8 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 													<th>ID Solicitud</th>
 													<th>Creación</th>
 													<th>Estado</th>
-													<th>Motivo</th>
-													<th>Modalidad</th>
+													<th>Asignada</th>
+													<th>Tipo</th>
 													<th>Acción</th>
 												</tr>
 											</thead>
@@ -42,7 +41,7 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 												echo "<td>$solicitud->fechaCreacion</td>";
 												echo "<td>$solicitud->nombre</td>";
 												echo "<td>$solicitud->asignada</td>";
-												echo "<td>$solicitud->asignada</td>";
+												echo "<td>$solicitud->tipoSolicitud</td>";
 												echo "<td><button class='btn btn-primary btn-sm admin-modal' data-funct='actualizar' data-toggle='modal' data-id='$administrador->id_administrador' data-target='#modal-admin'>Ver</button></td></tr>";
 											endforeach; ?>
 											</tbody>
