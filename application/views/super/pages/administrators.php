@@ -116,7 +116,7 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group row">
-										<label class="col-sm-3 col-form-label">Numero de cédula:</label>
+										<label class="col-sm-3 col-form-label">Cédula:</label>
 										<div class="col-sm-9">
 											<input class="form-control" type="number" id="super_numerocedula_admin" name="super_numerocedula_admin">
 										</div>
@@ -169,7 +169,7 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group row">
-										<label class="col-sm-3 col-form-label">Dirección correo electrónico:</label>
+										<label class="col-sm-3 col-form-label">Correo electrónico:</label>
 										<div class="col-sm-9">
 											<input class="form-control" type="text" id="super_correo_electronico_admin" name="super_correo_electronico_admin">
 										</div>
@@ -177,7 +177,6 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 								</div>
 							</div>
 							<?= form_close(); ?>
-							</div>
 						</div>
 					<div class="modal-footer">
 						<div class="btn-group" role='group' aria-label='acciones' id="actions-admins">

@@ -803,7 +803,7 @@ function EnviarInformacionOrganizacion(data) {
 		success: function (response) {
 			Alert.fire({
 				title: response.title,
-				text: response.msg,
+				html: response.msg,
 				icon: response.status,
 			})
 		}
