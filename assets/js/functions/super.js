@@ -114,9 +114,7 @@ $(".admin-modal").click(function () {
 	let funct = $(this).attr('data-funct');
 	if (funct === 'crear') {
 		$('#super_nuevo_admin').show();
-		$('#super_eliminar_admin').hide();
-		$('#super_desconectar_admin').hide();
-		$('#super_actualizar_admin').hide();
+		$('#actions-admins').hide();
 		$("#super_id_admin_modal").html("");
 		$("#super_status_adm").html("");
 		$("#super_status_adm").css("background-color", "#ffffff");
@@ -145,9 +143,7 @@ $(".admin-modal").click(function () {
 	}
 	else {
 		$('#super_nuevo_admin').hide();
-		$('#super_eliminar_admin').show();
-		$('#super_desconectar_admin').show();
-		$('#super_actualizar_admin').show();
+		$('#actions-admins').show();
 		data = {
 			id: $(this).attr("data-id"),
 		};
