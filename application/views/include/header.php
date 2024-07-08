@@ -105,7 +105,7 @@ return null; */
 		} ?>
 		<div class="body">
 			<div class="main_container" role="main">
-				<!-- Navar Bar Usuario //TODO: Navbar usuario (Orgaizaciones) -->
+				<!-- Navbar Bar Usuario //TODO: Navbar usuario (Orgaizaciones) -->
 				<?php
 				if ($logged_in && $tipo_usuario == "user") {
 					echo "<div class='hidden' id='data_logg' data-log='$logged_in'></div>";
@@ -113,7 +113,7 @@ return null; */
 					<div class="container">
 						<ol class="breadcrumb col-md-12"></ol>
 					</div>
-					<!-- Navabar Contenido -->
+					<!-- Navbar Contenido -->
 					<div class="top_nav container">
 						<div class="nav_menu">
 							<h3 class="text-center col-md-7"><?= $title; ?></h3>
@@ -156,7 +156,6 @@ return null; */
 					</div>
 					<!-- Menu formulario acreditación //TODO: Menu Formulario para acreditación-->
 					<?php if ($tipo_usuario == "user") { ?>
-
 								<!-- <div class="col-md-12">
 								<hr />
 								<a class="col-md-1 ayuda" title="Ayuda">
