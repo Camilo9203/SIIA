@@ -342,5 +342,6 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 
 	</div>
 	<!-- content-wrapper ends -->
-
+</div>
 <?php endif; ?>
+</div>

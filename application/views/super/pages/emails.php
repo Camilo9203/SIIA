@@ -14,46 +14,47 @@ $CI->load->model("TokenModel");
 if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 	<!-- partial -->
 	<div class="main-panel">
-	<div class="content-wrapper">
-		<!-- Tabla de administradores -->
-		<div class="row">
-			<div class="col-md-12 grid-margin stretch-card">
-				<div class="card">
-					<div class="card-body">
-						<p class="card-title">Registro correos</p>
-						<div class="row">
-							<div class="col-12">
-								<div class="container">
-									<div class="clearfix"></div>
-									<hr/>
-									<div class="table-responsive">
-										<table id="tabla_correos_logs" width="100%" border=0 class="table table-striped table-bordered tabla_form display expandable-table">
-											<thead>
-											<tr>
-												<th>Fecha de envío</th>
-												<th>Para</th>
-												<th>Tipo</th>
-												<th>Estado</th>
-												<th>Acciones</th>
-											</tr>
-											</thead>
-											<tbody id="tbody">
-											<?php
-											foreach ($correos as $correo):
-												echo "<td> $correo->fecha </td>";
-												echo "<td>$correo->para</td>";
-												echo "<td>$correo->tipo</td>";
-												if ($correo->error != "Enviado"):
-													echo "<td><span class='spanRojo'> Error de envío </span></td>";
-													echo "<td><button class='btn btn-primary btn-sm ver-error-envio' data-error='$correo->error'>Ver error</button></td>";
-												else:
-													echo "<td><span class='spanVerde'> Enviado</span></td>";
-													echo "<td><button class='btn btn-success btn-sm disabled' data-error='$correo->error'>Enviado</button></td>";
-												endif;
-												echo '</tr>';
-											endforeach; ?>
-											</tbody>
-										</table>
+		<div class="content-wrapper">
+			<!-- Tabla de administradores -->
+			<div class="row">
+				<div class="col-md-12 grid-margin stretch-card">
+					<div class="card">
+						<div class="card-body">
+							<p class="card-title">Registro correos</p>
+							<div class="row">
+								<div class="col-12">
+									<div class="container">
+										<div class="clearfix"></div>
+										<hr/>
+										<div class="table-responsive">
+											<table id="tabla_correos_logs" width="100%" border=0 class="table table-striped table-bordered tabla_form display expandable-table">
+												<thead>
+												<tr>
+													<th>Fecha de envío</th>
+													<th>Para</th>
+													<th>Tipo</th>
+													<th>Estado</th>
+													<th>Acciones</th>
+												</tr>
+												</thead>
+												<tbody id="tbody">
+												<?php
+												foreach ($correos as $correo):
+													echo "<td> $correo->fecha </td>";
+													echo "<td>$correo->para</td>";
+													echo "<td>$correo->tipo</td>";
+													if ($correo->error != "Enviado"):
+														echo "<td><span class='spanRojo'> Error de envío </span></td>";
+														echo "<td><button class='btn btn-primary btn-sm ver-error-envio' data-error='$correo->error'>Ver error</button></td>";
+													else:
+														echo "<td><span class='spanVerde'> Enviado</span></td>";
+														echo "<td><button class='btn btn-success btn-sm disabled' data-error='$correo->error'>Enviado</button></td>";
+													endif;
+													echo '</tr>';
+												endforeach; ?>
+												</tbody>
+											</table>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -63,7 +64,6 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 			</div>
 		</div>
 	</div>
-
 	<!-- Modal formulario usuarios -->
 	<div class="modal fade" id="modal-user" tabindex="-1" role="dialog" aria-labelledby="verUsuarios">
 		<div class="modal-dialog" role="document">
@@ -124,4 +124,6 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 			</div>
 		</div>
 	</div>
+
 <?php endif; ?>
+</div>

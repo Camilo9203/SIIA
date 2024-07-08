@@ -11,11 +11,67 @@
 		</button>
 		<!-- Perfil y cerrar sesión -->
 		<ul class="navbar-nav navbar-nav-right">
+			<!-- Notifications TODO: Validar según usuario -->
+			<li class="nav-item dropdown">
+				<!-- Icon -->
+				<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+					<i class="icon-bell mx-0"></i> 3
+					<span class="count"></span>
+				</a>
+				<!-- Items TODO: Realizar foreach con notificaciones y tipo -->
+				<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+					<p class="mb-0 font-weight-normal float-left dropdown-header">Notificaciones</p>
+					<a class="dropdown-item preview-item">
+						<div class="preview-thumbnail">
+							<div class="preview-icon bg-success">
+								<i class="ti-info-alt mx-0"></i>
+							</div>
+						</div>
+						<div class="preview-item-content">
+							<h6 class="preview-subject font-weight-normal">Solicitudes terminadas</h6>
+							<p class="font-weight-light small-text mb-0 text-muted">
+								Hace 5 minutos
+							</p>
+						</div>
+					</a>
+					<a class="dropdown-item preview-item">
+						<div class="preview-thumbnail">
+							<div class="preview-icon bg-warning">
+								<i class="ti-settings mx-0"></i>
+							</div>
+						</div>
+						<div class="preview-item-content">
+							<h6 class="preview-subject font-weight-normal">Alertas</h6>
+							<p class="font-weight-light small-text mb-0 text-muted">
+								Solicitudes pendientes por evaluar
+							</p>
+						</div>
+					</a>
+					<a class="dropdown-item preview-item">
+						<div class="preview-thumbnail">
+							<div class="preview-icon bg-info">
+								<i class="ti-user mx-0"></i>
+							</div>
+						</div>
+						<div class="preview-item-content">
+							<h6 class="preview-subject font-weight-normal">Usuarios nuevos</h6>
+							<p class="font-weight-light small-text mb-0 text-muted">
+								Hace 2 días
+							</p>
+						</div>
+					</a>
+				</div>
+			</li>
+			<!-- Profile -->
 			<li class="nav-item nav-profile dropdown">
 				<a class="nav-link dropdown-toggle" href="#"  data-toggle="dropdown" id="profileDropdown">
 					<img src="<?= base_url('assets/img/default.png')?>" alt="profile"/>
 				</a>
 				<div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+					<a class="dropdown-item">
+						<i class="ti-settings text-primary"></i>
+						Perfil
+					</a>
 					<a class="dropdown-item" data-toggle='modal' data-target='#cerrar_sesion'>
 						<i class="ti-power-off text-primary"></i>
 						Cerrar Sesión
@@ -33,14 +89,16 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h3 class="modal-title" id="cerrar_sesion">¿Está seguro de cerrar sesión?</h3>
+				<h4 class="modal-title" id="cerrar_sesion">¿Está seguro de cerrar sesión?</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">×</span>
 				</button>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-danger" data-dismiss="modal">No <i class="fa fa-times" aria-hidden="true"></i></button>
-				<button type="button" class="btn btn-primary pull-right" id="super_cerrar_sesion">Si <i class="fa fa-check" aria-hidden="true"></i></button>
+				<div class="btn-group" role='group' aria-label='cerrar_session'>
+					<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">No <i class="fa fa-times" aria-hidden="true"></i></button>
+					<button type="button" class="btn btn-sm btn-primary pull-right" id="super_cerrar_sesion">Si <i class="fa fa-check" aria-hidden="true"></i></button>
+				</div>
 			</div>
 		</div>
 	</div>
