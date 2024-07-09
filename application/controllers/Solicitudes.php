@@ -153,7 +153,8 @@ class Solicitudes extends CI_Controller
 	// Crear solicitud
 	public function crearSolicitud()
 	{
-		$this->datosSesionUsuario();
+		if (!$this->input->post('api'))
+			$this->datosSesionUsuario();
 		if ($this->input->post()) {
 			$estado = 'En Proceso';
 			// Comprobar si la solicitud se crea desde el super administrador o desde el usuario
