@@ -595,7 +595,7 @@
 								echo "<td>" . $documentacionLegal->departamento . "</td>";
 								echo "<td>" . $documentacionLegal->municipio . "</td>";
 								echo "<td><button class='btn btn-primary btn-sm verDocCertificadoExistencia' data-id=" . $documentacionLegal->id_certificadoExistencia . ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
-								if($nivel =! '7'):
+								if($nivel != '7'):
 									echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosCertificadoExistencia' data-id=" . $documentacionLegal->id_certificadoExistencia . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td>";
 								endif;
 								echo '</tr>';

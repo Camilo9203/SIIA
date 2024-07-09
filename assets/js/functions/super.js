@@ -31,7 +31,7 @@ if (funcion == "super" && funcion_ != "panel") {
 			success: function (response) {
 				if (response.error === 1) {
 					Alert.fire({
-						title: 'Contraseña invalida!',
+						title: 'Contraseña incorrecta!',
 						text: response.msg,
 						icon: 'error',
 					}).then((result) => {
