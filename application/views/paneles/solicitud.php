@@ -410,7 +410,7 @@
 			<div id="documentacion_legal" data-form="2" class=" formulario_panel">
 				<h3>2. Documentación Legal <i class="fa fa-book" aria-hidden="true"></i></h3>
 				<p>Los Campos marcados con (*) son obligatorios.</p>
-				<small>Si no tiene el registro educativo, seleccione la opción "No", y de clic  en guardar.</small>
+				<small>Si no tiene el registro educativo, seleccione la opción "No", y de clic en guardar.</small>
 				<!-- Camara de comercio -->
 				<div class="col-md-12">
 					<hr/>

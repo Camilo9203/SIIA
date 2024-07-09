@@ -24,6 +24,7 @@ class Super extends CI_Controller {
 		$this->load->model('CorreosRegistroModel');
 		$this->load->model('TokenModel');
 		$this->load->model('UsuariosModel');
+		$this->load->model('ResolucionesModel');
 	}
 	public function index()
 	{
@@ -80,7 +81,8 @@ class Super extends CI_Controller {
 			'organizaciones' => $this->OrganizacionesModel->getOrganizaciones(),
 			'correos' => $this->CorreosRegistroModel->getCorreosRegistro(),
 			'usuarios' => $this->UsuariosModel->getUsuariosSuperAdmin(),
-			'solicitudes' => $this->SolicitudesModel->solicitudes()
+			'solicitudes' => $this->SolicitudesModel->solicitudes(),
+			'resoluciones' => $this->ResolucionesModel->getResoluciones()
 		);
 		return $data;
 	}
@@ -150,6 +152,20 @@ class Super extends CI_Controller {
 			$data = $this->dataSessionSuper();
 			$this->load->view('include/header/main', $data);
 			$this->load->view('super/pages/requests', $data);
+			$this->load->view('include/footer/main');
+			$this->logs_sia->logs('PLACE_USER');
+		endif;
+	}
+	/**
+	 * Resoluciones
+	 */
+	public function Resoluciones(){
+		verify_session_admin();
+		$is = $this->db->select("valor")->from("opciones")->where("nombre","super")->get()->row()->valor;
+		if($is == "TRUE"):
+			$data = $this->dataSessionSuper();
+			$this->load->view('include/header/main', $data);
+			$this->load->view('super/pages/resolutions', $data);
 			$this->load->view('include/footer/main');
 			$this->logs_sia->logs('PLACE_USER');
 		endif;

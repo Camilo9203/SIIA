@@ -61,3 +61,10 @@
 	border-radius: 50% !important;
 	padding: 0.5em 0.9em !important;
 }
+
+.text-area-ext {
+	height: 100px;
+	width: 180px;
+	border: 0;
+	resize: none;
+}
