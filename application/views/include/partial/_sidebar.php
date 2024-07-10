@@ -9,7 +9,7 @@
 	<ul class="nav">
 		<?php
 			if($tipo_usuario == 'super'):
-				$this->load->view('include\partial\menu\_super', $activeLink);
+				$this->load->view('include/partial/menu/_super', $activeLink);
 			endif;
 		?>
 	</ul>
