@@ -189,10 +189,14 @@ class Solicitudes extends CI_Controller
 						$tipoSolicitud = 'Acreditación Primera vez';
 					endif;
 				endif;
+				if($this->input->post('fecha_creacion'))
+					$fecha = date($this->input->post('fecha_creacion'));
+				else
+					$fecha = date('Y/m/d H:i:s');
 				// Datos para crear solicitud
 				$data_solicitud = array(
 					'numeroSolicitudes' => $numeroSolicitudes += 1,
-					'fechaCreacion' =>  date('Y/m/d H:i:s'),
+					'fechaCreacion' =>  $fecha,
 					'idSolicitud' => $idSolicitud,
 					'organizaciones_id_organizacion' => $organizacion->id_organizacion,
 				);
@@ -207,7 +211,7 @@ class Solicitudes extends CI_Controller
 				);
 				$data_estado = array(
 					'nombre' => $estado,
-					'fechaUltimaActualizacion' => date('Y/m/d H:i:s'),
+					'fechaUltimaActualizacion' => $fecha,
 					'estadoAnterior' => $organizacion->estado,
 					'tipoSolicitudAcreditado' => $tipoSolicitud,
 					'motivoSolicitudAcreditado' => $this->input->post('motivo_solicitud'),

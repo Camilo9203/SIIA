@@ -46,7 +46,15 @@
 			<script src="<?= base_url('assets/js/dashboard/js/chart.js') ?>"></script>
 			<!-- End custom js for this page-->
 			<!-- Datatable:js -->
-			<script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+			<script src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.0.8/b-3.0.2/b-html5-3.0.2/b-print-3.0.2/date-1.5.2/sl-2.0.3/datatables.min.js"></script>
+			<!-- DataPicker.js -->
+			<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+			<script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
+			<script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
+			<!-- SelectPicker.js -->
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 			<!-- Sweet Alert -->
 			<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 			<!-- Scripts -->

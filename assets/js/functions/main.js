@@ -7413,6 +7413,7 @@ function initJS() {
 	validaciones();
 	tablas();
 	back_to_top();
+	selects();
 }
 function dragElemento(elmnt) {
 	var pos1 = 0,

@@ -4,6 +4,9 @@ let baseURL = activate[0] + "//" + activate[2] + "/" + activate[3] + "/";
 let funcion = activate[4];
 let funcion_ = activate[5];
 ValidarFormularioAdministradores();
+// TODO: Mover a main
+datepickers();
+selects();
 /**
  * Inicio de sesión súper admin
  */
@@ -702,7 +705,8 @@ $("#btn_crear_solicitud_sp").click(function () {
 			// Datos a enviar
 			let data = {
 				nit_organizacion: $("#nit-organizacion").val(),
-				tipo_solicitud: $("input:radio[name=tipos]:checked").val(),
+				tipo_solicitud: $("#tipo_solicitud").val(),
+				fecha_creacion: $("#fecha-creacion").val(),
 				motivo_solicitud: motivo_solicitud.substring(0, motivo_solicitud.length -2),
 				modalidad_solicitud: modalidad_solicitud.substring(0, modalidad_solicitud.length -2),
 				motivos_solicitud: motivos_solicitud,
@@ -922,5 +926,23 @@ function ValidarFormularioAdministradores () {
 				required: "Ingrese estado.",
 			},
 		},
+	});
+}
+function datepickers() {
+	$('.datepicker').flatpickr({
+		enableTime: true,
+		dateFormat: "Y/m/d H:i:ss",
+		locale: 'es',
+	});
+}
+function selects() {
+	$(".selectpicker").selectpicker({
+		size: 9,
+		width: "fit",
+		title: "Seleccione una opción...",
+		noneSelectedText: "Por favor, seleccione uno.",
+		liveSearch: true,
+		liveSearchNormalize: true,
+		liveSearchPlaceholder: "Buscar...",
 	});
 }
