@@ -1487,3 +1487,9 @@ FIN CUSTOM
 .auth .brand-logo {
 	text-align: center !important;
 }
+.text-area-ext {
+	height: 100px;
+	width: 180px;
+	border: 0;
+	resize: none;
+}
