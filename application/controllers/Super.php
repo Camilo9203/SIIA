@@ -101,6 +101,20 @@ class Super extends CI_Controller {
 		endif;
 	}
 	/**
+	 * Perfil súper administrador
+	 */
+	public function Perfil(){
+		verify_session_admin();
+		$is = $this->db->select("valor")->from("opciones")->where("nombre","super")->get()->row()->valor;
+		if($is == "TRUE"):
+			$data = $this->dataSessionSuper();
+			$this->load->view('include/header/main', $data);
+			$this->load->view('super/pages/profile', $data);
+			$this->load->view('include/footer/main');
+			$this->logs_sia->logs('PLACE_USER');
+		endif;
+	}
+	/**
 	 * Administradores
 	 */
 	public function Administradores(){

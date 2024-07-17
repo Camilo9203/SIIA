@@ -64,6 +64,7 @@ $route['facilitadores'] = 'Home/facilitadores';
 // Super Administrador
 $route['super/?'] = 'Super';
 $route['super/panel'] = 'Super/panel';
+$route['super/perfil'] = 'Super/perfil';
 $route['super/administradores'] = 'Super/administradores';
 $route['super/usuarios'] = 'Super/usuarios';
 $route['super/correos'] = 'Super/correos';
