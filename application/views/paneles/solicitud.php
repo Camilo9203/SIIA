@@ -786,7 +786,7 @@
 							<tbody id="tbody">
 								<?php
 									echo "<tr><td>" . $jornadasActualizacion->asistio . "</td>";
-									if ($nivel = !'7'):
+									if ($nivel != '7'):
 									echo "<td>
 											<button class='btn btn-danger btn-sm eliminarJornadaActualizacion' 
 												data-id-jornada=" . $jornadasActualizacion->idSolicitud . " 
