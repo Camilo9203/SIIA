@@ -308,7 +308,7 @@ $("#verDatPlatMenuAdmin").click(function () {
 			}
 			else {
 				for (let i = 0; i < response.plataforma.length; i++) {
-					html += "<tr><td><a href='http://" + response.plataforma[i]['urlAplicacion'] + "' target='_blank'>" +response.plataforma[i]['urlAplicacion'] + "</a></td>";
+					html += "<tr><td><a href='" + response.plataforma[i]['urlAplicacion'] + "' target='_blank'>" +response.plataforma[i]['urlAplicacion'] + "</a></td>";
 					html += "<td>" + response.plataforma[i]['usuarioAplicacion'] + "</td>";
 					html += "<td>" + response.plataforma[i]['contrasenaAplicacion'] + "</td>";
 				}
@@ -495,6 +495,7 @@ $(document).on("click", ".ver_organizacion_finalizada", function () {
 			$("#motSol").html(response.estadoOrganizaciones.motivoSolicitudAcreditado);
 			$("#numeroSol").html(response.solicitudes.numeroSolicitudes);
 			$("#revFechaFin").html(response.estadoOrganizaciones.fechaFinalizado);
+			$("#revFechaUltimaActualizacion").html(response.estadoOrganizaciones.fechaUltimaActualizacion);
 			$("#revSol").html(response.solicitudes.numeroRevisiones);
 			$("#revFechaSol").html(response.solicitudes.fechaUltimaRevision);
 			$("#estOrg").html(response.estadoOrganizaciones.nombre);
@@ -642,6 +643,7 @@ if ($("#idSolicitudInfo").html() != undefined) {
 				$("#revFechaFin").html(response.estadoOrganizaciones.fechaFinalizado);
 				$("#revSol").html(response.solicitudes.numeroRevisiones);
 				$("#revFechaSol").html(response.solicitudes.fechaUltimaRevision);
+				$("#revFechaUltimaActualizacion").html(response.estadoOrganizaciones.fechaUltimaActualizacion);
 				$("#estOrg").html(response.estadoOrganizaciones.nombre);
 				$("#nOrgSol").html(response.organizaciones.nombreOrganizacion);
 				$("#sOrgSol").html(response.organizaciones.sigla);
