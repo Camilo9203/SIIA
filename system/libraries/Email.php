@@ -78,28 +78,28 @@ class CI_Email
 	 *
 	 * @var	string
 	 */
-	public $smtp_host	= 'sandbox.smtp.mailtrap.io'; //sandbox.smtp.mailtrap.io smtp.office365.com
+	public $smtp_host	= 'smtp.office365.com'; //sandbox.smtp.mailtrap.io smtp.office365.com
 
 	/**
 	 * SMTP Username
 	 *
 	 * @var	string
 	 */
-	public $smtp_user	= '7baceb503f5e55'; // '7baceb503f5e55'; acreditaciones@unidadsolidaria.gov.co
+	public $smtp_user	= 'acreditaciones@unidadsolidaria.gov.co'; // '7baceb503f5e55'; acreditaciones@unidadsolidaria.gov.co
 
 	/**
 	 * SMTP Password
 	 *
 	 * @var	string
 	 */
-	public $smtp_pass	= '0886938263d949'; // uaeos: USolidarias2024*# mailtrap:0886938263d949
+	public $smtp_pass	= 'USolidarias2024*#'; // uaeos: USolidarias2024*# mailtrap:0886938263d949
 
 	/**
 	 * SMTP Server port
 	 *
 	 * @var	int
 	 */
-	public $smtp_port = 2525; //g:465 25 587 2525
+	public $smtp_port = 587; //g:465 25 587 2525
 
 	/**
 	 * SMTP connection timeout in seconds
