@@ -10,7 +10,11 @@
 	<div class="pull-right">
 		<a href="<?php echo base_url(); ?>reportes/exportarExcel"  class="btn btn-siia">
 			<i class="fa fa-download" aria-hidden="true"></i>
-			Excel
+			Acreditadas
+		</a>
+		<a href="<?php echo base_url(); ?>reportes/exportarExcel"  class="btn btn-siia">
+			<i class="fa fa-download" aria-hidden="true"></i>
+			Estadisticas
 		</a>
 		<a href="<?php echo base_url(); ?>reportes/exportarDatosAbiertos"  class="btn btn-danger">
 			<i class="fa fa-download" aria-hidden="true"></i>
