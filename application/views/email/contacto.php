@@ -120,7 +120,7 @@
 								<table width="600" cellpadding="0" cellspacing="0" border="0" class="container">
 									<tr>
 										<td align="center" valign="top">
-											<img src="https://acreditacion.unidadsolidaria.gov.co/siia/assets/img/siiaheadercorreo.png" width="720" height="157" style="margin:0; padding:0; border:none; display:block;" border="0" class="imgClass" alt="" />
+											<img src="<?= base_url();?>assets/img/siiaheadercorreo.png" width="720" height="157" style="margin:0; padding:0; border:none; display:block;" border="0" class="imgClass" alt="" />
 										</td>
 									</tr>
 								</table>

@@ -64,7 +64,7 @@ return null; */
 					<a href="https://www.gov.co/home/" target="_blank"><img src="<?= base_url(); ?>assets/img/govco.png" class="img-responsive" style="width: 1903px;margin-bottom: 2%;"></a>
 				</div>
 				<div class="col-md-6">
-					<a href="<?= PAGINA_WEB ?>"><img alt="Unidad Solidaria" id="imagen_header" height="170px" width="350px" class="pull-left img-responsive" src="<?= base_url(); ?>assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png"></a>
+					<a href="<?= PAGINA_WEB ?>"><img alt="Unidad Solidaria" id="imagen_header" height="190px" width="370px" class="pull-left img-responsive" src="<?= base_url(); ?>assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png"></a>
 				</div>
 				<div class="col-md-6">
 					<a href="<?= base_url(); ?>"><img alt="SIIA" id="imagen_header_sia" class="pull-right img-responsive" src="<?= base_url(); ?>assets/img/siia_logo.png"></a>
