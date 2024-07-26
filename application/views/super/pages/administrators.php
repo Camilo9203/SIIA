@@ -146,6 +146,9 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 											<option value="5">Seguimientos 5</option>
 											<option value="6">Asignación 6</option>
 											<option value="7">Atención al ciudadano 7</option>
+											<option value="8">Dirección Técnica 8</option>
+											<option value="9">Jurídica 9</option>
+											<option value="10">Dirección Nacional 10</option>
 										</select>
 									</div>
 								</div>

@@ -142,54 +142,58 @@
 	<hr />
 	<button class="btn btn-siia btn-block" id="llenar_asistentes" data-backdrop="static" data-keyboard="false" data-toggle='modal' data-target='#llenar_asistente' disabled="">Click para llenar los asistentes del curso</button>
 </div>
-<div class="col-md-12" id="div_informe_cursos">
-	<hr>
-	<table id="tabla_super_admins" width="100%" border=0 class="table table-striped table-bordered tabla_form">
-		<thead>
-			<tr>
-				<td>Docente</td>
-				<td>Nombre Curso</td>
-				<td>Modalidad</td>
-				<td>Intencionalidad Curso</td>
-				<td>Duracion Curso</td>
-				<td>Asistentes</td>
-				<td>Numero Mujeres</td>
-				<td>Numero Hombres</td>
-				<td>¿Curso Gratis?</td>
-				<td>Departamento</td>
-				<td>Municipio</td>
-				<td>Archivo</td>
-				<td>Accion</td>
-			</tr>
-		</thead>
-		<tbody id="tbody">
-			<?php
-			foreach ($cursos[0] as $curso) {
-				echo "<tr><td>$curso->nombreDocente</td>";
-				echo "<td>$curso->nombreCurso</td>";
-				echo "<td>$curso->tipoCurso</td>";
-				echo "<td>$curso->intencionalidadCurso</td>";
-				echo "<td>$curso->duracionCurso</td>";
-				echo "<td>$curso->numeroAsistentes</td>";
-				echo "<td>$curso->numeroMujeres</td>";
-				echo "<td>$curso->numeroHombres</td>";
-				if ($curso->cursoGratis == '0') {
-					echo "<td>No</td>";
-				} else if ($curso->cursoGratis == '1') {
-					echo "<td>Si</td>";
+<div class="container">
+	<div class="row">
+		<div class="col-md-12" id="div_informe_cursos">
+			<hr>
+			<table id="tabla_super_admins" width="100%" border=0 class="table table-striped table-bordered tabla_form">
+				<thead>
+				<tr>
+					<td>Docente</td>
+					<td>Nombre Curso</td>
+					<td>Modalidad</td>
+					<td>Intencionalidad Curso</td>
+					<td>Duración Curso</td>
+					<td>Asistentes</td>
+					<td>Número Mujeres</td>
+					<td>Número Hombres</td>
+					<td>¿Curso Gratis?</td>
+					<td>Departamento</td>
+					<td>Municipio</td>
+					<td>Archivo</td>
+					<td>Accion</td>
+				</tr>
+				</thead>
+				<tbody id="tbody">
+				<?php
+				foreach ($cursos[0] as $curso) {
+					echo "<tr><td>$curso->nombreDocente</td>";
+					echo "<td>$curso->nombreCurso</td>";
+					echo "<td>$curso->tipoCurso</td>";
+					echo "<td>$curso->intencionalidadCurso</td>";
+					echo "<td>$curso->duracionCurso</td>";
+					echo "<td>$curso->numeroAsistentes</td>";
+					echo "<td>$curso->numeroMujeres</td>";
+					echo "<td>$curso->numeroHombres</td>";
+					if ($curso->cursoGratis == '0') {
+						echo "<td>No</td>";
+					} else if ($curso->cursoGratis == '1') {
+						echo "<td>Si</td>";
+					}
+					echo "<td>$curso->departamentoCurso</td>";
+					echo "<td>$curso->municipioCurso</td>";
+					if ($curso->archivoAsistentes != null) {
+						echo "<td><a href='" . base_url("uploads/asistentes/" . $curso->archivoAsistentes . "") . "'<button class='btn btn-siia'>Ver archivo <i class='fa fa-bars' aria-hidden='true'></i></button></a></td>";
+					} else {
+						echo "<td>Ninguno</td>";
+					}
+					echo "<td><button class='btn btn-siia verCurso' data-toggle='modal' data-nombre='$curso->nombreCurso' data-id='$curso->id_informeActividades' data-target='#verCurso'>Ver Asistentes <i class='fa fa-eye' aria-hidden='true'></i></button></td></tr>";
 				}
-				echo "<td>$curso->departamentoCurso</td>";
-				echo "<td>$curso->municipioCurso</td>";
-				if ($curso->archivoAsistentes != null) {
-					echo "<td><a href='" . base_url("uploads/asistentes/" . $curso->archivoAsistentes . "") . "'<button class='btn btn-siia'>Ver archivo <i class='fa fa-bars' aria-hidden='true'></i></button></a></td>";
-				} else {
-					echo "<td>Ninguno</td>";
-				}
-				echo "<td><button class='btn btn-siia verCurso' data-toggle='modal' data-nombre='$curso->nombreCurso' data-id='$curso->id_informeActividades' data-target='#verCurso'>Ver Asistentes <i class='fa fa-eye' aria-hidden='true'></i></button></td></tr>";
-			}
-			?>
-		</tbody>
-	</table>
+				?>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
 <div class="modal fade" id="llenar_asistente" tabindex="-1" role="dialog" aria-labelledby="llenarAsistente">
 	<!-- <div class="modal-dialog modal-lg" role="document">
