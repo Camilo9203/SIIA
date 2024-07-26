@@ -281,11 +281,11 @@ $CI->load->model("ResolucionesModel");
 									$diferencia = $fechaFinResolucion->diff($fechaActual)->days;
 									//$date =	strtotime('-1 month', strtotime($resolucion->fechaResolucionFinal));
 									//$date = date('Y-m-d', $date);
-									if($diferencia <= 30 && $solicitud->nombre == 'Acreditado'): ?>
-								<button type='button' class='btn btn-success btn-sm renovarSolicitud' data-id='<?= $solicitud->idSolicitud ?>' title='Continuar Solicitud'>
-									Renovar <i class='fa fa-check' aria-hidden='true'></i>
-								</button>
-								<?php endif; ?>
+									if($diferencia <= 60 && $solicitud->nombre == 'Acreditado'): ?>
+										<button type='button' class='btn btn-success btn-sm renovarSolicitud' data-id='<?= $solicitud->idSolicitud ?>' title='Continuar Solicitud'>
+											Renovar <i class='fa fa-check' aria-hidden='true'></i>
+										</button>
+									<?php endif; ?>
 								<?php endif; ?>
 								<button class='btn btn-info btn-sm verDetalleSolicitud' data-toggle='modal' data-target='#modalVerDetalle' data-backdrop='static' data-keyboard='false' data-id='<?= $solicitud->idSolicitud ?>' title='Ver Detalle'>
 									Detalle <i class='fa fa-info' aria-hidden='true'></i>
