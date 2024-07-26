@@ -41,7 +41,7 @@
 							echo "<td>" . $solicitud->numNIT . "</td>";
 							echo "<td>" . $solicitud->idSolicitud . "</td>";
 							echo "<td>" . $solicitud->tipoSolicitud . "</td>";
-							echo "<td><textarea style='border: none; width: 282px; height: 110px; resize: none' readonly>" . $solicitud->motivoSolicitud . "</textarea></td>";
+							echo "<td><textarea class='text-area-ext' readonly>" . $solicitud->motivoSolicitud . "</textarea></td>";
 							echo "<td>" . $solicitud->modalidadSolicitud . "</td>";
 							echo "<td>" . $solicitud->fechaFinalizado . "</td>";
 							echo "<td>" . $solicitud->asignada . "</td>";

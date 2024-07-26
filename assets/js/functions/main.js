@@ -803,6 +803,9 @@ $(document).ready(function () {
 	$("#reporte_org_acreditadasSin").click(function () {
 		redirect(baseURL + "panelAdmin/reportes/acreditadasSin");
 	});
+	$("#registro_solicitudes").click(function () {
+		redirect(baseURL + "panelAdmin/reportes/solicitudes");
+	});
 	$("#reporte_org_historico").click(function () {
 		redirect(baseURL + "panelAdmin/reportes/historico");
 	});
