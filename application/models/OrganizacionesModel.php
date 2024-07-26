@@ -41,13 +41,16 @@ class OrganizacionesModel extends CI_Model
 			$organizacion = $this->db->select("*")->from("organizaciones")->where("numNIT", $nit->numNIT)->get()->row();
 			$informacion = $this->db->select("*")->from("informacionGeneral")->where("organizaciones_id_organizacion", $organizacion->id_organizacion)->get()->row();
 			$resoluciones = $this->db->select("*")->from("resoluciones")->where("organizaciones_id_organizacion", $organizacion->id_organizacion)->get()->result();
-				foreach ($resoluciones as $resolucion) {
-					$organizacion_resolucion = $this->db->select("*")->from("resoluciones")->where("id_resoluciones", $resolucion->id_resoluciones)->get()->row();
-					if($organizacion_resolucion->fechaResolucionFinal >= date("Y-m-d")):
-						array_push($organizaciones, array("data_organizaciones" => $organizacion, "data_organizaciones_inf" => $informacion, "resoluciones" => $organizacion_resolucion));
-					endif;
-				}
+			foreach ($resoluciones as $resolucion) {
+				$organizacion_resolucion = $this->db->select("*")->from("resoluciones")->where("id_resoluciones", $resolucion->id_resoluciones)->get()->row();
+				// Sacar tipo de la solicitud para conteó.
+				$tipoSolicitud = $this->db->select('*')->from('tipoSolicitud')->where('idSolicitud', $organizacion_resolucion->idSolicitud)->get()->row();
+				// TODO: + dos meses
+				if($organizacion_resolucion->fechaResolucionFinal >= date("Y-m-d")):
+					array_push($organizaciones, array("data_organizaciones" => $organizacion, "data_organizaciones_inf" => $informacion, "resoluciones" => $organizacion_resolucion, "tipoSolicitud" => $tipoSolicitud));
+				endif;
 			}
+		}
 		return $organizaciones;
 	}
 	/** Cargar organizaciones con estado "Acreditado" */
