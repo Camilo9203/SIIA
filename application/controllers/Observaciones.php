@@ -89,7 +89,6 @@ class Observaciones extends CI_Controller
 			if ($this->db->update('solicitudes', $data_update)) {
 				$data_estado = array(
 					'nombre' => "En Observaciones",
-					'fechaUltimaActualizacion' => date('Y/m/d H:i:s'),
 					'estadoAnterior' => $solicitud->nombre,
 					'organizaciones_id_organizacion' => $organizacion->id_organizacion
 				);
