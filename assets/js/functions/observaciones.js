@@ -644,6 +644,7 @@ if ($("#idSolicitudInfo").html() != undefined) {
 				$("#revSol").html(response.solicitudes.numeroRevisiones);
 				$("#revFechaSol").html(response.solicitudes.fechaUltimaRevision);
 				$("#revFechaUltimaActualizacion").html(response.estadoOrganizaciones.fechaUltimaActualizacion);
+				$("#camaraComercio_org").attr("href", baseURL + "uploads/camaraComercio/" + response.organizaciones.camaraComercio);
 				$("#estOrg").html(response.estadoOrganizaciones.nombre);
 				$("#nOrgSol").html(response.organizaciones.nombreOrganizacion);
 				$("#sOrgSol").html(response.organizaciones.sigla);
