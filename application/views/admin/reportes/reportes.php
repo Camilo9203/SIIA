@@ -5,6 +5,9 @@
 		<button class="btn btn-default form-control" id="reporte_org_acreditadas">Reporte Organizaciones Acreditadas</button>
 	</div>
 	<div class="form-group">
+		<button class="btn btn-default form-control" id="registro_solicitudes">Registro de Solicitudes de Acreditación</button>
+	</div>
+	<div class="form-group">
 		<button class="btn btn-default form-control" id="reporte_org_historico">Reporte Organizaciones Histórico</button>
 	</div>
 	<div class="form-group">

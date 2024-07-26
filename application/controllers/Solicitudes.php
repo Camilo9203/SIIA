@@ -163,7 +163,7 @@ class Solicitudes extends CI_Controller
 			else:
 				$organizacion = $this->OrganizacionesModel->getOrganizacionUsuario($this->session->userdata('usuario_id'));
 			endif;
-			$solicitudes = $this->SolicitudesModel->getSolicitudesOrganizacion($organizacion->id_organizacion);
+			$solicitudes = $this->SolicitudesModel->getSolicitudesByOrganizacion($organizacion->id_organizacion);
 			// Comprobar si la solicitud se crea desde el super administrador o desde el usuario
 			if($this->input->post('nit_organizacion')):
 				$comprobarSolicitud = 'true';

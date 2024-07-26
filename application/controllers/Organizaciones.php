@@ -57,7 +57,7 @@ class Organizaciones extends CI_Controller
 		$organizacion = $this->OrganizacionesModel->getOrganizacion($this->input->post('id_organizacion'));
 		$usuario = $this->UsuariosModel->getUsuarios($organizacion->usuarios_id_usuario);
 		$actividad = $this->UsuariosModel->getActividadUsuario($organizacion->usuarios_id_usuario);
-		$solicitudes = $this->SolicitudesModel->getSolicitudesOrganizacion($organizacion->id_organizacion);
+		$solicitudes = $this->SolicitudesModel->getSolicitudesByOrganizacion($organizacion->id_organizacion);
 		echo json_encode(array('organizacion' => $organizacion, 'actividad' => $actividad, 'usuario' => $usuario, 'solicitudes' => $solicitudes));
 	}
 	/** Camara de comercio */

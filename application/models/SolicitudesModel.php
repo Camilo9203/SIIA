@@ -18,8 +18,20 @@ class SolicitudesModel extends CI_Model
 		$query = $this->db->select("*")->from("solicitudes")->join('tipoSolicitud', "tipoSolicitud.idSolicitud = solicitudes.idSolicitud")->join('estadoOrganizaciones', "estadoOrganizaciones.idSolicitud = solicitudes.idSolicitud")->where('solicitudes.idSolicitud', $id)->get()->row();;
 		return $query;
 	}
+	/** Cargar solicitudes y datos de la organización */
+	public function getSolicitudesAndOrganizacion($id = FALSE)
+	{
+		if ($id === FALSE) {
+			// Consulta para traer organizaciones acreditas
+			$query = $this->db->select("*")->from("organizaciones")->join('solicitudes', 'solicitudes.organizaciones_id_organizacion = organizaciones.id_organizacion')->join('tipoSolicitud', "tipoSolicitud.idSolicitud = solicitudes.idSolicitud")->join('estadoOrganizaciones', "estadoOrganizaciones.idSolicitud = solicitudes.idSolicitud")->order_by('solicitudes.fechaCreacion', 'desc')->get();
+			return $query->result();
+		}
+		// Traer solicitudes por id
+		$query = $this->db->select("*")->from("solicitudes")->join('tipoSolicitud', "tipoSolicitud.idSolicitud = solicitudes.idSolicitud")->join('estadoOrganizaciones', "estadoOrganizaciones.idSolicitud = solicitudes.idSolicitud")->where('solicitudes.idSolicitud', $id)->get()->row();;
+		return $query;
+	}
 	/** Cargar Solicitudes por Organización */
-	public function getSolicitudesOrganizacion($id = FALSE)
+	public function getSolicitudesByOrganizacion($id = FALSE)
 	{
 		$solicitudes = $this->db->select("*")->from("solicitudes")->join('tipoSolicitud', "tipoSolicitud.idSolicitud = solicitudes.idSolicitud")->join('estadoOrganizaciones', "estadoOrganizaciones.idSolicitud = solicitudes.idSolicitud")->where('solicitudes.organizaciones_id_organizacion', $id)->get()->result();
 		return $solicitudes;
