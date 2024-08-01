@@ -45,8 +45,12 @@ class OrganizacionesModel extends CI_Model
 				$organizacion_resolucion = $this->db->select("*")->from("resoluciones")->where("id_resoluciones", $resolucion->id_resoluciones)->get()->row();
 				// Sacar tipo de la solicitud para conteó.
 				$tipoSolicitud = $this->db->select('*')->from('tipoSolicitud')->where('idSolicitud', $organizacion_resolucion->idSolicitud)->get()->row();
-				// TODO: + dos meses
-				if($organizacion_resolucion->fechaResolucionFinal >= date("Y-m-d")):
+				// Capturar fecha actual y límite para bajar la resolución
+				$fechaActual = new DateTime();
+				$fechaLimiteResolucion = new DateTime($organizacion_resolucion->fechaResolucionFinal);
+				$fechaLimiteResolucion = $fechaLimiteResolucion->modify('+2 months');
+				// Guardar organización si la fecha límite es menor a la fecha actual.
+				if($fechaActual <= $fechaLimiteResolucion):
 					array_push($organizaciones, array("data_organizaciones" => $organizacion, "data_organizaciones_inf" => $informacion, "resoluciones" => $organizacion_resolucion, "tipoSolicitud" => $tipoSolicitud));
 				endif;
 			}
