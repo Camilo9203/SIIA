@@ -92,7 +92,7 @@ class CI_Email
 	 *
 	 * @var	string
 	 */
-	public $smtp_pass	= 'USolidarias2024*#'; // uaeos: USolidarias2024*# mailtrap:0886938263d949
+	public $smtp_pass	= 'M$eAg4r^7r%|m#&z'; // uaeos: USolidarias2024*# mailtrap:0886938263d949
 
 	/**
 	 * SMTP Server port
