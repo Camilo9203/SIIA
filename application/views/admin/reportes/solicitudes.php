@@ -1,6 +1,7 @@
 <?php
 /***
  * @var $solicitudes
+ * @var $organizacion
  *
  */
 ?>
@@ -10,6 +11,14 @@
 			<div class="clearfix"></div>
 			<hr />
 			<h3>Registro de solicitudes:</h3>
+			<div class="form-group">
+				<label>Fecha Inicio </label>
+				<input class="form-control" type="date" id="min" name="min">
+				<br>
+				<label>Fecha Fin </label>
+				<input class="form-control" type="date" id="max" name="max">
+			</div>
+			<br>
 			<table id="tabla_enProceso_organizacion" width="100%" border=0 class="table table-striped table-bordered tabla_form">
 				<thead>
 					<tr>

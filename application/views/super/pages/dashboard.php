@@ -50,7 +50,7 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 			<div class="col-md-6 grid-margin stretch-card">
 				<div class="card tale-bg">
 					<div class="card-people mt-auto">
-						<img src="<?= base_url('assets/img/images/dashboard/people.svg') ?>" alt="people">
+						<img src="<?= base_url('assets/img/images/dashboard/people.png') ?>" alt="people">
 						<div class="weather-info">
 							<div class="d-flex">
 								<div>

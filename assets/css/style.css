@@ -77,3 +77,22 @@
 	}
 }
 
+.admin-login {
+	position: relative;
+	background-image: url("../img/background-login.png") !important;
+	background-size: cover !important;
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+}
+.admin-login::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+.card-people {
+	padding-top: 0px !important;
+}
