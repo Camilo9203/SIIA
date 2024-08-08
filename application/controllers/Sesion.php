@@ -108,9 +108,9 @@ class Sesion extends CI_Controller {
 		$data['title'] = 'Login Administrador';
 		$data['logged_in'] = false;
 		$data['tipo_usuario'] = "none";
-		$this->load->view('include/header', $data);
+		$this->load->view('include/header/main', $data);
 		$this->load->view('admin/login');
-		$this->load->view('include/footer');
+		$this->load->view('include/footer/main');
 		$this->logs_sia->logs('PLACE_USER');
 	}
 	/** Función login admin */

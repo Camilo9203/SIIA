@@ -301,6 +301,7 @@ $(document).ready(function () {
 				$("#asigDocentes").remove();
 				$("#solicitudes_menu").remove();
 				$("#verOrgPro").remove();
+				$("#verFacili").remove();
 				break;
 			default:
 
@@ -312,7 +313,6 @@ $(document).ready(function () {
 	} else {
 		/** No hay nada que hacer aquí. **/
 	}
-
 	if (funcion_ == "reportes") {
 		$int_rep = setInterval(function () {
 			$("#verReportes").click();
@@ -321,8 +321,6 @@ $(document).ready(function () {
 	} else {
 		/** No hay nada que hacer aquí. **/
 	}
-
-
 	if (funcion == "evaluacion" && funcion != "panel") {
 		var $sp = url.split("?");
 		$sp = $sp[1];
@@ -358,7 +356,6 @@ $(document).ready(function () {
 		}
 		});*/
 	}
-
 	if (funcion == "mapa") {
 		$sp = url.split("?");
 
@@ -474,9 +471,7 @@ $(document).ready(function () {
 			},
 		});
 	}
-
 	notificaciones(baseURL);
-
 	/**
 		Eventos Clicks TODO
 	**/
@@ -7250,7 +7245,7 @@ function tablas() {
 					buttons: [
 						{
 							extend: "pageLength",
-							className: "btn-sm",
+							className: "btn-sm btn-danger",
 							text: "Ver Filas",
 						},
 						{
@@ -7258,11 +7253,11 @@ function tablas() {
 							className: "btn-sm",
 							text: "Copiar Tabla",
 						},
-						{
+						/**{
 							extend: "csv",
 							className: "btn-sm",
 							text: "Descargar a CSV",
-						},
+						},*/
 						/*{
 					  	extend: "print",
 					  	className: "btn-sm",
@@ -7273,8 +7268,8 @@ function tablas() {
 							autoFilter: true,
 							className: "btn-sm",
 							text: "Descargar a Excel",
-							/*header: "Unidad Administrativa especial de organizaciones Solidarias",
-						footer: "Unidad Administrativa especial de organizaciones Solidarias",*/
+							/* header: "Unidad Administrativa especial de organizaciones Solidarias",
+								footer: "Unidad Administrativa especial de organizaciones Solidarias",*/
 							//messageBottom: "Unidad Administrativa Especial de Organizaciones Solidarias | SIIA",
 							messageTop:
 								"Registro de ____________________________ por la Unidad Administrativa Especial de Organizaciones Solidarias | SIIA ",
@@ -7345,15 +7340,14 @@ function tablas() {
 					language: {
 						url: "https://cdn.datatables.net/plug-ins/2.0.8/i18n/es-ES.json",
 					},
-					order: [[0, "asc"]],
+					order: [[0, "desc"]],
 					rowGroup: {
 						dataSrc: 0,
 					},
 					responsive: true,
-					rowGroup: true,
 					//autoFill: true,
 					//fixedColumns: true,
-					colReorder: true,
+					//colReorder: true,
 					//rowReorder: true,
 					select: true,
 					fixedHeader: {

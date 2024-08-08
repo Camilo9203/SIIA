@@ -65,6 +65,8 @@
 		</script>
 	<?php endif; ?>
 	<!--End of Tawk.to Script-->
+	<!-- Google -->
+	<script src="https://www.google.com/recaptcha/api.js?render=6LeTFnYnAAAAAKl5U_RbOYnUbGFGlhG4Ffn52Sef"></script>
 	<!-- Title -->
 	<title>Sistema Integrado de Información de Acreditación | <?= $title; ?></title>
 </head>
