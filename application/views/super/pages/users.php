@@ -48,7 +48,7 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 												echo "<td>"; echo $CI->UsuariosModel->getPassword($usuario->contrasena_rdel); echo "</td>";
 												echo "<td>"; echo $CI->TokenModel->getState($usuario->verificado); echo "</td>";
 												echo "<td>"; echo $CI->UsuariosModel->getConnection($usuario->logged_in); echo "</td>";
-												echo "<td><button class='btn btn-primary btn-sm admin-usuario' data-toggle='modal' data-id='$usuario->id_usuario' data-target='#modal-user'>Ver</button></td></tr>";
+												echo "<td><button class='btn btn-outline-primary btn-sm admin-usuario' data-toggle='modal' data-id='$usuario->id_usuario' data-target='#modal-user'>Ver</button></td></tr>";
 											endforeach; ?>
 											</tbody>
 										</table>
@@ -135,10 +135,11 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 					</div>
 					<div class="modal-footer">
 						<div class="btn-group" role='group' aria-label='acciones' id="actions_users">
-							<button type="button" class="btn btn-danger" id="super_desconectar_user">Desconectar</button>
-							<button type="button" class="btn btn-success" id="super_enviar_activacion_cuenta">Enviar Activación</button>
-							<button type="button" class="btn btn-primary" id="super_actualizar_user">Actualizar</button>
-							<button type="button" class="btn btn-info" id="super_enviar_info_usuer">Enviar Información</button>
+							<button type="button" class="btn btn-sm btn-danger" id="super_eliminar_cuenta">Eliminar</button>
+							<button type="button" class="btn btn-sm btn-warning" id="super_desconectar_user">Desconectar</button>
+							<button type="button" class="btn btn-sm btn-success" id="super_enviar_activacion_cuenta">Enviar Activación</button>
+							<button type="button" class="btn btn-sm btn-primary" id="super_actualizar_user">Actualizar</button>
+							<button type="button" class="btn btn-sm btn-info" id="super_enviar_info_usuer">Enviar Información</button>
 						</div>
 					</div>
 					</div>

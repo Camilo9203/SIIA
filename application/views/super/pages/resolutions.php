@@ -8,6 +8,7 @@
 $CI = &get_instance();
 $CI->load->model("ResolucionesModel");
 if($logged_in == TRUE && $tipo_usuario == "super"): ?>
+	<script src="<?= base_url('assets/js/functions/super/resolutions.js?v=1.0') . time() ?>" type="text/javascript"></script>
 	<!-- partial -->
 	<div class="main-panel">
 		<div class="content-wrapper">
@@ -16,9 +17,9 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 				<div class="col-md-12 grid-margin stretch-card">
 					<div class="card">
 						<div class="card-body">
-							<input type="button" class="btn btn-primary float-right solicitudes-modal" data-toggle='modal' data-target='#modal-crear-solicitud' value="Crear Resolución">
+							<input type="button" class="btn btn-primary float-right resoluciones-modal" data-funct='crear' data-toggle='modal' data-target='#modal-resolucion' value="Crear Resolución">
 							<br>
-							<p class="card-title">Resoluciones registradas</p>
+							<p class="card-title"><i class="icon-book menu-icon"></i> Resoluciones registradas</p>
 							<div class="row">
 								<div class="col-12">
 									<div class="container">
@@ -28,24 +29,25 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 											<table id="tabla_super_admins" width="100%" class="table table-striped table-bordered tabla_form display expandable-table">
 												<thead>
 												<tr>
+													<th>Organización</th>
+													<th>NIT</th>
 													<th>Número Resolución</th>
 													<th>Años</th>
 													<th>Fecha Inicio</th>
 													<th>Fecha Fin</th>
-													<th>Curso Aprobado</th>
-													<th>Modalidad Aprobada</th>
 													<th>Acción</th>
 												</tr>
 												</thead>
 												<tbody id="tbody">
-													<?php foreach ($resoluciones as $resolucion):
-														echo "<tr><td>$resolucion->numeroResolucion</td>";
+													<?php
+													foreach ($resoluciones as $resolucion):
+														echo "<tr><td>$resolucion->sigla</td>";
+														echo "<td>$resolucion->numNIT</td>";
+														echo "<td>$resolucion->numeroResolucion</td>";
 														echo "<td>$resolucion->anosResolucion</td>";
 														echo "<td>$resolucion->fechaResolucionInicial</td>";
 														echo "<td>$resolucion->fechaResolucionFinal</td>";
-														echo "<td><textarea class='text-area-ext' readonly>$resolucion->cursoAprobado</textarea></td>";
-														echo "<td><textarea class='text-area-ext' readonly>$resolucion->modalidadAprobada</textarea></td>";
-														echo "<td><button class='btn btn-primary btn-sm resoluciones-modal' data-funct='actualizar' data-toggle='modal' data-id='$resolucion->id_resoluciones' data-target='#modal-resolucion'>Ver</button></td></tr>";
+														echo "<td><button class='btn btn-outline-primary btn-sm resoluciones-modal' data-funct='actualizar' data-toggle='modal' data-id='$resolucion->id_resoluciones' data-target='#modal-resolucion'>Ver</button></td></tr>";
 													endforeach; ?>
 												</tbody>
 											</table>
@@ -60,23 +62,71 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 		</div>
 	</div>
 	<!-- Modal formulario crear resolución -->
-	<div class="modal fade" id="modal-crear-resolucion" tabindex="-1" role="dialog" aria-labelledby="modal-crear-resolucion">
+	<div class="modal fade" id="modal-resolucion" tabindex="-1" role="dialog" aria-labelledby="modal-resolucion">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="verAdmin">Crear solicitud <label id="super_id_admin_modal"></label> <span id="super_status_adm"></span></h4>
+					<h4 class="modal-title" id="resolu">Crear resolución <label id="super_id_admin_modal"></label> <span id="super_status_adm"></span></h4>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				</div>
 				<div class="modal-body">
 					<div class="container-fluid">
-						<?php echo form_open('', array('id' => 'crear_solicitud_sp')); ?>
+						<?php echo form_open('', array('id' => 'form_resoluciones_super')); ?>
 						<!--Select NIT Organización -->
 						<div class="row">
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group row align-content-center">
-									<label class="col-sm-3 col-form-label">Nit organización</label><br>
+									<label class="col-sm-3 col-form-label" for="nit-organizacion">NIT <span class="spanRojo">*</span></label>
+									<select name="nit-organizacion" id="nit-organizacion" class="selectpicker form-control" required>
+										<?php foreach ($organizaciones as $organizacion) : ?>
+											<option value="<?= $organizacion->numNIT ?>"><?= $organizacion->numNIT ?> | <?= $organizacion->sigla ?> </option>
+										<?php endforeach; ?>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group row align-content-center">
+									<input type="number" name="anos-resolucion" id="anos-resolucion" class="form-control" required placeholder="Años Vigencia">
+								</div>
+							</div>
+						</div>
+						<!-- Fechas -->
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group row align-content-center">
+									<label class="col-sm-3 col-form-label" for="fecha-inicio">Fecha de creación <span class="spanRojo">*</span></label>
 									<div class="col-sm-9">
-										<select name="nit-organizacion" id="nit-organizacion" class="selectpicker form-control show-tick" required>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+											</div>
+											<input class="form-control datepicker" placeholder="Selecciona la fecha" type="text"  id="fecha-inicio">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group row align-content-center">
+									<label class="col-sm-3 col-form-label" for="fecha-inicio">Fecha de finalización <span class="spanRojo">*</span></label>
+									<div class="col-sm-9">
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+											</div>
+											<input class="form-control datepicker" placeholder="Selecciona la fecha" type="text"  id="fecha-fin">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Fecha de creación -->
+						<div class="form-group row">
+							<label class="col-sm-3 col-form-label" for="fecha-creacion">Fecha de creación <span class="spanRojo">*</span></label>
+							<div class="col-md-6">
+								<div class="form-group row align-content-center">
+									<label class="col-sm-3 col-form-label" for="nit-organizacion">NIT <span class="spanRojo">*</span></label>
+									<div class="col-sm-9">
+										<select name="nit-organizacion" id="nit-organizacion" class="selectpicker form-control" required>
 											<?php foreach ($organizaciones as $organizacion) : ?>
 												<option value="<?= $organizacion->numNIT ?>"><?= $organizacion->numNIT ?> | <?= $organizacion->sigla ?> </option>
 											<?php endforeach; ?>
@@ -84,73 +134,15 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-8">
-								<!-- CheckBox Motivos de la solicitud -->
-								<div class="form-group row">
-									<label class="col-sm-3 col-form-label">Motivo de la solicitud <span class="spanRojo">*</span></label><br>
+							<div class="col-md-6">
+								<div class="form-group row align-content-center">
+									<label class="col-sm-3 col-form-label" for="nit-organizacion">NIT <span class="spanRojo">*</span></label>
 									<div class="col-sm-9">
-										<div class="form-check radio">
-											<input class="form-check-input" type="checkbox" value="1" id="cursoBasico" name="motivos" checked>
-											<label class="form-check-label" for="cursoBasico">Acreditación Curso Básico de Economía Solidaria</label>
-										</div>
-										<div class="form-check radio">
-											<input class="form-check-input" type="checkbox" value="2" id="avalTrabajo" name="motivos">
-											<label class="form-check-label" for="avalTrabajo">Aval de Trabajo Asociado</label>
-										</div>
-										<div class="form-check radio">
-											<input class="form-check-input" type="checkbox" value="3" id="cursoMedio" name="motivos">
-											<label class="form-check-label" for="cursoMedio">Acreditación Curso Medio de Economía Solidaria</label>
-										</div>
-										<div class="form-check radio">
-											<input class="form-check-input" type="checkbox" value="4" id="cursoAvanzado" name="motivos">
-											<label class="form-check-label" for="cursoAvanzado">Acreditación Curso Avanzado de Economía Solidaria</label>
-										</div>
-										<div class="form-check radio">
-											<input class="form-check-input" type="checkbox" value="5" id="finacieraEconomia" name="motivos">
-											<label class="form-check-label" for="finacieraEconomia">Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria</label>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<!-- Modalidad de la solicitud -->
-								<div class="form-group row">
-									<label class="col-sm-3 col-form-label">Modalidad <span class="spanRojo">*</span></label><br>
-									<div class="col-sm-9">
-										<div class="form-check radio">
-											<input class="form-check-input" type="checkbox" value="1" id="presencial" name="modalidades" checked>
-											<label class="form-check-label" for="presencial">Presencial</label>
-										</div>
-										<div class="form-check radio">
-											<input class="form-check-input" type="checkbox" value="2" id="virtual" name="modalidades">
-											<label class="form-check-label" for="virtual">Virtual</label>
-										</div>
-										<div class="form-check radio">
-											<input class="form-check-input" type="checkbox" value="3" id="enLinea" name="modalidades">
-											<label class="form-check-label" for="enLinea">En Linea</label>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-8">
-								<!-- Tipo de la solicitud -->
-								<div class="form-group">
-									<label class="col-sm-3 col-form-label">Tipo <span class="spanRojo">*</span></label><br>
-									<div class="form-check radio">
-										<input class="form-check-input" type="radio" value="Solicitud Nueva" id="nueva" name="tipos" checked>
-										<label class="form-check-label" for="nueva">Solicitud Nueva</label>
-									</div>
-									<div class="form-check radio">
-										<input class="form-check-input" type="radio" value="Renovación de Acreditación" id="renovacion" name="tipos">
-										<label class="form-check-label" for="renovacion">Renovación de Acreditación</label>
-									</div>
-									<div class="form-check radio">
-										<input class="form-check-input" type="radio" value="Acreditación Primera vez" id="acreditacion" name="tipos">
-										<label class="form-check-label" for="acreditacion">Acreditación Primera vez</label>
+										<select name="nit-organizacion" id="nit-organizacion" class="selectpicker form-control" required>
+											<?php foreach ($organizaciones as $organizacion) : ?>
+												<option value="<?= $organizacion->numNIT ?>"><?= $organizacion->numNIT ?> | <?= $organizacion->sigla ?> </option>
+											<?php endforeach; ?>
+										</select>
 									</div>
 								</div>
 							</div>

@@ -112,12 +112,46 @@ class Usuarios extends CI_Controller
 	public function delete(){
 		$id = $this->input->post('id');
 		$usuario = $this->UsuariosModel->getUsuarios($id);
-		if($usuario->logged_in == 1){
-			echo json_encode(array("msg" => "El usuario " . $usuario->usuario . " esta en linea."));
-		}else{
-			$this->db->where('id_usuario', $id);
-			if($this->db->delete('usuarios')){
-				echo json_encode(array("msg" => "El usuario " . $usuario->usuario . " ha sido eliminado."));
+		if($usuario->logged_in == 1) {
+			echo json_encode(array("title" => 'Usuario conectado', 'status' => 'warning',"msg" => "El usuario " . $usuario->usuario . " esta en linea."));
+		}
+		else {
+			$organizacion = $this->OrganizacionesModel->getOrganizacionUsuario($usuario->id_usuario);
+			// Eliminar posibles tablas que relacionen a la organización.
+			$this->db->where('organizaciones_id_organizacion', $organizacion->id_organizacion);
+			$tables = array(
+				'estadoOrganizaciones',
+				'solicitudes',
+				'tipoSolicitud',
+				'documentacion',
+				'certificadoExistencia',
+				'registroEducativoProgramas',
+				'jornadasActualizacion',
+				'datosProgramas',
+				'datosEnLinea',
+				'datosAplicacion',
+				'informacionGeneral',
+				'archivos',
+				'docentes');
+			$this->db->delete($tables);
+			// Eliminar Organización
+			$this->db->reset_query();
+			$this->db->where('id_organizacion', $organizacion->id_organizacion);
+			if($this->db->delete('organizaciones')) {
+				// Eliminar Usuario
+				$this->db->reset_query();
+				$this->db->where('id_usuario', $usuario->id_usuario);
+				if($this->db->delete('usuarios')) {
+					echo json_encode(array("title" => 'Usuario eliminado', 'status' => 'success', "msg" => "El usuario " . $usuario->usuario . " y sus datos en el sistema han sido eliminados."));
+				}
+				else {
+					$error = $this->db->erorr();
+					echo json_encode(array("title" => 'Error', 'status' => 'error', "msg" => "El usuario " . $usuario->usuario . " no fue eliminado. Error: " . $error['message']));
+				}
+			}
+			else {
+				$error = $this->db->erorr();
+				echo json_encode(array("title" => 'Error', 'status' => 'error', "msg" => "El usuario " . $usuario->usuario . " no fue eliminado. Error: " . $error['message']));
 			}
 		}
 	}

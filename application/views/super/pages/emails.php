@@ -15,7 +15,7 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 	<!-- partial -->
 	<div class="main-panel">
 		<div class="content-wrapper">
-			<!-- Tabla de administradores -->
+			<!-- Tabla de correos -->
 			<div class="row">
 				<div class="col-md-12 grid-margin stretch-card">
 					<div class="card">
@@ -45,10 +45,10 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 													echo "<td>$correo->tipo</td>";
 													if ($correo->error != "Enviado"):
 														echo "<td><span class='spanRojo'> Error de envío </span></td>";
-														echo "<td><button class='btn btn-primary btn-sm ver-error-envio' data-error='$correo->error'>Ver error</button></td>";
+														echo "<td><button class='btn btn-outline-primary btn-sm ver-error-envio' data-error='$correo->error'>Ver error</button></td>";
 													else:
 														echo "<td><span class='spanVerde'> Enviado</span></td>";
-														echo "<td><button class='btn btn-success btn-sm disabled' data-error='$correo->error'>Enviado</button></td>";
+														echo "<td><button class='btn btn-outline-success btn-sm disabled' data-error='$correo->error'>Enviado</button></td>";
 													endif;
 													echo '</tr>';
 												endforeach; ?>

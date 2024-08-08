@@ -43,7 +43,7 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 													echo "<td>$solicitud->nombre</td>";
 													echo "<td>$solicitud->asignada</td>";
 													echo "<td>$solicitud->tipoSolicitud</td>";
-													echo "<td><button class='btn btn-primary btn-sm admin-modal' data-funct='actualizar' data-toggle='modal' data-id='$solicitud->id_solicitudes' data-target='#modal-admin'>Ver</button></td></tr>";
+													echo "<td><button class='btn btn-outline-primary btn-sm admin-modal' data-funct='actualizar' data-toggle='modal' data-id='$solicitud->id_solicitudes' data-target='#modal-admin'>Ver</button></td></tr>";
 												endforeach; ?>
 												</tbody>
 											</table>

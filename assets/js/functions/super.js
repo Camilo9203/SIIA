@@ -63,54 +63,6 @@ if (funcion == "super" && funcion_ != "panel") {
 	}
 }
 /**
- * Acciones de menú
- */
-// Ver administradores
-$('#super-ver-admins').click(function () {
-	if ($('#super-view-admins').css('display') == 'none'){
-		$('#super-view-admins').show('swing');
-		$('#super-view-users').hide('linear');
-		$('#super-view-correos-log').hide('linear');
-		$('#super-ver-admins').val('Ocultar admministradores');
-		$('#super-ver-users').val('Ver usuarios');
-		$('#super-ver-correos').val('Ver correos');
-	}
-	else {
-		$('#super-view-admins').hide('linear');
-		$('#super-ver-admins').val('Ver admministradores');
-	}
-});
-// Ver usuarios
-$('#super-ver-users').click(function () {
-	if ($('#super-view-users').css('display') == 'none'){
-		$('#super-view-users').show('swing');
-		$('#super-view-admins').hide('linear');
-		$('#super-view-correos-log').hide('linear');
-		$('#super-ver-users').val('Ocultar usuarios');
-		$('#super-ver-admins').val('Ver admministradores');
-		$('#super-ver-correos').val('Ver correos');
-	}
-	else {
-		$('#super-view-users').hide('linear');
-		$('#super-ver-users').val('Ver usuarios');
-	}
-});
-// Ver correos logs
-$('#super-ver-correos').click(function () {
-	if ($('#super-view-correos-log').css('display') == 'none'){
-		$('#super-view-correos-log').show('swing');
-		$('#super-view-admins').hide('linear');
-		$('#super-view-users').hide('linear');
-		$('#super-ver-correos').val('Ocultar correos');
-		$('#super-ver-admins').val('Ver admministradores');
-		$('#super-ver-users').val('Ver usuarios');
-	}
-	else {
-		$('#super-view-correos-log').hide('linear');
-		$('#super-ver-correos').val('Ver correos');
-	}
-});
-/**
  * Modal crear/actualizar administrador
  */
 $(".admin-modal").click(function () {
@@ -455,7 +407,7 @@ $(".admin-usuario").click(function () {
 				$("#super_desconectar_user").prop("disabled", false);
 			} else {
 				$("#super_status_usr").css("background-color", "#c61f1b");
-				$("#super_status_usr").html("Estado: No conectado");
+				$("#super_status_usr").html("Estado: Desconectado");
 				$("#username").prop("disabled", false);
 				$("#password").prop("disabled", false);
 				$("#estado_usuario").prop("disabled", false);
@@ -606,6 +558,59 @@ $("#super_desconectar_user").click(function () {
 			//Do nothing
 		},
 	});
+});
+/**
+ * Eliminar usuario
+ */
+$("#super_eliminar_cuenta").click(function () {
+	data = {
+		id: $("#super_id_user").val(),
+	};
+	Alert.fire({
+		title: 'Eliminar usuario!',
+		text: 'Realmente desea eliminar el usuario, esta acción eliminara todo registro del usuario en el sistema.',
+		icon: 'question',
+		showCancelButton: true,
+		confirmButtonText: 'Eliminar',
+		cancelButtonText: 'Cancelar'
+	}).then((result) => {
+		if (result.isConfirmed) {
+			$.ajax({
+				url: baseURL + "usuarios/delete",
+				type: "post",
+				dataType: "JSON",
+				data: data,
+				success: function (response) {
+					console.log(response)
+					if(response.status === "success") {
+						Alert.fire({
+							title: response.title,
+							text: response.msg,
+							icon: response.status,
+							confirmButtonText: 'Aceptar',
+						}).then((result) => {
+							if (result.isConfirmed) {
+								reload();
+							}
+						})
+					}
+					else {
+						Alert.fire({
+							title: response.title,
+							text: response.msg,
+							icon: response.status,
+							confirmButtonText: 'Aceptar',
+						})
+					}
+
+				},
+				error: function (ev) {
+					//Do nothing
+				},
+			});
+		}
+	})
+
 });
 /**
  * Cerrar sesión súper administrador
