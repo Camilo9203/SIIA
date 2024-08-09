@@ -1,3 +1,14 @@
+<?php
+/***
+ * @var $logged_in
+ * @var $tipo_usuario
+ * @var $nivel
+ * @var $administradores
+ * @var $usuarios
+ * @var $organizaciones
+ * @var $correos
+ */
+?>
 <!-- partial:../../partials/_navbar.html -->
 <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 	<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
@@ -11,6 +22,7 @@
 		</button>
 		<!-- Perfil y cerrar sesión -->
 		<ul class="navbar-nav navbar-nav-right">
+			<?php if($nivel != '7'): ?>
 			<!-- Notifications TODO: Validar según usuario -->
 			<li class="nav-item dropdown">
 				<!-- Icon -->
@@ -18,6 +30,7 @@
 					<i class="icon-bell mx-0"></i> 3
 					<span class="count"></span>
 				</a>
+
 				<!-- Items TODO: Realizar foreach con notificaciones y tipo -->
 				<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
 					<p class="mb-0 font-weight-normal float-left dropdown-header">Notificaciones</p>
@@ -62,16 +75,19 @@
 					</a>
 				</div>
 			</li>
+			<?php endif; ?>
 			<!-- Profile -->
 			<li class="nav-item nav-profile dropdown">
 				<a class="nav-link dropdown-toggle" href="#"  data-toggle="dropdown" id="profileDropdown">
 					<img src="<?= base_url('assets/img/default.png')?>" alt="profile"/>
 				</a>
 				<div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+					<?php if($nivel != '7'): ?>
 					<a href="<?= base_url('super/perfil')?>" class="dropdown-item">
 						<i class="ti-settings text-primary"></i>
 						Perfil
 					</a>
+					<?php endif; ?>
 					<a class="dropdown-item" data-toggle='modal' data-target='#cerrar_sesion'>
 						<i class="ti-power-off text-primary"></i>
 						Cerrar Sesión

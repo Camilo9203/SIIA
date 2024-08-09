@@ -5,6 +5,7 @@
  * @var $data_organizacion
  * @var $title
  * @var $logged_in
+ * @var $nivel
  * @var $tipo_usuario
  */
 ?>
@@ -76,7 +77,7 @@
 		<!-- Navbar Usuario no registrado -->
 		<?php
 			// Datos enviados a menu y navbar
-			$data = array('tipo_usuario' => $tipo_usuario, 'logged_in' => $logged_in, 'activeLink' => $activeLink, 'organizacion', $data_organizacion);
+			$data = array('nivel' => $nivel, 'tipo_usuario' => $tipo_usuario, 'logged_in' => $logged_in, 'activeLink' => $activeLink, 'organizacion', $data_organizacion);
 			// Comprobar si esta iniciada la sesión
 			if ($logged_in != FALSE && $tipo_usuario != "none"):
 				$this->load->view('include/partial/_navbar', $data); ?>

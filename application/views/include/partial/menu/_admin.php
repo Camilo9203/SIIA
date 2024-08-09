@@ -5,7 +5,7 @@
 ?>
 <!-- Dashboard -->
 <li class="nav-item <?php if ($activeLink == 'dashboard') {echo 'active';}  ?>">
-	<a class="nav-link" href="<?= base_url('panelAdmin/panel');?>">
+	<a class="nav-link" href="<?= base_url('panelAdmin');?>">
 		<i class="ti-home menu-icon"></i>
 		<span class="menu-title">Panel principal</span>
 	</a>

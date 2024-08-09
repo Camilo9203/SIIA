@@ -2,6 +2,7 @@
 /***
  * @var $logged_in
  * @var $tipo_usuario
+ * @var $nivel
  * @var $administradores
  * @var $usuarios
  * @var $organizaciones
@@ -66,6 +67,8 @@ if($logged_in == TRUE && $tipo_usuario == "admin"): ?>
 						</div>
 					</div>
 				</div>
+				<!-- Cards data-->
+				<?php if($nivel != '7'): ?>
 				<div class="col-md-6 grid-margin transparent">
 					<div class="row">
 						<div class="col-md-6 mb-4 stretch-card transparent">
@@ -116,6 +119,7 @@ if($logged_in == TRUE && $tipo_usuario == "admin"): ?>
 						</div>
 					</div>
 				</div>
+				<?php endif; ?>
 			</div>
 			<!--		<div class="row">-->
 			<!--			<div class="col-md-6 grid-margin stretch-card">-->
