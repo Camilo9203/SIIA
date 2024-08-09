@@ -265,6 +265,130 @@
 			</div>
 		</div>
 	</div>
+	<!-- Modal Formulario Registro Llamadas -->
+	<div class="modal fade" id="modal_form_registro_llamadas" tabindex="-1" role="dialog" aria-labelledby="ayudaLogin">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="ayudaLogin">Registrar Llamada </h4>
+				</div>
+				<div class="modal-body">
+					<p>Por favor completa los datos </p>
+					<?= form_open_multipart('', array('id' => 'formulario_registro_telefonico')); ?>
+					<input type="hidden" name="telefonicoIdAdministrador" id="telefonicoIdAdministrador" value="<?= $usuario_id ?>">
+					<div class="container-fluid p-2" id="formulario-registro-telefonico">
+						<!-- Organización -->
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="telefonicoNitOrganizacion">Organización <span class="spanRojo">*</span></label>
+									<select name="telefonicoNitOrganizacion" id="telefonicoNitOrganizacion" class="selectpicker form-control" required>
+										<?php foreach ($organizaciones as $organizacion) : ?>
+											<option value="<?= $organizacion->id_organizacion ?>"><?= $organizacion->numNIT ?> | <?= $organizacion->sigla ?> </option>
+										<?php endforeach; ?>
+									</select>
+								</div>
+							</div>
+						</div><br>
+						<!-- Funcionario y Cargo -->
+						<div class="row">
+							<div class="col-md-6">
+								<!-- Funcionario -->
+								<div class="form-group">
+									<label>Funcionario con el que se habló:</label>
+									<input type="text" class="form-control" name="telefonicoFuncionario" id="telefonicoFuncionario" placeholder="Nombre completo funcionario" required>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<!-- Cargo -->
+								<div class="form-group">
+									<label>Cargo:</label>
+									<input type="text" class="form-control" name="telefonicoCargo" id="telefonicoCargo" placeholder="Cargo" required>
+								</div>
+							</div>
+						</div>
+						<!-- Teléfono y Tipo Llamada -->
+						<div class="row">
+							<!-- Teléfono -->
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Teléfono:</label>
+									<input type="number" class="form-control" name="telefonicoTelefono" id="telefonicoTelefono" placeholder="Teléfono" required>
+								</div>
+							</div>
+							<!-- Tipo Llamada -->
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Tipo de llamada:</label>
+									<select name="telefonicoTipoLlamada" id="telefonicoTipoLlamada" class="form-control show-tick telefonicoTipoLlamada" required>
+										<option value="" selected>Seleccione tipo</option>
+										<option value="Entrante">Entrante</option>
+										<option value="Saliente">Saliente</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<!-- Tipo Comunicación ID Solicitud -->
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Tipo de comunicación:</label>
+									<select name="telefonicoTipoComunicacion" id="telefonicoTipoComunicacion" class="form-control show-tick telefonicoTipoComunicacion" required>
+										<option value="" selected>Seleccione tipo</option>
+										<option value="Técnica">Asistencia Técnica</option>
+										<option value="Plataforma">Asistencia Plataforma</option>
+										<option value="Otra">Otra</option>
+									</select>
+								</div>
+							</div>
+							<!-- Id Solicitud -->
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>ID Solicitud:</label>
+									<select name="telefonicoIdSolicitud" id="telefonicoIdSolicitud" class="form-control show-tick" disabled>
+									</select>
+								</div>
+							</div>
+						</div><br>
+						<!-- Fecha y Duración-->
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Fecha:</label>
+									<input type="date" class="form-control" name="telefonicoFecha" id="telefonicoFecha" value="<?= date('Y-m-d'); ?>" required>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Duración:</label>
+									<select name="telefonicoDuracion" id="telefonicoDuracion" class="form-control show-tick telefonicoDuracion" required>
+										<option value="1-10">1 - 10 minutos</option>
+										<option value="10-30">10 - 30 minutos</option>
+										<option value="30 - 1">30 - 1 hora</option>
+										<option value="1+">Mas 1 hora</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<!-- Descripción -->
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>Descripción de la consulta:</label>
+									<textarea class="form-control" name="telefonicoDescripcion" id="telefonicoDescripcion" rows="4" placeholder="Descripción de la llamada" required></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					<?= form_close() ?>
+				</div>
+				<div class="modal-footer">
+					<button id="guardarRegistroTelefonico" class="btn btn-siia btn-sm btn-block">Guardar Registro <i class="fa fa-check" aria-hidden="true"></i></button>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- Modal - FIN -->
 <!-- //TODO: Botón de ir arriba -->
@@ -389,6 +513,7 @@
 	<script src="<?php echo base_url('assets/js/vis.min.js') ?>"></script>
 	<script src="<?php echo base_url('assets/js/functions/main.js?v=1.0.8.61219') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/super.js?v=1.1.3.4123') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/registro-llamadas.js?v=1.0.1') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/registro.js?v=1.0.3') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/login.js?v=1.0.0') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/perfil.js?v=1.1.0') . time() ?>" type="text/javascript"></script>
@@ -396,7 +521,7 @@
 	<script src="<?php echo base_url('assets/js/functions/observaciones.js?v=1.1.1') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/solicitudes.js?v=1.0.1') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/estados.js?v=1.2.1') . time() ?>" type="text/javascript"></script>
-	<script src="<?php echo base_url('assets/js/functions/resoluciones.js?v=1.4.1') . time() ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/js/functions/resolutions.js?v=1.4.1') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/nits.js?v=1.5.1') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/panel.js?v=1.0.1') . time() ?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/js/functions/solicitud.js?v=1.0.0') . time() ?>" type="text/javascript"></script>

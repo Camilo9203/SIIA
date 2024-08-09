@@ -12,7 +12,11 @@ class Admin extends CI_Controller
 		$this->load->model('DepartamentosModel');
 		$this->load->model('SolicitudesModel');
 		$this->load->model('OrganizacionesModel');
-		//$this->load->model('ResolucionesModel');
+		$this->load->model('AdministradoresModel');
+		$this->load->model('CorreosRegistroModel');
+		$this->load->model('TokenModel');
+		$this->load->model('UsuariosModel');
+		$this->load->model('ResolucionesModel');
 	}
 	// Función para la creación de idSolicitud
 	private function createIDSolicitud($nit)
@@ -61,8 +65,13 @@ class Admin extends CI_Controller
 			'nivel' => $this->session->userdata('nivel'),
 			'hora' => date("H:i", time()),
 			'fecha' => date('Y/m/d'),
-			'activeLink' => 'solicitudes',
 			'departamentos' => $this->DepartamentosModel->getDepartamentos(),
+			'administradores' => $this->AdministradoresModel->getAdministradores(),
+			'organizaciones' => $this->OrganizacionesModel->getOrganizaciones(),
+			'correos' => $this->CorreosRegistroModel->getCorreosRegistro(),
+			'usuarios' => $this->UsuariosModel->getUsuariosSuperAdmin(),
+			'solicitudes' => $this->SolicitudesModel->solicitudes(),
+			'resoluciones' => $this->ResolucionesModel->getResolucionAndOrganizacion()
 		);
 		return $data;
 	}
@@ -249,10 +258,17 @@ class Admin extends CI_Controller
 	public function panel()
 	{
 		$data = $this->datosSesionAdmin();
-		$data['title'] = 'Panel Principal / Organizaciones / En evaluación';
-		$this->load->view('include/header', $data);
-		$this->load->view('admin/paneles/panel', $data);
-		$this->load->view('include/footer', $data);
+		$data['title'] = 'Panel Principal';
+		// TODO: If provisional para mostrar panel atención al ciudadano
+		if ($data['nivel'] == '7'):
+			$this->load->view('include/header/main', $data);
+			$this->load->view('admin/index', $data);
+			$this->load->view('include/footer/main', $data);
+		else:
+			$this->load->view('include/header', $data);
+			$this->load->view('admin/paneles/panel', $data);
+			$this->load->view('include/footer', $data);
+		endif;
 		$this->logs_sia->logs('PLACE_USER');
 	}
 	// Contacto
@@ -1311,57 +1327,6 @@ class Admin extends CI_Controller
 		$datos_historial_org = $this->db->select("*")->from("historial")->where("id_historial", $id_historial)->get()->result();
 
 		echo json_encode(array("organizacion" => $datos_organizacion, "resolucion_historial" => $datos_historial_res, "historial" => $datos_historial_org));
-	}
-	public function guardarRegistroTelefonico()
-	{
-		$telefonicoNombre = $this->input->post('telefonicoNombre');
-		$telefonicoApellidos = $this->input->post('telefonicoApellidos');
-		$telefonicoCedula = $this->input->post('telefonicoCedula');
-		$telefonicoNit = $this->input->post('telefonicoNit');
-		$telefonicoTipoPersona = $this->input->post('telefonicoTipoPersona');
-		$telefonicoGenero = $this->input->post('telefonicoGenero');
-		$telefonicoMunicipio = $this->input->post('telefonicoMunicipio');
-		$telefonicoDepartamento = $this->input->post('telefonicoDepartamento');
-		$telefonicoNumeroContacto = $this->input->post('telefonicoNumeroContacto');
-		$telefonicoCorreoContacto = $this->input->post('telefonicoCorreoContacto');
-		$telefonicoNombreOrganizacion = $this->input->post('telefonicoNombreOrganizacion');
-		$telefonicoTipoOrganizacion = $this->input->post('telefonicoTipoOrganizacion');
-		$telefonicoTemaConsulta = $this->input->post('telefonicoTemaConsulta');
-		$telefonicoDescripcionConsulta = $this->input->post('telefonicoDescripcionConsulta');
-		$telefonicoTipoSolicitud = $this->input->post('telefonicoTipoSolicitud');
-		$telefonicoCanalRecepcion = $this->input->post('telefonicoCanalRecepcion');
-		$telefonicoCanalRespuesta = $this->input->post('telefonicoCanalRespuesta');
-		$telefonicoFecha = $this->input->post('telefonicoFecha');
-		$telefonicoDuracion = $this->input->post('telefonicoDuracion');
-		$telefonicoHora = $this->input->post('telefonicoHora');
-
-		$dataInsert = array(
-			"telefonicoNombre" => $telefonicoNombre,
-			"telefonicoApellidos" => $telefonicoApellidos,
-			"telefonicoCedula" => $telefonicoCedula,
-			"telefonicoNit" => $telefonicoNit,
-			"telefonicoTipoPersona" => $telefonicoTipoPersona,
-			"telefonicoGenero" => $telefonicoGenero,
-			"telefonicoMunicipio" => $telefonicoMunicipio,
-			"telefonicoDepartamento" => $telefonicoDepartamento,
-			"telefonicoNumeroContacto" => $telefonicoNumeroContacto,
-			"telefonicoCorreoContacto" => $telefonicoCorreoContacto,
-			"telefonicoNombreOrganizacion" => $telefonicoNombreOrganizacion,
-			"telefonicoTipoOrganizacion" => $telefonicoTipoOrganizacion,
-			"telefonicoTemaConsulta" => $telefonicoTemaConsulta,
-			"telefonicoDescripcionConsulta" => $telefonicoDescripcionConsulta,
-			"telefonicoTipoSolicitud" => $telefonicoTipoSolicitud,
-			"telefonicoCanalRecepcion" => $telefonicoCanalRecepcion,
-			"telefonicoCanalRespuesta" => $telefonicoCanalRespuesta,
-			"telefonicoFecha" => $telefonicoFecha,
-			"telefonicoDuracion" => $telefonicoDuracion,
-			"telefonicoHora" => $telefonicoHora
-		);
-
-		if ($this->db->insert('registroTelefonico', $dataInsert)) {
-			echo json_encode(array('url' => "admin", 'msg' => "Se ingreso el registro telefonico."));
-			$this->logs_sia->session_log('Se ingreso el registro telefonico con NIT:' . $telefonicoNit . ' nombre:' . $telefonicoNombreOrganizacion . ' y correo de contacto:' . $telefonicoCorreoContacto);
-		}
 	}
 	public function guardar_organizacionHistorial()
 	{

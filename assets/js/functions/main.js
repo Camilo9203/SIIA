@@ -1255,71 +1255,6 @@ $(document).ready(function () {
 		}
 	});
 
-
-
-	$("#guardarRegistroTelefonico").click(function () {
-		$telefonicoNombre = $("#telefonicoNombre").val();
-		$telefonicoApellidos = $("#telefonicoApellidos").val();
-		$telefonicoCedula = $("#telefonicoCedula").val();
-		$telefonicoNit = $("#telefonicoNit").val();
-		$telefonicoTipoPersona = $("#telefonicoTipoPersona").val();
-		$telefonicoGenero = $("#telefonicoGenero").val();
-		$telefonicoMunicipio = $("#telefonicoMunicipio").val();
-		$telefonicoDepartamento = $("#telefonicoDepartamento").val();
-		$telefonicoNumeroContacto = $("#telefonicoNumeroContacto").val();
-		$telefonicoCorreoContacto = $("#telefonicoCorreoContacto").val();
-		$telefonicoNombreOrganizacion = $("#telefonicoNombreOrganizacion").val();
-		$telefonicoTipoOrganizacion = $("#telefonicoTipoOrganizacion").val();
-		$telefonicoTemaConsulta = $("#telefonicoTemaConsulta").val();
-		$telefonicoDescripcionConsulta = $("#telefonicoDescripcionConsulta").val();
-		$telefonicoTipoSolicitud = $("#telefonicoTipoSolicitud").val();
-		$telefonicoCanalRecepcion = $("#telefonicoCanalRecepcion").val();
-		$telefonicoCanalRespuesta = $("#telefonicoCanalRespuesta").val();
-		$telefonicoFecha = $("#telefonicoFecha").val();
-		$telefonicoDuracion = $("#telefonicoDuracion").val();
-		$telefonicoHora = $("#telefonicoHora").val();
-
-		data = {
-			telefonicoNombre: $telefonicoNombre,
-			telefonicoApellidos: $telefonicoApellidos,
-			telefonicoCedula: $telefonicoCedula,
-			telefonicoNit: $telefonicoNit,
-			telefonicoTipoPersona: $telefonicoTipoPersona,
-			telefonicoGenero: $telefonicoGenero,
-			telefonicoMunicipio: $telefonicoMunicipio,
-			telefonicoDepartamento: $telefonicoDepartamento,
-			telefonicoNumeroContacto: $telefonicoNumeroContacto,
-			telefonicoCorreoContacto: $telefonicoCorreoContacto,
-			telefonicoNombreOrganizacion: $telefonicoNombreOrganizacion,
-			telefonicoTipoOrganizacion: $telefonicoTipoOrganizacion,
-			telefonicoTemaConsulta: $telefonicoTemaConsulta,
-			telefonicoDescripcionConsulta: $telefonicoDescripcionConsulta,
-			telefonicoTipoSolicitud: $telefonicoTipoSolicitud,
-			telefonicoCanalRecepcion: $telefonicoCanalRecepcion,
-			telefonicoCanalRespuesta: $telefonicoCanalRespuesta,
-			telefonicoFecha: $telefonicoFecha,
-			telefonicoDuracion: $telefonicoDuracion,
-			telefonicoHora: $telefonicoHora,
-		};
-
-		$.ajax({
-			url: baseURL + "admin/guardarRegistroTelefonico",
-			type: "post",
-			dataType: "JSON",
-			data: data,
-			beforeSend: function () {
-				notificacion("Espere...", "success");
-			},
-			success: function (response) {
-				notificacion(response.msg, "success");
-				clearInputs("noRegisSiste");
-			},
-			error: function (ev) {
-				//Do nothing
-			},
-		});
-	});
-
 	$("#admin_buscar_organizacion").click(function () {
 		if ($("#admin_buscar_nombre").val().length == 0) {
 			$("#admin_buscar_nombre").val("*");
@@ -6704,12 +6639,7 @@ $(document).ready(function () {
 		}
 	});
 
-	$(".contenedor--menu2").hide();
-	$(".icono2").click(function () {
-		$(".contenedor--menu2").animate({
-			width: "toggle",
-		});
-	});
+
 	//TODO: Menu formularios
 	$(".contenedor--menu3").hide();
 	$(".icono3").click(function () {

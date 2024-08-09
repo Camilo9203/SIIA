@@ -1105,23 +1105,8 @@ small > a {
 	padding: 50px;
 	overflow-y: scroll;
 }
-.contenedor--menu2 {
-	background-color: white;
-	z-index: 300;
-	width: 20%;
-	position: absolute;
-	border-radius: 10px;
-	border: 1px black solid;
-	top: 0px;
-	cursor: move;
-}
 .menu {
 	padding: 10px 0px 10px 20px;
-}
-.formRegistroTelefonico {
-	padding: 10px 0px 10px 10px;
-	overflow-x: auto;
-	height: 780px;
 }
 .icono--div {
 	z-index: 600;
@@ -1129,7 +1114,7 @@ small > a {
 	bottom: 11%;
 	right: 1.1%;
 }
-.icono--div2 {
+.icono--registro-llamadas {
 	z-index: 600;
 	position: fixed;
 	bottom: 18%;

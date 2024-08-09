@@ -96,3 +96,9 @@
 .card-people {
 	padding-top: 0px !important;
 }
+.icono--registro-llamadas {
+	z-index: 600;
+	position: fixed;
+	bottom: 18%;
+	right: 1.1%;
+}
