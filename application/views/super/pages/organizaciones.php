@@ -7,6 +7,7 @@
  */
 $CI = &get_instance();
 $CI->load->model("SolicitudesModel");
+$CI->load->model("UsuariosModel");
 if($logged_in == TRUE && ($tipo_usuario == "super" || $tipo_usuario == "admin")): ?>
 	<!-- partial -->
 	<div class="main-panel">
@@ -23,31 +24,29 @@ if($logged_in == TRUE && ($tipo_usuario == "super" || $tipo_usuario == "admin"))
 							<p class="card-title">Organizaciones registradas</p>
 							<div class="row">
 								<div class="col-12">
-									<div class="container">
-										<div class="clearfix"></div>
-										<hr/>
-										<div class="table-responsive">
-											<table id="tabla_super_admins" width="100%" border=0 class="table table-striped table-bordered tabla_form display expandable-table">
-												<thead>
-												<tr>
-													<th>Organización</th>
-													<th>NIT</th>
-													<th>Correo Notificaciones</th>
-													<th>Usuario</th>
-													<th>Acción</th>
-												</tr>
-												</thead>
-												<tbody id="tbody">
-												<?php foreach ($organizaciones as $organizacion):
-													echo "<tr><td>$organizacion->nombreOrganizacion</td>";
-													echo "<td>$organizacion->numNIT</td>";
-													echo "<td>$organizacion->direccionCorreoElectronicoOrganizacion</td>";
-													echo "<td>$organizacion->usuarios_id_usuario</td>";
-													echo "<td><button class='btn btn-outline-primary btn-sm admin-modal' data-funct='ver' data-toggle='modal' data-id='$organizacion->id_organizacion' data-target='#modal-organizaciones-detalle'>Detalle</button></td></tr>";
-												endforeach; ?>
-												</tbody>
-											</table>
-										</div>
+									<div class="clearfix"></div>
+									<hr/>
+									<div class="table-responsive">
+										<table id="tabla_super_admins" width="100%" border=0 class="table table-striped table-bordered tabla_form display expandable-table">
+											<thead>
+											<tr>
+												<th>Organización</th>
+												<th>NIT</th>
+												<th>Correo Notificaciones</th>
+												<th>Usuario</th>
+												<th>Acción</th>
+											</tr>
+											</thead>
+											<tbody id="tbody">
+											<?php foreach ($organizaciones as $organizacion):
+												echo "<tr><td>$organizacion->nombreOrganizacion</td>";
+												echo "<td>$organizacion->numNIT</td>";
+												echo "<td>$organizacion->direccionCorreoElectronicoOrganizacion</td>";
+												echo "<td>"; echo $CI->UsuariosModel->getUsuarios($organizacion->usuarios_id_usuario)->usuario; echo "</td>";
+												echo "<td><button class='btn btn-outline-primary btn-sm admin-modal' data-funct='ver' data-toggle='modal' data-id='$organizacion->id_organizacion' data-target='#modal-organizaciones-detalle'>Detalle</button></td></tr>";
+											endforeach; ?>
+											</tbody>
+										</table>
 									</div>
 								</div>
 							</div>

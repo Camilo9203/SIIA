@@ -20,39 +20,37 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 			<div class="col-md-12 grid-margin stretch-card">
 				<div class="card">
 					<div class="card-body">
-						<p class="card-title">Usuarios registrados</p>
+						<p class="card-title"><i class="icon-head menu-icon"></i> Usuarios registrados</p>
 						<div class="row">
 							<div class="col-12">
-								<div class="container">
-									<div class="clearfix"></div>
-									<hr/>
-									<div class="table-responsive">
-										<table id="tabla_super_usuarios" width="100%" border=0 class="table table-striped table-bordered tabla_form display expandable-table">
-											<thead>
-											<tr>
-												<th>Organización</th>
-												<th>NIT</th>
-												<th>Usuario</th>
-												<th>Contraseña</th>
-												<th>Estado</th>
-												<th>Conectado</th>
-												<th>Acciones</th>
-											</tr>
-											</thead>
-											<tbody id="tbody">
-											<?php
-											foreach ($usuarios as $usuario):
-												echo "<td> $usuario->sigla </td>";
-												echo "<td>$usuario->numNIT</td>";
-												echo "<td>$usuario->usuario</td>";
-												echo "<td>"; echo $CI->UsuariosModel->getPassword($usuario->contrasena_rdel); echo "</td>";
-												echo "<td>"; echo $CI->TokenModel->getState($usuario->verificado); echo "</td>";
-												echo "<td>"; echo $CI->UsuariosModel->getConnection($usuario->logged_in); echo "</td>";
-												echo "<td><button class='btn btn-outline-primary btn-sm admin-usuario' data-toggle='modal' data-id='$usuario->id_usuario' data-target='#modal-user'>Ver</button></td></tr>";
-											endforeach; ?>
-											</tbody>
-										</table>
-									</div>
+								<div class="clearfix"></div>
+								<hr/>
+								<div class="table-responsive">
+									<table id="tabla_super_usuarios" width="100%" border=0 class="table table-striped table-bordered tabla_form display expandable-table">
+										<thead>
+										<tr>
+											<th>Organización</th>
+											<th>NIT</th>
+											<th>Usuario</th>
+											<th>Contraseña</th>
+											<th>Estado</th>
+											<th>Conectado</th>
+											<th>Acciones</th>
+										</tr>
+										</thead>
+										<tbody id="tbody">
+										<?php
+										foreach ($usuarios as $usuario):
+											echo "<td> $usuario->sigla </td>";
+											echo "<td>$usuario->numNIT</td>";
+											echo "<td>$usuario->usuario</td>";
+											echo "<td>"; echo $CI->UsuariosModel->getPassword($usuario->contrasena_rdel); echo "</td>";
+											echo "<td>"; echo $CI->TokenModel->getState($usuario->verificado); echo "</td>";
+											echo "<td>"; echo $CI->UsuariosModel->getConnection($usuario->logged_in); echo "</td>";
+											echo "<td><button class='btn btn-outline-primary btn-sm admin-usuario' data-toggle='modal' data-id='$usuario->id_usuario' data-target='#modal-user'>Ver</button></td></tr>";
+										endforeach; ?>
+										</tbody>
+									</table>
 								</div>
 							</div>
 						</div>

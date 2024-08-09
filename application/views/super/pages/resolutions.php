@@ -19,39 +19,37 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 						<div class="card-body">
 							<input type="button" class="btn btn-primary float-right resoluciones-modal" data-funct='crear' data-toggle='modal' data-target='#modal-resolucion' value="Crear Resolución">
 							<br>
-							<p class="card-title"><i class="icon-book menu-icon"></i> Resoluciones registradas</p>
+							<p class="card-title"><i class="icon-folder menu-icon"></i> Resoluciones registradas</p>
 							<div class="row">
 								<div class="col-12">
-									<div class="container">
-										<div class="clearfix"></div>
-										<hr/>
-										<div class="table-responsive">
-											<table id="tabla_super_admins" width="100%" class="table table-striped table-bordered tabla_form display expandable-table">
-												<thead>
-												<tr>
-													<th>Organización</th>
-													<th>NIT</th>
-													<th>Número Resolución</th>
-													<th>Años</th>
-													<th>Fecha Inicio</th>
-													<th>Fecha Fin</th>
-													<th>Acción</th>
-												</tr>
-												</thead>
-												<tbody id="tbody">
-													<?php
-													foreach ($resoluciones as $resolucion):
-														echo "<tr><td>$resolucion->sigla</td>";
-														echo "<td>$resolucion->numNIT</td>";
-														echo "<td>$resolucion->numeroResolucion</td>";
-														echo "<td>$resolucion->anosResolucion</td>";
-														echo "<td>$resolucion->fechaResolucionInicial</td>";
-														echo "<td>$resolucion->fechaResolucionFinal</td>";
-														echo "<td><button class='btn btn-outline-primary btn-sm resoluciones-modal' data-funct='actualizar' data-toggle='modal' data-id='$resolucion->id_resoluciones' data-target='#modal-resolucion'>Ver</button></td></tr>";
-													endforeach; ?>
-												</tbody>
-											</table>
-										</div>
+									<div class="clearfix"></div>
+									<hr/>
+									<div class="table-responsive">
+										<table id="tabla_super_admins" width="100%" class="table table-striped table-bordered tabla_form display expandable-table">
+											<thead>
+											<tr>
+												<th>Organización</th>
+												<th>NIT</th>
+												<th>Número Resolución</th>
+												<th>Años</th>
+												<th>Fecha Inicio</th>
+												<th>Fecha Fin</th>
+												<th>Acción</th>
+											</tr>
+											</thead>
+											<tbody id="tbody">
+												<?php
+												foreach ($resoluciones as $resolucion):
+													echo "<tr><td>$resolucion->sigla</td>";
+													echo "<td>$resolucion->numNIT</td>";
+													echo "<td>$resolucion->numeroResolucion</td>";
+													echo "<td>$resolucion->anosResolucion</td>";
+													echo "<td>$resolucion->fechaResolucionInicial</td>";
+													echo "<td>$resolucion->fechaResolucionFinal</td>";
+													echo "<td><button class='btn btn-outline-primary btn-sm resoluciones-modal' data-funct='actualizar' data-toggle='modal' data-id='$resolucion->id_resoluciones' data-target='#modal-resolucion'>Ver</button></td></tr>";
+												endforeach; ?>
+											</tbody>
+										</table>
 									</div>
 								</div>
 							</div>
