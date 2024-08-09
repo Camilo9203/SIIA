@@ -122,6 +122,9 @@ class Resoluciones extends CI_Controller
 			$this->logs_sia->logQueries();
 		}
 	}
+	/**
+	 *
+	 */
 }
 // Validación de errores
 function var_dump_pre($mixed = null) {
