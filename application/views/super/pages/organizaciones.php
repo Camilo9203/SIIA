@@ -43,7 +43,7 @@ if($logged_in == TRUE && ($tipo_usuario == "super" || $tipo_usuario == "admin"))
 												echo "<td>$organizacion->numNIT</td>";
 												echo "<td>$organizacion->direccionCorreoElectronicoOrganizacion</td>";
 												echo "<td>"; echo $CI->UsuariosModel->getUsuarios($organizacion->usuarios_id_usuario)->usuario; echo "</td>";
-												echo "<td><button class='btn btn-outline-primary btn-sm admin-modal' data-funct='ver' data-toggle='modal' data-id='$organizacion->id_organizacion' data-target='#modal-organizaciones-detalle'>Detalle</button></td></tr>";
+												echo "<td><button class='btn btn-outline-primary btn-sm organizacion-modal-detalle' data-funct='ver' data-toggle='modal' data-id='$organizacion->id_organizacion' data-target='#modal-organizaciones-detalle'>Detalle</button></td></tr>";
 											endforeach; ?>
 											</tbody>
 										</table>
@@ -66,7 +66,15 @@ if($logged_in == TRUE && ($tipo_usuario == "super" || $tipo_usuario == "admin"))
 				</div>
 				<div class="modal-body">
 					<div class="container">
-
+						<div class="row">
+							<div class="col-4">
+								<label for="organizacion">Organización</label>
+							</div>
+							<div class="col-4">
+								<label for="nit">NIT</label>
+							</div>
+							<div class="col-4">Sigla</div>
+						</div>
 					</div>
 				</div>
 				<br>
