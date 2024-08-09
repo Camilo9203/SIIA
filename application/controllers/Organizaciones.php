@@ -35,6 +35,7 @@ class Organizaciones extends CI_Controller
 	{
 		$data = $this->datosSession();
 		$data['title'] = 'Panel Principal / Administrador / Organizaciones';
+		$data['activeLink'] = 'organizaciones';
 		$this->load->view('include/header', $data);
 		$this->load->view('admin/organizaciones/organizaciones', $data);
 		$this->load->view('include/footer', $data);
@@ -46,10 +47,16 @@ class Organizaciones extends CI_Controller
 		$data =  $this->datosSession();
 		$data['title'] = 'Panel Principal / Administrador / Inscritas';
 		$data['organizaciones'] = $this->OrganizacionesModel->getOrganizaciones();
-		$this->load->view('include/header', $data);
-		$this->load->view('admin/organizaciones/inscritas', $data);
-		$this->load->view('include/footer', $data);
-		$this->logs_sia->logs('PLACE_USER');
+		// TODO: If provisional para mostrar panel atención al ciudadano
+		if ($data['nivel'] == '7'):
+			$this->load->view('include/header/main', $data);
+			$this->load->view('super/pages/organizaciones', $data);
+			$this->load->view('include/footer/main', $data);
+		else:
+			$this->load->view('include/header', $data);
+			$this->load->view('admin/organizaciones/inscritas', $data);
+			$this->load->view('include/footer', $data);
+		endif;
 	}
 	// Cargar información organización inscrita
 	public function datosOrganzacion()

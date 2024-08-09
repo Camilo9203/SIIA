@@ -7,7 +7,7 @@
  */
 $CI = &get_instance();
 $CI->load->model("SolicitudesModel");
-if($logged_in == TRUE && $tipo_usuario == "super"): ?>
+if($logged_in == TRUE && ($tipo_usuario == "super" || $tipo_usuario == "admin")): ?>
 	<!-- partial -->
 	<div class="main-panel">
 		<div class="content-wrapper">
@@ -16,7 +16,9 @@ if($logged_in == TRUE && $tipo_usuario == "super"): ?>
 				<div class="col-md-12 grid-margin stretch-card">
 					<div class="card">
 						<div class="card-body">
+							<?php if($tipo_usuario == "super"): ?>
 							<input type="button" class="btn btn-primary float-right solicitudes-modal" data-toggle='modal' data-target='#modal-crear-solicitud' value="Crear Solicitud">
+							<?php endif; ?>
 							<br>
 							<p class="card-title">Solicitudes registradas</p>
 							<div class="row">

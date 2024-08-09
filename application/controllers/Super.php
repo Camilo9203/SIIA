@@ -74,6 +74,7 @@ class Super extends CI_Controller {
 			'logged_in' => $this->session->userdata('logged_in'),
 			'title' => 'Super | Panel de Control',
 			'tipo_usuario' => $this->session->userdata('type_user'),
+			'nivel' => $this->session->userdata('nivel'),
 			'usuario_id' => 666,
 			'hora' => date("H:i", time()),
 			'fecha' => date('Y/m/d'),
@@ -82,7 +83,7 @@ class Super extends CI_Controller {
 			'correos' => $this->CorreosRegistroModel->getCorreosRegistro(),
 			'usuarios' => $this->UsuariosModel->getUsuariosSuperAdmin(),
 			'solicitudes' => $this->SolicitudesModel->solicitudes(),
-			'resoluciones' => $this->ResolucionesModel->getResoluciones()
+			'resoluciones' => $this->ResolucionesModel->getResolucionAndOrganizacion()
 		);
 		return $data;
 	}
@@ -162,13 +163,13 @@ class Super extends CI_Controller {
 	public function Solicitudes(){
 		verify_session_admin();
 		$is = $this->db->select("valor")->from("opciones")->where("nombre","super")->get()->row()->valor;
-		if($is == "TRUE"):
+		//if($is == "TRUE"):
 			$data = $this->dataSessionSuper();
 			$this->load->view('include/header/main', $data);
 			$this->load->view('super/pages/requests', $data);
 			$this->load->view('include/footer/main');
 			$this->logs_sia->logs('PLACE_USER');
-		endif;
+		//endif;
 	}
 	/**
 	 * Resoluciones
