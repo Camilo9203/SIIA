@@ -623,7 +623,7 @@ $("#super_cerrar_sesion").click(function () {
 		data: data,
 		success: function (response) {
 			if (response.status == "ok") {
-				redirect(baseURL + 'super?');
+				redirect(baseURL);
 			}
 		},
 		error: function (ev) {
