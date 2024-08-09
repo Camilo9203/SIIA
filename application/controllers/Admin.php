@@ -259,6 +259,7 @@ class Admin extends CI_Controller
 	{
 		$data = $this->datosSesionAdmin();
 		$data['title'] = 'Panel Principal';
+		$data['activeLink'] = 'Panel Principal';
 		// TODO: If provisional para mostrar panel atención al ciudadano
 		if ($data['nivel'] == '7'):
 			$this->load->view('include/header/main', $data);

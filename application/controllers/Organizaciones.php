@@ -25,7 +25,6 @@ class Organizaciones extends CI_Controller
 			'nivel' => $this->session->userdata('nivel'),
 			'hora' => date("H:i", time()),
 			'fecha' => date('Y/m/d'),
-			'activeLink' => 'reportes',
 			'departamentos' => $this->DepartamentosModel->getDepartamentos(),
 		);
 		return $data;
@@ -35,7 +34,6 @@ class Organizaciones extends CI_Controller
 	{
 		$data = $this->datosSession();
 		$data['title'] = 'Panel Principal / Administrador / Organizaciones';
-		$data['activeLink'] = 'organizaciones';
 		$this->load->view('include/header', $data);
 		$this->load->view('admin/organizaciones/organizaciones', $data);
 		$this->load->view('include/footer', $data);

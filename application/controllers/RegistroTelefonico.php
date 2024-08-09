@@ -35,7 +35,6 @@ class RegistroTelefonico extends CI_Controller
 			'nivel' => $this->session->userdata('nivel'),
 			'hora' => date("H:i", time()),
 			'fecha' => date('Y/m/d'),
-			'activeLink' => 'reportes',
 		);
 		return $data;
 	}

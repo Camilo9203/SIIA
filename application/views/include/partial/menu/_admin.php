@@ -5,7 +5,7 @@
 ?>
 <!-- Dashboard -->
 <li class="nav-item <?php if ($activeLink == 'dashboard') {echo 'active';}  ?>">
-	<a class="nav-link" href="<?= base_url('panelAdmin');?>">
+	<a class="nav-link" href="<?= base_url('panelAdmin/panel');?>">
 		<i class="ti-home menu-icon"></i>
 		<span class="menu-title">Panel principal</span>
 	</a>
@@ -19,7 +19,7 @@
 	</a>
 	<div class="collapse" id="organizaciones-menu-collapse">
 		<ul class="nav flex-column sub-menu">
-			<li class="nav-item"><a href="<?= base_url('panelAdmin/organizaciones/inscritas')?>" class="nav-link">Inscritas</a></li>
+			<li class="nav-item"><a href="<?= base_url('organizaciones/inscritas')?>" class="nav-link">Inscritas</a></li>
 		</ul>
 	</div>
 </li>
@@ -46,7 +46,7 @@
 	</a>
 	<div class="collapse" id="reportes-menu-collapse">
 		<ul class="nav flex-column sub-menu">
-			<li class="nav-item"><a href="<?= base_url('panelAdmin/reportes/telefonico');?>" class="nav-link">Telefónico</a></li>
+			<li class="nav-item"><a href="<?= base_url('reportes/telefonico');?>" class="nav-link">Telefónico</a></li>
 		</ul>
 	</div>
 </li>
