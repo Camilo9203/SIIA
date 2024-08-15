@@ -5600,7 +5600,7 @@ $(document).ready(function () {
 			$("#re_password").attr("type", "text");
 		}
 	});
-	$("#show-pass3").hover(function () {
+	$("#show-pass3").click(function () {
 		$(this).attr("title", "Aquí puedes ver tu contraseña.");
 		if ($("#password").attr("type") === "text") {
 			$("#password").attr("type", "password");

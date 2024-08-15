@@ -22,7 +22,12 @@ if($logged_in == FALSE && $tipo_usuario == "none"): ?>
 								</div>
 								<div class="form-group">
 									<label for="password"><i class="fa fa-key" aria-hidden="true"></i> Contraseña: <span class="spanRojo">*</span></label>
-									<input type="password" name="password" class="form-control" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required="" size="10" autocomplete="off">
+									<div class="input-group mb-4">
+										<div class="input-group-prepend">
+											<span class="input-group-text" id="show-pass3"><a href="#"><i class="icon-eye"></i></a></span>
+										</div>
+										<input type="password" name="password" class="form-control" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required size="10" autocomplete="off">
+									</div>
 								</div>
 								<div class="mt-3">
 									<a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" id="inicio_sesion_admin">Iniciar Sesión</a>
