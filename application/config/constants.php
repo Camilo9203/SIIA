@@ -90,6 +90,7 @@ define('APP_DATOS_TOKEN', '34gNFwkJaEVjZQdRRrCPBHwGk'); // Token de la aplicaci�
 define('RECAPTCHA_KEY', '6LeTFnYnAAAAAIhB3zerDj5WTFRhG2XCILU6xIWL'); // Key recaptcha google
 define('APP_DATOS_USER', 'uaeostics@gmail.com'); // Usuario de la aplicación en datos abiertos
 define('APP_DATOS_PASSWORD', 'Lr563serv*'); // Contraseña de la aplicación en datos abiertos
+define('EMAIl_PASSWORD', '0886938263d949');
 define('APP_DATOS_VIEWIUD', '2tsa-2de2'); // https://www.datos.gov.co/resource/43dx-dcjb.json https://www.datos.gov.co/resource/9qtj-epz2.json
 define('PAGINA_WEB', 'https://www.unidadsolidaria.gov.co/'); // Correo electrónico del sia para el contacto
 define('CORREO_SIA', 'acreditaciones@unidadsolidaria.gov.co'); // Correo electrónico del sia para el contacto
@@ -99,4 +100,4 @@ define('CORREO_AREA', 'acreditaciones@unidadsolidaria.gov.co'); // Correo electr
 define('CORREO_DIRECTOR', 'acreditaciones@unidadsolidaria.gov.co'); // Correo electrónico de DIRECTOR NACIONAL PRIORIDAD MUY ALTA
 define('CORREO_DIRECTOR', 'acreditaciones@unidadsolidaria.gov.co'); // Correo electrónico de DIRECTOR NACIONAL PRIORIDAD MUY ALTA
 define('SUPER_PS', 'Nm3BcJ7GJbUkIe0aLpd5'); // PS de super // https://www.clavesegura.org/es/
-define('user_sia_db', 'SKGqzlw8gL'); // PS de bd sia user portal pruebas
+define('PASSWORD_DB', '');

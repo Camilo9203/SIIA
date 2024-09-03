@@ -648,7 +648,7 @@ $(document).ready(function () {
 	//Click en volver al panel.
 
 	$("#ver_informe_actividades").click(function () {
-		redirect(baseURL + "panel/informeActividades");
+		redirect(baseURL + "panel/informe-actividades");
 	});
 	$("#ver_plan_mejoramiento").click(function () {
 		redirect(baseURL + "panel/planMejora");

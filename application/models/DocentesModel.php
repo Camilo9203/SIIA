@@ -35,4 +35,18 @@ class DocentesModel extends CI_Model
 		$docentes = $this->db->select("*")->from("docentes")->where("valido", 1)->get()->result();
 		return $docentes;
 	}
+	/**
+	 * Cargar Docentes valídos por entidad
+	 */
+	public function getDocentesValidos($id = FALSE)
+	{
+		if ($id === FALSE) {
+			// Consulta para traer docentes
+			$query = $this->db->select("*")->from("docentes")->where("valido", 1)->get();
+			return $query->result();
+		}
+		// Traer docentes por ID
+		$query = $this->db->get_where('docentes', array('organizaciones_id_organizacion' => $id, 'valido' => 1));
+		return $query->result();
+	}
 }

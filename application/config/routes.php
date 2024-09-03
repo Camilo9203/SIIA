@@ -95,6 +95,7 @@ $route['panelAdmin/organizaciones'] = 'Organizaciones';
 $route['panelAdmin/organizaciones/asignar'] = 'Organizaciones/asignar';
 $route['panelAdmin/organizaciones/inscritas'] = 'Organizaciones/inscritas';
 // Solicitudes
+$route['administracion/solicitudes/inscritas'] = 'Solicitudes';
 $route['panelAdmin/organizaciones/solicitudes/asignar'] = 'Solicitudes/asignar';
 $route['panelAdmin/organizaciones/solicitudes/finalizadas'] = 'Solicitudes/finalizadas';
 $route['panelAdmin/organizaciones/solicitudes/proceso'] = 'Solicitudes/proceso';
@@ -148,7 +149,7 @@ $route['panel/solicitud/(:idSolicitud)'] = 'Solicitudes/solicitud/$idSolicitud';
 $route['Certificado'] = 'Certificaciones/crearCertificacion';
 // $route['panel/obtenerCertificado'] = 'Certificaciones/obtenerCertificado';
 $route['panel/estadoSolicitud/(:idSolicitud)'] = 'Solicitudes/estadoSolicitud/$idSolicitud';
-$route['panel/informeActividades'] = 'Panel/informeActividades';
+$route['panel/informe-actividades'] = 'InformeActividades/index';
 $route['panel/docentes'] = 'Docentes/index';
 $route['panel/planMejora'] = 'Panel/planMejora';
 //Perfil Usuario

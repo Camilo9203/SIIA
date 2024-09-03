@@ -32,7 +32,7 @@
 	</a>
 	<div class="collapse" id="solicitudes-menu-collapse">
 		<ul class="nav flex-column sub-menu">
-			<li class="nav-item"><a href="<?= base_url('super/solicitudes');?>" class="nav-link">Inscritas</a></li>
+			<li class="nav-item"><a href="<?= base_url('panelAdmin/organizaciones/solicitudes/inscritas');?>" class="nav-link">Inscritas</a></li>
 		</ul>
 	</div>
 </li>

@@ -42,7 +42,18 @@ class Solicitudes extends CI_Controller
 		);
 		return $data;
 	}
-	// Cargar solicitud
+	/**
+	 * Solicitudes inscritas
+	 */
+	public function index(){
+		$data = $this->dataSessionSuper();
+		$data['title'] = 'Panel Principal / Organizaciones / Inscritas';
+		$data['solicitudes'] = $this->SolicitudesModel->getSolicitudesFinalizadas()[0]['solicitudesSinAsignar'];
+		$this->load->view('include/header/main', $data);
+		$this->load->view('super/pages/requests', $data);
+		$this->load->view('include/footer/main');
+		$this->logs_sia->logs('PLACE_USER');
+	}	// Cargar solicitud
 	public function cargarDatosSolicitud(){
 		$solicitud = $this->SolicitudesModel->solicitudes($this->input->post('idSolicitud'));
 		$resolucion = $this->ResolucionesModel->getResolucionSolicitud($this->input->post('idSolicitud'));

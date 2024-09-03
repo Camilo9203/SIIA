@@ -350,15 +350,7 @@ class Panel extends CI_Controller
 		$id_Solicitud = $idSolicitud->idSolicitud;
 		return $id_Solicitud;
 	}
-	public function cargarDocentesInforme()
-	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
 
-		$docentes = $this->db->select("*")->from("docentes")->where("organizaciones_id_organizacion", $id_organizacion)->where("valido", 1)->get()->result();
-		return $docentes;
-	}
 	public function cargarInformacionDocente()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
