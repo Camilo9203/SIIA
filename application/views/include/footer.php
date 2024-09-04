@@ -275,6 +275,7 @@
 				</div>
 				<div class="modal-body">
 					<p>Por favor completa los datos </p>
+					<?= validation_errors('formulario_registro'); ?>
 					<?= form_open_multipart('', array('id' => 'formulario_registro_telefonico')); ?>
 					<input type="hidden" name="telefonicoIdAdministrador" id="telefonicoIdAdministrador" value="<?= $usuario_id ?>">
 					<div class="container-fluid p-2" id="formulario-registro-telefonico">
@@ -296,14 +297,14 @@
 							<div class="col-md-6">
 								<!-- Funcionario -->
 								<div class="form-group">
-									<label>Funcionario con el que se habló:</label>
+									<label>Funcionario con el que se habló: <span class="spanRojo">*</span></label>
 									<input type="text" class="form-control" name="telefonicoFuncionario" id="telefonicoFuncionario" placeholder="Nombre completo funcionario" required>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<!-- Cargo -->
 								<div class="form-group">
-									<label>Cargo:</label>
+									<label>Cargo: <span class="spanRojo">*</span></label>
 									<input type="text" class="form-control" name="telefonicoCargo" id="telefonicoCargo" placeholder="Cargo" required>
 								</div>
 							</div>
@@ -313,14 +314,14 @@
 							<!-- Teléfono -->
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>Teléfono:</label>
+									<label>Teléfono: <span class="spanRojo">*</span></label>
 									<input type="number" class="form-control" name="telefonicoTelefono" id="telefonicoTelefono" placeholder="Teléfono" required>
 								</div>
 							</div>
 							<!-- Tipo Llamada -->
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>Tipo de llamada:</label>
+									<label>Tipo de llamada: <span class="spanRojo">*</span></label>
 									<select name="telefonicoTipoLlamada" id="telefonicoTipoLlamada" class="form-control show-tick telefonicoTipoLlamada" required>
 										<option value="" selected>Seleccione tipo</option>
 										<option value="Entrante">Entrante</option>
@@ -333,7 +334,7 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>Tipo de comunicación:</label>
+									<label>Tipo de comunicación: <span class="spanRojo">*</span></label>
 									<select name="telefonicoTipoComunicacion" id="telefonicoTipoComunicacion" class="form-control show-tick telefonicoTipoComunicacion" required>
 										<option value="" selected>Seleccione tipo</option>
 										<option value="Técnica">Asistencia Técnica</option>
@@ -355,7 +356,7 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>Fecha:</label>
+									<label>Fecha: <span class="spanRojo">*</span></label>
 									<input type="date" class="form-control" name="telefonicoFecha" id="telefonicoFecha" value="<?= date('Y-m-d'); ?>" required>
 								</div>
 							</div>
@@ -375,7 +376,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label>Descripción de la consulta:</label>
+									<label>Descripción de la consulta: <span class="spanRojo">*</span></label>
 									<textarea class="form-control" name="telefonicoDescripcion" id="telefonicoDescripcion" rows="4" placeholder="Descripción de la llamada" required></textarea>
 								</div>
 							</div>
