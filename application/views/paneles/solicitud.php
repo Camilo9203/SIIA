@@ -631,7 +631,7 @@
 								echo "<td><textarea style='width: 282px; height: 110px; resize: none' readonly>" . $documentacionLegal->objetoResolucion . "</textarea></td>";
 								echo "<td>" . $documentacionLegal->entidadResolucion . "</td>";
 								echo "<td><button class='btn btn-primary btn-sm verDocRegistro' data-id=" . $documentacionLegal->id_registroEducativoPro . ">Ver Documento <i class='fa fa-file-o' aria-hidden='true'></i></button></td>";
-								if ($nivel = !'7'):
+								if ($nivel != '7'):
 									echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosRegistro' data-id=" . $documentacionLegal->id_registroEducativoPro . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td>";
 								endif;
 								echo '</tr>';
@@ -655,7 +655,7 @@
 								<tbody id="tbody">
 									<?php
 									echo "<tr><td>Camara de comercio </td>";
-									if ($nivel = !'7'):
+									if ($nivel != '7'):
 										echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosCamaraComercio' data-id=" . $documentacionLegal->id_tipoDocumentacion . ">Deshacer <i class='fa fa-trash-o' aria-hidden='true'></i></button></td>";
 									endif;
 									echo '</tr>';
@@ -891,7 +891,7 @@
 										echo "<tr><td>" . $data->nombrePrograma . "</td>";
 										echo "<td>" . $data->aceptarPrograma . "</td>";
 										echo "<td>" . $data->fecha . "</td>";
-										if ($nivel = !'7'):
+										if ($nivel != '7'):
 											echo "<td><button class='btn btn-danger btn-sm eliminarDataTabla eliminarDatosProgramas' data-id=" . $data->id . ">Eliminar <i class='fa fa-trash-o' aria-hidden='true'></i></button></td>";
 										endif;
 										echo "</tr>";

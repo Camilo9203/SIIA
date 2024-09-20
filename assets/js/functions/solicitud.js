@@ -1503,7 +1503,7 @@ function validFroms (form){
 					},
 					vision: {
 						required: "Por favor, escriba la visión.",
-						minlength: "La visión debe tener mínimo 20 caracteres.",
+						minlength: "La visión debe tener mínimo 200 caracteres.",
 						maxlength: "La visión debe tener máximo 800 caracteres.",
 					},
 					principios: {
