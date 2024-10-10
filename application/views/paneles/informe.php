@@ -1,51 +1,19 @@
 <?php
 /***
- * @var $docentes
+ * @var Docentes $docentes
  * @var Solicitudes $dolicitudes
  * @var $departamentos
+ * @var $municipios
+ * @var InformeActividadesModel $informes
  */
 ?>
+<!-- jQuery primero, luego Popper.js, luego Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-	$(document).ready(function() {
-		var progress = 0;
-		function updateProgressBar(value) {
-			if(value === 0) {
-				$('#back').attr('disabled', true);
-				$('#title-form').hide();
-			}
-			else if(value === 100) {
-				$('#forward').attr('disabled', true);
-			}
-			else {
-				$('#back').attr('disabled', false);
-				$('#forward').attr('disabled', false);
-				$('#title-form').show();
-			}
-			$('#progress-bar').css('width', value + '%').attr('aria-valuenow', value).text(value + '%');
-			$('.form-section').hide(); // Ocultar todos los formularios
-			$('#form-' + value).show(); // Mostrar el formulario correspondiente
-		}
-
-		$('#forward').click(function() {
-			if (progress < 100) {
-				progress += 50;
-				updateProgressBar(progress);
-			}
-		});
-
-		$('#back').click(function() {
-			if (progress > 0) {
-				progress -= 50;
-				updateProgressBar(progress);
-			}
-		});
-	});
-</script>
-<hr />
-<div class="container">
+<script src="<?= base_url('assets/js/functions/user/informe-actividades.js?v=1.0') . time() ?>" type="text/javascript"></script>
+<div class="container" id="registro_informe_actividades" <?php if($informes): ?> style="display: none" <?php endif; ?>>
 	<div class="row">
 		<div class="col-md-12">
+			<hr>
 			<div id="form-0" class="form-section">
 				<h3>Información para diligenciar este informe de actividades</h3><br><br>
 				<div class="tipoLeer">
@@ -55,8 +23,8 @@
 						<li>Los facilitadores así como los cursos en cursos, deben estar previamente aprobados y/o acreditados por la Unidad Solidaria.</li>
 						<li>Debe tener en su computador los siguientes documentos correctamente diligenciados para su respectivo cargue:</li>
 							<ol>
-								<li>Archivo de asistencia (PDF Único)</li>
-								<li>Archivo con el detalle de cada asistente (Excel) <a target="_blank" href="<?php echo base_url("assets/manuales/AsistentesCursosOrganizacion.xlsx"); ?>">FORMATO <i class="fa fa-file-excel-o" aria-hidden="true"></i></a></li>
+								<li>Archivo de asistencia (Entregar en PDF Único con firmas reales) <a target="_blank" href="<?= base_url("assets/manuales/FO002_LIST_ASIST_ENTI_ACRED_USOL_V1.xlsx"); ?>">FORMATO <i class="fa fa-file-excel-o" aria-hidden="true"></i></a></li>
+								<li>Archivo con el detalle de cada asistente (Excel) <a target="_blank" href="<?= base_url("assets/manuales/FO003_REGIST_GRAL_PROC_FORMAC_ENTIDAD_ACREDITADA_V1.xlsx"); ?>">FORMATO <i class="fa fa-file-excel-o" aria-hidden="true"></i></a></li>
 							</ol>
 						<li>Recuerde diligenciar y verificar toda la información suministrada antes de finalizar.</li>
 					</ul>
@@ -69,60 +37,24 @@
 				<div id="progress-bar" class="progress-bar " role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
 			</div>
 			<br>
+			<!-- Formulario informe de actividades -->
 			<div id="form-50" class="form-section" style="display: none;">
 				<h4>Información del curso impartido:</h4>
 				<div class="clearfix"></div>
 				<hr />
+				<?php echo form_open('', array('id' => 'formulario_informe_actividades')); ?>
 				<div class="col-md-6">
-					<!-- Curso -->
+					<!-- Fecha de inicio -->
 					<div class="form-group">
-						<label for="informe_nombre_curso">Nombre del curso:</label>
-						<input type="text" class="form-control" name="informe_nombre_curso" id="informe_nombre_curso" placeholder="Nombre del curso">
+						<label for="informe_fecha_incio">Fecha de inicio</label>
+						<input type="date" class="form-control" name="informe_fecha_incio" id="informe_fecha_incio" required>
 					</div>
-					<!-- Tipo Curso -->
+					<!-- Fecha de fin -->
 					<div class="form-group">
-						<label for="informe_tipo_curso">Modalidad del curso:</label><br>
-						<select name="informe_tipo_curso" id="informe_tipo_curso" class="selectpicker form-control show-tick" required="">
-							<?php
-							foreach ($tiposCursos as $tiposCurso) {
-								?>
-								<option id="<?php echo $tiposCurso->id_tiposCursoInformes; ?>" value="<?php echo $tiposCurso->nombre; ?>"><?php echo $tiposCurso->nombre; ?></option>
-								<?php
-							}
-							?>
-						</select>
+						<label for="informe_fecha_fin">Fecha de finalización</label>
+						<input type="date" class="form-control" name="informe_fecha_fin" id="informe_fecha_fin" required>
 					</div>
-					<!-- Intencionalidad Curso -->
-					<div class="form-group">
-						<label for="informe_intencionalidad_curso">Intencionalidad del Curso:</label><br>
-						<select name="informe_intencionalidad_curso" id="informe_intencionalidad_curso" class="selectpicker form-control show-tick" required="">
-							<option id="1" value="Fortalecimiento">Fortalecimiento</option>
-							<option id="2" value="Creación">Creación</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="unionOrg">Unión?:</label>
-						<br>
-						<select name="unionOrg" id="unionOrg" class="selectpicker form-control show-tick" required="">
-							<optgroup label="No union">
-								<option id="0" value="No" selected>No, sin unión...</option>
-							</optgroup>
-							<optgroup label="Organizaciones">
-								<!-- //TODO: Cambiar por organizaciones acreditadas -->
-								<?php
-								foreach ($organizaciones as $organizacion) {
-									?>
-									<option id="<?php echo $organizacion->nombreOrganizacion; ?>" value="<?php echo $organizacion->nombreOrganizacion; ?>"><?php echo $organizacion->nombreOrganizacion; ?></option>
-									<?php
-								}
-								?>
-							</optgroup>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="informe_duracion_curso">Duracion del Curso: <small>Horas</small></label>
-						<input type="number" name="informe_duracion_curso" class="form-control" id="informe_duracion_curso" min="20" value="20">
-					</div>
+					<!-- Departamentos -->
 					<div class="form-group">
 						<label for="informe_departamento_curso">Departamento*</label>
 						<br>
@@ -136,6 +68,7 @@
 							?>
 						</select>
 					</div>
+					<!-- Municipios -->
 					<div class="form-group">
 						<div id="div_municipios4">
 							<label for="informe_municipio_curso">Municipio:*</label>
@@ -151,46 +84,78 @@
 							</select>
 						</div>
 					</div>
-				</div>
-				<div class="col-md-6">
+					<!-- Duración Curso -->
 					<div class="form-group">
-						<label>¿El curso fue gratis?:</label>
-						<div class="radio">
-							<label><input type="radio" name="gratisCurso" id="gratisCurso1" class="" value="1">Sí</label>
-							<label><input type="radio" name="gratisCurso" id="gratisCurso2" class="" value="0" checked>No</label>
-						</div>
+						<label for="informe_duracion_curso">Duracion del Curso: <small>Horas</small></label>
+						<input type="number" name="informe_duracion_curso" class="form-control" id="informe_duracion_curso" min="20" placeholder="20" required>
 					</div>
+					<!-- Docente -->
 					<div class="form-group">
 						<label for="informe_docente">Docente:</label><br>
-						<select name="informe_docente" id="informe_docente" class="selectpicker form-control show-tick" required="">
+						<select name="informe_docente" id="informe_docente" class="selectpicker form-control show-tick" required>
 							<?php
-							foreach ($docentes as $docente) {
-								echo "<option id='$docente->id_docente' value='$docente->id_docente'>$docente->primerNombreDocente $docente->primerApellidoDocente</option>";
-							}
+							foreach ($docentes as $docente):
+										echo "<option id='$docente->id_docente' value='$docente->id_docente'>$docente->primerNombreDocente $docente->primerApellidoDocente</option>";
+							endforeach;
 							?>
 						</select>
 					</div>
+					<!-- Intencionalidad Curso -->
 					<div class="form-group">
-						<label for="informe_fecha_curso">Fecha del Curso</label>
-						<input type="date" class="form-control" name="informe_fecha_curso" id="informe_fecha_curso">
+						<label for="informe_intencionalidad_curso">Intencionalidad del Curso:</label><br>
+						<select name="informe_intencionalidad_curso" id="informe_intencionalidad_curso" class="selectpicker form-control show-tick" required multiple>
+							<option value="1">Fortalecimiento</option>
+							<option value="2">Creación</option>
+						</select>
 					</div>
+				</div>
+				<div class="col-md-6">
+					<!-- Curso -->
+					<div class="form-group">
+						<label for="informe_cursos">Nombre del curso:</label>
+						<select name="informe_cursos" id="informe_cursos" class="selectpicker form-control show-tick" required multiple>
+							<option value="1">Acreditación Curso Básico de Economía Solidaria</option>
+							<option value="2">Aval de Trabajo Asociado</option>
+							<option value="3">Acreditación Curso Medio de Economía Solidaria</option>
+							<option value="4">Acreditación Curso Avanzado de Economía Solidaria</option>
+							<option value="5">Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria</option>
+						</select>
+					</div>
+					<!-- Tipo Curso -->
+					<div class="form-group">
+						<label for="informe_modalidad">Modalidad del curso:</label><br>
+						<select name="informe_modalidad" id="informe_modalidad" class="selectpicker form-control show-tick" required="" multiple>
+							<option value="1">Presencial</option>
+							<option value="2">Virtual</option>
+							<option value="3">En Linea</option>
+						</select>
+					</div>
+					<!-- Asistentes Curso -->
 					<div class="form-group">
 						<label for="informe_asistentes">Asistentes:</label>
-						<input type="number" class="form-control" name="informe_asistentes" id="informe_asistentes" placeholder="25">
+						<input type="number" class="form-control" name="informe_asistentes" id="informe_asistentes" value="35" disabled>
 					</div>
+					<!-- Asistentes Mujeres Curso -->
 					<div class="form-group">
 						<label for="informe_numero_mujeres">Numero Mujeres:</label>
-						<input type="number" class="form-control" name="informe_numero_mujeres" id="informe_numero_mujeres" placeholder="13">
+						<input type="number" class="form-control" name="informe_numero_mujeres" id="informe_numero_mujeres" value="13" required>
 					</div>
+					<!-- Asistentes Hombres Curso -->
 					<div class="form-group">
 						<label for="informe_numero_hombres">Numero Hombres:</label>
-						<input type="number" class="form-control" name="informe_numero_hombres" id="informe_numero_hombres" placeholder="12">
+						<input type="number" class="form-control" name="informe_numero_hombres" id="informe_numero_hombres" value="12" required>
 					</div>
-					<button class="btn btn-siia pull-right" id="guardar_curso_informe">Crear Curso <i class="fa fa-check" aria-hidden="true"></i></button>
+					<!-- Asistentes No Binario Curso -->
+					<div class="form-group">
+						<label for="informe_numero_no_binario">No Binario:</label>
+						<input type="number" class="form-control" name="informe_numero_no_binario" id="informe_numero_no_binario" value="10" required>
+					</div>
 				</div>
+				<?php echo form_close(); ?>
 				<div class="clearfix"></div>
 				<hr />
 			</div>
+			<!-- Formulario cargar archivos de informe  -->
 			<div id="form-100" class="form-section" style="display: none;">
 				<h4>Cargar archivo con los asistentes:</h4>
 				<div class="clearfix"></div>
@@ -199,81 +164,100 @@
 					<p>El archivo de asistencia del curso debe estar en formato único pdf. (Se requiere solo un archivo si son varios archivos por favor unirlos en uno solo para hacer una consolidación de la asistencia)</p>
 					<p>Para ingresar los asistentes de forma automática en excel debe diligenciar el siguiente <a target="_blank" href="<?php echo base_url("assets/manuales/AsistentesCursosOrganizacion.xlsx"); ?>">FORMATO <i class="fa fa-file-excel-o" aria-hidden="true"></i></a> en excel, o si ya lo diligencio, seleccione el archivo y de click en subir asistentes.</p>
 				</div>
+				<?php echo form_open('', array('id' => 'formulario_archivos_informe_actividades')); ?>
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>Archivo de Asistencia del curso:</label>
-						<input type="file" class="form-control archivoAsistencia" accept="application/pdf" name="archivoExcelAsistencia" id="archivoExcelAsistencia" data-name="archivoExcelAsistencia" required>
+						<input type="file" class="form-control archivoAsistencia" accept="application/pdf" name="archivoPdfAsistencia" id="archivoPdfAsistencia" data-name="archivoPdfAsistencia" required>
 					</div>
 					<div class="form-group">
-						<label>Archivo de Asistentes:</label>
+						<label for="archivoExcelAsistentes">Archivo de Asistentes:</label>
 						<input type="file" class="form-control archivoAsistentes" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" name="archivoExcelAsistentes" id="archivoExcelAsistentes" data-name="archivoExcelAsistentes" required>
 					</div>
-					<button class="btn btn-siia" id="guardarArchivoAsistentes">Subir archivos <i class="fa fa-check" aria-hidden="true"></i></button>
 				</div>
+				<?php echo form_close(); ?>
 				<div class="clearfix"></div>
 				<hr />
 			</div>
-			<button class="btn btn-siia" id="back" disabled><i class="fa fa-arrow-left" aria-hidden="true"></i> Atrás</button>
+			<div id="form-150" class="form-section" style="display: none;">
+				<h3>¡Información cargada con éxito!</h3><br><br>
+				<div class="tipoLeer">
+					<p>La información ha sido cargada con éxito, por favor recuerde revisar que la información coincida con lo registrado. Gracias por su participación. </p><br><br>
+				</div>
+				<button class="btn btn-siia mt-6" id="reload" style="display: none">Volver</button>
+			</div>
+			<button class="btn btn-siia" id="back"><i class="fa fa-arrow-left" aria-hidden="true"></i> Atrás</button>
 			<button class="btn btn-siia" id="forward">Siguiente <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
 			<br><br>
 		</div>
 	</div>
 </div>
-
+<?php if ($informes): ?>
 <!-- Tabla de cursos registrados -->
-<div class="container" style="display: none">
+<div class="container" id="tabla_informe_actividades">
 	<div class="row">
 		<div class="col-md-12" id="div_informe_cursos">
 			<hr>
+			<h3 id="title-form">Informe de actividades registrados</h3>
+			<button class="btn btn-siia pull-right" id="registrar_informe"><i class="fa fa-archive" aria-hidden="true"></i> Registrar informe </button>
+			<br>
+			<br>
 			<table id="tabla_super_admins" width="100%" border=0 class="table table-striped table-bordered tabla_form">
 				<thead>
-				<tr>
-					<td>Docente</td>
-					<td>Nombre Curso</td>
-					<td>Modalidad</td>
-					<td>Intencionalidad Curso</td>
-					<td>Duración Curso</td>
-					<td>Asistentes</td>
-					<td>Número Mujeres</td>
-					<td>Número Hombres</td>
-					<td>¿Curso Gratis?</td>
-					<td>Departamento</td>
-					<td>Municipio</td>
-					<td>Archivo</td>
-					<td>Accion</td>
-				</tr>
+					<tr>
+						<td>Fecha de inicio</td>
+						<td>Fecha de finalización</td>
+						<td>Ciudad</td>
+						<td>Duración</td>
+						<td>Intencionalidad</td>
+						<td>Cursos</td>
+						<td>Modalidades</td>
+						<td>Total Asistentes</td>
+						<td>Archivos</td>
+						<td>Acciones</td>
+					</tr>
 				</thead>
 				<tbody id="tbody">
-				<?php
-				foreach ($cursos[0] as $curso) {
-					echo "<tr><td>$curso->nombreDocente</td>";
-					echo "<td>$curso->nombreCurso</td>";
-					echo "<td>$curso->tipoCurso</td>";
-					echo "<td>$curso->intencionalidadCurso</td>";
-					echo "<td>$curso->duracionCurso</td>";
-					echo "<td>$curso->numeroAsistentes</td>";
-					echo "<td>$curso->numeroMujeres</td>";
-					echo "<td>$curso->numeroHombres</td>";
-					if ($curso->cursoGratis == '0') {
-						echo "<td>No</td>";
-					} else if ($curso->cursoGratis == '1') {
-						echo "<td>Si</td>";
-					}
-					echo "<td>$curso->departamentoCurso</td>";
-					echo "<td>$curso->municipioCurso</td>";
-					if ($curso->archivoAsistentes != null) {
-						echo "<td><a href='" . base_url("uploads/asistentes/" . $curso->archivoAsistentes . "") . "'<button class='btn btn-siia'>Ver archivo <i class='fa fa-bars' aria-hidden='true'></i></button></a></td>";
-					} else {
-						echo "<td>Ninguno</td>";
-					}
-					echo "<td><button class='btn btn-siia verCurso' data-toggle='modal' data-nombre='$curso->nombreCurso' data-id='$curso->id_informeActividades' data-target='#verCurso'>Ver Asistentes <i class='fa fa-eye' aria-hidden='true'></i></button></td></tr>";
-				}
-				?>
+					<?php foreach ($informes as $informe): ?>
+					<tr>
+						<td><?= $informe->fechaInicio ?></td>
+						<td><?= $informe->fechaFin ?></td>
+						<td><?= $informe->municipio ?></td>
+						<td><?= $informe->duracion ?></td>
+						<td><?= $informe->intencionalidad ?></td>
+						<td><?= $informe->cursos ?></td>
+						<td><?= $informe->modalidades ?></td>
+						<td><?= $informe->totalAsistentes ?></td>
+						<td>
+							<div class="btn-group-vertical" role="group" >
+							<a type="button" class='btn btn-success' href="<?= base_url("uploads/asistentes/" . $informe->archivoAsistentes) ?>">
+								<i class='fa fa-file-excel-o' aria-hidden='true'></i>
+							</a>
+							<a type="button" class='btn btn-danger' href="<?= base_url("uploads/asistentes/" . $informe->archivoAsistencia) ?>">
+								<i class='fa fa-file-pdf-o' aria-hidden='true'></i>
+							</a>
+							</div>
+						</td>
+						<td>
+							<div class="btn-group-vertical" role="group" >
+								<button type="button" class='btn btn-info verCurso' id="editar_informe_actividad" data-toggle='modal' data-nombre='<?= $informe->nombreCurso ?>' data-id='<?= $informe->id_informeActividades ?>' data-target='#verCurso'>
+									<i class='fa fa-edit' aria-hidden='true'></i>
+								</button>
+								<button type="button" class='btn btn-danger' id="eliminar_informe_actividad">
+									<i class='fa fa-trash' aria-hidden='true'></i>
+								</button>
+							</div>
+						</td>
+					</tr>
+					<?php endforeach; ?>
 				</tbody>
 			</table>
 		</div>
 	</div>
 </div>
+<?php endif; ?>
+
+
 <!-- Modal ver cursos -->
 <div class="modal fade" id="verCurso" tabindex="-1" role="dialog" aria-labelledby="vercurso">
 	<div class="modal-dialog" role="document" style="width: 100%;">
@@ -356,3 +340,30 @@
 		</div>
 	</div>
 </div>
+
+<!--<div class="form-group">-->
+<!--	<label for="unionOrg">Unión?:</label>-->
+<!--	<br>-->
+<!--	<select name="unionOrg" id="unionOrg" class="selectpicker form-control show-tick" required="">-->
+<!--		<optgroup label="No union">-->
+<!--			<option id="0" value="No" selected>No, sin unión...</option>-->
+<!--		</optgroup>-->
+<!--		<optgroup label="Organizaciones">-->
+<!--			--><?php
+//			foreach ($organizaciones as $organizacion) {
+//				?>
+<!--				<option id="--><?php //echo $organizacion->nombreOrganizacion; ?><!--" value="--><?php //echo $organizacion->nombreOrganizacion; ?><!--">--><?php //echo $organizacion->nombreOrganizacion; ?><!--</option>-->
+<!--				--><?php
+//			}
+//			?>
+<!--		</optgroup>-->
+<!--	</select>-->
+<!--</div>-->
+<!--<div class="form-group">-->
+<!--	<label>¿El curso fue gratis?:</label>-->
+<!--	<div class="radio">-->
+<!--		<label><input type="radio" name="gratisCurso" id="gratisCurso1" class="" value="1">Sí</label>-->
+<!--		<label><input type="radio" name="gratisCurso" id="gratisCurso2" class="" value="0" checked>No</label>-->
+<!--	</div>-->
+<!--</div>-->
+

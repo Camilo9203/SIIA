@@ -690,7 +690,7 @@ function procesando(status, msg){
 // Alerta de formulario guardado
 function alertaGuardado(msg, status){
 	Alert.fire({
-		title: 'Docente actualizado!',
+		title: 'Guardado!',
 		text: msg,
 		icon: status,
 	}).then((result) => {

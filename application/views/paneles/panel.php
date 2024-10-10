@@ -67,8 +67,8 @@ $CI->load->model("ResolucionesModel");
 					</div>
 				</div>
 			</div>
-			<!-- Informe de actividades (Desarrollo) -->
-			<!-- <div class="col-md-3">
+			<!-- Informe de actividades -->
+			<div class="col-md-3">
 				<div class="panel panel-siia ver_informe_actividades">
 					<div class="panel-heading">
 						<h3 class="panel-title">Informes <i class="fa fa-flag" aria-hidden="true"></i></h3>
@@ -77,18 +77,18 @@ $CI->load->model("ResolucionesModel");
 						<button class="btn btn-default btn-block ver_informe_actividades" id="ver_informe_actividades">Informe de actividades </button>
 					</div>
 				</div>
-			</div> -->
-			<!-- Informe de actividades -->
-			<div class="col-md-3">
-				<div class="panel panel-siia">
-					<div class="panel-heading">
-						<h3 class="panel-title">Informes <i class="fa fa-flag" aria-hidden="true"></i></h3>
-					</div>
-					<div class="panel-body">
-						<button class="btn btn-default form-control" data-toggle="modal" data-toggle="modal" data-target="#modalInformeAct2019">Informes de Actividades </button>
-					</div>
-				</div>
 			</div>
+			<!-- Informe de actividades -->
+<!--			<div class="col-md-3">-->
+<!--				<div class="panel panel-siia">-->
+<!--					<div class="panel-heading">-->
+<!--						<h3 class="panel-title">Informes <i class="fa fa-flag" aria-hidden="true"></i></h3>-->
+<!--					</div>-->
+<!--					<div class="panel-body">-->
+<!--						<button class="btn btn-default form-control" data-toggle="modal" data-toggle="modal" data-target="#modalInformeAct2019">Informes de Actividades </button>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
             <!-- Contacto -->
             <!--<div class="col-md-3 hidden">
                 <div class="panel panel-siia contacto">

@@ -61,6 +61,10 @@ if ($this->config->item('mantenimiento') == TRUE) {
 // HOME
 $route['estado'] = 'Home/estadoSolicitud';
 $route['facilitadores'] = 'Home/facilitadores';
+
+/**
+ * Todas las rutas super administrador
+ */
 // Super Administrador
 $route['super/?'] = 'Super';
 $route['super/panel'] = 'Super/panel';
@@ -87,6 +91,9 @@ $route['socrata'] = 'Admin/socrata';
 $route['clean_socrata'] = 'Admin/clean_socrata';
 $route['get_socrata'] = 'Admin/get_socrata';
 $route['llamadas'] = 'Admin/llamadas';
+/**
+ * Todas las rutas Administrador
+ */
 $route['panelAdmin/socrata'] = 'Admin/socrataPanel';
 $route['panelAdmin'] = 'Admin/panel';
 $route['panelAdmin/reportes'] = 'Admin/panel_reportes';
@@ -135,14 +142,15 @@ $route['panelAdmin/seguimiento'] = 'Admin/seguimiento';
 // Estadísticas
 $route['panelAdmin/estadisticas'] = 'Estadisticas/panel';
 $route['panelAdmin/estadisticas/acreditacion'] = 'Estadisticas/acreditacion';
+/**
+ * Todas las rutas organizaciones
+ */
 // Activar cuenta con token
 $route['activate'] = 'Activate';
 // Actualización de datos
 $route['actualizacion'] = 'Update/update_info_user';
-//Recodar Contrasena
+//Recodar Contraseña
 $route['recordar'] = 'Recordar';
-//Panel usuario
-//$route['panel/contacto'] = 'Contacto';
 $route['panel/contacto'] = 'Contacto';
 $route['panel/contacto/ayuda'] = 'Contacto/ayuda';
 $route['panel/solicitud/(:idSolicitud)'] = 'Solicitudes/solicitud/$idSolicitud';
