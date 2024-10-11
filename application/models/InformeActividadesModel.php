@@ -32,24 +32,12 @@ class InformeActividadesModel extends CI_Model
 				case 2:
 					$result .= "Creación, ";
 					break;
-				case 3:
-					return "Cámaras";
-					break;
-				case 4:
-					return "Histório";
-					break;
-				case 5:
-					return "Segumiendo";
-					break;
-				case 6:
-					return "Asignación";
-					break;
 				default:
 					break;
 			endswitch;
-			$result = substr($result, 0, -2);
-			return $result;
 		endforeach;
+		$result = substr($result, 0, -2);
+		return $result;
 	}
 	/**
 	 * Traer cursos
@@ -66,20 +54,20 @@ class InformeActividadesModel extends CI_Model
 					$result .= "Aval de Trabajo Asociado, ";
 					break;
 				case 3:
-					return "Acreditación Curso Medio de Economía Solidaria, ";
+					$result .= "Acreditación Curso Medio de Economía Solidaria, ";
 					break;
 				case 4:
-					return "Acreditación Curso Avanzado de Economía Solidaria, ";
+					$result .= "Acreditación Curso Avanzado de Economía Solidaria, ";
 					break;
 				case 5:
-					return "Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria, ";
+					$result .= "Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria, ";
 					break;
 				default:
 					break;
 			endswitch;
-			$result = substr($result, 0, -2);
-			return $result;
 		endforeach;
+		$result = substr($result, 0, -2);
+		return $result;
 	}
 	/**
 	 * Traer modalidades
@@ -96,14 +84,14 @@ class InformeActividadesModel extends CI_Model
 					$result .= "Virtual, ";
 					break;
 				case 3:
-					return "En Linea, ";
+					$result .= "En Linea, ";
 					break;
 				default:
 					break;
 			endswitch;
-			$result = substr($result, 0, -2);
-			return $result;
 		endforeach;
+		$result = substr($result, 0, -2);
+		return $result;
 	}
 }
 

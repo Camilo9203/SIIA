@@ -42,9 +42,10 @@ $CI->load->model("InformeActividadesModel");
 							<td><?= $informe->fechaInicio ?></td>
 							<td><?= $informe->fechaFin ?></td>
 							<td><?= $informe->municipio ?></td>
-							<td><?= $informe->duracion ?></td>
+							<td><?= $informe->duracion ?> horas</td>
 							<td><?= $CI->InformeActividadesModel->getIntencionalidad($informe->intencionalidad); ?></td>
-							<td><?= $CI->InformeActividadesModel->getCursos($informe->cursos); ?></td>
+							<td><textarea class="text-area-ext" ><?= $CI->InformeActividadesModel->getCursos($informe->cursos); ?></textarea>
+							</td>
 							<td><?= $CI->InformeActividadesModel->getModalidades($informe->modalidades); ?></td>
 							<td><?= $informe->totalAsistentes ?></td>
 							<td>
