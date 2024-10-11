@@ -6,10 +6,76 @@
  * @var $municipios
  * @var InformeActividadesModel $informes
  */
+$CI = &get_instance();
+$CI->load->model("InformeActividadesModel");
 ?>
 <!-- jQuery primero, luego Popper.js, luego Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<?= base_url('assets/js/functions/user/informe-actividades.js?v=1.0') . time() ?>" type="text/javascript"></script>
+<!-- Tabla de cursos registrados -->
+<?php if ($informes): ?>
+	<div class="container" id="tabla_informe_actividades">
+		<div class="row">
+			<div class="col-md-12" id="div_informe_cursos">
+				<hr>
+				<h3 id="title-form">Informe de actividades registrados</h3>
+				<!-- Botón registrar informe -->
+				<button class="btn btn-siia pull-right" id="registrar_informe"><i class="fa fa-archive" aria-hidden="true"></i> Registrar informe </button><br><br>
+				<table id="tabla_super_admins" width="100%" border=0 class="table table-striped table-bordered tabla_form">
+					<thead>
+						<tr>
+							<td>Fecha de inicio</td>
+							<td>Fecha de finalización</td>
+							<td>Ciudad</td>
+							<td>Duración</td>
+							<td>Intencionalidad</td>
+							<td>Cursos</td>
+							<td>Modalidades</td>
+							<td>Total Asistentes</td>
+							<td>Archivos</td>
+							<td>Acciones</td>
+						</tr>
+					</thead>
+					<tbody id="tbody">
+					<?php foreach ($informes as $informe): ?>
+						<tr>
+							<td><?= $informe->fechaInicio ?></td>
+							<td><?= $informe->fechaFin ?></td>
+							<td><?= $informe->municipio ?></td>
+							<td><?= $informe->duracion ?></td>
+							<td><?= $CI->InformeActividadesModel->getIntencionalidad($informe->intencionalidad); ?></td>
+							<td><?= $CI->InformeActividadesModel->getCursos($informe->cursos); ?></td>
+							<td><?= $CI->InformeActividadesModel->getModalidades($informe->modalidades); ?></td>
+							<td><?= $informe->totalAsistentes ?></td>
+							<td>
+								<div class="btn-group-vertical" role="group" >
+									<a type="button" class='btn btn-success' href="<?= base_url("uploads/asistentes/" . $informe->archivoAsistentes) ?>">
+										<i class='fa fa-file-excel-o' aria-hidden='true'></i>
+									</a>
+									<a type="button" class='btn btn-danger' href="<?= base_url("uploads/asistentes/" . $informe->archivoAsistencia) ?>">
+										<i class='fa fa-file-pdf-o' aria-hidden='true'></i>
+									</a>
+								</div>
+							</td>
+							<td>
+								<div class="btn-group-vertical" role="group" >
+									<button type="button" class='btn btn-info verCurso' id="editar_informe_actividad" data-toggle='modal' data-nombre='<?= $informe->nombreCurso ?>' data-id='<?= $informe->id_informeActividades ?>' data-target='#verCurso'>
+										<i class='fa fa-edit' aria-hidden='true'></i>
+									</button>
+									<button type="button" class='btn btn-danger' id="eliminar_informe_actividad">
+										<i class='fa fa-trash' aria-hidden='true'></i>
+									</button>
+								</div>
+							</td>
+						</tr>
+					<?php endforeach; ?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+<?php endif; ?>
+<!-- Proceso de registro informes -->
 <div class="container" id="registro_informe_actividades" <?php if($informes): ?> style="display: none" <?php endif; ?>>
 	<div class="row">
 		<div class="col-md-12">
@@ -192,72 +258,6 @@
 		</div>
 	</div>
 </div>
-<?php if ($informes): ?>
-<!-- Tabla de cursos registrados -->
-<div class="container" id="tabla_informe_actividades">
-	<div class="row">
-		<div class="col-md-12" id="div_informe_cursos">
-			<hr>
-			<h3 id="title-form">Informe de actividades registrados</h3>
-			<button class="btn btn-siia pull-right" id="registrar_informe"><i class="fa fa-archive" aria-hidden="true"></i> Registrar informe </button>
-			<br>
-			<br>
-			<table id="tabla_super_admins" width="100%" border=0 class="table table-striped table-bordered tabla_form">
-				<thead>
-					<tr>
-						<td>Fecha de inicio</td>
-						<td>Fecha de finalización</td>
-						<td>Ciudad</td>
-						<td>Duración</td>
-						<td>Intencionalidad</td>
-						<td>Cursos</td>
-						<td>Modalidades</td>
-						<td>Total Asistentes</td>
-						<td>Archivos</td>
-						<td>Acciones</td>
-					</tr>
-				</thead>
-				<tbody id="tbody">
-					<?php foreach ($informes as $informe): ?>
-					<tr>
-						<td><?= $informe->fechaInicio ?></td>
-						<td><?= $informe->fechaFin ?></td>
-						<td><?= $informe->municipio ?></td>
-						<td><?= $informe->duracion ?></td>
-						<td><?= $informe->intencionalidad ?></td>
-						<td><?= $informe->cursos ?></td>
-						<td><?= $informe->modalidades ?></td>
-						<td><?= $informe->totalAsistentes ?></td>
-						<td>
-							<div class="btn-group-vertical" role="group" >
-							<a type="button" class='btn btn-success' href="<?= base_url("uploads/asistentes/" . $informe->archivoAsistentes) ?>">
-								<i class='fa fa-file-excel-o' aria-hidden='true'></i>
-							</a>
-							<a type="button" class='btn btn-danger' href="<?= base_url("uploads/asistentes/" . $informe->archivoAsistencia) ?>">
-								<i class='fa fa-file-pdf-o' aria-hidden='true'></i>
-							</a>
-							</div>
-						</td>
-						<td>
-							<div class="btn-group-vertical" role="group" >
-								<button type="button" class='btn btn-info verCurso' id="editar_informe_actividad" data-toggle='modal' data-nombre='<?= $informe->nombreCurso ?>' data-id='<?= $informe->id_informeActividades ?>' data-target='#verCurso'>
-									<i class='fa fa-edit' aria-hidden='true'></i>
-								</button>
-								<button type="button" class='btn btn-danger' id="eliminar_informe_actividad">
-									<i class='fa fa-trash' aria-hidden='true'></i>
-								</button>
-							</div>
-						</td>
-					</tr>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
-		</div>
-	</div>
-</div>
-<?php endif; ?>
-
-
 <!-- Modal ver cursos -->
 <div class="modal fade" id="verCurso" tabindex="-1" role="dialog" aria-labelledby="vercurso">
 	<div class="modal-dialog" role="document" style="width: 100%;">
@@ -341,29 +341,5 @@
 	</div>
 </div>
 
-<!--<div class="form-group">-->
-<!--	<label for="unionOrg">Unión?:</label>-->
-<!--	<br>-->
-<!--	<select name="unionOrg" id="unionOrg" class="selectpicker form-control show-tick" required="">-->
-<!--		<optgroup label="No union">-->
-<!--			<option id="0" value="No" selected>No, sin unión...</option>-->
-<!--		</optgroup>-->
-<!--		<optgroup label="Organizaciones">-->
-<!--			--><?php
-//			foreach ($organizaciones as $organizacion) {
-//				?>
-<!--				<option id="--><?php //echo $organizacion->nombreOrganizacion; ?><!--" value="--><?php //echo $organizacion->nombreOrganizacion; ?><!--">--><?php //echo $organizacion->nombreOrganizacion; ?><!--</option>-->
-<!--				--><?php
-//			}
-//			?>
-<!--		</optgroup>-->
-<!--	</select>-->
-<!--</div>-->
-<!--<div class="form-group">-->
-<!--	<label>¿El curso fue gratis?:</label>-->
-<!--	<div class="radio">-->
-<!--		<label><input type="radio" name="gratisCurso" id="gratisCurso1" class="" value="1">Sí</label>-->
-<!--		<label><input type="radio" name="gratisCurso" id="gratisCurso2" class="" value="0" checked>No</label>-->
-<!--	</div>-->
-<!--</div>-->
+
 
