@@ -144,7 +144,8 @@ class CI_Logs_sia {
         $usuario_ip = $_SERVER['REMOTE_ADDR'];
 
         if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)) {
-            $usuario_ip = array_pop(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']));
+			$array = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+			$usuario_ip = array_pop($array);
         }
 
         $nombre_usuario = $this->CI->session->userdata('nombre_usuario');

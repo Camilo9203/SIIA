@@ -323,8 +323,6 @@ $("#super_eliminar_admin").click(function () {
 			});
 		}
 	})
-
-
 });
 /**
  * Desconectar Administrador

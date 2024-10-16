@@ -3062,11 +3062,7 @@ $(document).ready(function () {
 		backdrop: "static",
 		keyboard: false,
 	});
-	$("#verCurso").modal({
-		show: false,
-		backdrop: "static",
-		keyboard: false,
-	});
+
 	$("#adminCrearSeguimiento").click(function () {
 		$nombreOrganizacion = $("#organizacionSeguimiento").val();
 		$id_organizacion = $("option:selected", "#organizacionSeguimiento").attr(

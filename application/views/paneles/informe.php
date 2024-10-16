@@ -32,8 +32,8 @@ $CI->load->model("InformeActividadesModel");
 							<td>Cursos</td>
 							<td>Modalidades</td>
 							<td>Total Asistentes</td>
-							<td>Archivos</td>
 							<td>Acciones</td>
+							<td>Archivos</td>
 						</tr>
 					</thead>
 					<tbody id="tbody">
@@ -44,10 +44,20 @@ $CI->load->model("InformeActividadesModel");
 							<td><?= $informe->municipio ?></td>
 							<td><?= $informe->duracion ?> horas</td>
 							<td><?= $CI->InformeActividadesModel->getIntencionalidad($informe->intencionalidad); ?></td>
-							<td><textarea class="text-area-ext" ><?= $CI->InformeActividadesModel->getCursos($informe->cursos); ?></textarea>
+							<td><textarea class="text-area-ext" readonly><?= $CI->InformeActividadesModel->getCursos($informe->cursos); ?></textarea>
 							</td>
 							<td><?= $CI->InformeActividadesModel->getModalidades($informe->modalidades); ?></td>
 							<td><?= $informe->totalAsistentes ?></td>
+							<td>
+								<div class="btn-group-vertical" role="group" >
+									<button type="button" class='btn btn-info verCurso' id="editar_informe_actividad" data-toggle='modal' data-nombre='<?= $informe->nombreCurso ?>' data-id='<?= $informe->id_informeActividades ?>' data-target='#verCurso'>
+										<i class='fa fa-edit' aria-hidden='true'></i>
+									</button>
+									<button type="button" class='btn btn-danger ' id="eliminar_informe_actividad" data-id="<?= $informe->id_informeActividades ?>">
+										<i class='fa fa-trash' aria-hidden='true'></i>
+									</button>
+								</div>
+							</td>
 							<td>
 								<div class="btn-group-vertical" role="group" >
 									<a type="button" class='btn btn-success' href="<?= base_url("uploads/asistentes/" . $informe->archivoAsistentes) ?>">
@@ -56,16 +66,6 @@ $CI->load->model("InformeActividadesModel");
 									<a type="button" class='btn btn-danger' href="<?= base_url("uploads/asistentes/" . $informe->archivoAsistencia) ?>">
 										<i class='fa fa-file-pdf-o' aria-hidden='true'></i>
 									</a>
-								</div>
-							</td>
-							<td>
-								<div class="btn-group-vertical" role="group" >
-									<button type="button" class='btn btn-info verCurso' id="editar_informe_actividad" data-toggle='modal' data-nombre='<?= $informe->nombreCurso ?>' data-id='<?= $informe->id_informeActividades ?>' data-target='#verCurso'>
-										<i class='fa fa-edit' aria-hidden='true'></i>
-									</button>
-									<button type="button" class='btn btn-danger' id="eliminar_informe_actividad">
-										<i class='fa fa-trash' aria-hidden='true'></i>
-									</button>
 								</div>
 							</td>
 						</tr>

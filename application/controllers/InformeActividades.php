@@ -56,7 +56,6 @@ class InformeActividades extends CI_Controller
 		$this->load->view('include/header', $data);
 		$this->load->view('paneles/informe', $data);
 		$this->load->view('include/footer', $data);
-		$this->logs_sia->logs('PLACE_USER');
 	}
 	/**
 	 * Cargar datos administrador

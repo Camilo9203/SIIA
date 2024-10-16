@@ -192,6 +192,47 @@ $(document).ready(function() {
 			alertaValidarFomulario('Horas validas', 'success')
 		}
 	})
+	/**
+	 * Eliminar Administrador
+	 */
+	$("#eliminar_informe_actividad").click(function () {
+		alert($(this).attr("data-id"))
+		let data = {
+			id: $(this).attr("data-id"),
+		};
+		Alert.fire({
+			title: 'Borrar administrador!',
+			text: 'Esta acción no se puede deshacer, realmente desea eliminar al usuario: ' + name + '?' ,
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Si',
+			cancelButtonText: 'No',
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.ajax({
+					url: baseURL + "InformeActividades/delete",
+					type: "post",
+					dataType: "JSON",
+					data: data,
+					success: function (response) {
+						Alert.fire({
+							title: 'Administrador eliminado!',
+							text: response.msg,
+							icon: 'success',
+							confirmButtonText: 'Aceptar',
+						}).then((result) => {
+							if (result.isConfirmed) {
+								reload();
+							}
+						})
+					},
+					error: function (ev) {
+						//Do nothing
+					},
+				});
+			}
+		})
+	});
 	// Validar formulario
 	function validarFormInformeActividades () {
 		// Formulario Login.

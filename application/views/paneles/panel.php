@@ -165,15 +165,15 @@ $CI->load->model("ResolucionesModel");
 	<form-group>
 		<i data-toggle="modal" data-target="#ayudaModalidad" class="fa fa-question-circle pull-right" aria-hidden="true"></i>
 		<div class="form-check radio">
-			<input class="form-check-input" type="checkbox" value="1" id="presencial" value="Presencial" name="modalidades" checked>
+			<input class="form-check-input" type="checkbox" value="1" id="presencial" name="modalidades" checked>
 			<label class="form-check-label" for="presencial">Presencial</label>
 		</div>
 		<div class="form-check radio">
-			<input class="form-check-input" type="checkbox" value="2" id="virtual" value="Virtual" name="modalidades">
+			<input class="form-check-input" type="checkbox" value="2" id="virtual" name="modalidades">
 			<label class="form-check-label" for="virtual">Virtual</label>
 		</div>
 		<div class="form-check radio">
-			<input class="form-check-input" type="checkbox" value="3" id="enLinea" value="En Linea" name="modalidades">
+			<input class="form-check-input" type="checkbox" value="3" id="enLinea" name="modalidades">
 			<label class="form-check-label" for="enLinea">En Linea</label>
 		</div>
 	</form-group>
