@@ -97,10 +97,9 @@ p {
   	<div class="col-middle">
     <div class="text-center text-center">
       <h1>SIIA en Mantenimiento.</h1>
-      <h3>Se informa que el día de hoy <?php echo $fecha; ?>, se realizara un mantenimiento en la plataforma, debido a esto se presentara intermitencia en el servicio, se pondrá en funcionamiento lo más pronto posible.</h3>
-      <h4>Agradecemos su compresión, todo con el fin de poder brindarles un mejor servicio.</h4>
-      <h5>Causas: Implementación de nuevas funcionalidades.</h5>
-      <h5>Hora de restablecimiento estimado: 06:00 PM</h5>
+      <h3>La Unidad Administrativa Especial de Organizaciones Solidarias, informa que las actividades relacionadas con el proceso de acreditación estarán temporalmente pausadas del 21 al 25 de octubre de 2024. Durante estos días, nuestro equipo estará concentrado en la propuesta y objetivos del Encuentro Internacional de Economías para la Vida – ECOOVIDA2024, liderado por la Unidad Solidaria.</h3>
+      <h4 >Agradecemos su comprensión y los invitamos a reanudar el envío de solicitudes a partir del 28 de octubre de 2024. Atentamente,</h4>
+      <h5>Unidad Administrativa Especial de Organizaciones Solidarias</h5>
       </p>
     </div>
   </div>
