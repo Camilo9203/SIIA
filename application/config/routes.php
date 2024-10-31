@@ -158,6 +158,7 @@ $route['Certificado'] = 'Certificaciones/crearCertificacion';
 // $route['panel/obtenerCertificado'] = 'Certificaciones/obtenerCertificado';
 $route['panel/estadoSolicitud/(:idSolicitud)'] = 'Solicitudes/estadoSolicitud/$idSolicitud';
 $route['panel/informe-actividades'] = 'InformeActividades/index';
+$route['panel/informe-actividades/asistentes/(:curso)'] = 'InformeActividades/asistentes/$curso';
 $route['panel/docentes'] = 'Docentes/index';
 $route['panel/planMejora'] = 'Panel/planMejora';
 //Perfil Usuario

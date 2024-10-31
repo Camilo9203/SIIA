@@ -617,8 +617,8 @@ $(document).ready(function () {
 	});
 
 	//Atras en solicitud
-	$("#atras_solicitud").click(function () {
-		redirect("panel");
+	$("#volver_panel_usuario").click(function () {
+		window.history.back();
 	});
 	$("#ver_docentes").click(function () {
 		redirect(baseURL + "panel/docentes");
@@ -5737,7 +5737,8 @@ function tablas() {
 		"tabla_observaciones_form7",
 		"tabla_registro_programas",
 		"tabla_organizaciones_inscritas",
-		"tabla_organizaciones_resolucion"
+		"tabla_organizaciones_resolucion",
+		"tabla_asistentes_curso"
 	];
 	// Iniciar tablas
 	for (i = 0; i < tablas.length; i++) {

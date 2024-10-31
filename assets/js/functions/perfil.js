@@ -1,9 +1,3 @@
-/**
- * Volver a panel
- * */
-$(".volverPanelPerfil").click(function () {
-	window.open(baseURL + "panel", '_self');
-});
 $('#configuracion').change(function () {
 	let configuracion = $('#configuracion').val();
 	switch (configuracion) {

@@ -400,5 +400,5 @@ die();*/
 			</div>
 		</div>
 	</div>
-	<button class="btn btn-danger btn-sm volverPanelPerfil"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver al panel principal</button>
+	<?php $this->load->view('include/partial/buttons/_back_user'); ?>
 </div>

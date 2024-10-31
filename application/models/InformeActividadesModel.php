@@ -6,7 +6,7 @@ class InformeActividadesModel extends CI_Model
 		$this->load->database();
 	}
 	/**
-	 * Cargar informes de actividades
+	 * Traer informes de actividades
 	 */
 	public function getInformeActividades($id = FALSE) {
 		if ($id === FALSE) {
@@ -19,6 +19,14 @@ class InformeActividadesModel extends CI_Model
 		return $query->result();
 	}
 	/**
+	 * Traer informe de actividad
+	 */
+	public function getInformeActividad($id = FALSE) {
+		// Traer docentes por ID
+		$query = $this->db->get_where('informeActividades', array('id_informeActividades' => $id));
+		return $query->row();
+	}
+	/**
 	 * Traer intencionalidad
 	 */
 	public function getIntencionalidad($intencionalidades) {
@@ -27,10 +35,22 @@ class InformeActividadesModel extends CI_Model
 			$intencionalidad = intval($intencionalidad);
 			switch ($intencionalidad):
 				case 1:
-					$result .= "Fortalecimiento, ";
+					$result .= "Promoción, ";
 					break;
 				case 2:
 					$result .= "Creación, ";
+					break;
+				case 3:
+					$result .= "Fortalecimiento, ";
+					break;
+				case 4:
+					$result .= "Desarrollo, ";
+					break;
+				case 5:
+					$result .= "Integración, ";
+					break;
+				case 6:
+					$result .= "Protección, ";
 					break;
 				default:
 					break;

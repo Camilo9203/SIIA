@@ -22,16 +22,18 @@ class InformeActividades extends CI_Controller
 		parent::__construct();
 		$this->load->model('AdministradoresModel');
 		$this->load->model('InformeActividadesModel');
+		$this->load->model('AsistentesModel');
 		$this->load->model('OrganizacionesModel');
 		$this->load->model('SolicitudesModel');
 		$this->load->model('DocentesModel');
 		$this->load->model('DepartamentosModel');
 	}
 	/**
-	 * Datos sesión súper administrador
+	 * Datos sesión usuarios
 	 */
-	public function dataSessionAdministrador() {
+	public function dataSessionUsuario() {
 		date_default_timezone_set("America/Bogota");
+		verify_session();
 		$data = array(
 			'logged_in' => $this->session->userdata('logged_in'),
 			'tipo_usuario' => $this->session->userdata('type_user'),
@@ -45,30 +47,17 @@ class InformeActividades extends CI_Controller
 	}
 	public function index()
 	{
-		$data = $this->dataSessionAdministrador();
-		$data['title'] = 'Panel Principal - Informe de Actividades';
+		$data = $this->dataSessionUsuario();
 		$organizacion = $this->OrganizacionesModel->getOrganizacionUsuario($data['usuario_id']);
+		$data['title'] = 'Panel Principal - Informe de Actividades';
 		$data['organizaciones'] = $this->OrganizacionesModel->getOrganizacionesAcreditadas();
 		$data['docentes'] = $this->DocentesModel->getDocentesValidos($organizacion->id_organizacion);
 		$data['solicitudes'] = $this->SolicitudesModel->getSolicitudesAcreditadasOrganizacion($organizacion->id_organizacion);
 		$data['informes'] = $this->InformeActividadesModel->getInformeActividades($organizacion->id_organizacion);
 		$data['departamentos'] = $this->DepartamentosModel->getDepartamentos();
 		$this->load->view('include/header', $data);
-		$this->load->view('paneles/informe', $data);
+		$this->load->view('paneles/InformeActividades/index', $data);
 		$this->load->view('include/footer', $data);
-	}
-	/**
-	 * Cargar datos administrador
-	 */
-	public function cargarDatosAdministrador(){
-		$administrador = $this->AdministradoresModel->getAdministradores($this->input->post('id'));
-		$contrasena_rdel = $administrador->contrasena_rdel;
-		$password = mc_decrypt($contrasena_rdel, KEY_RDEL);
-		$datos = array(
-			'administrador' => $administrador,
-			'password' => $password
-		);
-		echo json_encode($datos);
 	}
 	/**
 	 * Crear Informe Actividades
@@ -134,77 +123,11 @@ class InformeActividades extends CI_Controller
 		$this->logs_sia->logQueries();
 	}
 	/**
-	 * Cargar archivo masivo excel
+	 * Cargar datos informe de actividades
 	 */
-	public function excelAsistentes()
-	{
-		$organizacion = $this->OrganizacionesModel->getOrganizacionUsuario($this->session->userdata('usuario_id'));
-		$append_name = $this->input->post('append_name');
-		$name_random = random(10);
-		$name =  $append_name . "_" . $name_random . "_" . $_FILES['file']['name'];
-		$tipo_archivo = pathinfo($name, PATHINFO_EXTENSION);
-		$this->load->library('PHPExcel'); // Load PHPExcel library
-		$ruta = 'uploads/asistentes/';
-		$size = 60000000;
-		if (0 < $_FILES['file']['error']) {
-			echo json_encode(array('title' => "Error", 'status' => 'error', 'msg' => "Hubo un error al actualizar, intente de nuevo."));
-		} else if ($_FILES['file']['size'] > $size) {
-			echo json_encode(array('title' => "Error", 'status' => 'error', 'msg' => "El tamaño supera las 60 Mb, intente con otro archivo xlsx."));
-		} else if ($tipo_archivo != "xlsx") {
-			echo json_encode(array('title' => "Error", 'status' => 'error', 'msg' => "La extensión del archivo no es correcta, debe ser xlsx. (archivo.xlsx)"));
-		} else if (1 == 1) {
-			if (move_uploaded_file($_FILES['file']['tmp_name'], $ruta . $name)) {
-				$fileName = $ruta . $name;
-				$excelReader = PHPExcel_IOFactory::createReaderForFile($fileName);
-				$excelObj = $excelReader->load($fileName);
-				$worksheet = $excelObj->getSheet(0);
-				$lastRow = $worksheet->getHighestRow();
-				// Recorrer excel y capturar data para guardar
-				$curso = $this->db->select_max("id_informeActividades")->from("informeActividades")->where("organizaciones_id_organizacion", $organizacion->id_organizacion)->get()->row();
-				$data = array();
-				for ($row = 5; $row <= $lastRow; $row++) {
-					$data[] = [
-						'primerApellidoAsistente' => $worksheet->getCell('A' . $row)->getValue(),
-						'segundoApellidoAsistente' => $worksheet->getCell('B' . $row)->getValue(),
-						'primerNombreAsistente' => $worksheet->getCell('C' . $row)->getValue(),
-						'segundoNombreAsistente' => $worksheet->getCell('D' . $row)->getValue(),
-						'numeroDocumentoAsistente' => $worksheet->getCell('E' . $row)->getValue(),
-						'numNITOrganizacion' => $worksheet->getCell('F' . $row)->getValue(),
-						'nombreOrganizacion' => $worksheet->getCell('G' . $row)->getValue(),
-						'tipoFormacion' => $worksheet->getCell('H' . $row)->getValue(),
-						'finalidadFormacion' => $worksheet->getCell('I' . $row)->getValue(),
-						'fechaInicio' => $worksheet->getCell('J' . $row)->getValue(),
-						'fechaFin' => $worksheet->getCell('K' . $row)->getValue(),
-						'departamentoResidencia' => $worksheet->getCell('L' . $row)->getValue(),
-						'municipioResidencia' => $worksheet->getCell('M' . $row)->getValue(),
-						'telefono' => $worksheet->getCell('N' . $row)->getValue(),
-						'correoElectronico' => $worksheet->getCell('O' . $row)->getValue(),
-						'edad' => $worksheet->getCell('P' . $row)->getValue(),
-						'genero' => $worksheet->getCell('Q' . $row)->getValue(),
-						'escolaridad' => $worksheet->getCell('R' . $row)->getValue(),
-						'enfoqueDiferencial' => $worksheet->getCell('S' . $row)->getValue(),
-						'condicionVulnerabilidad' => $worksheet->getCell('T' . $row)->getValue(),
-						'discapacidad' => $worksheet->getCell('U' . $row)->getValue(),
-						'informeActividades_id_informeActividades' => $curso->id_informeActividades,
-					];
-				}
-				// Actualizar dato de archivo en informe de actividades
-				$data_archivoAsistentes = ['archivoAsistentes' => $name];
-				$this->db->where('id_informeActividades', $curso->id_informeActividades);
-				if ($this->db->update('informeActividades', $data_archivoAsistentes)) {
-					// Insertar datos a tabla de asistentes
-					foreach ($data as $row) {
-						$this->db->insert('asistentes', $row);
-					}
-					echo json_encode(array('title' => 'Archivos cargados','status' => "success", 'msg' => "Se guardaron los asistentes del curso, espere 5 segundos."));
-					//unlink('././uploads/excel/'.$file_name); //File Deleted After uploading in database .
-				} else {
-					echo json_encode(array('title' => "Error", 'status' => 'error', 'msg' => "No se actualizo la tabla."));
-				}
-			} else {
-				echo json_encode(array('title' => "Error", 'status' => 'error', 'msg' => "No se guardo el archivo(s)."));
-			}
-		}
+	public function cargarInformeActividad(){
+		$informe = $this->InformeActividadesModel->getInformeActividad($this->input->post('id'));
+		echo json_encode($informe);
 	}
 	/**
 	 * Actualizar datos informe de actividades
@@ -241,16 +164,24 @@ class InformeActividades extends CI_Controller
 	 * Eliminar informe de actividades
 	 */
 	public function delete(){
-		$id = $this->input->post('id_adm');
-		$administrador = $this->AdministradoresModel->getAdministradores($id);
-		if($administrador->logged_in == 1){
-			echo json_encode(array("msg" => "El administrador " . $administrador->usuario . " esta en linea."));
-		}else{
-			$this->db->where('id_administrador', $id);
-			if($this->db->delete('administradores')){
-				echo json_encode(array("msg" => "El administador " . $administrador->usuario . " ha sido eliminado."));
+		$id = $this->input->post('id');
+		$informe = $this->InformeActividadesModel->getInformeActividad($id);
+		// Eliminar archivos cargados
+		$ruta = 'uploads/asistentes/';
+		unlink($ruta . $informe->archivoAsistentes);
+		unlink($ruta . $informe->archivoAsistencia);
+		$this->db->where('informeActividades_id_informeActividades', $id);
+		if ($this->db->delete('asistentes')) {
+			$this->db->where('id_informeActividades', $id);
+			if($this->db->delete('informeActividades')){
+				echo json_encode(array("title" => "Informe eliminado","status" => "success", "msg" => "Se ha eliminado informe de manera correcta"));
 			}
+			else {
+				echo json_encode(array("title" => "Error","status" => "error", "msg" => "No se ha eliminado informe de manera correcta"));
+			}
+		}
+		else {
+			echo json_encode(array("title" => "Error","status" => "error", "msg" => "No se ha eliminado informe de manera correcta"));
 		}
 	}
 }
-

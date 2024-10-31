@@ -42,36 +42,6 @@ class Panel extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-
-	public function informeActividades()
-	{
-		date_default_timezone_set("America/Bogota");
-		$logged = $this->session->userdata('logged_in');
-		$nombre_usuario = $this->session->userdata('nombre_usuario');
-		$usuario_id = $this->session->userdata('usuario_id');
-		$tipo_usuario = $this->session->userdata('type_user');
-		$hora = date("H:i", time());
-		$fecha = date('Y/m/d');
-
-		$data['title'] = 'Panel Principal - Informe de Actividades';
-		$data['logged_in'] = $logged;
-		$datos_usuario = $this->db->select('usuario')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
-		$data['nombre_usuario'] = $datos_usuario->usuario;
-		$data['usuario_id'] = $usuario_id;
-		$data['tipo_usuario'] = $tipo_usuario;
-		$data['hora'] = $hora;
-		$data['fecha'] = $fecha;
-		$data['docentes'] = $this->cargarDocentesInforme();
-		$data['departamentos'] = $this->cargarDepartamentos();
-		$data['cursos'] = $this->cargar_informeCursos();
-		$data['organizaciones'] = $this->cargarTodasOrganizaciones();
-		$data['tiposCursos'] = $this->cargarTiposCursoInforme();
-
-		$this->load->view('include/header', $data);
-		$this->load->view('paneles/informe', $data);
-		$this->load->view('include/footer', $data);
-		$this->logs_sia->logs('PLACE_USER');
-	}
 	public function planMejora()
 	{
 		date_default_timezone_set("America/Bogota");
@@ -350,7 +320,6 @@ class Panel extends CI_Controller
 		$id_Solicitud = $idSolicitud->idSolicitud;
 		return $id_Solicitud;
 	}
-
 	public function cargarInformacionDocente()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
@@ -410,8 +379,6 @@ class Panel extends CI_Controller
 		$motivoSolicitudBD = $motivoSolicitud->motivoSolicitud;
 		return $motivoSolicitudBD;
 	}
-	// Cargar motivos solicitud
-
 	// Cargar modalidad solicitud
 	public function cargarModalidadSolicitud($idSolicitud)
 	{
@@ -424,7 +391,6 @@ class Panel extends CI_Controller
 		$tiposCursoInformes = $this->db->select("*")->from("tiposCursoInformes")->get()->result();
 		return $tiposCursoInformes;
 	}
-
 	// Cargar estado solicitud
 	public function estadoOrganizaciones($idSolicitud)
 	{
@@ -454,7 +420,6 @@ class Panel extends CI_Controller
 				break;
 		}*/
 	}
-
 	// Verificar Solicitud
 	public function verificar_tipoSolicitud()
 	{
@@ -594,142 +559,6 @@ class Panel extends CI_Controller
 			echo json_encode(array('msg' => "Verifique los datos ingresado, no son correctos."));
 		}
 		//}
-	}
-
-	public function guardar_asistentesInformeActividades()
-	{
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-
-		$informe_primerNombre_asistente = $this->input->post("informe_primerNombre_asistente");
-		$informe_segundoNombre_asistente = $this->input->post("informe_segundoNombre_asistente");
-		$informe_primerApellido_asistente = $this->input->post("informe_primerApellido_asistente");
-		$informe_segundoApellido_asistente = $this->input->post("informe_segundoApellido_asistente");
-		$informe_sexo_asistente = $this->input->post("informe_sexo_asistente");
-		$informe_edad_asistente = $this->input->post("informe_edad_asistente");
-		$informe_tipoDocumento_asistente = $this->input->post("informe_tipoDocumento_asistente");
-		$informe_numeroDocumento_asistente = $this->input->post("informe_numeroDocumento_asistente");
-		$informe_formacion_asistente = $this->input->post("informe_formacion_asistente");
-		$informe_nit_asistente = $this->input->post("informe_nit_asistente");
-		$informe_razonsocial_asistente = $this->input->post("informe_razonsocial_asistente");
-		$informe_rolorganizacion_asistente = $this->input->post("informe_rolorganizacion_asistente");
-		$informe_proceso_asistente = $this->input->post("informe_proceso_asistente");
-		$informe_fechafinalizacion_asistente = $this->input->post("informe_fechafinalizacion_asistente");
-		$informe_departamento_asistente = $this->input->post("informe_departamento_asistente");
-		$informe_municipio_asistente = $this->input->post("informe_municipio_asistente");
-		$informe_fax_asistente = $this->input->post("informe_fax_asistente");
-		$informe_direccion_asistente = $this->input->post("informe_direccion_asistente");
-		$informe_direccionCorreoElectronico_asistente = $this->input->post("informe_direccionCorreoElectronico_asistente");
-
-		$cabeza_radio = $this->input->post("cabeza_radio");
-		$informe_discapacidad_asistente = $this->input->post("informe_discapacidad_asistente");
-		$indigenas_chekbox = $this->input->post("indigenas_chekbox");
-		$Rom_Gitanos_checkbox = $this->input->post("Rom_Gitanos_checkbox");
-		$Afro_Negros_Mulatos_checkbox = $this->input->post("Afro_Negros_Mulatos_checkbox");
-		$raizal_checkbox = $this->input->post("raizal_checkbox");
-		$palenqueros_checkbox = $this->input->post("palenqueros_checkbox");
-		$red_radio = $this->input->post("red_radio");
-		$informe_folio_red_asistente = $this->input->post("informe_folio_red_asistente");
-		$victima_radio = $this->input->post("victima_radio");
-		$informe_ruv_asistente = $this->input->post("informe_ruv_asistente");
-		$reintegracion_radio = $this->input->post("reintegracion_radio");
-		$informe_coda_asistente = $this->input->post("informe_coda_asistente");
-		$lgtbi_radio = $this->input->post("lgtbi_radio");
-		$prostitucion_radio = $this->input->post("prostitucion_radio");
-		$libertad_radio = $this->input->post("libertad_radio");
-
-		if ($indigenas_chekbox == "on") {
-			$indigenas_chekbox = "Si";
-		} else {
-			$indigenas_chekbox = "No";
-		}
-		if ($Rom_Gitanos_checkbox == "on") {
-			$Rom_Gitanos_checkbox = "Si";
-		} else {
-			$Rom_Gitanos_checkbox = "No";
-		}
-		if ($Afro_Negros_Mulatos_checkbox == "on") {
-			$Afro_Negros_Mulatos_checkbox = "Si";
-		} else {
-			$Afro_Negros_Mulatos_checkbox = "No";
-		}
-		if ($raizal_checkbox == "on") {
-			$raizal_checkbox = "Si";
-		} else {
-			$raizal_checkbox = "No";
-		}
-		if ($palenqueros_checkbox == "on") {
-			$palenqueros_checkbox = "Si";
-		} else {
-			$palenqueros_checkbox = "No";
-		}
-		$id_curso = $this->db->select_max("id_informeActividades")->from("informeActividades")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row()->id_informeActividades;
-		$data_asistente = array(
-			'primerNombreAsistente' => $informe_primerNombre_asistente,
-			'segundoNombreAsistente' => $informe_segundoNombre_asistente,
-			'primerApellidoAsistente' => $informe_primerApellido_asistente,
-			'segundoApellidoAsistente' => $informe_segundoApellido_asistente,
-			'tipoDocumentoAsistente' => $informe_tipoDocumento_asistente,
-			'numeroDocumentoAsistente' => $informe_numeroDocumento_asistente,
-			'numNITOrganizacion' => $informe_nit_asistente,
-			'nombreOrganizacion' => $informe_razonsocial_asistente,
-			'procesoBeneficio' => $informe_proceso_asistente,
-			'fechaFinalizacion' => $informe_fechafinalizacion_asistente,
-			'departamentoResidencia' => $informe_departamento_asistente,
-			'municipioResidencia' => $informe_municipio_asistente,
-			'faxAsistente' => $informe_fax_asistente,
-			'direccionAsistente' => $informe_direccion_asistente,
-			'direccionCorreoElectronicoAsistente' => $informe_direccionCorreoElectronico_asistente,
-			'edadAsistente' => $informe_edad_asistente,
-			'sexoAsistente' => $informe_sexo_asistente,
-			'nivelFormacion' => $informe_formacion_asistente,
-			'rolOrganizacion' => $informe_rolorganizacion_asistente,
-			'cabezaFamilia' => $cabeza_radio,
-			'discapacidad' => $informe_discapacidad_asistente,
-			'indigena' => $indigenas_chekbox,
-			'afro' => $Afro_Negros_Mulatos_checkbox,
-			'raizal' => $raizal_checkbox,
-			'palenquero' => $palenqueros_checkbox,
-			'romGitano' => $Rom_Gitanos_checkbox,
-			'redUnidos' => $red_radio,
-			'numeroFolioRedUnidos' => $informe_folio_red_asistente,
-			'victima' => $victima_radio,
-			'numeroRUVVictima' => $informe_ruv_asistente,
-			'reintegro' => $reintegracion_radio,
-			'numeroCODAReintegro' => $informe_coda_asistente,
-			'LGTBI' => $lgtbi_radio,
-			'prostitucion' => $prostitucion_radio,
-			'privadoLibertad' => $libertad_radio,
-			'informeActividades_id_informeActividades' => $id_curso
-		);
-		if ($this->db->insert("asistentes", $data_asistente)) {
-			echo  json_encode(array("msg" => "Asistentes Guardadados."));
-		}
-	}
-
-	public function verAsistentesCurso()
-	{
-		$id_curso = $this->input->post("id_curso");
-		$asistentes = $this->db->select("*")->from("asistentes")->where("informeActividades_id_informeActividades", $id_curso)->get()->result();
-		echo json_encode($asistentes);
-	}
-
-	public function cargar_informeCursos()
-	{
-		$datos = array();
-		$usuario_id = $this->session->userdata('usuario_id');
-		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion->id_organizacion;
-
-		$cursos = $this->db->select("*")->from("informeActividades")->where("organizaciones_id_organizacion", $id_organizacion)->get()->result();
-		array_push($datos, $cursos);
-		foreach ($cursos as $curso) {
-			$id_docente = $curso->docentes_id_docente;
-			$docente = $this->db->select("*")->from("docentes")->where("id_docente", $id_docente)->get()->result();
-			array_push($datos, $docente);
-		}
-		return $datos;
 	}
 	public function darRespuestaSeguimiento()
 	{
@@ -907,47 +736,6 @@ class Panel extends CI_Controller
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-	public function cargarObservacionesUsuario()
-	{
-		$id_organizacion = $this->input->post('id_organizacion');
-
-		$observaciones = $this->db->select("*")->from("observaciones")->where("organizaciones_id_organizacion", $id_organizacion)->order_by("numeroRevision", "desc")->get()->result();
-		echo json_encode(array("observaciones" => $observaciones));
-	}
-	public function cargar_informacionAsistente()
-	{
-		$id_asistente = $this->input->post('id_asistente');
-
-		$informacion = $this->db->select("*")->from("asistentes")->where("id_asistentes", $id_asistente)->get()->row();
-		echo json_encode(array("informacion" => $informacion));
-	}
-	public function actualizarAsistente()
-	{
-		$id_asistente = $this->input->post('id_asistente');
-		$editarAsisPN = $this->input->post('editarAsisPN');
-		$editarAsisSN = $this->input->post('editarAsisSN');
-		$editarAsisPA = $this->input->post('editarAsisPA');
-		$editarAsisSA = $this->input->post('editarAsisSA');
-		$editarAsisTipo = $this->input->post('editarAsisTipo');
-		$editarAsisNumero = $this->input->post('editarAsisNumero');
-		$editarAsisDireccion = $this->input->post('editarAsisDireccion');
-
-		$data_update_asistente = array(
-			'primerNombreAsistente' => $editarAsisPN,
-			'segundoNombreAsistente' => $editarAsisSN,
-			'primerApellidoAsistente' => $editarAsisPA,
-			'segundoApellidoAsistente' => $editarAsisSA,
-			'tipoDocumentoAsistente' => $editarAsisTipo,
-			'numeroDocumentoAsistente' => $editarAsisNumero,
-			'direccionCorreoElectronicoAsistente' => $editarAsisDireccion
-		);
-
-		$this->db->where('id_asistentes', $id_asistente);
-		if ($this->db->update('asistentes', $data_update_asistente)) {
-			echo json_encode(array("msg" => "Asistente actualizado, verifique la información."));
-		}
-	}
-
 	// TODO: Enviar Correos a Administrador
 	function envilo_mailadmin($type, $prioridad, $docente)
 	{
