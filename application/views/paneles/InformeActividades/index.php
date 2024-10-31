@@ -20,7 +20,13 @@ $CI->load->model("InformeActividadesModel");
 			<hr>
 			<h3 id="title-form">Informe de actividades registrados</h3>
 			<!-- Botón registrar informe -->
-			<button class="btn btn-siia pull-right" id="registrar_informe"><i class="fa fa-archive" aria-hidden="true"></i> Registrar informe </button><br><br>
+			<div class="btn-group pull-right">
+				<button class="btn btn-siia ml-3" id="registrar_informe"><i class="fa fa-archive" aria-hidden="true"></i> Registrar informe </button>
+				<button class="btn btn-info" title="Ayuda informe actividades" data-toggle='modal' data-target='#modal-ayuda-informe-actividades'>
+					<i class="fa fa-question" aria-hidden="true"></i> Ayuda
+				</button>
+			</div>
+			<br><br>
 			<table id="tabla_super_admins" width="100%" border=0 class="table table-striped table-bordered tabla_form">
 				<thead>
 					<tr>
@@ -79,7 +85,7 @@ $CI->load->model("InformeActividadesModel");
 	</div>
 	<?php $this->load->view('include/partial/buttons/_back_user'); ?>
 </div>
-<!-- Modal formulario administradores -->
+<!-- Modal curso -->
 <div class="modal fade" id="modal-curso-informe" tabindex="-1" role="dialog" aria-labelledby="modal-curso-informes">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
@@ -207,6 +213,9 @@ $CI->load->model("InformeActividadesModel");
 	<div class="row">
 		<div class="col-md-12">
 			<hr>
+			<button class="btn btn-info pull-right" title="Ayuda informe actividades" data-toggle='modal' data-target='#modal-ayuda-informe-actividades'>
+				<i class="fa fa-question" aria-hidden="true"></i> Ayuda
+			</button>
 			<div id="form-0" class="form-section">
 				<h3>Información para diligenciar este informe de actividades</h3><br><br>
 				<div class="tipoLeer">
@@ -379,4 +388,19 @@ $CI->load->model("InformeActividadesModel");
 		</div>
 	</div>
 </div>
-
+<!-- Modal ayuda informe de actividades -->
+<div class="modal fade" id="modal-ayuda-informe-actividades" tabindex="-1" role="dialog" aria-labelledby="modal-ayuda-informe-actividades">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Ayuda Informe de actividad</h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<iframe src="https://scribehow.com/embed/Informe_de_actividades__tvG455w0QlORuB3Q6dL0Ww?as=video" width="100%" height="540" allowfullscreen frameborder="0"></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
