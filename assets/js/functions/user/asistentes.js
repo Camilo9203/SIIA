@@ -93,7 +93,7 @@ $(document).ready(function() {
 				discapacidad: $("#discapacidad").val(),
 				id_informe: curso_id,
 			};
-			let funct = $(this).attr('data-funct');
+			let funct = $(this).attr('data-func');
 			if (funct === 'crear') {
 				$.ajax({
 					url: baseURL + "Asistentes/create",
