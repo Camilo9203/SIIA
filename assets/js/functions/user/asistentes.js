@@ -72,19 +72,19 @@ $(document).ready(function() {
 	 */
 	$("#guardarAsistente").click(function () {
 		if ($("#formulario_asistente").valid()) {
-			//Datos formulario modatente: $("#primerApellidoAsistente").val(),
-			// 				segundoApellidoAsistente: $("#segundoApellidoAsistente").val(),
-			// 				primerNombreAsistente: $("#primerNombreAsistente").val(),
-			// 				segundoNombreAsistente: $("#segundoNombreAsistente").val(),
-			// 				numeroDocumentoAsistente: $("#numeroDocumentoAsistente").val(),
-			// 				numNITOrganizacion: $("#numNITOrganizacion").val(),
-			// 				nombreOrganizacion: $("#nombreOrganizacion").val(),
-			// 				departamentoResidencia: $("#informe_departamento_curso").val(),
-			// 				municipioResidencia: $("#informe_municipio_curso").val(),
-			// 				telefono: $("#telefono").val(),
-			// 				correoElectronicol
+			//Datos formulario
 			var data = {
-				primerApellidoAsis: $("#correoElectronico").val(),
+				primerApellidoAsistente: $("#primerApellidoAsistente").val(),
+				segundoApellidoAsistente: $("#segundoApellidoAsistente").val(),
+				primerNombreAsistente: $("#primerNombreAsistente").val(),
+				segundoNombreAsistente: $("#segundoNombreAsistente").val(),
+				numeroDocumentoAsistente: $("#numeroDocumentoAsistente").val(),
+				numNITOrganizacion: $("#numNITOrganizacion").val(),
+				nombreOrganizacion: $("#nombreOrganizacion").val(),
+				departamentoResidencia: $("#informe_departamento_curso").val(),
+				municipioResidencia: $("#informe_municipio_curso").val(),
+				telefono: $("#telefono").val(),
+				correoElectronico: $("#correoElectronico").val(),
 				edad: $("#edad").val(),
 				genero: $("#genero").val(),
 				escolaridad: $("#escolaridad").val(),
