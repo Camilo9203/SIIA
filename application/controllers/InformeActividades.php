@@ -221,9 +221,15 @@ class InformeActividades extends CI_Controller
 		if ($this->db->delete('asistentes')) {
 			$this->db->where('informeActividades_id_informeActividades', $id);
 			if ($this->db->delete('historico_estado_informe')) {
-				$this->db->where('id_informeActividades', $id);
-				if ($this->db->delete('informeActividades')) {
-					echo json_encode(array("title" => "Informe eliminado", "status" => "success", "msg" => "Se ha eliminado informe de manera correcta"));
+				$this->db->where('informeActividades_id_informeActividades', $id);
+				if ($this->db->delete('observaciones_informe')) {
+					$this->db->where('id_informeActividades', $id);
+					if ($this->db->delete('informeActividades')) {
+						echo json_encode(array("title" => "Informe eliminado", "status" => "success", "msg" => "Se ha eliminado informe de manera correcta"));
+					}
+					else {
+						echo json_encode(array("title" => "Error", "status" => "error", "msg" => "No se ha eliminado informe de manera correcta"));
+					}
 				}
 				else {
 					echo json_encode(array("title" => "Error", "status" => "error", "msg" => "No se ha eliminado informe de manera correcta"));
