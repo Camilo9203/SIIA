@@ -75,7 +75,12 @@ function send_email_admin($tipo, $prioridad = null, $to = null, $docente = null,
 		// Llegada de solicitudes para asignar evaluadores
 		case 'enviarSolicitd':
 			$subject = 'Finalización de solicitud';
-			$message = 'La organización <strong>' . $organizacion->nombreOrganizacion . '</strong> ha finalizado la solicitud: <strong>' . $solicitud . '</strong>. Para que pueda asignar la solicitud y/o ver la información, debe ingresar a la aplicación <a href='. base_url() . '>. Ir a organizaciones y dar clic en botón <strong>ASIGNAR</strong>.';
+			$message = 'La organización <strong>' . $organizacion->nombreOrganizacion . '</strong> ha finalizado el informe de actividades: <strong>' . $solicitud . '</strong>.Para que pueda asignar la solicitud y/o ver la información, debe ingresar a la aplicación <a href='. base_url() . '>. Ir a organizaciones y dar clic en botón <strong>ASIGNAR</strong>.';
+			break;
+		// Envió informe de actividades
+		case 'enviarInforme':
+			$subject = 'Finalización de informe';
+			$message = 'La organización <strong>' . $organizacion->nombreOrganizacion . '</strong> ha finalizado la solicitud: <strong>' . $solicitud . '</strong>.  El cual ya se puede revisar. <a href='. base_url() . '>. Ir a informe de actividades y buscarlo';
 			break;
 		case 'actualizacionSolicitud':
 			$subject = 'Actualización de la solicitud - ' . $solicitud;
@@ -244,6 +249,16 @@ function send_email_user($to, $type, $organizacion, $usuario = null, $token = nu
 				$message = "<p>Buen día. <br><strong> " . $organizacion->nombreOrganizacion . "</strong><br><br> La Unidad Solidaria le informa que se ha vinculado la nueva resolución de acreditación en el SIIA, la cual podrá ver ingresando con su usuario y contraseña a la plataforma SIIA. <br><br> En próximos días le será enviado correo electrónico de notificación.</p>";
 			endif;
 			$response = array('status' => "success", 'title' => $subject, 'msg' =>  "Se ha enviado una notificación a <strong>" . $organizacion->nombreOrganizacion . "</strong>. Se envío notificación al correo  <strong>" . $organizacion->direccionCorreoElectronicoOrganizacion . "</strong>");
+			break;
+		case 'informeAprobado':
+			$subject = "Informe de actividades aprobado - " . $idSolicitud;
+			$message = "Buen día. <br> " . $organizacion->nombreOrganizacion . "<br><br> La Unidad Solidaria le informa que su informe de actividades ha sido revisado y aprobado. <br>Gracias por su participación.";
+			$response = array('status' => "success", 'title' => $subject, 'msg' =>  "Se ha enviado una notificación a <strong>" . $organizacion->nombreOrganizacion . "</strong>. <br>Se envío notificación al correo  <strong>" . $organizacion->direccionCorreoElectronicoOrganizacion . "</strong>");
+			break;
+		case 'observacionesInforme':
+			$subject = "Informe de actividades: " . $idSolicitud . " en observaciones" ;
+			$message = "Buen día. <br> " . $organizacion->nombreOrganizacion . "<br><br> La Unidad Solidaria le informa que su informe de actividades ha sido revisado y cuenta con observaciones pendientes por revisar. <br>Por favor ingrese a la sección de informe de actividades para revisar.";
+			$response = array('status' => "success", 'title' => $subject, 'msg' =>  "Se ha enviado una notificación a <strong>" . $organizacion->nombreOrganizacion . "</strong>. <br>Se envío notificación al correo  <strong>" . $organizacion->direccionCorreoElectronicoOrganizacion . "</strong>");
 			break;
 		default:
 			$asunto = "";

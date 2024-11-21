@@ -781,10 +781,10 @@ $(document).ready(function () {
 		redirect(baseURL + "panelAdmin/historico");
 	});
 	$("#admin_informeActividades").click(function () {
-		redirect(baseURL + "panelAdmin/informes");
+		redirect(baseURL + "panelAdmin/informes-actividades");
 	});
 	$("#volverInforme").click(function () {
-		redirect(baseURL + "panelAdmin/informes");
+		redirect(baseURL + "panelAdmin/informes-actividades");
 	});
 	$(".volverReporte").click(function () {
 		redirect(baseURL + "panelAdmin/reportes");

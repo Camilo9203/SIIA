@@ -6,7 +6,7 @@ class InformeActividadesModel extends CI_Model
 		$this->load->database();
 	}
 	/**
-	 * Traer informes de actividades
+	 * Traer informeActividades de actividades
 	 */
 	public function getInformeActividades($id = FALSE) {
 		if ($id === FALSE) {
@@ -19,12 +19,40 @@ class InformeActividadesModel extends CI_Model
 		return $query->result();
 	}
 	/**
+	 * Traer informeActividades de actividades enviadas
+	 */
+	public function getInformeActividadesEnviadas($id = FALSE) {
+		if ($id === FALSE) {
+			// Consulta para traer docentes
+			$query = $this->db->select("*")->from("informeActividades")->where(array('estado' => 'Enviado'))->get();
+			return $query->result();
+		}
+		// Traer docentes por ID
+		$query = $this->db->get_where('informeActividades', array('organizaciones_id_organizacion' => $id, 'estado' => 'Enviado'));
+		return $query->result();
+	}
+	/**
 	 * Traer informe de actividad
 	 */
 	public function getInformeActividad($id = FALSE) {
+		if ($id === FALSE) {
+			// Consulta para traer el ultimo informe creado
+			$query = $this->db->select("*")->from("informeActividades")->order_by('id_informeActividades', 'desc')->get();
+			return $query->row();
+		}
 		// Traer docentes por ID
 		$query = $this->db->get_where('informeActividades', array('id_informeActividades' => $id));
 		return $query->row();
+	}
+	public function updateEstadoInformeActividad($id, $data)
+	{
+		$this->db->where('id_informeActividades', $id);
+		$updated = $this->db->update('informeActividades', array('estado' => $data['estado']));
+		if ($updated) {
+			// Registrar el cambio en el historial
+			$this->db->insert('historico_estado_informe', $data);
+		}
+		return $updated;
 	}
 	/**
 	 * Traer intencionalidad
@@ -50,7 +78,7 @@ class InformeActividadesModel extends CI_Model
 					$result .= "Integración, ";
 					break;
 				case 6:
-					$result .= "Protección, ";
+					$result .= "in, ";
 					break;
 				default:
 					break;

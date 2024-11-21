@@ -25,6 +25,7 @@ $CI->load->model("AsistentesModel");
 			<hr>
 			<h3 id="title-form">Informe de actividades registrados</h3>
 			<!-- Botón registrar asistentes curso -->
+			<?php if ($curso->estado != 'Aprobado'): ?>
 			<div class="from-group btn-group pull-right" role="group">
 				<button class="btn btn-outline-success ml-3" data-toggle='modal' data-target='#modal-excel-asistentes'>
 					<i class="fa fa-file-excel-o" aria-hidden="true"></i> Cargar asistentes masivamente
@@ -33,6 +34,7 @@ $CI->load->model("AsistentesModel");
 					<i class="fa fa-user-circle" aria-hidden="true"></i> Crear asistente
 				</button>
 			</div>
+			<?php endif; ?>
 			<br><br>
 			<!-- Asistentes Cursos -->
 			<table id="tabla_asistentes_curso" width="100%" border=0 class="table table-striped table-bordered">
@@ -47,7 +49,9 @@ $CI->load->model("AsistentesModel");
 						<td><label>Escolaridad</label></td>
 						<td><label>Discapacidad</label></td>
 						<td><label>Vulnerabilidad</label></td>
+						<?php if ($curso->estado != 'Aprobado'): ?>
 						<td><label>Acciones</label></td>
+						<?php endif; ?>
 					</tr>
 				</thead>
 				<tbody id="tbody_asistentes_curso">
@@ -62,6 +66,7 @@ $CI->load->model("AsistentesModel");
 						<td><?= $asistente->escolaridad; ?></td>
 						<td><?= $asistente->discapacidad; ?></td>
 						<td><?= $asistente->condicionVulnerabilidad; ?></td>
+						<?php if ($curso->estado != 'Aprobado'): ?>
 						<td>
 							<div class="btn-group-vertical" role="group" >
 								<button type="button" class='btn btn-primary asistente-modal' title="Editar asistente" data-toggle='modal' data-funct='actualizar' data-id='<?= $asistente->id_asistentes ?>' data-target='#modal-asistente-curso'>
@@ -72,6 +77,7 @@ $CI->load->model("AsistentesModel");
 								</button>
 							</div>
 						</td>
+						<?php endif; ?>
 					</tr>
 				<?php endforeach; ?>
 				</tbody>

@@ -124,7 +124,7 @@ $route['panelAdmin/nitEntidades'] = 'Nit/nitEntidades';
 $route['panelAdmin/resultadosEncuesta'] = 'Admin/resultadosEncuesta';
 $route['panelAdmin/modalInformacion'] = 'Admin/modalInformacion';
 $route['panelAdmin/historico'] = 'Admin/historico';
-$route['panelAdmin/informes'] = 'Admin/informes';
+$route['panelAdmin/informes-actividades'] = 'InformeActividades/enviados';
 // Reportes
 $route['panelAdmin/reportes/acreditadas'] = 'Reportes/entidadesAcreditadas';
 $route['panelAdmin/reportes/solicitudes'] = 'Reportes/registroSolicitudes';

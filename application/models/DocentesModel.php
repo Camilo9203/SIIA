@@ -19,6 +19,19 @@ class DocentesModel extends CI_Model
 		return $query->result();
 	}
 	/**
+	 * Cargar docentes por organización
+	 */
+	public function getDocente($id = FALSE) {
+		if ($id === FALSE) {
+			// Consulta para traer docentes
+			$query = $this->db->select("*")->from("docentes")->get();
+			return $query->result();
+		}
+		// Traer docentes por ID
+		$query = $this->db->get_where('docentes', array('id_docente' => $id));
+		return $query->row();
+	}
+	/**
 	 * Cargar Docentes Sin Asignar
 	 */
 	public function docentesSinAsignar()

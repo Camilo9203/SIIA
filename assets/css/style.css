@@ -5,6 +5,9 @@
 .spanVerde {
 	color: green;
 }
+.spanAzul {
+	color: dodgerblue;
+}
 .popup-toast {
 	height: 80px;
 	width: 100px;
@@ -61,13 +64,13 @@
 	border-radius: 50% !important;
 	padding: 0.5em 0.9em !important;
 }
-
 .text-area-ext {
 	height: 100px;
 	width: 180px;
 	border: 0;
 	resize: none;
 }
+
 .modal-dialog {
 	margin-top: 80px !important;
 }

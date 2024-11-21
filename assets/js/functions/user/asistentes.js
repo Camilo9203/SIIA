@@ -65,7 +65,6 @@ $(document).ready(function() {
 				},
 			});
 		}
-
 	});
 	/**
 	 * Crear administrador
@@ -110,7 +109,7 @@ $(document).ready(function() {
 						if(response.status === 'success') {
 							Alert.fire({
 								title: response.title,
-								text: response.msg,
+								html: response.msg,
 								icon: response.status,
 								confirmButtonText: 'Aceptar',
 							}).then((result) => {
@@ -163,7 +162,6 @@ $(document).ready(function() {
 					},
 				});
 			}
-
 		}
 		else {
 			Toast.fire({

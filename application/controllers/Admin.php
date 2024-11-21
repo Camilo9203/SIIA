@@ -380,33 +380,6 @@ class Admin extends CI_Controller
 		$this->load->view('include/footer', $data);
 		$this->logs_sia->logs('PLACE_USER');
 	}
-	public function informes()
-	{
-		date_default_timezone_set("America/Bogota");
-		$logged = $this->session->userdata('logged_in');
-		$nombre_usuario = $this->session->userdata('nombre_usuario');
-		$usuario_id = $this->session->userdata('usuario_id');
-		$tipo_usuario = $this->session->userdata('type_user');
-		$nivel = $this->session->userdata('nivel');
-		$hora = date("H:i", time());
-		$fecha = date('Y/m/d');
-
-		$data['title'] = 'Panel Principal / Administrador / Informes Actividades';
-		$data['logged_in'] = $logged;
-		$data['nombre_usuario'] = $nombre_usuario;
-		$data['usuario_id'] = $usuario_id;
-		$data['tipo_usuario'] = $tipo_usuario;
-		$data['nivel'] = $nivel;
-		$data['hora'] = $hora;
-		$data['fecha'] = $fecha;
-		$data['departamentos'] = $this->cargarDepartamentos();
-		$data['informes'] = $this->cargar_informes();
-
-		$this->load->view('include/header', $data);
-		$this->load->view('admin/informes/informes', $data);
-		$this->load->view('include/footer', $data);
-		$this->logs_sia->logs('PLACE_USER');
-	}
 	// Vista docentes
 	public function docentes()
 	{
@@ -1159,11 +1132,7 @@ class Admin extends CI_Controller
 			$this->envio_mail_admin("asignarDocente", $correoEvaluador, 2, $docente);
 		}
 	}
-	public function cargar_informes()
-	{
-		$informes = $this->db->select("*")->from("informeActividades")->get()->result();
-		return $informes;
-	}
+
 	public function cargar_informacionInforme()
 	{
 		$id_curso = $this->input->post('id_curso');
@@ -1895,7 +1864,7 @@ class Admin extends CI_Controller
 		$this->db->where('id_tiposCursoInformes', $id_curso);
 		if ($this->db->delete("tiposCursoInformes")) {
 			echo json_encode(array('msg' => "El curso se elimino."));
-			$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' elimino el cruso de informes.');
+			$this->logs_sia->session_log('Administrador:' . $this->session->userdata('nombre_usuario') . ' elimino el cruso de informeActividades.');
 		}
 	}
 	public function crearTiposCursoInforme()

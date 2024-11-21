@@ -22,6 +22,7 @@ class InformeActividades extends CI_Controller
 		parent::__construct();
 		$this->load->model('AdministradoresModel');
 		$this->load->model('InformeActividadesModel');
+		$this->load->model('ObservacionesInformeModel');
 		$this->load->model('AsistentesModel');
 		$this->load->model('OrganizacionesModel');
 		$this->load->model('SolicitudesModel');
@@ -62,11 +63,11 @@ class InformeActividades extends CI_Controller
 	/**
 	 * Crear Informe Actividades
 	 */
-	// Informe de actividades
 	public function create()
 	{
 		// Traer datos organización
 		$organizacion = $this->OrganizacionesModel->getOrganizacionUsuario($this->session->userdata('usuario_id'));
+		//die(var_dump($_POST));
 		// Capturar datos de formulario
 		$data_curso = array(
 			"fechaInicio" => $this->input->post("informe_fecha_incio"),
@@ -87,9 +88,29 @@ class InformeActividades extends CI_Controller
 		);
 		// Insertar datos de curso dictado
 		if ($this->db->insert('informeActividades', $data_curso)) {
+			$data_status = [
+				"descripcion" => "Estado actualizado a creado",
+				"estado" => "Creado",
+				"changed_at" => date('Y-m-d H:i:s'),
+				"changed_by" => $this->session->userdata('usuario_id'),
+				"informeActividades_id_informeActividades" => intval($this->cargarUltimoInformeActividadArray()->id_informeActividades),
+			];
+			$this->update_status($data_status);
 			echo json_encode(array('title' =>'Guardado exitoso!', "msg" => "El curso se ha registrado exitosamente.", 'status' => 'success'));
 			$this->logs_sia->session_log('Informe de actividad');
 			$this->notif_sia->notification('Informe', 'admin', $organizacion->nombreOrganizacion);
+		}
+	}
+	/**
+	 * Actualizar estado informe
+	 */
+	public function update_status($data_status) {
+		$informe = $this->InformeActividadesModel->getInformeActividad((int)$data_status['informeActividades_id_informeActividades']);
+		if ($informe) {
+			$valid_statuses = array('Creado', 'Enviado', 'Observaciones', 'Aprobado');
+			if (in_array($data_status['estado'], $valid_statuses)) {
+				$this->InformeActividadesModel->updateEstadoInformeActividad(intval($informe->id_informeActividades), $data_status);
+			}
 		}
 	}
 	/**
@@ -123,11 +144,37 @@ class InformeActividades extends CI_Controller
 		$this->logs_sia->logQueries();
 	}
 	/**
-	 * Cargar datos informe de actividades
+	 * Cargar datos ultimo informe de actividades registrado
 	 */
-	public function cargarInformeActividad(){
-		$informe = $this->InformeActividadesModel->getInformeActividad($this->input->post('id'));
-		echo json_encode($informe);
+	public function cargarUltimoInformeActividadArray(){
+		$informe = $this->InformeActividadesModel->getInformeActividad();
+		return $informe;
+	}
+	/**
+	 * Enviar informe de actividades
+	 */
+	public function send(){
+		$id = $this->input->post('id');
+		// Insertar datos de curso dictado
+		$curso = $this->InformeActividadesModel->getInformeActividad((int)$this->input->post("id"));
+		$asistentes = count($this->AsistentesModel->getAsistentesCurso((int)$this->input->post("id")));
+		$organizacion = $this->OrganizacionesModel->getOrganizacionUsuario($this->session->userdata('usuario_id'));
+		// Comprobar si ya los registros de asistentes están completos
+		if ($asistentes == $curso->totalAsistentes) {
+			$data_status = [
+				"descripcion" => "Estado actualizado a enviado",
+				"estado" => "Enviado",
+				"changed_at" => date('Y-m-d H:i:s'),
+				"changed_by" => $this->session->userdata('usuario_id'),
+				"informeActividades_id_informeActividades" => intval($curso->id_informeActividades),
+			];
+			$this->update_status($data_status);
+			send_email_admin('enviarInforme', 1, CORREO_SIA, null, $organizacion, $curso->id_informeActividades);
+			echo json_encode(array('title' => "Informe Enviado", 'status' => 'success', 'msg' => "El informe se ha enviado exitosamente.<br> Se le informará cuando sea aprobado o tenga alguna observación por corregir <br><br>Gracias por su participación"));
+		}
+		else {
+			echo json_encode(array('title' => "Error al enviar", 'status' => 'warning', 'msg' => "Número de asistentes registrados incompletos. <br><br><strong>Asistentes reportados:</strong> " . $curso->totalAsistentes . "<br><strong>Registrados en el sistema: </strong>" . $asistentes . '<br><br> Por favor registra el numero de asistentes faltantes y vuelve a intentar'));
+		}
 	}
 	/**
 	 * Actualizar datos informe de actividades
@@ -172,16 +219,99 @@ class InformeActividades extends CI_Controller
 		unlink($ruta . $informe->archivoAsistencia);
 		$this->db->where('informeActividades_id_informeActividades', $id);
 		if ($this->db->delete('asistentes')) {
-			$this->db->where('id_informeActividades', $id);
-			if($this->db->delete('informeActividades')){
-				echo json_encode(array("title" => "Informe eliminado","status" => "success", "msg" => "Se ha eliminado informe de manera correcta"));
+			$this->db->where('informeActividades_id_informeActividades', $id);
+			if ($this->db->delete('historico_estado_informe')) {
+				$this->db->where('id_informeActividades', $id);
+				if ($this->db->delete('informeActividades')) {
+					echo json_encode(array("title" => "Informe eliminado", "status" => "success", "msg" => "Se ha eliminado informe de manera correcta"));
+				}
+				else {
+					echo json_encode(array("title" => "Error", "status" => "error", "msg" => "No se ha eliminado informe de manera correcta"));
+				}
 			}
 			else {
-				echo json_encode(array("title" => "Error","status" => "error", "msg" => "No se ha eliminado informe de manera correcta"));
+				echo json_encode(array("title" => "Error", "status" => "error", "msg" => "No se ha eliminado informe de manera correcta"));
 			}
 		}
 		else {
 			echo json_encode(array("title" => "Error","status" => "error", "msg" => "No se ha eliminado informe de manera correcta"));
+		}
+	}
+	/**
+	 * Ajax: Cargar datos ultimo informe de actividades registrado
+	 */
+	public function cargarUltimoInformeActividad(){
+		$informe = $this->InformeActividadesModel->getInformeActividad();
+		echo json_encode($informe);
+	}
+	/**
+	 * Ajax: Cargar datos informe de actividades
+	 */
+	public function cargarInformeActividad(){
+		$informe = $this->InformeActividadesModel->getInformeActividad($this->input->post('id'));
+		echo json_encode($informe);
+	}
+	/**
+	 * Ajax: Cargar datos observación informe de actividades
+	 */
+	public function cargarObservacionesInforme(){
+		$observaciones = $this->ObservacionesInformeModel->getObservacionesInforme($this->input->post('id'));
+		echo json_encode($observaciones);
+	}
+	/**
+	 * Acciones Administrador
+	 */
+	// Ver informes de actividades enviados a la unidad
+	public function enviados()
+	{
+		$data = $this->dataSessionUsuario();
+		$data['title'] = 'Panel Principal - Informe de Actividades';
+		$data['informes'] = $this->InformeActividadesModel->getInformeActividadesEnviadas();
+		$this->load->view('include/header', $data);
+		$this->load->view('admin/informeActividades/index', $data);
+		$this->load->view('include/footer', $data);
+		$this->logs_sia->logs('PLACE_USER');
+	}
+	// Aprobar informe de actividades
+	public function approved(){
+		$id = $this->input->post('id');
+		// Insertar datos de curso dictado
+		$curso = $this->InformeActividadesModel->getInformeActividad((int)$this->input->post("id"));
+		$organizacion = $this->OrganizacionesModel->getOrganizacion($curso->organizaciones_id_organizacion);
+		// Capturar datos para actualización de estado informe
+		$data_status = [
+			"descripcion" => "Estado actualizado a aprobado",
+			"estado" => "Aprobado",
+			"changed_at" => date('Y-m-d H:i:s'),
+			"changed_by" => $this->session->userdata('usuario_id'),
+			"informeActividades_id_informeActividades" => intval($curso->id_informeActividades),
+		];
+		$this->update_status($data_status);
+		send_email_user($organizacion->direccionCorreoElectronicoOrganizacion,'informeAprobado', $organizacion,null, null, $curso->id_informeActividades);
+	}
+	// Aprobar informe de actividades
+	public function crearObservacion(){
+		$id = $this->input->post('id');
+		// Insertar datos de curso dictado
+		$curso = $this->InformeActividadesModel->getInformeActividad((int)$this->input->post("id"));
+		$organizacion = $this->OrganizacionesModel->getOrganizacion($curso->organizaciones_id_organizacion);
+		$data = [
+			"descripcion" => $this->input->post('descripcion'),
+			"created_at" => date('Y-m-d H:i:s'),
+			"administradores_id_administrador" => $this->session->userdata('usuario_id'),
+			"informeActividades_id_informeActividades" => intval($curso->id_informeActividades),
+		];
+		if ($this->db->insert('observaciones_informe', $data)) {
+			// Capturar datos para actualización de estado informe
+			$data_status = [
+				"descripcion" => "Estado actualizado a observaciones",
+				"estado" => "Observaciones",
+				"changed_at" => date('Y-m-d H:i:s'),
+				"changed_by" => $this->session->userdata('usuario_id'),
+				"informeActividades_id_informeActividades" => intval($curso->id_informeActividades),
+			];
+			$this->update_status($data_status);
+			send_email_user($organizacion->direccionCorreoElectronicoOrganizacion,'observacionesInforme', $organizacion,null, null, $curso->id_informeActividades);
 		}
 	}
 }

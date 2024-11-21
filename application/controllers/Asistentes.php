@@ -74,10 +74,18 @@ class Asistentes extends CI_Controller
 			"informeActividades_id_informeActividades" => $this->input->post("id_informe"),
 		);
 		// Insertar datos de curso dictado
-		if ($this->db->insert('asistentes', $data)) {
-			echo json_encode(array('title' =>'Guardado exitoso!','status' => 'success', "msg" => "El asistente se registro con éxito." ));
-			$this->logs_sia->session_log('Guardar asistentes');
-			//$this->notif_sia->notification('Registro asistentes', 'admin', $organizacion->nombreOrganizacion);
+		$curso = $this->InformeActividadesModel->getInformeActividad((int)$this->input->post("id_informe"));
+		$asistentes = count($this->AsistentesModel->getAsistentesCurso((int)$this->input->post("id_informe")));
+		// Comprobar si ya los registros de asistentes están completos
+		if ($asistentes == $curso->totalAsistentes) {
+			echo json_encode(array('title' => "Error al guardar", 'status' => 'info', 'msg' => "Número de asistentes registrados completos. <br><br><strong>Asistentes reportados:</strong> " . $curso->totalAsistentes . "<br><strong>Registrados en el sistema: </strong>" . $asistentes));
+		}
+		else {
+			if ($this->db->insert('asistentes', $data)) {
+				echo json_encode(array('title' =>'Guardado exitoso!','status' => 'success', "msg" => "El asistente se registro con éxito." ));
+				$this->logs_sia->session_log('Guardar asistentes');
+				//$this->notif_sia->notification('Registro asistentes', 'admin', $organizacion->nombreOrganizacion);
+			}
 		}
 	}
 	/**

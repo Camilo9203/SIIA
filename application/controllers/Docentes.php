@@ -351,6 +351,14 @@ class Docentes extends CI_Controller
 		$docentes = $this->db->select("*")->from("organizaciones")->join("docentes", 'docentes.organizaciones_id_organizacion = organizaciones.id_organizacion')->get()->result();
 		return $docentes;
 	}
+	/**
+	 * Cargar Información Docente Organización
+	 */
+	public function cargarDocente()
+	{
+		$docente = $this->DocentesModel->getDocente($this->input->post("id_docente"));
+		echo json_encode($docente);
+	}
 	public function cargarInformacionDocente()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');

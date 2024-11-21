@@ -8,17 +8,24 @@
  */
 $CI = &get_instance();
 $CI->load->model("InformeActividadesModel");
+//echo "<pre>";
+//var_dump($informes);
+//echo "</pre>";
+//die();
 ?>
 <!-- jQuery primero, luego Popper.js, luego Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="<?= base_url('assets/js/functions/user/informe-actividades.js?v=1.0') . time() ?>" type="text/javascript"></script>
+<script src="<?= base_url('assets/js/functions/user/informe-actividades.js?v=1.1') . time() ?>" type="text/javascript"></script>
+<script>
+	var informes = '<?= count($informes) ?>';
+</script>
 <!-- Tabla de cursos registrados -->
 <?php if ($informes): ?>
 <div class="container" id="tabla_informe_actividades">
 	<div class="row">
 		<div class="col-md-12" id="div_informe_cursos">
 			<hr>
-			<h3 id="title-form">Informe de actividades registrados</h3>
+			<h3>Informe de actividades registrados</h3>
 			<!-- Botón registrar informe -->
 			<div class="btn-group pull-right">
 				<button class="btn btn-siia ml-3" id="registrar_informe"><i class="fa fa-archive" aria-hidden="true"></i> Registrar informe </button>
@@ -34,10 +41,10 @@ $CI->load->model("InformeActividadesModel");
 						<td>Fecha de finalización</td>
 						<td>Ciudad</td>
 						<td>Duración</td>
-						<td>Intencionalidad</td>
 						<td>Cursos</td>
 						<td>Modalidades</td>
 						<td>Total Asistentes</td>
+						<td>Estado</td>
 						<td>Asistentes</td>
 						<td>Acciones</td>
 					</tr>
@@ -49,32 +56,47 @@ $CI->load->model("InformeActividadesModel");
 						<td><?= $informe->fechaFin ?></td>
 						<td><?= $informe->municipio ?></td>
 						<td><?= $informe->duracion ?> horas</td>
-						<td><?= $CI->InformeActividadesModel->getIntencionalidad($informe->intencionalidad); ?></td>
+<!--						<td>--><?php //= $CI->InformeActividadesModel->getIntencionalidad($informe->intencionalidad); ?><!--</td>-->
 						<td><textarea class="text-area-ext" readonly><?= $CI->InformeActividadesModel->getCursos($informe->cursos); ?></textarea>
 						</td>
 						<td><?= $CI->InformeActividadesModel->getModalidades($informe->modalidades); ?></td>
 						<td><?= $informe->totalAsistentes ?></td>
+						<td><?= $informe->estado ?></td>
 						<td>
 							<div class="btn-group-vertical" role="group" >
-<!--								<a type="button" class='btn btn-success' title="Descargar excel" href="--><?php //= base_url("uploads/asistentes/" . $informe->archivoAsistentes); ?><!--">-->
-<!--									<i class='fa fa-file-excel-o' aria-hidden='true'></i>-->
-<!--								</a>-->
-								<a type="button" class='btn btn-siia verAsistentes' title="Asistentes" data-id='<?= $informe->id_informeActividades; ?>'>
-									<i class='fa fa-eye' aria-hidden='true'></i>
-								</a>
-								<a type="button" class='btn btn-danger' title="Ver PDF Firmas" href="<?= base_url("uploads/asistentes/" . $informe->archivoAsistencia); ?>" target="_blank">
+								<button type="button" class='btn btn-siia verAsistentes' title="Ver | Editar Asistentes" data-id='<?= $informe->id_informeActividades; ?>'>
+									<i class='fa fa-users' aria-hidden='true'></i>
+								</button>
+								<a type="button" class='btn btn-outline-danger' title="Ver PDF Firmas" href="<?= base_url("uploads/asistentes/" . $informe->archivoAsistencia); ?>" target="_blank">
 									<i class='fa fa-file-pdf-o' aria-hidden='true'></i>
 								</a>
+								<?php if ($informe->archivoAsistentes): ?>
+									<a type="button" class='btn btn-outline-success' title="Descargar excel" href="<?= base_url("uploads/asistentes/" . $informe->archivoAsistentes); ?>">
+										<i class='fa fa-file-excel-o' aria-hidden='true'></i>
+									</a>
+								<?php endif; ?>
 							</div>
 						</td>
 						<td>
 							<div class="btn-group-vertical" role="group">
-								<!--								<button type="button" class='btn btn-info verCurso' title="Editar Curso" data-toggle='modal' data-id='--><?php //= $informe->id_informeActividades; ?><!--' data-target='#modal-curso-informe'>-->
-								<!--									<i class='fa fa-edit' aria-hidden='true'></i>-->
-								<!--								</button>-->
+								<?php if ($informe->estado == 'Creado' || $informe->estado == 'Observaciones'): ?>
+								<button type="button" class='btn btn-primary enviarInforme' title="Enviar Informe" data-id='<?= $informe->id_informeActividades; ?>'>
+									<i class='fa fa-send' aria-hidden='true'></i>
+								</button>
+								<?php endif; ?>
+								<button type="button" class='btn btn-info verCurso' title="Ver Detalle Curso" data-toggle='modal' data-id='<?= $informe->id_informeActividades; ?>' data-target='#modal-curso-informe'>
+									<i class='fa fa-book' aria-hidden='true'></i>
+								</button>
+								<?php if ($informe->estado == 'Observaciones'): ?>
+								<button type="button" class='btn btn-warning verObservacionesInforme' title="Ver Observaciones" data-toggle='modal' data-id='<?= $informe->id_informeActividades; ?>' data-target='#modal-observaciones-informe'>
+									<i class='fa fa-eye' aria-hidden='true'></i>
+								</button>
+								<?php endif; ?>
+								<?php if ($informe->estado != 'Aprobado' && $informe->estado != 'Observaciones' && $informe->estado != 'Enviado'): ?>
 								<button type="button" class='btn btn-danger eliminar_informe_actividad' title="Eliminar curso" data-id="<?= $informe->id_informeActividades; ?>">
 									<i class='fa fa-trash' aria-hidden='true'></i>
 								</button>
+								<?php endif; ?>
 							</div>
 						</td>
 					</tr>
@@ -85,131 +107,115 @@ $CI->load->model("InformeActividadesModel");
 	</div>
 	<?php $this->load->view('include/partial/buttons/_back_user'); ?>
 </div>
-<!-- Modal curso -->
-<div class="modal fade" id="modal-curso-informe" tabindex="-1" role="dialog" aria-labelledby="modal-curso-informes">
+<!-- Modal observaciones informe -->
+<div class="modal fade" id="modal-observaciones-informe" tabindex="-1" role="dialog" aria-labelledby="modal-observaciones-informe">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h3 class="modal-title">Informe de actividad <label id="super_id_admin_modal"></label> <span id="super_status_adm"></span></h3>
+				<h3>Observaciones | Informe de Actividades</h3>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			</div>
 			<div class="modal-body">
-				<div class="container-fluid">
-					<?= form_open('', array('id' => 'formulario_informe_actividades')); ?>
-					<div class="col-md-6">
-						<!-- Fecha de inicio -->
-						<div class="form-group">
-							<label for="informe_fecha_incio">Fecha de inicio</label>
-							<input type="date" class="form-control" name="informe_fecha_incio" id="informe_fecha_incio" required>
-						</div>
-						<!-- Fecha de fin -->
-						<div class="form-group">
-							<label for="informe_fecha_fin">Fecha de finalización</label>
-							<input type="date" class="form-control" name="informe_fecha_fin" id="informe_fecha_fin" required>
-						</div>
-						<!-- Departamentos -->
-						<div class="form-group">
-							<label for="informe_departamento_curso">Departamento*</label>
-							<br>
-							<select name="informe_departamento_curso" id="informe_departamento_curso" data-id-dep="4" class="selectpicker form-control show-tick departamentos" required="">
-								<?php foreach ($departamentos as $departamento): ?>
-									<option id="<?= $departamento->id_departamento ?>" value="<?= $departamento->nombre ?>"><?= $departamento->nombre ?></option>
-								<?php endforeach;?>
-							</select>
-						</div>
-						<!-- Municipios -->
-						<div class="form-group">
-							<div id="div_municipios4">
-								<label for="informe_municipio_curso">Municipio:*</label>
-								<br>
-								<select name="informe_municipio_curso" id="informe_municipio_curso" class="selectpicker form-control show-tick" required="">
-									<?php foreach ($municipios as $municipio) : ?>
-										<option id="<?= $municipio->id_municipio ?>" value="<?= $municipio->nombre ?>"><?= $municipio->nombre ?></option>
-									<?php endforeach; ?>
-								</select>
-							</div>
-						</div>
-						<!-- Duración Curso -->
-						<div class="form-group">
-							<label for="informe_duracion_curso">Duracion del Curso: <small>Horas</small></label>
-							<input type="number" name="informe_duracion_curso" class="form-control" id="informe_duracion_curso" min="20" placeholder="20" required>
-						</div>
-						<!-- Docente -->
-						<div class="form-group">
-							<label for="informe_docente">Docente:</label><br>
-							<select name="informe_docente" id="informe_docente" class="selectpicker form-control show-tick" required>
-								<?php foreach ($docentes as $docente): ?>
-									<option id='<?= $docente->id_docente ?>' value='<?= $docente->id_docente ?>'>
-										<?= $docente->primerNombreDocente ?>  <?= $docente->primerApellidoDocente ?>
-									</option>
-								<?php endforeach; ?>
-							</select>
-						</div>
-						<!-- Intencionalidad Curso -->
-						<div class="form-group">
-							<label for="informe_intencionalidad_curso">Intencionalidad del Curso:</label><br>
-							<select name="informe_intencionalidad_curso" id="informe_intencionalidad_curso" class="selectpicker form-control show-tick" required multiple>
-								<option value="1">Fortalecimiento</option>
-								<option value="2">Creación</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<!-- Curso -->
-						<div class="form-group">
-							<label for="informe_cursos">Nombre del curso:</label>
-							<select name="informe_cursos" id="informe_cursos" class="selectpicker form-control show-tick" required multiple>
-								<option value="1">Acreditación Curso Básico de Economía Solidaria</option>
-								<option value="2">Aval de Trabajo Asociado</option>
-								<option value="3">Acreditación Curso Medio de Economía Solidaria</option>
-								<option value="4">Acreditación Curso Avanzado de Economía Solidaria</option>
-								<option value="5">Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria</option>
-							</select>
-						</div>
-						<!-- Tipo Curso -->
-						<div class="form-group">
-							<label for="informe_modalidad">Modalidad del curso:</label><br>
-							<select name="informe_modalidad" id="informe_modalidad" class="selectpicker form-control show-tick" required="" multiple>
-								<option value="1">Presencial</option>
-								<option value="2">Virtual</option>
-								<option value="3">En Linea</option>
-							</select>
-						</div>
-						<!-- Asistentes Curso -->
-						<div class="form-group">
-							<label for="informe_asistentes">Asistentes:</label>
-							<input type="number" class="form-control" name="informe_asistentes" id="informe_asistentes" disabled>
-						</div>
-						<!-- Asistentes Mujeres Curso -->
-						<div class="form-group">
-							<label for="informe_numero_mujeres">Numero Mujeres:</label>
-							<input type="number" class="form-control" name="informe_numero_mujeres" id="informe_numero_mujeres" disabled>
-						</div>
-						<!-- Asistentes Hombres Curso -->
-						<div class="form-group">
-							<label for="informe_numero_hombres">Numero Hombres:</label>
-							<input type="number" class="form-control" name="informe_numero_hombres" id="informe_numero_hombres" disabled>
-						</div>
-						<!-- Asistentes No Binario Curso -->
-						<div class="form-group">
-							<label for="informe_numero_no_binario">No Binario:</label>
-							<input type="number" class="form-control" name="informe_numero_no_binario" id="informe_numero_no_binario" disabled>
-						</div>
-					</div>
-					<?= form_close(); ?>
-				</div>
-				<div class="modal-footer">
-					<div class="btn-group" role='group' aria-label='acciones' id="actions-admins">
-						<button type="button" class="btn btn-md btn-siia" id="actualizar_curso_informe">Actualizar</button>
-					</div>
+				<p class="tipoLeer">
+					Por favor lee la observación realizada a su informe, realice la corrección indicada y envíe nuevamente dando clic en <strong>Enviar </strong><span class="spanAzul"><i class='fa fa-send' aria-hidden='true'></i></span>
+				</p>
+				<div class="container-fluid text-center" id="observaciones_informe_actividades">
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<!-- Modal detalle informe -->
+<div class="modal fade" id="modal-curso-informe" tabindex="-1" role="dialog" aria-labelledby="modal-curso-informes">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3>Detalle | Informe de Actividades</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="col-md-6">
+						<!-- Fecha de inicio -->
+						<div class="form-group">
+							<label for="informe_fecha_incio_v">Fecha de inicio</label>
+							<input type="text" class="form-control" name="informe_fecha_incio_v" id="informe_fecha_incio_v" disabled>
+						</div>
+						<!-- Fecha de fin -->
+						<div class="form-group">
+							<label for="informe_fecha_fin_v">Fecha de finalización</label>
+							<input type="text" class="form-control" name="informe_fecha_fin_v" id="informe_fecha_fin_v" disabled>
+						</div>
+						<!-- Departamentos -->
+						<div class="form-group">
+							<label for="informe_departamento_curso_v">Departamento*</label>
+							<input type="text" class="form-control" name="informe_departamento_curso_v" id="informe_departamento_curso_v" disabled>
+						</div>
+						<!-- Municipios -->
+						<div class="form-group">
+							<label for="informe_municipio_curso_v">Municipio:*</label>
+							<input type="text" class="form-control" name="informe_municipio_curso_v" id="informe_municipio_curso_v" disabled>
+						</div>
+						<!-- Duración Curso -->
+						<div class="form-group">
+							<label for="informe_duracion_curso_v">Duracion del Curso: <small>Horas</small></label>
+							<input type="number" name="informe_duracion_curso_v" class="form-control" id="informe_duracion_curso_v" disabled>
+						</div>
+						<!-- Docente -->
+						<div class="form-group">
+							<label for="informe_docente_v">Docente:</label><br>
+							<input type="text" class="form-control" name="informe_docente_v" id="informe_docente_v" disabled>
+						</div>
+						<!-- Intencionalidad Curso -->
+						<div class="form-group">
+							<label for="informe_intencionalidad_curso_v">Intencionalidad del Curso:</label><br>
+							<input type="text" class="form-control" name="informe_intencionalidad_curso_v" id="informe_intencionalidad_curso_v" disabled>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<!-- Curso -->
+						<div class="form-group">
+							<label for="informe_cursos_v">Nombre del curso:</label>
+							<input type="text" class="form-control" name="informe_cursos_v" id="informe_cursos_v" disabled>
+						</div>
+						<!-- Tipo Curso -->
+						<div class="form-group">
+							<label for="informe_modalidad_v">Modalidad del curso:</label><br>
+							<input type="text" class="form-control" name="informe_modalidad_v" id="informe_modalidad_v" disabled>
+						</div>
+						<!-- Asistentes Curso -->
+						<div class="form-group">
+							<label for="informe_asistentes_v">Asistentes:</label>
+							<input type="number" class="form-control" name="informe_asistentes_v" id="informe_asistentes_v" disabled>
+						</div>
+						<!-- Asistentes Mujeres Curso -->
+						<div class="form-group">
+							<label for="informe_numero_mujeres_v">Numero Mujeres:</label>
+							<input type="number" class="form-control" name="informe_numero_mujeres_v" id="informe_numero_mujeres_v" disabled>
+						</div>
+						<!-- Asistentes Hombres Curso -->
+						<div class="form-group">
+							<label for="informe_numero_hombres_v">Numero Hombres:</label>
+							<input type="number" class="form-control" name="informe_numero_hombres_v" id="informe_numero_hombres_v" disabled>
+						</div>
+						<!-- Asistentes No Binario Curso -->
+						<div class="form-group">
+							<label for="informe_numero_no_binario_v">No Binario:</label>
+							<input type="number" class="form-control" name="informe_numero_no_binario_v" id="informe_numero_no_binario_v" disabled>
+						</div>
+					</div>
+				</div>
+				<p class="tipoLeer">
+					Si los datos aquí registrado no son correctos, por favor dar clic en <strong>Eliminar  </strong><span class="spanRojo"><i class='fa fa-trash' aria-hidden='true'></i></span>
+					Y vuelve a crear tu informe
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
 <?php endif; ?>
-<!-- Proceso de registro informes -->
-<div class="container" id="registro_informe_actividades" <?php if($informes): ?> style="display: none" <?php endif; ?>>
+<!-- Proceso de registro informeActividades -->
+<div class="container" id="registro_informe_actividades">
 	<div class="row">
 		<div class="col-md-12">
 			<hr>
@@ -235,7 +241,8 @@ $CI->load->model("InformeActividadesModel");
 					</ul>
 				</div>
 			</div>
-			<h3 id="title-form" style="display: none">Informe de actividades</h3>
+			<!-- Titulo sección -->
+			<h3 class="title-form" style="display: none">Informe de actividades</h3>
 			<br>
 			<!-- Barra de progreso -->
 			<div class="progress">
@@ -378,11 +385,18 @@ $CI->load->model("InformeActividadesModel");
 			<div id="form-150" class="form-section" style="display: none;">
 				<h3>¡Información cargada con éxito!</h3><br><br>
 				<div class="tipoLeer">
-					<p>La información ha sido cargada con éxito, por favor recuerde revisar que la información coincida con lo registrado. Gracias por su participación. </p><br><br>
+					<p>La información ha sido cargada con éxito, por favor recuerde revisar que la información coincida con lo registrado.</p>
+					<p>A continuación debe diligenciar los asistentes a este curso, los cuales deben coincidir con la cantidad registrada anteriormente: <strong id="cantidadAsistentes"></strong></p>
+					<br>
+					<div class="text-center">
+						<button class="btn btn-success verAsistentes" id="registrarAsistentes"><i class="fa fa-user-circle" aria-hidden="true"></i> Registrar Asistentes</button>
+					</div>
+					<br>
 				</div>
+				<br>
+				<button class="btn btn-siia" id="reload"><i class="fa fa-window-restore" aria-hidden="true"></i> Volver</button>
 			</div>
-			<button class="btn btn-siia mt-6" id="reload" style="display: none">Volver</button>
-			<button class="btn btn-siia" <?php if(!$informes): ?> disabled <?php endif; ?> id="back"><i class="fa fa-arrow-left" aria-hidden="true"></i> Atrás</button>
+			<button class="btn btn-siia" id="back"><i class="fa fa-arrow-left" aria-hidden="true"></i> Atrás</button>
 			<button class="btn btn-siia" id="forward">Siguiente <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
 			<br><br>
 		</div>
