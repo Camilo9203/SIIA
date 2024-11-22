@@ -137,9 +137,9 @@ class Reportes extends CI_Controller
 		$this->load->library('PHPExcel');
 		$objPHPExcel = new PHPExcel();
 		$objPHPExcel->setActiveSheetIndex(0);
-		$objPHPExcel->getActiveSheet()->getStyle('A1:V1')->getFont()->setBold(true);
-		$objPHPExcel->getActiveSheet()->setAutoFilter('A1:V1');
-		$objPHPExcel->getActiveSheet()->getStyle('A1:V1')->applyFromArray([
+		$objPHPExcel->getActiveSheet()->getStyle('A1:W1')->getFont()->setBold(true);
+		$objPHPExcel->getActiveSheet()->setAutoFilter('A1:W1');
+		$objPHPExcel->getActiveSheet()->getStyle('A1:W1')->applyFromArray([
 			'fill' => [
 				'type' => PHPExcel_Style_Fill::FILL_SOLID,
 				'color' => ['rgb' => 'BDD7EE'] // Cambia 'FF0000' al código de color deseado
@@ -162,11 +162,12 @@ class Reportes extends CI_Controller
 		$objPHPExcel->getActiveSheet()->SetCellValue('O1', 'FECHA INICIO DE LA ACREDITACIÓN');
 		$objPHPExcel->getActiveSheet()->SetCellValue('P1', 'FECHA VENCIMIENTO DE LA ACREDITACIÓN');
 		$objPHPExcel->getActiveSheet()->SetCellValue('Q1', 'MUNICIPIO');
-		$objPHPExcel->getActiveSheet()->SetCellValue('R1', 'DIRECCIÓN');
-		$objPHPExcel->getActiveSheet()->SetCellValue('S1', 'TELÉFONO');
-		$objPHPExcel->getActiveSheet()->SetCellValue('T1', 'DIRECCIÓN WEB DE LA ENTIDAD ACREDITADA');
-		$objPHPExcel->getActiveSheet()->SetCellValue('U1', 'CORREO ELECTRÓNICO ORGANIZACIÓN');
-		$objPHPExcel->getActiveSheet()->SetCellValue('V1', 'ID SOLICITUD');
+		$objPHPExcel->getActiveSheet()->SetCellValue('R1', 'DEPARTAMENTO');
+		$objPHPExcel->getActiveSheet()->SetCellValue('S1', 'DIRECCIÓN');
+		$objPHPExcel->getActiveSheet()->SetCellValue('T1', 'TELÉFONO');
+		$objPHPExcel->getActiveSheet()->SetCellValue('U1', 'DIRECCIÓN WEB DE LA ENTIDAD ACREDITADA');
+		$objPHPExcel->getActiveSheet()->SetCellValue('V1', 'CORREO ELECTRÓNICO ORGANIZACIÓN');
+		$objPHPExcel->getActiveSheet()->SetCellValue('W1', 'ID SOLICITUD');
 		$rowCount = 2;
 		$data = $this->OrganizacionesModel->getOrganizacionesAcreditadas();
 		// Cursos
@@ -271,12 +272,13 @@ class Reportes extends CI_Controller
 			$objPHPExcel->getActiveSheet()->SetCellValue('O'.$rowCount, $organizacion['resoluciones']->fechaResolucionInicial);
 			$objPHPExcel->getActiveSheet()->SetCellValue('P'.$rowCount, $organizacion['resoluciones']->fechaResolucionFinal);
 			$objPHPExcel->getActiveSheet()->SetCellValue('Q'.$rowCount, $organizacion['data_organizaciones_inf']->nomMunicipioNacional);
-			$objPHPExcel->getActiveSheet()->SetCellValue('R'.$rowCount, $organizacion['data_organizaciones_inf']->direccionOrganizacion);
-			$objPHPExcel->getActiveSheet()->SetCellValue('S'.$rowCount, $organizacion['data_organizaciones_inf']->fax);
-			$objPHPExcel->getActiveSheet()->SetCellValue('T'.$rowCount, $organizacion['data_organizaciones_inf']->urlOrganizacion);
-			$objPHPExcel->getActiveSheet()->SetCellValue('U'.$rowCount, $organizacion['data_organizaciones']->direccionCorreoElectronicoOrganizacion);
-			$objPHPExcel->getActiveSheet()->SetCellValue('V'.$rowCount, $organizacion['tipoSolicitud']->idSolicitud);
-			foreach(range('A','V') as $columnID) {
+			$objPHPExcel->getActiveSheet()->SetCellValue('R'.$rowCount, $organizacion['data_organizaciones_inf']->nomDepartamentoUbicacion);
+			$objPHPExcel->getActiveSheet()->SetCellValue('S'.$rowCount, $organizacion['data_organizaciones_inf']->direccionOrganizacion);
+			$objPHPExcel->getActiveSheet()->SetCellValue('T'.$rowCount, $organizacion['data_organizaciones_inf']->fax);
+			$objPHPExcel->getActiveSheet()->SetCellValue('U'.$rowCount, $organizacion['data_organizaciones_inf']->urlOrganizacion);
+			$objPHPExcel->getActiveSheet()->SetCellValue('V'.$rowCount, $organizacion['data_organizaciones']->direccionCorreoElectronicoOrganizacion);
+			$objPHPExcel->getActiveSheet()->SetCellValue('W'.$rowCount, $organizacion['tipoSolicitud']->idSolicitud);
+			foreach(range('A','W') as $columnID) {
 				$objPHPExcel->getActiveSheet()->getColumnDimension($columnID)
 					->setAutoSize(true);
 			}
