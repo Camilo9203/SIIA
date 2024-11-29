@@ -95,7 +95,7 @@ define('APP_DATOS_VIEWIUD', '2tsa-2de2'); // https://www.datos.gov.co/resource/4
 define('PAGINA_WEB', 'https://www.unidadsolidaria.gov.co/'); // Correo electrónico del sia para el contacto
 define('CORREO_SIA', 'acreditaciones@unidadsolidaria.gov.co'); // Correo electrónico del sia para el contacto
 define('CORREO_ATENCION', 'atencionalciudadano@unidadsolidaria.gov.co'); // Correo electrónico de ATENCIÓN AL CIUDADANO PRIORIDAD BAJA
-define('CORREO_COORDINADOR', 'rolfi.serrano@unidadsolidaria.gov.co'); // Correo electrónico de COORDINADOR DE EDUCACIÓN PRIORIDAD MEDIA
+define('CORREO_COORDINADOR', 'laura.ballen@unidadsolidaria.gov.co'); // Correo electrónico de COORDINADOR DE EDUCACIÓN PRIORIDAD MEDIA
 define('CORREO_AREA', 'acreditaciones@unidadsolidaria.gov.co'); // Correo electrónico de COORDINADOR DE AREA PRIORIDAD ALTA
 define('CORREO_DIRECTOR', 'acreditaciones@unidadsolidaria.gov.co'); // Correo electrónico de DIRECTOR NACIONAL PRIORIDAD MUY ALTA
 define('CORREO_DIRECTOR', 'acreditaciones@unidadsolidaria.gov.co'); // Correo electrónico de DIRECTOR NACIONAL PRIORIDAD MUY ALTA
