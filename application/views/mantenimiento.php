@@ -97,8 +97,8 @@ p {
   	<div class="col-middle">
     <div class="text-center text-center">
       <h1>SIIA en Mantenimiento.</h1>
-      <h3>La Unidad Administrativa Especial de Organizaciones Solidarias, informa que las actividades relacionadas con el proceso de acreditación estarán temporalmente pausadas del 21 al 25 de octubre de 2024. Durante estos días, nuestro equipo estará concentrado en la propuesta y objetivos del Encuentro Internacional de Economías para la Vida – ECOOVIDA2024, liderado por la Unidad Solidaria.</h3>
-      <h4 >Agradecemos su comprensión y los invitamos a reanudar el envío de solicitudes a partir del 28 de octubre de 2024. Atentamente,</h4>
+      <h3>La Unidad Administrativa Especial de Organizaciones Solidarias, informa que las actividades relacionadas con el proceso de acreditación estarán temporalmente pausadas del 26 al 7 de diciembre de 2024. Ya que la plataforma estará en un mantenimiento preventivo.</h3>
+      <h4 >Agradecemos su comprensión y los invitamos a reanudar el envío de solicitudes a partir del 8 de diciembre de 2024. Atentamente,</h4>
       <h5>Unidad Administrativa Especial de Organizaciones Solidarias</h5>
       </p>
     </div>
