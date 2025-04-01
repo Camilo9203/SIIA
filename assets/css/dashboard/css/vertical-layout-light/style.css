@@ -28409,7 +28409,6 @@ div.tagsinput span.tag a {
 .auth form .form-group .tt-query,
 .auth form .form-group .tt-hint {
   background: transparent;
-  border-radius: 0;
   font-size: .9375rem;
 }
 

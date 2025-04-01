@@ -5,6 +5,10 @@
  * @var $nombre_usuario
  * @var $nivel
  */
+// echo '<pre>';
+// var_dump($solicitudesAsignadas);
+// echo '</pre>';
+// return null;
 ?>
 <!-- Solicitudes a evaluar-->
 <div class="container">

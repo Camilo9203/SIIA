@@ -1,4 +1,5 @@
 <?php
+
 /***
  * @var $activeLink
  * @var $logo
@@ -11,6 +12,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
@@ -54,14 +56,16 @@
 	<!--Start of Tawk.to Script-->
 	<?php if ($logged_in == FALSE && $tipo_usuario == "none"): ?>
 		<script type="text/javascript">
-			var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-			(function(){
-				var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-				s1.async=true;
-				s1.src='https://embed.tawk.to/624281002abe5b455fc21567/1fv9sfqn8';
-				s1.charset='UTF-8';
-				s1.setAttribute('crossorigin','*');
-				s0.parentNode.insertBefore(s1,s0);
+			var Tawk_API = Tawk_API || {},
+				Tawk_LoadStart = new Date();
+			(function() {
+				var s1 = document.createElement("script"),
+					s0 = document.getElementsByTagName("script")[0];
+				s1.async = true;
+				s1.src = 'https://embed.tawk.to/624281002abe5b455fc21567/1fv9sfqn8';
+				s1.charset = 'UTF-8';
+				s1.setAttribute('crossorigin', '*');
+				s0.parentNode.insertBefore(s1, s0);
 			})();
 		</script>
 	<?php endif; ?>
@@ -69,18 +73,26 @@
 	<!-- Google -->
 	<script src="https://www.google.com/recaptcha/api.js?render=6LeTFnYnAAAAAKl5U_RbOYnUbGFGlhG4Ffn52Sef"></script>
 	<!-- Title -->
-	<title>Sistema Integrado de Información de Acreditación | <?= $title; ?></title>
+	<title><?= APP_NAME; ?> | <?= $title; ?></title>
 </head>
+
 <body class="nav-md">
 	<div class="container-scroller">
 		<?= "<div class='hidden' id='data_logg' data-log='$logged_in'></div>" ?>
 		<!-- Navbar Usuario no registrado -->
 		<?php
-			// Datos enviados a menu y navbar
-			$data = array('nivel' => $nivel, 'tipo_usuario' => $tipo_usuario, 'logged_in' => $logged_in, 'activeLink' => $activeLink, 'organizacion', $data_organizacion);
-			// Comprobar si esta iniciada la sesión
-			if ($logged_in != FALSE && $tipo_usuario != "none"):
-				$this->load->view('include/partial/_navbar', $data); ?>
+		// Datos enviados a menu y navbar
+		$data = array(
+			'nivel' => $nivel,
+			'tipo_usuario' => $tipo_usuario,
+			'logged_in' => $logged_in,
+			'activeLink' => $activeLink,
+			'organizacion' => $data_organizacion
+		);
+		// Comprobar si esta iniciada la sesión
+		if ($logged_in != FALSE && $tipo_usuario != "none"):
+			$this->load->view('include/partial/_navbar', $data); ?>
 			<!-- partial ajustes visuales-->
 			<div class="container-fluid page-body-wrapper">
-			<?php $this->load->view('include/partial/_sidebar', $data); endif; ?>
+			<?php $this->load->view('include/partial/_sidebar', $data);
+		endif; ?>

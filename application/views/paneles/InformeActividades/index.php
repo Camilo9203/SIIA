@@ -37,8 +37,7 @@ $CI->load->model("InformeActividadesModel");
 			<table id="tabla_super_admins" width="100%" border=0 class="table table-striped table-bordered tabla_form">
 				<thead>
 					<tr>
-						<td>Fecha de inicio</td>
-						<td>Fecha de finalización</td>
+						<td>Fecha de registro</td>
 						<td>Ciudad</td>
 						<td>Duración</td>
 						<td>Cursos</td>
@@ -52,8 +51,7 @@ $CI->load->model("InformeActividadesModel");
 				<tbody id="tbody">
 				<?php foreach ($informes as $informe): ?>
 					<tr>
-						<td><?= $informe->fechaInicio ?></td>
-						<td><?= $informe->fechaFin ?></td>
+						<td><?= $informe->created_at ?></td>
 						<td><?= $informe->municipio ?></td>
 						<td><?= $informe->duracion ?> horas</td>
 <!--						<td>--><?php //= $CI->InformeActividadesModel->getIntencionalidad($informe->intencionalidad); ?><!--</td>-->

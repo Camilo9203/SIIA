@@ -1,4 +1,46 @@
 /* Your custom styles */
+#imagen_header_politicas {
+	margin: 0 auto;
+	display: block;
+	height: auto;
+	width: 300px;
+}
+.modal-xl {
+	max-width: 90% !important; /* Ajusta el ancho del modal */
+}
+
+.modal-lg {
+	max-width: 75% !important;
+}
+.modal .modal-dialog {
+	margin-top: 20px !important;
+}
+.modal-body p {
+	text-align: justify !important;
+}
+.modal-body ol li {
+	text-align: justify !important;
+}
+
+h5 {
+	margin-top: 1rem !important; /* Espaciado arriba */
+	margin-bottom: 0.5rem !important; /* Espaciado abajo */
+}
+.form-check-input {
+	margin-left: 0rem !important;
+}
+
+@media (max-width: 768px) {
+	h5 {
+		margin-top: 1.5rem !important; /* Más separación en móviles */
+		margin-bottom: 1rem !important;
+		font-size: 1.1rem !important; /* Ajuste de tamaño para mejor legibilidad */
+	}
+}
+
+.forms-error {
+	color: red;
+}
 .spanRojo {
 	color: red;
 }
@@ -36,7 +78,7 @@
 	align-content: center;
 	justify-content: center;
 }
-.list-popup{
+.list-popup {
 	justify-content: left;
 	text-align: left;
 }
@@ -44,7 +86,6 @@
 	background-color: #07385d !important;
 	color: white !important;
 }
-
 .input-swalert {
 	height: 2.625em !important;
 	width: auto !important;
@@ -52,6 +93,10 @@
 	box-sizing: border-box !important;
 	border: 1px solid #d9d9d9 !important;
 	font-size: 1.125em !important;
+}
+
+.input-label-swalert {
+	text-align: center !important;
 }
 
 .auth .brand-logo img {
@@ -71,15 +116,6 @@
 	resize: none;
 }
 
-.modal-dialog {
-	margin-top: 80px !important;
-}
-@media (min-width: 576px) {
-	.modal-dialog {
-		max-width: 700px !important;
-	}
-}
-
 .admin-login {
 	position: relative;
 	background-image: url("../img/background-login.png") !important;
@@ -95,6 +131,10 @@
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.3);
+}
+.auth .auth-form-light {
+	background: rgba(255, 255, 255, 0.9) !important;
+	border-radius: 10px !important;
 }
 .card-people {
 	padding-top: 0px !important;

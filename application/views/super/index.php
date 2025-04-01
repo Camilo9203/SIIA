@@ -20,7 +20,7 @@ if($logged_in == FALSE && $tipo_usuario == "none"): ?>
 									<input type="password" id="tpssp" class="form-control" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required value="" class="form-control form-control-lg">
 								</div>
 								<div class="mt-3">
-									<a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" id="init_sp">Iniciar Sesión</a>
+									<a class="btn btn-block btn-primary btn-md font-weight-medium" id="init_sp">Iniciar Sesión</a>
 								</div>
 							</form>
 						</div>
