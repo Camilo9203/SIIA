@@ -56,7 +56,7 @@
 		</form>
 	</div>
 </div>
-<!-- Tabla Usuarios en linea -->
+<!-- Tabla Usuarios en línea -->
 <div class="container">
 	<div class="clearfix"></div>
 	<hr />

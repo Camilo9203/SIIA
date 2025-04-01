@@ -74,6 +74,9 @@ $route['super/usuarios'] = 'Super/usuarios';
 $route['super/correos'] = 'Super/correos';
 $route['super/solicitudes'] = 'Super/solicitudes';
 $route['super/resoluciones'] = 'Super/resoluciones';
+$route['configcontroller'] = 'configcontroller/index';
+$route['configcontroller/update_constants'] = 'configcontroller/update_constants';
+
 
 /** Usuarios */
 $route['login'] = 'Sesion';
