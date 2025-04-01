@@ -392,7 +392,6 @@
 	</div>
 </div>
 <!-- Modal - FIN -->
-<!-- //TODO: Botón de ir arriba -->
 <a id="back-to-top" class="btn btn-siia back-to-top" role="button" title="Volver arriba" data-toggle="tooltip" data-placement="left"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
 <!-- Footer Content -->
 <footer>

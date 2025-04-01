@@ -1,0 +1,99 @@
+.govco-logo {
+	height: 30px;
+	display: inline-block;
+	content: url(https://cdn.www.gov.co/v4/assets/images/logo.svg);
+	vertical-align: super;
+}
+.govco-co {
+	height: 48px;
+	margin-top: 24px;
+	display: inline-block;
+	content: url(https://cdn.www.gov.co/v4/assets/images/logo-colombia.svg);
+}
+/* Preloader */
+.se-pre-con {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: url(../../assets/img/loading_siia.gif) center no-repeat #fff;
+}
+/* Navbar */
+.icon-entidad-menu-govco {
+	content: url(../../assets/img/siia_logo.png);
+	height: 2.188rem;
+	margin-left: 1.125rem;
+	padding: 0;
+}
+.container-logo-header-govco .logo-header-govco {
+	height: 5rem;
+	content: url(../../assets/img/logoHeader_j9rcK84myYnuevoLogo_0.png);
+}
+.container-logo-header-govco .logo-header-siia {
+	height: 5rem;
+	content: url(../../assets/img/siia_logo.png);
+}
+.govco-links-portal-container {
+	margin-left: 15px !important;
+	margin-bottom: 30px !important;
+	margin-top: 10px !important;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+/* Footer */
+.extramt-network {
+	margin-top: 10px !important;
+}
+
+@media (max-width: 991px) {
+	.navbar-collapse-menu-govco {
+		height: max-content;
+	}
+}
+
+.container-logo-header-govco {
+	padding: 2rem 5.375rem 0 5.375rem;
+}
+
+@media (min-width: 992px) {
+	.navbar-menu-govco ul.navbar-nav li a {
+		padding-top: 1.5rem;
+	}
+	.justify-content-md-center {
+		padding: 0 !important;
+	}
+}
+
+@media (min-width: 768px) {
+	.justify-content-md-center {
+		padding: 1.5rem;
+	}
+}
+@media (min-width: 350px) {
+	.justify-content-md-center {
+		padding: 1.5rem;
+	}
+}
+.dropdown-container-govco {
+	width: fit-content !important;
+}
+.titulos-govco {
+	color: #004884 !important;
+	padding: 2rem !important;
+	text-align: center !important;
+}
+.parrafo-govco {
+	text-align: justify !important;
+}
+.btn-govco {
+	height: 40px;
+	width: 140px;
+	margin-left: 3px;
+}
+
+.tarjeta-govco.vertical-tarjeta-govco {
+	max-width: 100%;
+}
