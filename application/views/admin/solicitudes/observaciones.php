@@ -5,6 +5,10 @@
  * @var $nombre_usuario
  * @var $nivel
  */
+//echo '<pre>';
+//var_dump($solicitudesEnObservaciones);
+//echo '</pre>';
+//return null;
 ?>
 <div class="container">
 	<div class="row">
