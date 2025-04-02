@@ -18,7 +18,7 @@ class Encuesta extends CI_Controller
 			'nombre_usuario' => "none",
 		);
 		$this->load->view('include/header/guest', $data);
-		$this->load->view('encuesta/index');
+		$this->load->view('encuesta');
 		$this->load->view('include/footer/guest');
 		$this->logs_sia->logs('PLACE_USER');
 	}
@@ -65,10 +65,9 @@ class Encuesta extends CI_Controller
 					'tipo' => "Notificación interna"
 				);
 				//Comprobar que se guardó o no el registro en la tabla correosRegistro
-				if($this->db->insert('correosRegistro', $correo_registro)){
+				if ($this->db->insert('correosRegistro', $correo_registro)) {
 					echo json_encode(array('estado' => 1, 'msg' => "Se envío el correo, por favor esperar la respuesta."));
-				}
-				else {
+				} else {
 					echo json_encode(array('estado' => 2, 'msg' => "Se envío el correo al administrador con tus respuesta pero no se guardo registro en base de datos"));
 				}
 			} else {
@@ -84,14 +83,12 @@ class Encuesta extends CI_Controller
 					'error' => $this->email->print_debugger()
 				);
 				//Comprobar que se guardó o no el registro en la tabla correosRegistro
-				if($this->db->insert('correosRegistro', $correo_registro)){
+				if ($this->db->insert('correosRegistro', $correo_registro)) {
 					echo json_encode(array('estado' => 2, 'msg' => "Se han guardado tus repuestas en base de datos pero no se logro notificar por correo al administrador, sin embargo se registro error en base de datos para verificación"));
 				}
 			}
 		} else {
-			echo json_decode(array('estado' => 0, 'msg' => "No se ha logrado registrar tu respuesta por favor intenta de nuevo" ));
+			echo json_decode(array('estado' => 0, 'msg' => "No se ha logrado registrar tu respuesta por favor intenta de nuevo"));
 		}
-
 	}
-
 }
