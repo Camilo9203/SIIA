@@ -19,8 +19,8 @@ if (funcion == "super" && funcion_ != "panel") {
 	var sp = url.split("?");
 	sp = sp[1];
 	// Si esta definida se comprueba
-	if(sp != undefined) {
-		console.log(sp)
+	if (sp != undefined) {
+		console.log(sp);
 		var spF = sp.split(":");
 		var data = {
 			sp: spF[1],
@@ -34,30 +34,30 @@ if (funcion == "super" && funcion_ != "panel") {
 			success: function (response) {
 				if (response.error === 1) {
 					Alert.fire({
-						title: 'Contraseña incorrecta!',
+						title: "Contraseña incorrecta!",
 						text: response.msg,
-						icon: 'error',
+						icon: "error",
 					}).then((result) => {
 						if (result.isConfirmed) {
-							redirect(baseURL + 'super?');
+							redirect(baseURL + "super?");
 						}
-					})
+					});
 				} else {
 					Alert.fire({
-						title: 'Bienvenido!',
+						title: "Bienvenido!",
 						text: response.msg,
-						icon: 'success',
+						icon: "success",
 					}).then((result) => {
 						if (result.isConfirmed) {
 							setInterval(function () {
 								redirect(response.url);
 							}, 1000);
 						}
-					})
+					});
 				}
 			},
 			error: function (ev) {
-				console.log(ev)
+				console.log(ev);
 			},
 		});
 	}
@@ -66,23 +66,23 @@ if (funcion == "super" && funcion_ != "panel") {
  * Modal crear/actualizar administrador
  */
 $(".admin-modal").click(function () {
-	let funct = $(this).attr('data-funct');
-	if (funct === 'crear') {
-		$('#super_nuevo_admin').show();
-		$('#actions-admins').hide();
+	let funct = $(this).attr("data-funct");
+	if (funct === "crear") {
+		$("#super_nuevo_admin").show();
+		$("#actions-admins").hide();
 		$("#super_id_admin_modal").html("");
 		$("#super_status_adm").html("");
 		$("#super_status_adm").css("background-color", "#ffffff");
-		$("#super_primernombre_admin").val('');
-		$("#super_segundonombre_admin").val('');
-		$("#super_primerapellido_admin").val('');
-		$("#super_segundoapellido_admin").val('');
-		$("#super_numerocedula_admin").val('');
-		$("#super_ext_admin").val('');
-		$("#super_nombre_admin").val('');
-		$("#super_correo_electronico_admin").val('');
-		$("#super_contrasena_admin").val('');
-		$("#super_acceso_nvl option[value='seleccione']").prop('selected', true);
+		$("#super_primernombre_admin").val("");
+		$("#super_segundonombre_admin").val("");
+		$("#super_primerapellido_admin").val("");
+		$("#super_segundoapellido_admin").val("");
+		$("#super_numerocedula_admin").val("");
+		$("#super_ext_admin").val("");
+		$("#super_nombre_admin").val("");
+		$("#super_correo_electronico_admin").val("");
+		$("#super_contrasena_admin").val("");
+		$("#super_acceso_nvl option[value='seleccione']").prop("selected", true);
 		$("#super_id_admin_modal").prop("disabled", false);
 		$("#super_eliminar_admin").prop("disabled", false);
 		$("#super_actualizar_admin").prop("disabled", false);
@@ -95,10 +95,9 @@ $(".admin-modal").click(function () {
 		$("#super_contrasena_admin").prop("disabled", false);
 		$("#super_correo_electronico_admin").prop("disabled", false);
 		$("#super_acceso_nvl").prop("disabled", false);
-	}
-	else {
-		$('#super_nuevo_admin').hide();
-		$('#actions-admins').show();
+	} else {
+		$("#super_nuevo_admin").hide();
+		$("#actions-admins").show();
 		data = {
 			id: $(this).attr("data-id"),
 		};
@@ -113,16 +112,34 @@ $(".admin-modal").click(function () {
 				$("#super_status_adm").html("");
 				$("#super_status_adm").css("color", "white");
 				$("#super_status_adm").css("padding", "5px");
-				$("#super_id_admin_modal").html(response.administrador.id_administrador);
-				$("#super_primernombre_admin").val(response.administrador.primerNombreAdministrador);
-				$("#super_segundonombre_admin").val(response.administrador.segundoNombreAdministrador);
-				$("#super_primerapellido_admin").val(response.administrador.primerApellidoAdministrador);
-				$("#super_segundoapellido_admin").val(response.administrador.segundoApellidoAdministrador);
-				$("#super_numerocedula_admin").val(response.administrador.numCedulaCiudadaniaAdministrador);
+				$("#super_id_admin_modal").html(
+					response.administrador.id_administrador
+				);
+				$("#super_primernombre_admin").val(
+					response.administrador.primerNombreAdministrador
+				);
+				$("#super_segundonombre_admin").val(
+					response.administrador.segundoNombreAdministrador
+				);
+				$("#super_primerapellido_admin").val(
+					response.administrador.primerApellidoAdministrador
+				);
+				$("#super_segundoapellido_admin").val(
+					response.administrador.segundoApellidoAdministrador
+				);
+				$("#super_numerocedula_admin").val(
+					response.administrador.numCedulaCiudadaniaAdministrador
+				);
 				$("#super_ext_admin").val(response.administrador.ext);
 				$("#super_nombre_admin").val(response.administrador.usuario);
-				$("#super_correo_electronico_admin").val(response.administrador.direccionCorreoElectronico);
-				$("#super_acceso_nvl option[value='" + response.administrador.nivel + "']").prop("selected", true);
+				$("#super_correo_electronico_admin").val(
+					response.administrador.direccionCorreoElectronico
+				);
+				$(
+					"#super_acceso_nvl option[value='" +
+						response.administrador.nivel +
+						"']"
+				).prop("selected", true);
 				$("#super_contrasena_admin").val(response.password);
 				// Comprobar conexión de usuario
 				if (response.administrador.logged_in == 1) {
@@ -162,7 +179,6 @@ $(".admin-modal").click(function () {
 			},
 		});
 	}
-
 });
 /**
  * Crear administrador
@@ -177,7 +193,9 @@ $("#super_nuevo_admin").click(function () {
 			super_segundoapellido_admin: $("#super_segundoapellido_admin").val(),
 			super_numerocedula_admin: $("#super_numerocedula_admin").val(),
 			super_ext_admin: $("#super_ext_admin").val(),
-			super_correo_electronico_admin: $("#super_correo_electronico_admin").val(),
+			super_correo_electronico_admin: $(
+				"#super_correo_electronico_admin"
+			).val(),
 			super_nombre_admin: $("#super_nombre_admin").val(),
 			super_contrasena_admin: $("#super_contrasena_admin").val(),
 			super_acceso_nvl: $("#super_acceso_nvl").val(),
@@ -189,40 +207,39 @@ $("#super_nuevo_admin").click(function () {
 			data: data,
 			beforeSend: function () {
 				Toast.fire({
-					icon: 'info',
-					title: 'Guardando datos'
+					icon: "info",
+					title: "Guardando datos",
 				});
 			},
 			success: function (response) {
-				if(response.status === 0) {
+				if (response.status === 0) {
 					Alert.fire({
 						title: response.title,
 						text: response.msg,
 						icon: response.icon,
-						confirmButtonText: 'Aceptar',
-					})
-				}  else if(response.status === 1){
+						confirmButtonText: "Aceptar",
+					});
+				} else if (response.status === 1) {
 					Alert.fire({
 						title: response.title,
 						text: response.msg,
 						icon: response.icon,
-						confirmButtonText: 'Aceptar',
+						confirmButtonText: "Aceptar",
 					}).then((result) => {
 						if (result.isConfirmed) {
 							reload();
 						}
-					})
+					});
 				}
 			},
 			error: function (ev) {
 				//Do nothing
 			},
 		});
-	}
-	else {
+	} else {
 		Toast.fire({
-			icon: 'warning',
-			title: 'Por favor, llene los datos requeridos.'
+			icon: "warning",
+			title: "Por favor, llene los datos requeridos.",
 		});
 	}
 });
@@ -241,7 +258,9 @@ $("#super_actualizar_admin").click(function () {
 			super_segundoapellido_admin: $("#super_segundoapellido_admin").val(),
 			super_numerocedula_admin: $("#super_numerocedula_admin").val(),
 			super_ext_admin: $("#super_ext_admin").val(),
-			super_correo_electronico_admin: $("#super_correo_electronico_admin").val(),
+			super_correo_electronico_admin: $(
+				"#super_correo_electronico_admin"
+			).val(),
 			super_nombre_admin: $("#super_nombre_admin").val(),
 			super_contrasena_admin: $("#super_contrasena_admin").val(),
 			super_acceso_nvl: $("#super_acceso_nvl").val(),
@@ -253,31 +272,30 @@ $("#super_actualizar_admin").click(function () {
 			data: data,
 			beforeSend: function () {
 				Toast.fire({
-					icon: 'info',
-					title: 'Actualizando datos'
+					icon: "info",
+					title: "Actualizando datos",
 				});
 			},
 			success: function (response) {
 				Alert.fire({
-					title: 'Administrador actualizado!',
+					title: "Administrador actualizado!",
 					text: response.msg,
-					icon: 'success',
-					confirmButtonText: 'Aceptar',
+					icon: "success",
+					confirmButtonText: "Aceptar",
 				}).then((result) => {
 					if (result.isConfirmed) {
 						reload();
 					}
-				})
+				});
 			},
 			error: function (ev) {
 				//Do nothing
 			},
 		});
-	}
-	else {
+	} else {
 		Toast.fire({
-			icon: 'warning',
-			title: 'Por favor, llene los datos requeridos.'
+			icon: "warning",
+			title: "Por favor, llene los datos requeridos.",
 		});
 	}
 });
@@ -287,17 +305,20 @@ $("#super_actualizar_admin").click(function () {
 $("#super_eliminar_admin").click(function () {
 	let lbl_adm = $("#verAdmin>label").attr("id");
 	let id = $("#" + lbl_adm).html();
-	let name = $('#super_nombre_admin').val();
+	let name = $("#super_nombre_admin").val();
 	data = {
 		id_adm: id,
 	};
 	Alert.fire({
-		title: 'Borrar administrador!',
-		text: 'Esta acción no se puede deshacer, realmente desea eliminar al usuario: ' + name + '?' ,
-		icon: 'warning',
+		title: "Borrar administrador!",
+		text:
+			"Esta acción no se puede deshacer, realmente desea eliminar al usuario: " +
+			name +
+			"?",
+		icon: "warning",
 		showCancelButton: true,
-		confirmButtonText: 'Si',
-		cancelButtonText: 'No',
+		confirmButtonText: "Si",
+		cancelButtonText: "No",
 	}).then((result) => {
 		if (result.isConfirmed) {
 			$.ajax({
@@ -307,22 +328,22 @@ $("#super_eliminar_admin").click(function () {
 				data: data,
 				success: function (response) {
 					Alert.fire({
-						title: 'Administrador eliminado!',
+						title: "Administrador eliminado!",
 						text: response.msg,
-						icon: 'success',
-						confirmButtonText: 'Aceptar',
+						icon: "success",
+						confirmButtonText: "Aceptar",
 					}).then((result) => {
 						if (result.isConfirmed) {
 							reload();
 						}
-					})
+					});
 				},
 				error: function (ev) {
 					//Do nothing
 				},
 			});
 		}
-	})
+	});
 });
 /**
  * Desconectar Administrador
@@ -339,25 +360,23 @@ $("#super_desconectar_admin").click(function () {
 		dataType: "JSON",
 		data: data,
 		success: function (response) {
-			if(response.status == 1) {
+			if (response.status == 1) {
 				Alert.fire({
-					title: 'Administrador desconectado!',
+					title: "Administrador desconectado!",
 					text: response.msg,
-					icon: 'success',
-					confirmButtonText: 'Aceptar',
+					icon: "success",
+					confirmButtonText: "Aceptar",
 				}).then((result) => {
 					if (result.isConfirmed) {
 						reload();
 					}
-				})
-			}
-			else {
+				});
+			} else {
 				Toast.fire({
-					icon: 'error',
-					title: response.msg
-				})
+					icon: "error",
+					title: response.msg,
+				});
 			}
-
 		},
 		error: function (ev) {
 			//Do nothing
@@ -368,10 +387,10 @@ $("#super_desconectar_admin").click(function () {
  * Modal actions users
  */
 $(".admin-usuario").click(function () {
-	$('#super_nuevo_admin').hide();
-	$('#super_eliminar_admin').show();
-	$('#super_desconectar_admin').show();
-	$('#super_actualizar_admin').show();
+	$("#super_nuevo_admin").hide();
+	$("#super_eliminar_admin").show();
+	$("#super_desconectar_admin").show();
+	$("#super_actualizar_admin").show();
 	data = {
 		id: $(this).attr("data-id"),
 	};
@@ -390,10 +409,14 @@ $(".admin-usuario").click(function () {
 			$("#super_id_user").val(response.usuario.id_usuario);
 			$("#nombre_organizacion").val(response.usuario.nombreOrganizacion);
 			$("#nit_organizacion").val(response.usuario.numNIT);
-			$("#correo_electronico_usuario").val(response.usuario.direccionCorreoElectronicoOrganizacion);
+			$("#correo_electronico_usuario").val(
+				response.usuario.direccionCorreoElectronicoOrganizacion
+			);
 			$("#username").val(response.usuario.usuario);
 			$("#password").val(response.password);
-			$("#estado_usuario option[value='" + response.usuario.verificado + "']").prop("selected", true);
+			$(
+				"#estado_usuario option[value='" + response.usuario.verificado + "']"
+			).prop("selected", true);
 			// Comprobar conexión de usuario
 			if (response.usuario.logged_in == 1) {
 				$("#super_status_usr").css("background-color", "#398439");
@@ -434,20 +457,19 @@ $("#super_actualizar_user").click(function () {
 			dataType: "JSON",
 			data: usuario,
 			success: function (response) {
-				let className = $('#username').attr('class');
+				let className = $("#username").attr("class");
 				if (response.existe === 1) {
 					Toast.fire({
-						icon: 'error',
-						title: 'El nombre de usuario ya existe. Puede usar números.'
+						icon: "error",
+						title: "El nombre de usuario ya existe. Puede usar números.",
 					});
-					if (className = 'form-control valid') {
-						$('#username').removeClass('valid');
-						$('#username').toggleClass('invalid');
+					if ((className = "form-control valid")) {
+						$("#username").removeClass("valid");
+						$("#username").toggleClass("invalid");
 					}
-				}
-				else {
-					if (className = 'form-control invalid valid') {
-						$('#username').removeClass('invalid');
+				} else {
+					if ((className = "form-control invalid valid")) {
+						$("#username").removeClass("invalid");
 					}
 					let data = {
 						id: $("#super_id_user").val(),
@@ -463,23 +485,23 @@ $("#super_actualizar_user").click(function () {
 						data: data,
 						beforeSend: function () {
 							Toast.fire({
-								icon: 'info',
-								title: 'Actualizando datos'
+								icon: "info",
+								title: "Actualizando datos",
 							});
 						},
 						success: function (response) {
 							Alert.fire({
 								title: response.msg,
-								text: '¿Desea enviar datos de usuario a la organización?',
+								text: "¿Desea enviar datos de usuario a la organización?",
 								icon: response.status,
-								confirmButtonText: 'Enviar datos',
+								confirmButtonText: "Enviar datos",
 								showCancelButton: true,
-								cancelButtonText: 'Solo actualizar',
+								cancelButtonText: "Solo actualizar",
 							}).then((result) => {
 								if (result.isConfirmed) {
 									EnviarInformacionOrganizacion(data);
 								}
-							})
+							});
 						},
 						error: function (ev) {
 							//Do nothing
@@ -491,11 +513,10 @@ $("#super_actualizar_user").click(function () {
 				//Do nothing
 			},
 		});
-	}
-	else {
+	} else {
 		Toast.fire({
-			icon: 'warning',
-			title: 'Por favor, llene los datos requeridos.'
+			icon: "warning",
+			title: "Por favor, llene los datos requeridos.",
 		});
 	}
 });
@@ -505,7 +526,7 @@ $("#super_actualizar_user").click(function () {
 $("#super_enviar_info_usuer").click(function () {
 	let data = {
 		id: $("#super_id_user").val(),
-		type: 'EnviarDatosUsuario'
+		type: "EnviarDatosUsuario",
 	};
 	EnviarInformacionOrganizacion(data);
 });
@@ -515,7 +536,7 @@ $("#super_enviar_info_usuer").click(function () {
 $("#super_enviar_activacion_cuenta").click(function () {
 	let data = {
 		id: $("#super_id_user").val(),
-		type: 'registroUsuario'
+		type: "registroUsuario",
 	};
 	EnviarInformacionOrganizacion(data);
 });
@@ -532,25 +553,23 @@ $("#super_desconectar_user").click(function () {
 		dataType: "JSON",
 		data: data,
 		success: function (response) {
-			if(response.status === "success") {
+			if (response.status === "success") {
 				Alert.fire({
-					title: 'Usuario desconectado!',
+					title: "Usuario desconectado!",
 					text: response.msg,
 					icon: response.status,
-					confirmButtonText: 'Aceptar',
+					confirmButtonText: "Aceptar",
 				}).then((result) => {
 					if (result.isConfirmed) {
 						reload();
 					}
-				})
-			}
-			else {
+				});
+			} else {
 				Toast.fire({
 					icon: response.status,
-					title: response.msg
-				})
+					title: response.msg,
+				});
 			}
-
 		},
 		error: function (ev) {
 			//Do nothing
@@ -565,12 +584,12 @@ $("#super_eliminar_cuenta").click(function () {
 		id: $("#super_id_user").val(),
 	};
 	Alert.fire({
-		title: 'Eliminar usuario!',
-		text: 'Realmente desea eliminar el usuario, esta acción eliminara todo registro del usuario en el sistema.',
-		icon: 'question',
+		title: "Eliminar usuario!",
+		text: "Realmente desea eliminar el usuario, esta acción eliminara todo registro del usuario en el sistema.",
+		icon: "question",
 		showCancelButton: true,
-		confirmButtonText: 'Eliminar',
-		cancelButtonText: 'Cancelar'
+		confirmButtonText: "Eliminar",
+		cancelButtonText: "Cancelar",
 	}).then((result) => {
 		if (result.isConfirmed) {
 			$.ajax({
@@ -579,36 +598,33 @@ $("#super_eliminar_cuenta").click(function () {
 				dataType: "JSON",
 				data: data,
 				success: function (response) {
-					console.log(response)
-					if(response.status === "success") {
+					console.log(response);
+					if (response.status === "success") {
 						Alert.fire({
 							title: response.title,
 							text: response.msg,
 							icon: response.status,
-							confirmButtonText: 'Aceptar',
+							confirmButtonText: "Aceptar",
 						}).then((result) => {
 							if (result.isConfirmed) {
 								reload();
 							}
-						})
-					}
-					else {
+						});
+					} else {
 						Alert.fire({
 							title: response.title,
 							text: response.msg,
 							icon: response.status,
-							confirmButtonText: 'Aceptar',
-						})
+							confirmButtonText: "Aceptar",
+						});
 					}
-
 				},
 				error: function (ev) {
 					//Do nothing
 				},
 			});
 		}
-	})
-
+	});
 });
 /**
  * Cerrar sesión súper administrador
@@ -628,7 +644,6 @@ $("#super_cerrar_sesion").click(function () {
 			//Do nothing
 		},
 	});
-
 });
 /**
  * Crear solicitud de acreditación
@@ -637,29 +652,34 @@ $("#btn_crear_solicitud_sp").click(function () {
 	if ($("#crear_solicitud_sp").valid()) {
 		// Declaración de variables
 		let motivos_solicitud = [];
-		let motivo_solicitud = '';
-		let modalidad_solicitud = '';
+		let motivo_solicitud = "";
+		let modalidad_solicitud = "";
 		let modalidades_solicitud = [];
 		let seleccionModalidad = 0;
 		let seleccionMotivo = 0;
 		// Recorrer motivos de la solicitud y guardar variables
-		$("#crear_solicitud_sp input[name=motivos]").each(function (){
-			if (this.checked){
+		$("#crear_solicitud_sp input[name=motivos]").each(function () {
+			if (this.checked) {
 				switch ($(this).val()) {
-					case '1':
-						motivo_solicitud += 'Acreditación Curso Básico de Economía Solidaria' + ', ';
+					case "1":
+						motivo_solicitud +=
+							"Acreditación Curso Básico de Economía Solidaria" + ", ";
 						break;
-					case '2':
-						motivo_solicitud += 'Aval de Trabajo Asociado' + ', ';
+					case "2":
+						motivo_solicitud += "Aval de Trabajo Asociado" + ", ";
 						break;
-					case '3':
-						motivo_solicitud += 'Acreditación Curso Medio de Economía Solidaria' + ', ';
+					case "3":
+						motivo_solicitud +=
+							"Acreditación Curso Medio de Economía Solidaria" + ", ";
 						break;
-					case '4':
-						motivo_solicitud += 'Acreditación Curso Avanzado de Economía Solidaria' + ', ';
+					case "4":
+						motivo_solicitud +=
+							"Acreditación Curso Avanzado de Economía Solidaria" + ", ";
 						break;
-					case '5':
-						motivo_solicitud += 'Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria' + ', ';
+					case "5":
+						motivo_solicitud +=
+							"Acreditación Curso de Educación Económica y Financiera Para La Economía Solidaria" +
+							", ";
 						break;
 					default:
 				}
@@ -667,17 +687,17 @@ $("#btn_crear_solicitud_sp").click(function () {
 			}
 		});
 		// Recorrer motivos de la solicitud y guardar variables
-		$("#crear_solicitud_sp input[name=modalidades]").each(function (){
-			if (this.checked){
+		$("#crear_solicitud_sp input[name=modalidades]").each(function () {
+			if (this.checked) {
 				switch ($(this).val()) {
-					case '1':
-						modalidad_solicitud += 'Presencial' + ', ';
+					case "1":
+						modalidad_solicitud += "Presencial" + ", ";
 						break;
-					case '2':
-						modalidad_solicitud += 'Virtual' + ', ';
+					case "2":
+						modalidad_solicitud += "Virtual" + ", ";
 						break;
-					case '3':
-						modalidad_solicitud += 'En Linea' + ', ';
+					case "3":
+						modalidad_solicitud += "En Linea" + ", ";
 						break;
 					default:
 				}
@@ -685,35 +705,39 @@ $("#btn_crear_solicitud_sp").click(function () {
 			}
 		});
 		// Contar la cantidad de motivos y solicitudes
-		$('input[name=modalidades]:checked').each(function() {
+		$("input[name=modalidades]:checked").each(function () {
 			seleccionModalidad += 1;
 		});
-		$('input[name=motivos]:checked').each(function() {
+		$("input[name=motivos]:checked").each(function () {
 			seleccionMotivo += 1;
 		});
 		// Comprobar que si se seleccione algún motivo y/o modalidad
-		if (seleccionMotivo == '') {
+		if (seleccionMotivo == "") {
 			Toast.fire({
-				icon: 'error',
-				title: 'Seleccione al menos un motivo'
+				icon: "error",
+				title: "Seleccione al menos un motivo",
 			});
-		}
-		else if (seleccionModalidad == 0){
+		} else if (seleccionModalidad == 0) {
 			Toast.fire({
-				icon: 'error',
-				title: 'Seleccione al menos una modalidad'
+				icon: "error",
+				title: "Seleccione al menos una modalidad",
 			});
-		}
-		else {
+		} else {
 			// Datos a enviar
 			let data = {
 				nit_organizacion: $("#nit-organizacion").val(),
 				tipo_solicitud: $("#tipo_solicitud").val(),
 				fecha_creacion: $("#fecha-creacion").val(),
-				motivo_solicitud: motivo_solicitud.substring(0, motivo_solicitud.length -2),
-				modalidad_solicitud: modalidad_solicitud.substring(0, modalidad_solicitud.length -2),
+				motivo_solicitud: motivo_solicitud.substring(
+					0,
+					motivo_solicitud.length - 2
+				),
+				modalidad_solicitud: modalidad_solicitud.substring(
+					0,
+					modalidad_solicitud.length - 2
+				),
 				motivos_solicitud: motivos_solicitud,
-				modalidades_solicitud: modalidades_solicitud
+				modalidades_solicitud: modalidades_solicitud,
 			};
 			//Si la data es validada se envía al controlador para guardar con ajax
 			$.ajax({
@@ -723,16 +747,17 @@ $("#btn_crear_solicitud_sp").click(function () {
 				data: data,
 				beforeSend: function () {
 					Toast.fire({
-						icon: 'info',
-						title: 'Guardando Información'
+						icon: "info",
+						title: "Guardando Información",
 					});
 				},
 				success: function (response) {
-					console.log(response)
-					if(response.status == 'success'){
+					console.log(response);
+					if (response.status == "success") {
 						Alert.fire({
 							title: response.title,
-							html: "Se créo nueva solicitud:<strong>" + response.id + "</strong>",
+							html:
+								"Se créo nueva solicitud:<strong>" + response.id + "</strong>",
 							icon: response.status,
 							allowOutsideClick: false,
 						}).then((result) => {
@@ -741,9 +766,8 @@ $("#btn_crear_solicitud_sp").click(function () {
 									reload();
 								}, 1000);
 							}
-						})
-					}
-					else if(response.status = 'error'){
+						});
+					} else if ((response.status = "error")) {
 						Alert.fire({
 							title: response.title,
 							html: response.msg,
@@ -751,10 +775,10 @@ $("#btn_crear_solicitud_sp").click(function () {
 							icon: response.status,
 							allowOutsideClick: false,
 							customClass: {
-								popup: 'popup-swalert-list',
-								confirmButton: 'button-swalert',
+								popup: "popup-swalert-list",
+								confirmButton: "button-swalert",
 							},
-						})
+						});
 					}
 				},
 				error: function (ev) {
@@ -762,13 +786,13 @@ $("#btn_crear_solicitud_sp").click(function () {
 						title: ev.statusText,
 						html: ev.responseText,
 						text: ev.responseText,
-						icon: 'error',
+						icon: "error",
 						allowOutsideClick: false,
 						customClass: {
-							popup: 'popup-swalert-list',
-							confirmButton: 'button-swalert',
+							popup: "popup-swalert-list",
+							confirmButton: "button-swalert",
 						},
-					})
+					});
 				},
 			});
 		}
@@ -777,18 +801,18 @@ $("#btn_crear_solicitud_sp").click(function () {
 /**
  * Ver detalle error
  */
-$('.ver-error-envio').click(function () {
-	let msg = $(this).attr('data-error');
+$(".ver-error-envio").click(function () {
+	let msg = $(this).attr("data-error");
 	Alert.fire({
-		title: 'Error de envío',
+		title: "Error de envío",
 		html: msg,
-		icon:'error',
+		icon: "error",
 		allowOutsideClick: false,
 		customClass: {
-			confirmButton: 'button-swalert',
-			popup: 'popup-swalert-list'
+			confirmButton: "button-swalert",
+			popup: "popup-swalert-list",
 		},
-	})
+	});
 });
 /**
  * Enviar Datos Organización
@@ -797,29 +821,29 @@ $('.ver-error-envio').click(function () {
  */
 function EnviarInformacionOrganizacion(data) {
 	$.ajax({
-		url: baseURL + 'super/enviarDatosUsuario',
-		type: 'post',
-		dataType: 'JSON',
+		url: baseURL + "super/enviarDatosUsuario",
+		type: "post",
+		dataType: "JSON",
 		data: data,
 		beforeSend: function () {
 			Toast.fire({
-				icon: 'info',
-				title: 'Enviando información a la organización'
-			})
+				icon: "info",
+				title: "Enviando información a la organización",
+			});
 		},
 		success: function (response) {
 			Alert.fire({
 				title: response.title,
 				html: response.msg,
 				icon: response.status,
-			})
-		}
-	})
+			});
+		},
+	});
 }
 /**
  * Validar formulario registro
  */
-function ValidarFormularioAdministradores () {
+function ValidarFormularioAdministradores() {
 	$("form[id='formulario_super_administradores']").validate({
 		rules: {
 			super_primernombre_admin: {
@@ -886,7 +910,7 @@ function ValidarFormularioAdministradores () {
 				required: true,
 				minlength: 3,
 				email: true,
-				regex: /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/
+				regex: /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/,
 			},
 			username: {
 				required: true,
@@ -899,7 +923,6 @@ function ValidarFormularioAdministradores () {
 			estado_usuario: {
 				required: true,
 			},
-
 		},
 		messages: {
 			correo_electronico_usuario: {
@@ -907,7 +930,7 @@ function ValidarFormularioAdministradores () {
 					"Por favor, escriba un correo electrónico del representante legal válido.",
 				minlength: "El correo electrónico debe tener mínimo 3 caracteres.",
 				email: "Por favor, escriba un correo electrónico valido.",
-				regex: 'No olvide el @ y el .dominio'
+				regex: "No olvide el @ y el .dominio",
 			},
 			username: {
 				required: "Por favor, escriba el Nombre de Usuario.",
@@ -932,10 +955,10 @@ function ValidarFormularioAdministradores () {
 	});
 }
 function datepickers() {
-	$('.datepicker').flatpickr({
+	$(".datepicker").flatpickr({
 		enableTime: true,
 		dateFormat: "Y/m/d H:i:ss",
-		locale: 'es',
+		locale: "es",
 	});
 }
 function selects() {

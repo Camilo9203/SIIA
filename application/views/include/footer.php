@@ -37,7 +37,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- Modal para bateria de observaciones -->
+	<!-- Modal para batería de observaciones -->
 	<div class="modal fade in" id="modalBateriaObservaciones" tabindex="-1" role="dialog" aria-labelledby="modalBateriaObservaciones">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
@@ -78,7 +78,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- //Modal relaciónn de cambios -->
+	<!-- //Modal relación de cambios -->
 	<div class="modal fade" id="modalRelacionCambios" tabindex="-1" role="dialog" aria-labelledby="relacionCambios">
 		<div class="modal-dialog modal-xl" role="document">
 			<div class="modal-content">
@@ -106,7 +106,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- Modal perdir camara -->
+	<!-- Modal pedir cámara -->
 	<div class="modal fade" id="modalPedirCamara" tabindex="-1" role="dialog" aria-labelledby="pedircamara">
 		<div class="modal-dialog modal-md" role="document">
 			<div class="modal-content">
@@ -142,7 +142,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- Servicio de atencion -->
+	<!-- Servicio de atención -->
 	<div class="modal fade" id="servicioAtencion" tabindex="-1" role="dialog" aria-labelledby="servicioAtencion">
 		<div class="modal-dialog modal-xl" role="document">
 			<div class="modal-content">
@@ -197,70 +197,6 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger btn-sm" id="crr_hist_obs" data-dismiss="modal">Cerrar <i class="fa fa-times" aria-hidden="true"></i></button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Modal Ayuda en Login- Inicio -->
-	<div class="modal fade" id="ayuda_login" tabindex="-1" role="dialog" aria-labelledby="ayudaLogin">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="ayudaLogin">Ayuda </h4>
-				</div>
-				<div class="modal-body">
-					<p>Contenido de ayuda para login</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar <i class="fa fa-times" aria-hidden="true"></i></button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Modal Cerrar Sesion - Inicio -->
-	<div class="modal fade" id="cerrar_sesion" tabindex="-1" role="dialog" aria-labelledby="cerrarSesion">
-		<div class="modal-dialog modal-sm" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h5 class="modal-title" id="cerrarSesion">¿Esta seguro de cerrar sesión <label class="user-profile"><?php echo $nombre_usuario ?></label>?</h5>
-				</div>
-				<div class="modal-body">
-					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button type="button" class="btn btn-siia btn-sm pull-right" id="salir">Si <i class="fa fa-check" aria-hidden="true"></i></button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Modal Cerrar Sesion - Inicio -->
-	<div class="modal fade" id="cerrar_sesion_admin" tabindex="-1" role="dialog" aria-labelledby="cerrarSesionAdmin">
-		<div class="modal-dialog modal-sm" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h5 class="modal-title" id="cerrarSesionAdmin">¿Esta seguro de cerrar sesión <label class="user-profile"><?php echo $nombre_usuario ?></label>?</h5>
-				</div>
-				<div class="modal-body">
-					<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No <i class="fa fa-times" aria-hidden="true"></i></button>
-					<button type="button" class="btn btn-siia btn-sm pull-right" id="salir_admin">Si <i class="fa fa-check" aria-hidden="true"></i></button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Modal - Inicio -->
-	<div class="modal fade" id="+++++++" tabindex="-1" role="dialog" aria-labelledby="--------------">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="--------------">Ayuda </h4>
-				</div>
-				<div class="modal-body">
-					<!-- Contenido -->
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar <i class="fa fa-times" aria-hidden="true"></i></button>
 				</div>
 			</div>
 		</div>
@@ -466,7 +402,7 @@
 		</div>
 	</div>
 </footer>
-<div class="hidden" id="scripts-sia">
+<div class="hidden" id="scripts-siia">
 	<!-- Sweetalert2 -->
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<!--<link href="<?php echo base_url('assets/css/styles.min.css') ?>" rel="stylesheet" type="text/css" />-->
@@ -539,4 +475,5 @@
 	<!--<script type="text/javascript" async="async" defer="defer" data-cfasync="false" src="https://mylivechat.com/chatinline.aspx?hccid=49054954"></script>-->
 </div>
 </body>
+
 </html>

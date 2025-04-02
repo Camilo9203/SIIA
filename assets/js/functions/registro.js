@@ -149,7 +149,7 @@ $("#guardar_registro").click(function () {
 							$("#guardar_registro").attr("disabled", true);
 							Toast.fire({
 								icon: "info",
-								title: "Registrando información, espere...",
+								title: "Registrando información...",
 							});
 						},
 						success: function (response) {
@@ -476,7 +476,7 @@ function ValidarFormRegistro() {
 			},
 			aceptocond: {
 				required:
-					"<p class='forms-error'>Para continuar tiene que aceptar las condiciones y restricciones de SIA.</p>",
+					"<p class='forms-error'>Para continuar tiene que aceptar las condiciones y restricciones de SIIA.</p>",
 			},
 		},
 	});

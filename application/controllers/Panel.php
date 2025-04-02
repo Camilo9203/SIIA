@@ -9,38 +9,73 @@ class Panel extends CI_Controller
 		$this->load->helper(array('download', 'file', 'url', 'html', 'form'));
 		$this->load->model('InformacionGeneralModel');
 		$this->load->model('OrganizacionesModel');
+		$this->load->model('DocentesModel');
+		$this->load->model('SolicitudesModel');
 		$this->load->model('ResolucionesModel');
+		$this->load->model('InformacionGeneralModel');
 		verify_session();
+	}
+	// Datos de sesión del usuario
+	public function datosSession()
+	{
+		verify_session();
+		date_default_timezone_set("America/Bogota");
+		$organizacion = $this->OrganizacionesModel->getOrganizacionUsuario($this->session->userdata('usuario_id'));
+		$data = array(
+			'logged_in' => $this->session->userdata('logged_in'),
+			'nombre_usuario' => $this->session->userdata('nombre_usuario'),
+			'usuario_id' => $this->session->userdata('usuario_id'),
+			'tipo_usuario' => $this->session->userdata('type_user'),
+			'nivel' => $this->session->userdata('nivel'),
+			'hora' => date("H:i", time()),
+			'fecha' => date('Y/m/d'),
+			'organizacion' => $organizacion,
+			'solicitudes' => $this->SolicitudesModel->getSolicitudesByOrganizacion($organizacion->id_organizacion),
+			'docentes' => $this->DocentesModel->getDocentes($organizacion->id_organizacion),
+		);
+		return $data;
 	}
 	// Vista index
 	public function index()
 	{
-		date_default_timezone_set("America/Bogota");
-		$logged = $this->session->userdata('logged_in');
-		$nombre_usuario = $this->session->userdata('nombre_usuario');
-		$usuario_id = $this->session->userdata('usuario_id');
-		$tipo_usuario = $this->session->userdata('type_user');
-
-		$usuario = $this->db->select('*')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
-		$data = array (
-			'title' => 'Panel Principal',
-			'logged_in' => $logged,
-			'nombre_usuario' => $usuario->usuario,
-			'usuario_id' => $usuario_id,
-			'tipo_usuario' => $tipo_usuario,
-			'hora' => date("H:i", time()),
-			'fecha' => date('Y/m/d'),
-			'departamentos' => $this->cargarDepartamentos(),
-			'data_organizacion' => $this->cargarDatosOrganizacion(),
-			'data_solicitudes' => $this->cargarSolicitudes(),
-			'informacionGeneral' => $this->InformacionGeneralModel->getInformacionGeneral($usuario->id_usuario),
-		);
-		$data["camara"] = $this->cargarCamaraComercio();
-		$data['informacionModal'] = $this->cargar_informacionModal();
-		$this->load->view('include/header', $data);
-		$this->load->view('paneles/panel', $data);
-		$this->load->view('include/footer', $data);
+		$data = $this->datosSession();
+		$data['title'] = 'Panel Principal';
+		$data['activeLink'] = 'dashboard';
+		$this->load->view('include/header/main', $data);
+		$this->load->view('usuario/panel', $data);
+		$this->load->view('include/footer/main', $data);
 		$this->logs_sia->logs('PLACE_USER');
+	}
+	// Solicitudes por usuario
+	public function solicitudes()
+	{
+		$data = $this->datosSession();
+		$data['title'] = 'Panel Principal - Solicitudes';
+		$data['activeLink'] = 'solicitudes';
+		$data['dataInformacionGeneral'] = $this->InformacionGeneralModel->getInformacionGeneral($data['organizacion']->id_organizacion);
+		$this->load->view('include/header/main', $data);
+		$this->load->view('usuario/paginas/solicitudes', $data);
+		$this->load->view('include/footer/main', $data);
+		$this->logs_sia->logs('PLACE_USER');
+	}
+	// Ayuda
+	public function ayuda()
+	{
+		$data = $this->datosSession();
+		$data['title'] = 'Panel Principal - Solicitudes';
+		$data['activeLink'] = 'ayuda';
+		$datos_usuario = $this->db->select('usuario')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
+		$data['nombre_usuario'] = $datos_usuario->usuario;
+		$data['administradores'] = $this->verAdministradores();
+		$this->load->view('include/header/main', $data);
+		$this->load->view('contacto/ayuda');
+		$this->load->view('include/footer/main');
+		$this->logs_sia->logs('PLACE_USER');
+	}
+	public function verAdministradores()
+	{
+		$administradores = $this->db->select("*")->from("administradores")->where("logged_in", 1)->get()->result();
+		return $administradores;
 	}
 	public function planMejora()
 	{
@@ -155,16 +190,15 @@ class Panel extends CI_Controller
 	{
 		$archivo = $this->db->select('*')->from('archivos')->where('id_registro', $this->input->post('id'))->get()->row();
 		$this->db->where('id_archivo', $archivo->id_archivo);
-		if($this->db->delete('archivos')){
+		if ($this->db->delete('archivos')) {
 			unlink($this->input->post('ruta') . $archivo->nombre);
 			switch ($this->input->post('tipo')) {
 				case 2:
 					$documentacion = $this->db->select('*')->from('documentacion')->where('id_tipoDocumentacion', $this->input->post('id'))->get()->row();
 					$this->db->where('id_tipoDocumentacion', $documentacion->id_tipoDocumentacion);
 					if ($this->db->delete('documentacion')) {
-							echo json_encode(array('url' => "panel", 'msg' => "Se eliminaron los datos de camara de comercio."));
-					}
-					else {
+						echo json_encode(array('url' => "panel", 'msg' => "Se eliminaron los datos de camara de comercio."));
+					} else {
 						echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los datos de camara de comercio."));
 					}
 					break;
@@ -176,12 +210,10 @@ class Panel extends CI_Controller
 						$this->db->where('id_certificadoExistencia', $certificadoExistencia->id_certificadoExistencia);
 						if ($this->db->delete('certificadoExistencia')) {
 							echo json_encode(array('url' => "panel", 'msg' => "Se eliminaron los datos del certificado existencia."));
-						}
-						else {
+						} else {
 							echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los datos del certificado existencia."));
 						}
-					}
-					else {
+					} else {
 						echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los datos de la documentación legal."));
 					}
 					break;
@@ -193,19 +225,16 @@ class Panel extends CI_Controller
 						$this->db->where('id_registroEducativoPro', $registroEducativo->id_registroEducativoPro);
 						if ($this->db->delete('registroEducativoProgramas')) {
 							echo json_encode(array('url' => "panel", 'msg' => "Se eliminaron los datos del registro educativo."));
-						}
-						else {
+						} else {
 							echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los datos del registro educativo."));
 						}
-					}
-					else {
+					} else {
 						echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los datos de la documentación legal."));
 					}
 					break;
 				default:
 			}
-		}
-		else {
+		} else {
 			echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los archivos, vuelve a intentar o comunicate con el administrador."));
 		}
 	}
@@ -278,13 +307,12 @@ class Panel extends CI_Controller
 	{
 		$archivo = $this->db->select('*')->from('archivos')->where('id_registro', $this->input->post('id'))->get()->row();
 		$this->db->where('id_archivo', $archivo->id_archivo);
-		if($this->db->delete('archivos')){
+		if ($this->db->delete('archivos')) {
 			unlink('uploads/instructivoEnLinea/' . $archivo->nombre);
 			$this->db->where('id', $this->input->post('id'));
 			if ($this->db->delete('datosEnLinea')) {
 				echo json_encode(array('url' => "panel", 'msg' => "Se eliminaron los datos de la herramienta."));
-			}
-			else {
+			} else {
 				echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los datos de la herramienta."));
 			}
 		}
@@ -295,11 +323,9 @@ class Panel extends CI_Controller
 		$this->db->where('id', $programa->id);
 		if ($this->db->delete('datosProgramas')) {
 			echo json_encode(array('url' => "panel", 'msg' => "Se eliminaron los datos de aceptación del programa: " . $programa->nombrePrograma, 'status' => 1));
-		}
-		else {
+		} else {
 			echo json_encode(array('url' => "panel", 'msg' => "No se eliminaron los datos de aceptación del programa: " . $programa->nombrePrograma, 'status' => 2));
 		}
-
 	}
 	public function cargarObservacionesPlataforma()
 	{
@@ -745,7 +771,7 @@ class Panel extends CI_Controller
 		$docente = $this->db->select("*")->from("docentes")->where("numCedulaCiudadaniaDocente", $docente)->get()->row();
 		// Cuerpo del mensaje según sea el caso.
 		switch ($type) {
-				// Actualización de facilitadores
+			// Actualización de facilitadores
 			case 'actualizacion':
 				$asunto = "Actualizacion Docente";
 				$mensaje = "La organización <strong>" . $organizacion->nombreOrganizacion . "</strong>: Realizo una solicitud para actualización del facilitador <strong>" . $docente->primerNombreDocente . " " . $docente->primerApellidoDocente . "</strong>, por favor ingrese al sistema para asignar dicha solicitud, gracias. 
@@ -791,19 +817,20 @@ class Panel extends CI_Controller
 		return $informacionModal;
 	}
 	// TODO: Ver Documentos
-	public function verDocumento (){
+	public function verDocumento()
+	{
 		$archivo = $this->db->select('*')->from('archivos')->where('id_registro', $this->input->post('id'))->get()->row();
-		switch($this->input->post('formulario')){
+		switch ($this->input->post('formulario')) {
 			case 8:
-				$file = base_url()."uploads/instructivoEnLinea" . "/" . $archivo->nombre;
+				$file = base_url() . "uploads/instructivoEnLinea" . "/" . $archivo->nombre;
 				echo json_encode(array('file' => $file));
 				break;
 			case 2.1:
-				$file = base_url()."uploads/certificadoExistencia" . "/" . $archivo->nombre;
+				$file = base_url() . "uploads/certificadoExistencia" . "/" . $archivo->nombre;
 				echo json_encode(array('file' => $file));
 				break;
 			case 2.2:
-				$file = base_url()."uploads/registrosEducativos" . "/" . $archivo->nombre;
+				$file = base_url() . "uploads/registrosEducativos" . "/" . $archivo->nombre;
 				echo json_encode(array('file' => $file));
 				break;
 			default:
@@ -811,9 +838,10 @@ class Panel extends CI_Controller
 	}
 }
 // Depurar errores
-function var_dump_pre($mixed = null) {
-  echo '<pre>';
-  	var_dump($mixed);
-  echo '</pre>';
-  return null;
+function var_dump_pre($mixed = null)
+{
+	echo '<pre>';
+	var_dump($mixed);
+	echo '</pre>';
+	return null;
 }

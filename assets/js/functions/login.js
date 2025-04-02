@@ -39,7 +39,7 @@ $("#inicio_sesion").click(function () {
 									}).then((result) => {
 										if (result.isConfirmed) {
 											setInterval(function () {
-												redirect(baseURL + "panel");
+												redirect(baseURL + "organizacion/panel");
 												grecaptcha.reset();
 											}, 500);
 										}
@@ -156,6 +156,38 @@ $("#inicio_sesion_admin").click(function () {
 					}
 				}
 			});
+	});
+});
+
+/**
+		Click en cerrar sesión.
+	**/
+$("#salir_sesion").click(function () {
+	Alert.fire({
+		title: "Cerrar sesión ",
+		text: "¿Realmente desea cerrar sesión?",
+		icon: "question",
+		showCancelButton: true,
+		confirmButtonText: "Si",
+		cancelButtonText: "No",
+		allowOutsideClick: false,
+	}).then((result) => {
+		if (result.isConfirmed) {
+			$.ajax({
+				url: baseURL + "sesion/logout",
+				type: "post",
+				dataType: "JSON",
+				beforeSend: function () {
+					procesando("info", "Cerrando sesión");
+				},
+				success: function (response) {
+					redirect(response.url);
+				},
+				error: function (ev) {
+					//Do nothing
+				},
+			});
+		}
 	});
 });
 /** Validar formularios */

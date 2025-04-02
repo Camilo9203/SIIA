@@ -304,11 +304,13 @@ $(document).ready(function () {
 				$("#verFacili").remove();
 				break;
 			default:
-
 				break;
 		}
 	}
-	if (funcion == "panelAdmin" && (funcion_ == "contacto" || funcion_ == "modalInformacion")) {
+	if (
+		funcion == "panelAdmin" &&
+		(funcion_ == "contacto" || funcion_ == "modalInformacion")
+	) {
 		initCK();
 	} else {
 		/** No hay nada que hacer aquí. **/
@@ -551,7 +553,6 @@ $(document).ready(function () {
 			notificacion("Por favor, valide el captcha...");
 		}
 	});
-
 
 	if (funcion == "panelAdmin" && funcion_ == "organizaciones") {
 		$.ajax({
@@ -1577,7 +1578,7 @@ $(document).ready(function () {
 	/**
 		Click en Salir de Sesion.
 	**/
-	$("#salir").click(function () {
+	$("#logout").click(function () {
 		$(this).attr("disabled", true);
 		$.ajax({
 			url: baseURL + "sesion/logout",
@@ -2182,15 +2183,48 @@ $(document).ready(function () {
 	$("#nueva_desc").click(function () {
 		console.log(cont_desc);
 		if (cont_desc >= 2 && cont_desc != 12) {
-			$(".div_desc").append('<div class="descripciones" id="descrp_' + cont_desc + '">');
-			$(".div_desc>#descrp_" + cont_desc + "").append('<div class="form-group txt_descripcion" id="form-group-desc-' + cont_desc + '">');
-			$(".div_desc>#descrp_" + cont_desc + ">#form-group-desc-" + cont_desc + "").append("<label>" + cont_desc + ". Descripcion:</label>");
-			$(".div_desc>#descrp_" + cont_desc + ">#form-group-desc-" + cont_desc + "").append('<textarea class="form-control" rows="3" placeholder="Escriba aquí la descripción..."></textarea>');
-			$(".div_desc>#descrp_" + cont_desc + ">#form-group-desc-" + cont_desc + "").append("</div>");
-			$(".div_desc>#descrp_" + cont_desc + "").append('<div class="form-group txt_fecha" id="form-group-fecha-' + cont_desc + '">');
-			$(".div_desc>#descrp_" + cont_desc + ">#form-group-fecha-" + cont_desc + "").append("<label>" + cont_desc + ". Fecha:</label>");
-			$(".div_desc>#descrp_" + cont_desc + ">#form-group-fecha-" + cont_desc + "").append('<input type="date" name="" id="" class="form-control" value="">');
-			$(".div_desc>#descrp_" +
+			$(".div_desc").append(
+				'<div class="descripciones" id="descrp_' + cont_desc + '">'
+			);
+			$(".div_desc>#descrp_" + cont_desc + "").append(
+				'<div class="form-group txt_descripcion" id="form-group-desc-' +
+					cont_desc +
+					'">'
+			);
+			$(
+				".div_desc>#descrp_" + cont_desc + ">#form-group-desc-" + cont_desc + ""
+			).append("<label>" + cont_desc + ". Descripcion:</label>");
+			$(
+				".div_desc>#descrp_" + cont_desc + ">#form-group-desc-" + cont_desc + ""
+			).append(
+				'<textarea class="form-control" rows="3" placeholder="Escriba aquí la descripción..."></textarea>'
+			);
+			$(
+				".div_desc>#descrp_" + cont_desc + ">#form-group-desc-" + cont_desc + ""
+			).append("</div>");
+			$(".div_desc>#descrp_" + cont_desc + "").append(
+				'<div class="form-group txt_fecha" id="form-group-fecha-' +
+					cont_desc +
+					'">'
+			);
+			$(
+				".div_desc>#descrp_" +
+					cont_desc +
+					">#form-group-fecha-" +
+					cont_desc +
+					""
+			).append("<label>" + cont_desc + ". Fecha:</label>");
+			$(
+				".div_desc>#descrp_" +
+					cont_desc +
+					">#form-group-fecha-" +
+					cont_desc +
+					""
+			).append(
+				'<input type="date" name="" id="" class="form-control" value="">'
+			);
+			$(
+				".div_desc>#descrp_" +
 					cont_desc +
 					">#form-group-fecha-" +
 					cont_desc +
@@ -4405,7 +4439,6 @@ $(document).ready(function () {
 		});
 	});
 
-
 	//Botones para fomulario 7
 	$("#atrasProgAvalEcT").click(function () {
 		$("#divAtrasProgAvalEcT").slideDown();
@@ -5212,7 +5245,6 @@ $(document).ready(function () {
 		}
 	});
 
-
 	//TODO: Menu formularios
 	$(".contenedor--menu3").hide();
 	$(".icono3").click(function () {
@@ -5236,7 +5268,6 @@ $(document).ready(function () {
 	}else{
 		alert('Your search string contains illegal characters.');
 	} */
-
 
 	$("#verDivAgregarOrgHist").click(function () {
 		$(".divAgregarOrgHist").slideDown();
@@ -5738,7 +5769,7 @@ function tablas() {
 		"tabla_registro_programas",
 		"tabla_organizaciones_inscritas",
 		"tabla_organizaciones_resolucion",
-		"tabla_asistentes_curso"
+		"tabla_asistentes_curso",
 	];
 	// Iniciar tablas
 	for (i = 0; i < tablas.length; i++) {
@@ -5871,7 +5902,6 @@ function tablas() {
 		})();
 		TableManageButtons.init();
 	}
-
 }
 /**
 	Parametros de los selects options.
@@ -5893,7 +5923,7 @@ function submenu() {
 	$(".contenedor--menu").hide();
 
 	$(".icono").click(function () {
-		$(".contenedor--menu").animate({width: "toggle",});
+		$(".contenedor--menu").animate({ width: "toggle" });
 	});
 
 	//$( ".submenu" ).before(innerHTML = "\u25bc");

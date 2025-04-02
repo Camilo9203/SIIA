@@ -1,4 +1,5 @@
 <?php
+
 /***
  * @var $administradores
  * @var $organizaciones
@@ -14,7 +15,7 @@ $CI->load->model("OrganizacionesModel");
 $CI->load->model("CorreosRegistroModel");
 $CI->load->model("TokenModel");
 ?>
-<?php if($logged_in == FALSE && $tipo_usuario == "none"): ?>
+<?php if ($logged_in == FALSE && $tipo_usuario == "none"): ?>
 	<div class="container">
 		<div class="col-md-12">
 			<h3>Contraseña:</h3>
@@ -25,7 +26,7 @@ $CI->load->model("TokenModel");
 		</div>
 	</div>
 <?php endif; ?>
-<?php if($logged_in == TRUE && $tipo_usuario == "super"): ?>
+<?php if ($logged_in == TRUE && $tipo_usuario == "super"): ?>
 	<!-- Menu super administrador -->
 	<div class="container" id="menu-super-admin">
 		<hr>
@@ -37,7 +38,7 @@ $CI->load->model("TokenModel");
 				<div class="col-md-3">
 					<div class="panel panel-siia">
 						<div class="panel-heading">
-							<h3 class="panel-title">Ver  administradores <i class="fa fa-users" aria-hidden="true"></i></h3>
+							<h3 class="panel-title">Ver administradores <i class="fa fa-users" aria-hidden="true"></i></h3>
 						</div>
 						<div class="panel-body">
 							<input type="button" class="btn btn-default btn-block" data-toggle="modal" id="super-ver-admins" value="Ver administradores">
@@ -101,32 +102,34 @@ $CI->load->model("TokenModel");
 					<h3 class="title">Administradores</h3>
 					<table id="tabla_super_admins" width="100%" border=0 class="table table-striped table-bordered tabla_form">
 						<thead>
-						<tr>
-							<td>Nombre</td>
-							<td>Número de cédula</td>
-							<td>Nombre usuario</td>
-							<td>Correo electrónico</td>
-							<td>Rol</td>
-							<td>Estado</td>
-							<td>Accion</td>
-						</tr>
+							<tr>
+								<td>Nombre</td>
+								<td>Número de cédula</td>
+								<td>Nombre usuario</td>
+								<td>Correo electrónico</td>
+								<td>Rol</td>
+								<td>Estado</td>
+								<td>Accion</td>
+							</tr>
 						</thead>
 						<tbody id="tbody">
-						<?php foreach ($administradores as $administrador):
-							echo "<td>$administrador->primerNombreAdministrador" . " " . $administrador->primerApellidoAdministrador . "</td>";
-							echo "<td>$administrador->numCedulaCiudadaniaAdministrador</td>";
-							echo "<td>$administrador->usuario</td>";
-							echo "<td>$administrador->direccionCorreoElectronico</td>";
-							echo "<td>"; echo $CI->AdministradoresModel->getNivel($administrador->nivel); echo "</td>";
-							echo "<td>";
-								if($administrador->logged_in == 1):
+							<?php foreach ($administradores as $administrador):
+								echo "<td>$administrador->primerNombreAdministrador" . " " . $administrador->primerApellidoAdministrador . "</td>";
+								echo "<td>$administrador->numCedulaCiudadaniaAdministrador</td>";
+								echo "<td>$administrador->usuario</td>";
+								echo "<td>$administrador->direccionCorreoElectronico</td>";
+								echo "<td>";
+								echo $CI->AdministradoresModel->getNivel($administrador->nivel);
+								echo "</td>";
+								echo "<td>";
+								if ($administrador->logged_in == 1):
 									echo 'Conectado';
 								else:
-									echo" Desconectado";
+									echo " Desconectado";
 								endif;
-							echo "</td>";
-							echo "<td><button class='btn btn-siia admin-modal' data-funct='actualizar' data-toggle='modal' data-id='$administrador->id_administrador' data-target='#modal-admin'>Ver</button></td></tr>";
-						endforeach; ?>
+								echo "</td>";
+								echo "<td><button class='btn btn-siia admin-modal' data-funct='actualizar' data-toggle='modal' data-id='$administrador->id_administrador' data-target='#modal-admin'>Ver</button></td></tr>";
+							endforeach; ?>
 						</tbody>
 					</table>
 				</div>
@@ -141,28 +144,34 @@ $CI->load->model("TokenModel");
 					<h3 class="title">Usuarios</h3>
 					<table id="tabla_super_usuarios" width="100%" border=0 class="table table-striped table-bordered tabla_form">
 						<thead>
-						<tr>
-							<td>Organización</td>
-							<td>NIT</td>
-							<td>Usuario</td>
-							<td>Contraseña</td>
-							<td>Estado</td>
-							<td>Conectado</td>
-							<td>Acciones</td>
-						</tr>
+							<tr>
+								<td>Organización</td>
+								<td>NIT</td>
+								<td>Usuario</td>
+								<td>Contraseña</td>
+								<td>Estado</td>
+								<td>Conectado</td>
+								<td>Acciones</td>
+							</tr>
 						</thead>
 						<tbody id="tbody">
-						<?php
-						foreach ($usuarios as $usuario):
-							echo "<td> $usuario->sigla </td>";
-							echo "<td>$usuario->numNIT</td>";
-							echo "<td>$usuario->usuario</td>";
-							echo "<td>"; echo $CI->UsuariosModel->getPassword($usuario->contrasena_rdel); echo "</td>";
-							echo "<td>"; echo $CI->TokenModel->getState($usuario->verificado); echo "</td>";
-							echo "<td>"; echo $CI->UsuariosModel->getConnection($usuario->logged_in); echo "</td>";
-							echo "</td>";
-							echo "<td><button class='btn btn-siia admin-usuario' data-toggle='modal' data-id='$usuario->id_usuario' data-target='#modal-user'>Ver</button></td></tr>";
-						endforeach; ?>
+							<?php
+							foreach ($usuarios as $usuario):
+								echo "<td> $usuario->sigla </td>";
+								echo "<td>$usuario->numNIT</td>";
+								echo "<td>$usuario->usuario</td>";
+								echo "<td>";
+								echo $CI->UsuariosModel->getPassword($usuario->contrasena_rdel);
+								echo "</td>";
+								echo "<td>";
+								echo $CI->TokenModel->getState($usuario->verificado);
+								echo "</td>";
+								echo "<td>";
+								echo $CI->UsuariosModel->getConnection($usuario->logged_in);
+								echo "</td>";
+								echo "</td>";
+								echo "<td><button class='btn btn-siia admin-usuario' data-toggle='modal' data-id='$usuario->id_usuario' data-target='#modal-user'>Ver</button></td></tr>";
+							endforeach; ?>
 						</tbody>
 					</table>
 				</div>
@@ -177,33 +186,33 @@ $CI->load->model("TokenModel");
 					<h3 class="title">Correos Registro</h3>
 					<table id="tabla_correos_logs" width="100%" border=0 class="table table-striped table-bordered tabla_form">
 						<thead>
-						<tr>
-							<td>Fecha de envío</td>
-							<td>De</td>
-							<td>Para</td>
-							<td>Asunto</td>
-							<td>Tipo</td>
-							<td>Estado</td>
-							<td>Acciones</td>
-						</tr>
+							<tr>
+								<td>Fecha de envío</td>
+								<td>De</td>
+								<td>Para</td>
+								<td>Asunto</td>
+								<td>Tipo</td>
+								<td>Estado</td>
+								<td>Acciones</td>
+							</tr>
 						</thead>
 						<tbody id="tbody">
-						<?php
-						foreach ($correos as $correo):
-							echo "<td> $correo->fecha </td>";
-							echo "<td>$correo->de</td>";
-							echo "<td>$correo->para</td>";
-							echo "<td>$correo->asunto</td>";
-							echo "<td>$correo->tipo</td>";
-							if ($correo->error != "Enviado"):
-								echo "<td><span class='spanRojo'> Error de envío </span></td>";
-								echo "<td><button class='btn btn-siia ver-error-envio' data-error='$correo->error'>Ver error</button></td>";
-							else:
-								echo "<td><span class='spanVerde'> $correo->error </span></td>";
-								echo "<td><button class='btn btn-siia disabled' data-error='$correo->error'>Ver error</button></td>";
-							endif;
-							echo '</tr>';
-						endforeach; ?>
+							<?php
+							foreach ($correos as $correo):
+								echo "<td> $correo->fecha </td>";
+								echo "<td>$correo->de</td>";
+								echo "<td>$correo->para</td>";
+								echo "<td>$correo->asunto</td>";
+								echo "<td>$correo->tipo</td>";
+								if ($correo->error != "Enviado"):
+									echo "<td><span class='spanRojo'> Error de envío </span></td>";
+									echo "<td><button class='btn btn-siia ver-error-envio' data-error='$correo->error'>Ver error</button></td>";
+								else:
+									echo "<td><span class='spanVerde'> $correo->error </span></td>";
+									echo "<td><button class='btn btn-siia disabled' data-error='$correo->error'>Ver error</button></td>";
+								endif;
+								echo '</tr>';
+							endforeach; ?>
 						</tbody>
 					</table>
 				</div>
@@ -212,16 +221,16 @@ $CI->load->model("TokenModel");
 	</div>
 	<!-- Modal formulario administradores -->
 	<div class="modal fade" id="modal-admin" tabindex="-1" role="dialog" aria-labelledby="verAdmin">
-	  <div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="verAdmin">Administrador <label id="super_id_admin_modal"></label> <span id="super_status_adm"></span></h4>
-			</div>
-			<div class="modal-body">
-				<div class="container-fluid">
-					<div class="row">
-						<?= form_open('', array('id' => 'formulario_super_administradores')); ?>
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="verAdmin">Administrador <label id="super_id_admin_modal"></label> <span id="super_status_adm"></span></h4>
+				</div>
+				<div class="modal-body">
+					<div class="container-fluid">
+						<div class="row">
+							<?= form_open('', array('id' => 'formulario_super_administradores')); ?>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Primer Nombre:</label>
@@ -250,7 +259,7 @@ $CI->load->model("TokenModel");
 									<input type="number" id="super_ext_admin" name="super_ext_admin" class="form-control">
 								</div>
 								<div class="form-group">
-									<label>Nivel de acceso:</label><br/>
+									<label>Nivel de acceso:</label><br />
 									<select class="custom-select show-tick" name="super_acceso_nvl" id="super_acceso_nvl" required>
 										<option value="0">Total 0</option>
 										<option value="1">Evaluador 1</option>
@@ -275,21 +284,21 @@ $CI->load->model("TokenModel");
 									<input type="text" id="super_correo_electronico_admin" name="super_correo_electronico_admin" class="form-control" name="" value="">
 								</div>
 							</div>
-						<?= form_close(); ?>
+							<?= form_close(); ?>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="btn-group" role='group' aria-label='acciones'>
+						<button type="button" class="btn btn-info" id="super_desconectar_admin">Desconectar</button>
+						<button type="button" class="btn btn-danger" id="super_eliminar_admin">Eliminar</button>
+						<button type="button" class="btn btn-siia" id="super_actualizar_admin">Actualizar</button>
+						<button type="button" class="btn btn-success" id="super_nuevo_admin">Crear</button>
+						<!-- <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button> -->
 					</div>
 				</div>
 			</div>
-			<div class="modal-footer">
-				<div class="btn-group" role='group' aria-label='acciones'>
-					<button type="button" class="btn btn-info" id="super_desconectar_admin">Desconectar</button>
-					<button type="button" class="btn btn-danger" id="super_eliminar_admin">Eliminar</button>
-					<button type="button" class="btn btn-siia" id="super_actualizar_admin">Actualizar</button>
-					<button type="button" class="btn btn-success" id="super_nuevo_admin">Crear</button>
-					<!-- <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button> -->
-				</div>
-			</div>
 		</div>
-	  </div>
 	</div>
 	<!-- Modal formulario crearsolicitud -->
 	<div class="modal fade" id="modal-crear-solicitud" tabindex="-1" role="dialog" aria-labelledby="modal-crear-solicitud">

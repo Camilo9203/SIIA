@@ -8,7 +8,8 @@ class DocentesModel extends CI_Model
 	/**
 	 * Cargar docentes por organización
 	 */
-	public function getDocentes($id = FALSE) {
+	public function getDocentes($id = FALSE)
+	{
 		if ($id === FALSE) {
 			// Consulta para traer docentes
 			$query = $this->db->select("*")->from("docentes")->get();
@@ -21,7 +22,8 @@ class DocentesModel extends CI_Model
 	/**
 	 * Cargar docentes por organización
 	 */
-	public function getDocente($id = FALSE) {
+	public function getDocente($id = FALSE)
+	{
 		if ($id === FALSE) {
 			// Consulta para traer docentes
 			$query = $this->db->select("*")->from("docentes")->get();

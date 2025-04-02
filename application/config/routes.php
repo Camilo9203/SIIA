@@ -60,6 +60,7 @@ if ($this->config->item('mantenimiento') == TRUE) {
 
 // HOME
 $route['estado'] = 'Home/estadoSolicitud';
+$route['encuesta'] = 'Encuesta/index';
 $route['facilitadores'] = 'Home/facilitadores';
 
 /**
@@ -78,10 +79,35 @@ $route['configcontroller'] = 'configcontroller/index';
 $route['configcontroller/update_constants'] = 'configcontroller/update_constants';
 
 
-/** Usuarios */
+/**
+ * Todas las rutas organizaciones
+ */
+// Inicio y registro
 $route['login'] = 'Sesion';
-$route['panel'] = 'Panel';
 $route['registro'] = 'Registro';
+// Activar cuenta con token
+$route['activate'] = 'Activate';
+// Panel Organizaciones
+$route['organizacion/panel'] = 'Panel';
+// Perfil Usuario
+$route['organizacion/perfil'] = 'Perfil';
+$route['organizacion/solicitudes'] = 'Panel/solicitudes';
+$route['organizacion/ayuda'] = 'Panel/ayuda';
+// Actualización de datos
+$route['actualizacion'] = 'Update/update_info_user';
+//Recodar Contraseña
+$route['recordar'] = 'Recordar';
+$route['panel/contacto'] = 'Contacto';
+
+$route['panel/solicitud/(:idSolicitud)'] = 'Solicitudes/solicitud/$idSolicitud';
+$route['Certificado'] = 'Certificaciones/crearCertificacion';
+// $route['panel/obtenerCertificado'] = 'Certificaciones/obtenerCertificado';
+$route['panel/estadoSolicitud/(:idSolicitud)'] = 'Solicitudes/estadoSolicitud/$idSolicitud';
+$route['panel/informe-actividades'] = 'InformeActividades/index';
+$route['panel/informe-actividades/asistentes/(:curso)'] = 'InformeActividades/asistentes/$curso';
+$route['panel/docentes'] = 'Docentes/index';
+$route['panel/planMejora'] = 'Panel/planMejora';
+
 
 //Recordar para cron por si existe algún error
 $route['tiempo'] = 'Recordar/calculo_tiempo';
@@ -145,27 +171,7 @@ $route['panelAdmin/seguimiento'] = 'Admin/seguimiento';
 // Estadísticas
 $route['panelAdmin/estadisticas'] = 'Estadisticas/panel';
 $route['panelAdmin/estadisticas/acreditacion'] = 'Estadisticas/acreditacion';
-/**
- * Todas las rutas organizaciones
- */
-// Activar cuenta con token
-$route['activate'] = 'Activate';
-// Actualización de datos
-$route['actualizacion'] = 'Update/update_info_user';
-//Recodar Contraseña
-$route['recordar'] = 'Recordar';
-$route['panel/contacto'] = 'Contacto';
-$route['panel/contacto/ayuda'] = 'Contacto/ayuda';
-$route['panel/solicitud/(:idSolicitud)'] = 'Solicitudes/solicitud/$idSolicitud';
-$route['Certificado'] = 'Certificaciones/crearCertificacion';
-// $route['panel/obtenerCertificado'] = 'Certificaciones/obtenerCertificado';
-$route['panel/estadoSolicitud/(:idSolicitud)'] = 'Solicitudes/estadoSolicitud/$idSolicitud';
-$route['panel/informe-actividades'] = 'InformeActividades/index';
-$route['panel/informe-actividades/asistentes/(:curso)'] = 'InformeActividades/asistentes/$curso';
-$route['panel/docentes'] = 'Docentes/index';
-$route['panel/planMejora'] = 'Panel/planMejora';
-//Perfil Usuario
-$route['panel/perfil'] = 'Perfil';
+
 //Mapa Gestion
 $route['mapa'] = 'home/mapa';
 // 404 ...

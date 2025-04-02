@@ -1,9 +1,11 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Perfil extends CI_Controller {
-	
-	function __construct(){
+class Perfil extends CI_Controller
+{
+
+	function __construct()
+	{
 		parent::__construct();
 		$this->load->model('SolicitudesModel');
 		$this->load->model('DepartamentosModel');
@@ -36,92 +38,102 @@ class Perfil extends CI_Controller {
 		$organizacion = $this->db->select('*')->from('organizaciones')->where('usuarios_id_usuario', $usuario->id_usuario)->get()->row();
 		$informacionGeneral = $this->InformacionGeneralModel->getInformacionGeneral($organizacion->id_organizacion);
 		$actividades = $this->UsuariosModel->getActividadUsuario($data['usuario_id']);
-		$this->load->view('include/header', $data);
-		$this->load->view('paneles/perfil', array(
+		$this->load->view('include/header/main', $data);
+		$this->load->view('usuario/paginas/perfil/index', array(
 			'organizacion' => $organizacion,
 			'usuario' => $usuario,
 			'informacionGeneral' => $informacionGeneral,
 			'actividades' => $actividades
 		));
 		//$this->load->view('paneles/actividad', $data_actividad);
-		$this->load->view('include/footer');
+		$this->load->view('include/footer/main');
 		$this->logs_sia->logs('PLACE_USER');
 	}
-	public function actividad(){
+	public function actividad()
+	{
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_actividad = $this->db->select('*')->from('session_log')->where('usuario_id', $usuario_id)->order_by("id_session_log", "desc")->limit(70)->get()->result();
 		return $datos_actividad;
 	}
-	public function idSolicitud(){
+	public function idSolicitud()
+	{
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion ->id_organizacion;
+		$id_organizacion = $datos_organizacion->id_organizacion;
 
 		$idSolicitud = $this->db->select("idSolicitud")->from("tipoSolicitud")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$id_Solicitud = $idSolicitud ->idSolicitud;
+		$id_Solicitud = $idSolicitud->idSolicitud;
 		return $id_Solicitud;
 	}
-	public function estadoOrganizaciones(){
+	public function estadoOrganizaciones()
+	{
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion ->id_organizacion;
+		$id_organizacion = $datos_organizacion->id_organizacion;
 
 		$estado = $this->db->select("nombre")->from("estadoOrganizaciones")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$nombreEstado = $estado ->nombre;
+		$nombreEstado = $estado->nombre;
 		return $nombreEstado;
 	}
-	public function cargarMunicipios(){
+	public function cargarMunicipios()
+	{
 		$departamento = $this->input->post('departamento');
 
 		$data_departamento = $this->db->select("id_departamento")->from("departamentos")->where('nombre', $departamento)->get()->row();
-		$id_departamento = $data_departamento ->id_departamento;
+		$id_departamento = $data_departamento->id_departamento;
 		$municipios = $this->db->select("*")->from("municipios")->where('departamentos_id_departamento', $id_departamento)->get()->result();
 		echo json_encode($municipios);
 	}
-	public function cargarDatos_formulario_informacion_general_entidad(){
+	public function cargarDatos_formulario_informacion_general_entidad()
+	{
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion ->id_organizacion;
+		$id_organizacion = $datos_organizacion->id_organizacion;
 		$datos_formulario = $this->db->select("*")->from("informacionGeneral")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
 		return $datos_formulario;
 	}
-	public function estadoAnteriorOrganizaciones(){
+	public function estadoAnteriorOrganizaciones()
+	{
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion ->id_organizacion;
+		$id_organizacion = $datos_organizacion->id_organizacion;
 
 		$estado = $this->db->select("estadoAnterior")->from("estadoOrganizaciones")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$nombreEstado = $estado ->estadoAnterior;
+		$nombreEstado = $estado->estadoAnterior;
 		return $nombreEstado;
 	}
-	public function numeroSolicitudes(){
+	public function numeroSolicitudes()
+	{
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion ->id_organizacion;
+		$id_organizacion = $datos_organizacion->id_organizacion;
 
 		$solicitudes = $this->db->select("numeroSolicitudes")->from("solicitudes")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
-		$numeroSolicitudes = $solicitudes ->numeroSolicitudes;
+		$numeroSolicitudes = $solicitudes->numeroSolicitudes;
 		return $numeroSolicitudes;
 	}
-	public function cargarMisNotificaciones(){
+	public function cargarMisNotificaciones()
+	{
 		$nombre_usuario = $this->session->userdata('nombre_usuario');
 		$tipo_usuario = $this->session->userdata('type_user');
 
 		$notificaciones = $this->db->select("*")->from("notificaciones")->where("quienRecibe", $nombre_usuario)->get()->result();
 		return $notificaciones;
 	}
-	public function cargarResolucion(){
+	public function cargarResolucion()
+	{
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion ->id_organizacion;
+		$id_organizacion = $datos_organizacion->id_organizacion;
 
 		$resolucion = $this->db->select("*")->from("resoluciones")->where("organizaciones_id_organizacion", $id_organizacion)->get()->row();
 		return $resolucion;
 	}
-	public function cargarCamaraComercio(){
+	public function cargarCamaraComercio()
+	{
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion ->id_organizacion;
+		$id_organizacion = $datos_organizacion->id_organizacion;
 
 		$resolucion = $this->db->select("*")->from("organizaciones")->where("id_organizacion", $id_organizacion)->get()->row();
 		return $resolucion;
@@ -133,55 +145,50 @@ class Perfil extends CI_Controller {
 		$name_random = random(10);
 		$size = 10000000;
 		$organizacion = $this->db->select('*')->from('organizaciones')->where('usuarios_id_usuario', $usuario_id)->get()->row();
-		$nombre_imagen =  "logo_".$name_random.$_FILES['file']['name'];
-		$tipo_imagen = pathinfo($nombre_imagen,PATHINFO_EXTENSION);
+		$nombre_imagen =  "logo_" . $name_random . $_FILES['file']['name'];
+		$tipo_imagen = pathinfo($nombre_imagen, PATHINFO_EXTENSION);
 
-		if(0 < $_FILES['file']['error']) {
+		if (0 < $_FILES['file']['error']) {
 			echo json_encode(array('icon' => "error", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
-		}
-		else if($_FILES['file']['size'] > $size){
+		} else if ($_FILES['file']['size'] > $size) {
 			echo json_encode(array('icon' => "warning", 'msg' => "El tamaño supera las 10 Mb, intente con otra imagen."));
-		}
-		else if($tipo_imagen != "jpeg" &&  $tipo_imagen != "png" &&  $tipo_imagen != "jpg"){
+		} else if ($tipo_imagen != "jpeg" &&  $tipo_imagen != "png" &&  $tipo_imagen != "jpg") {
 			echo json_encode(array('icon' => "warning", 'msg' => "La extensión de la imagen no es correcta, debe ser JPG, PNG"));
-		}
-		else if(move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/logosOrganizaciones/'.$nombre_imagen)){
-			if($organizacion->imagenOrganizacion != 'default.png'):
-				unlink('uploads/logosOrganizaciones/'. $organizacion->imagenOrganizacion);
+		} else if (move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/logosOrganizaciones/' . $nombre_imagen)) {
+			if ($organizacion->imagenOrganizacion != 'default.png'):
+				unlink('uploads/logosOrganizaciones/' . $organizacion->imagenOrganizacion);
 			endif;
 
 			$data_update = array('imagenOrganizacion' => $nombre_imagen);
 			$this->db->where('usuarios_id_usuario', $usuario_id);
 			$this->db->update('organizaciones', $data_update);
 			echo json_encode(array('icon' => "success", 'msg' => "Se actualizo la imagen de perfil correctamente."));
-
 		}
-
 	}
 	// Actualizar datos de la organización
 	public function actualizarInformacionPerfil()
 	{
-		$this->form_validation->set_rules('organizacion','','trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('nit','','trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('sigla','','trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('nombre','','trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('nombre_s','','trim|xss_clean');
-		$this->form_validation->set_rules('apellido','','trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('apellido_s','','trim|xss_clean');
-		$this->form_validation->set_rules('correo_electronico','','trim|required|min_length[3]|valid_email|xss_clean');
-		$this->form_validation->set_rules('correo_electronico_rep_legal','','trim|required|min_length[3]|valid_email|xss_clean');
-		$this->form_validation->set_rules('nombre_p','','trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('apellido_p','','trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('tipo_organizacion','','trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('departamento','','trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('municipio','','trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('direccion','','trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('fax','','trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('extension','','trim|min_length[1]|xss_clean');
-		$this->form_validation->set_rules('urlOrganizacion','','trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('actuacion','','trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('educacion','','trim|required|min_length[3]|xss_clean');
-		$this->form_validation->set_rules('numCedulaCiudadaniaPersona','','trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('organizacion', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('nit', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('sigla', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('nombre', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('nombre_s', '', 'trim|xss_clean');
+		$this->form_validation->set_rules('apellido', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('apellido_s', '', 'trim|xss_clean');
+		$this->form_validation->set_rules('correo_electronico', '', 'trim|required|min_length[3]|valid_email|xss_clean');
+		$this->form_validation->set_rules('correo_electronico_rep_legal', '', 'trim|required|min_length[3]|valid_email|xss_clean');
+		$this->form_validation->set_rules('nombre_p', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('apellido_p', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('tipo_organizacion', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('departamento', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('municipio', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('direccion', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('fax', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('extension', '', 'trim|min_length[1]|xss_clean');
+		$this->form_validation->set_rules('urlOrganizacion', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('actuacion', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('educacion', '', 'trim|required|min_length[3]|xss_clean');
+		$this->form_validation->set_rules('numCedulaCiudadaniaPersona', '', 'trim|required|min_length[3]|xss_clean');
 		if ($this->form_validation->run("formulario_actualizar") == FALSE):
 			$error = validation_errors();
 			echo json_encode(array('msg' => $error, 'status' => 'error'));
@@ -219,9 +226,9 @@ class Perfil extends CI_Controller {
 			);
 			// Actualizar datos de la organización
 			$this->db->where('usuarios_id_usuario', $this->session->userdata('usuario_id'));
-			if($this->db->update('organizaciones', $data_update)):
+			if ($this->db->update('organizaciones', $data_update)):
 				// Comprobar si existen datos de información general
-				if($informacionGeneral == NULL || $informacionGeneral == ""):
+				if ($informacionGeneral == NULL || $informacionGeneral == ""):
 					// Crear datos si no existen
 					$this->db->insert('informacionGeneral', $data_informacion_general);
 				else:
@@ -242,26 +249,26 @@ class Perfil extends CI_Controller {
 	public function upload_firma()
 	{
 		$usuario_id = $this->session->userdata('usuario_id');
-    	$firma_contrasena = $this->input->post('firmaContrasena');
+		$firma_contrasena = $this->input->post('firmaContrasena');
 
 		$name_random = random(10);
 		$size = 10000000;
 
 		$imagen_db = $this->db->select('firmaRepLegal')->from('organizaciones')->where('usuarios_id_usuario', $usuario_id)->get()->row();
-		$imagen_db_nombre = $imagen_db ->firmaRepLegal;
+		$imagen_db_nombre = $imagen_db->firmaRepLegal;
 
-		if($imagen_db_nombre != 'default.png'){
-			$nombre_imagen =  "firma_".$name_random.$_FILES['file']['name'];
-			$tipo_imagen = pathinfo($nombre_imagen,PATHINFO_EXTENSION);
+		if ($imagen_db_nombre != 'default.png') {
+			$nombre_imagen =  "firma_" . $name_random . $_FILES['file']['name'];
+			$tipo_imagen = pathinfo($nombre_imagen, PATHINFO_EXTENSION);
 
-			if(0 < $_FILES['file']['error']) {
-			    echo json_encode(array('url'=>"perfil", 'msg'=>"Hubo un error al actualizar, intente de nuevo."));
-			}else if($_FILES['file']['size'] > $size){
-				echo json_encode(array('url'=>"perfil", 'msg'=>"El tamaño supera las 10 Mb, intente con otra imagen."));
-			}else if($tipo_imagen != "jpeg" &&  $tipo_imagen != "png" &&  $tipo_imagen != "jpg"){
-				echo json_encode(array('url'=>"perfil", 'msg'=>"La extensión de la imagen no es correcta, debe ser JPG, PNG"));
-			}else if(move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/logosOrganizaciones/firma/'.$nombre_imagen)){
-				unlink('uploads/logosOrganizaciones/firma/'.$imagen_db_nombre);
+			if (0 < $_FILES['file']['error']) {
+				echo json_encode(array('url' => "perfil", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
+			} else if ($_FILES['file']['size'] > $size) {
+				echo json_encode(array('url' => "perfil", 'msg' => "El tamaño supera las 10 Mb, intente con otra imagen."));
+			} else if ($tipo_imagen != "jpeg" &&  $tipo_imagen != "png" &&  $tipo_imagen != "jpg") {
+				echo json_encode(array('url' => "perfil", 'msg' => "La extensión de la imagen no es correcta, debe ser JPG, PNG"));
+			} else if (move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/logosOrganizaciones/firma/' . $nombre_imagen)) {
+				unlink('uploads/logosOrganizaciones/firma/' . $imagen_db_nombre);
 				$data_update = array(
 					'firmaRepLegal' => $nombre_imagen,
 					'contrasena_firma' => $firma_contrasena
@@ -270,20 +277,20 @@ class Perfil extends CI_Controller {
 				$this->db->where('usuarios_id_usuario', $usuario_id);
 				$this->db->update('organizaciones', $data_update);
 
-				echo json_encode(array('url'=>"perfil", 'msg'=>"Se actualizo la firma."));
+				echo json_encode(array('url' => "perfil", 'msg' => "Se actualizo la firma."));
 				$this->logs_sia->session_log('Actualización de Firma');
 			}
-		}else{
-			$nombre_imagen =  "firma_".$name_random.$_FILES['file']['name'];
-			$tipo_imagen = pathinfo($nombre_imagen,PATHINFO_EXTENSION);
+		} else {
+			$nombre_imagen =  "firma_" . $name_random . $_FILES['file']['name'];
+			$tipo_imagen = pathinfo($nombre_imagen, PATHINFO_EXTENSION);
 
-			if(0 < $_FILES['file']['error']) {
-			    echo json_encode(array('url'=>"perfil", 'msg'=>"Hubo un error al actualizar, intente de nuevo."));
-			}else if($_FILES['file']['size'] > $size){
-				 echo json_encode(array('url'=>"perfil", 'msg'=>"El tamaño supera las 10 Mb, intente con otra imagen."));
-			}else if($tipo_imagen != "jpeg" &&  $tipo_imagen != "png" &&  $tipo_imagen != "jpg"){
-				echo json_encode(array('url'=>"perfil", 'msg'=>"La extensión de la imagen no es correcta, debe ser JPG, PNG"));
-			}else if(move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/logosOrganizaciones/firma/'.$nombre_imagen)){
+			if (0 < $_FILES['file']['error']) {
+				echo json_encode(array('url' => "perfil", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
+			} else if ($_FILES['file']['size'] > $size) {
+				echo json_encode(array('url' => "perfil", 'msg' => "El tamaño supera las 10 Mb, intente con otra imagen."));
+			} else if ($tipo_imagen != "jpeg" &&  $tipo_imagen != "png" &&  $tipo_imagen != "jpg") {
+				echo json_encode(array('url' => "perfil", 'msg' => "La extensión de la imagen no es correcta, debe ser JPG, PNG"));
+			} else if (move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/logosOrganizaciones/firma/' . $nombre_imagen)) {
 				$data_update = array(
 					'firmaRepLegal' => $nombre_imagen,
 					'contrasena_firma' => $firma_contrasena
@@ -292,7 +299,7 @@ class Perfil extends CI_Controller {
 				$this->db->where('usuarios_id_usuario', $usuario_id);
 				$this->db->update('organizaciones', $data_update);
 
-				echo json_encode(array('url'=>"perfil", 'msg'=>"Se actualizo la firma."));
+				echo json_encode(array('url' => "perfil", 'msg' => "Se actualizo la firma."));
 				$this->logs_sia->session_log('Actualización de la Firma');
 			}
 		}
@@ -307,20 +314,20 @@ class Perfil extends CI_Controller {
 		$size = 10000000;
 
 		$imagen_db = $this->db->select('firmaCert')->from('organizaciones')->where('usuarios_id_usuario', $usuario_id)->get()->row();
-		$imagen_db_nombre = $imagen_db ->firmaCert;
+		$imagen_db_nombre = $imagen_db->firmaCert;
 
-		if($imagen_db_nombre != 'default.png'){
-			$nombre_imagen =  "firmaCert_".$name_random.$_FILES['file']['name'];
-			$tipo_imagen = pathinfo($nombre_imagen,PATHINFO_EXTENSION);
+		if ($imagen_db_nombre != 'default.png') {
+			$nombre_imagen =  "firmaCert_" . $name_random . $_FILES['file']['name'];
+			$tipo_imagen = pathinfo($nombre_imagen, PATHINFO_EXTENSION);
 
-			if(0 < $_FILES['file']['error']) {
-			    echo json_encode(array('url'=>"perfil", 'msg'=>"Hubo un error al actualizar, intente de nuevo."));
-			}else if($_FILES['file']['size'] > $size){
-				echo json_encode(array('url'=>"perfil", 'msg'=>"El tamaño supera las 10 Mb, intente con otra imagen."));
-			}else if($tipo_imagen != "png"){
-				echo json_encode(array('url'=>"perfil", 'msg'=>"La extensión de la imagen no es correcta, debe ser PNG."));
-			}else if(move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/logosOrganizaciones/firmaCert/'.$nombre_imagen)){
-				unlink('uploads/logosOrganizaciones/firmaCert/'.$imagen_db_nombre);
+			if (0 < $_FILES['file']['error']) {
+				echo json_encode(array('url' => "perfil", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
+			} else if ($_FILES['file']['size'] > $size) {
+				echo json_encode(array('url' => "perfil", 'msg' => "El tamaño supera las 10 Mb, intente con otra imagen."));
+			} else if ($tipo_imagen != "png") {
+				echo json_encode(array('url' => "perfil", 'msg' => "La extensión de la imagen no es correcta, debe ser PNG."));
+			} else if (move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/logosOrganizaciones/firmaCert/' . $nombre_imagen)) {
+				unlink('uploads/logosOrganizaciones/firmaCert/' . $imagen_db_nombre);
 				$data_update = array(
 					'firmaCert' => $nombre_imagen
 				);
@@ -328,20 +335,20 @@ class Perfil extends CI_Controller {
 				$this->db->where('usuarios_id_usuario', $usuario_id);
 				$this->db->update('organizaciones', $data_update);
 
-				echo json_encode(array('url'=>"perfil", 'msg'=>"Se actualizo la firma para certificados."));
+				echo json_encode(array('url' => "perfil", 'msg' => "Se actualizo la firma para certificados."));
 				$this->logs_sia->session_log('Actualización de la Firma Certificados');
 			}
-		}else{
-			$nombre_imagen =  "firmaCert_".$name_random.$_FILES['file']['name'];
-			$tipo_imagen = pathinfo($nombre_imagen,PATHINFO_EXTENSION);
+		} else {
+			$nombre_imagen =  "firmaCert_" . $name_random . $_FILES['file']['name'];
+			$tipo_imagen = pathinfo($nombre_imagen, PATHINFO_EXTENSION);
 
-			if(0 < $_FILES['file']['error']) {
-			    echo json_encode(array('url'=>"perfil", 'msg'=>"Hubo un error al actualizar, intente de nuevo."));
-			}else if($_FILES['file']['size'] > $size){
-				 echo json_encode(array('url'=>"perfil", 'msg'=>"El tamaño supera las 10 Mb, intente con otra imagen."));
-			}else if($tipo_imagen != "png"){
-				echo json_encode(array('url'=>"perfil", 'msg'=>"La extensión de la imagen no es correcta, debe ser PNG."));
-			}else if(move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/logosOrganizaciones/firmaCert/'.$nombre_imagen)){
+			if (0 < $_FILES['file']['error']) {
+				echo json_encode(array('url' => "perfil", 'msg' => "Hubo un error al actualizar, intente de nuevo."));
+			} else if ($_FILES['file']['size'] > $size) {
+				echo json_encode(array('url' => "perfil", 'msg' => "El tamaño supera las 10 Mb, intente con otra imagen."));
+			} else if ($tipo_imagen != "png") {
+				echo json_encode(array('url' => "perfil", 'msg' => "La extensión de la imagen no es correcta, debe ser PNG."));
+			} else if (move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/logosOrganizaciones/firmaCert/' . $nombre_imagen)) {
 				$data_update = array(
 					'firmaCert' => $nombre_imagen
 				);
@@ -349,17 +356,19 @@ class Perfil extends CI_Controller {
 				$this->db->where('usuarios_id_usuario', $usuario_id);
 				$this->db->update('organizaciones', $data_update);
 
-				echo json_encode(array('url'=>"perfil", 'msg'=>"Se actualizo la firma para certificados."));
+				echo json_encode(array('url' => "perfil", 'msg' => "Se actualizo la firma para certificados."));
 				$this->logs_sia->session_log('Actualización de la Firma Certificados');
 			}
 		}
 		$this->logs_sia->logs('URL_TYPE');
 		$this->logs_sia->logQueries();
 	}
-	public function actualizar_nombreCargo(){
+	public function actualizar_nombreCargo()
+	{
 		$usuario_id = $this->session->userdata('usuario_id');
 		$datos_organizacion = $this->db->select("id_organizacion")->from("organizaciones")->where("usuarios_id_usuario", $usuario_id)->get()->row();
-		$id_organizacion = $datos_organizacion ->id_organizacion;$usuario_id = $this->session->userdata('usuario_id');
+		$id_organizacion = $datos_organizacion->id_organizacion;
+		$usuario_id = $this->session->userdata('usuario_id');
 
 		$nombrePersonaCert = $this->input->post('nombrePersonaCert');
 		$cargoPersonaCert = $this->input->post('cargoPersonaCert');
@@ -370,8 +379,8 @@ class Perfil extends CI_Controller {
 		);
 
 		$this->db->where('id_organizacion', $id_organizacion);
-		if($this->db->update('organizaciones', $data_update)){
-			echo json_encode(array('url'=>"perfil", 'msg'=>"Se actualizaron los datos de nombre y cargo."));
+		if ($this->db->update('organizaciones', $data_update)) {
+			echo json_encode(array('url' => "perfil", 'msg' => "Se actualizaron los datos de nombre y cargo."));
 			$this->logs_sia->session_log('Actualizacion de Nombre y Cargo Certificados');
 			$this->logs_sia->logQueries();
 		}
@@ -387,7 +396,7 @@ class Perfil extends CI_Controller {
 		$this->db->where('usuarios_id_usuario', $usuario_id);
 		$this->db->update('organizaciones', $data_update);
 
-		echo json_encode(array('url'=>"perfil", 'msg'=>"Se elimino la firma para certificados."));
+		echo json_encode(array('url' => "perfil", 'msg' => "Se elimino la firma para certificados."));
 		$this->logs_sia->session_log('Actualización de la Firma Certificados');
 
 		$this->logs_sia->logs('URL_TYPE');

@@ -45,7 +45,8 @@ class Solicitudes extends CI_Controller
 	/**
 	 * Solicitudes inscritas
 	 */
-	public function index(){
+	public function index()
+	{
 		$data = $this->dataSessionSuper();
 		$data['title'] = 'Panel Principal / Organizaciones / Inscritas';
 		$data['solicitudes'] = $this->SolicitudesModel->getSolicitudesFinalizadas()[0]['solicitudesSinAsignar'];
@@ -54,13 +55,15 @@ class Solicitudes extends CI_Controller
 		$this->load->view('include/footer/main');
 		$this->logs_sia->logs('PLACE_USER');
 	}	// Cargar solicitud
-	public function cargarDatosSolicitud(){
+	public function cargarDatosSolicitud()
+	{
 		$solicitud = $this->SolicitudesModel->solicitudes($this->input->post('idSolicitud'));
 		$resolucion = $this->ResolucionesModel->getResolucionSolicitud($this->input->post('idSolicitud'));
 		echo json_encode(array('solicitud' => $solicitud, 'resolucion' => $resolucion));
 	}
 	// Cargar todos los datos de una solicitud
-	public function cargarInformacionCompletaSolicitud(){
+	public function cargarInformacionCompletaSolicitud()
+	{
 		$idSolicitud = $this->input->post('idSolicitud');
 		$idOrganizacion = $this->input->post('id_organizacion');
 		$solicitud = $this->SolicitudesModel->getAllInformacionSolicitud($idSolicitud, $idOrganizacion);
@@ -92,8 +95,8 @@ class Solicitudes extends CI_Controller
 		$this->db->where('idSolicitud', $this->input->post('idSolicitud'));
 		if ($this->db->update('solicitudes', $data_asignar)) {
 			$this->logs_sia->session_log('Se asigno ' . $organizacion->nombreOrganizacion . ' a ' . $nombreEvaluador . ' en la fecha ' . date("Y/m/d H:m:s") . '.');
-			send_email_admin('asignarSolicitud','2', $evaluador->direccionCorreoElectronico, null, $organizacion, $this->input->post('idSolicitud'));
-			send_email_user($organizacion->direccionCorreoElectronicoOrganizacion,'asignarEvaluador', $organizacion, $evaluador, null, $this->input->post('idSolicitud'));
+			send_email_admin('asignarSolicitud', '2', $evaluador->direccionCorreoElectronico, null, $organizacion, $this->input->post('idSolicitud'));
+			send_email_user($organizacion->direccionCorreoElectronicoOrganizacion, 'asignarEvaluador', $organizacion, $evaluador, null, $this->input->post('idSolicitud'));
 		}
 	}
 	// Solicitudes finalizadas
@@ -169,14 +172,14 @@ class Solicitudes extends CI_Controller
 		if ($this->input->post()) {
 			$estado = 'En Proceso';
 			// Comprobar si la solicitud se crea desde el super administrador o desde el usuario
-			if($this->input->post('nit_organizacion')):
+			if ($this->input->post('nit_organizacion')):
 				$organizacion = $this->OrganizacionesModel->getOrganizaciones($this->input->post('nit_organizacion'));
 			else:
 				$organizacion = $this->OrganizacionesModel->getOrganizacionUsuario($this->session->userdata('usuario_id'));
 			endif;
 			$solicitudes = $this->SolicitudesModel->getSolicitudesByOrganizacion($organizacion->id_organizacion);
 			// Comprobar si la solicitud se crea desde el super administrador o desde el usuario
-			if($this->input->post('nit_organizacion')):
+			if ($this->input->post('nit_organizacion')):
 				$comprobarSolicitud = 'true';
 			else:
 				$comprobarSolicitud = $this->comprobarSolicitud($solicitudes, $this->input->post('motivos_solicitud'), $this->input->post('modalidades_solicitud'));
@@ -185,12 +188,12 @@ class Solicitudes extends CI_Controller
 				$idSolicitud = date('YmdHis') . $organizacion->nombreOrganizacion[3] . random(2);
 				$numeroSolicitudes = count($solicitudes);
 				// Comprobar si la solicitud se crea desde el super administrador o desde el usuario
-				if($this->input->post('tipo_solicitud')):
+				if ($this->input->post('tipo_solicitud')):
 					$tipoSolicitud = $this->input->post('tipo_solicitud');
 				else:
 					// Comprobar y asignar estado a la solicitud
-					if($numeroSolicitudes > 0):
-						if($organizacion->estado == "Acreditado"):
+					if ($numeroSolicitudes > 0):
+						if ($organizacion->estado == "Acreditado"):
 							$estado = 'En Renovación';
 							$tipoSolicitud = "Renovación de Acreditación";
 						else:
@@ -200,7 +203,7 @@ class Solicitudes extends CI_Controller
 						$tipoSolicitud = 'Acreditación Primera vez';
 					endif;
 				endif;
-				if($this->input->post('fecha_creacion'))
+				if ($this->input->post('fecha_creacion'))
 					$fecha = date($this->input->post('fecha_creacion'));
 				else
 					$fecha = date('Y/m/d H:i:s');
@@ -233,11 +236,11 @@ class Solicitudes extends CI_Controller
 
 				);
 				// Guardar datos iniciales de la solicitud
-				if($this->db->insert('solicitudes', $data_solicitud)):
-					if($this->db->insert('tipoSolicitud', $data_tipoSolicitud)):
-						if($this->db->insert('estadoOrganizaciones', $data_estado)):
+				if ($this->db->insert('solicitudes', $data_solicitud)):
+					if ($this->db->insert('tipoSolicitud', $data_tipoSolicitud)):
+						if ($this->db->insert('estadoOrganizaciones', $data_estado)):
 							// Comprobar si lo hace el super
-							if(!$this->input->post('nit_organizacion'))
+							if (!$this->input->post('nit_organizacion'))
 								$this->logs_sia->session_log('Formulario Motivo Solicitud - Tipo Solicitud: ' . '. Motivo Solicitud: ' . $this->input->post('motivo_solicitud') . '. Modalidad Solicitud: ' . $this->input->post('modalidad_solicitud') . '. ID: ' . $idSolicitud . '. Fecha: ' . date('Y/m/d') . '.');
 							$this->logs_sia->logQueries();
 							send_email_user($organizacion->direccionCorreoElectronicoOrganizacion, 'crearSolicitud', $organizacion, null, null, $idSolicitud);
@@ -256,7 +259,7 @@ class Solicitudes extends CI_Controller
 		$motivo = true;
 		$modalidad = true;
 		$return = '';
-        // Recorrer las solicitudes de la organización
+		// Recorrer las solicitudes de la organización
 		foreach ($solicitudes as $solicitud):
 			// Comprobar que la solicitud no se encuentré acreditada, negada o archívada.
 			if ($solicitud->nombre != 'Archivada'):
@@ -283,7 +286,7 @@ class Solicitudes extends CI_Controller
 							endfor;
 							$motivos = substr($motivos, 0, -2);
 							$motivo = false;
-							$return .= "<li>La solicitud con ID: <strong> " . $solicitud->idSolicitud . " </strong>tiene los siguientes motivos identicos: " . $motivos ." <i class='fa fa-times spanRojo' aria-hidden='false'></i></li><br><br>";
+							$return .= "<li>La solicitud con ID: <strong> " . $solicitud->idSolicitud . " </strong>tiene los siguientes motivos identicos: " . $motivos . " <i class='fa fa-times spanRojo' aria-hidden='false'></i></li><br><br>";
 						endif;
 						if (!empty($compararModalidad)):
 							$modalidades = '';
@@ -335,7 +338,7 @@ class Solicitudes extends CI_Controller
 		if (count($formularios) === 0) {
 			$organizacion = $this->OrganizacionesModel->getOrganizacionUsuario($this->session->userdata('usuario_id'));
 			$solicitud = $this->SolicitudesModel->solicitudes($idSolicitud);
-			if($solicitud->nombre  != 'Finalizado'):
+			if ($solicitud->nombre  != 'Finalizado'):
 				$updateEstado = array(
 					'nombre' => "Finalizado",
 					'fechaUltimaActualizacion' => date('Y/m/d H:i:s'),
@@ -343,7 +346,7 @@ class Solicitudes extends CI_Controller
 					'fechaFinalizado' => date('Y/m/d H:i:s')
 				);
 			endif;
-			if($solicitud->nombre == 'En Observaciones'):
+			if ($solicitud->nombre == 'En Observaciones'):
 				$updateEstado = array(
 					'nombre' => "Finalizado",
 					'fechaUltimaActualizacion' => date('Y/m/d H:i:s'),
@@ -359,13 +362,12 @@ class Solicitudes extends CI_Controller
 			$this->logs_sia->session_log('Finalizada la Solicitud ' . $idSolicitud);
 			$this->notif_sia->notification('Finalizada', 'admin', $organizacion->nombreOrganizacion);
 			$this->logs_sia->logQueries();
-		}
-		else {
+		} else {
 			echo json_encode(
 				array(
 					'title' => 'Verifique su solicitud!',
 					'status' => 'info',
-					'msg' => '<p>Continue diligenciando los formularios, Solicitud: <strong>' .  $idSolicitud. '</strong></p>',
+					'msg' => '<p>Continue diligenciando los formularios, Solicitud: <strong>' .  $idSolicitud . '</strong></p>',
 					'formularios' => $formularios,
 					'solicitud' => $this->SolicitudesModel->solicitudes($idSolicitud),
 					'motivos' => $this->cargarMotivosSolicitud($idSolicitud),
@@ -380,55 +382,55 @@ class Solicitudes extends CI_Controller
 		$idSolicitud = $this->input->post('solicitud');
 		$solicitud = $this->SolicitudesModel->solicitudes($idSolicitud);
 		$programas = $this->DatosProgramasModel->getDatosProgramas($idSolicitud);
-        $motivos = $this->cargarMotivosSolicitud($idSolicitud);
+		$motivos = $this->cargarMotivosSolicitud($idSolicitud);
 		$observaciones = $this->ObservacionesModel->getObservaciones($idSolicitud);
-        $formularios = $this->verificarFormularios($idSolicitud);
+		$formularios = $this->verificarFormularios($idSolicitud);
 		switch ($solicitud->nombre) {
 			case "En Proceso":
-                if(count($formularios) === 0):
-                    $title = 'Solicitud verificada!';
+				if (count($formularios) === 0):
+					$title = 'Solicitud verificada!';
 					$icon = 'success';
-                    $msg = '<p>Solicitud: <strong>' .  $idSolicitud. '</strong> cuenta con los formularios diligenciados. <br><br>Por favor de clic en <strong>Finaliza Proceso</strong> para enviar la solicitud a la Unidad Solidaria. <br>Gracias!</p>';
-                else:
-                    $title = 'Verifique su solicitud!';
-                    $icon = 'info';
-                    $msg = '<p>Continue diligenciando los formularios, Solicitud: <strong>' .  $idSolicitud. '</strong></p>';
-                endif;
-                echo json_encode(
-                    array(
+					$msg = '<p>Solicitud: <strong>' .  $idSolicitud . '</strong> cuenta con los formularios diligenciados. <br><br>Por favor de clic en <strong>Finaliza Proceso</strong> para enviar la solicitud a la Unidad Solidaria. <br>Gracias!</p>';
+				else:
+					$title = 'Verifique su solicitud!';
+					$icon = 'info';
+					$msg = '<p>Continue diligenciando los formularios, Solicitud: <strong>' .  $idSolicitud . '</strong></p>';
+				endif;
+				echo json_encode(
+					array(
 						'title' => $title,
-                        'icon' => $icon,
-                        'msg' => $msg,
-                        'formularios' => $formularios,
-                        'solicitud' => $solicitud,
-                        'motivos' => $motivos,
-                        'programas' => $programas
-                    )
-                );
+						'icon' => $icon,
+						'msg' => $msg,
+						'formularios' => $formularios,
+						'solicitud' => $solicitud,
+						'motivos' => $motivos,
+						'programas' => $programas
+					)
+				);
 				break;
 			case "En Observaciones":
-				if(count($formularios) === 0):
+				if (count($formularios) === 0):
 					$listaFormularios = '';
-					if($observaciones['formulario1'])
+					if ($observaciones['formulario1'])
 						$listaFormularios .= '<li>Formulario 1 información general.</li>';
-					if($observaciones['formulario2'])
+					if ($observaciones['formulario2'])
 						$listaFormularios .= '<li>Formulario 2 documentación legal.</li>';
-					if($observaciones['formulario3'])
+					if ($observaciones['formulario3'])
 						$listaFormularios .= '<li>Formulario 3 Jornadas de actualización.</li>';
-					if($observaciones['formulario4'])
+					if ($observaciones['formulario4'])
 						$listaFormularios .= '<li>Formulario 4 datos básicos programas.</li>';
-					if($observaciones['formulario5'])
+					if ($observaciones['formulario5'])
 						$listaFormularios .= '<li>Formulario 5 docentes.</li>';
-					if($observaciones['formulario6'])
+					if ($observaciones['formulario6'])
 						$listaFormularios .= '<li>Formulario 6 plataforma virtual.</li>';
-					if($observaciones['formulario7'])
+					if ($observaciones['formulario7'])
 						$listaFormularios .= '<li>Formulario 7 modalidad en línea.</li>';
 					if ($listaFormularios != ''):
 						$title = '¡Tramite verificado!';
 						$icon = 'info';
 						$msg = '<p>Solicitud: <strong>' .  $idSolicitud . '</strong> 
 								<br><br>El evaluador realizó observaciones para los formularios: <br><br>
-								<ul>' . $listaFormularios .'</ul>
+								<ul>' . $listaFormularios . '</ul>
 								<br><br>Por favor, revise las observaciones y de clic en <strong>Actualizar</strong> la solicitud una vez realizados los ajustes y <strong>Finalice el proceso</strong>  <br><br>
 								<br><br>Volverá a llegarle un mensaje con la finalización de la solicitud ajustada.
 								<br><br>Si ya realizó los cambios y recibió un correo de finalización, por favor cierre este cuadro y espere una nueva confirmación
@@ -444,7 +446,7 @@ class Solicitudes extends CI_Controller
 				else:
 					$title = 'Verifique su solicitud!';
 					$icon = 'info';
-					$msg = '<p>Continue diligenciando los formularios, Solicitud: <strong>' .  $idSolicitud. '</strong></p>';
+					$msg = '<p>Continue diligenciando los formularios, Solicitud: <strong>' .  $idSolicitud . '</strong></p>';
 				endif;
 				echo json_encode(
 					array(
@@ -458,16 +460,16 @@ class Solicitudes extends CI_Controller
 					)
 				);
 				break;
-                break;
+				break;
 			case "En Renovación":
-				if(count($formularios) === 0):
+				if (count($formularios) === 0):
 					$title = 'Solicitud verificada!';
 					$icon = 'success';
-					$msg = '<p>Solicitud: <strong>' .  $idSolicitud. '</strong> cuenta con los formularios diligenciados. <br><br>Por favor de clic en <strong>Finaliza Proceso</strong> para enviar la solicitud a la Unidad Solidaria. <br>Gracias!</p>';
+					$msg = '<p>Solicitud: <strong>' .  $idSolicitud . '</strong> cuenta con los formularios diligenciados. <br><br>Por favor de clic en <strong>Finaliza Proceso</strong> para enviar la solicitud a la Unidad Solidaria. <br>Gracias!</p>';
 				else:
 					$title = 'Verifique su solicitud!';
 					$icon = 'info';
-					$msg = '<p>Continue diligenciando los formularios, Solicitud: <strong>' .  $idSolicitud. '</strong></p>';
+					$msg = '<p>Continue diligenciando los formularios, Solicitud: <strong>' .  $idSolicitud . '</strong></p>';
 				endif;
 				echo json_encode(
 					array(
@@ -485,12 +487,12 @@ class Solicitudes extends CI_Controller
 				break;
 		}
 	}
-    // Cargar motivos de la solicitud para el estado
-    public function cargarMotivosSolicitud($idSolicitud)
-    {
-        $motivosSolicitud = $this->db->select("motivosSolicitud")->from("tipoSolicitud")->where("idSolicitud", $idSolicitud)->get()->row()->motivosSolicitud;
-        return json_decode($motivosSolicitud);
-    }
+	// Cargar motivos de la solicitud para el estado
+	public function cargarMotivosSolicitud($idSolicitud)
+	{
+		$motivosSolicitud = $this->db->select("motivosSolicitud")->from("tipoSolicitud")->where("idSolicitud", $idSolicitud)->get()->row()->motivosSolicitud;
+		return json_decode($motivosSolicitud);
+	}
 	// Validad formularios de la solicitud para el estado
 	public function verificarFormularios($idSolicitud)
 	{
@@ -573,15 +575,14 @@ class Solicitudes extends CI_Controller
 					break;
 			}
 		}
-		if($certificacionesForm == FALSE)
+		if ($certificacionesForm == FALSE)
 			$strFormulario1 .= "<span class='upper'>Certificaciones </span><i class='fa fa-times spanRojo' aria-hidden='true'></i><br/>";
-		if($carta == FALSE)
+		if ($carta == FALSE)
 			$strFormulario1 .= "<span class='upper'>Carta de solicitud </span><i class='fa fa-times spanRojo' aria-hidden='true'></i><br/>";
-		if($this->SolicitudesModel->solicitudes($idSolicitud)->nombre == 'En Renovación'){
-			if($autoevaluacion == FALSE)
+		if ($this->SolicitudesModel->solicitudes($idSolicitud)->nombre == 'En Renovación') {
+			if ($autoevaluacion == FALSE)
 				$strFormulario1 .= "<span class='upper'>Autoevaluación </span><i class='fa fa-times spanRojo' aria-hidden='true'></i><br/>";
-		}
-		else {
+		} else {
 			$autoevaluacion = TRUE;
 		}
 		/** Variables Formularios */
@@ -636,7 +637,7 @@ class Solicitudes extends CI_Controller
 			if ($hoja == true && $titulo == true && $certificacionesEco == true && $certificaciones == true):
 			else:
 				// TODO: Mostrar que documentos faltan
-				$strDocentes .= "Verificar la documentación para el docente: <span class='upper'>" . $docente->primerNombreDocente . " " . $docente->primerApellidoDocente. "</span>. <i class='fa fa-times spanRojo' aria-hidden='true'></i><br/>";
+				$strDocentes .= "Verificar la documentación para el docente: <span class='upper'>" . $docente->primerNombreDocente . " " . $docente->primerApellidoDocente . "</span>. <i class='fa fa-times spanRojo' aria-hidden='true'></i><br/>";
 			endif;
 		endforeach;
 		/**
@@ -682,40 +683,41 @@ class Solicitudes extends CI_Controller
 		if (($modalidadSolicitud == "En Linea" || $modalidadSolicitud == "Presencial, En Linea" || $modalidadSolicitud == "Presencial, Virtual, En Linea"  || $modalidadSolicitud == "Virtual, En Linea") && $datosEnLinea == NULL) {
 			array_push($formularios, "7. Falta el formulario de datos modalidad en linea.<hr>");
 		}
-		if(!empty($strFormulario1)) {
+		if (!empty($strFormulario1)) {
 			array_push($formularios, "1. Formulario <strong>Información General</strong> | Documentos por cargar: <br><br><strong><small><i>" . $strFormulario1 . "</i></small></strong>");
 		}
-		if(!empty($strDocentes)) {
+		if (!empty($strDocentes)) {
 			array_push($formularios, "5. <strong>Facilitadores</strong> | Realice las siguientes acciones:<br><br><strong><small><i>" . $strDocentes . "</i></small></strong>");
 		}
 		return $formularios;
 	}
-    // Cargar datos archivos docentes
-    public function cargarDatosArchivosDocentes($id)
-    {
-        $data_archivos = $this->db->select("*")->from("archivosDocente")->where('docentes_id_docente', $id)->get()->result();
-        return $data_archivos;
-    }
-    // Eliminar Solicitud
-    public function eliminarSolicitud()
-    {
+	// Cargar datos archivos docentes
+	public function cargarDatosArchivosDocentes($id)
+	{
+		$data_archivos = $this->db->select("*")->from("archivosDocente")->where('docentes_id_docente', $id)->get()->result();
+		return $data_archivos;
+	}
+	// Eliminar Solicitud
+	public function eliminarSolicitud()
+	{
 		// TODO: Eliminar archivos de la solicitud
-        $this->db->where('idSolicitud', $this->input->post('idSolicitud'));
-        $tables = array(
-            'estadoOrganizaciones',
-            'solicitudes',
-            'tipoSolicitud',
-            'documentacion',
-            'certificadoExistencia',
-            'registroEducativoProgramas',
-            'jornadasActualizacion',
-            'datosProgramas',
-            'datosEnLinea',
-            'datosAplicacion');
-        $this->db->delete($tables);
-        $msg = 'Se elimino la solicitud: <strong>' . $this->input->post('idSolicitud') . '<strong>';
-        echo json_encode(array('status' => "success", 'msg' => $msg));
-    }
+		$this->db->where('idSolicitud', $this->input->post('idSolicitud'));
+		$tables = array(
+			'estadoOrganizaciones',
+			'solicitudes',
+			'tipoSolicitud',
+			'documentacion',
+			'certificadoExistencia',
+			'registroEducativoProgramas',
+			'jornadasActualizacion',
+			'datosProgramas',
+			'datosEnLinea',
+			'datosAplicacion'
+		);
+		$this->db->delete($tables);
+		$msg = 'Se elimino la solicitud: <strong>' . $this->input->post('idSolicitud') . '<strong>';
+		echo json_encode(array('status' => "success", 'msg' => $msg));
+	}
 	// Estado de la solicitud
 	public function estadoSolicitud($idSolicitud)
 	{
@@ -742,9 +744,9 @@ class Solicitudes extends CI_Controller
 			'estadoAnterior' => $solicitud->nombre,
 			'idSolicitudAcreditado' => $idSolicitud,
 		);
-		if($estadoSolicitud == $solicitud->nombre):
+		if ($estadoSolicitud == $solicitud->nombre):
 			echo json_encode(array('status' => 'warning', 'msg' => "Seleccione un estado diferente al actual."));
-		elseif($estadoSolicitud == "Acreditado"):
+		elseif ($estadoSolicitud == "Acreditado"):
 			$this->db->where('idSolicitud', $idSolicitud);
 			if ($this->db->update('estadoOrganizaciones', $dataEstado)):
 				$dataOrganizacion = array('estado' => $estadoSolicitud,);
@@ -761,8 +763,9 @@ class Solicitudes extends CI_Controller
 		endif;
 	}
 	// Renovación solicitud
-	public function renovarSolicitud(){
-		if($this->input->post()) {
+	public function renovarSolicitud()
+	{
+		if ($this->input->post()) {
 			$solicitud = $this->SolicitudesModel->solicitudes($this->input->post('idSolicitud'));
 			$organizacion = $this->OrganizacionesModel->getOrganizacionUsuario($this->session->userdata('usuario_id'));
 			$idSolicitud = date('YmdHis') . $organizacion->nombreOrganizacion[3] . random(2);
@@ -800,9 +803,9 @@ class Solicitudes extends CI_Controller
 			if ($this->db->update('estadoOrganizaciones', $data_update)):
 				// Guardar datos iniciales de la solicitud
 				$this->db->where('idSolicitud', $idSolicitud);
-				if($this->db->insert('solicitudes', $data_solicitud)):
-					if($this->db->insert('tipoSolicitud', $data_tipoSolicitud)):
-						if($this->db->insert('estadoOrganizaciones', $data_estado)):
+				if ($this->db->insert('solicitudes', $data_solicitud)):
+					if ($this->db->insert('tipoSolicitud', $data_tipoSolicitud)):
+						if ($this->db->insert('estadoOrganizaciones', $data_estado)):
 							$this->logs_sia->session_log('Creación de solicitud renovación' . '. Motivo Solicitud: ' . $solicitud->motivoSolicitud . '. Modalidad Solicitud: ' . $solicitud->modalidadSolicitud . '. ID: ' . $idSolicitud . '. Fecha: ' . date('Y/m/d H:i:s') . '.');
 							$this->logs_sia->logQueries();
 							send_email_user($organizacion->direccionCorreoElectronicoOrganizacion, 'crearSolicitud', $organizacion, null, null, $idSolicitud);
@@ -812,9 +815,9 @@ class Solicitudes extends CI_Controller
 			endif;
 		}
 	}
-
 }
-function var_dump_pre($mixed = null) {
+function var_dump_pre($mixed = null)
+{
 	echo '<pre>';
 	var_dump($mixed);
 	echo '</pre>';

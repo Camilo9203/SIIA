@@ -67,32 +67,6 @@ class Contacto extends CI_Controller
 		$this->logs_sia->logs('PLACE_USER');
 	}
 
-	public function ayuda()
-	{
-		$logged = $this->session->userdata('logged_in');
-		$nombre_usuario = $this->session->userdata('nombre_usuario');
-		$usuario_id = $this->session->userdata('usuario_id');
-		$tipo_usuario = $this->session->userdata('type_user');
-		$hora = date("H:i", time());
-		$fecha = date('Y/m/d');
-
-		$data['title'] = 'Ayuda';
-		$data['logged_in'] = $logged;
-		$data['tipo_usuario'] = $tipo_usuario;
-		$data['usuario_id'] = $usuario_id;
-		$data['hora'] = $hora;
-		$data['fecha'] = $fecha;
-
-		$datos_usuario = $this->db->select('usuario')->from('usuarios')->where('id_usuario', $usuario_id)->get()->row();
-		$data['nombre_usuario'] = $datos_usuario->usuario;
-		$data['administradores'] = $this->verAdministradores();
-
-		$this->load->view('include/header', $data);
-		$this->load->view('contacto/ayuda');
-		$this->load->view('include/footer');
-		$this->logs_sia->logs('PLACE_USER');
-	}
-
 	/**
 		Funcion para enviar un correo electronico.
 	 **/

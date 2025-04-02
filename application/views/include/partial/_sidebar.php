@@ -16,6 +16,9 @@
 		if ($tipo_usuario == 'admin'):
 			$this->load->view('include/partial/menu/_admin', $activeLink);
 		endif;
+		if ($tipo_usuario == 'user'):
+			$this->load->view('include/partial/menu/_user', $activeLink);
+		endif;
 		?>
 	</ul>
 </nav>

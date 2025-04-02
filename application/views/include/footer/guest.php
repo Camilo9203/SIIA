@@ -63,7 +63,7 @@
 		</div>
 	</div>
 </footer>
-<div class="hidden" id="scripts-sia">
+<div class="hidden" id="scripts-siia">
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	<!-- utils.js BDC -->
 	<script src="https://cdn.www.gov.co/layout/v4/script.js"></script>
@@ -73,6 +73,7 @@
 		crossorigin="anonymous"></script>
 	<!-- Script init -->
 	<script src="<?= base_url('assets/js/functions/home.js?v=1.0') . time() ?>" type="text/javascript"></script>
+	<script src="<?= base_url('assets/js/functions/encuesta.js?v=1.0') . time() ?>" type="text/javascript"></script>
 	<!--Add the following script at the bottom of the web page (immediately before the </body> tag)-->
 	<!--<script type="text/javascript" async="async" defer="defer" data-cfasync="false" src="https://mylivechat.com/chatinline.aspx?hccid=49054954"></script>-->
 </div>
