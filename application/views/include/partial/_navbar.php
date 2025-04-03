@@ -1,18 +1,23 @@
 <?php
 
 /***
- * @var $logged_in
- * @var $tipo_usuario
  * @var $nivel
- * @var $administradores
- * @var $usuarios
- * @var $organizaciones
- * @var $correos
+ * @var $tipo_usuario
+ * @var $logged_in
+ * @var $activeLink
+ * @var $organizacion
  */
 // echo '<pre>';
 // var_dump($tipo_usuario);
 // echo '</pre>';
 // return null;
+// Cargar imagen de perfil
+if ($organizacion != null):
+	$imagen = 'uploads/logosOrganizaciones/' . $organizacion['imagenOrganizacion'];
+else:
+	$imagen = 'assets/img/default.png';
+endif;
+// Comprobar tipo de usuario
 switch ($tipo_usuario) {
 	case 'user':
 		$panel = 'organizacion/panel';
@@ -105,7 +110,7 @@ switch ($tipo_usuario) {
 			<!-- Profile -->
 			<li class="nav-item nav-profile dropdown">
 				<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-					<img src="<?= base_url('assets/img/default.png') ?>" alt="profile" />
+					<img src="<?= base_url($imagen); ?>" alt="profile" />
 				</a>
 				<div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
 					<?php if ($nivel != '7'): ?>
