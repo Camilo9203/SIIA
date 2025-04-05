@@ -1,9 +1,10 @@
 <?php
+
 /***
  * @var $logged_in
  * @var $tipo_usuario
  */
-if($logged_in == FALSE && $tipo_usuario == "none"): ?>
+if ($logged_in == FALSE && $tipo_usuario == "none"): ?>
 	<div class="container-scroller">
 		<div class="container-fluid page-body-wrapper full-page-wrapper">
 			<div class="content-wrapper d-flex align-items-center auth px-0 admin-login">
@@ -20,7 +21,10 @@ if($logged_in == FALSE && $tipo_usuario == "none"): ?>
 									<input type="password" id="tpssp" class="form-control" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required value="" class="form-control form-control-lg">
 								</div>
 								<div class="mt-3">
-									<a class="btn btn-block btn-primary btn-md font-weight-medium" id="init_sp">Iniciar Sesión</a>
+									<a class="btn btn-block btn-primary" id="init_sp">
+										Iniciar Sesión
+										<i class="mdi mdi-login ml-1" aria-hidden="true"></i>
+									</a>
 								</div>
 							</form>
 						</div>
@@ -32,4 +36,3 @@ if($logged_in == FALSE && $tipo_usuario == "none"): ?>
 <?php endif; ?>
 <!-- Corrección footer -->
 </div>
-

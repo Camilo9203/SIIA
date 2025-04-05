@@ -55,6 +55,17 @@ class Registro extends CI_Controller
 			echo json_encode(array("existe" => 0));
 		}
 	}
+	/** Verificar si existe email */
+	public function verificarEmail()
+	{
+		// Comprobar que el nit no se encuentre en la base de datos.
+		$correo = $this->db->select("direccionCorreoElectronicoOrganizacion")->from("organizaciones")->where("direccionCorreoElectronicoOrganizacion", $this->input->post('correo'))->get()->row()->direccionCorreoElectronicoOrganizacion;
+		if ($correo != NULL || $correo != "") {
+			echo json_encode(array("existe" => 1));
+		} else {
+			echo json_encode(array("existe" => 0));
+		}
+	}
 	/** Registro de información  */
 	public function registrar_info()
 	{

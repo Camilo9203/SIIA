@@ -36,11 +36,11 @@ if ($logged_in == FALSE && $tipo_usuario == "none"): ?>
 									</span>
 								</div>
 							</div>
-							<div class="mt-4">
-								<a class="btn btn-block btn-primary btn-md font-weight-medium" id="inicio_sesion_admin">
+							<div class="col-12 mb-2 mt-3">
+								<a class="btn btn-block btn-primary btn-sm" id="inicio_sesion_admin">
 									Iniciar Sesión
+									<i class="mdi mdi-login ml-1" aria-hidden="true"></i>
 								</a>
-								<i class="fa fa-sign-in" aria-hidden="true"></i>
 							</div>
 							<div class="my-2 d-flex justify-content-between align-items-center">
 								<div class="form-check">

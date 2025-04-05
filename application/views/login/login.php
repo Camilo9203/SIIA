@@ -36,11 +36,11 @@ if ($logged_in == FALSE && $tipo_usuario == "none"): ?>
 									</span>
 								</div>
 							</div>
-							<div class="mt-3">
-								<a class="btn btn-block btn-primary btn-md font-weight-medium" id="inicio_sesion">
+							<div class="col-12 mb-2 mt-3">
+								<a class="btn btn-block btn-primary btn-sm" id="inicio_sesion">
 									Iniciar Sesión
+									<i class="mdi mdi-login ml-1" aria-hidden="true"></i>
 								</a>
-								<i class="fa fa-sign-in" aria-hidden="true"></i>
 							</div>
 							<!-- Imagen de carga -->
 							<div class="my-2 d-flex justify-content-between align-items-center">
@@ -50,7 +50,7 @@ if ($logged_in == FALSE && $tipo_usuario == "none"): ?>
 										Recordarme
 									</label>
 								</div>
-								<a id="recordar_contrasena_login" class="text-primary">Recordar contraseña?</a>
+								<a id="recordar_contrasena_login" class="text-primary" style="cursor: pointer;">Recordar contraseña?</a>
 							</div>
 							<div class="text-center mt-4 font-weight-light">
 								No tienes cuenta? <a href="<?= base_url('registro') ?>" class="text-primary registrar">Registrarse</a>

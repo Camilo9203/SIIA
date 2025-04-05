@@ -145,3 +145,7 @@ h5 {
 	bottom: 18%;
 	right: 1.1%;
 }
+.input-group,
+.asColorPicker-wrap {
+	flex-wrap: nowrap !important;
+}

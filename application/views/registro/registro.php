@@ -88,16 +88,23 @@ if ($logged_in == FALSE && $tipo_usuario == "none"): ?>
 									</div>
 									<div class="col-12 mb-2">
 										<label for="password">Contraseña: <span class="spanRojo">*</span></label>
-										<div class="pw-cont">
-											<input type="password" class="form-control " form="formulario_registro" name="password" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required="" autocomplete="off">
-											<span id="show-pass1"><i class="fa fa-eye" aria-hidden="true"></i></span>
+										<div class="input-group flex-nowrap">
+											<span id="show-pass1" class="mdi mdi-eye input-group-text"></span>
+											<input type="password" class="form-control" form="formulario_registro" name="password" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required autocomplete="off">
 										</div>
+										<!-- Barra de progreso de la contraseña -->
+										<div class="progress mt-2">
+											<div id="password-strength-bar" class="progress-bar" role="progressbar" style="width: 0%;"></div>
+										</div>
+										<small id="password-strength-text" class="form-text"></small>
+										<!-- Contenedor para los mensajes de requisitos -->
+										<div id="password-requirements"></div>
 									</div>
 									<div class="col-12 mb-2">
-										<label for="re_password">Vuelve a escribir la contraseña: <span class="spanRojo">*</span></label>
-										<div class="pw-cont">
+										<label for="re_password">Repetir contraseña: <span class="spanRojo">*</span></label>
+										<div class="input-group flex-nowrap">
+											<span id="show-pass2" class="mdi mdi-eye input-group-text" aria-hidden="true"></span>
 											<input type="password" class="form-control" form="formulario_registro" name="re_password" id="re_password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" required="" autocomplete="off">
-											<span id="show-pass2"><i class="fa fa-eye" aria-hidden="true"></i></span>
 										</div>
 									</div>
 									<!-- Política de tratamiento de datos -->
@@ -117,8 +124,8 @@ if ($logged_in == FALSE && $tipo_usuario == "none"): ?>
 									<div class="mt-3">
 										<a class="btn btn-block btn-primary btn-md font-weight-medium" id="confirmaRegistro">
 											Registrarse
+											<i class="mdi mdi-check-all ml-1" aria-hidden="true"></i>
 										</a>
-										<i class="fa fa-sign-in" aria-hidden="true"></i>
 									</div>
 								</div>
 							</div>
@@ -289,8 +296,14 @@ if ($logged_in == FALSE && $tipo_usuario == "none"): ?>
 			</div>
 			<div class="modal-footer justify-content-center">
 				<div class="btn-group" role="group" aria-label="Basic mixed styles example">
-					<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="declino_politica">No, declino.</button>
-					<button type="button" class="btn btn-sm btn-success" id="acepto_politica">Sí, acepto. </button>
+					<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="declino_politica">
+						<i class="mdi mdi-close mr-1"></i>
+						No, declino.
+					</button>
+					<button type="button" class="btn btn-sm btn-success" id="acepto_politica">
+						<i class="mdi mdi-check mr-1"></i>
+						Sí, acepto.
+					</button>
 				</div>
 			</div>
 		</div>
@@ -299,137 +312,179 @@ if ($logged_in == FALSE && $tipo_usuario == "none"): ?>
 <!-- Modal Registro - INICIO -->
 <div class="modal fade" id="ayuda_registro" tabindex="-1" role="dialog" aria-labelledby="ayudaRegistro">
 	<div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h3 class="modal-title" id="ayudaRegistro">¿La información ingresada és correcta?</h3>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<div class="modal-content border-0 shadow-lg">
+			<div class="modal-header bg-primary text-white">
+				<h3 class="modal-title font-weight-bold" id="ayudaRegistro">
+					<i class="mdi mdi-check-circle mr-2"></i>¿La información ingresada es correcta?
+				</h3>
+				<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body py-4">
 				<div class="container-fluid" id="informacion_previa">
-					<p>
-						Por favor, verifique los correos electrónicos en este momento, se le notificara cualquier comunicación del sistema por este medio y se enviara un link de activación de la cuenta en el SIIA. ***
-					</p><br>
+					<div class="alert alert-info mb-4">
+						<i class="mdi mdi-information-outline mr-2"></i>
+						Por favor, verifique los correos electrónicos en este momento. Se le notificará cualquier comunicación del sistema por este medio y se enviará un link de activación de la cuenta en el SIIA.
+					</div>
 					<div class="row">
 						<!-- Primera tabla: Datos de la Organización -->
-						<div class="col-lg-6 col-md-12">
-							<h5 class="text-center text-primary">📌 Datos de la Organización</h5>
-							<div class="table-responsive">
-								<table class="table table-bordered table-striped table-hover table-sm">
-									<tbody>
-										<tr>
-											<td><strong>Organización</strong></td>
-											<td id="modalConfOrg"></td>
-										</tr>
-										<tr>
-											<td><strong>NIT</strong></td>
-											<td id="modalConfNit"></td>
-										</tr>
-										<tr>
-											<td><strong>Sigla</strong></td>
-											<td id="modalConfSigla"></td>
-										</tr>
-									</tbody>
-								</table>
+						<div class="col-lg-6 col-md-12 mb-4">
+							<div class="card h-100 border-primary">
+								<div class="card-header bg-primary text-white">
+									<h5 class="mb-0 text-center">
+										<i class="mdi mdi-office-building mr-2"></i>Datos de la Organización
+									</h5>
+								</div>
+								<div class="card-body p-0">
+									<div class="table-responsive">
+										<table class="table table-bordered table-hover table-sm mb-0">
+											<tbody>
+												<tr>
+													<td class="bg-light" width="40%"><strong>Organización</strong></td>
+													<td id="modalConfOrg"></td>
+												</tr>
+												<tr>
+													<td class="bg-light"><strong>NIT</strong></td>
+													<td id="modalConfNit"></td>
+												</tr>
+												<tr>
+													<td class="bg-light"><strong>Sigla</strong></td>
+													<td id="modalConfSigla"></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
 							</div>
 						</div>
-
 						<!-- Segunda tabla: Datos del Representante Legal -->
-						<div class="col-lg-6 col-md-12">
-							<h5 class="text-center text-success">👤 Datos del Representante Legal</h5>
-							<div class="table-responsive">
-								<table class="table table-bordered table-striped table-hover table-sm">
-									<tbody>
-										<tr>
-											<td><strong>Primer nombre</strong></td>
-											<td id="modalConfPNRL"></td>
-										</tr>
-										<tr>
-											<td><strong>Segundo nombre</strong></td>
-											<td id="modalConfSNRL"></td>
-										</tr>
-										<tr>
-											<td><strong>Primer apellido</strong></td>
-											<td id="modalConfPARL"></td>
-										</tr>
-										<tr>
-											<td><strong>Segundo apellido</strong></td>
-											<td id="modalConfSARL"></td>
-										</tr>
-										<tr>
-											<td><strong>Correo electrónico</strong></td>
-											<td id="modalConfCRep"></td>
-										</tr>
-									</tbody>
-								</table>
+						<div class="col-lg-6 col-md-12 mb-4">
+							<div class="card h-100 border-success">
+								<div class="card-header bg-success text-white">
+									<h5 class="mb-0 text-center">
+										<i class="mdi mdi-account-tie mr-2"></i>Datos del Representante Legal
+									</h5>
+								</div>
+								<div class="card-body p-0">
+									<div class="table-responsive">
+										<table class="table table-bordered table-hover table-sm mb-0">
+											<tbody>
+												<tr>
+													<td class="bg-light" width="40%"><strong>Primer nombre</strong></td>
+													<td id="modalConfPNRL"></td>
+												</tr>
+												<tr>
+													<td class="bg-light"><strong>Segundo nombre</strong></td>
+													<td id="modalConfSNRL"></td>
+												</tr>
+												<tr>
+													<td class="bg-light"><strong>Primer apellido</strong></td>
+													<td id="modalConfPARL"></td>
+												</tr>
+												<tr>
+													<td class="bg-light"><strong>Segundo apellido</strong></td>
+													<td id="modalConfSARL"></td>
+												</tr>
+												<tr>
+													<td class="bg-light"><strong>Correo electrónico</strong></td>
+													<td id="modalConfCRep"></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 					<!-- Tercera tabla: Datos del Usuario (Centrada) -->
-					<div class="row justify-content-center mt-3">
+					<div class="row justify-content-center mt-2">
 						<div class="col-lg-8 col-md-10">
-							<h5 class="text-center text-info">🔐 Datos del Usuario</h5>
-							<div class="table-responsive">
-								<table class="table table-bordered table-striped table-hover table-sm">
-									<tbody>
-										<tr>
-											<td><strong>Nombre</strong></td>
-											<td id="modalConfPn"></td>
-										</tr>
-										<tr>
-											<td><strong>Apellido</strong></td>
-											<td id="modalConfPa"></td>
-										</tr>
-										<tr>
-											<td><strong>Nombre de usuario</strong></td>
-											<td id="modalConfNU"></td>
-										</tr>
-										<tr>
-											<td><strong>Contraseña</strong></td>
-											<td id="modalConfPass"></td>
-										</tr>
-										<tr>
-											<td><strong>Correo de organización (Notificaciones)</strong></td>
-											<td id="modalConfCOrg"></td>
-										</tr>
-									</tbody>
-								</table>
+							<div class="card border-info mb-4">
+								<div class="card-header bg-info text-white">
+									<h5 class="mb-0 text-center">
+										<i class="mdi mdi-account-key mr-2"></i>Datos del Usuario
+									</h5>
+								</div>
+								<div class="card-body p-0">
+									<div class="table-responsive">
+										<table class="table table-bordered table-hover table-sm mb-0">
+											<tbody>
+												<tr>
+													<td class="bg-light" width="40%"><strong>Nombre</strong></td>
+													<td id="modalConfPn"></td>
+												</tr>
+												<tr>
+													<td class="bg-light"><strong>Apellido</strong></td>
+													<td id="modalConfPa"></td>
+												</tr>
+												<tr>
+													<td class="bg-light"><strong>Nombre de usuario</strong></td>
+													<td id="modalConfNU"></td>
+												</tr>
+												<tr>
+													<td class="bg-light"><strong>Contraseña</strong></td>
+													<td id="modalConfPass"></td>
+												</tr>
+												<tr>
+													<td class="bg-light"><strong>Correo de organización</strong></td>
+													<td id="modalConfCOrg"></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<div class="form-check d-flex align-items-center mb-4 p-3 border rounded bg-light">
+								<input type="checkbox" class="form-check-input mt-0 mr-3" id="aceptoComActo" style="transform: scale(1.2);">
+								<label class="form-check-label" for="aceptoComActo">
+									Acepto que se envíen comunicaciones, notificaciones y actos administrativos vía correo electrónico a:
+									<strong id="modalConfCorreo" class="text-primary"></strong>
+									<span class="text-danger">*</span>
+								</label>
 							</div>
 						</div>
 					</div>
-					<div class="form-check">
-						<input type="checkbox" class="form-check-input" id="aceptoComActo">
-						<label class="form-check-label" for="aceptoComActo"><span class="underlined"><a>Acepto que se envíen comunicaciones, notificaciones y actos administrativos vía correo electrónico a: <strong id="modalConfCorreo"></strong> <span class=" spanRojo">*</span></a></span></label>
-					</div>
 				</div>
 				<div class="container" id="reenvio_email">
-					<div class="jumbotron">
-						<p>Si el correo no le llega en los próximos 5 minutos, y no está en la bandeja de spam, por favor, escriba otro correo electrónico (Gmail.com, Outlook.com, Yahoo.com, Hotmail.com), y de click en "Volver a enviar el correo". Si el problema persiste, contactese con <a href="mailto:<?php echo CORREO_ATENCION ?>"><?php echo CORREO_ATENCION ?></a></p>
-						<div class="clearfix"></div>
-						<hr />
-						<div class="form-group">
-							<label for="correo_electronico_rese">Correo electrónico de organización:*</label>
-							<input type="email" class="form-control" name="correo_electronico_rese" id="correo_electronico_rese" placeholder="Correo electrónico organización">
+					<div class="card bg-light border-0 shadow-sm">
+						<div class="card-body">
+							<div class="d-flex align-items-center mb-3">
+								<i class="mdi mdi-email-alert mdi-24px text-warning mr-3"></i>
+								<p class="mb-0">
+									Si el correo no le llega en los próximos 5 minutos, y no está en la bandeja de spam, por favor, escriba otro correo electrónico (Gmail.com, Outlook.com, Yahoo.com, Hotmail.com), y de click en "Volver a enviar el correo". Si el problema persiste, contáctese con
+									<a href="mailto:<?php echo CORREO_ATENCION ?>" class="text-primary"><?php echo CORREO_ATENCION ?></a>
+								</p>
+							</div>
+							<hr class="my-3">
+							<div class="form-group mb-0">
+								<label for="correo_electronico_rese" class="font-weight-bold">Correo electrónico de organización:<span class="text-danger">*</span></label>
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<span class="mdi mdi-email input-group-text"></span>
+									</div>
+									<input type="email" class="form-control" name="correo_electronico_rese" id="correo_electronico_rese" placeholder="Ingrese un correo electrónico alternativo">
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="modal-footer">
+			<div class="modal-footer bg-light">
 				<div class="btn-group" role="group" aria-label="seccion-reenvio" style="display: none;" id="seccion-reenvio">
-					<button type="button" id="btn-reenvio" class="btn btn-info btn-sm" value="Volver a enviar">
-						Volver a enviar el correo
-						<i class="fa fa-paper-plane"></i>
+					<button type="button" id="btn-reenvio" class="btn btn-info">
+						<i class="mdi mdi-email-send mr-1"></i> Volver a enviar el correo
 					</button>
-					<button type="button" id="btn-cerrar-reenvio" class="btn btn-sm btn-danger pull-left">
-						Cerrar e iniciar sesión <i class="fa fa-times"></i>
+					<button type="button" id="btn-cerrar-reenvio" class="btn btn-danger">
+						<i class="mdi mdi-login mr-1"></i> Cerrar e iniciar sesión
 					</button>
 				</div>
 				<div class="btn-group" role="group" aria-label="seccion-guardar" id="seccion-guardar">
-					<button type=" button" id="btn-cerrar-modal" class="btn btn-warning btn-sm pull-left" data-dismiss="modal">
-						No, voy a verificar
-						<i class="fa fa-times" aria-hidden="true"></i>
+					<button type="button" id="btn-cerrar-modal" class="btn btn-outline-secondary" data-dismiss="modal">
+						<i class="mdi mdi-arrow-left mr-1"></i> No, voy a verificar
 					</button>
-					<button type="button" id="guardar_registro" name="registro" disabled="disabled" class="btn btn-success btn-sm submit" value="Registrarme">
-						Sí, Registrarme <i class="fa fa-check"></i>
+					<button type="button" id="guardar_registro" name="registro" disabled="disabled" class="btn btn-success submit">
+						<i class="mdi mdi-check-circle mr-1"></i> Sí, Registrarme
 					</button>
 				</div>
 			</div>

@@ -23,6 +23,95 @@ $("#aceptoComActo").change(function () {
 		$("#guardar_registro").attr("disabled", true);
 	}
 });
+// Medidor de seguridad de contraseña
+$("#password").on("input", function () {
+	var password = $(this).val();
+	var strength = 0;
+
+	// Evaluación de cada requisito para la barra de progreso
+	if (password.length >= 8) strength++;
+	if (/[A-Z]/.test(password)) strength++;
+	if (/[a-z]/.test(password)) strength++;
+	if (/[0-9]/.test(password)) strength++;
+	if (/[#?!@$%^&*-]/.test(password)) strength++;
+
+	// Actualización de la barra de progreso y texto descriptivo
+	var strengthBar = $("#password-strength-bar");
+	var strengthText = $("#password-strength-text");
+
+	switch (strength) {
+		case 0:
+		case 1:
+		case 2:
+			strengthBar
+				.css("width", "25%")
+				.removeClass()
+				.addClass("progress-bar bg-danger");
+			strengthText.text("Incorrecta").css("color", "red");
+			break;
+		case 3:
+			strengthBar
+				.css("width", "50%")
+				.removeClass()
+				.addClass("progress-bar bg-warning");
+			strengthText.text("Débil").css("color", "orange");
+			break;
+		case 4:
+			strengthBar
+				.css("width", "75%")
+				.removeClass()
+				.addClass("progress-bar bg-warning");
+			strengthText.text("Aceptable").css("color", "orange");
+			break;
+		case 5:
+			strengthBar
+				.css("width", "100%")
+				.removeClass()
+				.addClass("progress-bar bg-success");
+			strengthText.text("Segura").css("color", "green");
+			break;
+		default:
+			strengthBar
+				.css("width", "0%")
+				.removeClass()
+				.addClass("progress-bar weak");
+			strengthText.text("");
+	}
+
+	// Verificar cada requisito y generar la lista de mensajes pendientes
+	var errors = [];
+	if (!/\d/.test(password)) {
+		errors.push("Al menos <strong>un número</strong>.");
+	}
+	if (!/[A-Z]/.test(password)) {
+		errors.push("Al menos <strong>una mayúscula</strong>.");
+	}
+	if (!/[a-z]/.test(password)) {
+		errors.push("Al menos <strong>letras minúsculas</strong>.");
+	}
+	if (!/[#?!@$%^&*-]/.test(password)) {
+		errors.push("Al menos <strong>un carácter especial (#?!@$%^&*-)</strong>.");
+	}
+	if (password.length < 8) {
+		errors.push("Una longitud mínima de <strong>8 caracteres</strong>.");
+	}
+
+	// Actualizar el contenedor de requisitos
+	if (errors.length > 0) {
+		var errorHtml =
+			"<p class='forms-error'>La contraseña debe cumplir con los siguientes requisitos:</p><ul class='forms-error'>";
+		for (var i = 0; i < errors.length; i++) {
+			errorHtml += "<li>" + errors[i] + "</li>";
+		}
+		errorHtml += "</ul>";
+		$("#password-requirements").html(errorHtml);
+	} else {
+		$("#password-requirements").html(
+			"<p class='text-success'>Todos los requisitos cumplidos.</p>"
+		);
+	}
+});
+
 /**
  * Confirmar registro formulario de registro
  * */
@@ -322,6 +411,25 @@ function ValidarFormRegistro() {
 				email: true,
 				//Expresión regular para validar correo y dominio
 				regex: /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/,
+				remote: {
+					url: baseURL + "registro/verificarEmail",
+					type: "post",
+					data: {
+						correo: function () {
+							return $("#correo_electronico").val().trim();
+						},
+					},
+					dataFilter: function (response) {
+						// El endpoint devuelve un JSON con { existe: 1 } o { existe: 0 }
+						var res = JSON.parse(response);
+						if (res.existe === 1) {
+							// Se retorna un mensaje de error; jQuery Validate lo mostrará
+							return '"El correo ya está registrado, por favor escriba un correo valido."';
+						} else {
+							return "true";
+						}
+					},
+				},
 			},
 			correo_electronico_rep_legal: {
 				required: true,
@@ -362,11 +470,10 @@ function ValidarFormRegistro() {
 			},
 			password: {
 				required: true,
-				regex: "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?)(?=.*?[#?!@$%^&*-]).{8,}$",
+				regex: /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[#?!@$%^&*-]).{8,}$/,
 			},
 			re_password: {
 				required: true,
-				regex: "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?)(?=.*?[#?!@$%^&*-]).{8,}$",
 				equalTo: "#password",
 			},
 			aceptocond: {
@@ -451,27 +558,11 @@ function ValidarFormRegistro() {
 				required:
 					"<p class='forms-error'>Por favor, escriba la Contraseña.</p>",
 				regex:
-					"<p class='forms-error'>La contraseña debe cumplir con los siguientes requisitos:</p> <br><br>" +
-					"<ul class='forms-error'>" +
-					"<li>Al menos <strong>un número</strong>.</li>" +
-					"<li>Al menos <strong>una mayúscula</strong>.</li>" +
-					"<li>Al menos <strong>letras minúsculas</strong>.</li>" +
-					"<li>Al menos <strong>un cáracter especial (#?!@$%^&*-)</strong>.</li>" +
-					"<li>Una longitud mínima de <strong>8 caracteres</strong> sin límite máximo.</li>" +
-					"</ul>",
+					"<p class='forms-error'>La contraseña debe cumplir con los requisitos indicados.</p>",
 			},
 			re_password: {
 				required:
-					"<p class='forms-error'>Por favor, vuela a escribir la Contraseña.",
-				regex:
-					"<p class='forms-error'>La contraseña debe cumplir con los siguientes requisitos:</p> <br><br>" +
-					"<ul class='forms-error'>" +
-					"<li>Al menos <strong>un número</strong>.</li>" +
-					"<li>Al menos <strong>una mayúscula</strong>.</li>" +
-					"<li>Al menos <strong>letras minúsculas</strong>.</li>" +
-					"<li>Al menos <strong>un cáracter especial (#?!@$%^&*-)</strong>.</li>" +
-					"<li>Una longitud mínima de <strong>8 caracteres</strong> sin límite máximo.</li>" +
-					"</ul>",
+					"<p class='forms-error'>Por favor, vuelva a escribir la Contraseña.",
 				equalTo: "<p class='forms-error'>Las contraseñas no coinciden.</p>",
 			},
 			aceptocond: {
